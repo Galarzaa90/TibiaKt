@@ -1,13 +1,14 @@
 package com.galarzaa.tibiakt.core
 
+import com.galarzaa.tibiakt.models.Character
+import com.galarzaa.tibiakt.parsers.CharacterParser
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.features.*
-import io.ktor.client.features.compression.ContentEncoding
+import io.ktor.client.features.compression.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
-import com.galarzaa.tibiakt.models.*
 
 class Client {
     val client = HttpClient(CIO){
@@ -22,8 +23,9 @@ class Client {
     }
 
     suspend fun fetchCharacter(name: String): Character?{
-        val response: HttpResponse = client.get("https://www.tibia.com/community/?subtopic=characters&name=$name")
+        val url = getTibiaUrl("community", Pair("subtopic", "characters"), Pair("name", name))
+        val response: HttpResponse = client.get(url)
         val stringBody: String = response.receive()
-        return Character.parseFromContent(stringBody)
+        return CharacterParser.fromContent(stringBody)
     }
 }
