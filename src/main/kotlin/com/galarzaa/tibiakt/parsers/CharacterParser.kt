@@ -6,6 +6,8 @@ import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 import org.jsoup.select.Elements
 
+val deletedRegexp = Regex("([^,]+), will be deleted at (.*)")
+
 object CharacterParser : Parser<Character> {
     override fun fromContent(content: String): Character? {
         val document: Document = Jsoup.parse(content, "", org.jsoup.parser.Parser.xmlParser())
@@ -14,22 +16,39 @@ object CharacterParser : Parser<Character> {
         if (tables.containsKey("Character Information")) {
             return parseCharacterInformation(tables["Character Information"]!!)
         }
-        return null;
+        return null
     }
 
     private fun parseCharacterInformation(rows: Elements): Character {
-        val attributes = mutableMapOf<String, String>()
-        for (row: Element in rows){
+        val attributes = mutableMapOf<String, Any>()
+        for (row: Element in rows) {
             val columns = row.select("td")
-            var (field, value) = columns.map{ it.text().trim()}
+            var (field, value) = columns.map { it.text().trim() }
             field = field.replace(" ", "_").replace(":", "").lowercase()
-            attributes[field] = value
+            when (field) {
+                "name" -> {
+                    var name: String
+                    val match = deletedRegexp.matchEntire(value)
+                    if (match != null) {
+                        name = match.groups[0]?.value!!
+                    } else {
+                        name = value
+                    }
+                    if (name.contains("(traded")) {
+                        attributes["traded"] = true
+                        name = name.replace("(traded)", "").trim()
+                    }
+                    attributes[field] = name
+                }
+                else -> attributes[field] = value
+            }
+
         }
         val character = Character(
-            name = attributes["name"]!!,
-            level = attributes["level"]!!.toInt(),
+            name = attributes["name"]!! as String,
+            level = (attributes["level"]!! as String).toInt(),
         ).apply {
-            vocation = attributes["vocation"]
+            vocation = attributes["vocation"] as String
         }
         return character
     }
@@ -48,4 +67,6 @@ object CharacterParser : Parser<Character> {
         }
         return output
     }
+
+
 }

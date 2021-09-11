@@ -23,8 +23,7 @@ class Client {
     }
 
     suspend fun fetchCharacter(name: String): Character?{
-        val url = getTibiaUrl("community", Pair("subtopic", "characters"), Pair("name", name))
-        val response: HttpResponse = client.get(url)
+        val response: HttpResponse = client.get(Character.getUrl(name))
         val stringBody: String = response.receive()
         return CharacterParser.fromContent(stringBody)
     }
