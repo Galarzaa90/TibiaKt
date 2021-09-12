@@ -4,7 +4,7 @@ import com.galarzaa.tibiakt.core.getTibiaUrl
 import java.time.LocalDateTime
 import kotlin.math.floor
 
-class Character(val name: String, val level: Int) {
+class Character(var name: String, var level: Int) {
     var vocation: String? = null
     var sex: String? = null
     var achievementPoints: Int? = null

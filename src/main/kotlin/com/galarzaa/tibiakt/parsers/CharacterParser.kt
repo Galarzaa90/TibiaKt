@@ -21,6 +21,7 @@ object CharacterParser : Parser<Character> {
 
     private fun parseCharacterInformation(rows: Elements): Character {
         val attributes = mutableMapOf<String, Any>()
+        val character = Character("", 0)
         for (row: Element in rows) {
             val columns = row.select("td")
             var (field, value) = columns.map { it.text().trim() }
@@ -35,20 +36,17 @@ object CharacterParser : Parser<Character> {
                         name = value
                     }
                     if (name.contains("(traded")) {
-                        attributes["traded"] = true
+                        character.traded = false
                         name = name.replace("(traded)", "").trim()
                     }
-                    attributes[field] = name
+                    character.name = name
                 }
-                else -> attributes[field] = value
+                "level" -> character.level = value.toInt()
+                "sex" -> character.sex = value
+                "residence" -> character.residence = value
+                "vocation" -> character.vocation = value
             }
 
-        }
-        val character = Character(
-            name = attributes["name"]!! as String,
-            level = (attributes["level"]!! as String).toInt(),
-        ).apply {
-            vocation = attributes["vocation"] as String
         }
         return character
     }
