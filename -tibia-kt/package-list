@@ -12,8 +12,9 @@ $dokka.location:com.galarzaa.tibiakt.core/Client/client/#/PointingToDeclaration/
 $dokka.location:com.galarzaa.tibiakt.core/Client/fetchCharacter/#kotlin.String/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.core/-client/fetch-character.html
 $dokka.location:com.galarzaa.tibiakt.models////PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/index.html
 $dokka.location:com.galarzaa.tibiakt.models/AccountBadge///PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-account-badge/index.html
-$dokka.location:com.galarzaa.tibiakt.models/AccountBadge/AccountBadge/#kotlin.String#kotlin.String/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-account-badge/-account-badge.html
+$dokka.location:com.galarzaa.tibiakt.models/AccountBadge/AccountBadge/#kotlin.String#kotlin.String#kotlin.String/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-account-badge/-account-badge.html
 $dokka.location:com.galarzaa.tibiakt.models/AccountBadge/description/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-account-badge/description.html
+$dokka.location:com.galarzaa.tibiakt.models/AccountBadge/imageUrl/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-account-badge/image-url.html
 $dokka.location:com.galarzaa.tibiakt.models/AccountBadge/name/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-account-badge/name.html
 $dokka.location:com.galarzaa.tibiakt.models/AccountInformation///PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-account-information/index.html
 $dokka.location:com.galarzaa.tibiakt.models/AccountInformation/AccountInformation/#kotlin.String#java.time.Instant#kotlin.String?/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-account-information/-account-information.html
@@ -24,6 +25,7 @@ $dokka.location:com.galarzaa.tibiakt.models/Character.Builder///PointingToDeclar
 $dokka.location:com.galarzaa.tibiakt.models/Character.Builder/Builder/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-character/-builder/-builder.html
 $dokka.location:com.galarzaa.tibiakt.models/Character.Builder/accountStatus/#kotlin.String/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-character/-builder/account-status.html
 $dokka.location:com.galarzaa.tibiakt.models/Character.Builder/achievementPoints/#kotlin.Int/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-character/-builder/achievement-points.html
+$dokka.location:com.galarzaa.tibiakt.models/Character.Builder/addBadge/#kotlin.String#kotlin.String#kotlin.String/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-character/-builder/add-badge.html
 $dokka.location:com.galarzaa.tibiakt.models/Character.Builder/addHouse/#kotlin.String#kotlin.Int#kotlin.String#java.time.LocalDate/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-character/-builder/add-house.html
 $dokka.location:com.galarzaa.tibiakt.models/Character.Builder/build/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-character/-builder/build.html
 $dokka.location:com.galarzaa.tibiakt.models/Character.Builder/comment/#kotlin.String?/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-character/-builder/comment.html
@@ -113,7 +115,6 @@ $dokka.location:com.galarzaa.tibiakt.parsers/CharacterParser/fromContent/#kotlin
 $dokka.location:com.galarzaa.tibiakt.parsers/Parser///PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.parsers/-parser/index.html
 $dokka.location:com.galarzaa.tibiakt.parsers/Parser/fromContent/#kotlin.String/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.parsers/-parser/from-content.html
 $dokka.location:com.galarzaa.tibiakt////PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt/index.html
-$dokka.location:com.galarzaa.tibiakt//main/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt/main.html
 $dokka.location:com.galarzaa.tibiakt/InstantSerializer///PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt/-instant-serializer/index.html
 $dokka.location:com.galarzaa.tibiakt/InstantSerializer/descriptor/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt/-instant-serializer/descriptor.html
 $dokka.location:com.galarzaa.tibiakt/InstantSerializer/deserialize/#kotlinx.serialization.encoding.Decoder/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt/-instant-serializer/deserialize.html
