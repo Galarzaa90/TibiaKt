@@ -1,6 +1,9 @@
 package com.galarzaa.tibiakt.core
 
+import org.jsoup.Jsoup
+import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
+import org.jsoup.parser.Parser
 import java.net.URL
 import java.net.URLEncoder
 import java.time.Instant
@@ -61,4 +64,19 @@ internal class LinkInformation(val title: String, targetUrl: String) {
             }
             return map
         }
+}
+
+internal fun parsePopup(content: String): Pair<String, Document> {
+    val parts = content.split(",", limit = 3)
+    val title = parts[1]
+        .replace("'", "")
+        .trim()
+    val html = parts[parts.size - 1]
+        .replace("\\'", "\"")
+        .replace("'", "")
+        .replace(",);", "")
+        .replace(", );", "")
+        .trim()
+    val parsedHtml = Jsoup.parse(html, "", Parser.xmlParser())
+    return Pair(title, parsedHtml)
 }

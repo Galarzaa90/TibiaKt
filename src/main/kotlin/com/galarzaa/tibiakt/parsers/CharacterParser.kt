@@ -1,6 +1,7 @@
 package com.galarzaa.tibiakt.parsers
 
 import com.galarzaa.tibiakt.core.getLinkInformation
+import com.galarzaa.tibiakt.core.parsePopup
 import com.galarzaa.tibiakt.core.parseTibiaDate
 import com.galarzaa.tibiakt.core.parseTibiaDateTime
 import com.galarzaa.tibiakt.models.Character
@@ -18,14 +19,24 @@ object CharacterParser : Parser<Character> {
         val document: Document = Jsoup.parse(content, "", org.jsoup.parser.Parser.xmlParser())
         val boxContent = document.selectFirst("div.BoxContent")
         val tables = parseTables(boxContent!!)
-        if (tables.containsKey("Character Information")) {
-            return parseCharacterInformation(tables["Character Information"]!!)
-        }
-        return null
+        val builder = Character.Builder()
+        parseCharacterInformation(tables["Character Information"] ?: return null, builder)
+        tables["Account Badges"]?.apply { parseAccountBadges(this, builder) }
+        return builder.build()
     }
 
-    private fun parseCharacterInformation(rows: Elements): Character {
-        val charBuilder = Character.Builder()
+    private fun parseAccountBadges(rows: Elements, builder: Character.Builder) {
+        val row = rows[0]
+        for (column: Element in row.select("td")) {
+            val popupSpan = column.select("span.HelperDivIndicator") ?: return
+            val (title: String, popupContent: Document) = parsePopup(popupSpan.attr("onmouseover"))
+            val description = popupContent.text()
+            val imageUrl = column.selectFirst("img")?.attr("src")
+            builder.addBadge(title, description, imageUrl!!)
+        }
+    }
+
+    private fun parseCharacterInformation(rows: Elements, charBuilder: Character.Builder): Character.Builder {
         for (row: Element in rows) {
             val columns = row.select("td")
             var (field, value) = columns.map { it.wholeText().replace("\u00A0", " ").trim() }
@@ -51,9 +62,8 @@ object CharacterParser : Parser<Character> {
                 "house" -> parseHouseColumn(charBuilder, columns[1])
                 "guild_membership" -> parseGuildColumn(charBuilder, columns[1])
             }
-
         }
-        return charBuilder.build()
+        return charBuilder
     }
 
     private fun parseGuildColumn(charBuilder: Character.Builder, valueColumn: Element) {

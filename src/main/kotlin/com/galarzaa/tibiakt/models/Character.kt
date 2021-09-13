@@ -78,6 +78,7 @@ data class Character(
         private var unlockedTitles: Int = 0
         private val houses: MutableList<CharacterHouse> = mutableListOf()
         private var guildMembership: GuildMembership? = null
+        private val accountBadges: MutableList<AccountBadge> = mutableListOf()
 
         fun name(name: String) = apply { this.name = name }
         fun titles(currentTitle: String?, unlockedTitles: Int) = apply {
@@ -102,6 +103,10 @@ data class Character(
             houses.add(CharacterHouse(name, houseId, town, paidUntil))
         }
 
+        fun addBadge(name: String, descroption: String, iconUrl: String) = apply {
+            accountBadges.add(AccountBadge(name, descroption, iconUrl))
+        }
+
         fun guild(rank: String, guild: String) = apply { this.guildMembership = GuildMembership(rank, guild) }
 
         fun build() =
@@ -123,7 +128,8 @@ data class Character(
                 houses = houses,
                 guildMembership = guildMembership,
                 title = title,
-                unlockedTitles = unlockedTitles
+                unlockedTitles = unlockedTitles,
+                badges = accountBadges
             )
     }
 }
@@ -147,7 +153,7 @@ data class GuildMembership(val guildName: String, val guildRank: String)
 data class DisplayedAchievement(val name: String, val grade: Int, val secret: Boolean = false)
 
 @Serializable
-data class AccountBadge(val name: String, val description: String)
+data class AccountBadge(val name: String, val description: String, val imageUrl: String)
 
 @Serializable
 data class AccountInformation(val loyaltyTitle: String, val creation: Instant, val position: String? = null)
