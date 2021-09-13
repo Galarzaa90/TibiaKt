@@ -1,5 +1,6 @@
 package com.galarzaa.tibiakt.parsers
 
+import com.galarzaa.tibiakt.core.parseTibiaTime
 import com.galarzaa.tibiakt.models.Character
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
@@ -21,7 +22,7 @@ object CharacterParser : Parser<Character> {
 
     private fun parseCharacterInformation(rows: Elements): Character {
         val attributes = mutableMapOf<String, Any>()
-        val character = Character("", 0)
+        val charBuilder = Character.Builder()
         for (row: Element in rows) {
             val columns = row.select("td")
             var (field, value) = columns.map { it.text().trim() }
@@ -36,29 +37,36 @@ object CharacterParser : Parser<Character> {
                         name = value
                     }
                     if (name.contains("(traded")) {
-                        character.traded = false
+                        charBuilder.traded(true)
                         name = name.replace("(traded)", "").trim()
                     }
-                    character.name = name
+                    charBuilder.name(name)
                 }
-                "level" -> character.level = value.toInt()
-                "sex" -> character.sex = value
-                "residence" -> character.residence = value
-                "vocation" -> character.vocation = value
+                "sex" -> charBuilder.sex(value)
+                "vocation" -> charBuilder.vocation(value)
+                "level" -> charBuilder.level(value.toInt())
+                "world" -> charBuilder.world(value)
+                "achievement_points" -> charBuilder.achievementPoints(value.toInt())
+                "residence" -> charBuilder.residence(value)
+                "last_login" -> {
+                    if (!value.contains("never logged", true)) {
+                        charBuilder.lastLogin(parseTibiaTime(value))
+                    }
+                }
             }
 
         }
-        return character
+        return charBuilder.build()
     }
 
-    private fun parseTables(parsedContent: Element) : Map<String, Elements> {
+    private fun parseTables(parsedContent: Element): Map<String, Elements> {
         val tables = parsedContent.select("div.TableContainer")
         val output = mutableMapOf<String, Elements>()
-        for (table: Element in tables){
+        for (table: Element in tables) {
             val captionContainer = table.selectFirst("div.CaptionContainer")
             val contentTable = table.selectFirst("table.TableContent")
             val caption = captionContainer!!.text()
-            if(contentTable == null)
+            if (contentTable == null)
                 continue
             val rows = contentTable.select("tr")
             output[caption] = rows
