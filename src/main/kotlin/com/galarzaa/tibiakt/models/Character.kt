@@ -1,27 +1,30 @@
 package com.galarzaa.tibiakt.models
 
 import com.galarzaa.tibiakt.InstantSerializer
+import com.galarzaa.tibiakt.LocalDateSerializer
 import com.galarzaa.tibiakt.core.getTibiaUrl
 import kotlinx.serialization.Serializable
 import java.time.Instant
+import java.time.LocalDate
 import kotlin.math.ceil
 import kotlin.math.floor
 
 
 @Serializable
 data class Character(
-    var name: String,
-    var level: Int,
-    var vocation: String,
-    var sex: String,
-    var world: String,
-    var achievementPoints: Int = 0,
-    var residence: String,
-    @Serializable(with = InstantSerializer::class) var lastLogin: Instant? = null,
-    var recentlyTraded: Boolean = false,
-    @Serializable(with = InstantSerializer::class) var deletionDate: Instant? = null,
-    val formerNames: MutableList<String> = mutableListOf(),
-    val characters: MutableList<OtherCharacter> = mutableListOf(),
+    val name: String,
+    val level: Int,
+    val vocation: String,
+    val sex: String,
+    val world: String,
+    val achievementPoints: Int = 0,
+    val residence: String,
+    @Serializable(with = InstantSerializer::class) val lastLogin: Instant? = null,
+    val recentlyTraded: Boolean = false,
+    @Serializable(with = InstantSerializer::class) val deletionDate: Instant? = null,
+    val formerNames: List<String> = listOf(),
+    val formerWorld: String? = null,
+    val characters: List<OtherCharacter> = listOf(),
 ) {
 
     val shareRange: Pair<Int, Int>
@@ -42,17 +45,18 @@ data class Character(
     }
 
     class Builder {
-        var name: String? = null
-        var level: Int = 2
-        var residence: String? = null
-        var vocation: String? = null
-        var sex: String? = null
-        var world: String? = null
-        var achievementPoints: Int = 0
-        var lastLogin: Instant? = null
-        var recentlyTraded: Boolean = false
-        var formerNames: MutableList<String> = mutableListOf()
-        var deletionDate: Instant? = null
+        private var name: String? = null
+        private var level: Int = 2
+        private var residence: String? = null
+        private var vocation: String? = null
+        private var sex: String? = null
+        private var world: String? = null
+        private var achievementPoints: Int = 0
+        private var lastLogin: Instant? = null
+        private var recentlyTraded: Boolean = false
+        private var formerNames: List<String> = listOf()
+        private var deletionDate: Instant? = null
+        private var formerWorld: String? = null
 
         fun name(name: String) = apply { this.name = name }
         fun vocation(vocation: String) = apply { this.vocation = vocation }
@@ -64,7 +68,8 @@ data class Character(
         fun recentlyTraded(recentlyTraded: Boolean) = apply { this.recentlyTraded = recentlyTraded }
         fun lastLogin(lastLogin: Instant?) = apply { this.lastLogin = lastLogin }
         fun deletionDate(deletionDate: Instant?) = apply { this.deletionDate = deletionDate }
-        fun formerNames(formerNames: MutableList<String>) = apply { this.formerNames = formerNames }
+        fun formerNames(formerNames: List<String>) = apply { this.formerNames = formerNames }
+        fun formerWorld(formerWorld: String?) = apply { this.formerWorld = formerWorld }
 
         fun build() =
             Character(
@@ -78,18 +83,23 @@ data class Character(
                 lastLogin,
                 recentlyTraded,
                 deletionDate,
-                formerNames
+                formerNames,
+                formerWorld
             )
     }
 }
 
 @Serializable
-class OtherCharacter(val name: String, val world: String) {
-    var main = false
-    var deleted = false
+data class OtherCharacter(val name: String, val world: String, val main: Boolean = false, val deleted: Boolean = false)
 
-    constructor(name: String, world: String, main: Boolean, deleted: Boolean) : this(name, world) {
-        this.main = main
-        this.deleted = deleted
-    }
-}
+
+@Serializable
+data class CharacterHouse(
+    val name: String,
+    val houseId: Int,
+    val town: String,
+    @Serializable(with = LocalDateSerializer::class) val paidUntil: LocalDate
+)
+
+@Serializable
+data class GuildMembership(val guildName: String, val guildRank: String)

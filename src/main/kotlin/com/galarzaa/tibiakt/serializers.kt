@@ -7,9 +7,20 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import java.time.Instant
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 object InstantSerializer : KSerializer<Instant> {
-    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("Date", PrimitiveKind.LONG)
+    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("DateTime", PrimitiveKind.LONG)
     override fun serialize(encoder: Encoder, value: Instant) = encoder.encodeLong(value.epochSecond)
     override fun deserialize(decoder: Decoder): Instant = Instant.ofEpochSecond(decoder.decodeLong())
+}
+
+object LocalDateSerializer : KSerializer<LocalDate> {
+    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("Date", PrimitiveKind.STRING)
+    override fun serialize(encoder: Encoder, value: LocalDate) =
+        encoder.encodeString(value.format(DateTimeFormatter.ISO_DATE))
+
+    override fun deserialize(decoder: Decoder): LocalDate =
+        LocalDate.parse(decoder.decodeString(), DateTimeFormatter.ISO_DATE)
 }

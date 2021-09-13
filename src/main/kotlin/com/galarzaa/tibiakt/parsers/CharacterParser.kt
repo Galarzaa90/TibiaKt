@@ -28,7 +28,8 @@ object CharacterParser : Parser<Character> {
             field = field.replace(" ", "_").replace(":", "").lowercase()
             when (field) {
                 "name" -> parseNameField(charBuilder, value)
-                "former_names" -> charBuilder.formerNames(value.split(",").map { it.trim() }.toMutableList())
+                "former_names" -> charBuilder.formerNames(value.split(",").map { it.trim() })
+                "former_world" -> charBuilder.formerWorld(value)
                 "sex" -> charBuilder.sex(value)
                 "vocation" -> charBuilder.vocation(value)
                 "level" -> charBuilder.level(value.toInt())
