@@ -1,10 +1,15 @@
 package com.galarzaa.tibiakt.core
 
+import org.jsoup.nodes.Element
+import java.net.URL
 import java.net.URLEncoder
 import java.time.Instant
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
+
+val queryStringRegex = Regex("([^&=]+)=([^&]*)")
 
 fun getTibiaUrl(section: String, vararg params: Pair<String, String>, test: Boolean = false): String {
     val baseUrl = if (test) "www.test.tibia.com" else "www.tibia.com"
@@ -15,7 +20,7 @@ fun getTibiaUrl(section: String, vararg params: Pair<String, String>, test: Bool
     }"
 }
 
-fun parseTibiaTime(input: String): Instant {
+fun parseTibiaDateTime(input: String): Instant {
     val timeString = input.replace("&#160;", " ").substring(0, input.length - 4).trim()
     val tzString = input.substring(input.length - 4)
     return LocalDateTime.parse(
@@ -24,3 +29,36 @@ fun parseTibiaTime(input: String): Instant {
     ).atOffset(ZoneOffset.of(if (tzString == "CEST") "+02:00" else "+01:00")).toInstant()
 }
 
+fun parseTibiaDate(input: String): LocalDate {
+    return LocalDate.parse(
+        input,
+        DateTimeFormatter.ofPattern("MMM dd yyyy")
+    )
+}
+
+internal fun Element.getLinkInformation(): LinkInformation? {
+    if (this.tagName() != "a")
+        return null
+    return LinkInformation(this.text(), this.attr("href"))
+}
+
+internal class LinkInformation(val title: String, targetUrl: String) {
+    val targetUrl: URL
+
+    init {
+        this.targetUrl = URL(targetUrl)
+    }
+
+    val queryParams: HashMap<String, MutableList<String>>
+        get() {
+            val matches = queryStringRegex.findAll(this.targetUrl.query)
+            val map = hashMapOf<String, MutableList<String>>()
+            for (match: MatchResult in matches) {
+                val (_, name, value) = match.groupValues
+                if (!map.containsKey(name))
+                    map[name] = mutableListOf()
+                map[name]?.add(value)
+            }
+            return map
+        }
+}

@@ -1,6 +1,8 @@
 package com.galarzaa.tibiakt.parsers
 
-import com.galarzaa.tibiakt.core.parseTibiaTime
+import com.galarzaa.tibiakt.core.getLinkInformation
+import com.galarzaa.tibiakt.core.parseTibiaDate
+import com.galarzaa.tibiakt.core.parseTibiaDateTime
 import com.galarzaa.tibiakt.models.Character
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
@@ -8,6 +10,8 @@ import org.jsoup.nodes.Element
 import org.jsoup.select.Elements
 
 val deletedRegexp = Regex("([^,]+), will be deleted at (.*)")
+val titlesRegexp = Regex("(.*)\\((\\d+) titles? unlocked\\)")
+val houseRegexp = Regex("\\(([^)]+)\\) is paid until (.*)")
 
 object CharacterParser : Parser<Character> {
     override fun fromContent(content: String): Character? {
@@ -28,6 +32,7 @@ object CharacterParser : Parser<Character> {
             field = field.replace(" ", "_").replace(":", "").lowercase()
             when (field) {
                 "name" -> parseNameField(charBuilder, value)
+                "title" -> parseTitles(charBuilder, value)
                 "former_names" -> charBuilder.formerNames(value.split(",").map { it.trim() })
                 "former_world" -> charBuilder.formerWorld(value)
                 "sex" -> charBuilder.sex(value)
@@ -38,25 +43,52 @@ object CharacterParser : Parser<Character> {
                 "residence" -> charBuilder.residence(value)
                 "last_login" -> {
                     if (!value.contains("never logged", true)) {
-                        charBuilder.lastLogin(parseTibiaTime(value))
+                        charBuilder.lastLogin(parseTibiaDateTime(value))
                     }
                 }
                 "comment" -> charBuilder.comment(value)
                 "account_status" -> charBuilder.accountStatus(value)
+                "house" -> parseHouseColumn(charBuilder, columns[1])
+                "guild_membership" -> parseGuildColumn(charBuilder, columns[1])
             }
 
         }
         return charBuilder.build()
     }
 
+    private fun parseGuildColumn(charBuilder: Character.Builder, valueColumn: Element) {
+        val link = valueColumn.selectFirst("a")?.getLinkInformation() ?: return
+        val rankName = valueColumn.text().split("of the").first().trim()
+        charBuilder.guild(rankName, link.title)
+    }
+
+    private fun parseHouseColumn(charBuilder: Character.Builder, valueColumn: Element) {
+        val match = houseRegexp.find(valueColumn.ownText()) ?: return
+        val (_, town, paidUntilStr) = match.groupValues
+        val link = valueColumn.selectFirst("a")?.getLinkInformation() ?: return
+        charBuilder.addHouse(
+            link.title,
+            link.queryParams["houseid"]?.first()?.toInt() ?: 0,
+            town,
+            parseTibiaDate(paidUntilStr)
+        )
+    }
+
+    private fun parseTitles(charBuilder: Character.Builder, value: String) {
+        val match = titlesRegexp.find(value) ?: return
+        val (_, currentTitle, unlockedTitles) = match.groupValues
+        charBuilder.titles(
+            if (currentTitle.contains("none", true)) null else currentTitle.trim(),
+            unlockedTitles.toInt()
+        )
+    }
+
     private fun parseNameField(charBuilder: Character.Builder, value: String) {
-        var name: String
         val match = deletedRegexp.matchEntire(value)
-        name = if (match != null) {
-            match.groups[1]?.value?.run {
-                charBuilder.deletionDate(parseTibiaTime(this))
-            }
-            match.groups[0]?.value!!
+        var name = if (match != null) {
+            val (_, cleanName, deletionDateStr) = match.groupValues
+            charBuilder.deletionDate(parseTibiaDateTime(deletionDateStr))
+            cleanName
         } else {
             value
         }

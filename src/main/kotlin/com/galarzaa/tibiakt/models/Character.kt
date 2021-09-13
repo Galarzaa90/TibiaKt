@@ -74,8 +74,17 @@ data class Character(
         private var formerWorld: String? = null
         private var accountStatus: String? = null
         private var comment: String? = null
+        private var title: String? = null
+        private var unlockedTitles: Int = 0
+        private val houses: MutableList<CharacterHouse> = mutableListOf()
+        private var guildMembership: GuildMembership? = null
 
         fun name(name: String) = apply { this.name = name }
+        fun titles(currentTitle: String?, unlockedTitles: Int) = apply {
+            title = currentTitle
+            this.unlockedTitles = unlockedTitles
+        }
+
         fun vocation(vocation: String) = apply { this.vocation = vocation }
         fun level(level: Int) = apply { this.level = level }
         fun sex(sex: String) = apply { this.sex = sex }
@@ -89,6 +98,11 @@ data class Character(
         fun formerWorld(formerWorld: String?) = apply { this.formerWorld = formerWorld }
         fun accountStatus(accountStatus: String) = apply { this.accountStatus = accountStatus }
         fun comment(comment: String?) = apply { this.comment = comment }
+        fun addHouse(name: String, houseId: Int, town: String, paidUntil: LocalDate) = apply {
+            houses.add(CharacterHouse(name, houseId, town, paidUntil))
+        }
+
+        fun guild(rank: String, guild: String) = apply { this.guildMembership = GuildMembership(rank, guild) }
 
         fun build() =
             Character(
@@ -105,7 +119,11 @@ data class Character(
                 formerNames = formerNames,
                 formerWorld = formerWorld,
                 accountStatus = accountStatus!!,
-                comment = comment
+                comment = comment,
+                houses = houses,
+                guildMembership = guildMembership,
+                title = title,
+                unlockedTitles = unlockedTitles
             )
     }
 }
