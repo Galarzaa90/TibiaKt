@@ -1,31 +1,26 @@
 package com.galarzaa.tibiakt.models
 
+import com.galarzaa.tibiakt.InstantSerializer
 import com.galarzaa.tibiakt.core.getTibiaUrl
+import kotlinx.serialization.Serializable
 import java.time.Instant
 import kotlin.math.ceil
 import kotlin.math.floor
 
-open class BaseCharacter(open var name: String) {
-    val url: String
-        get() = getUrl(name)
 
-    companion object {
-        fun getUrl(name: String) = getTibiaUrl("community", Pair("subtopic", "characters"), Pair("name", name))
-    }
-}
-
+@Serializable
 data class Character(
-    override var name: String,
+    var name: String,
     var level: Int,
     var vocation: String,
     var sex: String,
     var world: String,
     var achievementPoints: Int = 0,
     var residence: String,
-    var lastLogin: Instant? = null,
+    @Serializable(with = InstantSerializer::class) var lastLogin: Instant? = null,
     var traded: Boolean = false,
     val characters: ArrayList<OtherCharacter> = arrayListOf(),
-) : BaseCharacter(name) {
+) {
 
     val shareRange: Pair<Int, Int>
         get() {
@@ -34,8 +29,11 @@ data class Character(
             return Pair(minLevel, maxLevel)
         }
 
+    val url: String
+        get() = getUrl(name)
+
     companion object {
-        fun getUrl(name: String) = BaseCharacter.getUrl(name)
+        fun getUrl(name: String) = getTibiaUrl("community", Pair("subtopic", "characters"), Pair("name", name))
     }
 
     class Builder {
@@ -64,6 +62,7 @@ data class Character(
     }
 }
 
+@Serializable
 class OtherCharacter(val name: String, val world: String) {
     var main = false
     var deleted = false
