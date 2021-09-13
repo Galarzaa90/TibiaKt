@@ -24,7 +24,7 @@ object CharacterParser : Parser<Character> {
         val charBuilder = Character.Builder()
         for (row: Element in rows) {
             val columns = row.select("td")
-            var (field, value) = columns.map { it.text().trim() }
+            var (field, value) = columns.map { it.wholeText().replace("\u00A0", " ").trim() }
             field = field.replace(" ", "_").replace(":", "").lowercase()
             when (field) {
                 "name" -> parseNameField(charBuilder, value)
@@ -33,14 +33,16 @@ object CharacterParser : Parser<Character> {
                 "sex" -> charBuilder.sex(value)
                 "vocation" -> charBuilder.vocation(value)
                 "level" -> charBuilder.level(value.toInt())
-                "world" -> charBuilder.world(value)
                 "achievement_points" -> charBuilder.achievementPoints(value.toInt())
+                "world" -> charBuilder.world(value)
                 "residence" -> charBuilder.residence(value)
                 "last_login" -> {
                     if (!value.contains("never logged", true)) {
                         charBuilder.lastLogin(parseTibiaTime(value))
                     }
                 }
+                "comment" -> charBuilder.comment(value)
+                "account_status" -> charBuilder.accountStatus(value)
             }
 
         }

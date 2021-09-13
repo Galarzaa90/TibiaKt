@@ -1,9 +1,12 @@
+@file:UseSerializers(InstantSerializer::class, LocalDateSerializer::class)
+
 package com.galarzaa.tibiakt.models
 
 import com.galarzaa.tibiakt.InstantSerializer
 import com.galarzaa.tibiakt.LocalDateSerializer
 import com.galarzaa.tibiakt.core.getTibiaUrl
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.UseSerializers
 import java.time.Instant
 import java.time.LocalDate
 import kotlin.math.ceil
@@ -14,16 +17,28 @@ import kotlin.math.floor
 data class Character(
     val name: String,
     val level: Int,
-    val vocation: String,
     val sex: String,
+    val vocation: String,
     val world: String,
     val achievementPoints: Int = 0,
     val residence: String,
-    @Serializable(with = InstantSerializer::class) val lastLogin: Instant? = null,
+    val accountStatus: String,
     val recentlyTraded: Boolean = false,
-    @Serializable(with = InstantSerializer::class) val deletionDate: Instant? = null,
+    val deletionDate: Instant? = null,
+    val title: String? = null,
+    val unlockedTitles: Int = 0,
     val formerNames: List<String> = listOf(),
     val formerWorld: String? = null,
+    val marriedTo: String? = null,
+    val houses: List<CharacterHouse> = listOf(),
+    val guildMembership: GuildMembership? = null,
+    @Serializable(with = InstantSerializer::class) val lastLogin: Instant? = null,
+    val position: String? = null,
+    val comment: String? = null,
+    val badges: List<AccountBadge> = listOf(),
+    val achievements: List<DisplayedAchievement> = listOf(),
+    val deaths: List<Death> = listOf(),
+    val accountInformation: AccountInformation? = null,
     val characters: List<OtherCharacter> = listOf(),
 ) {
 
@@ -57,6 +72,8 @@ data class Character(
         private var formerNames: List<String> = listOf()
         private var deletionDate: Instant? = null
         private var formerWorld: String? = null
+        private var accountStatus: String? = null
+        private var comment: String? = null
 
         fun name(name: String) = apply { this.name = name }
         fun vocation(vocation: String) = apply { this.vocation = vocation }
@@ -70,21 +87,25 @@ data class Character(
         fun deletionDate(deletionDate: Instant?) = apply { this.deletionDate = deletionDate }
         fun formerNames(formerNames: List<String>) = apply { this.formerNames = formerNames }
         fun formerWorld(formerWorld: String?) = apply { this.formerWorld = formerWorld }
+        fun accountStatus(accountStatus: String) = apply { this.accountStatus = accountStatus }
+        fun comment(comment: String?) = apply { this.comment = comment }
 
         fun build() =
             Character(
-                name!!,
-                level,
-                vocation!!,
-                sex!!,
-                world!!,
-                achievementPoints,
-                residence!!,
-                lastLogin,
-                recentlyTraded,
-                deletionDate,
-                formerNames,
-                formerWorld
+                name = name!!,
+                level = level,
+                vocation = vocation!!,
+                sex = sex!!,
+                world = world!!,
+                achievementPoints = achievementPoints,
+                residence = residence!!,
+                lastLogin = lastLogin,
+                recentlyTraded = recentlyTraded,
+                deletionDate = deletionDate,
+                formerNames = formerNames,
+                formerWorld = formerWorld,
+                accountStatus = accountStatus!!,
+                comment = comment
             )
     }
 }
@@ -98,8 +119,23 @@ data class CharacterHouse(
     val name: String,
     val houseId: Int,
     val town: String,
-    @Serializable(with = LocalDateSerializer::class) val paidUntil: LocalDate
+    val paidUntil: LocalDate
 )
 
 @Serializable
 data class GuildMembership(val guildName: String, val guildRank: String)
+
+@Serializable
+data class DisplayedAchievement(val name: String, val grade: Int, val secret: Boolean = false)
+
+@Serializable
+data class AccountBadge(val name: String, val description: String)
+
+@Serializable
+data class AccountInformation(val loyaltyTitle: String, val creation: Instant, val position: String? = null)
+
+@Serializable
+data class Death(val timestamp: Instant, val level: Int, val killer: List<Killer>, val assists: List<Killer>)
+
+@Serializable
+data class Killer(val name: String, val player: Boolean, val summon: String? = null)
