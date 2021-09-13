@@ -16,11 +16,11 @@ fun getTibiaUrl(section: String, vararg params: Pair<String, String>, test: Bool
 }
 
 fun parseTibiaTime(input: String): Instant {
-    var timeString = input.replace("&#160;", " ").substring(0, input.length - 4).trim()
+    val timeString = input.replace("&#160;", " ").substring(0, input.length - 4).trim()
     val tzString = input.substring(input.length - 4)
-    var instant = LocalDateTime.parse(
+    return LocalDateTime.parse(
         timeString,
         DateTimeFormatter.ofPattern("MMM dd yyyy, HH:mm:ss")
     ).atOffset(ZoneOffset.of(if (tzString == "CEST") "+02:00" else "+01:00")).toInstant()
-    return instant
 }
+

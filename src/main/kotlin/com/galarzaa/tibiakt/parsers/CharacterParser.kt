@@ -21,27 +21,14 @@ object CharacterParser : Parser<Character> {
     }
 
     private fun parseCharacterInformation(rows: Elements): Character {
-        val attributes = mutableMapOf<String, Any>()
         val charBuilder = Character.Builder()
         for (row: Element in rows) {
             val columns = row.select("td")
             var (field, value) = columns.map { it.text().trim() }
             field = field.replace(" ", "_").replace(":", "").lowercase()
             when (field) {
-                "name" -> {
-                    var name: String
-                    val match = deletedRegexp.matchEntire(value)
-                    if (match != null) {
-                        name = match.groups[0]?.value!!
-                    } else {
-                        name = value
-                    }
-                    if (name.contains("(traded")) {
-                        charBuilder.traded(true)
-                        name = name.replace("(traded)", "").trim()
-                    }
-                    charBuilder.name(name)
-                }
+                "name" -> parseNameField(charBuilder, value)
+                "former_names" -> charBuilder.formerNames(value.split(",").map { it.trim() }.toMutableList())
                 "sex" -> charBuilder.sex(value)
                 "vocation" -> charBuilder.vocation(value)
                 "level" -> charBuilder.level(value.toInt())
@@ -57,6 +44,24 @@ object CharacterParser : Parser<Character> {
 
         }
         return charBuilder.build()
+    }
+
+    private fun parseNameField(charBuilder: Character.Builder, value: String) {
+        var name: String
+        val match = deletedRegexp.matchEntire(value)
+        name = if (match != null) {
+            match.groups[1]?.value?.run {
+                charBuilder.deletionDate(parseTibiaTime(this))
+            }
+            match.groups[0]?.value!!
+        } else {
+            value
+        }
+        if (name.contains("(traded")) {
+            charBuilder.recentlyTraded(true)
+            name = name.replace("(traded)", "").trim()
+        }
+        charBuilder.name(name)
     }
 
     private fun parseTables(parsedContent: Element): Map<String, Elements> {

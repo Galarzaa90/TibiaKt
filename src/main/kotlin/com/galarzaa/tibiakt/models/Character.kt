@@ -18,8 +18,10 @@ data class Character(
     var achievementPoints: Int = 0,
     var residence: String,
     @Serializable(with = InstantSerializer::class) var lastLogin: Instant? = null,
-    var traded: Boolean = false,
-    val characters: ArrayList<OtherCharacter> = arrayListOf(),
+    var recentlyTraded: Boolean = false,
+    @Serializable(with = InstantSerializer::class) var deletionDate: Instant? = null,
+    val formerNames: MutableList<String> = mutableListOf(),
+    val characters: MutableList<OtherCharacter> = mutableListOf(),
 ) {
 
     val shareRange: Pair<Int, Int>
@@ -31,6 +33,9 @@ data class Character(
 
     val url: String
         get() = getUrl(name)
+
+    val scheduledForDeletion: Boolean
+        get() = deletionDate != null
 
     companion object {
         fun getUrl(name: String) = getTibiaUrl("community", Pair("subtopic", "characters"), Pair("name", name))
@@ -45,7 +50,9 @@ data class Character(
         var world: String? = null
         var achievementPoints: Int = 0
         var lastLogin: Instant? = null
-        var traded: Boolean = false
+        var recentlyTraded: Boolean = false
+        var formerNames: MutableList<String> = mutableListOf()
+        var deletionDate: Instant? = null
 
         fun name(name: String) = apply { this.name = name }
         fun vocation(vocation: String) = apply { this.vocation = vocation }
@@ -54,11 +61,25 @@ data class Character(
         fun world(world: String) = apply { this.world = world }
         fun achievementPoints(achievementPoints: Int) = apply { this.achievementPoints = achievementPoints }
         fun residence(residence: String) = apply { this.residence = residence }
-        fun traded(traded: Boolean) = apply { this.traded = traded }
+        fun recentlyTraded(recentlyTraded: Boolean) = apply { this.recentlyTraded = recentlyTraded }
         fun lastLogin(lastLogin: Instant?) = apply { this.lastLogin = lastLogin }
+        fun deletionDate(deletionDate: Instant?) = apply { this.deletionDate = deletionDate }
+        fun formerNames(formerNames: MutableList<String>) = apply { this.formerNames = formerNames }
 
         fun build() =
-            Character(name!!, level, vocation!!, sex!!, world!!, achievementPoints, residence!!, lastLogin, traded)
+            Character(
+                name!!,
+                level,
+                vocation!!,
+                sex!!,
+                world!!,
+                achievementPoints,
+                residence!!,
+                lastLogin,
+                recentlyTraded,
+                deletionDate,
+                formerNames
+            )
     }
 }
 
