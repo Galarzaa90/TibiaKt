@@ -24,11 +24,11 @@ data class Character(
     val characters: MutableList<OtherCharacter> = mutableListOf(),
 ) {
 
-    val shareRange: Pair<Int, Int>
+    val shareRange: IntRange
         get() {
             val minLevel = floor((level / 3.0) * 2).toInt()
             val maxLevel = ceil((level / 2.0) * 3).toInt() + if (level % 2 == 0) 1 else 0
-            return Pair(minLevel, maxLevel)
+            return minLevel..maxLevel
         }
 
     val url: String
