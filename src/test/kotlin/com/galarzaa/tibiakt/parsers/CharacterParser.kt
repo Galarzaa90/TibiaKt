@@ -1,15 +1,15 @@
 package com.galarzaa.tibiakt.parsers
 
-import kotlin.test.Test
+import com.galarzaa.tibiakt.TestResources.getResource
+import org.junit.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 
-internal class CharacterParserTest {
+class CharacterParserTest {
 
     @Test
     fun fromContent() {
-        val content = javaClass.classLoader.getResource("character.txt").readText()
-        val result = CharacterParser.fromContent(content)
+        val result = CharacterParser.fromContent(getResource("character.txt"))
 
         assertNotNull(result)
         assertEquals("Galarzaa Fidera", result.name)
