@@ -27,19 +27,19 @@ data class Character(
     val deletionDate: Instant? = null,
     val title: String? = null,
     val unlockedTitles: Int = 0,
-    val formerNames: List<String> = listOf(),
+    val formerNames: List<String> = emptyList(),
     val formerWorld: String? = null,
     val marriedTo: String? = null,
-    val houses: List<CharacterHouse> = listOf(),
+    val houses: List<CharacterHouse> = emptyList(),
     val guildMembership: GuildMembership? = null,
     @Serializable(with = InstantSerializer::class) val lastLogin: Instant? = null,
     val position: String? = null,
     val comment: String? = null,
-    val badges: List<AccountBadge> = listOf(),
-    val achievements: List<DisplayedAchievement> = listOf(),
-    val deaths: List<Death> = listOf(),
+    val badges: List<AccountBadge> = emptyList(),
+    val achievements: List<DisplayedAchievement> = emptyList(),
+    val deaths: List<Death> = emptyList(),
     val accountInformation: AccountInformation? = null,
-    val characters: List<OtherCharacter> = listOf(),
+    val characters: List<OtherCharacter> = emptyList(),
 ) {
 
     val shareRange: IntRange
@@ -75,10 +75,15 @@ data class Character(
         private var accountStatus: String? = null
         private var comment: String? = null
         private var title: String? = null
+        private var position: String? = null
         private var unlockedTitles: Int = 0
         private val houses: MutableList<CharacterHouse> = mutableListOf()
         private var guildMembership: GuildMembership? = null
         private val accountBadges: MutableList<AccountBadge> = mutableListOf()
+        private val achievements: MutableList<DisplayedAchievement> = mutableListOf()
+        private var accountInformation: AccountInformation? = null
+        private val deaths: MutableList<Death> = mutableListOf()
+        private val characters: MutableList<OtherCharacter> = mutableListOf()
 
         fun name(name: String) = apply { this.name = name }
         fun titles(currentTitle: String?, unlockedTitles: Int) = apply {
@@ -97,6 +102,7 @@ data class Character(
         fun deletionDate(deletionDate: Instant?) = apply { this.deletionDate = deletionDate }
         fun formerNames(formerNames: List<String>) = apply { this.formerNames = formerNames }
         fun formerWorld(formerWorld: String?) = apply { this.formerWorld = formerWorld }
+        fun position(position: String?) = apply { this.position = position }
         fun accountStatus(accountStatus: String) = apply { this.accountStatus = accountStatus }
         fun comment(comment: String?) = apply { this.comment = comment }
         fun addHouse(name: String, houseId: Int, town: String, paidUntil: LocalDate) = apply {
@@ -107,35 +113,72 @@ data class Character(
             accountBadges.add(AccountBadge(name, descroption, iconUrl))
         }
 
-        fun guild(rank: String, guild: String) = apply { this.guildMembership = GuildMembership(rank, guild) }
+        fun addAchievement(name: String, grade: Int, secret: Boolean) = apply {
+            achievements.add(DisplayedAchievement(name, grade, secret))
+        }
+
+        fun accountInformation(created: Instant, loyaltyTitle: String?, position: String?, tutorStars: Int?) = apply {
+            accountInformation = AccountInformation(created, loyaltyTitle, position, tutorStars)
+        }
+
+        fun guild(rank: String, guild: String) = apply { guildMembership = GuildMembership(rank, guild) }
+
+        fun addDeath(timestamp: Instant, level: Int, killers: List<Killer>, assists: List<Killer>) = apply {
+            deaths.add(Death(timestamp, level, killers, assists))
+        }
+
+        fun addCharacter(
+            name: String,
+            world: String,
+            main: Boolean = false,
+            online: Boolean = false,
+            deleted: Boolean = false,
+            traded: Boolean = false,
+            position: String?
+        ) =
+            apply { characters.add(OtherCharacter(name, world, main, online, deleted, traded, position)) }
+
 
         fun build() =
             Character(
-                name = name!!,
+                name = name ?: throw IllegalStateException("name is required"),
                 level = level,
-                vocation = vocation!!,
-                sex = sex!!,
-                world = world!!,
+                vocation = vocation ?: throw IllegalStateException("vocation is required"),
+                sex = sex ?: throw IllegalStateException("sex is required"),
+                world = world ?: throw IllegalStateException("world is required"),
                 achievementPoints = achievementPoints,
-                residence = residence!!,
+                residence = residence ?: throw IllegalStateException("residence is required"),
                 lastLogin = lastLogin,
                 recentlyTraded = recentlyTraded,
                 deletionDate = deletionDate,
                 formerNames = formerNames,
                 formerWorld = formerWorld,
-                accountStatus = accountStatus!!,
+                accountStatus = accountStatus ?: throw IllegalStateException("accountStatus is required"),
                 comment = comment,
                 houses = houses,
                 guildMembership = guildMembership,
                 title = title,
                 unlockedTitles = unlockedTitles,
-                badges = accountBadges
+                badges = accountBadges,
+                achievements = achievements,
+                accountInformation = accountInformation,
+                deaths = deaths,
+                position = position,
+                characters = characters
             )
     }
 }
 
 @Serializable
-data class OtherCharacter(val name: String, val world: String, val main: Boolean = false, val deleted: Boolean = false)
+data class OtherCharacter(
+    val name: String,
+    val world: String,
+    val main: Boolean = false,
+    val isOnline: Boolean = false,
+    val isDeleted: Boolean = false,
+    val recentlyTraded: Boolean = false,
+    val position: String?
+)
 
 
 @Serializable
@@ -156,10 +199,15 @@ data class DisplayedAchievement(val name: String, val grade: Int, val secret: Bo
 data class AccountBadge(val name: String, val description: String, val imageUrl: String)
 
 @Serializable
-data class AccountInformation(val loyaltyTitle: String, val creation: Instant, val position: String? = null)
+data class AccountInformation(
+    val creation: Instant,
+    val loyaltyTitle: String?,
+    val position: String? = null,
+    val tutorStars: Int? = null
+)
 
 @Serializable
-data class Death(val timestamp: Instant, val level: Int, val killer: List<Killer>, val assists: List<Killer>)
+data class Death(val timestamp: Instant, val level: Int, val killers: List<Killer>, val assists: List<Killer>)
 
 @Serializable
-data class Killer(val name: String, val player: Boolean, val summon: String? = null)
+data class Killer(val name: String, val player: Boolean, val summon: String? = null, val traded: Boolean = false)

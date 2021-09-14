@@ -24,7 +24,7 @@ fun getTibiaUrl(section: String, vararg params: Pair<String, String>, test: Bool
 }
 
 fun parseTibiaDateTime(input: String): Instant {
-    val timeString = input.replace("&#160;", " ").substring(0, input.length - 4).trim()
+    val timeString = input.clean().substring(0, input.length - 4).trim()
     val tzString = input.substring(input.length - 4)
     return LocalDateTime.parse(
         timeString,
@@ -79,4 +79,25 @@ internal fun parsePopup(content: String): Pair<String, Document> {
         .trim()
     val parsedHtml = Jsoup.parse(html, "", Parser.xmlParser())
     return Pair(title, parsedHtml)
+}
+
+fun String.splitList(separator: String = ",", lastSeparator: String = " and "): List<String> {
+    val items = this.split(separator).toMutableList()
+    val lastItem: String = items.last()
+    val lastSplit: List<String> = lastItem.split(lastSeparator)
+    if (lastSplit.size > 1) {
+        items[items.lastIndex] = lastSplit.subList(0, lastSplit.lastIndex).joinToString(lastSeparator)
+        items.add(lastSplit.last())
+    }
+    return items.map { it.trim() }
+}
+
+/**
+ * Cleans the string of non-breaking spaces and trims whitespace.
+ */
+fun String.clean(): String {
+    return this
+        .replace("\u00A0", " ")
+        .replace("&#xa0;", " ")
+        .trim()
 }
