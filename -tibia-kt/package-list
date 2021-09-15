@@ -2,6 +2,7 @@ $dokka.format:html-v1
 $dokka.linkExtension:html
 $dokka.location:com.galarzaa.tibiakt.core////PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.core/index.html
 $dokka.location:com.galarzaa.tibiakt.core//clean/kotlin.String#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.core/clean.html
+$dokka.location:com.galarzaa.tibiakt.core//getCharacterUrl/#kotlin.String/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.core/get-character-url.html
 $dokka.location:com.galarzaa.tibiakt.core//getTibiaUrl/#kotlin.String#kotlin.Array[kotlin.Pair[kotlin.String,kotlin.String]]#kotlin.Boolean/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.core/get-tibia-url.html
 $dokka.location:com.galarzaa.tibiakt.core//main/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.core/main.html
 $dokka.location:com.galarzaa.tibiakt.core//parseTibiaDate/#kotlin.String/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.core/parse-tibia-date.html
@@ -13,6 +14,10 @@ $dokka.location:com.galarzaa.tibiakt.core/Client/Client/#/PointingToDeclaration/
 $dokka.location:com.galarzaa.tibiakt.core/Client/client/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.core/-client/client.html
 $dokka.location:com.galarzaa.tibiakt.core/Client/fetchCharacter/#kotlin.String/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.core/-client/fetch-character.html
 $dokka.location:com.galarzaa.tibiakt.models////PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/index.html
+$dokka.location:com.galarzaa.tibiakt.models//getUrl/Character.Companion#kotlin.String/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/get-url.html
+$dokka.location:com.galarzaa.tibiakt.models//scheduledForDeletion/com.galarzaa.tibiakt.models.Character#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/scheduled-for-deletion.html
+$dokka.location:com.galarzaa.tibiakt.models//shareRange/com.galarzaa.tibiakt.models.Character#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/share-range.html
+$dokka.location:com.galarzaa.tibiakt.models//url/com.galarzaa.tibiakt.models.Character#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/url.html
 $dokka.location:com.galarzaa.tibiakt.models/AccountBadge///PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-account-badge/index.html
 $dokka.location:com.galarzaa.tibiakt.models/AccountBadge/AccountBadge/#kotlin.String#kotlin.String#kotlin.String/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-account-badge/-account-badge.html
 $dokka.location:com.galarzaa.tibiakt.models/AccountBadge/description/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-account-badge/description.html
@@ -50,8 +55,6 @@ $dokka.location:com.galarzaa.tibiakt.models/Character.Builder/sex/#kotlin.String
 $dokka.location:com.galarzaa.tibiakt.models/Character.Builder/titles/#kotlin.String?#kotlin.Int/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-character/-builder/titles.html
 $dokka.location:com.galarzaa.tibiakt.models/Character.Builder/vocation/#kotlin.String/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-character/-builder/vocation.html
 $dokka.location:com.galarzaa.tibiakt.models/Character.Builder/world/#kotlin.String/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-character/-builder/world.html
-$dokka.location:com.galarzaa.tibiakt.models/Character.Companion///PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-character/-companion/index.html
-$dokka.location:com.galarzaa.tibiakt.models/Character.Companion/getUrl/#kotlin.String/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-character/-companion/get-url.html
 $dokka.location:com.galarzaa.tibiakt.models/Character///PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-character/index.html
 $dokka.location:com.galarzaa.tibiakt.models/Character/Character/#kotlin.String#kotlin.Int#kotlin.String#kotlin.String#kotlin.String#kotlin.Int#kotlin.String#kotlin.String#kotlin.Boolean#java.time.Instant?#kotlin.String?#kotlin.Int#kotlin.collections.List[kotlin.String]#kotlin.String?#kotlin.String?#kotlin.collections.List[com.galarzaa.tibiakt.models.CharacterHouse]#com.galarzaa.tibiakt.models.GuildMembership?#java.time.Instant?#kotlin.String?#kotlin.String?#kotlin.collections.List[com.galarzaa.tibiakt.models.AccountBadge]#kotlin.collections.List[com.galarzaa.tibiakt.models.DisplayedAchievement]#kotlin.collections.List[com.galarzaa.tibiakt.models.Death]#com.galarzaa.tibiakt.models.AccountInformation?#kotlin.collections.List[com.galarzaa.tibiakt.models.OtherCharacter]/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-character/-character.html
 $dokka.location:com.galarzaa.tibiakt.models/Character/accountInformation/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-character/account-information.html
@@ -74,12 +77,9 @@ $dokka.location:com.galarzaa.tibiakt.models/Character/name/#/PointingToDeclarati
 $dokka.location:com.galarzaa.tibiakt.models/Character/position/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-character/position.html
 $dokka.location:com.galarzaa.tibiakt.models/Character/recentlyTraded/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-character/recently-traded.html
 $dokka.location:com.galarzaa.tibiakt.models/Character/residence/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-character/residence.html
-$dokka.location:com.galarzaa.tibiakt.models/Character/scheduledForDeletion/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-character/scheduled-for-deletion.html
 $dokka.location:com.galarzaa.tibiakt.models/Character/sex/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-character/sex.html
-$dokka.location:com.galarzaa.tibiakt.models/Character/shareRange/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-character/share-range.html
 $dokka.location:com.galarzaa.tibiakt.models/Character/title/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-character/title.html
 $dokka.location:com.galarzaa.tibiakt.models/Character/unlockedTitles/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-character/unlocked-titles.html
-$dokka.location:com.galarzaa.tibiakt.models/Character/url/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-character/url.html
 $dokka.location:com.galarzaa.tibiakt.models/Character/vocation/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-character/vocation.html
 $dokka.location:com.galarzaa.tibiakt.models/Character/world/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-character/world.html
 $dokka.location:com.galarzaa.tibiakt.models/CharacterHouse///PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-character-house/index.html
@@ -119,14 +119,6 @@ $dokka.location:com.galarzaa.tibiakt.models/OtherCharacter/position/#/PointingTo
 $dokka.location:com.galarzaa.tibiakt.models/OtherCharacter/recentlyTraded/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-other-character/recently-traded.html
 $dokka.location:com.galarzaa.tibiakt.models/OtherCharacter/world/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-other-character/world.html
 $dokka.location:com.galarzaa.tibiakt.parsers////PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.parsers/index.html
-$dokka.location:com.galarzaa.tibiakt.parsers//deathAssistsRegex/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.parsers/death-assists-regex.html
-$dokka.location:com.galarzaa.tibiakt.parsers//deathSummon/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.parsers/death-summon.html
-$dokka.location:com.galarzaa.tibiakt.parsers//deathsRegex/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.parsers/deaths-regex.html
-$dokka.location:com.galarzaa.tibiakt.parsers//deletedRegexp/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.parsers/deleted-regexp.html
-$dokka.location:com.galarzaa.tibiakt.parsers//houseRegexp/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.parsers/house-regexp.html
-$dokka.location:com.galarzaa.tibiakt.parsers//linkContent/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.parsers/link-content.html
-$dokka.location:com.galarzaa.tibiakt.parsers//linkSearch/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.parsers/link-search.html
-$dokka.location:com.galarzaa.tibiakt.parsers//titlesRegexp/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.parsers/titles-regexp.html
 $dokka.location:com.galarzaa.tibiakt.parsers/CharacterParser///PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.parsers/-character-parser/index.html
 $dokka.location:com.galarzaa.tibiakt.parsers/CharacterParser/fromContent/#kotlin.String/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.parsers/-character-parser/from-content.html
 $dokka.location:com.galarzaa.tibiakt.parsers/Parser///PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.parsers/-parser/index.html
