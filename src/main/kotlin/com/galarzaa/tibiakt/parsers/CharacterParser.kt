@@ -1,9 +1,16 @@
 package com.galarzaa.tibiakt.parsers
 
 import com.galarzaa.tibiakt.ParsingException
-import com.galarzaa.tibiakt.core.*
+import com.galarzaa.tibiakt.builders.CharacterBuilder
+import com.galarzaa.tibiakt.core.getLinkInformation
+import com.galarzaa.tibiakt.core.parsePopup
+import com.galarzaa.tibiakt.core.parseTibiaDate
+import com.galarzaa.tibiakt.core.parseTibiaDateTime
 import com.galarzaa.tibiakt.models.Character
 import com.galarzaa.tibiakt.models.Killer
+import com.galarzaa.tibiakt.utils.clean
+import com.galarzaa.tibiakt.utils.remove
+import com.galarzaa.tibiakt.utils.splitList
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
@@ -19,14 +26,14 @@ object CharacterParser : Parser<Character> {
     private val deathAssistsRegex = Regex("""(?<killers>.+)\.<br\s?/>Assisted by (?<assists>.+)""")
     private val linkSearch = Regex("""<a[^>]+>[^<]+</a>""")
     private val linkContent = Regex(""">([^<]+)<""")
-    private val deathSummon = Regex("""(?<summon>.+) of <a[^>]+>(?<name>[^<]+)</a>""")
+    private val deathSummon = Regex("""(?<summon>an? .+) of (?<name>.*)""")
     private const val tradedLabel = "(traded)"
 
     override fun fromContent(content: String): Character? {
         val document: Document = Jsoup.parse(content, "", org.jsoup.parser.Parser.xmlParser())
         val boxContent = document.selectFirst("div.BoxContent")
         val tables = parseTables(boxContent ?: throw ParsingException("BoxContent container not found"))
-        val builder = Character.Builder()
+        val builder = CharacterBuilder()
         parseCharacterInformation(tables["Character Information"] ?: return null, builder)
         tables["Account Badges"]?.apply { parseAccountBadges(this, builder) }
         tables["Account Achievements"]?.apply { parseAccountAchievements(this, builder) }
@@ -36,11 +43,11 @@ object CharacterParser : Parser<Character> {
         return builder.build()
     }
 
-    private fun parseCharacterInformation(rows: Elements, charBuilder: Character.Builder): Character.Builder {
+    private fun parseCharacterInformation(rows: Elements, charBuilder: CharacterBuilder): CharacterBuilder {
         for (row: Element in rows) {
             val columns = row.select("td")
-            var (field, value) = columns.map { it.wholeText().replace("\u00A0", " ").trim() }
-            field = field.replace(" ", "_").replace(":", "").lowercase()
+            var (field, value) = columns.map { it.wholeText().clean() }
+            field = field.replace(" ", "_").remove(":").lowercase()
             when (field) {
                 "name" -> parseNameField(charBuilder, value)
                 "title" -> parseTitles(charBuilder, value)
@@ -67,13 +74,13 @@ object CharacterParser : Parser<Character> {
         return charBuilder
     }
 
-    private fun parseGuildColumn(charBuilder: Character.Builder, valueColumn: Element) {
+    private fun parseGuildColumn(charBuilder: CharacterBuilder, valueColumn: Element) {
         val link = valueColumn.selectFirst("a")?.getLinkInformation() ?: return
         val rankName = valueColumn.text().split("of the").first().trim()
         charBuilder.guild(rankName, link.title)
     }
 
-    private fun parseHouseColumn(charBuilder: Character.Builder, valueColumn: Element) {
+    private fun parseHouseColumn(charBuilder: CharacterBuilder, valueColumn: Element) {
         val match = houseRegexp.find(valueColumn.ownText()) ?: return
         val (_, town, paidUntilStr) = match.groupValues
         val link = valueColumn.selectFirst("a")?.getLinkInformation() ?: return
@@ -85,7 +92,7 @@ object CharacterParser : Parser<Character> {
         )
     }
 
-    private fun parseTitles(charBuilder: Character.Builder, value: String) {
+    private fun parseTitles(charBuilder: CharacterBuilder, value: String) {
         val match = titlesRegexp.find(value) ?: return
         val (_, currentTitle, unlockedTitles) = match.groupValues
         charBuilder.titles(
@@ -94,7 +101,7 @@ object CharacterParser : Parser<Character> {
         )
     }
 
-    private fun parseNameField(charBuilder: Character.Builder, value: String) {
+    private fun parseNameField(charBuilder: CharacterBuilder, value: String) {
         val match = deletedRegexp.matchEntire(value)
         var name = if (match != null) {
             val (_, cleanName, deletionDateStr) = match.groupValues
@@ -105,12 +112,12 @@ object CharacterParser : Parser<Character> {
         }
         if (name.contains(tradedLabel)) {
             charBuilder.recentlyTraded(true)
-            name = name.replace(tradedLabel, "").trim()
+            name = name.remove(tradedLabel).trim()
         }
         charBuilder.name(name)
     }
 
-    private fun parseAccountBadges(rows: Elements, builder: Character.Builder) {
+    private fun parseAccountBadges(rows: Elements, builder: CharacterBuilder) {
         val row = rows[0]
         for (column: Element in row.select("td")) {
             val popupSpan = column.select("span.HelperDivIndicator") ?: return
@@ -121,7 +128,7 @@ object CharacterParser : Parser<Character> {
         }
     }
 
-    private fun parseAccountAchievements(rows: Elements, builder: Character.Builder) {
+    private fun parseAccountAchievements(rows: Elements, builder: CharacterBuilder) {
         for (row: Element in rows) {
             val columns = row.select("td")
             if (columns.size != 2)
@@ -134,12 +141,12 @@ object CharacterParser : Parser<Character> {
         }
     }
 
-    private fun parseAccountInformation(rows: Elements, builder: Character.Builder) {
+    private fun parseAccountInformation(rows: Elements, builder: CharacterBuilder) {
         val valueMap = mutableMapOf<String, String>()
         for (row: Element in rows) {
             val columns = row.select("td")
-            var (field, value) = columns.map { it.wholeText().replace("\u00A0", " ").trim() }
-            field = field.replace(" ", "_").replace(":", "").lowercase()
+            var (field, value) = columns.map { it.wholeText().clean() }
+            field = field.replace(" ", "_").remove(":").lowercase()
             when (field) {
                 "position" -> {
                     if (value.contains("tutor", true)) {
@@ -158,7 +165,7 @@ object CharacterParser : Parser<Character> {
         )
     }
 
-    private fun parseCharacterDeaths(rows: Elements, builder: Character.Builder) {
+    private fun parseCharacterDeaths(rows: Elements, builder: CharacterBuilder) {
         for (row: Element in rows) {
             val columns = row.select("td")
             if (columns.size != 2)
@@ -185,28 +192,28 @@ object CharacterParser : Parser<Character> {
     }
 
     private fun parseKiller(killerHtml: String): Killer? {
-        var name: String
+        var name: String = killerHtml
         var player = false
         var traded = false
         var summon: String? = null
+        if (killerHtml.contains(tradedLabel)) {
+            name = killerHtml.clean().remove(tradedLabel).trim()
+            traded = true
+            player = true
+        }
         if (killerHtml.contains("href")) {
             name = linkContent.find(killerHtml)?.groups?.get(1)?.value ?: return null
             player = true
-        } else {
-            name = killerHtml
         }
-        deathSummon.find(killerHtml)?.apply {
-            summon = this.groups.get("summon")?.value?.clean()
+        deathSummon.find(name)?.apply {
+            summon = groups["summon"]!!.value.clean()
+            name = groups["name"]!!.value.clean()
         }
-        name = name.clean()
-        if (name.contains(tradedLabel)) {
-            name = name.replace(tradedLabel, "").trim()
-            traded = true
-        }
+
         return Killer(name, player, summon, traded)
     }
 
-    private fun parseCharacters(rows: Elements, builder: Character.Builder) {
+    private fun parseCharacters(rows: Elements, builder: CharacterBuilder) {
         for (row: Element in rows.subList(1, rows.lastIndex)) {
             val columns = row.select("td")
             if (columns.size != 4)
@@ -215,7 +222,7 @@ object CharacterParser : Parser<Character> {
             var traded = false
             var name = nameColumn.text().splitList(".").last().clean()
             if (name.contains(tradedLabel, true)) {
-                name = name.replace(tradedLabel, "").trim()
+                name = name.remove(tradedLabel).trim()
                 traded = true
             }
             val main = nameColumn.selectFirst("img") != null

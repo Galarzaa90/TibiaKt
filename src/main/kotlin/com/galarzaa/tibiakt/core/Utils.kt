@@ -1,5 +1,6 @@
 package com.galarzaa.tibiakt.core
 
+import com.galarzaa.tibiakt.utils.clean
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
@@ -71,23 +72,3 @@ internal fun parsePopup(content: String): Pair<String, Document> {
     return Pair(title, parsedHtml)
 }
 
-fun String.splitList(separator: String = ",", lastSeparator: String = " and "): List<String> {
-    val items = this.split(separator).toMutableList()
-    val lastItem: String = items.last()
-    val lastSplit: List<String> = lastItem.split(lastSeparator)
-    if (lastSplit.size > 1) {
-        items[items.lastIndex] = lastSplit.subList(0, lastSplit.lastIndex).joinToString(lastSeparator)
-        items.add(lastSplit.last())
-    }
-    return items.map { it.trim() }
-}
-
-/**
- * Cleans the string of non-breaking spaces and trims whitespace.
- */
-fun String.clean(): String {
-    return this
-        .replace("\u00A0", " ")
-        .replace("&#xa0;", " ")
-        .trim()
-}

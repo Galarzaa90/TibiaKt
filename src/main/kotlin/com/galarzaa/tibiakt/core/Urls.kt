@@ -12,3 +12,6 @@ fun getTibiaUrl(section: String, vararg params: Pair<String, String>, test: Bool
 }
 
 fun getCharacterUrl(name: String) = getTibiaUrl("community", Pair("subtopic", "characters"), Pair("name", name))
+fun getWorldGuildsUrl(world: String) = getTibiaUrl("community", Pair("subtopic", "guilds"), Pair("world", world))
+fun getGuildUrl(name: String) =
+    getTibiaUrl("community", Pair("subtopic", "guilds"), Pair("GuildName", name), Pair("page", "view"))
