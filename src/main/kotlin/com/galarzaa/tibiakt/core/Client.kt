@@ -1,6 +1,7 @@
 package com.galarzaa.tibiakt.core
 
 import com.galarzaa.tibiakt.models.Character
+import com.galarzaa.tibiakt.models.getUrl
 import com.galarzaa.tibiakt.parsers.CharacterParser
 import io.ktor.client.*
 import io.ktor.client.call.*

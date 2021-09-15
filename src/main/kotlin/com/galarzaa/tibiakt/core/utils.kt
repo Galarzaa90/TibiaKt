@@ -5,7 +5,6 @@ import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 import org.jsoup.parser.Parser
 import java.net.URL
-import java.net.URLEncoder
 import java.time.Instant
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -13,15 +12,6 @@ import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 
 val queryStringRegex = Regex("([^&=]+)=([^&]*)")
-
-fun getTibiaUrl(section: String, vararg params: Pair<String, String>, test: Boolean = false): String {
-    val baseUrl = if (test) "www.test.tibia.com" else "www.tibia.com"
-    return "https://$baseUrl/$section/?${
-        params.joinToString("&") { (name, value) ->
-            "$name=${URLEncoder.encode(value, Charsets.ISO_8859_1)}"
-        }
-    }"
-}
 
 fun parseTibiaDateTime(input: String): Instant {
     val timeString = input.clean().substring(0, input.length - 4).trim()

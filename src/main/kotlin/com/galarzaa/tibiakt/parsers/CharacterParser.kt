@@ -10,16 +10,18 @@ import org.jsoup.nodes.Element
 import org.jsoup.select.Elements
 import java.time.Instant
 
-val deletedRegexp = Regex("""([^,]+), will be deleted at (.*)""")
-val titlesRegexp = Regex("""(.*)\((\d+) titles? unlocked\)""")
-val houseRegexp = Regex("""\(([^)]+)\) is paid until (.*)""")
-val deathsRegex = Regex("""Level (\d+) by (.*)\.</td>""")
-val deathAssistsRegex = Regex("""(?<killers>.+)\.<br\s?/>Assisted by (?<assists>.+)""")
-val linkSearch = Regex("""<a[^>]+>[^<]+</a>""")
-val linkContent = Regex(""">([^<]+)<""")
-val deathSummon = Regex("""(?<summon>.+) of <a[^>]+>(?<name>[^<]+)</a>""")
 
 object CharacterParser : Parser<Character> {
+    private val deletedRegexp = Regex("""([^,]+), will be deleted at (.*)""")
+    private val titlesRegexp = Regex("""(.*)\((\d+) titles? unlocked\)""")
+    private val houseRegexp = Regex("""\(([^)]+)\) is paid until (.*)""")
+    private val deathsRegex = Regex("""Level (\d+) by (.*)\.</td>""")
+    private val deathAssistsRegex = Regex("""(?<killers>.+)\.<br\s?/>Assisted by (?<assists>.+)""")
+    private val linkSearch = Regex("""<a[^>]+>[^<]+</a>""")
+    private val linkContent = Regex(""">([^<]+)<""")
+    private val deathSummon = Regex("""(?<summon>.+) of <a[^>]+>(?<name>[^<]+)</a>""")
+    private const val tradedLabel = "(traded)"
+
     override fun fromContent(content: String): Character? {
         val document: Document = Jsoup.parse(content, "", org.jsoup.parser.Parser.xmlParser())
         val boxContent = document.selectFirst("div.BoxContent")
@@ -101,9 +103,9 @@ object CharacterParser : Parser<Character> {
         } else {
             value
         }
-        if (name.contains("(traded")) {
+        if (name.contains(tradedLabel)) {
             charBuilder.recentlyTraded(true)
-            name = name.replace("(traded)", "").trim()
+            name = name.replace(tradedLabel, "").trim()
         }
         charBuilder.name(name)
     }
@@ -197,8 +199,8 @@ object CharacterParser : Parser<Character> {
             summon = this.groups.get("summon")?.value?.clean()
         }
         name = name.clean()
-        if (name.contains("(traded)")) {
-            name = name.replace("(traded)", "").trim()
+        if (name.contains(tradedLabel)) {
+            name = name.replace(tradedLabel, "").trim()
             traded = true
         }
         return Killer(name, player, summon, traded)
@@ -212,8 +214,8 @@ object CharacterParser : Parser<Character> {
             val (nameColumn, worldColumn, statusColumn, _) = columns
             var traded = false
             var name = nameColumn.text().splitList(".").last().clean()
-            if (name.contains("(traded)", true)) {
-                name = name.replace("(traded)", "").trim()
+            if (name.contains(tradedLabel, true)) {
+                name = name.replace(tradedLabel, "").trim()
                 traded = true
             }
             val main = nameColumn.selectFirst("img") != null

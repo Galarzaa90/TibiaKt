@@ -4,7 +4,7 @@ package com.galarzaa.tibiakt.models
 
 import com.galarzaa.tibiakt.InstantSerializer
 import com.galarzaa.tibiakt.LocalDateSerializer
-import com.galarzaa.tibiakt.core.getTibiaUrl
+import com.galarzaa.tibiakt.core.getCharacterUrl
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import java.time.Instant
@@ -41,24 +41,6 @@ data class Character(
     val accountInformation: AccountInformation? = null,
     val characters: List<OtherCharacter> = emptyList(),
 ) {
-
-    val shareRange: IntRange
-        get() {
-            val minLevel = floor((level / 3.0) * 2).toInt()
-            val maxLevel = ceil((level / 2.0) * 3).toInt() + if (level % 2 == 0) 1 else 0
-            return minLevel..maxLevel
-        }
-
-    val url: String
-        get() = getUrl(name)
-
-    val scheduledForDeletion: Boolean
-        get() = deletionDate != null
-
-    companion object {
-        fun getUrl(name: String) = getTibiaUrl("community", Pair("subtopic", "characters"), Pair("name", name))
-    }
-
     class Builder {
         private var name: String? = null
         private var level: Int = 2
@@ -168,6 +150,19 @@ data class Character(
             )
     }
 }
+
+val Character.shareRange: IntRange
+    get() {
+        val minLevel = floor((level / 3.0) * 2).toInt()
+        val maxLevel = ceil((level / 2.0) * 3).toInt() + if (level % 2 == 0) 1 else 0
+        return minLevel..maxLevel
+    }
+val Character.url: String
+    get() = getCharacterUrl(name)
+val Character.scheduledForDeletion: Boolean
+    get() = deletionDate != null
+
+fun Character.Companion.getUrl(name: String) = getCharacterUrl(name)
 
 @Serializable
 data class OtherCharacter(
