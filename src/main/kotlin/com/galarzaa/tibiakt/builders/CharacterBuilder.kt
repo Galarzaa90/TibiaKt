@@ -52,8 +52,8 @@ class CharacterBuilder {
     fun marriedTo(marriedTo: String?) = apply { this.marriedTo = marriedTo }
     fun accountStatus(accountStatus: String) = apply { this.accountStatus = accountStatus }
     fun comment(comment: String?) = apply { this.comment = comment }
-    fun addHouse(name: String, houseId: Int, town: String, paidUntil: LocalDate) = apply {
-        houses.add(CharacterHouse(name, houseId, town, paidUntil))
+    fun addHouse(name: String, houseId: Int, town: String, paidUntil: LocalDate, world: String) = apply {
+        houses.add(CharacterHouse(name, houseId, town, paidUntil, world))
     }
 
     fun addBadge(name: String, descroption: String, iconUrl: String) = apply {

@@ -22,11 +22,10 @@ fun main() {
                     status = HttpStatusCode.BadRequest
                 )
                 val response = client.fetchCharacter(name)
-                if (response.data == null)
-                    call.respondText("Not Found", status = HttpStatusCode.NotFound)
-                else {
-                    call.respond(response)
-                }
+                call.respond(
+                    if (response.data != null) HttpStatusCode.OK else HttpStatusCode.NotFound,
+                    response
+                )
             }
         }
     }.start(wait = true)

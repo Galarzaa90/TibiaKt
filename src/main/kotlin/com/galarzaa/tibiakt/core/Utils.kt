@@ -71,4 +71,3 @@ internal fun parsePopup(content: String): Pair<String, Document> {
     val parsedHtml = Jsoup.parse(html, "", Parser.xmlParser())
     return Pair(title, parsedHtml)
 }
-

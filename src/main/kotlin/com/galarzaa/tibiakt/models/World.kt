@@ -27,7 +27,7 @@ data class WorldEntry(
     val location: String,
     val pvpType: String,
     val battleEyeType: String,
-    val battleEyeStartDate: LocalDate,
+    val battleEyeStartDate: LocalDate?,
     val transferType: String,
     val isPremiumRestricted: Boolean = false,
     val isExperimental: Boolean = false
@@ -41,7 +41,7 @@ data class World(
     val location: String,
     val pvpType: String,
     val battleEyeType: String,
-    val battleEyeStartDate: LocalDate,
+    val battleEyeStartDate: LocalDate?,
     val transferType: String,
     val isPremiumRestricted: Boolean = false,
     val isExperimental: Boolean = false,

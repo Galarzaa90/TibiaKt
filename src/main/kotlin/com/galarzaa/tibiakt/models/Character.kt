@@ -4,13 +4,10 @@ package com.galarzaa.tibiakt.models
 
 import com.galarzaa.tibiakt.InstantSerializer
 import com.galarzaa.tibiakt.LocalDateSerializer
-import com.galarzaa.tibiakt.core.getCharacterUrl
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import java.time.Instant
 import java.time.LocalDate
-import kotlin.math.ceil
-import kotlin.math.floor
 
 
 /**
@@ -19,7 +16,7 @@ import kotlin.math.floor
  */
 @Serializable
 data class Character(
-    val name: String,
+    override val name: String,
     val level: Int,
     val sex: String,
     val vocation: String,
@@ -44,38 +41,27 @@ data class Character(
     val deaths: List<Death> = emptyList(),
     val accountInformation: AccountInformation? = null,
     val characters: List<OtherCharacter> = emptyList(),
-)
-
-val Character.shareRange: IntRange
-    get() {
-        val minLevel = floor((level / 3.0) * 2).toInt()
-        val maxLevel = ceil((level / 2.0) * 3).toInt() + if (level % 2 == 0) 1 else 0
-        return minLevel..maxLevel
-    }
-val Character.url: String
-    get() = getCharacterUrl(name)
-val Character.scheduledForDeletion: Boolean
-    get() = deletionDate != null
-
-fun Character.Companion.getUrl(name: String) = getCharacterUrl(name)
+) : BaseCharacter
 
 @Serializable
 data class OtherCharacter(
-    val name: String,
+    override val name: String,
     val world: String,
     val main: Boolean = false,
     val isOnline: Boolean = false,
     val isDeleted: Boolean = false,
     val recentlyTraded: Boolean = false,
     val position: String?
-)
+) : BaseCharacter
+
 
 @Serializable
 data class CharacterHouse(
     val name: String,
     val houseId: Int,
     val town: String,
-    val paidUntil: LocalDate
+    val paidUntil: LocalDate,
+    val world: String,
 )
 
 @Serializable

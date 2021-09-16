@@ -31,8 +31,11 @@ object CharacterParser : Parser<Character> {
 
     override fun fromContent(content: String): Character? {
         val document: Document = Jsoup.parse(content, "", org.jsoup.parser.Parser.xmlParser())
-        val boxContent = document.selectFirst("div.BoxContent")
-        val tables = parseTables(boxContent ?: throw ParsingException("BoxContent container not found"))
+        val boxContent =
+            document.selectFirst("div.BoxContent") ?: throw ParsingException("BoxContent container not found")
+        val tables = parseTables(boxContent)
+        if (tables.keys.any { it.startsWith("Could not find character") })
+            return null
         val builder = CharacterBuilder()
         parseCharacterInformation(tables["Character Information"] ?: return null, builder)
         tables["Account Badges"]?.apply { parseAccountBadges(this, builder) }
@@ -87,9 +90,10 @@ object CharacterParser : Parser<Character> {
         val link = valueColumn.selectFirst("a")?.getLinkInformation() ?: return
         charBuilder.addHouse(
             link.title,
-            link.queryParams["houseid"]?.first()?.toInt() ?: 0,
+            link.queryParams["houseid"]?.first()?.toInt() ?: return,
             town,
-            parseTibiaDate(paidUntilStr)
+            parseTibiaDate(paidUntilStr),
+            world = link.queryParams["world"]?.first() ?: return
         )
     }
 

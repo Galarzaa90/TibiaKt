@@ -1,7 +1,11 @@
 package com.galarzaa.tibiakt.core
 
-import com.galarzaa.tibiakt.models.*
+import com.galarzaa.tibiakt.models.Character
+import com.galarzaa.tibiakt.models.TibiaResponse
+import com.galarzaa.tibiakt.models.TimedResponse
+import com.galarzaa.tibiakt.models.toTibiaResponse
 import com.galarzaa.tibiakt.parsers.CharacterParser
+import com.galarzaa.tibiakt.utils.getCharacterUrl
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.engine.cio.*
@@ -40,7 +44,7 @@ class Client {
     }
 
     suspend fun fetchCharacter(name: String): TibiaResponse<Character> {
-        val response = this.request(HttpMethod.Get, Character.getUrl(name))
+        val response = this.request(HttpMethod.Get, getCharacterUrl(name))
         val data: Character?
         val stringBody: String = response.original.receive()
         val parsingTime = measureTimeMillis {

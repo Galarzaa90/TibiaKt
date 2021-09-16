@@ -1,7 +1,7 @@
 package com.galarzaa.tibiakt.parsers
 
 import com.galarzaa.tibiakt.TestResources.getResource
-import com.galarzaa.tibiakt.models.scheduledForDeletion
+import com.galarzaa.tibiakt.utils.scheduledForDeletion
 import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.inspectors.forAtLeastOne
