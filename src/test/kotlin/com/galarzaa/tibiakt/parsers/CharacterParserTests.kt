@@ -12,7 +12,7 @@ import io.kotest.matchers.shouldNotBe
 import java.time.LocalDate
 
 
-class CharacterParserTest : StringSpec({
+class CharacterParserTests : StringSpec({
     isolationMode = IsolationMode.InstancePerTest
     "Parsing a character with houses, guild and married" {
         val char = CharacterParser.fromContent(getResource("characters/characterHousesGuildAndMarried.txt"))
