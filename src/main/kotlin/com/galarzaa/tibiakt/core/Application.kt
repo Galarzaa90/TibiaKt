@@ -21,11 +21,12 @@ fun main() {
                     "Bad Request",
                     status = HttpStatusCode.BadRequest
                 )
-                val character = client.fetchCharacter(name) ?: return@get call.respondText(
-                    "Not Found",
-                    status = HttpStatusCode.NotFound
-                )
-                call.respond(character)
+                val response = client.fetchCharacter(name)
+                if (response.data == null)
+                    call.respondText("Not Found", status = HttpStatusCode.NotFound)
+                else {
+                    call.respond(response)
+                }
             }
         }
     }.start(wait = true)
