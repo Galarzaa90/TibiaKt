@@ -67,6 +67,7 @@ object CharacterParser : Parser<Character> {
                 "position" -> charBuilder.position(value)
                 "comment" -> charBuilder.comment(value)
                 "account_status" -> charBuilder.accountStatus(value)
+                "married_to" -> charBuilder.marriedTo(value)
                 "house" -> parseHouseColumn(charBuilder, columns[1])
                 "guild_membership" -> parseGuildColumn(charBuilder, columns[1])
             }
@@ -75,9 +76,9 @@ object CharacterParser : Parser<Character> {
     }
 
     private fun parseGuildColumn(charBuilder: CharacterBuilder, valueColumn: Element) {
-        val link = valueColumn.selectFirst("a")?.getLinkInformation() ?: return
+        val guildName = valueColumn.selectFirst("a")?.text() ?: return
         val rankName = valueColumn.text().split("of the").first().trim()
-        charBuilder.guild(rankName, link.title)
+        charBuilder.guild(rankName, guildName)
     }
 
     private fun parseHouseColumn(charBuilder: CharacterBuilder, valueColumn: Element) {
@@ -182,11 +183,7 @@ object CharacterParser : Parser<Character> {
             }
             val killerNameList = killersDesc.splitList()
             val killerList = killerNameList.mapNotNull { parseKiller(it) }
-            val assistsList = assistNameList.mapNotNull { a ->
-                linkContent.find(a)?.groups?.get(1)?.value?.let {
-                    Killer(it.clean(), true)
-                }
-            }
+            val assistsList = assistNameList.mapNotNull { parseKiller(it) }
             builder.addDeath(deathDateTime, levelStr.toInt(), killerList, assistsList)
         }
     }
@@ -216,8 +213,6 @@ object CharacterParser : Parser<Character> {
     private fun parseCharacters(rows: Elements, builder: CharacterBuilder) {
         for (row: Element in rows.subList(1, rows.lastIndex)) {
             val columns = row.select("td")
-            if (columns.size != 4)
-                continue
             val (nameColumn, worldColumn, statusColumn, _) = columns
             var traded = false
             var name = nameColumn.text().splitList(".").last().clean()

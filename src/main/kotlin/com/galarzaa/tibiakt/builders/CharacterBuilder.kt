@@ -22,6 +22,7 @@ class CharacterBuilder {
     private var title: String? = null
     private var position: String? = null
     private var unlockedTitles: Int = 0
+    private var marriedTo: String? = null
     private val houses: MutableList<CharacterHouse> = mutableListOf()
     private var guildMembership: GuildMembership? = null
     private val accountBadges: MutableList<AccountBadge> = mutableListOf()
@@ -48,6 +49,7 @@ class CharacterBuilder {
     fun formerNames(formerNames: List<String>) = apply { this.formerNames = formerNames }
     fun formerWorld(formerWorld: String?) = apply { this.formerWorld = formerWorld }
     fun position(position: String?) = apply { this.position = position }
+    fun marriedTo(marriedTo: String?) = apply { this.marriedTo = marriedTo }
     fun accountStatus(accountStatus: String) = apply { this.accountStatus = accountStatus }
     fun comment(comment: String?) = apply { this.comment = comment }
     fun addHouse(name: String, houseId: Int, town: String, paidUntil: LocalDate) = apply {
@@ -100,6 +102,7 @@ class CharacterBuilder {
             formerWorld = formerWorld,
             accountStatus = accountStatus ?: throw IllegalStateException("accountStatus is required"),
             comment = comment,
+            marriedTo = marriedTo,
             houses = houses,
             guildMembership = guildMembership,
             title = title,

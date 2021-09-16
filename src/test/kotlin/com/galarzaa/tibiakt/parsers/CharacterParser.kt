@@ -1,21 +1,56 @@
 package com.galarzaa.tibiakt.parsers
 
 import com.galarzaa.tibiakt.TestResources.getResource
+import com.galarzaa.tibiakt.models.scheduledForDeletion
 import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.StringSpec
+import io.kotest.inspectors.forAtLeastOne
+import io.kotest.inspectors.forAtMostOne
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
+import java.time.LocalDate
 
 
 class CharacterParserTest : StringSpec({
     isolationMode = IsolationMode.InstancePerTest
-    "Parsing a character" {
-        val char = CharacterParser.fromContent(getResource("characters/character.txt"))
+    "Parsing a character with houses, guild and married" {
+        val char = CharacterParser.fromContent(getResource("characters/characterHousesGuildAndMarried.txt"))
         char shouldNotBe null
-        char?.run {
-            name shouldBe "Galarzaa Fidera"
-            level shouldBe 287
+        char!!.name shouldBe "Callie Aena"
+        char.level shouldBe 392
+        char.unlockedTitles shouldBe 18
+        char.achievementPoints shouldBe 816
+        char.marriedTo shouldBe "Jacky pumpkin"
+        char.houses shouldHaveSize 2
+        char.houses.first().run {
+            name shouldBe "Trout Plaza 1"
+            town shouldBe "Svargrond"
+            paidUntil shouldBe LocalDate.of(2021, 10, 4)
+        }
+        char.guildMembership shouldNotBe null
+        char.guildMembership?.run {
+            guildName shouldBe "Naovaiterzezin"
+            guildRank shouldBe "Adestrador de Sucuri"
+        }
+        char.comment shouldBe "/NB-83CE5FECF800002/"
+        char.achievements shouldHaveSize 2
+        char.achievements.first().run {
+            grade shouldBe 2
+            name shouldBe "Green Thumb"
+            secret shouldBe true
+        }
+    }
+
+    "Parsing a character with account badges displayed"{
+        val char = CharacterParser.fromContent(getResource("characters/characterAccountBadges.txt"))
+        char shouldNotBe null
+        char!!.name shouldBe "Galarzaa Fidera"
+        char.badges shouldHaveSize 8
+        char.badges.first().run {
+            name shouldBe "Ancient Hero"
+            description shouldBe "The account is older than 15 years."
+            imageUrl shouldNotBe null
         }
     }
 
@@ -27,6 +62,35 @@ class CharacterParserTest : StringSpec({
             tutorStars shouldBe 4
             loyaltyTitle shouldBe "Guardian of Tibia"
         }
+    }
+
+    "Parsing a CipSoft member"{
+        val char = CharacterParser.fromContent(getResource("characters/characterCipSoftMember.txt"))
+        char shouldNotBe null
+        char!!.name shouldBe "Steve"
+        char.position shouldBe "CipSoft Member"
+        char.accountInformation?.position shouldBe "CipSoft Member"
+        char.characters.forAtLeastOne { it.position shouldBe "CipSoft Member" }
+    }
+
+    "Parsing a character with former names and former world and deleted characters" {
+        val char = CharacterParser.fromContent(getResource("characters/characterFormerNamesAndWorld.txt"))
+        char shouldNotBe null
+        char!!.name shouldBe "Legend Tumate"
+        char.formerNames shouldHaveSize 2
+        char.formerWorld shouldNotBe null
+        char.characters.forAtLeastOne { it.isDeleted shouldBe true }
+        char.characters.forAtLeastOne { it.isOnline shouldBe true }
+        char.characters.forAtMostOne { it.main shouldBe true }
+    }
+
+    "Parsing a character scheduld for deletion" {
+        val char = CharacterParser.fromContent(getResource("characters/characterDeleted.txt"))
+        char shouldNotBe null
+        char!!.name shouldBe "Orsty Serv"
+        char.scheduledForDeletion shouldBe true
+        char.deletionDate shouldNotBe null
+        char.deletionDate?.epochSecond shouldBe 1632678475
     }
 
     "Parsing a character with PvP deaths"{
@@ -42,7 +106,7 @@ class CharacterParserTest : StringSpec({
             level shouldBe 802
             killers.last().run {
                 name shouldBe "Alloy Hat"
-                recentlyTraded shouldBe true
+                traded shouldBe true
                 isPlayer shouldBe true
                 summon shouldBe "a paladin familiar"
             }

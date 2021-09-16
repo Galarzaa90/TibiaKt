@@ -13,6 +13,10 @@ import kotlin.math.ceil
 import kotlin.math.floor
 
 
+/**
+ * Represents the character information available on Tibia.com.
+ * @property recentlyTraded Whether the character was recently traded. If its name was changed afterwards, this flag is removed.
+ */
 @Serializable
 data class Character(
     val name: String,
@@ -75,7 +79,7 @@ data class CharacterHouse(
 )
 
 @Serializable
-data class GuildMembership(val guildName: String, val guildRank: String)
+data class GuildMembership(val guildRank: String, val guildName: String)
 
 @Serializable
 data class DisplayedAchievement(val name: String, val grade: Int, val secret: Boolean = false)
@@ -99,7 +103,7 @@ data class Death(val timestamp: Instant, val level: Int, val killers: List<Kille
  *
  * @property name The name of the killer. If the killer is a summoned creature, this is the summoner's name.
  * @property isPlayer Whether the killer is a player.
- * @property recentlyTraded Whether the character was traded after this death occurred.
+ * @property traded Whether the character was traded after this death occurred.
  * @property summon The summoned creature that caused this death, if applicable.
  */
 @Serializable
@@ -107,5 +111,5 @@ data class Killer(
     val name: String,
     val isPlayer: Boolean,
     val summon: String? = null,
-    val recentlyTraded: Boolean = false
+    val traded: Boolean = false
 )
