@@ -30,6 +30,14 @@ fun parseTibiaDate(input: String): LocalDate {
     )
 }
 
+fun parseTibiaFullDate(input: String): LocalDate {
+    return LocalDate.parse(
+        input,
+        DateTimeFormatter.ofPattern("MMMMM dd, yyyy")
+    )
+}
+
+
 internal fun Element.getLinkInformation(): LinkInformation? {
     if (this.tagName() != "a")
         return null

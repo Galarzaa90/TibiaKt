@@ -1,5 +1,7 @@
 package com.galarzaa.tibiakt.builders
 
+import com.galarzaa.tibiakt.models.BattlEyeType
+import com.galarzaa.tibiakt.models.TransferType
 import com.galarzaa.tibiakt.models.WorldEntry
 import com.galarzaa.tibiakt.models.WorldOverview
 import java.time.Instant
@@ -22,9 +24,9 @@ class WorldOverviewBuilder {
         onlineCount: Int,
         location: String,
         pvpType: String,
-        battlEyeType: String,
-        battleEyeStart: LocalDate?,
-        transferType: String,
+        battlEyeType: BattlEyeType,
+        battlEyeStart: LocalDate?,
+        transferType: TransferType,
         premiumRestricted: Boolean,
         experimental: Boolean
     ) = apply {
@@ -36,7 +38,7 @@ class WorldOverviewBuilder {
                 location,
                 pvpType,
                 battlEyeType,
-                battleEyeStart,
+                battlEyeStart,
                 transferType,
                 premiumRestricted,
                 experimental
@@ -44,14 +46,13 @@ class WorldOverviewBuilder {
         )
     }
 
-    fun build() {
-        WorldOverview(
+    fun build(): WorldOverview {
+        return WorldOverview(
             overallMaximumCount = overallMaximumCount
                 ?: throw IllegalStateException("overallMaximumCount is required"),
             overallMaximumCountDateTime = overallMaximumCountDateTime
                 ?: throw IllegalStateException("overallMaximumCountDateTime is required"),
-            worlds = worlds,
-            tournamentWorlds = worlds
+            worlds = worlds
         )
     }
 }

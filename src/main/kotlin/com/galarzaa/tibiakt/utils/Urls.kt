@@ -4,6 +4,10 @@ import java.net.URLEncoder
 
 private typealias P<A, B> = Pair<A, B>
 
+fun getTibiaUrl(section: String, params: Map<String, Any>, test: Boolean = false): String {
+    return getTibiaUrl(section, params = params.toList().toTypedArray(), test = test)
+}
+
 fun getTibiaUrl(section: String, vararg params: Pair<String, Any>, test: Boolean = false): String {
     val baseUrl = if (test) "www.test.tibia.com" else "www.tibia.com"
     return "https://$baseUrl/$section/?${
@@ -20,3 +24,5 @@ fun getGuildUrl(name: String) =
 
 fun getHouseUrl(world: String, houseId: Int) =
     getTibiaUrl("community", P("subtopic", "houses"), P("world", world), P("houseid", houseId))
+
+fun getWorldOverviewUrl() = getTibiaUrl("community", P("subtopic", "worlds"))

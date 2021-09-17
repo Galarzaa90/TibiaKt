@@ -28,3 +28,8 @@ fun String.clean(): String {
         .replace("&#xa0;", " ")
         .trim()
 }
+
+
+fun String.parseInteger(): Int {
+    return remove(",").trim().toInt()
+}
