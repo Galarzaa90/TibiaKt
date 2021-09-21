@@ -1,11 +1,10 @@
 package com.galarzaa.tibiakt.core
 
-import com.galarzaa.tibiakt.models.Character
-import com.galarzaa.tibiakt.models.TibiaResponse
-import com.galarzaa.tibiakt.models.TimedResponse
-import com.galarzaa.tibiakt.models.toTibiaResponse
+import com.galarzaa.tibiakt.models.*
 import com.galarzaa.tibiakt.parsers.CharacterParser
+import com.galarzaa.tibiakt.parsers.WorldOverviewParser
 import com.galarzaa.tibiakt.utils.getCharacterUrl
+import com.galarzaa.tibiakt.utils.getWorldOverviewUrl
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.engine.cio.*
@@ -43,14 +42,24 @@ class Client {
         }
     }
 
-    suspend fun fetchCharacter(name: String): TibiaResponse<Character> {
-        val response = this.request(HttpMethod.Get, getCharacterUrl(name))
-        val data: Character?
-        val stringBody: String = response.original.receive()
+    private suspend fun <T> parseResponse(response: TimedResponse, parser: (content: String) -> T): TibiaResponse<T> {
+        val data: T
         val parsingTime = measureTimeMillis {
-            data = CharacterParser.fromContent(stringBody)
+            val stringBody: String = response.original.receive()
+            data = parser(stringBody)
         } / 1000f
         return response.toTibiaResponse(parsingTime, data)
+    }
+
+
+    suspend fun fetchCharacter(name: String): TibiaResponse<Character?> {
+        val response = this.request(HttpMethod.Get, getCharacterUrl(name))
+        return parseResponse(response) { CharacterParser.fromContent(it) }
+    }
+
+    suspend fun fetchWorldOverview(): TibiaResponse<WorldOverview> {
+        val response = this.request(HttpMethod.Get, getWorldOverviewUrl())
+        return parseResponse(response) { WorldOverviewParser.fromContent(it) }
     }
 
     private val HttpResponse.fetchingTime: Float

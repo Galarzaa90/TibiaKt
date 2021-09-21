@@ -27,6 +27,10 @@ fun main() {
                     response
                 )
             }
+            get("/worlds") {
+                val response = client.fetchWorldOverview()
+                call.respond(response)
+            }
         }
     }.start(wait = true)
 }

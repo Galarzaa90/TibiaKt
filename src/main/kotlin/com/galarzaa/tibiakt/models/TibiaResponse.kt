@@ -14,5 +14,5 @@ data class TibiaResponse<T>(
     val cacheAge: Int,
     val fetchingTime: Float,
     val parsingTime: Float,
-    val data: T?
+    val data: T
 )

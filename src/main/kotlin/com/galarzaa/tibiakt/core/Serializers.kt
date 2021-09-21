@@ -27,7 +27,7 @@ object LocalDateSerializer : KSerializer<LocalDate> {
 }
 
 object YearMonthSerializer : KSerializer<YearMonth> {
-    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("Date", PrimitiveKind.STRING)
+    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("YearMonth", PrimitiveKind.STRING)
     override fun serialize(encoder: Encoder, value: YearMonth) =
         encoder.encodeString(value.toString())
 
