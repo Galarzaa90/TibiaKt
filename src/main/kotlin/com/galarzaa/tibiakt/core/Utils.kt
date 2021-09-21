@@ -25,15 +25,15 @@ fun parseTibiaDateTime(input: String): Instant {
 
 fun parseTibiaDate(input: String): LocalDate {
     return LocalDate.parse(
-        input,
+        input.clean(),
         DateTimeFormatter.ofPattern("MMM dd yyyy")
     )
 }
 
 fun parseTibiaFullDate(input: String): LocalDate {
     return LocalDate.parse(
-        input,
-        DateTimeFormatter.ofPattern("MMMMM dd, yyyy")
+        input.clean(),
+        DateTimeFormatter.ofPattern("MMMM d, yyyy")
     )
 }
 

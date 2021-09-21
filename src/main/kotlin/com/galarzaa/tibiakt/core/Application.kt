@@ -31,6 +31,17 @@ fun main() {
                 val response = client.fetchWorldOverview()
                 call.respond(response)
             }
+            get("/worlds/{name}") {
+                val name = call.parameters["name"] ?: return@get call.respondText(
+                    "Bad Request",
+                    status = HttpStatusCode.BadRequest
+                )
+                val response = client.fetchWorld(name)
+                call.respond(
+                    if (response.data != null) HttpStatusCode.OK else HttpStatusCode.NotFound,
+                    response
+                )
+            }
         }
     }.start(wait = true)
 }

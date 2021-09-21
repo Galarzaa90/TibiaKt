@@ -9,6 +9,7 @@ import com.galarzaa.tibiakt.core.parseTibiaDateTime
 import com.galarzaa.tibiakt.models.Character
 import com.galarzaa.tibiakt.models.Killer
 import com.galarzaa.tibiakt.utils.clean
+import com.galarzaa.tibiakt.utils.parseTables
 import com.galarzaa.tibiakt.utils.remove
 import com.galarzaa.tibiakt.utils.splitList
 import org.jsoup.Jsoup
@@ -33,7 +34,7 @@ object CharacterParser : Parser<Character> {
         val document: Document = Jsoup.parse(content, "", org.jsoup.parser.Parser.xmlParser())
         val boxContent =
             document.selectFirst("div.BoxContent") ?: throw ParsingException("BoxContent container not found")
-        val tables = parseTables(boxContent)
+        val tables = boxContent.parseTables()
         if (tables.keys.any { it.startsWith("Could not find character") })
             return null
         val builder = CharacterBuilder()
@@ -215,7 +216,7 @@ object CharacterParser : Parser<Character> {
     }
 
     private fun parseCharacters(rows: Elements, builder: CharacterBuilder) {
-        for (row: Element in rows.subList(1, rows.lastIndex)) {
+        for (row: Element in rows.subList(1, rows.size)) {
             val columns = row.select("td")
             val (nameColumn, worldColumn, statusColumn, _) = columns
             var traded = false
@@ -232,20 +233,5 @@ object CharacterParser : Parser<Character> {
             val position = if (status.contains("CipSoft Member")) "CipSoft Member" else null
             builder.addCharacter(name, world, main, online, deleted, traded, position)
         }
-    }
-
-    private fun parseTables(parsedContent: Element): Map<String, Elements> {
-        val tables = parsedContent.select("div.TableContainer")
-        val output = mutableMapOf<String, Elements>()
-        for (table: Element in tables) {
-            val captionContainer = table.selectFirst("div.CaptionContainer")
-            val contentTable = table.selectFirst("table.TableContent")
-            val caption = captionContainer?.text() ?: throw ParsingException("table has no caption container")
-            if (contentTable == null)
-                continue
-            val rows = contentTable.select("tr")
-            output[caption] = rows
-        }
-        return output
     }
 }

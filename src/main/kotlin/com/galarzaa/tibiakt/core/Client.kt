@@ -3,8 +3,10 @@ package com.galarzaa.tibiakt.core
 import com.galarzaa.tibiakt.models.*
 import com.galarzaa.tibiakt.parsers.CharacterParser
 import com.galarzaa.tibiakt.parsers.WorldOverviewParser
+import com.galarzaa.tibiakt.parsers.WorldParser
 import com.galarzaa.tibiakt.utils.getCharacterUrl
 import com.galarzaa.tibiakt.utils.getWorldOverviewUrl
+import com.galarzaa.tibiakt.utils.getWorldUrl
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.engine.cio.*
@@ -60,6 +62,11 @@ class Client {
     suspend fun fetchWorldOverview(): TibiaResponse<WorldOverview> {
         val response = this.request(HttpMethod.Get, getWorldOverviewUrl())
         return parseResponse(response) { WorldOverviewParser.fromContent(it) }
+    }
+
+    suspend fun fetchWorld(name: String): TibiaResponse<World?> {
+        val response = this.request(HttpMethod.Get, getWorldUrl(name))
+        return parseResponse(response) { WorldParser.fromContent(it) }
     }
 
     private val HttpResponse.fetchingTime: Float

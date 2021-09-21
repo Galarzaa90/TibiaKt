@@ -54,7 +54,7 @@ data class World(
 
 @Serializable
 data class OnlineCharacter(
-    val name: String,
+    override val name: String,
     val level: Int,
     val vocation: String
-)
+) : BaseCharacter
