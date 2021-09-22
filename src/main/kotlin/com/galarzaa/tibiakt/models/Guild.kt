@@ -17,7 +17,7 @@ data class Guild(
     val isActive: Boolean,
     val applicationsOpen: Boolean,
     val homepage: String?,
-    val guildHall: GuildHall,
+    val guildHall: GuildHall?,
     val members: List<GuildMember> = emptyList(),
     val invited: List<GuildInvite> = emptyList()
 ) : BaseGuild
