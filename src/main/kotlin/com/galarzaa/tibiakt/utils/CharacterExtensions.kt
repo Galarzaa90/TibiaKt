@@ -11,6 +11,7 @@ val Character.shareRange: IntRange
         val maxLevel = ceil((level / 2.0) * 3).toInt() + if (level % 2 == 0) 1 else 0
         return minLevel..maxLevel
     }
+
 val BaseCharacter.url: String
     get() = getCharacterUrl(name)
 
