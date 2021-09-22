@@ -49,4 +49,12 @@ class WorldParserTests : StringSpec({
         world.transferType shouldBe TransferType.LOCKED
         world.isPremiumRestricted shouldBe true
     }
+
+    "Parsing an offline world" {
+        val world = WorldParser.fromContent(TestResources.getResource("worlds/worldOffline.txt"))
+        world shouldNotBe null
+        world!!.name shouldBe "Gladera"
+        world.isOnline shouldBe false
+        world.onlineCount shouldBe 0
+    }
 })
