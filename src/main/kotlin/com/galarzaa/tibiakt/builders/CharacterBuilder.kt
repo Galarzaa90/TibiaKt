@@ -68,7 +68,7 @@ class CharacterBuilder {
         accountInformation = AccountInformation(created, loyaltyTitle, position, tutorStars)
     }
 
-    fun guild(rank: String, guild: String) = apply { guildMembership = GuildMembership(rank, guild) }
+    fun guild(rank: String, guild: String) = apply { guildMembership = GuildMembership(guild, rank) }
 
     fun addDeath(timestamp: Instant, level: Int, killers: List<Killer>, assists: List<Killer>) = apply {
         deaths.add(Death(timestamp, level, killers, assists))

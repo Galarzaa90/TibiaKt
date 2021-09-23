@@ -18,3 +18,6 @@ internal fun Element.parseTables(contentTableSelector: String = "table.TableCont
     }
     return output
 }
+
+internal fun Element.cleanText() = text().clean()
+internal fun Element.wholeCleanText() = wholeText().clean()

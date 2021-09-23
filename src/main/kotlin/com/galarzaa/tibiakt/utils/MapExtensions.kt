@@ -1,10 +1,11 @@
 package com.galarzaa.tibiakt.utils
 
+/**
+ * Get a mapping's key containing the string.
+ */
 fun <V> Map<String, V>.getContaining(key: String, default: V? = null): V? {
-    this.forEach { (k, v) ->
-        if (k.contains(key)) {
+    for ((k, v) in this)
+        if (k.contains(key))
             return v
-        }
-    }
     return default
 }

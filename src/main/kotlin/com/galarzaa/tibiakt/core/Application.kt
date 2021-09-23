@@ -42,6 +42,28 @@ fun main() {
                     response
                 )
             }
+            get("/guilds/{name}") {
+                val name = call.parameters["name"] ?: return@get call.respondText(
+                    "Bad Request",
+                    status = HttpStatusCode.BadRequest
+                )
+                val response = client.fetchGuild(name)
+                call.respond(
+                    if (response.data != null) HttpStatusCode.OK else HttpStatusCode.NotFound,
+                    response
+                )
+            }
+            get("/worlds/{name}/guilds") {
+                val name = call.parameters["name"] ?: return@get call.respondText(
+                    "Bad Request",
+                    status = HttpStatusCode.BadRequest
+                )
+                val response = client.fetchWorldGuilds(name)
+                call.respond(
+                    if (response.data != null) HttpStatusCode.OK else HttpStatusCode.NotFound,
+                    response
+                )
+            }
         }
     }.start(wait = true)
 }

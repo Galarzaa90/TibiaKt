@@ -10,7 +10,5 @@ import java.time.LocalDate
 @Serializable
 data class GuildHall(
     val name: String,
-    val town: String,
     val paidUntil: LocalDate,
-    val world: String,
 )

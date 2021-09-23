@@ -30,8 +30,8 @@ class CharacterParserTests : StringSpec({
         }
         char.guildMembership shouldNotBe null
         char.guildMembership?.run {
-            guildName shouldBe "Naovaiterzezin"
-            guildRank shouldBe "Adestrador de Sucuri"
+            name shouldBe "Naovaiterzezin"
+            rank shouldBe "Adestrador de Sucuri"
         }
         char.comment shouldBe "/NB-83CE5FECF800002/"
         char.achievements shouldHaveSize 2

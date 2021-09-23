@@ -11,8 +11,9 @@ import java.time.LocalDate
 data class GuildMember(
     override val name: String,
     val rank: String,
-    val title: String?,
+    val title: String? = null,
     val level: Int,
     val vocation: String,
-    val joiningDate: LocalDate
+    val joiningDate: LocalDate,
+    val isOnline: Boolean,
 ) : BaseCharacter

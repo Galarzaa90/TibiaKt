@@ -8,3 +8,15 @@ val BaseGuild.url: String
 
 val Guild.ranks: List<String>
     get() = members.map { it.rank }.distinct()
+
+val Guild.leader
+    get() = members.first()
+
+val Guild.viceLeaders
+    get() = members.offsetStart(1).takeWhile { it.rank == members[1].rank }
+
+val Guild.membersByRank
+    get() = members.groupBy { it.rank }
+
+val Guild.memberCount
+    get() = members.size

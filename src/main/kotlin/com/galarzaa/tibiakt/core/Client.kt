@@ -1,12 +1,8 @@
 package com.galarzaa.tibiakt.core
 
 import com.galarzaa.tibiakt.models.*
-import com.galarzaa.tibiakt.parsers.CharacterParser
-import com.galarzaa.tibiakt.parsers.WorldOverviewParser
-import com.galarzaa.tibiakt.parsers.WorldParser
-import com.galarzaa.tibiakt.utils.getCharacterUrl
-import com.galarzaa.tibiakt.utils.getWorldOverviewUrl
-import com.galarzaa.tibiakt.utils.getWorldUrl
+import com.galarzaa.tibiakt.parsers.*
+import com.galarzaa.tibiakt.utils.*
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.engine.cio.*
@@ -67,6 +63,16 @@ class Client {
     suspend fun fetchWorld(name: String): TibiaResponse<World?> {
         val response = this.request(HttpMethod.Get, getWorldUrl(name))
         return parseResponse(response) { WorldParser.fromContent(it) }
+    }
+
+    suspend fun fetchGuild(name: String): TibiaResponse<Guild?> {
+        val response = this.request(HttpMethod.Get, getGuildUrl(name))
+        return parseResponse(response) { GuildParser.fromContent(it) }
+    }
+
+    suspend fun fetchWorldGuilds(name: String): TibiaResponse<GuildsSection?> {
+        val response = this.request(HttpMethod.Get, getWorldGuildsUrl(name))
+        return parseResponse(response) { GuildsSectionParser.fromContent(it) }
     }
 
     private val HttpResponse.fetchingTime: Float
