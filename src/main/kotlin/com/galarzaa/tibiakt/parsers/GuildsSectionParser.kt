@@ -8,7 +8,7 @@ import com.galarzaa.tibiakt.utils.offsetStart
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 
-object GuildsSectionParser : Parser<GuildsSection> {
+object GuildsSectionParser : Parser<GuildsSection?> {
     override fun fromContent(content: String): GuildsSection? {
         val document: Document = Jsoup.parse(content, "")
         val boxContent =

@@ -9,10 +9,10 @@ import java.time.LocalDate
 
 @Serializable
 data class NewsEntry(
-    val id: Int,
+    override val id: Int,
     val title: String,
     val category: NewsCategory,
     val categoryIcon: String,
     val date: LocalDate,
     val type: NewsType,
-)
+) : BaseNews

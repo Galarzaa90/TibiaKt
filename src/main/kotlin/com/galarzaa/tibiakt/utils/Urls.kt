@@ -28,3 +28,6 @@ fun getHouseUrl(world: String, houseId: Int) =
 fun getWorldOverviewUrl() = getTibiaUrl("community", P("subtopic", "worlds"))
 fun getWorldUrl(name: String) = getTibiaUrl("community", P("subtopic", "worlds"), P("world", name))
 fun getWorldGuilds(world: String) = getTibiaUrl("community", P("subtopic", "guilds"), P("world", world))
+fun getNewsArchiveUrl() = getTibiaUrl("news", P("subtopic", "newsarchive"))
+fun getNewsUrl(newsId: Int) = getTibiaUrl("news", P("subtopic", "newsarchive"), P("id", newsId))
+fun getThreadUrl(threadId: Int) = getTibiaUrl("forum", P("action", "thread"), P("threadid", threadId))
