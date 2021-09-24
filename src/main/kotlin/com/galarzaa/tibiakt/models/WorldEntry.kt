@@ -9,7 +9,7 @@ import java.time.LocalDate
 
 @Serializable
 data class WorldEntry(
-    val name: String,
+    override val name: String,
     val isOnline: Boolean,
     val onlineCount: Int,
     val location: String,
@@ -19,4 +19,4 @@ data class WorldEntry(
     val transferType: TransferType,
     val isPremiumRestricted: Boolean = false,
     val isExperimental: Boolean = false
-)
+) : BaseWorld

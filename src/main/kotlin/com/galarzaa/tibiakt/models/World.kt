@@ -13,7 +13,7 @@ import java.time.YearMonth
 
 @Serializable
 data class World(
-    val name: String,
+    override val name: String,
     val isOnline: Boolean,
     val onlineCount: Int,
     val location: String,
@@ -28,5 +28,5 @@ data class World(
     val creationDate: YearMonth,
     val worldQuests: List<String> = emptyList(),
     val playersOnline: List<OnlineCharacter> = emptyList()
-)
+) : BaseWorld
 
