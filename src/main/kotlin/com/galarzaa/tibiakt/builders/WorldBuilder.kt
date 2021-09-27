@@ -1,9 +1,6 @@
 package com.galarzaa.tibiakt.builders
 
-import com.galarzaa.tibiakt.models.BattlEyeType
-import com.galarzaa.tibiakt.models.OnlineCharacter
-import com.galarzaa.tibiakt.models.TransferType
-import com.galarzaa.tibiakt.models.World
+import com.galarzaa.tibiakt.models.*
 import java.time.Instant
 import java.time.LocalDate
 import java.time.YearMonth
@@ -38,7 +35,7 @@ class WorldBuilder {
     fun battlEyeType(battlEyeType: BattlEyeType) = apply { this.battlEyeType = battlEyeType }
     fun battlEyeStartDate(battlEyeStartDate: LocalDate?) = apply { this.battlEyeStartDate = battlEyeStartDate }
     fun transferType(transferType: TransferType) = apply { this.transferType = transferType }
-    fun addOnlinePlayer(name: String, level: Int, vocation: String) =
+    fun addOnlinePlayer(name: String, level: Int, vocation: Vocation) =
         apply { playersOnline.add(OnlineCharacter(name, level, vocation)) }
 
     fun experimental(experimental: Boolean) = apply { this.isExperimental = experimental }

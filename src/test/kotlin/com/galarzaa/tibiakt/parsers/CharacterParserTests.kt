@@ -1,6 +1,7 @@
 package com.galarzaa.tibiakt.parsers
 
 import com.galarzaa.tibiakt.TestResources.getResource
+import com.galarzaa.tibiakt.models.Vocation
 import com.galarzaa.tibiakt.utils.scheduledForDeletion
 import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.StringSpec
@@ -19,6 +20,7 @@ class CharacterParserTests : StringSpec({
         char shouldNotBe null
         char!!.name shouldBe "Callie Aena"
         char.level shouldBe 392
+        char.vocation shouldBe Vocation.ROYAL_PALADIN
         char.unlockedTitles shouldBe 18
         char.achievementPoints shouldBe 816
         char.marriedTo shouldBe "Jacky pumpkin"

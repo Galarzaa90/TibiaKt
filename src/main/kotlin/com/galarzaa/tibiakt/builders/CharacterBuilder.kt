@@ -8,7 +8,7 @@ class CharacterBuilder {
     private var name: String? = null
     private var level: Int = 2
     private var residence: String? = null
-    private var vocation: String? = null
+    private var vocation: Vocation? = null
     private var sex: String? = null
     private var world: String? = null
     private var achievementPoints: Int = 0
@@ -37,7 +37,7 @@ class CharacterBuilder {
         this.unlockedTitles = unlockedTitles
     }
 
-    fun vocation(vocation: String) = apply { this.vocation = vocation }
+    fun vocation(vocation: Vocation) = apply { this.vocation = vocation }
     fun level(level: Int) = apply { this.level = level }
     fun sex(sex: String) = apply { this.sex = sex }
     fun world(world: String) = apply { this.world = world }
@@ -89,29 +89,29 @@ class CharacterBuilder {
     fun build() =
         Character(
             name = name ?: throw IllegalStateException("name is required"),
-            level = level,
-            vocation = vocation ?: throw IllegalStateException("vocation is required"),
-            sex = sex ?: throw IllegalStateException("sex is required"),
-            world = world ?: throw IllegalStateException("world is required"),
-            achievementPoints = achievementPoints,
-            residence = residence ?: throw IllegalStateException("residence is required"),
-            lastLogin = lastLogin,
-            recentlyTraded = recentlyTraded,
-            deletionDate = deletionDate,
+            title = title,
             formerNames = formerNames,
+            unlockedTitles = unlockedTitles,
+            sex = sex ?: throw IllegalStateException("sex is required"),
+            vocation = vocation ?: throw IllegalStateException("vocation is required"),
+            level = level,
+            achievementPoints = achievementPoints,
+            world = world ?: throw IllegalStateException("world is required"),
             formerWorld = formerWorld,
-            accountStatus = accountStatus ?: throw IllegalStateException("accountStatus is required"),
-            comment = comment,
+            residence = residence ?: throw IllegalStateException("residence is required"),
             marriedTo = marriedTo,
             houses = houses,
             guildMembership = guildMembership,
-            title = title,
-            unlockedTitles = unlockedTitles,
+            lastLogin = lastLogin,
+            position = position,
+            comment = comment,
+            accountStatus = accountStatus ?: throw IllegalStateException("accountStatus is required"),
+            recentlyTraded = recentlyTraded,
+            deletionDate = deletionDate,
             badges = accountBadges,
             achievements = achievements,
-            accountInformation = accountInformation,
             deaths = deaths,
-            position = position,
+            accountInformation = accountInformation,
             characters = characters
         )
 }

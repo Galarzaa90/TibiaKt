@@ -25,7 +25,7 @@ object NewsArchiveParser : Parser<NewsArchive> {
         boxContent.selectFirst("form")?.apply {
             parseFilterTable(this, builder)
         }
-        parseResultsTable(tables["Search Results"] ?: throw ParsingException("search resulst table not found"), builder)
+        parseResultsTable(tables["Search Results"] ?: return builder.build(), builder)
         return builder.build()
     }
 

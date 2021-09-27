@@ -8,6 +8,7 @@ import com.galarzaa.tibiakt.core.parseTibiaDate
 import com.galarzaa.tibiakt.core.parseTibiaDateTime
 import com.galarzaa.tibiakt.models.Character
 import com.galarzaa.tibiakt.models.Killer
+import com.galarzaa.tibiakt.models.Vocation
 import com.galarzaa.tibiakt.utils.clean
 import com.galarzaa.tibiakt.utils.parseTables
 import com.galarzaa.tibiakt.utils.remove
@@ -58,7 +59,9 @@ object CharacterParser : Parser<Character?> {
                 "former_names" -> charBuilder.formerNames(value.split(",").map { it.trim() })
                 "former_world" -> charBuilder.formerWorld(value)
                 "sex" -> charBuilder.sex(value)
-                "vocation" -> charBuilder.vocation(value)
+                "vocation" -> charBuilder.vocation(
+                    Vocation.fromProperName(value) ?: throw ParsingException("Unknown vocation: $value")
+                )
                 "level" -> charBuilder.level(value.toInt())
                 "achievement_points" -> charBuilder.achievementPoints(value.toInt())
                 "world" -> charBuilder.world(value)

@@ -33,3 +33,5 @@ fun String.clean(): String {
 fun String.parseInteger(): Int {
     return remove(",").trim().toInt()
 }
+
+fun String?.nullIfBlank(): String? = if (isNullOrBlank()) null else this

@@ -64,6 +64,10 @@ fun main() {
                     response
                 )
             }
+            get("/news/") {
+                val response = client.fetchRecentNews(90)
+                call.respond(response)
+            }
         }
     }.start(wait = true)
 }

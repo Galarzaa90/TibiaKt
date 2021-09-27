@@ -8,7 +8,7 @@ data class HighscoresEntry(
     override val name: String,
     val level: Int,
     val world: String,
-    val vocation: String,
-    val value: Int,
+    val vocation: Vocation,
+    val value: Long,
     val additionalValue: String? = null
 ) : BaseCharacter

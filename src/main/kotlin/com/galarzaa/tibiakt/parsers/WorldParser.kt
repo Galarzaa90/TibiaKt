@@ -6,6 +6,7 @@ import com.galarzaa.tibiakt.core.parseTibiaDateTime
 import com.galarzaa.tibiakt.core.parseTibiaFullDate
 import com.galarzaa.tibiakt.models.BattlEyeType
 import com.galarzaa.tibiakt.models.TransferType
+import com.galarzaa.tibiakt.models.Vocation
 import com.galarzaa.tibiakt.models.World
 import com.galarzaa.tibiakt.utils.*
 import org.jsoup.Jsoup
@@ -35,7 +36,11 @@ object WorldParser : Parser<World?> {
         for (row in rows.subList(2, rows.size)) {
             val columns = row.select("td")
             val (name, level, vocation) = columns.map { it.text().clean() }
-            builder.addOnlinePlayer(name, level.toInt(), vocation)
+            builder.addOnlinePlayer(
+                name,
+                level.toInt(),
+                Vocation.fromProperName(vocation) ?: throw ParsingException("unknown vocation: $vocation")
+            )
         }
     }
 

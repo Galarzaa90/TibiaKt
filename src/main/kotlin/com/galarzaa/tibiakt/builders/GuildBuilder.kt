@@ -1,9 +1,6 @@
 package com.galarzaa.tibiakt.builders
 
-import com.galarzaa.tibiakt.models.Guild
-import com.galarzaa.tibiakt.models.GuildHall
-import com.galarzaa.tibiakt.models.GuildInvite
-import com.galarzaa.tibiakt.models.GuildMember
+import com.galarzaa.tibiakt.models.*
 import java.time.LocalDate
 
 class GuildBuilder {
@@ -36,7 +33,7 @@ class GuildBuilder {
         rank: String,
         name: String,
         title: String?,
-        vocation: String,
+        vocation: Vocation,
         level: Int,
         joiningDate: LocalDate,
         isOnline: Boolean

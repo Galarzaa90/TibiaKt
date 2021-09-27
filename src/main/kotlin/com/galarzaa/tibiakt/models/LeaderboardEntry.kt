@@ -3,8 +3,8 @@ package com.galarzaa.tibiakt.models
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class OnlineCharacter(
+data class LeaderboardEntry(
+    val rank: Int,
     override val name: String,
-    val level: Int,
-    val vocation: Vocation
+    val dromeLevel: Int
 ) : BaseCharacter

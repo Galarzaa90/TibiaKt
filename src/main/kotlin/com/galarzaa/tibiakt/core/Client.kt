@@ -9,9 +9,11 @@ import io.ktor.client.engine.cio.*
 import io.ktor.client.features.*
 import io.ktor.client.features.compression.*
 import io.ktor.client.request.*
+import io.ktor.client.request.forms.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.util.date.*
+import java.time.LocalDate
 import kotlin.system.measureTimeMillis
 
 
@@ -22,22 +24,27 @@ class Client {
             deflate()
         }
         install(UserAgent) {
-            agent = "TibiaKt"
+            agent = "TibiaKt/"
         }
     }
 
-    private suspend fun request(method: HttpMethod, url: String): TimedResponse {
-        return when (method) {
-            HttpMethod.Get -> {
-                val response: HttpResponse = client.get(url)
-                TimedResponse(response, response.fetchingTime)
-            }
-            HttpMethod.Post -> {
-                val response: HttpResponse = client.post(url)
-                TimedResponse(response, response.fetchingTime)
-            }
+    private suspend fun request(
+        method: HttpMethod,
+        url: String,
+        data: List<Pair<String, String>> = emptyList()
+    ): TimedResponse {
+        val response: HttpResponse = when (method) {
+            HttpMethod.Get -> client.get(url)
+            HttpMethod.Post -> client.submitForm(
+                url,
+                formParameters = Parameters.build {
+                    data.forEach { append(it.first, it.second) }
+                },
+                encodeInQuery = false
+            )
             else -> throw IllegalArgumentException("Unsupported method")
         }
+        return TimedResponse(response)
     }
 
     private suspend fun <T> parseResponse(response: TimedResponse, parser: (content: String) -> T): TibiaResponse<T> {
@@ -75,11 +82,20 @@ class Client {
         return parseResponse(response) { GuildsSectionParser.fromContent(it) }
     }
 
-    private val HttpResponse.fetchingTime: Float
-        get() {
-            return (responseTime.toJvmDate().toInstant().toEpochMilli() -
-                    requestTime.toJvmDate().toInstant().toEpochMilli()) / 1000f
-        }
+    suspend fun fetchRecentNews(
+        days: Int = 30,
+        categories: Set<NewsCategory>? = null,
+        types: Set<NewsType>? = null
+    ): TibiaResponse<NewsArchive> {
+        val data = NewsArchive.getFormData(LocalDate.now().minusDays(days.toLong()), LocalDate.now(), categories, types)
+        val response = this.request(HttpMethod.Post, getNewsArchiveUrl(), data)
+        return parseResponse(response) { NewsArchiveParser.fromContent(it) }
+    }
+
+    suspend fun fetchNews(newsId: Int): TibiaResponse<News?> {
+        val response = this.request(HttpMethod.Get, getNewsUrl(newsId))
+        return parseResponse(response) { NewsParser.fromContent(it, newsId) }
+    }
 
     private fun <T> TimedResponse.toTibiaResponse(parsingTime: Float, data: T): TibiaResponse<T> {
         val isCached = original.headers["CF-Cache-Status"] == "HIT"

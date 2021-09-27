@@ -4,7 +4,9 @@ import com.galarzaa.tibiakt.ParsingException
 import com.galarzaa.tibiakt.builders.GuildBuilder
 import com.galarzaa.tibiakt.core.parseTibiaDate
 import com.galarzaa.tibiakt.models.Guild
+import com.galarzaa.tibiakt.models.Vocation
 import com.galarzaa.tibiakt.utils.clean
+import com.galarzaa.tibiakt.utils.nullIfBlank
 import com.galarzaa.tibiakt.utils.remove
 import com.galarzaa.tibiakt.utils.wholeCleanText
 import org.jsoup.Jsoup
@@ -69,11 +71,13 @@ object GuildParser : Parser<Guild?> {
         val nameLink = columns[1].selectFirst("a") ?: return currentRank
         val titleNode = nameLink.nextSibling()
         val title = (titleNode as TextNode?)?.text()?.remove("(")?.remove(")")?.clean()
+        val name = nameLink.text().clean()
+        val vocation = columns[2].text().clean()
         builder.addMember(
             rank,
-            nameLink.text().clean(),
-            if (title.isNullOrBlank()) null else title,
-            columns[2].text().clean(),
+            name,
+            title.nullIfBlank(),
+            Vocation.fromProperName(vocation) ?: throw ParsingException("unknown vocation in member '$: $vocation"),
             columns[3].text().toInt(),
             parseTibiaDate(columns[4].text().clean()),
             columns[5].text().contains("online")

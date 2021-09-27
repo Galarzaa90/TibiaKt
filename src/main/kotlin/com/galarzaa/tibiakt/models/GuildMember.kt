@@ -13,7 +13,7 @@ data class GuildMember(
     val rank: String,
     val title: String? = null,
     val level: Int,
-    val vocation: String,
+    val vocation: Vocation,
     val joiningDate: LocalDate,
     val isOnline: Boolean,
 ) : BaseCharacter
