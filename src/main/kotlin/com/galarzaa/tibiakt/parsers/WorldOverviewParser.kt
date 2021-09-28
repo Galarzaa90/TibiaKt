@@ -1,7 +1,7 @@
 package com.galarzaa.tibiakt.parsers
 
-import com.galarzaa.tibiakt.ParsingException
 import com.galarzaa.tibiakt.builders.WorldOverviewBuilder
+import com.galarzaa.tibiakt.core.ParsingException
 import com.galarzaa.tibiakt.core.parsePopup
 import com.galarzaa.tibiakt.core.parseTibiaDateTime
 import com.galarzaa.tibiakt.core.parseTibiaFullDate

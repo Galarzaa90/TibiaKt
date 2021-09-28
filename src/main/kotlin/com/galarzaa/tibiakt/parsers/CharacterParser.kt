@@ -1,11 +1,7 @@
 package com.galarzaa.tibiakt.parsers
 
-import com.galarzaa.tibiakt.ParsingException
 import com.galarzaa.tibiakt.builders.CharacterBuilder
-import com.galarzaa.tibiakt.core.getLinkInformation
-import com.galarzaa.tibiakt.core.parsePopup
-import com.galarzaa.tibiakt.core.parseTibiaDate
-import com.galarzaa.tibiakt.core.parseTibiaDateTime
+import com.galarzaa.tibiakt.core.*
 import com.galarzaa.tibiakt.models.Character
 import com.galarzaa.tibiakt.models.Killer
 import com.galarzaa.tibiakt.models.Vocation

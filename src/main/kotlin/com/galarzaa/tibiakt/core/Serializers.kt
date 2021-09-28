@@ -1,4 +1,4 @@
-package com.galarzaa.tibiakt
+package com.galarzaa.tibiakt.core
 
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.descriptors.PrimitiveKind
@@ -12,9 +12,11 @@ import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 
 object InstantSerializer : KSerializer<Instant> {
-    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("DateTime", PrimitiveKind.LONG)
-    override fun serialize(encoder: Encoder, value: Instant) = encoder.encodeLong(value.epochSecond)
-    override fun deserialize(decoder: Decoder): Instant = Instant.ofEpochSecond(decoder.decodeLong())
+    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("DateTime", PrimitiveKind.STRING)
+    override fun serialize(encoder: Encoder, value: Instant) =
+        encoder.encodeString(DateTimeFormatter.ISO_INSTANT.format(value))
+
+    override fun deserialize(decoder: Decoder): Instant = Instant.parse(decoder.decodeString())
 }
 
 object LocalDateSerializer : KSerializer<LocalDate> {

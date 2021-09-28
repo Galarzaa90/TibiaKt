@@ -1,7 +1,7 @@
 package com.galarzaa.tibiakt.parsers
 
-import com.galarzaa.tibiakt.ParsingException
 import com.galarzaa.tibiakt.builders.GuildBuilder
+import com.galarzaa.tibiakt.core.ParsingException
 import com.galarzaa.tibiakt.core.parseTibiaDate
 import com.galarzaa.tibiakt.models.Guild
 import com.galarzaa.tibiakt.models.Vocation

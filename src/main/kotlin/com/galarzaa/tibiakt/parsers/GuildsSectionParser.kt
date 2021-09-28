@@ -1,7 +1,7 @@
 package com.galarzaa.tibiakt.parsers
 
-import com.galarzaa.tibiakt.ParsingException
 import com.galarzaa.tibiakt.builders.GuildsSectionBuilder
+import com.galarzaa.tibiakt.core.ParsingException
 import com.galarzaa.tibiakt.models.GuildsSection
 import com.galarzaa.tibiakt.utils.cleanText
 import com.galarzaa.tibiakt.utils.offsetStart
