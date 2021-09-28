@@ -107,6 +107,20 @@ $dokka.location:com.galarzaa.tibiakt.core/Client/fetchRecentNews/#kotlin.Int#kot
 $dokka.location:com.galarzaa.tibiakt.core/Client/fetchWorld/#kotlin.String/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.core/-client/fetch-world.html
 $dokka.location:com.galarzaa.tibiakt.core/Client/fetchWorldGuilds/#kotlin.String/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.core/-client/fetch-world-guilds.html
 $dokka.location:com.galarzaa.tibiakt.core/Client/fetchWorldOverview/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.core/-client/fetch-world-overview.html
+$dokka.location:com.galarzaa.tibiakt.core/InstantSerializer///PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.core/-instant-serializer/index.html
+$dokka.location:com.galarzaa.tibiakt.core/InstantSerializer/descriptor/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.core/-instant-serializer/descriptor.html
+$dokka.location:com.galarzaa.tibiakt.core/InstantSerializer/deserialize/#kotlinx.serialization.encoding.Decoder/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.core/-instant-serializer/deserialize.html
+$dokka.location:com.galarzaa.tibiakt.core/InstantSerializer/serialize/#kotlinx.serialization.encoding.Encoder#java.time.Instant/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.core/-instant-serializer/serialize.html
+$dokka.location:com.galarzaa.tibiakt.core/LocalDateSerializer///PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.core/-local-date-serializer/index.html
+$dokka.location:com.galarzaa.tibiakt.core/LocalDateSerializer/descriptor/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.core/-local-date-serializer/descriptor.html
+$dokka.location:com.galarzaa.tibiakt.core/LocalDateSerializer/deserialize/#kotlinx.serialization.encoding.Decoder/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.core/-local-date-serializer/deserialize.html
+$dokka.location:com.galarzaa.tibiakt.core/LocalDateSerializer/serialize/#kotlinx.serialization.encoding.Encoder#java.time.LocalDate/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.core/-local-date-serializer/serialize.html
+$dokka.location:com.galarzaa.tibiakt.core/ParsingException///PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.core/-parsing-exception/index.html
+$dokka.location:com.galarzaa.tibiakt.core/ParsingException/ParsingException/#kotlin.String?#kotlin.Throwable?/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.core/-parsing-exception/-parsing-exception.html
+$dokka.location:com.galarzaa.tibiakt.core/YearMonthSerializer///PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.core/-year-month-serializer/index.html
+$dokka.location:com.galarzaa.tibiakt.core/YearMonthSerializer/descriptor/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.core/-year-month-serializer/descriptor.html
+$dokka.location:com.galarzaa.tibiakt.core/YearMonthSerializer/deserialize/#kotlinx.serialization.encoding.Decoder/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.core/-year-month-serializer/deserialize.html
+$dokka.location:com.galarzaa.tibiakt.core/YearMonthSerializer/serialize/#kotlinx.serialization.encoding.Encoder#java.time.YearMonth/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.core/-year-month-serializer/serialize.html
 $dokka.location:com.galarzaa.tibiakt.models////PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/index.html
 $dokka.location:com.galarzaa.tibiakt.models/AccountBadge///PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-account-badge/index.html
 $dokka.location:com.galarzaa.tibiakt.models/AccountBadge/AccountBadge/#kotlin.String#kotlin.String#kotlin.String/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-account-badge/-account-badge.html
@@ -659,22 +673,6 @@ $dokka.location:com.galarzaa.tibiakt.utils/FormData/FormData/#kotlin.collections
 $dokka.location:com.galarzaa.tibiakt.utils/FormData/availableOptions/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/-form-data/available-options.html
 $dokka.location:com.galarzaa.tibiakt.utils/FormData/data/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/-form-data/data.html
 $dokka.location:com.galarzaa.tibiakt.utils/FormData/dataMultiple/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/-form-data/data-multiple.html
-$dokka.location:com.galarzaa.tibiakt////PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt/index.html
-$dokka.location:com.galarzaa.tibiakt/InstantSerializer///PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt/-instant-serializer/index.html
-$dokka.location:com.galarzaa.tibiakt/InstantSerializer/descriptor/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt/-instant-serializer/descriptor.html
-$dokka.location:com.galarzaa.tibiakt/InstantSerializer/deserialize/#kotlinx.serialization.encoding.Decoder/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt/-instant-serializer/deserialize.html
-$dokka.location:com.galarzaa.tibiakt/InstantSerializer/serialize/#kotlinx.serialization.encoding.Encoder#java.time.Instant/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt/-instant-serializer/serialize.html
-$dokka.location:com.galarzaa.tibiakt/LocalDateSerializer///PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt/-local-date-serializer/index.html
-$dokka.location:com.galarzaa.tibiakt/LocalDateSerializer/descriptor/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt/-local-date-serializer/descriptor.html
-$dokka.location:com.galarzaa.tibiakt/LocalDateSerializer/deserialize/#kotlinx.serialization.encoding.Decoder/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt/-local-date-serializer/deserialize.html
-$dokka.location:com.galarzaa.tibiakt/LocalDateSerializer/serialize/#kotlinx.serialization.encoding.Encoder#java.time.LocalDate/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt/-local-date-serializer/serialize.html
-$dokka.location:com.galarzaa.tibiakt/ParsingException///PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt/-parsing-exception/index.html
-$dokka.location:com.galarzaa.tibiakt/ParsingException/ParsingException/#kotlin.String?#kotlin.Throwable?/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt/-parsing-exception/-parsing-exception.html
-$dokka.location:com.galarzaa.tibiakt/YearMonthSerializer///PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt/-year-month-serializer/index.html
-$dokka.location:com.galarzaa.tibiakt/YearMonthSerializer/descriptor/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt/-year-month-serializer/descriptor.html
-$dokka.location:com.galarzaa.tibiakt/YearMonthSerializer/deserialize/#kotlinx.serialization.encoding.Decoder/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt/-year-month-serializer/deserialize.html
-$dokka.location:com.galarzaa.tibiakt/YearMonthSerializer/serialize/#kotlinx.serialization.encoding.Encoder#java.time.YearMonth/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt/-year-month-serializer/serialize.html
-com.galarzaa.tibiakt
 com.galarzaa.tibiakt.builders
 com.galarzaa.tibiakt.core
 com.galarzaa.tibiakt.models
