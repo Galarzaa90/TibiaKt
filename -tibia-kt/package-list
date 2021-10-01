@@ -51,13 +51,14 @@ $dokka.location:com.galarzaa.tibiakt.builders/GuildsSectionBuilder/world/#kotlin
 $dokka.location:com.galarzaa.tibiakt.builders/HighscoresBuilder///PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.builders/-highscores-builder/index.html
 $dokka.location:com.galarzaa.tibiakt.builders/HighscoresBuilder/HighscoresBuilder/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.builders/-highscores-builder/-highscores-builder.html
 $dokka.location:com.galarzaa.tibiakt.builders/HighscoresBuilder/addEntry/#kotlin.Int#kotlin.String#com.galarzaa.tibiakt.enums.Vocation#kotlin.String#kotlin.Int#kotlin.Long#kotlin.String?/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.builders/-highscores-builder/add-entry.html
+$dokka.location:com.galarzaa.tibiakt.builders/HighscoresBuilder/addWorldType/#com.galarzaa.tibiakt.enums.HighscoresPvpType/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.builders/-highscores-builder/add-world-type.html
 $dokka.location:com.galarzaa.tibiakt.builders/HighscoresBuilder/battlEyeType/#com.galarzaa.tibiakt.enums.HighscoresBattlEyeType?/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.builders/-highscores-builder/battl-eye-type.html
 $dokka.location:com.galarzaa.tibiakt.builders/HighscoresBuilder/build/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.builders/-highscores-builder/build.html
 $dokka.location:com.galarzaa.tibiakt.builders/HighscoresBuilder/category/#com.galarzaa.tibiakt.enums.HighscoresCategory?/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.builders/-highscores-builder/category.html
+$dokka.location:com.galarzaa.tibiakt.builders/HighscoresBuilder/currentPage/#kotlin.Int/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.builders/-highscores-builder/current-page.html
 $dokka.location:com.galarzaa.tibiakt.builders/HighscoresBuilder/lastUpdate/#java.time.Instant/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.builders/-highscores-builder/last-update.html
-$dokka.location:com.galarzaa.tibiakt.builders/HighscoresBuilder/pageCurrent/#kotlin.Int/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.builders/-highscores-builder/page-current.html
-$dokka.location:com.galarzaa.tibiakt.builders/HighscoresBuilder/pageTotal/#kotlin.Int/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.builders/-highscores-builder/page-total.html
 $dokka.location:com.galarzaa.tibiakt.builders/HighscoresBuilder/resultsCount/#kotlin.Int/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.builders/-highscores-builder/results-count.html
+$dokka.location:com.galarzaa.tibiakt.builders/HighscoresBuilder/totalPages/#kotlin.Int/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.builders/-highscores-builder/total-pages.html
 $dokka.location:com.galarzaa.tibiakt.builders/HighscoresBuilder/vocation/#com.galarzaa.tibiakt.enums.HighscoresProfession?/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.builders/-highscores-builder/vocation.html
 $dokka.location:com.galarzaa.tibiakt.builders/HighscoresBuilder/world/#kotlin.String?/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.builders/-highscores-builder/world.html
 $dokka.location:com.galarzaa.tibiakt.builders/NewsArchiveBuilder///PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.builders/-news-archive-builder/index.html
@@ -502,11 +503,11 @@ $dokka.location:com.galarzaa.tibiakt.models/Highscores///PointingToDeclaration/
 $dokka.location:com.galarzaa.tibiakt.models/Highscores/Highscores/#kotlin.String?#com.galarzaa.tibiakt.enums.HighscoresCategory#com.galarzaa.tibiakt.enums.HighscoresProfession#kotlin.collections.Set[com.galarzaa.tibiakt.enums.HighscoresPvpType]#com.galarzaa.tibiakt.enums.HighscoresBattlEyeType#java.time.Instant#kotlin.Int#kotlin.Int#kotlin.Int#kotlin.collections.List[com.galarzaa.tibiakt.models.HighscoresEntry]/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-highscores/-highscores.html
 $dokka.location:com.galarzaa.tibiakt.models/Highscores/battlEyeType/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-highscores/battl-eye-type.html
 $dokka.location:com.galarzaa.tibiakt.models/Highscores/category/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-highscores/category.html
+$dokka.location:com.galarzaa.tibiakt.models/Highscores/currentPage/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-highscores/current-page.html
 $dokka.location:com.galarzaa.tibiakt.models/Highscores/entries/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-highscores/entries.html
 $dokka.location:com.galarzaa.tibiakt.models/Highscores/lastUpdate/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-highscores/last-update.html
-$dokka.location:com.galarzaa.tibiakt.models/Highscores/pageCurrent/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-highscores/page-current.html
-$dokka.location:com.galarzaa.tibiakt.models/Highscores/pageTotal/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-highscores/page-total.html
 $dokka.location:com.galarzaa.tibiakt.models/Highscores/resultsCount/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-highscores/results-count.html
+$dokka.location:com.galarzaa.tibiakt.models/Highscores/totalPages/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-highscores/total-pages.html
 $dokka.location:com.galarzaa.tibiakt.models/Highscores/vocation/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-highscores/vocation.html
 $dokka.location:com.galarzaa.tibiakt.models/Highscores/world/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-highscores/world.html
 $dokka.location:com.galarzaa.tibiakt.models/Highscores/worldTypes/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-highscores/world-types.html
@@ -657,11 +658,13 @@ $dokka.location:com.galarzaa.tibiakt.utils//getCharacterUrl/#kotlin.String/Point
 $dokka.location:com.galarzaa.tibiakt.utils//getContaining/kotlin.collections.Map[kotlin.String,TypeParam(bounds=[kotlin.Any?])]#kotlin.String#TypeParam(bounds=[kotlin.Any?])?/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/get-containing.html
 $dokka.location:com.galarzaa.tibiakt.utils//getFormData/NewsArchive.Companion#java.time.LocalDate#java.time.LocalDate#kotlin.collections.Set[com.galarzaa.tibiakt.enums.NewsCategory]?#kotlin.collections.Set[com.galarzaa.tibiakt.enums.NewsType]?/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/get-form-data.html
 $dokka.location:com.galarzaa.tibiakt.utils//getGuildUrl/#kotlin.String/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/get-guild-url.html
+$dokka.location:com.galarzaa.tibiakt.utils//getHighscoresUrl/#kotlin.String?#com.galarzaa.tibiakt.enums.HighscoresCategory#com.galarzaa.tibiakt.enums.HighscoresProfession#kotlin.Int#com.galarzaa.tibiakt.enums.HighscoresBattlEyeType#kotlin.collections.Set[com.galarzaa.tibiakt.enums.HighscoresPvpType]?/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/get-highscores-url.html
 $dokka.location:com.galarzaa.tibiakt.utils//getHouseUrl/#kotlin.String#kotlin.Int/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/get-house-url.html
 $dokka.location:com.galarzaa.tibiakt.utils//getNewsArchiveUrl/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/get-news-archive-url.html
 $dokka.location:com.galarzaa.tibiakt.utils//getNewsUrl/#kotlin.Int/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/get-news-url.html
+$dokka.location:com.galarzaa.tibiakt.utils//getPageUrl/com.galarzaa.tibiakt.models.Highscores#kotlin.Int/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/get-page-url.html
 $dokka.location:com.galarzaa.tibiakt.utils//getThreadUrl/#kotlin.Int/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/get-thread-url.html
-$dokka.location:com.galarzaa.tibiakt.utils//getTibiaUrl/#kotlin.String#kotlin.Array[kotlin.Pair[kotlin.String,kotlin.Any]]#kotlin.Boolean/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/get-tibia-url.html
+$dokka.location:com.galarzaa.tibiakt.utils//getTibiaUrl/#kotlin.String#kotlin.Array[kotlin.Pair[kotlin.String,kotlin.Any?]]#kotlin.Boolean/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/get-tibia-url.html
 $dokka.location:com.galarzaa.tibiakt.utils//getTibiaUrl/#kotlin.String#kotlin.collections.Map[kotlin.String,kotlin.Any]#kotlin.Boolean/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/get-tibia-url.html
 $dokka.location:com.galarzaa.tibiakt.utils//getWorldGuilds/#kotlin.String/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/get-world-guilds.html
 $dokka.location:com.galarzaa.tibiakt.utils//getWorldGuildsUrl/#kotlin.String/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/get-world-guilds-url.html
@@ -671,11 +674,12 @@ $dokka.location:com.galarzaa.tibiakt.utils//leader/com.galarzaa.tibiakt.models.G
 $dokka.location:com.galarzaa.tibiakt.utils//marriedToUrl/com.galarzaa.tibiakt.models.Character#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/married-to-url.html
 $dokka.location:com.galarzaa.tibiakt.utils//memberCount/com.galarzaa.tibiakt.models.Guild#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/member-count.html
 $dokka.location:com.galarzaa.tibiakt.utils//membersByRank/com.galarzaa.tibiakt.models.Guild#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/members-by-rank.html
+$dokka.location:com.galarzaa.tibiakt.utils//nextPageUrl/com.galarzaa.tibiakt.models.Highscores#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/next-page-url.html
 $dokka.location:com.galarzaa.tibiakt.utils//nullIfBlank/kotlin.String?#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/null-if-blank.html
 $dokka.location:com.galarzaa.tibiakt.utils//offsetStart/kotlin.collections.List[TypeParam(bounds=[kotlin.Any?])]#kotlin.Int/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/offset-start.html
 $dokka.location:com.galarzaa.tibiakt.utils//parseInteger/kotlin.String#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/parse-integer.html
 $dokka.location:com.galarzaa.tibiakt.utils//parseLong/kotlin.String#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/parse-long.html
-$dokka.location:com.galarzaa.tibiakt.utils//parsePagination/org.jsoup.nodes.Element#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/parse-pagination.html
+$dokka.location:com.galarzaa.tibiakt.utils//previousPageUrl/com.galarzaa.tibiakt.models.Highscores#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/previous-page-url.html
 $dokka.location:com.galarzaa.tibiakt.utils//ranks/com.galarzaa.tibiakt.models.Guild#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/ranks.html
 $dokka.location:com.galarzaa.tibiakt.utils//remove/kotlin.String#kotlin.String#kotlin.Boolean/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/remove.html
 $dokka.location:com.galarzaa.tibiakt.utils//scheduledForDeletion/com.galarzaa.tibiakt.models.Character#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/scheduled-for-deletion.html
@@ -688,18 +692,10 @@ $dokka.location:com.galarzaa.tibiakt.utils//url/com.galarzaa.tibiakt.models.Base
 $dokka.location:com.galarzaa.tibiakt.utils//url/com.galarzaa.tibiakt.models.BaseNews#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/url.html
 $dokka.location:com.galarzaa.tibiakt.utils//url/com.galarzaa.tibiakt.models.BaseWorld#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/url.html
 $dokka.location:com.galarzaa.tibiakt.utils//url/com.galarzaa.tibiakt.models.CharacterHouse#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/url.html
+$dokka.location:com.galarzaa.tibiakt.utils//url/com.galarzaa.tibiakt.models.GuildsSection#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/url.html
+$dokka.location:com.galarzaa.tibiakt.utils//url/com.galarzaa.tibiakt.models.Highscores#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/url.html
 $dokka.location:com.galarzaa.tibiakt.utils//url/com.galarzaa.tibiakt.models.WorldOverview#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/url.html
 $dokka.location:com.galarzaa.tibiakt.utils//viceLeaders/com.galarzaa.tibiakt.models.Guild#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/vice-leaders.html
-$dokka.location:com.galarzaa.tibiakt.utils/FormData///PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/-form-data/index.html
-$dokka.location:com.galarzaa.tibiakt.utils/FormData/FormData/#kotlin.collections.Map[kotlin.String,kotlin.String?]#kotlin.collections.Map[kotlin.String,kotlin.collections.List[kotlin.String]]#kotlin.collections.Map[kotlin.String,kotlin.collections.List[kotlin.String]]/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/-form-data/-form-data.html
-$dokka.location:com.galarzaa.tibiakt.utils/FormData/availableOptions/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/-form-data/available-options.html
-$dokka.location:com.galarzaa.tibiakt.utils/FormData/data/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/-form-data/data.html
-$dokka.location:com.galarzaa.tibiakt.utils/FormData/dataMultiple/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/-form-data/data-multiple.html
-$dokka.location:com.galarzaa.tibiakt.utils/PaginationData///PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/-pagination-data/index.html
-$dokka.location:com.galarzaa.tibiakt.utils/PaginationData/PaginationData/#kotlin.Int#kotlin.Int#kotlin.Int/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/-pagination-data/-pagination-data.html
-$dokka.location:com.galarzaa.tibiakt.utils/PaginationData/currentPage/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/-pagination-data/current-page.html
-$dokka.location:com.galarzaa.tibiakt.utils/PaginationData/resultsCount/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/-pagination-data/results-count.html
-$dokka.location:com.galarzaa.tibiakt.utils/PaginationData/totalPages/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/-pagination-data/total-pages.html
 com.galarzaa.tibiakt.builders
 com.galarzaa.tibiakt.core
 com.galarzaa.tibiakt.enums
