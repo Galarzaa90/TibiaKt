@@ -67,3 +67,44 @@ data class FormData(
     val dataMultiple: Map<String, List<String>> = emptyMap(),
     val availableOptions: Map<String, List<String>> = emptyMap()
 )
+
+private val pageRegex = Regex("""page=(\d+)""")
+private val resultsRegex = Regex("""Results: ([\d,]+)""")
+
+fun Element.parsePagination(): PaginationData {
+    val (pagesDiv, resultsDiv) = select("div")
+    val currentPageLink =
+        pagesDiv.selectFirst(".CurrentPageLink") ?: throw ParsingException("Could not parse pagination info")
+    val pageLinks = pagesDiv.select(".PageLink")
+    val firstOrLastPages = pagesDiv.select(".FirstOrLastElement")
+    val totalPages = if (!firstOrLastPages.isNullOrEmpty()) {
+        val lastPageLink = firstOrLastPages.last()?.selectFirst("a")
+        if (lastPageLink != null) {
+            pageRegex.find(lastPageLink.attr("href"))?.let {
+                it.groups[1]!!.value.toInt()
+            } ?: throw ParsingException("Could not parse pagination info")
+        } else {
+            pageLinks[pageLinks.size - 2].text().toInt()
+        }
+    } else {
+        pageLinks.last()!!.text().toInt()
+    }
+    val page = try {
+        currentPageLink.text().toInt()
+    } catch (nfe: NumberFormatException) {
+        if (currentPageLink.text().contains("First"))
+            1
+        else
+            totalPages
+    }
+    val resultsCount: Int = resultsRegex.find(resultsDiv.text())?.let {
+        it.groups[1]!!.value.parseInteger()
+    } ?: 0
+    return PaginationData(page, totalPages, resultsCount)
+}
+
+data class PaginationData(
+    val currentPage: Int,
+    val totalPages: Int,
+    val resultsCount: Int
+)

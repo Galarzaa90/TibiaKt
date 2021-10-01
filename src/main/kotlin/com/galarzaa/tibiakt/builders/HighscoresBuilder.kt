@@ -21,7 +21,10 @@ class HighscoresBuilder {
     fun category(category: HighscoresCategory?) = apply { this.category = category }
     fun vocation(vocation: HighscoresProfession?) = apply { this.vocation = vocation }
     fun battlEyeType(battlEyeType: HighscoresBattlEyeType?) = apply { this.battlEyeType = battlEyeType }
-    fun lastUpate(lastUpdate: Instant) = apply { this.lastUpdate = lastUpdate }
+    fun lastUpdate(lastUpdate: Instant) = apply { this.lastUpdate = lastUpdate }
+    fun pageCurrent(pageCurrent: Int) = apply { this.pageCurrent = pageCurrent }
+    fun pageTotal(pageTotal: Int) = apply { this.pageTotal = pageTotal }
+    fun resultsCount(resultsCount: Int) = apply { this.resultsCount = resultsCount }
     fun addEntry(
         rank: Int,
         name: String,

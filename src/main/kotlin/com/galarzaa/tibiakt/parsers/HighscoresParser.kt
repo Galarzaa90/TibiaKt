@@ -9,6 +9,7 @@ import com.galarzaa.tibiakt.utils.*
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
+import java.time.Instant
 
 object HighscoresParser : Parser<Highscores?> {
     val numericMatch = Regex("""(\d+)""")
@@ -28,8 +29,10 @@ object HighscoresParser : Parser<Highscores?> {
         tables["Highscores"]?.apply {
             parseHighscoresTable(this, builder)
             val lastUpdateText = boxContent.selectFirst("span.RightArea")?.cleanText()
-            numericMatch.find(lastUpdateText!!)?.apply {
-                val minutes = this.groups[0]?.value
+                ?: throw ParsingException("Could not find last update label")
+            numericMatch.find(lastUpdateText)?.apply {
+                val minutes = this.groups[0]!!.value.toInt()
+                builder.lastUpdate(Instant.now().minusSeconds(60L * minutes))
             }
         }
         return builder.build()
@@ -56,5 +59,11 @@ object HighscoresParser : Parser<Highscores?> {
                 columns[5].parseLong()
             )
         }
+        val paginationData =
+            element.selectFirst("small")?.parsePagination() ?: throw ParsingException("could not find pagination block")
+        builder
+            .pageCurrent(paginationData.currentPage)
+            .pageTotal(paginationData.totalPages)
+            .resultsCount(paginationData.resultsCount)
     }
 }
