@@ -62,7 +62,13 @@ internal fun Element.formData(): FormData {
     return FormData(data, dataMultiple, availableOptions)
 }
 
-data class FormData(
+/**
+ * Contains the data extracted from a form.
+ * @property data Mapping of form fields to their selected value.
+ * @property dataMultiple Mapping of form fields that might have multiple values.
+ * @property availableOptions Mapping of the available options for selection in the form.
+ */
+internal data class FormData(
     val data: Map<String, String?> = emptyMap(),
     val dataMultiple: Map<String, List<String>> = emptyMap(),
     val availableOptions: Map<String, List<String>> = emptyMap()
@@ -71,7 +77,7 @@ data class FormData(
 private val pageRegex = Regex("""page=(\d+)""")
 private val resultsRegex = Regex("""Results: ([\d,]+)""")
 
-fun Element.parsePagination(): PaginationData {
+internal fun Element.parsePagination(): PaginationData {
     val (pagesDiv, resultsDiv) = select("div")
     val currentPageLink =
         pagesDiv.selectFirst(".CurrentPageLink") ?: throw ParsingException("Could not parse pagination info")
@@ -103,7 +109,7 @@ fun Element.parsePagination(): PaginationData {
     return PaginationData(page, totalPages, resultsCount)
 }
 
-data class PaginationData(
+internal data class PaginationData(
     val currentPage: Int,
     val totalPages: Int,
     val resultsCount: Int

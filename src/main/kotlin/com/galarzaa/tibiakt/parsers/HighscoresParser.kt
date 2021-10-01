@@ -2,6 +2,7 @@ package com.galarzaa.tibiakt.parsers
 
 import com.galarzaa.tibiakt.builders.HighscoresBuilder
 import com.galarzaa.tibiakt.core.ParsingException
+import com.galarzaa.tibiakt.enums.HighscoresPvpType
 import com.galarzaa.tibiakt.enums.IntEnum
 import com.galarzaa.tibiakt.enums.Vocation
 import com.galarzaa.tibiakt.models.Highscores
@@ -14,7 +15,7 @@ import java.time.Instant
 object HighscoresParser : Parser<Highscores?> {
     val numericMatch = Regex("""(\d+)""")
 
-    override fun fromContent(content: String): Highscores? {
+    override fun fromContent(content: String): Highscores {
         val document: Document = Jsoup.parse(content)
         val boxContent =
             document.selectFirst("div.BoxContent") ?: throw ParsingException("BoxContent container not found")
@@ -44,26 +45,36 @@ object HighscoresParser : Parser<Highscores?> {
             .category(IntEnum.fromValue(formData.data["category"]?.toInt())!!)
             .battlEyeType(IntEnum.fromValue(formData.data["beprotection"]?.toInt())!!)
             .vocation(IntEnum.fromValue(formData.data["profession"]?.toInt()))
+        for (pvpType in formData.dataMultiple["worldtypes[]"].orEmpty()) {
+            IntEnum.fromValue<HighscoresPvpType>(pvpType.toInt())?.apply { builder.addWorldType(this) }
+        }
     }
 
     private fun parseHighscoresTable(element: Element, builder: HighscoresBuilder) {
         val entriesTable = element.selectFirst("table.TableContent")
         for (row in entriesTable.rows().offsetStart(1)) {
             val columns = row.columnsText()
+            if (columns.size < 6) {
+                return
+            }
+            val columnOffset = if (columns.size == 7) 1 else 0
+            val loyaltyTitle = if (columns.size == 7) columns[2] else null
             builder.addEntry(
                 columns[0].toInt(),
-                columns[1],
-                Vocation.fromProperName(columns[2]) ?: throw ParsingException("invalid vocation found: ${columns[2]}"),
-                columns[3],
-                columns[4].toInt(),
-                columns[5].parseLong()
+                columns[1 + columnOffset],
+                Vocation.fromProperName(columns[2 + columnOffset])
+                    ?: throw ParsingException("invalid vocation found: ${columns[2 + columnOffset]}"),
+                columns[3 + columnOffset],
+                columns[4 + columnOffset].toInt(),
+                columns[5 + columnOffset].parseLong(),
+                loyaltyTitle,
             )
         }
         val paginationData =
             element.selectFirst("small")?.parsePagination() ?: throw ParsingException("could not find pagination block")
         builder
-            .pageCurrent(paginationData.currentPage)
-            .pageTotal(paginationData.totalPages)
+            .currentPage(paginationData.currentPage)
+            .totalPages(paginationData.totalPages)
             .resultsCount(paginationData.resultsCount)
     }
 }

@@ -12,18 +12,19 @@ class HighscoresBuilder {
     private val worldTypes: MutableSet<HighscoresPvpType> = mutableSetOf()
     private var battlEyeType: HighscoresBattlEyeType? = null
     private var lastUpdate: Instant? = null
-    private var pageCurrent: Int = 1
-    private var pageTotal: Int = 1
+    private var currentPage: Int = 1
+    private var totalPages: Int = 1
     private var resultsCount: Int = 0
     private val entries: MutableList<HighscoresEntry> = mutableListOf()
 
     fun world(world: String?) = apply { this.world = world }
     fun category(category: HighscoresCategory?) = apply { this.category = category }
     fun vocation(vocation: HighscoresProfession?) = apply { this.vocation = vocation }
+    fun addWorldType(worldType: HighscoresPvpType) = apply { this.worldTypes.add(worldType) }
     fun battlEyeType(battlEyeType: HighscoresBattlEyeType?) = apply { this.battlEyeType = battlEyeType }
     fun lastUpdate(lastUpdate: Instant) = apply { this.lastUpdate = lastUpdate }
-    fun pageCurrent(pageCurrent: Int) = apply { this.pageCurrent = pageCurrent }
-    fun pageTotal(pageTotal: Int) = apply { this.pageTotal = pageTotal }
+    fun currentPage(currentPage: Int) = apply { this.currentPage = currentPage }
+    fun totalPages(totalPages: Int) = apply { this.totalPages = totalPages }
     fun resultsCount(resultsCount: Int) = apply { this.resultsCount = resultsCount }
     fun addEntry(
         rank: Int,
@@ -44,8 +45,8 @@ class HighscoresBuilder {
         worldTypes = worldTypes,
         battlEyeType = battlEyeType ?: HighscoresBattlEyeType.ANY_WORLD,
         lastUpdate = lastUpdate ?: throw IllegalStateException("lastUpdate is required"),
-        pageCurrent = pageCurrent,
-        pageTotal = pageTotal,
+        currentPage = currentPage,
+        totalPages = totalPages,
         resultsCount = resultsCount,
         entries = entries
     )

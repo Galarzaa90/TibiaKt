@@ -18,8 +18,8 @@ data class Highscores(
     val worldTypes: Set<HighscoresPvpType> = emptySet(),
     val battlEyeType: HighscoresBattlEyeType,
     val lastUpdate: Instant,
-    val pageCurrent: Int,
-    val pageTotal: Int,
+    val currentPage: Int,
+    val totalPages: Int,
     val resultsCount: Int,
     val entries: List<HighscoresEntry> = emptyList()
 )
