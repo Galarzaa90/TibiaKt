@@ -2,6 +2,7 @@ package com.galarzaa.tibiakt.utils
 
 import com.galarzaa.tibiakt.models.BaseGuild
 import com.galarzaa.tibiakt.models.Guild
+import com.galarzaa.tibiakt.models.GuildsSection
 
 val BaseGuild.url: String
     get() = getGuildUrl(name)
@@ -20,3 +21,6 @@ val Guild.membersByRank
 
 val Guild.memberCount
     get() = members.size
+
+val GuildsSection.url
+    get() = getWorldGuilds(world)

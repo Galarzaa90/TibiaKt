@@ -1,5 +1,9 @@
 package com.galarzaa.tibiakt.utils
 
+import com.galarzaa.tibiakt.enums.HighscoresBattlEyeType
+import com.galarzaa.tibiakt.enums.HighscoresCategory
+import com.galarzaa.tibiakt.enums.HighscoresProfession
+import com.galarzaa.tibiakt.enums.HighscoresPvpType
 import java.net.URLEncoder
 
 private typealias P<A, B> = Pair<A, B>
@@ -8,10 +12,10 @@ fun getTibiaUrl(section: String, params: Map<String, Any>, test: Boolean = false
     return getTibiaUrl(section, params = params.toList().toTypedArray(), test = test)
 }
 
-fun getTibiaUrl(section: String, vararg params: Pair<String, Any>, test: Boolean = false): String {
+fun getTibiaUrl(section: String, vararg params: Pair<String, Any?>, test: Boolean = false): String {
     val baseUrl = if (test) "www.test.tibia.com" else "www.tibia.com"
     return "https://$baseUrl/$section/?${
-        params.joinToString("&") { (name, value) ->
+        params.filter { it.second != null }.joinToString("&") { (name, value) ->
             "$name=${URLEncoder.encode(value.toString(), Charsets.ISO_8859_1)}"
         }
     }"
@@ -31,3 +35,20 @@ fun getWorldGuilds(world: String) = getTibiaUrl("community", P("subtopic", "guil
 fun getNewsArchiveUrl() = getTibiaUrl("news", P("subtopic", "newsarchive"))
 fun getNewsUrl(newsId: Int) = getTibiaUrl("news", P("subtopic", "newsarchive"), P("id", newsId))
 fun getThreadUrl(threadId: Int) = getTibiaUrl("forum", P("action", "thread"), P("threadid", threadId))
+fun getHighscoresUrl(
+    world: String?,
+    category: HighscoresCategory = HighscoresCategory.EXPERIENCE_POINTS,
+    vocations: HighscoresProfession = HighscoresProfession.ALL,
+    page: Int = 1,
+    battleEye: HighscoresBattlEyeType = HighscoresBattlEyeType.ANY_WORLD,
+    worldTypes: Set<HighscoresPvpType>? = null
+) = getTibiaUrl(
+    "community",
+    P("subtopic", "highscores"),
+    P("world", world),
+    P("profession", vocations.value),
+    P("curentpage", page),
+    P("category", category.value),
+    P("beprotection", battleEye.value),
+    *worldTypes.orEmpty().map { P("worldtypes[]", it.value) }.toTypedArray()
+)
