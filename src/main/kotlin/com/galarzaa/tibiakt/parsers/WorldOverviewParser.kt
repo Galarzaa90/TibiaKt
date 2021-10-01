@@ -5,8 +5,8 @@ import com.galarzaa.tibiakt.core.ParsingException
 import com.galarzaa.tibiakt.core.parsePopup
 import com.galarzaa.tibiakt.core.parseTibiaDateTime
 import com.galarzaa.tibiakt.core.parseTibiaFullDate
-import com.galarzaa.tibiakt.models.BattlEyeType
-import com.galarzaa.tibiakt.models.TransferType
+import com.galarzaa.tibiakt.enums.BattlEyeType
+import com.galarzaa.tibiakt.enums.TransferType
 import com.galarzaa.tibiakt.models.WorldOverview
 import com.galarzaa.tibiakt.utils.parseInteger
 import org.jsoup.Jsoup

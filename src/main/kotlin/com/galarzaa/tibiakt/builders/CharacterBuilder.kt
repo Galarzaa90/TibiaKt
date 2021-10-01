@@ -1,5 +1,6 @@
 package com.galarzaa.tibiakt.builders
 
+import com.galarzaa.tibiakt.enums.Vocation
 import com.galarzaa.tibiakt.models.*
 import java.time.Instant
 import java.time.LocalDate

@@ -3,6 +3,7 @@
 package com.galarzaa.tibiakt.models
 
 import com.galarzaa.tibiakt.core.LocalDateSerializer
+import com.galarzaa.tibiakt.enums.NewsCategory
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import java.time.LocalDate

@@ -2,6 +2,10 @@
 package com.galarzaa.tibiakt.models
 
 import com.galarzaa.tibiakt.core.InstantSerializer
+import com.galarzaa.tibiakt.enums.HighscoresBattlEyeType
+import com.galarzaa.tibiakt.enums.HighscoresCategory
+import com.galarzaa.tibiakt.enums.HighscoresProfession
+import com.galarzaa.tibiakt.enums.HighscoresPvpType
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import java.time.Instant
@@ -12,11 +16,11 @@ data class Highscores(
     val category: HighscoresCategory,
     val vocation: HighscoresProfession,
     val worldTypes: Set<HighscoresPvpType> = emptySet(),
-    val battlEyeType: BattlEyeType,
+    val battlEyeType: HighscoresBattlEyeType,
     val lastUpdate: Instant,
     val pageCurrent: Int,
     val pageTotal: Int,
     val resultsCount: Int,
-    val entries: List<LeaderboardEntry>
+    val entries: List<HighscoresEntry> = emptyList()
 )
 

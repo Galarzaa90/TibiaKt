@@ -1,7 +1,7 @@
 package com.galarzaa.tibiakt.parsers
 
 import com.galarzaa.tibiakt.TestResources.getResource
-import com.galarzaa.tibiakt.models.Vocation
+import com.galarzaa.tibiakt.enums.Vocation
 import com.galarzaa.tibiakt.utils.scheduledForDeletion
 import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.StringSpec

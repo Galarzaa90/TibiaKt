@@ -30,8 +30,8 @@ fun String.clean(): String {
 }
 
 
-fun String.parseInteger(): Int {
-    return remove(",").trim().toInt()
-}
+fun String.parseInteger(): Int = remove(",").trim().toInt()
+
+fun String.parseLong(): Long = remove(",").trim().toLong()
 
 fun String?.nullIfBlank(): String? = if (isNullOrBlank()) null else this

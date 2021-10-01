@@ -5,6 +5,8 @@ package com.galarzaa.tibiakt.models
 import com.galarzaa.tibiakt.core.InstantSerializer
 import com.galarzaa.tibiakt.core.LocalDateSerializer
 import com.galarzaa.tibiakt.core.YearMonthSerializer
+import com.galarzaa.tibiakt.enums.BattlEyeType
+import com.galarzaa.tibiakt.enums.TransferType
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import java.time.Instant

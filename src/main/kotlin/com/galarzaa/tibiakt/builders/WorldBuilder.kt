@@ -1,6 +1,10 @@
 package com.galarzaa.tibiakt.builders
 
-import com.galarzaa.tibiakt.models.*
+import com.galarzaa.tibiakt.enums.BattlEyeType
+import com.galarzaa.tibiakt.enums.TransferType
+import com.galarzaa.tibiakt.enums.Vocation
+import com.galarzaa.tibiakt.models.OnlineCharacter
+import com.galarzaa.tibiakt.models.World
 import java.time.Instant
 import java.time.LocalDate
 import java.time.YearMonth

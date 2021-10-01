@@ -1,9 +1,9 @@
 package com.galarzaa.tibiakt.builders
 
+import com.galarzaa.tibiakt.enums.NewsCategory
+import com.galarzaa.tibiakt.enums.NewsType
 import com.galarzaa.tibiakt.models.NewsArchive
-import com.galarzaa.tibiakt.models.NewsCategory
 import com.galarzaa.tibiakt.models.NewsEntry
-import com.galarzaa.tibiakt.models.NewsType
 import java.time.LocalDate
 
 class NewsArchiveBuilder {

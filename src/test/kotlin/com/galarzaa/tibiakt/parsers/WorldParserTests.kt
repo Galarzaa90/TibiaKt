@@ -1,8 +1,8 @@
 package com.galarzaa.tibiakt.parsers
 
 import com.galarzaa.tibiakt.TestResources
-import com.galarzaa.tibiakt.models.BattlEyeType
-import com.galarzaa.tibiakt.models.TransferType
+import com.galarzaa.tibiakt.enums.BattlEyeType
+import com.galarzaa.tibiakt.enums.TransferType
 import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.collections.shouldHaveSize

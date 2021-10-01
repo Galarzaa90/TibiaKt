@@ -1,6 +1,10 @@
 package com.galarzaa.tibiakt.utils
 
-import com.galarzaa.tibiakt.models.*
+import com.galarzaa.tibiakt.enums.NewsCategory
+import com.galarzaa.tibiakt.enums.NewsType
+import com.galarzaa.tibiakt.models.BaseNews
+import com.galarzaa.tibiakt.models.News
+import com.galarzaa.tibiakt.models.NewsArchive
 import java.time.LocalDate
 
 val BaseNews.url

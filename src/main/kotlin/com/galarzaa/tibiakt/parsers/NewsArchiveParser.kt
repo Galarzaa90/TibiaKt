@@ -4,9 +4,9 @@ import com.galarzaa.tibiakt.builders.NewsArchiveBuilder
 import com.galarzaa.tibiakt.core.ParsingException
 import com.galarzaa.tibiakt.core.getLinkInformation
 import com.galarzaa.tibiakt.core.parseTibiaDate
+import com.galarzaa.tibiakt.enums.NewsCategory
+import com.galarzaa.tibiakt.enums.NewsType
 import com.galarzaa.tibiakt.models.NewsArchive
-import com.galarzaa.tibiakt.models.NewsCategory
-import com.galarzaa.tibiakt.models.NewsType
 import com.galarzaa.tibiakt.utils.*
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document

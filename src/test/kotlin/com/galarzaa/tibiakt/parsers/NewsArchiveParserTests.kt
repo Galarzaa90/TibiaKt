@@ -1,8 +1,8 @@
 package com.galarzaa.tibiakt.parsers
 
 import com.galarzaa.tibiakt.TestResources.getResource
-import com.galarzaa.tibiakt.models.NewsCategory
-import com.galarzaa.tibiakt.models.NewsType
+import com.galarzaa.tibiakt.enums.NewsCategory
+import com.galarzaa.tibiakt.enums.NewsType
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.collections.shouldNotContain

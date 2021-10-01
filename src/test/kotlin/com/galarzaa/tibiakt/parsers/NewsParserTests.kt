@@ -1,7 +1,7 @@
 package com.galarzaa.tibiakt.parsers
 
 import com.galarzaa.tibiakt.TestResources.getResource
-import com.galarzaa.tibiakt.models.NewsCategory
+import com.galarzaa.tibiakt.enums.NewsCategory
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe

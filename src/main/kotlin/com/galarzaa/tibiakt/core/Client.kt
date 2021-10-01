@@ -1,5 +1,7 @@
 package com.galarzaa.tibiakt.core
 
+import com.galarzaa.tibiakt.enums.NewsCategory
+import com.galarzaa.tibiakt.enums.NewsType
 import com.galarzaa.tibiakt.models.*
 import com.galarzaa.tibiakt.parsers.*
 import com.galarzaa.tibiakt.utils.*

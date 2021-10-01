@@ -1,5 +1,6 @@
 package com.galarzaa.tibiakt.models
 
+import com.galarzaa.tibiakt.enums.Vocation
 import kotlinx.serialization.Serializable
 
 @Serializable

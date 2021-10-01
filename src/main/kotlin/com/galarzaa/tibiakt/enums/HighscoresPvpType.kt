@@ -1,6 +1,6 @@
-package com.galarzaa.tibiakt.models
+package com.galarzaa.tibiakt.enums
 
-enum class HighscoresPvpType(val value: Int) {
+enum class HighscoresPvpType(override val value: Int) : IntEnum {
     OPEN_PVP(0),
     OPTIONAL_PVP(1),
     HARDCORE_PVP(2),

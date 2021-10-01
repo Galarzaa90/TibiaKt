@@ -1,6 +1,6 @@
-package com.galarzaa.tibiakt.models
+package com.galarzaa.tibiakt.enums
 
-enum class HighscoresCategory(val value: Int) {
+enum class HighscoresCategory(override val value: Int) : IntEnum {
     ACHIEVEMENTS(1),
     AXE_FIGHTING(2),
     CHARM_POINTS(3),

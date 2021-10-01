@@ -4,9 +4,9 @@ import com.galarzaa.tibiakt.builders.WorldBuilder
 import com.galarzaa.tibiakt.core.ParsingException
 import com.galarzaa.tibiakt.core.parseTibiaDateTime
 import com.galarzaa.tibiakt.core.parseTibiaFullDate
-import com.galarzaa.tibiakt.models.BattlEyeType
-import com.galarzaa.tibiakt.models.TransferType
-import com.galarzaa.tibiakt.models.Vocation
+import com.galarzaa.tibiakt.enums.BattlEyeType
+import com.galarzaa.tibiakt.enums.TransferType
+import com.galarzaa.tibiakt.enums.Vocation
 import com.galarzaa.tibiakt.models.World
 import com.galarzaa.tibiakt.utils.*
 import org.jsoup.Jsoup

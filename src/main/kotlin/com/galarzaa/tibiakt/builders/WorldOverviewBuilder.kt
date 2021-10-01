@@ -1,7 +1,7 @@
 package com.galarzaa.tibiakt.builders
 
-import com.galarzaa.tibiakt.models.BattlEyeType
-import com.galarzaa.tibiakt.models.TransferType
+import com.galarzaa.tibiakt.enums.BattlEyeType
+import com.galarzaa.tibiakt.enums.TransferType
 import com.galarzaa.tibiakt.models.WorldEntry
 import com.galarzaa.tibiakt.models.WorldOverview
 import java.time.Instant

@@ -1,4 +1,4 @@
-package com.galarzaa.tibiakt.models
+package com.galarzaa.tibiakt.enums
 
 enum class BattlEyeType {
     /**

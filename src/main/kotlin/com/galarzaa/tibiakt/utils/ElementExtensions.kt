@@ -19,20 +19,20 @@ internal fun Element.parseTables(contentTableSelector: String = "table.TableCont
     return output
 }
 
-internal fun Element.parseTablesMap(): Map<String, Element> {
+internal fun Element.parseTablesMap(contentSelector: String = "div.TableContentContainer"): Map<String, Element> {
     val tables = select("div.TableContainer")
     val output = mutableMapOf<String, Element>()
     for (table: Element in tables) {
         val caption: String =
             table.selectFirst("div.Text")?.cleanText() ?: throw ParsingException("table has no caption")
-        val contentTable = table.selectFirst("div.TableContentContainer")
+        val contentTable = table.selectFirst(contentSelector)
         output[caption] = contentTable ?: continue
     }
     return output
 }
 
-internal fun Element.rows(): Elements = select("tr")
-internal fun Element.columns(): Elements = select("td")
+internal fun Element?.rows(): Elements = this?.select("tr") ?: Elements()
+internal fun Element?.columns(): Elements = this?.select("td") ?: Elements()
 internal fun Element.columnsText(): List<String> = columns().map { it.cleanText() }
 
 internal fun Element.cleanText() = text().clean()

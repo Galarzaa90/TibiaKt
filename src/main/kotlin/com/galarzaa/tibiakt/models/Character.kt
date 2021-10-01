@@ -3,6 +3,7 @@
 package com.galarzaa.tibiakt.models
 
 import com.galarzaa.tibiakt.core.InstantSerializer
+import com.galarzaa.tibiakt.enums.Vocation
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import java.time.Instant
