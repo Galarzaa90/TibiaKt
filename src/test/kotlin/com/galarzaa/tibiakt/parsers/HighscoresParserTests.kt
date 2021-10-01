@@ -21,6 +21,6 @@ class HighscoresParserTests : StringSpec({
         highscores.pageCurrent shouldBe 1
         highscores.pageTotal shouldBe 20
         highscores.resultsCount shouldBe 1000
-        highscores.entries shouldHaveSize 30
+        highscores.entries shouldHaveSize 50
     }
 })
