@@ -52,3 +52,5 @@ fun getHighscoresUrl(
     P("beprotection", battleEye.value),
     *worldTypes.orEmpty().map { P("worldtypes[]", it.value) }.toTypedArray()
 )
+
+fun getKillStatisticsUrl(world: String) = getTibiaUrl("community", P("subtopic", "killstatistics"), P("world", world))

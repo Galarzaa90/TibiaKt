@@ -4,8 +4,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class KillsStatisticEntry(
+    val lastDayKilledPlayers: Int,
     val lastDayKilled: Int,
-    val lastDayPlayersKilled: Int,
+    val lastWeekKilledPlayers: Int,
     val lastWeekKilled: Int,
-    val lastWeekPlayersKilled: Int
 )
