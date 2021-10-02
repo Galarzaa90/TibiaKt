@@ -61,6 +61,13 @@ $dokka.location:com.galarzaa.tibiakt.builders/HighscoresBuilder/resultsCount/#ko
 $dokka.location:com.galarzaa.tibiakt.builders/HighscoresBuilder/totalPages/#kotlin.Int/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.builders/-highscores-builder/total-pages.html
 $dokka.location:com.galarzaa.tibiakt.builders/HighscoresBuilder/vocation/#com.galarzaa.tibiakt.enums.HighscoresProfession?/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.builders/-highscores-builder/vocation.html
 $dokka.location:com.galarzaa.tibiakt.builders/HighscoresBuilder/world/#kotlin.String?/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.builders/-highscores-builder/world.html
+$dokka.location:com.galarzaa.tibiakt.builders/KillStatisticsBuilder///PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.builders/-kill-statistics-builder/index.html
+$dokka.location:com.galarzaa.tibiakt.builders/KillStatisticsBuilder/KillStatisticsBuilder/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.builders/-kill-statistics-builder/-kill-statistics-builder.html
+$dokka.location:com.galarzaa.tibiakt.builders/KillStatisticsBuilder/addEntry/#kotlin.String#kotlin.Int#kotlin.Int#kotlin.Int#kotlin.Int/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.builders/-kill-statistics-builder/add-entry.html
+$dokka.location:com.galarzaa.tibiakt.builders/KillStatisticsBuilder/build/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.builders/-kill-statistics-builder/build.html
+$dokka.location:com.galarzaa.tibiakt.builders/KillStatisticsBuilder/entries/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.builders/-kill-statistics-builder/entries.html
+$dokka.location:com.galarzaa.tibiakt.builders/KillStatisticsBuilder/total/#kotlin.Int#kotlin.Int#kotlin.Int#kotlin.Int/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.builders/-kill-statistics-builder/total.html
+$dokka.location:com.galarzaa.tibiakt.builders/KillStatisticsBuilder/world/#kotlin.String/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.builders/-kill-statistics-builder/world.html
 $dokka.location:com.galarzaa.tibiakt.builders/NewsArchiveBuilder///PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.builders/-news-archive-builder/index.html
 $dokka.location:com.galarzaa.tibiakt.builders/NewsArchiveBuilder/NewsArchiveBuilder/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.builders/-news-archive-builder/-news-archive-builder.html
 $dokka.location:com.galarzaa.tibiakt.builders/NewsArchiveBuilder/addCategory/#com.galarzaa.tibiakt.enums.NewsCategory/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.builders/-news-archive-builder/add-category.html
@@ -534,9 +541,9 @@ $dokka.location:com.galarzaa.tibiakt.models/Killer/traded/#/PointingToDeclaratio
 $dokka.location:com.galarzaa.tibiakt.models/KillsStatisticEntry///PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-kills-statistic-entry/index.html
 $dokka.location:com.galarzaa.tibiakt.models/KillsStatisticEntry/KillsStatisticEntry/#kotlin.Int#kotlin.Int#kotlin.Int#kotlin.Int/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-kills-statistic-entry/-kills-statistic-entry.html
 $dokka.location:com.galarzaa.tibiakt.models/KillsStatisticEntry/lastDayKilled/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-kills-statistic-entry/last-day-killed.html
-$dokka.location:com.galarzaa.tibiakt.models/KillsStatisticEntry/lastDayPlayersKilled/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-kills-statistic-entry/last-day-players-killed.html
+$dokka.location:com.galarzaa.tibiakt.models/KillsStatisticEntry/lastDayKilledPlayers/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-kills-statistic-entry/last-day-killed-players.html
 $dokka.location:com.galarzaa.tibiakt.models/KillsStatisticEntry/lastWeekKilled/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-kills-statistic-entry/last-week-killed.html
-$dokka.location:com.galarzaa.tibiakt.models/KillsStatisticEntry/lastWeekPlayersKilled/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-kills-statistic-entry/last-week-players-killed.html
+$dokka.location:com.galarzaa.tibiakt.models/KillsStatisticEntry/lastWeekKilledPlayers/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-kills-statistic-entry/last-week-killed-players.html
 $dokka.location:com.galarzaa.tibiakt.models/Leaderboard///PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-leaderboard/index.html
 $dokka.location:com.galarzaa.tibiakt.models/Leaderboard/Leaderboard/#kotlin.String#kotlin.Int#kotlin.Int#kotlin.Int#kotlin.Int#kotlin.collections.List[com.galarzaa.tibiakt.models.HighscoresEntry]/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-leaderboard/-leaderboard.html
 $dokka.location:com.galarzaa.tibiakt.models/Leaderboard/entries/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.models/-leaderboard/entries.html
@@ -641,6 +648,8 @@ $dokka.location:com.galarzaa.tibiakt.parsers/GuildsSectionParser/fromContent/#ko
 $dokka.location:com.galarzaa.tibiakt.parsers/HighscoresParser///PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.parsers/-highscores-parser/index.html
 $dokka.location:com.galarzaa.tibiakt.parsers/HighscoresParser/fromContent/#kotlin.String/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.parsers/-highscores-parser/from-content.html
 $dokka.location:com.galarzaa.tibiakt.parsers/HighscoresParser/numericMatch/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.parsers/-highscores-parser/numeric-match.html
+$dokka.location:com.galarzaa.tibiakt.parsers/KillStatisticsParser///PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.parsers/-kill-statistics-parser/index.html
+$dokka.location:com.galarzaa.tibiakt.parsers/KillStatisticsParser/fromContent/#kotlin.String/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.parsers/-kill-statistics-parser/from-content.html
 $dokka.location:com.galarzaa.tibiakt.parsers/NewsArchiveParser///PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.parsers/-news-archive-parser/index.html
 $dokka.location:com.galarzaa.tibiakt.parsers/NewsArchiveParser/fromContent/#kotlin.String/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.parsers/-news-archive-parser/from-content.html
 $dokka.location:com.galarzaa.tibiakt.parsers/NewsParser///PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.parsers/-news-parser/index.html
@@ -660,6 +669,7 @@ $dokka.location:com.galarzaa.tibiakt.utils//getFormData/NewsArchive.Companion#ja
 $dokka.location:com.galarzaa.tibiakt.utils//getGuildUrl/#kotlin.String/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/get-guild-url.html
 $dokka.location:com.galarzaa.tibiakt.utils//getHighscoresUrl/#kotlin.String?#com.galarzaa.tibiakt.enums.HighscoresCategory#com.galarzaa.tibiakt.enums.HighscoresProfession#kotlin.Int#com.galarzaa.tibiakt.enums.HighscoresBattlEyeType#kotlin.collections.Set[com.galarzaa.tibiakt.enums.HighscoresPvpType]?/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/get-highscores-url.html
 $dokka.location:com.galarzaa.tibiakt.utils//getHouseUrl/#kotlin.String#kotlin.Int/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/get-house-url.html
+$dokka.location:com.galarzaa.tibiakt.utils//getKillStatisticsUrl/#kotlin.String/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/get-kill-statistics-url.html
 $dokka.location:com.galarzaa.tibiakt.utils//getNewsArchiveUrl/#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/get-news-archive-url.html
 $dokka.location:com.galarzaa.tibiakt.utils//getNewsUrl/#kotlin.Int/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/get-news-url.html
 $dokka.location:com.galarzaa.tibiakt.utils//getPageUrl/com.galarzaa.tibiakt.models.Highscores#kotlin.Int/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/get-page-url.html
@@ -679,6 +689,7 @@ $dokka.location:com.galarzaa.tibiakt.utils//nullIfBlank/kotlin.String?#/Pointing
 $dokka.location:com.galarzaa.tibiakt.utils//offsetStart/kotlin.collections.List[TypeParam(bounds=[kotlin.Any?])]#kotlin.Int/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/offset-start.html
 $dokka.location:com.galarzaa.tibiakt.utils//parseInteger/kotlin.String#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/parse-integer.html
 $dokka.location:com.galarzaa.tibiakt.utils//parseLong/kotlin.String#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/parse-long.html
+$dokka.location:com.galarzaa.tibiakt.utils//players/com.galarzaa.tibiakt.models.KillStatistics#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/players.html
 $dokka.location:com.galarzaa.tibiakt.utils//previousPageUrl/com.galarzaa.tibiakt.models.Highscores#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/previous-page-url.html
 $dokka.location:com.galarzaa.tibiakt.utils//ranks/com.galarzaa.tibiakt.models.Guild#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/ranks.html
 $dokka.location:com.galarzaa.tibiakt.utils//remove/kotlin.String#kotlin.String#kotlin.Boolean/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/remove.html
@@ -694,6 +705,7 @@ $dokka.location:com.galarzaa.tibiakt.utils//url/com.galarzaa.tibiakt.models.Base
 $dokka.location:com.galarzaa.tibiakt.utils//url/com.galarzaa.tibiakt.models.CharacterHouse#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/url.html
 $dokka.location:com.galarzaa.tibiakt.utils//url/com.galarzaa.tibiakt.models.GuildsSection#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/url.html
 $dokka.location:com.galarzaa.tibiakt.utils//url/com.galarzaa.tibiakt.models.Highscores#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/url.html
+$dokka.location:com.galarzaa.tibiakt.utils//url/com.galarzaa.tibiakt.models.KillStatistics#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/url.html
 $dokka.location:com.galarzaa.tibiakt.utils//url/com.galarzaa.tibiakt.models.WorldOverview#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/url.html
 $dokka.location:com.galarzaa.tibiakt.utils//viceLeaders/com.galarzaa.tibiakt.models.Guild#/PointingToDeclaration/-tibia-kt/com.galarzaa.tibiakt.utils/vice-leaders.html
 com.galarzaa.tibiakt.builders
