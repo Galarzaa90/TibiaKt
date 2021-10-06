@@ -10,8 +10,8 @@ import java.time.LocalDate
 @Serializable
 data class CharacterHouse(
     val name: String,
-    val houseId: Int,
+    override val houseId: Int,
     val town: String,
     val paidUntil: LocalDate,
-    val world: String,
-)
+    override val world: String,
+) : BaseHouse
