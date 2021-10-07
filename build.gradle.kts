@@ -8,8 +8,8 @@ plugins {
     id("org.jetbrains.dokka") version "1.5.0"
 }
 
-group "com.galarzaa"
-version "1.0-SNAPSHOT"
+group = "com.galarzaa"
+version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
