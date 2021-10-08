@@ -28,9 +28,6 @@ dependencies {
     implementation("io.ktor:ktor-client-core:$ktorVersion")
     implementation("io.ktor:ktor-client-java:$ktorVersion")
 
-    implementation("io.ktor:ktor-server-cio:$ktorVersion")
-    implementation("io.ktor:ktor-server-netty:$ktorVersion")
-
     implementation("io.ktor:ktor-serialization:$ktorVersion")
 
     implementation("ch.qos.logback:logback-classic:1.2.6")

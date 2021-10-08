@@ -1,4 +1,5 @@
 @file:UseSerializers(InstantSerializer::class)
+
 package com.galarzaa.tibiakt.models
 
 import com.galarzaa.tibiakt.core.InstantSerializer
