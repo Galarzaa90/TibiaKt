@@ -5,9 +5,9 @@ module:tibiakt-client
 com.galarzaa.tibiakt.client
 com.galarzaa.tibiakt.client.models
 module:tibiakt-core
-com.galarzaa.tibiakt.builders
 com.galarzaa.tibiakt.core
-com.galarzaa.tibiakt.enums
-com.galarzaa.tibiakt.models
-com.galarzaa.tibiakt.parsers
-com.galarzaa.tibiakt.utils
+com.galarzaa.tibiakt.core.builders
+com.galarzaa.tibiakt.core.enums
+com.galarzaa.tibiakt.core.models
+com.galarzaa.tibiakt.core.parsers
+com.galarzaa.tibiakt.core.utils
