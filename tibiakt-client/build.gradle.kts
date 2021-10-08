@@ -1,9 +1,9 @@
-val ktorVersion = "1.6.3"
-val kotestVersion = "4.6.3"
+val ktorVersion: String by project
+val kotestVersion: String by project
 
 plugins {
-    id("org.jetbrains.kotlin.jvm")
-    id("org.jetbrains.kotlin.plugin.serialization")
+    kotlin("jvm")
+    kotlin("plugin.serialization")
     id("org.jetbrains.dokka")
 }
 

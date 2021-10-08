@@ -1,9 +1,11 @@
-val ktorVersion = "1.6.3"
-val kotestVersion = "4.6.3"
+val kotlinVersion: String by project
+val ktorVersion: String by project
+val kotestVersion: String by project
+val jsoupVersion: String by project
 
 plugins {
-    id("org.jetbrains.kotlin.jvm")
-    id("org.jetbrains.kotlin.plugin.serialization")
+    kotlin("jvm")
+    kotlin("plugin.serialization")
     id("org.jetbrains.dokka")
 }
 
@@ -12,8 +14,8 @@ tasks.test {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.5.30")
-    implementation("org.jsoup:jsoup:1.14.2")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion")
+    implementation("org.jsoup:jsoup:$jsoupVersion")
 
     implementation("io.ktor:ktor-serialization:$ktorVersion")
 

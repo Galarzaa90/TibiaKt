@@ -2,11 +2,11 @@ package com.galarzaa.tibiakt.client
 
 import com.galarzaa.tibiakt.client.models.TibiaResponse
 import com.galarzaa.tibiakt.client.models.TimedResponse
-import com.galarzaa.tibiakt.enums.NewsCategory
-import com.galarzaa.tibiakt.enums.NewsType
-import com.galarzaa.tibiakt.models.*
-import com.galarzaa.tibiakt.parsers.*
-import com.galarzaa.tibiakt.utils.*
+import com.galarzaa.tibiakt.core.enums.NewsCategory
+import com.galarzaa.tibiakt.core.enums.NewsType
+import com.galarzaa.tibiakt.core.models.*
+import com.galarzaa.tibiakt.core.parsers.*
+import com.galarzaa.tibiakt.core.utils.*
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.engine.cio.*

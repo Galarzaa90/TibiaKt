@@ -1,6 +1,6 @@
 package com.galarzaa.tibiakt.core
 
-import com.galarzaa.tibiakt.utils.clean
+import com.galarzaa.tibiakt.core.utils.clean
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
@@ -14,6 +14,9 @@ import java.time.format.DateTimeFormatter
 
 val queryStringRegex = Regex("([^&=]+)=([^&]*)")
 
+/**
+ * Parses a string containing date and time from Tibia.com into an Instant instance.
+ */
 fun parseTibiaDateTime(input: String): Instant {
     val timeString = input.clean().substring(0, input.length - 4).trim()
     val tzString = input.substring(input.length - 4)
@@ -23,6 +26,9 @@ fun parseTibiaDateTime(input: String): Instant {
     ).atOffset(ZoneOffset.of(if (tzString == "CEST") "+02:00" else "+01:00")).toInstant()
 }
 
+/**
+ * Parses a string containing date from Tibia.com into an Instant instance.
+ */
 fun parseTibiaDate(input: String): LocalDate {
     return LocalDate.parse(
         input.clean(),
@@ -30,6 +36,9 @@ fun parseTibiaDate(input: String): LocalDate {
     )
 }
 
+/**
+ * Parses a string containing date from Tibia.com into an Instant instance.
+ */
 fun parseTibiaFullDate(input: String): LocalDate {
     return LocalDate.parse(
         input.clean(),
