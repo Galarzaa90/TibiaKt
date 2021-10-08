@@ -1,0 +1,13 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+
+module:tibiakt-client
+com.galarzaa.tibiakt.client
+com.galarzaa.tibiakt.client.models
+module:tibiakt-core
+com.galarzaa.tibiakt.builders
+com.galarzaa.tibiakt.core
+com.galarzaa.tibiakt.enums
+com.galarzaa.tibiakt.models
+com.galarzaa.tibiakt.parsers
+com.galarzaa.tibiakt.utils
