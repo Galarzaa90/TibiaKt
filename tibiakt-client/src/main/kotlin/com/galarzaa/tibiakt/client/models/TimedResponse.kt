@@ -1,4 +1,4 @@
-package com.galarzaa.tibiakt.models
+package com.galarzaa.tibiakt.client.models
 
 import io.ktor.client.statement.*
 import io.ktor.util.date.*

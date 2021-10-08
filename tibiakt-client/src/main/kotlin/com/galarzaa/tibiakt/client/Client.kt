@@ -1,5 +1,7 @@
-package com.galarzaa.tibiakt.core
+package com.galarzaa.tibiakt.client
 
+import com.galarzaa.tibiakt.client.models.TibiaResponse
+import com.galarzaa.tibiakt.client.models.TimedResponse
 import com.galarzaa.tibiakt.enums.NewsCategory
 import com.galarzaa.tibiakt.enums.NewsType
 import com.galarzaa.tibiakt.models.*

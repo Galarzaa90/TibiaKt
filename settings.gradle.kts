@@ -1,4 +1,5 @@
 rootProject.name = "TibiaKt"
 
-include("core")
-include("server")
+include("tibiakt-core")
+include("tibiakt-client")
+include("tibiakt-server")

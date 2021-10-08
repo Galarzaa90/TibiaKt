@@ -1,6 +1,6 @@
 @file:UseSerializers(InstantSerializer::class)
 
-package com.galarzaa.tibiakt.models
+package com.galarzaa.tibiakt.client.models
 
 import com.galarzaa.tibiakt.core.InstantSerializer
 import kotlinx.serialization.Serializable

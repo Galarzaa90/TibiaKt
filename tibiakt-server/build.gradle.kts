@@ -13,7 +13,8 @@ version = "1.0-SNAPSHOT"
 
 
 dependencies {
-    implementation(project(":core"))
+    implementation(project(":tibiakt-core"))
+    implementation(project(":tibiakt-client"))
     implementation("io.ktor:ktor-server-cio:$ktorVersion")
     implementation("io.ktor:ktor-server-netty:$ktorVersion")
     implementation("io.ktor:ktor-serialization:$ktorVersion")

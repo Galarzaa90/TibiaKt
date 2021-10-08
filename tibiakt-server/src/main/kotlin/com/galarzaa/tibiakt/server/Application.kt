@@ -1,6 +1,6 @@
 package com.galarzaa.tibiakt.server
 
-import com.galarzaa.tibiakt.core.Client
+import com.galarzaa.tibiakt.client.Client
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.http.*
