@@ -22,7 +22,7 @@ jobs:
 
       - name: Generate API documentation
         if: ${{github.event_name == 'push'}}
-        run: ./gradlew dokkaHtml
+        run: ./gradlew dokkaHtmlMultiModule
 
       - name: Deploy 🚀
         if: ${{github.event_name == 'push'}}
@@ -30,4 +30,4 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: build/dokka/html
+          FOLDER: build/dokkaCustomMultiModuleOutput

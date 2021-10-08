@@ -2,15 +2,10 @@ val ktorVersion = "1.6.3"
 val kotestVersion = "4.6.3"
 
 plugins {
-    id("org.jetbrains.kotlin.jvm") version "1.5.30"
-    id("org.jetbrains.kotlin.plugin.serialization") version "1.5.30"
-
-    id("org.jetbrains.dokka") version "1.5.0"
+    id("org.jetbrains.kotlin.jvm")
+    id("org.jetbrains.kotlin.plugin.serialization")
+    id("org.jetbrains.dokka")
 }
-
-group = "com.galarzaa"
-version = "1.0-SNAPSHOT"
-
 
 tasks.test {
     useJUnitPlatform()
