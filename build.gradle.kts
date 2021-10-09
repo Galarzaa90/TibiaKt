@@ -1,9 +1,10 @@
 val ktorVersion: String by project
 
 plugins {
-    kotlin("jvm") version "1.5.30" apply false
-    kotlin("plugin.serialization") version "1.5.30" apply false
-    id("org.jetbrains.dokka") version "1.5.0" apply true
+    kotlin("jvm") version "1.5.30"
+    kotlin("plugin.serialization") version "1.5.30"
+    id("org.jetbrains.dokka") version "1.5.0"
+    `maven-publish`
 }
 
 group = "com.galarzaa"
@@ -15,11 +16,23 @@ allprojects {
     }
 }
 
-tasks.register("clean", Delete::class) {
-    delete(rootProject.buildDir)
+tasks.dokkaHtmlMultiModule.configure {
+    outputDirectory.set(buildDir.resolve("dokka"))
 }
 
 
-tasks.dokkaHtmlMultiModule.configure {
-    outputDirectory.set(buildDir.resolve("dokka"))
+subprojects {
+    apply(plugin = "maven-publish")
+    configure<PublishingExtension> {
+        repositories {
+            maven {
+                name = "GitHubPackages"
+                url = uri("https://maven.pkg.github.com/OWNER/REPOSITORY")
+                credentials {
+                    username = System.getenv("USERNAME")
+                    password = System.getenv("TOKEN")
+                }
+            }
+        }
+    }
 }
