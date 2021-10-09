@@ -1,5 +1,3 @@
-val ktorVersion: String by project
-
 plugins {
     kotlin("jvm") version "1.5.30"
     kotlin("plugin.serialization") version "1.5.30"
@@ -34,5 +32,10 @@ subprojects {
                 }
             }
         }
+//        publications {
+//            register<MavenPublication>("gpr") {
+//                from(components["java"])
+//            }
+//        }
     }
 }
