@@ -21,21 +21,23 @@ tasks.dokkaHtmlMultiModule.configure {
 
 subprojects {
     apply(plugin = "maven-publish")
-    configure<PublishingExtension> {
-        repositories {
-            maven {
-                name = "GitHubPackages"
-                url = uri("https://maven.pkg.github.com/Galarzaa90/TibiaKt")
-                credentials {
-                    username = System.getenv("GITHUB_ACTOR")
-                    password = System.getenv("GITHUB_TOKEN")
+    afterEvaluate {
+        publishing {
+            repositories {
+                maven {
+                    name = "GitHubPackages"
+                    url = uri("https://maven.pkg.github.com/Galarzaa90/TibiaKt")
+                    credentials {
+                        username = System.getenv("GITHUB_ACTOR")
+                        password = System.getenv("GITHUB_TOKEN")
+                    }
+                }
+            }
+            publications {
+                register<MavenPublication>("jar") {
+                    from(components["java"])
                 }
             }
         }
-//        publications {
-//            register<MavenPublication>("gpr") {
-//                from(components["java"])
-//            }
-//        }
     }
 }
