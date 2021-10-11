@@ -36,6 +36,7 @@ subprojects {
             publications {
                 register<MavenPublication>("jar") {
                     from(components["java"])
+                    version = "1.0-SNAPSHOT"
                     pom {
                         name.set("TibiaKt")
                         description.set("Tibia.com parser and client.")
