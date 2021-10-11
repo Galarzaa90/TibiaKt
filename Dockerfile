@@ -8,5 +8,5 @@ EXPOSE 8080
 
 LABEL maintainer="Allan Galarza <allan.galarza@gmail.com>"
 FROM adoptopenjdk/openjdk16:debianslim-jre
-COPY --from=builder ./home/gradle/app/tibiakt-server/build/libs/tibiatk-sever.jar .
-CMD [ "java", "-jar",  "./tibiatk-sever.jar" ]
+COPY --from=builder ./home/gradle/app/tibiakt-server/build/libs/tibiatk-server.jar .
+CMD [ "java", "-jar",  "./tibiatk-server.jar" ]
