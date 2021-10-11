@@ -3,7 +3,6 @@ name: Docker Build
 on:
   push:
     branches:
-      - master
       - dev
       - main
     tags:
@@ -32,7 +31,6 @@ jobs:
             ghcr.io/${{ github.repository }}
             ${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DOCKER_HUB_REPO }}
           tags: |
-            type=ref,event=branch
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}.{{patch}}
             type=semver,pattern={{major}}.{{minor}}
