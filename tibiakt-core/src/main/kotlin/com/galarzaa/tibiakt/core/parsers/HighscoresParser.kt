@@ -27,7 +27,7 @@ object HighscoresParser : Parser<Highscores?> {
             parseHighscoresFilter(formData!!, builder)
             print("")
         }
-        tables["Highscores"]?.apply {
+        tables.get("Highscores")?.apply {
             parseHighscoresTable(this, builder)
             val lastUpdateText = boxContent.selectFirst("span.RightArea")?.cleanText()
                 ?: throw ParsingException("Could not find last update label")

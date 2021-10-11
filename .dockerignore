@@ -1,0 +1,9 @@
+*
+!tibiakt-*/
+!build.gradle.kts
+!publish.gradle.kts
+!gradle.properties
+!gradlew
+!gradlew.bat
+!settings.gradle.kts
+!gradle/

@@ -1,6 +1,10 @@
 val ktorVersion: String by project
 val kotestVersion: String by project
 
+apply {
+    from("${rootDir}/publish.gradle.kts")
+}
+
 plugins {
     kotlin("jvm")
     kotlin("plugin.serialization")
