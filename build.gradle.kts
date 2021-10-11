@@ -36,6 +36,23 @@ subprojects {
             publications {
                 register<MavenPublication>("jar") {
                     from(components["java"])
+                    pom {
+                        name.set("TibiaKt")
+                        description.set("Tibia.com parser and client.")
+                        scm {
+                            connection.set("scm:git:git://github.com/Galarzaa90/TibiaKt.git")
+                            developerConnection.set("scm:git:git://github.com/Galarzaa90/TibiaKt.git")
+                            url.set("https://github.com/Galarzaa90/TibiaKt")
+                        }
+                        developers {
+                            developer {
+                                id.set("Galarzaa")
+                                name.set("Allan Galarza")
+                                url.set("https://galarzaa.com/")
+                            }
+                        }
+
+                    }
                 }
             }
         }
