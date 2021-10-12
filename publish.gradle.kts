@@ -5,8 +5,6 @@ apply(plugin = "signing")
 
 val signingKey: String? by project
 val signingPassword: String? by project
-val sonatypeUsername: String by project
-val sonatypePassword: String by project
 
 configure<SigningExtension> {
     //useInMemoryPgpKeys(signingKey, signingPassword)
@@ -19,30 +17,11 @@ configure<JavaPluginExtension> {
 
 afterEvaluate {
     configure<PublishingExtension> {
-        repositories {
-//            maven {
-//                name = "GitHubPackages"
-//                url = uri("https://maven.pkg.github.com/Galarzaa90/TibiaKt")
-//                credentials {
-//                    username = System.getenv("GITHUB_ACTOR")
-//                    password = System.getenv("GITHUB_TOKEN")
-//                }
-//            }
-//            maven {
-//                val releasesRepoUrl = uri("https://s01.oss.sonatype.org/content/repositories/releases/")
-//                val snapshotsRepoUrl = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
-//                url = snapshotsRepoUrl
-//                credentials {
-//                    username = sonatypeUsername
-//                    password = sonatypePassword
-//                }
-//            }
-        }
         publications {
             register<MavenPublication>("mavenJar") {
                 from(components["java"])
                 version = "1.0-SNAPSHOT"
-                groupId = "com.galarzaa"
+                groupId = Library.group
                 pom {
                     name.set("TibiaKt")
                     description.set("Tibia.com parser and client.")

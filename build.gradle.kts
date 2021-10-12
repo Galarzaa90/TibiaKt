@@ -15,13 +15,14 @@ plugins {
 group = "com.galarzaa"
 version = "1.0-SNAPSHOT"
 
+
 nexusPublishing {
     repositories {
         sonatype {
-            username.set(sonatypeUsername ?: "")
-            password.set(sonatypePassword ?: "")
-            nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
-            snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
+            username.set(sonatypeUsername ?: System.getenv("SONATYPE_USER") ?: "")
+            password.set(sonatypePassword ?: System.getenv("SONATYPE_PASSWORD") ?: "")
+            nexusUrl.set(uri(Repo.releasesUrl))
+            snapshotRepositoryUrl.set(uri(Repo.snapshotsUrl))
         }
     }
 }
