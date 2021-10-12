@@ -11,6 +11,6 @@ import java.time.LocalDate
 data class EventEntry(
     val title: String,
     val description: String,
-    val startDate: LocalDate?,
-    val endDate: LocalDate?,
+    val startDate: LocalDate? = null,
+    val endDate: LocalDate? = null,
 )

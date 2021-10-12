@@ -20,7 +20,7 @@ import java.time.LocalDate
 import kotlin.system.measureTimeMillis
 
 
-class TibiaKtClient {
+open class TibiaKtClient {
     private val client = HttpClient(CIO) {
         ContentEncoding {
             gzip()
@@ -31,7 +31,7 @@ class TibiaKtClient {
         }
     }
 
-    private suspend fun request(
+    suspend fun request(
         method: HttpMethod,
         url: String,
         data: List<Pair<String, String>> = emptyList()
