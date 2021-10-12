@@ -2,8 +2,7 @@ package com.galarzaa.tibiakt.client
 
 import com.galarzaa.tibiakt.client.models.TibiaResponse
 import com.galarzaa.tibiakt.client.models.TimedResponse
-import com.galarzaa.tibiakt.core.enums.NewsCategory
-import com.galarzaa.tibiakt.core.enums.NewsType
+import com.galarzaa.tibiakt.core.enums.*
 import com.galarzaa.tibiakt.core.models.*
 import com.galarzaa.tibiakt.core.parsers.*
 import com.galarzaa.tibiakt.core.utils.*
@@ -21,8 +20,8 @@ import java.time.LocalDate
 import kotlin.system.measureTimeMillis
 
 
-class Client {
-    val client = HttpClient(CIO) {
+class TibiaKtClient {
+    private val client = HttpClient(CIO) {
         ContentEncoding {
             gzip()
             deflate()
@@ -42,7 +41,9 @@ class Client {
             HttpMethod.Post -> client.submitForm(
                 url,
                 formParameters = Parameters.build {
-                    data.forEach { append(it.first, it.second) }
+                    data.forEach {
+                        append(it.first, it.second)
+                    }
                 },
                 encodeInQuery = false
             )
@@ -99,6 +100,24 @@ class Client {
     suspend fun fetchNews(newsId: Int): TibiaResponse<News?> {
         val response = this.request(HttpMethod.Get, getNewsUrl(newsId))
         return parseResponse(response) { NewsParser.fromContent(it, newsId) }
+    }
+
+    suspend fun fetchKillStatistics(world: String): TibiaResponse<KillStatistics> {
+        val response = this.request(HttpMethod.Get, getKillStatisticsUrl(world))
+        return parseResponse(response) { KillStatisticsParser.fromContent(it) }
+    }
+
+    suspend fun fetchHighscoresPage(
+        world: String?,
+        category: HighscoresCategory,
+        vocation: HighscoresProfession = HighscoresProfession.ALL,
+        page: Int = 1,
+        battlEyeType: HighscoresBattlEyeType = HighscoresBattlEyeType.ANY_WORLD,
+        pvpTypes: Set<HighscoresPvpType>? = null
+    ): TibiaResponse<Highscores> {
+        val response =
+            this.request(HttpMethod.Get, getHighscoresUrl(world, category, vocation, page, battlEyeType, pvpTypes))
+        return parseResponse(response) { HighscoresParser.fromContent(it) }
     }
 
     private fun <T> TimedResponse.toTibiaResponse(parsingTime: Float, data: T): TibiaResponse<T> {

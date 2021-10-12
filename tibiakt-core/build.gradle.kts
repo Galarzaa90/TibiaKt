@@ -3,9 +3,7 @@ val ktorVersion: String by project
 val kotestVersion: String by project
 val jsoupVersion: String by project
 
-apply {
-    from("${rootDir}/publish.gradle.kts")
-}
+apply("../publish.gradle.kts")
 
 plugins {
     kotlin("jvm")

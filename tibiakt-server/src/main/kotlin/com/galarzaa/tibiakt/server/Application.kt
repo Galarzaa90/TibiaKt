@@ -1,6 +1,6 @@
 package com.galarzaa.tibiakt.server
 
-import com.galarzaa.tibiakt.client.Client
+import com.galarzaa.tibiakt.client.TibiaKtClient
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.http.*
@@ -11,7 +11,7 @@ import io.ktor.server.cio.*
 import io.ktor.server.engine.*
 
 fun main() {
-    val client = Client()
+    val client = TibiaKtClient()
     embeddedServer(CIO, port = 8080) {
         install(ContentNegotiation) {
             json()
