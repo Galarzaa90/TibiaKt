@@ -1,5 +1,5 @@
-val sonatypeUsername: String by project
-val sonatypePassword: String by project
+val sonatypeUsername: String? by project
+val sonatypePassword: String? by project
 
 plugins {
     java
@@ -18,8 +18,8 @@ version = "1.0-SNAPSHOT"
 nexusPublishing {
     repositories {
         sonatype {
-            username.set(sonatypeUsername)
-            password.set(sonatypePassword)
+            username.set(sonatypeUsername ?: "")
+            password.set(sonatypePassword ?: "")
             nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
             snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
         }

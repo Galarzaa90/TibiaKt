@@ -10,7 +10,7 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":tibiakt-core"))
+    api(project(":tibiakt-core"))
     implementation("io.ktor:ktor-client-encoding:$ktorVersion")
     implementation("io.ktor:ktor-client-cio:$ktorVersion")
     implementation("io.ktor:ktor-client-core:$ktorVersion")
