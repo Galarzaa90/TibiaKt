@@ -88,6 +88,9 @@ open class TibiaKtClient {
         return parseResponse(response) { GuildsSectionParser.fromContent(it) }
     }
 
+    /**
+     * Fetch the news for a given interval.
+     */
     suspend fun fetchRecentNews(
         startDate: LocalDate,
         endDate: LocalDate,
@@ -99,6 +102,9 @@ open class TibiaKtClient {
         return parseResponse(response) { NewsArchiveParser.fromContent(it) }
     }
 
+    /**
+     * Fetch the news from today to the last provided days.
+     */
     suspend fun fetchRecentNews(
         days: Int = 30,
         categories: Set<NewsCategory>? = null,
@@ -128,14 +134,25 @@ open class TibiaKtClient {
         return parseResponse(response) { HighscoresParser.fromContent(it) }
     }
 
+    /**
+     * Fetch the events schedule for a specific year and month
+     */
     suspend fun fetchEventsSchedule(yearMonth: YearMonth): TibiaResponse<EventsSchedule> {
         val response =
             this.request(HttpMethod.Get, getEventsScheduleUrl(yearMonth))
         return parseResponse(response) { EventsScheduleParser.fromContent(it) }
     }
 
+    /**
+     * Fetch the events schedule for the current month.
+     */
     suspend fun fetchEventsSchedule() = fetchEventsSchedule(YearMonth.now())
+
+    /**
+     * Fetch the events schedule for a specific year and month
+     */
     suspend fun fetchEventsSchedule(year: Int, month: Int) = fetchEventsSchedule(YearMonth.of(year, month))
+
 
     suspend fun fetchHousesSection(
         world: String,
