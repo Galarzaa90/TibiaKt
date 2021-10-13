@@ -1,4 +1,4 @@
-package com.galarzaa.tibiakt.core
+package com.galarzaa.tibiakt.core.utils
 
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.descriptors.PrimitiveKind

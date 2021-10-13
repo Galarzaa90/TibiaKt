@@ -1,6 +1,5 @@
 package com.galarzaa.tibiakt.core.parsers
 
-import com.galarzaa.tibiakt.core.ParsingException
 import com.galarzaa.tibiakt.core.builders.HighscoresBuilder
 import com.galarzaa.tibiakt.core.enums.HighscoresPvpType
 import com.galarzaa.tibiakt.core.enums.IntEnum

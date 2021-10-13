@@ -130,6 +130,18 @@ open class TibiaKtClient {
     suspend fun fetchEventsSchedule() = fetchEventsSchedule(YearMonth.now())
     suspend fun fetchEventsSchedule(year: Int, month: Int) = fetchEventsSchedule(YearMonth.of(year, month))
 
+    suspend fun fetchHousesSection(
+        world: String,
+        town: String,
+        type: HouseType? = null,
+        status: HouseStatus? = null,
+        order: HouseOrder? = null
+    ): TibiaResponse<HousesSection> {
+        val response =
+            this.request(HttpMethod.Get, getHousesSectionUrl(world, town, type, status, order))
+        return parseResponse(response) { HousesSectionParser.fromContent(it) }
+    }
+
     private fun <T> TimedResponse.toTibiaResponse(parsingTime: Float, data: T): TibiaResponse<T> {
         val isCached = original.headers["CF-Cache-Status"] == "HIT"
         val age = original.headers["Age"]?.toInt() ?: 0

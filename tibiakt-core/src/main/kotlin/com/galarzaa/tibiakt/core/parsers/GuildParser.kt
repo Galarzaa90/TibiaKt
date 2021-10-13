@@ -1,14 +1,9 @@
 package com.galarzaa.tibiakt.core.parsers
 
-import com.galarzaa.tibiakt.core.ParsingException
 import com.galarzaa.tibiakt.core.builders.GuildBuilder
 import com.galarzaa.tibiakt.core.enums.Vocation
 import com.galarzaa.tibiakt.core.models.Guild
-import com.galarzaa.tibiakt.core.parseTibiaDate
-import com.galarzaa.tibiakt.core.utils.clean
-import com.galarzaa.tibiakt.core.utils.nullIfBlank
-import com.galarzaa.tibiakt.core.utils.remove
-import com.galarzaa.tibiakt.core.utils.wholeCleanText
+import com.galarzaa.tibiakt.core.utils.*
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element

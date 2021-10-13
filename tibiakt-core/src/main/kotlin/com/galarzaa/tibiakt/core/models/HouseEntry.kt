@@ -2,9 +2,9 @@
 
 package com.galarzaa.tibiakt.core.models
 
-import com.galarzaa.tibiakt.core.DurationSerializer
 import com.galarzaa.tibiakt.core.enums.HouseStatus
 import com.galarzaa.tibiakt.core.enums.HouseType
+import com.galarzaa.tibiakt.core.utils.DurationSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import java.time.Duration

@@ -1,8 +1,8 @@
 package com.galarzaa.tibiakt.core.parsers
 
-import com.galarzaa.tibiakt.core.ParsingException
 import com.galarzaa.tibiakt.core.builders.GuildsSectionBuilder
 import com.galarzaa.tibiakt.core.models.GuildsSection
+import com.galarzaa.tibiakt.core.utils.ParsingException
 import com.galarzaa.tibiakt.core.utils.cleanText
 import com.galarzaa.tibiakt.core.utils.offsetStart
 import org.jsoup.Jsoup

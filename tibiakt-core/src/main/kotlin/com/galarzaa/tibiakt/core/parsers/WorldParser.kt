@@ -1,13 +1,10 @@
 package com.galarzaa.tibiakt.core.parsers
 
-import com.galarzaa.tibiakt.core.ParsingException
 import com.galarzaa.tibiakt.core.builders.WorldBuilder
 import com.galarzaa.tibiakt.core.enums.BattlEyeType
 import com.galarzaa.tibiakt.core.enums.TransferType
 import com.galarzaa.tibiakt.core.enums.Vocation
 import com.galarzaa.tibiakt.core.models.World
-import com.galarzaa.tibiakt.core.parseTibiaDateTime
-import com.galarzaa.tibiakt.core.parseTibiaFullDate
 import com.galarzaa.tibiakt.core.utils.*
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document

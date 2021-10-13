@@ -1,6 +1,5 @@
-package com.galarzaa.tibiakt.core
+package com.galarzaa.tibiakt.core.utils
 
-import com.galarzaa.tibiakt.core.utils.clean
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element

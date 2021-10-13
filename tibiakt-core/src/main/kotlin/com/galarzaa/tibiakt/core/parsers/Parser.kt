@@ -1,6 +1,6 @@
 package com.galarzaa.tibiakt.core.parsers
 
-import com.galarzaa.tibiakt.core.ParsingException
+import com.galarzaa.tibiakt.core.utils.ParsingException
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element

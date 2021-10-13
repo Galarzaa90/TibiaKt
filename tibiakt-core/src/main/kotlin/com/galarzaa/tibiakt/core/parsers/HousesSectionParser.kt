@@ -1,6 +1,5 @@
 package com.galarzaa.tibiakt.core.parsers
 
-import com.galarzaa.tibiakt.core.ParsingException
 import com.galarzaa.tibiakt.core.builders.HousesSectionBuilder
 import com.galarzaa.tibiakt.core.enums.HouseStatus
 import com.galarzaa.tibiakt.core.enums.StringEnum

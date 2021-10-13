@@ -2,11 +2,11 @@
 
 package com.galarzaa.tibiakt.core.models
 
-import com.galarzaa.tibiakt.core.InstantSerializer
 import com.galarzaa.tibiakt.core.enums.HighscoresBattlEyeType
 import com.galarzaa.tibiakt.core.enums.HighscoresCategory
 import com.galarzaa.tibiakt.core.enums.HighscoresProfession
 import com.galarzaa.tibiakt.core.enums.HighscoresPvpType
+import com.galarzaa.tibiakt.core.utils.InstantSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import java.time.Instant

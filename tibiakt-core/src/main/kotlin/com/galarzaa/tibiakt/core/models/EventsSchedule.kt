@@ -2,7 +2,7 @@
 
 package com.galarzaa.tibiakt.core.models
 
-import com.galarzaa.tibiakt.core.YearMonthSerializer
+import com.galarzaa.tibiakt.core.utils.YearMonthSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import java.time.YearMonth

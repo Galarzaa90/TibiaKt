@@ -1,12 +1,9 @@
 package com.galarzaa.tibiakt.core.parsers
 
-import com.galarzaa.tibiakt.core.ParsingException
 import com.galarzaa.tibiakt.core.builders.NewsArchiveBuilder
 import com.galarzaa.tibiakt.core.enums.NewsCategory
 import com.galarzaa.tibiakt.core.enums.NewsType
-import com.galarzaa.tibiakt.core.getLinkInformation
 import com.galarzaa.tibiakt.core.models.NewsArchive
-import com.galarzaa.tibiakt.core.parseTibiaDate
 import com.galarzaa.tibiakt.core.utils.*
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document

@@ -1,7 +1,6 @@
 package com.galarzaa.tibiakt.core.parsers
 
 
-import com.galarzaa.tibiakt.core.ParsingException
 import com.galarzaa.tibiakt.core.builders.KillStatisticsBuilder
 import com.galarzaa.tibiakt.core.models.KillStatistics
 import com.galarzaa.tibiakt.core.utils.*

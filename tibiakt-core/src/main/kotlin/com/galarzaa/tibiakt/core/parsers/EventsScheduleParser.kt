@@ -1,13 +1,9 @@
 package com.galarzaa.tibiakt.core.parsers
 
-import com.galarzaa.tibiakt.core.ParsingException
 import com.galarzaa.tibiakt.core.builders.EventEntryBuilder
 import com.galarzaa.tibiakt.core.builders.EventsScheduleBuilder
 import com.galarzaa.tibiakt.core.models.EventsSchedule
-import com.galarzaa.tibiakt.core.parsePopup
-import com.galarzaa.tibiakt.core.utils.cleanText
-import com.galarzaa.tibiakt.core.utils.columns
-import com.galarzaa.tibiakt.core.utils.remove
+import com.galarzaa.tibiakt.core.utils.*
 import org.jsoup.nodes.Element
 import java.time.LocalDate
 import java.time.YearMonth

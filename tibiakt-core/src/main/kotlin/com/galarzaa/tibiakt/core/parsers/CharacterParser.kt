@@ -1,14 +1,10 @@
 package com.galarzaa.tibiakt.core.parsers
 
-import com.galarzaa.tibiakt.core.*
 import com.galarzaa.tibiakt.core.builders.CharacterBuilder
 import com.galarzaa.tibiakt.core.enums.Vocation
 import com.galarzaa.tibiakt.core.models.Character
 import com.galarzaa.tibiakt.core.models.Killer
-import com.galarzaa.tibiakt.core.utils.clean
-import com.galarzaa.tibiakt.core.utils.parseTables
-import com.galarzaa.tibiakt.core.utils.remove
-import com.galarzaa.tibiakt.core.utils.splitList
+import com.galarzaa.tibiakt.core.utils.*
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
