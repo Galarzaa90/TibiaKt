@@ -8,6 +8,7 @@ import com.galarzaa.tibiakt.core.parsePopup
 import com.galarzaa.tibiakt.core.utils.cleanText
 import com.galarzaa.tibiakt.core.utils.columns
 import com.galarzaa.tibiakt.core.utils.remove
+import org.jsoup.nodes.Element
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
@@ -21,32 +22,32 @@ object EventsScheduleParser : Parser<EventsSchedule> {
         val yearMonth =
             YearMonth.parse(dateBlock.cleanText().remove("»").remove("«"), DateTimeFormatter.ofPattern("MMMM yyyy"))
         builder.yearMonth(yearMonth)
+        parseCalendar(builder, boxContent, yearMonth)
+        return builder.build()
+    }
+
+    private fun parseCalendar(
+        builder: EventsScheduleBuilder,
+        boxContent: Element,
+        yearMonth: YearMonth
+    ) {
+        var currentMonth = yearMonth
         val calendarTable = boxContent.selectFirst("#eventscheduletable")
         var onGoingDay = 1
         var firstDay = true
-        var month = yearMonth.month.value
-        var year = yearMonth.year
-        val ongoingEvents = mutableListOf<EventEntryBuilder>()
+        val onGoingEvents: MutableList<EventEntryBuilder> = mutableListOf()
         for (cell in calendarTable.columns()) {
             val dayDiv = cell.selectFirst("div")!!
             val day = dayDiv.cleanText().toInt()
             val spans = cell.select("span.HelperDivIndicator")
             // The calendar might start with a day from the previous month
             if (onGoingDay < day)
-                month--
+                currentMonth = currentMonth.minusMonths(1)
             if (day < onGoingDay) {
-                month++
-            }
-            if (month > 12) {
-                month = 1
-                year++
-            }
-            if (month < 1) {
-                month = 12
-                year--
+                currentMonth = currentMonth.plusMonths(1)
             }
             onGoingDay = day + 1
-            val todayEvents = mutableListOf<EventEntryBuilder>()
+            val todayEvents: MutableList<EventEntryBuilder> = mutableListOf()
             for (popup in spans) {
                 val (_, popupContent) = parsePopup(popup.attr("onmouseover"))
                 val divs = popupContent.select("div")
@@ -59,28 +60,27 @@ object EventsScheduleParser : Parser<EventsSchedule> {
                         .description(description)
                     todayEvents.add(event)
                     // If this is not an event that was already ongoing from a previous day, add to list
-                    if (!ongoingEvents.contains(event)) {
+                    if (!onGoingEvents.contains(event)) {
                         // Only add start date if this is not the first day of the calendar.
                         // If it's the first day, we have no way to know if the event started that day or before
                         if (!firstDay) {
-                            event.startDate(LocalDate.of(year, month, day))
+                            event.startDate(LocalDate.of(currentMonth.year, currentMonth.month, day))
                         }
-                        ongoingEvents.add(event)
+                        onGoingEvents.add(event)
                     }
                 }
             }
             // Check which of the ongoing events did not show up today, meaning it has ended now
-            for (pendingEvent in ongoingEvents.toList()) {
+            for (pendingEvent in onGoingEvents.toList()) {
                 if (!todayEvents.contains(pendingEvent)) {
                     //If it didn't show up today, it means it ended yesterday.
-                    pendingEvent.endDate(LocalDate.of(year, month, day).minusDays(1))
+                    pendingEvent.endDate(LocalDate.of(currentMonth.year, currentMonth.month, day).minusDays(1))
                     builder.addEntry(pendingEvent.build())
-                    ongoingEvents.remove(pendingEvent)
+                    onGoingEvents.remove(pendingEvent)
                 }
             }
             firstDay = false
         }
-        return builder.build()
     }
 
 }
