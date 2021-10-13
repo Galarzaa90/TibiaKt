@@ -1,5 +1,7 @@
 package com.galarzaa.tibiakt.core.models
 
+import com.galarzaa.tibiakt.core.enums.HouseStatus
+import com.galarzaa.tibiakt.core.enums.HouseType
 import kotlinx.serialization.Serializable
 
 @Serializable

@@ -3,6 +3,8 @@
 package com.galarzaa.tibiakt.core.models
 
 import com.galarzaa.tibiakt.core.InstantSerializer
+import com.galarzaa.tibiakt.core.enums.HouseStatus
+import com.galarzaa.tibiakt.core.enums.HouseType
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import java.time.Instant

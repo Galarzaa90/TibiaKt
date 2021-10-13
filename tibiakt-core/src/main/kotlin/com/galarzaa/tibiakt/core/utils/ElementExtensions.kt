@@ -59,6 +59,13 @@ internal fun Element.formData(): FormData {
         if (it.hasAttr("checked"))
             dataMultiple.getOrPut(name) { mutableListOf() }.add(value)
     }
+    select("input[type=radio]").forEach {
+        val name = it.attr("name")
+        val value = it.attr("value")
+        availableOptions.getOrPut(name) { mutableListOf() }.add(value)
+        if (it.hasAttr("checked"))
+            data[name] = value
+    }
     return FormData(data, dataMultiple, availableOptions)
 }
 
@@ -83,7 +90,7 @@ internal fun Element.parsePagination(): PaginationData {
         pagesDiv.selectFirst(".CurrentPageLink") ?: throw ParsingException("Could not parse pagination info")
     val pageLinks = pagesDiv.select(".PageLink")
     val firstOrLastPages = pagesDiv.select(".FirstOrLastElement")
-    val totalPages = if (!firstOrLastPages.isNullOrEmpty()) {
+    val totalPages = if (!firstOrLastPages.isEmpty()) {
         val lastPageLink = firstOrLastPages.last()?.selectFirst("a")
         if (lastPageLink != null) {
             pageRegex.find(lastPageLink.attr("href"))?.let {
