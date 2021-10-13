@@ -39,6 +39,8 @@ internal fun Element.cleanText() = text().clean()
 internal fun Element.wholeCleanText() = wholeText().clean()
 
 internal fun Element.formData(): FormData {
+    if (this.tagName() != "form")
+        throw IllegalArgumentException("receiver must be a form element")
     val data = mutableMapOf<String, String?>()
     val dataMultiple = mutableMapOf<String, MutableList<String>>()
     val availableOptions = mutableMapOf<String, MutableList<String>>()
@@ -66,7 +68,7 @@ internal fun Element.formData(): FormData {
         if (it.hasAttr("checked"))
             data[name] = value
     }
-    return FormData(data, dataMultiple, availableOptions)
+    return FormData(data, dataMultiple, availableOptions, action = attr("action"), method = attr("method"))
 }
 
 /**
@@ -74,11 +76,15 @@ internal fun Element.formData(): FormData {
  * @property data Mapping of form fields to their selected value.
  * @property dataMultiple Mapping of form fields that might have multiple values.
  * @property availableOptions Mapping of the available options for selection in the form.
+ * @property action Where the form would be submitted to.
+ * @property method The HTTP method used
  */
 internal data class FormData(
     val data: Map<String, String?> = emptyMap(),
     val dataMultiple: Map<String, List<String>> = emptyMap(),
-    val availableOptions: Map<String, List<String>> = emptyMap()
+    val availableOptions: Map<String, List<String>> = emptyMap(),
+    val action: String? = null,
+    val method: String? = null,
 )
 
 private val pageRegex = Regex("""page=(\d+)""")

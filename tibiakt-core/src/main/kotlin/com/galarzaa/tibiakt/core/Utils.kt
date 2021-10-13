@@ -12,7 +12,7 @@ import java.time.LocalDateTime
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 
-val queryStringRegex = Regex("([^&=]+)=([^&]*)")
+private val queryStringRegex = Regex("([^&=]+)=([^&]*)")
 
 /**
  * Parses a string containing date and time from Tibia.com into an Instant instance.

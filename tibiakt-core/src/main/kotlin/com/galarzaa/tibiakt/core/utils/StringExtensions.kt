@@ -35,3 +35,8 @@ fun String.parseInteger(): Int = remove(",").trim().toInt()
 fun String.parseLong(): Long = remove(",").trim().toLong()
 
 fun String?.nullIfBlank(): String? = if (isNullOrBlank()) null else this
+
+fun String.parseThousandPrefix(): Int {
+    val kCount = filter { it == 'k' || it == 'K' }.count()
+    return remove("k", true).parseInteger() * (kCount * 1000)
+}
