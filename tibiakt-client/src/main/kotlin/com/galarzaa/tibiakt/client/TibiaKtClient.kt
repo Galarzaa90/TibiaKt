@@ -89,14 +89,21 @@ open class TibiaKtClient {
     }
 
     suspend fun fetchRecentNews(
-        days: Int = 30,
+        startDate: LocalDate,
+        endDate: LocalDate,
         categories: Set<NewsCategory>? = null,
         types: Set<NewsType>? = null
     ): TibiaResponse<NewsArchive> {
-        val data = NewsArchive.getFormData(LocalDate.now().minusDays(days.toLong()), LocalDate.now(), categories, types)
+        val data = NewsArchive.getFormData(startDate, endDate, categories, types)
         val response = this.request(HttpMethod.Post, getNewsArchiveUrl(), data)
         return parseResponse(response) { NewsArchiveParser.fromContent(it) }
     }
+
+    suspend fun fetchRecentNews(
+        days: Int = 30,
+        categories: Set<NewsCategory>? = null,
+        types: Set<NewsType>? = null
+    ) = fetchRecentNews(LocalDate.now().minusDays(days.toLong()), LocalDate.now(), categories, types)
 
     suspend fun fetchNews(newsId: Int): TibiaResponse<News?> {
         val response = this.request(HttpMethod.Get, getNewsUrl(newsId))
