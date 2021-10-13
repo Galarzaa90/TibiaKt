@@ -6,8 +6,7 @@ import java.time.LocalDate
 import java.time.YearMonth
 
 class EventsScheduleBuilder {
-    var yearMonth: YearMonth? = null
-        private set
+    private var yearMonth: YearMonth? = null
     private val entries: MutableList<EventEntry> = mutableListOf()
 
     fun yearMonth(yearMonth: YearMonth) = apply { this.yearMonth = yearMonth }

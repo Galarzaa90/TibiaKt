@@ -5,6 +5,7 @@ import com.galarzaa.tibiakt.core.enums.HighscoresCategory
 import com.galarzaa.tibiakt.core.enums.HighscoresProfession
 import com.galarzaa.tibiakt.core.enums.HighscoresPvpType
 import java.net.URLEncoder
+import java.time.YearMonth
 
 private typealias P<A, B> = Pair<A, B>
 
@@ -54,3 +55,11 @@ fun getHighscoresUrl(
 )
 
 fun getKillStatisticsUrl(world: String) = getTibiaUrl("community", P("subtopic", "killstatistics"), P("world", world))
+
+// https://www.tibia.com/news/?subtopic=eventcalendar&calendarmonth=9&calendaryear=2021
+fun getEventsScheduleUrl(yearMonth: YearMonth) = getTibiaUrl(
+    "news",
+    P("subtopic", "eventcalendar"),
+    P("calendarmonth", yearMonth.month.value),
+    P("calendarYear", yearMonth.year)
+)

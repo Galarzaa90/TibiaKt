@@ -17,6 +17,7 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.util.date.*
 import java.time.LocalDate
+import java.time.YearMonth
 import kotlin.system.measureTimeMillis
 
 
@@ -119,6 +120,15 @@ open class TibiaKtClient {
             this.request(HttpMethod.Get, getHighscoresUrl(world, category, vocation, page, battlEyeType, pvpTypes))
         return parseResponse(response) { HighscoresParser.fromContent(it) }
     }
+
+    suspend fun fetchEventsSchedule(yearMonth: YearMonth): TibiaResponse<EventsSchedule> {
+        val response =
+            this.request(HttpMethod.Get, getEventsScheduleUrl(yearMonth))
+        return parseResponse(response) { EventsScheduleParser.fromContent(it) }
+    }
+
+    suspend fun fetchEventsSchedule() = fetchEventsSchedule(YearMonth.now())
+    suspend fun fetchEventsSchedule(year: Int, month: Int) = fetchEventsSchedule(YearMonth.of(year, month))
 
     private fun <T> TimedResponse.toTibiaResponse(parsingTime: Float, data: T): TibiaResponse<T> {
         val isCached = original.headers["CF-Cache-Status"] == "HIT"

@@ -27,15 +27,22 @@ object HighscoresParser : Parser<Highscores?> {
             parseHighscoresFilter(formData!!, builder)
             print("")
         }
-        tables.get("Highscores")?.apply {
+        tables.getContaining("HighscoresLast")?.apply {
             parseHighscoresTable(this, builder)
-            val lastUpdateText = boxContent.selectFirst("span.RightArea")?.cleanText()
-                ?: throw ParsingException("Could not find last update label")
-            numericMatch.find(lastUpdateText)?.apply {
-                val minutes = this.groups[0]!!.value.toInt()
-                builder.lastUpdate(Instant.now().minusSeconds(60L * minutes))
-            }
         }
+        val lastUpdateText = boxContent.selectFirst("span.RightArea")?.cleanText()
+            ?: throw ParsingException("Could not find last update label")
+        numericMatch.find(lastUpdateText)?.apply {
+            val minutes = this.groups[0]!!.value.toInt()
+            builder.lastUpdate(Instant.now().minusSeconds(60L * minutes))
+        }
+        val paginationData =
+            boxContent.selectFirst("small")?.parsePagination()
+                ?: throw ParsingException("could not find pagination block")
+        builder
+            .currentPage(paginationData.currentPage)
+            .totalPages(paginationData.totalPages)
+            .resultsCount(paginationData.resultsCount)
         return builder.build()
     }
 
@@ -70,11 +77,5 @@ object HighscoresParser : Parser<Highscores?> {
                 loyaltyTitle,
             )
         }
-        val paginationData =
-            element.selectFirst("small")?.parsePagination() ?: throw ParsingException("could not find pagination block")
-        builder
-            .currentPage(paginationData.currentPage)
-            .totalPages(paginationData.totalPages)
-            .resultsCount(paginationData.resultsCount)
     }
 }

@@ -1,7 +1,7 @@
 package com.galarzaa.tibiakt.core.utils
 
-import kotlin.math.max
+import kotlin.math.min
 
 fun <T> List<T>.offsetStart(offset: Int): List<T> {
-    return subList(max(offset, size), size)
+    return subList(min(offset, size), size)
 }
