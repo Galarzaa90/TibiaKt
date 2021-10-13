@@ -26,7 +26,7 @@ object HousesSectionParser : Parser<HousesSection> {
         tables.getContaining("Available")?.apply {
             for (row in rows().offsetStart(1)) {
                 val columns = row.columns()
-                if (columns.size != 6)
+                if (columns.size != 5)
                     break
                 val statusText = columns[3].cleanText()
                 var timeLeft: Duration? = null
