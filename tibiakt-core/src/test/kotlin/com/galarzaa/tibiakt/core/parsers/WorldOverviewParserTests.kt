@@ -1,7 +1,7 @@
 package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.TestResources
-import com.galarzaa.tibiakt.core.utils.totalOnline
+import com.galarzaa.tibiakt.core.models.totalOnline
 import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.inspectors.forAtLeast

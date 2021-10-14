@@ -6,6 +6,7 @@ import com.galarzaa.tibiakt.core.utils.LocalDateSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import java.time.LocalDate
+import java.time.Period
 
 @Serializable
 data class EventEntry(
@@ -14,3 +15,6 @@ data class EventEntry(
     val startDate: LocalDate? = null,
     val endDate: LocalDate? = null,
 )
+
+val EventEntry.duration: Period?
+    get() = if (startDate != null && endDate != null) Period.between(startDate, endDate) else null

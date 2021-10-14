@@ -4,9 +4,12 @@ package com.galarzaa.tibiakt.core.models
 
 import com.galarzaa.tibiakt.core.enums.Vocation
 import com.galarzaa.tibiakt.core.utils.InstantSerializer
+import com.galarzaa.tibiakt.core.utils.getCharacterUrl
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import java.time.Instant
+import kotlin.math.ceil
+import kotlin.math.floor
 
 
 /**
@@ -43,3 +46,19 @@ data class Character(
 ) : BaseCharacter
 
 
+val Character.shareRange: IntRange
+    get() {
+        val minLevel = floor((level / 3.0) * 2).toInt()
+        val maxLevel = ceil((level / 2.0) * 3).toInt() + if (level % 2 == 0) 1 else 0
+        return minLevel..maxLevel
+    }
+val Character.scheduledForDeletion: Boolean
+    get() = deletionDate != null
+
+/**
+ * URL to the character this character is married to, if any.
+ */
+val Character.marriedToUrl: String?
+    get() {
+        return getCharacterUrl(marriedTo ?: return null)
+    }

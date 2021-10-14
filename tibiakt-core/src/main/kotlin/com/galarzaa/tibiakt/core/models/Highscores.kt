@@ -7,6 +7,7 @@ import com.galarzaa.tibiakt.core.enums.HighscoresCategory
 import com.galarzaa.tibiakt.core.enums.HighscoresProfession
 import com.galarzaa.tibiakt.core.enums.HighscoresPvpType
 import com.galarzaa.tibiakt.core.utils.InstantSerializer
+import com.galarzaa.tibiakt.core.utils.getHighscoresUrl
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import java.time.Instant
@@ -25,3 +26,10 @@ data class Highscores(
     val entries: List<HighscoresEntry> = emptyList()
 )
 
+fun Highscores.getPageUrl(page: Int) = getHighscoresUrl(world, category, vocation, page, battlEyeType, worldTypes)
+val Highscores.url
+    get() = getPageUrl(currentPage)
+val Highscores.nextPageUrl: String?
+    get() = if (currentPage == totalPages) null else getPageUrl(currentPage + 1)
+val Highscores.previousPageUrl: String?
+    get() = if (currentPage == 0) null else getPageUrl(currentPage - 1)

@@ -4,6 +4,7 @@ package com.galarzaa.tibiakt.core.models
 
 import com.galarzaa.tibiakt.core.enums.NewsCategory
 import com.galarzaa.tibiakt.core.utils.LocalDateSerializer
+import com.galarzaa.tibiakt.core.utils.getThreadUrl
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import java.time.LocalDate
@@ -29,3 +30,6 @@ data class News(
     val content: String,
     val threadId: Int?,
 ) : BaseNews
+
+val News.threadUrl
+    get() = if (threadId != null) getThreadUrl(threadId) else null

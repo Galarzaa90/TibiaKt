@@ -3,6 +3,7 @@ package com.galarzaa.tibiakt.core.models
 import com.galarzaa.tibiakt.core.enums.HouseOrder
 import com.galarzaa.tibiakt.core.enums.HouseStatus
 import com.galarzaa.tibiakt.core.enums.HouseType
+import com.galarzaa.tibiakt.core.utils.getHousesSectionUrl
 import kotlinx.serialization.Serializable
 
 /**
@@ -24,3 +25,6 @@ data class HousesSection(
     val order: HouseOrder,
     val entries: List<HouseEntry>,
 )
+
+val HousesSection.url
+    get() = getHousesSectionUrl(world, town, type, status, order)
