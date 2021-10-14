@@ -31,13 +31,17 @@ fun String.clean(): String {
 
 
 fun String.parseInteger(): Int = remove(",").trim().toInt()
+fun String.parseLong(): Long = remove(",").trim().toLong()
 fun String.findInteger(): Int = filter { it.isDigit() }.toInt()
 
-fun String.parseLong(): Long = remove(",").trim().toLong()
+/**
+ * Return null if the string is blank
+ */
+fun String?.nullIfBlank(): String? = takeIf { !it.isNullOrBlank() }
 
-fun String?.nullIfBlank(): String? = if (isNullOrBlank()) null else this
-
-fun String.parseThousandPrefix(): Int {
-    val kCount = filter { it == 'k' || it == 'K' }.count()
-    return remove("k", true).parseInteger() * (kCount * 1000)
+/**
+ *  Parses strings with numbers using "k" as a thousand suffix
+ */
+fun String.parseThousandSuffix(): Int {
+    return remove("k", true).parseInteger() * (count { it == 'k' || it == 'K' } * 1000)
 }

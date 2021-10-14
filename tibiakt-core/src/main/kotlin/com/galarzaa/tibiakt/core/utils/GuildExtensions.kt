@@ -22,5 +22,11 @@ val Guild.membersByRank
 val Guild.memberCount
     get() = members.size
 
+val Guild.onlineMembers
+    get() = members.filter { it.isOnline }
+
+val Guild.onlineCount
+    get() = onlineMembers.count()
+
 val GuildsSection.url
     get() = getWorldGuilds(world)

@@ -13,7 +13,7 @@ object HouseParser : Parser<House?> {
         val (title, sizeStr, rentStr, world) = descriptionRow.select("b").map { it.cleanText() }
         builder.name(title)
             .size(sizeStr.remove("square meters").clean().toInt())
-            .rent(rentStr.remove("gold").parseThousandPrefix())
+            .rent(rentStr.remove("gold").parseThousandSuffix())
             .world(world)
         val descriptionLines = descriptionRow.replaceBrs().wholeText().lines()
         builder.beds(descriptionLines[1].findInteger())

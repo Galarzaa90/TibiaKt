@@ -45,7 +45,7 @@ object HousesSectionParser : Parser<HousesSection?> {
                 builder.addEntry(
                     name = columns.first()!!.cleanText(),
                     size = columns[1].cleanText().remove("sqm").parseInteger(),
-                    rent = columns[2].cleanText().remove("gold").parseThousandPrefix(),
+                    rent = columns[2].cleanText().remove("gold").parseThousandSuffix(),
                     status = if (statusText.contains("auctioned")) HouseStatus.AUCTIONED else HouseStatus.RENTED,
                     houseId = columns[4].selectFirst("input[name=houseid]")?.`val`()?.toInt() ?: throw ParsingException(
                         "could not find view button for house"
