@@ -160,7 +160,7 @@ open class TibiaKtClient {
         type: HouseType? = null,
         status: HouseStatus? = null,
         order: HouseOrder? = null
-    ): TibiaResponse<HousesSection> {
+    ): TibiaResponse<HousesSection?> {
         val response =
             this.request(HttpMethod.Get, getHousesSectionUrl(world, town, type, status, order))
         return parseResponse(response) { HousesSectionParser.fromContent(it) }

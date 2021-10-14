@@ -17,7 +17,7 @@ internal fun Application.configureRouting(client: TibiaKtClient) {
         get<GetWorld> { (name) -> call.respondOrNotFound(client.fetchWorld(name)) }
         get<GetGuild> { (name) -> call.respondOrNotFound(client.fetchGuild(name)) }
         get<GetWorld.Guilds> { (params) -> call.respondOrNotFound(client.fetchWorldGuilds(params.name)) }
-        get<GetNewsArchive> { it ->
+        get<GetNewsArchive> {
             if (it.start != null && it.end != null) {
                 call.respond(client.fetchRecentNews(it.start, it.end))
             } else if (it.days != null) {
@@ -39,7 +39,9 @@ internal fun Application.configureRouting(client: TibiaKtClient) {
         get<GetKillStatistics> { (world) -> call.respondOrNotFound(client.fetchKillStatistics(world)) }
         get<GetEventsSchedule> { (year, month) -> call.respondOrNotFound(client.fetchEventsSchedule(year, month)) }
         get("/eventsSchedule") { call.respondOrNotFound(client.fetchEventsSchedule()) }
-
+        get<GetWorldHouses> {
+            call.respondOrNotFound(client.fetchHousesSection(it.world, it.town, it.type, it.status, it.order))
+        }
     }
 
 }

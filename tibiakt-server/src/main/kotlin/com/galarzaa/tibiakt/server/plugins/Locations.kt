@@ -2,6 +2,9 @@
 
 package com.galarzaa.tibiakt.server.plugins
 
+import com.galarzaa.tibiakt.core.enums.HouseOrder
+import com.galarzaa.tibiakt.core.enums.HouseStatus
+import com.galarzaa.tibiakt.core.enums.HouseType
 import io.ktor.application.*
 import io.ktor.locations.*
 import java.time.LocalDate
@@ -23,7 +26,7 @@ data class GetWorld(val name: String) {
 data class GetGuild(val name: String)
 
 @Location("/news")
-data class GetNewsArchive(val start: LocalDate?, val end: LocalDate?, val days: Int?)
+data class GetNewsArchive(val start: LocalDate? = null, val end: LocalDate? = null, val days: Int? = null)
 
 @Location("/news/{newsId}")
 data class GetNews(val newsId: Int) {
@@ -31,8 +34,17 @@ data class GetNews(val newsId: Int) {
     data class Html(val parent: GetNews)
 }
 
-@Location("killStatistics/{world}")
+@Location("/killStatistics/{world}")
 data class GetKillStatistics(val world: String)
 
-@Location("eventsSchedule/{year}/{month}")
+@Location("/eventsSchedule/{year}/{month}")
 data class GetEventsSchedule(val year: Int, val month: Int)
+
+@Location("/houses/{world}/{town}")
+data class GetWorldHouses(
+    val world: String,
+    val town: String,
+    val type: HouseType? = null,
+    val status: HouseStatus? = null,
+    val order: HouseOrder? = null
+)
