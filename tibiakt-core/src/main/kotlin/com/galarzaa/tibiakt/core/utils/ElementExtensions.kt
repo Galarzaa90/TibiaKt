@@ -1,6 +1,7 @@
 package com.galarzaa.tibiakt.core.utils
 
 import org.jsoup.nodes.Element
+import org.jsoup.nodes.TextNode
 import org.jsoup.select.Elements
 
 internal fun Element.parseTables(contentTableSelector: String = "table.TableContent"): Map<String, Elements> {
@@ -36,6 +37,14 @@ internal fun Element.columnsText(): List<String> = columns().map { it.cleanText(
 
 internal fun Element.cleanText() = text().clean()
 internal fun Element.wholeCleanText() = wholeText().clean()
+
+internal fun ArrayList<Element>.replaceBr() {
+    forEach { it.replaceBrs() }
+}
+
+internal fun Element.replaceBrs() = apply {
+    select("br").forEach { it.replaceWith(TextNode("\n")) }
+}
 
 internal fun Element.formData(): FormData {
     if (this.tagName() != "form")

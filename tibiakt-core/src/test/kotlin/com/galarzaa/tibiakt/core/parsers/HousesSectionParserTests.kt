@@ -14,7 +14,8 @@ import io.kotest.matchers.shouldNotBe
 class HousesSectionParserTests : StringSpec({
     "Parse house list"{
         val housesSection = HousesSectionParser.fromContent(getResource("houses/houseList.txt"))
-        housesSection.world shouldBe "Ardera"
+        housesSection shouldNotBe null
+        housesSection!!.world shouldBe "Ardera"
         housesSection.town shouldBe "Carlin"
         housesSection.status shouldBe null
         housesSection.type shouldBe HouseType.HOUSE
@@ -36,11 +37,17 @@ class HousesSectionParserTests : StringSpec({
 
     "Parse an empty house list"{
         val housesSection = HousesSectionParser.fromContent(getResource("houses/houseListEmpty.txt"))
-        housesSection.world shouldBe "Antica"
+        housesSection shouldNotBe null
+        housesSection!!.world shouldBe "Antica"
         housesSection.town shouldBe "Carlin"
         housesSection.status shouldBe HouseStatus.AUCTIONED
         housesSection.type shouldBe HouseType.HOUSE
         housesSection.order shouldBe HouseOrder.NAME
         housesSection.entries shouldHaveSize 0
+    }
+
+    "Parse initial house list (no parameters)"{
+        val housesSection = HousesSectionParser.fromContent(getResource("houses/houseListInitial.txt"))
+        housesSection shouldBe null
     }
 })

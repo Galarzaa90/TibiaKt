@@ -7,10 +7,10 @@ import com.galarzaa.tibiakt.core.models.HousesSection
 import com.galarzaa.tibiakt.core.utils.*
 import java.time.Duration
 
-object HousesSectionParser : Parser<HousesSection> {
+object HousesSectionParser : Parser<HousesSection?> {
     private val auctionInfoRegex = Regex("""\((?<bid>\d+) gold; (?<timeLeft>\w)+ (?<timeUnit>day|hour)s? left\)""")
 
-    override fun fromContent(content: String): HousesSection {
+    override fun fromContent(content: String): HousesSection? {
         val boxContent = boxContent(content)
         val builder = HousesSectionBuilder()
         val tables = boxContent.parseTablesMap()
@@ -22,7 +22,7 @@ object HousesSectionParser : Parser<HousesSection> {
                 .status(StringEnum.fromValue(form.data["state"]))
                 .type(StringEnum.fromValue(form.data["type"])!!)
                 .order(StringEnum.fromValue(form.data["order"]))
-        }
+        } ?: throw ParsingException("House Search table not found")
         tables.getContaining("Available")?.apply {
             for (row in rows().offsetStart(1)) {
                 val columns = row.columns()
@@ -54,7 +54,7 @@ object HousesSectionParser : Parser<HousesSection> {
                     highestBid = highestBid
                 )
             }
-        }
+        } ?: return null
         return builder.build()
     }
 }

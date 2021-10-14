@@ -31,6 +31,7 @@ fun String.clean(): String {
 
 
 fun String.parseInteger(): Int = remove(",").trim().toInt()
+fun String.findInteger(): Int = filter { it.isDigit() }.toInt()
 
 fun String.parseLong(): Long = remove(",").trim().toLong()
 
