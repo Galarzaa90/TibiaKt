@@ -3,6 +3,7 @@
 package com.galarzaa.tibiakt.core.models
 
 import com.galarzaa.tibiakt.core.enums.BattlEyeType
+import com.galarzaa.tibiakt.core.enums.PvpType
 import com.galarzaa.tibiakt.core.enums.TransferType
 import com.galarzaa.tibiakt.core.utils.InstantSerializer
 import com.galarzaa.tibiakt.core.utils.LocalDateSerializer
@@ -37,7 +38,7 @@ data class World(
     val isOnline: Boolean,
     val onlineCount: Int,
     val location: String,
-    val pvpType: String,
+    val pvpType: PvpType,
     val battlEyeType: BattlEyeType,
     val battlEyeStartDate: LocalDate?,
     val transferType: TransferType,
@@ -47,6 +48,15 @@ data class World(
     val onlineRecordDateTime: Instant,
     val creationDate: YearMonth,
     val worldQuests: List<String> = emptyList(),
-    val playersOnline: List<OnlineCharacter> = emptyList()
+    val playersOnline: List<OnlineCharacter> = emptyList(),
 ) : BaseWorld
 
+fun World.transferableTo(target: World): Boolean {
+    return pvpType.weight >= target.pvpType.weight &&
+            isExperimental == target.isExperimental &&
+            transferType != TransferType.LOCKED &&
+            target.transferType != TransferType.BLOCKED &&
+            battlEyeType == target.battlEyeType
+}
+
+fun World.transferableFrom(other: World): Boolean = other.transferableTo(this)

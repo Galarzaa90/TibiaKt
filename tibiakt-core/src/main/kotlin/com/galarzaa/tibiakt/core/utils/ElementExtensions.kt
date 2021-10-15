@@ -98,6 +98,7 @@ internal data class FormData(
 private val pageRegex = Regex("""page=(\d+)""")
 private val resultsRegex = Regex("""Results: ([\d,]+)""")
 
+/** Parse the pagination block present in many Tibia.com sections */
 internal fun Element.parsePagination(): PaginationData {
     val (pagesDiv, resultsDiv) = select("div")
     val currentPageLink =
@@ -130,8 +131,7 @@ internal fun Element.parsePagination(): PaginationData {
     return PaginationData(page, totalPages, resultsCount)
 }
 
-internal data class PaginationData(
-    val currentPage: Int,
-    val totalPages: Int,
-    val resultsCount: Int
-)
+/**
+ * Container for pagination information
+ */
+internal data class PaginationData(val currentPage: Int, val totalPages: Int, val resultsCount: Int)

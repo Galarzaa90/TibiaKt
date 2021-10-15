@@ -1,6 +1,7 @@
 package com.galarzaa.tibiakt.core.builders
 
 import com.galarzaa.tibiakt.core.enums.BattlEyeType
+import com.galarzaa.tibiakt.core.enums.PvpType
 import com.galarzaa.tibiakt.core.enums.TransferType
 import com.galarzaa.tibiakt.core.enums.Vocation
 import com.galarzaa.tibiakt.core.models.OnlineCharacter
@@ -14,7 +15,7 @@ class WorldBuilder {
     private var isOnline: Boolean = false
     private var onlineCount: Int = 0
     private var location: String? = null
-    private var pvpType: String? = null
+    private var pvpType: PvpType? = null
     private var battlEyeType: BattlEyeType = BattlEyeType.UNPROTECTED
     private var battlEyeStartDate: LocalDate? = null
     private var transferType: TransferType = TransferType.REGULAR
@@ -34,7 +35,7 @@ class WorldBuilder {
 
     fun creationDate(creationDate: YearMonth) = apply { this.creationDate = creationDate }
     fun location(location: String) = apply { this.location = location }
-    fun pvpType(pvpType: String) = apply { this.pvpType = pvpType }
+    fun pvpType(pvpType: PvpType) = apply { this.pvpType = pvpType }
     fun addWorldQuest(worldQuest: String) = apply { worldQuests.add(worldQuest) }
     fun battlEyeType(battlEyeType: BattlEyeType) = apply { this.battlEyeType = battlEyeType }
     fun battlEyeStartDate(battlEyeStartDate: LocalDate?) = apply { this.battlEyeStartDate = battlEyeStartDate }

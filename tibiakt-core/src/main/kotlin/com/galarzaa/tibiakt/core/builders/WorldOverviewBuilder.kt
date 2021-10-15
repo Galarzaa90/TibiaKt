@@ -1,6 +1,7 @@
 package com.galarzaa.tibiakt.core.builders
 
 import com.galarzaa.tibiakt.core.enums.BattlEyeType
+import com.galarzaa.tibiakt.core.enums.PvpType
 import com.galarzaa.tibiakt.core.enums.TransferType
 import com.galarzaa.tibiakt.core.models.WorldEntry
 import com.galarzaa.tibiakt.core.models.WorldOverview
@@ -23,12 +24,12 @@ class WorldOverviewBuilder {
         isOnline: Boolean,
         onlineCount: Int,
         location: String,
-        pvpType: String,
+        pvpType: PvpType,
         battlEyeType: BattlEyeType,
         battlEyeStart: LocalDate?,
         transferType: TransferType,
         premiumRestricted: Boolean,
-        experimental: Boolean
+        experimental: Boolean,
     ) = apply {
         worlds.add(
             WorldEntry(

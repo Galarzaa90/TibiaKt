@@ -2,6 +2,7 @@ package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.core.builders.WorldOverviewBuilder
 import com.galarzaa.tibiakt.core.enums.BattlEyeType
+import com.galarzaa.tibiakt.core.enums.StringEnum
 import com.galarzaa.tibiakt.core.enums.TransferType
 import com.galarzaa.tibiakt.core.models.WorldOverview
 import com.galarzaa.tibiakt.core.utils.*
@@ -79,7 +80,7 @@ object WorldOverviewParser : Parser<WorldOverview> {
                 isOnline,
                 onlineCount,
                 location,
-                pvpType,
+                StringEnum.fromValue(pvpType) ?: throw ParsingException("Unknown PvP type found: $pvpType"),
                 battlEyeType,
                 battlEyeDate,
                 transferType,

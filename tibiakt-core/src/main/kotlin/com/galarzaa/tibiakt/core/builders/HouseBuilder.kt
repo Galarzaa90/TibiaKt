@@ -23,11 +23,19 @@ class HouseBuilder {
     private var highestBidder: String? = null
     private var auctionEnd: Instant? = null
 
+    fun houseId(houseId: Int) = apply { this.houseId = houseId }
     fun name(name: String) = apply { this.name = name }
     fun size(size: Int) = apply { this.size = size }
     fun rent(rent: Int) = apply { this.rent = rent }
     fun beds(beds: Int) = apply { this.beds = beds }
     fun world(world: String) = apply { this.world = world }
+    fun status(status: HouseStatus) = apply { this.status = status }
+    fun owner(owner: String) = apply { this.owner = owner }
+    fun paidUntil(paidUntil: Instant) = apply { this.paidUntil = paidUntil }
+    fun auctionEnd(auctionEnd: Instant?) = apply { this.auctionEnd = auctionEnd }
+    fun highestBid(highestBid: Int?) = apply { this.highestBid = highestBid }
+    fun highestBidder(highestBidder: String?) = apply { this.highestBidder = highestBidder }
+    fun type(type: HouseType) = apply { this.type = type }
 
     fun build() = House(
         houseId = houseId ?: throw IllegalStateException("houseId is required"),

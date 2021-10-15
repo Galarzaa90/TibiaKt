@@ -3,6 +3,7 @@
 package com.galarzaa.tibiakt.core.models
 
 import com.galarzaa.tibiakt.core.enums.BattlEyeType
+import com.galarzaa.tibiakt.core.enums.PvpType
 import com.galarzaa.tibiakt.core.enums.TransferType
 import com.galarzaa.tibiakt.core.utils.LocalDateSerializer
 import kotlinx.serialization.Serializable
@@ -28,10 +29,10 @@ data class WorldEntry(
     val isOnline: Boolean,
     val onlineCount: Int,
     val location: String,
-    val pvpType: String,
+    val pvpType: PvpType,
     val battlEyeType: BattlEyeType,
     val battlEyeStartDate: LocalDate?,
     val transferType: TransferType,
     val isPremiumRestricted: Boolean = false,
-    val isExperimental: Boolean = false
+    val isExperimental: Boolean = false,
 ) : BaseWorld

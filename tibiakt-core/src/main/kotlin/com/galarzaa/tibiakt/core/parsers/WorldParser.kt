@@ -2,6 +2,7 @@ package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.core.builders.WorldBuilder
 import com.galarzaa.tibiakt.core.enums.BattlEyeType
+import com.galarzaa.tibiakt.core.enums.StringEnum
 import com.galarzaa.tibiakt.core.enums.TransferType
 import com.galarzaa.tibiakt.core.enums.Vocation
 import com.galarzaa.tibiakt.core.models.World
@@ -53,7 +54,8 @@ object WorldParser : Parser<World?> {
                 "Online Record" -> parseOnlineRecord(value, builder)
                 "Creation Date" -> parseCreationDate(value, builder)
                 "Location" -> builder.location(value)
-                "PvP Type" -> builder.pvpType(value)
+                "PvP Type" -> builder.pvpType(StringEnum.fromValue(value)
+                    ?: throw ParsingException("unknown pvp type found: $value"))
                 "Premium Type" -> builder.premiumRestricted(true)
                 "Transfer Type" -> parseTransferType(value, builder)
                 "World Quest Titles" -> if (!value.contains("has no title", true)) {

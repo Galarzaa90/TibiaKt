@@ -59,18 +59,19 @@ internal class LinkInformation(val title: String, targetUrl: String) {
         this.targetUrl = URL(targetUrl)
     }
 
-    val queryParams: HashMap<String, MutableList<String>>
-        get() {
-            val matches = queryStringRegex.findAll(this.targetUrl.query)
-            val map = hashMapOf<String, MutableList<String>>()
-            for (match: MatchResult in matches) {
-                val (_, name, value) = match.groupValues
-                if (!map.containsKey(name))
-                    map[name] = mutableListOf()
-                map[name]?.add(value)
-            }
-            return map
-        }
+    val queryParams
+        get() = targetUrl.queryParams()
+}
+
+internal fun URL.queryParams(): HashMap<String, MutableList<String>> {
+    val matches = queryStringRegex.findAll(this.query)
+    val map: HashMap<String, MutableList<String>> = hashMapOf()
+    for (match: MatchResult in matches) {
+        val (_, name, value) = match.groupValues
+        map.getOrPut(name) { mutableListOf() }.add(value)
+    }
+    return map
+
 }
 
 internal fun parsePopup(content: String): Pair<String, Document> {
