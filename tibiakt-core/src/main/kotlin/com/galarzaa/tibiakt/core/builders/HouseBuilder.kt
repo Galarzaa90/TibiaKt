@@ -19,6 +19,7 @@ class HouseBuilder {
     private var transferDate: Instant? = null
     private var transferPrice: Int? = null
     private var transferAccepted: Boolean? = null
+    private var transferee: String? = null
     private var highestBid: Int? = null
     private var highestBidder: String? = null
     private var auctionEnd: Instant? = null
@@ -36,6 +37,10 @@ class HouseBuilder {
     fun highestBid(highestBid: Int?) = apply { this.highestBid = highestBid }
     fun highestBidder(highestBidder: String?) = apply { this.highestBidder = highestBidder }
     fun type(type: HouseType) = apply { this.type = type }
+    fun transferDate(transferDate: Instant?) = apply { this.transferDate = transferDate }
+    fun transferPrice(transferPrice: Int?) = apply { this.transferPrice = transferPrice }
+    fun transferAccepted(transferAccepted: Boolean) = apply { this.transferAccepted = transferAccepted }
+    fun transferee(transferee: String?) = apply { this.transferee = transferee }
 
     fun build() = House(
         houseId = houseId ?: throw IllegalStateException("houseId is required"),
@@ -51,6 +56,7 @@ class HouseBuilder {
         transferDate = transferDate,
         transferPrice = transferPrice,
         transferAccepted = transferAccepted,
+        transferee = transferee,
         highestBid = highestBid,
         highestBidder = highestBidder,
         auctionEnd = auctionEnd,

@@ -24,6 +24,7 @@ data class House(
     val transferDate: Instant?,
     val transferPrice: Int?,
     val transferAccepted: Boolean?,
+    val transferee: String?,
     val highestBid: Int?,
     val highestBidder: String?,
     val auctionEnd: Instant?,

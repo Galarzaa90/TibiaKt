@@ -38,4 +38,42 @@ class HouseParserTests : StringSpec({
         house.highestBidder shouldBe "Eiike"
         house.highestBid shouldBe 0
     }
+
+    "Parse a house set to be transferred but not accepted"{
+        val house = HouseParser.fromContent(getResource("houses/houseTransferNotAccepted.txt"))
+        house shouldNotBe null
+        house!!.houseId shouldBe 59048
+        house.name shouldBe "Unklath II b"
+        house.size shouldBe 17
+        house.beds shouldBe 1
+        house.rent shouldBe 50_000
+        house.type shouldBe HouseType.HOUSE
+        house.world shouldBe "Monza"
+        house.owner shouldBe "Grandpa Asan"
+        house.status shouldBe HouseStatus.RENTED
+        house.paidUntil shouldNotBe null
+        house.transferDate shouldNotBe null
+        house.transferAccepted shouldNotBe true
+        house.transferee shouldBe "Szatanku"
+        house.transferPrice shouldBe 10
+    }
+
+    "Parse a house set to be transferred, and accepted"{
+        val house = HouseParser.fromContent(getResource("houses/houseTransferAccepted.txt"))
+        house shouldNotBe null
+        house!!.houseId shouldBe 37016
+        house.name shouldBe "Radiant Plaza 4"
+        house.size shouldBe 186
+        house.beds shouldBe 3
+        house.rent shouldBe 800_000
+        house.type shouldBe HouseType.HOUSE
+        house.world shouldBe "Ferobra"
+        house.owner shouldBe "Valeth Ossa"
+        house.status shouldBe HouseStatus.RENTED
+        house.paidUntil shouldNotBe null
+        house.transferDate shouldNotBe null
+        house.transferAccepted shouldBe true
+        house.transferee shouldBe "King Brunno"
+        house.transferPrice shouldBe 1
+    }
 })
