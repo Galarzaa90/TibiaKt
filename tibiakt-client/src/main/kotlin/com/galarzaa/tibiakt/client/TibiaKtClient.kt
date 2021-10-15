@@ -157,6 +157,7 @@ open class TibiaKtClient {
         return response.parse { HousesSectionParser.fromContent(it) }
     }
 
+    /** Fetch a house by its [houseId] in a specific world. */
     suspend fun fetchHouse(
         houseId: Int,
         world: String,
@@ -187,8 +188,8 @@ open class TibiaKtClient {
         return toTibiaResponse(parsingTime, data)
     }
 
-    companion object {
-        val logger: org.slf4j.Logger = LoggerFactory.getLogger(TibiaKtClient::class.java)
+    internal companion object {
+        internal val logger: org.slf4j.Logger = LoggerFactory.getLogger(TibiaKtClient::class.java)
     }
 }
 
