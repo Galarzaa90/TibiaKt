@@ -52,9 +52,9 @@ class HouseParserTests : StringSpec({
         house.owner shouldBe "Grandpa Asan"
         house.status shouldBe HouseStatus.RENTED
         house.paidUntil shouldNotBe null
-        house.transferDate shouldNotBe null
+        house.movingDate shouldNotBe null
         house.transferAccepted shouldNotBe true
-        house.transferee shouldBe "Szatanku"
+        house.transferRecipient shouldBe "Szatanku"
         house.transferPrice shouldBe 10
     }
 
@@ -71,9 +71,9 @@ class HouseParserTests : StringSpec({
         house.owner shouldBe "Valeth Ossa"
         house.status shouldBe HouseStatus.RENTED
         house.paidUntil shouldNotBe null
-        house.transferDate shouldNotBe null
+        house.movingDate shouldNotBe null
         house.transferAccepted shouldBe true
-        house.transferee shouldBe "King Brunno"
+        house.transferRecipient shouldBe "King Brunno"
         house.transferPrice shouldBe 1
     }
 })

@@ -59,7 +59,7 @@ object HighscoresParser : Parser<Highscores?> {
     private fun parseHighscoresTable(element: Element, builder: HighscoresBuilder) {
         val entriesTable = element.selectFirst("table.TableContent")
         for (row in entriesTable.rows().offsetStart(1)) {
-            val columns = row.columnsText()
+            val columns = row.cellsText()
             if (columns.size < 6) {
                 return
             }

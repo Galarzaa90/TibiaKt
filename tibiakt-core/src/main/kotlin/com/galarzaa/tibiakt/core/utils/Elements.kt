@@ -1,8 +1,12 @@
 package com.galarzaa.tibiakt.core.utils
 
+import org.jsoup.Jsoup
+import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 import org.jsoup.nodes.TextNode
+import org.jsoup.parser.Parser
 import org.jsoup.select.Elements
+import java.net.URL
 
 internal fun Element.parseTables(contentTableSelector: String = "table.TableContent"): Map<String, Elements> {
     val tables = select("div.TableContainer")
@@ -31,24 +35,36 @@ internal fun Element.parseTablesMap(contentSelector: String = "div.TableContentC
     return output
 }
 
+/** Get a list of rows in the element. */
 internal fun Element?.rows(): Elements = this?.select("tr") ?: Elements()
-internal fun Element?.columns(): Elements = this?.select("td") ?: Elements()
-internal fun Element.columnsText(): List<String> = columns().map { it.cleanText() }
 
+/** Get a list of cells found in the elmenet. */
+internal fun Element?.cells(): Elements = this?.select("td") ?: Elements()
+
+/** Get a list of the text contained in all cells in the element.*/
+internal fun Element.cellsText(): List<String> = cells().map { it.cleanText() }
+
+/** Get the text contained in an element, cleaned out of extraneous characters. */
 internal fun Element.cleanText() = text().clean()
+
+/** Get the text contained in an element, cleaned out of extraneous characters. */
 internal fun Element.wholeCleanText() = wholeText().clean()
 
-internal fun ArrayList<Element>.replaceBr() {
-    forEach { it.replaceBrs() }
-}
 
+/** Replace all br tags in an element with line jumps */
 internal fun Element.replaceBrs() = apply {
     select("br").forEach { it.replaceWith(TextNode("\n")) }
 }
 
+/** Replace all br tags in an array of elements with line jumps */
+internal fun ArrayList<Element>.replaceBr() = forEach { it.replaceBrs() }
+
+/** Get all the field's values and available options of a form element
+ * @receiver An element with the form tag.
+ */
 internal fun Element.formData(): FormData {
     if (this.tagName() != "form")
-        throw IllegalArgumentException("receiver must be a form element")
+        throw IllegalArgumentException("expected element with 'form' tag, got element with '${this.tagName()}' tag")
     val data = mutableMapOf<String, String?>()
     val dataMultiple = mutableMapOf<String, MutableList<String>>()
     val availableOptions = mutableMapOf<String, MutableList<String>>()
@@ -135,3 +151,47 @@ internal fun Element.parsePagination(): PaginationData {
  * Container for pagination information
  */
 internal data class PaginationData(val currentPage: Int, val totalPages: Int, val resultsCount: Int)
+
+internal fun parsePopup(content: String): Pair<String, Document> {
+    val parts = content.split(",", limit = 3)
+    val title = parts[1]
+        .replace("'", "")
+        .trim()
+    val html = parts[parts.size - 1]
+        .replace("\\'", "\"")
+        .replace("'", "")
+        .replace(",);", "")
+        .replace(", );", "")
+        .trim()
+    val parsedHtml = Jsoup.parse(html, "", Parser.xmlParser())
+    return Pair(title, parsedHtml)
+}
+
+private val queryStringRegex = Regex("([^&=]+)=([^&]*)")
+internal fun Element.getLinkInformation(): LinkInformation? {
+    if (this.tagName() != "a")
+        return null
+    return LinkInformation(this.text(), this.attr("href"))
+}
+
+internal class LinkInformation(val title: String, targetUrl: String) {
+    val targetUrl: URL
+
+    init {
+        this.targetUrl = URL(targetUrl)
+    }
+
+    val queryParams
+        get() = targetUrl.queryParams()
+}
+
+internal fun URL.queryParams(): HashMap<String, MutableList<String>> {
+    val matches = queryStringRegex.findAll(this.query)
+    val map: HashMap<String, MutableList<String>> = hashMapOf()
+    for (match: MatchResult in matches) {
+        val (_, name, value) = match.groupValues
+        map.getOrPut(name) { mutableListOf() }.add(value)
+    }
+    return map
+
+}

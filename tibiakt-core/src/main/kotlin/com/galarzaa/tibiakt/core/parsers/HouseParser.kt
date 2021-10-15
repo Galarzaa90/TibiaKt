@@ -21,9 +21,11 @@ object HouseParser : Parser<House?> {
         val boxContent = boxContent(content)
         val infoTable = boxContent.selectFirst("table")
         val builder = HouseBuilder()
-        val (imageRow, descriptionRow) = infoTable.columns()
+        val (imageRow, descriptionRow) = infoTable.cells()
+        if (imageRow.text().contains("No information about this house found"))
+            return null
         val imageUrl = imageRow.selectFirst("img")?.attr("src")
-        val houseId = imageUrl!!.findInteger()
+        val houseId = imageUrl?.findInteger() ?: throw ParsingException("House image not found")
         val (title, sizeStr, rentStr, world) = descriptionRow.select("b").map { it.cleanText() }
         builder.name(title)
             .size(sizeStr.remove("square meters").clean().toInt())
@@ -52,12 +54,12 @@ object HouseParser : Parser<House?> {
                 .highestBidder(groups["bidder"]!!.value.clean())
         }
         moveOutPattern.find(stateLine)?.apply {
-            builder.transferDate(parseTibiaDateTime(groups["moveDate"]!!.value))
+            builder.movingDate(parseTibiaDateTime(groups["moveDate"]!!.value))
         }
         transferPattern.find(stateLine)?.apply {
             builder
                 .transferAccepted(groups["action"]!!.value == "will")
-                .transferee(groups["transferee"]!!.value.clean())
+                .transferRecipient(groups["transferee"]!!.value.clean())
                 .transferPrice(groups["transferPrice"]!!.value.toInt())
         }
         return builder.build()

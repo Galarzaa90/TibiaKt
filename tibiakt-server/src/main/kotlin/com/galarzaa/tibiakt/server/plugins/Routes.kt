@@ -42,8 +42,8 @@ internal fun Application.configureRouting(client: TibiaKtClient) {
         get<GetWorldHouses> {
             call.respondOrNotFound(client.fetchHousesSection(it.world, it.town, it.type, it.status, it.order))
         }
+        get<GetHouse> { (world, houseId) -> call.respondOrNotFound(client.fetchHouse(houseId, world)) }
     }
-
 }
 
 private suspend inline fun <reified T : Any?> ApplicationCall.respondOrNotFound(body: TibiaResponse<T>) {

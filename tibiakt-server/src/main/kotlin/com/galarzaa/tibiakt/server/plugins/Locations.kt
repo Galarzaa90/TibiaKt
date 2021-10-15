@@ -40,11 +40,17 @@ data class GetKillStatistics(val world: String)
 @Location("/eventsSchedule/{year}/{month}")
 data class GetEventsSchedule(val year: Int, val month: Int)
 
-@Location("/houses/{world}/{town}")
+@Location("/houses/{world}/town/{town}")
 data class GetWorldHouses(
     val world: String,
     val town: String,
     val type: HouseType? = null,
     val status: HouseStatus? = null,
-    val order: HouseOrder? = null
+    val order: HouseOrder? = null,
+)
+
+@Location("/houses/{world}/{houseId}")
+data class GetHouse(
+    val world: String,
+    val houseId: Int,
 )

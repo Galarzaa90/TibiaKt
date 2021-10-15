@@ -32,7 +32,7 @@ object EventsScheduleParser : Parser<EventsSchedule> {
         var onGoingDay = 1
         var firstDay = true
         val onGoingEvents: MutableList<EventEntryBuilder> = mutableListOf()
-        for (cell in calendarTable.columns()) {
+        for (cell in calendarTable.cells()) {
             val dayDiv = cell.selectFirst("div")!!
             val day = dayDiv.cleanText().toInt()
             val spans = cell.select("span.HelperDivIndicator")

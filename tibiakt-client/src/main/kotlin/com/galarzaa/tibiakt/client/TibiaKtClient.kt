@@ -1,7 +1,6 @@
 package com.galarzaa.tibiakt.client
 
 import com.galarzaa.tibiakt.client.models.TibiaResponse
-import com.galarzaa.tibiakt.client.models.TimedResponse
 import com.galarzaa.tibiakt.core.enums.*
 import com.galarzaa.tibiakt.core.models.*
 import com.galarzaa.tibiakt.core.parsers.*
@@ -15,7 +14,8 @@ import io.ktor.client.request.*
 import io.ktor.client.request.forms.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
-import io.ktor.util.date.*
+import org.slf4j.LoggerFactory
+import java.time.Instant
 import java.time.LocalDate
 import java.time.YearMonth
 import kotlin.system.measureTimeMillis
@@ -35,8 +35,8 @@ open class TibiaKtClient {
     suspend fun request(
         method: HttpMethod,
         url: String,
-        data: List<Pair<String, String>> = emptyList()
-    ): TimedResponse {
+        data: List<Pair<String, String>> = emptyList(),
+    ): HttpResponse {
         val response: HttpResponse = when (method) {
             HttpMethod.Get -> client.get(url)
             HttpMethod.Post -> client.submitForm(
@@ -48,44 +48,35 @@ open class TibiaKtClient {
                 },
                 encodeInQuery = false
             )
-            else -> throw IllegalArgumentException("Unsupported method")
+            else -> throw IllegalArgumentException("Unsupported method $method")
         }
-        return TimedResponse(response)
+        logger.info("$url | ${method.value.uppercase()} | ${response.status.value} ${response.status.description} | ${response.fetchingTimeMillis}ms")
+        return response
     }
-
-    private suspend fun <T> parseResponse(response: TimedResponse, parser: (content: String) -> T): TibiaResponse<T> {
-        val data: T
-        val parsingTime = measureTimeMillis {
-            val stringBody: String = response.original.receive()
-            data = parser(stringBody)
-        } / 1000f
-        return response.toTibiaResponse(parsingTime, data)
-    }
-
 
     suspend fun fetchCharacter(name: String): TibiaResponse<Character?> {
         val response = this.request(HttpMethod.Get, getCharacterUrl(name))
-        return parseResponse(response) { CharacterParser.fromContent(it) }
+        return response.parse { CharacterParser.fromContent(it) }
     }
 
     suspend fun fetchWorldOverview(): TibiaResponse<WorldOverview> {
         val response = this.request(HttpMethod.Get, getWorldOverviewUrl())
-        return parseResponse(response) { WorldOverviewParser.fromContent(it) }
+        return response.parse { WorldOverviewParser.fromContent(it) }
     }
 
     suspend fun fetchWorld(name: String): TibiaResponse<World?> {
         val response = this.request(HttpMethod.Get, getWorldUrl(name))
-        return parseResponse(response) { WorldParser.fromContent(it) }
+        return response.parse { WorldParser.fromContent(it) }
     }
 
     suspend fun fetchGuild(name: String): TibiaResponse<Guild?> {
         val response = this.request(HttpMethod.Get, getGuildUrl(name))
-        return parseResponse(response) { GuildParser.fromContent(it) }
+        return response.parse { GuildParser.fromContent(it) }
     }
 
     suspend fun fetchWorldGuilds(name: String): TibiaResponse<GuildsSection?> {
         val response = this.request(HttpMethod.Get, getWorldGuildsUrl(name))
-        return parseResponse(response) { GuildsSectionParser.fromContent(it) }
+        return response.parse { GuildsSectionParser.fromContent(it) }
     }
 
     /**
@@ -95,11 +86,11 @@ open class TibiaKtClient {
         startDate: LocalDate,
         endDate: LocalDate,
         categories: Set<NewsCategory>? = null,
-        types: Set<NewsType>? = null
+        types: Set<NewsType>? = null,
     ): TibiaResponse<NewsArchive> {
         val data = NewsArchive.getFormData(startDate, endDate, categories, types)
         val response = this.request(HttpMethod.Post, getNewsArchiveUrl(), data)
-        return parseResponse(response) { NewsArchiveParser.fromContent(it) }
+        return response.parse { NewsArchiveParser.fromContent(it) }
     }
 
     /**
@@ -108,17 +99,17 @@ open class TibiaKtClient {
     suspend fun fetchRecentNews(
         days: Int = 30,
         categories: Set<NewsCategory>? = null,
-        types: Set<NewsType>? = null
+        types: Set<NewsType>? = null,
     ) = fetchRecentNews(LocalDate.now().minusDays(days.toLong()), LocalDate.now(), categories, types)
 
     suspend fun fetchNews(newsId: Int): TibiaResponse<News?> {
         val response = this.request(HttpMethod.Get, getNewsUrl(newsId))
-        return parseResponse(response) { NewsParser.fromContent(it, newsId) }
+        return response.parse { NewsParser.fromContent(it, newsId) }
     }
 
     suspend fun fetchKillStatistics(world: String): TibiaResponse<KillStatistics> {
         val response = this.request(HttpMethod.Get, getKillStatisticsUrl(world))
-        return parseResponse(response) { KillStatisticsParser.fromContent(it) }
+        return response.parse { KillStatisticsParser.fromContent(it) }
     }
 
     suspend fun fetchHighscoresPage(
@@ -127,11 +118,11 @@ open class TibiaKtClient {
         vocation: HighscoresProfession = HighscoresProfession.ALL,
         page: Int = 1,
         battlEyeType: HighscoresBattlEyeType = HighscoresBattlEyeType.ANY_WORLD,
-        pvpTypes: Set<HighscoresPvpType>? = null
+        pvpTypes: Set<HighscoresPvpType>? = null,
     ): TibiaResponse<Highscores> {
         val response =
             this.request(HttpMethod.Get, getHighscoresUrl(world, category, vocation, page, battlEyeType, pvpTypes))
-        return parseResponse(response) { HighscoresParser.fromContent(it) }
+        return response.parse { HighscoresParser.fromContent(it) }
     }
 
     /**
@@ -140,7 +131,7 @@ open class TibiaKtClient {
     suspend fun fetchEventsSchedule(yearMonth: YearMonth): TibiaResponse<EventsSchedule> {
         val response =
             this.request(HttpMethod.Get, getEventsScheduleUrl(yearMonth))
-        return parseResponse(response) { EventsScheduleParser.fromContent(it) }
+        return response.parse { EventsScheduleParser.fromContent(it) }
     }
 
     /**
@@ -159,24 +150,45 @@ open class TibiaKtClient {
         town: String,
         type: HouseType? = null,
         status: HouseStatus? = null,
-        order: HouseOrder? = null
+        order: HouseOrder? = null,
     ): TibiaResponse<HousesSection?> {
         val response =
             this.request(HttpMethod.Get, getHousesSectionUrl(world, town, type, status, order))
-        return parseResponse(response) { HousesSectionParser.fromContent(it) }
+        return response.parse { HousesSectionParser.fromContent(it) }
     }
 
-    private fun <T> TimedResponse.toTibiaResponse(parsingTime: Float, data: T): TibiaResponse<T> {
-        val isCached = original.headers["CF-Cache-Status"] == "HIT"
-        val age = original.headers["Age"]?.toInt() ?: 0
-        return TibiaResponse(
-            timestamp = original.responseTime.toJvmDate().toInstant(),
-            isCached = isCached,
-            cacheAge = age,
-            fetchingTime = fetchingTime,
-            parsingTime = parsingTime,
-            data = data
-        )
+    suspend fun fetchHouse(
+        houseId: Int,
+        world: String,
+    ): TibiaResponse<House?> {
+        val response = this.request(HttpMethod.Get, getHouseUrl(world, houseId))
+        return response.parse { HouseParser.fromContent(it) }
+    }
+
+    private val HttpResponse.fetchingTime get() = (responseTime.timestamp - requestTime.timestamp) / 1000f
+    private val HttpResponse.fetchingTimeMillis get() = (fetchingTime * 1000).toInt()
+
+    private fun <T> HttpResponse.toTibiaResponse(parsingTime: Float, data: T): TibiaResponse<T> = TibiaResponse(
+        timestamp = Instant.ofEpochMilli(responseTime.timestamp),
+        isCached = headers["CF-Cache-Status"] == "HIT",
+        cacheAge = headers["Age"]?.toInt() ?: 0,
+        fetchingTime = fetchingTime,
+        parsingTime = parsingTime,
+        data = data
+    )
+
+    private suspend fun <T> HttpResponse.parse(parser: (content: String) -> T): TibiaResponse<T> {
+        val data: T
+        val parsingTime = measureTimeMillis {
+            val stringBody: String = receive()
+            data = parser(stringBody)
+        } / 1000f
+        logger.info("${this.request.url} | PARSE | ${(parsingTime * 1000).toInt()}ms")
+        return toTibiaResponse(parsingTime, data)
+    }
+
+    companion object {
+        val logger: org.slf4j.Logger = LoggerFactory.getLogger(TibiaKtClient::class.java)
     }
 }
 

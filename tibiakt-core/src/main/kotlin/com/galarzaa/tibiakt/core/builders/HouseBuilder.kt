@@ -16,10 +16,10 @@ class HouseBuilder {
     private var status: HouseStatus? = null
     private var paidUntil: Instant? = null
     private var owner: String? = null
-    private var transferDate: Instant? = null
+    private var movingDate: Instant? = null
     private var transferPrice: Int? = null
     private var transferAccepted: Boolean? = null
-    private var transferee: String? = null
+    private var transferRecipient: String? = null
     private var highestBid: Int? = null
     private var highestBidder: String? = null
     private var auctionEnd: Instant? = null
@@ -37,10 +37,10 @@ class HouseBuilder {
     fun highestBid(highestBid: Int?) = apply { this.highestBid = highestBid }
     fun highestBidder(highestBidder: String?) = apply { this.highestBidder = highestBidder }
     fun type(type: HouseType) = apply { this.type = type }
-    fun transferDate(transferDate: Instant?) = apply { this.transferDate = transferDate }
+    fun movingDate(movingDate: Instant?) = apply { this.movingDate = movingDate }
     fun transferPrice(transferPrice: Int?) = apply { this.transferPrice = transferPrice }
     fun transferAccepted(transferAccepted: Boolean) = apply { this.transferAccepted = transferAccepted }
-    fun transferee(transferee: String?) = apply { this.transferee = transferee }
+    fun transferRecipient(transferRecipient: String?) = apply { this.transferRecipient = transferRecipient }
 
     fun build() = House(
         houseId = houseId ?: throw IllegalStateException("houseId is required"),
@@ -53,10 +53,10 @@ class HouseBuilder {
         status = status ?: throw IllegalStateException("status is required"),
         paidUntil = paidUntil,
         owner = owner,
-        transferDate = transferDate,
+        movingDate = movingDate,
         transferPrice = transferPrice,
         transferAccepted = transferAccepted,
-        transferee = transferee,
+        transferRecipient = transferRecipient,
         highestBid = highestBid,
         highestBidder = highestBidder,
         auctionEnd = auctionEnd,

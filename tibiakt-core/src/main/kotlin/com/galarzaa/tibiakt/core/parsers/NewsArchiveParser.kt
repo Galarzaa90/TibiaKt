@@ -28,7 +28,7 @@ object NewsArchiveParser : Parser<NewsArchive> {
 
     private fun parseResultsTable(table: Element, builder: NewsArchiveBuilder) {
         for (row in table.rows()) {
-            val (iconColumn, dateColumn, titleColumn) = row.columns()
+            val (iconColumn, dateColumn, titleColumn) = row.cells()
             val iconUrl =
                 iconColumn.selectFirst("img")?.attr("src") ?: throw ParsingException("category icon not found")
             val category =

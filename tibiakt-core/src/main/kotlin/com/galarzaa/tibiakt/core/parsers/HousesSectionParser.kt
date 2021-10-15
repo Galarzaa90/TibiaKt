@@ -25,7 +25,7 @@ object HousesSectionParser : Parser<HousesSection?> {
         } ?: throw ParsingException("House Search table not found")
         tables.getContaining("Available")?.apply {
             for (row in rows().offsetStart(1)) {
-                val columns = row.columns()
+                val columns = row.cells()
                 if (columns.size != 5)
                     break
                 val statusText = columns[3].cleanText()

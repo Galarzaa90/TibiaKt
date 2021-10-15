@@ -28,7 +28,7 @@ object KillStatisticsParser : Parser<KillStatistics> {
     private fun parseKillStatisticsTable(table: Element, builder: KillStatisticsBuilder) {
         val innerTable = table.selectFirst("table.TableContent")
         for (row in innerTable.rows().offsetStart(2)) {
-            val columnns = row.columnsText()
+            val columnns = row.cellsText()
             if (columnns[0] == "Total") {
                 builder.total(
                     columnns[1].toInt(),
