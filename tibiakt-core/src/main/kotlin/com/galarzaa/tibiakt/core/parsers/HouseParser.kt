@@ -34,18 +34,30 @@ object HouseParser : Parser<House?> {
             .houseId(houseId)
         val descriptionLines = descriptionRow.replaceBrs().wholeText().lines()
         builder.beds(descriptionLines[1].findInteger())
-        val stateLine = descriptionLines.last().clean()
+        val statusLine = descriptionLines.last().clean()
+        parseStatusDescription(builder, statusLine)
+        return builder.build()
+    }
+
+    private fun parseStatusDescription(
+        builder: HouseBuilder,
+        stateLine: String,
+    ) {
         rentedPattern.find(stateLine)?.apply {
             builder.status(HouseStatus.RENTED)
                 .owner(groups["owner"]!!.value.clean())
                 .paidUntil(parseTibiaDateTime(groups["paidUntil"]!!.value))
-                .type(StringEnum.fromValue("${groups["type"]!!.value}s")
-                    ?: throw ParsingException("Unknown house type found: ${groups["type"]!!.value}"))
+                .type(
+                    StringEnum.fromValue("${groups["type"]!!.value}s")
+                        ?: throw ParsingException("Unknown house type found: ${groups["type"]!!.value}")
+                )
         }
         auctionedPattern.find(stateLine)?.apply {
             builder.status(HouseStatus.AUCTIONED)
-                .type(StringEnum.fromValue("${groups["type"]!!.value}s")
-                    ?: throw ParsingException("Unknown house type found: ${groups["type"]!!.value}"))
+                .type(
+                    StringEnum.fromValue("${groups["type"]!!.value}s")
+                        ?: throw ParsingException("Unknown house type found: ${groups["type"]!!.value}")
+                )
         }
         bidPattern.find(stateLine)?.apply {
             builder.status(HouseStatus.AUCTIONED)
@@ -62,6 +74,5 @@ object HouseParser : Parser<House?> {
                 .transferRecipient(groups["transferee"]!!.value.clean())
                 .transferPrice(groups["transferPrice"]!!.value.toInt())
         }
-        return builder.build()
     }
 }
