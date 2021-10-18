@@ -4,7 +4,7 @@ import com.galarzaa.tibiakt.core.utils.getWorldUrl
 
 interface BaseWorld {
     val name: String
-}
 
-val BaseWorld.url
-    get() = getWorldUrl(name)
+    val url
+        get() = getWorldUrl(name)
+}

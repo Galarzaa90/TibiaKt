@@ -38,39 +38,39 @@ data class Guild(
     val disbandingDate: LocalDate? = null,
     val disbandingReason: String? = null,
     val members: List<GuildMember> = emptyList(),
-    val invited: List<GuildInvite> = emptyList()
-) : BaseGuild
+    val invited: List<GuildInvite> = emptyList(),
+) : BaseGuild {
+    /**
+     * A list of the guild ranks.
+     */
+    val ranks: List<String>
+        get() = members.map { it.rank }.distinct()
 
-/**
- * A list of the guild ranks.
- */
-val Guild.ranks: List<String>
-    get() = members.map { it.rank }.distinct()
+    /** The leader of the guild */
+    val leader: GuildMember
+        get() = members.first()
 
-/** The leader of the guild */
-val Guild.leader
-    get() = members.first()
+    /** The vice leaders of the guild */
+    val viceLeaders: List<GuildMember>
+        get() = members.offsetStart(1).takeWhile { it.rank == members[1].rank }
 
-/** The vice leaders of the guild */
-val Guild.viceLeaders
-    get() = members.offsetStart(1).takeWhile { it.rank == members[1].rank }
+    /** A mapping of the members by their rank */
+    val membersByRank: Map<String, List<GuildMember>>
+        get() = members.groupBy { it.rank }
 
-/** A mapping of the members by their rank */
-val Guild.membersByRank
-    get() = members.groupBy { it.rank }
+    /** The number of members in the guild. */
+    val memberCount
+        get() = members.size
 
-/** The number of members in the guild. */
-val Guild.memberCount
-    get() = members.size
+    /**
+     * The list of members currently online.
+     */
+    val onlineMembers: List<GuildMember>
+        get() = members.filter { it.isOnline }
 
-/**
- * The list of members currently online.
- */
-val Guild.onlineMembers
-    get() = members.filter { it.isOnline }
-
-/**
- * The number of online members in the guild
- */
-val Guild.onlineCount
-    get() = onlineMembers.count()
+    /**
+     * The number of online members in the guild
+     */
+    val onlineCount
+        get() = onlineMembers.count()
+}

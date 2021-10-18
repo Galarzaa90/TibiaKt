@@ -9,10 +9,10 @@ import com.galarzaa.tibiakt.core.utils.getCharacterUrl
  */
 interface BaseCharacter {
     val name: String
-}
 
-/**
- * URL to the character's information page.
- */
-val BaseCharacter.url: String
-    get() = getCharacterUrl(name)
+    /**
+     * URL to the character's information page.
+     */
+    val url: String
+        get() = getCharacterUrl(name)
+}

@@ -51,13 +51,13 @@ data class World(
     val playersOnline: List<OnlineCharacter> = emptyList(),
 ) : BaseWorld
 
-/** Check if a character from [this] world can be transferred to the this world. */
+/** Check if a character from this world can be transferred to [target] world. */
 fun World.transferableTo(target: World): Boolean {
     return pvpType.weight >= target.pvpType.weight &&
             isExperimental == target.isExperimental &&
             transferType != TransferType.LOCKED &&
             target.transferType != TransferType.BLOCKED &&
-            battlEyeType == target.battlEyeType
+            battlEyeType.weight >= target.battlEyeType.weight
 }
 
 /** Check if a character from the [origin] world can transfer to this world */

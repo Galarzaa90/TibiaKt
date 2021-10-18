@@ -4,7 +4,7 @@ package com.galarzaa.tibiakt.core.utils
  * Split a string enumerating elements, using a different separator for the last item.
  */
 fun String?.splitList(separator: String = ",", lastSeparator: String = " and "): List<String> {
-    val items = this?.split(separator)?.toMutableList() ?: return emptyList()
+    val items = this?.nullIfBlank()?.split(separator)?.toMutableList() ?: return emptyList()
     val lastSplit: List<String> = items.last().split(lastSeparator)
     if (lastSplit.size > 1) {
         items[items.lastIndex] = lastSplit.subList(0, lastSplit.lastIndex).joinToString(lastSeparator)

@@ -6,3 +6,4 @@ enum class AuctionStatus {
     PENDING_TRANSFER,
     FINISHED
 }
+

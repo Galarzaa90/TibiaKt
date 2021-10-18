@@ -14,7 +14,7 @@ data class EventEntry(
     val description: String,
     val startDate: LocalDate? = null,
     val endDate: LocalDate? = null,
-)
-
-val EventEntry.duration: Period?
-    get() = if (startDate != null && endDate != null) Period.between(startDate, endDate) else null
+) {
+    val duration: Period?
+        get() = if (startDate != null && endDate != null) Period.between(startDate, endDate) else null
+}

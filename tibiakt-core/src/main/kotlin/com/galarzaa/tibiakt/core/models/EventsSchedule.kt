@@ -12,10 +12,10 @@ import java.time.YearMonth
 @Serializable
 data class EventsSchedule(
     val yearMonth: YearMonth,
-    val entries: List<EventEntry> = emptyList()
-)
-
-val EventsSchedule.url get() = getEventsScheduleUrl(yearMonth)
+    val entries: List<EventEntry> = emptyList(),
+) {
+    val url get() = getEventsScheduleUrl(yearMonth)
+}
 
 fun EventsSchedule.getEventsOn(date: LocalDate): List<EventEntry> {
     return entries.filter {

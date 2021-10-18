@@ -24,7 +24,9 @@ data class HousesSection(
     val type: HouseType,
     val order: HouseOrder,
     val entries: List<HouseEntry>,
-)
+) {
 
-val HousesSection.url
-    get() = getHousesSectionUrl(world, town, type, status, order)
+    val url
+        get() = getHousesSectionUrl(world, town, type, status, order)
+}
+

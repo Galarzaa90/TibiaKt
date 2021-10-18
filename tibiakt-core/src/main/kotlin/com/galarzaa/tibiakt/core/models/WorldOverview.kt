@@ -20,16 +20,16 @@ data class WorldOverview(
     val overallMaximumCountDateTime: Instant,
     val worlds: List<WorldEntry> = emptyList(),
     val tournamentWorlds: List<WorldEntry> = emptyList(),
-)
+) {
+    /**
+     * The total of currently online players across worlds.
+     */
+    val totalOnline: Int
+        get() = worlds.sumOf { it.onlineCount }
 
-/**
- * The total of currently online players across worlds.
- */
-val WorldOverview.totalOnline: Int
-    get() = worlds.sumOf { it.onlineCount }
-
-/**
- * The URL to the world overview section.
- */
-val WorldOverview.url: String
-    get() = getWorldOverviewUrl()
+    /**
+     * The URL to the world overview section.
+     */
+    val url: String
+        get() = getWorldOverviewUrl()
+}

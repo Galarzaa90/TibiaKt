@@ -29,7 +29,9 @@ data class News(
     val date: LocalDate,
     val content: String,
     val threadId: Int?,
-) : BaseNews
+) : BaseNews {
 
-val News.threadUrl
-    get() = if (threadId != null) getThreadUrl(threadId) else null
+    val threadUrl
+        get() = if (threadId != null) getThreadUrl(threadId) else null
+}
+

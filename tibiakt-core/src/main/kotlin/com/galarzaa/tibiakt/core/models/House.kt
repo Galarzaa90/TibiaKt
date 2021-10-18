@@ -47,9 +47,9 @@ data class House(
     val highestBid: Int?,
     val highestBidder: String?,
     val auctionEnd: Instant?,
-) : BaseHouse
+) : BaseHouse {
 
-
-val House.ownerUrl get() = owner?.let { getCharacterUrl(it) }
-val House.transferRecipientUrl get() = transferRecipient?.let { getCharacterUrl(it) }
-val House.highestBidderUrl get() = highestBidder?.let { getCharacterUrl(it) }
+    val ownerUrl get() = owner?.let { getCharacterUrl(it) }
+    val transferRecipientUrl get() = transferRecipient?.let { getCharacterUrl(it) }
+    val highestBidderUrl get() = highestBidder?.let { getCharacterUrl(it) }
+}

@@ -13,17 +13,17 @@ import kotlinx.serialization.Serializable
 data class KillStatistics(
     val world: String,
     val entries: Map<String, KillsStatisticEntry> = mapOf(),
-    val total: KillsStatisticEntry
-)
+    val total: KillsStatisticEntry,
+) {
+    /**
+     * The URL to these kill stastistics.
+     */
+    val url
+        get() = getKillStatisticsUrl(world)
 
-/**
- * The URL to these kill stastistics.
- */
-val KillStatistics.url
-    get() = getKillStatisticsUrl(world)
-
-/**
- * The kill statistics for players.
- */
-val KillStatistics.players
-    get() = entries.getOrDefault("players", KillsStatisticEntry(0, 0, 0, 0))
+    /**
+     * The kill statistics for players.
+     */
+    val players
+        get() = entries.getOrDefault("players", KillsStatisticEntry(0, 0, 0, 0))
+}

@@ -1,18 +1,18 @@
 package com.galarzaa.tibiakt.core.enums
 
-enum class BattlEyeType {
+enum class BattlEyeType(val weight: Int) {
     /**
      * Protected by BattlEye since the beginning.
      */
-    GREEN,
+    GREEN(2),
 
     /**
      * Protected by BattlEye at a later date.
      */
-    YELLOW,
+    YELLOW(1),
 
     /**
      * Not protected by BattlEye
      */
-    UNPROTECTED,
+    UNPROTECTED(0),
 }

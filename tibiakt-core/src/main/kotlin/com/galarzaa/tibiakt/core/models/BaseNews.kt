@@ -7,10 +7,10 @@ import com.galarzaa.tibiakt.core.utils.getNewsUrl
  */
 interface BaseNews {
     val id: Int
-}
 
-/**
- * The URL to the article.
- */
-val BaseNews.url
-    get() = getNewsUrl(id)
+    /**
+     * The URL to the article.
+     */
+    val url
+        get() = getNewsUrl(id)
+}

@@ -43,22 +43,32 @@ data class Character(
     val deaths: List<Death> = emptyList(),
     val accountInformation: AccountInformation? = null,
     val characters: List<OtherCharacter> = emptyList(),
-) : BaseCharacter
+) : BaseCharacter {
 
+    val shareRange: IntRange
+        get() {
+            val minLevel = floor((level / 3.0) * 2).toInt()
+            val maxLevel = ceil((level / 2.0) * 3).toInt() + if (level % 2 == 0) 1 else 0
+            return minLevel..maxLevel
+        }
 
-val Character.shareRange: IntRange
-    get() {
-        val minLevel = floor((level / 3.0) * 2).toInt()
-        val maxLevel = ceil((level / 2.0) * 3).toInt() + if (level % 2 == 0) 1 else 0
-        return minLevel..maxLevel
-    }
-val Character.scheduledForDeletion: Boolean
-    get() = deletionDate != null
+    /**
+     * Whether this character is scheduled for deletion or nto.
+     */
+    val scheduledForDeletion: Boolean
+        get() = deletionDate != null
 
-/**
- * URL to the character this character is married to, if any.
- */
-val Character.marriedToUrl: String?
-    get() {
-        return getCharacterUrl(marriedTo ?: return null)
-    }
+    /**
+     * Whether this character is hidden or not.
+     */
+    val hidden: Boolean
+        get() = characters.isEmpty()
+
+    /**
+     * URL to the character this character is married to, if any.
+     */
+    val marriedToUrl: String?
+        get() {
+            return getCharacterUrl(marriedTo ?: return null)
+        }
+}
