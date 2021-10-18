@@ -17,7 +17,7 @@ object CharacterParser : Parser<Character?> {
     private val titlesRegexp = Regex("""(.*)\((\d+) titles? unlocked\)""")
     private val houseRegexp = Regex("""\(([^)]+)\) is paid until (.*)""")
     private val deathsRegex = Regex("""Level (\d+) by (.*)\.</td>""")
-    private val deathAssistsRegex = Regex("""(?<killers>.+)\.<br\s?/>Assisted by (?<assists>.+)""")
+    private val deathAssistsRegex = Regex("""(?:(?<killers>.+)\.<br\s?/>)?Assisted by (?<assists>.+)""")
     private val linkSearch = Regex("""<a[^>]+>[^<]+</a>""")
     private val linkContent = Regex(""">([^<]+)<""")
     private val deathSummon = Regex("""(?<summon>an? .+) of (?<name>.*)""")
@@ -173,11 +173,13 @@ object CharacterParser : Parser<Character?> {
                 continue
             val (dateColumn, descriptionColumn) = columns
             val deathDateTime: Instant = parseTibiaDateTime(dateColumn.text())
-            val deathMatch = deathsRegex.find(descriptionColumn.toString()) ?: continue
-            var (_, levelStr, killersDesc) = deathMatch.groupValues
+            val deathMatch = deathsRegex.find(descriptionColumn.toString())
+            var (_, levelStr, killersDesc) = deathMatch?.groupValues ?: Triple("",
+                "0",
+                descriptionColumn.toString()).toList()
             var assistNameList: List<String> = mutableListOf()
             deathAssistsRegex.find(killersDesc)?.apply {
-                killersDesc = this.groups["killers"]?.value ?: return
+                killersDesc = this.groups["killers"]?.value ?: ""
                 val assistsDec = this.groups["assists"]?.value ?: return
                 assistNameList = linkSearch.findAll(assistsDec).map { it.value }.toList()
             }
@@ -207,7 +209,7 @@ object CharacterParser : Parser<Character?> {
             name = groups["name"]!!.value.clean()
         }
 
-        return Killer(name, player, summon, traded)
+        return Killer(name.clean(), player, summon, traded)
     }
 
     private fun parseCharacters(rows: Elements, builder: CharacterBuilder) {

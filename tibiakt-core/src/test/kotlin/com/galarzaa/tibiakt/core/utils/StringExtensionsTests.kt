@@ -9,6 +9,7 @@ class StringExtensionsTests : StringSpec({
         "One, Two, Three and Four".splitList() shouldBe listOf("One", "Two", "Three", "Four")
         "A, B, C , D".splitList() shouldBe listOf("A", "B", "C", "D")
         (null as String?).splitList() shouldBe emptyList()
+        "".splitList() shouldBe emptyList()
     }
 
     "remove" {

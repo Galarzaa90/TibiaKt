@@ -2,9 +2,9 @@ package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.TestResources.getResource
 import com.galarzaa.tibiakt.core.enums.Vocation
-import com.galarzaa.tibiakt.core.models.scheduledForDeletion
 import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.StringSpec
+import io.kotest.inspectors.forAll
 import io.kotest.inspectors.forAtLeastOne
 import io.kotest.inspectors.forAtMostOne
 import io.kotest.matchers.collections.shouldHaveSize
@@ -112,6 +112,18 @@ class CharacterParserTests : StringSpec({
                 isPlayer shouldBe true
                 summon shouldBe "a paladin familiar"
             }
+        }
+    }
+
+    "Character with deaths with only assists"{
+        val char = CharacterParser.fromContent(getResource("characters/charactersDeathsOnlyAssists.txt"))
+        char shouldNotBe null
+        char!!.name shouldBe "Legend lthuliol"
+        char.deaths shouldHaveSize 8
+        char.deaths.forAll {
+            it.assists shouldHaveSize 1
+            it.killers shouldHaveSize 0
+            it.level shouldBe 0
         }
     }
 })
