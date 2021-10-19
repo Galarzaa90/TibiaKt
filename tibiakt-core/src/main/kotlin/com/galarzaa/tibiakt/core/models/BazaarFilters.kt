@@ -14,6 +14,8 @@ data class BazaarFilters(
     val skill: AuctionSkillFilter? = null,
     val minimumSkillLevel: Int? = null,
     val maximumSkillLevel: Int? = null,
+    val order: AuctionOrder? = null,
+    val orderBy: AuctionOrderBy? = null,
     val searchString: String? = null,
     val searchType: AuctionSearchType? = null,
 )
