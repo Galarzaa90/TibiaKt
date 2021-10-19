@@ -5,6 +5,7 @@ import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
+import java.time.format.DateTimeParseException
 
 /**
  * Parses a string containing date and time from Tibia.com into an Instant instance.
@@ -12,10 +13,17 @@ import java.time.format.DateTimeFormatter
 fun parseTibiaDateTime(input: String): Instant {
     val timeString = input.clean().substring(0, input.length - 4).trim()
     val tzString = input.substring(input.length - 4)
-    return LocalDateTime.parse(
-        timeString,
-        DateTimeFormatter.ofPattern("MMM dd yyyy, HH:mm:ss")
-    ).atOffset(ZoneOffset.of(if (tzString == "CEST") "+02:00" else "+01:00")).toInstant()
+    return try {
+        LocalDateTime.parse(
+            timeString,
+            DateTimeFormatter.ofPattern("MMM dd yyyy, HH:mm:ss")
+        )
+    } catch (dfe: DateTimeParseException) {
+        LocalDateTime.parse(
+            timeString,
+            DateTimeFormatter.ofPattern("MMM dd yyyy, HH:mm")
+        )
+    }.atOffset(ZoneOffset.of(if (tzString == "CEST") "+02:00" else "+01:00")).toInstant()
 }
 
 /**

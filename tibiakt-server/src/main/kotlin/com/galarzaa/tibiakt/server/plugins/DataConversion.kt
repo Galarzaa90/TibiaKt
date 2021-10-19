@@ -1,9 +1,6 @@
 package com.galarzaa.tibiakt.server.plugins
 
-import com.galarzaa.tibiakt.core.enums.HouseOrder
-import com.galarzaa.tibiakt.core.enums.HouseStatus
-import com.galarzaa.tibiakt.core.enums.HouseType
-import com.galarzaa.tibiakt.core.enums.StringEnum
+import com.galarzaa.tibiakt.core.enums.*
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.util.*
@@ -28,6 +25,8 @@ internal fun Application.configureDataConversion() {
         convert<HouseType> { stringEnumConverter<HouseType>() }
         convert<HouseStatus> { stringEnumConverter<HouseStatus>() }
         convert<HouseOrder> { stringEnumConverter<HouseOrder>() }
+        convert<HighscoresCategory> { intEnumConverter<HighscoresCategory>() }
+        convert<HighscoresProfession> { intEnumConverter<HighscoresProfession>() }
     }
 }
 
@@ -37,6 +36,17 @@ private inline fun <reified T : StringEnum> DelegatingConversionService.stringEn
         when (value) {
             null -> listOf()
             is LocalDate -> listOf((value as StringEnum).value)
+            else -> throw DataConversionException("Cannot convert $value as ${T::class.simpleName}")
+        }
+    }
+}
+
+private inline fun <reified T : IntEnum> DelegatingConversionService.intEnumConverter() {
+    decode { values, _ -> values.singleOrNull()?.let { IntEnum.fromValue<T>(it.toInt()) } }
+    encode { value ->
+        when (value) {
+            null -> listOf()
+            is LocalDate -> listOf((value as IntEnum).value.toString())
             else -> throw DataConversionException("Cannot convert $value as ${T::class.simpleName}")
         }
     }

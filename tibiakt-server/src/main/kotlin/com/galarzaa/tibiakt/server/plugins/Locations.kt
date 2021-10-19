@@ -2,9 +2,7 @@
 
 package com.galarzaa.tibiakt.server.plugins
 
-import com.galarzaa.tibiakt.core.enums.HouseOrder
-import com.galarzaa.tibiakt.core.enums.HouseStatus
-import com.galarzaa.tibiakt.core.enums.HouseType
+import com.galarzaa.tibiakt.core.enums.*
 import io.ktor.application.*
 import io.ktor.locations.*
 import java.time.LocalDate
@@ -53,4 +51,12 @@ data class GetWorldHouses(
 data class GetHouse(
     val world: String,
     val houseId: Int,
+)
+
+@Location("/highscores/{world}/{category}")
+data class GetHighscoresPage(
+    val world: String,
+    val category: HighscoresCategory,
+    val page: Int = 1,
+    val profession: HighscoresProfession = HighscoresProfession.ALL,
 )

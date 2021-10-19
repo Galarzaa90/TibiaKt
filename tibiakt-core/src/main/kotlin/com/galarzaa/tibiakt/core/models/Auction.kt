@@ -1,9 +1,12 @@
 @file:UseSerializers(InstantSerializer::class)
+
 package com.galarzaa.tibiakt.core.models
 
 import com.galarzaa.tibiakt.core.enums.BidType
 import com.galarzaa.tibiakt.core.enums.Vocation
 import com.galarzaa.tibiakt.core.utils.InstantSerializer
+import com.galarzaa.tibiakt.core.utils.getAuctionUrl
+import com.galarzaa.tibiakt.core.utils.getCharacterUrl
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import java.time.Instant
@@ -23,5 +26,11 @@ data class Auction(
     val auctionEnd: Instant,
     val bid: Int,
     val bidType: BidType,
-    val details: AuctionDetails,
-)
+    val details: AuctionDetails?,
+) {
+    /** URL to the auction */
+    val url get() = getAuctionUrl(auctionId)
+
+    /** URL to the character being sold */
+    val characterUrl get() = getCharacterUrl(name)
+}

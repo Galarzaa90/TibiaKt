@@ -6,6 +6,7 @@ import java.time.YearMonth
 
 private typealias P<A, B> = Pair<A, B>
 
+
 fun getTibiaUrl(section: String, params: Map<String, Any>, test: Boolean = false): String {
     return getTibiaUrl(section, params = params.toList().toTypedArray(), test = test)
 }
@@ -17,6 +18,12 @@ fun getTibiaUrl(section: String, vararg params: Pair<String, Any?>, test: Boolea
             "$name=${URLEncoder.encode(value.toString(), Charsets.ISO_8859_1)}"
         }
     }"
+}
+
+fun getTibiaUrl(section: String, subtopic: String, vararg params: Pair<String, Any?>, test: Boolean = false): String {
+    val newParams = mutableListOf(*params)
+    newParams.add(0, P("subtopic", subtopic))
+    return getTibiaUrl(section, params = newParams.toTypedArray(), test = test)
 }
 
 fun getCharacterUrl(name: String) = getTibiaUrl("community", P("subtopic", "characters"), P("name", name))
@@ -39,13 +46,13 @@ fun getHighscoresUrl(
     vocations: HighscoresProfession = HighscoresProfession.ALL,
     page: Int = 1,
     battleEye: HighscoresBattlEyeType = HighscoresBattlEyeType.ANY_WORLD,
-    worldTypes: Set<HighscoresPvpType>? = null
+    worldTypes: Set<HighscoresPvpType>? = null,
 ) = getTibiaUrl(
     "community",
     P("subtopic", "highscores"),
     P("world", world),
     P("profession", vocations.value),
-    P("curentpage", page),
+    P("currentpage", page),
     P("category", category.value),
     P("beprotection", battleEye.value),
     *worldTypes.orEmpty().map { P("worldtypes[]", it.value) }.toTypedArray()
@@ -65,7 +72,7 @@ fun getHousesSectionUrl(
     town: String,
     type: HouseType? = null,
     status: HouseStatus? = null,
-    order: HouseOrder? = null
+    order: HouseOrder? = null,
 ) =
     getTibiaUrl(
         "community",
@@ -76,3 +83,6 @@ fun getHousesSectionUrl(
         P("type", type?.value),
         P("order", order?.value),
     )
+
+fun getAuctionUrl(auctionId: Int) =
+    getTibiaUrl("charactertrade", "currentcharactertrades", P("page", "details"), P("auctionid", auctionId))
