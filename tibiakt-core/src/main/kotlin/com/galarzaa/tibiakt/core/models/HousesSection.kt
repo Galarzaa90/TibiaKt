@@ -9,12 +9,12 @@ import kotlinx.serialization.Serializable
 /**
  * The Houses Section in Tibia.com
  *
- * @world The world of the houses.
- * @town The town of the houses.
- * @status The status filter used for the search, if null, houses of any status will be shown.
- * @type The type of houses to display.
- * @order The ordering to use.
- * @entries The list of houses matching the provided filters.
+ * @property world The world of the houses.
+ * @property town The town of the houses.
+ * @property status The status filter used for the search, if null, houses of any status will be shown.
+ * @property type The type of houses to display.
+ * @property order The ordering to use.
+ * @property entries The list of houses matching the provided filters.
  */
 @Serializable
 data class HousesSection(

@@ -4,6 +4,7 @@ import com.galarzaa.tibiakt.core.utils.getHouseUrl
 
 /**
  * Base interface for house related classes.
+ *
  * @property houseId The internal ID of the house.
  * @property world The world where this house is located.
  */

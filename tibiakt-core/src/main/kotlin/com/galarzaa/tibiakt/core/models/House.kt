@@ -12,6 +12,7 @@ import java.time.Instant
 
 /**
  * A house or guildhall.
+ *
  * @property name The name of the house.
  * @property size The size of the house in square meters (tiles).
  * @property type The type of the house.

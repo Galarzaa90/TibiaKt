@@ -7,6 +7,11 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import java.time.LocalDate
 
+/** A guildhall owned by a [Guild]
+ *
+ * @property name The name of the guildhall.
+ * @property paidUntil The date when the last paid rent is due.
+ */
 @Serializable
 data class GuildHall(
     val name: String,

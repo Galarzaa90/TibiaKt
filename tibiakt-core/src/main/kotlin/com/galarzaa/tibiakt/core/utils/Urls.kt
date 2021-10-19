@@ -6,11 +6,12 @@ import java.time.YearMonth
 
 private typealias P<A, B> = Pair<A, B>
 
-
-fun getTibiaUrl(section: String, params: Map<String, Any>, test: Boolean = false): String {
-    return getTibiaUrl(section, params = params.toList().toTypedArray(), test = test)
-}
-
+/**
+ * Gets the URL to a specific section in Tibia.
+ *
+ * @param section The desired section.
+ * @param params The query arguments to pass.
+ */
 fun getTibiaUrl(section: String, vararg params: Pair<String, Any?>, test: Boolean = false): String {
     val baseUrl = if (test) "www.test.tibia.com" else "www.tibia.com"
     return "https://$baseUrl/$section/?${
@@ -20,6 +21,13 @@ fun getTibiaUrl(section: String, vararg params: Pair<String, Any?>, test: Boolea
     }"
 }
 
+/**
+ * Gets the URL to a specific section in Tibia.
+ *
+ * @param section The desired section.
+ * @param subtopic The desired subtopic.
+ * @param params The query arguments to pass.
+ */
 fun getTibiaUrl(section: String, subtopic: String, vararg params: Pair<String, Any?>, test: Boolean = false): String {
     val newParams = mutableListOf(*params)
     newParams.add(0, P("subtopic", subtopic))

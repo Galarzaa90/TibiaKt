@@ -4,6 +4,7 @@ import com.galarzaa.tibiakt.core.utils.getGuildUrl
 
 /**
  * Base interface for guild related classes
+ *
  * @property name The name of the guild.
  */
 interface BaseGuild {

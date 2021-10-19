@@ -20,7 +20,9 @@ import java.time.LocalDate
 import java.time.YearMonth
 import kotlin.system.measureTimeMillis
 
-
+/**
+ * A coroutine based client to fetch from Tibia.com
+ */
 open class TibiaKtClient {
     private val client = HttpClient(CIO) {
         ContentEncoding {
