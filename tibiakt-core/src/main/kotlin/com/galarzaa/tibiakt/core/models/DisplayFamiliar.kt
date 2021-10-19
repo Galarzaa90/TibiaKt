@@ -1,9 +1,12 @@
 package com.galarzaa.tibiakt.core.models
 
+import com.galarzaa.tibiakt.core.utils.getStaticFileUrl
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class DisplayFamiliar(
-    val familiarId: Int,
     val name: String,
-)
+    val familiarId: Int,
+) {
+    val imageUrl get() = getStaticFileUrl("images", "charactertrade", "summons", "$familiarId.gif")
+}

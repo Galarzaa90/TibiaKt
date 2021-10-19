@@ -7,4 +7,6 @@ data class BestiaryEntry(
     val name: String,
     val kills: Long,
     val step: Int,
-)
+) {
+    val isComplete get() = step == 4
+}

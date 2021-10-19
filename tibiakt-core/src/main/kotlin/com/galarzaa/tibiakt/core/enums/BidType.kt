@@ -10,7 +10,7 @@ enum class BidType(override val value: String) : StringEnum {
     CURRENT("Current Bid"),
 
     /**
-     * The minimum bid set by the auction author, meaning the auction hasn't received any bids or it finished without bids.
+     * The minimum bid set by the auction author, meaning the auction didn't receive any bids
      */
     MINIMUM("Minimum Bid"),
 

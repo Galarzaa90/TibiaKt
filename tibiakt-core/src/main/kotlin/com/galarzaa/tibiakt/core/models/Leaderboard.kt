@@ -6,5 +6,5 @@ data class Leaderboard(
     val pageCurrent: Int,
     val pageTotal: Int,
     val resultsCount: Int,
-    val entries: List<HighscoresEntry>
+    val entries: List<HighscoresEntry> = emptyList(),
 )

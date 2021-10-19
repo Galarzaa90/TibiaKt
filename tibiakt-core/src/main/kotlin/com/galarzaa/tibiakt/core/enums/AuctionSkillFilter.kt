@@ -1,5 +1,8 @@
 package com.galarzaa.tibiakt.core.enums
 
+/**
+ * The possible skills to auctions by.
+ */
 enum class AuctionSkillFilter(override val value: Int) : IntEnum {
     AXE_FIGHTING(10),
     CLUB_FIGHTING(9),

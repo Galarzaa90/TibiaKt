@@ -116,7 +116,7 @@ private val resultsRegex = Regex("""Results: ([\d,]+)""")
 
 /** Parse the pagination block present in many Tibia.com sections */
 internal fun Element.parsePagination(): PaginationData {
-    val (pagesDiv, resultsDiv) = select("div")
+    val (pagesDiv, resultsDiv) = select("small > div")
     val currentPageLink =
         pagesDiv.selectFirst(".CurrentPageLink") ?: throw ParsingException("Could not parse pagination info")
     val pageLinks = pagesDiv.select(".PageLink")

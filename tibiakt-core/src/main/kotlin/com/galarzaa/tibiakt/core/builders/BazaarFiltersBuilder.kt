@@ -13,7 +13,7 @@ class BazaarFiltersBuilder {
     private var skill: AuctionSkillFilter? = null
     private var minimumSkillLevel: Int? = null
     private var maximumSkillLevel: Int? = null
-    private var order: AuctionOrder? = null
+    private var orderDirection: AuctionOrderDirection? = null
     private var orderBy: AuctionOrderBy? = null
     private var searchString: String? = null
     private var searchType: AuctionSearchType? = null
@@ -27,7 +27,7 @@ class BazaarFiltersBuilder {
     fun skill(skill: AuctionSkillFilter?) = apply { this.skill = skill }
     fun minimumSkillLevel(minimumSkillLevel: Int?) = apply { this.minimumSkillLevel = minimumSkillLevel }
     fun maximumSkillLevel(maximumSkillLevel: Int?) = apply { this.maximumSkillLevel = maximumSkillLevel }
-    fun order(order: AuctionOrder?) = apply { this.order = order }
+    fun orderDirection(orderDirection: AuctionOrderDirection?) = apply { this.orderDirection = orderDirection }
     fun orderBy(orderBy: AuctionOrderBy?) = apply { this.orderBy = orderBy }
     fun searchString(searchString: String?) = apply { this.searchString = searchString }
     fun searchType(searchType: AuctionSearchType?) = apply { this.searchType = searchType }
@@ -44,7 +44,7 @@ class BazaarFiltersBuilder {
         maximumSkillLevel = maximumSkillLevel,
         searchString = searchString,
         searchType = searchType,
-        order = order,
+        orderDirection = orderDirection,
         orderBy = orderBy
     )
 }

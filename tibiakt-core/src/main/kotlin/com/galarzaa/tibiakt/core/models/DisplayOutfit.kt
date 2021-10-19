@@ -1,12 +1,17 @@
 package com.galarzaa.tibiakt.core.models
 
-import com.galarzaa.tibiakt.core.utils.getStaticFileUrl
 import kotlinx.serialization.Serializable
 
+/**
+ * An outfit owned or unlocked by a character in an [Auction].
+ *
+ * @property name The name of the outfit.
+ */
 @Serializable
 data class DisplayOutfit(
-    val outfitId: Int,
-    val addons: Int,
-) {
-    val imageUrl get() = getStaticFileUrl("images", "charactertrade", "outfits", "${outfitId}_$addons.gif")
-}
+    val name: String,
+    override val outfitId: Int,
+    override val addons: Int,
+) : BaseOutfit
+
+

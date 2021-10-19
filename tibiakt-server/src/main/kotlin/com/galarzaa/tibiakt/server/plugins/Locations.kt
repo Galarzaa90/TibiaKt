@@ -63,3 +63,6 @@ data class GetHighscoresPage(
 
 @Location("/bazaar")
 data class GetBazaar(val page: Int = 1)
+
+@Location("/auctions/{auctionId}")
+data class GetAuction(val auctionId: Int)

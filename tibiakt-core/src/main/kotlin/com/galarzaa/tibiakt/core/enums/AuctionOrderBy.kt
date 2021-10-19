@@ -1,5 +1,8 @@
 package com.galarzaa.tibiakt.core.enums
 
+/**
+ * The possible fields you can order autions by
+ */
 enum class AuctionOrderBy(override val value: Int) : IntEnum {
     BID(100),
     END_DATE(101),

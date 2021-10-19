@@ -23,7 +23,7 @@ data class HousesSection(
     val status: HouseStatus?,
     val type: HouseType,
     val order: HouseOrder,
-    val entries: List<HouseEntry>,
+    val entries: List<HouseEntry> = emptyList(),
 ) {
 
     val url

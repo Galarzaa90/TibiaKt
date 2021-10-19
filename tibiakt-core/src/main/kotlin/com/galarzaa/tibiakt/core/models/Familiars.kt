@@ -7,6 +7,6 @@ data class Familiars(
     override val currentPage: Int,
     override val totalPages: Int,
     override val resultsCount: Int,
-    override val entries: List<DisplayFamiliar>,
+    override val entries: List<DisplayFamiliar> = emptyList(),
     val fullyFetched: Boolean = false,
 ) : Paginated<DisplayFamiliar>

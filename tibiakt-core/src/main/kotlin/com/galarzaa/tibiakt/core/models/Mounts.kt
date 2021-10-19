@@ -7,6 +7,6 @@ data class Mounts(
     override val currentPage: Int,
     override val totalPages: Int,
     override val resultsCount: Int,
-    override val entries: List<DisplayMount>,
+    override val entries: List<DisplayMount> = emptyList(),
     val fullyFetched: Boolean = false,
 ) : Paginated<DisplayMount>

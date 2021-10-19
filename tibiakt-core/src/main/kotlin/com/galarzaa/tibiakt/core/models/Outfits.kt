@@ -7,6 +7,6 @@ data class Outfits(
     override val currentPage: Int,
     override val totalPages: Int,
     override val resultsCount: Int,
-    override val entries: List<DisplayOutfit>,
+    override val entries: List<DisplayOutfit> = emptyList(),
     val fullyFetched: Boolean = false,
 ) : Paginated<DisplayOutfit>

@@ -48,6 +48,7 @@ internal fun Application.configureRouting(client: TibiaKtClient) {
             call.respondOrNotFound(client.fetchHighscoresPage(world, it.category, it.profession, it.page))
         }
         get<GetBazaar> { it -> call.respondOrNotFound(client.fetchBazaar()) }
+        get<GetAuction> { it -> call.respondOrNotFound(client.fetchAuction(it.auctionId)) }
     }
 }
 

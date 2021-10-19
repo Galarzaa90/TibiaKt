@@ -13,7 +13,7 @@ class AuctionBuilder {
     private var world: String? = null
     private var vocation: Vocation? = null
     private var sex: String? = null
-    private var outfit: DisplayOutfit? = null
+    private var outfit: OutfitImage? = null
     private val displayedItems: MutableList<DisplayItem> = mutableListOf()
     private val salesArguments: MutableList<SalesArgument> = mutableListOf()
     private var auctionStart: Instant? = null
@@ -29,8 +29,8 @@ class AuctionBuilder {
     fun vocation(vocation: Vocation) = apply { this.vocation = vocation }
     fun sex(sex: String) = apply { this.sex = sex }
     fun world(world: String) = apply { this.world = world }
-    fun outfit(outfit: DisplayOutfit) = apply { this.outfit = outfit }
-    fun outfit(outfitId: Int, addons: Int) = apply { outfit = DisplayOutfit(outfitId, addons) }
+    fun outfit(outfit: OutfitImage) = apply { this.outfit = outfit }
+    fun outfit(outfitId: Int, addons: Int) = apply { outfit = OutfitImage(outfitId, addons) }
     fun addDisplayedItem(displayedItem: DisplayItem) = apply { displayedItems.add(displayedItem) }
     fun addSalesArgument(salesArgument: SalesArgument) = apply { salesArguments.add(salesArgument) }
     fun auctionStart(auctionStart: Instant) = apply { this.auctionStart = auctionStart }
@@ -38,10 +38,11 @@ class AuctionBuilder {
     fun bid(bid: Int) = apply { this.bid = bid }
     fun bidType(bidType: BidType) = apply { this.bidType = bidType }
     fun status(status: AuctionStatus) = apply { this.status = status }
+    fun details(details: AuctionDetails) = apply { this.details = details }
 
     fun build() = Auction(
         name = name ?: throw IllegalStateException("name is required"),
-        auctionId = auctionId ?: throw IllegalStateException("aucitonId is required"),
+        auctionId = auctionId ?: throw IllegalStateException("auctionId is required"),
         level = level ?: throw IllegalStateException("level is required"),
         world = world ?: throw IllegalStateException("world is required"),
         vocation = vocation ?: throw IllegalStateException("vocaiton is required"),

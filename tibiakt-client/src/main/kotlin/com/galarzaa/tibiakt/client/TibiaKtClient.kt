@@ -175,6 +175,11 @@ open class TibiaKtClient {
         return response.parse { CharacterBazaarParser.fromContent(it) }
     }
 
+    suspend fun fetchAuction(auctionId: Int): TibiaResponse<Auction?> {
+        val response = this.request(HttpMethod.Get, getAuctionUrl(auctionId))
+        return response.parse { AuctionParser.fromContent(it, auctionId) }
+    }
+
     private val HttpResponse.fetchingTime get() = (responseTime.timestamp - requestTime.timestamp) / 1000f
     private val HttpResponse.fetchingTimeMillis get() = (fetchingTime * 1000).toInt()
 
