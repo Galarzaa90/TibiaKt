@@ -2,6 +2,7 @@
 
 package com.galarzaa.tibiakt.core.models
 
+import com.galarzaa.tibiakt.core.enums.AuctionStatus
 import com.galarzaa.tibiakt.core.enums.BidType
 import com.galarzaa.tibiakt.core.enums.Vocation
 import com.galarzaa.tibiakt.core.utils.InstantSerializer
@@ -26,6 +27,7 @@ data class Auction(
     val auctionEnd: Instant,
     val bid: Int,
     val bidType: BidType,
+    val status: AuctionStatus,
     val details: AuctionDetails?,
 ) {
     /** URL to the auction */

@@ -3,11 +3,10 @@ package com.galarzaa.tibiakt.core.parsers
 import com.galarzaa.tibiakt.core.builders.AuctionBuilder
 import com.galarzaa.tibiakt.core.builders.BazaarFiltersBuilder
 import com.galarzaa.tibiakt.core.builders.CharacterBazaarBuilder
-import com.galarzaa.tibiakt.core.enums.IntEnum
-import com.galarzaa.tibiakt.core.enums.StringEnum
-import com.galarzaa.tibiakt.core.enums.Vocation
+import com.galarzaa.tibiakt.core.enums.*
 import com.galarzaa.tibiakt.core.models.CharacterBazaar
 import com.galarzaa.tibiakt.core.models.DisplayItem
+import com.galarzaa.tibiakt.core.models.SalesArgument
 import com.galarzaa.tibiakt.core.utils.*
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
@@ -18,6 +17,7 @@ object CharacterBazaarParser : Parser<CharacterBazaar> {
     private val charInfoRegex = Regex("""Level: (\d+) \| Vocation: ([\w\s]+)\| (\w+) \| World: (\w+)""")
     private val idAddonsRegex = Regex("""/(\d+)_(\d+)""")
     private val amountRegex = Regex("""([\d,]+)x """)
+    private val idRegex = Regex("""(\d+).(?:gif|png)""")
 
     override fun fromContent(content: String): CharacterBazaar {
         val builder = CharacterBazaarBuilder()
@@ -25,16 +25,27 @@ object CharacterBazaarParser : Parser<CharacterBazaar> {
         val tables = document.parseTablesMap("table.Table3")
         tables["Filter Auctions"]?.apply { parseAuctionFilters(this, builder) }
         tables["Current Auctions"]?.apply {
-            val auctions = this.select("div.Auction")
-            auctions.forEach { parseAuctionContainer(it, builder) }
+            this.select("div.Auction").forEach { parseAuctionContainer(it, builder) }
+            builder.type(BazaarType.CURRENT)
+        }
+        tables["Auction History"]?.apply {
+            this.select("div.Auction").forEach { parseAuctionContainer(it, builder) }
+            builder.type(BazaarType.HISTORY)
+        }
+        val paginationBlock = document.selectFirst("td.PageNavigation")
+        paginationBlock?.parsePagination()?.run {
+            builder
+                .totalPages(totalPages)
+                .currentPage(currentPage)
+                .resultsCount(resultsCount)
         }
         return builder.build()
     }
 
     private fun parseAuctionFilters(filtersTable: Element, builder: CharacterBazaarBuilder) {
-        val (searchForm, secondaryForm) = filtersTable.select("form")
-        val searchData = searchForm.formData()
-        val additionalData = secondaryForm.formData()
+        val forms = filtersTable.select("form")
+        val searchData = forms.first()?.formData() ?: throw ParsingException("could not find search form")
+
         val filterBuilder = BazaarFiltersBuilder()
         filterBuilder
             .world(searchData.data["filter_world"])
@@ -48,9 +59,14 @@ object CharacterBazaarParser : Parser<CharacterBazaar> {
             .maximumLevel(searchData.data["filter_levelrangeto"]?.nullIfBlank()?.parseInteger())
             .minimumSkillLevel(searchData.data["filter_skillrangefrom"]?.nullIfBlank()?.parseInteger())
             .maximumSkillLevel(searchData.data["filter_skillrangeto"]?.nullIfBlank()?.parseInteger())
-            .searchString(additionalData.data["searchstring"]?.nullIfBlank())
-            .searchType(IntEnum.fromValue(additionalData.data["searchstring"]))
-        builder.filters(filterBuilder.build())
+
+        if (forms.size > 1) {
+            val additionalData = forms[1].formData()
+            filterBuilder.searchString(additionalData.data["searchstring"]?.nullIfBlank())
+                .searchType(IntEnum.fromValue(additionalData.data["searchstring"]))
+        }
+        builder
+            .filters(filterBuilder.build())
     }
 
     private fun parseAuctionContainer(auctionContainer: Element, builder: CharacterBazaarBuilder) {
@@ -78,6 +94,15 @@ object CharacterBazaarParser : Parser<CharacterBazaar> {
         auctionContainer.select(".CVIcon").map { parseDisplayedItem(it, auctionBuilder) }
         auctionBuilder.outfit(outfitId.toInt(), addons.toInt())
 
+        auctionContainer.select("div.Entry").forEach {
+            val img = it.select("img")
+            val imgUrl = img.attr("src")
+            val (_, id) = idRegex.find(imgUrl)!!.groupValues
+            auctionBuilder.addSalesArgument(
+                SalesArgument(id.toInt(), it.cleanText())
+            )
+        }
+
         val (startDate, endDate, _) = auctionContainer.select("div.ShortAuctionDataValue").map { it.cleanText() }
         auctionBuilder.auctionStart(parseTibiaDateTime(startDate)).auctionEnd(parseTibiaDateTime(endDate))
         auctionContainer.selectFirst("div.ShortAuctionDataBidRow")?.run {
@@ -87,8 +112,13 @@ object CharacterBazaarParser : Parser<CharacterBazaar> {
             val bidTypeStr = bidTypeTag.cleanText().remove(":")
             auctionBuilder
                 .bid(bidTag.text().parseInteger())
-                .bidType(StringEnum.fromValue(bidTypeStr) ?: throw ParsingException("unknown bid type: $bidTypeStr"))
+                .bidType(StringEnum.fromValue(bidTypeStr)
+                    ?: throw ParsingException("unknown bid type: $bidTypeStr"))
         }
+
+        val status = auctionContainer.selectFirst("div.AuctionInfo")?.cleanText() ?: ""
+        auctionBuilder.status(StringEnum.fromValue<AuctionStatus>(status) ?: AuctionStatus.IN_PROGRESS)
+
         builder.addEntry(auctionBuilder.build())
     }
 

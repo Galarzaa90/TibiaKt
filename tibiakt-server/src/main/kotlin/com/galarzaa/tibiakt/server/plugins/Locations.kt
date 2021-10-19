@@ -60,3 +60,6 @@ data class GetHighscoresPage(
     val page: Int = 1,
     val profession: HighscoresProfession = HighscoresProfession.ALL,
 )
+
+@Location("/bazaar")
+data class GetBazaar(val page: Int = 1)

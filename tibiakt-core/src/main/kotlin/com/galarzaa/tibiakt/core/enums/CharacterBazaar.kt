@@ -10,5 +10,5 @@ data class CharacterBazaar(
     override val totalPages: Int,
     override val resultsCount: Int,
     override val entries: List<Auction>,
-    val filters: BazaarFilters? = null,
+    val filters: BazaarFilters = BazaarFilters(),
 ) : Paginated<Auction>

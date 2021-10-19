@@ -168,6 +168,13 @@ open class TibiaKtClient {
         return response.parse { HouseParser.fromContent(it) }
     }
 
+    suspend fun fetchBazaar(
+        type: BazaarType = BazaarType.CURRENT,
+    ): TibiaResponse<CharacterBazaar> {
+        val response = this.request(HttpMethod.Get, getBazaarUrl(type))
+        return response.parse { CharacterBazaarParser.fromContent(it) }
+    }
+
     private val HttpResponse.fetchingTime get() = (responseTime.timestamp - requestTime.timestamp) / 1000f
     private val HttpResponse.fetchingTimeMillis get() = (fetchingTime * 1000).toInt()
 

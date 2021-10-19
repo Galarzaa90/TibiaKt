@@ -1,5 +1,6 @@
 package com.galarzaa.tibiakt.core.builders
 
+import com.galarzaa.tibiakt.core.enums.AuctionStatus
 import com.galarzaa.tibiakt.core.enums.BidType
 import com.galarzaa.tibiakt.core.enums.Vocation
 import com.galarzaa.tibiakt.core.models.*
@@ -19,6 +20,7 @@ class AuctionBuilder {
     private var auctionEnd: Instant? = null
     private var bid: Int = 0
     private var bidType: BidType? = null
+    private var status: AuctionStatus? = null
     private var details: AuctionDetails? = null
 
     fun name(name: String) = apply { this.name = name }
@@ -30,10 +32,12 @@ class AuctionBuilder {
     fun outfit(outfit: DisplayOutfit) = apply { this.outfit = outfit }
     fun outfit(outfitId: Int, addons: Int) = apply { outfit = DisplayOutfit(outfitId, addons) }
     fun addDisplayedItem(displayedItem: DisplayItem) = apply { displayedItems.add(displayedItem) }
+    fun addSalesArgument(salesArgument: SalesArgument) = apply { salesArguments.add(salesArgument) }
     fun auctionStart(auctionStart: Instant) = apply { this.auctionStart = auctionStart }
     fun auctionEnd(auctionEnd: Instant) = apply { this.auctionEnd = auctionEnd }
     fun bid(bid: Int) = apply { this.bid = bid }
     fun bidType(bidType: BidType) = apply { this.bidType = bidType }
+    fun status(status: AuctionStatus) = apply { this.status = status }
 
     fun build() = Auction(
         name = name ?: throw IllegalStateException("name is required"),
@@ -49,6 +53,7 @@ class AuctionBuilder {
         auctionEnd = auctionEnd ?: throw IllegalStateException("auctionEnd is required"),
         bid = bid,
         bidType = bidType ?: throw IllegalStateException("bidType is required"),
+        status = status ?: throw IllegalStateException("status is required"),
         details = details,
     )
 }
