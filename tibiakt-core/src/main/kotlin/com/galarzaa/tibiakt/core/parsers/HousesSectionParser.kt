@@ -3,7 +3,7 @@ package com.galarzaa.tibiakt.core.parsers
 import com.galarzaa.tibiakt.core.builders.HousesSectionBuilder
 import com.galarzaa.tibiakt.core.enums.HouseStatus
 import com.galarzaa.tibiakt.core.enums.StringEnum
-import com.galarzaa.tibiakt.core.models.HousesSection
+import com.galarzaa.tibiakt.core.models.house.HousesSection
 import com.galarzaa.tibiakt.core.utils.*
 import java.time.Duration
 

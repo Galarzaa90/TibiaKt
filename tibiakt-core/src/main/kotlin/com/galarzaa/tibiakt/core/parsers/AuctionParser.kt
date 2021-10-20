@@ -5,7 +5,7 @@ import com.galarzaa.tibiakt.core.builders.AuctionDetailsBuilder
 import com.galarzaa.tibiakt.core.enums.AuctionStatus
 import com.galarzaa.tibiakt.core.enums.StringEnum
 import com.galarzaa.tibiakt.core.enums.Vocation
-import com.galarzaa.tibiakt.core.models.*
+import com.galarzaa.tibiakt.core.models.bazaar.*
 import com.galarzaa.tibiakt.core.utils.*
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element

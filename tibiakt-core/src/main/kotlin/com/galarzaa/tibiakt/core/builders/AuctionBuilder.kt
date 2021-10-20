@@ -3,7 +3,7 @@ package com.galarzaa.tibiakt.core.builders
 import com.galarzaa.tibiakt.core.enums.AuctionStatus
 import com.galarzaa.tibiakt.core.enums.BidType
 import com.galarzaa.tibiakt.core.enums.Vocation
-import com.galarzaa.tibiakt.core.models.*
+import com.galarzaa.tibiakt.core.models.bazaar.*
 import java.time.Instant
 
 class AuctionBuilder {

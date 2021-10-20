@@ -3,8 +3,8 @@ package com.galarzaa.tibiakt.core.builders
 import com.galarzaa.tibiakt.core.enums.HouseOrder
 import com.galarzaa.tibiakt.core.enums.HouseStatus
 import com.galarzaa.tibiakt.core.enums.HouseType
-import com.galarzaa.tibiakt.core.models.HouseEntry
-import com.galarzaa.tibiakt.core.models.HousesSection
+import com.galarzaa.tibiakt.core.models.house.HouseEntry
+import com.galarzaa.tibiakt.core.models.house.HousesSection
 import java.time.Duration
 
 class HousesSectionBuilder {

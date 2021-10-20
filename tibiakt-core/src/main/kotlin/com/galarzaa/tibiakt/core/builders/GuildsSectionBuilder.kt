@@ -1,7 +1,7 @@
 package com.galarzaa.tibiakt.core.builders
 
-import com.galarzaa.tibiakt.core.models.GuildEntry
-import com.galarzaa.tibiakt.core.models.GuildsSection
+import com.galarzaa.tibiakt.core.models.guild.GuildEntry
+import com.galarzaa.tibiakt.core.models.guild.GuildsSection
 
 class GuildsSectionBuilder {
     private var world: String? = null

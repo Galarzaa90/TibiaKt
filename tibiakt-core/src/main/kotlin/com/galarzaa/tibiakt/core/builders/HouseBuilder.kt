@@ -2,7 +2,7 @@ package com.galarzaa.tibiakt.core.builders
 
 import com.galarzaa.tibiakt.core.enums.HouseStatus
 import com.galarzaa.tibiakt.core.enums.HouseType
-import com.galarzaa.tibiakt.core.models.House
+import com.galarzaa.tibiakt.core.models.house.House
 import java.time.Instant
 
 class HouseBuilder {

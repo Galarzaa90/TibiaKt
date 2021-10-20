@@ -1,10 +1,10 @@
 package com.galarzaa.tibiakt.core.builders
 
 import com.galarzaa.tibiakt.core.enums.Vocation
-import com.galarzaa.tibiakt.core.models.Guild
-import com.galarzaa.tibiakt.core.models.GuildHall
-import com.galarzaa.tibiakt.core.models.GuildInvite
-import com.galarzaa.tibiakt.core.models.GuildMember
+import com.galarzaa.tibiakt.core.models.guild.Guild
+import com.galarzaa.tibiakt.core.models.guild.GuildHall
+import com.galarzaa.tibiakt.core.models.guild.GuildInvite
+import com.galarzaa.tibiakt.core.models.guild.GuildMember
 import java.time.LocalDate
 
 class GuildBuilder {

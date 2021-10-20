@@ -1,9 +1,9 @@
 package com.galarzaa.tibiakt.core.builders
 
 import com.galarzaa.tibiakt.core.enums.BazaarType
-import com.galarzaa.tibiakt.core.models.Auction
-import com.galarzaa.tibiakt.core.models.BazaarFilters
-import com.galarzaa.tibiakt.core.models.CharacterBazaar
+import com.galarzaa.tibiakt.core.models.bazaar.Auction
+import com.galarzaa.tibiakt.core.models.bazaar.BazaarFilters
+import com.galarzaa.tibiakt.core.models.bazaar.CharacterBazaar
 
 class CharacterBazaarBuilder {
     private var type: BazaarType? = BazaarType.CURRENT

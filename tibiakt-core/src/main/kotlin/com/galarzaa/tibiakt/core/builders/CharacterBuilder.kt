@@ -1,7 +1,7 @@
 package com.galarzaa.tibiakt.core.builders
 
 import com.galarzaa.tibiakt.core.enums.Vocation
-import com.galarzaa.tibiakt.core.models.*
+import com.galarzaa.tibiakt.core.models.character.*
 import java.time.Instant
 import java.time.LocalDate
 

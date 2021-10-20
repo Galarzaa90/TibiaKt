@@ -2,8 +2,8 @@ package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.core.builders.CharacterBuilder
 import com.galarzaa.tibiakt.core.enums.Vocation
-import com.galarzaa.tibiakt.core.models.Character
-import com.galarzaa.tibiakt.core.models.Killer
+import com.galarzaa.tibiakt.core.models.character.Character
+import com.galarzaa.tibiakt.core.models.character.Killer
 import com.galarzaa.tibiakt.core.utils.*
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document

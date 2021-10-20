@@ -2,7 +2,7 @@ package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.core.builders.EventEntryBuilder
 import com.galarzaa.tibiakt.core.builders.EventsScheduleBuilder
-import com.galarzaa.tibiakt.core.models.EventsSchedule
+import com.galarzaa.tibiakt.core.models.news.EventsSchedule
 import com.galarzaa.tibiakt.core.utils.*
 import org.jsoup.nodes.Element
 import java.time.LocalDate

@@ -1,7 +1,7 @@
 package com.galarzaa.tibiakt.core.builders
 
-import com.galarzaa.tibiakt.core.models.EventEntry
-import com.galarzaa.tibiakt.core.models.EventsSchedule
+import com.galarzaa.tibiakt.core.models.news.EventEntry
+import com.galarzaa.tibiakt.core.models.news.EventsSchedule
 import java.time.LocalDate
 import java.time.YearMonth
 

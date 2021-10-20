@@ -1,6 +1,6 @@
 package com.galarzaa.tibiakt.core.builders
 
-import com.galarzaa.tibiakt.core.models.EventEntry
+import com.galarzaa.tibiakt.core.models.news.EventEntry
 import java.time.LocalDate
 
 class EventEntryBuilder {

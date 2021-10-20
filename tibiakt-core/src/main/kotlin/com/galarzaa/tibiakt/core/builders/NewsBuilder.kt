@@ -1,7 +1,7 @@
 package com.galarzaa.tibiakt.core.builders
 
 import com.galarzaa.tibiakt.core.enums.NewsCategory
-import com.galarzaa.tibiakt.core.models.News
+import com.galarzaa.tibiakt.core.models.news.News
 import java.time.LocalDate
 
 class NewsBuilder {

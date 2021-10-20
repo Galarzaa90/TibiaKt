@@ -4,8 +4,8 @@ import com.galarzaa.tibiakt.core.enums.BattlEyeType
 import com.galarzaa.tibiakt.core.enums.PvpType
 import com.galarzaa.tibiakt.core.enums.TransferType
 import com.galarzaa.tibiakt.core.enums.Vocation
-import com.galarzaa.tibiakt.core.models.OnlineCharacter
-import com.galarzaa.tibiakt.core.models.World
+import com.galarzaa.tibiakt.core.models.world.OnlineCharacter
+import com.galarzaa.tibiakt.core.models.world.World
 import java.time.Instant
 import java.time.LocalDate
 import java.time.YearMonth

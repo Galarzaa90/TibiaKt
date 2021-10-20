@@ -1,7 +1,7 @@
 package com.galarzaa.tibiakt.core.builders
 
 import com.galarzaa.tibiakt.core.enums.*
-import com.galarzaa.tibiakt.core.models.BazaarFilters
+import com.galarzaa.tibiakt.core.models.bazaar.BazaarFilters
 
 class BazaarFiltersBuilder {
     private var world: String? = null

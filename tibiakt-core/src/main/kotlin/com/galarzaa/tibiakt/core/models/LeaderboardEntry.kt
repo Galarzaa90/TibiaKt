@@ -1,5 +1,6 @@
 package com.galarzaa.tibiakt.core.models
 
+import com.galarzaa.tibiakt.core.models.character.BaseCharacter
 import kotlinx.serialization.Serializable
 
 @Serializable

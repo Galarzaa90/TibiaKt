@@ -3,7 +3,7 @@ package com.galarzaa.tibiakt.core.parsers
 import com.galarzaa.tibiakt.core.builders.HouseBuilder
 import com.galarzaa.tibiakt.core.enums.HouseStatus
 import com.galarzaa.tibiakt.core.enums.StringEnum
-import com.galarzaa.tibiakt.core.models.House
+import com.galarzaa.tibiakt.core.models.house.House
 import com.galarzaa.tibiakt.core.utils.*
 
 object HouseParser : Parser<House?> {

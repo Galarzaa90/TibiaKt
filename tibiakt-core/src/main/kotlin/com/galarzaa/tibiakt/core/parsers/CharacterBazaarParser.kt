@@ -5,7 +5,7 @@ import com.galarzaa.tibiakt.core.builders.BazaarFiltersBuilder
 import com.galarzaa.tibiakt.core.builders.CharacterBazaarBuilder
 import com.galarzaa.tibiakt.core.enums.BazaarType
 import com.galarzaa.tibiakt.core.enums.IntEnum
-import com.galarzaa.tibiakt.core.models.CharacterBazaar
+import com.galarzaa.tibiakt.core.models.bazaar.CharacterBazaar
 import com.galarzaa.tibiakt.core.parsers.AuctionParser.parseAuctionContainer
 import com.galarzaa.tibiakt.core.utils.*
 import org.jsoup.Jsoup

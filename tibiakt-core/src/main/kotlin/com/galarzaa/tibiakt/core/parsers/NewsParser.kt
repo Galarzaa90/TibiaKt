@@ -1,7 +1,7 @@
 package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.core.builders.NewsBuilder
-import com.galarzaa.tibiakt.core.models.News
+import com.galarzaa.tibiakt.core.models.news.News
 import com.galarzaa.tibiakt.core.utils.*
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document

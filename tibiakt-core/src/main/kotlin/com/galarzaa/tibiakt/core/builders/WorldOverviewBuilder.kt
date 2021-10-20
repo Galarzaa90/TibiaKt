@@ -3,8 +3,8 @@ package com.galarzaa.tibiakt.core.builders
 import com.galarzaa.tibiakt.core.enums.BattlEyeType
 import com.galarzaa.tibiakt.core.enums.PvpType
 import com.galarzaa.tibiakt.core.enums.TransferType
-import com.galarzaa.tibiakt.core.models.WorldEntry
-import com.galarzaa.tibiakt.core.models.WorldOverview
+import com.galarzaa.tibiakt.core.models.world.WorldEntry
+import com.galarzaa.tibiakt.core.models.world.WorldOverview
 import java.time.Instant
 import java.time.LocalDate
 
