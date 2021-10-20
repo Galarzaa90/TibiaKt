@@ -1,6 +1,6 @@
 package com.galarzaa.tibiakt.core.models.guild
 
-import com.galarzaa.tibiakt.core.utils.getWorldGuilds
+import com.galarzaa.tibiakt.core.utils.getWorldGuildsUrl
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -9,6 +9,6 @@ data class GuildsSection(
     val guilds: List<GuildEntry> = emptyList(),
 ) {
     val url
-        get() = getWorldGuilds(world)
+        get() = getWorldGuildsUrl(world)
 }
 

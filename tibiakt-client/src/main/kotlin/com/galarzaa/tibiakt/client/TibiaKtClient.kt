@@ -2,7 +2,8 @@ package com.galarzaa.tibiakt.client
 
 import com.galarzaa.tibiakt.client.models.TibiaResponse
 import com.galarzaa.tibiakt.core.enums.*
-import com.galarzaa.tibiakt.core.models.*
+import com.galarzaa.tibiakt.core.models.Highscores
+import com.galarzaa.tibiakt.core.models.KillStatistics
 import com.galarzaa.tibiakt.core.models.bazaar.Auction
 import com.galarzaa.tibiakt.core.models.bazaar.CharacterBazaar
 import com.galarzaa.tibiakt.core.models.character.Character
@@ -13,7 +14,6 @@ import com.galarzaa.tibiakt.core.models.house.HousesSection
 import com.galarzaa.tibiakt.core.models.news.EventsSchedule
 import com.galarzaa.tibiakt.core.models.news.News
 import com.galarzaa.tibiakt.core.models.news.NewsArchive
-import com.galarzaa.tibiakt.core.models.news.getFormData
 import com.galarzaa.tibiakt.core.models.world.World
 import com.galarzaa.tibiakt.core.models.world.WorldOverview
 import com.galarzaa.tibiakt.core.parsers.*
@@ -103,7 +103,7 @@ open class TibiaKtClient {
         categories: Set<NewsCategory>? = null,
         types: Set<NewsType>? = null,
     ): TibiaResponse<NewsArchive> {
-        val data = NewsArchive.getFormData(startDate, endDate, categories, types)
+        val data = getNewArchiveFormData(startDate, endDate, categories, types)
         val response = this.request(HttpMethod.Post, getNewsArchiveUrl(), data)
         return response.parse { NewsArchiveParser.fromContent(it) }
     }
