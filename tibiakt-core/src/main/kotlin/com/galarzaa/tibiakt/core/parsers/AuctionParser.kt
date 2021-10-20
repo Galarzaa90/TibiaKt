@@ -24,30 +24,28 @@ object AuctionParser : Parser<Auction?> {
         val builder = AuctionBuilder()
         document.selectFirst("div.Auction")?.apply {
             parseAuctionContainer(this, builder)
-        }
+        } ?: return null
         val detailsTables = document.parseTablesMap("table.Table3, table.Table5")
         if (!parseDetails)
             return builder.build()
         val detailsBuilder = AuctionDetailsBuilder()
-        detailsTables["General"]?.run {
-            parseGeneralTable(this, detailsBuilder)
-        }
-        detailsTables["Item Summary"]?.run { detailsBuilder.items(parseItemsTable(this)) }
-        detailsTables["Store Item Summary"]?.run { detailsBuilder.storeItems(parseItemsTable(this)) }
-        detailsTables["Mounts"]?.run { detailsBuilder.mounts(parseMountsTable(this)) }
-        detailsTables["Store Mounts"]?.run { detailsBuilder.storeMounts(parseMountsTable(this)) }
-        detailsTables["Outfits"]?.run { detailsBuilder.outfits(parseOutfitsTable(this)) }
-        detailsTables["Store Outfits"]?.run { detailsBuilder.storeOutfits(parseOutfitsTable(this)) }
-        detailsTables["Familiars"]?.run { detailsBuilder.familiars(parseFamiliarsTable(this)) }
-        detailsTables["Blessings"]?.run { parseBlessingsTable(this, detailsBuilder) }
-        detailsTables["Imbuements"]?.run { parseSingleColumnTable(this).forEach { detailsBuilder.addImbuement(it) } }
-        detailsTables["Charms"]?.run { parseCharmsTable(this, detailsBuilder) }
-        detailsTables["Completed Cyclopedia Map Areas"]?.run {
+        detailsTables["General"]?.apply { parseGeneralTable(this, detailsBuilder) }
+        detailsTables["Item Summary"]?.apply { detailsBuilder.items(parseItemsTable(this)) }
+        detailsTables["Store Item Summary"]?.apply { detailsBuilder.storeItems(parseItemsTable(this)) }
+        detailsTables["Mounts"]?.apply { detailsBuilder.mounts(parseMountsTable(this)) }
+        detailsTables["Store Mounts"]?.apply { detailsBuilder.storeMounts(parseMountsTable(this)) }
+        detailsTables["Outfits"]?.apply { detailsBuilder.outfits(parseOutfitsTable(this)) }
+        detailsTables["Store Outfits"]?.apply { detailsBuilder.storeOutfits(parseOutfitsTable(this)) }
+        detailsTables["Familiars"]?.apply { detailsBuilder.familiars(parseFamiliarsTable(this)) }
+        detailsTables["Blessings"]?.apply { parseBlessingsTable(this, detailsBuilder) }
+        detailsTables["Imbuements"]?.apply { parseSingleColumnTable(this).forEach { detailsBuilder.addImbuement(it) } }
+        detailsTables["Charms"]?.apply { parseCharmsTable(this, detailsBuilder) }
+        detailsTables["Completed Cyclopedia Map Areas"]?.apply {
             parseSingleColumnTable(this).forEach {
                 detailsBuilder.addCompletedCyclopediaMapArea(it)
             }
         }
-        detailsTables["Completed Quest Lines"]?.run {
+        detailsTables["Completed Quest Lines"]?.apply {
             parseSingleColumnTable(this).forEach {
                 detailsBuilder.addCompletedQuestLine(it)
             }

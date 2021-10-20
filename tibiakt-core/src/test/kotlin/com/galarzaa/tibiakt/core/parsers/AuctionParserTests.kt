@@ -24,4 +24,9 @@ class AuctionParserTests : StringSpec({
 
         }
     }
+
+    "Parsing auction not found page"{
+        val auction = AuctionParser.fromContent(getResource("auctions/auctionNotFound.txt"))
+        auction shouldBe null
+    }
 })

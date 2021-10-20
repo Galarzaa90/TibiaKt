@@ -9,7 +9,7 @@ import com.galarzaa.tibiakt.core.models.World
 import com.galarzaa.tibiakt.core.utils.*
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
-import org.jsoup.select.Elements
+import org.jsoup.nodes.Element
 import java.time.YearMonth
 
 object WorldParser : Parser<World?> {
@@ -20,9 +20,9 @@ object WorldParser : Parser<World?> {
         val document: Document = Jsoup.parse(content, "", org.jsoup.parser.Parser.xmlParser())
         val boxContent =
             document.selectFirst("div.BoxContent") ?: throw ParsingException("BoxContent container not found")
-        val tables = boxContent.parseTables("table.Table1, table.Table2")
+        val tables = boxContent.parseTablesMap("table.Table1, table.Table2")
         tables["Error"]?.apply { return null }
-        val name = tables["World Selection"]?.select("option[selected]")?.text()?.clean()
+        val name = tables["World Selection"]?.selectFirst("option[selected]")?.text()?.clean()
             ?: throw ParsingException("World Selection table not found")
         val builder = WorldBuilder().name(name)
         tables["World Information"]?.apply { parseWorldInformation(this, builder) }
@@ -30,8 +30,8 @@ object WorldParser : Parser<World?> {
         return builder.build()
     }
 
-    private fun parseOnlinePlayersTable(rows: Elements, builder: WorldBuilder) {
-        for (row in rows.subList(2, rows.size)) {
+    private fun parseOnlinePlayersTable(table: Element, builder: WorldBuilder) {
+        for (row in table.rows().offsetStart(2)) {
             val columns = row.select("td")
             val (name, level, vocation) = columns.map { it.text().clean() }
             builder.addOnlinePlayer(
@@ -43,8 +43,8 @@ object WorldParser : Parser<World?> {
     }
 
 
-    private fun parseWorldInformation(rows: Elements, builder: WorldBuilder) {
-        for (row in rows.subList(1, rows.size)) {
+    private fun parseWorldInformation(table: Element, builder: WorldBuilder) {
+        for (row in table.rows().offsetStart(1)) {
             val columns = row.select("td")
             var (field, value) = columns.map { it.text().clean() }
             field = field.remove(":")

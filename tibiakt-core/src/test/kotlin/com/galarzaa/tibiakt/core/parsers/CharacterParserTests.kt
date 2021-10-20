@@ -126,4 +126,9 @@ class CharacterParserTests : StringSpec({
             it.level shouldBe 0
         }
     }
+
+    "Character not found"{
+        val char = CharacterParser.fromContent(getResource("characters/characterNotFound.txt"))
+        char shouldBe null
+    }
 })

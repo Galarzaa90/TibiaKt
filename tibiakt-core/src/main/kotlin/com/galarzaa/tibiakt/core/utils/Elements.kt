@@ -8,6 +8,11 @@ import org.jsoup.parser.Parser
 import org.jsoup.select.Elements
 import java.net.URL
 
+internal fun Element.boxContent(): Element {
+    return selectFirst("div.BoxContent") ?: throw ParsingException("BoxContent container not found")
+}
+
+
 internal fun Element.parseTables(contentTableSelector: String = "table.TableContent"): Map<String, Elements> {
     val tables = select("div.TableContainer")
     val output = mutableMapOf<String, Elements>()
@@ -46,6 +51,9 @@ internal fun Element.cellsText(): List<String> = cells().map { it.cleanText() }
 
 /** Get the text contained in an element, cleaned out of extraneous characters. */
 internal fun Element.cleanText() = text().clean()
+
+/** Get the text contained in an list of element, cleaned out of extraneous characters. */
+internal fun Elements.cleanText() = text().clean()
 
 /** Get the text contained in an element, cleaned out of extraneous characters. */
 internal fun Element.wholeCleanText() = wholeText().clean()

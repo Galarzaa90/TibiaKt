@@ -4,6 +4,7 @@ val kotestVersion: String by project
 val jsoupVersion: String by project
 
 apply("../publish.gradle.kts")
+apply(plugin = "kover")
 
 plugins {
     kotlin("jvm")
@@ -29,4 +30,12 @@ dependencies {
     testImplementation("io.kotest:kotest-assertions-core:$kotestVersion")
     testImplementation("io.kotest:kotest-property:$kotestVersion")
     testImplementation("io.kotest:kotest-framework-datatest:$kotestVersion")
+}
+
+tasks.test {
+    extensions.configure(kotlinx.kover.api.KoverTaskExtension::class) {
+        generateXml = true
+        generateHtml = true
+        coverageEngine = kotlinx.kover.api.CoverageEngine.INTELLIJ
+    }
 }

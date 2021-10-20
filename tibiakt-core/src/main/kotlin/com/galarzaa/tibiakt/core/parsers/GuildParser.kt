@@ -24,18 +24,20 @@ object GuildParser : Parser<Guild?> {
 
     override fun fromContent(content: String): Guild? {
         val document: Document = Jsoup.parse(content)
-        val boxContent =
-            document.selectFirst("div.BoxContent") ?: throw ParsingException("BoxContent container not found")
+        val boxContent = document.boxContent()
         val builder = GuildBuilder()
-        boxContent.selectFirst("div#GuildInformationContainer")?.apply {
-            parseGuildInformation(this, builder)
-        } ?: throw ParsingException("Guild Information container not found")
+        val tables = boxContent.parseTablesMap("table.Table1, table.Table3")
+        if ("Error" in tables) {
+            return null
+        }
+        tables["Guild Information"]?.apply { parseGuildInformation(this, builder) }
+            ?: throw ParsingException("Guild Information container not found")
 
         builder.name(boxContent.selectFirst("h1")?.text()?.trim() ?: throw ParsingException("Guild title not found"))
         val guildImg = boxContent.selectFirst("img[width=64]")
         builder.logoUrl(guildImg?.attr("src"))
-
-        parseGuildMembers(boxContent, builder)
+        tables["Guild Members"]?.apply { parseGuildMembers(this, builder) }
+        tables["Invited Characters"]?.apply { parseGuildMembers(this, builder) }
         return builder.build()
     }
 

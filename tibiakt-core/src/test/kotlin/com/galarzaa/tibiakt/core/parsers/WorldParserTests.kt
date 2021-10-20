@@ -1,6 +1,6 @@
 package com.galarzaa.tibiakt.core.parsers
 
-import com.galarzaa.tibiakt.TestResources
+import com.galarzaa.tibiakt.TestResources.getResource
 import com.galarzaa.tibiakt.core.enums.BattlEyeType
 import com.galarzaa.tibiakt.core.enums.TransferType
 import io.kotest.core.spec.IsolationMode
@@ -12,8 +12,8 @@ import java.time.LocalDate
 
 class WorldParserTests : StringSpec({
     isolationMode = IsolationMode.InstancePerTest
-    "Parsing a world with yellow BattlEye" {
-        val world = WorldParser.fromContent(TestResources.getResource("worlds/worldYellowBE.txt"))
+    "World with yellow BattlEye" {
+        val world = WorldParser.fromContent(getResource("worlds/worldYellowBE.txt"))
         world shouldNotBe null
         world!!.name shouldBe "Gladera"
         world.isOnline shouldBe true
@@ -24,8 +24,8 @@ class WorldParserTests : StringSpec({
         world.battlEyeStartDate shouldBe LocalDate.of(2018, 4, 19)
     }
 
-    "Parsing a world with no BattlEye" {
-        val world = WorldParser.fromContent(TestResources.getResource("worlds/worldNoBE.txt"))
+    "World with no BattlEye" {
+        val world = WorldParser.fromContent(getResource("worlds/worldNoBE.txt"))
         world shouldNotBe null
         world!!.name shouldBe "Zuna"
         world.isOnline shouldBe true
@@ -36,8 +36,8 @@ class WorldParserTests : StringSpec({
         world.battlEyeStartDate shouldBe null
     }
 
-    "Parsing a world with green BattlEye and no world quest titles" {
-        val world = WorldParser.fromContent(TestResources.getResource("worlds/worldGreenBENoTitles.txt"))
+    "World with green BattlEye and no world quest titles" {
+        val world = WorldParser.fromContent(getResource("worlds/worldGreenBENoTitles.txt"))
         world shouldNotBe null
         world!!.name shouldBe "Ardera"
         world.isOnline shouldBe true
@@ -50,11 +50,16 @@ class WorldParserTests : StringSpec({
         world.isPremiumRestricted shouldBe true
     }
 
-    "Parsing an offline world" {
-        val world = WorldParser.fromContent(TestResources.getResource("worlds/worldOffline.txt"))
+    "Offline world" {
+        val world = WorldParser.fromContent(getResource("worlds/worldOffline.txt"))
         world shouldNotBe null
         world!!.name shouldBe "Gladera"
         world.isOnline shouldBe false
         world.onlineCount shouldBe 0
+    }
+
+    "World not found"{
+        val world = WorldParser.fromContent(getResource("worlds/worldNotFound.txt"))
+        world shouldBe null
     }
 })

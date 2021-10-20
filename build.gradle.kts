@@ -10,6 +10,7 @@ plugins {
     kotlin("plugin.serialization") version "1.5.30"
     id("org.jetbrains.dokka") version "1.5.0"
     id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
+    id("org.jetbrains.kotlinx.kover") version "0.3.0"
 }
 
 group = "com.galarzaa"
