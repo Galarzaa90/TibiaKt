@@ -22,7 +22,7 @@ afterEvaluate {
         publications {
             register<MavenPublication>("mavenJar") {
                 from(components["java"])
-                version = "1.0-SNAPSHOT"
+                version = Library.version
                 groupId = Library.group
                 pom {
                     name.set("TibiaKt")
