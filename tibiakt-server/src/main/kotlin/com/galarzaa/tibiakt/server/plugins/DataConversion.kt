@@ -7,6 +7,7 @@ import io.ktor.util.*
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
+
 internal fun Application.configureDataConversion() {
     install(DataConversion) {
         convert<LocalDate> {

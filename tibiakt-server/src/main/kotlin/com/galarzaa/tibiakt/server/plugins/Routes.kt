@@ -47,8 +47,14 @@ internal fun Application.configureRouting(client: TibiaKtClient) {
             val world = if (it.world.lowercase() == "all") null else it.world
             call.respondOrNotFound(client.fetchHighscoresPage(world, it.category, it.profession, it.page))
         }
-        get<GetBazaar> { it -> call.respondOrNotFound(client.fetchBazaar()) }
-        get<GetAuction> { it -> call.respondOrNotFound(client.fetchAuction(it.auctionId)) }
+        get<GetBazaar> { _ -> call.respondOrNotFound(client.fetchBazaar()) }
+        get<GetAuction> { (auctionId, detailsOnly, fetchAll) ->
+            call.respondOrNotFound(client.fetchAuction(auctionId,
+                detailsOnly != 0 && fetchAll == 0,
+                fetchItems = fetchAll != 0,
+                fetchMounts = fetchAll != 0,
+                fetchOutfits = fetchAll != 0))
+        }
     }
 }
 

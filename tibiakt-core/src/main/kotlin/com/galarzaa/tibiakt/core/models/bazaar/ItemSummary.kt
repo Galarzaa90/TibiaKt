@@ -1,6 +1,5 @@
 package com.galarzaa.tibiakt.core.models.bazaar
 
-import com.galarzaa.tibiakt.core.models.Paginated
 import kotlinx.serialization.Serializable
 
 /**
@@ -12,5 +11,5 @@ data class ItemSummary(
     override val totalPages: Int,
     override val resultsCount: Int,
     override val entries: List<DisplayItem> = emptyList(),
-    val fullyFetched: Boolean = false,
-) : Paginated<DisplayItem>
+    override val fullyFetched: Boolean = false,
+) : AjaxPaginator<DisplayItem>

@@ -65,4 +65,4 @@ data class GetHighscoresPage(
 data class GetBazaar(val page: Int = 1)
 
 @Location("/auctions/{auctionId}")
-data class GetAuction(val auctionId: Int)
+data class GetAuction(val auctionId: Int, val detailsOnly: Int = 0, val fetchAll: Int = 0)

@@ -1,6 +1,7 @@
 package com.galarzaa.tibiakt.core.utils
 
 import com.galarzaa.tibiakt.core.enums.*
+import com.galarzaa.tibiakt.core.models.bazaar.BazaarFilters
 import java.net.URLEncoder
 import java.time.LocalDate
 import java.time.YearMonth
@@ -210,4 +211,25 @@ fun getAuctionUrl(auctionId: Int) =
  *
  * @param type Whether to show current auctions or the auction history.
  */
-fun getBazaarUrl(type: BazaarType = BazaarType.CURRENT) = buildTibiaUrl("charactertrade", type.subtopic)
+fun getBazaarUrl(type: BazaarType = BazaarType.CURRENT, filters: BazaarFilters? = null, page: Int = 1): String {
+    return buildTibiaUrl("charactertrade", type.subtopic, P("currentpage", page), *filters.getQueryParams())
+}
+
+private fun BazaarFilters?.getQueryParams(): Array<P<String, Any?>> {
+    return if (this != null)
+        arrayOf(
+            P("filter_world", world),
+            P("filter_profession", vocation?.value),
+            P("filter_levelrangefrom", minimumLevel),
+            P("filter_levelrangeto", maximumLevel),
+            P("filter_worldpvptype", pvpType?.value),
+            P("filter_worldbattleyestate", battlEyeType?.value),
+            P("filter_skillid", skill?.value),
+            P("filter_skillrangefrom", minimumSkillLevel),
+            P("filter_skillrangeto", maximumSkillLevel),
+            P("order_column", orderBy?.value),
+            P("order_direction", orderDirection?.value),
+            P("searchstring", searchString),
+            P("searchtype", searchType?.value),
+        ) else emptyArray()
+}

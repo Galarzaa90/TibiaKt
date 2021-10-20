@@ -128,12 +128,7 @@ object AuctionParser : Parser<Auction?> {
         val paginationData =
             table.selectFirst("div.BlockPageNavigationRow")?.parsePagination() ?: return Outfits(1, 0, 0)
         val outfitBoxes = table.select("div.CVIcon")
-        val outfits = mutableListOf<DisplayOutfit>()
-        for (mountBox in outfitBoxes) {
-            val name = mountBox.attr("title").split("(").first().clean()
-            val (_, id, addons) = idAddonsRegex.find(mountBox.selectFirst("img")?.attr("src") ?: "")?.groupValues!!
-            outfits.add(DisplayOutfit(name, id.toInt(), addons.toInt()))
-        }
+        val outfits = outfitBoxes.map { parseDisplayedOutfit(it) }
         return Outfits(paginationData.currentPage, paginationData.totalPages, paginationData.resultsCount, outfits)
     }
 
@@ -141,12 +136,7 @@ object AuctionParser : Parser<Auction?> {
         val paginationData =
             mountsTable.selectFirst("div.BlockPageNavigationRow")?.parsePagination() ?: return Mounts(1, 0, 0)
         val mountsBoxes = mountsTable.select("div.CVIcon")
-        val mounts = mutableListOf<DisplayMount>()
-        for (mountBox in mountsBoxes) {
-            val name = mountBox.attr("title")
-            val (_, id) = idRegex.find(mountBox.selectFirst("img")?.attr("src") ?: "")?.groupValues!!
-            mounts.add(DisplayMount(name, id.toInt()))
-        }
+        val mounts = mountsBoxes.map { parseDisplayedMount(it) }
         return Mounts(paginationData.currentPage, paginationData.totalPages, paginationData.resultsCount, mounts)
     }
 
@@ -296,7 +286,8 @@ object AuctionParser : Parser<Auction?> {
         builder.status(StringEnum.fromValue<AuctionStatus>(status) ?: AuctionStatus.IN_PROGRESS)
     }
 
-    private fun parseDisplayedItem(displayItemContainer: Element): DisplayItem? {
+    @PublishedApi
+    internal fun parseDisplayedItem(displayItemContainer: Element): DisplayItem? {
         val title = displayItemContainer.attr("title")
         val fileUrl = displayItemContainer.selectFirst("img")?.attr("src") ?: return null
         val fileName = File(URL(fileUrl).path).name
@@ -314,5 +305,30 @@ object AuctionParser : Parser<Auction?> {
             name = amountRegex.replace(name, "")
         }
         return DisplayItem(itemId, name, description, amount)
+    }
+
+    @PublishedApi
+    internal fun parseDisplayedOutfit(container: Element): DisplayOutfit {
+        val name = container.attr("title").split("(").first().clean()
+        val (_, id, addons) = idAddonsRegex.find(container.selectFirst("img")?.attr("src") ?: "")?.groupValues!!
+        return DisplayOutfit(name, id.toInt(), addons.toInt())
+    }
+
+    @PublishedApi
+    internal fun parseDisplayedMount(container: Element): DisplayMount {
+        val name = container.attr("title")
+        val (_, id) = idRegex.find(container.selectFirst("img")?.attr("src") ?: "")?.groupValues!!
+        return DisplayMount(name, id.toInt())
+    }
+
+    inline fun <reified T> parsePageItems(content: String): List<T> {
+        val document = Jsoup.parse(content)
+        val cvIcon = document.select("div.CVIcon")
+        return when (T::class) {
+            DisplayItem::class -> cvIcon.mapNotNull { parseDisplayedItem(it) as T }
+            DisplayOutfit::class -> cvIcon.mapNotNull { parseDisplayedOutfit(it) as T }
+            DisplayMount::class -> cvIcon.mapNotNull { parseDisplayedMount(it) as T }
+            else -> emptyList()
+        }
     }
 }
