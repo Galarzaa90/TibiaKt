@@ -4,13 +4,13 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class AjaxResponse(
+internal data class AjaxResponse(
     @SerialName("AjaxObjects")
     val ajaxObjects: List<AjaxObject>,
 )
 
 @Serializable
-data class AjaxObject(
+internal data class AjaxObject(
     @SerialName("Data")
     val data: String,
     @SerialName("DataType")

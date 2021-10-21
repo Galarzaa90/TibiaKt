@@ -2,6 +2,7 @@ package com.galarzaa.tibiakt.client
 
 import com.galarzaa.tibiakt.client.models.AjaxResponse
 import com.galarzaa.tibiakt.client.models.TibiaResponse
+import com.galarzaa.tibiakt.client.models.TimedResult
 import com.galarzaa.tibiakt.core.enums.*
 import com.galarzaa.tibiakt.core.models.Highscores
 import com.galarzaa.tibiakt.core.models.KillStatistics
@@ -76,7 +77,7 @@ open class TibiaKtClient {
     }
 
     @OptIn(ExperimentalSerializationApi::class)
-    private suspend fun fetchAjaxPage(auctionId: Int, typeId: Int, page: Int): String? {
+    private suspend fun fetchAjaxPage(auctionId: Int, typeId: Int, page: Int): TimedResult<String?> {
         val response: HttpResponse = client.get("https://www.tibia.com/websiteservices/handle_charactertrades.php") {
             headers {
                 header("x-requested-with", "XMLHttpRequest")
@@ -89,9 +90,9 @@ open class TibiaKtClient {
         val content: String = response.receive()
         return try {
             val responseData = Json.decodeFromString<AjaxResponse>(content)
-            responseData.ajaxObjects.first().data
+            TimedResult(response.fetchingTime, responseData.ajaxObjects.first().data)
         } catch (e: NoSuchElementException) {
-            null
+            TimedResult(response.fetchingTime, null)
         }
     }
 
@@ -102,10 +103,15 @@ open class TibiaKtClient {
     ): List<E> {
         var currentPage = 2
         val entries: MutableList<E> = paginator.entries.toMutableList()
+        var fetchingTime = 0f
+        var parsingTime = 0f
         while (currentPage <= paginator.totalPages) {
-            val content = fetchAjaxPage(auctionId, itemType, currentPage)
-            if (content != null) {
-                entries.addAll(AuctionParser.parsePageItems(content))
+            val (time, result) = fetchAjaxPage(auctionId, itemType, currentPage)
+            fetchingTime += time
+            if (result != null) {
+                parsingTime += measureTimeMillis {
+                    entries.addAll(AuctionParser.parsePageItems(result))
+                } * 1000f
             }
             currentPage++
         }
