@@ -1,15 +1,12 @@
 package com.galarzaa.tibiakt.client
 
 import com.galarzaa.tibiakt.client.models.AjaxResponse
+import com.galarzaa.tibiakt.client.models.AuctionPagesType
 import com.galarzaa.tibiakt.client.models.TibiaResponse
-import com.galarzaa.tibiakt.client.models.TimedResult
 import com.galarzaa.tibiakt.core.enums.*
 import com.galarzaa.tibiakt.core.models.Highscores
 import com.galarzaa.tibiakt.core.models.KillStatistics
-import com.galarzaa.tibiakt.core.models.bazaar.AjaxPaginator
-import com.galarzaa.tibiakt.core.models.bazaar.Auction
-import com.galarzaa.tibiakt.core.models.bazaar.BazaarFilters
-import com.galarzaa.tibiakt.core.models.bazaar.CharacterBazaar
+import com.galarzaa.tibiakt.core.models.bazaar.*
 import com.galarzaa.tibiakt.core.models.character.Character
 import com.galarzaa.tibiakt.core.models.guild.Guild
 import com.galarzaa.tibiakt.core.models.guild.GuildsSection
@@ -50,23 +47,33 @@ open class TibiaKtClient {
             deflate()
         }
         install(UserAgent) {
-            agent = "TibiaKt/"
+            agent = "TibiaKtClient"
         }
     }
 
-    suspend fun request(
+    /**
+     * Perform a request using the required headers.
+     * @param method The HTTP method to use for the request.
+     * @param url The URL to request.
+     * @param data The form parameters to add.
+     * @param headers Additional headers to add.
+     */
+    open suspend fun request(
         method: HttpMethod,
         url: String,
-        data: List<Pair<String, String>> = emptyList(),
+        data: List<Pair<String, Any>> = emptyList(),
+        headers: List<Pair<String, Any>> = emptyList(),
     ): HttpResponse {
         val response: HttpResponse = when (method) {
-            HttpMethod.Get -> client.get(url)
+            HttpMethod.Get -> client.get(url) {
+                if (headers.isNotEmpty()) {
+                    headers { headers.forEach { header(it.first, it.second) } }
+                }
+            }
             HttpMethod.Post -> client.submitForm(
                 url,
                 formParameters = Parameters.build {
-                    data.forEach {
-                        append(it.first, it.second)
-                    }
+                    data.forEach { append(it.first, it.second.toString()) }
                 },
                 encodeInQuery = false
             )
@@ -74,48 +81,6 @@ open class TibiaKtClient {
         }
         logger.info("$url | ${method.value.uppercase()} | ${response.status.value} ${response.status.description} | ${response.fetchingTimeMillis}ms")
         return response
-    }
-
-    @OptIn(ExperimentalSerializationApi::class)
-    private suspend fun fetchAjaxPage(auctionId: Int, typeId: Int, page: Int): TimedResult<String?> {
-        val response: HttpResponse = client.get("https://www.tibia.com/websiteservices/handle_charactertrades.php") {
-            headers {
-                header("x-requested-with", "XMLHttpRequest")
-            }
-            parameter("auctionid", auctionId)
-            parameter("type", typeId)
-            parameter("currentpage", page)
-        }
-        logger.info("${response.request.url} | GET | ${response.status.value} ${response.status.description} | ${response.fetchingTimeMillis}ms")
-        val content: String = response.receive()
-        return try {
-            val responseData = Json.decodeFromString<AjaxResponse>(content)
-            TimedResult(response.fetchingTime, responseData.ajaxObjects.first().data)
-        } catch (e: NoSuchElementException) {
-            TimedResult(response.fetchingTime, null)
-        }
-    }
-
-    private suspend inline fun <reified E, T : AjaxPaginator<E>> fetchAllPages(
-        auctionId: Int,
-        itemType: Int,
-        paginator: T,
-    ): List<E> {
-        var currentPage = 2
-        val entries: MutableList<E> = paginator.entries.toMutableList()
-        var fetchingTime = 0f
-        var parsingTime = 0f
-        while (currentPage <= paginator.totalPages) {
-            val (time, result) = fetchAjaxPage(auctionId, itemType, currentPage)
-            fetchingTime += time
-            if (result != null) {
-                parsingTime += measureTimeMillis {
-                    entries.addAll(AuctionParser.parsePageItems(result))
-                } * 1000f
-            }
-            currentPage++
-        }
-        return entries
     }
 
     /**
@@ -288,52 +253,67 @@ open class TibiaKtClient {
     ): TibiaResponse<Auction?> {
         if (tibiaResponse.data?.details == null)
             return tibiaResponse
-        var itemEntries = tibiaResponse.data.details!!.items.entries
-        var storeItemEntries = tibiaResponse.data.details!!.storeItems.entries
-        var outfitEntries = tibiaResponse.data.details!!.outfits.entries
-        var storeOutfitEntries = tibiaResponse.data.details!!.storeOutfits.entries
-        var mountEntries = tibiaResponse.data.details!!.mounts.entries
-        var storeMountEntries = tibiaResponse.data.details!!.storeMounts.entries
+        val accumulator = Timing(tibiaResponse.fetchingTime, tibiaResponse.parsingTime)
+        var itemEntries: List<DisplayItem>? = null
+        var storeItemEntries: List<DisplayItem>? = null
+        var outfitEntries: List<DisplayOutfit>? = null
+        var storeOutfitEntries: List<DisplayOutfit>? = null
+        var mountEntries: List<DisplayMount>? = null
+        var storeMountEntries: List<DisplayMount>? = null
         if (fetchItems) {
-            itemEntries = fetchAllPages(tibiaResponse.data.auctionId, 0, tibiaResponse.data.details!!.items)
+            itemEntries = fetchAllPages(tibiaResponse.data.auctionId,
+                AuctionPagesType.ITEMS,
+                tibiaResponse.data.details!!.items).accumulateTime(accumulator)
             storeItemEntries =
-                fetchAllPages(tibiaResponse.data.auctionId, 1, tibiaResponse.data.details!!.storeItems)
+                fetchAllPages(tibiaResponse.data.auctionId,
+                    AuctionPagesType.ITEMS_STORE,
+                    tibiaResponse.data.details!!.storeItems).accumulateTime(accumulator)
         }
         if (fetchMounts) {
-            mountEntries = fetchAllPages(tibiaResponse.data.auctionId, 2, tibiaResponse.data.details!!.mounts)
+            mountEntries = fetchAllPages(tibiaResponse.data.auctionId,
+                AuctionPagesType.MOUNTS,
+                tibiaResponse.data.details!!.mounts).accumulateTime(accumulator)
             storeMountEntries =
-                fetchAllPages(tibiaResponse.data.auctionId, 3, tibiaResponse.data.details!!.storeMounts)
+                fetchAllPages(tibiaResponse.data.auctionId,
+                    AuctionPagesType.MOUNTS_STORE,
+                    tibiaResponse.data.details!!.storeMounts).accumulateTime(accumulator)
         }
         if (fetchOutfits) {
-            outfitEntries = fetchAllPages(tibiaResponse.data.auctionId, 4, tibiaResponse.data.details!!.outfits)
+            outfitEntries = fetchAllPages(tibiaResponse.data.auctionId,
+                AuctionPagesType.OUTFITS,
+                tibiaResponse.data.details!!.outfits).accumulateTime(accumulator)
             storeOutfitEntries =
-                fetchAllPages(tibiaResponse.data.auctionId, 5, tibiaResponse.data.details!!.storeOutfits)
+                fetchAllPages(tibiaResponse.data.auctionId,
+                    AuctionPagesType.OUTFITS_STORE,
+                    tibiaResponse.data.details!!.storeOutfits).accumulateTime(accumulator)
         }
         return tibiaResponse.copy(
+            fetchingTime = accumulator.fetching,
+            parsingTime = accumulator.parsing,
             data = tibiaResponse.data.copy(
                 details = tibiaResponse.data.details!!.copy(
                     items = tibiaResponse.data.details!!.items.copy(
-                        entries = itemEntries,
+                        entries = itemEntries ?: tibiaResponse.data.details!!.items.entries,
                         fullyFetched = fetchItems,
                     ),
                     storeItems = tibiaResponse.data.details!!.items.copy(
-                        entries = storeItemEntries,
+                        entries = storeItemEntries ?: tibiaResponse.data.details!!.items.entries,
                         fullyFetched = fetchItems,
                     ),
                     mounts = tibiaResponse.data.details!!.mounts.copy(
-                        entries = mountEntries,
+                        entries = mountEntries ?: tibiaResponse.data.details!!.mounts.entries,
                         fullyFetched = fetchMounts,
                     ),
                     storeMounts = tibiaResponse.data.details!!.storeMounts.copy(
-                        entries = storeMountEntries,
-                        fullyFetched = fetchMounts,
+                        entries = storeMountEntries ?: tibiaResponse.data.details!!.storeMounts.entries,
+                        fullyFetched = fetchMounts
                     ),
                     outfits = tibiaResponse.data.details!!.outfits.copy(
-                        entries = outfitEntries,
+                        entries = outfitEntries ?: tibiaResponse.data.details!!.outfits.entries,
                         fullyFetched = fetchOutfits,
                     ),
                     storeOutfits = tibiaResponse.data.details!!.storeOutfits.copy(
-                        entries = storeOutfitEntries,
+                        entries = storeOutfitEntries ?: tibiaResponse.data.details!!.storeOutfits.entries,
                         fullyFetched = fetchOutfits,
                     ),
                 )
@@ -362,6 +342,72 @@ open class TibiaKtClient {
         logger.info("${this.request.url} | PARSE | ${(parsingTime * 1000).toInt()}ms")
         return toTibiaResponse(parsingTime, data)
     }
+
+    /**
+     * Get the URL to the endpoint to get page items for auctions.
+     */
+    private fun getAuctionAjaxPaginationUrl(auctionId: Int, type: AuctionPagesType, page: Int): String {
+        return "https://www.tibia.com/websiteservices/handle_charactertrades.php?auctionid=$auctionId&type=${type.typeId}&currentpage=$page"
+    }
+
+    /**
+     * Fetch a single page from the auction pagination endpoint.
+     */
+    @OptIn(ExperimentalSerializationApi::class)
+    private suspend fun fetchAjaxPage(auctionId: Int, type: AuctionPagesType, page: Int): TimedResult<AjaxResponse> {
+        val response = this.request(
+            HttpMethod.Get, getAuctionAjaxPaginationUrl(auctionId, type, page),
+            headers = listOf(Pair("x-requested-with", "XMLHttpRequest")),
+        )
+        return TimedResult(response.fetchingTime, Json.decodeFromString(response.receive()))
+    }
+
+    /**
+     * Fetch all the pages, parse and collect the entries.
+     * @param auctionId The id of the auction.
+     * @param type The type of items.
+     * @param paginator The paginator class that holds the collection
+     */
+    private suspend inline fun <reified E, T : AjaxPaginator<E>> fetchAllPages(
+        auctionId: Int,
+        type: AuctionPagesType,
+        paginator: T,
+    ): Pair<Timing, List<E>> {
+        var currentPage = paginator.currentPage + 1
+        val entries: MutableList<E> = paginator.entries.toMutableList()
+        val timing = Timing()
+        while (currentPage <= paginator.totalPages) {
+            val (fetchingTime, ajaxResponse) = fetchAjaxPage(auctionId, type, currentPage)
+            timing.fetching += fetchingTime
+            val parsingTime = measureTimeMillis {
+                entries.addAll(AuctionParser.parsePageItems(ajaxResponse.ajaxObjects.first().data))
+            } / 1000f
+            timing.parsing += parsingTime
+            logger.info("${
+                getAuctionAjaxPaginationUrl(auctionId,
+                    type,
+                    currentPage)
+            } | PARSE | ${(parsingTime * 1000).toInt()}ms")
+            currentPage++
+        }
+        return Pair(timing, entries)
+    }
+
+    /**
+     * A data class to hold fetching and parsing times.
+     */
+    private data class Timing(var fetching: Float = 0f, var parsing: Float = 0f)
+
+    /**
+     * Extract the results of [fetchAllPages] and sum the timings into the [accumulator]
+     */
+    private fun <T> Pair<Timing, List<T>>.accumulateTime(accumulator: Timing): List<T> {
+        accumulator.fetching += first.fetching
+        accumulator.parsing += first.parsing
+        return second
+    }
+
+    private data class TimedResult<T>(val time: Float, val result: T)
 
     internal companion object {
         internal val logger: org.slf4j.Logger = LoggerFactory.getLogger(TibiaKtClient::class.java)
