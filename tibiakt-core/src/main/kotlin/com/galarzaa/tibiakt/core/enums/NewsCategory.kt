@@ -1,6 +1,6 @@
 package com.galarzaa.tibiakt.core.enums
 
-enum class NewsCategory(val value: String) {
+enum class NewsCategory(override val value: String) : StringEnum {
     CIPSOFT("cipsoft"),
     COMMUNITY("community"),
     DEVELOPMENT("development"),
@@ -14,11 +14,9 @@ enum class NewsCategory(val value: String) {
         private val iconRegex = Regex("""newsicon_([^_]+)_(?:small|big)""")
         fun fromIcon(iconUrl: String): NewsCategory? {
             iconRegex.find(iconUrl)?.apply {
-                return fromValue(this.groups[1]!!.value.lowercase())
+                return StringEnum.fromValue(this.groups[1]!!.value.lowercase())
             }
             return null
         }
-
-        fun fromValue(value: String) = values().find { it.value == value }
     }
 }

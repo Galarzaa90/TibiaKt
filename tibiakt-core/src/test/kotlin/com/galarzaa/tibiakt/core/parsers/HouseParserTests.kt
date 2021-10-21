@@ -8,7 +8,7 @@ import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
 
 class HouseParserTests : StringSpec({
-    "Parse a rented house"{
+    "Rented house"{
         val house = HouseParser.fromContent(getResource("houses/houseRented.txt"))
         house shouldNotBe null
         house!!.houseId shouldBe 40501
@@ -22,7 +22,7 @@ class HouseParserTests : StringSpec({
         house.paidUntil shouldNotBe null
     }
 
-    "Parse a guildhall on auction with bids"{
+    "Guildhall on auction with bids"{
         val house = HouseParser.fromContent(getResource("houses/houseAuctionedBidsGuildhall.txt"))
         house shouldNotBe null
         house!!.houseId shouldBe 20002
@@ -39,7 +39,7 @@ class HouseParserTests : StringSpec({
         house.highestBid shouldBe 0
     }
 
-    "Parse a house set to be transferred but not accepted"{
+    "House set to be transferred but not accepted"{
         val house = HouseParser.fromContent(getResource("houses/houseTransferNotAccepted.txt"))
         house shouldNotBe null
         house!!.houseId shouldBe 59048
@@ -58,7 +58,7 @@ class HouseParserTests : StringSpec({
         house.transferPrice shouldBe 10
     }
 
-    "Parse a house set to be transferred, and accepted"{
+    "House set to be transferred, and accepted"{
         val house = HouseParser.fromContent(getResource("houses/houseTransferAccepted.txt"))
         house shouldNotBe null
         house!!.houseId shouldBe 37016
@@ -75,5 +75,10 @@ class HouseParserTests : StringSpec({
         house.transferAccepted shouldBe true
         house.transferRecipient shouldBe "King Brunno"
         house.transferPrice shouldBe 1
+    }
+
+    "House not found" {
+        val house = HouseParser.fromContent(getResource("houses/houseNotFound.txt"))
+        house shouldBe null
     }
 })

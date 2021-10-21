@@ -1,6 +1,6 @@
 package com.galarzaa.tibiakt.core.enums
 
-enum class NewsType(val value: String) {
+enum class NewsType(override val value: String) : StringEnum {
     NEWS("News"),
     NEWS_TICKER("News Ticker"),
     FEATURED_ARTICLE("Featured Article");
@@ -10,8 +10,4 @@ enum class NewsType(val value: String) {
 
     val filterValue
         get() = value.split(" ").last().lowercase()
-
-    companion object {
-        fun fromValue(value: String) = values().find { it.value == value }
-    }
 }

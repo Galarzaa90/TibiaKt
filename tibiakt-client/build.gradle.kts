@@ -22,3 +22,7 @@ dependencies {
     implementation("ch.qos.logback:logback-core:$logbackVersion")
     implementation("ch.qos.logback:logback-classic:$logbackVersion")
 }
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>() {
+    kotlinOptions.freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
+}

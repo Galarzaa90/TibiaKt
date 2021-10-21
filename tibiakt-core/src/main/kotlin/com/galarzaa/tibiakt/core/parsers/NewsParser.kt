@@ -3,19 +3,19 @@ package com.galarzaa.tibiakt.core.parsers
 import com.galarzaa.tibiakt.core.builders.NewsBuilder
 import com.galarzaa.tibiakt.core.models.news.News
 import com.galarzaa.tibiakt.core.utils.*
-import org.jsoup.Jsoup
-import org.jsoup.nodes.Document
 
 object NewsParser : Parser<News?> {
     override fun fromContent(content: String): News? = fromContent(content, 0)
 
     fun fromContent(content: String, newsId: Int = 0): News? {
-        val document: Document = Jsoup.parse(content)
-        val boxContent =
-            document.selectFirst("div.BoxContent") ?: throw ParsingException("BoxContent container not found")
+        val boxContent = boxContent(content)
 
         val titleContainer =
-            boxContent.selectFirst("div.NewsHeadlineText") ?: throw ParsingException("News headline not found.")
+            boxContent.selectFirst("div.NewsHeadlineText")
+                ?: if ("not found" in (boxContent.selectFirst("div.CaptionContainer")?.cleanText() ?: ""))
+                    return null
+                else
+                    throw ParsingException("News headline not found.")
         val icon = boxContent.selectFirst("img.NewsHeadlineIcon") ?: throw ParsingException("News icon not found.")
         val builder = NewsBuilder()
             .id(newsId)

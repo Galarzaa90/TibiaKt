@@ -4,8 +4,7 @@ interface StringEnum {
     val value: String
 
     companion object {
-        inline fun <reified T : StringEnum> fromValue(value: String?) =
+        inline fun <reified T : StringEnum> fromValue(value: String?): T? =
             T::class.java.takeIf { it.isEnum }?.enumConstants?.find { it.value == value }
-
     }
 }

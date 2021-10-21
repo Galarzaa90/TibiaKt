@@ -8,7 +8,7 @@ import io.kotest.matchers.shouldNotBe
 import java.time.LocalDate
 
 class NewsParserTests : StringSpec({
-    "Parsing a news ticker" {
+    "News ticker" {
         val news = NewsParser.fromContent(getResource("news/newsTicker.txt"))
         news shouldNotBe null
         news!!.title shouldBe "News Ticker"
@@ -18,7 +18,7 @@ class NewsParserTests : StringSpec({
         news.content shouldNotBe null
     }
 
-    "Parsing a featured article" {
+    "Featured article" {
         val news = NewsParser.fromContent(getResource("news/newsFeaturedArticle.txt"))
         news shouldNotBe null
         news!!.title shouldBe "Memories from 2020"
@@ -28,7 +28,7 @@ class NewsParserTests : StringSpec({
         news.content shouldNotBe null
     }
 
-    "Parsing a news article with a discussion thread" {
+    "News article with a discussion thread" {
         val news = NewsParser.fromContent(getResource("news/newsWithDiscussionThread.txt"))
         news shouldNotBe null
         news!!.title shouldBe "Sneak Peek: Tibia Observer"
@@ -36,5 +36,10 @@ class NewsParserTests : StringSpec({
         news.date shouldBe LocalDate.of(2021, 9, 22)
         news.threadId shouldBe 4889730
         news.content shouldNotBe null
+    }
+
+    "News not found" {
+        val news = NewsParser.fromContent(getResource("news/newsNotFound.txt"))
+        news shouldBe null
     }
 })

@@ -3,6 +3,7 @@ package com.galarzaa.tibiakt.core.parsers
 import com.galarzaa.tibiakt.core.builders.NewsArchiveBuilder
 import com.galarzaa.tibiakt.core.enums.NewsCategory
 import com.galarzaa.tibiakt.core.enums.NewsType
+import com.galarzaa.tibiakt.core.enums.StringEnum
 import com.galarzaa.tibiakt.core.models.news.NewsArchive
 import com.galarzaa.tibiakt.core.utils.*
 import org.jsoup.Jsoup
@@ -45,7 +46,7 @@ object NewsArchiveParser : Parser<NewsArchive> {
                 category,
                 iconUrl,
                 parseTibiaDate(dateColumn.cleanText()),
-                NewsType.fromValue(newsType)!!
+                StringEnum.fromValue(newsType)!!
             )
         }
     }
