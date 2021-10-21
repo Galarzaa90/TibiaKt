@@ -23,8 +23,15 @@ data class GetWorld(val name: String) {
 @Location("guilds/{name}")
 data class GetGuild(val name: String)
 
+
 @Location("/news")
-data class GetNewsArchive(val start: LocalDate? = null, val end: LocalDate? = null, val days: Int? = null)
+data class GetNewsArchive(
+    val start: LocalDate? = null,
+    val end: LocalDate? = null,
+    val days: Int? = null,
+    val type: List<NewsType>? = null,
+    val category: List<NewsCategory>? = null,
+)
 
 @Location("/news/{newsId}")
 data class GetNews(val newsId: Int) {
@@ -62,7 +69,23 @@ data class GetHighscoresPage(
 )
 
 @Location("/bazaar")
-data class GetBazaar(val page: Int = 1)
+data class GetBazaar(
+    val page: Int = 1,
+    val type: BazaarType = BazaarType.CURRENT,
+    val world: String? = null,
+    val pvpType: AuctionPvpTypeFilter? = null,
+    val battlEyeType: AuctionBattlEyeFilter? = null,
+    val vocation: AuctionVocationFilter? = null,
+    val minLevel: Int? = null,
+    val maxLevel: Int? = null,
+    val skill: AuctionSkillFilter? = null,
+    val minSkillLevel: Int? = null,
+    val maxSkillLevel: Int? = null,
+    val orderDirection: AuctionOrderDirection? = null,
+    val orderBy: AuctionOrderBy? = null,
+    val searchString: String? = null,
+    val searchType: AuctionSearchType? = null,
+)
 
 @Location("/auctions/{auctionId}")
 data class GetAuction(val auctionId: Int, val detailsOnly: Int = 0, val fetchAll: Int = 0)

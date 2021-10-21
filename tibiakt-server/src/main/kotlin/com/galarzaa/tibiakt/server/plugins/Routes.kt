@@ -4,6 +4,7 @@ package com.galarzaa.tibiakt.server.plugins
 
 import com.galarzaa.tibiakt.client.TibiaKtClient
 import com.galarzaa.tibiakt.client.models.TibiaResponse
+import com.galarzaa.tibiakt.core.models.bazaar.BazaarFilters
 import io.ktor.application.*
 import io.ktor.http.*
 import io.ktor.locations.*
@@ -19,9 +20,9 @@ internal fun Application.configureRouting(client: TibiaKtClient) {
         get<GetWorld.Guilds> { (params) -> call.respondOrNotFound(client.fetchWorldGuilds(params.name)) }
         get<GetNewsArchive> {
             if (it.start != null && it.end != null) {
-                call.respond(client.fetchRecentNews(it.start, it.end))
+                call.respond(client.fetchRecentNews(it.start, it.end, it.category?.toSet(), it.type?.toSet()))
             } else if (it.days != null) {
-                call.respond(client.fetchRecentNews(it.days))
+                call.respond(client.fetchRecentNews(it.days, it.category?.toSet(), it.type?.toSet()))
             } else {
                 call.respond(
                     HttpStatusCode.BadRequest,
@@ -47,7 +48,24 @@ internal fun Application.configureRouting(client: TibiaKtClient) {
             val world = if (it.world.lowercase() == "all") null else it.world
             call.respondOrNotFound(client.fetchHighscoresPage(world, it.category, it.profession, it.page))
         }
-        get<GetBazaar> { _ -> call.respondOrNotFound(client.fetchBazaar()) }
+        get<GetBazaar> {
+            val filters = BazaarFilters(
+                world = it.world,
+                pvpType = it.pvpType,
+                battlEyeType = it.battlEyeType,
+                vocation = it.vocation,
+                minimumLevel = it.minLevel,
+                maximumLevel = it.maxLevel,
+                skill = it.skill,
+                minimumSkillLevel = it.minSkillLevel,
+                maximumSkillLevel = it.maxSkillLevel,
+                orderDirection = it.orderDirection,
+                orderBy = it.orderBy,
+                searchString = it.searchString,
+                searchType = it.searchType,
+            )
+            call.respondOrNotFound(client.fetchBazaar(it.type, filters, it.page))
+        }
         get<GetAuction> { (auctionId, detailsOnly, fetchAll) ->
             call.respondOrNotFound(client.fetchAuction(auctionId,
                 detailsOnly != 0 && fetchAll == 0,

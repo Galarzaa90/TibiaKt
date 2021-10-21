@@ -219,17 +219,17 @@ private fun BazaarFilters?.getQueryParams(): Array<P<String, Any?>> {
     return if (this != null)
         arrayOf(
             P("filter_world", world),
-            P("filter_profession", vocation?.value),
+            P(AuctionVocationFilter.queryParam, vocation?.value),
             P("filter_levelrangefrom", minimumLevel),
             P("filter_levelrangeto", maximumLevel),
-            P("filter_worldpvptype", pvpType?.value),
-            P("filter_worldbattleyestate", battlEyeType?.value),
-            P("filter_skillid", skill?.value),
+            P(AuctionPvpTypeFilter.queryParam, pvpType?.value),
+            P(AuctionBattlEyeFilter.queryParam, battlEyeType?.value),
+            P(AuctionSkillFilter.queryParam, skill?.value),
             P("filter_skillrangefrom", minimumSkillLevel),
             P("filter_skillrangeto", maximumSkillLevel),
-            P("order_column", orderBy?.value),
-            P("order_direction", orderDirection?.value),
+            P(AuctionOrderBy.queryParam, orderBy?.value),
+            P(AuctionOrderDirection.queryParam, orderDirection?.value),
             P("searchstring", searchString),
-            P("searchtype", searchType?.value),
+            P(AuctionSearchType.queryParam, searchType?.value),
         ) else emptyArray()
 }

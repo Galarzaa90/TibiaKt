@@ -1,6 +1,6 @@
 package com.galarzaa.tibiakt.core.enums
 
-enum class BazaarType(val subtopic: String) {
-    CURRENT("currentcharactertrades"),
-    HISTORY("pastcharactertrades"),
+enum class BazaarType(override val value: String, val subtopic: String) : StringEnum {
+    CURRENT("current", "currentcharactertrades"),
+    HISTORY("history", "pastcharactertrades"),
 }

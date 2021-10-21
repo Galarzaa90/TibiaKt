@@ -126,7 +126,7 @@ private val resultsRegex = Regex("""Results: ([\d,]+)""")
 internal fun Element.parsePagination(): PaginationData {
     val (pagesDiv, resultsDiv) = select("small > div")
     val currentPageLink =
-        pagesDiv.selectFirst(".CurrentPageLink") ?: throw ParsingException("Could not parse pagination info")
+        pagesDiv.selectFirst(".CurrentPageLink")
     val pageLinks = pagesDiv.select(".PageLink")
     val firstOrLastPages = pagesDiv.select(".FirstOrLastElement")
     val totalPages = if (!firstOrLastPages.isEmpty()) {
@@ -142,9 +142,9 @@ internal fun Element.parsePagination(): PaginationData {
         pageLinks.last()!!.text().toInt()
     }
     val page = try {
-        currentPageLink.text().toInt()
+        currentPageLink?.text()?.toInt() ?: totalPages
     } catch (nfe: NumberFormatException) {
-        if (currentPageLink.text().contains("First"))
+        if (currentPageLink?.text()?.contains("First") == true)
             1
         else
             totalPages

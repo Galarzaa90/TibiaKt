@@ -3,8 +3,7 @@ package com.galarzaa.tibiakt.core.parsers
 import com.galarzaa.tibiakt.core.builders.AuctionBuilder
 import com.galarzaa.tibiakt.core.builders.BazaarFiltersBuilder
 import com.galarzaa.tibiakt.core.builders.CharacterBazaarBuilder
-import com.galarzaa.tibiakt.core.enums.BazaarType
-import com.galarzaa.tibiakt.core.enums.IntEnum
+import com.galarzaa.tibiakt.core.enums.*
 import com.galarzaa.tibiakt.core.models.bazaar.CharacterBazaar
 import com.galarzaa.tibiakt.core.parsers.AuctionParser.parseAuctionContainer
 import com.galarzaa.tibiakt.core.utils.*
@@ -51,12 +50,12 @@ object CharacterBazaarParser : Parser<CharacterBazaar> {
         val filterBuilder = BazaarFiltersBuilder()
         filterBuilder
             .world(searchData.data["filter_world"])
-            .pvpType(IntEnum.fromValue(searchData.data["filter_worldpvptype"]))
-            .battlEyeType(IntEnum.fromValue(searchData.data["filter_battleyestate"]))
-            .vocation(IntEnum.fromValue(searchData.data["filter_profession"]))
-            .skill(IntEnum.fromValue(searchData.data["filter_skillid"]))
-            .orderBy(IntEnum.fromValue(searchData.data["order_column"]))
-            .orderDirection(IntEnum.fromValue(searchData.data["order_direction"]))
+            .pvpType(IntEnum.fromValue(searchData.data[AuctionPvpTypeFilter.queryParam]))
+            .battlEyeType(IntEnum.fromValue(searchData.data[AuctionBattlEyeFilter.queryParam]))
+            .vocation(IntEnum.fromValue(searchData.data[AuctionVocationFilter.queryParam]))
+            .skill(IntEnum.fromValue(searchData.data[AuctionSkillFilter.queryParam]))
+            .orderBy(IntEnum.fromValue(searchData.data[AuctionOrderBy.queryParam]))
+            .orderDirection(IntEnum.fromValue(searchData.data[AuctionOrderDirection.queryParam]))
             .minimumLevel(searchData.data["filter_levelrangefrom"]?.nullIfBlank()?.parseInteger())
             .maximumLevel(searchData.data["filter_levelrangeto"]?.nullIfBlank()?.parseInteger())
             .minimumSkillLevel(searchData.data["filter_skillrangefrom"]?.nullIfBlank()?.parseInteger())
@@ -65,7 +64,7 @@ object CharacterBazaarParser : Parser<CharacterBazaar> {
         if (forms.size > 1) {
             val additionalData = forms[1].formData()
             filterBuilder.searchString(additionalData.data["searchstring"]?.nullIfBlank())
-                .searchType(IntEnum.fromValue(additionalData.data["searchstring"]))
+                .searchType(IntEnum.fromValue(additionalData.data[AuctionSearchType.queryParam]))
         }
         builder
             .filters(filterBuilder.build())

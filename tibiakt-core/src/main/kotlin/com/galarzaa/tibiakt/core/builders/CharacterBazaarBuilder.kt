@@ -22,10 +22,10 @@ class CharacterBazaarBuilder {
 
     fun build() = CharacterBazaar(
         type = type ?: throw IllegalStateException("type is required"),
+        filters = filters,
         currentPage = currentPage,
         totalPages = totalPages,
         resultsCount = resultsCount,
         entries = entries,
-        filters = filters,
     )
 }

@@ -15,5 +15,9 @@ enum class AuctionOrderBy(override val value: Int) : IntEnum {
     FIST_FIGHTING(11),
     MAGIC_LEVEL(1),
     SHIELDING(6),
-    SWORD_FIGHTING(8),
+    SWORD_FIGHTING(8);
+
+    companion object {
+        const val queryParam = "order_column"
+    }
 }

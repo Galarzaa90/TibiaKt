@@ -8,11 +8,11 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class CharacterBazaar(
     val type: BazaarType,
+    val filters: BazaarFilters = BazaarFilters(),
     override val currentPage: Int,
     override val totalPages: Int,
     override val resultsCount: Int,
     override val entries: List<Auction> = emptyList(),
-    val filters: BazaarFilters = BazaarFilters(),
 ) : Paginated<Auction> {
     val url get() = getBazaarUrl(type, filters, currentPage)
 }

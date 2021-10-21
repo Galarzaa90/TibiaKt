@@ -13,8 +13,6 @@ import java.time.LocalDate
  * A news entry listed in the [NewsArchive]
  *
  * @property title The title of the entry.
- * @property category The category of the entry.
- * @property categoryIcon The category icon associated with the entry.
  * @property date The date when the entry was published.
  * @property type The type of the entry.
  */
@@ -22,7 +20,7 @@ import java.time.LocalDate
 data class NewsEntry(
     override val id: Int,
     val title: String,
-    val category: NewsCategory,
+    override val category: NewsCategory,
     val categoryIcon: String,
     val date: LocalDate,
     val type: NewsType,

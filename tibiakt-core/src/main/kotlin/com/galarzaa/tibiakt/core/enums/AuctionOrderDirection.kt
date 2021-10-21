@@ -12,5 +12,9 @@ enum class AuctionOrderDirection(override val value: Int) : IntEnum {
     /**
      * Ascending order
      */
-    LOWEST_EARLIEST(1),
+    LOWEST_EARLIEST(1);
+
+    companion object {
+        const val queryParam = "order_direction"
+    }
 }

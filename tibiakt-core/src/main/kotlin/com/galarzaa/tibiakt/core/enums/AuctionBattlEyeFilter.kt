@@ -17,5 +17,9 @@ enum class AuctionBattlEyeFilter(override val value: Int) : IntEnum {
     /**
      * Worlds that have no BattlEye protection at all.
      */
-    NOT_PROTECTED(3),
+    NOT_PROTECTED(3);
+
+    companion object {
+        const val queryParam = "filter_worldbattleyestate"
+    }
 }

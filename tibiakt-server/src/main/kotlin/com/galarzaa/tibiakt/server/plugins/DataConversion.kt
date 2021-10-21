@@ -23,15 +23,27 @@ internal fun Application.configureDataConversion() {
                 }
             }
         }
+        convert<NewsType> { stringEnumConverter<NewsType>() }
+        convert<NewsCategory> { stringEnumConverter<NewsCategory>() }
+
         convert<HouseType> { stringEnumConverter<HouseType>() }
         convert<HouseStatus> { stringEnumConverter<HouseStatus>() }
         convert<HouseOrder> { stringEnumConverter<HouseOrder>() }
         convert<HighscoresCategory> { intEnumConverter<HighscoresCategory>() }
         convert<HighscoresProfession> { intEnumConverter<HighscoresProfession>() }
+
+        convert<BazaarType> { stringEnumConverter<BazaarType>() }
+        convert<AuctionPvpTypeFilter> { intEnumConverter<AuctionPvpTypeFilter>() }
+        convert<AuctionBattlEyeFilter> { intEnumConverter<AuctionBattlEyeFilter>() }
+        convert<AuctionSkillFilter> { intEnumConverter<AuctionSkillFilter>() }
+        convert<AuctionVocationFilter> { intEnumConverter<AuctionVocationFilter>() }
+        convert<AuctionOrderBy> { intEnumConverter<AuctionOrderBy>() }
+        convert<AuctionOrderDirection> { intEnumConverter<AuctionOrderDirection>() }
+        convert<AuctionSearchType> { intEnumConverter<AuctionSearchType>() }
     }
 }
 
-private inline fun <reified T : StringEnum> DelegatingConversionService.stringEnumConverter() {
+private inline fun <reified T> DelegatingConversionService.stringEnumConverter() where T : Enum<T>, T : StringEnum {
     decode { values, _ -> values.singleOrNull()?.let { StringEnum.fromValue<T>(it) } }
     encode { value ->
         when (value) {
@@ -42,8 +54,8 @@ private inline fun <reified T : StringEnum> DelegatingConversionService.stringEn
     }
 }
 
-private inline fun <reified T : IntEnum> DelegatingConversionService.intEnumConverter() {
-    decode { values, _ -> values.singleOrNull()?.let { IntEnum.fromValue<T>(it.toInt()) } }
+private inline fun <reified T> DelegatingConversionService.intEnumConverter() where T : Enum<T>, T : IntEnum {
+    decode { values, _ -> values.singleOrNull()?.let { IntEnum.fromValue<T>(it) } }
     encode { value ->
         when (value) {
             null -> listOf()

@@ -3,7 +3,7 @@ package com.galarzaa.tibiakt.core.models.character
 import com.galarzaa.tibiakt.core.utils.getCharacterUrl
 
 /**
- * Base interface for characters
+ * Base interface for characters.
  *
  * @property name The name of the character.
  */

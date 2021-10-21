@@ -17,5 +17,9 @@ enum class AuctionSearchType(override val value: Int) : IntEnum {
     /**
      * Searches a character’s name.
      */
-    CHARACTER_NAME(2),
+    CHARACTER_NAME(2);
+
+    companion object {
+        const val queryParam = "searchtype"
+    }
 }
