@@ -2,27 +2,31 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <title>com.galarzaa.tibiakt.core.utils</title>
-</head><body><link href="../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../";</script><script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async></script><link href="../../styles/style.css" rel="Stylesheet"><link href="../../styles/logo-styles.css" rel="Stylesheet"><link href="../../styles/jetbrains-mono.css" rel="Stylesheet"><link href="../../styles/main.css" rel="Stylesheet"><script type="text/javascript" src="../../scripts/clipboard.js" async></script><script type="text/javascript" src="../../scripts/navigation-loader.js" async></script><script type="text/javascript" src="../../scripts/platform-content-handler.js" async></script><script type="text/javascript" src="../../scripts/main.js" async></script>
+</head><body><link href="../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../";</script>
+    <script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async></script><link href="../../styles/style.css" rel="Stylesheet"><link href="../../styles/jetbrains-mono.css" rel="Stylesheet"><link href="../../styles/main.css" rel="Stylesheet"><link href="../../styles/prism.css" rel="Stylesheet"><link href="../../styles/logo-styles.css" rel="Stylesheet"><script type="text/javascript" src="../../scripts/clipboard.js" async></script><script type="text/javascript" src="../../scripts/navigation-loader.js" async></script><script type="text/javascript" src="../../scripts/platform-content-handler.js" async></script><script type="text/javascript" src="../../scripts/main.js" async></script><script type="text/javascript" src="../../scripts/prism.js" async></script><script>const storage = localStorage.getItem("dokka-dark-mode")
+const savedDarkMode = storage ? JSON.parse(storage) : false
+if(savedDarkMode === true){
+    document.getElementsByTagName("html")[0].classList.add("theme-dark")
+}</script>
+
   
+    <div class="navigation-wrapper" id="navigation-wrapper">
+      <div id="leftToggler"><span class="icon-toggler"></span></div>
+      <div class="library-name"><a href="../../index.html"><span>TibiaKt</span></a></div>
+      <div>1.0-SNAPSHOT</div>
+      <div class="pull-right d-flex"><button id="theme-toggle-button"><span id="theme-toggle"></span></button>
+        <div id="searchBar"></div>
+      </div>
+    </div>
     <div id="container">
-      <div id="leftColumn"><a href="../../index.html">
-            <div id="logo"></div>
-          </a>
-        <div id="paneSearch"></div>
+      <div id="leftColumn">
         <div id="sideMenu"></div>
       </div>
-      <div id="main">
-        <script type="text/javascript" src="../../scripts/main.js"></script><div id="leftToggler"><span class="icon-toggler"></span></div>
-
+      <div id="main"><script type="text/javascript" src="../../scripts/main.js"></script>
         <div class="main-content" id="content" pageids="tibiakt-core::com.galarzaa.tibiakt.core.utils////PointingToDeclaration//-185655222">
-          <div class="navigation-wrapper" id="navigation-wrapper">
-            <div class="breadcrumbs"><a href="../index.html">tibiakt-core</a>/<a href="index.html">com.galarzaa.tibiakt.core.utils</a></div>
-            <div class="pull-right d-flex">
-              <div id="searchBar"></div>
-            </div>
-          </div>
+          <div class="breadcrumbs"><a href="../index.html">tibiakt-core</a>/<a href="index.html">com.galarzaa.tibiakt.core.utils</a></div>
           <div class="cover ">
-            <h1 class="cover"><span>Package com.</span><wbr><span>galarzaa.</span><wbr><span>tibiakt.</span><wbr><span>core.</span><wbr><span>utils</span></h1>
+            <h1 class="cover"><span><span>Package</span></span> <span>com.</span><wbr><span>galarzaa.</span><wbr><span>tibiakt.</span><wbr><span>core.</span><wbr><span>utils</span></h1>
           </div>
           <div class="tabbedcontent">
             <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Types">Types</button><button class="section-tab" data-togglable="Functions">Functions</button></div>
@@ -31,85 +35,65 @@
               <div class="table" data-togglable="Types"><a data-name="-611382872%2FClasslikes%2F-185655222" anchor-label="DurationSerializer" id="-611382872%2FClasslikes%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="-duration-serializer/index.html">DurationSerializer</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-611382872%2FClasslikes%2F-185655222"></span>
+                    <div class=""><span class="inline-flex"><a href="-duration-serializer/index.html"><span>Duration</span><wbr><span><span>Serializer</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-611382872%2FClasslikes%2F-185655222"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">object <a href="-duration-serializer/index.html">DurationSerializer</a> : <span data-unresolved-link="kotlinx.serialization/KSerializer///PointingToDeclaration/">KSerializer</span>&lt;<a href="https://docs.oracle.com/javase/8/docs/api/java/time/Duration.html">Duration</a>&gt; <span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-duration-serializer/index.html">DurationSerializer</a> : <span data-unresolved-link="kotlinx.serialization/KSerializer///PointingToDeclaration/">KSerializer</span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://docs.oracle.com/javase/8/docs/api/java/time/Duration.html">Duration</a><span class="token operator">&gt; </span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
 <a data-name="-176556895%2FClasslikes%2F-185655222" anchor-label="InstantSerializer" id="-176556895%2FClasslikes%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="-instant-serializer/index.html">InstantSerializer</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-176556895%2FClasslikes%2F-185655222"></span>
+                    <div class=""><span class="inline-flex"><a href="-instant-serializer/index.html"><span>Instant</span><wbr><span><span>Serializer</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-176556895%2FClasslikes%2F-185655222"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">object <a href="-instant-serializer/index.html">InstantSerializer</a> : <span data-unresolved-link="kotlinx.serialization/KSerializer///PointingToDeclaration/">KSerializer</span>&lt;<a href="https://docs.oracle.com/javase/8/docs/api/java/time/Instant.html">Instant</a>&gt; <span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-instant-serializer/index.html">InstantSerializer</a> : <span data-unresolved-link="kotlinx.serialization/KSerializer///PointingToDeclaration/">KSerializer</span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://docs.oracle.com/javase/8/docs/api/java/time/Instant.html">Instant</a><span class="token operator">&gt; </span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
 <a data-name="-262870775%2FClasslikes%2F-185655222" anchor-label="LocalDateSerializer" id="-262870775%2FClasslikes%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="-local-date-serializer/index.html">LocalDateSerializer</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-262870775%2FClasslikes%2F-185655222"></span>
+                    <div class=""><span class="inline-flex"><a href="-local-date-serializer/index.html"><span>Local</span><wbr><span>Date</span><wbr><span><span>Serializer</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-262870775%2FClasslikes%2F-185655222"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">object <a href="-local-date-serializer/index.html">LocalDateSerializer</a> : <span data-unresolved-link="kotlinx.serialization/KSerializer///PointingToDeclaration/">KSerializer</span>&lt;<a href="https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html">LocalDate</a>&gt; <span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-local-date-serializer/index.html">LocalDateSerializer</a> : <span data-unresolved-link="kotlinx.serialization/KSerializer///PointingToDeclaration/">KSerializer</span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html">LocalDate</a><span class="token operator">&gt; </span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
 <a data-name="-1886593585%2FClasslikes%2F-185655222" anchor-label="ParsingException" id="-1886593585%2FClasslikes%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="-parsing-exception/index.html">ParsingException</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1886593585%2FClasslikes%2F-185655222"></span>
+                    <div class=""><span class="inline-flex"><a href="-parsing-exception/index.html"><span>Parsing</span><wbr><span><span>Exception</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1886593585%2FClasslikes%2F-185655222"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">class <a href="-parsing-exception/index.html">ParsingException</a>(message: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>?, cause: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html">Throwable</a>?) : <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Exception.html">Exception</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-parsing-exception/index.html">ParsingException</a><span class="token punctuation">(</span>message<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token punctuation">, </span>cause<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html">Throwable</a><span class="token operator">?</span><span class="token punctuation">)</span> : <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Exception.html">Exception</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
 <a data-name="-1374070209%2FClasslikes%2F-185655222" anchor-label="YearMonthSerializer" id="-1374070209%2FClasslikes%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="-year-month-serializer/index.html">YearMonthSerializer</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1374070209%2FClasslikes%2F-185655222"></span>
+                    <div class=""><span class="inline-flex"><a href="-year-month-serializer/index.html"><span>Year</span><wbr><span>Month</span><wbr><span><span>Serializer</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1374070209%2FClasslikes%2F-185655222"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">object <a href="-year-month-serializer/index.html">YearMonthSerializer</a> : <span data-unresolved-link="kotlinx.serialization/KSerializer///PointingToDeclaration/">KSerializer</span>&lt;<a href="https://docs.oracle.com/javase/8/docs/api/java/time/YearMonth.html">YearMonth</a>&gt; <span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-year-month-serializer/index.html">YearMonthSerializer</a> : <span data-unresolved-link="kotlinx.serialization/KSerializer///PointingToDeclaration/">KSerializer</span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://docs.oracle.com/javase/8/docs/api/java/time/YearMonth.html">YearMonth</a><span class="token operator">&gt; </span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -118,539 +102,403 @@
               <div class="table" data-togglable="Functions"><a data-name="-1580532889%2FFunctions%2F-185655222" anchor-label="buildTibiaUrl" id="-1580532889%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="build-tibia-url.html">buildTibiaUrl</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1580532889%2FFunctions%2F-185655222"></span>
+                    <div class=""><span class="inline-flex"><a href="build-tibia-url.html"><span>build</span><wbr><span>Tibia</span><wbr><span><span>Url</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1580532889%2FFunctions%2F-185655222"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">fun <a href="build-tibia-url.html">buildTibiaUrl</a>(section: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>, vararg params: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html">Pair</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>, <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt;, test: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="838906727%2FFunctions%2F-185655222" anchor-label="buildTibiaUrl" id="838906727%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="brief "><a data-name="838906727%2FFunctions%2F-185655222" anchor-label="buildTibiaUrl" id="838906727%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>Build a URL to Tibia.com.</div></div>
-<div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">fun <a href="build-tibia-url.html">buildTibiaUrl</a>(section: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>, subtopic: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>, vararg params: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html">Pair</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>, <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt;, test: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="848059532%2FFunctions%2F-185655222" anchor-label="buildTibiaUrl" id="848059532%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="brief "><a data-name="848059532%2FFunctions%2F-185655222" anchor-label="buildTibiaUrl" id="848059532%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>Build a URL to Tibia.com.</div></div>
-</div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="build-tibia-url.html"><span class="token function">buildTibiaUrl</span></a><span class="token punctuation">(</span>section<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><span class="token keyword">vararg </span>params<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html">Pair</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token punctuation">, </span>test<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="build-tibia-url.html"><span class="token function">buildTibiaUrl</span></a><span class="token punctuation">(</span>section<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span>subtopic<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><span class="token keyword">vararg </span>params<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html">Pair</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token punctuation">, </span>test<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Build a URL to Tibia.com.</p></div></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
 <a data-name="-871663110%2FFunctions%2F-185655222" anchor-label="clean" id="-871663110%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="clean.html">clean</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-871663110%2FFunctions%2F-185655222"></span>
+                    <div class=""><span class="inline-flex"><a href="clean.html"><span><span>clean</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-871663110%2FFunctions%2F-185655222"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">fun <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>.<a href="clean.html">clean</a>(): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="-871663110%2FFunctions%2F-185655222" anchor-label="clean" id="-871663110%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="brief "><a data-name="-871663110%2FFunctions%2F-185655222" anchor-label="clean" id="-871663110%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>Clean the string of non-breaking spaces and trims whitespace.</div></div>
-</div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">.</span><a href="clean.html"><span class="token function">clean</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Clean the string of non-breaking spaces and trims whitespace.</p></div></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
 <a data-name="1353781494%2FFunctions%2F-185655222" anchor-label="findInteger" id="1353781494%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="find-integer.html">findInteger</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1353781494%2FFunctions%2F-185655222"></span>
+                    <div class=""><span class="inline-flex"><a href="find-integer.html"><span>find</span><wbr><span><span>Integer</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1353781494%2FFunctions%2F-185655222"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">fun <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>.<a href="find-integer.html">findInteger</a>(): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">.</span><a href="find-integer.html"><span class="token function">findInteger</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
 <a data-name="-593528507%2FFunctions%2F-185655222" anchor-label="getAuctionUrl" id="-593528507%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="get-auction-url.html">getAuctionUrl</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-593528507%2FFunctions%2F-185655222"></span>
+                    <div class=""><span class="inline-flex"><a href="get-auction-url.html"><span>get</span><wbr><span>Auction</span><wbr><span><span>Url</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-593528507%2FFunctions%2F-185655222"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">fun <a href="get-auction-url.html">getAuctionUrl</a>(auctionId: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="-593528507%2FFunctions%2F-185655222" anchor-label="getAuctionUrl" id="-593528507%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="brief "><a data-name="-593528507%2FFunctions%2F-185655222" anchor-label="getAuctionUrl" id="-593528507%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>Get the URL to a specific auction.</div></div>
-</div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="get-auction-url.html"><span class="token function">getAuctionUrl</span></a><span class="token punctuation">(</span>auctionId<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Get the URL to a specific auction.</p></div></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
 <a data-name="1309077710%2FFunctions%2F-185655222" anchor-label="getBazaarUrl" id="1309077710%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="get-bazaar-url.html">getBazaarUrl</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1309077710%2FFunctions%2F-185655222"></span>
+                    <div class=""><span class="inline-flex"><a href="get-bazaar-url.html"><span>get</span><wbr><span>Bazaar</span><wbr><span><span>Url</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1309077710%2FFunctions%2F-185655222"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">fun <a href="get-bazaar-url.html">getBazaarUrl</a>(type: <a href="../com.galarzaa.tibiakt.core.enums/-bazaar-type/index.html">BazaarType</a> = BazaarType.CURRENT, filters: <a href="../com.galarzaa.tibiakt.core.models.bazaar/-bazaar-filters/index.html">BazaarFilters</a>? = null, page: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = 1): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="1309077710%2FFunctions%2F-185655222" anchor-label="getBazaarUrl" id="1309077710%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="brief "><a data-name="1309077710%2FFunctions%2F-185655222" anchor-label="getBazaarUrl" id="1309077710%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>Get the URL to the character bazaar.</div></div>
-</div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="get-bazaar-url.html"><span class="token function">getBazaarUrl</span></a><span class="token punctuation">(</span>type<span class="token operator">: </span><a href="../com.galarzaa.tibiakt.core.enums/-bazaar-type/index.html">BazaarType</a><span class="token operator"> = </span>BazaarType.CURRENT<span class="token punctuation">, </span>filters<span class="token operator">: </span><a href="../com.galarzaa.tibiakt.core.models.bazaar/-bazaar-filters/index.html">BazaarFilters</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span>page<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator"> = </span><span class="token constant">1</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Get the URL to the character bazaar.</p></div></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
 <a data-name="2040399703%2FFunctions%2F-185655222" anchor-label="getCharacterUrl" id="2040399703%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="get-character-url.html">getCharacterUrl</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2040399703%2FFunctions%2F-185655222"></span>
+                    <div class=""><span class="inline-flex"><a href="get-character-url.html"><span>get</span><wbr><span>Character</span><wbr><span><span>Url</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2040399703%2FFunctions%2F-185655222"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">fun <a href="get-character-url.html">getCharacterUrl</a>(name: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="2040399703%2FFunctions%2F-185655222" anchor-label="getCharacterUrl" id="2040399703%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="brief "><a data-name="2040399703%2FFunctions%2F-185655222" anchor-label="getCharacterUrl" id="2040399703%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>Get the URL to specific character.</div></div>
-</div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="get-character-url.html"><span class="token function">getCharacterUrl</span></a><span class="token punctuation">(</span>name<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Get the URL to specific character.</p></div></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
 <a data-name="-537507901%2FFunctions%2F-185655222" anchor-label="getContaining" id="-537507901%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="get-containing.html">getContaining</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-537507901%2FFunctions%2F-185655222"></span>
+                    <div class=""><span class="inline-flex"><a href="get-containing.html"><span>get</span><wbr><span><span>Containing</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-537507901%2FFunctions%2F-185655222"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">fun &lt;<a href="get-containing.html">V</a>&gt; <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html">Map</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>, <a href="get-containing.html">V</a>&gt;.<a href="get-containing.html">getContaining</a>(key: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>, default: <a href="get-containing.html">V</a>? = null): <a href="get-containing.html">V</a>?<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="-537507901%2FFunctions%2F-185655222" anchor-label="getContaining" id="-537507901%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="brief "><a data-name="-537507901%2FFunctions%2F-185655222" anchor-label="getContaining" id="-537507901%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>Get a mapping's key containing the string.</div></div>
-</div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="get-containing.html">V</a><span class="token operator">&gt; </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html">Map</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="get-containing.html">V</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="get-containing.html"><span class="token function">getContaining</span></a><span class="token punctuation">(</span>key<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span>default<span class="token operator">: </span><a href="get-containing.html">V</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">)</span><span class="token operator">: </span><a href="get-containing.html">V</a><span class="token operator">?</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Get a mapping's key containing the string.</p></div></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
 <a data-name="556462327%2FFunctions%2F-185655222" anchor-label="getEventsScheduleUrl" id="556462327%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="get-events-schedule-url.html">getEventsScheduleUrl</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="556462327%2FFunctions%2F-185655222"></span>
+                    <div class=""><span class="inline-flex"><a href="get-events-schedule-url.html"><span>get</span><wbr><span>Events</span><wbr><span>Schedule</span><wbr><span><span>Url</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="556462327%2FFunctions%2F-185655222"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">fun <a href="get-events-schedule-url.html">getEventsScheduleUrl</a>(yearMonth: <a href="https://docs.oracle.com/javase/8/docs/api/java/time/YearMonth.html">YearMonth</a>? = null): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="556462327%2FFunctions%2F-185655222" anchor-label="getEventsScheduleUrl" id="556462327%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="brief "><a data-name="556462327%2FFunctions%2F-185655222" anchor-label="getEventsScheduleUrl" id="556462327%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>Get the URL to the events schedule.</div></div>
-</div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="get-events-schedule-url.html"><span class="token function">getEventsScheduleUrl</span></a><span class="token punctuation">(</span>yearMonth<span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/time/YearMonth.html">YearMonth</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Get the URL to the events schedule.</p></div></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
 <a data-name="625145549%2FFunctions%2F-185655222" anchor-label="getGuildUrl" id="625145549%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="get-guild-url.html">getGuildUrl</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="625145549%2FFunctions%2F-185655222"></span>
+                    <div class=""><span class="inline-flex"><a href="get-guild-url.html"><span>get</span><wbr><span>Guild</span><wbr><span><span>Url</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="625145549%2FFunctions%2F-185655222"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">fun <a href="get-guild-url.html">getGuildUrl</a>(name: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="625145549%2FFunctions%2F-185655222" anchor-label="getGuildUrl" id="625145549%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="brief "><a data-name="625145549%2FFunctions%2F-185655222" anchor-label="getGuildUrl" id="625145549%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>Get the URL to a specific guild.</div></div>
-</div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="get-guild-url.html"><span class="token function">getGuildUrl</span></a><span class="token punctuation">(</span>name<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Get the URL to a specific guild.</p></div></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
 <a data-name="-1082306912%2FFunctions%2F-185655222" anchor-label="getHighscoresUrl" id="-1082306912%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="get-highscores-url.html">getHighscoresUrl</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1082306912%2FFunctions%2F-185655222"></span>
+                    <div class=""><span class="inline-flex"><a href="get-highscores-url.html"><span>get</span><wbr><span>Highscores</span><wbr><span><span>Url</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1082306912%2FFunctions%2F-185655222"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">fun <a href="get-highscores-url.html">getHighscoresUrl</a>(world: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>?, category: <a href="../com.galarzaa.tibiakt.core.enums/-highscores-category/index.html">HighscoresCategory</a> = HighscoresCategory.EXPERIENCE_POINTS, vocations: <a href="../com.galarzaa.tibiakt.core.enums/-highscores-profession/index.html">HighscoresProfession</a> = HighscoresProfession.ALL, page: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = 1, battleEye: <a href="../com.galarzaa.tibiakt.core.enums/-highscores-battl-eye-type/index.html">HighscoresBattlEyeType</a> = HighscoresBattlEyeType.ANY_WORLD, worldTypes: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set</a>&lt;<a href="../com.galarzaa.tibiakt.core.enums/-highscores-pvp-type/index.html">HighscoresPvpType</a>&gt;? = null): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="-1082306912%2FFunctions%2F-185655222" anchor-label="getHighscoresUrl" id="-1082306912%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="brief "><a data-name="-1082306912%2FFunctions%2F-185655222" anchor-label="getHighscoresUrl" id="-1082306912%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>Get the URL to the highscores, with the specified parameters.</div></div>
-</div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="get-highscores-url.html"><span class="token function">getHighscoresUrl</span></a><span class="token punctuation">(</span>world<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token punctuation">, </span>category<span class="token operator">: </span><a href="../com.galarzaa.tibiakt.core.enums/-highscores-category/index.html">HighscoresCategory</a><span class="token operator"> = </span>HighscoresCategory.EXPERIENCE_POINTS<span class="token punctuation">, </span>vocations<span class="token operator">: </span><a href="../com.galarzaa.tibiakt.core.enums/-highscores-profession/index.html">HighscoresProfession</a><span class="token operator"> = </span>HighscoresProfession.ALL<span class="token punctuation">, </span>page<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator"> = </span><span class="token constant">1</span><span class="token punctuation">, </span>battleEye<span class="token operator">: </span><a href="../com.galarzaa.tibiakt.core.enums/-highscores-battl-eye-type/index.html">HighscoresBattlEyeType</a><span class="token operator"> = </span>HighscoresBattlEyeType.ANY_WORLD<span class="token punctuation">, </span>worldTypes<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../com.galarzaa.tibiakt.core.enums/-highscores-pvp-type/index.html">HighscoresPvpType</a><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Get the URL to the highscores, with the specified parameters.</p></div></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
 <a data-name="1018792062%2FFunctions%2F-185655222" anchor-label="getHousesSectionUrl" id="1018792062%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="get-houses-section-url.html">getHousesSectionUrl</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1018792062%2FFunctions%2F-185655222"></span>
+                    <div class=""><span class="inline-flex"><a href="get-houses-section-url.html"><span>get</span><wbr><span>Houses</span><wbr><span>Section</span><wbr><span><span>Url</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1018792062%2FFunctions%2F-185655222"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">fun <a href="get-houses-section-url.html">getHousesSectionUrl</a>(world: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>, town: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>, type: <a href="../com.galarzaa.tibiakt.core.enums/-house-type/index.html">HouseType</a>? = null, status: <a href="../com.galarzaa.tibiakt.core.enums/-house-status/index.html">HouseStatus</a>? = null, order: <a href="../com.galarzaa.tibiakt.core.enums/-house-order/index.html">HouseOrder</a>? = null): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="1018792062%2FFunctions%2F-185655222" anchor-label="getHousesSectionUrl" id="1018792062%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="brief "><a data-name="1018792062%2FFunctions%2F-185655222" anchor-label="getHousesSectionUrl" id="1018792062%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>Get the URL to the houses section with the provided parameters.</div></div>
-</div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="get-houses-section-url.html"><span class="token function">getHousesSectionUrl</span></a><span class="token punctuation">(</span>world<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span>town<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span>type<span class="token operator">: </span><a href="../com.galarzaa.tibiakt.core.enums/-house-type/index.html">HouseType</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span>status<span class="token operator">: </span><a href="../com.galarzaa.tibiakt.core.enums/-house-status/index.html">HouseStatus</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span>order<span class="token operator">: </span><a href="../com.galarzaa.tibiakt.core.enums/-house-order/index.html">HouseOrder</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Get the URL to the houses section with the provided parameters.</p></div></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
 <a data-name="-234712291%2FFunctions%2F-185655222" anchor-label="getHouseUrl" id="-234712291%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="get-house-url.html">getHouseUrl</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-234712291%2FFunctions%2F-185655222"></span>
+                    <div class=""><span class="inline-flex"><a href="get-house-url.html"><span>get</span><wbr><span>House</span><wbr><span><span>Url</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-234712291%2FFunctions%2F-185655222"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">fun <a href="get-house-url.html">getHouseUrl</a>(world: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>, houseId: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="-234712291%2FFunctions%2F-185655222" anchor-label="getHouseUrl" id="-234712291%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="brief "><a data-name="-234712291%2FFunctions%2F-185655222" anchor-label="getHouseUrl" id="-234712291%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>Get the URL to a house on a specific <a href="get-house-url.html">world</a>.</div></div>
-</div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="get-house-url.html"><span class="token function">getHouseUrl</span></a><span class="token punctuation">(</span>world<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span>houseId<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Get the URL to a house on a specific <a href="get-house-url.html">world</a>.</p></div></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
 <a data-name="1710478539%2FFunctions%2F-185655222" anchor-label="getKillStatisticsUrl" id="1710478539%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="get-kill-statistics-url.html">getKillStatisticsUrl</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1710478539%2FFunctions%2F-185655222"></span>
+                    <div class=""><span class="inline-flex"><a href="get-kill-statistics-url.html"><span>get</span><wbr><span>Kill</span><wbr><span>Statistics</span><wbr><span><span>Url</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1710478539%2FFunctions%2F-185655222"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">fun <a href="get-kill-statistics-url.html">getKillStatisticsUrl</a>(world: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="1710478539%2FFunctions%2F-185655222" anchor-label="getKillStatisticsUrl" id="1710478539%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="brief "><a data-name="1710478539%2FFunctions%2F-185655222" anchor-label="getKillStatisticsUrl" id="1710478539%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>Get the URL to the kill statistics of a specific world.</div></div>
-</div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="get-kill-statistics-url.html"><span class="token function">getKillStatisticsUrl</span></a><span class="token punctuation">(</span>world<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Get the URL to the kill statistics of a specific world.</p></div></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
 <a data-name="-1202883906%2FFunctions%2F-185655222" anchor-label="getNewArchiveFormData" id="-1202883906%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="get-new-archive-form-data.html">getNewArchiveFormData</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1202883906%2FFunctions%2F-185655222"></span>
+                    <div class=""><span class="inline-flex"><a href="get-new-archive-form-data.html"><span>get</span><wbr><span>New</span><wbr><span>Archive</span><wbr><span>Form</span><wbr><span><span>Data</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1202883906%2FFunctions%2F-185655222"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">fun <a href="get-new-archive-form-data.html">getNewArchiveFormData</a>(startDate: <a href="https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html">LocalDate</a>, endDate: <a href="https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html">LocalDate</a>, categories: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set</a>&lt;<a href="../com.galarzaa.tibiakt.core.enums/-news-category/index.html">NewsCategory</a>&gt;? = null, types: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set</a>&lt;<a href="../com.galarzaa.tibiakt.core.enums/-news-type/index.html">NewsType</a>&gt;? = null): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html">Pair</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>, <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>&gt;&gt;<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="-1202883906%2FFunctions%2F-185655222" anchor-label="getNewArchiveFormData" id="-1202883906%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="brief "><a data-name="-1202883906%2FFunctions%2F-185655222" anchor-label="getNewArchiveFormData" id="-1202883906%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>Get the post parameters to filter news in the News Archive</div></div>
-</div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="get-new-archive-form-data.html"><span class="token function">getNewArchiveFormData</span></a><span class="token punctuation">(</span>startDate<span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html">LocalDate</a><span class="token punctuation">, </span>endDate<span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html">LocalDate</a><span class="token punctuation">, </span>categories<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../com.galarzaa.tibiakt.core.enums/-news-category/index.html">NewsCategory</a><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span>types<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../com.galarzaa.tibiakt.core.enums/-news-type/index.html">NewsType</a><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html">Pair</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Get the post parameters to filter news in the News Archive</p></div></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
 <a data-name="-1076360301%2FFunctions%2F-185655222" anchor-label="getNewsArchiveUrl" id="-1076360301%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="get-news-archive-url.html">getNewsArchiveUrl</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1076360301%2FFunctions%2F-185655222"></span>
+                    <div class=""><span class="inline-flex"><a href="get-news-archive-url.html"><span>get</span><wbr><span>News</span><wbr><span>Archive</span><wbr><span><span>Url</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1076360301%2FFunctions%2F-185655222"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">fun <a href="get-news-archive-url.html">getNewsArchiveUrl</a>(): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="-1076360301%2FFunctions%2F-185655222" anchor-label="getNewsArchiveUrl" id="-1076360301%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="brief "><a data-name="-1076360301%2FFunctions%2F-185655222" anchor-label="getNewsArchiveUrl" id="-1076360301%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>Get the URL to the News Archive.</div></div>
-</div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="get-news-archive-url.html"><span class="token function">getNewsArchiveUrl</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Get the URL to the News Archive.</p></div></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
 <a data-name="173279721%2FFunctions%2F-185655222" anchor-label="getNewsUrl" id="173279721%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="get-news-url.html">getNewsUrl</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="173279721%2FFunctions%2F-185655222"></span>
+                    <div class=""><span class="inline-flex"><a href="get-news-url.html"><span>get</span><wbr><span>News</span><wbr><span><span>Url</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="173279721%2FFunctions%2F-185655222"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">fun <a href="get-news-url.html">getNewsUrl</a>(newsId: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="173279721%2FFunctions%2F-185655222" anchor-label="getNewsUrl" id="173279721%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="brief "><a data-name="173279721%2FFunctions%2F-185655222" anchor-label="getNewsUrl" id="173279721%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>Get the URL to a specific news article</div></div>
-</div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="get-news-url.html"><span class="token function">getNewsUrl</span></a><span class="token punctuation">(</span>newsId<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Get the URL to a specific news article</p></div></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
 <a data-name="145547880%2FFunctions%2F-185655222" anchor-label="getStaticFileUrl" id="145547880%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="get-static-file-url.html">getStaticFileUrl</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="145547880%2FFunctions%2F-185655222"></span>
+                    <div class=""><span class="inline-flex"><a href="get-static-file-url.html"><span>get</span><wbr><span>Static</span><wbr><span>File</span><wbr><span><span>Url</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="145547880%2FFunctions%2F-185655222"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">fun <a href="get-static-file-url.html">getStaticFileUrl</a>(vararg path: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>, test: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="848417458%2FFunctions%2F-185655222" anchor-label="getStaticFileUrl" id="848417458%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="brief "><a data-name="848417458%2FFunctions%2F-185655222" anchor-label="getStaticFileUrl" id="848417458%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>Get the URL of a static asset in Tibia.</div></div>
-<div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">fun <a href="get-static-file-url.html">getStaticFileUrl</a>(path: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>, test: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="1082067778%2FFunctions%2F-185655222" anchor-label="getStaticFileUrl" id="1082067778%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="brief "><a data-name="1082067778%2FFunctions%2F-185655222" anchor-label="getStaticFileUrl" id="1082067778%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>Get the URL of a static asset in Tibia.</div></div>
-</div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="get-static-file-url.html"><span class="token function">getStaticFileUrl</span></a><span class="token punctuation">(</span><span class="token keyword">vararg </span>path<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span>test<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="get-static-file-url.html"><span class="token function">getStaticFileUrl</span></a><span class="token punctuation">(</span>path<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span>test<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Get the URL of a static asset in Tibia.com</p></div></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
 <a data-name="2005014880%2FFunctions%2F-185655222" anchor-label="getThreadUrl" id="2005014880%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="get-thread-url.html">getThreadUrl</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2005014880%2FFunctions%2F-185655222"></span>
+                    <div class=""><span class="inline-flex"><a href="get-thread-url.html"><span>get</span><wbr><span>Thread</span><wbr><span><span>Url</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2005014880%2FFunctions%2F-185655222"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">fun <a href="get-thread-url.html">getThreadUrl</a>(threadId: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="2005014880%2FFunctions%2F-185655222" anchor-label="getThreadUrl" id="2005014880%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="brief "><a data-name="2005014880%2FFunctions%2F-185655222" anchor-label="getThreadUrl" id="2005014880%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>Get the URL to a specific thread in the forums.</div></div>
-</div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="get-thread-url.html"><span class="token function">getThreadUrl</span></a><span class="token punctuation">(</span>threadId<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Get the URL to a specific thread in the forums.</p></div></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
 <a data-name="2100204814%2FFunctions%2F-185655222" anchor-label="getWorldGuildsUrl" id="2100204814%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="get-world-guilds-url.html">getWorldGuildsUrl</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2100204814%2FFunctions%2F-185655222"></span>
+                    <div class=""><span class="inline-flex"><a href="get-world-guilds-url.html"><span>get</span><wbr><span>World</span><wbr><span>Guilds</span><wbr><span><span>Url</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2100204814%2FFunctions%2F-185655222"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">fun <a href="get-world-guilds-url.html">getWorldGuildsUrl</a>(world: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="2100204814%2FFunctions%2F-185655222" anchor-label="getWorldGuildsUrl" id="2100204814%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="brief "><a data-name="2100204814%2FFunctions%2F-185655222" anchor-label="getWorldGuildsUrl" id="2100204814%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>Get the URL to the list of guilds for a specific <a href="get-world-guilds-url.html">world</a>.</div></div>
-</div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="get-world-guilds-url.html"><span class="token function">getWorldGuildsUrl</span></a><span class="token punctuation">(</span>world<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Get the URL to the list of guilds for a specific <a href="get-world-guilds-url.html">world</a>.</p></div></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
 <a data-name="-25482033%2FFunctions%2F-185655222" anchor-label="getWorldOverviewUrl" id="-25482033%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="get-world-overview-url.html">getWorldOverviewUrl</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-25482033%2FFunctions%2F-185655222"></span>
+                    <div class=""><span class="inline-flex"><a href="get-world-overview-url.html"><span>get</span><wbr><span>World</span><wbr><span>Overview</span><wbr><span><span>Url</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-25482033%2FFunctions%2F-185655222"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">fun <a href="get-world-overview-url.html">getWorldOverviewUrl</a>(): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="-25482033%2FFunctions%2F-185655222" anchor-label="getWorldOverviewUrl" id="-25482033%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="brief "><a data-name="-25482033%2FFunctions%2F-185655222" anchor-label="getWorldOverviewUrl" id="-25482033%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>Get the URL to the World Overview section</div></div>
-</div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="get-world-overview-url.html"><span class="token function">getWorldOverviewUrl</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Get the URL to the World Overview section</p></div></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
 <a data-name="-146344434%2FFunctions%2F-185655222" anchor-label="getWorldUrl" id="-146344434%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="get-world-url.html">getWorldUrl</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-146344434%2FFunctions%2F-185655222"></span>
+                    <div class=""><span class="inline-flex"><a href="get-world-url.html"><span>get</span><wbr><span>World</span><wbr><span><span>Url</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-146344434%2FFunctions%2F-185655222"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">fun <a href="get-world-url.html">getWorldUrl</a>(name: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="-146344434%2FFunctions%2F-185655222" anchor-label="getWorldUrl" id="-146344434%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="brief "><a data-name="-146344434%2FFunctions%2F-185655222" anchor-label="getWorldUrl" id="-146344434%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>Get the URL to a specific world.</div></div>
-</div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="get-world-url.html"><span class="token function">getWorldUrl</span></a><span class="token punctuation">(</span>name<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Get the URL to a specific world.</p></div></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
 <a data-name="1763398810%2FFunctions%2F-185655222" anchor-label="nullIfBlank" id="1763398810%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="null-if-blank.html">nullIfBlank</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1763398810%2FFunctions%2F-185655222"></span>
+                    <div class=""><span class="inline-flex"><a href="null-if-blank.html"><span>null</span><wbr><span>If</span><wbr><span><span>Blank</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1763398810%2FFunctions%2F-185655222"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">fun <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>?.<a href="null-if-blank.html">nullIfBlank</a>(): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>?<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="1763398810%2FFunctions%2F-185655222" anchor-label="nullIfBlank" id="1763398810%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="brief "><a data-name="1763398810%2FFunctions%2F-185655222" anchor-label="nullIfBlank" id="1763398810%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>Return null if the string is blank</div></div>
-</div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token punctuation">.</span><a href="null-if-blank.html"><span class="token function">nullIfBlank</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Return null if the string is blank</p></div></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
 <a data-name="1874761960%2FFunctions%2F-185655222" anchor-label="offsetStart" id="1874761960%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="offset-start.html">offsetStart</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1874761960%2FFunctions%2F-185655222"></span>
+                    <div class=""><span class="inline-flex"><a href="offset-start.html"><span>offset</span><wbr><span><span>Start</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1874761960%2FFunctions%2F-185655222"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">fun &lt;<a href="offset-start.html">T</a>&gt; <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="offset-start.html">T</a>&gt;.<a href="offset-start.html">offsetStart</a>(offset: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="offset-start.html">T</a>&gt;<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="offset-start.html">T</a><span class="token operator">&gt; </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="offset-start.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><a href="offset-start.html"><span class="token function">offsetStart</span></a><span class="token punctuation">(</span>offset<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="offset-start.html">T</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
 <a data-name="-1848533804%2FFunctions%2F-185655222" anchor-label="parseInteger" id="-1848533804%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="parse-integer.html">parseInteger</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1848533804%2FFunctions%2F-185655222"></span>
+                    <div class=""><span class="inline-flex"><a href="parse-integer.html"><span>parse</span><wbr><span><span>Integer</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1848533804%2FFunctions%2F-185655222"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">fun <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>.<a href="parse-integer.html">parseInteger</a>(): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">.</span><a href="parse-integer.html"><span class="token function">parseInteger</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
 <a data-name="2051250432%2FFunctions%2F-185655222" anchor-label="parseLong" id="2051250432%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="parse-long.html">parseLong</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2051250432%2FFunctions%2F-185655222"></span>
+                    <div class=""><span class="inline-flex"><a href="parse-long.html"><span>parse</span><wbr><span><span>Long</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2051250432%2FFunctions%2F-185655222"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">fun <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>.<a href="parse-long.html">parseLong</a>(): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">.</span><a href="parse-long.html"><span class="token function">parseLong</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
 <a data-name="389560147%2FFunctions%2F-185655222" anchor-label="parseThousandSuffix" id="389560147%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="parse-thousand-suffix.html">parseThousandSuffix</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="389560147%2FFunctions%2F-185655222"></span>
+                    <div class=""><span class="inline-flex"><a href="parse-thousand-suffix.html"><span>parse</span><wbr><span>Thousand</span><wbr><span><span>Suffix</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="389560147%2FFunctions%2F-185655222"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">fun <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>.<a href="parse-thousand-suffix.html">parseThousandSuffix</a>(): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="389560147%2FFunctions%2F-185655222" anchor-label="parseThousandSuffix" id="389560147%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="brief "><a data-name="389560147%2FFunctions%2F-185655222" anchor-label="parseThousandSuffix" id="389560147%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>Parses strings with numbers using "k" as a thousand suffix</div></div>
-</div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">.</span><a href="parse-thousand-suffix.html"><span class="token function">parseThousandSuffix</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Parses strings with numbers using "k" as a thousand suffix</p></div></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
 <a data-name="-669631437%2FFunctions%2F-185655222" anchor-label="parseTibiaDate" id="-669631437%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="parse-tibia-date.html">parseTibiaDate</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-669631437%2FFunctions%2F-185655222"></span>
+                    <div class=""><span class="inline-flex"><a href="parse-tibia-date.html"><span>parse</span><wbr><span>Tibia</span><wbr><span><span>Date</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-669631437%2FFunctions%2F-185655222"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">fun <a href="parse-tibia-date.html">parseTibiaDate</a>(input: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>): <a href="https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html">LocalDate</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="-669631437%2FFunctions%2F-185655222" anchor-label="parseTibiaDate" id="-669631437%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="brief "><a data-name="-669631437%2FFunctions%2F-185655222" anchor-label="parseTibiaDate" id="-669631437%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>Parses a string containing date from Tibia.com into an Instant instance.</div></div>
-</div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="parse-tibia-date.html"><span class="token function">parseTibiaDate</span></a><span class="token punctuation">(</span>input<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html">LocalDate</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Parses a string containing date from Tibia.com into an Instant instance.</p></div></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
 <a data-name="-1919442080%2FFunctions%2F-185655222" anchor-label="parseTibiaDateTime" id="-1919442080%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="parse-tibia-date-time.html">parseTibiaDateTime</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1919442080%2FFunctions%2F-185655222"></span>
+                    <div class=""><span class="inline-flex"><a href="parse-tibia-date-time.html"><span>parse</span><wbr><span>Tibia</span><wbr><span>Date</span><wbr><span><span>Time</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1919442080%2FFunctions%2F-185655222"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">fun <a href="parse-tibia-date-time.html">parseTibiaDateTime</a>(input: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>): <a href="https://docs.oracle.com/javase/8/docs/api/java/time/Instant.html">Instant</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="-1919442080%2FFunctions%2F-185655222" anchor-label="parseTibiaDateTime" id="-1919442080%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="brief "><a data-name="-1919442080%2FFunctions%2F-185655222" anchor-label="parseTibiaDateTime" id="-1919442080%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>Parses a string containing date and time from Tibia.com into an Instant instance.</div></div>
-</div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="parse-tibia-date-time.html"><span class="token function">parseTibiaDateTime</span></a><span class="token punctuation">(</span>input<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/time/Instant.html">Instant</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Parses a string containing date and time from Tibia.com into an Instant instance.</p></div></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
 <a data-name="-923166430%2FFunctions%2F-185655222" anchor-label="parseTibiaFullDate" id="-923166430%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="parse-tibia-full-date.html">parseTibiaFullDate</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-923166430%2FFunctions%2F-185655222"></span>
+                    <div class=""><span class="inline-flex"><a href="parse-tibia-full-date.html"><span>parse</span><wbr><span>Tibia</span><wbr><span>Full</span><wbr><span><span>Date</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-923166430%2FFunctions%2F-185655222"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">fun <a href="parse-tibia-full-date.html">parseTibiaFullDate</a>(input: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>): <a href="https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html">LocalDate</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="-923166430%2FFunctions%2F-185655222" anchor-label="parseTibiaFullDate" id="-923166430%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="brief "><a data-name="-923166430%2FFunctions%2F-185655222" anchor-label="parseTibiaFullDate" id="-923166430%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>Parses a string containing date from Tibia.com into an Instant instance.</div></div>
-</div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="parse-tibia-full-date.html"><span class="token function">parseTibiaFullDate</span></a><span class="token punctuation">(</span>input<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html">LocalDate</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Parses a string containing date from Tibia.com into an Instant instance.</p></div></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
 <a data-name="886350093%2FFunctions%2F-185655222" anchor-label="remove" id="886350093%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="remove.html">remove</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="886350093%2FFunctions%2F-185655222"></span>
+                    <div class=""><span class="inline-flex"><a href="remove.html"><span><span>remove</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="886350093%2FFunctions%2F-185655222"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">fun <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>.<a href="remove.html">remove</a>(value: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>, ignoreCase: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="886350093%2FFunctions%2F-185655222" anchor-label="remove" id="886350093%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="brief "><a data-name="886350093%2FFunctions%2F-185655222" anchor-label="remove" id="886350093%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>Remove an arbitrary string from a string, as many times as it is found.</div></div>
-</div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">.</span><a href="remove.html"><span class="token function">remove</span></a><span class="token punctuation">(</span>value<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span>ignoreCase<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Remove an arbitrary string from a string, as many times as it is found.</p></div></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
 <a data-name="-2111585993%2FFunctions%2F-185655222" anchor-label="splitList" id="-2111585993%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="split-list.html">splitList</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2111585993%2FFunctions%2F-185655222"></span>
+                    <div class=""><span class="inline-flex"><a href="split-list.html"><span>split</span><wbr><span><span>List</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2111585993%2FFunctions%2F-185655222"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">fun <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>?.<a href="split-list.html">splitList</a>(separator: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a> = ",", lastSeparator: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a> = " and "): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>&gt;<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<a data-name="-2111585993%2FFunctions%2F-185655222" anchor-label="splitList" id="-2111585993%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="brief "><a data-name="-2111585993%2FFunctions%2F-185655222" anchor-label="splitList" id="-2111585993%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>Split a string enumerating elements, using a different separator for the last item.</div></div>
-</div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token punctuation">.</span><a href="split-list.html"><span class="token function">splitList</span></a><span class="token punctuation">(</span>separator<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator"> = </span><span class="token string">","</span><span class="token punctuation">, </span>lastSeparator<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator"> = </span><span class="token string">" and "</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Split a string enumerating elements, using a different separator for the last item.</p></div></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -658,7 +506,7 @@
             </div>
           </div>
         </div>
-        <div class="footer"><span class="go-to-top-icon"><a href="#content"></a></span><span>© 2021 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span></div>
+        <div class="footer"><span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2021 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span></div>
       </div>
     </div>
   

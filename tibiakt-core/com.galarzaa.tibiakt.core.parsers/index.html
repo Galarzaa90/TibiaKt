@@ -2,27 +2,31 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <title>com.galarzaa.tibiakt.core.parsers</title>
-</head><body><link href="../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../";</script><script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async></script><link href="../../styles/style.css" rel="Stylesheet"><link href="../../styles/logo-styles.css" rel="Stylesheet"><link href="../../styles/jetbrains-mono.css" rel="Stylesheet"><link href="../../styles/main.css" rel="Stylesheet"><script type="text/javascript" src="../../scripts/clipboard.js" async></script><script type="text/javascript" src="../../scripts/navigation-loader.js" async></script><script type="text/javascript" src="../../scripts/platform-content-handler.js" async></script><script type="text/javascript" src="../../scripts/main.js" async></script>
+</head><body><link href="../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../";</script>
+    <script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async></script><link href="../../styles/style.css" rel="Stylesheet"><link href="../../styles/jetbrains-mono.css" rel="Stylesheet"><link href="../../styles/main.css" rel="Stylesheet"><link href="../../styles/prism.css" rel="Stylesheet"><link href="../../styles/logo-styles.css" rel="Stylesheet"><script type="text/javascript" src="../../scripts/clipboard.js" async></script><script type="text/javascript" src="../../scripts/navigation-loader.js" async></script><script type="text/javascript" src="../../scripts/platform-content-handler.js" async></script><script type="text/javascript" src="../../scripts/main.js" async></script><script type="text/javascript" src="../../scripts/prism.js" async></script><script>const storage = localStorage.getItem("dokka-dark-mode")
+const savedDarkMode = storage ? JSON.parse(storage) : false
+if(savedDarkMode === true){
+    document.getElementsByTagName("html")[0].classList.add("theme-dark")
+}</script>
+
   
+    <div class="navigation-wrapper" id="navigation-wrapper">
+      <div id="leftToggler"><span class="icon-toggler"></span></div>
+      <div class="library-name"><a href="../../index.html"><span>TibiaKt</span></a></div>
+      <div>1.0-SNAPSHOT</div>
+      <div class="pull-right d-flex"><button id="theme-toggle-button"><span id="theme-toggle"></span></button>
+        <div id="searchBar"></div>
+      </div>
+    </div>
     <div id="container">
-      <div id="leftColumn"><a href="../../index.html">
-            <div id="logo"></div>
-          </a>
-        <div id="paneSearch"></div>
+      <div id="leftColumn">
         <div id="sideMenu"></div>
       </div>
-      <div id="main">
-        <script type="text/javascript" src="../../scripts/main.js"></script><div id="leftToggler"><span class="icon-toggler"></span></div>
-
+      <div id="main"><script type="text/javascript" src="../../scripts/main.js"></script>
         <div class="main-content" id="content" pageids="tibiakt-core::com.galarzaa.tibiakt.core.parsers////PointingToDeclaration//-185655222">
-          <div class="navigation-wrapper" id="navigation-wrapper">
-            <div class="breadcrumbs"><a href="../index.html">tibiakt-core</a>/<a href="index.html">com.galarzaa.tibiakt.core.parsers</a></div>
-            <div class="pull-right d-flex">
-              <div id="searchBar"></div>
-            </div>
-          </div>
+          <div class="breadcrumbs"><a href="../index.html">tibiakt-core</a>/<a href="index.html">com.galarzaa.tibiakt.core.parsers</a></div>
           <div class="cover ">
-            <h1 class="cover"><span>Package com.</span><wbr><span>galarzaa.</span><wbr><span>tibiakt.</span><wbr><span>core.</span><wbr><span>parsers</span></h1>
+            <h1 class="cover"><span><span>Package</span></span> <span>com.</span><wbr><span>galarzaa.</span><wbr><span>tibiakt.</span><wbr><span>core.</span><wbr><span>parsers</span></h1>
           </div>
           <div class="tabbedcontent">
             <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Types">Types</button></div>
@@ -31,238 +35,182 @@
               <div class="table" data-togglable="Types"><a data-name="1484749039%2FClasslikes%2F-185655222" anchor-label="AuctionParser" id="1484749039%2FClasslikes%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="-auction-parser/index.html">AuctionParser</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1484749039%2FClasslikes%2F-185655222"></span>
+                    <div class=""><span class="inline-flex"><a href="-auction-parser/index.html"><span>Auction</span><wbr><span><span>Parser</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1484749039%2FClasslikes%2F-185655222"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">object <a href="-auction-parser/index.html">AuctionParser</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.parsers/-parser/index.html">Parser</a>&lt;<a href="../com.galarzaa.tibiakt.core.models.bazaar/-auction/index.html">Auction</a>?&gt; <span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-auction-parser/index.html">AuctionParser</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.parsers/-parser/index.html">Parser</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../com.galarzaa.tibiakt.core.models.bazaar/-auction/index.html">Auction</a><span class="token operator">?</span><span class="token operator">&gt; </span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
 <a data-name="795810994%2FClasslikes%2F-185655222" anchor-label="CharacterBazaarParser" id="795810994%2FClasslikes%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="-character-bazaar-parser/index.html">CharacterBazaarParser</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="795810994%2FClasslikes%2F-185655222"></span>
+                    <div class=""><span class="inline-flex"><a href="-character-bazaar-parser/index.html"><span>Character</span><wbr><span>Bazaar</span><wbr><span><span>Parser</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="795810994%2FClasslikes%2F-185655222"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">object <a href="-character-bazaar-parser/index.html">CharacterBazaarParser</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.parsers/-parser/index.html">Parser</a>&lt;<a href="../com.galarzaa.tibiakt.core.models.bazaar/-character-bazaar/index.html">CharacterBazaar</a>&gt; <span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-character-bazaar-parser/index.html">CharacterBazaarParser</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.parsers/-parser/index.html">Parser</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../com.galarzaa.tibiakt.core.models.bazaar/-character-bazaar/index.html">CharacterBazaar</a><span class="token operator">&gt; </span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
 <a data-name="-1777184951%2FClasslikes%2F-185655222" anchor-label="CharacterParser" id="-1777184951%2FClasslikes%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="-character-parser/index.html">CharacterParser</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1777184951%2FClasslikes%2F-185655222"></span>
+                    <div class=""><span class="inline-flex"><a href="-character-parser/index.html"><span>Character</span><wbr><span><span>Parser</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1777184951%2FClasslikes%2F-185655222"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">object <a href="-character-parser/index.html">CharacterParser</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.parsers/-parser/index.html">Parser</a>&lt;<a href="../com.galarzaa.tibiakt.core.models.character/-character/index.html">Character</a>?&gt; <span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-character-parser/index.html">CharacterParser</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.parsers/-parser/index.html">Parser</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../com.galarzaa.tibiakt.core.models.character/-character/index.html">Character</a><span class="token operator">?</span><span class="token operator">&gt; </span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
 <a data-name="-1496611518%2FClasslikes%2F-185655222" anchor-label="EventsScheduleParser" id="-1496611518%2FClasslikes%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="-events-schedule-parser/index.html">EventsScheduleParser</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1496611518%2FClasslikes%2F-185655222"></span>
+                    <div class=""><span class="inline-flex"><a href="-events-schedule-parser/index.html"><span>Events</span><wbr><span>Schedule</span><wbr><span><span>Parser</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1496611518%2FClasslikes%2F-185655222"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">object <a href="-events-schedule-parser/index.html">EventsScheduleParser</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.parsers/-parser/index.html">Parser</a>&lt;<a href="../com.galarzaa.tibiakt.core.models.news/-events-schedule/index.html">EventsSchedule</a>&gt; <span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-events-schedule-parser/index.html">EventsScheduleParser</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.parsers/-parser/index.html">Parser</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../com.galarzaa.tibiakt.core.models.news/-events-schedule/index.html">EventsSchedule</a><span class="token operator">&gt; </span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
 <a data-name="-1535994561%2FClasslikes%2F-185655222" anchor-label="GuildParser" id="-1535994561%2FClasslikes%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="-guild-parser/index.html">GuildParser</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1535994561%2FClasslikes%2F-185655222"></span>
+                    <div class=""><span class="inline-flex"><a href="-guild-parser/index.html"><span>Guild</span><wbr><span><span>Parser</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1535994561%2FClasslikes%2F-185655222"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">object <a href="-guild-parser/index.html">GuildParser</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.parsers/-parser/index.html">Parser</a>&lt;<a href="../com.galarzaa.tibiakt.core.models.guild/-guild/index.html">Guild</a>?&gt; <span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-guild-parser/index.html">GuildParser</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.parsers/-parser/index.html">Parser</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../com.galarzaa.tibiakt.core.models.guild/-guild/index.html">Guild</a><span class="token operator">?</span><span class="token operator">&gt; </span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
 <a data-name="938031885%2FClasslikes%2F-185655222" anchor-label="GuildsSectionParser" id="938031885%2FClasslikes%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="-guilds-section-parser/index.html">GuildsSectionParser</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="938031885%2FClasslikes%2F-185655222"></span>
+                    <div class=""><span class="inline-flex"><a href="-guilds-section-parser/index.html"><span>Guilds</span><wbr><span>Section</span><wbr><span><span>Parser</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="938031885%2FClasslikes%2F-185655222"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">object <a href="-guilds-section-parser/index.html">GuildsSectionParser</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.parsers/-parser/index.html">Parser</a>&lt;<a href="../com.galarzaa.tibiakt.core.models.guild/-guilds-section/index.html">GuildsSection</a>?&gt; <span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-guilds-section-parser/index.html">GuildsSectionParser</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.parsers/-parser/index.html">Parser</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../com.galarzaa.tibiakt.core.models.guild/-guilds-section/index.html">GuildsSection</a><span class="token operator">?</span><span class="token operator">&gt; </span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
 <a data-name="-2089208465%2FClasslikes%2F-185655222" anchor-label="HighscoresParser" id="-2089208465%2FClasslikes%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="-highscores-parser/index.html">HighscoresParser</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2089208465%2FClasslikes%2F-185655222"></span>
+                    <div class=""><span class="inline-flex"><a href="-highscores-parser/index.html"><span>Highscores</span><wbr><span><span>Parser</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2089208465%2FClasslikes%2F-185655222"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">object <a href="-highscores-parser/index.html">HighscoresParser</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.parsers/-parser/index.html">Parser</a>&lt;<a href="../com.galarzaa.tibiakt.core.models/-highscores/index.html">Highscores</a>?&gt; <span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-highscores-parser/index.html">HighscoresParser</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.parsers/-parser/index.html">Parser</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../com.galarzaa.tibiakt.core.models/-highscores/index.html">Highscores</a><span class="token operator">?</span><span class="token operator">&gt; </span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
 <a data-name="-2043616142%2FClasslikes%2F-185655222" anchor-label="HouseParser" id="-2043616142%2FClasslikes%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="-house-parser/index.html">HouseParser</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2043616142%2FClasslikes%2F-185655222"></span>
+                    <div class=""><span class="inline-flex"><a href="-house-parser/index.html"><span>House</span><wbr><span><span>Parser</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2043616142%2FClasslikes%2F-185655222"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">object <a href="-house-parser/index.html">HouseParser</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.parsers/-parser/index.html">Parser</a>&lt;<a href="../com.galarzaa.tibiakt.core.models.house/-house/index.html">House</a>?&gt; <span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-house-parser/index.html">HouseParser</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.parsers/-parser/index.html">Parser</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../com.galarzaa.tibiakt.core.models.house/-house/index.html">House</a><span class="token operator">?</span><span class="token operator">&gt; </span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
 <a data-name="596289344%2FClasslikes%2F-185655222" anchor-label="HousesSectionParser" id="596289344%2FClasslikes%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="-houses-section-parser/index.html">HousesSectionParser</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="596289344%2FClasslikes%2F-185655222"></span>
+                    <div class=""><span class="inline-flex"><a href="-houses-section-parser/index.html"><span>Houses</span><wbr><span>Section</span><wbr><span><span>Parser</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="596289344%2FClasslikes%2F-185655222"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">object <a href="-houses-section-parser/index.html">HousesSectionParser</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.parsers/-parser/index.html">Parser</a>&lt;<a href="../com.galarzaa.tibiakt.core.models.house/-houses-section/index.html">HousesSection</a>?&gt; <span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-houses-section-parser/index.html">HousesSectionParser</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.parsers/-parser/index.html">Parser</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../com.galarzaa.tibiakt.core.models.house/-houses-section/index.html">HousesSection</a><span class="token operator">?</span><span class="token operator">&gt; </span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
 <a data-name="1187659473%2FClasslikes%2F-185655222" anchor-label="KillStatisticsParser" id="1187659473%2FClasslikes%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="-kill-statistics-parser/index.html">KillStatisticsParser</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1187659473%2FClasslikes%2F-185655222"></span>
+                    <div class=""><span class="inline-flex"><a href="-kill-statistics-parser/index.html"><span>Kill</span><wbr><span>Statistics</span><wbr><span><span>Parser</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1187659473%2FClasslikes%2F-185655222"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">object <a href="-kill-statistics-parser/index.html">KillStatisticsParser</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.parsers/-parser/index.html">Parser</a>&lt;<a href="../com.galarzaa.tibiakt.core.models/-kill-statistics/index.html">KillStatistics</a>&gt; <span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-kill-statistics-parser/index.html">KillStatisticsParser</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.parsers/-parser/index.html">Parser</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../com.galarzaa.tibiakt.core.models/-kill-statistics/index.html">KillStatistics</a><span class="token operator">&gt; </span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
 <a data-name="-451229885%2FClasslikes%2F-185655222" anchor-label="NewsArchiveParser" id="-451229885%2FClasslikes%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="-news-archive-parser/index.html">NewsArchiveParser</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-451229885%2FClasslikes%2F-185655222"></span>
+                    <div class=""><span class="inline-flex"><a href="-news-archive-parser/index.html"><span>News</span><wbr><span>Archive</span><wbr><span><span>Parser</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-451229885%2FClasslikes%2F-185655222"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">object <a href="-news-archive-parser/index.html">NewsArchiveParser</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.parsers/-parser/index.html">Parser</a>&lt;<a href="../com.galarzaa.tibiakt.core.models.news/-news-archive/index.html">NewsArchive</a>&gt; <span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-news-archive-parser/index.html">NewsArchiveParser</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.parsers/-parser/index.html">Parser</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../com.galarzaa.tibiakt.core.models.news/-news-archive/index.html">NewsArchive</a><span class="token operator">&gt; </span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
 <a data-name="1787099359%2FClasslikes%2F-185655222" anchor-label="NewsParser" id="1787099359%2FClasslikes%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="-news-parser/index.html">NewsParser</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1787099359%2FClasslikes%2F-185655222"></span>
+                    <div class=""><span class="inline-flex"><a href="-news-parser/index.html"><span>News</span><wbr><span><span>Parser</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1787099359%2FClasslikes%2F-185655222"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">object <a href="-news-parser/index.html">NewsParser</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.parsers/-parser/index.html">Parser</a>&lt;<a href="../com.galarzaa.tibiakt.core.models.news/-news/index.html">News</a>?&gt; <span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-news-parser/index.html">NewsParser</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.parsers/-parser/index.html">Parser</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../com.galarzaa.tibiakt.core.models.news/-news/index.html">News</a><span class="token operator">?</span><span class="token operator">&gt; </span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
 <a data-name="-796299513%2FClasslikes%2F-185655222" anchor-label="WorldOverviewParser" id="-796299513%2FClasslikes%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="-world-overview-parser/index.html">WorldOverviewParser</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-796299513%2FClasslikes%2F-185655222"></span>
+                    <div class=""><span class="inline-flex"><a href="-world-overview-parser/index.html"><span>World</span><wbr><span>Overview</span><wbr><span><span>Parser</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-796299513%2FClasslikes%2F-185655222"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">object <a href="-world-overview-parser/index.html">WorldOverviewParser</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.parsers/-parser/index.html">Parser</a>&lt;<a href="../com.galarzaa.tibiakt.core.models.world/-world-overview/index.html">WorldOverview</a>&gt; <span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-world-overview-parser/index.html">WorldOverviewParser</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.parsers/-parser/index.html">Parser</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../com.galarzaa.tibiakt.core.models.world/-world-overview/index.html">WorldOverview</a><span class="token operator">&gt; </span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
 <a data-name="-1519418944%2FClasslikes%2F-185655222" anchor-label="WorldParser" id="-1519418944%2FClasslikes%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="-world-parser/index.html">WorldParser</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1519418944%2FClasslikes%2F-185655222"></span>
+                    <div class=""><span class="inline-flex"><a href="-world-parser/index.html"><span>World</span><wbr><span><span>Parser</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1519418944%2FClasslikes%2F-185655222"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace">object <a href="-world-parser/index.html">WorldParser</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.parsers/-parser/index.html">Parser</a>&lt;<a href="../com.galarzaa.tibiakt.core.models.world/-world/index.html">World</a>?&gt; <span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-world-parser/index.html">WorldParser</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.parsers/-parser/index.html">Parser</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../com.galarzaa.tibiakt.core.models.world/-world/index.html">World</a><span class="token operator">?</span><span class="token operator">&gt; </span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -270,7 +218,7 @@
             </div>
           </div>
         </div>
-        <div class="footer"><span class="go-to-top-icon"><a href="#content"></a></span><span>© 2021 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span></div>
+        <div class="footer"><span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2021 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span></div>
       </div>
     </div>
   
