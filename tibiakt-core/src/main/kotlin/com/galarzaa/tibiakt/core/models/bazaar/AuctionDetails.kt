@@ -8,7 +8,7 @@ import kotlinx.serialization.UseSerializers
 import java.time.Instant
 
 /**
- * An auctions details
+ * An auction's details
  *
  * @property hitPoints The maximum hitpoint of the character.
  * @property mana The maximum mana of the character.

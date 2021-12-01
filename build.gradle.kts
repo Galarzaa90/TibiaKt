@@ -6,11 +6,11 @@ plugins {
     `java-library`
     `maven-publish`
     signing
-    kotlin("jvm") version "1.5.30"
-    kotlin("plugin.serialization") version "1.5.30"
-    id("org.jetbrains.dokka") version "1.5.0"
+    kotlin("jvm") version "1.6.0"
+    kotlin("plugin.serialization") version "1.6.0"
+    id("org.jetbrains.dokka") version "1.6.0"
     id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
-    id("org.jetbrains.kotlinx.kover") version "0.3.0"
+    id("org.jetbrains.kotlinx.kover") version "0.4.4"
 }
 
 group = "com.galarzaa"

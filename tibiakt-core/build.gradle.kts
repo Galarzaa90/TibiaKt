@@ -4,7 +4,6 @@ val kotestVersion: String by project
 val jsoupVersion: String by project
 
 apply("../publish.gradle.kts")
-apply(plugin = "kover")
 
 plugins {
     kotlin("jvm")
@@ -22,9 +21,9 @@ dependencies {
 
     implementation("io.ktor:ktor-serialization:$ktorVersion")
 
-    implementation("ch.qos.logback:logback-classic:1.2.6")
+    implementation("ch.qos.logback:logback-classic:1.2.7")
 
-    testImplementation("org.jetbrains.kotlin:kotlin-test:1.5.30")
+    testImplementation("org.jetbrains.kotlin:kotlin-test:1.6.0")
 
     testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
     testImplementation("io.kotest:kotest-assertions-core:$kotestVersion")
@@ -32,10 +31,11 @@ dependencies {
     testImplementation("io.kotest:kotest-framework-datatest:$kotestVersion")
 }
 
-tasks.test {
-    extensions.configure(kotlinx.kover.api.KoverTaskExtension::class) {
-        generateXml = true
-        generateHtml = true
-        coverageEngine = kotlinx.kover.api.CoverageEngine.INTELLIJ
+
+tasks.withType<org.jetbrains.dokka.gradle.DokkaTaskPartial>().configureEach {
+    dokkaSourceSets {
+        configureEach {
+            includes.from("Module.md")
+        }
     }
 }
