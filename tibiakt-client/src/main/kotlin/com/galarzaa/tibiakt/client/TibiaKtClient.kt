@@ -67,8 +67,7 @@ import io.ktor.client.HttpClient
 import io.ktor.client.call.receive
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.engine.cio.CIO
-import io.ktor.client.features.ClientRequestException
-import io.ktor.client.features.ServerResponseException
+import io.ktor.client.features.ResponseException
 import io.ktor.client.features.UserAgent
 import io.ktor.client.features.compression.ContentEncoding
 import io.ktor.client.request.forms.submitForm
@@ -83,7 +82,7 @@ import io.ktor.http.Parameters
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
-import org.slf4j.LoggerFactory
+import mu.KotlinLogging
 import java.time.Instant
 import java.time.LocalDate
 import java.time.YearMonth
@@ -94,16 +93,6 @@ import kotlin.system.measureTimeMillis
  */
 open class TibiaKtClient internal constructor(engine: HttpClientEngine) {
     constructor() : this(CIO.create())
-
-    private val client = HttpClient(engine) {
-        ContentEncoding {
-            gzip()
-            deflate()
-        }
-        install(UserAgent) {
-            agent = "TibiaKtClient"
-        }
-    }
 
     /**
      * Perform a request using the required headers.
@@ -134,16 +123,24 @@ open class TibiaKtClient internal constructor(engine: HttpClientEngine) {
                 )
                 else -> throw IllegalArgumentException("Unsupported method $method")
             }
-        } catch (cre: ClientRequestException) {
-            if (cre.response.status == HttpStatusCode.Forbidden) {
-                throw ForbiddenException("403 Forbidden: Might be getting rate-limited", cre)
+        } catch (re: ResponseException) {
+            if (re.response.status == HttpStatusCode.Forbidden) {
+                throw ForbiddenException("403 Forbidden: Might be getting rate-limited", re)
             }
-            throw NetworkException("${cre.response.status.value} ${cre.response.status.description}", cre)
-        } catch (sre: ServerResponseException) {
-            throw NetworkException("${sre.response.status.value} ${sre.response.status.description}", sre)
+            throw NetworkException("${re.response.status.value} ${re.response.status.description}", re)
         }
-        logger.info("$url | ${method.value.uppercase()} | ${response.status.value} ${response.status.description} | ${response.fetchingTimeMillis}ms")
+        logger.info { "$url | ${method.value.uppercase()} | ${response.status.value} ${response.status.description} | ${response.fetchingTimeMillis}ms" }
         return response
+    }
+
+    private val client = HttpClient(engine) {
+        ContentEncoding {
+            gzip()
+            deflate()
+        }
+        install(UserAgent) {
+            agent = "TibiaKtClient"
+        }
     }
 
     /**
@@ -204,16 +201,32 @@ open class TibiaKtClient internal constructor(engine: HttpClientEngine) {
         types: Set<NewsType>? = null,
     ) = fetchRecentNews(LocalDate.now().minusDays(days.toLong()), LocalDate.now(), categories, types)
 
+    /**
+     * Fetch a specific news article by its [newsId]
+     */
     suspend fun fetchNews(newsId: Int): TibiaResponse<News?> {
         val response = this.request(HttpMethod.Get, getNewsUrl(newsId))
         return response.parse { NewsParser.fromContent(it, newsId) }
     }
 
+    /**
+     * Fetch the kill statistics for a [world]
+     */
     suspend fun fetchKillStatistics(world: String): TibiaResponse<KillStatistics> {
         val response = this.request(HttpMethod.Get, getKillStatisticsUrl(world))
         return response.parse { KillStatisticsParser.fromContent(it) }
     }
 
+    /**
+     * Fetch a page of the highscores.
+     *
+     * @param world The world to get highscores from. If null, the highscores of all worlds are returned.
+     * @param category The category to fetch.
+     * @param vocation The vocation to filter by. By default all vocations will be returned
+     * @param page The page number to fetch
+     * @param battlEyeType The BattlEye type of the worlds to fetch. Only applies when [world] is null.
+     * @param pvpTypes The PvP type of the worlds to fetch. Only applies when [world] is null.
+     */
     suspend fun fetchHighscoresPage(
         world: String?,
         category: HighscoresCategory,
@@ -237,16 +250,18 @@ open class TibiaKtClient internal constructor(engine: HttpClientEngine) {
     }
 
     /**
+     * Fetch the events schedule for a specific year and month
+     */
+    suspend fun fetchEventsSchedule(year: Int, month: Int) = fetchEventsSchedule(YearMonth.of(year, month))
+
+    /**
      * Fetch the events schedule for the current month.
      */
     suspend fun fetchEventsSchedule() = fetchEventsSchedule(YearMonth.now())
 
     /**
-     * Fetch the events schedule for a specific year and month
+     * Fetch the houses section for a [world] and [town].
      */
-    suspend fun fetchEventsSchedule(year: Int, month: Int) = fetchEventsSchedule(YearMonth.of(year, month))
-
-
     suspend fun fetchHousesSection(
         world: String,
         town: String,
@@ -387,6 +402,7 @@ open class TibiaKtClient internal constructor(engine: HttpClientEngine) {
     private val HttpResponse.fetchingTime get() = (responseTime.timestamp - requestTime.timestamp) / 1000f
     private val HttpResponse.fetchingTimeMillis get() = (fetchingTime * 1000).toInt()
 
+    /** Convert to a [TibiaResponse]. */
     private fun <T> HttpResponse.toTibiaResponse(parsingTime: Float, data: T): TibiaResponse<T> = TibiaResponse(
         timestamp = Instant.ofEpochMilli(responseTime.timestamp),
         isCached = headers["CF-Cache-Status"] == "HIT",
@@ -396,13 +412,16 @@ open class TibiaKtClient internal constructor(engine: HttpClientEngine) {
         data = data
     )
 
+    /**
+     * Parse the [HttpResponse] into a TibiaResponse.
+     */
     private suspend fun <T> HttpResponse.parse(parser: (content: String) -> T): TibiaResponse<T> {
         val data: T
         val parsingTime = measureTimeMillis {
             val stringBody: String = receive()
             data = parser(stringBody)
         } / 1000f
-        logger.info("${this.request.url} | PARSE | ${(parsingTime * 1000).toInt()}ms")
+        logger.info { "${this.request.url} | PARSE | ${(parsingTime * 1000).toInt()}ms" }
         return toTibiaResponse(parsingTime, data)
     }
 
@@ -446,11 +465,13 @@ open class TibiaKtClient internal constructor(engine: HttpClientEngine) {
                 entries.addAll(AuctionParser.parsePageItems(ajaxResponse.ajaxObjects.first().data))
             } / 1000f
             timing.parsing += parsingTime
-            logger.info("${
-                getAuctionAjaxPaginationUrl(auctionId,
-                    type,
-                    currentPage)
-            } | PARSE | ${(parsingTime * 1000).toInt()}ms")
+            logger.info {
+                "${
+                    getAuctionAjaxPaginationUrl(auctionId,
+                        type,
+                        currentPage)
+                } | PARSE | ${(parsingTime * 1000).toInt()}ms"
+            }
             currentPage++
         }
         return Pair(timing, entries)
@@ -473,7 +494,7 @@ open class TibiaKtClient internal constructor(engine: HttpClientEngine) {
     private data class TimedResult<T>(val time: Float, val result: T)
 
     internal companion object {
-        internal val logger: org.slf4j.Logger = LoggerFactory.getLogger(TibiaKtClient::class.java)
+        internal val logger = KotlinLogging.logger { }
     }
 }
 

@@ -16,7 +16,6 @@ application {
 dependencies {
     implementation(project(":tibiakt-client"))
     implementation("io.ktor:ktor-server-cio:$ktorVersion")
-    implementation("io.ktor:ktor-server-netty:$ktorVersion")
     implementation("io.ktor:ktor-serialization:$ktorVersion")
     implementation("io.ktor:ktor-locations:$ktorVersion")
 }
