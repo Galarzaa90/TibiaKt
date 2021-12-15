@@ -1,8 +1,6 @@
 package com.galarzaa.tibiakt.client
 
-import com.galarzaa.tibiakt.client.models.AjaxResponse
-import com.galarzaa.tibiakt.client.models.AuctionPagesType
-import com.galarzaa.tibiakt.client.models.TibiaResponse
+import com.galarzaa.tibiakt.client.models.*
 import com.galarzaa.tibiakt.core.enums.*
 import com.galarzaa.tibiakt.core.models.Highscores
 import com.galarzaa.tibiakt.core.models.KillStatistics
@@ -64,20 +62,29 @@ open class TibiaKtClient {
         data: List<Pair<String, Any>> = emptyList(),
         headers: List<Pair<String, Any>> = emptyList(),
     ): HttpResponse {
-        val response: HttpResponse = when (method) {
-            HttpMethod.Get -> client.get(url) {
-                if (headers.isNotEmpty()) {
-                    headers { headers.forEach { header(it.first, it.second) } }
+        val response: HttpResponse = try {
+            when (method) {
+                HttpMethod.Get -> client.get(url) {
+                    if (headers.isNotEmpty()) {
+                        headers { headers.forEach { header(it.first, it.second) } }
+                    }
                 }
+                HttpMethod.Post -> client.submitForm(
+                    url,
+                    formParameters = Parameters.build {
+                        data.forEach { append(it.first, it.second.toString()) }
+                    },
+                    encodeInQuery = false
+                )
+                else -> throw IllegalArgumentException("Unsupported method $method")
             }
-            HttpMethod.Post -> client.submitForm(
-                url,
-                formParameters = Parameters.build {
-                    data.forEach { append(it.first, it.second.toString()) }
-                },
-                encodeInQuery = false
-            )
-            else -> throw IllegalArgumentException("Unsupported method $method")
+        } catch (cre: ClientRequestException) {
+            if (cre.response.status == HttpStatusCode.Forbidden) {
+                throw ForbiddenException("403 Forbidden: Might be getting rate-limited", cre)
+            }
+            throw NetworkException("${cre.response.status.value} ${cre.response.status.description}", cre)
+        } catch (sre: ServerResponseException) {
+            throw NetworkException("${sre.response.status.value} ${sre.response.status.description}", sre)
         }
         logger.info("$url | ${method.value.uppercase()} | ${response.status.value} ${response.status.description} | ${response.fetchingTimeMillis}ms")
         return response
