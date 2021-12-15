@@ -1,10 +1,29 @@
 package com.galarzaa.tibiakt.client
 
-import com.galarzaa.tibiakt.client.models.*
-import com.galarzaa.tibiakt.core.enums.*
+import com.galarzaa.tibiakt.client.models.AjaxResponse
+import com.galarzaa.tibiakt.client.models.AuctionPagesType
+import com.galarzaa.tibiakt.client.models.ForbiddenException
+import com.galarzaa.tibiakt.client.models.NetworkException
+import com.galarzaa.tibiakt.client.models.TibiaResponse
+import com.galarzaa.tibiakt.core.enums.BazaarType
+import com.galarzaa.tibiakt.core.enums.HighscoresBattlEyeType
+import com.galarzaa.tibiakt.core.enums.HighscoresCategory
+import com.galarzaa.tibiakt.core.enums.HighscoresProfession
+import com.galarzaa.tibiakt.core.enums.HighscoresPvpType
+import com.galarzaa.tibiakt.core.enums.HouseOrder
+import com.galarzaa.tibiakt.core.enums.HouseStatus
+import com.galarzaa.tibiakt.core.enums.HouseType
+import com.galarzaa.tibiakt.core.enums.NewsCategory
+import com.galarzaa.tibiakt.core.enums.NewsType
 import com.galarzaa.tibiakt.core.models.Highscores
 import com.galarzaa.tibiakt.core.models.KillStatistics
-import com.galarzaa.tibiakt.core.models.bazaar.*
+import com.galarzaa.tibiakt.core.models.bazaar.AjaxPaginator
+import com.galarzaa.tibiakt.core.models.bazaar.Auction
+import com.galarzaa.tibiakt.core.models.bazaar.BazaarFilters
+import com.galarzaa.tibiakt.core.models.bazaar.CharacterBazaar
+import com.galarzaa.tibiakt.core.models.bazaar.DisplayItem
+import com.galarzaa.tibiakt.core.models.bazaar.DisplayMount
+import com.galarzaa.tibiakt.core.models.bazaar.DisplayOutfit
 import com.galarzaa.tibiakt.core.models.character.Character
 import com.galarzaa.tibiakt.core.models.guild.Guild
 import com.galarzaa.tibiakt.core.models.guild.GuildsSection
@@ -15,17 +34,52 @@ import com.galarzaa.tibiakt.core.models.news.News
 import com.galarzaa.tibiakt.core.models.news.NewsArchive
 import com.galarzaa.tibiakt.core.models.world.World
 import com.galarzaa.tibiakt.core.models.world.WorldOverview
-import com.galarzaa.tibiakt.core.parsers.*
-import com.galarzaa.tibiakt.core.utils.*
-import io.ktor.client.*
-import io.ktor.client.call.*
-import io.ktor.client.engine.cio.*
-import io.ktor.client.features.*
-import io.ktor.client.features.compression.*
-import io.ktor.client.request.*
-import io.ktor.client.request.forms.*
-import io.ktor.client.statement.*
-import io.ktor.http.*
+import com.galarzaa.tibiakt.core.parsers.AuctionParser
+import com.galarzaa.tibiakt.core.parsers.CharacterBazaarParser
+import com.galarzaa.tibiakt.core.parsers.CharacterParser
+import com.galarzaa.tibiakt.core.parsers.EventsScheduleParser
+import com.galarzaa.tibiakt.core.parsers.GuildParser
+import com.galarzaa.tibiakt.core.parsers.GuildsSectionParser
+import com.galarzaa.tibiakt.core.parsers.HighscoresParser
+import com.galarzaa.tibiakt.core.parsers.HouseParser
+import com.galarzaa.tibiakt.core.parsers.HousesSectionParser
+import com.galarzaa.tibiakt.core.parsers.KillStatisticsParser
+import com.galarzaa.tibiakt.core.parsers.NewsArchiveParser
+import com.galarzaa.tibiakt.core.parsers.NewsParser
+import com.galarzaa.tibiakt.core.parsers.WorldOverviewParser
+import com.galarzaa.tibiakt.core.parsers.WorldParser
+import com.galarzaa.tibiakt.core.utils.getAuctionUrl
+import com.galarzaa.tibiakt.core.utils.getBazaarUrl
+import com.galarzaa.tibiakt.core.utils.getCharacterUrl
+import com.galarzaa.tibiakt.core.utils.getEventsScheduleUrl
+import com.galarzaa.tibiakt.core.utils.getGuildUrl
+import com.galarzaa.tibiakt.core.utils.getHighscoresUrl
+import com.galarzaa.tibiakt.core.utils.getHouseUrl
+import com.galarzaa.tibiakt.core.utils.getHousesSectionUrl
+import com.galarzaa.tibiakt.core.utils.getKillStatisticsUrl
+import com.galarzaa.tibiakt.core.utils.getNewArchiveFormData
+import com.galarzaa.tibiakt.core.utils.getNewsArchiveUrl
+import com.galarzaa.tibiakt.core.utils.getNewsUrl
+import com.galarzaa.tibiakt.core.utils.getWorldGuildsUrl
+import com.galarzaa.tibiakt.core.utils.getWorldOverviewUrl
+import com.galarzaa.tibiakt.core.utils.getWorldUrl
+import io.ktor.client.HttpClient
+import io.ktor.client.call.receive
+import io.ktor.client.engine.HttpClientEngine
+import io.ktor.client.engine.cio.CIO
+import io.ktor.client.features.ClientRequestException
+import io.ktor.client.features.ServerResponseException
+import io.ktor.client.features.UserAgent
+import io.ktor.client.features.compression.ContentEncoding
+import io.ktor.client.request.forms.submitForm
+import io.ktor.client.request.get
+import io.ktor.client.request.header
+import io.ktor.client.request.headers
+import io.ktor.client.statement.HttpResponse
+import io.ktor.client.statement.request
+import io.ktor.http.HttpMethod
+import io.ktor.http.HttpStatusCode
+import io.ktor.http.Parameters
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
@@ -38,8 +92,10 @@ import kotlin.system.measureTimeMillis
 /**
  * A coroutine based client to fetch from Tibia.com
  */
-open class TibiaKtClient {
-    private val client = HttpClient(CIO) {
+open class TibiaKtClient internal constructor(engine: HttpClientEngine) {
+    constructor() : this(CIO.create())
+
+    private val client = HttpClient(engine) {
         ContentEncoding {
             gzip()
             deflate()
