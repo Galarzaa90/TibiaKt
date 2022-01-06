@@ -1,6 +1,22 @@
 package com.galarzaa.tibiakt.core.utils
 
-import com.galarzaa.tibiakt.core.enums.*
+import com.galarzaa.tibiakt.core.enums.AuctionBattlEyeFilter
+import com.galarzaa.tibiakt.core.enums.AuctionOrderBy
+import com.galarzaa.tibiakt.core.enums.AuctionOrderDirection
+import com.galarzaa.tibiakt.core.enums.AuctionPvpTypeFilter
+import com.galarzaa.tibiakt.core.enums.AuctionSearchType
+import com.galarzaa.tibiakt.core.enums.AuctionSkillFilter
+import com.galarzaa.tibiakt.core.enums.AuctionVocationFilter
+import com.galarzaa.tibiakt.core.enums.BazaarType
+import com.galarzaa.tibiakt.core.enums.HighscoresBattlEyeType
+import com.galarzaa.tibiakt.core.enums.HighscoresCategory
+import com.galarzaa.tibiakt.core.enums.HighscoresProfession
+import com.galarzaa.tibiakt.core.enums.HighscoresPvpType
+import com.galarzaa.tibiakt.core.enums.HouseOrder
+import com.galarzaa.tibiakt.core.enums.HouseStatus
+import com.galarzaa.tibiakt.core.enums.HouseType
+import com.galarzaa.tibiakt.core.enums.NewsCategory
+import com.galarzaa.tibiakt.core.enums.NewsType
 import com.galarzaa.tibiakt.core.models.bazaar.BazaarFilters
 import java.net.URLEncoder
 import java.time.LocalDate
@@ -45,7 +61,7 @@ fun buildTibiaUrl(section: String, subtopic: String, vararg params: Pair<String,
  * @param test Whether to use the testing version of Tibia.com or not.
  */
 fun getStaticFileUrl(path: String, test: Boolean = false): String {
-    return "https://${if (test) "test." else ""}static.tibia.com/$path".replace("//", "/")
+    return "https://${if (test) "test." else ""}static.tibia.com/${path.replace("//", "/")}"
 }
 
 /**
