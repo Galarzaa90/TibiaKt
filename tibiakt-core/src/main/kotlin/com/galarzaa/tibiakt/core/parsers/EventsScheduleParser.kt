@@ -3,7 +3,11 @@ package com.galarzaa.tibiakt.core.parsers
 import com.galarzaa.tibiakt.core.builders.EventEntryBuilder
 import com.galarzaa.tibiakt.core.builders.EventsScheduleBuilder
 import com.galarzaa.tibiakt.core.models.news.EventsSchedule
-import com.galarzaa.tibiakt.core.utils.*
+import com.galarzaa.tibiakt.core.utils.ParsingException
+import com.galarzaa.tibiakt.core.utils.cells
+import com.galarzaa.tibiakt.core.utils.cleanText
+import com.galarzaa.tibiakt.core.utils.parsePopup
+import com.galarzaa.tibiakt.core.utils.remove
 import org.jsoup.nodes.Element
 import java.time.LocalDate
 import java.time.YearMonth
@@ -77,6 +81,8 @@ object EventsScheduleParser : Parser<EventsSchedule> {
             }
             firstDay = false
         }
+        // Add any leftover ongoing events without a end date, as we don't know when they end.
+        onGoingEvents.forEach { builder.addEntry(it.build()) }
     }
 
 }

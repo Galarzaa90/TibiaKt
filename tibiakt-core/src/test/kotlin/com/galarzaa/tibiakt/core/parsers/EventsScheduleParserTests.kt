@@ -9,6 +9,6 @@ class EventsScheduleParserTests : StringSpec({
     "Parse event schedule"{
         val eventSchedule = EventsScheduleParser.fromContent(getResource("events/eventCalendar.txt"))
         eventSchedule.yearMonth.year shouldBe 2021
-        eventSchedule.entries shouldHaveSize 7
+        eventSchedule.entries shouldHaveSize 8
     }
 })

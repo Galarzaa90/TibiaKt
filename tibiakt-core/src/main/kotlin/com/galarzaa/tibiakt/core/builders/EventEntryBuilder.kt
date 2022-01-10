@@ -24,4 +24,8 @@ class EventEntryBuilder {
     override fun equals(other: Any?): Boolean {
         return other is EventEntryBuilder && other.title == title && other.description == description
     }
+
+    override fun toString(): String {
+        return title ?: "<undefined title>"
+    }
 }
