@@ -1,5 +1,6 @@
 val ktorVersion: String by project
 val kotestVersion: String by project
+val logbackVersion: String by project
 
 plugins {
     application
@@ -18,6 +19,8 @@ dependencies {
     implementation("io.ktor:ktor-server-cio:$ktorVersion")
     implementation("io.ktor:ktor-serialization:$ktorVersion")
     implementation("io.ktor:ktor-locations:$ktorVersion")
+
+    implementation("ch.qos.logback:logback-classic:$logbackVersion")
 }
 
 tasks.withType<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar> {
