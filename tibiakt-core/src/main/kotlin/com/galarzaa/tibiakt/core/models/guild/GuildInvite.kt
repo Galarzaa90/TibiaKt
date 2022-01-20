@@ -8,7 +8,11 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import java.time.LocalDate
 
-
+/**
+ * A character invited to a [Guild].
+ *
+ * @property inviteDate The date when the character was invited.
+ */
 @Serializable
 data class GuildInvite(
     override val name: String,

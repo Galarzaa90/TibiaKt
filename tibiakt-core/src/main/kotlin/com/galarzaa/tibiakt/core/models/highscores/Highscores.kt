@@ -13,6 +13,14 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import java.time.Instant
 
+/**
+ * The Tibia highscores, containing the highest levels of a given [category]
+ *
+ * @property world The world the highscores belong to, or null if these are global highscores.
+ * @property category The displayed highscores category.
+ * @property vocation The selected vocation filter for the entries.
+ * @property worldTypes The selected world types.
+ */
 @Serializable
 data class Highscores(
     val world: String?,
