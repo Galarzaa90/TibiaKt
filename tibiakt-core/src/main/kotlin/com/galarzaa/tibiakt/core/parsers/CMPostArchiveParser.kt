@@ -4,6 +4,7 @@ import com.galarzaa.tibiakt.core.builders.CMPostArchiveBuilder
 import com.galarzaa.tibiakt.core.models.forums.CMPost
 import com.galarzaa.tibiakt.core.models.forums.CMPostArchive
 import com.galarzaa.tibiakt.core.utils.cells
+import com.galarzaa.tibiakt.core.utils.formData
 import com.galarzaa.tibiakt.core.utils.getLinkInformation
 import com.galarzaa.tibiakt.core.utils.offsetStart
 import com.galarzaa.tibiakt.core.utils.parseTablesMap
@@ -20,7 +21,19 @@ object CMPostArchiveParser : Parser<CMPostArchive> {
         val tables = boxContent.parseTablesMap()
         val builder = CMPostArchiveBuilder()
         tables["CM Post List"]?.let { parsePostList(it, builder) }
-        return CMPostArchive(LocalDate.now(), LocalDate.now(), 0, 0, 0, emptyList())
+        val form = boxContent.selectFirst("form")!!
+        parseSearchTable(form, builder)
+        return builder.build()
+    }
+
+    private fun parseSearchTable(form: Element, builder: CMPostArchiveBuilder) {
+        val formData = form.formData()
+        builder.startDate(LocalDate.of(formData.data["startyear"]!!.toInt(),
+            formData.data["startmonth"]!!.toInt(),
+            formData.data["startday"]!!.toInt()))
+            .endDate(LocalDate.of(formData.data["endyear"]!!.toInt(),
+                formData.data["endmonth"]!!.toInt(),
+                formData.data["endday"]!!.toInt()))
     }
 
     private fun parsePostList(table: Element, builder: CMPostArchiveBuilder) {
