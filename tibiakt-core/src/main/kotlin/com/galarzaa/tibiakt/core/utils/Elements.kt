@@ -158,7 +158,11 @@ internal fun Element.parsePagination(): PaginationData {
 /**
  * Container for pagination information
  */
-internal data class PaginationData(val currentPage: Int, val totalPages: Int, val resultsCount: Int)
+internal data class PaginationData(val currentPage: Int, val totalPages: Int, val resultsCount: Int) {
+    companion object {
+        fun default() = PaginationData(1, 1, 0)
+    }
+}
 
 internal fun parsePopup(content: String): Pair<String, Document> {
     val parts = content.split(",", limit = 3)

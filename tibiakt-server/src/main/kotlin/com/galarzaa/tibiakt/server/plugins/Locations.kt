@@ -2,9 +2,26 @@
 
 package com.galarzaa.tibiakt.server.plugins
 
-import com.galarzaa.tibiakt.core.enums.*
-import io.ktor.application.*
-import io.ktor.locations.*
+import com.galarzaa.tibiakt.core.enums.AuctionBattlEyeFilter
+import com.galarzaa.tibiakt.core.enums.AuctionOrderBy
+import com.galarzaa.tibiakt.core.enums.AuctionOrderDirection
+import com.galarzaa.tibiakt.core.enums.AuctionPvpTypeFilter
+import com.galarzaa.tibiakt.core.enums.AuctionSearchType
+import com.galarzaa.tibiakt.core.enums.AuctionSkillFilter
+import com.galarzaa.tibiakt.core.enums.AuctionVocationFilter
+import com.galarzaa.tibiakt.core.enums.BazaarType
+import com.galarzaa.tibiakt.core.enums.HighscoresCategory
+import com.galarzaa.tibiakt.core.enums.HighscoresProfession
+import com.galarzaa.tibiakt.core.enums.HouseOrder
+import com.galarzaa.tibiakt.core.enums.HouseStatus
+import com.galarzaa.tibiakt.core.enums.HouseType
+import com.galarzaa.tibiakt.core.enums.NewsCategory
+import com.galarzaa.tibiakt.core.enums.NewsType
+import io.ktor.application.Application
+import io.ktor.application.install
+import io.ktor.locations.KtorExperimentalLocationsAPI
+import io.ktor.locations.Location
+import io.ktor.locations.Locations
 import java.time.LocalDate
 
 internal fun Application.configureLocations() {
@@ -89,3 +106,10 @@ data class GetBazaar(
 
 @Location("/auctions/{auctionId}")
 data class GetAuction(val auctionId: Int, val detailsOnly: Int = 0, val fetchAll: Int = 0)
+
+@Location("/cmPosts")
+data class GetCMPosts(
+    val start: LocalDate? = null,
+    val end: LocalDate? = null,
+    val days: Int? = null, val page: Int = 1,
+)

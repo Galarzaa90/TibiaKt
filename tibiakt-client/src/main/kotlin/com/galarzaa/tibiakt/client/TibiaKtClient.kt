@@ -25,6 +25,7 @@ import com.galarzaa.tibiakt.core.models.bazaar.DisplayItem
 import com.galarzaa.tibiakt.core.models.bazaar.DisplayMount
 import com.galarzaa.tibiakt.core.models.bazaar.DisplayOutfit
 import com.galarzaa.tibiakt.core.models.character.Character
+import com.galarzaa.tibiakt.core.models.forums.CMPostArchive
 import com.galarzaa.tibiakt.core.models.guild.Guild
 import com.galarzaa.tibiakt.core.models.guild.GuildsSection
 import com.galarzaa.tibiakt.core.models.house.House
@@ -35,6 +36,7 @@ import com.galarzaa.tibiakt.core.models.news.NewsArchive
 import com.galarzaa.tibiakt.core.models.world.World
 import com.galarzaa.tibiakt.core.models.world.WorldOverview
 import com.galarzaa.tibiakt.core.parsers.AuctionParser
+import com.galarzaa.tibiakt.core.parsers.CMPostArchiveParser
 import com.galarzaa.tibiakt.core.parsers.CharacterBazaarParser
 import com.galarzaa.tibiakt.core.parsers.CharacterParser
 import com.galarzaa.tibiakt.core.parsers.EventsScheduleParser
@@ -50,6 +52,7 @@ import com.galarzaa.tibiakt.core.parsers.WorldOverviewParser
 import com.galarzaa.tibiakt.core.parsers.WorldParser
 import com.galarzaa.tibiakt.core.utils.getAuctionUrl
 import com.galarzaa.tibiakt.core.utils.getBazaarUrl
+import com.galarzaa.tibiakt.core.utils.getCMPostArchiveUrl
 import com.galarzaa.tibiakt.core.utils.getCharacterUrl
 import com.galarzaa.tibiakt.core.utils.getEventsScheduleUrl
 import com.galarzaa.tibiakt.core.utils.getGuildUrl
@@ -143,6 +146,62 @@ open class TibiaKtClient internal constructor(engine: HttpClientEngine) {
         }
     }
 
+    // region News Section
+
+    /**
+     * Fetch the news for a given interval.
+     */
+    suspend fun fetchRecentNews(
+        startDate: LocalDate,
+        endDate: LocalDate,
+        categories: Set<NewsCategory>? = null,
+        types: Set<NewsType>? = null,
+    ): TibiaResponse<NewsArchive> {
+        val data = getNewArchiveFormData(startDate, endDate, categories, types)
+        val response = this.request(HttpMethod.Post, getNewsArchiveUrl(), data)
+        return response.parse { NewsArchiveParser.fromContent(it) }
+    }
+
+    /**
+     * Fetch the news from today to the last provided days.
+     */
+    suspend fun fetchRecentNews(
+        days: Int = 30,
+        categories: Set<NewsCategory>? = null,
+        types: Set<NewsType>? = null,
+    ) = fetchRecentNews(LocalDate.now().minusDays(days.toLong()), LocalDate.now(), categories, types)
+
+    /**
+     * Fetch a specific news article by its [newsId]
+     */
+    suspend fun fetchNews(newsId: Int): TibiaResponse<News?> {
+        val response = this.request(HttpMethod.Get, getNewsUrl(newsId))
+        return response.parse { NewsParser.fromContent(it, newsId) }
+    }
+
+    /**
+     * Fetch the events schedule for a specific year and month
+     */
+    suspend fun fetchEventsSchedule(yearMonth: YearMonth): TibiaResponse<EventsSchedule> {
+        val response =
+            this.request(HttpMethod.Get, getEventsScheduleUrl(yearMonth))
+        return response.parse { EventsScheduleParser.fromContent(it) }
+    }
+
+    /**
+     * Fetch the events schedule for a specific year and month
+     */
+    suspend fun fetchEventsSchedule(year: Int, month: Int) = fetchEventsSchedule(YearMonth.of(year, month))
+
+    /**
+     * Fetch the events schedule for the current month.
+     */
+    suspend fun fetchEventsSchedule() = fetchEventsSchedule(YearMonth.now())
+
+    // endregion
+
+    // region Community Section
+
     /**
      * Fetch a character
      * @param name The name of the character.
@@ -179,37 +238,6 @@ open class TibiaKtClient internal constructor(engine: HttpClientEngine) {
     }
 
     /**
-     * Fetch the news for a given interval.
-     */
-    suspend fun fetchRecentNews(
-        startDate: LocalDate,
-        endDate: LocalDate,
-        categories: Set<NewsCategory>? = null,
-        types: Set<NewsType>? = null,
-    ): TibiaResponse<NewsArchive> {
-        val data = getNewArchiveFormData(startDate, endDate, categories, types)
-        val response = this.request(HttpMethod.Post, getNewsArchiveUrl(), data)
-        return response.parse { NewsArchiveParser.fromContent(it) }
-    }
-
-    /**
-     * Fetch the news from today to the last provided days.
-     */
-    suspend fun fetchRecentNews(
-        days: Int = 30,
-        categories: Set<NewsCategory>? = null,
-        types: Set<NewsType>? = null,
-    ) = fetchRecentNews(LocalDate.now().minusDays(days.toLong()), LocalDate.now(), categories, types)
-
-    /**
-     * Fetch a specific news article by its [newsId]
-     */
-    suspend fun fetchNews(newsId: Int): TibiaResponse<News?> {
-        val response = this.request(HttpMethod.Get, getNewsUrl(newsId))
-        return response.parse { NewsParser.fromContent(it, newsId) }
-    }
-
-    /**
      * Fetch the kill statistics for a [world]
      */
     suspend fun fetchKillStatistics(world: String): TibiaResponse<KillStatistics> {
@@ -241,25 +269,6 @@ open class TibiaKtClient internal constructor(engine: HttpClientEngine) {
     }
 
     /**
-     * Fetch the events schedule for a specific year and month
-     */
-    suspend fun fetchEventsSchedule(yearMonth: YearMonth): TibiaResponse<EventsSchedule> {
-        val response =
-            this.request(HttpMethod.Get, getEventsScheduleUrl(yearMonth))
-        return response.parse { EventsScheduleParser.fromContent(it) }
-    }
-
-    /**
-     * Fetch the events schedule for a specific year and month
-     */
-    suspend fun fetchEventsSchedule(year: Int, month: Int) = fetchEventsSchedule(YearMonth.of(year, month))
-
-    /**
-     * Fetch the events schedule for the current month.
-     */
-    suspend fun fetchEventsSchedule() = fetchEventsSchedule(YearMonth.now())
-
-    /**
      * Fetch the houses section for a [world] and [town].
      */
     suspend fun fetchHousesSection(
@@ -283,6 +292,27 @@ open class TibiaKtClient internal constructor(engine: HttpClientEngine) {
         return response.parse { HouseParser.fromContent(it) }
     }
 
+    // endregion
+
+    // region Forum Section
+
+    /** Fetch CM posts between two dates. */
+    suspend fun fetchCMPostArchive(
+        startDate: LocalDate,
+        endDate: LocalDate,
+        page: Int = 0,
+    ): TibiaResponse<CMPostArchive> {
+        val response = this.request(HttpMethod.Get, getCMPostArchiveUrl(startDate, endDate, page))
+        return response.parse { CMPostArchiveParser.fromContent(it) }
+    }
+
+    /** Fetch CM posts from today to the last specified [days]. */
+    suspend fun fetchCMPostArchive(days: Int, page: Int = 0) =
+        fetchCMPostArchive(LocalDate.now().minusDays(days.toLong()), LocalDate.now(), page)
+
+    // endregion
+
+    // region Char Bazaar Section
     /**
      * Fetch the character bazaar
      *
@@ -398,6 +428,8 @@ open class TibiaKtClient internal constructor(engine: HttpClientEngine) {
             )
         )
     }
+
+    // endregion
 
     private val HttpResponse.fetchingTime get() = (responseTime.timestamp - requestTime.timestamp) / 1000f
     private val HttpResponse.fetchingTimeMillis get() = (fetchingTime * 1000).toInt()

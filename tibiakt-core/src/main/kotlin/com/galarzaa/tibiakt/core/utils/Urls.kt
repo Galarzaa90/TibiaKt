@@ -31,13 +31,18 @@ private typealias P<A, B> = Pair<A, B>
  * @param params The query arguments to pass.
  * @param test Whether to get a URL to the testing version of Tibia.com.
  */
-fun buildTibiaUrl(section: String, vararg params: Pair<String, Any?>, test: Boolean = false): String {
+fun buildTibiaUrl(
+    section: String,
+    vararg params: Pair<String, Any?>,
+    test: Boolean = false,
+    anchor: String? = null,
+): String {
     val baseUrl = if (test) "www.test.tibia.com" else "www.tibia.com"
     return "https://$baseUrl/$section/?${
         params.filter { it.second != null }.joinToString("&") { (name, value) ->
             "$name=${URLEncoder.encode(value.toString(), Charsets.ISO_8859_1)}"
         }
-    }"
+    }${anchor?.let { "#$it" } ?: ""}"
 }
 
 /**
@@ -48,10 +53,16 @@ fun buildTibiaUrl(section: String, vararg params: Pair<String, Any?>, test: Bool
  * @param params The query arguments to pass.
  * @param test Whether to get a URL to the testing version of Tibia.com.
  */
-fun buildTibiaUrl(section: String, subtopic: String, vararg params: Pair<String, Any?>, test: Boolean = false): String {
+fun buildTibiaUrl(
+    section: String,
+    subtopic: String,
+    vararg params: Pair<String, Any?>,
+    test: Boolean = false,
+    anchor: String? = null,
+): String {
     val newParams = mutableListOf(*params)
     newParams.add(0, P("subtopic", subtopic))
-    return buildTibiaUrl(section, params = newParams.toTypedArray(), test = test)
+    return buildTibiaUrl(section, params = newParams.toTypedArray(), test = test, anchor = anchor)
 }
 
 /**
@@ -248,4 +259,22 @@ private fun BazaarFilters?.getQueryParams(): Array<P<String, Any?>> {
             P("searchstring", searchString),
             P(AuctionSearchType.queryParam, searchType?.value),
         ) else emptyArray()
+}
+
+fun getCMPostArchiveUrl(startDate: LocalDate, endDate: LocalDate, page: Int = 1): String {
+    return buildTibiaUrl("forum",
+        "forum",
+        P("action", "cm_post_archive"),
+        P("startyear", startDate.year),
+        P("startmonth", startDate.monthValue),
+        P("startday", startDate.dayOfMonth),
+        P("endyear", endDate.year),
+        P("endmonth", endDate.monthValue),
+        P("endday", endDate.dayOfMonth),
+        P("currentpage", page)
+    )
+}
+
+fun getForumPostUrl(postId: Int): String {
+    return buildTibiaUrl("forum", P("action", "thread"), P("postid", postId), anchor = "post$postId")
 }

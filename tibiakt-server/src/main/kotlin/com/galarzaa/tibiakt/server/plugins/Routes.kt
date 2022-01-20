@@ -5,11 +5,17 @@ package com.galarzaa.tibiakt.server.plugins
 import com.galarzaa.tibiakt.client.TibiaKtClient
 import com.galarzaa.tibiakt.client.models.TibiaResponse
 import com.galarzaa.tibiakt.core.models.bazaar.BazaarFilters
-import io.ktor.application.*
-import io.ktor.http.*
-import io.ktor.locations.*
-import io.ktor.response.*
-import io.ktor.routing.*
+import io.ktor.application.Application
+import io.ktor.application.ApplicationCall
+import io.ktor.application.call
+import io.ktor.http.ContentType
+import io.ktor.http.HttpStatusCode
+import io.ktor.locations.KtorExperimentalLocationsAPI
+import io.ktor.locations.get
+import io.ktor.response.respond
+import io.ktor.response.respondText
+import io.ktor.routing.get
+import io.ktor.routing.routing
 
 internal fun Application.configureRouting(client: TibiaKtClient) {
     routing {
@@ -72,6 +78,19 @@ internal fun Application.configureRouting(client: TibiaKtClient) {
                 fetchItems = fetchAll != 0,
                 fetchMounts = fetchAll != 0,
                 fetchOutfits = fetchAll != 0))
+        }
+
+        get<GetCMPosts> { it ->
+            if (it.start != null && it.end != null) {
+                call.respond(client.fetchCMPostArchive(it.start, it.end, it.page))
+            } else if (it.days != null) {
+                call.respond(client.fetchCMPostArchive(it.days, it.page))
+            } else {
+                call.respond(
+                    HttpStatusCode.BadRequest,
+                    "Query parameters 'start' and 'end', or 'days' are required"
+                )
+            }
         }
     }
 }
