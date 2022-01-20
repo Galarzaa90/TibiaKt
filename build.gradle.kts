@@ -6,8 +6,8 @@ plugins {
     `java-library`
     `maven-publish`
     signing
-    kotlin("jvm") version "1.6.0"
-    kotlin("plugin.serialization") version "1.6.0"
+    kotlin("jvm") version "1.6.10"
+    kotlin("plugin.serialization") version "1.6.10"
     id("org.jetbrains.dokka") version "1.6.0"
     id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
     id("org.jetbrains.kotlinx.kover") version "0.4.4"

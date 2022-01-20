@@ -182,12 +182,9 @@ internal fun Element.getLinkInformation(): LinkInformation? {
     return LinkInformation(this.text(), this.attr("href"))
 }
 
-internal class LinkInformation(val title: String, targetUrl: String) {
-    val targetUrl: URL
+internal data class LinkInformation(val title: String, val targetUrl: URL) {
 
-    init {
-        this.targetUrl = URL(targetUrl)
-    }
+    constructor(title: String, targetUrl: String) : this(title, URL(targetUrl))
 
     val queryParams
         get() = targetUrl.queryParams()
