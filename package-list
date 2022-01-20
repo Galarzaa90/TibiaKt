@@ -10,6 +10,7 @@ com.galarzaa.tibiakt.core.enums
 com.galarzaa.tibiakt.core.models
 com.galarzaa.tibiakt.core.models.bazaar
 com.galarzaa.tibiakt.core.models.character
+com.galarzaa.tibiakt.core.models.forums
 com.galarzaa.tibiakt.core.models.guild
 com.galarzaa.tibiakt.core.models.house
 com.galarzaa.tibiakt.core.models.news
