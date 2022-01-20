@@ -15,7 +15,6 @@ import com.galarzaa.tibiakt.core.enums.HouseStatus
 import com.galarzaa.tibiakt.core.enums.HouseType
 import com.galarzaa.tibiakt.core.enums.NewsCategory
 import com.galarzaa.tibiakt.core.enums.NewsType
-import com.galarzaa.tibiakt.core.models.Highscores
 import com.galarzaa.tibiakt.core.models.KillStatistics
 import com.galarzaa.tibiakt.core.models.bazaar.AjaxPaginator
 import com.galarzaa.tibiakt.core.models.bazaar.Auction
@@ -28,6 +27,7 @@ import com.galarzaa.tibiakt.core.models.character.Character
 import com.galarzaa.tibiakt.core.models.forums.CMPostArchive
 import com.galarzaa.tibiakt.core.models.guild.Guild
 import com.galarzaa.tibiakt.core.models.guild.GuildsSection
+import com.galarzaa.tibiakt.core.models.highscores.Highscores
 import com.galarzaa.tibiakt.core.models.house.House
 import com.galarzaa.tibiakt.core.models.house.HousesSection
 import com.galarzaa.tibiakt.core.models.news.EventsSchedule

@@ -1,11 +1,12 @@
 @file:UseSerializers(InstantSerializer::class)
 
-package com.galarzaa.tibiakt.core.models
+package com.galarzaa.tibiakt.core.models.highscores
 
 import com.galarzaa.tibiakt.core.enums.HighscoresBattlEyeType
 import com.galarzaa.tibiakt.core.enums.HighscoresCategory
 import com.galarzaa.tibiakt.core.enums.HighscoresProfession
 import com.galarzaa.tibiakt.core.enums.HighscoresPvpType
+import com.galarzaa.tibiakt.core.models.Paginated
 import com.galarzaa.tibiakt.core.utils.InstantSerializer
 import com.galarzaa.tibiakt.core.utils.getHighscoresUrl
 import kotlinx.serialization.Serializable
@@ -24,12 +25,15 @@ data class Highscores(
     override val totalPages: Int,
     override val resultsCount: Int,
     override val entries: List<HighscoresEntry> = emptyList(),
-) : Paginated<HighscoresEntry>
+) : Paginated<HighscoresEntry> {
 
-fun Highscores.getPageUrl(page: Int) = getHighscoresUrl(world, category, vocation, page, battlEyeType, worldTypes)
-val Highscores.url
-    get() = getPageUrl(currentPage)
-val Highscores.nextPageUrl: String?
-    get() = if (currentPage == totalPages) null else getPageUrl(currentPage + 1)
-val Highscores.previousPageUrl: String?
-    get() = if (currentPage == 0) null else getPageUrl(currentPage - 1)
+    fun getPageUrl(page: Int) = getHighscoresUrl(world, category, vocation, page, battlEyeType, worldTypes)
+
+    val url get() = getPageUrl(currentPage)
+
+    val nextPageUrl: String?
+        get() = if (currentPage == totalPages) null else getPageUrl(currentPage + 1)
+
+    val previousPageUrl: String?
+        get() = if (currentPage == 0) null else getPageUrl(currentPage - 1)
+}

@@ -1,4 +1,4 @@
-package com.galarzaa.tibiakt.core.models
+package com.galarzaa.tibiakt.core.models.highscores
 
 import com.galarzaa.tibiakt.core.enums.Vocation
 import com.galarzaa.tibiakt.core.models.character.BaseCharacter

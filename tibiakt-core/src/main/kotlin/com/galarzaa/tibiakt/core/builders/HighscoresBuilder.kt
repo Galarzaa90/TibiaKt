@@ -1,8 +1,12 @@
 package com.galarzaa.tibiakt.core.builders
 
-import com.galarzaa.tibiakt.core.enums.*
-import com.galarzaa.tibiakt.core.models.Highscores
-import com.galarzaa.tibiakt.core.models.HighscoresEntry
+import com.galarzaa.tibiakt.core.enums.HighscoresBattlEyeType
+import com.galarzaa.tibiakt.core.enums.HighscoresCategory
+import com.galarzaa.tibiakt.core.enums.HighscoresProfession
+import com.galarzaa.tibiakt.core.enums.HighscoresPvpType
+import com.galarzaa.tibiakt.core.enums.Vocation
+import com.galarzaa.tibiakt.core.models.highscores.Highscores
+import com.galarzaa.tibiakt.core.models.highscores.HighscoresEntry
 import java.time.Instant
 
 class HighscoresBuilder {
