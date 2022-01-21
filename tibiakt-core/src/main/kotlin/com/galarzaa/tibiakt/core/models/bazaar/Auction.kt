@@ -4,6 +4,7 @@ package com.galarzaa.tibiakt.core.models.bazaar
 
 import com.galarzaa.tibiakt.core.enums.AuctionStatus
 import com.galarzaa.tibiakt.core.enums.BidType
+import com.galarzaa.tibiakt.core.enums.Sex
 import com.galarzaa.tibiakt.core.enums.Vocation
 import com.galarzaa.tibiakt.core.utils.InstantSerializer
 import com.galarzaa.tibiakt.core.utils.getAuctionUrl
@@ -38,7 +39,7 @@ data class Auction(
     val level: Int,
     val world: String,
     val vocation: Vocation,
-    val sex: String,
+    val sex: Sex,
     val outfit: OutfitImage,
     val displayedItems: List<ItemEntry> = emptyList(),
     val salesArguments: List<SalesArgument> = emptyList(),

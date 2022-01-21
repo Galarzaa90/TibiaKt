@@ -272,8 +272,10 @@ object AuctionParser : Parser<Auction?> {
             val (_, level, vocation, sex, world) = groupValues
             builder
                 .level(level.toInt())
-                .vocation(StringEnum.fromValue(vocation.trim())!!)
-                .sex(sex.trim())
+                .vocation(StringEnum.fromValue(vocation.trim())
+                    ?: throw ParsingException("Unknow vocation found: $vocation"))
+                .sex(sex.trim().lowercase()
+                    .let { StringEnum.fromValue(it) ?: throw ParsingException("Unknown sex found: $it") })
                 .world(world.trim())
         }
         val outfitImage = auctionContainer.selectFirst("img.AuctionOutfitImage")

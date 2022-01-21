@@ -2,6 +2,8 @@
 
 package com.galarzaa.tibiakt.core.models.character
 
+import com.galarzaa.tibiakt.core.enums.AccountStatus
+import com.galarzaa.tibiakt.core.enums.Sex
 import com.galarzaa.tibiakt.core.enums.Vocation
 import com.galarzaa.tibiakt.core.utils.InstantSerializer
 import com.galarzaa.tibiakt.core.utils.getCharacterUrl
@@ -45,7 +47,7 @@ data class Character(
     val title: String? = null,
     val formerNames: List<String> = emptyList(),
     val unlockedTitles: Int = 0,
-    val sex: String,
+    val sex: Sex,
     val vocation: Vocation,
     val level: Int,
     val achievementPoints: Int = 0,
@@ -58,7 +60,7 @@ data class Character(
     val lastLogin: Instant? = null,
     val position: String? = null,
     val comment: String? = null,
-    val accountStatus: String,
+    val accountStatus: AccountStatus,
     val recentlyTraded: Boolean = false,
     val deletionDate: Instant? = null,
     val badges: List<AccountBadge> = emptyList(),

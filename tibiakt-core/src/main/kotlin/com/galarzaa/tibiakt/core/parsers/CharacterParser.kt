@@ -58,7 +58,7 @@ object CharacterParser : Parser<Character?> {
                 "title" -> parseTitles(charBuilder, value)
                 "former_names" -> charBuilder.formerNames(value.split(",").map { it.trim() })
                 "former_world" -> charBuilder.formerWorld(value)
-                "sex" -> charBuilder.sex(value)
+                "sex" -> charBuilder.sex(StringEnum.fromValue(value)!!)
                 "vocation" -> charBuilder.vocation(
                     StringEnum.fromValue(value) ?: throw ParsingException("Unknown vocation: $value")
                 )
@@ -73,7 +73,8 @@ object CharacterParser : Parser<Character?> {
                 }
                 "position" -> charBuilder.position(value)
                 "comment" -> charBuilder.comment(value)
-                "account_status" -> charBuilder.accountStatus(value)
+                "account_status" -> charBuilder.accountStatus(StringEnum.fromValue(value)
+                    ?: throw ParsingException("Unknown account status: $value"))
                 "married_to" -> charBuilder.marriedTo(value)
                 "house" -> parseHouseColumn(charBuilder, columns[1])
                 "guild_membership" -> parseGuildColumn(charBuilder, columns[1])

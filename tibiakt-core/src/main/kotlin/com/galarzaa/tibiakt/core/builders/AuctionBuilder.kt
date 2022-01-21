@@ -2,6 +2,7 @@ package com.galarzaa.tibiakt.core.builders
 
 import com.galarzaa.tibiakt.core.enums.AuctionStatus
 import com.galarzaa.tibiakt.core.enums.BidType
+import com.galarzaa.tibiakt.core.enums.Sex
 import com.galarzaa.tibiakt.core.enums.Vocation
 import com.galarzaa.tibiakt.core.models.bazaar.Auction
 import com.galarzaa.tibiakt.core.models.bazaar.AuctionDetails
@@ -16,7 +17,7 @@ class AuctionBuilder {
     private var level: Int? = null
     private var world: String? = null
     private var vocation: Vocation? = null
-    private var sex: String? = null
+    private var sex: Sex? = null
     private var outfit: OutfitImage? = null
     private val displayedItems: MutableList<ItemEntry> = mutableListOf()
     private val salesArguments: MutableList<SalesArgument> = mutableListOf()
@@ -31,7 +32,7 @@ class AuctionBuilder {
     fun auctionId(auctionId: Int) = apply { this.auctionId = auctionId }
     fun level(level: Int) = apply { this.level = level }
     fun vocation(vocation: Vocation) = apply { this.vocation = vocation }
-    fun sex(sex: String) = apply { this.sex = sex }
+    fun sex(sex: Sex) = apply { this.sex = sex }
     fun world(world: String) = apply { this.world = world }
     fun outfit(outfit: OutfitImage) = apply { this.outfit = outfit }
     fun outfit(outfitId: Int, addons: Int) = apply { outfit = OutfitImage(outfitId, addons) }

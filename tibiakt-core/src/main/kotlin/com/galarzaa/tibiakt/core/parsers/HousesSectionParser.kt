@@ -4,7 +4,17 @@ import com.galarzaa.tibiakt.core.builders.HousesSectionBuilder
 import com.galarzaa.tibiakt.core.enums.HouseStatus
 import com.galarzaa.tibiakt.core.enums.StringEnum
 import com.galarzaa.tibiakt.core.models.house.HousesSection
-import com.galarzaa.tibiakt.core.utils.*
+import com.galarzaa.tibiakt.core.utils.ParsingException
+import com.galarzaa.tibiakt.core.utils.cells
+import com.galarzaa.tibiakt.core.utils.cleanText
+import com.galarzaa.tibiakt.core.utils.formData
+import com.galarzaa.tibiakt.core.utils.getContaining
+import com.galarzaa.tibiakt.core.utils.offsetStart
+import com.galarzaa.tibiakt.core.utils.parseInteger
+import com.galarzaa.tibiakt.core.utils.parseTablesMap
+import com.galarzaa.tibiakt.core.utils.parseThousandSuffix
+import com.galarzaa.tibiakt.core.utils.remove
+import com.galarzaa.tibiakt.core.utils.rows
 import java.time.Duration
 
 object HousesSectionParser : Parser<HousesSection?> {
@@ -15,7 +25,8 @@ object HousesSectionParser : Parser<HousesSection?> {
         val builder = HousesSectionBuilder()
         val tables = boxContent.parseTablesMap()
         tables["House Search"]?.apply {
-            val form = boxContent.selectFirst("div.BoxContent > form")!!.formData()
+            val form = boxContent.selectFirst("div.BoxContent > form")?.formData()
+                ?: throw ParsingException("House Search form not found")
             builder
                 .world(form.data["world"]!!)
                 .town(form.data["town"]!!)

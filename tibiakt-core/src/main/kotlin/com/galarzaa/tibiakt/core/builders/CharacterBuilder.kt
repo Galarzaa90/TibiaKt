@@ -1,7 +1,17 @@
 package com.galarzaa.tibiakt.core.builders
 
+import com.galarzaa.tibiakt.core.enums.AccountStatus
+import com.galarzaa.tibiakt.core.enums.Sex
 import com.galarzaa.tibiakt.core.enums.Vocation
-import com.galarzaa.tibiakt.core.models.character.*
+import com.galarzaa.tibiakt.core.models.character.AccountBadge
+import com.galarzaa.tibiakt.core.models.character.AccountInformation
+import com.galarzaa.tibiakt.core.models.character.Character
+import com.galarzaa.tibiakt.core.models.character.CharacterHouse
+import com.galarzaa.tibiakt.core.models.character.Death
+import com.galarzaa.tibiakt.core.models.character.DisplayedAchievement
+import com.galarzaa.tibiakt.core.models.character.GuildMembership
+import com.galarzaa.tibiakt.core.models.character.Killer
+import com.galarzaa.tibiakt.core.models.character.OtherCharacter
 import java.time.Instant
 import java.time.LocalDate
 
@@ -10,7 +20,7 @@ class CharacterBuilder {
     private var level: Int = 2
     private var residence: String? = null
     private var vocation: Vocation? = null
-    private var sex: String? = null
+    private var sex: Sex? = null
     private var world: String? = null
     private var achievementPoints: Int = 0
     private var lastLogin: Instant? = null
@@ -18,7 +28,7 @@ class CharacterBuilder {
     private var formerNames: List<String> = listOf()
     private var deletionDate: Instant? = null
     private var formerWorld: String? = null
-    private var accountStatus: String? = null
+    private var accountStatus: AccountStatus? = null
     private var comment: String? = null
     private var title: String? = null
     private var position: String? = null
@@ -40,7 +50,7 @@ class CharacterBuilder {
 
     fun vocation(vocation: Vocation) = apply { this.vocation = vocation }
     fun level(level: Int) = apply { this.level = level }
-    fun sex(sex: String) = apply { this.sex = sex }
+    fun sex(sex: Sex) = apply { this.sex = sex }
     fun world(world: String) = apply { this.world = world }
     fun achievementPoints(achievementPoints: Int) = apply { this.achievementPoints = achievementPoints }
     fun residence(residence: String) = apply { this.residence = residence }
@@ -51,7 +61,7 @@ class CharacterBuilder {
     fun formerWorld(formerWorld: String?) = apply { this.formerWorld = formerWorld }
     fun position(position: String?) = apply { this.position = position }
     fun marriedTo(marriedTo: String?) = apply { this.marriedTo = marriedTo }
-    fun accountStatus(accountStatus: String) = apply { this.accountStatus = accountStatus }
+    fun accountStatus(accountStatus: AccountStatus) = apply { this.accountStatus = accountStatus }
     fun comment(comment: String?) = apply { this.comment = comment }
     fun addHouse(name: String, houseId: Int, town: String, paidUntil: LocalDate, world: String) = apply {
         houses.add(CharacterHouse(name, houseId, town, paidUntil, world))
