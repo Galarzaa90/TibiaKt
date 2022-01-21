@@ -4,9 +4,17 @@ import com.galarzaa.tibiakt.core.builders.WorldBuilder
 import com.galarzaa.tibiakt.core.enums.BattlEyeType
 import com.galarzaa.tibiakt.core.enums.StringEnum
 import com.galarzaa.tibiakt.core.enums.TransferType
-import com.galarzaa.tibiakt.core.enums.Vocation
 import com.galarzaa.tibiakt.core.models.world.World
-import com.galarzaa.tibiakt.core.utils.*
+import com.galarzaa.tibiakt.core.utils.ParsingException
+import com.galarzaa.tibiakt.core.utils.clean
+import com.galarzaa.tibiakt.core.utils.getContaining
+import com.galarzaa.tibiakt.core.utils.offsetStart
+import com.galarzaa.tibiakt.core.utils.parseInteger
+import com.galarzaa.tibiakt.core.utils.parseTablesMap
+import com.galarzaa.tibiakt.core.utils.parseTibiaDateTime
+import com.galarzaa.tibiakt.core.utils.parseTibiaFullDate
+import com.galarzaa.tibiakt.core.utils.remove
+import com.galarzaa.tibiakt.core.utils.rows
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
@@ -37,7 +45,7 @@ object WorldParser : Parser<World?> {
             builder.addOnlinePlayer(
                 name,
                 level.toInt(),
-                Vocation.fromProperName(vocation) ?: throw ParsingException("unknown vocation: $vocation")
+                StringEnum.fromValue(vocation) ?: throw ParsingException("unknown vocation: $vocation")
             )
         }
     }

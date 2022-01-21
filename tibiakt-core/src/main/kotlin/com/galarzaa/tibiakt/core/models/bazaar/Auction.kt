@@ -40,7 +40,7 @@ data class Auction(
     val vocation: Vocation,
     val sex: String,
     val outfit: OutfitImage,
-    val displayedItems: List<DisplayItem> = emptyList(),
+    val displayedItems: List<ItemEntry> = emptyList(),
     val salesArguments: List<SalesArgument> = emptyList(),
     val auctionStart: Instant,
     val auctionEnd: Instant,

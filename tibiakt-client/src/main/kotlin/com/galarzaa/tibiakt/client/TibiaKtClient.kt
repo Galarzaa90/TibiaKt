@@ -20,9 +20,9 @@ import com.galarzaa.tibiakt.core.models.bazaar.AjaxPaginator
 import com.galarzaa.tibiakt.core.models.bazaar.Auction
 import com.galarzaa.tibiakt.core.models.bazaar.BazaarFilters
 import com.galarzaa.tibiakt.core.models.bazaar.CharacterBazaar
-import com.galarzaa.tibiakt.core.models.bazaar.DisplayItem
-import com.galarzaa.tibiakt.core.models.bazaar.DisplayMount
-import com.galarzaa.tibiakt.core.models.bazaar.DisplayOutfit
+import com.galarzaa.tibiakt.core.models.bazaar.ItemEntry
+import com.galarzaa.tibiakt.core.models.bazaar.MountEntry
+import com.galarzaa.tibiakt.core.models.bazaar.OutfitEntry
 import com.galarzaa.tibiakt.core.models.character.Character
 import com.galarzaa.tibiakt.core.models.forums.CMPostArchive
 import com.galarzaa.tibiakt.core.models.guild.Guild
@@ -362,12 +362,12 @@ open class TibiaKtClient internal constructor(engine: HttpClientEngine) {
         if (tibiaResponse.data?.details == null)
             return tibiaResponse
         val accumulator = Timing(tibiaResponse.fetchingTime, tibiaResponse.parsingTime)
-        var itemEntries: List<DisplayItem>? = null
-        var storeItemEntries: List<DisplayItem>? = null
-        var outfitEntries: List<DisplayOutfit>? = null
-        var storeOutfitEntries: List<DisplayOutfit>? = null
-        var mountEntries: List<DisplayMount>? = null
-        var storeMountEntries: List<DisplayMount>? = null
+        var itemEntries: List<ItemEntry>? = null
+        var storeItemEntries: List<ItemEntry>? = null
+        var outfitEntries: List<OutfitEntry>? = null
+        var storeOutfitEntries: List<OutfitEntry>? = null
+        var mountEntries: List<MountEntry>? = null
+        var storeMountEntries: List<MountEntry>? = null
         if (fetchItems) {
             itemEntries = fetchAllPages(tibiaResponse.data.auctionId,
                 AuctionPagesType.ITEMS,

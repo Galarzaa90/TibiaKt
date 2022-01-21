@@ -1,9 +1,16 @@
 package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.core.builders.GuildBuilder
-import com.galarzaa.tibiakt.core.enums.Vocation
+import com.galarzaa.tibiakt.core.enums.StringEnum
 import com.galarzaa.tibiakt.core.models.guild.Guild
-import com.galarzaa.tibiakt.core.utils.*
+import com.galarzaa.tibiakt.core.utils.ParsingException
+import com.galarzaa.tibiakt.core.utils.boxContent
+import com.galarzaa.tibiakt.core.utils.clean
+import com.galarzaa.tibiakt.core.utils.nullIfBlank
+import com.galarzaa.tibiakt.core.utils.parseTablesMap
+import com.galarzaa.tibiakt.core.utils.parseTibiaDate
+import com.galarzaa.tibiakt.core.utils.remove
+import com.galarzaa.tibiakt.core.utils.wholeCleanText
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
@@ -74,7 +81,7 @@ object GuildParser : Parser<Guild?> {
             rank,
             name,
             title.nullIfBlank(),
-            Vocation.fromProperName(vocation) ?: throw ParsingException("unknown vocation in member '$: $vocation"),
+            StringEnum.fromValue(vocation) ?: throw ParsingException("unknown vocation in member '$: $vocation"),
             columns[3].text().toInt(),
             parseTibiaDate(columns[4].text().clean()),
             columns[5].text().contains("online")

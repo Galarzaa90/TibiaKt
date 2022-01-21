@@ -3,7 +3,11 @@ package com.galarzaa.tibiakt.core.builders
 import com.galarzaa.tibiakt.core.enums.AuctionStatus
 import com.galarzaa.tibiakt.core.enums.BidType
 import com.galarzaa.tibiakt.core.enums.Vocation
-import com.galarzaa.tibiakt.core.models.bazaar.*
+import com.galarzaa.tibiakt.core.models.bazaar.Auction
+import com.galarzaa.tibiakt.core.models.bazaar.AuctionDetails
+import com.galarzaa.tibiakt.core.models.bazaar.ItemEntry
+import com.galarzaa.tibiakt.core.models.bazaar.OutfitImage
+import com.galarzaa.tibiakt.core.models.bazaar.SalesArgument
 import java.time.Instant
 
 class AuctionBuilder {
@@ -14,7 +18,7 @@ class AuctionBuilder {
     private var vocation: Vocation? = null
     private var sex: String? = null
     private var outfit: OutfitImage? = null
-    private val displayedItems: MutableList<DisplayItem> = mutableListOf()
+    private val displayedItems: MutableList<ItemEntry> = mutableListOf()
     private val salesArguments: MutableList<SalesArgument> = mutableListOf()
     private var auctionStart: Instant? = null
     private var auctionEnd: Instant? = null
@@ -31,7 +35,7 @@ class AuctionBuilder {
     fun world(world: String) = apply { this.world = world }
     fun outfit(outfit: OutfitImage) = apply { this.outfit = outfit }
     fun outfit(outfitId: Int, addons: Int) = apply { outfit = OutfitImage(outfitId, addons) }
-    fun addDisplayedItem(displayedItem: DisplayItem) = apply { displayedItems.add(displayedItem) }
+    fun addDisplayedItem(displayedItem: ItemEntry) = apply { displayedItems.add(displayedItem) }
     fun addSalesArgument(salesArgument: SalesArgument) = apply { salesArguments.add(salesArgument) }
     fun auctionStart(auctionStart: Instant) = apply { this.auctionStart = auctionStart }
     fun auctionEnd(auctionEnd: Instant) = apply { this.auctionEnd = auctionEnd }

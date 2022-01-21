@@ -19,7 +19,9 @@ import java.time.Instant
  * @property world The world the highscores belong to, or null if these are global highscores.
  * @property category The displayed highscores category.
  * @property vocation The selected vocation filter for the entries.
- * @property worldTypes The selected world types.
+ * @property worldTypes The selected world types to show for global highscores.
+ * @property battlEyeType The BattlEye type of worlds to show for global highscores.
+ * @property lastUpdate The time when the currently displayed results were last updated.
  */
 @Serializable
 data class Highscores(

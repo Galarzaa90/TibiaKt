@@ -7,6 +7,6 @@ data class Mounts(
     override val currentPage: Int,
     override val totalPages: Int,
     override val resultsCount: Int,
-    override val entries: List<DisplayMount> = emptyList(),
+    override val entries: List<MountEntry> = emptyList(),
     override val fullyFetched: Boolean = false,
-) : AjaxPaginator<DisplayMount>
+) : AjaxPaginator<MountEntry>

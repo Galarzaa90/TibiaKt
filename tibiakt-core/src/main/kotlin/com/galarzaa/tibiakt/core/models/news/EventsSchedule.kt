@@ -20,15 +20,18 @@ data class EventsSchedule(
     val yearMonth: YearMonth,
     val entries: List<EventEntry> = emptyList(),
 ) {
+    /**
+     * The URL of the events schedule of the month.
+     */
     val url get() = getEventsScheduleUrl(yearMonth)
-}
 
-/**
- * Get all the events that are active in a specific day of the month.
- */
-fun EventsSchedule.getEventsOn(date: LocalDate): List<EventEntry> {
-    return entries.filter {
-        (it.startDate ?: LocalDate.MIN) <= date &&
-                date <= (it.endDate ?: LocalDate.MAX)
+    /**
+     * Get all the events that are active in a specific day of the month.
+     */
+    fun getEventsOn(date: LocalDate): List<EventEntry> {
+        return entries.filter {
+            (it.startDate ?: LocalDate.MIN) <= date &&
+                    date <= (it.endDate ?: LocalDate.MAX)
+        }
     }
 }

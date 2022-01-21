@@ -10,6 +10,6 @@ data class ItemSummary(
     override val currentPage: Int,
     override val totalPages: Int,
     override val resultsCount: Int,
-    override val entries: List<DisplayItem> = emptyList(),
+    override val entries: List<ItemEntry> = emptyList(),
     override val fullyFetched: Boolean = false,
-) : AjaxPaginator<DisplayItem>
+) : AjaxPaginator<ItemEntry>

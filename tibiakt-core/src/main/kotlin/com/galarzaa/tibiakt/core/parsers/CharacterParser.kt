@@ -1,10 +1,18 @@
 package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.core.builders.CharacterBuilder
-import com.galarzaa.tibiakt.core.enums.Vocation
+import com.galarzaa.tibiakt.core.enums.StringEnum
 import com.galarzaa.tibiakt.core.models.character.Character
 import com.galarzaa.tibiakt.core.models.character.Killer
-import com.galarzaa.tibiakt.core.utils.*
+import com.galarzaa.tibiakt.core.utils.ParsingException
+import com.galarzaa.tibiakt.core.utils.clean
+import com.galarzaa.tibiakt.core.utils.getLinkInformation
+import com.galarzaa.tibiakt.core.utils.parsePopup
+import com.galarzaa.tibiakt.core.utils.parseTables
+import com.galarzaa.tibiakt.core.utils.parseTibiaDate
+import com.galarzaa.tibiakt.core.utils.parseTibiaDateTime
+import com.galarzaa.tibiakt.core.utils.remove
+import com.galarzaa.tibiakt.core.utils.splitList
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
@@ -52,7 +60,7 @@ object CharacterParser : Parser<Character?> {
                 "former_world" -> charBuilder.formerWorld(value)
                 "sex" -> charBuilder.sex(value)
                 "vocation" -> charBuilder.vocation(
-                    Vocation.fromProperName(value) ?: throw ParsingException("Unknown vocation: $value")
+                    StringEnum.fromValue(value) ?: throw ParsingException("Unknown vocation: $value")
                 )
                 "level" -> charBuilder.level(value.toInt())
                 "achievement_points" -> charBuilder.achievementPoints(value.toInt())

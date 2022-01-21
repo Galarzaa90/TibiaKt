@@ -29,5 +29,8 @@ data class News(
     val threadId: Int?,
 ) : BaseNews {
 
+    /**
+     * The URL to the discussion thread of this article, if any.
+     */
     val threadUrl: String? get() = threadId?.let { getThreadUrl(threadId) }
 }

@@ -3,7 +3,7 @@ package com.galarzaa.tibiakt.core.parsers
 import com.galarzaa.tibiakt.core.builders.HighscoresBuilder
 import com.galarzaa.tibiakt.core.enums.HighscoresPvpType
 import com.galarzaa.tibiakt.core.enums.IntEnum
-import com.galarzaa.tibiakt.core.enums.Vocation
+import com.galarzaa.tibiakt.core.enums.StringEnum
 import com.galarzaa.tibiakt.core.models.highscores.Highscores
 import com.galarzaa.tibiakt.core.utils.FormData
 import com.galarzaa.tibiakt.core.utils.ParsingException
@@ -79,7 +79,7 @@ object HighscoresParser : Parser<Highscores?> {
             builder.addEntry(
                 columns[0].toInt(),
                 columns[1 + columnOffset],
-                Vocation.fromProperName(columns[2 + columnOffset])
+                StringEnum.fromValue(columns[2 + columnOffset])
                     ?: throw ParsingException("invalid vocation found: ${columns[2 + columnOffset]}"),
                 columns[3 + columnOffset],
                 columns[4 + columnOffset].toInt(),

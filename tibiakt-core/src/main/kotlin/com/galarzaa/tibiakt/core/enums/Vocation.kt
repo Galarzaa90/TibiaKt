@@ -1,6 +1,6 @@
 package com.galarzaa.tibiakt.core.enums
 
-enum class Vocation(val properName: String) {
+enum class Vocation(override val value: String) : StringEnum {
     NONE("None"),
     DRUID("Druid"),
     SORCERER("Sorcerer"),
@@ -11,9 +11,15 @@ enum class Vocation(val properName: String) {
     ROYAL_PALADIN("Royal Paladin"),
     ELITE_KNIGHT("Elite Knight");
 
-    companion object {
-        fun fromProperName(properName: String): Vocation? {
-            return values().firstOrNull { it.properName.equals(properName, true) }
+    /**
+     * Gets the base form of a vocation.
+     */
+    val base
+        get() = when (this) {
+            ELDER_DRUID -> DRUID
+            MASTER_SORCERER -> SORCERER
+            ROYAL_PALADIN -> PALADIN
+            ELITE_KNIGHT -> KNIGHT
+            else -> this
         }
-    }
 }

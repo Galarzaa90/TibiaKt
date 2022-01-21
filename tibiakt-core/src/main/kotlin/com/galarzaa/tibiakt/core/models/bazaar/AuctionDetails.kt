@@ -42,7 +42,7 @@ import java.time.Instant
  * @property outfits The outfits the character has unlocked.
  * @property storeOutfits The store outfits the character has purchased.
  * @property familiars The familiars the character has unlocked.
- * @property blessingsCount The blessings the character has.
+ * @property blessings The blessings the character has.
  * @property imbuements The list of imbuements the character has unlocked.
  * @property charms The list of charms the character has unlocked.
  * @property completedCyclopediaMapAreas The map areas the character has fully discovered.

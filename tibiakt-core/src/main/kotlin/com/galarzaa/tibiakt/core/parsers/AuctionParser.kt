@@ -4,9 +4,34 @@ import com.galarzaa.tibiakt.core.builders.AuctionBuilder
 import com.galarzaa.tibiakt.core.builders.AuctionDetailsBuilder
 import com.galarzaa.tibiakt.core.enums.AuctionStatus
 import com.galarzaa.tibiakt.core.enums.StringEnum
-import com.galarzaa.tibiakt.core.enums.Vocation
-import com.galarzaa.tibiakt.core.models.bazaar.*
-import com.galarzaa.tibiakt.core.utils.*
+import com.galarzaa.tibiakt.core.models.bazaar.AchievementEntry
+import com.galarzaa.tibiakt.core.models.bazaar.Auction
+import com.galarzaa.tibiakt.core.models.bazaar.AuctionSkills
+import com.galarzaa.tibiakt.core.models.bazaar.BestiaryEntry
+import com.galarzaa.tibiakt.core.models.bazaar.BlessingEntry
+import com.galarzaa.tibiakt.core.models.bazaar.CharmEntry
+import com.galarzaa.tibiakt.core.models.bazaar.FamiliarEntry
+import com.galarzaa.tibiakt.core.models.bazaar.Familiars
+import com.galarzaa.tibiakt.core.models.bazaar.ItemEntry
+import com.galarzaa.tibiakt.core.models.bazaar.ItemSummary
+import com.galarzaa.tibiakt.core.models.bazaar.MountEntry
+import com.galarzaa.tibiakt.core.models.bazaar.Mounts
+import com.galarzaa.tibiakt.core.models.bazaar.OutfitEntry
+import com.galarzaa.tibiakt.core.models.bazaar.Outfits
+import com.galarzaa.tibiakt.core.models.bazaar.SalesArgument
+import com.galarzaa.tibiakt.core.utils.ParsingException
+import com.galarzaa.tibiakt.core.utils.cellsText
+import com.galarzaa.tibiakt.core.utils.clean
+import com.galarzaa.tibiakt.core.utils.cleanText
+import com.galarzaa.tibiakt.core.utils.getLinkInformation
+import com.galarzaa.tibiakt.core.utils.offsetStart
+import com.galarzaa.tibiakt.core.utils.parseInteger
+import com.galarzaa.tibiakt.core.utils.parseLong
+import com.galarzaa.tibiakt.core.utils.parsePagination
+import com.galarzaa.tibiakt.core.utils.parseTablesMap
+import com.galarzaa.tibiakt.core.utils.parseTibiaDateTime
+import com.galarzaa.tibiakt.core.utils.remove
+import com.galarzaa.tibiakt.core.utils.rows
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 import java.io.File
@@ -115,11 +140,11 @@ object AuctionParser : Parser<Auction?> {
         val paginationData =
             table.selectFirst("div.BlockPageNavigationRow")?.parsePagination() ?: return Familiars(1, 0, 0)
         val familiarBoxes = table.select("div.CVIcon")
-        val familiars = mutableListOf<DisplayFamiliar>()
+        val familiars = mutableListOf<FamiliarEntry>()
         for (mountBox in familiarBoxes) {
             val name = mountBox.attr("title").split("(").first().clean()
             val (_, id) = idRegex.find(mountBox.selectFirst("img")?.attr("src") ?: "")?.groupValues!!
-            familiars.add(DisplayFamiliar(name, id.toInt()))
+            familiars.add(FamiliarEntry(name, id.toInt()))
         }
         return Familiars(paginationData.currentPage, paginationData.totalPages, paginationData.resultsCount, familiars)
     }
@@ -144,7 +169,7 @@ object AuctionParser : Parser<Auction?> {
         val paginationData =
             itemsTable.selectFirst("div.BlockPageNavigationRow")?.parsePagination() ?: return ItemSummary(1, 0, 0)
         val itemBoxes = itemsTable.select("div.CVIcon")
-        val items = mutableListOf<DisplayItem>()
+        val items = mutableListOf<ItemEntry>()
         for (itemBox in itemBoxes) {
             parseDisplayedItem(itemBox)?.run { items.add(this) }
         }
@@ -247,7 +272,7 @@ object AuctionParser : Parser<Auction?> {
             val (_, level, vocation, sex, world) = groupValues
             builder
                 .level(level.toInt())
-                .vocation(Vocation.fromProperName(vocation.trim())!!)
+                .vocation(StringEnum.fromValue(vocation.trim())!!)
                 .sex(sex.trim())
                 .world(world.trim())
         }
@@ -287,7 +312,7 @@ object AuctionParser : Parser<Auction?> {
     }
 
     @PublishedApi
-    internal fun parseDisplayedItem(displayItemContainer: Element): DisplayItem? {
+    internal fun parseDisplayedItem(displayItemContainer: Element): ItemEntry? {
         val title = displayItemContainer.attr("title")
         val fileUrl = displayItemContainer.selectFirst("img")?.attr("src") ?: return null
         val fileName = File(URL(fileUrl).path).name
@@ -304,30 +329,30 @@ object AuctionParser : Parser<Auction?> {
             amount = groups[1]!!.value.parseInteger()
             name = amountRegex.replace(name, "")
         }
-        return DisplayItem(itemId, name, description, amount)
+        return ItemEntry(itemId, name, description, amount)
     }
 
     @PublishedApi
-    internal fun parseDisplayedOutfit(container: Element): DisplayOutfit {
+    internal fun parseDisplayedOutfit(container: Element): OutfitEntry {
         val name = container.attr("title").split("(").first().clean()
         val (_, id, addons) = idAddonsRegex.find(container.selectFirst("img")?.attr("src") ?: "")?.groupValues!!
-        return DisplayOutfit(name, id.toInt(), addons.toInt())
+        return OutfitEntry(name, id.toInt(), addons.toInt())
     }
 
     @PublishedApi
-    internal fun parseDisplayedMount(container: Element): DisplayMount {
+    internal fun parseDisplayedMount(container: Element): MountEntry {
         val name = container.attr("title")
         val (_, id) = idRegex.find(container.selectFirst("img")?.attr("src") ?: "")?.groupValues!!
-        return DisplayMount(name, id.toInt())
+        return MountEntry(name, id.toInt())
     }
 
     inline fun <reified T> parsePageItems(content: String): List<T> {
         val document = Jsoup.parse(content)
         val cvIcon = document.select("div.CVIcon")
         return when (T::class) {
-            DisplayItem::class -> cvIcon.mapNotNull { parseDisplayedItem(it) as T }
-            DisplayOutfit::class -> cvIcon.mapNotNull { parseDisplayedOutfit(it) as T }
-            DisplayMount::class -> cvIcon.mapNotNull { parseDisplayedMount(it) as T }
+            ItemEntry::class -> cvIcon.mapNotNull { parseDisplayedItem(it) as T }
+            OutfitEntry::class -> cvIcon.mapNotNull { parseDisplayedOutfit(it) as T }
+            MountEntry::class -> cvIcon.mapNotNull { parseDisplayedMount(it) as T }
             else -> emptyList()
         }
     }

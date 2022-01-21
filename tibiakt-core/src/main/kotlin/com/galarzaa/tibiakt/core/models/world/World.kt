@@ -49,16 +49,17 @@ data class World(
     val creationDate: YearMonth,
     val worldQuests: List<String> = emptyList(),
     val playersOnline: List<OnlineCharacter> = emptyList(),
-) : BaseWorld
+) : BaseWorld {
 
-/** Check if a character from this world can be transferred to [target] world. */
-fun World.transferableTo(target: World): Boolean {
-    return pvpType.weight >= target.pvpType.weight &&
-            isExperimental == target.isExperimental &&
-            transferType != TransferType.LOCKED &&
-            target.transferType != TransferType.BLOCKED &&
-            battlEyeType.weight >= target.battlEyeType.weight
+    /** Check if a character from this world can be transferred to [target] world. */
+    fun transferableTo(target: World): Boolean {
+        return pvpType.weight >= target.pvpType.weight &&
+                isExperimental == target.isExperimental &&
+                transferType != TransferType.LOCKED &&
+                target.transferType != TransferType.BLOCKED &&
+                battlEyeType.weight >= target.battlEyeType.weight
+    }
+
+    /** Check if a character from the [origin] world can transfer to this world */
+    fun transferableFrom(origin: World): Boolean = origin.transferableTo(this)
 }
-
-/** Check if a character from the [origin] world can transfer to this world */
-fun World.transferableFrom(origin: World): Boolean = origin.transferableTo(this)

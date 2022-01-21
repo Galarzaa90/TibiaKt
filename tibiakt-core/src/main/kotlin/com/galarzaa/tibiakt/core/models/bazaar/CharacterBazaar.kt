@@ -5,6 +5,12 @@ import com.galarzaa.tibiakt.core.models.Paginated
 import com.galarzaa.tibiakt.core.utils.getBazaarUrl
 import kotlinx.serialization.Serializable
 
+/**
+ * The Character Bazaar.
+ *
+ * @property type The type of bazaar, current auctions or auction history.
+ * @property filters The currently active filters for the bazaar.
+ */
 @Serializable
 data class CharacterBazaar(
     val type: BazaarType,
@@ -14,5 +20,8 @@ data class CharacterBazaar(
     override val resultsCount: Int,
     override val entries: List<Auction> = emptyList(),
 ) : Paginated<Auction> {
+    /**
+     * The URL to the bazaar with the current filters and page.
+     */
     val url get() = getBazaarUrl(type, filters, currentPage)
 }
