@@ -1,6 +1,9 @@
 package com.galarzaa.tibiakt.core.enums
 
 interface StringEnum {
+    /**
+     * The string representation of the enum.
+     */
     val value: String
 
     companion object {

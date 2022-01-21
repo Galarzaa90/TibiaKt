@@ -3,7 +3,7 @@ package com.galarzaa.tibiakt.core.builders
 import com.galarzaa.tibiakt.core.enums.HighscoresBattlEyeType
 import com.galarzaa.tibiakt.core.enums.HighscoresCategory
 import com.galarzaa.tibiakt.core.enums.HighscoresProfession
-import com.galarzaa.tibiakt.core.enums.HighscoresPvpType
+import com.galarzaa.tibiakt.core.enums.PvpType
 import com.galarzaa.tibiakt.core.enums.Vocation
 import com.galarzaa.tibiakt.core.models.highscores.Highscores
 import com.galarzaa.tibiakt.core.models.highscores.HighscoresEntry
@@ -13,7 +13,7 @@ class HighscoresBuilder {
     private var world: String? = null
     private var category: HighscoresCategory? = null
     private var vocation: HighscoresProfession? = null
-    private val worldTypes: MutableSet<HighscoresPvpType> = mutableSetOf()
+    private val worldTypes: MutableSet<PvpType> = mutableSetOf()
     private var battlEyeType: HighscoresBattlEyeType? = null
     private var lastUpdate: Instant? = null
     private var currentPage: Int = 1
@@ -24,7 +24,7 @@ class HighscoresBuilder {
     fun world(world: String?) = apply { this.world = world }
     fun category(category: HighscoresCategory?) = apply { this.category = category }
     fun vocation(vocation: HighscoresProfession?) = apply { this.vocation = vocation }
-    fun addWorldType(worldType: HighscoresPvpType) = apply { this.worldTypes.add(worldType) }
+    fun addWorldType(worldType: PvpType) = apply { this.worldTypes.add(worldType) }
     fun battlEyeType(battlEyeType: HighscoresBattlEyeType?) = apply { this.battlEyeType = battlEyeType }
     fun lastUpdate(lastUpdate: Instant) = apply { this.lastUpdate = lastUpdate }
     fun currentPage(currentPage: Int) = apply { this.currentPage = currentPage }

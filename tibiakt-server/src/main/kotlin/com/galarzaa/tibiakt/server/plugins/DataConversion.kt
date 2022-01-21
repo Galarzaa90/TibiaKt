@@ -1,9 +1,27 @@
 package com.galarzaa.tibiakt.server.plugins
 
-import com.galarzaa.tibiakt.core.enums.*
-import io.ktor.application.*
-import io.ktor.features.*
-import io.ktor.util.*
+import com.galarzaa.tibiakt.core.enums.AuctionBattlEyeFilter
+import com.galarzaa.tibiakt.core.enums.AuctionOrderBy
+import com.galarzaa.tibiakt.core.enums.AuctionOrderDirection
+import com.galarzaa.tibiakt.core.enums.AuctionSearchType
+import com.galarzaa.tibiakt.core.enums.AuctionSkillFilter
+import com.galarzaa.tibiakt.core.enums.AuctionVocationFilter
+import com.galarzaa.tibiakt.core.enums.BazaarType
+import com.galarzaa.tibiakt.core.enums.HighscoresCategory
+import com.galarzaa.tibiakt.core.enums.HighscoresProfession
+import com.galarzaa.tibiakt.core.enums.HouseOrder
+import com.galarzaa.tibiakt.core.enums.HouseStatus
+import com.galarzaa.tibiakt.core.enums.HouseType
+import com.galarzaa.tibiakt.core.enums.IntEnum
+import com.galarzaa.tibiakt.core.enums.NewsCategory
+import com.galarzaa.tibiakt.core.enums.NewsType
+import com.galarzaa.tibiakt.core.enums.PvpType
+import com.galarzaa.tibiakt.core.enums.StringEnum
+import io.ktor.application.Application
+import io.ktor.application.install
+import io.ktor.features.DataConversion
+import io.ktor.features.DelegatingConversionService
+import io.ktor.util.DataConversionException
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
@@ -33,7 +51,7 @@ internal fun Application.configureDataConversion() {
         convert<HighscoresProfession> { intEnumConverter<HighscoresProfession>() }
 
         convert<BazaarType> { stringEnumConverter<BazaarType>() }
-        convert<AuctionPvpTypeFilter> { intEnumConverter<AuctionPvpTypeFilter>() }
+        convert<PvpType> { stringEnumConverter<PvpType>() }
         convert<AuctionBattlEyeFilter> { intEnumConverter<AuctionBattlEyeFilter>() }
         convert<AuctionSkillFilter> { intEnumConverter<AuctionSkillFilter>() }
         convert<AuctionVocationFilter> { intEnumConverter<AuctionVocationFilter>() }

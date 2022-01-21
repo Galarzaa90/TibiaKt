@@ -1,8 +1,8 @@
 package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.core.builders.HighscoresBuilder
-import com.galarzaa.tibiakt.core.enums.HighscoresPvpType
 import com.galarzaa.tibiakt.core.enums.IntEnum
+import com.galarzaa.tibiakt.core.enums.PvpType
 import com.galarzaa.tibiakt.core.enums.StringEnum
 import com.galarzaa.tibiakt.core.models.highscores.Highscores
 import com.galarzaa.tibiakt.core.utils.FormData
@@ -62,8 +62,8 @@ object HighscoresParser : Parser<Highscores?> {
             .category(IntEnum.fromValue(formData.data["category"]?.toInt())!!)
             .battlEyeType(IntEnum.fromValue(formData.data["beprotection"]?.toInt())!!)
             .vocation(IntEnum.fromValue(formData.data["profession"]?.toInt()))
-        for (pvpType in formData.dataMultiple["worldtypes[]"].orEmpty()) {
-            IntEnum.fromValue<HighscoresPvpType>(pvpType.toInt())?.apply { builder.addWorldType(this) }
+        for (pvpType in formData.dataMultiple["${PvpType.highscoresQueryParam}[]"].orEmpty()) {
+            PvpType.fromHighscoresFilterValue(pvpType.toInt())?.apply { builder.addWorldType(this) }
         }
     }
 

@@ -1,11 +1,17 @@
 package com.galarzaa.tibiakt.core.builders
 
-import com.galarzaa.tibiakt.core.enums.*
+import com.galarzaa.tibiakt.core.enums.AuctionBattlEyeFilter
+import com.galarzaa.tibiakt.core.enums.AuctionOrderBy
+import com.galarzaa.tibiakt.core.enums.AuctionOrderDirection
+import com.galarzaa.tibiakt.core.enums.AuctionSearchType
+import com.galarzaa.tibiakt.core.enums.AuctionSkillFilter
+import com.galarzaa.tibiakt.core.enums.AuctionVocationFilter
+import com.galarzaa.tibiakt.core.enums.PvpType
 import com.galarzaa.tibiakt.core.models.bazaar.BazaarFilters
 
 class BazaarFiltersBuilder {
     private var world: String? = null
-    private var pvpType: AuctionPvpTypeFilter? = null
+    private var pvpType: PvpType? = null
     private var battlEyeType: AuctionBattlEyeFilter? = null
     private var vocation: AuctionVocationFilter? = null
     private var minimumLevel: Int? = null
@@ -19,7 +25,7 @@ class BazaarFiltersBuilder {
     private var searchType: AuctionSearchType? = null
 
     fun world(world: String?) = apply { this.world = world }
-    fun pvpType(pvpType: AuctionPvpTypeFilter?) = apply { this.pvpType = pvpType }
+    fun pvpType(pvpType: PvpType?) = apply { this.pvpType = pvpType }
     fun battlEyeType(battlEyeType: AuctionBattlEyeFilter?) = apply { this.battlEyeType = battlEyeType }
     fun vocation(vocation: AuctionVocationFilter?) = apply { this.vocation = vocation }
     fun minimumLevel(minimumLevel: Int?) = apply { this.minimumLevel = minimumLevel }

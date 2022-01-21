@@ -3,7 +3,6 @@ package com.galarzaa.tibiakt.core.utils
 import com.galarzaa.tibiakt.core.enums.AuctionBattlEyeFilter
 import com.galarzaa.tibiakt.core.enums.AuctionOrderBy
 import com.galarzaa.tibiakt.core.enums.AuctionOrderDirection
-import com.galarzaa.tibiakt.core.enums.AuctionPvpTypeFilter
 import com.galarzaa.tibiakt.core.enums.AuctionSearchType
 import com.galarzaa.tibiakt.core.enums.AuctionSkillFilter
 import com.galarzaa.tibiakt.core.enums.AuctionVocationFilter
@@ -11,12 +10,12 @@ import com.galarzaa.tibiakt.core.enums.BazaarType
 import com.galarzaa.tibiakt.core.enums.HighscoresBattlEyeType
 import com.galarzaa.tibiakt.core.enums.HighscoresCategory
 import com.galarzaa.tibiakt.core.enums.HighscoresProfession
-import com.galarzaa.tibiakt.core.enums.HighscoresPvpType
 import com.galarzaa.tibiakt.core.enums.HouseOrder
 import com.galarzaa.tibiakt.core.enums.HouseStatus
 import com.galarzaa.tibiakt.core.enums.HouseType
 import com.galarzaa.tibiakt.core.enums.NewsCategory
 import com.galarzaa.tibiakt.core.enums.NewsType
+import com.galarzaa.tibiakt.core.enums.PvpType
 import com.galarzaa.tibiakt.core.models.bazaar.BazaarFilters
 import java.net.URLEncoder
 import java.time.LocalDate
@@ -172,7 +171,7 @@ fun getHighscoresUrl(
     vocations: HighscoresProfession = HighscoresProfession.ALL,
     page: Int = 1,
     battleEye: HighscoresBattlEyeType = HighscoresBattlEyeType.ANY_WORLD,
-    worldTypes: Set<HighscoresPvpType>? = null,
+    worldTypes: Set<PvpType>? = null,
 ) = buildTibiaUrl(
     "community",
     P("subtopic", "highscores"),
@@ -181,7 +180,7 @@ fun getHighscoresUrl(
     P("currentpage", page),
     P("category", category.value),
     P("beprotection", battleEye.value),
-    *worldTypes.orEmpty().map { P("worldtypes[]", it.value) }.toTypedArray()
+    *worldTypes.orEmpty().map { P("${PvpType.highscoresQueryParam}[]", it.highscoresFilterValue) }.toTypedArray()
 )
 
 /**
@@ -249,7 +248,7 @@ private fun BazaarFilters?.getQueryParams(): Array<P<String, Any?>> {
             P(AuctionVocationFilter.queryParam, vocation?.value),
             P("filter_levelrangefrom", minimumLevel),
             P("filter_levelrangeto", maximumLevel),
-            P(AuctionPvpTypeFilter.queryParam, pvpType?.value),
+            P(PvpType.bazaarQueryParam, pvpType?.bazaarFilterValue),
             P(AuctionBattlEyeFilter.queryParam, battlEyeType?.value),
             P(AuctionSkillFilter.queryParam, skill?.value),
             P("filter_skillrangefrom", minimumSkillLevel),

@@ -3,10 +3,23 @@ package com.galarzaa.tibiakt.core.parsers
 import com.galarzaa.tibiakt.core.builders.AuctionBuilder
 import com.galarzaa.tibiakt.core.builders.BazaarFiltersBuilder
 import com.galarzaa.tibiakt.core.builders.CharacterBazaarBuilder
-import com.galarzaa.tibiakt.core.enums.*
+import com.galarzaa.tibiakt.core.enums.AuctionBattlEyeFilter
+import com.galarzaa.tibiakt.core.enums.AuctionOrderBy
+import com.galarzaa.tibiakt.core.enums.AuctionOrderDirection
+import com.galarzaa.tibiakt.core.enums.AuctionSearchType
+import com.galarzaa.tibiakt.core.enums.AuctionSkillFilter
+import com.galarzaa.tibiakt.core.enums.AuctionVocationFilter
+import com.galarzaa.tibiakt.core.enums.BazaarType
+import com.galarzaa.tibiakt.core.enums.IntEnum
+import com.galarzaa.tibiakt.core.enums.PvpType
 import com.galarzaa.tibiakt.core.models.bazaar.CharacterBazaar
 import com.galarzaa.tibiakt.core.parsers.AuctionParser.parseAuctionContainer
-import com.galarzaa.tibiakt.core.utils.*
+import com.galarzaa.tibiakt.core.utils.ParsingException
+import com.galarzaa.tibiakt.core.utils.formData
+import com.galarzaa.tibiakt.core.utils.nullIfBlank
+import com.galarzaa.tibiakt.core.utils.parseInteger
+import com.galarzaa.tibiakt.core.utils.parsePagination
+import com.galarzaa.tibiakt.core.utils.parseTablesMap
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 
@@ -50,7 +63,7 @@ object CharacterBazaarParser : Parser<CharacterBazaar> {
         val filterBuilder = BazaarFiltersBuilder()
         filterBuilder
             .world(searchData.data["filter_world"])
-            .pvpType(IntEnum.fromValue(searchData.data[AuctionPvpTypeFilter.queryParam]))
+            .pvpType(PvpType.fromHighscoresFilterValue(searchData.data[PvpType.bazaarQueryParam]?.toInt()))
             .battlEyeType(IntEnum.fromValue(searchData.data[AuctionBattlEyeFilter.queryParam]))
             .vocation(IntEnum.fromValue(searchData.data[AuctionVocationFilter.queryParam]))
             .skill(IntEnum.fromValue(searchData.data[AuctionSkillFilter.queryParam]))

@@ -1,6 +1,12 @@
 package com.galarzaa.tibiakt.core.models.bazaar
 
-import com.galarzaa.tibiakt.core.enums.*
+import com.galarzaa.tibiakt.core.enums.AuctionBattlEyeFilter
+import com.galarzaa.tibiakt.core.enums.AuctionOrderBy
+import com.galarzaa.tibiakt.core.enums.AuctionOrderDirection
+import com.galarzaa.tibiakt.core.enums.AuctionSearchType
+import com.galarzaa.tibiakt.core.enums.AuctionSkillFilter
+import com.galarzaa.tibiakt.core.enums.AuctionVocationFilter
+import com.galarzaa.tibiakt.core.enums.PvpType
 import kotlinx.serialization.Serializable
 
 /**
@@ -25,7 +31,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class BazaarFilters(
     val world: String? = null,
-    val pvpType: AuctionPvpTypeFilter? = null,
+    val pvpType: PvpType? = null,
     val battlEyeType: AuctionBattlEyeFilter? = null,
     val vocation: AuctionVocationFilter? = null,
     val minimumLevel: Int? = null,

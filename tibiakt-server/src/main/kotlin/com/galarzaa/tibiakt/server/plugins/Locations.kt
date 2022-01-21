@@ -5,7 +5,6 @@ package com.galarzaa.tibiakt.server.plugins
 import com.galarzaa.tibiakt.core.enums.AuctionBattlEyeFilter
 import com.galarzaa.tibiakt.core.enums.AuctionOrderBy
 import com.galarzaa.tibiakt.core.enums.AuctionOrderDirection
-import com.galarzaa.tibiakt.core.enums.AuctionPvpTypeFilter
 import com.galarzaa.tibiakt.core.enums.AuctionSearchType
 import com.galarzaa.tibiakt.core.enums.AuctionSkillFilter
 import com.galarzaa.tibiakt.core.enums.AuctionVocationFilter
@@ -17,6 +16,7 @@ import com.galarzaa.tibiakt.core.enums.HouseStatus
 import com.galarzaa.tibiakt.core.enums.HouseType
 import com.galarzaa.tibiakt.core.enums.NewsCategory
 import com.galarzaa.tibiakt.core.enums.NewsType
+import com.galarzaa.tibiakt.core.enums.PvpType
 import io.ktor.application.Application
 import io.ktor.application.install
 import io.ktor.locations.KtorExperimentalLocationsAPI
@@ -90,7 +90,7 @@ data class GetBazaar(
     val page: Int = 1,
     val type: BazaarType = BazaarType.CURRENT,
     val world: String? = null,
-    val pvpType: AuctionPvpTypeFilter? = null,
+    val pvpType: PvpType? = null,
     val battlEyeType: AuctionBattlEyeFilter? = null,
     val vocation: AuctionVocationFilter? = null,
     val minLevel: Int? = null,

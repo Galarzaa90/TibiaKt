@@ -9,12 +9,12 @@ import com.galarzaa.tibiakt.core.enums.BazaarType
 import com.galarzaa.tibiakt.core.enums.HighscoresBattlEyeType
 import com.galarzaa.tibiakt.core.enums.HighscoresCategory
 import com.galarzaa.tibiakt.core.enums.HighscoresProfession
-import com.galarzaa.tibiakt.core.enums.HighscoresPvpType
 import com.galarzaa.tibiakt.core.enums.HouseOrder
 import com.galarzaa.tibiakt.core.enums.HouseStatus
 import com.galarzaa.tibiakt.core.enums.HouseType
 import com.galarzaa.tibiakt.core.enums.NewsCategory
 import com.galarzaa.tibiakt.core.enums.NewsType
+import com.galarzaa.tibiakt.core.enums.PvpType
 import com.galarzaa.tibiakt.core.models.KillStatistics
 import com.galarzaa.tibiakt.core.models.bazaar.AjaxPaginator
 import com.galarzaa.tibiakt.core.models.bazaar.Auction
@@ -261,7 +261,7 @@ open class TibiaKtClient internal constructor(engine: HttpClientEngine) {
         vocation: HighscoresProfession = HighscoresProfession.ALL,
         page: Int = 1,
         battlEyeType: HighscoresBattlEyeType = HighscoresBattlEyeType.ANY_WORLD,
-        pvpTypes: Set<HighscoresPvpType>? = null,
+        pvpTypes: Set<PvpType>? = null,
     ): TibiaResponse<Highscores> {
         val response =
             this.request(HttpMethod.Get, getHighscoresUrl(world, category, vocation, page, battlEyeType, pvpTypes))

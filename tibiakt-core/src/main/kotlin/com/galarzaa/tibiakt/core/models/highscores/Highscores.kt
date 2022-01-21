@@ -5,7 +5,7 @@ package com.galarzaa.tibiakt.core.models.highscores
 import com.galarzaa.tibiakt.core.enums.HighscoresBattlEyeType
 import com.galarzaa.tibiakt.core.enums.HighscoresCategory
 import com.galarzaa.tibiakt.core.enums.HighscoresProfession
-import com.galarzaa.tibiakt.core.enums.HighscoresPvpType
+import com.galarzaa.tibiakt.core.enums.PvpType
 import com.galarzaa.tibiakt.core.models.Paginated
 import com.galarzaa.tibiakt.core.utils.InstantSerializer
 import com.galarzaa.tibiakt.core.utils.getHighscoresUrl
@@ -28,7 +28,7 @@ data class Highscores(
     val world: String?,
     val category: HighscoresCategory,
     val vocation: HighscoresProfession,
-    val worldTypes: Set<HighscoresPvpType> = emptySet(),
+    val worldTypes: Set<PvpType> = emptySet(),
     val battlEyeType: HighscoresBattlEyeType,
     val lastUpdate: Instant,
     override val currentPage: Int,
