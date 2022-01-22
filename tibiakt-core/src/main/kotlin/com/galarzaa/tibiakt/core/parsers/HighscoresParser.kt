@@ -33,9 +33,9 @@ object HighscoresParser : Parser<Highscores?> {
 
         val builder = HighscoresBuilder()
         tables["Highscores Filter"]?.apply {
-            val formData = boxContent.selectFirst("form")?.formData()
-            parseHighscoresFilter(formData!!, builder)
-            print("")
+            val formData =
+                boxContent.selectFirst("form")?.formData() ?: throw ParsingException("could not find highscores form")
+            parseHighscoresFilter(formData, builder)
         }
         tables.getContaining("HighscoresLast")?.apply {
             parseHighscoresTable(this, builder)
@@ -59,8 +59,10 @@ object HighscoresParser : Parser<Highscores?> {
     private fun parseHighscoresFilter(formData: FormData, builder: HighscoresBuilder) {
         builder
             .world(formData.data["world"].nullIfBlank())
-            .category(IntEnum.fromValue(formData.data["category"]?.toInt())!!)
-            .battlEyeType(IntEnum.fromValue(formData.data["beprotection"]?.toInt())!!)
+            .category(IntEnum.fromValue(formData.data["category"]?.toInt())
+                ?: throw ParsingException("could not find category form value"))
+            .battlEyeType(IntEnum.fromValue(formData.data["beprotection"]?.toInt())
+                ?: throw ParsingException("could not find beprotection form value"))
             .vocation(IntEnum.fromValue(formData.data["profession"]?.toInt()))
         for (pvpType in formData.dataMultiple["${PvpType.highscoresQueryParam}[]"].orEmpty()) {
             PvpType.fromHighscoresFilterValue(pvpType.toInt())?.apply { builder.addWorldType(this) }

@@ -15,20 +15,21 @@ object GuildsSectionParser : Parser<GuildsSection?> {
             document.selectFirst("div.BoxContent") ?: throw ParsingException("BoxContent container not found")
         val builder = GuildsSectionBuilder()
         val tables = boxContent.select("table.TableContent")
-        val worldSelect = boxContent.selectFirst("select[name=world]")
-        val selectedWorld = worldSelect!!.selectFirst("option[selected]")
-        builder.world(selectedWorld!!.cleanText())
+        val selectedWorld = boxContent.selectFirst("select[name=world]")?.selectFirst("option[selected]")
+            ?: throw ParsingException("Could not find selected world")
+        builder.world(selectedWorld.cleanText())
         for ((index, table) in tables.withIndex()) {
             val isActive = index == 0
             val rows = table?.select("tr") ?: emptyList()
             for (row in rows.offsetStart(1)) {
                 val (logoColumn, nameColumn, _) = row.select("td")
                 val nameContainer = nameColumn.selectFirst("b") ?: continue
-                val logoUrl = logoColumn.selectFirst("img")?.attr("src")
+                val logoUrl =
+                    logoColumn.selectFirst("img")?.attr("src") ?: throw ParsingException("could not find logo URL")
                 val name = nameContainer.cleanText()
                 nameContainer.remove()
                 val description = nameColumn.cleanText().ifBlank { null }
-                builder.addGuild(name, logoUrl!!, description, isActive)
+                builder.addGuild(name, logoUrl, description, isActive)
             }
         }
         return builder.build()

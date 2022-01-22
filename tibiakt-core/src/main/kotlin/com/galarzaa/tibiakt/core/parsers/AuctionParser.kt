@@ -143,7 +143,8 @@ object AuctionParser : Parser<Auction?> {
         val familiars = mutableListOf<FamiliarEntry>()
         for (mountBox in familiarBoxes) {
             val name = mountBox.attr("title").split("(").first().clean()
-            val (_, id) = idRegex.find(mountBox.selectFirst("img")?.attr("src") ?: "")?.groupValues!!
+            val (_, id) = idRegex.find(mountBox.selectFirst("img")?.attr("src") ?: "")?.groupValues
+                ?: throw ParsingException("familiar image did not match expected pattern")
             familiars.add(FamiliarEntry(name, id.toInt()))
         }
         return Familiars(paginationData.currentPage, paginationData.totalPages, paginationData.resultsCount, familiars)
@@ -176,11 +177,17 @@ object AuctionParser : Parser<Auction?> {
         return ItemSummary(paginationData.currentPage, paginationData.totalPages, paginationData.resultsCount, items)
     }
 
+    private fun getAuctionTableFieldValue(row: Element): Pair<String, String> {
+        val field =
+            row.selectFirst("span")?.cleanText()?.remove(":") ?: throw ParsingException("could not find field's span")
+        val value = row.selectFirst("div")?.cleanText() ?: throw ParsingException("could not find value's div")
+        return Pair(field, value)
+    }
+
     private fun parseGeneralTable(table: Element, builder: AuctionDetailsBuilder) {
         val contentContainers = table.select("table.TableContent")
         for (row in contentContainers[0].rows()) {
-            val field = row.selectFirst("span")!!.cleanText().remove(":")
-            val value = row.selectFirst("div")!!.cleanText()
+            val (field, value) = getAuctionTableFieldValue(row)
             when (field) {
                 "Hit Points" -> builder.hitPoints(value.parseInteger())
                 "Mana" -> builder.mana(value.parseInteger())
@@ -209,8 +216,7 @@ object AuctionParser : Parser<Auction?> {
         )
         builder.skills(skills)
         for (row in contentContainers[2].rows()) {
-            val field = row.selectFirst("span")!!.cleanText().remove(":")
-            val value = row.selectFirst("div")!!.cleanText()
+            val (field, value) = getAuctionTableFieldValue(row)
             when (field) {
                 "Creation Date" -> builder.creationDate(parseTibiaDateTime(value))
                 "Experience" -> builder.experience(value.parseLong())
@@ -225,8 +231,7 @@ object AuctionParser : Parser<Auction?> {
         }
 
         for (row in contentContainers[4].rows()) {
-            val field = row.selectFirst("span")!!.cleanText().remove(":")
-            val value = row.selectFirst("div")!!.cleanText()
+            val (field, value) = getAuctionTableFieldValue(row)
             when (field) {
                 "Charm Expansion" -> builder.charmExpansion(value.contains("yes"))
                 "Available Charm Points" -> builder.availableCharmPoints(value.parseInteger())
@@ -235,8 +240,7 @@ object AuctionParser : Parser<Auction?> {
         }
         builder.dailyRewardStreak(contentContainers[5].selectFirst("div")?.cleanText()?.toInt() ?: 0)
         for (row in contentContainers[6].rows()) {
-            val field = row.selectFirst("span")!!.cleanText().remove(":")
-            val value = row.selectFirst("div")!!.cleanText()
+            val (field, value) = getAuctionTableFieldValue(row)
             when (field) {
                 "Hunting Task Points" -> builder.huntingTaskPoints(value.parseInteger())
                 "Permanent Hunting Task Slots" -> builder.permanentHuntingTaskSlots(value.parseInteger())
@@ -246,8 +250,7 @@ object AuctionParser : Parser<Auction?> {
         }
 
         for (row in contentContainers[7].rows()) {
-            val field = row.selectFirst("span")!!.cleanText().remove(":")
-            val value = row.selectFirst("div")!!.cleanText()
+            val (field, value) = getAuctionTableFieldValue(row)
             when (field) {
                 "Hirelings" -> builder.hirelings(value.parseInteger())
                 "Hireling Jobs" -> builder.hirelingJobs(value.parseInteger())
@@ -259,10 +262,12 @@ object AuctionParser : Parser<Auction?> {
     internal fun parseAuctionContainer(auctionContainer: Element, builder: AuctionBuilder) {
         val headerContainer =
             auctionContainer.selectFirst("div.AuctionHeader") ?: throw ParsingException("auction header not found")
-        val name = headerContainer.selectFirst("div.AuctionCharacterName")!!.cleanText()
+        val name = headerContainer.selectFirst("div.AuctionCharacterName")?.cleanText()
+            ?: throw ParsingException("character name not found")
         headerContainer.selectFirst("div.AuctionCharacterName > a")?.apply {
             val auctionLinkInfo = getLinkInformation()!!
-            val auctionId = auctionLinkInfo.queryParams["auctionid"]?.first()!!
+            val auctionId = auctionLinkInfo.queryParams["auctionid"]?.first()
+                ?: throw ParsingException("auctionId not found in link")
             builder.auctionId(auctionId.toInt())
             remove()
         }
@@ -278,9 +283,10 @@ object AuctionParser : Parser<Auction?> {
                     .let { StringEnum.fromValue(it) ?: throw ParsingException("Unknown sex found: $it") })
                 .world(world.trim())
         }
-        val outfitImage = auctionContainer.selectFirst("img.AuctionOutfitImage")
-        val outfitImageUrl = outfitImage!!.attr("src")
-        val (_, outfitId, addons) = idAddonsRegex.find(outfitImageUrl)!!.groupValues
+        val outfitImageUrl = auctionContainer.selectFirst("img.AuctionOutfitImage")?.attr("src")
+            ?: throw ParsingException("outfit image not found")
+        val (_, outfitId, addons) = idAddonsRegex.find(outfitImageUrl)?.groupValues
+            ?: throw ParsingException("image url does not match expected pattern")
 
         auctionContainer.select(".CVIcon").forEach {
             parseDisplayedItem(it)?.run { builder.addDisplayedItem(this) }
@@ -290,7 +296,8 @@ object AuctionParser : Parser<Auction?> {
         auctionContainer.select("div.Entry").forEach {
             val img = it.select("img")
             val imgUrl = img.attr("src")
-            val (_, id) = idRegex.find(imgUrl)!!.groupValues
+            val (_, id) = idRegex.find(imgUrl)?.groupValues
+                ?: throw ParsingException("sales argument image does not match pattern.")
             builder.addSalesArgument(
                 SalesArgument(id.toInt(), it.cleanText())
             )
@@ -337,14 +344,16 @@ object AuctionParser : Parser<Auction?> {
     @PublishedApi
     internal fun parseDisplayedOutfit(container: Element): OutfitEntry {
         val name = container.attr("title").split("(").first().clean()
-        val (_, id, addons) = idAddonsRegex.find(container.selectFirst("img")?.attr("src") ?: "")?.groupValues!!
+        val (_, id, addons) = idAddonsRegex.find(container.selectFirst("img")?.attr("src") ?: "")?.groupValues
+            ?: throw ParsingException("outfit image did not match expected pattern")
         return OutfitEntry(name, id.toInt(), addons.toInt())
     }
 
     @PublishedApi
     internal fun parseDisplayedMount(container: Element): MountEntry {
         val name = container.attr("title")
-        val (_, id) = idRegex.find(container.selectFirst("img")?.attr("src") ?: "")?.groupValues!!
+        val (_, id) = idRegex.find(container.selectFirst("img")?.attr("src") ?: "")?.groupValues
+            ?: throw ParsingException("mount image did not match expected pattern")
         return MountEntry(name, id.toInt())
     }
 

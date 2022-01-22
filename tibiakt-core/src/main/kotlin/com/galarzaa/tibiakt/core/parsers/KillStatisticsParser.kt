@@ -3,7 +3,12 @@ package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.core.builders.KillStatisticsBuilder
 import com.galarzaa.tibiakt.core.models.KillStatistics
-import com.galarzaa.tibiakt.core.utils.*
+import com.galarzaa.tibiakt.core.utils.ParsingException
+import com.galarzaa.tibiakt.core.utils.cellsText
+import com.galarzaa.tibiakt.core.utils.formData
+import com.galarzaa.tibiakt.core.utils.offsetStart
+import com.galarzaa.tibiakt.core.utils.parseTablesMap
+import com.galarzaa.tibiakt.core.utils.rows
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
@@ -18,10 +23,8 @@ object KillStatisticsParser : Parser<KillStatistics> {
         tables["Kill Statistics"]?.apply {
             parseKillStatisticsTable(this, builder)
         } ?: throw ParsingException("kill statistics table not found")
-        val form = boxContent.selectFirst("form")
-        form?.formData()?.apply {
-            builder.world(this.data["world"]!!)
-        }
+        val form = boxContent.selectFirst("form") ?: throw ParsingException("could not find form in value")
+        builder.world(form.formData().data["world"] ?: throw ParsingException("could not find world value in form"))
         return builder.build()
     }
 

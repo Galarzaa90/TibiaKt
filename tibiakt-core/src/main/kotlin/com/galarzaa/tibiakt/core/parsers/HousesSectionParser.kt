@@ -26,12 +26,13 @@ object HousesSectionParser : Parser<HousesSection?> {
         val tables = boxContent.parseTablesMap()
         tables["House Search"]?.apply {
             val form = boxContent.selectFirst("div.BoxContent > form")?.formData()
-                ?: throw ParsingException("House Search form not found")
+                ?: throw ParsingException("could not find house form")
             builder
-                .world(form.data["world"]!!)
-                .town(form.data["town"]!!)
+                .world(form.data["world"] ?: throw ParsingException("could not find world value in form"))
+                .town(form.data["town"] ?: throw ParsingException("could not find town value in form"))
                 .status(StringEnum.fromValue(form.data["state"]))
-                .type(StringEnum.fromValue(form.data["type"])!!)
+                .type(StringEnum.fromValue(form.data["type"])
+                    ?: throw ParsingException("could not find type value in form"))
                 .order(StringEnum.fromValue(form.data["order"]))
         } ?: throw ParsingException("House Search table not found")
         tables.getContaining("Available")?.apply {
@@ -54,7 +55,7 @@ object HousesSectionParser : Parser<HousesSection?> {
                     }
                 }
                 builder.addEntry(
-                    name = columns.first()!!.cleanText(),
+                    name = columns[0].cleanText(),
                     size = columns[1].cleanText().remove("sqm").parseInteger(),
                     rent = columns[2].cleanText().remove("gold").parseThousandSuffix(),
                     status = if (statusText.contains("auctioned")) HouseStatus.AUCTIONED else HouseStatus.RENTED,

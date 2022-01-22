@@ -139,7 +139,7 @@ internal fun Element.parsePagination(): PaginationData {
             pageLinks[pageLinks.size - 2].text().toInt()
         }
     } else {
-        pageLinks.last()!!.text().toInt()
+        pageLinks.last()?.text()?.toInt() ?: throw ParsingException("could not find last page link")
     }
     val page = try {
         currentPageLink?.text()?.toInt() ?: totalPages

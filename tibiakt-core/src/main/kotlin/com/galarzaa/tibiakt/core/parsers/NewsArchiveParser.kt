@@ -5,7 +5,14 @@ import com.galarzaa.tibiakt.core.enums.NewsCategory
 import com.galarzaa.tibiakt.core.enums.NewsType
 import com.galarzaa.tibiakt.core.enums.StringEnum
 import com.galarzaa.tibiakt.core.models.news.NewsArchive
-import com.galarzaa.tibiakt.core.utils.*
+import com.galarzaa.tibiakt.core.utils.ParsingException
+import com.galarzaa.tibiakt.core.utils.cells
+import com.galarzaa.tibiakt.core.utils.cleanText
+import com.galarzaa.tibiakt.core.utils.formData
+import com.galarzaa.tibiakt.core.utils.getLinkInformation
+import com.galarzaa.tibiakt.core.utils.parseTablesMap
+import com.galarzaa.tibiakt.core.utils.parseTibiaDate
+import com.galarzaa.tibiakt.core.utils.rows
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
@@ -37,8 +44,8 @@ object NewsArchiveParser : Parser<NewsArchive> {
             val newsId = titleColumn.selectFirst("a")?.getLinkInformation()?.queryParams?.get("id")?.get(0)?.toInt()
                 ?: throw ParsingException("Could not find link")
 
-            val typeLabel = dateColumn.selectFirst("small")
-            val newsType = typeLabel!!.cleanText()
+            val typeLabel = dateColumn.selectFirst("small") ?: throw ParsingException("could not find type label")
+            val newsType = typeLabel.cleanText()
             typeLabel.remove()
             builder.addEntry(
                 newsId,
@@ -46,7 +53,7 @@ object NewsArchiveParser : Parser<NewsArchive> {
                 category,
                 iconUrl,
                 parseTibiaDate(dateColumn.cleanText()),
-                StringEnum.fromValue(newsType)!!
+                StringEnum.fromValue(newsType) ?: throw ParsingException("unexpected news type found: $newsType")
             )
         }
     }
@@ -56,16 +63,22 @@ object NewsArchiveParser : Parser<NewsArchive> {
         builder
             .startDate(
                 LocalDate.of(
-                    formData.data["filter_begin_year"]!!.toInt(),
-                    formData.data["filter_begin_month"]!!.toInt(),
-                    formData.data["filter_begin_day"]!!.toInt(),
+                    formData.data["filter_begin_year"]?.toInt()
+                        ?: throw ParsingException("could not find filter_begin_year in form"),
+                    formData.data["filter_begin_month"]?.toInt()
+                        ?: throw ParsingException("could not find filter_begin_month in form"),
+                    formData.data["filter_begin_day"]?.toInt()
+                        ?: throw ParsingException("could not find filter_begin_day in form"),
                 )
             )
             .endDate(
                 LocalDate.of(
-                    formData.data["filter_end_year"]!!.toInt(),
-                    formData.data["filter_end_month"]!!.toInt(),
-                    formData.data["filter_end_day"]!!.toInt(),
+                    formData.data["filter_end_year"]?.toInt()
+                        ?: throw ParsingException("could not find filter_end_year in form"),
+                    formData.data["filter_end_month"]?.toInt()
+                        ?: throw ParsingException("could not find filter_end_month in form"),
+                    formData.data["filter_end_day"]?.toInt()
+                        ?: throw ParsingException("could not find filter_end_day in form"),
                 )
             )
         for (value in NewsCategory.values()) {

@@ -40,12 +40,15 @@ object CMPostArchiveParser : Parser<CMPostArchive> {
 
     private fun parseSearchTable(form: Element, builder: CMPostArchiveBuilder) {
         val formData = form.formData()
-        builder.startDate(LocalDate.of(formData.data["startyear"]!!.toInt(),
-            formData.data["startmonth"]!!.toInt(),
-            formData.data["startday"]!!.toInt()))
-            .endDate(LocalDate.of(formData.data["endyear"]!!.toInt(),
-                formData.data["endmonth"]!!.toInt(),
-                formData.data["endday"]!!.toInt()))
+        builder.startDate(
+            LocalDate.of(formData.data["startyear"]?.toInt()
+                ?: throw ParsingException("could not find startyear param"),
+                formData.data["startmonth"]?.toInt() ?: throw ParsingException("could not find startmonth param"),
+                formData.data["startday"]?.toInt() ?: throw ParsingException("could not find startday param")))
+            .endDate(LocalDate.of(formData.data["endyear"]?.toInt()
+                ?: throw ParsingException("could not find endyear param"),
+                formData.data["endmonth"]?.toInt() ?: throw ParsingException("could not find endmonth param"),
+                formData.data["endday"]?.toInt() ?: throw ParsingException("could not find endday param")))
     }
 
     private fun parsePostList(table: Element, builder: CMPostArchiveBuilder) {
@@ -55,8 +58,9 @@ object CMPostArchiveParser : Parser<CMPostArchive> {
             val date = parseTibiaDateTime(dateText)
             val (forum, thread) = columns[1].replaceBrs().wholeCleanText().split("\n")
             val postLink =
-                columns[2]?.selectFirst("a")?.getLinkInformation() ?: throw ParsingException("Could not find post link")
-            val postId = postLink.queryParams["postid"]?.get(0)?.toInt()!!
+                columns[2]?.selectFirst("a")?.getLinkInformation() ?: throw ParsingException("could not find post link")
+            val postId = postLink.queryParams["postid"]?.get(0)?.toInt()
+                ?: throw ParsingException("could not find postid in link")
             builder.addEntry(CMPost(postId, date, forum, thread))
         }
     }
