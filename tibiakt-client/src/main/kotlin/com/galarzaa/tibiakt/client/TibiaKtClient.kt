@@ -16,6 +16,7 @@ import com.galarzaa.tibiakt.core.enums.NewsCategory
 import com.galarzaa.tibiakt.core.enums.NewsType
 import com.galarzaa.tibiakt.core.enums.PvpType
 import com.galarzaa.tibiakt.core.models.KillStatistics
+import com.galarzaa.tibiakt.core.models.Leaderboards
 import com.galarzaa.tibiakt.core.models.bazaar.AjaxPaginator
 import com.galarzaa.tibiakt.core.models.bazaar.Auction
 import com.galarzaa.tibiakt.core.models.bazaar.BazaarFilters
@@ -46,6 +47,7 @@ import com.galarzaa.tibiakt.core.parsers.HighscoresParser
 import com.galarzaa.tibiakt.core.parsers.HouseParser
 import com.galarzaa.tibiakt.core.parsers.HousesSectionParser
 import com.galarzaa.tibiakt.core.parsers.KillStatisticsParser
+import com.galarzaa.tibiakt.core.parsers.LeaderboardsParser
 import com.galarzaa.tibiakt.core.parsers.NewsArchiveParser
 import com.galarzaa.tibiakt.core.parsers.NewsParser
 import com.galarzaa.tibiakt.core.parsers.WorldOverviewParser
@@ -60,6 +62,7 @@ import com.galarzaa.tibiakt.core.utils.getHighscoresUrl
 import com.galarzaa.tibiakt.core.utils.getHouseUrl
 import com.galarzaa.tibiakt.core.utils.getHousesSectionUrl
 import com.galarzaa.tibiakt.core.utils.getKillStatisticsUrl
+import com.galarzaa.tibiakt.core.utils.getLeaderboardUrl
 import com.galarzaa.tibiakt.core.utils.getNewArchiveFormData
 import com.galarzaa.tibiakt.core.utils.getNewsArchiveUrl
 import com.galarzaa.tibiakt.core.utils.getNewsUrl
@@ -117,13 +120,9 @@ open class TibiaKtClient internal constructor(engine: HttpClientEngine) {
                         headers { headers.forEach { header(it.first, it.second) } }
                     }
                 }
-                HttpMethod.Post -> client.submitForm(
-                    url,
-                    formParameters = Parameters.build {
-                        data.forEach { append(it.first, it.second.toString()) }
-                    },
-                    encodeInQuery = false
-                )
+                HttpMethod.Post -> client.submitForm(url, formParameters = Parameters.build {
+                    data.forEach { append(it.first, it.second.toString()) }
+                }, encodeInQuery = false)
                 else -> throw IllegalArgumentException("Unsupported method $method")
             }
         } catch (re: ResponseException) {
@@ -183,8 +182,7 @@ open class TibiaKtClient internal constructor(engine: HttpClientEngine) {
      * Fetch the events schedule for a specific year and month
      */
     suspend fun fetchEventsSchedule(yearMonth: YearMonth): TibiaResponse<EventsSchedule> {
-        val response =
-            this.request(HttpMethod.Get, getEventsScheduleUrl(yearMonth))
+        val response = this.request(HttpMethod.Get, getEventsScheduleUrl(yearMonth))
         return response.parse { EventsScheduleParser.fromContent(it) }
     }
 
@@ -278,8 +276,7 @@ open class TibiaKtClient internal constructor(engine: HttpClientEngine) {
         status: HouseStatus? = null,
         order: HouseOrder? = null,
     ): TibiaResponse<HousesSection?> {
-        val response =
-            this.request(HttpMethod.Get, getHousesSectionUrl(world, town, type, status, order))
+        val response = this.request(HttpMethod.Get, getHousesSectionUrl(world, town, type, status, order))
         return response.parse { HousesSectionParser.fromContent(it) }
     }
 
@@ -290,6 +287,19 @@ open class TibiaKtClient internal constructor(engine: HttpClientEngine) {
     ): TibiaResponse<House?> {
         val response = this.request(HttpMethod.Get, getHouseUrl(world, houseId))
         return response.parse { HouseParser.fromContent(it) }
+    }
+
+    /**
+     * Fetches the Tibia Drome leaderboards for a [world]
+     * @param rotation THe rotation number to see. Tibia.com only allows viewing the current and last rotations. Any other value takes you to the current leaderboard.
+     */
+    suspend fun fetchLeaderboards(
+        world: String,
+        rotation: Int?,
+        page: Int = 1,
+    ): TibiaResponse<Leaderboards> {
+        val response = this.request(HttpMethod.Get, getLeaderboardUrl(world, rotation, page))
+        return response.parse { LeaderboardsParser.fromContent(it) }
     }
 
     // endregion
@@ -359,8 +369,7 @@ open class TibiaKtClient internal constructor(engine: HttpClientEngine) {
         fetchOutfits: Boolean = false,
         fetchMounts: Boolean = false,
     ): TibiaResponse<Auction?> {
-        if (tibiaResponse.data?.details == null)
-            return tibiaResponse
+        if (tibiaResponse.data?.details == null) return tibiaResponse
         val accumulator = Timing(tibiaResponse.fetchingTime, tibiaResponse.parsingTime)
         var itemEntries: List<ItemEntry>? = null
         var storeItemEntries: List<ItemEntry>? = null
@@ -372,61 +381,52 @@ open class TibiaKtClient internal constructor(engine: HttpClientEngine) {
             itemEntries = fetchAllPages(tibiaResponse.data.auctionId,
                 AuctionPagesType.ITEMS,
                 tibiaResponse.data.details!!.items).accumulateTime(accumulator)
-            storeItemEntries =
-                fetchAllPages(tibiaResponse.data.auctionId,
-                    AuctionPagesType.ITEMS_STORE,
-                    tibiaResponse.data.details!!.storeItems).accumulateTime(accumulator)
+            storeItemEntries = fetchAllPages(tibiaResponse.data.auctionId,
+                AuctionPagesType.ITEMS_STORE,
+                tibiaResponse.data.details!!.storeItems).accumulateTime(accumulator)
         }
         if (fetchMounts) {
             mountEntries = fetchAllPages(tibiaResponse.data.auctionId,
                 AuctionPagesType.MOUNTS,
                 tibiaResponse.data.details!!.mounts).accumulateTime(accumulator)
-            storeMountEntries =
-                fetchAllPages(tibiaResponse.data.auctionId,
-                    AuctionPagesType.MOUNTS_STORE,
-                    tibiaResponse.data.details!!.storeMounts).accumulateTime(accumulator)
+            storeMountEntries = fetchAllPages(tibiaResponse.data.auctionId,
+                AuctionPagesType.MOUNTS_STORE,
+                tibiaResponse.data.details!!.storeMounts).accumulateTime(accumulator)
         }
         if (fetchOutfits) {
             outfitEntries = fetchAllPages(tibiaResponse.data.auctionId,
                 AuctionPagesType.OUTFITS,
                 tibiaResponse.data.details!!.outfits).accumulateTime(accumulator)
-            storeOutfitEntries =
-                fetchAllPages(tibiaResponse.data.auctionId,
-                    AuctionPagesType.OUTFITS_STORE,
-                    tibiaResponse.data.details!!.storeOutfits).accumulateTime(accumulator)
+            storeOutfitEntries = fetchAllPages(tibiaResponse.data.auctionId,
+                AuctionPagesType.OUTFITS_STORE,
+                tibiaResponse.data.details!!.storeOutfits).accumulateTime(accumulator)
         }
-        return tibiaResponse.copy(
-            fetchingTime = accumulator.fetching,
+        return tibiaResponse.copy(fetchingTime = accumulator.fetching,
             parsingTime = accumulator.parsing,
-            data = tibiaResponse.data.copy(
-                details = tibiaResponse.data.details!!.copy(
-                    items = tibiaResponse.data.details!!.items.copy(
-                        entries = itemEntries ?: tibiaResponse.data.details!!.items.entries,
-                        fullyFetched = fetchItems,
-                    ),
-                    storeItems = tibiaResponse.data.details!!.items.copy(
-                        entries = storeItemEntries ?: tibiaResponse.data.details!!.items.entries,
-                        fullyFetched = fetchItems,
-                    ),
-                    mounts = tibiaResponse.data.details!!.mounts.copy(
-                        entries = mountEntries ?: tibiaResponse.data.details!!.mounts.entries,
-                        fullyFetched = fetchMounts,
-                    ),
-                    storeMounts = tibiaResponse.data.details!!.storeMounts.copy(
-                        entries = storeMountEntries ?: tibiaResponse.data.details!!.storeMounts.entries,
-                        fullyFetched = fetchMounts
-                    ),
-                    outfits = tibiaResponse.data.details!!.outfits.copy(
-                        entries = outfitEntries ?: tibiaResponse.data.details!!.outfits.entries,
-                        fullyFetched = fetchOutfits,
-                    ),
-                    storeOutfits = tibiaResponse.data.details!!.storeOutfits.copy(
-                        entries = storeOutfitEntries ?: tibiaResponse.data.details!!.storeOutfits.entries,
-                        fullyFetched = fetchOutfits,
-                    ),
-                )
-            )
-        )
+            data = tibiaResponse.data.copy(details = tibiaResponse.data.details!!.copy(
+                items = tibiaResponse.data.details!!.items.copy(
+                    entries = itemEntries ?: tibiaResponse.data.details!!.items.entries,
+                    fullyFetched = fetchItems,
+                ),
+                storeItems = tibiaResponse.data.details!!.items.copy(
+                    entries = storeItemEntries ?: tibiaResponse.data.details!!.items.entries,
+                    fullyFetched = fetchItems,
+                ),
+                mounts = tibiaResponse.data.details!!.mounts.copy(
+                    entries = mountEntries ?: tibiaResponse.data.details!!.mounts.entries,
+                    fullyFetched = fetchMounts,
+                ),
+                storeMounts = tibiaResponse.data.details!!.storeMounts.copy(entries = storeMountEntries
+                    ?: tibiaResponse.data.details!!.storeMounts.entries, fullyFetched = fetchMounts),
+                outfits = tibiaResponse.data.details!!.outfits.copy(
+                    entries = outfitEntries ?: tibiaResponse.data.details!!.outfits.entries,
+                    fullyFetched = fetchOutfits,
+                ),
+                storeOutfits = tibiaResponse.data.details!!.storeOutfits.copy(
+                    entries = storeOutfitEntries ?: tibiaResponse.data.details!!.storeOutfits.entries,
+                    fullyFetched = fetchOutfits,
+                ),
+            )))
     }
 
     // endregion
@@ -441,8 +441,7 @@ open class TibiaKtClient internal constructor(engine: HttpClientEngine) {
         cacheAge = headers["Age"]?.toInt() ?: 0,
         fetchingTime = fetchingTime,
         parsingTime = parsingTime,
-        data = data
-    )
+        data = data)
 
     /**
      * Parse the [HttpResponse] into a TibiaResponse.
@@ -499,9 +498,7 @@ open class TibiaKtClient internal constructor(engine: HttpClientEngine) {
             timing.parsing += parsingTime
             logger.info {
                 "${
-                    getAuctionAjaxPaginationUrl(auctionId,
-                        type,
-                        currentPage)
+                    getAuctionAjaxPaginationUrl(auctionId, type, currentPage)
                 } | PARSE | ${(parsingTime * 1000).toInt()}ms"
             }
             currentPage++

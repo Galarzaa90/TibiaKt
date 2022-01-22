@@ -73,7 +73,7 @@ internal fun ArrayList<Element>.replaceBr() = forEach { it.replaceBrs() }
 internal fun Element.formData(): FormData {
     if (this.tagName() != "form")
         throw IllegalArgumentException("expected element with 'form' tag, got element with '${this.tagName()}' tag")
-    val data = mutableMapOf<String, String?>()
+    val data = mutableMapOf<String, String>()
     val dataMultiple = mutableMapOf<String, MutableList<String>>()
     val availableOptions = mutableMapOf<String, MutableList<String>>()
     select("input[type=text]").forEach { data[it.attr("name")] = it.attr("value") }
@@ -112,7 +112,7 @@ internal fun Element.formData(): FormData {
  * @property method The HTTP method used
  */
 internal data class FormData(
-    val data: Map<String, String?> = emptyMap(),
+    val data: Map<String, String> = emptyMap(),
     val dataMultiple: Map<String, List<String>> = emptyMap(),
     val availableOptions: Map<String, List<String>> = emptyMap(),
     val action: String? = null,

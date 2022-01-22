@@ -97,8 +97,7 @@ fun getWorldGuildsUrl(world: String) = buildTibiaUrl("community", "guilds", P("w
 /**
  * Get the URL to a specific guild.
  */
-fun getGuildUrl(name: String) =
-    buildTibiaUrl("community", "guilds", P("GuildName", name), P("page", "view"))
+fun getGuildUrl(name: String) = buildTibiaUrl("community", "guilds", P("GuildName", name), P("page", "view"))
 
 /**
  * Get the URL to a house on a specific [world].
@@ -172,16 +171,14 @@ fun getHighscoresUrl(
     page: Int = 1,
     battleEye: HighscoresBattlEyeType = HighscoresBattlEyeType.ANY_WORLD,
     worldTypes: Set<PvpType>? = null,
-) = buildTibiaUrl(
-    "community",
+) = buildTibiaUrl("community",
     P("subtopic", "highscores"),
     P("world", world),
     P("profession", vocations.value),
     P("currentpage", page),
     P("category", category.value),
     P("beprotection", battleEye.value),
-    *worldTypes.orEmpty().map { P("${PvpType.highscoresQueryParam}[]", it.highscoresFilterValue) }.toTypedArray()
-)
+    *worldTypes.orEmpty().map { P("${PvpType.highscoresQueryParam}[]", it.highscoresFilterValue) }.toTypedArray())
 
 /**
  * Get the URL to the kill statistics of a specific world.
@@ -196,13 +193,10 @@ fun getKillStatisticsUrl(world: String) = buildTibiaUrl("community", "killstatis
  * Note that going past the allowed limits, will take you the current month and year.
  */
 fun getEventsScheduleUrl(yearMonth: YearMonth? = null): String {
-    val params = if (yearMonth != null)
-        arrayOf(P("calendarmonth", yearMonth.month.value), P("calendarYear", yearMonth.year))
-    else
-        emptyArray()
-    return buildTibiaUrl(
-        "news", "eventcalendar", *params
-    )
+    val params =
+        if (yearMonth != null) arrayOf(P("calendarmonth", yearMonth.month.value), P("calendarYear", yearMonth.year))
+        else emptyArray()
+    return buildTibiaUrl("news", "eventcalendar", *params)
 }
 
 
@@ -215,16 +209,15 @@ fun getHousesSectionUrl(
     type: HouseType? = null,
     status: HouseStatus? = null,
     order: HouseOrder? = null,
-) =
-    buildTibiaUrl(
-        "community",
-        "houses",
-        P("world", world),
-        P("town", town),
-        P("state", status?.value),
-        P("type", type?.value),
-        P("order", order?.value),
-    )
+) = buildTibiaUrl(
+    "community",
+    "houses",
+    P("world", world),
+    P("town", town),
+    P("state", status?.value),
+    P("type", type?.value),
+    P("order", order?.value),
+)
 
 /**
  * Get the URL to a specific auction.
@@ -242,22 +235,21 @@ fun getBazaarUrl(type: BazaarType = BazaarType.CURRENT, filters: BazaarFilters? 
 }
 
 private fun BazaarFilters?.getQueryParams(): Array<P<String, Any?>> {
-    return if (this != null)
-        arrayOf(
-            P("filter_world", world),
-            P(AuctionVocationFilter.queryParam, vocation?.value),
-            P("filter_levelrangefrom", minimumLevel),
-            P("filter_levelrangeto", maximumLevel),
-            P(PvpType.bazaarQueryParam, pvpType?.bazaarFilterValue),
-            P(AuctionBattlEyeFilter.queryParam, battlEyeType?.value),
-            P(AuctionSkillFilter.queryParam, skill?.value),
-            P("filter_skillrangefrom", minimumSkillLevel),
-            P("filter_skillrangeto", maximumSkillLevel),
-            P(AuctionOrderBy.queryParam, orderBy?.value),
-            P(AuctionOrderDirection.queryParam, orderDirection?.value),
-            P("searchstring", searchString),
-            P(AuctionSearchType.queryParam, searchType?.value),
-        ) else emptyArray()
+    return if (this != null) arrayOf(
+        P("filter_world", world),
+        P(AuctionVocationFilter.queryParam, vocation?.value),
+        P("filter_levelrangefrom", minimumLevel),
+        P("filter_levelrangeto", maximumLevel),
+        P(PvpType.bazaarQueryParam, pvpType?.bazaarFilterValue),
+        P(AuctionBattlEyeFilter.queryParam, battlEyeType?.value),
+        P(AuctionSkillFilter.queryParam, skill?.value),
+        P("filter_skillrangefrom", minimumSkillLevel),
+        P("filter_skillrangeto", maximumSkillLevel),
+        P(AuctionOrderBy.queryParam, orderBy?.value),
+        P(AuctionOrderDirection.queryParam, orderDirection?.value),
+        P("searchstring", searchString),
+        P(AuctionSearchType.queryParam, searchType?.value),
+    ) else emptyArray()
 }
 
 fun getCMPostArchiveUrl(startDate: LocalDate, endDate: LocalDate, page: Int = 1): String {
@@ -270,10 +262,11 @@ fun getCMPostArchiveUrl(startDate: LocalDate, endDate: LocalDate, page: Int = 1)
         P("endyear", endDate.year),
         P("endmonth", endDate.monthValue),
         P("endday", endDate.dayOfMonth),
-        P("currentpage", page)
-    )
+        P("currentpage", page))
 }
 
-fun getForumPostUrl(postId: Int): String {
-    return buildTibiaUrl("forum", P("action", "thread"), P("postid", postId), anchor = "post$postId")
-}
+fun getForumPostUrl(postId: Int): String =
+    buildTibiaUrl("forum", P("action", "thread"), P("postid", postId), anchor = "post$postId")
+
+fun getLeaderboardUrl(world: String, rotation: Int? = null, page: Int = 1): String =
+    buildTibiaUrl("community", "leaderboards", P("world", world), P("rotation", rotation), P("currentpage", page))
