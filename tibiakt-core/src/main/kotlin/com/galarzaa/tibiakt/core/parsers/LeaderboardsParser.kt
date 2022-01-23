@@ -14,6 +14,7 @@ import com.galarzaa.tibiakt.core.utils.parsePagination
 import com.galarzaa.tibiakt.core.utils.remove
 import com.galarzaa.tibiakt.core.utils.rows
 import org.jsoup.nodes.Element
+import java.time.Instant
 
 object LeaderboardsParser : Parser<Leaderboards?> {
     override fun fromContent(content: String): Leaderboards? {
@@ -26,6 +27,13 @@ object LeaderboardsParser : Parser<Leaderboards?> {
             ?: if ("world" in formData.availableOptions) return null else throw ParsingException("world form parameter not found"))
             .rotation(formData.values["rotation"]?.toInt()
                 ?: throw ParsingException("rotation form parameter not found"))
+
+        if (tables.size == 4) {
+            val lastUpdateString = tables[2].text()
+            val minutes = Regex("""(\d+)""").find(lastUpdateString)?.groups?.get(0)?.value?.toInt()
+                ?: throw ParsingException("unexpected last update text: $lastUpdateString")
+            builder.lastUpdated(Instant.now().minusSeconds(60L * minutes))
+        }
 
         val entriesTable = tables.last()
         parseLeaderboardEntries(entriesTable, builder)

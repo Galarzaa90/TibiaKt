@@ -15,6 +15,7 @@ class LeaderboardsBuilder {
 
     fun rotation(rotation: Int) = apply { this.rotation = rotation }
     fun world(world: String) = apply { this.world = world }
+    fun lastUpdated(lastUpdated: Instant) = apply { this.lastUpdated = lastUpdated }
     fun currentPage(currentPage: Int) = apply { this.currentPage = currentPage }
     fun totalPages(totalPages: Int) = apply { this.totalPages = totalPages }
     fun resultsCount(resultsCount: Int) = apply { this.resultsCount = resultsCount }
