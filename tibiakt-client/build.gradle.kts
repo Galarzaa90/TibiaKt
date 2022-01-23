@@ -1,6 +1,6 @@
 val ktorVersion: String by project
 val kotestVersion: String by project
-val slf4jVersion: String by project
+val kotlinLoggingVersion: String by project
 
 apply("../publish.gradle.kts")
 
@@ -23,7 +23,7 @@ dependencies {
     implementation("io.ktor:ktor-client-java:$ktorVersion")
     implementation("io.ktor:ktor-serialization:$ktorVersion")
 
-    implementation("io.github.microutils:kotlin-logging:1.12.5")
+    implementation("io.github.microutils:kotlin-logging:$kotlinLoggingVersion")
 
     testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
     testImplementation("io.kotest:kotest-assertions-core:$kotestVersion")
