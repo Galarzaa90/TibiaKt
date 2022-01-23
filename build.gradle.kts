@@ -17,6 +17,10 @@ plugins {
 group = "com.galarzaa"
 version = "1.0-SNAPSHOT"
 
+kover {
+    coverageEngine.set(kotlinx.kover.api.CoverageEngine.JACOCO)
+}
+
 
 nexusPublishing {
     repositories {
