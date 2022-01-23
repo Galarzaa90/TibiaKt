@@ -58,13 +58,13 @@ object HighscoresParser : Parser<Highscores?> {
 
     private fun parseHighscoresFilter(formData: FormData, builder: HighscoresBuilder) {
         builder
-            .world(formData.data["world"].nullIfBlank())
-            .category(IntEnum.fromValue(formData.data["category"]?.toInt())
+            .world(formData.values["world"].nullIfBlank())
+            .category(IntEnum.fromValue(formData.values["category"]?.toInt())
                 ?: throw ParsingException("could not find category form value"))
-            .battlEyeType(IntEnum.fromValue(formData.data["beprotection"]?.toInt())
+            .battlEyeType(IntEnum.fromValue(formData.values["beprotection"]?.toInt())
                 ?: throw ParsingException("could not find beprotection form value"))
-            .vocation(IntEnum.fromValue(formData.data["profession"]?.toInt()))
-        for (pvpType in formData.dataMultiple["${PvpType.highscoresQueryParam}[]"].orEmpty()) {
+            .vocation(IntEnum.fromValue(formData.values["profession"]?.toInt()))
+        for (pvpType in formData.valuesMultiple["${PvpType.highscoresQueryParam}[]"].orEmpty()) {
             PvpType.fromHighscoresFilterValue(pvpType.toInt())?.apply { builder.addWorldType(this) }
         }
     }

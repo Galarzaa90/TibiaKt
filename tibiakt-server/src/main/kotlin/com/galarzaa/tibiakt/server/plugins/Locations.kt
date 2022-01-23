@@ -113,3 +113,10 @@ data class GetCMPosts(
     val end: LocalDate? = null,
     val days: Int? = null, val page: Int = 1,
 )
+
+@Location("/leaderboards/{world}")
+data class GetLeaderboards(
+    val world: String,
+    val rotation: Int? = null,
+    val page: Int = 1,
+)

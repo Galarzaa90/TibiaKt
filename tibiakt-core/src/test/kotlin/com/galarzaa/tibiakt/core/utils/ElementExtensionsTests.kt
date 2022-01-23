@@ -10,6 +10,6 @@ class ElementExtensionsTests : StringSpec({
         val content: String = getResource("utils/formWithCheckboxes.txt")
         val formElement = Jsoup.parse(content).selectFirst("form")
         val formData = formElement!!.formData()
-        formData.data["filter_begin_day"] shouldBe "25"
+        formData.values["filter_begin_day"] shouldBe "25"
     }
 })

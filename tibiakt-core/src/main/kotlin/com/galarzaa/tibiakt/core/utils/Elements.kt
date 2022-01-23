@@ -105,15 +105,15 @@ internal fun Element.formData(): FormData {
 
 /**
  * Contains the data extracted from a form.
- * @property data Mapping of form fields to their selected value.
- * @property dataMultiple Mapping of form fields that might have multiple values.
+ * @property values Mapping of form fields to their selected value.
+ * @property valuesMultiple Mapping of form fields that might have multiple values.
  * @property availableOptions Mapping of the available options for selection in the form.
  * @property action Where the form would be submitted to.
  * @property method The HTTP method used
  */
 internal data class FormData(
-    val data: Map<String, String> = emptyMap(),
-    val dataMultiple: Map<String, List<String>> = emptyMap(),
+    val values: Map<String, String> = emptyMap(),
+    val valuesMultiple: Map<String, List<String>> = emptyMap(),
     val availableOptions: Map<String, List<String>> = emptyMap(),
     val action: String? = null,
     val method: String? = null,

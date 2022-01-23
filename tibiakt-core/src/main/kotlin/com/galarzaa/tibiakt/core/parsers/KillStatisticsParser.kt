@@ -24,7 +24,7 @@ object KillStatisticsParser : Parser<KillStatistics> {
             parseKillStatisticsTable(this, builder)
         } ?: throw ParsingException("kill statistics table not found")
         val form = boxContent.selectFirst("form") ?: throw ParsingException("could not find form in value")
-        builder.world(form.formData().data["world"] ?: throw ParsingException("could not find world value in form"))
+        builder.world(form.formData().values["world"] ?: throw ParsingException("could not find world value in form"))
         return builder.build()
     }
 

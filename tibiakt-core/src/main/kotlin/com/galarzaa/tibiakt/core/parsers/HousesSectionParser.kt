@@ -28,12 +28,12 @@ object HousesSectionParser : Parser<HousesSection?> {
             val form = boxContent.selectFirst("div.BoxContent > form")?.formData()
                 ?: throw ParsingException("could not find house form")
             builder
-                .world(form.data["world"] ?: throw ParsingException("could not find world value in form"))
-                .town(form.data["town"] ?: throw ParsingException("could not find town value in form"))
-                .status(StringEnum.fromValue(form.data["state"]))
-                .type(StringEnum.fromValue(form.data["type"])
+                .world(form.values["world"] ?: throw ParsingException("could not find world value in form"))
+                .town(form.values["town"] ?: throw ParsingException("could not find town value in form"))
+                .status(StringEnum.fromValue(form.values["state"]))
+                .type(StringEnum.fromValue(form.values["type"])
                     ?: throw ParsingException("could not find type value in form"))
-                .order(StringEnum.fromValue(form.data["order"]))
+                .order(StringEnum.fromValue(form.values["order"]))
         } ?: throw ParsingException("House Search table not found")
         tables.getContaining("Available")?.apply {
             for (row in rows().offsetStart(1)) {

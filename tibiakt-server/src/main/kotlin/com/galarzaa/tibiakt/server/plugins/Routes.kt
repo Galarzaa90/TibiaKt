@@ -30,10 +30,7 @@ internal fun Application.configureRouting(client: TibiaKtClient) {
             } else if (it.days != null) {
                 call.respond(client.fetchRecentNews(it.days, it.category?.toSet(), it.type?.toSet()))
             } else {
-                call.respond(
-                    HttpStatusCode.BadRequest,
-                    "Query parameters 'start' and 'end', or 'days' are required"
-                )
+                call.respond(HttpStatusCode.BadRequest, "Query parameters 'start' and 'end', or 'days' are required")
             }
         }
         get<GetNews> { (newsId) -> call.respondOrNotFound(client.fetchNews(newsId)) }
@@ -86,20 +83,19 @@ internal fun Application.configureRouting(client: TibiaKtClient) {
             } else if (it.days != null) {
                 call.respond(client.fetchCMPostArchive(it.days, it.page))
             } else {
-                call.respond(
-                    HttpStatusCode.BadRequest,
-                    "Query parameters 'start' and 'end', or 'days' are required"
-                )
+                call.respond(HttpStatusCode.BadRequest, "Query parameters 'start' and 'end', or 'days' are required")
             }
+        }
+
+        get<GetLeaderboards> { it ->
+            call.respondOrNotFound(client.fetchLeaderboards(it.world, null))
         }
     }
 }
 
+
 private suspend inline fun <reified T : Any?> ApplicationCall.respondOrNotFound(body: TibiaResponse<T>) {
-    respond(
-        if (body.data != null) HttpStatusCode.OK else HttpStatusCode.NotFound,
-        body
-    )
+    respond(if (body.data != null) HttpStatusCode.OK else HttpStatusCode.NotFound, body)
 }
 
 

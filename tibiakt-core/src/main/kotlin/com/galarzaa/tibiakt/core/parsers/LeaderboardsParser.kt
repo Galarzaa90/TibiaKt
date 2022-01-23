@@ -15,23 +15,23 @@ import com.galarzaa.tibiakt.core.utils.remove
 import com.galarzaa.tibiakt.core.utils.rows
 import org.jsoup.nodes.Element
 
-object LeaderboardsParser : Parser<Leaderboards> {
-    override fun fromContent(content: String): Leaderboards {
+object LeaderboardsParser : Parser<Leaderboards?> {
+    override fun fromContent(content: String): Leaderboards? {
         val boxContent = boxContent(content)
         val tables = boxContent.select("table.TableContent")
         val builder = LeaderboardsBuilder()
 
-        val data = tables[1].selectFirst("form")?.formData()?.data ?: throw ParsingException("form not found")
-        builder.world(data["world"] ?: throw ParsingException("world form parameter not found"))
-            .rotation(data["rotation"]?.toInt() ?: throw ParsingException("rotation form parameter not found"))
+        val formData = tables[1].selectFirst("form")?.formData() ?: throw ParsingException("form not found")
+        builder.world(formData.values["world"]
+            ?: if ("world" in formData.availableOptions) return null else throw ParsingException("world form parameter not found"))
+            .rotation(formData.values["rotation"]?.toInt()
+                ?: throw ParsingException("rotation form parameter not found"))
 
         val entriesTable = tables.last()
         parseLeaderboardEntries(entriesTable, builder)
 
         val paginationData = boxContent.selectFirst("small")?.parsePagination() ?: PaginationData.default()
-        builder
-            .currentPage(paginationData.currentPage)
-            .resultsCount(paginationData.resultsCount)
+        builder.currentPage(paginationData.currentPage).resultsCount(paginationData.resultsCount)
             .totalPages(paginationData.totalPages)
 
         return builder.build()

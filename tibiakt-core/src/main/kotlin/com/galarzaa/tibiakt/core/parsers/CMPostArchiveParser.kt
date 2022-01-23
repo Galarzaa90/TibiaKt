@@ -41,14 +41,14 @@ object CMPostArchiveParser : Parser<CMPostArchive> {
     private fun parseSearchTable(form: Element, builder: CMPostArchiveBuilder) {
         val formData = form.formData()
         builder.startDate(
-            LocalDate.of(formData.data["startyear"]?.toInt()
+            LocalDate.of(formData.values["startyear"]?.toInt()
                 ?: throw ParsingException("could not find startyear param"),
-                formData.data["startmonth"]?.toInt() ?: throw ParsingException("could not find startmonth param"),
-                formData.data["startday"]?.toInt() ?: throw ParsingException("could not find startday param")))
-            .endDate(LocalDate.of(formData.data["endyear"]?.toInt()
+                formData.values["startmonth"]?.toInt() ?: throw ParsingException("could not find startmonth param"),
+                formData.values["startday"]?.toInt() ?: throw ParsingException("could not find startday param")))
+            .endDate(LocalDate.of(formData.values["endyear"]?.toInt()
                 ?: throw ParsingException("could not find endyear param"),
-                formData.data["endmonth"]?.toInt() ?: throw ParsingException("could not find endmonth param"),
-                formData.data["endday"]?.toInt() ?: throw ParsingException("could not find endday param")))
+                formData.values["endmonth"]?.toInt() ?: throw ParsingException("could not find endmonth param"),
+                formData.values["endday"]?.toInt() ?: throw ParsingException("could not find endday param")))
     }
 
     private fun parsePostList(table: Element, builder: CMPostArchiveBuilder) {

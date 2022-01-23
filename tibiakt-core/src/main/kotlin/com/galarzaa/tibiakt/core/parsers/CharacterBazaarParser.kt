@@ -62,22 +62,22 @@ object CharacterBazaarParser : Parser<CharacterBazaar> {
 
         val filterBuilder = BazaarFiltersBuilder()
         filterBuilder
-            .world(searchData.data["filter_world"])
-            .pvpType(PvpType.fromHighscoresFilterValue(searchData.data[PvpType.bazaarQueryParam]?.toInt()))
-            .battlEyeType(IntEnum.fromValue(searchData.data[AuctionBattlEyeFilter.queryParam]))
-            .vocation(IntEnum.fromValue(searchData.data[AuctionVocationFilter.queryParam]))
-            .skill(IntEnum.fromValue(searchData.data[AuctionSkillFilter.queryParam]))
-            .orderBy(IntEnum.fromValue(searchData.data[AuctionOrderBy.queryParam]))
-            .orderDirection(IntEnum.fromValue(searchData.data[AuctionOrderDirection.queryParam]))
-            .minimumLevel(searchData.data["filter_levelrangefrom"]?.nullIfBlank()?.parseInteger())
-            .maximumLevel(searchData.data["filter_levelrangeto"]?.nullIfBlank()?.parseInteger())
-            .minimumSkillLevel(searchData.data["filter_skillrangefrom"]?.nullIfBlank()?.parseInteger())
-            .maximumSkillLevel(searchData.data["filter_skillrangeto"]?.nullIfBlank()?.parseInteger())
+            .world(searchData.values["filter_world"])
+            .pvpType(PvpType.fromHighscoresFilterValue(searchData.values[PvpType.bazaarQueryParam]?.toInt()))
+            .battlEyeType(IntEnum.fromValue(searchData.values[AuctionBattlEyeFilter.queryParam]))
+            .vocation(IntEnum.fromValue(searchData.values[AuctionVocationFilter.queryParam]))
+            .skill(IntEnum.fromValue(searchData.values[AuctionSkillFilter.queryParam]))
+            .orderBy(IntEnum.fromValue(searchData.values[AuctionOrderBy.queryParam]))
+            .orderDirection(IntEnum.fromValue(searchData.values[AuctionOrderDirection.queryParam]))
+            .minimumLevel(searchData.values["filter_levelrangefrom"]?.nullIfBlank()?.parseInteger())
+            .maximumLevel(searchData.values["filter_levelrangeto"]?.nullIfBlank()?.parseInteger())
+            .minimumSkillLevel(searchData.values["filter_skillrangefrom"]?.nullIfBlank()?.parseInteger())
+            .maximumSkillLevel(searchData.values["filter_skillrangeto"]?.nullIfBlank()?.parseInteger())
 
         if (forms.size > 1) {
             val additionalData = forms[1].formData()
-            filterBuilder.searchString(additionalData.data["searchstring"]?.nullIfBlank())
-                .searchType(IntEnum.fromValue(additionalData.data[AuctionSearchType.queryParam]))
+            filterBuilder.searchString(additionalData.values["searchstring"]?.nullIfBlank())
+                .searchType(IntEnum.fromValue(additionalData.values[AuctionSearchType.queryParam]))
         }
         builder
             .filters(filterBuilder.build())

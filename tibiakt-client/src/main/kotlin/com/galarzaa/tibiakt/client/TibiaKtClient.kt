@@ -290,14 +290,16 @@ open class TibiaKtClient internal constructor(engine: HttpClientEngine) {
     }
 
     /**
-     * Fetches the Tibia Drome leaderboards for a [world]
-     * @param rotation THe rotation number to see. Tibia.com only allows viewing the current and last rotations. Any other value takes you to the current leaderboard.
+     * Fetches the Tibia Drome leaderboards for a [world].
+     *
+     * If the world does not exist, the leaderboards will be null.
+     * @param rotation The rotation number to see. Tibia.com only allows viewing the current and last rotations. Any other value takes you to the current leaderboard.
      */
     suspend fun fetchLeaderboards(
         world: String,
-        rotation: Int?,
+        rotation: Int? = null,
         page: Int = 1,
-    ): TibiaResponse<Leaderboards> {
+    ): TibiaResponse<Leaderboards?> {
         val response = this.request(HttpMethod.Get, getLeaderboardUrl(world, rotation, page))
         return response.parse { LeaderboardsParser.fromContent(it) }
     }

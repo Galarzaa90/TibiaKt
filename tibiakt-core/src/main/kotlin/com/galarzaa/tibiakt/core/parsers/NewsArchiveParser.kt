@@ -63,30 +63,30 @@ object NewsArchiveParser : Parser<NewsArchive> {
         builder
             .startDate(
                 LocalDate.of(
-                    formData.data["filter_begin_year"]?.toInt()
+                    formData.values["filter_begin_year"]?.toInt()
                         ?: throw ParsingException("could not find filter_begin_year in form"),
-                    formData.data["filter_begin_month"]?.toInt()
+                    formData.values["filter_begin_month"]?.toInt()
                         ?: throw ParsingException("could not find filter_begin_month in form"),
-                    formData.data["filter_begin_day"]?.toInt()
+                    formData.values["filter_begin_day"]?.toInt()
                         ?: throw ParsingException("could not find filter_begin_day in form"),
                 )
             )
             .endDate(
                 LocalDate.of(
-                    formData.data["filter_end_year"]?.toInt()
+                    formData.values["filter_end_year"]?.toInt()
                         ?: throw ParsingException("could not find filter_end_year in form"),
-                    formData.data["filter_end_month"]?.toInt()
+                    formData.values["filter_end_month"]?.toInt()
                         ?: throw ParsingException("could not find filter_end_month in form"),
-                    formData.data["filter_end_day"]?.toInt()
+                    formData.values["filter_end_day"]?.toInt()
                         ?: throw ParsingException("could not find filter_end_day in form"),
                 )
             )
         for (value in NewsCategory.values()) {
-            if (!formData.dataMultiple[value.filterName].isNullOrEmpty())
+            if (!formData.valuesMultiple[value.filterName].isNullOrEmpty())
                 builder.addCategory(value)
         }
         for (value in NewsType.values()) {
-            if (!formData.dataMultiple[value.filterName].isNullOrEmpty())
+            if (!formData.valuesMultiple[value.filterName].isNullOrEmpty())
                 builder.addType(value)
         }
     }
