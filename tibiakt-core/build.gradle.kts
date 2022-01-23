@@ -1,3 +1,4 @@
+import java.net.URL
 val kotlinVersion: String by project
 val ktorVersion: String by project
 val kotestVersion: String by project
@@ -36,6 +37,11 @@ tasks.withType<org.jetbrains.dokka.gradle.DokkaTaskPartial>().configureEach {
     dokkaSourceSets {
         configureEach {
             includes.from("Module.md")
+            sourceLink {
+                localDirectory.set(file("src/main/kotlin"))
+                remoteUrl.set(URL("https://github.com/Galarzaa90/TibiaKt/blob/main/tibiakt-core/src/main/kotlin"))
+                remoteLineSuffix.set("#L")
+            }
         }
     }
 }
