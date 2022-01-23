@@ -1,9 +1,7 @@
-name: Dokka Docs
+name: GitHub Pages
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
     branches: [ main ]
 
 jobs:
@@ -19,15 +17,29 @@ jobs:
           java-version: 13
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
+      - name: Cache Gradle packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+          restore-keys: ${{ runner.os }}-gradle
+      - name: Generate Coverage Report 📊
+        if: ${{github.event_name == 'push'}}
+        run: ./gradlew koverMergedHtmlReport
 
-      - name: Generate API documentation
+      - name: Generate API documentation 📃
         if: ${{github.event_name == 'push'}}
         run: ./gradlew dokkaHtmlMultiModule
 
-      - name: Deploy 🚀
+      - name: Organize files 📁
+        run: |
+          mv build/dokka public
+          mv build/kover public/kover
+
+      - name: Deploy to GitHub Pages🚀
         if: ${{github.event_name == 'push'}}
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: build/dokka
+          FOLDER: public

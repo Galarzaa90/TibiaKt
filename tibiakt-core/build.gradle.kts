@@ -18,6 +18,7 @@ tasks.test {
     useJUnitPlatform()
 }
 
+
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion")
     implementation("org.jsoup:jsoup:$jsoupVersion")

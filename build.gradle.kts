@@ -10,15 +10,17 @@ plugins {
     kotlin("plugin.serialization") version "1.6.10"
     id("org.jetbrains.dokka") version "1.6.0"
     id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
-    id("org.jetbrains.kotlinx.kover") version "0.4.4"
+    id("org.jetbrains.kotlinx.kover") version "0.5.0-RC2"
     id("org.sonarqube") version "3.3"
 }
+
+
 
 group = "com.galarzaa"
 version = "1.0-SNAPSHOT"
 
 kover {
-    coverageEngine.set(kotlinx.kover.api.CoverageEngine.JACOCO)
+
 }
 
 
@@ -42,6 +44,13 @@ allprojects {
 tasks.dokkaHtmlMultiModule.configure {
     outputDirectory.set(buildDir.resolve("dokka"))
 }
+
+tasks.koverMergedHtmlReport {
+    isEnabled = true
+    htmlReportDir.set(layout.buildDirectory.dir("kover/"))
+    excludes = listOf("com.galarzaa.tibiakt.server.*")
+}
+
 
 
 sonarqube {
