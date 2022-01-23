@@ -1,0 +1,254 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Guild</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.galarzaa.tibiakt.core.models.guild</a>
+</div>
+
+<h1>Coverage Summary for Class: Guild (com.galarzaa.tibiakt.core.models.guild)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Block, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Guild</td>
+<td class="coverageStat">
+  <span class="percent">
+    12.5%
+  </span>
+  <span class="absValue">
+    (1/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/62)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (14/21)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Guild$$serializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Guild$Companion</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    10%
+  </span>
+  <span class="absValue">
+    (1/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/80)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    60.9%
+  </span>
+  <span class="absValue">
+    (14/23)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;@file:UseSerializers(LocalDateSerializer::class)
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;package com.galarzaa.tibiakt.core.models.guild
+<i class="no-highlight">4</i>&nbsp;
+<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.utils.LocalDateSerializer
+<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.utils.offsetStart
+<i class="no-highlight">7</i>&nbsp;import kotlinx.serialization.Serializable
+<i class="no-highlight">8</i>&nbsp;import kotlinx.serialization.UseSerializers
+<i class="no-highlight">9</i>&nbsp;import java.time.LocalDate
+<i class="no-highlight">10</i>&nbsp;
+<i class="no-highlight">11</i>&nbsp;/**
+<i class="no-highlight">12</i>&nbsp; * A Tibia guild
+<i class="no-highlight">13</i>&nbsp; *
+<i class="no-highlight">14</i>&nbsp; * @property world The world where the guild is in.
+<i class="no-highlight">15</i>&nbsp; * @property logoUrl The URL to the guild&#39;s logo, or the default logo.
+<i class="no-highlight">16</i>&nbsp; * @property description The description of the guild.
+<i class="no-highlight">17</i>&nbsp; * @property foundingDate The date when the guild was founded.
+<i class="no-highlight">18</i>&nbsp; * @property isActive Whether the guild is active or still in formation.
+<i class="no-highlight">19</i>&nbsp; * @property applicationsOpen Whether applications are open or not.
+<i class="no-highlight">20</i>&nbsp; * @property homepage The URL to the guild&#39;s homepage, if set.
+<i class="no-highlight">21</i>&nbsp; * @property guildHall The guildhall rented by the guild.
+<i class="no-highlight">22</i>&nbsp; * @property disbandingDate The date when the guild is set to be disbanded.
+<i class="no-highlight">23</i>&nbsp; * @property disbandingReason The reason why it will be disbanded.
+<i class="no-highlight">24</i>&nbsp; * @property members The list of members in the guild.
+<i class="no-highlight">25</i>&nbsp; * @property invited The list of characters currently invited to the guild.
+<i class="no-highlight">26</i>&nbsp; */
+<b class="pc"><i class="no-highlight">27</i>&nbsp;@Serializable</b>
+<i class="no-highlight">28</i>&nbsp;data class Guild(
+<b class="fc"><i class="no-highlight">29</i>&nbsp;    override val name: String,</b>
+<b class="fc"><i class="no-highlight">30</i>&nbsp;    val world: String,</b>
+<b class="fc"><i class="no-highlight">31</i>&nbsp;    val logoUrl: String,</b>
+<b class="fc"><i class="no-highlight">32</i>&nbsp;    val description: String? = null,</b>
+<b class="fc"><i class="no-highlight">33</i>&nbsp;    val foundingDate: LocalDate,</b>
+<b class="fc"><i class="no-highlight">34</i>&nbsp;    val isActive: Boolean,</b>
+<b class="fc"><i class="no-highlight">35</i>&nbsp;    val applicationsOpen: Boolean,</b>
+<b class="fc"><i class="no-highlight">36</i>&nbsp;    val homepage: String? = null,</b>
+<b class="fc"><i class="no-highlight">37</i>&nbsp;    val guildHall: GuildHall? = null,</b>
+<b class="fc"><i class="no-highlight">38</i>&nbsp;    val disbandingDate: LocalDate? = null,</b>
+<b class="fc"><i class="no-highlight">39</i>&nbsp;    val disbandingReason: String? = null,</b>
+<b class="pc"><i class="no-highlight">40</i>&nbsp;    val members: List&lt;GuildMember&gt; = emptyList(),</b>
+<b class="pc"><i class="no-highlight">41</i>&nbsp;    val invited: List&lt;GuildInvite&gt; = emptyList(),</b>
+<i class="no-highlight">42</i>&nbsp;) : BaseGuild {
+<i class="no-highlight">43</i>&nbsp;    /**
+<i class="no-highlight">44</i>&nbsp;     * A list of the guild ranks.
+<i class="no-highlight">45</i>&nbsp;     */
+<i class="no-highlight">46</i>&nbsp;    val ranks: List&lt;String&gt;
+<b class="nc"><i class="no-highlight">47</i>&nbsp;        get() = members.map { it.rank }.distinct()</b>
+<i class="no-highlight">48</i>&nbsp;
+<i class="no-highlight">49</i>&nbsp;    /** The leader of the guild */
+<i class="no-highlight">50</i>&nbsp;    val leader: GuildMember
+<b class="nc"><i class="no-highlight">51</i>&nbsp;        get() = members.first()</b>
+<i class="no-highlight">52</i>&nbsp;
+<i class="no-highlight">53</i>&nbsp;    /** The vice leaders of the guild */
+<i class="no-highlight">54</i>&nbsp;    val viceLeaders: List&lt;GuildMember&gt;
+<b class="nc"><i class="no-highlight">55</i>&nbsp;        get() = members.offsetStart(1).takeWhile { it.rank == members[1].rank }</b>
+<i class="no-highlight">56</i>&nbsp;
+<i class="no-highlight">57</i>&nbsp;    /** A mapping of the members by their rank */
+<i class="no-highlight">58</i>&nbsp;    val membersByRank: Map&lt;String, List&lt;GuildMember&gt;&gt;
+<b class="nc"><i class="no-highlight">59</i>&nbsp;        get() = members.groupBy { it.rank }</b>
+<i class="no-highlight">60</i>&nbsp;
+<i class="no-highlight">61</i>&nbsp;    /** The number of members in the guild. */
+<i class="no-highlight">62</i>&nbsp;    val memberCount
+<b class="nc"><i class="no-highlight">63</i>&nbsp;        get() = members.size</b>
+<i class="no-highlight">64</i>&nbsp;
+<i class="no-highlight">65</i>&nbsp;    /**
+<i class="no-highlight">66</i>&nbsp;     * The list of members currently online.
+<i class="no-highlight">67</i>&nbsp;     */
+<i class="no-highlight">68</i>&nbsp;    val onlineMembers: List&lt;GuildMember&gt;
+<b class="nc"><i class="no-highlight">69</i>&nbsp;        get() = members.filter { it.isOnline }</b>
+<i class="no-highlight">70</i>&nbsp;
+<i class="no-highlight">71</i>&nbsp;    /**
+<i class="no-highlight">72</i>&nbsp;     * The number of online members in the guild
+<i class="no-highlight">73</i>&nbsp;     */
+<i class="no-highlight">74</i>&nbsp;    val onlineCount
+<b class="nc"><i class="no-highlight">75</i>&nbsp;        get() = onlineMembers.count()</b>
+<i class="no-highlight">76</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-01-23 21:09</div>
+</div>
+</body>
+</html>

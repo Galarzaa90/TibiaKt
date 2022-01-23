@@ -1,0 +1,211 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Leaderboards</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.galarzaa.tibiakt.core.models</a>
+</div>
+
+<h1>Coverage Summary for Class: Leaderboards (com.galarzaa.tibiakt.core.models)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Block, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Leaderboards</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    88.9%
+  </span>
+  <span class="absValue">
+    (8/9)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Leaderboards$$serializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Leaderboards$Companion</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    25%
+  </span>
+  <span class="absValue">
+    (1/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/22)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    72.7%
+  </span>
+  <span class="absValue">
+    (8/11)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;@file:UseSerializers(InstantSerializer::class)
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;package com.galarzaa.tibiakt.core.models
+<i class="no-highlight">4</i>&nbsp;
+<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.utils.InstantSerializer
+<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getLeaderboardUrl
+<i class="no-highlight">7</i>&nbsp;import kotlinx.serialization.Serializable
+<i class="no-highlight">8</i>&nbsp;import kotlinx.serialization.UseSerializers
+<i class="no-highlight">9</i>&nbsp;import java.time.Instant
+<i class="no-highlight">10</i>&nbsp;
+<i class="no-highlight">11</i>&nbsp;/**
+<i class="no-highlight">12</i>&nbsp; * The Tibia Drome leaderboards of a world.
+<i class="no-highlight">13</i>&nbsp; *
+<i class="no-highlight">14</i>&nbsp; * @property world The name of the world.
+<i class="no-highlight">15</i>&nbsp; * @property rotation The number of the rotation.
+<i class="no-highlight">16</i>&nbsp; * @property lastUpdated The time when the leaderboard was last updated. Only available for the current rotation.
+<i class="no-highlight">17</i>&nbsp; */
+<b class="pc"><i class="no-highlight">18</i>&nbsp;@Serializable</b>
+<i class="no-highlight">19</i>&nbsp;data class Leaderboards(
+<b class="fc"><i class="no-highlight">20</i>&nbsp;    val world: String,</b>
+<b class="fc"><i class="no-highlight">21</i>&nbsp;    val rotation: Int,</b>
+<b class="fc"><i class="no-highlight">22</i>&nbsp;    val lastUpdated: Instant?,</b>
+<b class="fc"><i class="no-highlight">23</i>&nbsp;    override val currentPage: Int,</b>
+<b class="fc"><i class="no-highlight">24</i>&nbsp;    override val totalPages: Int,</b>
+<b class="fc"><i class="no-highlight">25</i>&nbsp;    override val resultsCount: Int,</b>
+<b class="pc"><i class="no-highlight">26</i>&nbsp;    override val entries: List&lt;LeaderboardsEntry&gt; = emptyList(),</b>
+<i class="no-highlight">27</i>&nbsp;) : Paginated&lt;LeaderboardsEntry&gt; {
+<i class="no-highlight">28</i>&nbsp;
+<i class="no-highlight">29</i>&nbsp;    /**
+<i class="no-highlight">30</i>&nbsp;     * The URL to these leaderboards.
+<i class="no-highlight">31</i>&nbsp;     */
+<b class="nc"><i class="no-highlight">32</i>&nbsp;    val url get() = getLeaderboardUrl(world, rotation, currentPage)</b>
+<i class="no-highlight">33</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-01-23 21:09</div>
+</div>
+</body>
+</html>

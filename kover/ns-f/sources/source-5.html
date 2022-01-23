@@ -1,0 +1,157 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > CreaturesSectionParser</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.galarzaa.tibiakt.core.parsers</a>
+</div>
+
+<h1>Coverage Summary for Class: CreaturesSectionParser (com.galarzaa.tibiakt.core.parsers)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Block, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CreaturesSectionParser</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    54.2%
+  </span>
+  <span class="absValue">
+    (13/24)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    72.7%
+  </span>
+  <span class="absValue">
+    (16/22)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.parsers
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.builders.CreaturesSectionBuilder
+<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.models.creatures.CreatureEntry
+<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.models.creatures.CreaturesSection
+<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.utils.ParsingException
+<i class="no-highlight">7</i>&nbsp;import com.galarzaa.tibiakt.core.utils.cleanText
+<i class="no-highlight">8</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getLinkInformation
+<i class="no-highlight">9</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseTablesMap
+<i class="no-highlight">10</i>&nbsp;
+<b class="nc"><i class="no-highlight">11</i>&nbsp;object CreaturesSectionParser : Parser&lt;CreaturesSection&gt; {</b>
+<i class="no-highlight">12</i>&nbsp;    override fun fromContent(content: String): CreaturesSection {
+<b class="fc"><i class="no-highlight">13</i>&nbsp;        val boxContent = boxContent(content)</b>
+<b class="fc"><i class="no-highlight">14</i>&nbsp;        val tables = boxContent.parseTablesMap(&quot;table.Table1&quot;)</b>
+<b class="fc"><i class="no-highlight">15</i>&nbsp;        val builder = CreaturesSectionBuilder()</b>
+<b class="pc"><i class="no-highlight">16</i>&nbsp;        tables[&quot;Boosted Creature&quot;]?.let {</b>
+<b class="fc"><i class="no-highlight">17</i>&nbsp;            val boostedCreatureLink =</b>
+<b class="pc"><i class="no-highlight">18</i>&nbsp;                it.selectFirst(&quot;a&quot;)?.getLinkInformation() ?: throw ParsingException(&quot;boosted creature link not found&quot;)</b>
+<b class="fc"><i class="no-highlight">19</i>&nbsp;            builder.boostedCreature(CreatureEntry(name = boostedCreatureLink.title,</b>
+<b class="pc"><i class="no-highlight">20</i>&nbsp;                identifier = boostedCreatureLink.queryParams[&quot;race&quot;]?.get(0)</b>
+<b class="nc"><i class="no-highlight">21</i>&nbsp;                    ?: throw ParsingException(&quot;race not found in boosted creature&#39;s link&quot;)))</b>
+<b class="nc"><i class="no-highlight">22</i>&nbsp;        } ?: throw ParsingException(&quot;Boosted Creature table not found.&quot;)</b>
+<i class="no-highlight">23</i>&nbsp;
+<b class="pc"><i class="no-highlight">24</i>&nbsp;        val entriesTable = boxContent.selectFirst(&quot;div[style*=display: table]&quot;)</b>
+<b class="nc"><i class="no-highlight">25</i>&nbsp;            ?: throw ParsingException(&quot;could not find creatures list container&quot;)</b>
+<b class="fc"><i class="no-highlight">26</i>&nbsp;        val entryContainers = entriesTable.select(&quot;div[style*=float: left]&quot;)</b>
+<b class="fc"><i class="no-highlight">27</i>&nbsp;        for (entryContainer in entryContainers) {</b>
+<b class="pc"><i class="no-highlight">28</i>&nbsp;            val linkInfo = entryContainer.selectFirst(&quot;a&quot;)?.getLinkInformation()</b>
+<b class="nc"><i class="no-highlight">29</i>&nbsp;                ?: throw ParsingException(&quot;creature link not found&quot;)</b>
+<b class="fc"><i class="no-highlight">30</i>&nbsp;            builder.addCreature(CreatureEntry(</b>
+<b class="fc"><i class="no-highlight">31</i>&nbsp;                name = entryContainer.cleanText(),</b>
+<b class="pc"><i class="no-highlight">32</i>&nbsp;                identifier = linkInfo.queryParams[&quot;race&quot;]?.get(0)</b>
+<b class="nc"><i class="no-highlight">33</i>&nbsp;                    ?: throw ParsingException(&quot;race not found in creature&#39;s link&quot;)</b>
+<i class="no-highlight">34</i>&nbsp;            )
+<i class="no-highlight">35</i>&nbsp;            )
+<i class="no-highlight">36</i>&nbsp;        }
+<b class="fc"><i class="no-highlight">37</i>&nbsp;        return builder.build()</b>
+<i class="no-highlight">38</i>&nbsp;    }
+<i class="no-highlight">39</i>&nbsp;
+<i class="no-highlight">40</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-01-23 21:09</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,184 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > GuildBuilder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.galarzaa.tibiakt.core.builders</a>
+</div>
+
+<h1>Coverage Summary for Class: GuildBuilder (com.galarzaa.tibiakt.core.builders)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Block, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GuildBuilder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (14/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (4/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (31/31)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.builders
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.enums.Vocation
+<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.models.guild.Guild
+<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.models.guild.GuildHall
+<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.models.guild.GuildInvite
+<i class="no-highlight">7</i>&nbsp;import com.galarzaa.tibiakt.core.models.guild.GuildMember
+<i class="no-highlight">8</i>&nbsp;import java.time.LocalDate
+<i class="no-highlight">9</i>&nbsp;
+<b class="fc"><i class="no-highlight">10</i>&nbsp;class GuildBuilder {</b>
+<i class="no-highlight">11</i>&nbsp;    private var world: String? = null
+<i class="no-highlight">12</i>&nbsp;    private var name: String? = null
+<i class="no-highlight">13</i>&nbsp;    private var logoUrl: String? = null
+<i class="no-highlight">14</i>&nbsp;    private var description: String? = null
+<i class="no-highlight">15</i>&nbsp;    private var foundingDate: LocalDate? = null
+<i class="no-highlight">16</i>&nbsp;    private var isActive: Boolean = false
+<i class="no-highlight">17</i>&nbsp;    private var applicationsOpen: Boolean = false
+<i class="no-highlight">18</i>&nbsp;    private var homepage: String? = null
+<i class="no-highlight">19</i>&nbsp;    private var guildHall: GuildHall? = null
+<i class="no-highlight">20</i>&nbsp;    private var disbandingDate: LocalDate? = null
+<i class="no-highlight">21</i>&nbsp;    private var disbandingReason: String? = null
+<b class="fc"><i class="no-highlight">22</i>&nbsp;    private val members: MutableList&lt;GuildMember&gt; = mutableListOf()</b>
+<b class="fc"><i class="no-highlight">23</i>&nbsp;    private val invited: MutableList&lt;GuildInvite&gt; = mutableListOf()</b>
+<i class="no-highlight">24</i>&nbsp;
+<b class="fc"><i class="no-highlight">25</i>&nbsp;    fun name(name: String) = apply { this.name = name }</b>
+<b class="fc"><i class="no-highlight">26</i>&nbsp;    fun description(description: String?) = apply { this.description = description }</b>
+<b class="fc"><i class="no-highlight">27</i>&nbsp;    fun logoUrl(logoUrl: String?) = apply { this.logoUrl = logoUrl }</b>
+<b class="fc"><i class="no-highlight">28</i>&nbsp;    fun world(world: String?) = apply { this.world = world }</b>
+<b class="fc"><i class="no-highlight">29</i>&nbsp;    fun isActive(isActive: Boolean) = apply { this.isActive = isActive }</b>
+<b class="fc"><i class="no-highlight">30</i>&nbsp;    fun applicationsOpen(applicationsOpen: Boolean) = apply { this.applicationsOpen = applicationsOpen }</b>
+<b class="fc"><i class="no-highlight">31</i>&nbsp;    fun homepage(homepage: String) = apply { this.homepage = homepage }</b>
+<b class="fc"><i class="no-highlight">32</i>&nbsp;    fun foundingDate(foundingDate: LocalDate) = apply { this.foundingDate = foundingDate }</b>
+<b class="fc"><i class="no-highlight">33</i>&nbsp;    fun disbanding(date: LocalDate, reason: String) = apply { disbandingDate = date; disbandingReason = reason }</b>
+<b class="fc"><i class="no-highlight">34</i>&nbsp;    fun guildHall(name: String, paidUntil: LocalDate) = apply { guildHall = GuildHall(name, paidUntil) }</b>
+<i class="no-highlight">35</i>&nbsp;
+<i class="no-highlight">36</i>&nbsp;    fun addMember(
+<i class="no-highlight">37</i>&nbsp;        rank: String,
+<i class="no-highlight">38</i>&nbsp;        name: String,
+<i class="no-highlight">39</i>&nbsp;        title: String?,
+<i class="no-highlight">40</i>&nbsp;        vocation: Vocation,
+<i class="no-highlight">41</i>&nbsp;        level: Int,
+<i class="no-highlight">42</i>&nbsp;        joiningDate: LocalDate,
+<i class="no-highlight">43</i>&nbsp;        isOnline: Boolean
+<b class="fc"><i class="no-highlight">44</i>&nbsp;    ) = apply {</b>
+<b class="fc"><i class="no-highlight">45</i>&nbsp;        members.add(GuildMember(name, rank, title, level, vocation, joiningDate, isOnline))</b>
+<b class="fc"><i class="no-highlight">46</i>&nbsp;    }</b>
+<i class="no-highlight">47</i>&nbsp;
+<b class="fc"><i class="no-highlight">48</i>&nbsp;    fun addInvite(name: String, inviteDate: LocalDate) = apply { invited.add(GuildInvite(name, inviteDate)) }</b>
+<i class="no-highlight">49</i>&nbsp;
+<i class="no-highlight">50</i>&nbsp;    fun build(): Guild {
+<b class="fc"><i class="no-highlight">51</i>&nbsp;        return Guild(</b>
+<b class="pc"><i class="no-highlight">52</i>&nbsp;            world = world ?: throw IllegalStateException(&quot;world is required&quot;),</b>
+<b class="pc"><i class="no-highlight">53</i>&nbsp;            name = name ?: throw IllegalStateException(&quot;name is required&quot;),</b>
+<b class="pc"><i class="no-highlight">54</i>&nbsp;            logoUrl = logoUrl ?: throw IllegalStateException(&quot;logoUrl is required&quot;),</b>
+<b class="fc"><i class="no-highlight">55</i>&nbsp;            description = description,</b>
+<b class="pc"><i class="no-highlight">56</i>&nbsp;            foundingDate = foundingDate ?: throw IllegalStateException(&quot;name is required&quot;),</b>
+<b class="fc"><i class="no-highlight">57</i>&nbsp;            isActive = isActive,</b>
+<b class="fc"><i class="no-highlight">58</i>&nbsp;            applicationsOpen = applicationsOpen,</b>
+<b class="fc"><i class="no-highlight">59</i>&nbsp;            homepage = homepage,</b>
+<b class="fc"><i class="no-highlight">60</i>&nbsp;            guildHall = guildHall,</b>
+<b class="fc"><i class="no-highlight">61</i>&nbsp;            members = members,</b>
+<b class="fc"><i class="no-highlight">62</i>&nbsp;            invited = invited,</b>
+<b class="fc"><i class="no-highlight">63</i>&nbsp;            disbandingDate = disbandingDate,</b>
+<b class="fc"><i class="no-highlight">64</i>&nbsp;            disbandingReason = disbandingReason,</b>
+<i class="no-highlight">65</i>&nbsp;        )
+<i class="no-highlight">66</i>&nbsp;    }
+<i class="no-highlight">67</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-01-23 21:09</div>
+</div>
+</body>
+</html>

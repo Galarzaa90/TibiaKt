@@ -1,0 +1,227 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Highscores</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.galarzaa.tibiakt.core.models.highscores</a>
+</div>
+
+<h1>Coverage Summary for Class: Highscores (com.galarzaa.tibiakt.core.models.highscores)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Block, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Highscores</td>
+<td class="coverageStat">
+  <span class="percent">
+    20%
+  </span>
+  <span class="absValue">
+    (1/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/22)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    73.3%
+  </span>
+  <span class="absValue">
+    (11/15)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Highscores$$serializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Highscores$Companion</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    14.3%
+  </span>
+  <span class="absValue">
+    (1/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/37)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    64.7%
+  </span>
+  <span class="absValue">
+    (11/17)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;@file:UseSerializers(InstantSerializer::class)
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;package com.galarzaa.tibiakt.core.models.highscores
+<i class="no-highlight">4</i>&nbsp;
+<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HighscoresBattlEyeType
+<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HighscoresCategory
+<i class="no-highlight">7</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HighscoresProfession
+<i class="no-highlight">8</i>&nbsp;import com.galarzaa.tibiakt.core.enums.PvpType
+<i class="no-highlight">9</i>&nbsp;import com.galarzaa.tibiakt.core.models.Paginated
+<i class="no-highlight">10</i>&nbsp;import com.galarzaa.tibiakt.core.utils.InstantSerializer
+<i class="no-highlight">11</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getHighscoresUrl
+<i class="no-highlight">12</i>&nbsp;import kotlinx.serialization.Serializable
+<i class="no-highlight">13</i>&nbsp;import kotlinx.serialization.UseSerializers
+<i class="no-highlight">14</i>&nbsp;import java.time.Instant
+<i class="no-highlight">15</i>&nbsp;
+<i class="no-highlight">16</i>&nbsp;/**
+<i class="no-highlight">17</i>&nbsp; * The Tibia highscores, containing the highest levels of a given [category]
+<i class="no-highlight">18</i>&nbsp; *
+<i class="no-highlight">19</i>&nbsp; * @property world The world the highscores belong to, or null if these are global highscores.
+<i class="no-highlight">20</i>&nbsp; * @property category The displayed highscores category.
+<i class="no-highlight">21</i>&nbsp; * @property vocation The selected vocation filter for the entries.
+<i class="no-highlight">22</i>&nbsp; * @property worldTypes The selected world types to show for global highscores.
+<i class="no-highlight">23</i>&nbsp; * @property battlEyeType The BattlEye type of worlds to show for global highscores.
+<i class="no-highlight">24</i>&nbsp; * @property lastUpdate The time when the currently displayed results were last updated.
+<i class="no-highlight">25</i>&nbsp; */
+<b class="pc"><i class="no-highlight">26</i>&nbsp;@Serializable</b>
+<i class="no-highlight">27</i>&nbsp;data class Highscores(
+<b class="fc"><i class="no-highlight">28</i>&nbsp;    val world: String?,</b>
+<b class="fc"><i class="no-highlight">29</i>&nbsp;    val category: HighscoresCategory,</b>
+<b class="fc"><i class="no-highlight">30</i>&nbsp;    val vocation: HighscoresProfession,</b>
+<b class="pc"><i class="no-highlight">31</i>&nbsp;    val worldTypes: Set&lt;PvpType&gt; = emptySet(),</b>
+<b class="fc"><i class="no-highlight">32</i>&nbsp;    val battlEyeType: HighscoresBattlEyeType,</b>
+<b class="fc"><i class="no-highlight">33</i>&nbsp;    val lastUpdate: Instant,</b>
+<b class="fc"><i class="no-highlight">34</i>&nbsp;    override val currentPage: Int,</b>
+<b class="fc"><i class="no-highlight">35</i>&nbsp;    override val totalPages: Int,</b>
+<b class="fc"><i class="no-highlight">36</i>&nbsp;    override val resultsCount: Int,</b>
+<b class="pc"><i class="no-highlight">37</i>&nbsp;    override val entries: List&lt;HighscoresEntry&gt; = emptyList(),</b>
+<i class="no-highlight">38</i>&nbsp;) : Paginated&lt;HighscoresEntry&gt; {
+<i class="no-highlight">39</i>&nbsp;
+<b class="nc"><i class="no-highlight">40</i>&nbsp;    fun getPageUrl(page: Int) = getHighscoresUrl(world, category, vocation, page, battlEyeType, worldTypes)</b>
+<i class="no-highlight">41</i>&nbsp;
+<b class="nc"><i class="no-highlight">42</i>&nbsp;    val url get() = getPageUrl(currentPage)</b>
+<i class="no-highlight">43</i>&nbsp;
+<i class="no-highlight">44</i>&nbsp;    val nextPageUrl: String?
+<b class="nc"><i class="no-highlight">45</i>&nbsp;        get() = if (currentPage == totalPages) null else getPageUrl(currentPage + 1)</b>
+<i class="no-highlight">46</i>&nbsp;
+<i class="no-highlight">47</i>&nbsp;    val previousPageUrl: String?
+<b class="nc"><i class="no-highlight">48</i>&nbsp;        get() = if (currentPage == 0) null else getPageUrl(currentPage - 1)</b>
+<i class="no-highlight">49</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-01-23 21:09</div>
+</div>
+</body>
+</html>

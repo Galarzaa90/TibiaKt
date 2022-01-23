@@ -1,0 +1,186 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > WorldBuilder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.galarzaa.tibiakt.core.builders</a>
+</div>
+
+<h1>Coverage Summary for Class: WorldBuilder (com.galarzaa.tibiakt.core.builders)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Block, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">WorldBuilder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (16/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (5/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    97.2%
+  </span>
+  <span class="absValue">
+    (35/36)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.builders
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.enums.BattlEyeType
+<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.enums.PvpType
+<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.enums.TransferType
+<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.enums.Vocation
+<i class="no-highlight">7</i>&nbsp;import com.galarzaa.tibiakt.core.models.world.OnlineCharacter
+<i class="no-highlight">8</i>&nbsp;import com.galarzaa.tibiakt.core.models.world.World
+<i class="no-highlight">9</i>&nbsp;import java.time.Instant
+<i class="no-highlight">10</i>&nbsp;import java.time.LocalDate
+<i class="no-highlight">11</i>&nbsp;import java.time.YearMonth
+<i class="no-highlight">12</i>&nbsp;
+<b class="fc"><i class="no-highlight">13</i>&nbsp;class WorldBuilder {</b>
+<i class="no-highlight">14</i>&nbsp;    private var name: String? = null
+<i class="no-highlight">15</i>&nbsp;    private var isOnline: Boolean = false
+<i class="no-highlight">16</i>&nbsp;    private var onlineCount: Int = 0
+<i class="no-highlight">17</i>&nbsp;    private var location: String? = null
+<i class="no-highlight">18</i>&nbsp;    private var pvpType: PvpType? = null
+<b class="fc"><i class="no-highlight">19</i>&nbsp;    private var battlEyeType: BattlEyeType = BattlEyeType.UNPROTECTED</b>
+<i class="no-highlight">20</i>&nbsp;    private var battlEyeStartDate: LocalDate? = null
+<b class="fc"><i class="no-highlight">21</i>&nbsp;    private var transferType: TransferType = TransferType.REGULAR</b>
+<i class="no-highlight">22</i>&nbsp;    private var isPremiumRestricted: Boolean = false
+<i class="no-highlight">23</i>&nbsp;    private var isExperimental: Boolean = false
+<i class="no-highlight">24</i>&nbsp;    private var onlineRecordCount: Int = 0
+<i class="no-highlight">25</i>&nbsp;    private var onlineRecordDateTime: Instant? = null
+<i class="no-highlight">26</i>&nbsp;    private var creationDate: YearMonth? = null
+<b class="fc"><i class="no-highlight">27</i>&nbsp;    private val worldQuests: MutableList&lt;String&gt; = mutableListOf()</b>
+<b class="fc"><i class="no-highlight">28</i>&nbsp;    private val playersOnline: MutableList&lt;OnlineCharacter&gt; = mutableListOf()</b>
+<i class="no-highlight">29</i>&nbsp;
+<b class="fc"><i class="no-highlight">30</i>&nbsp;    fun name(name: String) = apply { this.name = name }</b>
+<b class="fc"><i class="no-highlight">31</i>&nbsp;    fun isOnline(isOnline: Boolean) = apply { this.isOnline = isOnline }</b>
+<b class="fc"><i class="no-highlight">32</i>&nbsp;    fun onlineCount(onlineCount: Int) = apply { this.onlineCount = onlineCount }</b>
+<i class="no-highlight">33</i>&nbsp;    fun onlineRecord(count: Int, dateTime: Instant) =
+<b class="fc"><i class="no-highlight">34</i>&nbsp;        apply { onlineRecordCount = count; onlineRecordDateTime = dateTime }</b>
+<i class="no-highlight">35</i>&nbsp;
+<b class="fc"><i class="no-highlight">36</i>&nbsp;    fun creationDate(creationDate: YearMonth) = apply { this.creationDate = creationDate }</b>
+<b class="fc"><i class="no-highlight">37</i>&nbsp;    fun location(location: String) = apply { this.location = location }</b>
+<b class="fc"><i class="no-highlight">38</i>&nbsp;    fun pvpType(pvpType: PvpType) = apply { this.pvpType = pvpType }</b>
+<b class="fc"><i class="no-highlight">39</i>&nbsp;    fun addWorldQuest(worldQuest: String) = apply { worldQuests.add(worldQuest) }</b>
+<b class="fc"><i class="no-highlight">40</i>&nbsp;    fun battlEyeType(battlEyeType: BattlEyeType) = apply { this.battlEyeType = battlEyeType }</b>
+<b class="fc"><i class="no-highlight">41</i>&nbsp;    fun battlEyeStartDate(battlEyeStartDate: LocalDate?) = apply { this.battlEyeStartDate = battlEyeStartDate }</b>
+<b class="fc"><i class="no-highlight">42</i>&nbsp;    fun transferType(transferType: TransferType) = apply { this.transferType = transferType }</b>
+<i class="no-highlight">43</i>&nbsp;    fun addOnlinePlayer(name: String, level: Int, vocation: Vocation) =
+<b class="fc"><i class="no-highlight">44</i>&nbsp;        apply { playersOnline.add(OnlineCharacter(name, level, vocation)) }</b>
+<i class="no-highlight">45</i>&nbsp;
+<b class="fc"><i class="no-highlight">46</i>&nbsp;    fun experimental(experimental: Boolean) = apply { this.isExperimental = experimental }</b>
+<b class="fc"><i class="no-highlight">47</i>&nbsp;    fun premiumRestricted(premiumRestricted: Boolean) = apply { isPremiumRestricted = premiumRestricted }</b>
+<i class="no-highlight">48</i>&nbsp;
+<i class="no-highlight">49</i>&nbsp;    fun build(): World {
+<b class="fc"><i class="no-highlight">50</i>&nbsp;        return World(</b>
+<b class="pc"><i class="no-highlight">51</i>&nbsp;            name = name ?: throw IllegalStateException(&quot;name is required&quot;),</b>
+<b class="fc"><i class="no-highlight">52</i>&nbsp;            isOnline = isOnline,</b>
+<b class="fc"><i class="no-highlight">53</i>&nbsp;            onlineCount = onlineCount,</b>
+<b class="pc"><i class="no-highlight">54</i>&nbsp;            location = location ?: throw IllegalStateException(&quot;location is required&quot;),</b>
+<b class="pc"><i class="no-highlight">55</i>&nbsp;            pvpType = pvpType ?: throw IllegalStateException(&quot;pvpType is required&quot;),</b>
+<b class="fc"><i class="no-highlight">56</i>&nbsp;            battlEyeType = battlEyeType,</b>
+<b class="fc"><i class="no-highlight">57</i>&nbsp;            battlEyeStartDate = battlEyeStartDate,</b>
+<b class="fc"><i class="no-highlight">58</i>&nbsp;            transferType = transferType,</b>
+<b class="fc"><i class="no-highlight">59</i>&nbsp;            isPremiumRestricted = isPremiumRestricted,</b>
+<b class="fc"><i class="no-highlight">60</i>&nbsp;            onlineRecordCount = onlineRecordCount,</b>
+<b class="pc"><i class="no-highlight">61</i>&nbsp;            onlineRecordDateTime = onlineRecordDateTime</b>
+<b class="nc"><i class="no-highlight">62</i>&nbsp;                ?: throw IllegalStateException(&quot;onlineRecordDateTime is required&quot;),</b>
+<b class="fc"><i class="no-highlight">63</i>&nbsp;            isExperimental = isExperimental,</b>
+<b class="pc"><i class="no-highlight">64</i>&nbsp;            creationDate = creationDate ?: throw IllegalStateException(&quot;creationDate is required&quot;),</b>
+<b class="fc"><i class="no-highlight">65</i>&nbsp;            playersOnline = playersOnline,</b>
+<b class="fc"><i class="no-highlight">66</i>&nbsp;            worldQuests = worldQuests,</b>
+<i class="no-highlight">67</i>&nbsp;        )
+<i class="no-highlight">68</i>&nbsp;    }
+<i class="no-highlight">69</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-01-23 21:09</div>
+</div>
+</body>
+</html>
