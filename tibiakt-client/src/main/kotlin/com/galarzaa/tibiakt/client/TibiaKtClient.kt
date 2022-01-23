@@ -25,6 +25,7 @@ import com.galarzaa.tibiakt.core.models.bazaar.ItemEntry
 import com.galarzaa.tibiakt.core.models.bazaar.MountEntry
 import com.galarzaa.tibiakt.core.models.bazaar.OutfitEntry
 import com.galarzaa.tibiakt.core.models.character.Character
+import com.galarzaa.tibiakt.core.models.creatures.CreaturesSection
 import com.galarzaa.tibiakt.core.models.forums.CMPostArchive
 import com.galarzaa.tibiakt.core.models.guild.Guild
 import com.galarzaa.tibiakt.core.models.guild.GuildsSection
@@ -40,6 +41,7 @@ import com.galarzaa.tibiakt.core.parsers.AuctionParser
 import com.galarzaa.tibiakt.core.parsers.CMPostArchiveParser
 import com.galarzaa.tibiakt.core.parsers.CharacterBazaarParser
 import com.galarzaa.tibiakt.core.parsers.CharacterParser
+import com.galarzaa.tibiakt.core.parsers.CreaturesSectionParser
 import com.galarzaa.tibiakt.core.parsers.EventsScheduleParser
 import com.galarzaa.tibiakt.core.parsers.GuildParser
 import com.galarzaa.tibiakt.core.parsers.GuildsSectionParser
@@ -56,6 +58,7 @@ import com.galarzaa.tibiakt.core.utils.getAuctionUrl
 import com.galarzaa.tibiakt.core.utils.getBazaarUrl
 import com.galarzaa.tibiakt.core.utils.getCMPostArchiveUrl
 import com.galarzaa.tibiakt.core.utils.getCharacterUrl
+import com.galarzaa.tibiakt.core.utils.getCreaturesSectionUrl
 import com.galarzaa.tibiakt.core.utils.getEventsScheduleUrl
 import com.galarzaa.tibiakt.core.utils.getGuildUrl
 import com.galarzaa.tibiakt.core.utils.getHighscoresUrl
@@ -195,6 +198,16 @@ open class TibiaKtClient internal constructor(engine: HttpClientEngine) {
      * Fetch the events schedule for the current month.
      */
     suspend fun fetchEventsSchedule() = fetchEventsSchedule(YearMonth.now())
+
+    // endregion
+
+    // region Library Section
+
+    suspend fun fetchCreaturesSection(): TibiaResponse<CreaturesSection> {
+        val response = this.request(HttpMethod.Get, getCreaturesSectionUrl())
+        return response.parse { CreaturesSectionParser.fromContent(it) }
+    }
+
 
     // endregion
 

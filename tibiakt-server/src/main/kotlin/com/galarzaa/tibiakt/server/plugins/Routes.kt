@@ -90,6 +90,10 @@ internal fun Application.configureRouting(client: TibiaKtClient) {
         get<GetLeaderboards> { it ->
             call.respondOrNotFound(client.fetchLeaderboards(it.world, null))
         }
+
+        get<GetCreaturesSection> {
+            call.respondOrNotFound(client.fetchCreaturesSection())
+        }
     }
 }
 

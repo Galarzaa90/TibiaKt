@@ -120,3 +120,6 @@ data class GetLeaderboards(
     val rotation: Int? = null,
     val page: Int = 1,
 )
+
+@Location("/library/creatures")
+class GetCreaturesSection

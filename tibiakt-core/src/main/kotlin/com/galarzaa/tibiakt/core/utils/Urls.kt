@@ -270,3 +270,7 @@ fun getForumPostUrl(postId: Int): String =
 
 fun getLeaderboardUrl(world: String, rotation: Int? = null, page: Int = 1): String =
     buildTibiaUrl("community", "leaderboards", P("world", world), P("rotation", rotation), P("currentpage", page))
+
+fun getCreaturesSectionUrl() = buildTibiaUrl("library", "creatures")
+
+fun getCreatureUrl(identifier: String) = buildTibiaUrl("library", "creatures", P("race", identifier))
