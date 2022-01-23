@@ -11,6 +11,7 @@ plugins {
     id("org.jetbrains.dokka") version "1.6.0"
     id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
     id("org.jetbrains.kotlinx.kover") version "0.4.4"
+    id("org.sonarqube") version "3.3"
 }
 
 group = "com.galarzaa"
@@ -36,4 +37,14 @@ allprojects {
 
 tasks.dokkaHtmlMultiModule.configure {
     outputDirectory.set(buildDir.resolve("dokka"))
+}
+
+
+sonarqube {
+    properties {
+        property("sonar.projectKey", "Galarzaa90_TibiaKt")
+        property("sonar.organization", "galarzaa90")
+        property("sonar.host.url", "https://sonarcloud.io")
+        property("sonar.coverage.jacoco.xmlReportPaths", "tibiakt-core/build/reports/kover/report.xml")
+    }
 }
