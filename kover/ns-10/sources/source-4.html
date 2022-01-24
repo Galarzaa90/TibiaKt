@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > FormData</title>
+  <title>Coverage Report > CharacterParser</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -17,21 +17,22 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">com.galarzaa.tibiakt.core.utils</a>
+    <a href="../index.html">com.galarzaa.tibiakt.core.parsers</a>
 </div>
 
-<h1>Coverage Summary for Class: FormData (com.galarzaa.tibiakt.core.utils)</h1>
+<h1>Coverage Summary for Class: CharacterParser (com.galarzaa.tibiakt.core.parsers)</h1>
 
 <table class="coverageStats">
+
 <tr>
   <th class="name">Class</th>
 <th class="coverageStat 
 ">
-  Class, %
+  Method, %
 </th>
 <th class="coverageStat 
 ">
-  Method, %
+  Block, %
 </th>
 <th class="coverageStat 
 ">
@@ -39,33 +40,78 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">FormData</td>
+  <td class="name">CharacterParser</td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    92.9%
   </span>
   <span class="absValue">
-    (1/1)
+    (13/14)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    70.5%
   </span>
   <span class="absValue">
-    (1/1)
+    (122/173)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    95%
   </span>
   <span class="absValue">
-    (6/6)
+    (151/159)
   </span>
 </td>
 </tr>
-
+  <tr>
+    <td class="name">CharacterParser$parseCharacterDeaths$1$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    93.3%
+  </span>
+  <span class="absValue">
+    (14/15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    70.5%
+  </span>
+  <span class="absValue">
+    (122/173)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    95%
+  </span>
+  <span class="absValue">
+    (152/160)
+  </span>
+</td>
+</tr>
 </table>
 
 <br/>
@@ -73,212 +119,249 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.utils
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.parsers
 <i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import org.jsoup.Jsoup
-<i class="no-highlight">4</i>&nbsp;import org.jsoup.nodes.Document
-<i class="no-highlight">5</i>&nbsp;import org.jsoup.nodes.Element
-<i class="no-highlight">6</i>&nbsp;import org.jsoup.nodes.TextNode
-<i class="no-highlight">7</i>&nbsp;import org.jsoup.parser.Parser
-<i class="no-highlight">8</i>&nbsp;import org.jsoup.select.Elements
-<i class="no-highlight">9</i>&nbsp;import java.net.URL
-<i class="no-highlight">10</i>&nbsp;
-<i class="no-highlight">11</i>&nbsp;internal fun Element.boxContent(): Element {
-<i class="no-highlight">12</i>&nbsp;    return selectFirst(&quot;div.BoxContent&quot;) ?: throw ParsingException(&quot;BoxContent container not found&quot;)
-<i class="no-highlight">13</i>&nbsp;}
-<i class="no-highlight">14</i>&nbsp;
-<i class="no-highlight">15</i>&nbsp;
-<i class="no-highlight">16</i>&nbsp;internal fun Element.parseTables(contentTableSelector: String = &quot;table.TableContent&quot;): Map&lt;String, Elements&gt; {
-<i class="no-highlight">17</i>&nbsp;    val tables = select(&quot;div.TableContainer&quot;)
-<i class="no-highlight">18</i>&nbsp;    val output = mutableMapOf&lt;String, Elements&gt;()
-<i class="no-highlight">19</i>&nbsp;    for (table: Element in tables) {
-<i class="no-highlight">20</i>&nbsp;        val captionContainer = table.selectFirst(&quot;div.CaptionContainer&quot;)
-<i class="no-highlight">21</i>&nbsp;        val contentTable = table.selectFirst(contentTableSelector)
-<i class="no-highlight">22</i>&nbsp;        val caption = captionContainer?.text() ?: throw ParsingException(&quot;table has no caption container&quot;)
-<i class="no-highlight">23</i>&nbsp;        if (contentTable == null)
-<i class="no-highlight">24</i>&nbsp;            continue
-<i class="no-highlight">25</i>&nbsp;        val rows = contentTable.select(&quot;tr&quot;)
-<i class="no-highlight">26</i>&nbsp;        output[caption] = rows
-<i class="no-highlight">27</i>&nbsp;    }
-<i class="no-highlight">28</i>&nbsp;    return output
-<i class="no-highlight">29</i>&nbsp;}
-<i class="no-highlight">30</i>&nbsp;
-<i class="no-highlight">31</i>&nbsp;internal fun Element.parseTablesMap(contentSelector: String = &quot;div.TableContentContainer&quot;): Map&lt;String, Element&gt; {
-<i class="no-highlight">32</i>&nbsp;    val tables = select(&quot;div.TableContainer&quot;)
-<i class="no-highlight">33</i>&nbsp;    val output = mutableMapOf&lt;String, Element&gt;()
-<i class="no-highlight">34</i>&nbsp;    for (table: Element in tables) {
-<i class="no-highlight">35</i>&nbsp;        val caption: String =
-<i class="no-highlight">36</i>&nbsp;            table.selectFirst(&quot;div.Text&quot;)?.cleanText() ?: throw ParsingException(&quot;table has no caption&quot;)
-<i class="no-highlight">37</i>&nbsp;        val contentTable = table.selectFirst(contentSelector)
-<i class="no-highlight">38</i>&nbsp;        output[caption] = contentTable ?: continue
-<i class="no-highlight">39</i>&nbsp;    }
-<i class="no-highlight">40</i>&nbsp;    return output
-<i class="no-highlight">41</i>&nbsp;}
-<i class="no-highlight">42</i>&nbsp;
-<i class="no-highlight">43</i>&nbsp;/** Get a list of rows in the element. */
-<i class="no-highlight">44</i>&nbsp;internal fun Element?.rows(): Elements = this?.select(&quot;tr&quot;) ?: Elements()
-<i class="no-highlight">45</i>&nbsp;
-<i class="no-highlight">46</i>&nbsp;/** Get a list of cells found in the elmenet. */
-<i class="no-highlight">47</i>&nbsp;internal fun Element?.cells(): Elements = this?.select(&quot;td&quot;) ?: Elements()
-<i class="no-highlight">48</i>&nbsp;
-<i class="no-highlight">49</i>&nbsp;/** Get a list of the text contained in all cells in the element.*/
-<i class="no-highlight">50</i>&nbsp;internal fun Element.cellsText(): List&lt;String&gt; = cells().map { it.cleanText() }
-<i class="no-highlight">51</i>&nbsp;
-<i class="no-highlight">52</i>&nbsp;/** Get the text contained in an element, cleaned out of extraneous characters. */
-<i class="no-highlight">53</i>&nbsp;internal fun Element.cleanText() = text().clean()
-<i class="no-highlight">54</i>&nbsp;
-<i class="no-highlight">55</i>&nbsp;/** Get the text contained in an list of element, cleaned out of extraneous characters. */
-<i class="no-highlight">56</i>&nbsp;internal fun Elements.cleanText() = text().clean()
-<i class="no-highlight">57</i>&nbsp;
-<i class="no-highlight">58</i>&nbsp;/** Get the text contained in an element, cleaned out of extraneous characters. */
-<i class="no-highlight">59</i>&nbsp;internal fun Element.wholeCleanText() = wholeText().clean()
-<i class="no-highlight">60</i>&nbsp;
-<i class="no-highlight">61</i>&nbsp;
-<i class="no-highlight">62</i>&nbsp;/** Replace all br tags in an element with line jumps */
-<i class="no-highlight">63</i>&nbsp;internal fun Element.replaceBrs() = apply {
-<i class="no-highlight">64</i>&nbsp;    select(&quot;br&quot;).forEach { it.replaceWith(TextNode(&quot;\n&quot;)) }
-<i class="no-highlight">65</i>&nbsp;}
-<i class="no-highlight">66</i>&nbsp;
-<i class="no-highlight">67</i>&nbsp;/** Replace all br tags in an array of elements with line jumps */
-<i class="no-highlight">68</i>&nbsp;internal fun ArrayList&lt;Element&gt;.replaceBr() = forEach { it.replaceBrs() }
-<i class="no-highlight">69</i>&nbsp;
-<i class="no-highlight">70</i>&nbsp;/** Get all the field&#39;s values and available options of a form element
-<i class="no-highlight">71</i>&nbsp; * @receiver An element with the form tag.
-<i class="no-highlight">72</i>&nbsp; */
-<i class="no-highlight">73</i>&nbsp;internal fun Element.formData(): FormData {
-<i class="no-highlight">74</i>&nbsp;    if (this.tagName() != &quot;form&quot;)
-<i class="no-highlight">75</i>&nbsp;        throw IllegalArgumentException(&quot;expected element with &#39;form&#39; tag, got element with &#39;${this.tagName()}&#39; tag&quot;)
-<i class="no-highlight">76</i>&nbsp;    val data = mutableMapOf&lt;String, String&gt;()
-<i class="no-highlight">77</i>&nbsp;    val dataMultiple = mutableMapOf&lt;String, MutableList&lt;String&gt;&gt;()
-<i class="no-highlight">78</i>&nbsp;    val availableOptions = mutableMapOf&lt;String, MutableList&lt;String&gt;&gt;()
-<i class="no-highlight">79</i>&nbsp;    select(&quot;input[type=text]&quot;).forEach { data[it.attr(&quot;name&quot;)] = it.attr(&quot;value&quot;) }
-<i class="no-highlight">80</i>&nbsp;    select(&quot;select&quot;).forEach {
-<i class="no-highlight">81</i>&nbsp;        it.select(&quot;option&quot;).forEach { opt -&gt;
-<i class="no-highlight">82</i>&nbsp;            val value = opt.attr(&quot;value&quot;)
-<i class="no-highlight">83</i>&nbsp;            val name = it.attr(&quot;name&quot;)
-<i class="no-highlight">84</i>&nbsp;            availableOptions.getOrPut(name) { mutableListOf() }.add(value)
-<i class="no-highlight">85</i>&nbsp;            if (opt.hasAttr(&quot;selected&quot;))
-<i class="no-highlight">86</i>&nbsp;                data[name] = value
-<i class="no-highlight">87</i>&nbsp;        }
-<i class="no-highlight">88</i>&nbsp;    }
-<i class="no-highlight">89</i>&nbsp;    select(&quot;input[type=checkbox]&quot;).forEach {
-<i class="no-highlight">90</i>&nbsp;        val name = it.attr(&quot;name&quot;)
-<i class="no-highlight">91</i>&nbsp;        val value = it.attr(&quot;value&quot;)
-<i class="no-highlight">92</i>&nbsp;        availableOptions.getOrPut(name) { mutableListOf() }.add(value)
-<i class="no-highlight">93</i>&nbsp;        if (it.hasAttr(&quot;checked&quot;))
-<i class="no-highlight">94</i>&nbsp;            dataMultiple.getOrPut(name) { mutableListOf() }.add(value)
-<i class="no-highlight">95</i>&nbsp;    }
-<i class="no-highlight">96</i>&nbsp;    select(&quot;input[type=radio]&quot;).forEach {
-<i class="no-highlight">97</i>&nbsp;        val name = it.attr(&quot;name&quot;)
-<i class="no-highlight">98</i>&nbsp;        val value = it.attr(&quot;value&quot;)
-<i class="no-highlight">99</i>&nbsp;        availableOptions.getOrPut(name) { mutableListOf() }.add(value)
-<i class="no-highlight">100</i>&nbsp;        if (it.hasAttr(&quot;checked&quot;))
-<i class="no-highlight">101</i>&nbsp;            data[name] = value
-<i class="no-highlight">102</i>&nbsp;    }
-<i class="no-highlight">103</i>&nbsp;    return FormData(data, dataMultiple, availableOptions, action = attr(&quot;action&quot;), method = attr(&quot;method&quot;))
-<i class="no-highlight">104</i>&nbsp;}
-<i class="no-highlight">105</i>&nbsp;
-<i class="no-highlight">106</i>&nbsp;/**
-<i class="no-highlight">107</i>&nbsp; * Contains the data extracted from a form.
-<i class="no-highlight">108</i>&nbsp; * @property values Mapping of form fields to their selected value.
-<i class="no-highlight">109</i>&nbsp; * @property valuesMultiple Mapping of form fields that might have multiple values.
-<i class="no-highlight">110</i>&nbsp; * @property availableOptions Mapping of the available options for selection in the form.
-<i class="no-highlight">111</i>&nbsp; * @property action Where the form would be submitted to.
-<i class="no-highlight">112</i>&nbsp; * @property method The HTTP method used
-<i class="no-highlight">113</i>&nbsp; */
-<b class="fc"><i class="no-highlight">114</i>&nbsp;internal data class FormData(</b>
-<b class="fc"><i class="no-highlight">115</i>&nbsp;    val values: Map&lt;String, String&gt; = emptyMap(),</b>
-<b class="fc"><i class="no-highlight">116</i>&nbsp;    val valuesMultiple: Map&lt;String, List&lt;String&gt;&gt; = emptyMap(),</b>
-<b class="fc"><i class="no-highlight">117</i>&nbsp;    val availableOptions: Map&lt;String, List&lt;String&gt;&gt; = emptyMap(),</b>
-<b class="fc"><i class="no-highlight">118</i>&nbsp;    val action: String? = null,</b>
-<b class="fc"><i class="no-highlight">119</i>&nbsp;    val method: String? = null,</b>
-<i class="no-highlight">120</i>&nbsp;)
-<i class="no-highlight">121</i>&nbsp;
-<i class="no-highlight">122</i>&nbsp;private val pageRegex = Regex(&quot;&quot;&quot;page=(\d+)&quot;&quot;&quot;)
-<i class="no-highlight">123</i>&nbsp;private val resultsRegex = Regex(&quot;&quot;&quot;Results: ([\d,]+)&quot;&quot;&quot;)
-<i class="no-highlight">124</i>&nbsp;
-<i class="no-highlight">125</i>&nbsp;/** Parse the pagination block present in many Tibia.com sections */
-<i class="no-highlight">126</i>&nbsp;internal fun Element.parsePagination(): PaginationData {
-<i class="no-highlight">127</i>&nbsp;    val (pagesDiv, resultsDiv) = select(&quot;small &gt; div&quot;)
-<i class="no-highlight">128</i>&nbsp;    val currentPageLink =
-<i class="no-highlight">129</i>&nbsp;        pagesDiv.selectFirst(&quot;.CurrentPageLink&quot;)
-<i class="no-highlight">130</i>&nbsp;    val pageLinks = pagesDiv.select(&quot;.PageLink&quot;)
-<i class="no-highlight">131</i>&nbsp;    val firstOrLastPages = pagesDiv.select(&quot;.FirstOrLastElement&quot;)
-<i class="no-highlight">132</i>&nbsp;    val totalPages = if (!firstOrLastPages.isEmpty()) {
-<i class="no-highlight">133</i>&nbsp;        val lastPageLink = firstOrLastPages.last()?.selectFirst(&quot;a&quot;)
-<i class="no-highlight">134</i>&nbsp;        if (lastPageLink != null) {
-<i class="no-highlight">135</i>&nbsp;            pageRegex.find(lastPageLink.attr(&quot;href&quot;))?.let {
-<i class="no-highlight">136</i>&nbsp;                it.groups[1]!!.value.toInt()
-<i class="no-highlight">137</i>&nbsp;            } ?: throw ParsingException(&quot;Could not parse pagination info&quot;)
-<i class="no-highlight">138</i>&nbsp;        } else {
-<i class="no-highlight">139</i>&nbsp;            pageLinks[pageLinks.size - 2].text().toInt()
-<i class="no-highlight">140</i>&nbsp;        }
-<i class="no-highlight">141</i>&nbsp;    } else {
-<i class="no-highlight">142</i>&nbsp;        pageLinks.last()?.text()?.toInt() ?: throw ParsingException(&quot;could not find last page link&quot;)
-<i class="no-highlight">143</i>&nbsp;    }
-<i class="no-highlight">144</i>&nbsp;    val page = try {
-<i class="no-highlight">145</i>&nbsp;        currentPageLink?.text()?.toInt() ?: totalPages
-<i class="no-highlight">146</i>&nbsp;    } catch (nfe: NumberFormatException) {
-<i class="no-highlight">147</i>&nbsp;        if (currentPageLink?.text()?.contains(&quot;First&quot;) == true)
-<i class="no-highlight">148</i>&nbsp;            1
-<i class="no-highlight">149</i>&nbsp;        else
-<i class="no-highlight">150</i>&nbsp;            totalPages
-<i class="no-highlight">151</i>&nbsp;    }
-<i class="no-highlight">152</i>&nbsp;    val resultsCount: Int = resultsRegex.find(resultsDiv.text())?.let {
-<i class="no-highlight">153</i>&nbsp;        it.groups[1]!!.value.parseInteger()
-<i class="no-highlight">154</i>&nbsp;    } ?: 0
-<i class="no-highlight">155</i>&nbsp;    return PaginationData(page, totalPages, resultsCount)
-<i class="no-highlight">156</i>&nbsp;}
-<i class="no-highlight">157</i>&nbsp;
-<i class="no-highlight">158</i>&nbsp;/**
-<i class="no-highlight">159</i>&nbsp; * Container for pagination information
-<i class="no-highlight">160</i>&nbsp; */
-<i class="no-highlight">161</i>&nbsp;internal data class PaginationData(val currentPage: Int, val totalPages: Int, val resultsCount: Int) {
-<i class="no-highlight">162</i>&nbsp;    companion object {
-<i class="no-highlight">163</i>&nbsp;        fun default() = PaginationData(1, 1, 0)
-<i class="no-highlight">164</i>&nbsp;    }
-<i class="no-highlight">165</i>&nbsp;}
-<i class="no-highlight">166</i>&nbsp;
-<i class="no-highlight">167</i>&nbsp;internal fun parsePopup(content: String): Pair&lt;String, Document&gt; {
-<i class="no-highlight">168</i>&nbsp;    val parts = content.split(&quot;,&quot;, limit = 3)
-<i class="no-highlight">169</i>&nbsp;    val title = parts[1]
-<i class="no-highlight">170</i>&nbsp;        .replace(&quot;&#39;&quot;, &quot;&quot;)
-<i class="no-highlight">171</i>&nbsp;        .trim()
-<i class="no-highlight">172</i>&nbsp;    val html = parts[parts.size - 1]
-<i class="no-highlight">173</i>&nbsp;        .replace(&quot;\\&#39;&quot;, &quot;\&quot;&quot;)
-<i class="no-highlight">174</i>&nbsp;        .replace(&quot;&#39;&quot;, &quot;&quot;)
-<i class="no-highlight">175</i>&nbsp;        .replace(&quot;,);&quot;, &quot;&quot;)
-<i class="no-highlight">176</i>&nbsp;        .replace(&quot;, );&quot;, &quot;&quot;)
-<i class="no-highlight">177</i>&nbsp;        .trim()
-<i class="no-highlight">178</i>&nbsp;    val parsedHtml = Jsoup.parse(html, &quot;&quot;, Parser.xmlParser())
-<i class="no-highlight">179</i>&nbsp;    return Pair(title, parsedHtml)
-<i class="no-highlight">180</i>&nbsp;}
-<i class="no-highlight">181</i>&nbsp;
-<i class="no-highlight">182</i>&nbsp;private val queryStringRegex = Regex(&quot;([^&amp;=]+)=([^&amp;]*)&quot;)
-<i class="no-highlight">183</i>&nbsp;internal fun Element.getLinkInformation(): LinkInformation? {
-<i class="no-highlight">184</i>&nbsp;    if (this.tagName() != &quot;a&quot;)
-<i class="no-highlight">185</i>&nbsp;        return null
-<i class="no-highlight">186</i>&nbsp;    return LinkInformation(this.text(), this.attr(&quot;href&quot;))
-<i class="no-highlight">187</i>&nbsp;}
-<i class="no-highlight">188</i>&nbsp;
-<i class="no-highlight">189</i>&nbsp;internal data class LinkInformation(val title: String, val targetUrl: URL) {
-<i class="no-highlight">190</i>&nbsp;
-<i class="no-highlight">191</i>&nbsp;    constructor(title: String, targetUrl: String) : this(title, URL(targetUrl))
-<i class="no-highlight">192</i>&nbsp;
-<i class="no-highlight">193</i>&nbsp;    val queryParams
-<i class="no-highlight">194</i>&nbsp;        get() = targetUrl.queryParams()
-<i class="no-highlight">195</i>&nbsp;}
-<i class="no-highlight">196</i>&nbsp;
-<i class="no-highlight">197</i>&nbsp;internal fun URL.queryParams(): HashMap&lt;String, MutableList&lt;String&gt;&gt; {
-<i class="no-highlight">198</i>&nbsp;    val matches = queryStringRegex.findAll(this.query)
-<i class="no-highlight">199</i>&nbsp;    val map: HashMap&lt;String, MutableList&lt;String&gt;&gt; = hashMapOf()
-<i class="no-highlight">200</i>&nbsp;    for (match: MatchResult in matches) {
-<i class="no-highlight">201</i>&nbsp;        val (_, name, value) = match.groupValues
-<i class="no-highlight">202</i>&nbsp;        map.getOrPut(name) { mutableListOf() }.add(value)
-<i class="no-highlight">203</i>&nbsp;    }
-<i class="no-highlight">204</i>&nbsp;    return map
-<i class="no-highlight">205</i>&nbsp;
-<i class="no-highlight">206</i>&nbsp;}
+<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.builders.CharacterBuilder
+<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.enums.StringEnum
+<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
+<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.models.character.Character
+<i class="no-highlight">7</i>&nbsp;import com.galarzaa.tibiakt.core.models.character.Killer
+<i class="no-highlight">8</i>&nbsp;import com.galarzaa.tibiakt.core.utils.clean
+<i class="no-highlight">9</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getLinkInformation
+<i class="no-highlight">10</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parsePopup
+<i class="no-highlight">11</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseTables
+<i class="no-highlight">12</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseTibiaDate
+<i class="no-highlight">13</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseTibiaDateTime
+<i class="no-highlight">14</i>&nbsp;import com.galarzaa.tibiakt.core.utils.remove
+<i class="no-highlight">15</i>&nbsp;import com.galarzaa.tibiakt.core.utils.splitList
+<i class="no-highlight">16</i>&nbsp;import org.jsoup.Jsoup
+<i class="no-highlight">17</i>&nbsp;import org.jsoup.nodes.Document
+<i class="no-highlight">18</i>&nbsp;import org.jsoup.nodes.Element
+<i class="no-highlight">19</i>&nbsp;import org.jsoup.select.Elements
+<i class="no-highlight">20</i>&nbsp;import java.time.Instant
+<i class="no-highlight">21</i>&nbsp;
+<i class="no-highlight">22</i>&nbsp;
+<b class="nc"><i class="no-highlight">23</i>&nbsp;object CharacterParser : Parser&lt;Character?&gt; {</b>
+<b class="fc"><i class="no-highlight">24</i>&nbsp;    private val deletedRegexp = Regex(&quot;&quot;&quot;([^,]+), will be deleted at (.*)&quot;&quot;&quot;)</b>
+<b class="fc"><i class="no-highlight">25</i>&nbsp;    private val titlesRegexp = Regex(&quot;&quot;&quot;(.*)\((\d+) titles? unlocked\)&quot;&quot;&quot;)</b>
+<b class="fc"><i class="no-highlight">26</i>&nbsp;    private val houseRegexp = Regex(&quot;&quot;&quot;\(([^)]+)\) is paid until (.*)&quot;&quot;&quot;)</b>
+<b class="fc"><i class="no-highlight">27</i>&nbsp;    private val deathsRegex = Regex(&quot;&quot;&quot;Level (\d+) by (.*)\.&lt;/td&gt;&quot;&quot;&quot;)</b>
+<b class="fc"><i class="no-highlight">28</i>&nbsp;    private val deathAssistsRegex = Regex(&quot;&quot;&quot;(?:(?&lt;killers&gt;.+)\.&lt;br\s?/&gt;)?Assisted by (?&lt;assists&gt;.+)&quot;&quot;&quot;)</b>
+<b class="fc"><i class="no-highlight">29</i>&nbsp;    private val linkSearch = Regex(&quot;&quot;&quot;&lt;a[^&gt;]+&gt;[^&lt;]+&lt;/a&gt;&quot;&quot;&quot;)</b>
+<b class="fc"><i class="no-highlight">30</i>&nbsp;    private val linkContent = Regex(&quot;&quot;&quot;&gt;([^&lt;]+)&lt;&quot;&quot;&quot;)</b>
+<b class="fc"><i class="no-highlight">31</i>&nbsp;    private val deathSummon = Regex(&quot;&quot;&quot;(?&lt;summon&gt;an? .+) of (?&lt;name&gt;.*)&quot;&quot;&quot;)</b>
+<i class="no-highlight">32</i>&nbsp;    private const val tradedLabel = &quot;(traded)&quot;
+<i class="no-highlight">33</i>&nbsp;
+<i class="no-highlight">34</i>&nbsp;    override fun fromContent(content: String): Character? {
+<b class="fc"><i class="no-highlight">35</i>&nbsp;        val document: Document = Jsoup.parse(content, &quot;&quot;, org.jsoup.parser.Parser.xmlParser())</b>
+<b class="fc"><i class="no-highlight">36</i>&nbsp;        val boxContent =</b>
+<b class="pc"><i class="no-highlight">37</i>&nbsp;            document.selectFirst(&quot;div.BoxContent&quot;) ?: throw ParsingException(&quot;BoxContent container not found&quot;)</b>
+<b class="fc"><i class="no-highlight">38</i>&nbsp;        val tables = boxContent.parseTables()</b>
+<b class="pc"><i class="no-highlight">39</i>&nbsp;        if (tables.keys.any { it.startsWith(&quot;Could not find character&quot;) })</b>
+<b class="nc"><i class="no-highlight">40</i>&nbsp;            return null</b>
+<b class="fc"><i class="no-highlight">41</i>&nbsp;        val builder = CharacterBuilder()</b>
+<b class="fc"><i class="no-highlight">42</i>&nbsp;        parseCharacterInformation(tables[&quot;Character Information&quot;] ?: return null, builder)</b>
+<b class="fc"><i class="no-highlight">43</i>&nbsp;        tables[&quot;Account Badges&quot;]?.apply { parseAccountBadges(this, builder) }</b>
+<b class="pc"><i class="no-highlight">44</i>&nbsp;        tables[&quot;Account Achievements&quot;]?.apply { parseAccountAchievements(this, builder) }</b>
+<b class="fc"><i class="no-highlight">45</i>&nbsp;        tables[&quot;Account Information&quot;]?.apply { parseAccountInformation(this, builder) }</b>
+<b class="fc"><i class="no-highlight">46</i>&nbsp;        tables[&quot;Character Deaths&quot;]?.apply { parseCharacterDeaths(this, builder) }</b>
+<b class="fc"><i class="no-highlight">47</i>&nbsp;        tables[&quot;Characters&quot;]?.apply { parseCharacters(this, builder) }</b>
+<b class="fc"><i class="no-highlight">48</i>&nbsp;        return builder.build()</b>
+<i class="no-highlight">49</i>&nbsp;    }
+<i class="no-highlight">50</i>&nbsp;
+<i class="no-highlight">51</i>&nbsp;    private fun parseCharacterInformation(rows: Elements, charBuilder: CharacterBuilder): CharacterBuilder {
+<b class="fc"><i class="no-highlight">52</i>&nbsp;        for (row: Element in rows) {</b>
+<b class="fc"><i class="no-highlight">53</i>&nbsp;            val columns = row.select(&quot;td&quot;)</b>
+<b class="fc"><i class="no-highlight">54</i>&nbsp;            var (field, value) = columns.map { it.wholeText().clean() }</b>
+<b class="fc"><i class="no-highlight">55</i>&nbsp;            field = field.replace(&quot; &quot;, &quot;_&quot;).remove(&quot;:&quot;).lowercase()</b>
+<b class="pc"><i class="no-highlight">56</i>&nbsp;            when (field) {</b>
+<b class="fc"><i class="no-highlight">57</i>&nbsp;                &quot;name&quot; -&gt; parseNameField(charBuilder, value)</b>
+<b class="fc"><i class="no-highlight">58</i>&nbsp;                &quot;title&quot; -&gt; parseTitles(charBuilder, value)</b>
+<b class="fc"><i class="no-highlight">59</i>&nbsp;                &quot;former_names&quot; -&gt; charBuilder.formerNames(value.split(&quot;,&quot;).map { it.trim() })</b>
+<b class="fc"><i class="no-highlight">60</i>&nbsp;                &quot;former_world&quot; -&gt; charBuilder.formerWorld(value)</b>
+<b class="fc"><i class="no-highlight">61</i>&nbsp;                &quot;sex&quot; -&gt; charBuilder.sex(StringEnum.fromValue(value)!!)</b>
+<b class="fc"><i class="no-highlight">62</i>&nbsp;                &quot;vocation&quot; -&gt; charBuilder.vocation(</b>
+<b class="pc"><i class="no-highlight">63</i>&nbsp;                    StringEnum.fromValue(value) ?: throw ParsingException(&quot;Unknown vocation: $value&quot;)</b>
+<i class="no-highlight">64</i>&nbsp;                )
+<b class="fc"><i class="no-highlight">65</i>&nbsp;                &quot;level&quot; -&gt; charBuilder.level(value.toInt())</b>
+<b class="fc"><i class="no-highlight">66</i>&nbsp;                &quot;achievement_points&quot; -&gt; charBuilder.achievementPoints(value.toInt())</b>
+<b class="fc"><i class="no-highlight">67</i>&nbsp;                &quot;world&quot; -&gt; charBuilder.world(value)</b>
+<b class="fc"><i class="no-highlight">68</i>&nbsp;                &quot;residence&quot; -&gt; charBuilder.residence(value)</b>
+<i class="no-highlight">69</i>&nbsp;                &quot;last_login&quot; -&gt; {
+<b class="pc"><i class="no-highlight">70</i>&nbsp;                    if (!value.contains(&quot;never logged&quot;, true)) {</b>
+<b class="fc"><i class="no-highlight">71</i>&nbsp;                        charBuilder.lastLogin(parseTibiaDateTime(value))</b>
+<i class="no-highlight">72</i>&nbsp;                    }
+<i class="no-highlight">73</i>&nbsp;                }
+<b class="fc"><i class="no-highlight">74</i>&nbsp;                &quot;position&quot; -&gt; charBuilder.position(value)</b>
+<b class="fc"><i class="no-highlight">75</i>&nbsp;                &quot;comment&quot; -&gt; charBuilder.comment(value)</b>
+<b class="pc"><i class="no-highlight">76</i>&nbsp;                &quot;account_status&quot; -&gt; charBuilder.accountStatus(StringEnum.fromValue(value)</b>
+<b class="nc"><i class="no-highlight">77</i>&nbsp;                    ?: throw ParsingException(&quot;Unknown account status: $value&quot;))</b>
+<b class="fc"><i class="no-highlight">78</i>&nbsp;                &quot;married_to&quot; -&gt; charBuilder.marriedTo(value)</b>
+<b class="fc"><i class="no-highlight">79</i>&nbsp;                &quot;house&quot; -&gt; parseHouseColumn(charBuilder, columns[1])</b>
+<b class="fc"><i class="no-highlight">80</i>&nbsp;                &quot;guild_membership&quot; -&gt; parseGuildColumn(charBuilder, columns[1])</b>
+<i class="no-highlight">81</i>&nbsp;            }
+<i class="no-highlight">82</i>&nbsp;        }
+<b class="fc"><i class="no-highlight">83</i>&nbsp;        return charBuilder</b>
+<i class="no-highlight">84</i>&nbsp;    }
+<i class="no-highlight">85</i>&nbsp;
+<i class="no-highlight">86</i>&nbsp;    private fun parseGuildColumn(charBuilder: CharacterBuilder, valueColumn: Element) {
+<b class="pc"><i class="no-highlight">87</i>&nbsp;        val guildName = valueColumn.selectFirst(&quot;a&quot;)?.text() ?: return</b>
+<b class="fc"><i class="no-highlight">88</i>&nbsp;        val rankName = valueColumn.text().split(&quot;of the&quot;).first().trim()</b>
+<b class="fc"><i class="no-highlight">89</i>&nbsp;        charBuilder.guild(rankName, guildName)</b>
+<i class="no-highlight">90</i>&nbsp;    }
+<i class="no-highlight">91</i>&nbsp;
+<i class="no-highlight">92</i>&nbsp;    private fun parseHouseColumn(charBuilder: CharacterBuilder, valueColumn: Element) {
+<b class="pc"><i class="no-highlight">93</i>&nbsp;        val match = houseRegexp.find(valueColumn.ownText()) ?: return</b>
+<b class="fc"><i class="no-highlight">94</i>&nbsp;        val (_, town, paidUntilStr) = match.groupValues</b>
+<b class="pc"><i class="no-highlight">95</i>&nbsp;        val link = valueColumn.selectFirst(&quot;a&quot;)?.getLinkInformation() ?: return</b>
+<b class="fc"><i class="no-highlight">96</i>&nbsp;        charBuilder.addHouse(</b>
+<b class="fc"><i class="no-highlight">97</i>&nbsp;            link.title,</b>
+<b class="pc"><i class="no-highlight">98</i>&nbsp;            link.queryParams[&quot;houseid&quot;]?.first()?.toInt() ?: return,</b>
+<b class="fc"><i class="no-highlight">99</i>&nbsp;            town,</b>
+<b class="fc"><i class="no-highlight">100</i>&nbsp;            parseTibiaDate(paidUntilStr),</b>
+<b class="pc"><i class="no-highlight">101</i>&nbsp;            world = link.queryParams[&quot;world&quot;]?.first() ?: return</b>
+<i class="no-highlight">102</i>&nbsp;        )
+<i class="no-highlight">103</i>&nbsp;    }
+<i class="no-highlight">104</i>&nbsp;
+<i class="no-highlight">105</i>&nbsp;    private fun parseTitles(charBuilder: CharacterBuilder, value: String) {
+<b class="pc"><i class="no-highlight">106</i>&nbsp;        val match = titlesRegexp.find(value) ?: return</b>
+<b class="fc"><i class="no-highlight">107</i>&nbsp;        val (_, currentTitle, unlockedTitles) = match.groupValues</b>
+<b class="fc"><i class="no-highlight">108</i>&nbsp;        charBuilder.titles(</b>
+<b class="fc"><i class="no-highlight">109</i>&nbsp;            if (currentTitle.contains(&quot;none&quot;, true)) null else currentTitle.trim(),</b>
+<b class="fc"><i class="no-highlight">110</i>&nbsp;            unlockedTitles.toInt()</b>
+<i class="no-highlight">111</i>&nbsp;        )
+<i class="no-highlight">112</i>&nbsp;    }
+<i class="no-highlight">113</i>&nbsp;
+<i class="no-highlight">114</i>&nbsp;    private fun parseNameField(charBuilder: CharacterBuilder, value: String) {
+<b class="fc"><i class="no-highlight">115</i>&nbsp;        val match = deletedRegexp.matchEntire(value)</b>
+<b class="fc"><i class="no-highlight">116</i>&nbsp;        var name = if (match != null) {</b>
+<b class="fc"><i class="no-highlight">117</i>&nbsp;            val (_, cleanName, deletionDateStr) = match.groupValues</b>
+<b class="fc"><i class="no-highlight">118</i>&nbsp;            charBuilder.deletionDate(parseTibiaDateTime(deletionDateStr))</b>
+<b class="fc"><i class="no-highlight">119</i>&nbsp;            cleanName</b>
+<i class="no-highlight">120</i>&nbsp;        } else {
+<b class="fc"><i class="no-highlight">121</i>&nbsp;            value</b>
+<i class="no-highlight">122</i>&nbsp;        }
+<b class="pc"><i class="no-highlight">123</i>&nbsp;        if (name.contains(tradedLabel)) {</b>
+<b class="nc"><i class="no-highlight">124</i>&nbsp;            charBuilder.recentlyTraded(true)</b>
+<b class="nc"><i class="no-highlight">125</i>&nbsp;            name = name.remove(tradedLabel).trim()</b>
+<i class="no-highlight">126</i>&nbsp;        }
+<b class="fc"><i class="no-highlight">127</i>&nbsp;        charBuilder.name(name)</b>
+<i class="no-highlight">128</i>&nbsp;    }
+<i class="no-highlight">129</i>&nbsp;
+<i class="no-highlight">130</i>&nbsp;    private fun parseAccountBadges(rows: Elements, builder: CharacterBuilder) {
+<b class="fc"><i class="no-highlight">131</i>&nbsp;        val row = rows[0]</b>
+<b class="fc"><i class="no-highlight">132</i>&nbsp;        for (column: Element in row.select(&quot;td&quot;)) {</b>
+<b class="pc"><i class="no-highlight">133</i>&nbsp;            val popupSpan = column.select(&quot;span.HelperDivIndicator&quot;) ?: return</b>
+<b class="fc"><i class="no-highlight">134</i>&nbsp;            val (title: String, popupContent: Document) = parsePopup(popupSpan.attr(&quot;onmouseover&quot;))</b>
+<b class="fc"><i class="no-highlight">135</i>&nbsp;            val description = popupContent.text()</b>
+<b class="pc"><i class="no-highlight">136</i>&nbsp;            val imageUrl = column.selectFirst(&quot;img&quot;)?.attr(&quot;src&quot;)</b>
+<b class="pc"><i class="no-highlight">137</i>&nbsp;            builder.addBadge(title, description, imageUrl ?: continue)</b>
+<i class="no-highlight">138</i>&nbsp;        }
+<i class="no-highlight">139</i>&nbsp;    }
+<i class="no-highlight">140</i>&nbsp;
+<i class="no-highlight">141</i>&nbsp;    private fun parseAccountAchievements(rows: Elements, builder: CharacterBuilder) {
+<b class="fc"><i class="no-highlight">142</i>&nbsp;        for (row: Element in rows) {</b>
+<b class="fc"><i class="no-highlight">143</i>&nbsp;            val columns = row.select(&quot;td&quot;)</b>
+<b class="fc"><i class="no-highlight">144</i>&nbsp;            if (columns.size != 2)</b>
+<b class="fc"><i class="no-highlight">145</i>&nbsp;                continue</b>
+<b class="fc"><i class="no-highlight">146</i>&nbsp;            val (gradeColumn, nameColumn) = columns</b>
+<b class="fc"><i class="no-highlight">147</i>&nbsp;            val grade = gradeColumn.select(&quot;img&quot;).size</b>
+<b class="fc"><i class="no-highlight">148</i>&nbsp;            val name = nameColumn.text()</b>
+<b class="fc"><i class="no-highlight">149</i>&nbsp;            val secret = nameColumn.selectFirst(&quot;img&quot;) != null</b>
+<b class="fc"><i class="no-highlight">150</i>&nbsp;            builder.addAchievement(name, grade, secret)</b>
+<i class="no-highlight">151</i>&nbsp;        }
+<i class="no-highlight">152</i>&nbsp;    }
+<i class="no-highlight">153</i>&nbsp;
+<i class="no-highlight">154</i>&nbsp;    private fun parseAccountInformation(rows: Elements, builder: CharacterBuilder) {
+<b class="fc"><i class="no-highlight">155</i>&nbsp;        val valueMap = mutableMapOf&lt;String, String&gt;()</b>
+<b class="fc"><i class="no-highlight">156</i>&nbsp;        for (row: Element in rows) {</b>
+<b class="fc"><i class="no-highlight">157</i>&nbsp;            val columns = row.select(&quot;td&quot;)</b>
+<b class="fc"><i class="no-highlight">158</i>&nbsp;            var (field, value) = columns.map { it.wholeText().clean() }</b>
+<b class="fc"><i class="no-highlight">159</i>&nbsp;            field = field.replace(&quot; &quot;, &quot;_&quot;).remove(&quot;:&quot;).lowercase()</b>
+<b class="fc"><i class="no-highlight">160</i>&nbsp;            when (field) {</b>
+<b class="fc"><i class="no-highlight">161</i>&nbsp;                &quot;position&quot; -&gt; {</b>
+<b class="fc"><i class="no-highlight">162</i>&nbsp;                    if (value.contains(&quot;tutor&quot;, true)) {</b>
+<b class="fc"><i class="no-highlight">163</i>&nbsp;                        valueMap[&quot;stars&quot;] = columns[1].select(&quot;img&quot;).size.toString()</b>
+<i class="no-highlight">164</i>&nbsp;                    }
+<b class="fc"><i class="no-highlight">165</i>&nbsp;                    valueMap[field] = value</b>
+<i class="no-highlight">166</i>&nbsp;                }
+<b class="fc"><i class="no-highlight">167</i>&nbsp;                else -&gt; valueMap[field] = value</b>
+<i class="no-highlight">168</i>&nbsp;            }
+<i class="no-highlight">169</i>&nbsp;        }
+<b class="fc"><i class="no-highlight">170</i>&nbsp;        builder.accountInformation(</b>
+<b class="pc"><i class="no-highlight">171</i>&nbsp;            created = parseTibiaDateTime(valueMap[&quot;created&quot;] ?: return),</b>
+<b class="fc"><i class="no-highlight">172</i>&nbsp;            loyaltyTitle = valueMap[&quot;loyalty_title&quot;],</b>
+<b class="fc"><i class="no-highlight">173</i>&nbsp;            position = valueMap[&quot;position&quot;],</b>
+<b class="fc"><i class="no-highlight">174</i>&nbsp;            tutorStars = valueMap[&quot;stars&quot;]?.toInt()</b>
+<i class="no-highlight">175</i>&nbsp;        )
+<i class="no-highlight">176</i>&nbsp;    }
+<i class="no-highlight">177</i>&nbsp;
+<i class="no-highlight">178</i>&nbsp;    private fun parseCharacterDeaths(rows: Elements, builder: CharacterBuilder) {
+<b class="fc"><i class="no-highlight">179</i>&nbsp;        for (row: Element in rows) {</b>
+<b class="fc"><i class="no-highlight">180</i>&nbsp;            val columns = row.select(&quot;td&quot;)</b>
+<b class="pc"><i class="no-highlight">181</i>&nbsp;            if (columns.size != 2)</b>
+<b class="nc"><i class="no-highlight">182</i>&nbsp;                continue</b>
+<b class="fc"><i class="no-highlight">183</i>&nbsp;            val (dateColumn, descriptionColumn) = columns</b>
+<b class="fc"><i class="no-highlight">184</i>&nbsp;            val deathDateTime: Instant = parseTibiaDateTime(dateColumn.text())</b>
+<b class="fc"><i class="no-highlight">185</i>&nbsp;            val deathMatch = deathsRegex.find(descriptionColumn.toString())</b>
+<b class="fc"><i class="no-highlight">186</i>&nbsp;            var (_, levelStr, killersDesc) = deathMatch?.groupValues ?: Triple(&quot;&quot;,</b>
+<b class="fc"><i class="no-highlight">187</i>&nbsp;                &quot;0&quot;,</b>
+<b class="fc"><i class="no-highlight">188</i>&nbsp;                descriptionColumn.toString()).toList()</b>
+<b class="fc"><i class="no-highlight">189</i>&nbsp;            var assistNameList: List&lt;String&gt; = mutableListOf()</b>
+<b class="fc"><i class="no-highlight">190</i>&nbsp;            deathAssistsRegex.find(killersDesc)?.apply {</b>
+<b class="pc"><i class="no-highlight">191</i>&nbsp;                killersDesc = this.groups[&quot;killers&quot;]?.value ?: &quot;&quot;</b>
+<b class="pc"><i class="no-highlight">192</i>&nbsp;                val assistsDec = this.groups[&quot;assists&quot;]?.value ?: return</b>
+<b class="fc"><i class="no-highlight">193</i>&nbsp;                assistNameList = linkSearch.findAll(assistsDec).map { it.value }.toList()</b>
+<b class="fc"><i class="no-highlight">194</i>&nbsp;            }</b>
+<b class="fc"><i class="no-highlight">195</i>&nbsp;            val killerNameList = killersDesc.splitList()</b>
+<b class="pc"><i class="no-highlight">196</i>&nbsp;            val killerList = killerNameList.mapNotNull { parseKiller(it) }</b>
+<b class="pc"><i class="no-highlight">197</i>&nbsp;            val assistsList = assistNameList.mapNotNull { parseKiller(it) }</b>
+<b class="fc"><i class="no-highlight">198</i>&nbsp;            builder.addDeath(deathDateTime, levelStr.toInt(), killerList, assistsList)</b>
+<i class="no-highlight">199</i>&nbsp;        }
+<i class="no-highlight">200</i>&nbsp;    }
+<i class="no-highlight">201</i>&nbsp;
+<i class="no-highlight">202</i>&nbsp;    private fun parseKiller(killerHtml: String): Killer? {
+<b class="fc"><i class="no-highlight">203</i>&nbsp;        var name: String = killerHtml</b>
+<b class="fc"><i class="no-highlight">204</i>&nbsp;        var player = false</b>
+<b class="fc"><i class="no-highlight">205</i>&nbsp;        var traded = false</b>
+<b class="fc"><i class="no-highlight">206</i>&nbsp;        var summon: String? = null</b>
+<b class="fc"><i class="no-highlight">207</i>&nbsp;        if (killerHtml.contains(tradedLabel)) {</b>
+<b class="fc"><i class="no-highlight">208</i>&nbsp;            name = killerHtml.clean().remove(tradedLabel).trim()</b>
+<b class="fc"><i class="no-highlight">209</i>&nbsp;            traded = true</b>
+<b class="fc"><i class="no-highlight">210</i>&nbsp;            player = true</b>
+<i class="no-highlight">211</i>&nbsp;        }
+<b class="fc"><i class="no-highlight">212</i>&nbsp;        if (killerHtml.contains(&quot;href&quot;)) {</b>
+<b class="pc"><i class="no-highlight">213</i>&nbsp;            name = linkContent.find(killerHtml)?.groups?.get(1)?.value ?: return null</b>
+<b class="fc"><i class="no-highlight">214</i>&nbsp;            player = true</b>
+<i class="no-highlight">215</i>&nbsp;        }
+<b class="fc"><i class="no-highlight">216</i>&nbsp;        deathSummon.find(name)?.apply {</b>
+<b class="fc"><i class="no-highlight">217</i>&nbsp;            summon = groups[&quot;summon&quot;]!!.value.clean()</b>
+<b class="fc"><i class="no-highlight">218</i>&nbsp;            name = groups[&quot;name&quot;]!!.value.clean()</b>
+<b class="fc"><i class="no-highlight">219</i>&nbsp;        }</b>
+<i class="no-highlight">220</i>&nbsp;
+<b class="fc"><i class="no-highlight">221</i>&nbsp;        return Killer(name.clean(), player, summon, traded)</b>
+<i class="no-highlight">222</i>&nbsp;    }
+<i class="no-highlight">223</i>&nbsp;
+<i class="no-highlight">224</i>&nbsp;    private fun parseCharacters(rows: Elements, builder: CharacterBuilder) {
+<b class="fc"><i class="no-highlight">225</i>&nbsp;        for (row: Element in rows.subList(1, rows.size)) {</b>
+<b class="fc"><i class="no-highlight">226</i>&nbsp;            val columns = row.select(&quot;td&quot;)</b>
+<b class="fc"><i class="no-highlight">227</i>&nbsp;            val (nameColumn, worldColumn, statusColumn, _) = columns</b>
+<b class="fc"><i class="no-highlight">228</i>&nbsp;            var traded = false</b>
+<b class="fc"><i class="no-highlight">229</i>&nbsp;            var name = nameColumn.text().splitList(&quot;.&quot;).last().clean()</b>
+<b class="pc"><i class="no-highlight">230</i>&nbsp;            if (name.contains(tradedLabel, true)) {</b>
+<b class="nc"><i class="no-highlight">231</i>&nbsp;                name = name.remove(tradedLabel).trim()</b>
+<b class="nc"><i class="no-highlight">232</i>&nbsp;                traded = true</b>
+<i class="no-highlight">233</i>&nbsp;            }
+<b class="fc"><i class="no-highlight">234</i>&nbsp;            val main = nameColumn.selectFirst(&quot;img&quot;) != null</b>
+<b class="fc"><i class="no-highlight">235</i>&nbsp;            val world = worldColumn.text().clean()</b>
+<b class="fc"><i class="no-highlight">236</i>&nbsp;            val status = statusColumn.text().clean()</b>
+<b class="fc"><i class="no-highlight">237</i>&nbsp;            val online = status.contains(&quot;online&quot;)</b>
+<b class="fc"><i class="no-highlight">238</i>&nbsp;            val deleted = status.contains(&quot;deleted&quot;)</b>
+<b class="fc"><i class="no-highlight">239</i>&nbsp;            val position = if (status.contains(&quot;CipSoft Member&quot;)) &quot;CipSoft Member&quot; else null</b>
+<b class="fc"><i class="no-highlight">240</i>&nbsp;            builder.addCharacter(name, world, main, online, deleted, traded, position)</b>
+<i class="no-highlight">241</i>&nbsp;        }
+<i class="no-highlight">242</i>&nbsp;    }
+<i class="no-highlight">243</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -305,7 +388,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-01-23 23:41</div>
+    <div style="float:right;">generated on 2022-01-24 18:51</div>
 </div>
 </body>
 </html>

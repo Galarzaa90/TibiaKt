@@ -1,0 +1,207 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > TibiaResponse</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.galarzaa.tibiakt.client</a>
+</div>
+
+<h1>Coverage Summary for Class: TibiaResponse (com.galarzaa.tibiakt.client)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Block, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TibiaResponse</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">TibiaResponse$$serializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">TibiaResponse$Companion</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;@file:UseSerializers(InstantSerializer::class)
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;package com.galarzaa.tibiakt.client
+<i class="no-highlight">4</i>&nbsp;
+<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.serializers.InstantSerializer
+<i class="no-highlight">6</i>&nbsp;import kotlinx.serialization.Serializable
+<i class="no-highlight">7</i>&nbsp;import kotlinx.serialization.UseSerializers
+<i class="no-highlight">8</i>&nbsp;import java.time.Instant
+<i class="no-highlight">9</i>&nbsp;
+<i class="no-highlight">10</i>&nbsp;/**
+<i class="no-highlight">11</i>&nbsp; * A response from Tibia.com
+<i class="no-highlight">12</i>&nbsp; *
+<i class="no-highlight">13</i>&nbsp; * @property timestamp the time when the request was done.
+<i class="no-highlight">14</i>&nbsp; * @property isCached Whether the response is cached or not.
+<i class="no-highlight">15</i>&nbsp; * @property cacheAge How old is the cached response, in seconds.
+<i class="no-highlight">16</i>&nbsp; * @property fetchingTime The time it took to fetch the content from Tibia.com in seconds.
+<i class="no-highlight">17</i>&nbsp; * @property parsingTime The time it took to parse the content into data in seconds.
+<i class="no-highlight">18</i>&nbsp; * @property data The data parsed from Tibia.com.
+<i class="no-highlight">19</i>&nbsp; * @param T The type of the data returned.
+<i class="no-highlight">20</i>&nbsp; */
+<b class="nc"><i class="no-highlight">21</i>&nbsp;@Serializable</b>
+<i class="no-highlight">22</i>&nbsp;data class TibiaResponse&lt;T&gt;(
+<b class="nc"><i class="no-highlight">23</i>&nbsp;    val timestamp: Instant,</b>
+<b class="nc"><i class="no-highlight">24</i>&nbsp;    val isCached: Boolean,</b>
+<b class="nc"><i class="no-highlight">25</i>&nbsp;    val cacheAge: Int,</b>
+<b class="nc"><i class="no-highlight">26</i>&nbsp;    val fetchingTime: Float,</b>
+<b class="nc"><i class="no-highlight">27</i>&nbsp;    val parsingTime: Float,</b>
+<b class="nc"><i class="no-highlight">28</i>&nbsp;    val data: T</b>
+<b class="nc"><i class="no-highlight">29</i>&nbsp;)</b>
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-01-24 18:51</div>
+</div>
+</body>
+</html>

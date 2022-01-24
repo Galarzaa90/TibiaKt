@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > StringExtensionsKt</title>
+  <title>Coverage Report > KillStatisticsParser</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -17,10 +17,10 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">com.galarzaa.tibiakt.core.utils</a>
+    <a href="../index.html">com.galarzaa.tibiakt.core.parsers</a>
 </div>
 
-<h1>Coverage Summary for Class: StringExtensionsKt (com.galarzaa.tibiakt.core.utils)</h1>
+<h1>Coverage Summary for Class: KillStatisticsParser (com.galarzaa.tibiakt.core.parsers)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -43,7 +43,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">StringExtensionsKt</td>
+  <td class="name">KillStatisticsParser</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -54,26 +54,26 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    66.7%
   </span>
   <span class="absValue">
-    (10/10)
+    (2/3)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    92.3%
+    64.3%
   </span>
   <span class="absValue">
-    (24/26)
+    (9/14)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    96.3%
   </span>
   <span class="absValue">
-    (17/17)
+    (26/27)
   </span>
 </td>
 </tr>
@@ -85,53 +85,59 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.utils
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.parsers
 <i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;/**
-<i class="no-highlight">4</i>&nbsp; * Split a string enumerating elements, using a different separator for the last item.
-<i class="no-highlight">5</i>&nbsp; */
-<b class="fc"><i class="no-highlight">6</i>&nbsp;fun String?.splitList(separator: String = &quot;,&quot;, lastSeparator: String = &quot; and &quot;): List&lt;String&gt; {</b>
-<b class="pc"><i class="no-highlight">7</i>&nbsp;    val items = this?.nullIfBlank()?.split(separator)?.toMutableList() ?: return emptyList()</b>
-<b class="fc"><i class="no-highlight">8</i>&nbsp;    val lastSplit: List&lt;String&gt; = items.last().split(lastSeparator)</b>
-<b class="fc"><i class="no-highlight">9</i>&nbsp;    if (lastSplit.size &gt; 1) {</b>
-<b class="fc"><i class="no-highlight">10</i>&nbsp;        items[items.lastIndex] = lastSplit.subList(0, lastSplit.lastIndex).joinToString(lastSeparator)</b>
-<b class="fc"><i class="no-highlight">11</i>&nbsp;        items.add(lastSplit.last())</b>
-<i class="no-highlight">12</i>&nbsp;    }
-<b class="fc"><i class="no-highlight">13</i>&nbsp;    return items.map { it.trim() }</b>
-<i class="no-highlight">14</i>&nbsp;}
+<i class="no-highlight">3</i>&nbsp;
+<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.builders.KillStatisticsBuilder
+<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
+<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.models.KillStatistics
+<i class="no-highlight">7</i>&nbsp;import com.galarzaa.tibiakt.core.utils.cellsText
+<i class="no-highlight">8</i>&nbsp;import com.galarzaa.tibiakt.core.utils.formData
+<i class="no-highlight">9</i>&nbsp;import com.galarzaa.tibiakt.core.utils.offsetStart
+<i class="no-highlight">10</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseTablesMap
+<i class="no-highlight">11</i>&nbsp;import com.galarzaa.tibiakt.core.utils.rows
+<i class="no-highlight">12</i>&nbsp;import org.jsoup.Jsoup
+<i class="no-highlight">13</i>&nbsp;import org.jsoup.nodes.Document
+<i class="no-highlight">14</i>&nbsp;import org.jsoup.nodes.Element
 <i class="no-highlight">15</i>&nbsp;
-<i class="no-highlight">16</i>&nbsp;/**
-<i class="no-highlight">17</i>&nbsp; * Remove an arbitrary string from a string, as many times as it is found.
-<i class="no-highlight">18</i>&nbsp; */
-<b class="fc"><i class="no-highlight">19</i>&nbsp;fun String.remove(value: String, ignoreCase: Boolean = false): String {</b>
-<b class="fc"><i class="no-highlight">20</i>&nbsp;    return replace(value, &quot;&quot;, ignoreCase)</b>
-<i class="no-highlight">21</i>&nbsp;}
-<i class="no-highlight">22</i>&nbsp;
-<i class="no-highlight">23</i>&nbsp;/**
-<i class="no-highlight">24</i>&nbsp; * Clean the string of non-breaking spaces and trims whitespace.
-<i class="no-highlight">25</i>&nbsp; */
-<i class="no-highlight">26</i>&nbsp;fun String.clean(): String {
-<b class="fc"><i class="no-highlight">27</i>&nbsp;    return replace(&quot;\u00A0&quot;, &quot; &quot;)</b>
-<b class="fc"><i class="no-highlight">28</i>&nbsp;        .replace(&quot;&amp;#xa0;&quot;, &quot; &quot;)</b>
-<b class="fc"><i class="no-highlight">29</i>&nbsp;        .trim()</b>
-<i class="no-highlight">30</i>&nbsp;}
-<i class="no-highlight">31</i>&nbsp;
-<i class="no-highlight">32</i>&nbsp;
-<b class="fc"><i class="no-highlight">33</i>&nbsp;fun String.parseInteger(): Int = remove(&quot;,&quot;).trim().toInt()</b>
-<b class="fc"><i class="no-highlight">34</i>&nbsp;fun String.parseLong(): Long = remove(&quot;,&quot;).trim().toLong()</b>
-<b class="fc"><i class="no-highlight">35</i>&nbsp;fun String.findInteger(): Int = filter { it.isDigit() }.toInt()</b>
-<i class="no-highlight">36</i>&nbsp;
-<i class="no-highlight">37</i>&nbsp;/**
-<i class="no-highlight">38</i>&nbsp; * Return null if the string is blank
-<i class="no-highlight">39</i>&nbsp; */
-<b class="fc"><i class="no-highlight">40</i>&nbsp;fun String?.nullIfBlank(): String? = takeIf { !it.isNullOrBlank() }</b>
-<i class="no-highlight">41</i>&nbsp;
-<i class="no-highlight">42</i>&nbsp;/**
-<i class="no-highlight">43</i>&nbsp; *  Parses strings with numbers using &quot;k&quot; as a thousand suffix
-<i class="no-highlight">44</i>&nbsp; */
-<i class="no-highlight">45</i>&nbsp;fun String.parseThousandSuffix(): Int {
-<b class="pc"><i class="no-highlight">46</i>&nbsp;    return remove(&quot;k&quot;, true).parseInteger() * (count { it == &#39;k&#39; || it == &#39;K&#39; } * 1000)</b>
-<i class="no-highlight">47</i>&nbsp;}
+<b class="nc"><i class="no-highlight">16</i>&nbsp;object KillStatisticsParser : Parser&lt;KillStatistics&gt; {</b>
+<i class="no-highlight">17</i>&nbsp;    override fun fromContent(content: String): KillStatistics {
+<b class="fc"><i class="no-highlight">18</i>&nbsp;        val document: Document = Jsoup.parse(content)</b>
+<b class="fc"><i class="no-highlight">19</i>&nbsp;        val boxContent =</b>
+<b class="pc"><i class="no-highlight">20</i>&nbsp;            document.selectFirst(&quot;div.BoxContent&quot;) ?: throw ParsingException(&quot;BoxContent container not found&quot;)</b>
+<b class="fc"><i class="no-highlight">21</i>&nbsp;        val tables = boxContent.parseTablesMap(&quot;table.Table1, table.Table3&quot;)</b>
+<b class="fc"><i class="no-highlight">22</i>&nbsp;        val builder = KillStatisticsBuilder()</b>
+<b class="pc"><i class="no-highlight">23</i>&nbsp;        tables[&quot;Kill Statistics&quot;]?.apply {</b>
+<b class="fc"><i class="no-highlight">24</i>&nbsp;            parseKillStatisticsTable(this, builder)</b>
+<b class="fc"><i class="no-highlight">25</i>&nbsp;        } ?: throw ParsingException(&quot;kill statistics table not found&quot;)</b>
+<b class="pc"><i class="no-highlight">26</i>&nbsp;        val form = boxContent.selectFirst(&quot;form&quot;) ?: throw ParsingException(&quot;could not find form in value&quot;)</b>
+<b class="pc"><i class="no-highlight">27</i>&nbsp;        builder.world(form.formData().values[&quot;world&quot;] ?: throw ParsingException(&quot;could not find world value in form&quot;))</b>
+<b class="fc"><i class="no-highlight">28</i>&nbsp;        return builder.build()</b>
+<i class="no-highlight">29</i>&nbsp;    }
+<i class="no-highlight">30</i>&nbsp;
+<i class="no-highlight">31</i>&nbsp;    private fun parseKillStatisticsTable(table: Element, builder: KillStatisticsBuilder) {
+<b class="fc"><i class="no-highlight">32</i>&nbsp;        val innerTable = table.selectFirst(&quot;table.TableContent&quot;)</b>
+<b class="fc"><i class="no-highlight">33</i>&nbsp;        for (row in innerTable.rows().offsetStart(2)) {</b>
+<b class="fc"><i class="no-highlight">34</i>&nbsp;            val columnns = row.cellsText()</b>
+<b class="fc"><i class="no-highlight">35</i>&nbsp;            if (columnns[0] == &quot;Total&quot;) {</b>
+<b class="fc"><i class="no-highlight">36</i>&nbsp;                builder.total(</b>
+<b class="fc"><i class="no-highlight">37</i>&nbsp;                    columnns[1].toInt(),</b>
+<b class="fc"><i class="no-highlight">38</i>&nbsp;                    columnns[2].toInt(),</b>
+<b class="fc"><i class="no-highlight">39</i>&nbsp;                    columnns[3].toInt(),</b>
+<b class="fc"><i class="no-highlight">40</i>&nbsp;                    columnns[4].toInt(),</b>
+<i class="no-highlight">41</i>&nbsp;                )
+<i class="no-highlight">42</i>&nbsp;            } else {
+<b class="fc"><i class="no-highlight">43</i>&nbsp;                builder.addEntry(</b>
+<b class="fc"><i class="no-highlight">44</i>&nbsp;                    columnns[0],</b>
+<b class="fc"><i class="no-highlight">45</i>&nbsp;                    columnns[1].toInt(),</b>
+<b class="fc"><i class="no-highlight">46</i>&nbsp;                    columnns[2].toInt(),</b>
+<b class="fc"><i class="no-highlight">47</i>&nbsp;                    columnns[3].toInt(),</b>
+<b class="fc"><i class="no-highlight">48</i>&nbsp;                    columnns[4].toInt(),</b>
+<i class="no-highlight">49</i>&nbsp;                )
+<i class="no-highlight">50</i>&nbsp;            }
+<i class="no-highlight">51</i>&nbsp;        }
+<i class="no-highlight">52</i>&nbsp;    }
+<i class="no-highlight">53</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -158,7 +164,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-01-23 23:41</div>
+    <div style="float:right;">generated on 2022-01-24 18:51</div>
 </div>
 </body>
 </html>

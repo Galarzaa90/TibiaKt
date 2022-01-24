@@ -3,10 +3,11 @@ $dokka.linkExtension:html
 
 module:tibiakt-client
 com.galarzaa.tibiakt.client
-com.galarzaa.tibiakt.client.models
+com.galarzaa.tibiakt.client.exceptions
 module:tibiakt-core
 com.galarzaa.tibiakt.core.builders
 com.galarzaa.tibiakt.core.enums
+com.galarzaa.tibiakt.core.exceptions
 com.galarzaa.tibiakt.core.models
 com.galarzaa.tibiakt.core.models.bazaar
 com.galarzaa.tibiakt.core.models.character
@@ -18,4 +19,5 @@ com.galarzaa.tibiakt.core.models.house
 com.galarzaa.tibiakt.core.models.news
 com.galarzaa.tibiakt.core.models.world
 com.galarzaa.tibiakt.core.parsers
+com.galarzaa.tibiakt.core.serializers
 com.galarzaa.tibiakt.core.utils

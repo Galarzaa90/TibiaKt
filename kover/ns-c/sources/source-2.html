@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > House</title>
+  <title>Coverage Report > HighscoresEntry</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -17,10 +17,10 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">com.galarzaa.tibiakt.core.models.house</a>
+    <a href="../index.html">com.galarzaa.tibiakt.core.models.highscores</a>
 </div>
 
-<h1>Coverage Summary for Class: House (com.galarzaa.tibiakt.core.models.house)</h1>
+<h1>Coverage Summary for Class: HighscoresEntry (com.galarzaa.tibiakt.core.models.highscores)</h1>
 
 <table class="coverageStats">
 
@@ -40,13 +40,13 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">House</td>
+  <td class="name">HighscoresEntry</td>
 <td class="coverageStat">
   <span class="percent">
-    25%
+    100%
   </span>
   <span class="absValue">
-    (1/4)
+    (1/1)
   </span>
 </td>
 <td class="coverageStat">
@@ -54,20 +54,20 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/8)
+    (0/10)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    85.7%
+    100%
   </span>
   <span class="absValue">
-    (18/21)
+    (8/8)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">House$$serializer</td>
+    <td class="name">HighscoresEntry$$serializer</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -81,7 +81,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/22)
+    (0/12)
   </span>
 </td>
 <td class="coverageStat">
@@ -94,7 +94,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
   </tr>
   <tr>
-    <td class="name">House$Companion</td>
+    <td class="name">HighscoresEntry$Companion</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -116,10 +116,10 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    16.7%
+    33.3%
   </span>
   <span class="absValue">
-    (1/6)
+    (1/3)
   </span>
 </td>
 <td class="coverageStat">
@@ -127,15 +127,15 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/30)
+    (0/22)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    78.3%
+    80%
   </span>
   <span class="absValue">
-    (18/23)
+    (8/10)
   </span>
 </td>
 </tr>
@@ -146,62 +146,32 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;@file:UseSerializers(InstantSerializer::class)
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.models.highscores
 <i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;package com.galarzaa.tibiakt.core.models.house
-<i class="no-highlight">4</i>&nbsp;
-<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HouseStatus
-<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HouseType
-<i class="no-highlight">7</i>&nbsp;import com.galarzaa.tibiakt.core.utils.InstantSerializer
-<i class="no-highlight">8</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getCharacterUrl
-<i class="no-highlight">9</i>&nbsp;import kotlinx.serialization.Serializable
-<i class="no-highlight">10</i>&nbsp;import kotlinx.serialization.UseSerializers
-<i class="no-highlight">11</i>&nbsp;import java.time.Instant
-<i class="no-highlight">12</i>&nbsp;
-<i class="no-highlight">13</i>&nbsp;/**
-<i class="no-highlight">14</i>&nbsp; * A house or guildhall.
-<i class="no-highlight">15</i>&nbsp; *
-<i class="no-highlight">16</i>&nbsp; * @property name The name of the house.
-<i class="no-highlight">17</i>&nbsp; * @property size The size of the house in square meters (tiles).
-<i class="no-highlight">18</i>&nbsp; * @property type The type of the house.
-<i class="no-highlight">19</i>&nbsp; * @property beds The maximum amount of beds that can be placed in there.
-<i class="no-highlight">20</i>&nbsp; * @property rent The monthly rent paid for this house in gold coins.
-<i class="no-highlight">21</i>&nbsp; * @property status The current status of the house.
-<i class="no-highlight">22</i>&nbsp; * @property paidUntil The date when the last paid rent is due.
-<i class="no-highlight">23</i>&nbsp; * @property owner The character that currently owns the house.
-<i class="no-highlight">24</i>&nbsp; * @property movingDate The date when the current owner will move out of the house.
-<i class="no-highlight">25</i>&nbsp; * @property transferPrice When the house is being transferred to someone else, the amount of gold paid for the transfer.
-<i class="no-highlight">26</i>&nbsp; * @property transferAccepted Whether the transfer has been accepted by the recipient or not.
-<i class="no-highlight">27</i>&nbsp; * @property transferRecipient The character that will receive the house.
-<i class="no-highlight">28</i>&nbsp; * @property highestBid If the house is on auction, the highest bid received, if any.
-<i class="no-highlight">29</i>&nbsp; * @property highestBidder The character that placed the currently highest bid.
-<i class="no-highlight">30</i>&nbsp; * @property auctionEnd The date and time when the auction will end.
-<i class="no-highlight">31</i>&nbsp; */
-<b class="pc"><i class="no-highlight">32</i>&nbsp;@Serializable</b>
-<i class="no-highlight">33</i>&nbsp;data class House(
-<b class="fc"><i class="no-highlight">34</i>&nbsp;    override val houseId: Int,</b>
-<b class="fc"><i class="no-highlight">35</i>&nbsp;    val name: String,</b>
-<b class="fc"><i class="no-highlight">36</i>&nbsp;    val size: Int,</b>
-<b class="fc"><i class="no-highlight">37</i>&nbsp;    val type: HouseType,</b>
-<b class="fc"><i class="no-highlight">38</i>&nbsp;    val beds: Int,</b>
-<b class="fc"><i class="no-highlight">39</i>&nbsp;    val rent: Int,</b>
-<b class="fc"><i class="no-highlight">40</i>&nbsp;    override val world: String,</b>
-<b class="fc"><i class="no-highlight">41</i>&nbsp;    val status: HouseStatus,</b>
-<b class="fc"><i class="no-highlight">42</i>&nbsp;    val paidUntil: Instant?,</b>
-<b class="fc"><i class="no-highlight">43</i>&nbsp;    val owner: String?,</b>
-<b class="fc"><i class="no-highlight">44</i>&nbsp;    val movingDate: Instant?,</b>
-<b class="fc"><i class="no-highlight">45</i>&nbsp;    val transferPrice: Int?,</b>
-<b class="fc"><i class="no-highlight">46</i>&nbsp;    val transferAccepted: Boolean?,</b>
-<b class="fc"><i class="no-highlight">47</i>&nbsp;    val transferRecipient: String?,</b>
-<b class="fc"><i class="no-highlight">48</i>&nbsp;    val highestBid: Int?,</b>
-<b class="fc"><i class="no-highlight">49</i>&nbsp;    val highestBidder: String?,</b>
-<b class="fc"><i class="no-highlight">50</i>&nbsp;    val auctionEnd: Instant?,</b>
-<i class="no-highlight">51</i>&nbsp;) : BaseHouse {
-<i class="no-highlight">52</i>&nbsp;
-<b class="nc"><i class="no-highlight">53</i>&nbsp;    val ownerUrl get() = owner?.let { getCharacterUrl(it) }</b>
-<b class="nc"><i class="no-highlight">54</i>&nbsp;    val transferRecipientUrl get() = transferRecipient?.let { getCharacterUrl(it) }</b>
-<b class="nc"><i class="no-highlight">55</i>&nbsp;    val highestBidderUrl get() = highestBidder?.let { getCharacterUrl(it) }</b>
-<i class="no-highlight">56</i>&nbsp;}
+<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.enums.Vocation
+<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.models.character.BaseCharacter
+<i class="no-highlight">5</i>&nbsp;import kotlinx.serialization.Serializable
+<i class="no-highlight">6</i>&nbsp;
+<i class="no-highlight">7</i>&nbsp;/**
+<i class="no-highlight">8</i>&nbsp; * An entry in the [Highscores].
+<i class="no-highlight">9</i>&nbsp; *
+<i class="no-highlight">10</i>&nbsp; * @property rank The rank of the character. Multiple entries might have the same rank if they are tied.
+<i class="no-highlight">11</i>&nbsp; * @property level The level of the character.
+<i class="no-highlight">12</i>&nbsp; * @property world The world of the character.
+<i class="no-highlight">13</i>&nbsp; * @property vocation The vocation of the character.
+<i class="no-highlight">14</i>&nbsp; * @property value The value of the entry (e.g. distance level, magic level, experience)
+<i class="no-highlight">15</i>&nbsp; * @property additionalValue Additional information displayed in some categories, such as Loyalty Title.
+<i class="no-highlight">16</i>&nbsp; */
+<b class="pc"><i class="no-highlight">17</i>&nbsp;@Serializable</b>
+<i class="no-highlight">18</i>&nbsp;data class HighscoresEntry(
+<b class="fc"><i class="no-highlight">19</i>&nbsp;    val rank: Int,</b>
+<b class="fc"><i class="no-highlight">20</i>&nbsp;    override val name: String,</b>
+<b class="fc"><i class="no-highlight">21</i>&nbsp;    val level: Int,</b>
+<b class="fc"><i class="no-highlight">22</i>&nbsp;    val world: String,</b>
+<b class="fc"><i class="no-highlight">23</i>&nbsp;    val vocation: Vocation,</b>
+<b class="fc"><i class="no-highlight">24</i>&nbsp;    val value: Long,</b>
+<b class="fc"><i class="no-highlight">25</i>&nbsp;    val additionalValue: String? = null</b>
+<i class="no-highlight">26</i>&nbsp;) : BaseCharacter
 </div>
 </pre>
 </div>
@@ -228,7 +198,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-01-23 23:41</div>
+    <div style="float:right;">generated on 2022-01-24 18:51</div>
 </div>
 </body>
 </html>

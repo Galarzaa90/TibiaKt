@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > WorldOverview</title>
+  <title>Coverage Report > NewsArchive</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -17,10 +17,10 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">com.galarzaa.tibiakt.core.models.world</a>
+    <a href="../index.html">com.galarzaa.tibiakt.core.models.news</a>
 </div>
 
-<h1>Coverage Summary for Class: WorldOverview (com.galarzaa.tibiakt.core.models.world)</h1>
+<h1>Coverage Summary for Class: NewsArchive (com.galarzaa.tibiakt.core.models.news)</h1>
 
 <table class="coverageStats">
 
@@ -40,34 +40,34 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">WorldOverview</td>
+  <td class="name">NewsArchive</td>
 <td class="coverageStat">
   <span class="percent">
-    66.7%
+    100%
   </span>
   <span class="absValue">
-    (2/3)
+    (1/1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    10%
+    0%
   </span>
   <span class="absValue">
-    (2/20)
+    (0/26)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    85.7%
+    100%
   </span>
   <span class="absValue">
-    (6/7)
+    (6/6)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">WorldOverview$$serializer</td>
+    <td class="name">NewsArchive$$serializer</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -81,7 +81,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/9)
+    (0/10)
   </span>
 </td>
 <td class="coverageStat">
@@ -94,7 +94,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
   </tr>
   <tr>
-    <td class="name">WorldOverview$Companion</td>
+    <td class="name">NewsArchive$Companion</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -116,26 +116,26 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    40%
+    33.3%
   </span>
   <span class="absValue">
-    (2/5)
+    (1/3)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    6.9%
+    0%
   </span>
   <span class="absValue">
-    (2/29)
+    (0/36)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    66.7%
+    75%
   </span>
   <span class="absValue">
-    (6/9)
+    (6/8)
   </span>
 </td>
 </tr>
@@ -146,41 +146,34 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;@file:UseSerializers(InstantSerializer::class)
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;@file:UseSerializers(LocalDateSerializer::class)
 <i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;package com.galarzaa.tibiakt.core.models.world
+<i class="no-highlight">3</i>&nbsp;package com.galarzaa.tibiakt.core.models.news
 <i class="no-highlight">4</i>&nbsp;
-<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.utils.InstantSerializer
-<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getWorldOverviewUrl
-<i class="no-highlight">7</i>&nbsp;import kotlinx.serialization.Serializable
-<i class="no-highlight">8</i>&nbsp;import kotlinx.serialization.UseSerializers
-<i class="no-highlight">9</i>&nbsp;import java.time.Instant
-<i class="no-highlight">10</i>&nbsp;
-<i class="no-highlight">11</i>&nbsp;/**
-<i class="no-highlight">12</i>&nbsp; * The world overview section in Tibia.com
-<i class="no-highlight">13</i>&nbsp; *
-<i class="no-highlight">14</i>&nbsp; * @property overallMaximumCount The record for simultaneous online players.
-<i class="no-highlight">15</i>&nbsp; * @property overallMaximumCountDateTime The date and time when the record for online players was set.
-<i class="no-highlight">16</i>&nbsp; */
-<b class="pc"><i class="no-highlight">17</i>&nbsp;@Serializable</b>
-<i class="no-highlight">18</i>&nbsp;data class WorldOverview(
-<b class="fc"><i class="no-highlight">19</i>&nbsp;    val overallMaximumCount: Int,</b>
-<b class="fc"><i class="no-highlight">20</i>&nbsp;    val overallMaximumCountDateTime: Instant,</b>
-<b class="pc"><i class="no-highlight">21</i>&nbsp;    val worlds: List&lt;WorldEntry&gt; = emptyList(),</b>
-<b class="pc"><i class="no-highlight">22</i>&nbsp;    val tournamentWorlds: List&lt;WorldEntry&gt; = emptyList(),</b>
-<i class="no-highlight">23</i>&nbsp;) {
-<i class="no-highlight">24</i>&nbsp;    /**
-<i class="no-highlight">25</i>&nbsp;     * The total of currently online players across worlds.
-<i class="no-highlight">26</i>&nbsp;     */
-<i class="no-highlight">27</i>&nbsp;    val totalOnline: Int
-<b class="fc"><i class="no-highlight">28</i>&nbsp;        get() = worlds.sumOf { it.onlineCount }</b>
-<i class="no-highlight">29</i>&nbsp;
-<i class="no-highlight">30</i>&nbsp;    /**
-<i class="no-highlight">31</i>&nbsp;     * The URL to the world overview section.
-<i class="no-highlight">32</i>&nbsp;     */
-<i class="no-highlight">33</i>&nbsp;    val url: String
-<b class="nc"><i class="no-highlight">34</i>&nbsp;        get() = getWorldOverviewUrl()</b>
-<i class="no-highlight">35</i>&nbsp;}
+<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.enums.NewsCategory
+<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.enums.NewsType
+<i class="no-highlight">7</i>&nbsp;import com.galarzaa.tibiakt.core.serializers.LocalDateSerializer
+<i class="no-highlight">8</i>&nbsp;import kotlinx.serialization.Serializable
+<i class="no-highlight">9</i>&nbsp;import kotlinx.serialization.UseSerializers
+<i class="no-highlight">10</i>&nbsp;import java.time.LocalDate
+<i class="no-highlight">11</i>&nbsp;
+<i class="no-highlight">12</i>&nbsp;/**
+<i class="no-highlight">13</i>&nbsp; * The News Archive section in Tibia.com
+<i class="no-highlight">14</i>&nbsp; *
+<i class="no-highlight">15</i>&nbsp; * @property startDate The start date of the articles displayed.
+<i class="no-highlight">16</i>&nbsp; * @property endDate The end date of the articles displayed.
+<i class="no-highlight">17</i>&nbsp; * @property types The types of articles to show.
+<i class="no-highlight">18</i>&nbsp; * @property categories The categories of articles to show.
+<i class="no-highlight">19</i>&nbsp; * @property entries The entries matching the filters.
+<i class="no-highlight">20</i>&nbsp; */
+<b class="pc"><i class="no-highlight">21</i>&nbsp;@Serializable</b>
+<i class="no-highlight">22</i>&nbsp;data class NewsArchive(
+<b class="fc"><i class="no-highlight">23</i>&nbsp;    val startDate: LocalDate,</b>
+<b class="fc"><i class="no-highlight">24</i>&nbsp;    val endDate: LocalDate,</b>
+<b class="pc"><i class="no-highlight">25</i>&nbsp;    val types: Set&lt;NewsType&gt; = emptySet(),</b>
+<b class="pc"><i class="no-highlight">26</i>&nbsp;    val categories: Set&lt;NewsCategory&gt; = emptySet(),</b>
+<b class="pc"><i class="no-highlight">27</i>&nbsp;    val entries: List&lt;NewsEntry&gt; = emptyList(),</b>
+<i class="no-highlight">28</i>&nbsp;)
 </div>
 </pre>
 </div>
@@ -207,7 +200,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-01-23 23:41</div>
+    <div style="float:right;">generated on 2022-01-24 18:51</div>
 </div>
 </body>
 </html>

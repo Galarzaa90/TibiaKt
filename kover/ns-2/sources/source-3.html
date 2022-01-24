@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > AuctionPagesType</title>
+  <title>Coverage Report > ForbiddenException</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -17,10 +17,10 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">com.galarzaa.tibiakt.client.models</a>
+    <a href="../index.html">com.galarzaa.tibiakt.client.exceptions</a>
 </div>
 
-<h1>Coverage Summary for Class: AuctionPagesType (com.galarzaa.tibiakt.client.models)</h1>
+<h1>Coverage Summary for Class: ForbiddenException (com.galarzaa.tibiakt.client.exceptions)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -39,29 +39,29 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">AuctionPagesType</td>
+  <td class="name">ForbiddenException</td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/1)
+    (1/1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/2)
+    (1/1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/7)
+    (1/1)
   </span>
 </td>
 </tr>
@@ -73,16 +73,15 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.client.models
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.client.exceptions
 <i class="no-highlight">2</i>&nbsp;
-<b class="nc"><i class="no-highlight">3</i>&nbsp;internal enum class AuctionPagesType(val typeId: Int) {</b>
-<b class="nc"><i class="no-highlight">4</i>&nbsp;    ITEMS(0),</b>
-<b class="nc"><i class="no-highlight">5</i>&nbsp;    ITEMS_STORE(1),</b>
-<b class="nc"><i class="no-highlight">6</i>&nbsp;    MOUNTS(2),</b>
-<b class="nc"><i class="no-highlight">7</i>&nbsp;    MOUNTS_STORE(3),</b>
-<b class="nc"><i class="no-highlight">8</i>&nbsp;    OUTFITS(4),</b>
-<b class="nc"><i class="no-highlight">9</i>&nbsp;    OUTFITS_STORE(5)</b>
-<i class="no-highlight">10</i>&nbsp;}
+<i class="no-highlight">3</i>&nbsp;/**
+<i class="no-highlight">4</i>&nbsp; *  Exception thrown when Tibia.com returns a 403 status code.
+<i class="no-highlight">5</i>&nbsp; *
+<i class="no-highlight">6</i>&nbsp; *  Tibia.com returns a 403 status code when it detects that too many requests are being done.
+<i class="no-highlight">7</i>&nbsp; *  This has its own subclass to let the user decide to treat this differently than other network errors.
+<i class="no-highlight">8</i>&nbsp; */
+<b class="fc"><i class="no-highlight">9</i>&nbsp;open class ForbiddenException(message: String? = null, cause: Throwable?) : NetworkException(message, cause)</b>
 </div>
 </pre>
 </div>
@@ -109,7 +108,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-01-23 23:41</div>
+    <div style="float:right;">generated on 2022-01-24 18:51</div>
 </div>
 </body>
 </html>

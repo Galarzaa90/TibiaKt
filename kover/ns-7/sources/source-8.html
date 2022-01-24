@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > GuildMembership</title>
+  <title>Coverage Report > BlessingEntry</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -17,10 +17,10 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">com.galarzaa.tibiakt.core.models.character</a>
+    <a href="../index.html">com.galarzaa.tibiakt.core.models.bazaar</a>
 </div>
 
-<h1>Coverage Summary for Class: GuildMembership (com.galarzaa.tibiakt.core.models.character)</h1>
+<h1>Coverage Summary for Class: BlessingEntry (com.galarzaa.tibiakt.core.models.bazaar)</h1>
 
 <table class="coverageStats">
 
@@ -40,7 +40,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">GuildMembership</td>
+  <td class="name">BlessingEntry</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -62,12 +62,12 @@ Current scope:     <a href="../../index.html">all classes</a>
     100%
   </span>
   <span class="absValue">
-    (2/2)
+    (3/3)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">GuildMembership$$serializer</td>
+    <td class="name">BlessingEntry$$serializer</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -94,7 +94,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
   </tr>
   <tr>
-    <td class="name">GuildMembership$Companion</td>
+    <td class="name">BlessingEntry$Companion</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -132,10 +132,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    50%
+    60%
   </span>
   <span class="absValue">
-    (2/4)
+    (3/5)
   </span>
 </td>
 </tr>
@@ -146,18 +146,21 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.models.character
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.models.bazaar
 <i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.models.guild.BaseGuild
-<i class="no-highlight">4</i>&nbsp;import kotlinx.serialization.Serializable
-<i class="no-highlight">5</i>&nbsp;
-<i class="no-highlight">6</i>&nbsp;/**
-<i class="no-highlight">7</i>&nbsp; * The guild a [Character] belongs to.
-<i class="no-highlight">8</i>&nbsp; *
-<i class="no-highlight">9</i>&nbsp; * @property rank The name of the rank the character holds in the guild.
+<i class="no-highlight">3</i>&nbsp;import kotlinx.serialization.Serializable
+<i class="no-highlight">4</i>&nbsp;
+<i class="no-highlight">5</i>&nbsp;/**
+<i class="no-highlight">6</i>&nbsp; * A blessing of an [Auction] character.
+<i class="no-highlight">7</i>&nbsp; *
+<i class="no-highlight">8</i>&nbsp; * @property name The name of the blessing
+<i class="no-highlight">9</i>&nbsp; * @property amount The amount of this blessing the character has.
 <i class="no-highlight">10</i>&nbsp; */
 <b class="pc"><i class="no-highlight">11</i>&nbsp;@Serializable</b>
-<b class="fc"><i class="no-highlight">12</i>&nbsp;data class GuildMembership(override val name: String, val rank: String) : BaseGuild</b>
+<i class="no-highlight">12</i>&nbsp;data class BlessingEntry(
+<b class="fc"><i class="no-highlight">13</i>&nbsp;    val name: String,</b>
+<b class="fc"><i class="no-highlight">14</i>&nbsp;    val amount: Int,</b>
+<i class="no-highlight">15</i>&nbsp;)
 </div>
 </pre>
 </div>
@@ -184,7 +187,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-01-23 23:41</div>
+    <div style="float:right;">generated on 2022-01-24 18:51</div>
 </div>
 </body>
 </html>
