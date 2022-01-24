@@ -1,10 +1,10 @@
 package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.core.builders.LeaderboardsBuilder
+import com.galarzaa.tibiakt.core.exceptions.ParsingException
 import com.galarzaa.tibiakt.core.models.Leaderboards
 import com.galarzaa.tibiakt.core.models.LeaderboardsEntry
 import com.galarzaa.tibiakt.core.utils.PaginationData
-import com.galarzaa.tibiakt.core.utils.ParsingException
 import com.galarzaa.tibiakt.core.utils.cells
 import com.galarzaa.tibiakt.core.utils.clean
 import com.galarzaa.tibiakt.core.utils.formData

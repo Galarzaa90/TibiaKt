@@ -2,9 +2,9 @@ package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.core.builders.CharacterBuilder
 import com.galarzaa.tibiakt.core.enums.StringEnum
+import com.galarzaa.tibiakt.core.exceptions.ParsingException
 import com.galarzaa.tibiakt.core.models.character.Character
 import com.galarzaa.tibiakt.core.models.character.Killer
-import com.galarzaa.tibiakt.core.utils.ParsingException
 import com.galarzaa.tibiakt.core.utils.clean
 import com.galarzaa.tibiakt.core.utils.getLinkInformation
 import com.galarzaa.tibiakt.core.utils.parsePopup

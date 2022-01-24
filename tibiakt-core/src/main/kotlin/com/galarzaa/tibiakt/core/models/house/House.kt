@@ -4,7 +4,7 @@ package com.galarzaa.tibiakt.core.models.house
 
 import com.galarzaa.tibiakt.core.enums.HouseStatus
 import com.galarzaa.tibiakt.core.enums.HouseType
-import com.galarzaa.tibiakt.core.utils.InstantSerializer
+import com.galarzaa.tibiakt.core.serializers.InstantSerializer
 import com.galarzaa.tibiakt.core.utils.getCharacterUrl
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers

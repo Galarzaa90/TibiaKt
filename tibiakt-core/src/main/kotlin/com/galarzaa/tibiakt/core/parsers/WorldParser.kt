@@ -4,8 +4,8 @@ import com.galarzaa.tibiakt.core.builders.WorldBuilder
 import com.galarzaa.tibiakt.core.enums.BattlEyeType
 import com.galarzaa.tibiakt.core.enums.StringEnum
 import com.galarzaa.tibiakt.core.enums.TransferType
+import com.galarzaa.tibiakt.core.exceptions.ParsingException
 import com.galarzaa.tibiakt.core.models.world.World
-import com.galarzaa.tibiakt.core.utils.ParsingException
 import com.galarzaa.tibiakt.core.utils.clean
 import com.galarzaa.tibiakt.core.utils.getContaining
 import com.galarzaa.tibiakt.core.utils.offsetStart

@@ -3,8 +3,17 @@ package com.galarzaa.tibiakt.core.parsers
 import com.galarzaa.tibiakt.core.builders.HouseBuilder
 import com.galarzaa.tibiakt.core.enums.HouseStatus
 import com.galarzaa.tibiakt.core.enums.StringEnum
+import com.galarzaa.tibiakt.core.exceptions.ParsingException
 import com.galarzaa.tibiakt.core.models.house.House
-import com.galarzaa.tibiakt.core.utils.*
+import com.galarzaa.tibiakt.core.utils.cells
+import com.galarzaa.tibiakt.core.utils.clean
+import com.galarzaa.tibiakt.core.utils.cleanText
+import com.galarzaa.tibiakt.core.utils.findInteger
+import com.galarzaa.tibiakt.core.utils.parseInteger
+import com.galarzaa.tibiakt.core.utils.parseThousandSuffix
+import com.galarzaa.tibiakt.core.utils.parseTibiaDateTime
+import com.galarzaa.tibiakt.core.utils.remove
+import com.galarzaa.tibiakt.core.utils.replaceBrs
 
 object HouseParser : Parser<House?> {
     private val rentedPattern =

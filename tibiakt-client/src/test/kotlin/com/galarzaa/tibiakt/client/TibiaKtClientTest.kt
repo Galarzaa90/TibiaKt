@@ -1,6 +1,6 @@
 package com.galarzaa.tibiakt.client
 
-import com.galarzaa.tibiakt.client.models.ForbiddenException
+import com.galarzaa.tibiakt.client.exceptions.ForbiddenException
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.ktor.client.engine.mock.MockEngine

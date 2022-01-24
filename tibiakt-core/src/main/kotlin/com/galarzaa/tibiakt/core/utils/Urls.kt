@@ -252,6 +252,9 @@ private fun BazaarFilters?.getQueryParams(): Array<P<String, Any?>> {
     ) else emptyArray()
 }
 
+/**
+ * Get the URL to the CM Post Archive in Tibia.com
+ */
 fun getCMPostArchiveUrl(startDate: LocalDate, endDate: LocalDate, page: Int = 1): String {
     return buildTibiaUrl("forum",
         "forum",
@@ -265,12 +268,25 @@ fun getCMPostArchiveUrl(startDate: LocalDate, endDate: LocalDate, page: Int = 1)
         P("currentpage", page))
 }
 
+
+/**
+ * Get the URL of a forum post with a specific [postId] in Tibia.com.
+ */
 fun getForumPostUrl(postId: Int): String =
     buildTibiaUrl("forum", P("action", "thread"), P("postid", postId), anchor = "post$postId")
 
+/**
+ * Get the URL to the Leaderboard of a specific [world] in Tibia.com.
+ */
 fun getLeaderboardUrl(world: String, rotation: Int? = null, page: Int = 1): String =
     buildTibiaUrl("community", "leaderboards", P("world", world), P("rotation", rotation), P("currentpage", page))
 
+/**
+ * Get the URL to the Creatures section in Tibia.com.
+ */
 fun getCreaturesSectionUrl() = buildTibiaUrl("library", "creatures")
 
+/**
+ * Get the URL to a specific creature in Tibia.com.
+ */
 fun getCreatureUrl(identifier: String) = buildTibiaUrl("library", "creatures", P("race", identifier))

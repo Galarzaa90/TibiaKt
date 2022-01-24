@@ -1,8 +1,12 @@
 package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.core.builders.NewsBuilder
+import com.galarzaa.tibiakt.core.exceptions.ParsingException
 import com.galarzaa.tibiakt.core.models.news.News
-import com.galarzaa.tibiakt.core.utils.*
+import com.galarzaa.tibiakt.core.utils.cleanText
+import com.galarzaa.tibiakt.core.utils.getLinkInformation
+import com.galarzaa.tibiakt.core.utils.parseTibiaDate
+import com.galarzaa.tibiakt.core.utils.remove
 
 object NewsParser : Parser<News?> {
     override fun fromContent(content: String): News? = fromContent(content, 0)

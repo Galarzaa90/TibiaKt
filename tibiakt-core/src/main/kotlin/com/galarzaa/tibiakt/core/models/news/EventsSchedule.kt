@@ -2,7 +2,7 @@
 
 package com.galarzaa.tibiakt.core.models.news
 
-import com.galarzaa.tibiakt.core.utils.YearMonthSerializer
+import com.galarzaa.tibiakt.core.serializers.YearMonthSerializer
 import com.galarzaa.tibiakt.core.utils.getEventsScheduleUrl
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers

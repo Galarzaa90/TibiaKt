@@ -1,8 +1,8 @@
 @file:UseSerializers(InstantSerializer::class)
 
-package com.galarzaa.tibiakt.client.models
+package com.galarzaa.tibiakt.client
 
-import com.galarzaa.tibiakt.core.utils.InstantSerializer
+import com.galarzaa.tibiakt.core.serializers.InstantSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import java.time.Instant
@@ -16,7 +16,7 @@ import java.time.Instant
  * @property fetchingTime The time it took to fetch the content from Tibia.com in seconds.
  * @property parsingTime The time it took to parse the content into data in seconds.
  * @property data The data parsed from Tibia.com.
- * @property T The type of the data returned.
+ * @param T The type of the data returned.
  */
 @Serializable
 data class TibiaResponse<T>(

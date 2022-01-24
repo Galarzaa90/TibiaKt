@@ -4,8 +4,8 @@ import com.galarzaa.tibiakt.core.builders.NewsArchiveBuilder
 import com.galarzaa.tibiakt.core.enums.NewsCategory
 import com.galarzaa.tibiakt.core.enums.NewsType
 import com.galarzaa.tibiakt.core.enums.StringEnum
+import com.galarzaa.tibiakt.core.exceptions.ParsingException
 import com.galarzaa.tibiakt.core.models.news.NewsArchive
-import com.galarzaa.tibiakt.core.utils.ParsingException
 import com.galarzaa.tibiakt.core.utils.cells
 import com.galarzaa.tibiakt.core.utils.cleanText
 import com.galarzaa.tibiakt.core.utils.formData

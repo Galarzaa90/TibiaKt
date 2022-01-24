@@ -12,9 +12,9 @@ import com.galarzaa.tibiakt.core.enums.AuctionVocationFilter
 import com.galarzaa.tibiakt.core.enums.BazaarType
 import com.galarzaa.tibiakt.core.enums.IntEnum
 import com.galarzaa.tibiakt.core.enums.PvpType
+import com.galarzaa.tibiakt.core.exceptions.ParsingException
 import com.galarzaa.tibiakt.core.models.bazaar.CharacterBazaar
 import com.galarzaa.tibiakt.core.parsers.AuctionParser.parseAuctionContainer
-import com.galarzaa.tibiakt.core.utils.ParsingException
 import com.galarzaa.tibiakt.core.utils.formData
 import com.galarzaa.tibiakt.core.utils.nullIfBlank
 import com.galarzaa.tibiakt.core.utils.parseInteger

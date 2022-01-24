@@ -2,7 +2,7 @@
 
 package com.galarzaa.tibiakt.core.models.guild
 
-import com.galarzaa.tibiakt.core.utils.LocalDateSerializer
+import com.galarzaa.tibiakt.core.serializers.LocalDateSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import java.time.LocalDate

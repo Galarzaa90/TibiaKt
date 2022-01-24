@@ -2,7 +2,7 @@
 
 package com.galarzaa.tibiakt.core.models.character
 
-import com.galarzaa.tibiakt.core.utils.InstantSerializer
+import com.galarzaa.tibiakt.core.serializers.InstantSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import java.time.Instant

@@ -2,8 +2,8 @@ package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.core.builders.GuildBuilder
 import com.galarzaa.tibiakt.core.enums.StringEnum
+import com.galarzaa.tibiakt.core.exceptions.ParsingException
 import com.galarzaa.tibiakt.core.models.guild.Guild
-import com.galarzaa.tibiakt.core.utils.ParsingException
 import com.galarzaa.tibiakt.core.utils.boxContent
 import com.galarzaa.tibiakt.core.utils.clean
 import com.galarzaa.tibiakt.core.utils.nullIfBlank

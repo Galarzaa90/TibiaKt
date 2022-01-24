@@ -1,10 +1,8 @@
 package com.galarzaa.tibiakt.client
 
-import com.galarzaa.tibiakt.client.models.AjaxResponse
-import com.galarzaa.tibiakt.client.models.AuctionPagesType
-import com.galarzaa.tibiakt.client.models.ForbiddenException
-import com.galarzaa.tibiakt.client.models.NetworkException
-import com.galarzaa.tibiakt.client.models.TibiaResponse
+import com.galarzaa.tibiakt.client.exceptions.AjaxResponse
+import com.galarzaa.tibiakt.client.exceptions.ForbiddenException
+import com.galarzaa.tibiakt.client.exceptions.NetworkException
 import com.galarzaa.tibiakt.core.enums.BazaarType
 import com.galarzaa.tibiakt.core.enums.HighscoresBattlEyeType
 import com.galarzaa.tibiakt.core.enums.HighscoresCategory
@@ -100,8 +98,24 @@ import kotlin.system.measureTimeMillis
 /**
  * A coroutine based client to fetch from Tibia.com
  */
-open class TibiaKtClient internal constructor(engine: HttpClientEngine) {
-    constructor() : this(CIO.create())
+open class TibiaKtClient internal constructor(engine: HttpClientEngine, userAgent: String? = null) {
+
+    /**
+     * Creates an instance of the client.
+     *
+     * @param userAgent The value that will be sent in the User-Agent header of every request.
+     */
+    constructor(userAgent: String? = null) : this(CIO.create(), userAgent)
+
+    private val client = HttpClient(engine) {
+        ContentEncoding {
+            gzip()
+            deflate()
+        }
+        install(UserAgent) {
+            agent = userAgent ?: "TibiaKtClient/? ktor/? Kotlin/${KotlinVersion.CURRENT}"
+        }
+    }
 
     /**
      * Perform a request using the required headers.
@@ -136,16 +150,6 @@ open class TibiaKtClient internal constructor(engine: HttpClientEngine) {
         }
         logger.info { "$url | ${method.value.uppercase()} | ${response.status.value} ${response.status.description} | ${response.fetchingTimeMillis}ms" }
         return response
-    }
-
-    private val client = HttpClient(engine) {
-        ContentEncoding {
-            gzip()
-            deflate()
-        }
-        install(UserAgent) {
-            agent = "TibiaKtClient"
-        }
     }
 
     // region News Section

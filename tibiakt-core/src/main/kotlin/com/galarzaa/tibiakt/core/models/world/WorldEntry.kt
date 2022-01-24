@@ -5,7 +5,7 @@ package com.galarzaa.tibiakt.core.models.world
 import com.galarzaa.tibiakt.core.enums.BattlEyeType
 import com.galarzaa.tibiakt.core.enums.PvpType
 import com.galarzaa.tibiakt.core.enums.TransferType
-import com.galarzaa.tibiakt.core.utils.LocalDateSerializer
+import com.galarzaa.tibiakt.core.serializers.LocalDateSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import java.time.LocalDate

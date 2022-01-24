@@ -1,4 +1,4 @@
-package com.galarzaa.tibiakt.client.models
+package com.galarzaa.tibiakt.client
 
 internal enum class AuctionPagesType(val typeId: Int) {
     ITEMS(0),

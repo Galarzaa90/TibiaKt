@@ -2,8 +2,8 @@ package com.galarzaa.tibiakt.core.parsers
 
 
 import com.galarzaa.tibiakt.core.builders.KillStatisticsBuilder
+import com.galarzaa.tibiakt.core.exceptions.ParsingException
 import com.galarzaa.tibiakt.core.models.KillStatistics
-import com.galarzaa.tibiakt.core.utils.ParsingException
 import com.galarzaa.tibiakt.core.utils.cellsText
 import com.galarzaa.tibiakt.core.utils.formData
 import com.galarzaa.tibiakt.core.utils.offsetStart

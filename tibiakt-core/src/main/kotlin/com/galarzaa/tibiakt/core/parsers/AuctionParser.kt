@@ -4,6 +4,7 @@ import com.galarzaa.tibiakt.core.builders.AuctionBuilder
 import com.galarzaa.tibiakt.core.builders.AuctionDetailsBuilder
 import com.galarzaa.tibiakt.core.enums.AuctionStatus
 import com.galarzaa.tibiakt.core.enums.StringEnum
+import com.galarzaa.tibiakt.core.exceptions.ParsingException
 import com.galarzaa.tibiakt.core.models.bazaar.AchievementEntry
 import com.galarzaa.tibiakt.core.models.bazaar.Auction
 import com.galarzaa.tibiakt.core.models.bazaar.AuctionSkills
@@ -19,7 +20,6 @@ import com.galarzaa.tibiakt.core.models.bazaar.Mounts
 import com.galarzaa.tibiakt.core.models.bazaar.OutfitEntry
 import com.galarzaa.tibiakt.core.models.bazaar.Outfits
 import com.galarzaa.tibiakt.core.models.bazaar.SalesArgument
-import com.galarzaa.tibiakt.core.utils.ParsingException
 import com.galarzaa.tibiakt.core.utils.cellsText
 import com.galarzaa.tibiakt.core.utils.clean
 import com.galarzaa.tibiakt.core.utils.cleanText
@@ -286,7 +286,7 @@ object AuctionParser : Parser<Auction?> {
         val outfitImageUrl = auctionContainer.selectFirst("img.AuctionOutfitImage")?.attr("src")
             ?: throw ParsingException("outfit image not found")
         val (_, outfitId, addons) = idAddonsRegex.find(outfitImageUrl)?.groupValues
-            ?: throw ParsingException("image url does not match expected pattern")
+            ?: throw ParsingException("image URL does not match expected pattern")
 
         auctionContainer.select(".CVIcon").forEach {
             parseDisplayedItem(it)?.run { builder.addDisplayedItem(this) }

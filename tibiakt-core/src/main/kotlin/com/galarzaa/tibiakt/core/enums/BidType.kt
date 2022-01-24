@@ -5,7 +5,7 @@ package com.galarzaa.tibiakt.core.enums
  */
 enum class BidType(override val value: String) : StringEnum {
     /**
-     * The current maximum bid, meaning the auction has received at least one bid.
+     * The current highest bid, meaning the auction has received at least one bid.
      */
     CURRENT("Current Bid"),
 

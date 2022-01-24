@@ -6,10 +6,10 @@ import java.time.LocalDateTime
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeParseException
-import java.util.*
+import java.util.Locale
 
 /**
- * Parses a string containing date and time from Tibia.com into an Instant instance.
+ * Parses a string containing date and time from Tibia.com into an [Instant] instance.
  */
 fun parseTibiaDateTime(input: String): Instant {
     val timeString = input.clean().substring(0, input.length - 4).trim()
@@ -22,14 +22,14 @@ fun parseTibiaDateTime(input: String): Instant {
 }
 
 /**
- * Parses a string containing date from Tibia.com into an Instant instance.
+ * Parses a string containing date from Tibia.com into an [LocalDate] instance.
  */
 fun parseTibiaDate(input: String): LocalDate {
     return LocalDate.parse(input.clean(), DateTimeFormatter.ofPattern("MMM dd yyyy", Locale.US))
 }
 
 /**
- * Parses a string containing date from Tibia.com into an Instant instance.
+ * Parses a string containing date from Tibia.com into an [LocalDate] instance.
  */
 fun parseTibiaFullDate(input: String): LocalDate {
     return LocalDate.parse(input.clean(), DateTimeFormatter.ofPattern("MMMM d, yyyy", Locale.US))

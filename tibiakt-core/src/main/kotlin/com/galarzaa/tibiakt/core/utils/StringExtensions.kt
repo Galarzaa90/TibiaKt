@@ -24,14 +24,24 @@ fun String.remove(value: String, ignoreCase: Boolean = false): String {
  * Clean the string of non-breaking spaces and trims whitespace.
  */
 fun String.clean(): String {
-    return replace("\u00A0", " ")
-        .replace("&#xa0;", " ")
-        .trim()
+    return replace("\u00A0", " ").replace("&#xa0;", " ").trim()
 }
 
-
+/**
+ * Parse a string into an integer, removing any thousand separators.
+ */
 fun String.parseInteger(): Int = remove(",").trim().toInt()
+
+/**
+ * Parse a string into a long integer, removing any thousand separators.
+ */
 fun String.parseLong(): Long = remove(",").trim().toLong()
+
+/**
+ * Find and parse an integer from a string, ignoring everything that is not a digit.
+ *
+ * Note that this may cause unexpected results such as "I have 2 apples and 3 oranges" being converted into 23.
+ */
 fun String.findInteger(): Int = filter { it.isDigit() }.toInt()
 
 /**

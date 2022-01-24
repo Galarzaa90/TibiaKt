@@ -4,7 +4,7 @@ package com.galarzaa.tibiakt.core.models.forums
 
 
 import com.galarzaa.tibiakt.core.models.Paginated
-import com.galarzaa.tibiakt.core.utils.LocalDateSerializer
+import com.galarzaa.tibiakt.core.serializers.LocalDateSerializer
 import com.galarzaa.tibiakt.core.utils.getCMPostArchiveUrl
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers

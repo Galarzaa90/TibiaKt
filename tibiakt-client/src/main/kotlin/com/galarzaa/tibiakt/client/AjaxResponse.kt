@@ -1,4 +1,4 @@
-package com.galarzaa.tibiakt.client.models
+package com.galarzaa.tibiakt.client.exceptions
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

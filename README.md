@@ -46,13 +46,20 @@ This is not actually a package you can add to your dependencies, but rather a st
 
 Running this will create a server exposing endpoints to serve Tibia data in JSON.
 
+#### Docker
+
 It is also available on docker:   
 [![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/galarzaa90/tibiakt?sort=semver)
 ![Docker Image Version (latest semver)](https://img.shields.io/docker/v/galarzaa90/tibiakt?sort=semver)
 ![Docker Pulls](https://img.shields.io/docker/pulls/galarzaa90/tibiakt)
 ](https://hub.docker.com/repository/docker/galarzaa90/tibiakt)
 
-Example:
+```shell
+docker pull galarzaa90/tibiakt
+docker run --rm -ti -p 8080:8080 galarzaa90/tibiakt
+```
+
+#### Example
 
 **GET** `/characters/Galarzaa+Fidera`
 

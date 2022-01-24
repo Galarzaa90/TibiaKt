@@ -2,7 +2,7 @@
 
 package com.galarzaa.tibiakt.core.models.world
 
-import com.galarzaa.tibiakt.core.utils.InstantSerializer
+import com.galarzaa.tibiakt.core.serializers.InstantSerializer
 import com.galarzaa.tibiakt.core.utils.getWorldOverviewUrl
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers

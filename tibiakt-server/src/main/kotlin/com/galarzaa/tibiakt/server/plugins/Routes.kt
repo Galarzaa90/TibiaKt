@@ -3,7 +3,7 @@
 package com.galarzaa.tibiakt.server.plugins
 
 import com.galarzaa.tibiakt.client.TibiaKtClient
-import com.galarzaa.tibiakt.client.models.TibiaResponse
+import com.galarzaa.tibiakt.client.TibiaResponse
 import com.galarzaa.tibiakt.core.models.bazaar.BazaarFilters
 import io.ktor.application.Application
 import io.ktor.application.ApplicationCall
