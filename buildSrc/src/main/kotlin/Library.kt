@@ -5,7 +5,7 @@ object Library {
             val tag = System.getenv("GITHUB_TAG_NAME")
             val branch = System.getenv("GITHUB_BRANCH_NAME")
             return when {
-                !tag.isNullOrBlank() -> tag
+                !tag.isNullOrBlank() -> tag.replace("v", "")
                 !branch.isNullOrBlank() && branch.startsWith("refs/heads/") ->
                     branch.substringAfter("refs/heads/").replace("/", "-") + "-SNAPSHOT"
                 else -> "undefined"
