@@ -10,6 +10,9 @@ RUN ./gradlew build -x check --parallel --continue > /dev/null 2>&1 || true
 COPY . /home/gradle/app
 RUN ./gradlew build -x test shadowJar --parallel
 
+FROM adoptopenjdk/openjdk16:debianslim-jre
+COPY --from=builder ./home/gradle/app/tibiakt-server/build/libs/tibiatk-server.jar .
+
 EXPOSE 8080
 
 LABEL maintainer="Allan Galarza <allan.galarza@gmail.com>"
@@ -21,6 +24,4 @@ LABEL org.opencontainers.image.vendor="Allan Galarza <allan.galarza@gmail.com>"
 LABEL org.opencontainers.image.title="TibiaKT"
 LABEL org.opencontainers.image.description="API that parses website content into Kotlin data."
 
-FROM adoptopenjdk/openjdk16:debianslim-jre
-COPY --from=builder ./home/gradle/app/tibiakt-server/build/libs/tibiatk-server.jar .
 CMD [ "java", "-jar",  "./tibiatk-server.jar" ]

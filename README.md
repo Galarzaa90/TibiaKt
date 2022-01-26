@@ -2,14 +2,56 @@
 
 Kotlin library to fetch and parse Tibia.com pages.
 
-![Maven Central](https://img.shields.io/maven-central/v/com.galarzaa/tibiakt-core?label=maven)
-![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/Galarzaa90/TibiaKt?sort=semver)
-![GitHub commits since latest release (by SemVer)](https://img.shields.io/github/commits-since/Galarzaa90/TibiaKt/latest?sort=semver)
+![GitHub release](https://img.shields.io/github/v/release/Galarzaa90/TibiaKt?sort=semver)
+![GitHub commits since latest release](https://img.shields.io/github/commits-since/Galarzaa90/TibiaKt/latest?sort=semver)
 ![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/com.galarzaa/tibiakt-core?server=https%3A%2F%2Fs01.oss.sonatype.org)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=Galarzaa90_TibiaKt&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=Galarzaa90_TibiaKt)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=Galarzaa90_TibiaKt&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=Galarzaa90_TibiaKt)
 
 * [Dokka](https://galarzaa90.github.io/TibiaKt)
+* [Coverage](https://galarzaa90.github.io/TibiaKt/kover)
+
+## Installation
+
+The latest version available on maven central is:  
+![Maven Central](https://img.shields.io/maven-central/v/com.galarzaa/tibiakt-core?label=maven)
+
+For snapshots, use `{branch}-SNAPSHOT` (e.g. `main-SNAPSHOT`).
+
+### Groovy
+
+```groovy
+repositories {
+    mavenCentral()
+    // Only if you want to use snapshots
+    maven {
+        url "https://s01.oss.sonatype.org/content/repositories/snapshots"
+    }
+}
+
+dependencies {
+    implementation "com.galarzaa:tibiakt-core:{version}"
+    // OR
+    implementation "com.galarzaa:tibiakt-client:{version}"
+}
+
+```
+
+### Gradle Kotlin
+
+```kotlin
+repositories {
+    mavenCentral()
+    // Only if you want to use snapshots
+    maven("https://s01.oss.sonatype.org/content/repositories/snapshots")
+}
+
+dependencies {
+    implementation("com.galarzaa:tibiakt-core:{version}")
+    // OR
+    implementation("com.galarzaa:tibiakt-client:{version}")
+}
+```
 
 ## Usage
 
@@ -51,9 +93,11 @@ Running this will create a server exposing endpoints to serve Tibia data in JSON
 
 #### Docker
 
-It is also available on docker:   
-[![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/galarzaa90/tibiakt?sort=semver)
+A [Dockerfile](Dockerfile) is also available, or it can be pulled
+from [Docker Hub](https://hub.docker.com/repository/docker/galarzaa90/tibiakt)   
+[
 ![Docker Image Version (latest semver)](https://img.shields.io/docker/v/galarzaa90/tibiakt?sort=semver)
+![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/galarzaa90/tibiakt?sort=semver)
 ![Docker Pulls](https://img.shields.io/docker/pulls/galarzaa90/tibiakt)
 ](https://hub.docker.com/repository/docker/galarzaa90/tibiakt)
 
