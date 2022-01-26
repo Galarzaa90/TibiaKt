@@ -3,13 +3,6 @@ apply(plugin = "java-library")
 apply(plugin = "maven-publish")
 apply(plugin = "signing")
 
-val signingKey: String? by project
-val signingPassword: String? by project
-
-configure<SigningExtension> {
-    //useInMemoryPgpKeys(signingKey, signingPassword)
-}
-
 configure<JavaPluginExtension> {
     withJavadocJar()
     withSourcesJar()
@@ -17,8 +10,12 @@ configure<JavaPluginExtension> {
     targetCompatibility = JavaVersion.VERSION_1_8
 }
 
+fun Project.publishing(action: PublishingExtension.() -> Unit) = configure(action)
+fun Project.signing(configure: SigningExtension.() -> Unit): Unit = configure(configure)
+val publications: PublicationContainer = (extensions.getByName("publishing") as PublishingExtension).publications
+
 afterEvaluate {
-    configure<PublishingExtension> {
+    publishing {
         publications {
             register<MavenPublication>("mavenJar") {
                 from(components["java"])
@@ -45,3 +42,18 @@ afterEvaluate {
         }
     }
 }
+
+signing {
+    val signingId: String? = System.getenv("GPG_ID")
+    val signingKey: String? = System.getenv("GPG_KEY")
+    val signingPassword = System.getenv("GPG_PASS")
+    if (signingKey != null && !Library.isSnapshot) {
+        useInMemoryPgpKeys(
+            signingId,
+            signingKey,
+            signingPassword,
+        )
+    }
+    sign(publications)
+}
+
