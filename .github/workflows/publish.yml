@@ -30,7 +30,7 @@ jobs:
       - name: 🚀 Publish
         uses: gradle/gradle-build-action@v2
         with:
-          arguments: -x test publishToSonatype closeAndReleaseStagingRepository
+          arguments: -x test publishReleasePublicationToMavenRepository closeAndReleaseStagingRepository
         env:
           SONATYPE_USER: ${{secrets.SONATYPE_USER}}
           SONATYPE_PASSWORD: ${{secrets.SONATYPE_PASSWORD}}

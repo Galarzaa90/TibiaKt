@@ -17,7 +17,7 @@ val publications: PublicationContainer = (extensions.getByName("publishing") as 
 afterEvaluate {
     publishing {
         publications {
-            register<MavenPublication>("mavenJar") {
+            register<MavenPublication>("release") {
                 from(components["java"])
                 version = Library.version
                 groupId = Library.group
