@@ -14,26 +14,9 @@ plugins {
     id("org.sonarqube") version "3.3"
 }
 
-
-
 group = "com.galarzaa"
 version = "0.1.0"
 
-kover {
-
-}
-
-
-nexusPublishing {
-    repositories {
-        sonatype {
-            username.set(sonatypeUsername ?: System.getenv("SONATYPE_USER") ?: "")
-            password.set(sonatypePassword ?: System.getenv("SONATYPE_PASSWORD") ?: "")
-            nexusUrl.set(uri(Repo.releasesUrl))
-            snapshotRepositoryUrl.set(uri(Repo.snapshotsUrl))
-        }
-    }
-}
 
 allprojects {
     repositories {
@@ -50,7 +33,6 @@ tasks.koverMergedHtmlReport {
     htmlReportDir.set(layout.buildDirectory.dir("kover/"))
     excludes = listOf("com.galarzaa.tibiakt.server.*")
 }
-
 
 
 sonarqube {

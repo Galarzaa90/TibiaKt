@@ -36,7 +36,16 @@ afterEvaluate {
                             url.set("https://galarzaa.com/")
                         }
                     }
-
+                }
+            }
+        }
+        repositories {
+            maven {
+                url = if (Library.isRelease) uri(Repo.releasesUrl) else uri(Repo.snapshotsUrl)
+                println(url)
+                credentials {
+                    username = System.getenv("SONATYPE_USER") ?: ""
+                    password = System.getenv("SONATYPE_PASSWORD") ?: ""
                 }
             }
         }
@@ -53,7 +62,7 @@ signing {
             signingKey,
             signingPassword,
         )
+        sign(publications)
     }
-    sign(publications)
 }
 
