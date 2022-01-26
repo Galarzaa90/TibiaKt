@@ -47,7 +47,7 @@ signing {
     val signingId: String? = System.getenv("GPG_ID")
     val signingKey: String? = System.getenv("GPG_KEY")
     val signingPassword = System.getenv("GPG_PASS")
-    if (signingKey != null && !Library.isSnapshot) {
+    if (signingKey != null && !Library.isRelease) {
         useInMemoryPgpKeys(
             signingId,
             signingKey,

@@ -4,12 +4,14 @@ object Library {
         get() {
             val tag = System.getenv("GITHUB_TAG_NAME")
             val branch = System.getenv("GITHUB_BRANCH_NAME")
-            return when {
+            val out = when {
                 !tag.isNullOrBlank() -> tag.replace("v", "")
                 !branch.isNullOrBlank() && branch.startsWith("refs/heads/") ->
                     branch.substringAfter("refs/heads/").replace("/", "-") + "-SNAPSHOT"
                 else -> "undefined"
             }
+            println("Version: ${out}")
+            return out
         }
     val isSnapshot: Boolean get() = version.endsWith("-SNAPSHOT")
     val isRelease: Boolean get() = !isSnapshot && !isUndefined

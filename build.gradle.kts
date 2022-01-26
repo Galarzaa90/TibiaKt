@@ -17,7 +17,7 @@ plugins {
 
 
 group = "com.galarzaa"
-version = "1.0-SNAPSHOT"
+version = "0.1.0"
 
 kover {
 
