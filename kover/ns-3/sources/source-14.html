@@ -70,10 +70,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    93.1%
+    92.6%
   </span>
   <span class="absValue">
-    (27/29)
+    (25/27)
   </span>
 </td>
 </tr>
@@ -118,32 +118,27 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">31</i>&nbsp;        premiumRestricted: Boolean,
 <i class="no-highlight">32</i>&nbsp;        experimental: Boolean,
 <b class="fc"><i class="no-highlight">33</i>&nbsp;    ) = apply {</b>
-<b class="fc"><i class="no-highlight">34</i>&nbsp;        worlds.add(</b>
-<b class="fc"><i class="no-highlight">35</i>&nbsp;            WorldEntry(</b>
-<b class="fc"><i class="no-highlight">36</i>&nbsp;                name,</b>
-<b class="fc"><i class="no-highlight">37</i>&nbsp;                isOnline,</b>
-<b class="fc"><i class="no-highlight">38</i>&nbsp;                onlineCount,</b>
-<b class="fc"><i class="no-highlight">39</i>&nbsp;                location,</b>
-<b class="fc"><i class="no-highlight">40</i>&nbsp;                pvpType,</b>
-<b class="fc"><i class="no-highlight">41</i>&nbsp;                battlEyeType,</b>
-<b class="fc"><i class="no-highlight">42</i>&nbsp;                battlEyeStart,</b>
-<b class="fc"><i class="no-highlight">43</i>&nbsp;                transferType,</b>
-<b class="fc"><i class="no-highlight">44</i>&nbsp;                premiumRestricted,</b>
-<b class="fc"><i class="no-highlight">45</i>&nbsp;                experimental</b>
-<i class="no-highlight">46</i>&nbsp;            )
-<i class="no-highlight">47</i>&nbsp;        )
-<b class="fc"><i class="no-highlight">48</i>&nbsp;    }</b>
-<i class="no-highlight">49</i>&nbsp;
-<i class="no-highlight">50</i>&nbsp;    fun build(): WorldOverview {
-<b class="fc"><i class="no-highlight">51</i>&nbsp;        return WorldOverview(</b>
-<b class="pc"><i class="no-highlight">52</i>&nbsp;            overallMaximumCount = overallMaximumCount</b>
-<b class="nc"><i class="no-highlight">53</i>&nbsp;                ?: throw IllegalStateException(&quot;overallMaximumCount is required&quot;),</b>
-<b class="pc"><i class="no-highlight">54</i>&nbsp;            overallMaximumCountDateTime = overallMaximumCountDateTime</b>
-<b class="nc"><i class="no-highlight">55</i>&nbsp;                ?: throw IllegalStateException(&quot;overallMaximumCountDateTime is required&quot;),</b>
-<b class="fc"><i class="no-highlight">56</i>&nbsp;            worlds = worlds</b>
-<i class="no-highlight">57</i>&nbsp;        )
-<i class="no-highlight">58</i>&nbsp;    }
-<i class="no-highlight">59</i>&nbsp;}
+<b class="fc"><i class="no-highlight">34</i>&nbsp;        worlds.add(WorldEntry(name,</b>
+<b class="fc"><i class="no-highlight">35</i>&nbsp;            isOnline,</b>
+<b class="fc"><i class="no-highlight">36</i>&nbsp;            onlineCount,</b>
+<b class="fc"><i class="no-highlight">37</i>&nbsp;            location,</b>
+<b class="fc"><i class="no-highlight">38</i>&nbsp;            pvpType,</b>
+<b class="fc"><i class="no-highlight">39</i>&nbsp;            battlEyeType,</b>
+<b class="fc"><i class="no-highlight">40</i>&nbsp;            battlEyeStart,</b>
+<b class="fc"><i class="no-highlight">41</i>&nbsp;            transferType,</b>
+<b class="fc"><i class="no-highlight">42</i>&nbsp;            premiumRestricted,</b>
+<b class="fc"><i class="no-highlight">43</i>&nbsp;            experimental))</b>
+<b class="fc"><i class="no-highlight">44</i>&nbsp;    }</b>
+<i class="no-highlight">45</i>&nbsp;
+<i class="no-highlight">46</i>&nbsp;    fun build(): WorldOverview {
+<b class="pc"><i class="no-highlight">47</i>&nbsp;        return WorldOverview(overallMaximumCount = overallMaximumCount</b>
+<b class="nc"><i class="no-highlight">48</i>&nbsp;            ?: throw IllegalStateException(&quot;overallMaximumCount is required&quot;),</b>
+<b class="pc"><i class="no-highlight">49</i>&nbsp;            overallMaximumCountDateTime = overallMaximumCountDateTime</b>
+<b class="nc"><i class="no-highlight">50</i>&nbsp;                ?: throw IllegalStateException(&quot;overallMaximumCountDateTime is required&quot;),</b>
+<b class="fc"><i class="no-highlight">51</i>&nbsp;            worlds = worlds,</b>
+<b class="fc"><i class="no-highlight">52</i>&nbsp;            tournamentWorlds = tournamentWorlds)</b>
+<i class="no-highlight">53</i>&nbsp;    }
+<i class="no-highlight">54</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -170,7 +165,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-01-26 20:35</div>
+    <div style="float:right;">generated on 2022-02-25 20:14</div>
 </div>
 </body>
 </html>

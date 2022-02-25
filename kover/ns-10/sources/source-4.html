@@ -251,7 +251,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">130</i>&nbsp;    private fun parseAccountBadges(rows: Elements, builder: CharacterBuilder) {
 <b class="fc"><i class="no-highlight">131</i>&nbsp;        val row = rows[0]</b>
 <b class="fc"><i class="no-highlight">132</i>&nbsp;        for (column: Element in row.select(&quot;td&quot;)) {</b>
-<b class="pc"><i class="no-highlight">133</i>&nbsp;            val popupSpan = column.select(&quot;span.HelperDivIndicator&quot;) ?: return</b>
+<b class="pc"><i class="no-highlight">133</i>&nbsp;            val popupSpan = column.selectFirst(&quot;span.HelperDivIndicator&quot;) ?: return</b>
 <b class="fc"><i class="no-highlight">134</i>&nbsp;            val (title: String, popupContent: Document) = parsePopup(popupSpan.attr(&quot;onmouseover&quot;))</b>
 <b class="fc"><i class="no-highlight">135</i>&nbsp;            val description = popupContent.text()</b>
 <b class="pc"><i class="no-highlight">136</i>&nbsp;            val imageUrl = column.selectFirst(&quot;img&quot;)?.attr(&quot;src&quot;)</b>
@@ -388,7 +388,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-01-26 20:35</div>
+    <div style="float:right;">generated on 2022-02-25 20:14</div>
 </div>
 </body>
 </html>
