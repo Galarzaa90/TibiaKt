@@ -138,7 +138,7 @@ object AuctionParser : Parser<Auction?> {
 
     private fun parseFamiliarsTable(table: Element): Familiars {
         val paginationData =
-            table.selectFirst("div.BlockPageNavigationRow")?.parsePagination() ?: return Familiars(1, 0, 0)
+            table.selectFirst("div.BlockPageNavigationRow")?.parsePagination() ?: return Familiars(1, 0, 0, emptyList(), false)
         val familiarBoxes = table.select("div.CVIcon")
         val familiars = mutableListOf<FamiliarEntry>()
         for (mountBox in familiarBoxes) {
@@ -147,34 +147,34 @@ object AuctionParser : Parser<Auction?> {
                 ?: throw ParsingException("familiar image did not match expected pattern")
             familiars.add(FamiliarEntry(name, id.toInt()))
         }
-        return Familiars(paginationData.currentPage, paginationData.totalPages, paginationData.resultsCount, familiars)
+        return Familiars(paginationData.currentPage, paginationData.totalPages, paginationData.resultsCount, familiars, false)
     }
 
     private fun parseOutfitsTable(table: Element): Outfits {
         val paginationData =
-            table.selectFirst("div.BlockPageNavigationRow")?.parsePagination() ?: return Outfits(1, 0, 0)
+            table.selectFirst("div.BlockPageNavigationRow")?.parsePagination() ?: return Outfits(1, 0, 0, emptyList(), false)
         val outfitBoxes = table.select("div.CVIcon")
         val outfits = outfitBoxes.map { parseDisplayedOutfit(it) }
-        return Outfits(paginationData.currentPage, paginationData.totalPages, paginationData.resultsCount, outfits)
+        return Outfits(paginationData.currentPage, paginationData.totalPages, paginationData.resultsCount, outfits, false)
     }
 
     private fun parseMountsTable(mountsTable: Element): Mounts {
         val paginationData =
-            mountsTable.selectFirst("div.BlockPageNavigationRow")?.parsePagination() ?: return Mounts(1, 0, 0)
+            mountsTable.selectFirst("div.BlockPageNavigationRow")?.parsePagination() ?: return Mounts(1, 0, 0, emptyList(), false)
         val mountsBoxes = mountsTable.select("div.CVIcon")
         val mounts = mountsBoxes.map { parseDisplayedMount(it) }
-        return Mounts(paginationData.currentPage, paginationData.totalPages, paginationData.resultsCount, mounts)
+        return Mounts(paginationData.currentPage, paginationData.totalPages, paginationData.resultsCount, mounts, false)
     }
 
     private fun parseItemsTable(itemsTable: Element): ItemSummary {
         val paginationData =
-            itemsTable.selectFirst("div.BlockPageNavigationRow")?.parsePagination() ?: return ItemSummary(1, 0, 0)
+            itemsTable.selectFirst("div.BlockPageNavigationRow")?.parsePagination() ?: return ItemSummary(1, 0, 0, emptyList(), false)
         val itemBoxes = itemsTable.select("div.CVIcon")
         val items = mutableListOf<ItemEntry>()
         for (itemBox in itemBoxes) {
             parseDisplayedItem(itemBox)?.run { items.add(this) }
         }
-        return ItemSummary(paginationData.currentPage, paginationData.totalPages, paginationData.resultsCount, items)
+        return ItemSummary(paginationData.currentPage, paginationData.totalPages, paginationData.resultsCount, items, false)
     }
 
     private fun getAuctionTableFieldValue(row: Element): Pair<String, String> {

@@ -23,7 +23,7 @@ data class Leaderboards(
     override val currentPage: Int,
     override val totalPages: Int,
     override val resultsCount: Int,
-    override val entries: List<LeaderboardsEntry> = emptyList(),
+    override val entries: List<LeaderboardsEntry>,
 ) : Paginated<LeaderboardsEntry> {
 
     /**

@@ -42,13 +42,13 @@ data class World(
     val battlEyeType: BattlEyeType,
     val battlEyeStartDate: LocalDate?,
     val transferType: TransferType,
-    val isPremiumRestricted: Boolean = false,
-    val isExperimental: Boolean = false,
+    val isPremiumRestricted: Boolean ,
+    val isExperimental: Boolean,
     val onlineRecordCount: Int,
     val onlineRecordDateTime: Instant,
     val creationDate: YearMonth,
-    val worldQuests: List<String> = emptyList(),
-    val playersOnline: List<OnlineCharacter> = emptyList(),
+    val worldQuests: List<String> ,
+    val playersOnline: List<OnlineCharacter>,
 ) : BaseWorld {
 
     /** Check if a character from this world can be transferred to [target] world. */

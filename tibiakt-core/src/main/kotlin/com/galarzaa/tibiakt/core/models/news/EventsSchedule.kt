@@ -18,7 +18,7 @@ import java.time.YearMonth
 @Serializable
 data class EventsSchedule(
     val yearMonth: YearMonth,
-    val entries: List<EventEntry> = emptyList(),
+    val entries: List<EventEntry>,
 ) {
     /**
      * The URL of the events schedule of the month.

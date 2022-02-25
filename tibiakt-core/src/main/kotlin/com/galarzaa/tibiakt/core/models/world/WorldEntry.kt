@@ -33,6 +33,6 @@ data class WorldEntry(
     val battlEyeType: BattlEyeType,
     val battlEyeStartDate: LocalDate?,
     val transferType: TransferType,
-    val isPremiumRestricted: Boolean = false,
-    val isExperimental: Boolean = false,
+    val isPremiumRestricted: Boolean,
+    val isExperimental: Boolean,
 ) : BaseWorld

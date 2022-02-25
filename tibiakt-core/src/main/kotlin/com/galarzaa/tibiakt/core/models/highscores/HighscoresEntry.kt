@@ -22,5 +22,5 @@ data class HighscoresEntry(
     val world: String,
     val vocation: Vocation,
     val value: Long,
-    val additionalValue: String? = null
+    val additionalValue: String?
 ) : BaseCharacter

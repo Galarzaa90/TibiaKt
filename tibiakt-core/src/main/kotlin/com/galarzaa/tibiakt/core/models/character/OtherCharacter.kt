@@ -16,9 +16,9 @@ import kotlinx.serialization.Serializable
 data class OtherCharacter(
     override val name: String,
     val world: String,
-    val main: Boolean = false,
-    val isOnline: Boolean = false,
-    val isDeleted: Boolean = false,
-    val recentlyTraded: Boolean = false,
+    val main: Boolean,
+    val isOnline: Boolean,
+    val isDeleted: Boolean,
+    val recentlyTraded: Boolean,
     val position: String?
 ) : BaseCharacter

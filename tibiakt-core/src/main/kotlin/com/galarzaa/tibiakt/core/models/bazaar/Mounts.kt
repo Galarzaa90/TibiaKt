@@ -7,6 +7,6 @@ data class Mounts(
     override val currentPage: Int,
     override val totalPages: Int,
     override val resultsCount: Int,
-    override val entries: List<MountEntry> = emptyList(),
-    override val fullyFetched: Boolean = false,
+    override val entries: List<MountEntry>,
+    override val fullyFetched: Boolean,
 ) : AjaxPaginator<MountEntry>

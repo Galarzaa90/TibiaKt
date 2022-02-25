@@ -31,29 +31,24 @@ class WorldOverviewBuilder {
         premiumRestricted: Boolean,
         experimental: Boolean,
     ) = apply {
-        worlds.add(
-            WorldEntry(
-                name,
-                isOnline,
-                onlineCount,
-                location,
-                pvpType,
-                battlEyeType,
-                battlEyeStart,
-                transferType,
-                premiumRestricted,
-                experimental
-            )
-        )
+        worlds.add(WorldEntry(name,
+            isOnline,
+            onlineCount,
+            location,
+            pvpType,
+            battlEyeType,
+            battlEyeStart,
+            transferType,
+            premiumRestricted,
+            experimental))
     }
 
     fun build(): WorldOverview {
-        return WorldOverview(
-            overallMaximumCount = overallMaximumCount
-                ?: throw IllegalStateException("overallMaximumCount is required"),
+        return WorldOverview(overallMaximumCount = overallMaximumCount
+            ?: throw IllegalStateException("overallMaximumCount is required"),
             overallMaximumCountDateTime = overallMaximumCountDateTime
                 ?: throw IllegalStateException("overallMaximumCountDateTime is required"),
-            worlds = worlds
-        )
+            worlds = worlds,
+            tournamentWorlds = tournamentWorlds)
     }
 }

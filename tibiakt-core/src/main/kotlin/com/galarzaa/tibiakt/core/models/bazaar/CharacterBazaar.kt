@@ -18,7 +18,7 @@ data class CharacterBazaar(
     override val currentPage: Int,
     override val totalPages: Int,
     override val resultsCount: Int,
-    override val entries: List<Auction> = emptyList(),
+    override val entries: List<Auction>,
 ) : Paginated<Auction> {
     /**
      * The URL to the bazaar with the current filters and page.

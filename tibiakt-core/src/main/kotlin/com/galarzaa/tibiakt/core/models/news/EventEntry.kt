@@ -20,8 +20,8 @@ import java.time.Period
 data class EventEntry(
     val title: String,
     val description: String,
-    val startDate: LocalDate? = null,
-    val endDate: LocalDate? = null,
+    val startDate: LocalDate?,
+    val endDate: LocalDate?,
 ) {
     val duration: Period?
         get() = if (startDate != null && endDate != null) Period.between(startDate, endDate) else null

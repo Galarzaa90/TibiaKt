@@ -10,6 +10,6 @@ data class Outfits(
     override val currentPage: Int,
     override val totalPages: Int,
     override val resultsCount: Int,
-    override val entries: List<OutfitEntry> = emptyList(),
-    override val fullyFetched: Boolean = false,
+    override val entries: List<OutfitEntry>,
+    override val fullyFetched: Boolean,
 ) : AjaxPaginator<OutfitEntry>

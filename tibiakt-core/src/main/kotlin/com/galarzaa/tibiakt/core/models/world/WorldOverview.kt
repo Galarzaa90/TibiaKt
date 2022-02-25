@@ -18,8 +18,8 @@ import java.time.Instant
 data class WorldOverview(
     val overallMaximumCount: Int,
     val overallMaximumCountDateTime: Instant,
-    val worlds: List<WorldEntry> = emptyList(),
-    val tournamentWorlds: List<WorldEntry> = emptyList(),
+    val worlds: List<WorldEntry>,
+    val tournamentWorlds: List<WorldEntry>,
 ) {
     /**
      * The total of currently online players across worlds.

@@ -19,6 +19,6 @@ import java.time.Instant
 data class AccountInformation(
     val creation: Instant,
     val loyaltyTitle: String?,
-    val position: String? = null,
-    val tutorStars: Int? = null
+    val position: String?,
+    val tutorStars: Int?
 )

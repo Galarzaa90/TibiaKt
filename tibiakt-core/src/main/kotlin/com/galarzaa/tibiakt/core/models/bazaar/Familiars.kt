@@ -10,6 +10,6 @@ data class Familiars(
     override val currentPage: Int,
     override val totalPages: Int,
     override val resultsCount: Int,
-    override val entries: List<FamiliarEntry> = emptyList(),
-    override val fullyFetched: Boolean = false,
+    override val entries: List<FamiliarEntry>,
+    override val fullyFetched: Boolean,
 ) : AjaxPaginator<FamiliarEntry>

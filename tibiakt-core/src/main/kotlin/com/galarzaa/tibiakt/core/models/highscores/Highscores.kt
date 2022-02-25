@@ -28,13 +28,13 @@ data class Highscores(
     val world: String?,
     val category: HighscoresCategory,
     val vocation: HighscoresProfession,
-    val worldTypes: Set<PvpType> = emptySet(),
+    val worldTypes: Set<PvpType>,
     val battlEyeType: HighscoresBattlEyeType,
     val lastUpdate: Instant,
     override val currentPage: Int,
     override val totalPages: Int,
     override val resultsCount: Int,
-    override val entries: List<HighscoresEntry> = emptyList(),
+    override val entries: List<HighscoresEntry>,
 ) : Paginated<HighscoresEntry> {
 
     fun getPageUrl(page: Int) = getHighscoresUrl(world, category, vocation, page, battlEyeType, worldTypes)

@@ -14,6 +14,6 @@ import kotlinx.serialization.Serializable
 data class Killer(
     val name: String,
     val isPlayer: Boolean,
-    val summon: String? = null,
-    val traded: Boolean = false
+    val summon: String?,
+    val traded: Boolean
 )

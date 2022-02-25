@@ -22,7 +22,7 @@ import java.time.LocalDate
 data class NewsArchive(
     val startDate: LocalDate,
     val endDate: LocalDate,
-    val types: Set<NewsType> = emptySet(),
-    val categories: Set<NewsCategory> = emptySet(),
-    val entries: List<NewsEntry> = emptyList(),
+    val types: Set<NewsType>,
+    val categories: Set<NewsCategory>,
+    val entries: List<NewsEntry>,
 )
