@@ -130,7 +130,7 @@ object CharacterParser : Parser<Character?> {
     private fun parseAccountBadges(rows: Elements, builder: CharacterBuilder) {
         val row = rows[0]
         for (column: Element in row.select("td")) {
-            val popupSpan = column.select("span.HelperDivIndicator") ?: return
+            val popupSpan = column.selectFirst("span.HelperDivIndicator") ?: return
             val (title: String, popupContent: Document) = parsePopup(popupSpan.attr("onmouseover"))
             val description = popupContent.text()
             val imageUrl = column.selectFirst("img")?.attr("src")
