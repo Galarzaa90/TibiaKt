@@ -150,28 +150,29 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">2</i>&nbsp;
 <i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.enums.Vocation
 <i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.models.character.BaseCharacter
-<i class="no-highlight">5</i>&nbsp;import kotlinx.serialization.Serializable
-<i class="no-highlight">6</i>&nbsp;
-<i class="no-highlight">7</i>&nbsp;/**
-<i class="no-highlight">8</i>&nbsp; * An entry in the [Highscores].
-<i class="no-highlight">9</i>&nbsp; *
-<i class="no-highlight">10</i>&nbsp; * @property rank The rank of the character. Multiple entries might have the same rank if they are tied.
-<i class="no-highlight">11</i>&nbsp; * @property level The level of the character.
-<i class="no-highlight">12</i>&nbsp; * @property world The world of the character.
-<i class="no-highlight">13</i>&nbsp; * @property vocation The vocation of the character.
-<i class="no-highlight">14</i>&nbsp; * @property value The value of the entry (e.g. distance level, magic level, experience)
-<i class="no-highlight">15</i>&nbsp; * @property additionalValue Additional information displayed in some categories, such as Loyalty Title.
-<i class="no-highlight">16</i>&nbsp; */
-<b class="pc"><i class="no-highlight">17</i>&nbsp;@Serializable</b>
-<i class="no-highlight">18</i>&nbsp;data class HighscoresEntry(
-<b class="fc"><i class="no-highlight">19</i>&nbsp;    val rank: Int,</b>
-<b class="fc"><i class="no-highlight">20</i>&nbsp;    override val name: String,</b>
-<b class="fc"><i class="no-highlight">21</i>&nbsp;    val level: Int,</b>
-<b class="fc"><i class="no-highlight">22</i>&nbsp;    val world: String,</b>
-<b class="fc"><i class="no-highlight">23</i>&nbsp;    val vocation: Vocation,</b>
-<b class="fc"><i class="no-highlight">24</i>&nbsp;    val value: Long,</b>
-<b class="fc"><i class="no-highlight">25</i>&nbsp;    val additionalValue: String?</b>
-<i class="no-highlight">26</i>&nbsp;) : BaseCharacter
+<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.models.character.CharacterLevel
+<i class="no-highlight">6</i>&nbsp;import kotlinx.serialization.Serializable
+<i class="no-highlight">7</i>&nbsp;
+<i class="no-highlight">8</i>&nbsp;/**
+<i class="no-highlight">9</i>&nbsp; * An entry in the [Highscores].
+<i class="no-highlight">10</i>&nbsp; *
+<i class="no-highlight">11</i>&nbsp; * @property rank The rank of the character. Multiple entries might have the same rank if they are tied.
+<i class="no-highlight">12</i>&nbsp; * @property level The level of the character.
+<i class="no-highlight">13</i>&nbsp; * @property world The world of the character.
+<i class="no-highlight">14</i>&nbsp; * @property vocation The vocation of the character.
+<i class="no-highlight">15</i>&nbsp; * @property value The value of the entry (e.g. distance level, magic level, experience)
+<i class="no-highlight">16</i>&nbsp; * @property additionalValue Additional information displayed in some categories, such as Loyalty Title.
+<i class="no-highlight">17</i>&nbsp; */
+<b class="pc"><i class="no-highlight">18</i>&nbsp;@Serializable</b>
+<i class="no-highlight">19</i>&nbsp;data class HighscoresEntry(
+<b class="fc"><i class="no-highlight">20</i>&nbsp;    val rank: Int,</b>
+<b class="fc"><i class="no-highlight">21</i>&nbsp;    override val name: String,</b>
+<b class="fc"><i class="no-highlight">22</i>&nbsp;    override val level: Int,</b>
+<b class="fc"><i class="no-highlight">23</i>&nbsp;    val world: String,</b>
+<b class="fc"><i class="no-highlight">24</i>&nbsp;    val vocation: Vocation,</b>
+<b class="fc"><i class="no-highlight">25</i>&nbsp;    val value: Long,</b>
+<b class="fc"><i class="no-highlight">26</i>&nbsp;    val additionalValue: String?</b>
+<i class="no-highlight">27</i>&nbsp;) : BaseCharacter, CharacterLevel
 </div>
 </pre>
 </div>
@@ -198,7 +199,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-02-25 20:14</div>
+    <div style="float:right;">generated on 2022-03-01 16:53</div>
 </div>
 </body>
 </html>

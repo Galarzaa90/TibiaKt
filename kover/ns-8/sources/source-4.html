@@ -43,26 +43,26 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name">Character</td>
 <td class="coverageStat">
   <span class="percent">
-    40%
+    50%
   </span>
   <span class="absValue">
-    (2/5)
+    (2/4)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    12.5%
+    16.7%
   </span>
   <span class="absValue">
-    (1/8)
+    (1/6)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    84.4%
+    93.1%
   </span>
   <span class="absValue">
-    (27/32)
+    (27/29)
   </span>
 </td>
 </tr>
@@ -116,26 +116,26 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    28.6%
+    33.3%
   </span>
   <span class="absValue">
-    (2/7)
+    (2/6)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    2.6%
+    2.8%
   </span>
   <span class="absValue">
-    (1/38)
+    (1/36)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    79.4%
+    87.1%
   </span>
   <span class="absValue">
-    (27/34)
+    (27/31)
   </span>
 </td>
 </tr>
@@ -158,91 +158,79 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">10</i>&nbsp;import kotlinx.serialization.Serializable
 <i class="no-highlight">11</i>&nbsp;import kotlinx.serialization.UseSerializers
 <i class="no-highlight">12</i>&nbsp;import java.time.Instant
-<i class="no-highlight">13</i>&nbsp;import kotlin.math.ceil
-<i class="no-highlight">14</i>&nbsp;import kotlin.math.floor
-<i class="no-highlight">15</i>&nbsp;
-<i class="no-highlight">16</i>&nbsp;
-<i class="no-highlight">17</i>&nbsp;/**
-<i class="no-highlight">18</i>&nbsp; * Represents the character information available on Tibia.com.
-<i class="no-highlight">19</i>&nbsp; *
-<i class="no-highlight">20</i>&nbsp; * @property title The title selected to be displayed.
-<i class="no-highlight">21</i>&nbsp; * @property formerNames A list of former names the player had in the last 6 months.
-<i class="no-highlight">22</i>&nbsp; * @property unlockedTitles The amount of titles the player has unlocked in total.
-<i class="no-highlight">23</i>&nbsp; * @property sex The sex of the character.
-<i class="no-highlight">24</i>&nbsp; * @property vocation The vocation of the character.
-<i class="no-highlight">25</i>&nbsp; * @property level The level of the character.
-<i class="no-highlight">26</i>&nbsp; * @property achievementPoints The total achievement points.
-<i class="no-highlight">27</i>&nbsp; * @property world The current world of the character.
-<i class="no-highlight">28</i>&nbsp; * @property formerWorld The former world of the character. Only visible for 6 months.
-<i class="no-highlight">29</i>&nbsp; * @property residence The current city where the character will respawn on death.
-<i class="no-highlight">30</i>&nbsp; * @property marriedTo The name of the character this character is married to, if any.
-<i class="no-highlight">31</i>&nbsp; * @property houses The list of houses currently owned by the character.
-<i class="no-highlight">32</i>&nbsp; * @property guildMembership The guild the character belongs to.
-<i class="no-highlight">33</i>&nbsp; * @property position The special position the character holds.
-<i class="no-highlight">34</i>&nbsp; * @property comment The character&#39;s comment.
-<i class="no-highlight">35</i>&nbsp; * @property accountStatus The current status of the account.
-<i class="no-highlight">36</i>&nbsp; * @property recentlyTraded Whether the character was recently traded. If its name was changed afterwards, this flag is removed.
-<i class="no-highlight">37</i>&nbsp; * @property deletionDate The date when this character is scheduled to be deleted.
-<i class="no-highlight">38</i>&nbsp; * @property badges The visible badges of the character.
-<i class="no-highlight">39</i>&nbsp; * @property achievements The visible achievements for the character.
-<i class="no-highlight">40</i>&nbsp; * @property deaths The recent deaths of the character.
-<i class="no-highlight">41</i>&nbsp; * @property accountInformation The character&#39;s account information. Might be [hidden].
-<i class="no-highlight">42</i>&nbsp; * @property characters The list of visible characters in the same account. Might be [hidden].
-<i class="no-highlight">43</i>&nbsp; */
-<b class="pc"><i class="no-highlight">44</i>&nbsp;@Serializable</b>
-<i class="no-highlight">45</i>&nbsp;data class Character(
-<b class="fc"><i class="no-highlight">46</i>&nbsp;    override val name: String,</b>
-<b class="fc"><i class="no-highlight">47</i>&nbsp;    val title: String?,</b>
-<b class="fc"><i class="no-highlight">48</i>&nbsp;    val formerNames: List&lt;String&gt;,</b>
-<b class="fc"><i class="no-highlight">49</i>&nbsp;    val unlockedTitles: Int,</b>
-<b class="fc"><i class="no-highlight">50</i>&nbsp;    val sex: Sex,</b>
-<b class="fc"><i class="no-highlight">51</i>&nbsp;    val vocation: Vocation,</b>
-<b class="fc"><i class="no-highlight">52</i>&nbsp;    val level: Int,</b>
-<b class="fc"><i class="no-highlight">53</i>&nbsp;    val achievementPoints: Int,</b>
-<b class="fc"><i class="no-highlight">54</i>&nbsp;    val world: String,</b>
-<b class="fc"><i class="no-highlight">55</i>&nbsp;    val formerWorld: String?,</b>
-<b class="fc"><i class="no-highlight">56</i>&nbsp;    val residence: String,</b>
-<b class="fc"><i class="no-highlight">57</i>&nbsp;    val marriedTo: String?,</b>
-<b class="fc"><i class="no-highlight">58</i>&nbsp;    val houses: List&lt;CharacterHouse&gt;,</b>
-<b class="fc"><i class="no-highlight">59</i>&nbsp;    val guildMembership: GuildMembership?,</b>
-<b class="fc"><i class="no-highlight">60</i>&nbsp;    val lastLogin: Instant?,</b>
-<b class="fc"><i class="no-highlight">61</i>&nbsp;    val position: String?,</b>
-<b class="fc"><i class="no-highlight">62</i>&nbsp;    val comment: String?,</b>
-<b class="fc"><i class="no-highlight">63</i>&nbsp;    val accountStatus: AccountStatus,</b>
-<b class="fc"><i class="no-highlight">64</i>&nbsp;    val recentlyTraded: Boolean,</b>
-<b class="fc"><i class="no-highlight">65</i>&nbsp;    val deletionDate: Instant?,</b>
-<b class="fc"><i class="no-highlight">66</i>&nbsp;    val badges: List&lt;AccountBadge&gt;,</b>
-<b class="fc"><i class="no-highlight">67</i>&nbsp;    val achievements: List&lt;DisplayedAchievement&gt;,</b>
-<b class="fc"><i class="no-highlight">68</i>&nbsp;    val deaths: List&lt;Death&gt;,</b>
-<b class="fc"><i class="no-highlight">69</i>&nbsp;    val accountInformation: AccountInformation?,</b>
-<b class="fc"><i class="no-highlight">70</i>&nbsp;    val characters: List&lt;OtherCharacter&gt;,</b>
-<i class="no-highlight">71</i>&nbsp;) : BaseCharacter {
-<i class="no-highlight">72</i>&nbsp;
-<i class="no-highlight">73</i>&nbsp;    /**
-<i class="no-highlight">74</i>&nbsp;     * The party shared experience range of the character.
-<i class="no-highlight">75</i>&nbsp;     */
-<i class="no-highlight">76</i>&nbsp;    val shareRange: IntRange
-<i class="no-highlight">77</i>&nbsp;        get() {
-<b class="nc"><i class="no-highlight">78</i>&nbsp;            val minLevel = floor((level / 3.0) * 2).toInt()</b>
-<b class="nc"><i class="no-highlight">79</i>&nbsp;            val maxLevel = ceil((level / 2.0) * 3).toInt() + if (level % 2 == 0) 1 else 0</b>
-<b class="nc"><i class="no-highlight">80</i>&nbsp;            return minLevel..maxLevel</b>
-<i class="no-highlight">81</i>&nbsp;        }
-<i class="no-highlight">82</i>&nbsp;
-<i class="no-highlight">83</i>&nbsp;    /**
-<i class="no-highlight">84</i>&nbsp;     * Whether this character is scheduled for deletion or nto.
-<i class="no-highlight">85</i>&nbsp;     */
-<b class="pc"><i class="no-highlight">86</i>&nbsp;    val scheduledForDeletion: Boolean get() = deletionDate != null</b>
-<i class="no-highlight">87</i>&nbsp;
-<i class="no-highlight">88</i>&nbsp;    /**
-<i class="no-highlight">89</i>&nbsp;     * Whether this character is hidden or not.
-<i class="no-highlight">90</i>&nbsp;     */
-<b class="nc"><i class="no-highlight">91</i>&nbsp;    val hidden: Boolean get() = characters.isEmpty()</b>
-<i class="no-highlight">92</i>&nbsp;
-<i class="no-highlight">93</i>&nbsp;    /**
-<i class="no-highlight">94</i>&nbsp;     * URL to the character this character is married to, if any.
-<i class="no-highlight">95</i>&nbsp;     */
-<b class="nc"><i class="no-highlight">96</i>&nbsp;    val marriedToUrl: String? get() = marriedTo?.let { getCharacterUrl(it) }</b>
-<i class="no-highlight">97</i>&nbsp;}
+<i class="no-highlight">13</i>&nbsp;
+<i class="no-highlight">14</i>&nbsp;
+<i class="no-highlight">15</i>&nbsp;/**
+<i class="no-highlight">16</i>&nbsp; * Represents the character information available on Tibia.com.
+<i class="no-highlight">17</i>&nbsp; *
+<i class="no-highlight">18</i>&nbsp; * @property title The title selected to be displayed.
+<i class="no-highlight">19</i>&nbsp; * @property formerNames A list of former names the player had in the last 6 months.
+<i class="no-highlight">20</i>&nbsp; * @property unlockedTitles The amount of titles the player has unlocked in total.
+<i class="no-highlight">21</i>&nbsp; * @property sex The sex of the character.
+<i class="no-highlight">22</i>&nbsp; * @property vocation The vocation of the character.
+<i class="no-highlight">23</i>&nbsp; * @property level The level of the character.
+<i class="no-highlight">24</i>&nbsp; * @property achievementPoints The total achievement points.
+<i class="no-highlight">25</i>&nbsp; * @property world The current world of the character.
+<i class="no-highlight">26</i>&nbsp; * @property formerWorld The former world of the character. Only visible for 6 months.
+<i class="no-highlight">27</i>&nbsp; * @property residence The current city where the character will respawn on death.
+<i class="no-highlight">28</i>&nbsp; * @property marriedTo The name of the character this character is married to, if any.
+<i class="no-highlight">29</i>&nbsp; * @property houses The list of houses currently owned by the character.
+<i class="no-highlight">30</i>&nbsp; * @property guildMembership The guild the character belongs to.
+<i class="no-highlight">31</i>&nbsp; * @property position The special position the character holds.
+<i class="no-highlight">32</i>&nbsp; * @property comment The character&#39;s comment.
+<i class="no-highlight">33</i>&nbsp; * @property accountStatus The current status of the account.
+<i class="no-highlight">34</i>&nbsp; * @property recentlyTraded Whether the character was recently traded. If its name was changed afterwards, this flag is removed.
+<i class="no-highlight">35</i>&nbsp; * @property deletionDate The date when this character is scheduled to be deleted.
+<i class="no-highlight">36</i>&nbsp; * @property badges The visible badges of the character.
+<i class="no-highlight">37</i>&nbsp; * @property achievements The visible achievements for the character.
+<i class="no-highlight">38</i>&nbsp; * @property deaths The recent deaths of the character.
+<i class="no-highlight">39</i>&nbsp; * @property accountInformation The character&#39;s account information. Might be [hidden].
+<i class="no-highlight">40</i>&nbsp; * @property characters The list of visible characters in the same account. Might be [hidden].
+<i class="no-highlight">41</i>&nbsp; */
+<b class="pc"><i class="no-highlight">42</i>&nbsp;@Serializable</b>
+<i class="no-highlight">43</i>&nbsp;data class Character(
+<b class="fc"><i class="no-highlight">44</i>&nbsp;    override val name: String,</b>
+<b class="fc"><i class="no-highlight">45</i>&nbsp;    val title: String?,</b>
+<b class="fc"><i class="no-highlight">46</i>&nbsp;    val formerNames: List&lt;String&gt;,</b>
+<b class="fc"><i class="no-highlight">47</i>&nbsp;    val unlockedTitles: Int,</b>
+<b class="fc"><i class="no-highlight">48</i>&nbsp;    val sex: Sex,</b>
+<b class="fc"><i class="no-highlight">49</i>&nbsp;    val vocation: Vocation,</b>
+<b class="fc"><i class="no-highlight">50</i>&nbsp;    override val level: Int,</b>
+<b class="fc"><i class="no-highlight">51</i>&nbsp;    val achievementPoints: Int,</b>
+<b class="fc"><i class="no-highlight">52</i>&nbsp;    val world: String,</b>
+<b class="fc"><i class="no-highlight">53</i>&nbsp;    val formerWorld: String?,</b>
+<b class="fc"><i class="no-highlight">54</i>&nbsp;    val residence: String,</b>
+<b class="fc"><i class="no-highlight">55</i>&nbsp;    val marriedTo: String?,</b>
+<b class="fc"><i class="no-highlight">56</i>&nbsp;    val houses: List&lt;CharacterHouse&gt;,</b>
+<b class="fc"><i class="no-highlight">57</i>&nbsp;    val guildMembership: GuildMembership?,</b>
+<b class="fc"><i class="no-highlight">58</i>&nbsp;    val lastLogin: Instant?,</b>
+<b class="fc"><i class="no-highlight">59</i>&nbsp;    val position: String?,</b>
+<b class="fc"><i class="no-highlight">60</i>&nbsp;    val comment: String?,</b>
+<b class="fc"><i class="no-highlight">61</i>&nbsp;    val accountStatus: AccountStatus,</b>
+<b class="fc"><i class="no-highlight">62</i>&nbsp;    val recentlyTraded: Boolean,</b>
+<b class="fc"><i class="no-highlight">63</i>&nbsp;    val deletionDate: Instant?,</b>
+<b class="fc"><i class="no-highlight">64</i>&nbsp;    val badges: List&lt;AccountBadge&gt;,</b>
+<b class="fc"><i class="no-highlight">65</i>&nbsp;    val achievements: List&lt;DisplayedAchievement&gt;,</b>
+<b class="fc"><i class="no-highlight">66</i>&nbsp;    val deaths: List&lt;Death&gt;,</b>
+<b class="fc"><i class="no-highlight">67</i>&nbsp;    val accountInformation: AccountInformation?,</b>
+<b class="fc"><i class="no-highlight">68</i>&nbsp;    val characters: List&lt;OtherCharacter&gt;,</b>
+<i class="no-highlight">69</i>&nbsp;) : BaseCharacter, CharacterLevel {
+<i class="no-highlight">70</i>&nbsp;
+<i class="no-highlight">71</i>&nbsp;    /**
+<i class="no-highlight">72</i>&nbsp;     * Whether this character is scheduled for deletion or nto.
+<i class="no-highlight">73</i>&nbsp;     */
+<b class="pc"><i class="no-highlight">74</i>&nbsp;    val scheduledForDeletion: Boolean get() = deletionDate != null</b>
+<i class="no-highlight">75</i>&nbsp;
+<i class="no-highlight">76</i>&nbsp;    /**
+<i class="no-highlight">77</i>&nbsp;     * Whether this character is hidden or not.
+<i class="no-highlight">78</i>&nbsp;     */
+<b class="nc"><i class="no-highlight">79</i>&nbsp;    val hidden: Boolean get() = characters.isEmpty()</b>
+<i class="no-highlight">80</i>&nbsp;
+<i class="no-highlight">81</i>&nbsp;    /**
+<i class="no-highlight">82</i>&nbsp;     * URL to the character this character is married to, if any.
+<i class="no-highlight">83</i>&nbsp;     */
+<b class="nc"><i class="no-highlight">84</i>&nbsp;    val marriedToUrl: String? get() = marriedTo?.let { getCharacterUrl(it) }</b>
+<i class="no-highlight">85</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -269,7 +257,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-02-25 20:14</div>
+    <div style="float:right;">generated on 2022-03-01 16:53</div>
 </div>
 </body>
 </html>

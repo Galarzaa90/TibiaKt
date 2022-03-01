@@ -1,0 +1,202 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > OtherCharacter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.galarzaa.tibiakt.core.models.character</a>
+</div>
+
+<h1>Coverage Summary for Class: OtherCharacter (com.galarzaa.tibiakt.core.models.character)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Block, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">OtherCharacter</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">OtherCharacter$$serializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">OtherCharacter$Companion</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (1/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (8/10)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.models.character
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import kotlinx.serialization.Serializable
+<i class="no-highlight">4</i>&nbsp;
+<i class="no-highlight">5</i>&nbsp;/**
+<i class="no-highlight">6</i>&nbsp; * Additional character listed in a [Character]&#39;s information.
+<i class="no-highlight">7</i>&nbsp; *
+<i class="no-highlight">8</i>&nbsp; * @property world The world of the character.
+<i class="no-highlight">9</i>&nbsp; * @property main Whether this is the main character of the account or not.
+<i class="no-highlight">10</i>&nbsp; * @property isOnline Whether this character is currently online or not.
+<i class="no-highlight">11</i>&nbsp; * @property isDeleted Whether this character is scheduled for deletion or not.
+<i class="no-highlight">12</i>&nbsp; * @property recentlyTraded Whether this character was recently traded.
+<i class="no-highlight">13</i>&nbsp; * @property position Any special position the character holds.
+<i class="no-highlight">14</i>&nbsp; */
+<b class="pc"><i class="no-highlight">15</i>&nbsp;@Serializable</b>
+<i class="no-highlight">16</i>&nbsp;data class OtherCharacter(
+<b class="fc"><i class="no-highlight">17</i>&nbsp;    override val name: String,</b>
+<b class="fc"><i class="no-highlight">18</i>&nbsp;    val world: String,</b>
+<b class="fc"><i class="no-highlight">19</i>&nbsp;    val main: Boolean,</b>
+<b class="fc"><i class="no-highlight">20</i>&nbsp;    val isOnline: Boolean,</b>
+<b class="fc"><i class="no-highlight">21</i>&nbsp;    val isDeleted: Boolean,</b>
+<b class="fc"><i class="no-highlight">22</i>&nbsp;    val recentlyTraded: Boolean,</b>
+<b class="fc"><i class="no-highlight">23</i>&nbsp;    val position: String?</b>
+<i class="no-highlight">24</i>&nbsp;) : BaseCharacter
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-03-01 16:53</div>
+</div>
+</body>
+</html>
