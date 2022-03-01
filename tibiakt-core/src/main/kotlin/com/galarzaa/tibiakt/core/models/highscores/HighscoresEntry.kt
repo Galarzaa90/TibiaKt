@@ -2,6 +2,7 @@ package com.galarzaa.tibiakt.core.models.highscores
 
 import com.galarzaa.tibiakt.core.enums.Vocation
 import com.galarzaa.tibiakt.core.models.character.BaseCharacter
+import com.galarzaa.tibiakt.core.models.character.CharacterLevel
 import kotlinx.serialization.Serializable
 
 /**
@@ -18,9 +19,9 @@ import kotlinx.serialization.Serializable
 data class HighscoresEntry(
     val rank: Int,
     override val name: String,
-    val level: Int,
+    override val level: Int,
     val world: String,
     val vocation: Vocation,
     val value: Long,
     val additionalValue: String?
-) : BaseCharacter
+) : BaseCharacter, CharacterLevel

@@ -10,6 +10,5 @@ import com.galarzaa.tibiakt.core.utils.getCharacterUrl
  */
 interface BaseCharacter {
     val name: String
-
     val url: String get() = getCharacterUrl(name)
 }

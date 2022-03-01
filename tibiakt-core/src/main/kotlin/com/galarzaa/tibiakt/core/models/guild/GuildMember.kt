@@ -4,6 +4,7 @@ package com.galarzaa.tibiakt.core.models.guild
 
 import com.galarzaa.tibiakt.core.enums.Vocation
 import com.galarzaa.tibiakt.core.models.character.BaseCharacter
+import com.galarzaa.tibiakt.core.models.character.CharacterLevel
 import com.galarzaa.tibiakt.core.serializers.LocalDateSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
@@ -24,8 +25,8 @@ data class GuildMember(
     override val name: String,
     val rank: String,
     val title: String?,
-    val level: Int,
+    override val level: Int,
     val vocation: Vocation,
     val joiningDate: LocalDate,
     val isOnline: Boolean,
-) : BaseCharacter
+) : BaseCharacter, CharacterLevel
