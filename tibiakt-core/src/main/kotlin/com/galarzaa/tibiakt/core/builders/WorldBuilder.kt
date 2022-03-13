@@ -10,41 +10,29 @@ import java.time.Instant
 import java.time.LocalDate
 import java.time.YearMonth
 
+fun worldBuilder(block: WorldBuilder.() -> Unit) = WorldBuilder().apply(block)
+fun world(block: WorldBuilder.() -> Unit) = WorldBuilder().apply(block).build()
+
 class WorldBuilder {
-    private var name: String? = null
-    private var isOnline: Boolean = false
-    private var onlineCount: Int = 0
-    private var location: String? = null
-    private var pvpType: PvpType? = null
-    private var battlEyeType: BattlEyeType = BattlEyeType.UNPROTECTED
-    private var battlEyeStartDate: LocalDate? = null
-    private var transferType: TransferType = TransferType.REGULAR
-    private var isPremiumRestricted: Boolean = false
-    private var isExperimental: Boolean = false
-    private var onlineRecordCount: Int = 0
-    private var onlineRecordDateTime: Instant? = null
-    private var creationDate: YearMonth? = null
-    private val worldQuests: MutableList<String> = mutableListOf()
-    private val playersOnline: MutableList<OnlineCharacter> = mutableListOf()
+    var name: String? = null
+    var isOnline: Boolean = false
+    var onlineCount: Int = 0
+    var location: String? = null
+    var pvpType: PvpType? = null
+    var battlEyeType: BattlEyeType = BattlEyeType.UNPROTECTED
+    var battlEyeStartDate: LocalDate? = null
+    var transferType: TransferType = TransferType.REGULAR
+    var isPremiumRestricted: Boolean = false
+    var isExperimental: Boolean = false
+    var onlineRecordCount: Int = 0
+    var onlineRecordDateTime: Instant? = null
+    var creationDate: YearMonth? = null
+    var worldQuests: MutableList<String> = mutableListOf()
+    var playersOnline: MutableList<OnlineCharacter> = mutableListOf()
 
-    fun name(name: String) = apply { this.name = name }
-    fun isOnline(isOnline: Boolean) = apply { this.isOnline = isOnline }
-    fun onlineCount(onlineCount: Int) = apply { this.onlineCount = onlineCount }
-    fun onlineRecord(count: Int, dateTime: Instant) =
-        apply { onlineRecordCount = count; onlineRecordDateTime = dateTime }
-
-    fun creationDate(creationDate: YearMonth) = apply { this.creationDate = creationDate }
-    fun location(location: String) = apply { this.location = location }
-    fun pvpType(pvpType: PvpType) = apply { this.pvpType = pvpType }
-    fun addWorldQuest(worldQuest: String) = apply { worldQuests.add(worldQuest) }
-    fun battlEyeType(battlEyeType: BattlEyeType) = apply { this.battlEyeType = battlEyeType }
-    fun battlEyeStartDate(battlEyeStartDate: LocalDate?) = apply { this.battlEyeStartDate = battlEyeStartDate }
-    fun transferType(transferType: TransferType) = apply { this.transferType = transferType }
-    fun addOnlinePlayer(name: String, level: Int, vocation: Vocation) =
-        apply { playersOnline.add(OnlineCharacter(name, level, vocation)) }
-
-    fun experimental(experimental: Boolean) = apply { this.isExperimental = experimental }
-    fun premiumRestricted(premiumRestricted: Boolean) = apply { isPremiumRestricted = premiumRestricted }
+    fun worldQuest(quest: String) = worldQuests.add(quest)
+    fun onlinePlayer(name: String, level: Int, vocation: Vocation) =
+        playersOnline.add(OnlineCharacter(name, level, vocation))
 
     fun build(): World {
         return World(

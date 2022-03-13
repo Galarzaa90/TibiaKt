@@ -1,6 +1,7 @@
 package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.core.builders.WorldBuilder
+import com.galarzaa.tibiakt.core.builders.worldBuilder
 import com.galarzaa.tibiakt.core.enums.BattlEyeType
 import com.galarzaa.tibiakt.core.enums.StringEnum
 import com.galarzaa.tibiakt.core.enums.TransferType
@@ -32,93 +33,87 @@ object WorldParser : Parser<World?> {
         tables["Error"]?.apply { return null }
         val name = tables["World Selection"]?.selectFirst("option[selected]")?.text()?.clean()
             ?: throw ParsingException("World Selection table not found")
-        val builder = WorldBuilder().name(name)
-        tables["World Information"]?.apply { parseWorldInformation(this, builder) }
-        tables.getContaining("Players Online")?.apply { parseOnlinePlayersTable(this, builder) }
+        val builder = worldBuilder {
+            this.name = name
+        }
+        tables["World Information"]?.apply { builder.parseWorldInformation(this) }
+        tables.getContaining("Players Online")?.apply { builder.parseOnlinePlayersTable(this) }
         return builder.build()
     }
 
-    private fun parseOnlinePlayersTable(table: Element, builder: WorldBuilder) {
+    private fun WorldBuilder.parseOnlinePlayersTable(table: Element) {
         for (row in table.rows().offsetStart(2)) {
             val columns = row.select("td")
             val (name, level, vocation) = columns.map { it.text().clean() }
-            builder.addOnlinePlayer(
-                name,
+            onlinePlayer(name,
                 level.toInt(),
-                StringEnum.fromValue(vocation) ?: throw ParsingException("unknown vocation: $vocation")
-            )
+                StringEnum.fromValue(vocation) ?: throw ParsingException("unknown vocation: $vocation"))
         }
     }
 
-
-    private fun parseWorldInformation(table: Element, builder: WorldBuilder) {
+    private fun WorldBuilder.parseWorldInformation(table: Element) {
         for (row in table.rows().offsetStart(1)) {
             val columns = row.select("td")
             var (field, value) = columns.map { it.text().clean() }
             field = field.remove(":")
             when (field) {
-                "Status" -> builder.isOnline(value.contains("online", true))
-                "Players Online" -> builder.onlineCount(value.parseInteger())
-                "Online Record" -> parseOnlineRecord(value, builder)
-                "Creation Date" -> parseCreationDate(value, builder)
-                "Location" -> builder.location(value)
-                "PvP Type" -> builder.pvpType(StringEnum.fromValue(value)
-                    ?: throw ParsingException("unknown pvp type found: $value"))
-                "Premium Type" -> builder.premiumRestricted(true)
-                "Transfer Type" -> parseTransferType(value, builder)
+                "Status" -> isOnline = value.contains("online", true)
+                "Players Online" -> onlineCount = value.parseInteger()
+                "Online Record" -> parseOnlineRecord(value)
+                "Creation Date" -> parseCreationDate(value)
+                "Location" -> location = value
+                "PvP Type" -> pvpType =
+                    StringEnum.fromValue(value) ?: throw ParsingException("unknown pvp type found: $value")
+                "Premium Type" -> isPremiumRestricted = true
+                "Transfer Type" -> parseTransferType(value)
                 "World Quest Titles" -> if (!value.contains("has no title", true)) {
-                    value.split(",").map { builder.addWorldQuest(it.clean()) }
+                    value.split(",").map { worldQuest(it.clean()) }
                 }
-                "BattlEye Status" -> parseBattlEyeStatus(value, builder)
-                "Game World Type" -> builder.experimental(value.contains("experimental", true))
+                "BattlEye Status" -> parseBattlEyeStatus(value)
+                "Game World Type" -> isExperimental = (value.contains("experimental", true))
             }
         }
     }
 
-    private fun parseTransferType(value: String, builder: WorldBuilder) {
-        builder.transferType(
-            if (value.contains("locked", true)) {
-                TransferType.LOCKED
-            } else if (value.contains("blocked", true)) {
-                TransferType.BLOCKED
-            } else {
-                TransferType.REGULAR
-            }
-        )
+    private fun WorldBuilder.parseTransferType(value: String) {
+        transferType = if (value.contains("locked", true)) {
+            TransferType.LOCKED
+        } else if (value.contains("blocked", true)) {
+            TransferType.BLOCKED
+        } else {
+            TransferType.REGULAR
+        }
+
     }
 
-    private fun parseBattlEyeStatus(value: String, builder: WorldBuilder) {
+    private fun WorldBuilder.parseBattlEyeStatus(value: String) {
         battlEyeRegex.find(value)?.apply {
             val (_, since) = this.groupValues
             if (since.contains("release")) {
-                builder.battlEyeType(BattlEyeType.GREEN).battlEyeStartDate(null)
+                battlEyeType = BattlEyeType.GREEN
+                battlEyeStartDate = null
             } else {
-                builder.battlEyeType(BattlEyeType.YELLOW).battlEyeStartDate(parseTibiaFullDate(since))
+                battlEyeType = BattlEyeType.YELLOW
+                battlEyeStartDate = parseTibiaFullDate(since)
             }
             return
         }
-        builder
-            .battlEyeType(BattlEyeType.UNPROTECTED)
-            .battlEyeStartDate(null)
+        battlEyeType = BattlEyeType.UNPROTECTED
+        battlEyeStartDate = null
     }
 
-    private fun parseOnlineRecord(value: String, builder: WorldBuilder) {
+    private fun WorldBuilder.parseOnlineRecord(value: String) {
         recordRegex.find(value)?.apply {
             val (_, count, date) = this.groupValues
-            builder.onlineRecord(
-                count.parseInteger(),
-                parseTibiaDateTime(date)
-            )
+            onlineRecordCount = count.parseInteger()
+            onlineRecordDateTime = parseTibiaDateTime(date)
+
         }
     }
 
-    private fun parseCreationDate(value: String, builder: WorldBuilder) {
+    private fun WorldBuilder.parseCreationDate(value: String) {
         val (month, year) = value.split("/").map { it.toInt() }
-        builder.creationDate(
-            YearMonth.of(
-                if (year > 90) year + 1900 else year + 2000,
-                month
-            )
-        )
+        creationDate = YearMonth.of(if (year > 90) year + 1900 else year + 2000, month)
+
     }
 }
