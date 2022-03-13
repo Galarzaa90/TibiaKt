@@ -8,16 +8,22 @@ import com.galarzaa.tibiakt.core.models.world.WorldOverview
 import java.time.Instant
 import java.time.LocalDate
 
+inline fun worldOverviewBuilder(block: WorldOverviewBuilder.() -> Unit) = WorldOverviewBuilder().apply(block)
+inline fun worldOverview(block: WorldOverviewBuilder.() -> Unit) = worldOverviewBuilder(block).build()
+
+@TibiaKtDsl
 class WorldOverviewBuilder {
     var overallMaximumCount: Int? = null
     var overallMaximumCountDateTime: Instant? = null
-    val worlds: MutableList<WorldEntry> = mutableListOf()
-    val tournamentWorlds: MutableList<WorldEntry> = mutableListOf()
+    var worlds: MutableList<WorldEntry> = mutableListOf()
+    var tournamentWorlds: MutableList<WorldEntry> = mutableListOf()
 
     fun overallMaximum(count: Int, dateTime: Instant) = apply {
         overallMaximumCount = count
         overallMaximumCountDateTime = dateTime
     }
+
+    fun world(block: WorldEntryBuilder.() -> Unit) = worlds.add(worldEntry(block))
 
     fun addWorld(
         name: String,

@@ -3,18 +3,15 @@ package com.galarzaa.tibiakt.core.builders
 import com.galarzaa.tibiakt.core.enums.BattlEyeType
 import com.galarzaa.tibiakt.core.enums.PvpType
 import com.galarzaa.tibiakt.core.enums.TransferType
-import com.galarzaa.tibiakt.core.enums.Vocation
-import com.galarzaa.tibiakt.core.models.world.OnlineCharacter
-import com.galarzaa.tibiakt.core.models.world.World
+import com.galarzaa.tibiakt.core.models.world.WorldEntry
 import java.time.Instant
 import java.time.LocalDate
-import java.time.YearMonth
 
-inline fun worldBuilder(block: WorldBuilder.() -> Unit) = WorldBuilder().apply(block)
-inline fun world(block: WorldBuilder.() -> Unit) = worldBuilder(block).build()
+inline fun worldEntryBuilder(block: WorldEntryBuilder.() -> Unit) = WorldEntryBuilder().apply(block)
+inline fun worldEntry(block: WorldEntryBuilder.() -> Unit) = worldEntryBuilder(block).build()
 
 @TibiaKtDsl
-class WorldBuilder {
+class WorldEntryBuilder {
     var name: String? = null
     var isOnline: Boolean = false
     var onlineCount: Int = 0
@@ -25,18 +22,11 @@ class WorldBuilder {
     var transferType: TransferType = TransferType.REGULAR
     var isPremiumRestricted: Boolean = false
     var isExperimental: Boolean = false
-    var onlineRecordCount: Int = 0
     var onlineRecordDateTime: Instant? = null
-    var creationDate: YearMonth? = null
-    var worldQuests: MutableList<String> = mutableListOf()
-    var playersOnline: MutableList<OnlineCharacter> = mutableListOf()
 
-    fun worldQuest(quest: String) = worldQuests.add(quest)
-    fun onlinePlayer(name: String, level: Int, vocation: Vocation) =
-        playersOnline.add(OnlineCharacter(name, level, vocation))
 
-    fun build(): World {
-        return World(
+    fun build(): WorldEntry {
+        return WorldEntry(
             name = name ?: throw IllegalStateException("name is required"),
             isOnline = isOnline,
             onlineCount = onlineCount,
@@ -46,14 +36,7 @@ class WorldBuilder {
             battlEyeStartDate = battlEyeStartDate,
             transferType = transferType,
             isPremiumRestricted = isPremiumRestricted,
-            onlineRecordCount = onlineRecordCount,
-            onlineRecordDateTime = onlineRecordDateTime
-                ?: throw IllegalStateException("onlineRecordDateTime is required"),
             isExperimental = isExperimental,
-            creationDate = creationDate ?: throw IllegalStateException("creationDate is required"),
-            playersOnline = playersOnline,
-            worldQuests = worldQuests,
         )
     }
 }
-
