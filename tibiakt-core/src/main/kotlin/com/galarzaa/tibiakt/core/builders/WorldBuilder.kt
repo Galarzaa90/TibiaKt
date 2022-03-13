@@ -35,6 +35,9 @@ class WorldBuilder {
     fun onlinePlayer(name: String, level: Int, vocation: Vocation) =
         playersOnline.add(OnlineCharacter(name, level, vocation))
 
+    inline fun onlinePlayers(block: OnlineCharactersBuilder.() -> Unit) =
+        playersOnline.addAll(OnlineCharactersBuilder().apply(block).players)
+
     fun build(): World {
         return World(
             name = name ?: throw IllegalStateException("name is required"),
@@ -55,5 +58,25 @@ class WorldBuilder {
             worldQuests = worldQuests,
         )
     }
+
+    class OnlineCharactersBuilder {
+        val players = mutableListOf<OnlineCharacter>()
+        fun player(block: OnlineCharacterBuilder.() -> Unit) {
+            players.add(OnlineCharacterBuilder().apply(block).build())
+        }
+    }
+}
+
+@TibiaKtDsl
+class OnlineCharacterBuilder {
+    var name: String? = null
+    var level: Int = 2
+    var vocation: Vocation? = null
+
+    fun build() = OnlineCharacter(
+        name = name ?: throw IllegalStateException("name is required"),
+        level = level,
+        vocation = vocation ?: throw IllegalStateException("vocation is required"),
+    )
 }
 

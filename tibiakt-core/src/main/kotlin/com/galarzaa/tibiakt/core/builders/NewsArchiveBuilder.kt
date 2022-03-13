@@ -29,6 +29,7 @@ class NewsArchiveBuilder {
             NewsEntry(
                 id, title, category, categoryIcon, date, type
             )
+
         )
     }
 
