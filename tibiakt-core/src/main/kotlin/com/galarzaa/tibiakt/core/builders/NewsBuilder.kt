@@ -4,20 +4,17 @@ import com.galarzaa.tibiakt.core.enums.NewsCategory
 import com.galarzaa.tibiakt.core.models.news.News
 import java.time.LocalDate
 
-class NewsBuilder {
-    private var id: Int? = null
-    private var title: String? = null
-    private var category: NewsCategory? = null
-    private var date: LocalDate? = null
-    private var content: String? = null
-    private var threadId: Int? = null
+inline fun newsBuilder(block: NewsBuilder.() -> Unit) = NewsBuilder().apply(block)
+inline fun news(block: NewsBuilder.() -> Unit) = newsBuilder(block).build()
 
-    fun id(id: Int) = apply { this.id = id }
-    fun title(title: String) = apply { this.title = title }
-    fun category(icon: String) = apply { category = NewsCategory.fromIcon(icon) }
-    fun date(date: LocalDate) = apply { this.date = date }
-    fun content(content: String) = apply { this.content = content }
-    fun threadId(threadId: Int?) = apply { this.threadId = threadId }
+@TibiaKtDsl
+class NewsBuilder {
+    var id: Int? = null
+    var title: String? = null
+    var category: NewsCategory? = null
+    var date: LocalDate? = null
+    var content: String? = null
+    var threadId: Int? = null
 
     fun build(): News {
         return News(

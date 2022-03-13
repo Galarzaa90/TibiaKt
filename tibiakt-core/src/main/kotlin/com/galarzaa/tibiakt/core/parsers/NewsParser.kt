@@ -1,6 +1,7 @@
 package com.galarzaa.tibiakt.core.parsers
 
-import com.galarzaa.tibiakt.core.builders.NewsBuilder
+import com.galarzaa.tibiakt.core.builders.news
+import com.galarzaa.tibiakt.core.enums.NewsCategory
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
 import com.galarzaa.tibiakt.core.models.news.News
 import com.galarzaa.tibiakt.core.utils.cleanText
@@ -21,21 +22,20 @@ object NewsParser : Parser<News?> {
                 else
                     throw ParsingException("News headline not found.")
         val icon = boxContent.selectFirst("img.NewsHeadlineIcon") ?: throw ParsingException("News icon not found.")
-        val builder = NewsBuilder()
-            .id(newsId)
-            .title(titleContainer.cleanText())
-            .category(icon.attr("src"))
+        return news {
+            id = newsId
+            title = titleContainer.cleanText()
+            category = NewsCategory.fromIcon(icon.attr("src"))
 
-        val newsDate = boxContent.selectFirst("div.NewsHeadlineDate")?.cleanText()?.remove("-")?.trim()
-        builder.date(parseTibiaDate(newsDate ?: throw ParsingException("News date not found.")))
+            val newsDate = boxContent.selectFirst("div.NewsHeadlineDate")?.cleanText()?.remove("-")?.trim()
+            date = parseTibiaDate(newsDate ?: throw ParsingException("News date not found."))
 
-        val newsTable = boxContent.selectFirst("td.NewsTableContainer")?.children().toString()
-        builder.content(newsTable)
+            val newsTable = boxContent.selectFirst("td.NewsTableContainer")?.children().toString()
+            this.content = newsTable
 
-        boxContent.selectFirst("div.NewsForumLink > a")?.apply {
-            builder.threadId(getLinkInformation()?.queryParams?.get("threadid")?.get(0)?.toInt())
+            boxContent.selectFirst("div.NewsForumLink > a")?.apply {
+                threadId = getLinkInformation()?.queryParams?.get("threadid")?.get(0)?.toInt()
+            }
         }
-
-        return builder.build()
     }
 }
