@@ -99,7 +99,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">12</i>&nbsp; * Parses a string containing date and time from Tibia.com into an [Instant] instance.
 <i class="no-highlight">13</i>&nbsp; */
 <i class="no-highlight">14</i>&nbsp;fun parseTibiaDateTime(input: String): Instant {
-<b class="fc"><i class="no-highlight">15</i>&nbsp;    val timeString = input.clean().substring(0, input.length - 4).trim()</b>
+<b class="fc"><i class="no-highlight">15</i>&nbsp;    val timeString = input.clean().let{ it.substring(0, it.length - 4).trim() }</b>
 <b class="fc"><i class="no-highlight">16</i>&nbsp;    val tzString = input.substring(input.length - 4)</b>
 <b class="fc"><i class="no-highlight">17</i>&nbsp;    return try {</b>
 <b class="fc"><i class="no-highlight">18</i>&nbsp;        LocalDateTime.parse(timeString, DateTimeFormatter.ofPattern(&quot;MMM dd yyyy, HH:mm:ss&quot;, Locale.US))</b>
@@ -149,7 +149,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-03-01 16:53</div>
+    <div style="float:right;">generated on 2022-03-17 22:54</div>
 </div>
 </body>
 </html>
