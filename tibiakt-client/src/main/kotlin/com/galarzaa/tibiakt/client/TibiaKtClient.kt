@@ -97,17 +97,21 @@ import kotlin.system.measureTimeMillis
 
 /**
  * A coroutine based client to fetch from Tibia.com
+ *
+ * @param engine The ktor client engine to use, by default CIO is used.
  */
-open class TibiaKtClient internal constructor(engine: HttpClientEngine, userAgent: String? = null) {
+open class TibiaKtClient constructor(
+    engine: HttpClientEngine?,
+    private val userAgent: String? = null,
+) {
 
     /**
-     * Creates an instance of the client.
-     *
+     * Creates an instance of the client, using the default engine (CIO)
      * @param userAgent The value that will be sent in the User-Agent header of every request.
      */
-    constructor(userAgent: String? = null) : this(CIO.create(), userAgent)
+    constructor(userAgent: String? = null) : this(null, userAgent)
 
-    private val client = HttpClient(engine) {
+    private val client = HttpClient(engine ?: CIO.create()) {
         ContentEncoding {
             gzip()
             deflate()
