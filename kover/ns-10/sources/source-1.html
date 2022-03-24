@@ -320,10 +320,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc"><i class="no-highlight">199</i>&nbsp;                &quot;Titles&quot; -&gt; builder.titlesCount(value.parseInteger())</b>
 <i class="no-highlight">200</i>&nbsp;            }
 <i class="no-highlight">201</i>&nbsp;        }
-<b class="pc"><i class="no-highlight">202</i>&nbsp;        val skillsMap = mutableMapOf&lt;String, Float&gt;().withDefault { 0f }</b>
+<b class="pc"><i class="no-highlight">202</i>&nbsp;        val skillsMap = mutableMapOf&lt;String, Double&gt;().withDefault { 0.0 }</b>
 <b class="fc"><i class="no-highlight">203</i>&nbsp;        for (row in contentContainers[1].rows()) {</b>
 <b class="fc"><i class="no-highlight">204</i>&nbsp;            val (name, level, progress) = row.cellsText()</b>
-<b class="fc"><i class="no-highlight">205</i>&nbsp;            skillsMap[name] = level.parseInteger() + (progress.remove(&quot;%&quot;).toFloat() / 100f)</b>
+<b class="fc"><i class="no-highlight">205</i>&nbsp;            skillsMap[name] = level.parseInteger() + (progress.remove(&quot;%&quot;).toDouble() / 100f)</b>
 <i class="no-highlight">206</i>&nbsp;        }
 <b class="fc"><i class="no-highlight">207</i>&nbsp;        val skills = AuctionSkills(</b>
 <b class="fc"><i class="no-highlight">208</i>&nbsp;            axeFighting = skillsMap.getValue(&quot;Axe Fighting&quot;),</b>
@@ -515,7 +515,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-03-19 00:11</div>
+    <div style="float:right;">generated on 2022-03-24 22:19</div>
 </div>
 </body>
 </html>
