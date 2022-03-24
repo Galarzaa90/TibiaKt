@@ -28,6 +28,7 @@ import com.galarzaa.tibiakt.core.models.forums.CMPostArchive
 import com.galarzaa.tibiakt.core.models.guild.Guild
 import com.galarzaa.tibiakt.core.models.guild.GuildsSection
 import com.galarzaa.tibiakt.core.models.highscores.Highscores
+import com.galarzaa.tibiakt.core.models.highscores.HighscoresEntry
 import com.galarzaa.tibiakt.core.models.house.House
 import com.galarzaa.tibiakt.core.models.house.HousesSection
 import com.galarzaa.tibiakt.core.models.news.EventsSchedule
@@ -161,7 +162,7 @@ open class TibiaKtClient constructor(
     /**
      * Fetch the news for a given interval.
      */
-    suspend fun fetchRecentNews(
+    open suspend fun fetchRecentNews(
         startDate: LocalDate,
         endDate: LocalDate,
         categories: Set<NewsCategory>? = null,
@@ -175,7 +176,7 @@ open class TibiaKtClient constructor(
     /**
      * Fetch the news from today to the last provided days.
      */
-    suspend fun fetchRecentNews(
+    open suspend fun fetchRecentNews(
         days: Int = 30,
         categories: Set<NewsCategory>? = null,
         types: Set<NewsType>? = null,
@@ -184,7 +185,7 @@ open class TibiaKtClient constructor(
     /**
      * Fetch a specific news article by its [newsId]
      */
-    suspend fun fetchNews(newsId: Int): TibiaResponse<News?> {
+    open suspend fun fetchNews(newsId: Int): TibiaResponse<News?> {
         val response = this.request(HttpMethod.Get, getNewsUrl(newsId))
         return response.parse { NewsParser.fromContent(it, newsId) }
     }
@@ -192,7 +193,7 @@ open class TibiaKtClient constructor(
     /**
      * Fetch the events schedule for a specific year and month
      */
-    suspend fun fetchEventsSchedule(yearMonth: YearMonth): TibiaResponse<EventsSchedule> {
+    open suspend fun fetchEventsSchedule(yearMonth: YearMonth): TibiaResponse<EventsSchedule> {
         val response = this.request(HttpMethod.Get, getEventsScheduleUrl(yearMonth))
         return response.parse { EventsScheduleParser.fromContent(it) }
     }
@@ -200,18 +201,18 @@ open class TibiaKtClient constructor(
     /**
      * Fetch the events schedule for a specific year and month
      */
-    suspend fun fetchEventsSchedule(year: Int, month: Int) = fetchEventsSchedule(YearMonth.of(year, month))
+    open suspend fun fetchEventsSchedule(year: Int, month: Int) = fetchEventsSchedule(YearMonth.of(year, month))
 
     /**
      * Fetch the events schedule for the current month.
      */
-    suspend fun fetchEventsSchedule() = fetchEventsSchedule(YearMonth.now())
+    open suspend fun fetchEventsSchedule() = fetchEventsSchedule(YearMonth.now())
 
     // endregion
 
     // region Library Section
 
-    suspend fun fetchCreaturesSection(): TibiaResponse<CreaturesSection> {
+    open suspend fun fetchCreaturesSection(): TibiaResponse<CreaturesSection> {
         val response = this.request(HttpMethod.Get, getCreaturesSectionUrl())
         return response.parse { CreaturesSectionParser.fromContent(it) }
     }
@@ -225,7 +226,7 @@ open class TibiaKtClient constructor(
      * Fetch a character
      * @param name The name of the character.
      */
-    suspend fun fetchCharacter(name: String): TibiaResponse<Character?> {
+    open suspend fun fetchCharacter(name: String): TibiaResponse<Character?> {
         val response = this.request(HttpMethod.Get, getCharacterUrl(name))
         return response.parse { CharacterParser.fromContent(it) }
     }
@@ -233,7 +234,7 @@ open class TibiaKtClient constructor(
     /**
      * Fetch the world overview, containing the list of worlds.
      */
-    suspend fun fetchWorldOverview(): TibiaResponse<WorldOverview> {
+    open suspend fun fetchWorldOverview(): TibiaResponse<WorldOverview> {
         val response = this.request(HttpMethod.Get, getWorldOverviewUrl())
         return response.parse { WorldOverviewParser.fromContent(it) }
     }
@@ -241,17 +242,17 @@ open class TibiaKtClient constructor(
     /**
      * Fetch a world's information.
      */
-    suspend fun fetchWorld(name: String): TibiaResponse<World?> {
+    open suspend fun fetchWorld(name: String): TibiaResponse<World?> {
         val response = this.request(HttpMethod.Get, getWorldUrl(name))
         return response.parse { WorldParser.fromContent(it) }
     }
 
-    suspend fun fetchGuild(name: String): TibiaResponse<Guild?> {
+    open suspend fun fetchGuild(name: String): TibiaResponse<Guild?> {
         val response = this.request(HttpMethod.Get, getGuildUrl(name))
         return response.parse { GuildParser.fromContent(it) }
     }
 
-    suspend fun fetchWorldGuilds(name: String): TibiaResponse<GuildsSection?> {
+    open suspend fun fetchWorldGuilds(name: String): TibiaResponse<GuildsSection?> {
         val response = this.request(HttpMethod.Get, getWorldGuildsUrl(name))
         return response.parse { GuildsSectionParser.fromContent(it) }
     }
@@ -259,7 +260,7 @@ open class TibiaKtClient constructor(
     /**
      * Fetch the kill statistics for a [world]
      */
-    suspend fun fetchKillStatistics(world: String): TibiaResponse<KillStatistics> {
+    open suspend fun fetchKillStatistics(world: String): TibiaResponse<KillStatistics> {
         val response = this.request(HttpMethod.Get, getKillStatisticsUrl(world))
         return response.parse { KillStatisticsParser.fromContent(it) }
     }
@@ -274,7 +275,7 @@ open class TibiaKtClient constructor(
      * @param battlEyeType The BattlEye type of the worlds to fetch. Only applies when [world] is null.
      * @param pvpTypes The PvP type of the worlds to fetch. Only applies when [world] is null.
      */
-    suspend fun fetchHighscoresPage(
+    open suspend fun fetchHighscoresPage(
         world: String?,
         category: HighscoresCategory,
         vocation: HighscoresProfession = HighscoresProfession.ALL,
@@ -287,10 +288,43 @@ open class TibiaKtClient constructor(
         return response.parse { HighscoresParser.fromContent(it) }
     }
 
+    open suspend fun fetchHigscores(
+        world: String?,
+        category: HighscoresCategory,
+        vocation: HighscoresProfession = HighscoresProfession.ALL,
+        battlEyeType: HighscoresBattlEyeType = HighscoresBattlEyeType.ANY_WORLD,
+        pvpTypes: Set<PvpType>? = null,
+    ): TibiaResponse<Highscores> {
+        val now = Instant.now()
+        var totalPages = 0
+        var currentPage = 1
+        val entries = mutableListOf<HighscoresEntry>()
+        var fetchingTime = 0f
+        var parsingTime = 0f
+        var baseHighscores: Highscores? = null
+        while (totalPages == 0 || currentPage <= totalPages) {
+            val response = fetchHighscoresPage(world, category, vocation, currentPage, battlEyeType, pvpTypes)
+            entries.addAll(response.data.entries)
+            totalPages = response.data.totalPages
+            fetchingTime += response.fetchingTime
+            parsingTime += response.parsingTime
+            if (currentPage == 1) {
+                baseHighscores = response.data
+            }
+            currentPage++
+        }
+        return TibiaResponse(timestamp = now,
+            isCached = false,
+            cacheAge = 0,
+            fetchingTime = fetchingTime,
+            parsingTime = parsingTime,
+            data = baseHighscores!!.copy(entries = entries))
+    }
+
     /**
      * Fetch the houses section for a [world] and [town].
      */
-    suspend fun fetchHousesSection(
+    open suspend fun fetchHousesSection(
         world: String,
         town: String,
         type: HouseType? = null,
@@ -302,7 +336,7 @@ open class TibiaKtClient constructor(
     }
 
     /** Fetch a house by its [houseId] in a specific world. */
-    suspend fun fetchHouse(
+    open suspend fun fetchHouse(
         houseId: Int,
         world: String,
     ): TibiaResponse<House?> {
@@ -316,7 +350,7 @@ open class TibiaKtClient constructor(
      * If the world does not exist, the leaderboards will be null.
      * @param rotation The rotation number to see. Tibia.com only allows viewing the current and last rotations. Any other value takes you to the current leaderboard.
      */
-    suspend fun fetchLeaderboards(
+    open suspend fun fetchLeaderboards(
         world: String,
         rotation: Int? = null,
         page: Int = 1,
@@ -330,7 +364,7 @@ open class TibiaKtClient constructor(
     // region Forum Section
 
     /** Fetch CM posts between two dates. */
-    suspend fun fetchCMPostArchive(
+    open suspend fun fetchCMPostArchive(
         startDate: LocalDate,
         endDate: LocalDate,
         page: Int = 0,
@@ -340,7 +374,7 @@ open class TibiaKtClient constructor(
     }
 
     /** Fetch CM posts from today to the last specified [days]. */
-    suspend fun fetchCMPostArchive(days: Int, page: Int = 0) =
+    open suspend fun fetchCMPostArchive(days: Int, page: Int = 0) =
         fetchCMPostArchive(LocalDate.now().minusDays(days.toLong()), LocalDate.now(), page)
 
     // endregion
@@ -353,7 +387,7 @@ open class TibiaKtClient constructor(
      * @param filters The filtering parameters to use.
      * @param page The page to display.
      */
-    suspend fun fetchBazaar(
+    open suspend fun fetchBazaar(
         type: BazaarType = BazaarType.CURRENT,
         filters: BazaarFilters? = null,
         page: Int = 1,
@@ -370,7 +404,7 @@ open class TibiaKtClient constructor(
      * @param fetchOutfits Whether to fetch outfits from further pages if necessary. Cannot be done if [skipDetails] is true.
      * @param fetchMounts Whether to fetch mounts from further pages if necessary. Cannot be done if [skipDetails] is true.
      */
-    suspend fun fetchAuction(
+    open suspend fun fetchAuction(
         auctionId: Int,
         skipDetails: Boolean = false,
         fetchItems: Boolean = false,
