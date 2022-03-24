@@ -299,8 +299,8 @@ open class TibiaKtClient constructor(
         var totalPages = 0
         var currentPage = 1
         val entries = mutableListOf<HighscoresEntry>()
-        var fetchingTime = 0f
-        var parsingTime = 0f
+        var fetchingTime = 0.0
+        var parsingTime = 0.0
         var baseHighscores: Highscores? = null
         while (totalPages == 0 || currentPage <= totalPages) {
             val response = fetchHighscoresPage(world, category, vocation, currentPage, battlEyeType, pvpTypes)
@@ -488,11 +488,11 @@ open class TibiaKtClient constructor(
 
     // endregion
 
-    private val HttpResponse.fetchingTime get() = (responseTime.timestamp - requestTime.timestamp) / 1000f
+    private val HttpResponse.fetchingTime get() = (responseTime.timestamp - requestTime.timestamp) / 1000.0
     private val HttpResponse.fetchingTimeMillis get() = (fetchingTime * 1000).toInt()
 
     /** Convert to a [TibiaResponse]. */
-    private fun <T> HttpResponse.toTibiaResponse(parsingTime: Float, data: T): TibiaResponse<T> = TibiaResponse(
+    private fun <T> HttpResponse.toTibiaResponse(parsingTime: Double, data: T): TibiaResponse<T> = TibiaResponse(
         timestamp = Instant.ofEpochMilli(responseTime.timestamp),
         isCached = headers["CF-Cache-Status"] == "HIT",
         cacheAge = headers["Age"]?.toInt() ?: 0,
@@ -508,7 +508,7 @@ open class TibiaKtClient constructor(
         val parsingTime = measureTimeMillis {
             val stringBody: String = receive()
             data = parser(stringBody)
-        } / 1000f
+        } / 1000.0
         logger.info { "${this.request.url} | PARSE | ${(parsingTime * 1000).toInt()}ms" }
         return toTibiaResponse(parsingTime, data)
     }
@@ -551,7 +551,7 @@ open class TibiaKtClient constructor(
             timing.fetching += fetchingTime
             val parsingTime = measureTimeMillis {
                 entries.addAll(AuctionParser.parsePageItems(ajaxResponse.ajaxObjects.first().data))
-            } / 1000f
+            } / 1000.0
             timing.parsing += parsingTime
             logger.info {
                 "${
@@ -566,7 +566,7 @@ open class TibiaKtClient constructor(
     /**
      * A data class to hold fetching and parsing times.
      */
-    private data class Timing(var fetching: Float = 0f, var parsing: Float = 0f)
+    private data class Timing(var fetching: Double = 0.0, var parsing: Double = 0.0)
 
     /**
      * Extract the results of [fetchAllPages] and sum the timings into the [accumulator]
@@ -577,7 +577,7 @@ open class TibiaKtClient constructor(
         return second
     }
 
-    private data class TimedResult<T>(val time: Float, val result: T)
+    private data class TimedResult<T>(val time: Double, val result: T)
 
     internal companion object {
         internal val logger = KotlinLogging.logger { }

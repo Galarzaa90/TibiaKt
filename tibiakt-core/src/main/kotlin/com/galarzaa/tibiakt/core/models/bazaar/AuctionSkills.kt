@@ -18,12 +18,12 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 data class AuctionSkills(
-    val axeFighting: Float,
-    val clubFighting: Float,
-    val distanceFighting: Float,
-    val fishing: Float,
-    val fistFighting: Float,
-    val magicLevel: Float,
-    val shielding: Float,
-    val swordFighting: Float,
+    val axeFighting: Double,
+    val clubFighting: Double,
+    val distanceFighting: Double,
+    val fishing: Double,
+    val fistFighting: Double,
+    val magicLevel: Double,
+    val shielding: Double,
+    val swordFighting: Double,
 )

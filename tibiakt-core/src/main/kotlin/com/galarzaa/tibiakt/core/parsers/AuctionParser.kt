@@ -199,10 +199,10 @@ object AuctionParser : Parser<Auction?> {
                 "Titles" -> builder.titlesCount(value.parseInteger())
             }
         }
-        val skillsMap = mutableMapOf<String, Float>().withDefault { 0f }
+        val skillsMap = mutableMapOf<String, Double>().withDefault { 0.0 }
         for (row in contentContainers[1].rows()) {
             val (name, level, progress) = row.cellsText()
-            skillsMap[name] = level.parseInteger() + (progress.remove("%").toFloat() / 100f)
+            skillsMap[name] = level.parseInteger() + (progress.remove("%").toDouble() / 100f)
         }
         val skills = AuctionSkills(
             axeFighting = skillsMap.getValue("Axe Fighting"),
