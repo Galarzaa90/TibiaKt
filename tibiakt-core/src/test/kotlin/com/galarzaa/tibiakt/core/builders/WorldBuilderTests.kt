@@ -17,17 +17,10 @@ class WorldBuilderTests : StringSpec({
             onlineRecordDateTime = Instant.now()
             onlineRecordCount = 425
             creationDate = YearMonth.of(2018, 4)
-            onlinePlayers {
-                onlinePlayer("Someone", 123, Vocation.DRUID)
-                onlinePlayer("Galarzaa Fidera", 285, Vocation.ROYAL_PALADIN)
-                player {
-                    name = "Tschas"
-                    level = 123
-                    vocation = Vocation.ELDER_DRUID
-                }
-            }
+            addOnlinePlayer("Someone", 123, Vocation.DRUID)
+            addOnlinePlayer("Galarzaa Fidera", 285, Vocation.ROYAL_PALADIN)
         }
 
-        world.playersOnline shouldHaveSize 3
+        world.playersOnline shouldHaveSize 2
     }
 })

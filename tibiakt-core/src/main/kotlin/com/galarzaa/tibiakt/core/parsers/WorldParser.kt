@@ -45,7 +45,7 @@ object WorldParser : Parser<World?> {
         for (row in table.rows().offsetStart(2)) {
             val columns = row.select("td")
             val (name, level, vocation) = columns.map { it.text().clean() }
-            onlinePlayer(name,
+            addOnlinePlayer(name,
                 level.toInt(),
                 StringEnum.fromValue(vocation) ?: throw ParsingException("unknown vocation: $vocation"))
         }

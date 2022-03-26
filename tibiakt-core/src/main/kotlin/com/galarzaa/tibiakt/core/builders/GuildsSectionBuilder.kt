@@ -3,11 +3,14 @@ package com.galarzaa.tibiakt.core.builders
 import com.galarzaa.tibiakt.core.models.guild.GuildEntry
 import com.galarzaa.tibiakt.core.models.guild.GuildsSection
 
-class GuildsSectionBuilder {
-    private var world: String? = null
-    private val guilds: MutableList<GuildEntry> = mutableListOf()
 
-    fun world(world: String) = apply { this.world = world }
+inline fun guildsSectionBuilder(block: GuildsSectionBuilder.() -> Unit) = GuildsSectionBuilder().apply(block)
+inline fun guildsSection(block: GuildsSectionBuilder.() -> Unit) = guildsSectionBuilder(block).build()
+
+class GuildsSectionBuilder {
+    var world: String? = null
+    val guilds: MutableList<GuildEntry> = mutableListOf()
+
     fun addGuild(name: String, logoUrl: String, description: String? = null, isActive: Boolean) = apply {
         guilds.add(GuildEntry(name, description, logoUrl, isActive))
     }

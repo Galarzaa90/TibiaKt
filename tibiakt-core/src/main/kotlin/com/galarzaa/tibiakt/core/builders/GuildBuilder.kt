@@ -7,31 +7,28 @@ import com.galarzaa.tibiakt.core.models.guild.GuildInvite
 import com.galarzaa.tibiakt.core.models.guild.GuildMember
 import java.time.LocalDate
 
-class GuildBuilder {
-    private var world: String? = null
-    private var name: String? = null
-    private var logoUrl: String? = null
-    private var description: String? = null
-    private var foundingDate: LocalDate? = null
-    private var isActive: Boolean = false
-    private var applicationsOpen: Boolean = false
-    private var homepage: String? = null
-    private var guildHall: GuildHall? = null
-    private var disbandingDate: LocalDate? = null
-    private var disbandingReason: String? = null
-    private val members: MutableList<GuildMember> = mutableListOf()
-    private val invited: MutableList<GuildInvite> = mutableListOf()
 
-    fun name(name: String) = apply { this.name = name }
-    fun description(description: String?) = apply { this.description = description }
-    fun logoUrl(logoUrl: String?) = apply { this.logoUrl = logoUrl }
-    fun world(world: String?) = apply { this.world = world }
-    fun isActive(isActive: Boolean) = apply { this.isActive = isActive }
-    fun applicationsOpen(applicationsOpen: Boolean) = apply { this.applicationsOpen = applicationsOpen }
-    fun homepage(homepage: String) = apply { this.homepage = homepage }
-    fun foundingDate(foundingDate: LocalDate) = apply { this.foundingDate = foundingDate }
-    fun disbanding(date: LocalDate, reason: String) = apply { disbandingDate = date; disbandingReason = reason }
+inline fun guildBuilder(block: GuildBuilder.() -> Unit) = GuildBuilder().apply(block)
+inline fun guild(block: GuildBuilder.() -> Unit) = guildBuilder(block).build()
+
+@TibiaKtDsl
+class GuildBuilder {
+    var world: String? = null
+    var name: String? = null
+    var logoUrl: String? = null
+    var description: String? = null
+    var foundingDate: LocalDate? = null
+    var isActive: Boolean = false
+    var applicationsOpen: Boolean = false
+    var homepage: String? = null
+    var guildHall: GuildHall? = null
+    var disbandingDate: LocalDate? = null
+    var disbandingReason: String? = null
+    val members: MutableList<GuildMember> = mutableListOf()
+    val invited: MutableList<GuildInvite> = mutableListOf()
+
     fun guildHall(name: String, paidUntil: LocalDate) = apply { guildHall = GuildHall(name, paidUntil) }
+    fun guildHall(guildHall: GuildHall) = apply { this.guildHall = guildHall }
 
     fun addMember(
         rank: String,
@@ -40,7 +37,7 @@ class GuildBuilder {
         vocation: Vocation,
         level: Int,
         joiningDate: LocalDate,
-        isOnline: Boolean
+        isOnline: Boolean,
     ) = apply {
         members.add(GuildMember(name, rank, title, level, vocation, joiningDate, isOnline))
     }
