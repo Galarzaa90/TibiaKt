@@ -85,6 +85,14 @@ data class GetHighscoresPage(
     val profession: HighscoresProfession = HighscoresProfession.ALL,
 )
 
+@Location("/highscores/{world}/{category}/all")
+data class GetHighscoresComplete(
+    val world: String,
+    val category: HighscoresCategory,
+    val page: Int = 1,
+    val profession: HighscoresProfession = HighscoresProfession.ALL,
+)
+
 @Location("/bazaar")
 data class GetBazaar(
     val page: Int = 1,

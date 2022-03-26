@@ -18,7 +18,7 @@ class AuctionParserTests : StringSpec({
             mana shouldBe 12420
             capacity shouldBe 4580
             speed shouldBe 528
-            skills.magicLevel shouldBe 99.4142f
+            skills.magicLevel shouldBe 99.4142
             experience shouldBe 1216886752
             gold shouldBe 267387
 

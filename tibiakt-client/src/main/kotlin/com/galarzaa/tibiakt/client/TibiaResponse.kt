@@ -23,7 +23,7 @@ data class TibiaResponse<T>(
     val timestamp: Instant,
     val isCached: Boolean,
     val cacheAge: Int,
-    val fetchingTime: Float,
-    val parsingTime: Float,
+    val fetchingTime: Double,
+    val parsingTime: Double,
     val data: T
 )
