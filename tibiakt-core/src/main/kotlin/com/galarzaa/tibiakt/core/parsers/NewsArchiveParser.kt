@@ -1,6 +1,7 @@
 package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.core.builders.NewsArchiveBuilder
+import com.galarzaa.tibiakt.core.builders.newsArchive
 import com.galarzaa.tibiakt.core.enums.NewsCategory
 import com.galarzaa.tibiakt.core.enums.NewsType
 import com.galarzaa.tibiakt.core.enums.StringEnum
@@ -24,17 +25,16 @@ object NewsArchiveParser : Parser<NewsArchive> {
         val boxContent =
             document.selectFirst("div.BoxContent") ?: throw ParsingException("BoxContent container not found")
         val tables = boxContent.parseTablesMap()
-        if (!tables.containsKey("News Archive Search"))
-            throw ParsingException("news search not found in page")
-        val builder = NewsArchiveBuilder()
-        boxContent.selectFirst("form")?.apply {
-            parseFilterTable(this, builder)
+        if (!tables.containsKey("News Archive Search")) throw ParsingException("news search not found in page")
+        return newsArchive {
+            boxContent.selectFirst("form")?.apply {
+                parseFilterTable(this)
+            }
+            tables["Search Results"]?.let { parseResultsTable(it) }
         }
-        parseResultsTable(tables["Search Results"] ?: return builder.build(), builder)
-        return builder.build()
     }
 
-    private fun parseResultsTable(table: Element, builder: NewsArchiveBuilder) {
+    private fun NewsArchiveBuilder.parseResultsTable(table: Element) {
         for (row in table.rows()) {
             val (iconColumn, dateColumn, titleColumn) = row.cells()
             val iconUrl =
@@ -47,47 +47,39 @@ object NewsArchiveParser : Parser<NewsArchive> {
             val typeLabel = dateColumn.selectFirst("small") ?: throw ParsingException("could not find type label")
             val newsType = typeLabel.cleanText()
             typeLabel.remove()
-            builder.addEntry(
-                newsId,
+            addEntry(newsId,
                 titleColumn.cleanText(),
                 category,
                 iconUrl,
                 parseTibiaDate(dateColumn.cleanText()),
-                StringEnum.fromValue(newsType) ?: throw ParsingException("unexpected news type found: $newsType")
-            )
+                StringEnum.fromValue(newsType) ?: throw ParsingException("unexpected news type found: $newsType"))
         }
     }
 
-    private fun parseFilterTable(element: Element, builder: NewsArchiveBuilder) {
+    private fun NewsArchiveBuilder.parseFilterTable(element: Element) {
         val formData = element.formData()
-        builder
-            .startDate(
-                LocalDate.of(
-                    formData.values["filter_begin_year"]?.toInt()
-                        ?: throw ParsingException("could not find filter_begin_year in form"),
-                    formData.values["filter_begin_month"]?.toInt()
-                        ?: throw ParsingException("could not find filter_begin_month in form"),
-                    formData.values["filter_begin_day"]?.toInt()
-                        ?: throw ParsingException("could not find filter_begin_day in form"),
-                )
-            )
-            .endDate(
-                LocalDate.of(
-                    formData.values["filter_end_year"]?.toInt()
-                        ?: throw ParsingException("could not find filter_end_year in form"),
-                    formData.values["filter_end_month"]?.toInt()
-                        ?: throw ParsingException("could not find filter_end_month in form"),
-                    formData.values["filter_end_day"]?.toInt()
-                        ?: throw ParsingException("could not find filter_end_day in form"),
-                )
-            )
+        startDate = LocalDate.of(
+            formData.values["filter_begin_year"]?.toInt()
+                ?: throw ParsingException("could not find filter_begin_year in form"),
+            formData.values["filter_begin_month"]?.toInt()
+                ?: throw ParsingException("could not find filter_begin_month in form"),
+            formData.values["filter_begin_day"]?.toInt()
+                ?: throw ParsingException("could not find filter_begin_day in form"),
+        )
+        endDate = LocalDate.of(
+            formData.values["filter_end_year"]?.toInt()
+                ?: throw ParsingException("could not find filter_end_year in form"),
+            formData.values["filter_end_month"]?.toInt()
+                ?: throw ParsingException("could not find filter_end_month in form"),
+            formData.values["filter_end_day"]?.toInt()
+                ?: throw ParsingException("could not find filter_end_day in form"),
+        )
+
         for (value in NewsCategory.values()) {
-            if (!formData.valuesMultiple[value.filterName].isNullOrEmpty())
-                builder.addCategory(value)
+            if (!formData.valuesMultiple[value.filterName].isNullOrEmpty()) addCategory(value)
         }
         for (value in NewsType.values()) {
-            if (!formData.valuesMultiple[value.filterName].isNullOrEmpty())
-                builder.addType(value)
+            if (!formData.valuesMultiple[value.filterName].isNullOrEmpty()) addType(value)
         }
     }
 }
