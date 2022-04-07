@@ -1,44 +1,28 @@
 package com.galarzaa.tibiakt.core.builders
 
-import com.galarzaa.tibiakt.core.models.forums.BoardEntry
-import com.galarzaa.tibiakt.core.models.forums.ForumSection
-import com.galarzaa.tibiakt.core.models.forums.LastPost
+import com.galarzaa.tibiakt.core.models.forums.ForumBoard
+import com.galarzaa.tibiakt.core.models.forums.ForumEntry
 
+inline fun forumBoardBuilder(block: ForumBoardBuilder.() -> Unit) = ForumBoardBuilder().apply(block)
+inline fun forumBoard(block: ForumBoardBuilder.() -> Unit) = forumBoardBuilder(block).build()
 
-inline fun forumsSectionBuilder(block: ForumsSectionBuilder.() -> Unit) = ForumsSectionBuilder().apply(block)
-inline fun forumsSection(block: ForumsSectionBuilder.() -> Unit) = forumsSectionBuilder(block).build()
-
-inline fun boardEntryBuilder(block: BoardEntryBuilder.() -> Unit) = BoardEntryBuilder().apply(block)
-inline fun boardEntry(block: BoardEntryBuilder.() -> Unit) = boardEntryBuilder(block).build()
-
-class BoardEntryBuilder {
+@TibiaKtDsl
+class ForumBoardBuilder {
     var name: String? = null
-    var boardId: Int = 0
-    var description: String? = null
-    var posts: Int = 0
-    var threads: Int = 0
-    var lastPost: LastPost? = null
+    var boardId: Int? = null
+    var section: String? = null
+    var currentPage: Int = 1
+    var totalPages: Int = 1
+    var resultsCount: Int = 0
+    val entries: MutableList<ForumEntry> = mutableListOf()
 
-    fun build() = BoardEntry(
-        name = name ?: throw IllegalArgumentException("name is required"),
-        boardId = boardId,
-        description = description ?: throw IllegalArgumentException("description is required"),
-        posts = posts,
-        threads = threads,
-        lastPost = lastPost
-    )
-}
-
-class ForumsSectionBuilder {
-    var sectionId: Int = 0
-    val entries: MutableList<BoardEntry> = mutableListOf()
-
-    fun addEntry(block: BoardEntryBuilder.() -> Unit) {
-        entries.add(boardEntry(block))
-    }
-
-    fun build() = ForumSection(
-        sectionId = sectionId,
+    fun build() = ForumBoard(
+        name = name ?: throw IllegalStateException("name is required"),
+        boardId = boardId  ?: throw IllegalStateException("boardId is required"),
+        section = section  ?: throw IllegalStateException("section is required"),
+        currentPage = currentPage,
+        totalPages = totalPages,
+        resultsCount = resultsCount,
         entries = entries
     )
 }
