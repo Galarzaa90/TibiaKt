@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > WorldEntryBuilderKt</title>
+  <title>Coverage Report > WorldBuilderKt</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -20,7 +20,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">com.galarzaa.tibiakt.core.builders</a>
 </div>
 
-<h1>Coverage Summary for Class: WorldEntryBuilderKt (com.galarzaa.tibiakt.core.builders)</h1>
+<h1>Coverage Summary for Class: WorldBuilderKt (com.galarzaa.tibiakt.core.builders)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -39,7 +39,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">WorldEntryBuilderKt</td>
+  <td class="name">WorldBuilderKt</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -78,43 +78,60 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.enums.BattlEyeType
 <i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.enums.PvpType
 <i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.enums.TransferType
-<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.models.world.WorldEntry
-<i class="no-highlight">7</i>&nbsp;import java.time.Instant
-<i class="no-highlight">8</i>&nbsp;import java.time.LocalDate
-<i class="no-highlight">9</i>&nbsp;
-<b class="fc"><i class="no-highlight">10</i>&nbsp;inline fun worldEntryBuilder(block: WorldEntryBuilder.() -&gt; Unit) = WorldEntryBuilder().apply(block)</b>
-<b class="fc"><i class="no-highlight">11</i>&nbsp;inline fun worldEntry(block: WorldEntryBuilder.() -&gt; Unit) = worldEntryBuilder(block).build()</b>
+<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.enums.Vocation
+<i class="no-highlight">7</i>&nbsp;import com.galarzaa.tibiakt.core.models.world.OnlineCharacter
+<i class="no-highlight">8</i>&nbsp;import com.galarzaa.tibiakt.core.models.world.World
+<i class="no-highlight">9</i>&nbsp;import java.time.Instant
+<i class="no-highlight">10</i>&nbsp;import java.time.LocalDate
+<i class="no-highlight">11</i>&nbsp;import java.time.YearMonth
 <i class="no-highlight">12</i>&nbsp;
-<i class="no-highlight">13</i>&nbsp;@TibiaKtDsl
-<i class="no-highlight">14</i>&nbsp;class WorldEntryBuilder {
-<i class="no-highlight">15</i>&nbsp;    var name: String? = null
-<i class="no-highlight">16</i>&nbsp;    var isOnline: Boolean = false
-<i class="no-highlight">17</i>&nbsp;    var onlineCount: Int = 0
-<i class="no-highlight">18</i>&nbsp;    var location: String? = null
-<i class="no-highlight">19</i>&nbsp;    var pvpType: PvpType? = null
-<i class="no-highlight">20</i>&nbsp;    var battlEyeType: BattlEyeType = BattlEyeType.UNPROTECTED
-<i class="no-highlight">21</i>&nbsp;    var battlEyeStartDate: LocalDate? = null
-<i class="no-highlight">22</i>&nbsp;    var transferType: TransferType = TransferType.REGULAR
-<i class="no-highlight">23</i>&nbsp;    var isPremiumRestricted: Boolean = false
-<i class="no-highlight">24</i>&nbsp;    var isExperimental: Boolean = false
-<i class="no-highlight">25</i>&nbsp;    var onlineRecordDateTime: Instant? = null
-<i class="no-highlight">26</i>&nbsp;
-<i class="no-highlight">27</i>&nbsp;
-<i class="no-highlight">28</i>&nbsp;    fun build(): WorldEntry {
-<i class="no-highlight">29</i>&nbsp;        return WorldEntry(
-<i class="no-highlight">30</i>&nbsp;            name = name ?: throw IllegalStateException(&quot;name is required&quot;),
-<i class="no-highlight">31</i>&nbsp;            isOnline = isOnline,
-<i class="no-highlight">32</i>&nbsp;            onlineCount = onlineCount,
-<i class="no-highlight">33</i>&nbsp;            location = location ?: throw IllegalStateException(&quot;location is required&quot;),
-<i class="no-highlight">34</i>&nbsp;            pvpType = pvpType ?: throw IllegalStateException(&quot;pvpType is required&quot;),
-<i class="no-highlight">35</i>&nbsp;            battlEyeType = battlEyeType,
-<i class="no-highlight">36</i>&nbsp;            battlEyeStartDate = battlEyeStartDate,
-<i class="no-highlight">37</i>&nbsp;            transferType = transferType,
-<i class="no-highlight">38</i>&nbsp;            isPremiumRestricted = isPremiumRestricted,
-<i class="no-highlight">39</i>&nbsp;            isExperimental = isExperimental,
-<i class="no-highlight">40</i>&nbsp;        )
-<i class="no-highlight">41</i>&nbsp;    }
-<i class="no-highlight">42</i>&nbsp;}
+<b class="fc"><i class="no-highlight">13</i>&nbsp;inline fun worldBuilder(block: WorldBuilder.() -&gt; Unit) = WorldBuilder().apply(block)</b>
+<b class="fc"><i class="no-highlight">14</i>&nbsp;inline fun world(block: WorldBuilder.() -&gt; Unit) = worldBuilder(block).build()</b>
+<i class="no-highlight">15</i>&nbsp;
+<i class="no-highlight">16</i>&nbsp;@TibiaKtDsl
+<i class="no-highlight">17</i>&nbsp;class WorldBuilder {
+<i class="no-highlight">18</i>&nbsp;    var name: String? = null
+<i class="no-highlight">19</i>&nbsp;    var isOnline: Boolean = false
+<i class="no-highlight">20</i>&nbsp;    var onlineCount: Int = 0
+<i class="no-highlight">21</i>&nbsp;    var location: String? = null
+<i class="no-highlight">22</i>&nbsp;    var pvpType: PvpType? = null
+<i class="no-highlight">23</i>&nbsp;    var battlEyeType: BattlEyeType = BattlEyeType.UNPROTECTED
+<i class="no-highlight">24</i>&nbsp;    var battlEyeStartDate: LocalDate? = null
+<i class="no-highlight">25</i>&nbsp;    var transferType: TransferType = TransferType.REGULAR
+<i class="no-highlight">26</i>&nbsp;    var isPremiumRestricted: Boolean = false
+<i class="no-highlight">27</i>&nbsp;    var isExperimental: Boolean = false
+<i class="no-highlight">28</i>&nbsp;    var onlineRecordCount: Int = 0
+<i class="no-highlight">29</i>&nbsp;    var onlineRecordDateTime: Instant? = null
+<i class="no-highlight">30</i>&nbsp;    var creationDate: YearMonth? = null
+<i class="no-highlight">31</i>&nbsp;    var worldQuests: MutableList&lt;String&gt; = mutableListOf()
+<i class="no-highlight">32</i>&nbsp;    var playersOnline: MutableList&lt;OnlineCharacter&gt; = mutableListOf()
+<i class="no-highlight">33</i>&nbsp;
+<i class="no-highlight">34</i>&nbsp;    fun worldQuest(quest: String) = worldQuests.add(quest)
+<i class="no-highlight">35</i>&nbsp;    fun addOnlinePlayer(name: String, level: Int, vocation: Vocation) =
+<i class="no-highlight">36</i>&nbsp;        playersOnline.add(OnlineCharacter(name, level, vocation))
+<i class="no-highlight">37</i>&nbsp;
+<i class="no-highlight">38</i>&nbsp;
+<i class="no-highlight">39</i>&nbsp;    fun build(): World {
+<i class="no-highlight">40</i>&nbsp;        return World(
+<i class="no-highlight">41</i>&nbsp;            name = name ?: throw IllegalStateException(&quot;name is required&quot;),
+<i class="no-highlight">42</i>&nbsp;            isOnline = isOnline,
+<i class="no-highlight">43</i>&nbsp;            onlineCount = onlineCount,
+<i class="no-highlight">44</i>&nbsp;            location = location ?: throw IllegalStateException(&quot;location is required&quot;),
+<i class="no-highlight">45</i>&nbsp;            pvpType = pvpType ?: throw IllegalStateException(&quot;pvpType is required&quot;),
+<i class="no-highlight">46</i>&nbsp;            battlEyeType = battlEyeType,
+<i class="no-highlight">47</i>&nbsp;            battlEyeStartDate = battlEyeStartDate,
+<i class="no-highlight">48</i>&nbsp;            transferType = transferType,
+<i class="no-highlight">49</i>&nbsp;            isPremiumRestricted = isPremiumRestricted,
+<i class="no-highlight">50</i>&nbsp;            onlineRecordCount = onlineRecordCount,
+<i class="no-highlight">51</i>&nbsp;            onlineRecordDateTime = onlineRecordDateTime
+<i class="no-highlight">52</i>&nbsp;                ?: throw IllegalStateException(&quot;onlineRecordDateTime is required&quot;),
+<i class="no-highlight">53</i>&nbsp;            isExperimental = isExperimental,
+<i class="no-highlight">54</i>&nbsp;            creationDate = creationDate ?: throw IllegalStateException(&quot;creationDate is required&quot;),
+<i class="no-highlight">55</i>&nbsp;            playersOnline = playersOnline,
+<i class="no-highlight">56</i>&nbsp;            worldQuests = worldQuests,
+<i class="no-highlight">57</i>&nbsp;        )
+<i class="no-highlight">58</i>&nbsp;    }
+<i class="no-highlight">59</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -141,7 +158,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-04-01 04:01</div>
+    <div style="float:right;">generated on 2022-04-07 18:08</div>
 </div>
 </body>
 </html>
