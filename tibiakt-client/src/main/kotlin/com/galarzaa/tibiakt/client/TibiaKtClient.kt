@@ -25,6 +25,7 @@ import com.galarzaa.tibiakt.core.models.bazaar.OutfitEntry
 import com.galarzaa.tibiakt.core.models.character.Character
 import com.galarzaa.tibiakt.core.models.creatures.CreaturesSection
 import com.galarzaa.tibiakt.core.models.forums.CMPostArchive
+import com.galarzaa.tibiakt.core.models.forums.ForumSection
 import com.galarzaa.tibiakt.core.models.guild.Guild
 import com.galarzaa.tibiakt.core.models.guild.GuildsSection
 import com.galarzaa.tibiakt.core.models.highscores.Highscores
@@ -42,6 +43,7 @@ import com.galarzaa.tibiakt.core.parsers.CharacterBazaarParser
 import com.galarzaa.tibiakt.core.parsers.CharacterParser
 import com.galarzaa.tibiakt.core.parsers.CreaturesSectionParser
 import com.galarzaa.tibiakt.core.parsers.EventsScheduleParser
+import com.galarzaa.tibiakt.core.parsers.ForumSectionParser
 import com.galarzaa.tibiakt.core.parsers.GuildParser
 import com.galarzaa.tibiakt.core.parsers.GuildsSectionParser
 import com.galarzaa.tibiakt.core.parsers.HighscoresParser
@@ -59,6 +61,7 @@ import com.galarzaa.tibiakt.core.utils.getCMPostArchiveUrl
 import com.galarzaa.tibiakt.core.utils.getCharacterUrl
 import com.galarzaa.tibiakt.core.utils.getCreaturesSectionUrl
 import com.galarzaa.tibiakt.core.utils.getEventsScheduleUrl
+import com.galarzaa.tibiakt.core.utils.getForumSectionUrl
 import com.galarzaa.tibiakt.core.utils.getGuildUrl
 import com.galarzaa.tibiakt.core.utils.getHighscoresUrl
 import com.galarzaa.tibiakt.core.utils.getHouseUrl
@@ -362,6 +365,11 @@ open class TibiaKtClient constructor(
     // endregion
 
     // region Forum Section
+
+    open suspend fun fetchForumSection(sectionId: Int): TibiaResponse<ForumSection?> {
+        val response = this.request(HttpMethod.Get, getForumSectionUrl(sectionId))
+        return response.parse { ForumSectionParser.fromContent(it) }
+    }
 
     /** Fetch CM posts between two dates. */
     open suspend fun fetchCMPostArchive(

@@ -154,6 +154,20 @@ fun getNewArchiveFormData(
  */
 fun getNewsUrl(newsId: Int) = buildTibiaUrl("news", "newsarchive", P("id", newsId))
 
+
+/**
+ * Get the URL to a specific forum section
+ */
+fun getForumSectionUrl(sectionId: Int) = buildTibiaUrl("forum", P("action", "main"), P("sectionid", sectionId))
+
+/**
+ * Get the URL to a specific forum section by its name.
+ */
+fun getForumSectionUrl(sectionName: String) = buildTibiaUrl("forum", sectionName)
+
+fun getForumBoardUrl(boardId: Int, page: Int = 1, threadAge: Int? = null) =
+    buildTibiaUrl("forum", P("action", "board"), P("boardid", boardId), P("pagenumber", page), P("threadage", threadAge) )
+
 /**
  * Get the URL to a specific thread in the forums.
  */

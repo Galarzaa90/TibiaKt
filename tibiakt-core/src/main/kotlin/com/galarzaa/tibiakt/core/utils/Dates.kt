@@ -12,7 +12,7 @@ import java.util.Locale
  * Parses a string containing date and time from Tibia.com into an [Instant] instance.
  */
 fun parseTibiaDateTime(input: String): Instant {
-    val timeString = input.clean().let{ it.substring(0, it.length - 4).trim() }
+    val timeString = input.clean().let { it.substring(0, it.length - 4).trim() }
     val tzString = input.substring(input.length - 4)
     return try {
         LocalDateTime.parse(timeString, DateTimeFormatter.ofPattern("MMM dd yyyy, HH:mm:ss", Locale.US))
@@ -35,4 +35,7 @@ fun parseTibiaFullDate(input: String): LocalDate {
     return LocalDate.parse(input.clean(), DateTimeFormatter.ofPattern("MMMM d, yyyy", Locale.US))
 }
 
-
+fun parseTibiaForumDate(input: String, utcOffset: Int = 1): Instant {
+    return LocalDateTime.parse(input, DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss", Locale.US))
+        .atOffset(ZoneOffset.ofHours(utcOffset)).toInstant()
+}

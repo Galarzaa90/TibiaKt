@@ -122,6 +122,9 @@ data class GetCMPosts(
     val days: Int? = null, val page: Int = 1,
 )
 
+@Location("/forum/sections/{sectionId}")
+data class GetForumSection(val sectionId: Int)
+
 @Location("/leaderboards/{world}")
 data class GetLeaderboards(
     val world: String,

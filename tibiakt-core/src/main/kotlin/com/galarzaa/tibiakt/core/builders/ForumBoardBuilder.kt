@@ -1,7 +1,7 @@
 package com.galarzaa.tibiakt.core.builders
 
 import com.galarzaa.tibiakt.core.models.forums.BoardEntry
-import com.galarzaa.tibiakt.core.models.forums.ForumsSection
+import com.galarzaa.tibiakt.core.models.forums.ForumSection
 import com.galarzaa.tibiakt.core.models.forums.LastPost
 
 
@@ -37,7 +37,7 @@ class ForumsSectionBuilder {
         entries.add(boardEntry(block))
     }
 
-    fun build() = ForumsSection(
+    fun build() = ForumSection(
         sectionId = sectionId,
         entries = entries
     )
