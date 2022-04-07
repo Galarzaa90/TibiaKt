@@ -43,26 +43,26 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name">UrlsKt</td>
 <td class="coverageStat">
   <span class="percent">
-    14.6%
+    19.5%
   </span>
   <span class="absValue">
-    (6/41)
+    (8/41)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    13%
+    17.4%
   </span>
   <span class="absValue">
-    (6/46)
+    (8/46)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    12.2%
+    14.8%
   </span>
   <span class="absValue">
-    (14/115)
+    (17/115)
   </span>
 </td>
 </tr>
@@ -89,26 +89,26 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    16.7%
+    21.4%
   </span>
   <span class="absValue">
-    (7/42)
+    (9/42)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    13%
+    17.4%
   </span>
   <span class="absValue">
-    (6/46)
+    (8/46)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    13.7%
+    16.2%
   </span>
   <span class="absValue">
-    (16/117)
+    (19/117)
   </span>
 </td>
 </tr>
@@ -155,11 +155,11 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">34</i>&nbsp;    section: String,
 <i class="no-highlight">35</i>&nbsp;    vararg params: Pair&lt;String, Any?&gt;,
 <b class="fc"><i class="no-highlight">36</i>&nbsp;    test: Boolean = false,</b>
-<b class="nc"><i class="no-highlight">37</i>&nbsp;    anchor: String? = null,</b>
+<b class="fc"><i class="no-highlight">37</i>&nbsp;    anchor: String? = null,</b>
 <i class="no-highlight">38</i>&nbsp;): String {
 <b class="pc"><i class="no-highlight">39</i>&nbsp;    val baseUrl = if (test) &quot;www.test.tibia.com&quot; else &quot;www.tibia.com&quot;</b>
 <b class="fc"><i class="no-highlight">40</i>&nbsp;    return &quot;https://$baseUrl/$section/?${</b>
-<b class="pc"><i class="no-highlight">41</i>&nbsp;        params.filter { it.second != null }.joinToString(&quot;&amp;&quot;) { (name, value) -&gt;</b>
+<b class="fc"><i class="no-highlight">41</i>&nbsp;        params.filter { it.second != null }.joinToString(&quot;&amp;&quot;) { (name, value) -&gt;</b>
 <b class="fc"><i class="no-highlight">42</i>&nbsp;            &quot;$name=${URLEncoder.encode(value.toString(), Charsets.ISO_8859_1)}&quot;</b>
 <i class="no-highlight">43</i>&nbsp;        }
 <b class="pc"><i class="no-highlight">44</i>&nbsp;    }${anchor?.let { &quot;#$it&quot; } ?: &quot;&quot;}&quot;</b>
@@ -286,8 +286,8 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">165</i>&nbsp; */
 <b class="nc"><i class="no-highlight">166</i>&nbsp;fun getForumSectionUrl(sectionName: String) = buildTibiaUrl(&quot;forum&quot;, sectionName)</b>
 <i class="no-highlight">167</i>&nbsp;
-<b class="nc"><i class="no-highlight">168</i>&nbsp;fun getForumBoardUrl(boardId: Int, page: Int = 1, threadAge: Int? = null) =</b>
-<b class="nc"><i class="no-highlight">169</i>&nbsp;    buildTibiaUrl(&quot;forum&quot;, P(&quot;action&quot;, &quot;board&quot;), P(&quot;boardid&quot;, boardId), P(&quot;pagenumber&quot;, page), P(&quot;threadage&quot;, threadAge) )</b>
+<b class="fc"><i class="no-highlight">168</i>&nbsp;fun getForumBoardUrl(boardId: Int, page: Int = 1, threadAge: Int? = null) =</b>
+<b class="fc"><i class="no-highlight">169</i>&nbsp;    buildTibiaUrl(&quot;forum&quot;, P(&quot;action&quot;, &quot;board&quot;), P(&quot;boardid&quot;, boardId), P(&quot;pagenumber&quot;, page), P(&quot;threadage&quot;, threadAge) )</b>
 <i class="no-highlight">170</i>&nbsp;
 <i class="no-highlight">171</i>&nbsp;/**
 <i class="no-highlight">172</i>&nbsp; * Get the URL to a specific thread in the forums.
@@ -451,7 +451,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-04-07 18:08</div>
+    <div style="float:right;">generated on 2022-04-07 22:26</div>
 </div>
 </body>
 </html>
