@@ -12,12 +12,15 @@ import kotlinx.serialization.UseSerializers
 data class ForumBoard(
     val name: String,
     override val boardId: Int,
+    val sectionId: Int,
     val section: String,
+    val threadAge: Int,
+    val announcements: List<AnnouncementEntry>,
     override val currentPage: Int,
     override val totalPages: Int,
     override val resultsCount: Int,
-    override val entries: List<ForumEntry>,
-) : Paginated<ForumEntry>, BaseForumBoard {
+    override val entries: List<ThreadEntry>,
+) : Paginated<ThreadEntry>, BaseForumBoard {
 
     override val url = getForumBoardUrl(boardId, currentPage)
 }

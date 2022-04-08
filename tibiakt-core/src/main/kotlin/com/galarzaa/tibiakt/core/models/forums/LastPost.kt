@@ -27,6 +27,6 @@ data class LastPost(
     val traded: Boolean,
 ) {
     /** The URL to the author's character page. If the author is deleted, there is no URL. */
-    val authorUrl = if(!deleted) getCharacterUrl(author) else null
-    val postUrl = getForumPostUrl(postId)
+    val authorUrl get() = if(!deleted) getCharacterUrl(author) else null
+    val postUrl get() = getForumPostUrl(postId)
 }

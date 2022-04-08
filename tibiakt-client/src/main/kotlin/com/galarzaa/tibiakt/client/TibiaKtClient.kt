@@ -25,6 +25,7 @@ import com.galarzaa.tibiakt.core.models.bazaar.OutfitEntry
 import com.galarzaa.tibiakt.core.models.character.Character
 import com.galarzaa.tibiakt.core.models.creatures.CreaturesSection
 import com.galarzaa.tibiakt.core.models.forums.CMPostArchive
+import com.galarzaa.tibiakt.core.models.forums.ForumBoard
 import com.galarzaa.tibiakt.core.models.forums.ForumSection
 import com.galarzaa.tibiakt.core.models.guild.Guild
 import com.galarzaa.tibiakt.core.models.guild.GuildsSection
@@ -43,6 +44,7 @@ import com.galarzaa.tibiakt.core.parsers.CharacterBazaarParser
 import com.galarzaa.tibiakt.core.parsers.CharacterParser
 import com.galarzaa.tibiakt.core.parsers.CreaturesSectionParser
 import com.galarzaa.tibiakt.core.parsers.EventsScheduleParser
+import com.galarzaa.tibiakt.core.parsers.ForumBoardParser
 import com.galarzaa.tibiakt.core.parsers.ForumSectionParser
 import com.galarzaa.tibiakt.core.parsers.GuildParser
 import com.galarzaa.tibiakt.core.parsers.GuildsSectionParser
@@ -61,6 +63,7 @@ import com.galarzaa.tibiakt.core.utils.getCMPostArchiveUrl
 import com.galarzaa.tibiakt.core.utils.getCharacterUrl
 import com.galarzaa.tibiakt.core.utils.getCreaturesSectionUrl
 import com.galarzaa.tibiakt.core.utils.getEventsScheduleUrl
+import com.galarzaa.tibiakt.core.utils.getForumBoardUrl
 import com.galarzaa.tibiakt.core.utils.getForumSectionUrl
 import com.galarzaa.tibiakt.core.utils.getGuildUrl
 import com.galarzaa.tibiakt.core.utils.getHighscoresUrl
@@ -78,6 +81,7 @@ import io.ktor.client.HttpClient
 import io.ktor.client.call.receive
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.engine.cio.CIO
+import io.ktor.client.features.Charsets
 import io.ktor.client.features.ResponseException
 import io.ktor.client.features.UserAgent
 import io.ktor.client.features.compression.ContentEncoding
@@ -116,6 +120,9 @@ open class TibiaKtClient constructor(
     constructor(userAgent: String? = null) : this(null, userAgent)
 
     private val client = HttpClient(engine ?: CIO.create()) {
+        Charsets {
+            register(Charsets.ISO_8859_1)
+        }
         ContentEncoding {
             gzip()
             deflate()
@@ -369,6 +376,11 @@ open class TibiaKtClient constructor(
     open suspend fun fetchForumSection(sectionId: Int): TibiaResponse<ForumSection?> {
         val response = this.request(HttpMethod.Get, getForumSectionUrl(sectionId))
         return response.parse { ForumSectionParser.fromContent(it) }
+    }
+
+    open suspend fun fetchForumBoard(boardId: Int): TibiaResponse<ForumBoard?> {
+        val response = this.request(HttpMethod.Get, getForumBoardUrl(boardId))
+        return response.parse { ForumBoardParser.fromContent(it) }
     }
 
     /** Fetch CM posts between two dates. */

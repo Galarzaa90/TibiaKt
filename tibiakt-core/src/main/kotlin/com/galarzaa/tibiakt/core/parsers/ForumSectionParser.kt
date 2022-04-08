@@ -1,14 +1,13 @@
 package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.core.builders.forumsSection
-import com.galarzaa.tibiakt.core.builders.lastPost
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
 import com.galarzaa.tibiakt.core.models.forums.ForumSection
 import com.galarzaa.tibiakt.core.utils.cells
 import com.galarzaa.tibiakt.core.utils.cleanText
 import com.galarzaa.tibiakt.core.utils.getLinkInformation
+import com.galarzaa.tibiakt.core.utils.parseLastPostFromCell
 import com.galarzaa.tibiakt.core.utils.parseTablesMap
-import com.galarzaa.tibiakt.core.utils.parseTibiaForumDate
 import com.galarzaa.tibiakt.core.utils.queryParams
 import com.galarzaa.tibiakt.core.utils.remove
 import java.net.URL
@@ -30,33 +29,13 @@ object ForumSectionParser : Parser<ForumSection> {
                 val boardColumn = columns[1]
                 val boardLink = boardColumn.selectFirst("a")?.getLinkInformation()!!
 
-
-
-
                 addEntry {
                     name = boardLink.title
                     boardId = boardLink.queryParams["boardid"]!!.first().toInt()
                     description = boardColumn.selectFirst("font")?.cleanText() ?: ""
                     posts = columns[2].text().remove(",").toInt()
-                    threads = columns[2].text().remove(",").toInt()
-                    lastPost = columns[4].selectFirst("div.LastPostInfo")?.let {
-                        val permalink = it.selectFirst("a")?.getLinkInformation() ?: return@let null
-                        val authorTag = columns[4].selectFirst("font") ?: return@let null
-                        val authorLink = authorTag.selectFirst("font > a")?.getLinkInformation()
-                        var authorName = authorTag.cleanText().removePrefix("by ")
-                        var isTraded = false
-                        if("(traded)" in authorName) {
-                            authorName = authorName.remove("(traded)")
-                            isTraded = true
-                        }
-                        lastPost {
-                            postId = permalink.queryParams["postid"]!!.first().toInt()
-                            date = parseTibiaForumDate(it.cleanText())
-                            author = authorName
-                            deleted = authorLink == null
-                            traded = isTraded
-                        }
-                    }
+                    threads = columns[3].text().remove(",").toInt()
+                    lastPost = parseLastPostFromCell(columns[4])
                 }
             }
             // Try to get section ID from login link
@@ -66,5 +45,6 @@ object ForumSectionParser : Parser<ForumSection> {
                 decodedUrl.queryParams()["sectionid"]?.first()?.toInt()
             } ?: 0
         }
+
     }
 }

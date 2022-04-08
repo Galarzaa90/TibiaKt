@@ -1,6 +1,8 @@
 package com.galarzaa.tibiakt.core.utils
 
+import com.galarzaa.tibiakt.core.builders.lastPost
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
+import com.galarzaa.tibiakt.core.models.forums.LastPost
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
@@ -72,12 +74,12 @@ internal fun ArrayList<Element>.replaceBr() = forEach { it.replaceBrs() }
  * @receiver An element with the form tag.
  */
 internal fun Element.formData(): FormData {
-    if (this.tagName() != "form")
+    if (this.tagName().lowercase() != "form")
         throw IllegalArgumentException("expected element with 'form' tag, got element with '${this.tagName()}' tag")
     val data = mutableMapOf<String, String>()
     val dataMultiple = mutableMapOf<String, MutableList<String>>()
     val availableOptions = mutableMapOf<String, MutableList<String>>()
-    select("input[type=text]").forEach { data[it.attr("name")] = it.attr("value") }
+    select("input[type=text], input[type=hidden]").forEach { data[it.attr("name")] = it.attr("value") }
     select("select").forEach {
         it.select("option").forEach { opt ->
             val value = opt.attr("value")
@@ -203,5 +205,24 @@ internal fun URL.queryParams(): HashMap<String, MutableList<String>> {
         map.getOrPut(name) { mutableListOf() }.add(value)
     }
     return map
+}
 
+internal fun parseLastPostFromCell(cell: Element): LastPost? {
+    val postDate = cell.selectFirst("div.LastPostInfo") ?: return null
+    val permalink = cell.selectFirst("a")?.getLinkInformation() ?: return null
+    val authorTag =cell.selectFirst("font") ?: return null
+    val authorLink = authorTag.selectFirst("font > a")?.getLinkInformation()
+    var authorName = authorTag.cleanText().removePrefix("by ")
+    var isTraded = false
+    if("(traded)" in authorName) {
+        authorName = authorName.remove("(traded)")
+        isTraded = true
+    }
+    return lastPost {
+        postId = permalink.queryParams["postid"]!!.first().toInt()
+        date = parseTibiaForumDate(postDate.cleanText())
+        author = authorName
+        deleted = authorLink == null && !isTraded
+        traded = isTraded
+    }
 }
