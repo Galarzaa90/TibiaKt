@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > NewsArchiveBuilder</title>
+  <title>Coverage Report > LeaderboardsBuilder</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -20,7 +20,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">com.galarzaa.tibiakt.core.builders</a>
 </div>
 
-<h1>Coverage Summary for Class: NewsArchiveBuilder (com.galarzaa.tibiakt.core.builders)</h1>
+<h1>Coverage Summary for Class: LeaderboardsBuilder (com.galarzaa.tibiakt.core.builders)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -43,7 +43,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">NewsArchiveBuilder</td>
+  <td class="name">LeaderboardsBuilder</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -54,10 +54,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    87.5%
+    100%
   </span>
   <span class="absValue">
-    (7/8)
+    (9/9)
   </span>
 </td>
 <td class="coverageStat">
@@ -65,15 +65,15 @@ Current scope:     <a href="../../index.html">all classes</a>
     50%
   </span>
   <span class="absValue">
-    (2/4)
+    (5/10)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    85%
+    100%
   </span>
   <span class="absValue">
-    (17/20)
+    (17/17)
   </span>
 </td>
 </tr>
@@ -87,70 +87,38 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.builders
 <i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.enums.NewsCategory
-<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.enums.NewsType
-<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.models.news.NewsArchive
-<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.models.news.NewsEntry
-<i class="no-highlight">7</i>&nbsp;import java.time.LocalDate
-<i class="no-highlight">8</i>&nbsp;
-<i class="no-highlight">9</i>&nbsp;fun newsArchive(block: NewsArchiveBuilder.() -&gt; Unit) = newsArchiveBuilder(block).build()
-<i class="no-highlight">10</i>&nbsp;fun newsArchiveBuilder(block: NewsArchiveBuilder.() -&gt; Unit) = NewsArchiveBuilder().apply(block)
-<i class="no-highlight">11</i>&nbsp;
-<b class="fc"><i class="no-highlight">12</i>&nbsp;class NewsArchiveBuilder {</b>
-<b class="fc"><i class="no-highlight">13</i>&nbsp;    var startDate: LocalDate? = null</b>
-<b class="fc"><i class="no-highlight">14</i>&nbsp;    var endDate: LocalDate? = null</b>
-<b class="fc"><i class="no-highlight">15</i>&nbsp;    val types: MutableSet&lt;NewsType&gt; = mutableSetOf()</b>
-<b class="fc"><i class="no-highlight">16</i>&nbsp;    val categories: MutableSet&lt;NewsCategory&gt; = mutableSetOf()</b>
-<b class="fc"><i class="no-highlight">17</i>&nbsp;    val entries: MutableList&lt;NewsEntry&gt; = mutableListOf()</b>
-<i class="no-highlight">18</i>&nbsp;
-<b class="fc"><i class="no-highlight">19</i>&nbsp;    fun addCategory(category: NewsCategory) = apply { categories.add(category) }</b>
-<i class="no-highlight">20</i>&nbsp;
-<b class="fc"><i class="no-highlight">21</i>&nbsp;    fun addType(type: NewsType) = apply { types.add(type) }</b>
-<i class="no-highlight">22</i>&nbsp;
-<i class="no-highlight">23</i>&nbsp;    fun addEntry(
-<i class="no-highlight">24</i>&nbsp;        id: Int,
-<i class="no-highlight">25</i>&nbsp;        title: String,
-<i class="no-highlight">26</i>&nbsp;        category: NewsCategory,
-<i class="no-highlight">27</i>&nbsp;        categoryIcon: String,
-<i class="no-highlight">28</i>&nbsp;        date: LocalDate,
-<i class="no-highlight">29</i>&nbsp;        type: NewsType,
-<b class="fc"><i class="no-highlight">30</i>&nbsp;    ) = apply {</b>
-<b class="fc"><i class="no-highlight">31</i>&nbsp;        entries.add(NewsEntry(id, title, category, categoryIcon, date, type)</b>
-<i class="no-highlight">32</i>&nbsp;
-<i class="no-highlight">33</i>&nbsp;        )
-<b class="fc"><i class="no-highlight">34</i>&nbsp;    }</b>
-<i class="no-highlight">35</i>&nbsp;
-<b class="nc"><i class="no-highlight">36</i>&nbsp;    fun addEntry(builder: NewsEntryBuilder.() -&gt; Unit) = apply {</b>
-<b class="nc"><i class="no-highlight">37</i>&nbsp;        entries.add(NewsEntryBuilder().apply(builder).build())</b>
-<b class="nc"><i class="no-highlight">38</i>&nbsp;    }</b>
-<i class="no-highlight">39</i>&nbsp;
-<i class="no-highlight">40</i>&nbsp;
-<b class="fc"><i class="no-highlight">41</i>&nbsp;    fun build() = NewsArchive(</b>
-<b class="pc"><i class="no-highlight">42</i>&nbsp;        startDate = startDate ?: throw IllegalStateException(&quot;startDate is required&quot;),</b>
-<b class="pc"><i class="no-highlight">43</i>&nbsp;        endDate = endDate ?: throw IllegalStateException(&quot;endDate is required&quot;),</b>
-<b class="fc"><i class="no-highlight">44</i>&nbsp;        types = types,</b>
-<b class="fc"><i class="no-highlight">45</i>&nbsp;        categories = categories,</b>
-<b class="fc"><i class="no-highlight">46</i>&nbsp;        entries = entries,</b>
-<i class="no-highlight">47</i>&nbsp;    )
-<i class="no-highlight">48</i>&nbsp;}
-<i class="no-highlight">49</i>&nbsp;
-<i class="no-highlight">50</i>&nbsp;class NewsEntryBuilder {
-<i class="no-highlight">51</i>&nbsp;    val id: Int = 0
-<i class="no-highlight">52</i>&nbsp;    val title: String? = null
-<i class="no-highlight">53</i>&nbsp;    val category: NewsCategory? = null
-<i class="no-highlight">54</i>&nbsp;    val categoryIcon: String? = null
-<i class="no-highlight">55</i>&nbsp;    val date: LocalDate? = null
-<i class="no-highlight">56</i>&nbsp;    val type: NewsType? = null
-<i class="no-highlight">57</i>&nbsp;
-<i class="no-highlight">58</i>&nbsp;    fun build() = NewsEntry(
-<i class="no-highlight">59</i>&nbsp;        id = id,
-<i class="no-highlight">60</i>&nbsp;        title = title ?: throw IllegalStateException(&quot;title is required&quot;),
-<i class="no-highlight">61</i>&nbsp;        category = category ?: throw IllegalStateException(&quot;category is required&quot;),
-<i class="no-highlight">62</i>&nbsp;        categoryIcon = categoryIcon ?: throw IllegalStateException(&quot;categoryIcon is required&quot;),
-<i class="no-highlight">63</i>&nbsp;        date = date ?: throw IllegalStateException(&quot;date is required&quot;),
-<i class="no-highlight">64</i>&nbsp;        type = type ?: throw IllegalStateException(&quot;type is required&quot;),
-<i class="no-highlight">65</i>&nbsp;    )
-<i class="no-highlight">66</i>&nbsp;}
+<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.models.Leaderboards
+<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.models.LeaderboardsEntry
+<i class="no-highlight">5</i>&nbsp;import java.time.Instant
+<i class="no-highlight">6</i>&nbsp;
+<b class="fc"><i class="no-highlight">7</i>&nbsp;class LeaderboardsBuilder {</b>
+<i class="no-highlight">8</i>&nbsp;    private var world: String? = null
+<i class="no-highlight">9</i>&nbsp;    private var rotation: Int? = null
+<i class="no-highlight">10</i>&nbsp;    private var lastUpdated: Instant? = null
+<i class="no-highlight">11</i>&nbsp;    private var currentPage: Int? = null
+<i class="no-highlight">12</i>&nbsp;    private var totalPages: Int? = null
+<i class="no-highlight">13</i>&nbsp;    private var resultsCount: Int? = null
+<b class="fc"><i class="no-highlight">14</i>&nbsp;    private var entries: MutableList&lt;LeaderboardsEntry&gt; = mutableListOf()</b>
+<i class="no-highlight">15</i>&nbsp;
+<b class="fc"><i class="no-highlight">16</i>&nbsp;    fun rotation(rotation: Int) = apply { this.rotation = rotation }</b>
+<b class="fc"><i class="no-highlight">17</i>&nbsp;    fun world(world: String) = apply { this.world = world }</b>
+<b class="fc"><i class="no-highlight">18</i>&nbsp;    fun lastUpdated(lastUpdated: Instant) = apply { this.lastUpdated = lastUpdated }</b>
+<b class="fc"><i class="no-highlight">19</i>&nbsp;    fun currentPage(currentPage: Int) = apply { this.currentPage = currentPage }</b>
+<b class="fc"><i class="no-highlight">20</i>&nbsp;    fun totalPages(totalPages: Int) = apply { this.totalPages = totalPages }</b>
+<b class="fc"><i class="no-highlight">21</i>&nbsp;    fun resultsCount(resultsCount: Int) = apply { this.resultsCount = resultsCount }</b>
+<b class="fc"><i class="no-highlight">22</i>&nbsp;    fun addEntry(entry: LeaderboardsEntry) = apply { entries.add(entry) }</b>
+<i class="no-highlight">23</i>&nbsp;
+<b class="fc"><i class="no-highlight">24</i>&nbsp;    fun build() = Leaderboards(</b>
+<b class="pc"><i class="no-highlight">25</i>&nbsp;        world = world ?: throw IllegalArgumentException(&quot;world is required&quot;),</b>
+<b class="pc"><i class="no-highlight">26</i>&nbsp;        rotation = rotation ?: throw IllegalArgumentException(&quot;rotation is required&quot;),</b>
+<b class="fc"><i class="no-highlight">27</i>&nbsp;        lastUpdated = lastUpdated,</b>
+<b class="pc"><i class="no-highlight">28</i>&nbsp;        currentPage = currentPage ?: throw IllegalArgumentException(&quot;currentPage is required&quot;),</b>
+<b class="pc"><i class="no-highlight">29</i>&nbsp;        totalPages = totalPages ?: throw IllegalArgumentException(&quot;totalPages is required&quot;),</b>
+<b class="pc"><i class="no-highlight">30</i>&nbsp;        resultsCount = resultsCount ?: throw IllegalArgumentException(&quot;resultsCount is required&quot;),</b>
+<b class="fc"><i class="no-highlight">31</i>&nbsp;        entries = entries</b>
+<i class="no-highlight">32</i>&nbsp;    )
+<i class="no-highlight">33</i>&nbsp;
+<i class="no-highlight">34</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -177,7 +145,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-04-07 22:26</div>
+    <div style="float:right;">generated on 2022-04-08 22:19</div>
 </div>
 </body>
 </html>

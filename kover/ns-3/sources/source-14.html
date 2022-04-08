@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > HouseBuilder</title>
+  <title>Coverage Report > HighscoresBuilder</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -20,7 +20,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">com.galarzaa.tibiakt.core.builders</a>
 </div>
 
-<h1>Coverage Summary for Class: HouseBuilder (com.galarzaa.tibiakt.core.builders)</h1>
+<h1>Coverage Summary for Class: HighscoresBuilder (com.galarzaa.tibiakt.core.builders)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -43,7 +43,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">HouseBuilder</td>
+  <td class="name">HighscoresBuilder</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -54,26 +54,26 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    92.3%
   </span>
   <span class="absValue">
-    (19/19)
+    (12/13)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    50%
+    62.5%
   </span>
   <span class="absValue">
-    (8/16)
+    (5/8)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    93.3%
   </span>
   <span class="absValue">
-    (36/36)
+    (28/30)
   </span>
 </td>
 </tr>
@@ -87,68 +87,61 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.builders
 <i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HouseStatus
-<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HouseType
-<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.models.house.House
-<i class="no-highlight">6</i>&nbsp;import java.time.Instant
-<i class="no-highlight">7</i>&nbsp;
-<b class="fc"><i class="no-highlight">8</i>&nbsp;class HouseBuilder {</b>
-<i class="no-highlight">9</i>&nbsp;    private var houseId: Int? = null
-<i class="no-highlight">10</i>&nbsp;    private var name: String? = null
-<i class="no-highlight">11</i>&nbsp;    private var size: Int? = null
-<i class="no-highlight">12</i>&nbsp;    private var type: HouseType? = null
-<i class="no-highlight">13</i>&nbsp;    private var beds: Int? = null
-<i class="no-highlight">14</i>&nbsp;    private var rent: Int? = null
-<i class="no-highlight">15</i>&nbsp;    private var world: String? = null
-<i class="no-highlight">16</i>&nbsp;    private var status: HouseStatus? = null
-<i class="no-highlight">17</i>&nbsp;    private var paidUntil: Instant? = null
-<i class="no-highlight">18</i>&nbsp;    private var owner: String? = null
-<i class="no-highlight">19</i>&nbsp;    private var movingDate: Instant? = null
-<i class="no-highlight">20</i>&nbsp;    private var transferPrice: Int? = null
-<i class="no-highlight">21</i>&nbsp;    private var transferAccepted: Boolean? = null
-<i class="no-highlight">22</i>&nbsp;    private var transferRecipient: String? = null
-<i class="no-highlight">23</i>&nbsp;    private var highestBid: Int? = null
-<i class="no-highlight">24</i>&nbsp;    private var highestBidder: String? = null
-<i class="no-highlight">25</i>&nbsp;    private var auctionEnd: Instant? = null
-<i class="no-highlight">26</i>&nbsp;
-<b class="fc"><i class="no-highlight">27</i>&nbsp;    fun houseId(houseId: Int) = apply { this.houseId = houseId }</b>
-<b class="fc"><i class="no-highlight">28</i>&nbsp;    fun name(name: String) = apply { this.name = name }</b>
-<b class="fc"><i class="no-highlight">29</i>&nbsp;    fun size(size: Int) = apply { this.size = size }</b>
-<b class="fc"><i class="no-highlight">30</i>&nbsp;    fun rent(rent: Int) = apply { this.rent = rent }</b>
-<b class="fc"><i class="no-highlight">31</i>&nbsp;    fun beds(beds: Int) = apply { this.beds = beds }</b>
-<b class="fc"><i class="no-highlight">32</i>&nbsp;    fun world(world: String) = apply { this.world = world }</b>
-<b class="fc"><i class="no-highlight">33</i>&nbsp;    fun status(status: HouseStatus) = apply { this.status = status }</b>
-<b class="fc"><i class="no-highlight">34</i>&nbsp;    fun owner(owner: String) = apply { this.owner = owner }</b>
-<b class="fc"><i class="no-highlight">35</i>&nbsp;    fun paidUntil(paidUntil: Instant) = apply { this.paidUntil = paidUntil }</b>
-<b class="fc"><i class="no-highlight">36</i>&nbsp;    fun auctionEnd(auctionEnd: Instant?) = apply { this.auctionEnd = auctionEnd }</b>
-<b class="fc"><i class="no-highlight">37</i>&nbsp;    fun highestBid(highestBid: Int?) = apply { this.highestBid = highestBid }</b>
-<b class="fc"><i class="no-highlight">38</i>&nbsp;    fun highestBidder(highestBidder: String?) = apply { this.highestBidder = highestBidder }</b>
-<b class="fc"><i class="no-highlight">39</i>&nbsp;    fun type(type: HouseType) = apply { this.type = type }</b>
-<b class="fc"><i class="no-highlight">40</i>&nbsp;    fun movingDate(movingDate: Instant?) = apply { this.movingDate = movingDate }</b>
-<b class="fc"><i class="no-highlight">41</i>&nbsp;    fun transferPrice(transferPrice: Int?) = apply { this.transferPrice = transferPrice }</b>
-<b class="fc"><i class="no-highlight">42</i>&nbsp;    fun transferAccepted(transferAccepted: Boolean) = apply { this.transferAccepted = transferAccepted }</b>
-<b class="fc"><i class="no-highlight">43</i>&nbsp;    fun transferRecipient(transferRecipient: String?) = apply { this.transferRecipient = transferRecipient }</b>
+<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HighscoresBattlEyeType
+<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HighscoresCategory
+<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HighscoresProfession
+<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.enums.PvpType
+<i class="no-highlight">7</i>&nbsp;import com.galarzaa.tibiakt.core.enums.Vocation
+<i class="no-highlight">8</i>&nbsp;import com.galarzaa.tibiakt.core.models.highscores.Highscores
+<i class="no-highlight">9</i>&nbsp;import com.galarzaa.tibiakt.core.models.highscores.HighscoresEntry
+<i class="no-highlight">10</i>&nbsp;import java.time.Instant
+<i class="no-highlight">11</i>&nbsp;
+<b class="fc"><i class="no-highlight">12</i>&nbsp;class HighscoresBuilder {</b>
+<i class="no-highlight">13</i>&nbsp;    private var world: String? = null
+<i class="no-highlight">14</i>&nbsp;    private var category: HighscoresCategory? = null
+<i class="no-highlight">15</i>&nbsp;    private var vocation: HighscoresProfession? = null
+<b class="fc"><i class="no-highlight">16</i>&nbsp;    private val worldTypes: MutableSet&lt;PvpType&gt; = mutableSetOf()</b>
+<i class="no-highlight">17</i>&nbsp;    private var battlEyeType: HighscoresBattlEyeType? = null
+<i class="no-highlight">18</i>&nbsp;    private var lastUpdate: Instant? = null
+<b class="fc"><i class="no-highlight">19</i>&nbsp;    private var currentPage: Int = 1</b>
+<b class="fc"><i class="no-highlight">20</i>&nbsp;    private var totalPages: Int = 1</b>
+<i class="no-highlight">21</i>&nbsp;    private var resultsCount: Int = 0
+<b class="fc"><i class="no-highlight">22</i>&nbsp;    private val entries: MutableList&lt;HighscoresEntry&gt; = mutableListOf()</b>
+<i class="no-highlight">23</i>&nbsp;
+<b class="fc"><i class="no-highlight">24</i>&nbsp;    fun world(world: String?) = apply { this.world = world }</b>
+<b class="fc"><i class="no-highlight">25</i>&nbsp;    fun category(category: HighscoresCategory?) = apply { this.category = category }</b>
+<b class="fc"><i class="no-highlight">26</i>&nbsp;    fun vocation(vocation: HighscoresProfession?) = apply { this.vocation = vocation }</b>
+<b class="fc"><i class="no-highlight">27</i>&nbsp;    fun addWorldType(worldType: PvpType) = apply { this.worldTypes.add(worldType) }</b>
+<b class="fc"><i class="no-highlight">28</i>&nbsp;    fun battlEyeType(battlEyeType: HighscoresBattlEyeType?) = apply { this.battlEyeType = battlEyeType }</b>
+<b class="fc"><i class="no-highlight">29</i>&nbsp;    fun lastUpdate(lastUpdate: Instant) = apply { this.lastUpdate = lastUpdate }</b>
+<b class="fc"><i class="no-highlight">30</i>&nbsp;    fun currentPage(currentPage: Int) = apply { this.currentPage = currentPage }</b>
+<b class="fc"><i class="no-highlight">31</i>&nbsp;    fun totalPages(totalPages: Int) = apply { this.totalPages = totalPages }</b>
+<b class="fc"><i class="no-highlight">32</i>&nbsp;    fun resultsCount(resultsCount: Int) = apply { this.resultsCount = resultsCount }</b>
+<b class="nc"><i class="no-highlight">33</i>&nbsp;    fun addEntry(</b>
+<i class="no-highlight">34</i>&nbsp;        rank: Int,
+<i class="no-highlight">35</i>&nbsp;        name: String,
+<i class="no-highlight">36</i>&nbsp;        vocation: Vocation,
+<i class="no-highlight">37</i>&nbsp;        world: String,
+<i class="no-highlight">38</i>&nbsp;        level: Int,
+<i class="no-highlight">39</i>&nbsp;        points: Long,
+<b class="nc"><i class="no-highlight">40</i>&nbsp;        extra: String? = null</b>
+<b class="fc"><i class="no-highlight">41</i>&nbsp;    ) = apply {</b>
+<b class="fc"><i class="no-highlight">42</i>&nbsp;        entries.add(HighscoresEntry(rank, name, level, world, vocation, points, extra))</b>
+<b class="fc"><i class="no-highlight">43</i>&nbsp;    }</b>
 <i class="no-highlight">44</i>&nbsp;
-<b class="fc"><i class="no-highlight">45</i>&nbsp;    fun build() = House(</b>
-<b class="pc"><i class="no-highlight">46</i>&nbsp;        houseId = houseId ?: throw IllegalStateException(&quot;houseId is required&quot;),</b>
-<b class="pc"><i class="no-highlight">47</i>&nbsp;        name = name ?: throw IllegalStateException(&quot;name is required&quot;),</b>
-<b class="pc"><i class="no-highlight">48</i>&nbsp;        size = size ?: throw IllegalStateException(&quot;size is required&quot;),</b>
-<b class="pc"><i class="no-highlight">49</i>&nbsp;        type = type ?: throw IllegalStateException(&quot;type is required&quot;),</b>
-<b class="pc"><i class="no-highlight">50</i>&nbsp;        beds = beds ?: throw IllegalStateException(&quot;beds is required&quot;),</b>
-<b class="pc"><i class="no-highlight">51</i>&nbsp;        rent = rent ?: throw IllegalStateException(&quot;rent is required&quot;),</b>
-<b class="pc"><i class="no-highlight">52</i>&nbsp;        world = world ?: throw IllegalStateException(&quot;world is required&quot;),</b>
-<b class="pc"><i class="no-highlight">53</i>&nbsp;        status = status ?: throw IllegalStateException(&quot;status is required&quot;),</b>
-<b class="fc"><i class="no-highlight">54</i>&nbsp;        paidUntil = paidUntil,</b>
-<b class="fc"><i class="no-highlight">55</i>&nbsp;        owner = owner,</b>
-<b class="fc"><i class="no-highlight">56</i>&nbsp;        movingDate = movingDate,</b>
-<b class="fc"><i class="no-highlight">57</i>&nbsp;        transferPrice = transferPrice,</b>
-<b class="fc"><i class="no-highlight">58</i>&nbsp;        transferAccepted = transferAccepted,</b>
-<b class="fc"><i class="no-highlight">59</i>&nbsp;        transferRecipient = transferRecipient,</b>
-<b class="fc"><i class="no-highlight">60</i>&nbsp;        highestBid = highestBid,</b>
-<b class="fc"><i class="no-highlight">61</i>&nbsp;        highestBidder = highestBidder,</b>
-<b class="fc"><i class="no-highlight">62</i>&nbsp;        auctionEnd = auctionEnd,</b>
-<i class="no-highlight">63</i>&nbsp;    )
-<i class="no-highlight">64</i>&nbsp;}
+<b class="fc"><i class="no-highlight">45</i>&nbsp;    fun build() = Highscores(</b>
+<b class="fc"><i class="no-highlight">46</i>&nbsp;        world = world,</b>
+<b class="pc"><i class="no-highlight">47</i>&nbsp;        category = category ?: HighscoresCategory.EXPERIENCE_POINTS,</b>
+<b class="fc"><i class="no-highlight">48</i>&nbsp;        vocation = vocation ?: HighscoresProfession.ALL,</b>
+<b class="fc"><i class="no-highlight">49</i>&nbsp;        worldTypes = worldTypes,</b>
+<b class="pc"><i class="no-highlight">50</i>&nbsp;        battlEyeType = battlEyeType ?: HighscoresBattlEyeType.ANY_WORLD,</b>
+<b class="pc"><i class="no-highlight">51</i>&nbsp;        lastUpdate = lastUpdate ?: throw IllegalStateException(&quot;lastUpdate is required&quot;),</b>
+<b class="fc"><i class="no-highlight">52</i>&nbsp;        currentPage = currentPage,</b>
+<b class="fc"><i class="no-highlight">53</i>&nbsp;        totalPages = totalPages,</b>
+<b class="fc"><i class="no-highlight">54</i>&nbsp;        resultsCount = resultsCount,</b>
+<b class="fc"><i class="no-highlight">55</i>&nbsp;        entries = entries</b>
+<i class="no-highlight">56</i>&nbsp;    )
+<i class="no-highlight">57</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -175,7 +168,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-04-07 22:26</div>
+    <div style="float:right;">generated on 2022-04-08 22:19</div>
 </div>
 </body>
 </html>

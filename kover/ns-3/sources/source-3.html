@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > BazaarFiltersBuilder</title>
+  <title>Coverage Report > AuctionDetailsBuilder</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -20,7 +20,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">com.galarzaa.tibiakt.core.builders</a>
 </div>
 
-<h1>Coverage Summary for Class: BazaarFiltersBuilder (com.galarzaa.tibiakt.core.builders)</h1>
+<h1>Coverage Summary for Class: AuctionDetailsBuilder (com.galarzaa.tibiakt.core.builders)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -35,11 +35,15 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 <th class="coverageStat 
 ">
+  Block, %
+</th>
+<th class="coverageStat 
+">
   Line, %
 </th>
 </tr>
 <tr>
-  <td class="name">BazaarFiltersBuilder</td>
+  <td class="name">AuctionDetailsBuilder</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -50,18 +54,26 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    97.6%
   </span>
   <span class="absValue">
-    (15/15)
+    (41/42)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    50%
   </span>
   <span class="absValue">
-    (28/28)
+    (31/62)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    97.8%
+  </span>
+  <span class="absValue">
+    (89/91)
   </span>
 </td>
 </tr>
@@ -75,60 +87,142 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.builders
 <i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionBattlEyeFilter
-<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionOrderBy
-<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionOrderDirection
-<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionSearchType
-<i class="no-highlight">7</i>&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionSkillFilter
-<i class="no-highlight">8</i>&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionVocationFilter
-<i class="no-highlight">9</i>&nbsp;import com.galarzaa.tibiakt.core.enums.PvpType
-<i class="no-highlight">10</i>&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.BazaarFilters
-<i class="no-highlight">11</i>&nbsp;
-<b class="fc"><i class="no-highlight">12</i>&nbsp;class BazaarFiltersBuilder {</b>
-<i class="no-highlight">13</i>&nbsp;    private var world: String? = null
-<i class="no-highlight">14</i>&nbsp;    private var pvpType: PvpType? = null
-<i class="no-highlight">15</i>&nbsp;    private var battlEyeType: AuctionBattlEyeFilter? = null
-<i class="no-highlight">16</i>&nbsp;    private var vocation: AuctionVocationFilter? = null
-<i class="no-highlight">17</i>&nbsp;    private var minimumLevel: Int? = null
-<i class="no-highlight">18</i>&nbsp;    private var maximumLevel: Int? = null
-<i class="no-highlight">19</i>&nbsp;    private var skill: AuctionSkillFilter? = null
-<i class="no-highlight">20</i>&nbsp;    private var minimumSkillLevel: Int? = null
-<i class="no-highlight">21</i>&nbsp;    private var maximumSkillLevel: Int? = null
-<i class="no-highlight">22</i>&nbsp;    private var orderDirection: AuctionOrderDirection? = null
-<i class="no-highlight">23</i>&nbsp;    private var orderBy: AuctionOrderBy? = null
-<i class="no-highlight">24</i>&nbsp;    private var searchString: String? = null
-<i class="no-highlight">25</i>&nbsp;    private var searchType: AuctionSearchType? = null
-<i class="no-highlight">26</i>&nbsp;
-<b class="fc"><i class="no-highlight">27</i>&nbsp;    fun world(world: String?) = apply { this.world = world }</b>
-<b class="fc"><i class="no-highlight">28</i>&nbsp;    fun pvpType(pvpType: PvpType?) = apply { this.pvpType = pvpType }</b>
-<b class="fc"><i class="no-highlight">29</i>&nbsp;    fun battlEyeType(battlEyeType: AuctionBattlEyeFilter?) = apply { this.battlEyeType = battlEyeType }</b>
-<b class="fc"><i class="no-highlight">30</i>&nbsp;    fun vocation(vocation: AuctionVocationFilter?) = apply { this.vocation = vocation }</b>
-<b class="fc"><i class="no-highlight">31</i>&nbsp;    fun minimumLevel(minimumLevel: Int?) = apply { this.minimumLevel = minimumLevel }</b>
-<b class="fc"><i class="no-highlight">32</i>&nbsp;    fun maximumLevel(maximumLevel: Int?) = apply { this.maximumLevel = maximumLevel }</b>
-<b class="fc"><i class="no-highlight">33</i>&nbsp;    fun skill(skill: AuctionSkillFilter?) = apply { this.skill = skill }</b>
-<b class="fc"><i class="no-highlight">34</i>&nbsp;    fun minimumSkillLevel(minimumSkillLevel: Int?) = apply { this.minimumSkillLevel = minimumSkillLevel }</b>
-<b class="fc"><i class="no-highlight">35</i>&nbsp;    fun maximumSkillLevel(maximumSkillLevel: Int?) = apply { this.maximumSkillLevel = maximumSkillLevel }</b>
-<b class="fc"><i class="no-highlight">36</i>&nbsp;    fun orderDirection(orderDirection: AuctionOrderDirection?) = apply { this.orderDirection = orderDirection }</b>
-<b class="fc"><i class="no-highlight">37</i>&nbsp;    fun orderBy(orderBy: AuctionOrderBy?) = apply { this.orderBy = orderBy }</b>
-<b class="fc"><i class="no-highlight">38</i>&nbsp;    fun searchString(searchString: String?) = apply { this.searchString = searchString }</b>
-<b class="fc"><i class="no-highlight">39</i>&nbsp;    fun searchType(searchType: AuctionSearchType?) = apply { this.searchType = searchType }</b>
-<i class="no-highlight">40</i>&nbsp;
-<b class="fc"><i class="no-highlight">41</i>&nbsp;    fun build() = BazaarFilters(</b>
-<b class="fc"><i class="no-highlight">42</i>&nbsp;        world = world,</b>
-<b class="fc"><i class="no-highlight">43</i>&nbsp;        pvpType = pvpType,</b>
-<b class="fc"><i class="no-highlight">44</i>&nbsp;        battlEyeType = battlEyeType,</b>
-<b class="fc"><i class="no-highlight">45</i>&nbsp;        vocation = vocation,</b>
-<b class="fc"><i class="no-highlight">46</i>&nbsp;        minimumLevel = minimumLevel,</b>
-<b class="fc"><i class="no-highlight">47</i>&nbsp;        maximumLevel = maximumLevel,</b>
-<b class="fc"><i class="no-highlight">48</i>&nbsp;        skill = skill,</b>
-<b class="fc"><i class="no-highlight">49</i>&nbsp;        minimumSkillLevel = minimumSkillLevel,</b>
-<b class="fc"><i class="no-highlight">50</i>&nbsp;        maximumSkillLevel = maximumSkillLevel,</b>
-<b class="fc"><i class="no-highlight">51</i>&nbsp;        searchString = searchString,</b>
-<b class="fc"><i class="no-highlight">52</i>&nbsp;        searchType = searchType,</b>
-<b class="fc"><i class="no-highlight">53</i>&nbsp;        orderDirection = orderDirection,</b>
-<b class="fc"><i class="no-highlight">54</i>&nbsp;        orderBy = orderBy</b>
-<i class="no-highlight">55</i>&nbsp;    )
-<i class="no-highlight">56</i>&nbsp;}
+<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.*
+<i class="no-highlight">4</i>&nbsp;import java.time.Instant
+<i class="no-highlight">5</i>&nbsp;
+<b class="fc"><i class="no-highlight">6</i>&nbsp;class AuctionDetailsBuilder {</b>
+<i class="no-highlight">7</i>&nbsp;    private var hitPoints: Int? = null
+<i class="no-highlight">8</i>&nbsp;    private var mana: Int? = null
+<i class="no-highlight">9</i>&nbsp;    private var capacity: Int? = null
+<i class="no-highlight">10</i>&nbsp;    private var speed: Int? = null
+<i class="no-highlight">11</i>&nbsp;    private var blessingsCount: Int? = null
+<i class="no-highlight">12</i>&nbsp;    private var mountsCount: Int? = null
+<i class="no-highlight">13</i>&nbsp;    private var outfitsCount: Int? = null
+<i class="no-highlight">14</i>&nbsp;    private var titlesCount: Int? = null
+<i class="no-highlight">15</i>&nbsp;    private var skills: AuctionSkills? = null
+<i class="no-highlight">16</i>&nbsp;    private var creationDate: Instant? = null
+<i class="no-highlight">17</i>&nbsp;    private var experience: Long? = null
+<i class="no-highlight">18</i>&nbsp;    private var gold: Long? = null
+<i class="no-highlight">19</i>&nbsp;    private var achievementPoints: Int? = null
+<i class="no-highlight">20</i>&nbsp;    private var regularWorldTransfersAvailable: Instant? = null
+<i class="no-highlight">21</i>&nbsp;    private var charmExpansion: Boolean? = null
+<i class="no-highlight">22</i>&nbsp;    private var availableCharmPoints: Int? = null
+<i class="no-highlight">23</i>&nbsp;    private var spentCharmPoints: Int? = null
+<i class="no-highlight">24</i>&nbsp;    private var dailyRewardStreak: Int? = null
+<i class="no-highlight">25</i>&nbsp;    private var huntingTaskPoints: Int? = null
+<i class="no-highlight">26</i>&nbsp;    private var permanentHuntingTaskSlots: Int? = null
+<i class="no-highlight">27</i>&nbsp;    private var permanentPreySlots: Int? = null
+<i class="no-highlight">28</i>&nbsp;    private var preyWildcards: Int? = null
+<i class="no-highlight">29</i>&nbsp;    private var hirelings: Int? = null
+<i class="no-highlight">30</i>&nbsp;    private var hirelingJobs: Int? = null
+<i class="no-highlight">31</i>&nbsp;    private var hirelingOutfits: Int? = null
+<i class="no-highlight">32</i>&nbsp;    private var items: ItemSummary? = null
+<i class="no-highlight">33</i>&nbsp;    private var storeItems: ItemSummary? = null
+<i class="no-highlight">34</i>&nbsp;    private var mounts: Mounts? = null
+<i class="no-highlight">35</i>&nbsp;    private var storeMounts: Mounts? = null
+<i class="no-highlight">36</i>&nbsp;    private var outfits: Outfits? = null
+<i class="no-highlight">37</i>&nbsp;    private var storeOutfits: Outfits? = null
+<i class="no-highlight">38</i>&nbsp;    private var familiars: Familiars? = null
+<b class="fc"><i class="no-highlight">39</i>&nbsp;    private val blessings: MutableList&lt;BlessingEntry&gt; = mutableListOf()</b>
+<b class="fc"><i class="no-highlight">40</i>&nbsp;    private val imbuements: MutableList&lt;String&gt; = mutableListOf()</b>
+<b class="fc"><i class="no-highlight">41</i>&nbsp;    private val charms: MutableList&lt;CharmEntry&gt; = mutableListOf()</b>
+<b class="fc"><i class="no-highlight">42</i>&nbsp;    private val completedCyclopediaMapAreas: MutableList&lt;String&gt; = mutableListOf()</b>
+<b class="fc"><i class="no-highlight">43</i>&nbsp;    private val completedQuestLines: MutableList&lt;String&gt; = mutableListOf()</b>
+<b class="fc"><i class="no-highlight">44</i>&nbsp;    private val titles: MutableList&lt;String&gt; = mutableListOf()</b>
+<b class="fc"><i class="no-highlight">45</i>&nbsp;    private val achievements: MutableList&lt;AchievementEntry&gt; = mutableListOf()</b>
+<b class="fc"><i class="no-highlight">46</i>&nbsp;    private val bestiaryProgress: MutableList&lt;BestiaryEntry&gt; = mutableListOf()</b>
+<i class="no-highlight">47</i>&nbsp;
+<b class="fc"><i class="no-highlight">48</i>&nbsp;    fun hitPoints(hitPoints: Int) = apply { this.hitPoints = hitPoints }</b>
+<b class="fc"><i class="no-highlight">49</i>&nbsp;    fun mana(mana: Int) = apply { this.mana = mana }</b>
+<b class="fc"><i class="no-highlight">50</i>&nbsp;    fun capacity(capacity: Int) = apply { this.capacity = capacity }</b>
+<b class="fc"><i class="no-highlight">51</i>&nbsp;    fun speed(speed: Int) = apply { this.speed = speed }</b>
+<b class="fc"><i class="no-highlight">52</i>&nbsp;    fun blessingsCount(blessingsCount: Int) = apply { this.blessingsCount = blessingsCount }</b>
+<b class="fc"><i class="no-highlight">53</i>&nbsp;    fun mountsCount(mountsCount: Int) = apply { this.mountsCount = mountsCount }</b>
+<b class="fc"><i class="no-highlight">54</i>&nbsp;    fun outfitsCount(outfitsCount: Int) = apply { this.outfitsCount = outfitsCount }</b>
+<b class="fc"><i class="no-highlight">55</i>&nbsp;    fun titlesCount(titlesCount: Int) = apply { this.titlesCount = titlesCount }</b>
+<b class="fc"><i class="no-highlight">56</i>&nbsp;    fun skills(skills: AuctionSkills) = apply { this.skills = skills }</b>
+<b class="fc"><i class="no-highlight">57</i>&nbsp;    fun creationDate(creationDate: Instant) = apply { this.creationDate = creationDate }</b>
+<b class="fc"><i class="no-highlight">58</i>&nbsp;    fun experience(experience: Long) = apply { this.experience = experience }</b>
+<b class="fc"><i class="no-highlight">59</i>&nbsp;    fun gold(gold: Long) = apply { this.gold = gold }</b>
+<b class="fc"><i class="no-highlight">60</i>&nbsp;    fun achievementPoints(achievementPoints: Int) = apply { this.achievementPoints = achievementPoints }</b>
+<i class="no-highlight">61</i>&nbsp;    fun regularWorldTransfersAvailable(regularWorldTransfersAvailable: Instant) =
+<b class="fc"><i class="no-highlight">62</i>&nbsp;        apply { this.regularWorldTransfersAvailable = regularWorldTransfersAvailable }</b>
+<i class="no-highlight">63</i>&nbsp;
+<b class="fc"><i class="no-highlight">64</i>&nbsp;    fun charmExpansion(charmExpansion: Boolean) = apply { this.charmExpansion = charmExpansion }</b>
+<b class="fc"><i class="no-highlight">65</i>&nbsp;    fun availableCharmPoints(availableCharmPoints: Int) = apply { this.availableCharmPoints = availableCharmPoints }</b>
+<b class="fc"><i class="no-highlight">66</i>&nbsp;    fun spentCharmPoints(spentCharmPoints: Int) = apply { this.spentCharmPoints = spentCharmPoints }</b>
+<b class="fc"><i class="no-highlight">67</i>&nbsp;    fun dailyRewardStreak(dailyRewardStreak: Int) = apply { this.dailyRewardStreak = dailyRewardStreak }</b>
+<b class="fc"><i class="no-highlight">68</i>&nbsp;    fun huntingTaskPoints(huntingTaskPoints: Int) = apply { this.huntingTaskPoints = huntingTaskPoints }</b>
+<i class="no-highlight">69</i>&nbsp;    fun permanentHuntingTaskSlots(permanentHuntingTaskSlots: Int) =
+<b class="fc"><i class="no-highlight">70</i>&nbsp;        apply { this.permanentHuntingTaskSlots = permanentHuntingTaskSlots }</b>
+<i class="no-highlight">71</i>&nbsp;
+<b class="fc"><i class="no-highlight">72</i>&nbsp;    fun permanentPreySlots(permanentPreySlots: Int) = apply { this.permanentPreySlots = permanentPreySlots }</b>
+<b class="fc"><i class="no-highlight">73</i>&nbsp;    fun preyWildcards(preyWildcards: Int) = apply { this.preyWildcards = preyWildcards }</b>
+<b class="fc"><i class="no-highlight">74</i>&nbsp;    fun hirelings(hirelings: Int) = apply { this.hirelings = hirelings }</b>
+<b class="fc"><i class="no-highlight">75</i>&nbsp;    fun hirelingJobs(hirelingJobs: Int) = apply { this.hirelingJobs = hirelingJobs }</b>
+<b class="fc"><i class="no-highlight">76</i>&nbsp;    fun hirelingOutfits(hirelingOutfits: Int) = apply { this.hirelingOutfits = hirelingOutfits }</b>
+<b class="fc"><i class="no-highlight">77</i>&nbsp;    fun items(items: ItemSummary) = apply { this.items = items }</b>
+<b class="fc"><i class="no-highlight">78</i>&nbsp;    fun storeItems(storeItems: ItemSummary) = apply { this.storeItems = storeItems }</b>
+<b class="fc"><i class="no-highlight">79</i>&nbsp;    fun mounts(mounts: Mounts) = apply { this.mounts = mounts }</b>
+<b class="fc"><i class="no-highlight">80</i>&nbsp;    fun storeMounts(storeMounts: Mounts) = apply { this.storeMounts = storeMounts }</b>
+<b class="fc"><i class="no-highlight">81</i>&nbsp;    fun outfits(outfits: Outfits) = apply { this.outfits = outfits }</b>
+<b class="fc"><i class="no-highlight">82</i>&nbsp;    fun storeOutfits(storeOutfits: Outfits) = apply { this.storeOutfits = storeOutfits }</b>
+<b class="fc"><i class="no-highlight">83</i>&nbsp;    fun familiars(familiars: Familiars) = apply { this.familiars = familiars }</b>
+<b class="fc"><i class="no-highlight">84</i>&nbsp;    fun addBlessing(blessingEntry: BlessingEntry) = apply { blessings.add(blessingEntry) }</b>
+<b class="fc"><i class="no-highlight">85</i>&nbsp;    fun addImbuement(imbuement: String) = apply { imbuements.add(imbuement) }</b>
+<b class="fc"><i class="no-highlight">86</i>&nbsp;    fun addCharm(charm: CharmEntry) = apply { charms.add(charm) }</b>
+<b class="fc"><i class="no-highlight">87</i>&nbsp;    fun addCompletedQuestLine(completedQuestLine: String) = apply { completedQuestLines.add(completedQuestLine) }</b>
+<i class="no-highlight">88</i>&nbsp;    fun addCompletedCyclopediaMapArea(completedCyclopediaMapArea: String) =
+<b class="nc"><i class="no-highlight">89</i>&nbsp;        apply { completedCyclopediaMapAreas.add(completedCyclopediaMapArea) }</b>
+<i class="no-highlight">90</i>&nbsp;
+<b class="fc"><i class="no-highlight">91</i>&nbsp;    fun addTitle(title: String) = apply { titles.add(title) }</b>
+<b class="fc"><i class="no-highlight">92</i>&nbsp;    fun addAchievement(achievement: AchievementEntry) = apply { achievements.add(achievement) }</b>
+<b class="fc"><i class="no-highlight">93</i>&nbsp;    fun addBestiaryEntry(bestiaryEntry: BestiaryEntry) = apply { bestiaryProgress.add(bestiaryEntry) }</b>
+<i class="no-highlight">94</i>&nbsp;
+<b class="fc"><i class="no-highlight">95</i>&nbsp;    fun build() = AuctionDetails(</b>
+<b class="pc"><i class="no-highlight">96</i>&nbsp;        hitPoints = hitPoints ?: throw IllegalStateException(&quot;hitPoints is required&quot;),</b>
+<b class="pc"><i class="no-highlight">97</i>&nbsp;        mana = mana ?: throw IllegalStateException(&quot;mana is required&quot;),</b>
+<b class="pc"><i class="no-highlight">98</i>&nbsp;        capacity = capacity ?: throw IllegalStateException(&quot;capacity is required&quot;),</b>
+<b class="pc"><i class="no-highlight">99</i>&nbsp;        speed = speed ?: throw IllegalStateException(&quot;speed is required&quot;),</b>
+<b class="pc"><i class="no-highlight">100</i>&nbsp;        blessingsCount = blessingsCount ?: throw IllegalStateException(&quot;blessingsCount is required&quot;),</b>
+<b class="pc"><i class="no-highlight">101</i>&nbsp;        mountsCount = mountsCount ?: throw IllegalStateException(&quot;mountsCount is required&quot;),</b>
+<b class="pc"><i class="no-highlight">102</i>&nbsp;        outfitsCount = outfitsCount ?: throw IllegalStateException(&quot;outfitsCount is required&quot;),</b>
+<b class="pc"><i class="no-highlight">103</i>&nbsp;        titlesCount = titlesCount ?: throw IllegalStateException(&quot;titlesCount is required&quot;),</b>
+<b class="pc"><i class="no-highlight">104</i>&nbsp;        skills = skills ?: throw IllegalStateException(&quot;skills is required&quot;),</b>
+<b class="pc"><i class="no-highlight">105</i>&nbsp;        creationDate = creationDate ?: throw IllegalStateException(&quot;creationDate is required&quot;),</b>
+<b class="pc"><i class="no-highlight">106</i>&nbsp;        experience = experience ?: throw IllegalStateException(&quot;experience is required&quot;),</b>
+<b class="pc"><i class="no-highlight">107</i>&nbsp;        gold = gold ?: throw IllegalStateException(&quot;gold is required&quot;),</b>
+<b class="pc"><i class="no-highlight">108</i>&nbsp;        achievementPoints = achievementPoints ?: throw IllegalStateException(&quot;achievementPoints is required&quot;),</b>
+<b class="fc"><i class="no-highlight">109</i>&nbsp;        regularWorldTransfersAvailable = regularWorldTransfersAvailable,</b>
+<b class="pc"><i class="no-highlight">110</i>&nbsp;        charmExpansion = charmExpansion ?: throw IllegalStateException(&quot;charmExpansion is required&quot;),</b>
+<b class="pc"><i class="no-highlight">111</i>&nbsp;        availableCharmPoints = availableCharmPoints ?: throw IllegalStateException(&quot;availableCharmPoints is required&quot;),</b>
+<b class="pc"><i class="no-highlight">112</i>&nbsp;        spentCharmPoints = spentCharmPoints ?: throw IllegalStateException(&quot;spentCharmPoints is required&quot;),</b>
+<b class="pc"><i class="no-highlight">113</i>&nbsp;        dailyRewardStreak = dailyRewardStreak ?: throw IllegalStateException(&quot;dailyRewardStreak is required&quot;),</b>
+<b class="pc"><i class="no-highlight">114</i>&nbsp;        permanentHuntingTaskSlots = permanentHuntingTaskSlots</b>
+<b class="nc"><i class="no-highlight">115</i>&nbsp;            ?: throw IllegalStateException(&quot;permanentHuntingTaskSlots is required&quot;),</b>
+<b class="pc"><i class="no-highlight">116</i>&nbsp;        permanentPreySlots = permanentPreySlots ?: throw IllegalStateException(&quot;permanentPreySlots is required&quot;),</b>
+<b class="pc"><i class="no-highlight">117</i>&nbsp;        huntingTaskPoints = huntingTaskPoints ?: throw IllegalStateException(&quot;huntingTaskPoints is required&quot;),</b>
+<b class="pc"><i class="no-highlight">118</i>&nbsp;        preyWildcards = preyWildcards ?: throw IllegalStateException(&quot;preyWildcards is required&quot;),</b>
+<b class="pc"><i class="no-highlight">119</i>&nbsp;        hirelings = hirelings ?: throw IllegalStateException(&quot;hirelings is required&quot;),</b>
+<b class="pc"><i class="no-highlight">120</i>&nbsp;        hirelingJobs = hirelingJobs ?: throw IllegalStateException(&quot;hirelingJobs is required&quot;),</b>
+<b class="pc"><i class="no-highlight">121</i>&nbsp;        hirelingOutfits = hirelingOutfits ?: throw IllegalStateException(&quot;hirelingOutfits is required&quot;),</b>
+<b class="pc"><i class="no-highlight">122</i>&nbsp;        items = items ?: throw IllegalStateException(&quot;items is required&quot;),</b>
+<b class="pc"><i class="no-highlight">123</i>&nbsp;        storeItems = storeItems ?: throw IllegalStateException(&quot;storeItems is required&quot;),</b>
+<b class="pc"><i class="no-highlight">124</i>&nbsp;        mounts = mounts ?: throw IllegalStateException(&quot;mounts is required&quot;),</b>
+<b class="pc"><i class="no-highlight">125</i>&nbsp;        storeMounts = storeMounts ?: throw IllegalStateException(&quot;storeMounts is required&quot;),</b>
+<b class="pc"><i class="no-highlight">126</i>&nbsp;        outfits = outfits ?: throw IllegalStateException(&quot;outfits is required&quot;),</b>
+<b class="pc"><i class="no-highlight">127</i>&nbsp;        storeOutfits = storeOutfits ?: throw IllegalStateException(&quot;storeOutfits is required&quot;),</b>
+<b class="pc"><i class="no-highlight">128</i>&nbsp;        familiars = familiars ?: throw IllegalStateException(&quot;familiars is required&quot;),</b>
+<b class="fc"><i class="no-highlight">129</i>&nbsp;        blessings = blessings,</b>
+<b class="fc"><i class="no-highlight">130</i>&nbsp;        imbuements = imbuements,</b>
+<b class="fc"><i class="no-highlight">131</i>&nbsp;        charms = charms,</b>
+<b class="fc"><i class="no-highlight">132</i>&nbsp;        completedCyclopediaMapAreas = completedCyclopediaMapAreas,</b>
+<b class="fc"><i class="no-highlight">133</i>&nbsp;        completedQuestLines = completedQuestLines,</b>
+<b class="fc"><i class="no-highlight">134</i>&nbsp;        titles = titles,</b>
+<b class="fc"><i class="no-highlight">135</i>&nbsp;        achievements = achievements,</b>
+<b class="fc"><i class="no-highlight">136</i>&nbsp;        bestiaryProgress = bestiaryProgress</b>
+<i class="no-highlight">137</i>&nbsp;    )
+<i class="no-highlight">138</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -155,7 +249,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-04-07 22:26</div>
+    <div style="float:right;">generated on 2022-04-08 22:19</div>
 </div>
 </body>
 </html>
