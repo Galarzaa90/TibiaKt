@@ -10,7 +10,8 @@ internal interface Parser<T> {
     fun fromContent(content: String): T
 
     fun boxContent(content: String, parser: Parser? = null): Element {
-        val document: Document = if(parser == null) Jsoup.parse(content) else Jsoup.parse(content, "", parser)
+        val document: Document = content.replaceFirst("ISO-8859-1", "utf-8")
+            .let { if (parser == null) Jsoup.parse(it) else Jsoup.parse(it, "", parser) }
         return document.boxContent()
     }
 }

@@ -21,6 +21,8 @@ class ForumBoardParserTests : StringSpec({
             sectionId shouldBe 7
             threadAge shouldBe 30
             currentPage shouldBe 1
+            announcements shouldHaveSize 1
+            totalPages shouldBe 2
             entries shouldHaveSize 30
             entries.forAll {
                 it.title.isBlank() shouldBe false

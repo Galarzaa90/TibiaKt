@@ -22,6 +22,6 @@ data class ForumBoard(
     override val entries: List<ThreadEntry>,
 ) : Paginated<ThreadEntry>, BaseForumBoard {
 
-    override val url = getForumBoardUrl(boardId, currentPage)
+    override val url get() = getForumBoardUrl(boardId, currentPage)
 }
 

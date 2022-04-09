@@ -121,6 +121,7 @@ open class TibiaKtClient constructor(
 
     private val client = HttpClient(engine ?: CIO.create()) {
         Charsets {
+            register(Charsets.UTF_8)
             register(Charsets.ISO_8859_1)
         }
         ContentEncoding {

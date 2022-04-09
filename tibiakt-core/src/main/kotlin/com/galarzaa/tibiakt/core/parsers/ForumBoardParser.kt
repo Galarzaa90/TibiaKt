@@ -9,6 +9,7 @@ import com.galarzaa.tibiakt.core.utils.formData
 import com.galarzaa.tibiakt.core.utils.getLinkInformation
 import com.galarzaa.tibiakt.core.utils.offsetStart
 import com.galarzaa.tibiakt.core.utils.parseLastPostFromCell
+import com.galarzaa.tibiakt.core.utils.parsePagination
 import com.galarzaa.tibiakt.core.utils.remove
 import com.galarzaa.tibiakt.core.utils.rows
 
@@ -36,9 +37,19 @@ object ForumBoardParser : Parser<ForumBoard?> {
 
             val table = boxContent.selectFirst("table.Table3") ?: throw ParsingException("No board tables found.")
             val contentTables = table.select("table.TableContent")
+            if (contentTables.size >= 2) {
+                for (row in contentTables.first().rows().offsetStart(1)) {
+                    val (authorLink, titleLink) = row.select("a").mapNotNull { it.getLinkInformation() }
+                    announcement {
+                        title = titleLink.title
+                        author = authorLink.title
+                        announcementId = titleLink.queryParams["announcementid"]?.first()?.toInt()
+                    }
+                }
+            }
             for (row in contentTables.last().rows().offsetStart(1)) {
                 val columns = row.cells()
-                if(columns.size != 7) {
+                if (columns.size != 7) {
                     continue
                 }
                 val (threadLink, pageLinks) = columns[2].select("a").mapNotNull { it.getLinkInformation() }
@@ -65,8 +76,11 @@ object ForumBoardParser : Parser<ForumBoard?> {
                     replies = columns[4].text().remove(",").toInt()
                     views = columns[5].text().remove(",").toInt()
                 }
-
             }
+            val paginationData = boxContent.selectFirst("td > small")!!.parsePagination()
+            currentPage = paginationData.currentPage
+            totalPages = paginationData.totalPages
+            resultsCount = paginationData.resultsCount
         }
     }
 }
