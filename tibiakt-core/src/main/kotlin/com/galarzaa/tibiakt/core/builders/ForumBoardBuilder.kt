@@ -1,5 +1,6 @@
 package com.galarzaa.tibiakt.core.builders
 
+import com.galarzaa.tibiakt.core.enums.ThreadStatus
 import com.galarzaa.tibiakt.core.models.forums.AnnouncementEntry
 import com.galarzaa.tibiakt.core.models.forums.ForumBoard
 import com.galarzaa.tibiakt.core.models.forums.LastPost
@@ -14,7 +15,7 @@ class ForumBoardBuilder {
     var boardId: Int? = null
     var sectionId: Int? = null
     var section: String? = null
-    var threadAge: Int? = null
+    var threadAge: Int = 30
     var currentPage: Int = 1
     var totalPages: Int = 1
     var resultsCount: Int = 0
@@ -31,10 +32,10 @@ class ForumBoardBuilder {
 
     fun build() = ForumBoard(
         name = name ?: throw IllegalStateException("name is required"),
-        boardId = boardId  ?: throw IllegalStateException("boardId is required"),
-        sectionId = sectionId  ?: throw IllegalStateException("sectionId is required"),
-        section = section  ?: throw IllegalStateException("section is required"),
-        threadAge = threadAge  ?: throw IllegalStateException("threadAge is required"),
+        boardId = boardId ?: throw IllegalStateException("boardId is required"),
+        sectionId = sectionId ?: throw IllegalStateException("sectionId is required"),
+        section = section ?: throw IllegalStateException("section is required"),
+        threadAge = threadAge,
         currentPage = currentPage,
         totalPages = totalPages,
         resultsCount = resultsCount,
@@ -66,18 +67,19 @@ class ThreadEntryBuilder {
     var replies: Int = 0
     var views: Int = 0
     var lastPost: LastPost? = null
-    //var status: ThreadStatus,
+    val status: MutableSet<ThreadStatus> = mutableSetOf()
     var pages: Int = 1
     var goldenFrame: Boolean = false
 
     fun build() = ThreadEntry(
         title = title ?: throw IllegalStateException("title is required"),
-        threadId = threadId  ?: throw IllegalStateException("threadId is required"),
-        author = author  ?: throw IllegalStateException("author is required"),
+        threadId = threadId ?: throw IllegalStateException("threadId is required"),
+        author = author ?: throw IllegalStateException("author is required"),
         authorTraded = authorTraded,
         authorDeleted = authorDeleted,
         replies = replies,
         views = views,
+        status = status,
         lastPost = lastPost ?: throw IllegalStateException("lastPost is required"),
         pages = pages,
         goldenFrame = goldenFrame

@@ -379,8 +379,8 @@ open class TibiaKtClient constructor(
         return response.parse { ForumSectionParser.fromContent(it) }
     }
 
-    open suspend fun fetchForumBoard(boardId: Int): TibiaResponse<ForumBoard?> {
-        val response = this.request(HttpMethod.Get, getForumBoardUrl(boardId))
+    open suspend fun fetchForumBoard(boardId: Int, page: Int = 1, threadAge: Int? = null): TibiaResponse<ForumBoard?> {
+        val response = this.request(HttpMethod.Get, getForumBoardUrl(boardId, page, threadAge))
         return response.parse { ForumBoardParser.fromContent(it) }
     }
 

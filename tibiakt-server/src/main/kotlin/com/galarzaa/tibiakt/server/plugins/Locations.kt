@@ -126,7 +126,7 @@ data class GetCMPosts(
 data class GetForumSection(val sectionId: Int)
 
 @Location("/forum/boards/{boardId}")
-data class GetForumBoard(val boardId: Int)
+data class GetForumBoard(val boardId: Int, val page: Int = 1, val threadAge: Int? = null)
 
 @Location("/leaderboards/{world}")
 data class GetLeaderboards(

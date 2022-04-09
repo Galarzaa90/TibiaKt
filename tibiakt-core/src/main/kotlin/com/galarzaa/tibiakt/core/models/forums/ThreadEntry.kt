@@ -1,5 +1,6 @@
 package com.galarzaa.tibiakt.core.models.forums
 
+import com.galarzaa.tibiakt.core.enums.ThreadStatus
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -12,7 +13,7 @@ data class ThreadEntry(
     val replies: Int,
     val views: Int,
     val lastPost: LastPost,
-    //val status: ThreadStatus,
+    val status: Set<ThreadStatus>,
     val pages: Int,
     val goldenFrame: Boolean,
 )
