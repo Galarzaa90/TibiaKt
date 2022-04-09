@@ -87,89 +87,91 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.builders
 <i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.AnnouncementEntry
-<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.ForumBoard
-<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.LastPost
-<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.ThreadEntry
-<i class="no-highlight">7</i>&nbsp;
-<i class="no-highlight">8</i>&nbsp;inline fun forumBoardBuilder(block: ForumBoardBuilder.() -&gt; Unit) = ForumBoardBuilder().apply(block)
-<i class="no-highlight">9</i>&nbsp;inline fun forumBoard(block: ForumBoardBuilder.() -&gt; Unit) = forumBoardBuilder(block).build()
-<i class="no-highlight">10</i>&nbsp;
-<i class="no-highlight">11</i>&nbsp;@TibiaKtDsl
-<i class="no-highlight">12</i>&nbsp;class ForumBoardBuilder {
-<i class="no-highlight">13</i>&nbsp;    var name: String? = null
-<i class="no-highlight">14</i>&nbsp;    var boardId: Int? = null
-<i class="no-highlight">15</i>&nbsp;    var sectionId: Int? = null
-<i class="no-highlight">16</i>&nbsp;    var section: String? = null
-<i class="no-highlight">17</i>&nbsp;    var threadAge: Int? = null
-<i class="no-highlight">18</i>&nbsp;    var currentPage: Int = 1
-<i class="no-highlight">19</i>&nbsp;    var totalPages: Int = 1
-<i class="no-highlight">20</i>&nbsp;    var resultsCount: Int = 0
-<i class="no-highlight">21</i>&nbsp;    val announcements: MutableList&lt;AnnouncementEntry&gt; = mutableListOf()
-<i class="no-highlight">22</i>&nbsp;    val entries: MutableList&lt;ThreadEntry&gt; = mutableListOf()
-<i class="no-highlight">23</i>&nbsp;
-<i class="no-highlight">24</i>&nbsp;    fun announcement(block: AnnouncementEntryBuilder.() -&gt; Unit) {
-<i class="no-highlight">25</i>&nbsp;        announcements.add(AnnouncementEntryBuilder().apply(block).build())
-<i class="no-highlight">26</i>&nbsp;    }
-<i class="no-highlight">27</i>&nbsp;
-<i class="no-highlight">28</i>&nbsp;    fun thread(block: ThreadEntryBuilder.() -&gt; Unit) {
-<i class="no-highlight">29</i>&nbsp;        entries.add(ThreadEntryBuilder().apply(block).build())
-<i class="no-highlight">30</i>&nbsp;    }
-<i class="no-highlight">31</i>&nbsp;
-<i class="no-highlight">32</i>&nbsp;    fun build() = ForumBoard(
-<i class="no-highlight">33</i>&nbsp;        name = name ?: throw IllegalStateException(&quot;name is required&quot;),
-<i class="no-highlight">34</i>&nbsp;        boardId = boardId  ?: throw IllegalStateException(&quot;boardId is required&quot;),
-<i class="no-highlight">35</i>&nbsp;        sectionId = sectionId  ?: throw IllegalStateException(&quot;sectionId is required&quot;),
-<i class="no-highlight">36</i>&nbsp;        section = section  ?: throw IllegalStateException(&quot;section is required&quot;),
-<i class="no-highlight">37</i>&nbsp;        threadAge = threadAge  ?: throw IllegalStateException(&quot;threadAge is required&quot;),
-<i class="no-highlight">38</i>&nbsp;        currentPage = currentPage,
-<i class="no-highlight">39</i>&nbsp;        totalPages = totalPages,
-<i class="no-highlight">40</i>&nbsp;        resultsCount = resultsCount,
-<i class="no-highlight">41</i>&nbsp;        announcements = announcements,
-<i class="no-highlight">42</i>&nbsp;        entries = entries
-<i class="no-highlight">43</i>&nbsp;    )
-<i class="no-highlight">44</i>&nbsp;}
-<i class="no-highlight">45</i>&nbsp;
-<b class="fc"><i class="no-highlight">46</i>&nbsp;@TibiaKtDsl</b>
-<i class="no-highlight">47</i>&nbsp;class AnnouncementEntryBuilder {
-<b class="fc"><i class="no-highlight">48</i>&nbsp;    var title: String? = null</b>
-<b class="fc"><i class="no-highlight">49</i>&nbsp;    var announcementId: Int? = null</b>
-<b class="fc"><i class="no-highlight">50</i>&nbsp;    var author: String? = null</b>
-<i class="no-highlight">51</i>&nbsp;
-<b class="fc"><i class="no-highlight">52</i>&nbsp;    fun build() = AnnouncementEntry(</b>
-<b class="pc"><i class="no-highlight">53</i>&nbsp;        title = title ?: throw IllegalStateException(&quot;title is required&quot;),</b>
-<b class="pc"><i class="no-highlight">54</i>&nbsp;        announcementId = announcementId  ?: throw IllegalStateException(&quot;announcementId is required&quot;),</b>
-<b class="pc"><i class="no-highlight">55</i>&nbsp;        author = author  ?: throw IllegalStateException(&quot;author is required&quot;)</b>
-<i class="no-highlight">56</i>&nbsp;    )
-<i class="no-highlight">57</i>&nbsp;}
-<i class="no-highlight">58</i>&nbsp;
-<i class="no-highlight">59</i>&nbsp;@TibiaKtDsl
-<i class="no-highlight">60</i>&nbsp;class ThreadEntryBuilder {
-<i class="no-highlight">61</i>&nbsp;    var title: String? = null
-<i class="no-highlight">62</i>&nbsp;    var threadId: Int? = null
-<i class="no-highlight">63</i>&nbsp;    var author: String? = null
-<i class="no-highlight">64</i>&nbsp;    var authorTraded: Boolean = false
-<i class="no-highlight">65</i>&nbsp;    var authorDeleted: Boolean = false
-<i class="no-highlight">66</i>&nbsp;    var replies: Int = 0
-<i class="no-highlight">67</i>&nbsp;    var views: Int = 0
-<i class="no-highlight">68</i>&nbsp;    var lastPost: LastPost? = null
-<i class="no-highlight">69</i>&nbsp;    //var status: ThreadStatus,
-<i class="no-highlight">70</i>&nbsp;    var pages: Int = 1
-<i class="no-highlight">71</i>&nbsp;    var goldenFrame: Boolean = false
-<i class="no-highlight">72</i>&nbsp;
-<i class="no-highlight">73</i>&nbsp;    fun build() = ThreadEntry(
-<i class="no-highlight">74</i>&nbsp;        title = title ?: throw IllegalStateException(&quot;title is required&quot;),
-<i class="no-highlight">75</i>&nbsp;        threadId = threadId  ?: throw IllegalStateException(&quot;threadId is required&quot;),
-<i class="no-highlight">76</i>&nbsp;        author = author  ?: throw IllegalStateException(&quot;author is required&quot;),
-<i class="no-highlight">77</i>&nbsp;        authorTraded = authorTraded,
-<i class="no-highlight">78</i>&nbsp;        authorDeleted = authorDeleted,
-<i class="no-highlight">79</i>&nbsp;        replies = replies,
-<i class="no-highlight">80</i>&nbsp;        views = views,
-<i class="no-highlight">81</i>&nbsp;        lastPost = lastPost ?: throw IllegalStateException(&quot;lastPost is required&quot;),
-<i class="no-highlight">82</i>&nbsp;        pages = pages,
-<i class="no-highlight">83</i>&nbsp;        goldenFrame = goldenFrame
-<i class="no-highlight">84</i>&nbsp;    )
-<i class="no-highlight">85</i>&nbsp;}
+<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.enums.ThreadStatus
+<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.AnnouncementEntry
+<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.ForumBoard
+<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.LastPost
+<i class="no-highlight">7</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.ThreadEntry
+<i class="no-highlight">8</i>&nbsp;
+<i class="no-highlight">9</i>&nbsp;inline fun forumBoardBuilder(block: ForumBoardBuilder.() -&gt; Unit) = ForumBoardBuilder().apply(block)
+<i class="no-highlight">10</i>&nbsp;inline fun forumBoard(block: ForumBoardBuilder.() -&gt; Unit) = forumBoardBuilder(block).build()
+<i class="no-highlight">11</i>&nbsp;
+<i class="no-highlight">12</i>&nbsp;@TibiaKtDsl
+<i class="no-highlight">13</i>&nbsp;class ForumBoardBuilder {
+<i class="no-highlight">14</i>&nbsp;    var name: String? = null
+<i class="no-highlight">15</i>&nbsp;    var boardId: Int? = null
+<i class="no-highlight">16</i>&nbsp;    var sectionId: Int? = null
+<i class="no-highlight">17</i>&nbsp;    var section: String? = null
+<i class="no-highlight">18</i>&nbsp;    var threadAge: Int = 30
+<i class="no-highlight">19</i>&nbsp;    var currentPage: Int = 1
+<i class="no-highlight">20</i>&nbsp;    var totalPages: Int = 1
+<i class="no-highlight">21</i>&nbsp;    var resultsCount: Int = 0
+<i class="no-highlight">22</i>&nbsp;    val announcements: MutableList&lt;AnnouncementEntry&gt; = mutableListOf()
+<i class="no-highlight">23</i>&nbsp;    val entries: MutableList&lt;ThreadEntry&gt; = mutableListOf()
+<i class="no-highlight">24</i>&nbsp;
+<i class="no-highlight">25</i>&nbsp;    fun announcement(block: AnnouncementEntryBuilder.() -&gt; Unit) {
+<i class="no-highlight">26</i>&nbsp;        announcements.add(AnnouncementEntryBuilder().apply(block).build())
+<i class="no-highlight">27</i>&nbsp;    }
+<i class="no-highlight">28</i>&nbsp;
+<i class="no-highlight">29</i>&nbsp;    fun thread(block: ThreadEntryBuilder.() -&gt; Unit) {
+<i class="no-highlight">30</i>&nbsp;        entries.add(ThreadEntryBuilder().apply(block).build())
+<i class="no-highlight">31</i>&nbsp;    }
+<i class="no-highlight">32</i>&nbsp;
+<i class="no-highlight">33</i>&nbsp;    fun build() = ForumBoard(
+<i class="no-highlight">34</i>&nbsp;        name = name ?: throw IllegalStateException(&quot;name is required&quot;),
+<i class="no-highlight">35</i>&nbsp;        boardId = boardId ?: throw IllegalStateException(&quot;boardId is required&quot;),
+<i class="no-highlight">36</i>&nbsp;        sectionId = sectionId ?: throw IllegalStateException(&quot;sectionId is required&quot;),
+<i class="no-highlight">37</i>&nbsp;        section = section ?: throw IllegalStateException(&quot;section is required&quot;),
+<i class="no-highlight">38</i>&nbsp;        threadAge = threadAge,
+<i class="no-highlight">39</i>&nbsp;        currentPage = currentPage,
+<i class="no-highlight">40</i>&nbsp;        totalPages = totalPages,
+<i class="no-highlight">41</i>&nbsp;        resultsCount = resultsCount,
+<i class="no-highlight">42</i>&nbsp;        announcements = announcements,
+<i class="no-highlight">43</i>&nbsp;        entries = entries
+<i class="no-highlight">44</i>&nbsp;    )
+<i class="no-highlight">45</i>&nbsp;}
+<i class="no-highlight">46</i>&nbsp;
+<b class="fc"><i class="no-highlight">47</i>&nbsp;@TibiaKtDsl</b>
+<i class="no-highlight">48</i>&nbsp;class AnnouncementEntryBuilder {
+<b class="fc"><i class="no-highlight">49</i>&nbsp;    var title: String? = null</b>
+<b class="fc"><i class="no-highlight">50</i>&nbsp;    var announcementId: Int? = null</b>
+<b class="fc"><i class="no-highlight">51</i>&nbsp;    var author: String? = null</b>
+<i class="no-highlight">52</i>&nbsp;
+<b class="fc"><i class="no-highlight">53</i>&nbsp;    fun build() = AnnouncementEntry(</b>
+<b class="pc"><i class="no-highlight">54</i>&nbsp;        title = title ?: throw IllegalStateException(&quot;title is required&quot;),</b>
+<b class="pc"><i class="no-highlight">55</i>&nbsp;        announcementId = announcementId  ?: throw IllegalStateException(&quot;announcementId is required&quot;),</b>
+<b class="pc"><i class="no-highlight">56</i>&nbsp;        author = author  ?: throw IllegalStateException(&quot;author is required&quot;)</b>
+<i class="no-highlight">57</i>&nbsp;    )
+<i class="no-highlight">58</i>&nbsp;}
+<i class="no-highlight">59</i>&nbsp;
+<i class="no-highlight">60</i>&nbsp;@TibiaKtDsl
+<i class="no-highlight">61</i>&nbsp;class ThreadEntryBuilder {
+<i class="no-highlight">62</i>&nbsp;    var title: String? = null
+<i class="no-highlight">63</i>&nbsp;    var threadId: Int? = null
+<i class="no-highlight">64</i>&nbsp;    var author: String? = null
+<i class="no-highlight">65</i>&nbsp;    var authorTraded: Boolean = false
+<i class="no-highlight">66</i>&nbsp;    var authorDeleted: Boolean = false
+<i class="no-highlight">67</i>&nbsp;    var replies: Int = 0
+<i class="no-highlight">68</i>&nbsp;    var views: Int = 0
+<i class="no-highlight">69</i>&nbsp;    var lastPost: LastPost? = null
+<i class="no-highlight">70</i>&nbsp;    val status: MutableSet&lt;ThreadStatus&gt; = mutableSetOf()
+<i class="no-highlight">71</i>&nbsp;    var pages: Int = 1
+<i class="no-highlight">72</i>&nbsp;    var goldenFrame: Boolean = false
+<i class="no-highlight">73</i>&nbsp;
+<i class="no-highlight">74</i>&nbsp;    fun build() = ThreadEntry(
+<i class="no-highlight">75</i>&nbsp;        title = title ?: throw IllegalStateException(&quot;title is required&quot;),
+<i class="no-highlight">76</i>&nbsp;        threadId = threadId ?: throw IllegalStateException(&quot;threadId is required&quot;),
+<i class="no-highlight">77</i>&nbsp;        author = author ?: throw IllegalStateException(&quot;author is required&quot;),
+<i class="no-highlight">78</i>&nbsp;        authorTraded = authorTraded,
+<i class="no-highlight">79</i>&nbsp;        authorDeleted = authorDeleted,
+<i class="no-highlight">80</i>&nbsp;        replies = replies,
+<i class="no-highlight">81</i>&nbsp;        views = views,
+<i class="no-highlight">82</i>&nbsp;        status = status,
+<i class="no-highlight">83</i>&nbsp;        lastPost = lastPost ?: throw IllegalStateException(&quot;lastPost is required&quot;),
+<i class="no-highlight">84</i>&nbsp;        pages = pages,
+<i class="no-highlight">85</i>&nbsp;        goldenFrame = goldenFrame
+<i class="no-highlight">86</i>&nbsp;    )
+<i class="no-highlight">87</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -196,7 +198,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-04-09 04:36</div>
+    <div style="float:right;">generated on 2022-04-09 18:16</div>
 </div>
 </body>
 </html>

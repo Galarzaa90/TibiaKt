@@ -43,18 +43,18 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name">TibiaKtClient</td>
 <td class="coverageStat">
   <span class="percent">
-    10.2%
+    10%
   </span>
   <span class="absValue">
-    (5/49)
+    (5/50)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    5.1%
+    5%
   </span>
   <span class="absValue">
-    (7/138)
+    (7/140)
   </span>
 </td>
 <td class="coverageStat">
@@ -62,7 +62,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     7.3%
   </span>
   <span class="absValue">
-    (16/218)
+    (16/219)
   </span>
 </td>
 </tr>
@@ -731,10 +731,10 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    11.2%
+    11.1%
   </span>
   <span class="absValue">
-    (9/80)
+    (9/81)
   </span>
 </td>
 <td class="coverageStat">
@@ -742,7 +742,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     5.6%
   </span>
   <span class="absValue">
-    (8/142)
+    (8/144)
   </span>
 </td>
 <td class="coverageStat">
@@ -750,7 +750,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     9.4%
   </span>
   <span class="absValue">
-    (24/255)
+    (24/256)
   </span>
 </td>
 </tr>
@@ -1142,8 +1142,8 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="nc"><i class="no-highlight">379</i>&nbsp;        return response.parse { ForumSectionParser.fromContent(it) }</b>
 <i class="no-highlight">380</i>&nbsp;    }
 <i class="no-highlight">381</i>&nbsp;
-<i class="no-highlight">382</i>&nbsp;    open suspend fun fetchForumBoard(boardId: Int): TibiaResponse&lt;ForumBoard?&gt; {
-<b class="nc"><i class="no-highlight">383</i>&nbsp;        val response = this.request(HttpMethod.Get, getForumBoardUrl(boardId))</b>
+<b class="nc"><i class="no-highlight">382</i>&nbsp;    open suspend fun fetchForumBoard(boardId: Int, page: Int = 1, threadAge: Int? = null): TibiaResponse&lt;ForumBoard?&gt; {</b>
+<b class="nc"><i class="no-highlight">383</i>&nbsp;        val response = this.request(HttpMethod.Get, getForumBoardUrl(boardId, page, threadAge))</b>
 <b class="nc"><i class="no-highlight">384</i>&nbsp;        return response.parse { ForumBoardParser.fromContent(it) }</b>
 <i class="no-highlight">385</i>&nbsp;    }
 <i class="no-highlight">386</i>&nbsp;
@@ -1394,7 +1394,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-04-09 04:36</div>
+    <div style="float:right;">generated on 2022-04-09 18:16</div>
 </div>
 </body>
 </html>
