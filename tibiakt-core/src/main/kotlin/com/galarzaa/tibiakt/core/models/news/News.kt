@@ -4,7 +4,7 @@ package com.galarzaa.tibiakt.core.models.news
 
 import com.galarzaa.tibiakt.core.enums.NewsCategory
 import com.galarzaa.tibiakt.core.serializers.LocalDateSerializer
-import com.galarzaa.tibiakt.core.utils.getThreadUrl
+import com.galarzaa.tibiakt.core.utils.getForumThreadUrl
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import java.time.LocalDate
@@ -32,5 +32,5 @@ data class News(
     /**
      * The URL to the discussion thread of this article, if any.
      */
-    val threadUrl: String? get() = threadId?.let { getThreadUrl(threadId) }
+    val threadUrl: String? get() = threadId?.let { getForumThreadUrl(threadId) }
 }

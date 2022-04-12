@@ -165,12 +165,11 @@ fun getForumSectionUrl(sectionId: Int) = buildTibiaUrl("forum", P("action", "mai
  */
 fun getForumSectionUrl(sectionName: String) = buildTibiaUrl("forum", sectionName)
 
-fun getForumBoardUrl(boardId: Int, page: Int = 1, threadAge: Int? = null) =
-    buildTibiaUrl("forum",
-        P("action", "board"),
-        P("boardid", boardId),
-        P("pagenumber", page),
-        P("threadage", threadAge))
+fun getForumBoardUrl(boardId: Int, page: Int = 1, threadAge: Int? = null) = buildTibiaUrl("forum",
+    P("action", "board"),
+    P("boardid", boardId),
+    P("pagenumber", page),
+    P("threadage", threadAge))
 
 
 fun getForumAnnouncementUrl(announcementId: Int) =
@@ -179,7 +178,8 @@ fun getForumAnnouncementUrl(announcementId: Int) =
 /**
  * Get the URL to a specific thread in the forums.
  */
-fun getThreadUrl(threadId: Int) = buildTibiaUrl("forum", P("action", "thread"), P("threadid", threadId))
+fun getForumThreadUrl(threadId: Int, page: Int = 1) =
+    buildTibiaUrl("forum", P("action", "thread"), P("threadid", threadId), P("pagenumber", page))
 
 /**
  * Get the URL to the highscores, with the specified parameters.

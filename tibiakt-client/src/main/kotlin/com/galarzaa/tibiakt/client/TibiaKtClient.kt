@@ -28,6 +28,7 @@ import com.galarzaa.tibiakt.core.models.forums.CMPostArchive
 import com.galarzaa.tibiakt.core.models.forums.ForumAnnouncement
 import com.galarzaa.tibiakt.core.models.forums.ForumBoard
 import com.galarzaa.tibiakt.core.models.forums.ForumSection
+import com.galarzaa.tibiakt.core.models.forums.ForumThread
 import com.galarzaa.tibiakt.core.models.guild.Guild
 import com.galarzaa.tibiakt.core.models.guild.GuildsSection
 import com.galarzaa.tibiakt.core.models.highscores.Highscores
@@ -48,6 +49,7 @@ import com.galarzaa.tibiakt.core.parsers.EventsScheduleParser
 import com.galarzaa.tibiakt.core.parsers.ForumAnnouncementParser
 import com.galarzaa.tibiakt.core.parsers.ForumBoardParser
 import com.galarzaa.tibiakt.core.parsers.ForumSectionParser
+import com.galarzaa.tibiakt.core.parsers.ForumThreadParser
 import com.galarzaa.tibiakt.core.parsers.GuildParser
 import com.galarzaa.tibiakt.core.parsers.GuildsSectionParser
 import com.galarzaa.tibiakt.core.parsers.HighscoresParser
@@ -68,6 +70,7 @@ import com.galarzaa.tibiakt.core.utils.getEventsScheduleUrl
 import com.galarzaa.tibiakt.core.utils.getForumAnnouncementUrl
 import com.galarzaa.tibiakt.core.utils.getForumBoardUrl
 import com.galarzaa.tibiakt.core.utils.getForumSectionUrl
+import com.galarzaa.tibiakt.core.utils.getForumThreadUrl
 import com.galarzaa.tibiakt.core.utils.getGuildUrl
 import com.galarzaa.tibiakt.core.utils.getHighscoresUrl
 import com.galarzaa.tibiakt.core.utils.getHouseUrl
@@ -391,6 +394,12 @@ open class TibiaKtClient constructor(
         val response = this.request(HttpMethod.Get, getForumAnnouncementUrl(announcementId))
         return response.parse { ForumAnnouncementParser.fromContent(it, announcementId) }
     }
+
+    open suspend fun fetchForumThread(threadId: Int, page: Int = 1): TibiaResponse<ForumThread?> {
+        val response = this.request(HttpMethod.Get, getForumThreadUrl(threadId, page))
+        return response.parse { ForumThreadParser.fromContent(it) }
+    }
+
 
     /** Fetch CM posts between two dates. */
     open suspend fun fetchCMPostArchive(

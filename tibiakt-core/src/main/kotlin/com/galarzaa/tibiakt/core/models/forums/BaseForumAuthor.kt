@@ -30,4 +30,13 @@ data class ForumAuthor(
     val vocation: Vocation,
     val guild: GuildMembership?,
     val posts: Int,
+    val traded: Boolean,
+) : BaseForumAuthor(), BaseCharacter
+
+
+@SerialName("tournamentForumAuthor")
+@Serializable
+data class TournamentForumAuthor(
+    override val name: String,
+    val posts: Int,
 ) : BaseForumAuthor(), BaseCharacter

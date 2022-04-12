@@ -3,9 +3,11 @@ package com.galarzaa.tibiakt.core.utils
 import com.galarzaa.tibiakt.core.builders.lastPost
 import com.galarzaa.tibiakt.core.enums.StringEnum
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
+import com.galarzaa.tibiakt.core.models.character.GuildMembership
 import com.galarzaa.tibiakt.core.models.forums.BaseForumAuthor
 import com.galarzaa.tibiakt.core.models.forums.ForumAuthor
 import com.galarzaa.tibiakt.core.models.forums.LastPost
+import com.galarzaa.tibiakt.core.models.forums.TournamentForumAuthor
 import com.galarzaa.tibiakt.core.models.forums.UnavailableForumAuthor
 import org.jsoup.nodes.Element
 
@@ -40,32 +42,44 @@ internal fun parseAuthorTable(table: Element): BaseForumAuthor {
         val traded: Boolean = name.contains("(traded)")
         return UnavailableForumAuthor(name.remove("(traded)").trim(), !traded, traded)
     }
-    val positionInfo = table.selectFirst("font.ff_smallinfo")
+    val positionInfo = table.select("font.ff_smallinfo")
     var title: String? = null
     var position: String? = null
-    if (positionInfo != null && positionInfo.parent() == table) {
-        positionInfo.replaceBrs()
-        positionInfo.cleanText().split("\n").forEach {
+    var recentlyTraded = false
+    positionInfo.filter { it.parent() == table }.forEach { element ->
+        element.replaceBrs().wholeCleanText().split("\n").forEach {
             if (it in titles) position = it
+            else if ("traded" in it) recentlyTraded = true
             else title = it
         }
     }
+    var guildMembership: GuildMembership? = null
     val charInfo = table.selectFirst("font.ff_infotext")!!
-    val guildInfo = charInfo.selectFirst("font.ff_smallinfo")
+    charInfo.selectFirst("font.ff_smallinfo")?.let {
+        val guildLink = it.selectFirst("a")
+        val guildLinkInfo = guildLink?.getLinkInformation()!!
+        val guildName = guildLinkInfo.title
+        guildLink.remove()
+        val rank = it.cleanText().removeSuffix("of the").trim()
+        guildMembership = GuildMembership(guildName, rank)
+    }
     charInfo.replaceBrs()
+    if ("Tournament - " in charInfo.cleanText()) {
+        return TournamentForumAuthor(charLink.title, charInfo.cleanText().findInteger())
+    }
 
     val (_, world, vocation, level) = charInfoRegex.find(charInfo.wholeCleanText())?.groupValues
         ?: throw ParsingException("Could not find character info")
 
     val (_, postsText) = authorPostsRegex.find(charInfo.wholeCleanText())!!.groupValues
 
-    return ForumAuthor(
-        name = charLink.title,
+    return ForumAuthor(name = charLink.title,
         level = level.toInt(),
         world = world,
         vocation = StringEnum.fromValue(vocation) ?: throw ParsingException("Unknown vocation: $vocation"),
         position = position,
         title = title,
-        guild = null,
-        posts = postsText.parseInteger())
+        guild = guildMembership,
+        posts = postsText.parseInteger(),
+        traded = recentlyTraded)
 }

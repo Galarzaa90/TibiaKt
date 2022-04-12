@@ -52,6 +52,7 @@ internal fun Element.cellsText(): List<String> = cells().map { it.cleanText() }
 
 /** Get the text contained in an element, cleaned out of extraneous characters. */
 internal fun Element.cleanText() = text().clean()
+internal fun TextNode.cleanText() = text().clean()
 
 /** Get the text contained in an list of element, cleaned out of extraneous characters. */
 internal fun Elements.cleanText() = text().clean()
@@ -120,7 +121,7 @@ internal data class FormData(
     val method: String? = null,
 )
 
-private val pageRegex = Regex("""page=(\d+)""")
+private val pageRegex = Regex("""(?:page|pagenumber)=(\d+)""")
 private val resultsRegex = Regex("""Results: ([\d,]+)""")
 
 /** Parse the pagination block present in many Tibia.com sections */
