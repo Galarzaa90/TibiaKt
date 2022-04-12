@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > BaseForumBoard</title>
+  <title>Coverage Report > BaseForumAnnouncement</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -20,7 +20,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">com.galarzaa.tibiakt.core.models.forums</a>
 </div>
 
-<h1>Coverage Summary for Class: BaseForumBoard (com.galarzaa.tibiakt.core.models.forums)</h1>
+<h1>Coverage Summary for Class: BaseForumAnnouncement (com.galarzaa.tibiakt.core.models.forums)</h1>
 
 <table class="coverageStats">
 
@@ -36,7 +36,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
   <tr>
-    <td class="name">BaseForumBoard$DefaultImpls</td>
+    <td class="name">BaseForumAnnouncement$DefaultImpls</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -82,19 +82,14 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.models.forums
 <i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getForumBoardUrl
+<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getForumAnnouncementUrl
 <i class="no-highlight">4</i>&nbsp;
-<i class="no-highlight">5</i>&nbsp;/**
-<i class="no-highlight">6</i>&nbsp; * Base interface for forum boards.
-<i class="no-highlight">7</i>&nbsp; *
-<i class="no-highlight">8</i>&nbsp; * @property boardId The internal ID of the board. Used for linking.
-<i class="no-highlight">9</i>&nbsp; */
-<i class="no-highlight">10</i>&nbsp;interface BaseForumBoard {
-<i class="no-highlight">11</i>&nbsp;    val boardId: Int
-<i class="no-highlight">12</i>&nbsp;
-<i class="no-highlight">13</i>&nbsp;    /** The URL to this board. */
-<b class="nc"><i class="no-highlight">14</i>&nbsp;    val url get() = getForumBoardUrl(boardId)</b>
-<i class="no-highlight">15</i>&nbsp;}
+<i class="no-highlight">5</i>&nbsp;interface BaseForumAnnouncement {
+<i class="no-highlight">6</i>&nbsp;    val title: String
+<i class="no-highlight">7</i>&nbsp;    val announcementId: Int
+<i class="no-highlight">8</i>&nbsp;
+<b class="nc"><i class="no-highlight">9</i>&nbsp;    val url get() = getForumAnnouncementUrl(announcementId)</b>
+<i class="no-highlight">10</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -121,7 +116,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-04-09 18:16</div>
+    <div style="float:right;">generated on 2022-04-12 22:30</div>
 </div>
 </body>
 </html>

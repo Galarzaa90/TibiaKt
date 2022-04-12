@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > NewsParser</title>
+  <title>Coverage Report > LeaderboardsParser</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -20,7 +20,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">com.galarzaa.tibiakt.core.parsers</a>
 </div>
 
-<h1>Coverage Summary for Class: NewsParser (com.galarzaa.tibiakt.core.parsers)</h1>
+<h1>Coverage Summary for Class: LeaderboardsParser (com.galarzaa.tibiakt.core.parsers)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -43,7 +43,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">NewsParser</td>
+  <td class="name">LeaderboardsParser</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -54,26 +54,26 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (2/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
     50%
   </span>
   <span class="absValue">
-    (2/4)
+    (18/36)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    56.7%
+    84.6%
   </span>
   <span class="absValue">
-    (17/30)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    86.4%
-  </span>
-  <span class="absValue">
-    (19/22)
+    (22/26)
   </span>
 </td>
 </tr>
@@ -87,45 +87,65 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.parsers
 <i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.builders.news
-<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.enums.NewsCategory
-<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
-<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.models.news.News
-<i class="no-highlight">7</i>&nbsp;import com.galarzaa.tibiakt.core.utils.cleanText
-<i class="no-highlight">8</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getLinkInformation
-<i class="no-highlight">9</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseTibiaDate
-<i class="no-highlight">10</i>&nbsp;import com.galarzaa.tibiakt.core.utils.remove
-<i class="no-highlight">11</i>&nbsp;
-<b class="nc"><i class="no-highlight">12</i>&nbsp;object NewsParser : Parser&lt;News?&gt; {</b>
-<b class="fc"><i class="no-highlight">13</i>&nbsp;    override fun fromContent(content: String): News? = fromContent(content, 0)</b>
-<i class="no-highlight">14</i>&nbsp;
-<b class="nc"><i class="no-highlight">15</i>&nbsp;    fun fromContent(content: String, newsId: Int = 0): News? {</b>
-<b class="fc"><i class="no-highlight">16</i>&nbsp;        val boxContent = boxContent(content)</b>
-<i class="no-highlight">17</i>&nbsp;
-<b class="fc"><i class="no-highlight">18</i>&nbsp;        val titleContainer =</b>
-<b class="fc"><i class="no-highlight">19</i>&nbsp;            boxContent.selectFirst(&quot;div.NewsHeadlineText&quot;)</b>
-<b class="pc"><i class="no-highlight">20</i>&nbsp;                ?: if (&quot;not found&quot; in (boxContent.selectFirst(&quot;div.CaptionContainer&quot;)?.cleanText() ?: &quot;&quot;))</b>
-<b class="fc"><i class="no-highlight">21</i>&nbsp;                    return null</b>
-<i class="no-highlight">22</i>&nbsp;                else
-<b class="nc"><i class="no-highlight">23</i>&nbsp;                    throw ParsingException(&quot;News headline not found.&quot;)</b>
-<b class="pc"><i class="no-highlight">24</i>&nbsp;        val icon = boxContent.selectFirst(&quot;img.NewsHeadlineIcon&quot;) ?: throw ParsingException(&quot;News icon not found.&quot;)</b>
-<b class="fc"><i class="no-highlight">25</i>&nbsp;        return news {</b>
-<b class="fc"><i class="no-highlight">26</i>&nbsp;            id = newsId</b>
-<b class="fc"><i class="no-highlight">27</i>&nbsp;            title = titleContainer.cleanText()</b>
-<b class="fc"><i class="no-highlight">28</i>&nbsp;            category = NewsCategory.fromIcon(icon.attr(&quot;src&quot;))</b>
-<i class="no-highlight">29</i>&nbsp;
-<b class="pc"><i class="no-highlight">30</i>&nbsp;            val newsDate = boxContent.selectFirst(&quot;div.NewsHeadlineDate&quot;)?.cleanText()?.remove(&quot;-&quot;)?.trim()</b>
-<b class="pc"><i class="no-highlight">31</i>&nbsp;            date = parseTibiaDate(newsDate ?: throw ParsingException(&quot;News date not found.&quot;))</b>
-<i class="no-highlight">32</i>&nbsp;
-<b class="pc"><i class="no-highlight">33</i>&nbsp;            val newsTable = boxContent.selectFirst(&quot;td.NewsTableContainer&quot;)?.children().toString()</b>
-<b class="fc"><i class="no-highlight">34</i>&nbsp;            this.content = newsTable</b>
-<i class="no-highlight">35</i>&nbsp;
-<b class="fc"><i class="no-highlight">36</i>&nbsp;            boxContent.selectFirst(&quot;div.NewsForumLink &gt; a&quot;)?.apply {</b>
-<b class="pc"><i class="no-highlight">37</i>&nbsp;                threadId = getLinkInformation()?.queryParams?.get(&quot;threadid&quot;)?.get(0)?.toInt()</b>
-<b class="fc"><i class="no-highlight">38</i>&nbsp;            }</b>
-<b class="fc"><i class="no-highlight">39</i>&nbsp;        }</b>
-<i class="no-highlight">40</i>&nbsp;    }
-<i class="no-highlight">41</i>&nbsp;}
+<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.builders.LeaderboardsBuilder
+<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
+<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.models.Leaderboards
+<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.models.LeaderboardsEntry
+<i class="no-highlight">7</i>&nbsp;import com.galarzaa.tibiakt.core.utils.PaginationData
+<i class="no-highlight">8</i>&nbsp;import com.galarzaa.tibiakt.core.utils.cells
+<i class="no-highlight">9</i>&nbsp;import com.galarzaa.tibiakt.core.utils.clean
+<i class="no-highlight">10</i>&nbsp;import com.galarzaa.tibiakt.core.utils.formData
+<i class="no-highlight">11</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getLinkInformation
+<i class="no-highlight">12</i>&nbsp;import com.galarzaa.tibiakt.core.utils.offsetStart
+<i class="no-highlight">13</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parsePagination
+<i class="no-highlight">14</i>&nbsp;import com.galarzaa.tibiakt.core.utils.remove
+<i class="no-highlight">15</i>&nbsp;import com.galarzaa.tibiakt.core.utils.rows
+<i class="no-highlight">16</i>&nbsp;import org.jsoup.nodes.Element
+<i class="no-highlight">17</i>&nbsp;import java.time.Instant
+<i class="no-highlight">18</i>&nbsp;
+<b class="nc"><i class="no-highlight">19</i>&nbsp;object LeaderboardsParser : Parser&lt;Leaderboards?&gt; {</b>
+<i class="no-highlight">20</i>&nbsp;    override fun fromContent(content: String): Leaderboards? {
+<b class="fc"><i class="no-highlight">21</i>&nbsp;        val boxContent = boxContent(content)</b>
+<b class="fc"><i class="no-highlight">22</i>&nbsp;        val tables = boxContent.select(&quot;table.TableContent&quot;)</b>
+<b class="fc"><i class="no-highlight">23</i>&nbsp;        val builder = LeaderboardsBuilder()</b>
+<i class="no-highlight">24</i>&nbsp;
+<b class="pc"><i class="no-highlight">25</i>&nbsp;        val formData = tables[1].selectFirst(&quot;form&quot;)?.formData() ?: throw ParsingException(&quot;form not found&quot;)</b>
+<b class="pc"><i class="no-highlight">26</i>&nbsp;        builder.world(formData.values[&quot;world&quot;]</b>
+<b class="nc"><i class="no-highlight">27</i>&nbsp;            ?: if (&quot;world&quot; in formData.availableOptions) return null else throw ParsingException(&quot;world form parameter not found&quot;))</b>
+<b class="pc"><i class="no-highlight">28</i>&nbsp;            .rotation(formData.values[&quot;rotation&quot;]?.toInt()</b>
+<b class="nc"><i class="no-highlight">29</i>&nbsp;                ?: throw ParsingException(&quot;rotation form parameter not found&quot;))</b>
+<i class="no-highlight">30</i>&nbsp;
+<b class="pc"><i class="no-highlight">31</i>&nbsp;        if (tables.size == 4) {</b>
+<b class="fc"><i class="no-highlight">32</i>&nbsp;            val lastUpdateString = tables[2].text()</b>
+<b class="pc"><i class="no-highlight">33</i>&nbsp;            val minutes = Regex(&quot;&quot;&quot;(\d+)&quot;&quot;&quot;).find(lastUpdateString)?.groups?.get(0)?.value?.toInt()</b>
+<b class="nc"><i class="no-highlight">34</i>&nbsp;                ?: throw ParsingException(&quot;unexpected last update text: $lastUpdateString&quot;)</b>
+<b class="fc"><i class="no-highlight">35</i>&nbsp;            builder.lastUpdated(Instant.now().minusSeconds(60L * minutes))</b>
+<i class="no-highlight">36</i>&nbsp;        }
+<i class="no-highlight">37</i>&nbsp;
+<b class="fc"><i class="no-highlight">38</i>&nbsp;        val entriesTable = tables.last()</b>
+<b class="fc"><i class="no-highlight">39</i>&nbsp;        parseLeaderboardEntries(entriesTable, builder)</b>
+<i class="no-highlight">40</i>&nbsp;
+<b class="pc"><i class="no-highlight">41</i>&nbsp;        val paginationData = boxContent.selectFirst(&quot;small&quot;)?.parsePagination() ?: PaginationData.default()</b>
+<b class="fc"><i class="no-highlight">42</i>&nbsp;        builder.currentPage(paginationData.currentPage).resultsCount(paginationData.resultsCount)</b>
+<b class="fc"><i class="no-highlight">43</i>&nbsp;            .totalPages(paginationData.totalPages)</b>
+<i class="no-highlight">44</i>&nbsp;
+<b class="fc"><i class="no-highlight">45</i>&nbsp;        return builder.build()</b>
+<i class="no-highlight">46</i>&nbsp;    }
+<i class="no-highlight">47</i>&nbsp;
+<i class="no-highlight">48</i>&nbsp;    private fun parseLeaderboardEntries(
+<i class="no-highlight">49</i>&nbsp;        entriesTable: Element?,
+<i class="no-highlight">50</i>&nbsp;        builder: LeaderboardsBuilder,
+<i class="no-highlight">51</i>&nbsp;    ) {
+<b class="fc"><i class="no-highlight">52</i>&nbsp;        for (row in entriesTable.rows().offsetStart(1)) {</b>
+<b class="fc"><i class="no-highlight">53</i>&nbsp;            val cells = row.cells()</b>
+<b class="pc"><i class="no-highlight">54</i>&nbsp;            val name = cells[1].selectFirst(&quot;a&quot;)?.getLinkInformation()?.title?.clean()</b>
+<b class="fc"><i class="no-highlight">55</i>&nbsp;            builder.addEntry(LeaderboardsEntry(rank = cells[0].text().remove(&quot;.&quot;).toInt(),</b>
+<b class="fc"><i class="no-highlight">56</i>&nbsp;                name = name,</b>
+<b class="fc"><i class="no-highlight">57</i>&nbsp;                dromeLevel = cells[2].text().toInt()))</b>
+<i class="no-highlight">58</i>&nbsp;        }
+<i class="no-highlight">59</i>&nbsp;    }
+<i class="no-highlight">60</i>&nbsp;
+<i class="no-highlight">61</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -152,7 +172,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-04-09 18:16</div>
+    <div style="float:right;">generated on 2022-04-12 22:30</div>
 </div>
 </body>
 </html>

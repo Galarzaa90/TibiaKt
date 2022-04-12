@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > NewsArchiveBuilder</title>
+  <title>Coverage Report > HousesSectionBuilder</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -20,15 +20,12 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">com.galarzaa.tibiakt.core.builders</a>
 </div>
 
-<h1>Coverage Summary for Class: NewsArchiveBuilder (com.galarzaa.tibiakt.core.builders)</h1>
+<h1>Coverage Summary for Class: HousesSectionBuilder (com.galarzaa.tibiakt.core.builders)</h1>
 
 <table class="coverageStats">
+
 <tr>
   <th class="name">Class</th>
-<th class="coverageStat 
-">
-  Class, %
-</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -43,21 +40,13 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">NewsArchiveBuilder</td>
+  <td class="name">HousesSectionBuilder</td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    80%
   </span>
   <span class="absValue">
-    (1/1)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    87.5%
-  </span>
-  <span class="absValue">
-    (7/8)
+    (8/10)
   </span>
 </td>
 <td class="coverageStat">
@@ -65,19 +54,72 @@ Current scope:     <a href="../../index.html">all classes</a>
     50%
   </span>
   <span class="absValue">
-    (2/4)
+    (3/6)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    85%
+    86.7%
   </span>
   <span class="absValue">
-    (17/20)
+    (26/30)
   </span>
 </td>
 </tr>
-
+  <tr>
+    <td class="name">HousesSectionBuilder$HouseEntryBuilder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (12/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (8/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (22/22)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    90.9%
+  </span>
+  <span class="absValue">
+    (20/22)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (11/22)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    92.3%
+  </span>
+  <span class="absValue">
+    (48/52)
+  </span>
+</td>
+</tr>
 </table>
 
 <br/>
@@ -87,70 +129,95 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.builders
 <i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.enums.NewsCategory
-<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.enums.NewsType
-<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.models.news.NewsArchive
-<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.models.news.NewsEntry
-<i class="no-highlight">7</i>&nbsp;import java.time.LocalDate
-<i class="no-highlight">8</i>&nbsp;
-<i class="no-highlight">9</i>&nbsp;fun newsArchive(block: NewsArchiveBuilder.() -&gt; Unit) = newsArchiveBuilder(block).build()
-<i class="no-highlight">10</i>&nbsp;fun newsArchiveBuilder(block: NewsArchiveBuilder.() -&gt; Unit) = NewsArchiveBuilder().apply(block)
-<i class="no-highlight">11</i>&nbsp;
-<b class="fc"><i class="no-highlight">12</i>&nbsp;class NewsArchiveBuilder {</b>
-<b class="fc"><i class="no-highlight">13</i>&nbsp;    var startDate: LocalDate? = null</b>
-<b class="fc"><i class="no-highlight">14</i>&nbsp;    var endDate: LocalDate? = null</b>
-<b class="fc"><i class="no-highlight">15</i>&nbsp;    val types: MutableSet&lt;NewsType&gt; = mutableSetOf()</b>
-<b class="fc"><i class="no-highlight">16</i>&nbsp;    val categories: MutableSet&lt;NewsCategory&gt; = mutableSetOf()</b>
-<b class="fc"><i class="no-highlight">17</i>&nbsp;    val entries: MutableList&lt;NewsEntry&gt; = mutableListOf()</b>
-<i class="no-highlight">18</i>&nbsp;
-<b class="fc"><i class="no-highlight">19</i>&nbsp;    fun addCategory(category: NewsCategory) = apply { categories.add(category) }</b>
-<i class="no-highlight">20</i>&nbsp;
-<b class="fc"><i class="no-highlight">21</i>&nbsp;    fun addType(type: NewsType) = apply { types.add(type) }</b>
-<i class="no-highlight">22</i>&nbsp;
-<i class="no-highlight">23</i>&nbsp;    fun addEntry(
-<i class="no-highlight">24</i>&nbsp;        id: Int,
-<i class="no-highlight">25</i>&nbsp;        title: String,
-<i class="no-highlight">26</i>&nbsp;        category: NewsCategory,
-<i class="no-highlight">27</i>&nbsp;        categoryIcon: String,
-<i class="no-highlight">28</i>&nbsp;        date: LocalDate,
-<i class="no-highlight">29</i>&nbsp;        type: NewsType,
-<b class="fc"><i class="no-highlight">30</i>&nbsp;    ) = apply {</b>
-<b class="fc"><i class="no-highlight">31</i>&nbsp;        entries.add(NewsEntry(id, title, category, categoryIcon, date, type)</b>
-<i class="no-highlight">32</i>&nbsp;
-<i class="no-highlight">33</i>&nbsp;        )
-<b class="fc"><i class="no-highlight">34</i>&nbsp;    }</b>
-<i class="no-highlight">35</i>&nbsp;
-<b class="nc"><i class="no-highlight">36</i>&nbsp;    fun addEntry(builder: NewsEntryBuilder.() -&gt; Unit) = apply {</b>
-<b class="nc"><i class="no-highlight">37</i>&nbsp;        entries.add(NewsEntryBuilder().apply(builder).build())</b>
-<b class="nc"><i class="no-highlight">38</i>&nbsp;    }</b>
-<i class="no-highlight">39</i>&nbsp;
-<i class="no-highlight">40</i>&nbsp;
-<b class="fc"><i class="no-highlight">41</i>&nbsp;    fun build() = NewsArchive(</b>
-<b class="pc"><i class="no-highlight">42</i>&nbsp;        startDate = startDate ?: throw IllegalStateException(&quot;startDate is required&quot;),</b>
-<b class="pc"><i class="no-highlight">43</i>&nbsp;        endDate = endDate ?: throw IllegalStateException(&quot;endDate is required&quot;),</b>
-<b class="fc"><i class="no-highlight">44</i>&nbsp;        types = types,</b>
-<b class="fc"><i class="no-highlight">45</i>&nbsp;        categories = categories,</b>
-<b class="fc"><i class="no-highlight">46</i>&nbsp;        entries = entries,</b>
-<i class="no-highlight">47</i>&nbsp;    )
-<i class="no-highlight">48</i>&nbsp;}
-<i class="no-highlight">49</i>&nbsp;
-<i class="no-highlight">50</i>&nbsp;class NewsEntryBuilder {
-<i class="no-highlight">51</i>&nbsp;    val id: Int = 0
-<i class="no-highlight">52</i>&nbsp;    val title: String? = null
-<i class="no-highlight">53</i>&nbsp;    val category: NewsCategory? = null
-<i class="no-highlight">54</i>&nbsp;    val categoryIcon: String? = null
-<i class="no-highlight">55</i>&nbsp;    val date: LocalDate? = null
-<i class="no-highlight">56</i>&nbsp;    val type: NewsType? = null
-<i class="no-highlight">57</i>&nbsp;
-<i class="no-highlight">58</i>&nbsp;    fun build() = NewsEntry(
-<i class="no-highlight">59</i>&nbsp;        id = id,
-<i class="no-highlight">60</i>&nbsp;        title = title ?: throw IllegalStateException(&quot;title is required&quot;),
-<i class="no-highlight">61</i>&nbsp;        category = category ?: throw IllegalStateException(&quot;category is required&quot;),
-<i class="no-highlight">62</i>&nbsp;        categoryIcon = categoryIcon ?: throw IllegalStateException(&quot;categoryIcon is required&quot;),
-<i class="no-highlight">63</i>&nbsp;        date = date ?: throw IllegalStateException(&quot;date is required&quot;),
-<i class="no-highlight">64</i>&nbsp;        type = type ?: throw IllegalStateException(&quot;type is required&quot;),
-<i class="no-highlight">65</i>&nbsp;    )
-<i class="no-highlight">66</i>&nbsp;}
+<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HouseOrder
+<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HouseStatus
+<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HouseType
+<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.models.house.HouseEntry
+<i class="no-highlight">7</i>&nbsp;import com.galarzaa.tibiakt.core.models.house.HousesSection
+<i class="no-highlight">8</i>&nbsp;import java.time.Duration
+<i class="no-highlight">9</i>&nbsp;
+<b class="fc"><i class="no-highlight">10</i>&nbsp;class HousesSectionBuilder {</b>
+<i class="no-highlight">11</i>&nbsp;    private var world: String? = null
+<i class="no-highlight">12</i>&nbsp;    private var town: String? = null
+<i class="no-highlight">13</i>&nbsp;    private var status: HouseStatus? = null
+<b class="fc"><i class="no-highlight">14</i>&nbsp;    private var type: HouseType = HouseType.HOUSE</b>
+<i class="no-highlight">15</i>&nbsp;    private var order: HouseOrder? = null
+<b class="fc"><i class="no-highlight">16</i>&nbsp;    private val entries: MutableList&lt;HouseEntryBuilder&gt; = mutableListOf()</b>
+<i class="no-highlight">17</i>&nbsp;
+<b class="fc"><i class="no-highlight">18</i>&nbsp;    fun world(world: String) = apply { this.world = world }</b>
+<b class="fc"><i class="no-highlight">19</i>&nbsp;    fun town(town: String) = apply { this.town = town }</b>
+<b class="fc"><i class="no-highlight">20</i>&nbsp;    fun status(status: HouseStatus?) = apply { this.status = status }</b>
+<b class="fc"><i class="no-highlight">21</i>&nbsp;    fun type(type: HouseType) = apply { this.type = type }</b>
+<b class="fc"><i class="no-highlight">22</i>&nbsp;    fun order(order: HouseOrder?) = apply { this.order = order }</b>
+<b class="nc"><i class="no-highlight">23</i>&nbsp;    fun addEntry(</b>
+<i class="no-highlight">24</i>&nbsp;        name: String,
+<i class="no-highlight">25</i>&nbsp;        size: Int,
+<i class="no-highlight">26</i>&nbsp;        rent: Int,
+<i class="no-highlight">27</i>&nbsp;        status: HouseStatus,
+<i class="no-highlight">28</i>&nbsp;        houseId: Int,
+<b class="nc"><i class="no-highlight">29</i>&nbsp;        highestBid: Int? = null,</b>
+<b class="nc"><i class="no-highlight">30</i>&nbsp;        timeLeft: Duration? = null</b>
+<b class="fc"><i class="no-highlight">31</i>&nbsp;    ) = apply {</b>
+<b class="fc"><i class="no-highlight">32</i>&nbsp;        entries.add(</b>
+<b class="fc"><i class="no-highlight">33</i>&nbsp;            HouseEntryBuilder()</b>
+<b class="fc"><i class="no-highlight">34</i>&nbsp;                .name(name)</b>
+<b class="fc"><i class="no-highlight">35</i>&nbsp;                .size(size)</b>
+<b class="fc"><i class="no-highlight">36</i>&nbsp;                .rent(rent)</b>
+<b class="fc"><i class="no-highlight">37</i>&nbsp;                .status(status)</b>
+<b class="fc"><i class="no-highlight">38</i>&nbsp;                .houseId(houseId)</b>
+<b class="fc"><i class="no-highlight">39</i>&nbsp;                .highestBid(highestBid)</b>
+<b class="fc"><i class="no-highlight">40</i>&nbsp;                .timeLeft(timeLeft)</b>
+<i class="no-highlight">41</i>&nbsp;        )
+<b class="fc"><i class="no-highlight">42</i>&nbsp;    }</b>
+<i class="no-highlight">43</i>&nbsp;
+<b class="nc"><i class="no-highlight">44</i>&nbsp;    fun addEntry(houseBuilder: HouseEntryBuilder) = apply { entries.add(houseBuilder) }</b>
+<i class="no-highlight">45</i>&nbsp;
+<b class="fc"><i class="no-highlight">46</i>&nbsp;    fun build() = HousesSection(</b>
+<b class="pc"><i class="no-highlight">47</i>&nbsp;        world = world ?: throw IllegalStateException(&quot;world is required&quot;),</b>
+<b class="pc"><i class="no-highlight">48</i>&nbsp;        town = town ?: throw IllegalStateException(&quot;town is required&quot;),</b>
+<b class="fc"><i class="no-highlight">49</i>&nbsp;        type = type,</b>
+<b class="fc"><i class="no-highlight">50</i>&nbsp;        status = status,</b>
+<b class="pc"><i class="no-highlight">51</i>&nbsp;        order = order ?: HouseOrder.NAME,</b>
+<b class="fc"><i class="no-highlight">52</i>&nbsp;        entries = entries.map { it.town(town!!).world(world!!).type(type).build() },</b>
+<i class="no-highlight">53</i>&nbsp;    )
+<i class="no-highlight">54</i>&nbsp;
+<b class="fc"><i class="no-highlight">55</i>&nbsp;    inner class HouseEntryBuilder {</b>
+<i class="no-highlight">56</i>&nbsp;        private var houseId: Int? = null
+<i class="no-highlight">57</i>&nbsp;        private var name: String? = null
+<i class="no-highlight">58</i>&nbsp;        private var size: Int? = null
+<i class="no-highlight">59</i>&nbsp;        private var rent: Int? = null
+<i class="no-highlight">60</i>&nbsp;        private var town: String? = null
+<i class="no-highlight">61</i>&nbsp;        private var world: String? = null
+<i class="no-highlight">62</i>&nbsp;        private var type: HouseType? = null
+<i class="no-highlight">63</i>&nbsp;        private var status: HouseStatus? = null
+<i class="no-highlight">64</i>&nbsp;        private var highestBid: Int? = null
+<i class="no-highlight">65</i>&nbsp;        private var timeLeft: Duration? = null
+<i class="no-highlight">66</i>&nbsp;
+<b class="fc"><i class="no-highlight">67</i>&nbsp;        fun houseId(houseId: Int) = apply { this.houseId = houseId }</b>
+<b class="fc"><i class="no-highlight">68</i>&nbsp;        fun name(name: String) = apply { this.name = name }</b>
+<b class="fc"><i class="no-highlight">69</i>&nbsp;        fun size(size: Int) = apply { this.size = size }</b>
+<b class="fc"><i class="no-highlight">70</i>&nbsp;        fun rent(rent: Int) = apply { this.rent = rent }</b>
+<b class="fc"><i class="no-highlight">71</i>&nbsp;        fun town(town: String) = apply { this.town = town }</b>
+<b class="fc"><i class="no-highlight">72</i>&nbsp;        fun world(world: String) = apply { this.world = world }</b>
+<b class="fc"><i class="no-highlight">73</i>&nbsp;        fun type(type: HouseType) = apply { this.type = type }</b>
+<b class="fc"><i class="no-highlight">74</i>&nbsp;        fun status(status: HouseStatus) = apply { this.status = status }</b>
+<b class="fc"><i class="no-highlight">75</i>&nbsp;        fun highestBid(highestBid: Int?) = apply { this.highestBid = highestBid }</b>
+<b class="fc"><i class="no-highlight">76</i>&nbsp;        fun timeLeft(timeLeft: Duration?) = apply { this.timeLeft = timeLeft }</b>
+<i class="no-highlight">77</i>&nbsp;
+<b class="fc"><i class="no-highlight">78</i>&nbsp;        fun build() = HouseEntry(</b>
+<b class="pc"><i class="no-highlight">79</i>&nbsp;            houseId = houseId ?: throw IllegalStateException(&quot;houseId is required&quot;),</b>
+<b class="pc"><i class="no-highlight">80</i>&nbsp;            name = name ?: throw IllegalStateException(&quot;name is required&quot;),</b>
+<b class="pc"><i class="no-highlight">81</i>&nbsp;            size = size ?: throw IllegalStateException(&quot;size is required&quot;),</b>
+<b class="pc"><i class="no-highlight">82</i>&nbsp;            rent = rent ?: throw IllegalStateException(&quot;rent is required&quot;),</b>
+<b class="pc"><i class="no-highlight">83</i>&nbsp;            town = town ?: throw IllegalStateException(&quot;town is required&quot;),</b>
+<b class="pc"><i class="no-highlight">84</i>&nbsp;            world = world ?: throw IllegalStateException(&quot;world is required&quot;),</b>
+<b class="pc"><i class="no-highlight">85</i>&nbsp;            type = type ?: throw IllegalStateException(&quot;type is required&quot;),</b>
+<b class="pc"><i class="no-highlight">86</i>&nbsp;            status = status ?: throw IllegalStateException(&quot;status is required&quot;),</b>
+<b class="fc"><i class="no-highlight">87</i>&nbsp;            highestBid = highestBid,</b>
+<b class="fc"><i class="no-highlight">88</i>&nbsp;            timeLeft = timeLeft,</b>
+<i class="no-highlight">89</i>&nbsp;        )
+<i class="no-highlight">90</i>&nbsp;    }
+<i class="no-highlight">91</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -177,7 +244,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-04-09 18:16</div>
+    <div style="float:right;">generated on 2022-04-12 22:30</div>
 </div>
 </body>
 </html>

@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > NewsBuilder</title>
+  <title>Coverage Report > LastPostBuilder</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -20,7 +20,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">com.galarzaa.tibiakt.core.builders</a>
 </div>
 
-<h1>Coverage Summary for Class: NewsBuilder (com.galarzaa.tibiakt.core.builders)</h1>
+<h1>Coverage Summary for Class: LastPostBuilder (com.galarzaa.tibiakt.core.builders)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -43,7 +43,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">NewsBuilder</td>
+  <td class="name">LastPostBuilder</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -57,7 +57,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     100%
   </span>
   <span class="absValue">
-    (8/8)
+    (7/7)
   </span>
 </td>
 <td class="coverageStat">
@@ -65,7 +65,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     50%
   </span>
   <span class="absValue">
-    (5/10)
+    (3/6)
   </span>
 </td>
 <td class="coverageStat">
@@ -73,7 +73,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     100%
   </span>
   <span class="absValue">
-    (14/14)
+    (12/12)
   </span>
 </td>
 </tr>
@@ -87,33 +87,28 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.builders
 <i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.enums.NewsCategory
-<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.models.news.News
-<i class="no-highlight">5</i>&nbsp;import java.time.LocalDate
-<i class="no-highlight">6</i>&nbsp;
-<i class="no-highlight">7</i>&nbsp;inline fun newsBuilder(block: NewsBuilder.() -&gt; Unit) = NewsBuilder().apply(block)
-<i class="no-highlight">8</i>&nbsp;inline fun news(block: NewsBuilder.() -&gt; Unit) = newsBuilder(block).build()
-<i class="no-highlight">9</i>&nbsp;
-<b class="fc"><i class="no-highlight">10</i>&nbsp;@TibiaKtDsl</b>
-<i class="no-highlight">11</i>&nbsp;class NewsBuilder {
-<b class="fc"><i class="no-highlight">12</i>&nbsp;    var id: Int? = null</b>
-<b class="fc"><i class="no-highlight">13</i>&nbsp;    var title: String? = null</b>
-<b class="fc"><i class="no-highlight">14</i>&nbsp;    var category: NewsCategory? = null</b>
-<b class="fc"><i class="no-highlight">15</i>&nbsp;    var date: LocalDate? = null</b>
-<b class="fc"><i class="no-highlight">16</i>&nbsp;    var content: String? = null</b>
-<b class="fc"><i class="no-highlight">17</i>&nbsp;    var threadId: Int? = null</b>
-<i class="no-highlight">18</i>&nbsp;
-<i class="no-highlight">19</i>&nbsp;    fun build(): News {
-<b class="fc"><i class="no-highlight">20</i>&nbsp;        return News(</b>
-<b class="pc"><i class="no-highlight">21</i>&nbsp;            id = id ?: throw IllegalStateException(&quot;id is required&quot;),</b>
-<b class="pc"><i class="no-highlight">22</i>&nbsp;            title = title ?: throw IllegalStateException(&quot;title is required&quot;),</b>
-<b class="pc"><i class="no-highlight">23</i>&nbsp;            category = category ?: throw IllegalStateException(&quot;category is required&quot;),</b>
-<b class="pc"><i class="no-highlight">24</i>&nbsp;            date = date ?: throw IllegalStateException(&quot;date is required&quot;),</b>
-<b class="pc"><i class="no-highlight">25</i>&nbsp;            content = content ?: throw IllegalStateException(&quot;content is required&quot;),</b>
-<b class="fc"><i class="no-highlight">26</i>&nbsp;            threadId = threadId</b>
-<i class="no-highlight">27</i>&nbsp;        )
-<i class="no-highlight">28</i>&nbsp;    }
-<i class="no-highlight">29</i>&nbsp;}
+<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.LastPost
+<i class="no-highlight">4</i>&nbsp;import java.time.Instant
+<i class="no-highlight">5</i>&nbsp;
+<i class="no-highlight">6</i>&nbsp;inline fun lastPostBuilder(block: LastPostBuilder.() -&gt; Unit) = LastPostBuilder().apply(block)
+<i class="no-highlight">7</i>&nbsp;inline fun lastPost(block: LastPostBuilder.() -&gt; Unit) = lastPostBuilder(block).build()
+<i class="no-highlight">8</i>&nbsp;
+<b class="fc"><i class="no-highlight">9</i>&nbsp;@TibiaKtDsl</b>
+<i class="no-highlight">10</i>&nbsp;class LastPostBuilder {
+<b class="fc"><i class="no-highlight">11</i>&nbsp;    var author: String? = null</b>
+<b class="fc"><i class="no-highlight">12</i>&nbsp;    var postId: Int? = null</b>
+<b class="fc"><i class="no-highlight">13</i>&nbsp;    var date: Instant? = null</b>
+<b class="fc"><i class="no-highlight">14</i>&nbsp;    var deleted: Boolean = false</b>
+<b class="fc"><i class="no-highlight">15</i>&nbsp;    var traded: Boolean = false</b>
+<i class="no-highlight">16</i>&nbsp;
+<b class="fc"><i class="no-highlight">17</i>&nbsp;    fun build() = LastPost(</b>
+<b class="pc"><i class="no-highlight">18</i>&nbsp;        author = author ?: throw IllegalArgumentException(&quot;author is required&quot;),</b>
+<b class="pc"><i class="no-highlight">19</i>&nbsp;        postId = postId ?: throw IllegalArgumentException(&quot;postId is required&quot;),</b>
+<b class="pc"><i class="no-highlight">20</i>&nbsp;        date = date ?: throw IllegalArgumentException(&quot;date is required&quot;),</b>
+<b class="fc"><i class="no-highlight">21</i>&nbsp;        deleted = deleted,</b>
+<b class="fc"><i class="no-highlight">22</i>&nbsp;        traded = traded</b>
+<i class="no-highlight">23</i>&nbsp;    )
+<i class="no-highlight">24</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -140,7 +135,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-04-09 18:16</div>
+    <div style="float:right;">generated on 2022-04-12 22:30</div>
 </div>
 </body>
 </html>

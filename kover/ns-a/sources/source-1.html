@@ -153,10 +153,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">5</i>&nbsp;
 <b class="pc"><i class="no-highlight">6</i>&nbsp;@Serializable</b>
 <i class="no-highlight">7</i>&nbsp;data class AnnouncementEntry(
-<b class="fc"><i class="no-highlight">8</i>&nbsp;    val title: String,</b>
-<b class="fc"><i class="no-highlight">9</i>&nbsp;    val announcementId: Int,</b>
+<b class="fc"><i class="no-highlight">8</i>&nbsp;    override val title: String,</b>
+<b class="fc"><i class="no-highlight">9</i>&nbsp;    override val announcementId: Int,</b>
 <b class="fc"><i class="no-highlight">10</i>&nbsp;    val author: String,</b>
-<i class="no-highlight">11</i>&nbsp;)
+<i class="no-highlight">11</i>&nbsp;) : BaseForumAnnouncement
 <i class="no-highlight">12</i>&nbsp;
 </div>
 </pre>
@@ -184,7 +184,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-04-09 18:16</div>
+    <div style="float:right;">generated on 2022-04-12 22:30</div>
 </div>
 </body>
 </html>

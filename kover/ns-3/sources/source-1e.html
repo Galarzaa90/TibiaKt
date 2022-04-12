@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > NewsBuilderKt</title>
+  <title>Coverage Report > LastPostBuilderKt</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -20,7 +20,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">com.galarzaa.tibiakt.core.builders</a>
 </div>
 
-<h1>Coverage Summary for Class: NewsBuilderKt (com.galarzaa.tibiakt.core.builders)</h1>
+<h1>Coverage Summary for Class: LastPostBuilderKt (com.galarzaa.tibiakt.core.builders)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -39,7 +39,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">NewsBuilderKt</td>
+  <td class="name">LastPostBuilderKt</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -75,33 +75,28 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.builders
 <i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.enums.NewsCategory
-<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.models.news.News
-<i class="no-highlight">5</i>&nbsp;import java.time.LocalDate
-<i class="no-highlight">6</i>&nbsp;
-<b class="fc"><i class="no-highlight">7</i>&nbsp;inline fun newsBuilder(block: NewsBuilder.() -&gt; Unit) = NewsBuilder().apply(block)</b>
-<b class="fc"><i class="no-highlight">8</i>&nbsp;inline fun news(block: NewsBuilder.() -&gt; Unit) = newsBuilder(block).build()</b>
-<i class="no-highlight">9</i>&nbsp;
-<i class="no-highlight">10</i>&nbsp;@TibiaKtDsl
-<i class="no-highlight">11</i>&nbsp;class NewsBuilder {
-<i class="no-highlight">12</i>&nbsp;    var id: Int? = null
-<i class="no-highlight">13</i>&nbsp;    var title: String? = null
-<i class="no-highlight">14</i>&nbsp;    var category: NewsCategory? = null
-<i class="no-highlight">15</i>&nbsp;    var date: LocalDate? = null
-<i class="no-highlight">16</i>&nbsp;    var content: String? = null
-<i class="no-highlight">17</i>&nbsp;    var threadId: Int? = null
-<i class="no-highlight">18</i>&nbsp;
-<i class="no-highlight">19</i>&nbsp;    fun build(): News {
-<i class="no-highlight">20</i>&nbsp;        return News(
-<i class="no-highlight">21</i>&nbsp;            id = id ?: throw IllegalStateException(&quot;id is required&quot;),
-<i class="no-highlight">22</i>&nbsp;            title = title ?: throw IllegalStateException(&quot;title is required&quot;),
-<i class="no-highlight">23</i>&nbsp;            category = category ?: throw IllegalStateException(&quot;category is required&quot;),
-<i class="no-highlight">24</i>&nbsp;            date = date ?: throw IllegalStateException(&quot;date is required&quot;),
-<i class="no-highlight">25</i>&nbsp;            content = content ?: throw IllegalStateException(&quot;content is required&quot;),
-<i class="no-highlight">26</i>&nbsp;            threadId = threadId
-<i class="no-highlight">27</i>&nbsp;        )
-<i class="no-highlight">28</i>&nbsp;    }
-<i class="no-highlight">29</i>&nbsp;}
+<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.LastPost
+<i class="no-highlight">4</i>&nbsp;import java.time.Instant
+<i class="no-highlight">5</i>&nbsp;
+<b class="fc"><i class="no-highlight">6</i>&nbsp;inline fun lastPostBuilder(block: LastPostBuilder.() -&gt; Unit) = LastPostBuilder().apply(block)</b>
+<b class="fc"><i class="no-highlight">7</i>&nbsp;inline fun lastPost(block: LastPostBuilder.() -&gt; Unit) = lastPostBuilder(block).build()</b>
+<i class="no-highlight">8</i>&nbsp;
+<i class="no-highlight">9</i>&nbsp;@TibiaKtDsl
+<i class="no-highlight">10</i>&nbsp;class LastPostBuilder {
+<i class="no-highlight">11</i>&nbsp;    var author: String? = null
+<i class="no-highlight">12</i>&nbsp;    var postId: Int? = null
+<i class="no-highlight">13</i>&nbsp;    var date: Instant? = null
+<i class="no-highlight">14</i>&nbsp;    var deleted: Boolean = false
+<i class="no-highlight">15</i>&nbsp;    var traded: Boolean = false
+<i class="no-highlight">16</i>&nbsp;
+<i class="no-highlight">17</i>&nbsp;    fun build() = LastPost(
+<i class="no-highlight">18</i>&nbsp;        author = author ?: throw IllegalArgumentException(&quot;author is required&quot;),
+<i class="no-highlight">19</i>&nbsp;        postId = postId ?: throw IllegalArgumentException(&quot;postId is required&quot;),
+<i class="no-highlight">20</i>&nbsp;        date = date ?: throw IllegalArgumentException(&quot;date is required&quot;),
+<i class="no-highlight">21</i>&nbsp;        deleted = deleted,
+<i class="no-highlight">22</i>&nbsp;        traded = traded
+<i class="no-highlight">23</i>&nbsp;    )
+<i class="no-highlight">24</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -128,7 +123,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-04-09 18:16</div>
+    <div style="float:right;">generated on 2022-04-12 22:30</div>
 </div>
 </body>
 </html>
