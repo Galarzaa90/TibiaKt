@@ -27,7 +27,7 @@ sealed class ForumAuthor(
         val level: Int,
         val world: String,
         val position: String?,
-        val title: String,
+        val title: String?,
         val vocation: Vocation,
         val guild: GuildMembership?,
         val posts: Int,
