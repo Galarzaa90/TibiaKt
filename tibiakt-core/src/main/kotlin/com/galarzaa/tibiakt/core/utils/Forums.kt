@@ -1,8 +1,12 @@
 package com.galarzaa.tibiakt.core.utils
 
 import com.galarzaa.tibiakt.core.builders.lastPost
+import com.galarzaa.tibiakt.core.enums.StringEnum
+import com.galarzaa.tibiakt.core.exceptions.ParsingException
+import com.galarzaa.tibiakt.core.models.forums.BaseForumAuthor
 import com.galarzaa.tibiakt.core.models.forums.ForumAuthor
 import com.galarzaa.tibiakt.core.models.forums.LastPost
+import com.galarzaa.tibiakt.core.models.forums.UnavailableForumAuthor
 import org.jsoup.nodes.Element
 
 internal fun parseLastPostFromCell(cell: Element): LastPost? {
@@ -27,13 +31,14 @@ internal fun parseLastPostFromCell(cell: Element): LastPost? {
 
 val titles = listOf("Tutor", "Community Manager", "Customer Support", "Programmer", "Game Content Designer", "Tester")
 val charInfoRegex = Regex("""Inhabitant of (\w+)\nVocation: ([\w\s]+)\nLevel: (\d+)""")
+val authorPostsRegex = Regex("""Posts: (\d+)""")
 
-internal fun parseAuthorTable(table: Element): ForumAuthor {
+internal fun parseAuthorTable(table: Element): BaseForumAuthor {
     val charLink = table.selectFirst("a")?.getLinkInformation()
     if (charLink == null) {
         val name = table.cleanText()
         val traded: Boolean = name.contains("(traded)")
-        return ForumAuthor.Unavailable(name.remove("(traded)").trim(), !traded, traded)
+        return UnavailableForumAuthor(name.remove("(traded)").trim(), !traded, traded)
     }
     val positionInfo = table.selectFirst("font.ff_smallinfo")
     var title: String? = null
@@ -46,12 +51,21 @@ internal fun parseAuthorTable(table: Element): ForumAuthor {
         }
     }
     val charInfo = table.selectFirst("font.ff_infotext")!!
-    val guildInfo = charInfo.selectFirst("font.ff_smallinfo")!!
+    val guildInfo = charInfo.selectFirst("font.ff_smallinfo")
     charInfo.replaceBrs()
 
+    val (_, world, vocation, level) = charInfoRegex.find(charInfo.wholeCleanText())?.groupValues
+        ?: throw ParsingException("Could not find character info")
 
-    val
-    val charInfoRegex.find(char)?.groups
+    val (_, postsText) = authorPostsRegex.find(charInfo.wholeCleanText())!!.groupValues
 
-    return ForumAuthor.Unavailable(name.remove("(traded)").trim(), !traded, traded)
+    return ForumAuthor(
+        name = charLink.title,
+        level = level.toInt(),
+        world = world,
+        vocation = StringEnum.fromValue(vocation) ?: throw ParsingException("Unknown vocation: $vocation"),
+        position = position,
+        title = title,
+        guild = null,
+        posts = postsText.parseInteger())
 }

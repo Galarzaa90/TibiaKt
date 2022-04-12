@@ -128,6 +128,10 @@ data class GetForumSection(val sectionId: Int)
 @Location("/forum/boards/{boardId}")
 data class GetForumBoard(val boardId: Int, val page: Int = 1, val threadAge: Int? = null)
 
+
+@Location("/forum/announcements/{announcementId}")
+data class GetForumAnnouncement(val announcementId: Int)
+
 @Location("/leaderboards/{world}")
 data class GetLeaderboards(
     val world: String,

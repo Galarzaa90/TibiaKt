@@ -94,6 +94,7 @@ internal fun Application.configureRouting(client: TibiaKtClient) {
 
         get<GetForumSection> { call.respondOrNotFound(client.fetchForumSection(it.sectionId)) }
         get<GetForumBoard> { call.respondOrNotFound(client.fetchForumBoard(it.boardId, it.page, it.threadAge)) }
+        get<GetForumAnnouncement> { call.respondOrNotFound(client.fetchForumAnnouncement(it.announcementId)) }
 
         get<GetLeaderboards> { it ->
             call.respondOrNotFound(client.fetchLeaderboards(it.world, null))

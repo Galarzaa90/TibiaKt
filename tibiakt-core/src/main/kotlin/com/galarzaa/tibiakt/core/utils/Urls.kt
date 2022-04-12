@@ -166,7 +166,15 @@ fun getForumSectionUrl(sectionId: Int) = buildTibiaUrl("forum", P("action", "mai
 fun getForumSectionUrl(sectionName: String) = buildTibiaUrl("forum", sectionName)
 
 fun getForumBoardUrl(boardId: Int, page: Int = 1, threadAge: Int? = null) =
-    buildTibiaUrl("forum", P("action", "board"), P("boardid", boardId), P("pagenumber", page), P("threadage", threadAge) )
+    buildTibiaUrl("forum",
+        P("action", "board"),
+        P("boardid", boardId),
+        P("pagenumber", page),
+        P("threadage", threadAge))
+
+
+fun getForumAnnouncementUrl(announcementId: Int) =
+    buildTibiaUrl("forum", P("action", "announcement"), P("announcementid", announcementId))
 
 /**
  * Get the URL to a specific thread in the forums.

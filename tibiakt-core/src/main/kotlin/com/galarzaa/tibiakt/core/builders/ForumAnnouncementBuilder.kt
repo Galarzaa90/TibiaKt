@@ -1,7 +1,7 @@
 package com.galarzaa.tibiakt.core.builders
 
+import com.galarzaa.tibiakt.core.models.forums.BaseForumAuthor
 import com.galarzaa.tibiakt.core.models.forums.ForumAnnouncement
-import com.galarzaa.tibiakt.core.models.forums.ForumAuthor
 import java.time.Instant
 
 inline fun forumAnnouncementBuilder(block: ForumAnnouncementBuilder.() -> Unit) = ForumAnnouncementBuilder().apply(block)
@@ -14,7 +14,7 @@ class ForumAnnouncementBuilder {
     var boardId: Int? = null
     var section: String? = null
     var sectionId: Int? = null
-    var author: ForumAuthor? = null
+    var author: BaseForumAuthor? = null
     var content: String? = null
     var startDate: Instant? = null
     var endDate: Instant? = null

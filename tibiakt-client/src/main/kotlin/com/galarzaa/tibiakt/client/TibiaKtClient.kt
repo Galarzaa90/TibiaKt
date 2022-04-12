@@ -25,6 +25,7 @@ import com.galarzaa.tibiakt.core.models.bazaar.OutfitEntry
 import com.galarzaa.tibiakt.core.models.character.Character
 import com.galarzaa.tibiakt.core.models.creatures.CreaturesSection
 import com.galarzaa.tibiakt.core.models.forums.CMPostArchive
+import com.galarzaa.tibiakt.core.models.forums.ForumAnnouncement
 import com.galarzaa.tibiakt.core.models.forums.ForumBoard
 import com.galarzaa.tibiakt.core.models.forums.ForumSection
 import com.galarzaa.tibiakt.core.models.guild.Guild
@@ -44,6 +45,7 @@ import com.galarzaa.tibiakt.core.parsers.CharacterBazaarParser
 import com.galarzaa.tibiakt.core.parsers.CharacterParser
 import com.galarzaa.tibiakt.core.parsers.CreaturesSectionParser
 import com.galarzaa.tibiakt.core.parsers.EventsScheduleParser
+import com.galarzaa.tibiakt.core.parsers.ForumAnnouncementParser
 import com.galarzaa.tibiakt.core.parsers.ForumBoardParser
 import com.galarzaa.tibiakt.core.parsers.ForumSectionParser
 import com.galarzaa.tibiakt.core.parsers.GuildParser
@@ -63,6 +65,7 @@ import com.galarzaa.tibiakt.core.utils.getCMPostArchiveUrl
 import com.galarzaa.tibiakt.core.utils.getCharacterUrl
 import com.galarzaa.tibiakt.core.utils.getCreaturesSectionUrl
 import com.galarzaa.tibiakt.core.utils.getEventsScheduleUrl
+import com.galarzaa.tibiakt.core.utils.getForumAnnouncementUrl
 import com.galarzaa.tibiakt.core.utils.getForumBoardUrl
 import com.galarzaa.tibiakt.core.utils.getForumSectionUrl
 import com.galarzaa.tibiakt.core.utils.getGuildUrl
@@ -382,6 +385,11 @@ open class TibiaKtClient constructor(
     open suspend fun fetchForumBoard(boardId: Int, page: Int = 1, threadAge: Int? = null): TibiaResponse<ForumBoard?> {
         val response = this.request(HttpMethod.Get, getForumBoardUrl(boardId, page, threadAge))
         return response.parse { ForumBoardParser.fromContent(it) }
+    }
+
+    open suspend fun fetchForumAnnouncement(announcementId: Int): TibiaResponse<ForumAnnouncement?> {
+        val response = this.request(HttpMethod.Get, getForumAnnouncementUrl(announcementId))
+        return response.parse { ForumAnnouncementParser.fromContent(it, announcementId) }
     }
 
     /** Fetch CM posts between two dates. */

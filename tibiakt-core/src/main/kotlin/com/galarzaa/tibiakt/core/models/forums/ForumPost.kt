@@ -9,7 +9,7 @@ import java.time.Instant
 
 @Serializable
 data class ForumPost(
-    val author: ForumAuthor,
+    val author: BaseForumAuthor,
     val emoticon: ForumEmoticon?,
     val title: String?,
     val content: String,

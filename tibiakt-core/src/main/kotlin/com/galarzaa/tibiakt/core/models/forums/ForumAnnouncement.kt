@@ -9,14 +9,14 @@ import java.time.Instant
 
 @Serializable
 data class ForumAnnouncement(
-    val announcementId: Int,
-    val title: String,
+    override val announcementId: Int,
+    override val title: String,
     val board: String,
     val boardId: Int,
     val section: String,
     val sectionId: Int,
-    val author: ForumAuthor,
+    val author: BaseForumAuthor,
     val content: String,
     val startDate: Instant,
     val endDate: Instant,
-)
+) : BaseForumAnnouncement

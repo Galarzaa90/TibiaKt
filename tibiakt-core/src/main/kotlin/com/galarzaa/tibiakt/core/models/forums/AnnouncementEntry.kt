@@ -5,8 +5,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class AnnouncementEntry(
-    val title: String,
-    val announcementId: Int,
+    override val title: String,
+    override val announcementId: Int,
     val author: String,
-)
+) : BaseForumAnnouncement
 
