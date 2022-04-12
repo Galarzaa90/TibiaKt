@@ -10,6 +10,7 @@ data class ThreadEntry(
     val author: String,
     val authorTraded: Boolean,
     val authorDeleted: Boolean,
+    val emoticon: ForumEmoticon?,
     val replies: Int,
     val views: Int,
     val lastPost: LastPost,

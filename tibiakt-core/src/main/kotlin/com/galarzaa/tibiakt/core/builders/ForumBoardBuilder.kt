@@ -3,6 +3,7 @@ package com.galarzaa.tibiakt.core.builders
 import com.galarzaa.tibiakt.core.enums.ThreadStatus
 import com.galarzaa.tibiakt.core.models.forums.AnnouncementEntry
 import com.galarzaa.tibiakt.core.models.forums.ForumBoard
+import com.galarzaa.tibiakt.core.models.forums.ForumEmoticon
 import com.galarzaa.tibiakt.core.models.forums.LastPost
 import com.galarzaa.tibiakt.core.models.forums.ThreadEntry
 
@@ -65,6 +66,7 @@ class ThreadEntryBuilder {
     var authorTraded: Boolean = false
     var authorDeleted: Boolean = false
     var replies: Int = 0
+    var emoticon: ForumEmoticon? = null
     var views: Int = 0
     var lastPost: LastPost? = null
     val status: MutableSet<ThreadStatus> = mutableSetOf()
@@ -77,6 +79,7 @@ class ThreadEntryBuilder {
         author = author ?: throw IllegalStateException("author is required"),
         authorTraded = authorTraded,
         authorDeleted = authorDeleted,
+        emoticon = emoticon,
         replies = replies,
         views = views,
         status = status,
