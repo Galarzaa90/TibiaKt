@@ -2,12 +2,13 @@ package com.galarzaa.tibiakt.core.builders
 
 import com.galarzaa.tibiakt.core.enums.NewsCategory
 import com.galarzaa.tibiakt.core.models.news.News
+import com.galarzaa.tibiakt.core.utils.BuilderDsl
 import java.time.LocalDate
 
 inline fun newsBuilder(block: NewsBuilder.() -> Unit) = NewsBuilder().apply(block)
 inline fun news(block: NewsBuilder.() -> Unit) = newsBuilder(block).build()
 
-@TibiaKtDsl
+@BuilderDsl
 class NewsBuilder {
     var id: Int? = null
     var title: String? = null

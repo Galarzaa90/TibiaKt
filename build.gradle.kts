@@ -8,7 +8,7 @@ plugins {
     signing
     kotlin("jvm") version "1.6.10"
     kotlin("plugin.serialization") version "1.6.10"
-    id("org.jetbrains.dokka") version "1.6.0"
+    id("org.jetbrains.dokka") version "1.6.10"
     id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
     id("org.jetbrains.kotlinx.kover") version "0.5.0-RC2"
     id("org.sonarqube") version "3.3"
@@ -26,6 +26,7 @@ allprojects {
 
 tasks.dokkaHtmlMultiModule.configure {
     outputDirectory.set(buildDir.resolve("dokka"))
+
 }
 
 tasks.koverMergedHtmlReport {

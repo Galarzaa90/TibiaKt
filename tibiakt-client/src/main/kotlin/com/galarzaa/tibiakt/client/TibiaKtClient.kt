@@ -3,6 +3,7 @@ package com.galarzaa.tibiakt.client
 import com.galarzaa.tibiakt.client.exceptions.AjaxResponse
 import com.galarzaa.tibiakt.client.exceptions.ForbiddenException
 import com.galarzaa.tibiakt.client.exceptions.NetworkException
+import com.galarzaa.tibiakt.core.enums.AvailableForumSection
 import com.galarzaa.tibiakt.core.enums.BazaarType
 import com.galarzaa.tibiakt.core.enums.HighscoresBattlEyeType
 import com.galarzaa.tibiakt.core.enums.HighscoresCategory
@@ -233,7 +234,6 @@ open class TibiaKtClient constructor(
         return response.parse { CreaturesSectionParser.fromContent(it) }
     }
 
-
     // endregion
 
     // region Community Section
@@ -255,14 +255,13 @@ open class TibiaKtClient constructor(
         return response.parse { WorldOverviewParser.fromContent(it) }
     }
 
-    /**
-     * Fetch a world's information.
-     */
+    /** Fetch a world's information. */
     open suspend fun fetchWorld(name: String): TibiaResponse<World?> {
         val response = this.request(HttpMethod.Get, getWorldUrl(name))
         return response.parse { WorldParser.fromContent(it) }
     }
 
+    /** Fetch a guild by its [name]. */
     open suspend fun fetchGuild(name: String): TibiaResponse<Guild?> {
         val response = this.request(HttpMethod.Get, getGuildUrl(name))
         return response.parse { GuildParser.fromContent(it) }
@@ -379,21 +378,36 @@ open class TibiaKtClient constructor(
 
     // region Forum Section
 
+    /**
+     * Fetches a forum section by its internal [sectionId].
+     */
     open suspend fun fetchForumSection(sectionId: Int): TibiaResponse<ForumSection?> {
         val response = this.request(HttpMethod.Get, getForumSectionUrl(sectionId))
         return response.parse { ForumSectionParser.fromContent(it) }
     }
 
+    /** Fetches a specific forum section. */
+    open suspend fun fetchForumSection(section: AvailableForumSection): TibiaResponse<ForumSection?> {
+        val response = this.request(HttpMethod.Get, getForumSectionUrl(section))
+        return response.parse { ForumSectionParser.fromContent(it) }
+    }
+
+    /** Fetches a board from the Tibia.com forum.
+     *
+     * @param threadAge The maximum age of displayed threads. A value of -1 means no limit. Null means the server limit will be used.
+     */
     open suspend fun fetchForumBoard(boardId: Int, page: Int = 1, threadAge: Int? = null): TibiaResponse<ForumBoard?> {
         val response = this.request(HttpMethod.Get, getForumBoardUrl(boardId, page, threadAge))
         return response.parse { ForumBoardParser.fromContent(it) }
     }
 
+    /** Fetches a thread from the Tibia.com forum. */
     open suspend fun fetchForumAnnouncement(announcementId: Int): TibiaResponse<ForumAnnouncement?> {
         val response = this.request(HttpMethod.Get, getForumAnnouncementUrl(announcementId))
         return response.parse { ForumAnnouncementParser.fromContent(it, announcementId) }
     }
 
+    /** Fetches a forum thread from Tibia.com */
     open suspend fun fetchForumThread(threadId: Int, page: Int = 1): TibiaResponse<ForumThread?> {
         val response = this.request(HttpMethod.Get, getForumThreadUrl(threadId, page))
         return response.parse { ForumThreadParser.fromContent(it) }

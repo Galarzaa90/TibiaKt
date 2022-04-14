@@ -2,12 +2,13 @@ package com.galarzaa.tibiakt.core.builders
 
 import com.galarzaa.tibiakt.core.models.world.WorldEntry
 import com.galarzaa.tibiakt.core.models.world.WorldOverview
+import com.galarzaa.tibiakt.core.utils.BuilderDsl
 import java.time.Instant
 
 inline fun worldOverviewBuilder(block: WorldOverviewBuilder.() -> Unit) = WorldOverviewBuilder().apply(block)
 inline fun worldOverview(block: WorldOverviewBuilder.() -> Unit) = worldOverviewBuilder(block).build()
 
-@TibiaKtDsl
+@BuilderDsl
 class WorldOverviewBuilder {
     var overallMaximumCount: Int? = null
     var overallMaximumCountDateTime: Instant? = null

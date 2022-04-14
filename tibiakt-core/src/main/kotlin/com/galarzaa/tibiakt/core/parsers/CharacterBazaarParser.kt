@@ -1,8 +1,8 @@
 package com.galarzaa.tibiakt.core.parsers
 
-import com.galarzaa.tibiakt.core.builders.AuctionBuilder
 import com.galarzaa.tibiakt.core.builders.BazaarFiltersBuilder
 import com.galarzaa.tibiakt.core.builders.CharacterBazaarBuilder
+import com.galarzaa.tibiakt.core.builders.auction
 import com.galarzaa.tibiakt.core.enums.AuctionBattlEyeFilter
 import com.galarzaa.tibiakt.core.enums.AuctionOrderBy
 import com.galarzaa.tibiakt.core.enums.AuctionOrderDirection
@@ -32,26 +32,24 @@ object CharacterBazaarParser : Parser<CharacterBazaar> {
         tables["Filter Auctions"]?.apply { parseAuctionFilters(this, builder) }
         tables["Current Auctions"]?.apply {
             this.select("div.Auction").forEach {
-                val auctionBuilder = AuctionBuilder()
-                parseAuctionContainer(it, auctionBuilder)
-                builder.addEntry(auctionBuilder.build())
+
+                builder.addEntry(auction {
+                    parseAuctionContainer(it)
+                })
             }
             builder.type(BazaarType.CURRENT)
         }
         tables["Auction History"]?.apply {
             this.select("div.Auction").forEach {
-                val auctionBuilder = AuctionBuilder()
-                parseAuctionContainer(it, auctionBuilder)
-                builder.addEntry(auctionBuilder.build())
+                builder.addEntry(auction {
+                    parseAuctionContainer(it)
+                })
             }
             builder.type(BazaarType.HISTORY)
         }
         val paginationBlock = document.selectFirst("td.PageNavigation")
         paginationBlock?.parsePagination()?.run {
-            builder
-                .totalPages(totalPages)
-                .currentPage(currentPage)
-                .resultsCount(resultsCount)
+            builder.totalPages(totalPages).currentPage(currentPage).resultsCount(resultsCount)
         }
         return builder.build()
     }
@@ -61,8 +59,7 @@ object CharacterBazaarParser : Parser<CharacterBazaar> {
         val searchData = forms.first()?.formData() ?: throw ParsingException("could not find search form")
 
         val filterBuilder = BazaarFiltersBuilder()
-        filterBuilder
-            .world(searchData.values["filter_world"])
+        filterBuilder.world(searchData.values["filter_world"])
             .pvpType(PvpType.fromHighscoresFilterValue(searchData.values[PvpType.bazaarQueryParam]?.toInt()))
             .battlEyeType(IntEnum.fromValue(searchData.values[AuctionBattlEyeFilter.queryParam]))
             .vocation(IntEnum.fromValue(searchData.values[AuctionVocationFilter.queryParam]))
@@ -79,7 +76,6 @@ object CharacterBazaarParser : Parser<CharacterBazaar> {
             filterBuilder.searchString(additionalData.values["searchstring"]?.nullIfBlank())
                 .searchType(IntEnum.fromValue(additionalData.values[AuctionSearchType.queryParam]))
         }
-        builder
-            .filters(filterBuilder.build())
+        builder.filters(filterBuilder.build())
     }
 }

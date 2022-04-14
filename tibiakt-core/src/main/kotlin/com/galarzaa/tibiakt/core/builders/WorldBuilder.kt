@@ -13,7 +13,6 @@ import java.time.YearMonth
 inline fun worldBuilder(block: WorldBuilder.() -> Unit) = WorldBuilder().apply(block)
 inline fun world(block: WorldBuilder.() -> Unit) = worldBuilder(block).build()
 
-@TibiaKtDsl
 class WorldBuilder {
     var name: String? = null
     var isOnline: Boolean = false

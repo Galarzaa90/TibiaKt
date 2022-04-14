@@ -6,6 +6,7 @@ import com.galarzaa.tibiakt.core.enums.AuctionOrderDirection
 import com.galarzaa.tibiakt.core.enums.AuctionSearchType
 import com.galarzaa.tibiakt.core.enums.AuctionSkillFilter
 import com.galarzaa.tibiakt.core.enums.AuctionVocationFilter
+import com.galarzaa.tibiakt.core.enums.AvailableForumSection
 import com.galarzaa.tibiakt.core.enums.BazaarType
 import com.galarzaa.tibiakt.core.enums.HighscoresBattlEyeType
 import com.galarzaa.tibiakt.core.enums.HighscoresCategory
@@ -159,6 +160,12 @@ fun getNewsUrl(newsId: Int) = buildTibiaUrl("news", "newsarchive", P("id", newsI
  * Get the URL to a specific forum section
  */
 fun getForumSectionUrl(sectionId: Int) = buildTibiaUrl("forum", P("action", "main"), P("sectionid", sectionId))
+
+
+/**
+ * Get the URL to a specific forum section
+ */
+fun getForumSectionUrl(section: AvailableForumSection) = buildTibiaUrl("forum", P("subtopoic", section.subtopic))
 
 /**
  * Get the URL to a specific forum section by its name.

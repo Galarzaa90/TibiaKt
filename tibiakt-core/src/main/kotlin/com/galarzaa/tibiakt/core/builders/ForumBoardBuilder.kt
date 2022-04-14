@@ -6,11 +6,12 @@ import com.galarzaa.tibiakt.core.models.forums.ForumBoard
 import com.galarzaa.tibiakt.core.models.forums.ForumEmoticon
 import com.galarzaa.tibiakt.core.models.forums.LastPost
 import com.galarzaa.tibiakt.core.models.forums.ThreadEntry
+import com.galarzaa.tibiakt.core.utils.BuilderDsl
 
 inline fun forumBoardBuilder(block: ForumBoardBuilder.() -> Unit) = ForumBoardBuilder().apply(block)
 inline fun forumBoard(block: ForumBoardBuilder.() -> Unit) = forumBoardBuilder(block).build()
 
-@TibiaKtDsl
+@BuilderDsl
 class ForumBoardBuilder {
     var name: String? = null
     var boardId: Int? = null
@@ -45,7 +46,7 @@ class ForumBoardBuilder {
     )
 }
 
-@TibiaKtDsl
+@BuilderDsl
 class AnnouncementEntryBuilder {
     var title: String? = null
     var announcementId: Int? = null
@@ -58,7 +59,7 @@ class AnnouncementEntryBuilder {
     )
 }
 
-@TibiaKtDsl
+@BuilderDsl
 class ThreadEntryBuilder {
     var title: String? = null
     var threadId: Int? = null

@@ -1,7 +1,7 @@
 package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.core.builders.AuctionBuilder
-import com.galarzaa.tibiakt.core.builders.AuctionDetailsBuilder
+import com.galarzaa.tibiakt.core.builders.auction
 import com.galarzaa.tibiakt.core.enums.AuctionStatus
 import com.galarzaa.tibiakt.core.enums.StringEnum
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
@@ -18,8 +18,8 @@ import com.galarzaa.tibiakt.core.models.bazaar.ItemSummary
 import com.galarzaa.tibiakt.core.models.bazaar.MountEntry
 import com.galarzaa.tibiakt.core.models.bazaar.Mounts
 import com.galarzaa.tibiakt.core.models.bazaar.OutfitEntry
+import com.galarzaa.tibiakt.core.models.bazaar.OutfitImage
 import com.galarzaa.tibiakt.core.models.bazaar.Outfits
-import com.galarzaa.tibiakt.core.models.bazaar.SalesArgument
 import com.galarzaa.tibiakt.core.utils.cellsText
 import com.galarzaa.tibiakt.core.utils.clean
 import com.galarzaa.tibiakt.core.utils.cleanText
@@ -46,81 +46,70 @@ object AuctionParser : Parser<Auction?> {
     override fun fromContent(content: String) = fromContent(content, 0, true)
     fun fromContent(content: String, auctionId: Int, parseDetails: Boolean = true): Auction? {
         val document = Jsoup.parse(content)
-        val builder = AuctionBuilder()
-        document.selectFirst("div.Auction")?.apply {
-            parseAuctionContainer(this, builder)
-        } ?: return null
-        val detailsTables = document.parseTablesMap("table.Table3, table.Table5")
-        if (!parseDetails)
-            return builder.build()
-        val detailsBuilder = AuctionDetailsBuilder()
-        detailsTables["General"]?.apply { parseGeneralTable(this, detailsBuilder) }
-        detailsTables["Item Summary"]?.apply { detailsBuilder.items(parseItemsTable(this)) }
-        detailsTables["Store Item Summary"]?.apply { detailsBuilder.storeItems(parseItemsTable(this)) }
-        detailsTables["Mounts"]?.apply { detailsBuilder.mounts(parseMountsTable(this)) }
-        detailsTables["Store Mounts"]?.apply { detailsBuilder.storeMounts(parseMountsTable(this)) }
-        detailsTables["Outfits"]?.apply { detailsBuilder.outfits(parseOutfitsTable(this)) }
-        detailsTables["Store Outfits"]?.apply { detailsBuilder.storeOutfits(parseOutfitsTable(this)) }
-        detailsTables["Familiars"]?.apply { detailsBuilder.familiars(parseFamiliarsTable(this)) }
-        detailsTables["Blessings"]?.apply { parseBlessingsTable(this, detailsBuilder) }
-        detailsTables["Imbuements"]?.apply { parseSingleColumnTable(this).forEach { detailsBuilder.addImbuement(it) } }
-        detailsTables["Charms"]?.apply { parseCharmsTable(this, detailsBuilder) }
-        detailsTables["Completed Cyclopedia Map Areas"]?.apply {
-            parseSingleColumnTable(this).forEach {
-                detailsBuilder.addCompletedCyclopediaMapArea(it)
+        return auction {
+            this.auctionId = auctionId
+            document.selectFirst("div.Auction")?.let { parseAuctionContainer(it) } ?: return null
+            val detailsTables = document.parseTablesMap("table.Table3, table.Table5")
+            if (!parseDetails) return@auction
+
+            details {
+                detailsTables["General"]?.apply { parseGeneralTable(this) }
+                detailsTables["Item Summary"]?.apply { items = parseItemsTable(this) }
+                detailsTables["Store Item Summary"]?.apply { storeItems = parseItemsTable(this) }
+                detailsTables["Mounts"]?.apply { mounts = parseMountsTable(this) }
+                detailsTables["Store Mounts"]?.apply { storeMounts = parseMountsTable(this) }
+                detailsTables["Outfits"]?.apply { outfits = parseOutfitsTable(this) }
+                detailsTables["Store Outfits"]?.apply { storeOutfits = parseOutfitsTable(this) }
+                detailsTables["Familiars"]?.apply { familiars = parseFamiliarsTable(this) }
+                detailsTables["Blessings"]?.apply { parseBlessingsTable(this) }
+                detailsTables["Imbuements"]?.apply { parseSingleColumnTable(this).forEach { addImbuement(it) } }
+                detailsTables["Charms"]?.apply { parseCharmsTable(this) }
+                detailsTables["Completed Cyclopedia Map Areas"]?.apply {
+                    parseSingleColumnTable(this).forEach { addCompletedCyclopediaMapArea(it) }
+                }
+                detailsTables["Completed Quest Lines"]?.apply {
+                    parseSingleColumnTable(this).forEach { addCompletedQuestLine(it) }
+                }
+                detailsTables["Titles"]?.run { parseSingleColumnTable(this).forEach { addTitle(it) } }
+                detailsTables["Achievements"]?.run { parseAchievementsTable(this) }
+                detailsTables["Bestiary Progress"]?.run { parseBestiaryTable(this) }
             }
         }
-        detailsTables["Completed Quest Lines"]?.apply {
-            parseSingleColumnTable(this).forEach {
-                detailsBuilder.addCompletedQuestLine(it)
-            }
-        }
-        detailsTables["Titles"]?.run { parseSingleColumnTable(this).forEach { detailsBuilder.addTitle(it) } }
-        detailsTables["Achievements"]?.run { parseAchievementsTable(this, detailsBuilder) }
-        detailsTables["Bestiary Progress"]?.run { parseBestiaryTable(this, detailsBuilder) }
-        return builder
-            .auctionId(auctionId)
-            .details(detailsBuilder.build())
-            .build()
     }
 
-    private fun parseCharmsTable(table: Element, builder: AuctionDetailsBuilder) {
+    private fun AuctionBuilder.AuctionDetailsBuilder.parseCharmsTable(table: Element) {
         for (row in table.selectFirst("table.TableContent").rows().offsetStart(1)) {
             val colsText = row.cellsText()
-            if (colsText.size != 2)
-                continue
+            if (colsText.size != 2) continue
             val (cost, name) = colsText
-            builder.addCharm(CharmEntry(name, cost.parseInteger()))
+            addCharm(CharmEntry(name, cost.parseInteger()))
         }
     }
 
-    private fun parseAchievementsTable(table: Element, builder: AuctionDetailsBuilder) {
+    private fun AuctionBuilder.AuctionDetailsBuilder.parseAchievementsTable(table: Element) {
         for (row in table.selectFirst("table.TableContent").rows().offsetStart(1)) {
             val text = row.cleanText()
-            if (text.contains("more entries"))
-                continue
+            if (text.contains("more entries")) continue
             val secret = row.selectFirst("img") != null
-            builder.addAchievement(AchievementEntry(text, secret))
+            addAchievement(AchievementEntry(text, secret))
         }
     }
 
-    private fun parseBestiaryTable(table: Element, builder: AuctionDetailsBuilder) {
+    private fun AuctionBuilder.AuctionDetailsBuilder.parseBestiaryTable(table: Element) {
         for (row in table.selectFirst("table.TableContent").rows().offsetStart(1)) {
             val columnsText = row.cellsText()
-            if (columnsText.size != 3)
-                continue
+            if (columnsText.size != 3) continue
             val (step, kills, name) = columnsText
-            builder.addBestiaryEntry(BestiaryEntry(name, kills.remove("x").parseLong(), step.toInt()))
+            addBestiaryEntry(BestiaryEntry(name, kills.remove("x").parseLong(), step.toInt()))
         }
     }
 
-    private fun parseBlessingsTable(table: Element, builder: AuctionDetailsBuilder) {
+    private fun AuctionBuilder.AuctionDetailsBuilder.parseBlessingsTable(table: Element) {
         for (row in table.selectFirst("table.TableContent").rows().offsetStart(1)) {
             val colsText = row.cellsText()
-            if (colsText.size != 2)
-                continue
+            if (colsText.size != 2) continue
             val (amount, name) = colsText
-            builder.addBlessing(BlessingEntry(name, amount.remove("x").parseInteger()))
+            addBlessing(BlessingEntry(name, amount.remove("x").parseInteger()))
         }
     }
 
@@ -129,16 +118,18 @@ object AuctionParser : Parser<Auction?> {
         val values = mutableListOf<String>()
         for (row in innerTable.rows().offsetStart(1)) {
             val text = row.selectFirst("td")?.cleanText() ?: ""
-            if (text.contains("more entries"))
-                continue
+            if (text.contains("more entries")) continue
             values.add(text)
         }
         return values
     }
 
     private fun parseFamiliarsTable(table: Element): Familiars {
-        val paginationData =
-            table.selectFirst("div.BlockPageNavigationRow")?.parsePagination() ?: return Familiars(1, 0, 0, emptyList(), false)
+        val paginationData = table.selectFirst("div.BlockPageNavigationRow")?.parsePagination() ?: return Familiars(1,
+            0,
+            0,
+            emptyList(),
+            false)
         val familiarBoxes = table.select("div.CVIcon")
         val familiars = mutableListOf<FamiliarEntry>()
         for (mountBox in familiarBoxes) {
@@ -147,20 +138,35 @@ object AuctionParser : Parser<Auction?> {
                 ?: throw ParsingException("familiar image did not match expected pattern")
             familiars.add(FamiliarEntry(name, id.toInt()))
         }
-        return Familiars(paginationData.currentPage, paginationData.totalPages, paginationData.resultsCount, familiars, false)
+        return Familiars(paginationData.currentPage,
+            paginationData.totalPages,
+            paginationData.resultsCount,
+            familiars,
+            false)
     }
 
     private fun parseOutfitsTable(table: Element): Outfits {
-        val paginationData =
-            table.selectFirst("div.BlockPageNavigationRow")?.parsePagination() ?: return Outfits(1, 0, 0, emptyList(), false)
+        val paginationData = table.selectFirst("div.BlockPageNavigationRow")?.parsePagination() ?: return Outfits(1,
+            0,
+            0,
+            emptyList(),
+            false)
         val outfitBoxes = table.select("div.CVIcon")
         val outfits = outfitBoxes.map { parseDisplayedOutfit(it) }
-        return Outfits(paginationData.currentPage, paginationData.totalPages, paginationData.resultsCount, outfits, false)
+        return Outfits(paginationData.currentPage,
+            paginationData.totalPages,
+            paginationData.resultsCount,
+            outfits,
+            false)
     }
 
     private fun parseMountsTable(mountsTable: Element): Mounts {
         val paginationData =
-            mountsTable.selectFirst("div.BlockPageNavigationRow")?.parsePagination() ?: return Mounts(1, 0, 0, emptyList(), false)
+            mountsTable.selectFirst("div.BlockPageNavigationRow")?.parsePagination() ?: return Mounts(1,
+                0,
+                0,
+                emptyList(),
+                false)
         val mountsBoxes = mountsTable.select("div.CVIcon")
         val mounts = mountsBoxes.map { parseDisplayedMount(it) }
         return Mounts(paginationData.currentPage, paginationData.totalPages, paginationData.resultsCount, mounts, false)
@@ -168,13 +174,21 @@ object AuctionParser : Parser<Auction?> {
 
     private fun parseItemsTable(itemsTable: Element): ItemSummary {
         val paginationData =
-            itemsTable.selectFirst("div.BlockPageNavigationRow")?.parsePagination() ?: return ItemSummary(1, 0, 0, emptyList(), false)
+            itemsTable.selectFirst("div.BlockPageNavigationRow")?.parsePagination() ?: return ItemSummary(1,
+                0,
+                0,
+                emptyList(),
+                false)
         val itemBoxes = itemsTable.select("div.CVIcon")
         val items = mutableListOf<ItemEntry>()
         for (itemBox in itemBoxes) {
             parseDisplayedItem(itemBox)?.run { items.add(this) }
         }
-        return ItemSummary(paginationData.currentPage, paginationData.totalPages, paginationData.resultsCount, items, false)
+        return ItemSummary(paginationData.currentPage,
+            paginationData.totalPages,
+            paginationData.resultsCount,
+            items,
+            false)
     }
 
     private fun getAuctionTableFieldValue(row: Element): Pair<String, String> {
@@ -184,19 +198,19 @@ object AuctionParser : Parser<Auction?> {
         return Pair(field, value)
     }
 
-    private fun parseGeneralTable(table: Element, builder: AuctionDetailsBuilder) {
+    private fun AuctionBuilder.AuctionDetailsBuilder.parseGeneralTable(table: Element) {
         val contentContainers = table.select("table.TableContent")
         for (row in contentContainers[0].rows()) {
             val (field, value) = getAuctionTableFieldValue(row)
             when (field) {
-                "Hit Points" -> builder.hitPoints(value.parseInteger())
-                "Mana" -> builder.mana(value.parseInteger())
-                "Capacity" -> builder.capacity(value.parseInteger())
-                "Speed" -> builder.speed(value.parseInteger())
-                "Blessings" -> builder.blessingsCount(value.split("/").first().parseInteger())
-                "Mounts" -> builder.mountsCount(value.parseInteger())
-                "Outfits" -> builder.outfitsCount(value.parseInteger())
-                "Titles" -> builder.titlesCount(value.parseInteger())
+                "Hit Points" -> hitPoints = value.parseInteger()
+                "Mana" -> mana = value.parseInteger()
+                "Capacity" -> capacity = value.parseInteger()
+                "Speed" -> speed = value.parseInteger()
+                "Blessings" -> blessingsCount = value.split("/").first().parseInteger()
+                "Mounts" -> mountsCount = value.parseInteger()
+                "Outfits" -> outfitsCount = value.parseInteger()
+                "Titles" -> titlesCount = value.parseInteger()
             }
         }
         val skillsMap = mutableMapOf<String, Double>().withDefault { 0.0 }
@@ -204,7 +218,7 @@ object AuctionParser : Parser<Auction?> {
             val (name, level, progress) = row.cellsText()
             skillsMap[name] = level.parseInteger() + (progress.remove("%").toDouble() / 100f)
         }
-        val skills = AuctionSkills(
+        skills = AuctionSkills(
             axeFighting = skillsMap.getValue("Axe Fighting"),
             clubFighting = skillsMap.getValue("Club Fighting"),
             swordFighting = skillsMap.getValue("Sword Fighting"),
@@ -214,74 +228,71 @@ object AuctionParser : Parser<Auction?> {
             fistFighting = skillsMap.getValue("Fist Fighting"),
             shielding = skillsMap.getValue("Shielding"),
         )
-        builder.skills(skills)
         for (row in contentContainers[2].rows()) {
             val (field, value) = getAuctionTableFieldValue(row)
             when (field) {
-                "Creation Date" -> builder.creationDate(parseTibiaDateTime(value))
-                "Experience" -> builder.experience(value.parseLong())
-                "Gold" -> builder.gold(value.parseLong())
-                "Achievement Points" -> builder.achievementPoints(value.parseInteger())
+                "Creation Date" -> creationDate = parseTibiaDateTime(value)
+                "Experience" -> experience = value.parseLong()
+                "Gold" -> gold = value.parseLong()
+                "Achievement Points" -> achievementPoints = value.parseInteger()
             }
         }
         contentContainers[3].selectFirst("div")?.cleanText()?.run {
             if (contains("after")) {
-                builder.regularWorldTransfersAvailable(parseTibiaDateTime(split("after")[1]))
+                regularWorldTransfersAvailable = parseTibiaDateTime(split("after")[1])
             }
         }
 
         for (row in contentContainers[4].rows()) {
             val (field, value) = getAuctionTableFieldValue(row)
             when (field) {
-                "Charm Expansion" -> builder.charmExpansion(value.contains("yes"))
-                "Available Charm Points" -> builder.availableCharmPoints(value.parseInteger())
-                "Spent Charm Points" -> builder.spentCharmPoints(value.parseInteger())
+                "Charm Expansion" -> charmExpansion = value.contains("yes")
+                "Available Charm Points" -> availableCharmPoints = value.parseInteger()
+                "Spent Charm Points" -> spentCharmPoints = value.parseInteger()
             }
         }
-        builder.dailyRewardStreak(contentContainers[5].selectFirst("div")?.cleanText()?.toInt() ?: 0)
+        dailyRewardStreak = contentContainers[5].selectFirst("div")?.cleanText()?.toInt() ?: 0
         for (row in contentContainers[6].rows()) {
             val (field, value) = getAuctionTableFieldValue(row)
             when (field) {
-                "Hunting Task Points" -> builder.huntingTaskPoints(value.parseInteger())
-                "Permanent Hunting Task Slots" -> builder.permanentHuntingTaskSlots(value.parseInteger())
-                "Permanent Prey Slots" -> builder.permanentPreySlots(value.parseInteger())
-                "Prey Wildcards" -> builder.preyWildcards(value.parseInteger())
+                "Hunting Task Points" -> huntingTaskPoints = value.parseInteger()
+                "Permanent Hunting Task Slots" -> permanentHuntingTaskSlots = value.parseInteger()
+                "Permanent Prey Slots" -> permanentPreySlots = value.parseInteger()
+                "Prey Wildcards" -> preyWildcards = value.parseInteger()
             }
         }
 
         for (row in contentContainers[7].rows()) {
             val (field, value) = getAuctionTableFieldValue(row)
             when (field) {
-                "Hirelings" -> builder.hirelings(value.parseInteger())
-                "Hireling Jobs" -> builder.hirelingJobs(value.parseInteger())
-                "Hireling Outfits" -> builder.hirelingOutfits(value.parseInteger())
+                "Hirelings" -> hirelings = value.parseInteger()
+                "Hireling Jobs" -> hirelingJobs = value.parseInteger()
+                "Hireling Outfits" -> hirelingOutfits = value.parseInteger()
             }
         }
     }
 
-    internal fun parseAuctionContainer(auctionContainer: Element, builder: AuctionBuilder) {
+    internal fun AuctionBuilder.parseAuctionContainer(auctionContainer: Element) {
         val headerContainer =
             auctionContainer.selectFirst("div.AuctionHeader") ?: throw ParsingException("auction header not found")
-        val name = headerContainer.selectFirst("div.AuctionCharacterName")?.cleanText()
+        name = headerContainer.selectFirst("div.AuctionCharacterName")?.cleanText()
             ?: throw ParsingException("character name not found")
         headerContainer.selectFirst("div.AuctionCharacterName > a")?.apply {
             val auctionLinkInfo = getLinkInformation()!!
-            val auctionId = auctionLinkInfo.queryParams["auctionid"]?.first()
+            auctionId = auctionLinkInfo.queryParams["auctionid"]?.first()?.toInt()
                 ?: throw ParsingException("auctionId not found in link")
-            builder.auctionId(auctionId.toInt())
             remove()
         }
 
-        builder.name(name)
         charInfoRegex.find(headerContainer.cleanText())?.run {
-            val (_, level, vocation, sex, world) = groupValues
-            builder
-                .level(level.toInt())
-                .vocation(StringEnum.fromValue(vocation.trim())
-                    ?: throw ParsingException("Unknow vocation found: $vocation"))
-                .sex(sex.trim().lowercase()
-                    .let { StringEnum.fromValue(it) ?: throw ParsingException("Unknown sex found: $it") })
-                .world(world.trim())
+            val (_, levelStr, vocationStr, sexStr, worldStr) = groupValues
+            level = levelStr.toInt()
+            vocation =
+                StringEnum.fromValue(vocationStr.trim())
+                    ?: throw ParsingException("Unknown vocation found: $vocationStr")
+            sex =
+                StringEnum.fromValue(sexStr.lowercase().trim()) ?: throw ParsingException("Unknown sex found: $sexStr")
+            world = worldStr.trim()
         }
         val outfitImageUrl = auctionContainer.selectFirst("img.AuctionOutfitImage")?.attr("src")
             ?: throw ParsingException("outfit image not found")
@@ -289,35 +300,36 @@ object AuctionParser : Parser<Auction?> {
             ?: throw ParsingException("image URL does not match expected pattern")
 
         auctionContainer.select(".CVIcon").forEach {
-            parseDisplayedItem(it)?.run { builder.addDisplayedItem(this) }
+            parseDisplayedItem(it)?.run { addDisplayedItem(this) }
         }
-        builder.outfit(outfitId.toInt(), addons.toInt())
+
+        outfit = OutfitImage(outfitId = outfitId.toInt(), addons = addons.toInt())
 
         auctionContainer.select("div.Entry").forEach {
             val img = it.select("img")
             val imgUrl = img.attr("src")
             val (_, id) = idRegex.find(imgUrl)?.groupValues
                 ?: throw ParsingException("sales argument image does not match pattern.")
-            builder.addSalesArgument(
-                SalesArgument(id.toInt(), it.cleanText())
-            )
+            salesArgument {
+                categoryId = id.toInt()
+                content = it.cleanText()
+            }
         }
 
         val (startDate, endDate, _) = auctionContainer.select("div.ShortAuctionDataValue").map { it.cleanText() }
-        builder.auctionStart(parseTibiaDateTime(startDate)).auctionEnd(parseTibiaDateTime(endDate))
+        auctionStart = parseTibiaDateTime(startDate)
+        auctionEnd = parseTibiaDateTime(endDate)
         auctionContainer.selectFirst("div.ShortAuctionDataBidRow")?.run {
             val bidTag = selectFirst("div.ShortAuctionDataValue") ?: throw ParsingException("Could not find bid")
             val bidTypeTag =
                 selectFirst("div.ShortAuctionDataLabel") ?: throw ParsingException("could not find bid type")
             val bidTypeStr = bidTypeTag.cleanText().remove(":")
-            builder
-                .bid(bidTag.text().parseInteger())
-                .bidType(StringEnum.fromValue(bidTypeStr)
-                    ?: throw ParsingException("unknown bid type: $bidTypeStr"))
+            bid = bidTag.text().parseInteger()
+            bidType = StringEnum.fromValue(bidTypeStr) ?: throw ParsingException("unknown bid type: $bidTypeStr")
         }
 
-        val status = auctionContainer.selectFirst("div.AuctionInfo")?.cleanText() ?: ""
-        builder.status(StringEnum.fromValue<AuctionStatus>(status) ?: AuctionStatus.IN_PROGRESS)
+        status = auctionContainer.selectFirst("div.AuctionInfo")?.cleanText()?.let { StringEnum.fromValue(it) }
+            ?: AuctionStatus.IN_PROGRESS
     }
 
     @PublishedApi

@@ -43,6 +43,9 @@ tasks.withType<org.jetbrains.dokka.gradle.DokkaTaskPartial>().configureEach {
                 remoteUrl.set(URL("https://github.com/Galarzaa90/TibiaKt/blob/main/tibiakt-core/src/main/kotlin"))
                 remoteLineSuffix.set("#L")
             }
+            externalDocumentationLink {
+                url.set(URL("https://api.ktor.io/"))
+            }
         }
     }
 }

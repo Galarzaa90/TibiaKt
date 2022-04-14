@@ -5,13 +5,14 @@ import com.galarzaa.tibiakt.core.models.guild.Guild
 import com.galarzaa.tibiakt.core.models.guild.GuildHall
 import com.galarzaa.tibiakt.core.models.guild.GuildInvite
 import com.galarzaa.tibiakt.core.models.guild.GuildMember
+import com.galarzaa.tibiakt.core.utils.BuilderDsl
 import java.time.LocalDate
 
 
 inline fun guildBuilder(block: GuildBuilder.() -> Unit) = GuildBuilder().apply(block)
 inline fun guild(block: GuildBuilder.() -> Unit) = guildBuilder(block).build()
 
-@TibiaKtDsl
+@BuilderDsl
 class GuildBuilder {
     var world: String? = null
     var name: String? = null

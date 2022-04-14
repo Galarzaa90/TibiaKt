@@ -4,13 +4,14 @@ import com.galarzaa.tibiakt.core.enums.BattlEyeType
 import com.galarzaa.tibiakt.core.enums.PvpType
 import com.galarzaa.tibiakt.core.enums.TransferType
 import com.galarzaa.tibiakt.core.models.world.WorldEntry
+import com.galarzaa.tibiakt.core.utils.BuilderDsl
 import java.time.Instant
 import java.time.LocalDate
 
 inline fun worldEntryBuilder(block: WorldEntryBuilder.() -> Unit) = WorldEntryBuilder().apply(block)
 inline fun worldEntry(block: WorldEntryBuilder.() -> Unit) = worldEntryBuilder(block).build()
 
-@TibiaKtDsl
+@BuilderDsl
 class WorldEntryBuilder {
     var name: String? = null
     var isOnline: Boolean = false
