@@ -17,11 +17,11 @@ import com.galarzaa.tibiakt.core.enums.HouseType
 import com.galarzaa.tibiakt.core.enums.NewsCategory
 import com.galarzaa.tibiakt.core.enums.NewsType
 import com.galarzaa.tibiakt.core.enums.PvpType
-import io.ktor.application.Application
-import io.ktor.application.install
-import io.ktor.locations.KtorExperimentalLocationsAPI
-import io.ktor.locations.Location
-import io.ktor.locations.Locations
+import io.ktor.server.application.Application
+import io.ktor.server.application.install
+import io.ktor.server.locations.KtorExperimentalLocationsAPI
+import io.ktor.server.locations.Location
+import io.ktor.server.locations.Locations
 import java.time.LocalDate
 
 internal fun Application.configureLocations() {

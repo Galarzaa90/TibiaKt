@@ -84,13 +84,13 @@ import com.galarzaa.tibiakt.core.utils.getWorldGuildsUrl
 import com.galarzaa.tibiakt.core.utils.getWorldOverviewUrl
 import com.galarzaa.tibiakt.core.utils.getWorldUrl
 import io.ktor.client.HttpClient
-import io.ktor.client.call.receive
+import io.ktor.client.call.body
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.engine.cio.CIO
-import io.ktor.client.features.Charsets
-import io.ktor.client.features.ResponseException
-import io.ktor.client.features.UserAgent
-import io.ktor.client.features.compression.ContentEncoding
+import io.ktor.client.plugins.Charsets
+import io.ktor.client.plugins.ResponseException
+import io.ktor.client.plugins.UserAgent
+import io.ktor.client.plugins.compression.ContentEncoding
 import io.ktor.client.request.forms.submitForm
 import io.ktor.client.request.get
 import io.ktor.client.request.header
@@ -101,7 +101,6 @@ import io.ktor.http.HttpMethod
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.Parameters
 import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import mu.KotlinLogging
 import java.time.Instant
@@ -130,7 +129,7 @@ open class TibiaKtClient constructor(
             register(Charsets.UTF_8)
             register(Charsets.ISO_8859_1)
         }
-        ContentEncoding {
+        install(ContentEncoding) {
             gzip()
             deflate()
         }
@@ -544,7 +543,7 @@ open class TibiaKtClient constructor(
     private suspend fun <T> HttpResponse.parse(parser: (content: String) -> T): TibiaResponse<T> {
         val data: T
         val parsingTime = measureTimeMillis {
-            val stringBody: String = receive()
+            val stringBody: String = body()
             data = parser(stringBody)
         } / 1000.0
         logger.info { "${this.request.url} | PARSE | ${(parsingTime * 1000).toInt()}ms" }
@@ -567,7 +566,7 @@ open class TibiaKtClient constructor(
             HttpMethod.Get, getAuctionAjaxPaginationUrl(auctionId, type, page),
             headers = listOf(Pair("x-requested-with", "XMLHttpRequest")),
         )
-        return TimedResult(response.fetchingTime, Json.decodeFromString(response.receive()))
+        return TimedResult(response.fetchingTime, Json.decodeFromString(AjaxResponse.serializer(), response.body()))
     }
 
     /**

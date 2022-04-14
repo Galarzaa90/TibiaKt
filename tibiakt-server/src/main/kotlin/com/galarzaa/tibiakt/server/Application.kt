@@ -5,11 +5,11 @@ import com.galarzaa.tibiakt.server.plugins.configureDataConversion
 import com.galarzaa.tibiakt.server.plugins.configureLocations
 import com.galarzaa.tibiakt.server.plugins.configureRouting
 import com.galarzaa.tibiakt.server.plugins.configureStatusPages
-import io.ktor.application.install
-import io.ktor.features.ContentNegotiation
-import io.ktor.serialization.json
+import io.ktor.serialization.kotlinx.json.json
+import io.ktor.server.application.install
 import io.ktor.server.cio.CIO
 import io.ktor.server.engine.embeddedServer
+import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
 import kotlinx.serialization.json.Json
 
 fun main() {

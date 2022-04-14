@@ -5,17 +5,17 @@ package com.galarzaa.tibiakt.server.plugins
 import com.galarzaa.tibiakt.client.TibiaKtClient
 import com.galarzaa.tibiakt.client.TibiaResponse
 import com.galarzaa.tibiakt.core.models.bazaar.BazaarFilters
-import io.ktor.application.Application
-import io.ktor.application.ApplicationCall
-import io.ktor.application.call
 import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
-import io.ktor.locations.KtorExperimentalLocationsAPI
-import io.ktor.locations.get
-import io.ktor.response.respond
-import io.ktor.response.respondText
-import io.ktor.routing.get
-import io.ktor.routing.routing
+import io.ktor.server.application.Application
+import io.ktor.server.application.ApplicationCall
+import io.ktor.server.application.call
+import io.ktor.server.locations.KtorExperimentalLocationsAPI
+import io.ktor.server.locations.get
+import io.ktor.server.response.respond
+import io.ktor.server.response.respondText
+import io.ktor.server.routing.get
+import io.ktor.server.routing.routing
 
 internal fun Application.configureRouting(client: TibiaKtClient) {
     routing {
