@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > TransferType</title>
+  <title>Coverage Report > ThreadStatus</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -20,7 +20,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">com.galarzaa.tibiakt.core.enums</a>
 </div>
 
-<h1>Coverage Summary for Class: TransferType (com.galarzaa.tibiakt.core.enums)</h1>
+<h1>Coverage Summary for Class: ThreadStatus (com.galarzaa.tibiakt.core.enums)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -39,7 +39,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">TransferType</td>
+  <td class="name">ThreadStatus</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -61,7 +61,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     100%
   </span>
   <span class="absValue">
-    (3/3)
+    (4/4)
   </span>
 </td>
 </tr>
@@ -76,24 +76,23 @@ Current scope:     <a href="../../index.html">all classes</a>
 <div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.enums
 <i class="no-highlight">2</i>&nbsp;
 <i class="no-highlight">3</i>&nbsp;/**
-<i class="no-highlight">4</i>&nbsp; * The type of transfer rules applied to this server.
-<i class="no-highlight">5</i>&nbsp; */
-<i class="no-highlight">6</i>&nbsp;enum class TransferType {
-<i class="no-highlight">7</i>&nbsp;    /**
-<i class="no-highlight">8</i>&nbsp;     * No special rules besides the regular PvP and BattlEye restrictions.
-<i class="no-highlight">9</i>&nbsp;     */
-<b class="fc"><i class="no-highlight">10</i>&nbsp;    REGULAR,</b>
+<i class="no-highlight">4</i>&nbsp; * The possible status a thread can have.
+<i class="no-highlight">5</i>&nbsp; *
+<i class="no-highlight">6</i>&nbsp; * Threads can have a combination of multiple status.
+<i class="no-highlight">7</i>&nbsp; */
+<i class="no-highlight">8</i>&nbsp;enum class ThreadStatus {
+<i class="no-highlight">9</i>&nbsp;    /** Thread has more than 16 replies. */
+<b class="fc"><i class="no-highlight">10</i>&nbsp;    HOT,</b>
 <i class="no-highlight">11</i>&nbsp;
-<i class="no-highlight">12</i>&nbsp;    /**
-<i class="no-highlight">13</i>&nbsp;     * Character cannot transfer to this world but can transfer from this world to another.
-<i class="no-highlight">14</i>&nbsp;     */
-<b class="fc"><i class="no-highlight">15</i>&nbsp;    BLOCKED,</b>
-<i class="no-highlight">16</i>&nbsp;
-<i class="no-highlight">17</i>&nbsp;    /**
-<i class="no-highlight">18</i>&nbsp;     * Character can transfer to this world, but can only transfer to other locked worlds from these.
-<i class="no-highlight">19</i>&nbsp;     */
-<b class="fc"><i class="no-highlight">20</i>&nbsp;    LOCKED</b>
-<i class="no-highlight">21</i>&nbsp;}
+<i class="no-highlight">12</i>&nbsp;    /** Thread has new posts since last visit. */
+<b class="fc"><i class="no-highlight">13</i>&nbsp;    NEW,</b>
+<i class="no-highlight">14</i>&nbsp;
+<i class="no-highlight">15</i>&nbsp;    /** Thread is closed. */
+<b class="fc"><i class="no-highlight">16</i>&nbsp;    CLOSED,</b>
+<i class="no-highlight">17</i>&nbsp;
+<i class="no-highlight">18</i>&nbsp;    /** Thread is stickied to the top. */
+<b class="fc"><i class="no-highlight">19</i>&nbsp;    STICKY,</b>
+<i class="no-highlight">20</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -120,7 +119,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-04-12 22:30</div>
+    <div style="float:right;">generated on 2022-04-16 14:30</div>
 </div>
 </body>
 </html>

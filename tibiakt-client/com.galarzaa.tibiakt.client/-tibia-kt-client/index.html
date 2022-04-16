@@ -3,7 +3,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <title>TibiaKtClient</title>
 </head><body><link href="../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../";</script>
-    <script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script><link href="../../../styles/style.css" rel="Stylesheet"><link href="../../../styles/jetbrains-mono.css" rel="Stylesheet"><link href="../../../styles/main.css" rel="Stylesheet"><link href="../../../styles/prism.css" rel="Stylesheet"><link href="../../../styles/logo-styles.css" rel="Stylesheet"><script type="text/javascript" src="../../../scripts/clipboard.js" async></script><script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script><script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script><script type="text/javascript" src="../../../scripts/main.js" async></script><script type="text/javascript" src="../../../scripts/prism.js" async></script><script>const storage = localStorage.getItem("dokka-dark-mode")
+    <script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script><link href="../../../styles/style.css" rel="Stylesheet"><link href="../../../styles/jetbrains-mono.css" rel="Stylesheet"><link href="../../../styles/main.css" rel="Stylesheet"><link href="../../../styles/prism.css" rel="Stylesheet"><link href="../../../styles/logo-styles.css" rel="Stylesheet"><script type="text/javascript" src="../../../scripts/clipboard.js" async></script><script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script><script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script><script type="text/javascript" src="../../../scripts/main.js" defer></script><script type="text/javascript" src="../../../scripts/prism.js" async></script><script>const storage = localStorage.getItem("dokka-dark-mode")
 const savedDarkMode = storage ? JSON.parse(storage) : false
 if(savedDarkMode === true){
     document.getElementsByTagName("html")[0].classList.add("theme-dark")
@@ -22,7 +22,7 @@ if(savedDarkMode === true){
       <div id="leftColumn">
         <div id="sideMenu"></div>
       </div>
-      <div id="main"><script type="text/javascript" src="../../../scripts/main.js"></script>
+      <div id="main">
         <div class="main-content" id="content" pageids="tibiakt-client::com.galarzaa.tibiakt.client/TibiaKtClient///PointingToDeclaration//-899881058">
           <div class="breadcrumbs"><a href="../../index.html">tibiakt-client</a>/<a href="../index.html">com.galarzaa.tibiakt.client</a>/<a href="index.html">TibiaKtClient</a></div>
           <div class="cover ">
@@ -30,17 +30,19 @@ if(savedDarkMode === true){
             <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-client:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">class </span><a href="index.html">TibiaKtClient</a><span class="token punctuation">(</span>engine<span class="token operator">: </span><span data-unresolved-link="io.ktor.client.engine/HttpClientEngine///PointingToDeclaration/">HttpClientEngine</span><span class="token operator">?</span><span class="token punctuation">, </span>userAgent<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><p class="paragraph">A coroutine based client to fetch from Tibia.com</p></div></div>
           </div>
           <div class="tabbedcontent">
-            <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Constructors">Constructors</button><button class="section-tab" data-togglable="Functions">Functions</button><button class="section-tab" data-togglable="Parameters">Parameters</button></div>
+            <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Constructors">Constructors</button><button class="section-tab" data-togglable="Functions">Functions</button><button class="section-tab" data-togglable="Parameters">Parameters</button><button class="section-tab" data-togglable="Sources">Sources</button></div>
             <div class="tabs-section-body">
               <h2 class="">Parameters</h2>
               <div data-togglable="Parameters">
-                <div class="platform-hinted WithExtraAttributes" data-platform-hinted="data-platform-hinted" data-togglable="Parameters"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-client:dokkaHtmlPartial/main"><div data-togglable="Parameters"><div class="table" data-togglable="Parameters"><div class="table-row" data-filterable-current=":tibiakt-client:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><span><span>engine</span></span></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">The ktor client engine to use, by default CIO is used.</p></div></div></div></div></div></div></div></div></div>
+                <div class="platform-hinted WithExtraAttributes" data-platform-hinted="data-platform-hinted" data-togglable="Parameters"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-client:dokkaHtmlPartial/main"><div data-togglable="Parameters"><div class="table" data-togglable="Parameters"><div class="table-row" data-filterable-current=":tibiakt-client:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><span><span>engine</span></span></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">The ktor client engine to use, by default CIO is used.</p></div></div></div></div></div></div></div></div></div>
               </div>
               <h2 class="tabbedcontent">Constructors</h2>
               <div class="table" data-togglable="Constructors"><a data-name="-1511597549%2FConstructors%2F-899881058" anchor-label="TibiaKtClient" id="-1511597549%2FConstructors%2F-899881058" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-client:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue TabbedContent">
-                    <div class=""><span class="inline-flex"><a href="-tibia-kt-client.html">TibiaKtClient</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1511597549%2FConstructors%2F-899881058"></span>
+                    <div class=""><span class="inline-flex">
+                        <div><a href="-tibia-kt-client.html"><span>Tibia</span><wbr><span>Kt</span><wbr><span><span>Client</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1511597549%2FConstructors%2F-899881058"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
@@ -53,7 +55,9 @@ if(savedDarkMode === true){
 <a data-name="831814327%2FConstructors%2F-899881058" anchor-label="TibiaKtClient" id="831814327%2FConstructors%2F-899881058" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-client:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue TabbedContent">
-                    <div class=""><span class="inline-flex"><a href="-tibia-kt-client.html">TibiaKtClient</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="831814327%2FConstructors%2F-899881058"></span>
+                    <div class=""><span class="inline-flex">
+                        <div><a href="-tibia-kt-client.html"><span>Tibia</span><wbr><span>Kt</span><wbr><span><span>Client</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="831814327%2FConstructors%2F-899881058"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
@@ -68,7 +72,9 @@ if(savedDarkMode === true){
               <div class="table" data-togglable="Functions"><a data-name="-220245118%2FFunctions%2F-899881058" anchor-label="fetchAuction" id="-220245118%2FFunctions%2F-899881058" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-client:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="fetch-auction.html"><span>fetch</span><wbr><span><span>Auction</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-220245118%2FFunctions%2F-899881058"></span>
+                    <div class=""><span class="inline-flex">
+                        <div><a href="fetch-auction.html"><span>fetch</span><wbr><span><span>Auction</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-220245118%2FFunctions%2F-899881058"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
@@ -81,7 +87,9 @@ if(savedDarkMode === true){
 <a data-name="-1525946309%2FFunctions%2F-899881058" anchor-label="fetchBazaar" id="-1525946309%2FFunctions%2F-899881058" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-client:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="fetch-bazaar.html"><span>fetch</span><wbr><span><span>Bazaar</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1525946309%2FFunctions%2F-899881058"></span>
+                    <div class=""><span class="inline-flex">
+                        <div><a href="fetch-bazaar.html"><span>fetch</span><wbr><span><span>Bazaar</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1525946309%2FFunctions%2F-899881058"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
@@ -94,7 +102,9 @@ if(savedDarkMode === true){
 <a data-name="-480675962%2FFunctions%2F-899881058" anchor-label="fetchCharacter" id="-480675962%2FFunctions%2F-899881058" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-client:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="fetch-character.html"><span>fetch</span><wbr><span><span>Character</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-480675962%2FFunctions%2F-899881058"></span>
+                    <div class=""><span class="inline-flex">
+                        <div><a href="fetch-character.html"><span>fetch</span><wbr><span><span>Character</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-480675962%2FFunctions%2F-899881058"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
@@ -107,7 +117,9 @@ if(savedDarkMode === true){
 <a data-name="-2131839693%2FFunctions%2F-899881058" anchor-label="fetchCMPostArchive" id="-2131839693%2FFunctions%2F-899881058" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-client:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="fetch-c-m-post-archive.html"><span>fetch</span><wbr><span>CMPost</span><wbr><span><span>Archive</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2131839693%2FFunctions%2F-899881058"></span>
+                    <div class=""><span class="inline-flex">
+                        <div><a href="fetch-c-m-post-archive.html"><span>fetch</span><wbr><span>CMPost</span><wbr><span><span>Archive</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2131839693%2FFunctions%2F-899881058"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
@@ -120,7 +132,9 @@ if(savedDarkMode === true){
 <a data-name="1562172386%2FFunctions%2F-899881058" anchor-label="fetchCreaturesSection" id="1562172386%2FFunctions%2F-899881058" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-client:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="fetch-creatures-section.html"><span>fetch</span><wbr><span>Creatures</span><wbr><span><span>Section</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1562172386%2FFunctions%2F-899881058"></span>
+                    <div class=""><span class="inline-flex">
+                        <div><a href="fetch-creatures-section.html"><span>fetch</span><wbr><span>Creatures</span><wbr><span><span>Section</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1562172386%2FFunctions%2F-899881058"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
@@ -133,7 +147,9 @@ if(savedDarkMode === true){
 <a data-name="2006026254%2FFunctions%2F-899881058" anchor-label="fetchEventsSchedule" id="2006026254%2FFunctions%2F-899881058" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-client:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="fetch-events-schedule.html"><span>fetch</span><wbr><span>Events</span><wbr><span><span>Schedule</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2006026254%2FFunctions%2F-899881058"></span>
+                    <div class=""><span class="inline-flex">
+                        <div><a href="fetch-events-schedule.html"><span>fetch</span><wbr><span>Events</span><wbr><span><span>Schedule</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2006026254%2FFunctions%2F-899881058"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
@@ -146,12 +162,14 @@ if(savedDarkMode === true){
 <a data-name="-515180003%2FFunctions%2F-899881058" anchor-label="fetchForumAnnouncement" id="-515180003%2FFunctions%2F-899881058" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-client:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="fetch-forum-announcement.html"><span>fetch</span><wbr><span>Forum</span><wbr><span><span>Announcement</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-515180003%2FFunctions%2F-899881058"></span>
+                    <div class=""><span class="inline-flex">
+                        <div><a href="fetch-forum-announcement.html"><span>fetch</span><wbr><span>Forum</span><wbr><span><span>Announcement</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-515180003%2FFunctions%2F-899881058"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
                       <div class="title">
-                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-client:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="fetch-forum-announcement.html"><span class="token function">fetchForumAnnouncement</span></a><span class="token punctuation">(</span>announcementId<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-tibia-response/index.html">TibiaResponse</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../../../tibiakt-core/com.galarzaa.tibiakt.core.models.forums/-forum-announcement/index.html">ForumAnnouncement</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-client:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="fetch-forum-announcement.html"><span class="token function">fetchForumAnnouncement</span></a><span class="token punctuation">(</span>announcementId<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-tibia-response/index.html">TibiaResponse</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../../../tibiakt-core/com.galarzaa.tibiakt.core.models.forums/-forum-announcement/index.html">ForumAnnouncement</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Fetches a thread from the Tibia.com forum.</p></div></div></div>
                       </div>
                     </div>
                   </div>
@@ -159,25 +177,29 @@ if(savedDarkMode === true){
 <a data-name="-1876550505%2FFunctions%2F-899881058" anchor-label="fetchForumBoard" id="-1876550505%2FFunctions%2F-899881058" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-client:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="fetch-forum-board.html"><span>fetch</span><wbr><span>Forum</span><wbr><span><span>Board</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1876550505%2FFunctions%2F-899881058"></span>
+                    <div class=""><span class="inline-flex">
+                        <div><a href="fetch-forum-board.html"><span>fetch</span><wbr><span>Forum</span><wbr><span><span>Board</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1876550505%2FFunctions%2F-899881058"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
                       <div class="title">
-                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-client:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="fetch-forum-board.html"><span class="token function">fetchForumBoard</span></a><span class="token punctuation">(</span>boardId<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span>page<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator"> = </span><span class="token constant">1</span><span class="token punctuation">, </span>threadAge<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">)</span><span class="token operator">: </span><a href="../-tibia-response/index.html">TibiaResponse</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../../../tibiakt-core/com.galarzaa.tibiakt.core.models.forums/-forum-board/index.html">ForumBoard</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-client:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="fetch-forum-board.html"><span class="token function">fetchForumBoard</span></a><span class="token punctuation">(</span>boardId<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span>page<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator"> = </span><span class="token constant">1</span><span class="token punctuation">, </span>threadAge<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">)</span><span class="token operator">: </span><a href="../-tibia-response/index.html">TibiaResponse</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../../../tibiakt-core/com.galarzaa.tibiakt.core.models.forums/-forum-board/index.html">ForumBoard</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Fetches a board from the Tibia.com forum.</p></div></div></div>
                       </div>
                     </div>
                   </div>
                 </div>
-<a data-name="-1634455859%2FFunctions%2F-899881058" anchor-label="fetchForumSection" id="-1634455859%2FFunctions%2F-899881058" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main"></a>
+<a data-name="729067144%2FFunctions%2F-899881058" anchor-label="fetchForumSection" id="729067144%2FFunctions%2F-899881058" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-client:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="fetch-forum-section.html"><span>fetch</span><wbr><span>Forum</span><wbr><span><span>Section</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1634455859%2FFunctions%2F-899881058"></span>
+                    <div class=""><span class="inline-flex">
+                        <div><a href="fetch-forum-section.html"><span>fetch</span><wbr><span>Forum</span><wbr><span><span>Section</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="729067144%2FFunctions%2F-899881058"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
                       <div class="title">
-                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-client:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="fetch-forum-section.html"><span class="token function">fetchForumSection</span></a><span class="token punctuation">(</span>sectionId<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-tibia-response/index.html">TibiaResponse</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../../../tibiakt-core/com.galarzaa.tibiakt.core.models.forums/-forum-section/index.html">ForumSection</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-client:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="fetch-forum-section.html"><span class="token function">fetchForumSection</span></a><span class="token punctuation">(</span>section<span class="token operator">: </span><a href="../../../tibiakt-core/com.galarzaa.tibiakt.core.enums/-available-forum-section/index.html">AvailableForumSection</a><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-tibia-response/index.html">TibiaResponse</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../../../tibiakt-core/com.galarzaa.tibiakt.core.models.forums/-forum-section/index.html">ForumSection</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Fetches a specific forum section.</p></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="fetch-forum-section.html"><span class="token function">fetchForumSection</span></a><span class="token punctuation">(</span>sectionId<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-tibia-response/index.html">TibiaResponse</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../../../tibiakt-core/com.galarzaa.tibiakt.core.models.forums/-forum-section/index.html">ForumSection</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Fetches a forum section by its internal <a href="fetch-forum-section.html">sectionId</a>.</p></div></div></div>
                       </div>
                     </div>
                   </div>
@@ -185,12 +207,14 @@ if(savedDarkMode === true){
 <a data-name="-1641375773%2FFunctions%2F-899881058" anchor-label="fetchForumThread" id="-1641375773%2FFunctions%2F-899881058" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-client:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="fetch-forum-thread.html"><span>fetch</span><wbr><span>Forum</span><wbr><span><span>Thread</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1641375773%2FFunctions%2F-899881058"></span>
+                    <div class=""><span class="inline-flex">
+                        <div><a href="fetch-forum-thread.html"><span>fetch</span><wbr><span>Forum</span><wbr><span><span>Thread</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1641375773%2FFunctions%2F-899881058"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
                       <div class="title">
-                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-client:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="fetch-forum-thread.html"><span class="token function">fetchForumThread</span></a><span class="token punctuation">(</span>threadId<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span>page<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator"> = </span><span class="token constant">1</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-tibia-response/index.html">TibiaResponse</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../../../tibiakt-core/com.galarzaa.tibiakt.core.models.forums/-forum-thread/index.html">ForumThread</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-client:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="fetch-forum-thread.html"><span class="token function">fetchForumThread</span></a><span class="token punctuation">(</span>threadId<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span>page<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator"> = </span><span class="token constant">1</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-tibia-response/index.html">TibiaResponse</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../../../tibiakt-core/com.galarzaa.tibiakt.core.models.forums/-forum-thread/index.html">ForumThread</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Fetches a forum thread from Tibia.com</p></div></div></div>
                       </div>
                     </div>
                   </div>
@@ -198,12 +222,14 @@ if(savedDarkMode === true){
 <a data-name="-605496368%2FFunctions%2F-899881058" anchor-label="fetchGuild" id="-605496368%2FFunctions%2F-899881058" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-client:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="fetch-guild.html"><span>fetch</span><wbr><span><span>Guild</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-605496368%2FFunctions%2F-899881058"></span>
+                    <div class=""><span class="inline-flex">
+                        <div><a href="fetch-guild.html"><span>fetch</span><wbr><span><span>Guild</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-605496368%2FFunctions%2F-899881058"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
                       <div class="title">
-                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-client:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="fetch-guild.html"><span class="token function">fetchGuild</span></a><span class="token punctuation">(</span>name<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-tibia-response/index.html">TibiaResponse</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../../../tibiakt-core/com.galarzaa.tibiakt.core.models.guild/-guild/index.html">Guild</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-client:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="fetch-guild.html"><span class="token function">fetchGuild</span></a><span class="token punctuation">(</span>name<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-tibia-response/index.html">TibiaResponse</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../../../tibiakt-core/com.galarzaa.tibiakt.core.models.guild/-guild/index.html">Guild</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Fetch a guild by its <a href="fetch-guild.html">name</a>.</p></div></div></div>
                       </div>
                     </div>
                   </div>
@@ -211,7 +237,9 @@ if(savedDarkMode === true){
 <a data-name="331115575%2FFunctions%2F-899881058" anchor-label="fetchHighscoresPage" id="331115575%2FFunctions%2F-899881058" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-client:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="fetch-highscores-page.html"><span>fetch</span><wbr><span>Highscores</span><wbr><span><span>Page</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="331115575%2FFunctions%2F-899881058"></span>
+                    <div class=""><span class="inline-flex">
+                        <div><a href="fetch-highscores-page.html"><span>fetch</span><wbr><span>Highscores</span><wbr><span><span>Page</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="331115575%2FFunctions%2F-899881058"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
@@ -224,7 +252,9 @@ if(savedDarkMode === true){
 <a data-name="-1986045667%2FFunctions%2F-899881058" anchor-label="fetchHigscores" id="-1986045667%2FFunctions%2F-899881058" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-client:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="fetch-higscores.html"><span>fetch</span><wbr><span><span>Higscores</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1986045667%2FFunctions%2F-899881058"></span>
+                    <div class=""><span class="inline-flex">
+                        <div><a href="fetch-higscores.html"><span>fetch</span><wbr><span><span>Higscores</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1986045667%2FFunctions%2F-899881058"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
@@ -237,7 +267,9 @@ if(savedDarkMode === true){
 <a data-name="1478095914%2FFunctions%2F-899881058" anchor-label="fetchHouse" id="1478095914%2FFunctions%2F-899881058" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-client:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="fetch-house.html"><span>fetch</span><wbr><span><span>House</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1478095914%2FFunctions%2F-899881058"></span>
+                    <div class=""><span class="inline-flex">
+                        <div><a href="fetch-house.html"><span>fetch</span><wbr><span><span>House</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1478095914%2FFunctions%2F-899881058"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
@@ -250,7 +282,9 @@ if(savedDarkMode === true){
 <a data-name="-354893473%2FFunctions%2F-899881058" anchor-label="fetchHousesSection" id="-354893473%2FFunctions%2F-899881058" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-client:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="fetch-houses-section.html"><span>fetch</span><wbr><span>Houses</span><wbr><span><span>Section</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-354893473%2FFunctions%2F-899881058"></span>
+                    <div class=""><span class="inline-flex">
+                        <div><a href="fetch-houses-section.html"><span>fetch</span><wbr><span>Houses</span><wbr><span><span>Section</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-354893473%2FFunctions%2F-899881058"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
@@ -263,7 +297,9 @@ if(savedDarkMode === true){
 <a data-name="-2142864942%2FFunctions%2F-899881058" anchor-label="fetchKillStatistics" id="-2142864942%2FFunctions%2F-899881058" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-client:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="fetch-kill-statistics.html"><span>fetch</span><wbr><span>Kill</span><wbr><span><span>Statistics</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2142864942%2FFunctions%2F-899881058"></span>
+                    <div class=""><span class="inline-flex">
+                        <div><a href="fetch-kill-statistics.html"><span>fetch</span><wbr><span>Kill</span><wbr><span><span>Statistics</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2142864942%2FFunctions%2F-899881058"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
@@ -276,7 +312,9 @@ if(savedDarkMode === true){
 <a data-name="723237520%2FFunctions%2F-899881058" anchor-label="fetchLeaderboards" id="723237520%2FFunctions%2F-899881058" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-client:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="fetch-leaderboards.html"><span>fetch</span><wbr><span><span>Leaderboards</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="723237520%2FFunctions%2F-899881058"></span>
+                    <div class=""><span class="inline-flex">
+                        <div><a href="fetch-leaderboards.html"><span>fetch</span><wbr><span><span>Leaderboards</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="723237520%2FFunctions%2F-899881058"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
@@ -289,7 +327,9 @@ if(savedDarkMode === true){
 <a data-name="-1596861922%2FFunctions%2F-899881058" anchor-label="fetchNews" id="-1596861922%2FFunctions%2F-899881058" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-client:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="fetch-news.html"><span>fetch</span><wbr><span><span>News</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1596861922%2FFunctions%2F-899881058"></span>
+                    <div class=""><span class="inline-flex">
+                        <div><a href="fetch-news.html"><span>fetch</span><wbr><span><span>News</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1596861922%2FFunctions%2F-899881058"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
@@ -302,7 +342,9 @@ if(savedDarkMode === true){
 <a data-name="881627543%2FFunctions%2F-899881058" anchor-label="fetchRecentNews" id="881627543%2FFunctions%2F-899881058" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-client:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="fetch-recent-news.html"><span>fetch</span><wbr><span>Recent</span><wbr><span><span>News</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="881627543%2FFunctions%2F-899881058"></span>
+                    <div class=""><span class="inline-flex">
+                        <div><a href="fetch-recent-news.html"><span>fetch</span><wbr><span>Recent</span><wbr><span><span>News</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="881627543%2FFunctions%2F-899881058"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
@@ -315,7 +357,9 @@ if(savedDarkMode === true){
 <a data-name="-180220881%2FFunctions%2F-899881058" anchor-label="fetchWorld" id="-180220881%2FFunctions%2F-899881058" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-client:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="fetch-world.html"><span>fetch</span><wbr><span><span>World</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-180220881%2FFunctions%2F-899881058"></span>
+                    <div class=""><span class="inline-flex">
+                        <div><a href="fetch-world.html"><span>fetch</span><wbr><span><span>World</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-180220881%2FFunctions%2F-899881058"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
@@ -328,7 +372,9 @@ if(savedDarkMode === true){
 <a data-name="-1629944529%2FFunctions%2F-899881058" anchor-label="fetchWorldGuilds" id="-1629944529%2FFunctions%2F-899881058" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-client:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="fetch-world-guilds.html"><span>fetch</span><wbr><span>World</span><wbr><span><span>Guilds</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1629944529%2FFunctions%2F-899881058"></span>
+                    <div class=""><span class="inline-flex">
+                        <div><a href="fetch-world-guilds.html"><span>fetch</span><wbr><span>World</span><wbr><span><span>Guilds</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1629944529%2FFunctions%2F-899881058"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
@@ -341,7 +387,9 @@ if(savedDarkMode === true){
 <a data-name="-1214775428%2FFunctions%2F-899881058" anchor-label="fetchWorldOverview" id="-1214775428%2FFunctions%2F-899881058" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-client:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="fetch-world-overview.html"><span>fetch</span><wbr><span>World</span><wbr><span><span>Overview</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1214775428%2FFunctions%2F-899881058"></span>
+                    <div class=""><span class="inline-flex">
+                        <div><a href="fetch-world-overview.html"><span>fetch</span><wbr><span>World</span><wbr><span><span>Overview</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1214775428%2FFunctions%2F-899881058"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
@@ -354,7 +402,9 @@ if(savedDarkMode === true){
 <a data-name="-941238252%2FFunctions%2F-899881058" anchor-label="request" id="-941238252%2FFunctions%2F-899881058" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-client:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="request.html"><span><span>request</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-941238252%2FFunctions%2F-899881058"></span>
+                    <div class=""><span class="inline-flex">
+                        <div><a href="request.html"><span><span>request</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-941238252%2FFunctions%2F-899881058"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
@@ -362,6 +412,19 @@ if(savedDarkMode === true){
                         <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-client:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="request.html"><span class="token function">request</span></a><span class="token punctuation">(</span>method<span class="token operator">: </span><span data-unresolved-link="io.ktor.http/HttpMethod///PointingToDeclaration/">HttpMethod</span><span class="token punctuation">, </span>url<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span>data<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html">Pair</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt;</span><span class="token operator">&gt;</span><span class="token operator"> = </span>emptyList()<span class="token punctuation">, </span>headers<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html">Pair</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt;</span><span class="token operator">&gt;</span><span class="token operator"> = </span>emptyList()<span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="io.ktor.client.statement/HttpResponse///PointingToDeclaration/">HttpResponse</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Perform a request using the required headers.</p></div></div></div>
                       </div>
                     </div>
+                  </div>
+                </div>
+              </div>
+              <h2 class="">Sources</h2>
+              <div class="table" data-togglable="Sources"><a data-name="-539707438%2FSource%2F-899881058" anchor-label="https://github.com/Galarzaa90/TibiaKt/blob/main/tibiakt-client/src/main/kotlin/com/galarzaa/tibiakt/client/TibiaKtClient.kt#L113" id="-539707438%2FSource%2F-899881058" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main"></a>
+                <div class="table-row" data-filterable-current=":tibiakt-client:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex">
+                        <div><a href="https://github.com/Galarzaa90/TibiaKt/blob/main/tibiakt-client/src/main/kotlin/com/galarzaa/tibiakt/client/TibiaKtClient.kt#L113">jvm source</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-539707438%2FSource%2F-899881058"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div></div>
                   </div>
                 </div>
               </div>

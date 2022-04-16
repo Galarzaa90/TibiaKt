@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > Sex</title>
+  <title>Coverage Report > PvpType</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -20,18 +20,19 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">com.galarzaa.tibiakt.core.enums</a>
 </div>
 
-<h1>Coverage Summary for Class: Sex (com.galarzaa.tibiakt.core.enums)</h1>
+<h1>Coverage Summary for Class: PvpType (com.galarzaa.tibiakt.core.enums)</h1>
 
 <table class="coverageStats">
+
 <tr>
   <th class="name">Class</th>
 <th class="coverageStat 
 ">
-  Class, %
+  Method, %
 </th>
 <th class="coverageStat 
 ">
-  Method, %
+  Block, %
 </th>
 <th class="coverageStat 
 ">
@@ -39,15 +40,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">Sex</td>
-<td class="coverageStat">
-  <span class="percent">
-    100%
-  </span>
-  <span class="absValue">
-    (1/1)
-  </span>
-</td>
+  <td class="name">PvpType</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -61,11 +54,159 @@ Current scope:     <a href="../../index.html">all classes</a>
     100%
   </span>
   <span class="absValue">
-    (3/3)
+    (6/6)
   </span>
 </td>
 </tr>
-
+  <tr>
+    <td class="name">PvpType$Companion</td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (1/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (6/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (1/3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">PvpType$HARDCORE_PVP</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">PvpType$OPEN_PVP</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (2/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (3/4)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">PvpType$OPTIONAL_PVP</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">PvpType$RETRO_HARDCORE_PVP</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">PvpType$RETRO_OPEN_PVP</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (9/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (6/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    89.7%
+  </span>
+  <span class="absValue">
+    (26/29)
+  </span>
+</td>
+</tr>
 </table>
 
 <br/>
@@ -75,10 +216,60 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.enums
 <i class="no-highlight">2</i>&nbsp;
-<b class="fc"><i class="no-highlight">3</i>&nbsp;enum class Sex(override val value: String) : StringEnum {</b>
-<b class="fc"><i class="no-highlight">4</i>&nbsp;    MALE(&quot;male&quot;),</b>
-<b class="fc"><i class="no-highlight">5</i>&nbsp;    FEMALE(&quot;female&quot;);</b>
-<i class="no-highlight">6</i>&nbsp;}
+<i class="no-highlight">3</i>&nbsp;/**
+<i class="no-highlight">4</i>&nbsp; * A world PvP type
+<i class="no-highlight">5</i>&nbsp; */
+<b class="fc"><i class="no-highlight">6</i>&nbsp;enum class PvpType(override val value: String) : StringEnum {</b>
+<b class="fc"><i class="no-highlight">7</i>&nbsp;    OPEN_PVP(&quot;Open PvP&quot;) {</b>
+<b class="fc"><i class="no-highlight">8</i>&nbsp;        override val weight: Int = 2</b>
+<b class="fc"><i class="no-highlight">9</i>&nbsp;        override val highscoresFilterValue: Int = 0</b>
+<b class="nc"><i class="no-highlight">10</i>&nbsp;        override val bazaarFilterValue: Int = 0</b>
+<i class="no-highlight">11</i>&nbsp;    },
+<b class="fc"><i class="no-highlight">12</i>&nbsp;    OPTIONAL_PVP(&quot;Optional PvP&quot;) {</b>
+<b class="fc"><i class="no-highlight">13</i>&nbsp;        override val weight: Int = 1</b>
+<b class="fc"><i class="no-highlight">14</i>&nbsp;        override val highscoresFilterValue: Int = 1</b>
+<b class="fc"><i class="no-highlight">15</i>&nbsp;        override val bazaarFilterValue: Int = 1</b>
+<i class="no-highlight">16</i>&nbsp;    },
+<b class="fc"><i class="no-highlight">17</i>&nbsp;    RETRO_OPEN_PVP(&quot;Retro Open PvP&quot;) {</b>
+<b class="fc"><i class="no-highlight">18</i>&nbsp;        override val weight: Int = 2</b>
+<b class="fc"><i class="no-highlight">19</i>&nbsp;        override val highscoresFilterValue: Int = 3</b>
+<b class="fc"><i class="no-highlight">20</i>&nbsp;        override val bazaarFilterValue: Int = 3</b>
+<i class="no-highlight">21</i>&nbsp;    },
+<b class="fc"><i class="no-highlight">22</i>&nbsp;    RETRO_HARDCORE_PVP(&quot;Retro Hardcore PvP&quot;) {</b>
+<b class="fc"><i class="no-highlight">23</i>&nbsp;        override val weight: Int = 3</b>
+<b class="fc"><i class="no-highlight">24</i>&nbsp;        override val highscoresFilterValue: Int = 4</b>
+<b class="fc"><i class="no-highlight">25</i>&nbsp;        override val bazaarFilterValue: Int = 4</b>
+<i class="no-highlight">26</i>&nbsp;    },
+<b class="fc"><i class="no-highlight">27</i>&nbsp;    HARDCORE_PVP(&quot;Hardcore PvP&quot;) {</b>
+<b class="fc"><i class="no-highlight">28</i>&nbsp;        override val weight: Int = 3</b>
+<b class="fc"><i class="no-highlight">29</i>&nbsp;        override val highscoresFilterValue: Int = 2</b>
+<b class="fc"><i class="no-highlight">30</i>&nbsp;        override val bazaarFilterValue: Int = 2</b>
+<i class="no-highlight">31</i>&nbsp;    };
+<i class="no-highlight">32</i>&nbsp;
+<i class="no-highlight">33</i>&nbsp;    /**
+<i class="no-highlight">34</i>&nbsp;     * The restriction weight of this type, used to check transferability between worlds.
+<i class="no-highlight">35</i>&nbsp;     */
+<i class="no-highlight">36</i>&nbsp;    abstract val weight: Int
+<i class="no-highlight">37</i>&nbsp;
+<i class="no-highlight">38</i>&nbsp;    /**
+<i class="no-highlight">39</i>&nbsp;     * The value used internally to filter Highscores.
+<i class="no-highlight">40</i>&nbsp;     */
+<i class="no-highlight">41</i>&nbsp;    abstract val highscoresFilterValue: Int
+<i class="no-highlight">42</i>&nbsp;
+<i class="no-highlight">43</i>&nbsp;    /**
+<i class="no-highlight">44</i>&nbsp;     * The value used internally to filter the CharacterBazaar.
+<i class="no-highlight">45</i>&nbsp;     */
+<i class="no-highlight">46</i>&nbsp;    abstract val bazaarFilterValue: Int
+<i class="no-highlight">47</i>&nbsp;
+<b class="nc"><i class="no-highlight">48</i>&nbsp;    companion object {</b>
+<i class="no-highlight">49</i>&nbsp;        const val highscoresQueryParam: String = &quot;worldtypes&quot;
+<i class="no-highlight">50</i>&nbsp;        fun fromHighscoresFilterValue(value: Int?) =
+<b class="fc"><i class="no-highlight">51</i>&nbsp;            enumValues&lt;PvpType&gt;().firstOrNull { it.highscoresFilterValue == value }</b>
+<i class="no-highlight">52</i>&nbsp;
+<i class="no-highlight">53</i>&nbsp;        const val bazaarQueryParam = &quot;filter_worldpvptype&quot;
+<b class="nc"><i class="no-highlight">54</i>&nbsp;        fun fromBazaarFilterValue(value: Int?) = enumValues&lt;PvpType&gt;().firstOrNull { it.bazaarFilterValue == value }</b>
+<i class="no-highlight">55</i>&nbsp;    }
+<i class="no-highlight">56</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -105,7 +296,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-04-12 22:30</div>
+    <div style="float:right;">generated on 2022-04-16 14:30</div>
 </div>
 </body>
 </html>

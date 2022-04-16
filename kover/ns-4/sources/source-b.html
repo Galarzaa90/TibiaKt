@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > BidType</title>
+  <title>Coverage Report > BazaarType</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -20,7 +20,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">com.galarzaa.tibiakt.core.enums</a>
 </div>
 
-<h1>Coverage Summary for Class: BidType (com.galarzaa.tibiakt.core.enums)</h1>
+<h1>Coverage Summary for Class: BazaarType (com.galarzaa.tibiakt.core.enums)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -39,7 +39,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">BidType</td>
+  <td class="name">BazaarType</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -61,7 +61,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     100%
   </span>
   <span class="absValue">
-    (4/4)
+    (3/3)
   </span>
 </td>
 </tr>
@@ -75,23 +75,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.enums
 <i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;/**
-<i class="no-highlight">4</i>&nbsp; * The possible bid types an auction might have.
-<i class="no-highlight">5</i>&nbsp; */
-<b class="fc"><i class="no-highlight">6</i>&nbsp;enum class BidType(override val value: String) : StringEnum {</b>
-<i class="no-highlight">7</i>&nbsp;    /**
-<i class="no-highlight">8</i>&nbsp;     * The current highest bid, meaning the auction has received at least one bid.
-<i class="no-highlight">9</i>&nbsp;     */
-<b class="fc"><i class="no-highlight">10</i>&nbsp;    CURRENT(&quot;Current Bid&quot;),</b>
-<i class="no-highlight">11</i>&nbsp;
-<i class="no-highlight">12</i>&nbsp;    /**
-<i class="no-highlight">13</i>&nbsp;     * The minimum bid set by the auction author, meaning the auction didn&#39;t receive any bids
-<i class="no-highlight">14</i>&nbsp;     */
-<b class="fc"><i class="no-highlight">15</i>&nbsp;    MINIMUM(&quot;Minimum Bid&quot;),</b>
-<i class="no-highlight">16</i>&nbsp;
-<i class="no-highlight">17</i>&nbsp;    /** The bid that won the auction. */
-<b class="fc"><i class="no-highlight">18</i>&nbsp;    WINNING(&quot;Winning Bid&quot;),</b>
-<i class="no-highlight">19</i>&nbsp;}
+<b class="fc"><i class="no-highlight">3</i>&nbsp;enum class BazaarType(override val value: String, val subtopic: String) : StringEnum {</b>
+<b class="fc"><i class="no-highlight">4</i>&nbsp;    CURRENT(&quot;current&quot;, &quot;currentcharactertrades&quot;),</b>
+<b class="fc"><i class="no-highlight">5</i>&nbsp;    HISTORY(&quot;history&quot;, &quot;pastcharactertrades&quot;),</b>
+<i class="no-highlight">6</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -118,7 +105,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-04-12 22:30</div>
+    <div style="float:right;">generated on 2022-04-16 14:30</div>
 </div>
 </body>
 </html>

@@ -3,7 +3,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <title>TibiaResponse</title>
 </head><body><link href="../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../";</script>
-    <script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script><link href="../../../styles/style.css" rel="Stylesheet"><link href="../../../styles/jetbrains-mono.css" rel="Stylesheet"><link href="../../../styles/main.css" rel="Stylesheet"><link href="../../../styles/prism.css" rel="Stylesheet"><link href="../../../styles/logo-styles.css" rel="Stylesheet"><script type="text/javascript" src="../../../scripts/clipboard.js" async></script><script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script><script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script><script type="text/javascript" src="../../../scripts/main.js" async></script><script type="text/javascript" src="../../../scripts/prism.js" async></script><script>const storage = localStorage.getItem("dokka-dark-mode")
+    <script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script><link href="../../../styles/style.css" rel="Stylesheet"><link href="../../../styles/jetbrains-mono.css" rel="Stylesheet"><link href="../../../styles/main.css" rel="Stylesheet"><link href="../../../styles/prism.css" rel="Stylesheet"><link href="../../../styles/logo-styles.css" rel="Stylesheet"><script type="text/javascript" src="../../../scripts/clipboard.js" async></script><script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script><script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script><script type="text/javascript" src="../../../scripts/main.js" defer></script><script type="text/javascript" src="../../../scripts/prism.js" async></script><script>const storage = localStorage.getItem("dokka-dark-mode")
 const savedDarkMode = storage ? JSON.parse(storage) : false
 if(savedDarkMode === true){
     document.getElementsByTagName("html")[0].classList.add("theme-dark")
@@ -22,7 +22,7 @@ if(savedDarkMode === true){
       <div id="leftColumn">
         <div id="sideMenu"></div>
       </div>
-      <div id="main"><script type="text/javascript" src="../../../scripts/main.js"></script>
+      <div id="main">
         <div class="main-content" id="content" pageids="tibiakt-client::com.galarzaa.tibiakt.client/TibiaResponse///PointingToDeclaration//-899881058">
           <div class="breadcrumbs"><a href="../../index.html">tibiakt-client</a>/<a href="../index.html">com.galarzaa.tibiakt.client</a>/<a href="index.html">TibiaResponse</a></div>
           <div class="cover ">
@@ -30,17 +30,19 @@ if(savedDarkMode === true){
             <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-client:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="index.html">TibiaResponse</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">(</span>timestamp<span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/time/Instant.html">Instant</a><span class="token punctuation">, </span>isCached<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span>cacheAge<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span>fetchingTime<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span>parsingTime<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span>data<span class="token operator">: </span><a href="index.html">T</a><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><p class="paragraph">A response from Tibia.com</p></div></div>
           </div>
           <div class="tabbedcontent">
-            <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Constructors">Constructors</button><button class="section-tab" data-togglable="Properties">Properties</button><button class="section-tab" data-togglable="Parameters">Parameters</button></div>
+            <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Constructors">Constructors</button><button class="section-tab" data-togglable="Properties">Properties</button><button class="section-tab" data-togglable="Parameters">Parameters</button><button class="section-tab" data-togglable="Sources">Sources</button></div>
             <div class="tabs-section-body">
               <h2 class="">Parameters</h2>
               <div data-togglable="Parameters">
-                <div class="platform-hinted WithExtraAttributes" data-platform-hinted="data-platform-hinted" data-togglable="Parameters"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-client:dokkaHtmlPartial/main"><div data-togglable="Parameters"><div class="table" data-togglable="Parameters"><div class="table-row" data-filterable-current=":tibiakt-client:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><span><span>T</span></span></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">The type of the data returned.</p></div></div></div></div></div></div></div></div></div>
+                <div class="platform-hinted WithExtraAttributes" data-platform-hinted="data-platform-hinted" data-togglable="Parameters"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-client:dokkaHtmlPartial/main"><div data-togglable="Parameters"><div class="table" data-togglable="Parameters"><div class="table-row" data-filterable-current=":tibiakt-client:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><span><span>T</span></span></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">The type of the data returned.</p></div></div></div></div></div></div></div></div></div>
               </div>
               <h2 class="tabbedcontent">Constructors</h2>
               <div class="table" data-togglable="Constructors"><a data-name="77533822%2FConstructors%2F-899881058" anchor-label="TibiaResponse" id="77533822%2FConstructors%2F-899881058" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-client:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue TabbedContent">
-                    <div class=""><span class="inline-flex"><a href="-tibia-response.html">TibiaResponse</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="77533822%2FConstructors%2F-899881058"></span>
+                    <div class=""><span class="inline-flex">
+                        <div><a href="-tibia-response.html"><span>Tibia</span><wbr><span><span>Response</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="77533822%2FConstructors%2F-899881058"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
@@ -55,7 +57,9 @@ if(savedDarkMode === true){
               <div class="table" data-togglable="Properties"><a data-name="-297396259%2FProperties%2F-899881058" anchor-label="cacheAge" id="-297396259%2FProperties%2F-899881058" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-client:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="cache-age.html">cacheAge</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-297396259%2FProperties%2F-899881058"></span>
+                    <div class=""><span class="inline-flex">
+                        <div><a href="cache-age.html">cacheAge</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-297396259%2FProperties%2F-899881058"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
@@ -68,7 +72,9 @@ if(savedDarkMode === true){
 <a data-name="-780471952%2FProperties%2F-899881058" anchor-label="data" id="-780471952%2FProperties%2F-899881058" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-client:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="data.html">data</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-780471952%2FProperties%2F-899881058"></span>
+                    <div class=""><span class="inline-flex">
+                        <div><a href="data.html">data</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-780471952%2FProperties%2F-899881058"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
@@ -81,7 +87,9 @@ if(savedDarkMode === true){
 <a data-name="-446285659%2FProperties%2F-899881058" anchor-label="fetchingTime" id="-446285659%2FProperties%2F-899881058" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-client:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="fetching-time.html">fetchingTime</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-446285659%2FProperties%2F-899881058"></span>
+                    <div class=""><span class="inline-flex">
+                        <div><a href="fetching-time.html">fetchingTime</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-446285659%2FProperties%2F-899881058"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
@@ -94,7 +102,9 @@ if(savedDarkMode === true){
 <a data-name="-1146870290%2FProperties%2F-899881058" anchor-label="isCached" id="-1146870290%2FProperties%2F-899881058" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-client:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="is-cached.html">isCached</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1146870290%2FProperties%2F-899881058"></span>
+                    <div class=""><span class="inline-flex">
+                        <div><a href="is-cached.html">isCached</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1146870290%2FProperties%2F-899881058"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
@@ -107,7 +117,9 @@ if(savedDarkMode === true){
 <a data-name="1730585603%2FProperties%2F-899881058" anchor-label="parsingTime" id="1730585603%2FProperties%2F-899881058" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-client:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="parsing-time.html">parsingTime</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1730585603%2FProperties%2F-899881058"></span>
+                    <div class=""><span class="inline-flex">
+                        <div><a href="parsing-time.html">parsingTime</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1730585603%2FProperties%2F-899881058"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
@@ -120,7 +132,9 @@ if(savedDarkMode === true){
 <a data-name="-1387503766%2FProperties%2F-899881058" anchor-label="timestamp" id="-1387503766%2FProperties%2F-899881058" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main"></a>
                 <div class="table-row" data-filterable-current=":tibiakt-client:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main">
                   <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="timestamp.html">timestamp</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1387503766%2FProperties%2F-899881058"></span>
+                    <div class=""><span class="inline-flex">
+                        <div><a href="timestamp.html">timestamp</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1387503766%2FProperties%2F-899881058"></span>
                           <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                         </span></span></div>
                     <div>
@@ -128,6 +142,19 @@ if(savedDarkMode === true){
                         <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":tibiakt-client:dokkaHtmlPartial/main"><a data-name="-1387503766%2FProperties%2F-899881058" anchor-label="timestamp" id="-1387503766%2FProperties%2F-899881058" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="timestamp.html">timestamp</a><span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/time/Instant.html">Instant</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="-1387503766%2FProperties%2F-899881058" anchor-label="timestamp" id="-1387503766%2FProperties%2F-899881058" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main"></a><p class="paragraph">the time when the request was done.</p></div></div></div>
                       </div>
                     </div>
+                  </div>
+                </div>
+              </div>
+              <h2 class="">Sources</h2>
+              <div class="table" data-togglable="Sources"><a data-name="-1236178235%2FSource%2F-899881058" anchor-label="https://github.com/Galarzaa90/TibiaKt/blob/main/tibiakt-client/src/main/kotlin/com/galarzaa/tibiakt/client/TibiaResponse.kt#L10" id="-1236178235%2FSource%2F-899881058" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main"></a>
+                <div class="table-row" data-filterable-current=":tibiakt-client:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex">
+                        <div><a href="https://github.com/Galarzaa90/TibiaKt/blob/main/tibiakt-client/src/main/kotlin/com/galarzaa/tibiakt/client/TibiaResponse.kt#L10">jvm source</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1236178235%2FSource%2F-899881058"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div></div>
                   </div>
                 </div>
               </div>
