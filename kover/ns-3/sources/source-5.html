@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > BoardEntryBuilder</title>
+  <title>Coverage Report > BazaarFiltersBuilderKt</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -20,7 +20,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">com.galarzaa.tibiakt.core.builders</a>
 </div>
 
-<h1>Coverage Summary for Class: BoardEntryBuilder (com.galarzaa.tibiakt.core.builders)</h1>
+<h1>Coverage Summary for Class: BazaarFiltersBuilderKt (com.galarzaa.tibiakt.core.builders)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -35,15 +35,11 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 <th class="coverageStat 
 ">
-  Block, %
-</th>
-<th class="coverageStat 
-">
   Line, %
 </th>
 </tr>
 <tr>
-  <td class="name">BoardEntryBuilder</td>
+  <td class="name">BazaarFiltersBuilderKt</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -57,15 +53,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     100%
   </span>
   <span class="absValue">
-    (8/8)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    50%
-  </span>
-  <span class="absValue">
-    (2/4)
+    (2/2)
   </span>
 </td>
 <td class="coverageStat">
@@ -73,7 +61,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     100%
   </span>
   <span class="absValue">
-    (14/14)
+    (2/2)
   </span>
 </td>
 </tr>
@@ -87,48 +75,53 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.builders
 <i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.BoardEntry
-<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.ForumSection
-<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.LastPost
-<i class="no-highlight">6</i>&nbsp;
-<i class="no-highlight">7</i>&nbsp;
-<i class="no-highlight">8</i>&nbsp;inline fun forumsSectionBuilder(block: ForumsSectionBuilder.() -&gt; Unit) = ForumsSectionBuilder().apply(block)
-<i class="no-highlight">9</i>&nbsp;inline fun forumsSection(block: ForumsSectionBuilder.() -&gt; Unit) = forumsSectionBuilder(block).build()
-<i class="no-highlight">10</i>&nbsp;
-<i class="no-highlight">11</i>&nbsp;inline fun boardEntryBuilder(block: BoardEntryBuilder.() -&gt; Unit) = BoardEntryBuilder().apply(block)
-<i class="no-highlight">12</i>&nbsp;inline fun boardEntry(block: BoardEntryBuilder.() -&gt; Unit) = boardEntryBuilder(block).build()
+<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionBattlEyeFilter
+<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionOrderBy
+<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionOrderDirection
+<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionSearchType
+<i class="no-highlight">7</i>&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionSkillFilter
+<i class="no-highlight">8</i>&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionVocationFilter
+<i class="no-highlight">9</i>&nbsp;import com.galarzaa.tibiakt.core.enums.PvpType
+<i class="no-highlight">10</i>&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.BazaarFilters
+<i class="no-highlight">11</i>&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
+<i class="no-highlight">12</i>&nbsp;
 <i class="no-highlight">13</i>&nbsp;
-<i class="no-highlight">14</i>&nbsp;class ForumsSectionBuilder {
-<i class="no-highlight">15</i>&nbsp;    var sectionId: Int = 0
-<i class="no-highlight">16</i>&nbsp;    val entries: MutableList&lt;BoardEntry&gt; = mutableListOf()
-<i class="no-highlight">17</i>&nbsp;
-<i class="no-highlight">18</i>&nbsp;    fun addEntry(block: BoardEntryBuilder.() -&gt; Unit) {
-<i class="no-highlight">19</i>&nbsp;        entries.add(boardEntry(block))
-<i class="no-highlight">20</i>&nbsp;    }
-<i class="no-highlight">21</i>&nbsp;
-<i class="no-highlight">22</i>&nbsp;    fun build() = ForumSection(
-<i class="no-highlight">23</i>&nbsp;        sectionId = sectionId,
-<i class="no-highlight">24</i>&nbsp;        entries = entries
-<i class="no-highlight">25</i>&nbsp;    )
-<i class="no-highlight">26</i>&nbsp;}
-<i class="no-highlight">27</i>&nbsp;
-<b class="fc"><i class="no-highlight">28</i>&nbsp;class BoardEntryBuilder {</b>
-<b class="fc"><i class="no-highlight">29</i>&nbsp;    var name: String? = null</b>
-<b class="fc"><i class="no-highlight">30</i>&nbsp;    var boardId: Int = 0</b>
-<b class="fc"><i class="no-highlight">31</i>&nbsp;    var description: String? = null</b>
-<b class="fc"><i class="no-highlight">32</i>&nbsp;    var posts: Int = 0</b>
-<b class="fc"><i class="no-highlight">33</i>&nbsp;    var threads: Int = 0</b>
-<b class="fc"><i class="no-highlight">34</i>&nbsp;    var lastPost: LastPost? = null</b>
+<i class="no-highlight">14</i>&nbsp;@BuilderDsl
+<b class="fc"><i class="no-highlight">15</i>&nbsp;inline fun bazaarFilters(block: BazaarFiltersBuilder.() -&gt; Unit) = bazaarFiltersBuilder(block).build()</b>
+<i class="no-highlight">16</i>&nbsp;
+<i class="no-highlight">17</i>&nbsp;@BuilderDsl
+<b class="fc"><i class="no-highlight">18</i>&nbsp;inline fun bazaarFiltersBuilder(block: BazaarFiltersBuilder.() -&gt; Unit) = BazaarFiltersBuilder().apply(block)</b>
+<i class="no-highlight">19</i>&nbsp;
+<i class="no-highlight">20</i>&nbsp;@BuilderDsl
+<i class="no-highlight">21</i>&nbsp;class BazaarFiltersBuilder {
+<i class="no-highlight">22</i>&nbsp;    var world: String? = null
+<i class="no-highlight">23</i>&nbsp;    var pvpType: PvpType? = null
+<i class="no-highlight">24</i>&nbsp;    var battlEyeType: AuctionBattlEyeFilter? = null
+<i class="no-highlight">25</i>&nbsp;    var vocation: AuctionVocationFilter? = null
+<i class="no-highlight">26</i>&nbsp;    var minimumLevel: Int? = null
+<i class="no-highlight">27</i>&nbsp;    var maximumLevel: Int? = null
+<i class="no-highlight">28</i>&nbsp;    var skill: AuctionSkillFilter? = null
+<i class="no-highlight">29</i>&nbsp;    var minimumSkillLevel: Int? = null
+<i class="no-highlight">30</i>&nbsp;    var maximumSkillLevel: Int? = null
+<i class="no-highlight">31</i>&nbsp;    var orderDirection: AuctionOrderDirection? = null
+<i class="no-highlight">32</i>&nbsp;    var orderBy: AuctionOrderBy? = null
+<i class="no-highlight">33</i>&nbsp;    var searchString: String? = null
+<i class="no-highlight">34</i>&nbsp;    var searchType: AuctionSearchType? = null
 <i class="no-highlight">35</i>&nbsp;
-<b class="fc"><i class="no-highlight">36</i>&nbsp;    fun build() = BoardEntry(</b>
-<b class="pc"><i class="no-highlight">37</i>&nbsp;        name = name ?: throw IllegalArgumentException(&quot;name is required&quot;),</b>
-<b class="fc"><i class="no-highlight">38</i>&nbsp;        boardId = boardId,</b>
-<b class="pc"><i class="no-highlight">39</i>&nbsp;        description = description ?: throw IllegalArgumentException(&quot;description is required&quot;),</b>
-<b class="fc"><i class="no-highlight">40</i>&nbsp;        posts = posts,</b>
-<b class="fc"><i class="no-highlight">41</i>&nbsp;        threads = threads,</b>
-<b class="fc"><i class="no-highlight">42</i>&nbsp;        lastPost = lastPost</b>
-<i class="no-highlight">43</i>&nbsp;    )
-<i class="no-highlight">44</i>&nbsp;}
+<i class="no-highlight">36</i>&nbsp;    fun build() = BazaarFilters(world = world,
+<i class="no-highlight">37</i>&nbsp;        pvpType = pvpType,
+<i class="no-highlight">38</i>&nbsp;        battlEyeType = battlEyeType,
+<i class="no-highlight">39</i>&nbsp;        vocation = vocation,
+<i class="no-highlight">40</i>&nbsp;        minimumLevel = minimumLevel,
+<i class="no-highlight">41</i>&nbsp;        maximumLevel = maximumLevel,
+<i class="no-highlight">42</i>&nbsp;        skill = skill,
+<i class="no-highlight">43</i>&nbsp;        minimumSkillLevel = minimumSkillLevel,
+<i class="no-highlight">44</i>&nbsp;        maximumSkillLevel = maximumSkillLevel,
+<i class="no-highlight">45</i>&nbsp;        searchString = searchString,
+<i class="no-highlight">46</i>&nbsp;        searchType = searchType,
+<i class="no-highlight">47</i>&nbsp;        orderDirection = orderDirection,
+<i class="no-highlight">48</i>&nbsp;        orderBy = orderBy)
+<i class="no-highlight">49</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -155,7 +148,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-04-16 14:30</div>
+    <div style="float:right;">generated on 2022-04-16 14:42</div>
 </div>
 </body>
 </html>

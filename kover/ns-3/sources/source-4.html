@@ -61,7 +61,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     100%
   </span>
   <span class="absValue">
-    (28/28)
+    (27/27)
   </span>
 </td>
 </tr>
@@ -83,52 +83,45 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">8</i>&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionVocationFilter
 <i class="no-highlight">9</i>&nbsp;import com.galarzaa.tibiakt.core.enums.PvpType
 <i class="no-highlight">10</i>&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.BazaarFilters
-<i class="no-highlight">11</i>&nbsp;
-<b class="fc"><i class="no-highlight">12</i>&nbsp;class BazaarFiltersBuilder {</b>
-<i class="no-highlight">13</i>&nbsp;    private var world: String? = null
-<i class="no-highlight">14</i>&nbsp;    private var pvpType: PvpType? = null
-<i class="no-highlight">15</i>&nbsp;    private var battlEyeType: AuctionBattlEyeFilter? = null
-<i class="no-highlight">16</i>&nbsp;    private var vocation: AuctionVocationFilter? = null
-<i class="no-highlight">17</i>&nbsp;    private var minimumLevel: Int? = null
-<i class="no-highlight">18</i>&nbsp;    private var maximumLevel: Int? = null
-<i class="no-highlight">19</i>&nbsp;    private var skill: AuctionSkillFilter? = null
-<i class="no-highlight">20</i>&nbsp;    private var minimumSkillLevel: Int? = null
-<i class="no-highlight">21</i>&nbsp;    private var maximumSkillLevel: Int? = null
-<i class="no-highlight">22</i>&nbsp;    private var orderDirection: AuctionOrderDirection? = null
-<i class="no-highlight">23</i>&nbsp;    private var orderBy: AuctionOrderBy? = null
-<i class="no-highlight">24</i>&nbsp;    private var searchString: String? = null
-<i class="no-highlight">25</i>&nbsp;    private var searchType: AuctionSearchType? = null
-<i class="no-highlight">26</i>&nbsp;
-<b class="fc"><i class="no-highlight">27</i>&nbsp;    fun world(world: String?) = apply { this.world = world }</b>
-<b class="fc"><i class="no-highlight">28</i>&nbsp;    fun pvpType(pvpType: PvpType?) = apply { this.pvpType = pvpType }</b>
-<b class="fc"><i class="no-highlight">29</i>&nbsp;    fun battlEyeType(battlEyeType: AuctionBattlEyeFilter?) = apply { this.battlEyeType = battlEyeType }</b>
-<b class="fc"><i class="no-highlight">30</i>&nbsp;    fun vocation(vocation: AuctionVocationFilter?) = apply { this.vocation = vocation }</b>
-<b class="fc"><i class="no-highlight">31</i>&nbsp;    fun minimumLevel(minimumLevel: Int?) = apply { this.minimumLevel = minimumLevel }</b>
-<b class="fc"><i class="no-highlight">32</i>&nbsp;    fun maximumLevel(maximumLevel: Int?) = apply { this.maximumLevel = maximumLevel }</b>
-<b class="fc"><i class="no-highlight">33</i>&nbsp;    fun skill(skill: AuctionSkillFilter?) = apply { this.skill = skill }</b>
-<b class="fc"><i class="no-highlight">34</i>&nbsp;    fun minimumSkillLevel(minimumSkillLevel: Int?) = apply { this.minimumSkillLevel = minimumSkillLevel }</b>
-<b class="fc"><i class="no-highlight">35</i>&nbsp;    fun maximumSkillLevel(maximumSkillLevel: Int?) = apply { this.maximumSkillLevel = maximumSkillLevel }</b>
-<b class="fc"><i class="no-highlight">36</i>&nbsp;    fun orderDirection(orderDirection: AuctionOrderDirection?) = apply { this.orderDirection = orderDirection }</b>
-<b class="fc"><i class="no-highlight">37</i>&nbsp;    fun orderBy(orderBy: AuctionOrderBy?) = apply { this.orderBy = orderBy }</b>
-<b class="fc"><i class="no-highlight">38</i>&nbsp;    fun searchString(searchString: String?) = apply { this.searchString = searchString }</b>
-<b class="fc"><i class="no-highlight">39</i>&nbsp;    fun searchType(searchType: AuctionSearchType?) = apply { this.searchType = searchType }</b>
-<i class="no-highlight">40</i>&nbsp;
-<b class="fc"><i class="no-highlight">41</i>&nbsp;    fun build() = BazaarFilters(</b>
-<b class="fc"><i class="no-highlight">42</i>&nbsp;        world = world,</b>
-<b class="fc"><i class="no-highlight">43</i>&nbsp;        pvpType = pvpType,</b>
-<b class="fc"><i class="no-highlight">44</i>&nbsp;        battlEyeType = battlEyeType,</b>
-<b class="fc"><i class="no-highlight">45</i>&nbsp;        vocation = vocation,</b>
-<b class="fc"><i class="no-highlight">46</i>&nbsp;        minimumLevel = minimumLevel,</b>
-<b class="fc"><i class="no-highlight">47</i>&nbsp;        maximumLevel = maximumLevel,</b>
-<b class="fc"><i class="no-highlight">48</i>&nbsp;        skill = skill,</b>
-<b class="fc"><i class="no-highlight">49</i>&nbsp;        minimumSkillLevel = minimumSkillLevel,</b>
-<b class="fc"><i class="no-highlight">50</i>&nbsp;        maximumSkillLevel = maximumSkillLevel,</b>
-<b class="fc"><i class="no-highlight">51</i>&nbsp;        searchString = searchString,</b>
-<b class="fc"><i class="no-highlight">52</i>&nbsp;        searchType = searchType,</b>
-<b class="fc"><i class="no-highlight">53</i>&nbsp;        orderDirection = orderDirection,</b>
-<b class="fc"><i class="no-highlight">54</i>&nbsp;        orderBy = orderBy</b>
-<i class="no-highlight">55</i>&nbsp;    )
-<i class="no-highlight">56</i>&nbsp;}
+<i class="no-highlight">11</i>&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
+<i class="no-highlight">12</i>&nbsp;
+<i class="no-highlight">13</i>&nbsp;
+<i class="no-highlight">14</i>&nbsp;@BuilderDsl
+<i class="no-highlight">15</i>&nbsp;inline fun bazaarFilters(block: BazaarFiltersBuilder.() -&gt; Unit) = bazaarFiltersBuilder(block).build()
+<i class="no-highlight">16</i>&nbsp;
+<i class="no-highlight">17</i>&nbsp;@BuilderDsl
+<i class="no-highlight">18</i>&nbsp;inline fun bazaarFiltersBuilder(block: BazaarFiltersBuilder.() -&gt; Unit) = BazaarFiltersBuilder().apply(block)
+<i class="no-highlight">19</i>&nbsp;
+<b class="fc"><i class="no-highlight">20</i>&nbsp;@BuilderDsl</b>
+<i class="no-highlight">21</i>&nbsp;class BazaarFiltersBuilder {
+<b class="fc"><i class="no-highlight">22</i>&nbsp;    var world: String? = null</b>
+<b class="fc"><i class="no-highlight">23</i>&nbsp;    var pvpType: PvpType? = null</b>
+<b class="fc"><i class="no-highlight">24</i>&nbsp;    var battlEyeType: AuctionBattlEyeFilter? = null</b>
+<b class="fc"><i class="no-highlight">25</i>&nbsp;    var vocation: AuctionVocationFilter? = null</b>
+<b class="fc"><i class="no-highlight">26</i>&nbsp;    var minimumLevel: Int? = null</b>
+<b class="fc"><i class="no-highlight">27</i>&nbsp;    var maximumLevel: Int? = null</b>
+<b class="fc"><i class="no-highlight">28</i>&nbsp;    var skill: AuctionSkillFilter? = null</b>
+<b class="fc"><i class="no-highlight">29</i>&nbsp;    var minimumSkillLevel: Int? = null</b>
+<b class="fc"><i class="no-highlight">30</i>&nbsp;    var maximumSkillLevel: Int? = null</b>
+<b class="fc"><i class="no-highlight">31</i>&nbsp;    var orderDirection: AuctionOrderDirection? = null</b>
+<b class="fc"><i class="no-highlight">32</i>&nbsp;    var orderBy: AuctionOrderBy? = null</b>
+<b class="fc"><i class="no-highlight">33</i>&nbsp;    var searchString: String? = null</b>
+<b class="fc"><i class="no-highlight">34</i>&nbsp;    var searchType: AuctionSearchType? = null</b>
+<i class="no-highlight">35</i>&nbsp;
+<b class="fc"><i class="no-highlight">36</i>&nbsp;    fun build() = BazaarFilters(world = world,</b>
+<b class="fc"><i class="no-highlight">37</i>&nbsp;        pvpType = pvpType,</b>
+<b class="fc"><i class="no-highlight">38</i>&nbsp;        battlEyeType = battlEyeType,</b>
+<b class="fc"><i class="no-highlight">39</i>&nbsp;        vocation = vocation,</b>
+<b class="fc"><i class="no-highlight">40</i>&nbsp;        minimumLevel = minimumLevel,</b>
+<b class="fc"><i class="no-highlight">41</i>&nbsp;        maximumLevel = maximumLevel,</b>
+<b class="fc"><i class="no-highlight">42</i>&nbsp;        skill = skill,</b>
+<b class="fc"><i class="no-highlight">43</i>&nbsp;        minimumSkillLevel = minimumSkillLevel,</b>
+<b class="fc"><i class="no-highlight">44</i>&nbsp;        maximumSkillLevel = maximumSkillLevel,</b>
+<b class="fc"><i class="no-highlight">45</i>&nbsp;        searchString = searchString,</b>
+<b class="fc"><i class="no-highlight">46</i>&nbsp;        searchType = searchType,</b>
+<b class="fc"><i class="no-highlight">47</i>&nbsp;        orderDirection = orderDirection,</b>
+<b class="fc"><i class="no-highlight">48</i>&nbsp;        orderBy = orderBy)</b>
+<i class="no-highlight">49</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -155,7 +148,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-04-16 14:30</div>
+    <div style="float:right;">generated on 2022-04-16 14:42</div>
 </div>
 </body>
 </html>

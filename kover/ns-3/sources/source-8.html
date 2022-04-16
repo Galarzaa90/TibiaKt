@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > CharacterBuilder</title>
+  <title>Coverage Report > CharacterBazaarBuilder</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -20,7 +20,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">com.galarzaa.tibiakt.core.builders</a>
 </div>
 
-<h1>Coverage Summary for Class: CharacterBuilder (com.galarzaa.tibiakt.core.builders)</h1>
+<h1>Coverage Summary for Class: CharacterBazaarBuilder (com.galarzaa.tibiakt.core.builders)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -35,15 +35,11 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 <th class="coverageStat 
 ">
-  Block, %
-</th>
-<th class="coverageStat 
-">
   Line, %
 </th>
 </tr>
 <tr>
-  <td class="name">CharacterBuilder</td>
+  <td class="name">CharacterBazaarBuilder</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -54,26 +50,18 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    92.6%
+    83.3%
   </span>
   <span class="absValue">
-    (25/27)
+    (5/6)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    50%
+    93.8%
   </span>
   <span class="absValue">
-    (6/12)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    92.1%
-  </span>
-  <span class="absValue">
-    (70/76)
+    (15/16)
   </span>
 </td>
 </tr>
@@ -87,132 +75,42 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.builders
 <i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.enums.AccountStatus
-<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.enums.Sex
-<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.enums.Vocation
-<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.models.character.AccountBadge
-<i class="no-highlight">7</i>&nbsp;import com.galarzaa.tibiakt.core.models.character.AccountInformation
-<i class="no-highlight">8</i>&nbsp;import com.galarzaa.tibiakt.core.models.character.Character
-<i class="no-highlight">9</i>&nbsp;import com.galarzaa.tibiakt.core.models.character.CharacterHouse
-<i class="no-highlight">10</i>&nbsp;import com.galarzaa.tibiakt.core.models.character.Death
-<i class="no-highlight">11</i>&nbsp;import com.galarzaa.tibiakt.core.models.character.DisplayedAchievement
-<i class="no-highlight">12</i>&nbsp;import com.galarzaa.tibiakt.core.models.character.GuildMembership
-<i class="no-highlight">13</i>&nbsp;import com.galarzaa.tibiakt.core.models.character.Killer
-<i class="no-highlight">14</i>&nbsp;import com.galarzaa.tibiakt.core.models.character.OtherCharacter
-<i class="no-highlight">15</i>&nbsp;import java.time.Instant
-<i class="no-highlight">16</i>&nbsp;import java.time.LocalDate
-<i class="no-highlight">17</i>&nbsp;
-<b class="fc"><i class="no-highlight">18</i>&nbsp;class CharacterBuilder {</b>
-<i class="no-highlight">19</i>&nbsp;    private var name: String? = null
-<b class="fc"><i class="no-highlight">20</i>&nbsp;    private var level: Int = 2</b>
-<i class="no-highlight">21</i>&nbsp;    private var residence: String? = null
-<i class="no-highlight">22</i>&nbsp;    private var vocation: Vocation? = null
-<i class="no-highlight">23</i>&nbsp;    private var sex: Sex? = null
-<i class="no-highlight">24</i>&nbsp;    private var world: String? = null
-<i class="no-highlight">25</i>&nbsp;    private var achievementPoints: Int = 0
-<i class="no-highlight">26</i>&nbsp;    private var lastLogin: Instant? = null
-<i class="no-highlight">27</i>&nbsp;    private var recentlyTraded: Boolean = false
-<b class="fc"><i class="no-highlight">28</i>&nbsp;    private var formerNames: List&lt;String&gt; = listOf()</b>
-<i class="no-highlight">29</i>&nbsp;    private var deletionDate: Instant? = null
-<i class="no-highlight">30</i>&nbsp;    private var formerWorld: String? = null
-<i class="no-highlight">31</i>&nbsp;    private var accountStatus: AccountStatus? = null
-<i class="no-highlight">32</i>&nbsp;    private var comment: String? = null
-<i class="no-highlight">33</i>&nbsp;    private var title: String? = null
-<i class="no-highlight">34</i>&nbsp;    private var position: String? = null
-<i class="no-highlight">35</i>&nbsp;    private var unlockedTitles: Int = 0
-<i class="no-highlight">36</i>&nbsp;    private var marriedTo: String? = null
-<b class="fc"><i class="no-highlight">37</i>&nbsp;    private val houses: MutableList&lt;CharacterHouse&gt; = mutableListOf()</b>
-<i class="no-highlight">38</i>&nbsp;    private var guildMembership: GuildMembership? = null
-<b class="fc"><i class="no-highlight">39</i>&nbsp;    private val accountBadges: MutableList&lt;AccountBadge&gt; = mutableListOf()</b>
-<b class="fc"><i class="no-highlight">40</i>&nbsp;    private val achievements: MutableList&lt;DisplayedAchievement&gt; = mutableListOf()</b>
-<i class="no-highlight">41</i>&nbsp;    private var accountInformation: AccountInformation? = null
-<b class="fc"><i class="no-highlight">42</i>&nbsp;    private val deaths: MutableList&lt;Death&gt; = mutableListOf()</b>
-<b class="fc"><i class="no-highlight">43</i>&nbsp;    private val characters: MutableList&lt;OtherCharacter&gt; = mutableListOf()</b>
-<i class="no-highlight">44</i>&nbsp;
-<b class="fc"><i class="no-highlight">45</i>&nbsp;    fun name(name: String) = apply { this.name = name }</b>
-<b class="fc"><i class="no-highlight">46</i>&nbsp;    fun titles(currentTitle: String?, unlockedTitles: Int) = apply {</b>
-<b class="fc"><i class="no-highlight">47</i>&nbsp;        title = currentTitle</b>
-<b class="fc"><i class="no-highlight">48</i>&nbsp;        this.unlockedTitles = unlockedTitles</b>
-<b class="fc"><i class="no-highlight">49</i>&nbsp;    }</b>
-<i class="no-highlight">50</i>&nbsp;
-<b class="fc"><i class="no-highlight">51</i>&nbsp;    fun vocation(vocation: Vocation) = apply { this.vocation = vocation }</b>
-<b class="fc"><i class="no-highlight">52</i>&nbsp;    fun level(level: Int) = apply { this.level = level }</b>
-<b class="fc"><i class="no-highlight">53</i>&nbsp;    fun sex(sex: Sex) = apply { this.sex = sex }</b>
-<b class="fc"><i class="no-highlight">54</i>&nbsp;    fun world(world: String) = apply { this.world = world }</b>
-<b class="fc"><i class="no-highlight">55</i>&nbsp;    fun achievementPoints(achievementPoints: Int) = apply { this.achievementPoints = achievementPoints }</b>
-<b class="fc"><i class="no-highlight">56</i>&nbsp;    fun residence(residence: String) = apply { this.residence = residence }</b>
-<b class="nc"><i class="no-highlight">57</i>&nbsp;    fun recentlyTraded(recentlyTraded: Boolean) = apply { this.recentlyTraded = recentlyTraded }</b>
-<b class="fc"><i class="no-highlight">58</i>&nbsp;    fun lastLogin(lastLogin: Instant?) = apply { this.lastLogin = lastLogin }</b>
-<b class="fc"><i class="no-highlight">59</i>&nbsp;    fun deletionDate(deletionDate: Instant?) = apply { this.deletionDate = deletionDate }</b>
-<b class="fc"><i class="no-highlight">60</i>&nbsp;    fun formerNames(formerNames: List&lt;String&gt;) = apply { this.formerNames = formerNames }</b>
-<b class="fc"><i class="no-highlight">61</i>&nbsp;    fun formerWorld(formerWorld: String?) = apply { this.formerWorld = formerWorld }</b>
-<b class="fc"><i class="no-highlight">62</i>&nbsp;    fun position(position: String?) = apply { this.position = position }</b>
-<b class="fc"><i class="no-highlight">63</i>&nbsp;    fun marriedTo(marriedTo: String?) = apply { this.marriedTo = marriedTo }</b>
-<b class="fc"><i class="no-highlight">64</i>&nbsp;    fun accountStatus(accountStatus: AccountStatus) = apply { this.accountStatus = accountStatus }</b>
-<b class="fc"><i class="no-highlight">65</i>&nbsp;    fun comment(comment: String?) = apply { this.comment = comment }</b>
-<b class="fc"><i class="no-highlight">66</i>&nbsp;    fun addHouse(name: String, houseId: Int, town: String, paidUntil: LocalDate, world: String) = apply {</b>
-<b class="fc"><i class="no-highlight">67</i>&nbsp;        houses.add(CharacterHouse(name, houseId, town, paidUntil, world))</b>
-<b class="fc"><i class="no-highlight">68</i>&nbsp;    }</b>
-<i class="no-highlight">69</i>&nbsp;
-<b class="fc"><i class="no-highlight">70</i>&nbsp;    fun addBadge(name: String, descroption: String, iconUrl: String) = apply {</b>
-<b class="fc"><i class="no-highlight">71</i>&nbsp;        accountBadges.add(AccountBadge(name, descroption, iconUrl))</b>
-<b class="fc"><i class="no-highlight">72</i>&nbsp;    }</b>
-<i class="no-highlight">73</i>&nbsp;
-<b class="fc"><i class="no-highlight">74</i>&nbsp;    fun addAchievement(name: String, grade: Int, secret: Boolean) = apply {</b>
-<b class="fc"><i class="no-highlight">75</i>&nbsp;        achievements.add(DisplayedAchievement(name, grade, secret))</b>
-<b class="fc"><i class="no-highlight">76</i>&nbsp;    }</b>
-<i class="no-highlight">77</i>&nbsp;
-<b class="fc"><i class="no-highlight">78</i>&nbsp;    fun accountInformation(created: Instant, loyaltyTitle: String?, position: String?, tutorStars: Int?) = apply {</b>
-<b class="fc"><i class="no-highlight">79</i>&nbsp;        accountInformation = AccountInformation(created, loyaltyTitle, position, tutorStars)</b>
-<b class="fc"><i class="no-highlight">80</i>&nbsp;    }</b>
-<i class="no-highlight">81</i>&nbsp;
-<b class="fc"><i class="no-highlight">82</i>&nbsp;    fun guild(rank: String, guild: String) = apply { guildMembership = GuildMembership(guild, rank) }</b>
-<i class="no-highlight">83</i>&nbsp;
-<b class="fc"><i class="no-highlight">84</i>&nbsp;    fun addDeath(timestamp: Instant, level: Int, killers: List&lt;Killer&gt;, assists: List&lt;Killer&gt;) = apply {</b>
-<b class="fc"><i class="no-highlight">85</i>&nbsp;        deaths.add(Death(timestamp, level, killers, assists))</b>
-<b class="fc"><i class="no-highlight">86</i>&nbsp;    }</b>
-<i class="no-highlight">87</i>&nbsp;
-<b class="nc"><i class="no-highlight">88</i>&nbsp;    fun addCharacter(</b>
-<i class="no-highlight">89</i>&nbsp;        name: String,
-<i class="no-highlight">90</i>&nbsp;        world: String,
-<b class="nc"><i class="no-highlight">91</i>&nbsp;        main: Boolean = false,</b>
-<b class="nc"><i class="no-highlight">92</i>&nbsp;        online: Boolean = false,</b>
-<b class="nc"><i class="no-highlight">93</i>&nbsp;        deleted: Boolean = false,</b>
-<b class="nc"><i class="no-highlight">94</i>&nbsp;        traded: Boolean = false,</b>
-<i class="no-highlight">95</i>&nbsp;        position: String?
-<i class="no-highlight">96</i>&nbsp;    ) =
-<b class="fc"><i class="no-highlight">97</i>&nbsp;        apply { characters.add(OtherCharacter(name, world, main, online, deleted, traded, position)) }</b>
-<i class="no-highlight">98</i>&nbsp;
-<i class="no-highlight">99</i>&nbsp;
-<i class="no-highlight">100</i>&nbsp;    fun build() =
-<b class="fc"><i class="no-highlight">101</i>&nbsp;        Character(</b>
-<b class="pc"><i class="no-highlight">102</i>&nbsp;            name = name ?: throw IllegalStateException(&quot;name is required&quot;),</b>
-<b class="fc"><i class="no-highlight">103</i>&nbsp;            title = title,</b>
-<b class="fc"><i class="no-highlight">104</i>&nbsp;            formerNames = formerNames,</b>
-<b class="fc"><i class="no-highlight">105</i>&nbsp;            unlockedTitles = unlockedTitles,</b>
-<b class="pc"><i class="no-highlight">106</i>&nbsp;            sex = sex ?: throw IllegalStateException(&quot;sex is required&quot;),</b>
-<b class="pc"><i class="no-highlight">107</i>&nbsp;            vocation = vocation ?: throw IllegalStateException(&quot;vocation is required&quot;),</b>
-<b class="fc"><i class="no-highlight">108</i>&nbsp;            level = level,</b>
-<b class="fc"><i class="no-highlight">109</i>&nbsp;            achievementPoints = achievementPoints,</b>
-<b class="pc"><i class="no-highlight">110</i>&nbsp;            world = world ?: throw IllegalStateException(&quot;world is required&quot;),</b>
-<b class="fc"><i class="no-highlight">111</i>&nbsp;            formerWorld = formerWorld,</b>
-<b class="pc"><i class="no-highlight">112</i>&nbsp;            residence = residence ?: throw IllegalStateException(&quot;residence is required&quot;),</b>
-<b class="fc"><i class="no-highlight">113</i>&nbsp;            marriedTo = marriedTo,</b>
-<b class="fc"><i class="no-highlight">114</i>&nbsp;            houses = houses,</b>
-<b class="fc"><i class="no-highlight">115</i>&nbsp;            guildMembership = guildMembership,</b>
-<b class="fc"><i class="no-highlight">116</i>&nbsp;            lastLogin = lastLogin,</b>
-<b class="fc"><i class="no-highlight">117</i>&nbsp;            position = position,</b>
-<b class="fc"><i class="no-highlight">118</i>&nbsp;            comment = comment,</b>
-<b class="pc"><i class="no-highlight">119</i>&nbsp;            accountStatus = accountStatus ?: throw IllegalStateException(&quot;accountStatus is required&quot;),</b>
-<b class="fc"><i class="no-highlight">120</i>&nbsp;            recentlyTraded = recentlyTraded,</b>
-<b class="fc"><i class="no-highlight">121</i>&nbsp;            deletionDate = deletionDate,</b>
-<b class="fc"><i class="no-highlight">122</i>&nbsp;            badges = accountBadges,</b>
-<b class="fc"><i class="no-highlight">123</i>&nbsp;            achievements = achievements,</b>
-<b class="fc"><i class="no-highlight">124</i>&nbsp;            deaths = deaths,</b>
-<b class="fc"><i class="no-highlight">125</i>&nbsp;            accountInformation = accountInformation,</b>
-<b class="fc"><i class="no-highlight">126</i>&nbsp;            characters = characters</b>
-<i class="no-highlight">127</i>&nbsp;        )
-<i class="no-highlight">128</i>&nbsp;}
+<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.enums.BazaarType
+<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.Auction
+<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.BazaarFilters
+<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.CharacterBazaar
+<i class="no-highlight">7</i>&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
+<i class="no-highlight">8</i>&nbsp;
+<i class="no-highlight">9</i>&nbsp;
+<i class="no-highlight">10</i>&nbsp;@BuilderDsl
+<i class="no-highlight">11</i>&nbsp;inline fun characterBazaar(block: CharacterBazaarBuilder.() -&gt; Unit) = characterBazaarBuilder(block).build()
+<i class="no-highlight">12</i>&nbsp;
+<i class="no-highlight">13</i>&nbsp;@BuilderDsl
+<i class="no-highlight">14</i>&nbsp;inline fun characterBazaarBuilder(block: CharacterBazaarBuilder.() -&gt; Unit) = CharacterBazaarBuilder().apply(block)
+<i class="no-highlight">15</i>&nbsp;
+<b class="fc"><i class="no-highlight">16</i>&nbsp;class CharacterBazaarBuilder {</b>
+<b class="fc"><i class="no-highlight">17</i>&nbsp;    var type: BazaarType = BazaarType.CURRENT</b>
+<b class="fc"><i class="no-highlight">18</i>&nbsp;    var currentPage: Int = 0</b>
+<b class="fc"><i class="no-highlight">19</i>&nbsp;    var totalPages: Int = 1</b>
+<b class="fc"><i class="no-highlight">20</i>&nbsp;    var resultsCount: Int = 0</b>
+<b class="fc"><i class="no-highlight">21</i>&nbsp;    var filters: BazaarFilters = BazaarFilters()</b>
+<b class="fc"><i class="no-highlight">22</i>&nbsp;    private val entries: MutableList&lt;Auction&gt; = mutableListOf()</b>
+<i class="no-highlight">23</i>&nbsp;
+<i class="no-highlight">24</i>&nbsp;
+<b class="nc"><i class="no-highlight">25</i>&nbsp;    fun addEntry(entry: Auction) = apply { entries.add(entry) }</b>
+<i class="no-highlight">26</i>&nbsp;
+<i class="no-highlight">27</i>&nbsp;    @BuilderDsl
+<b class="fc"><i class="no-highlight">28</i>&nbsp;    fun auction(block: AuctionBuilder.() -&gt; Unit) = apply { entries.add(AuctionBuilder().apply(block).build()) }</b>
+<i class="no-highlight">29</i>&nbsp;
+<b class="fc"><i class="no-highlight">30</i>&nbsp;    fun build() = CharacterBazaar(</b>
+<b class="fc"><i class="no-highlight">31</i>&nbsp;        type = type,</b>
+<b class="fc"><i class="no-highlight">32</i>&nbsp;        filters = filters,</b>
+<b class="fc"><i class="no-highlight">33</i>&nbsp;        currentPage = currentPage,</b>
+<b class="fc"><i class="no-highlight">34</i>&nbsp;        totalPages = totalPages,</b>
+<b class="fc"><i class="no-highlight">35</i>&nbsp;        resultsCount = resultsCount,</b>
+<b class="fc"><i class="no-highlight">36</i>&nbsp;        entries = entries,</b>
+<i class="no-highlight">37</i>&nbsp;    )
+<i class="no-highlight">38</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -239,7 +137,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-04-16 14:30</div>
+    <div style="float:right;">generated on 2022-04-16 14:42</div>
 </div>
 </body>
 </html>

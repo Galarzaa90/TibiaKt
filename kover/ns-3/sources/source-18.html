@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > GuildsSectionBuilderKt</title>
+  <title>Coverage Report > GuildBuilderKt</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -20,7 +20,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">com.galarzaa.tibiakt.core.builders</a>
 </div>
 
-<h1>Coverage Summary for Class: GuildsSectionBuilderKt (com.galarzaa.tibiakt.core.builders)</h1>
+<h1>Coverage Summary for Class: GuildBuilderKt (com.galarzaa.tibiakt.core.builders)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -39,7 +39,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">GuildsSectionBuilderKt</td>
+  <td class="name">GuildBuilderKt</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -75,28 +75,69 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.builders
 <i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.models.guild.GuildEntry
-<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.models.guild.GuildsSection
-<i class="no-highlight">5</i>&nbsp;
-<i class="no-highlight">6</i>&nbsp;
-<b class="fc"><i class="no-highlight">7</i>&nbsp;inline fun guildsSectionBuilder(block: GuildsSectionBuilder.() -&gt; Unit) = GuildsSectionBuilder().apply(block)</b>
-<b class="fc"><i class="no-highlight">8</i>&nbsp;inline fun guildsSection(block: GuildsSectionBuilder.() -&gt; Unit) = guildsSectionBuilder(block).build()</b>
-<i class="no-highlight">9</i>&nbsp;
-<i class="no-highlight">10</i>&nbsp;class GuildsSectionBuilder {
-<i class="no-highlight">11</i>&nbsp;    var world: String? = null
-<i class="no-highlight">12</i>&nbsp;    val guilds: MutableList&lt;GuildEntry&gt; = mutableListOf()
-<i class="no-highlight">13</i>&nbsp;
-<i class="no-highlight">14</i>&nbsp;    fun addGuild(name: String, logoUrl: String, description: String? = null, isActive: Boolean) = apply {
-<i class="no-highlight">15</i>&nbsp;        guilds.add(GuildEntry(name, description, logoUrl, isActive))
-<i class="no-highlight">16</i>&nbsp;    }
-<i class="no-highlight">17</i>&nbsp;
-<i class="no-highlight">18</i>&nbsp;    fun build(): GuildsSection {
-<i class="no-highlight">19</i>&nbsp;        return GuildsSection(
-<i class="no-highlight">20</i>&nbsp;            world = world ?: throw IllegalStateException(&quot;name is required&quot;),
-<i class="no-highlight">21</i>&nbsp;            guilds = guilds
-<i class="no-highlight">22</i>&nbsp;        )
-<i class="no-highlight">23</i>&nbsp;    }
-<i class="no-highlight">24</i>&nbsp;}
+<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.enums.Vocation
+<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.models.guild.Guild
+<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.models.guild.GuildHall
+<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.models.guild.GuildInvite
+<i class="no-highlight">7</i>&nbsp;import com.galarzaa.tibiakt.core.models.guild.GuildMember
+<i class="no-highlight">8</i>&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
+<i class="no-highlight">9</i>&nbsp;import java.time.LocalDate
+<i class="no-highlight">10</i>&nbsp;
+<i class="no-highlight">11</i>&nbsp;
+<b class="fc"><i class="no-highlight">12</i>&nbsp;inline fun guildBuilder(block: GuildBuilder.() -&gt; Unit) = GuildBuilder().apply(block)</b>
+<b class="fc"><i class="no-highlight">13</i>&nbsp;inline fun guild(block: GuildBuilder.() -&gt; Unit) = guildBuilder(block).build()</b>
+<i class="no-highlight">14</i>&nbsp;
+<i class="no-highlight">15</i>&nbsp;@BuilderDsl
+<i class="no-highlight">16</i>&nbsp;class GuildBuilder {
+<i class="no-highlight">17</i>&nbsp;    var world: String? = null
+<i class="no-highlight">18</i>&nbsp;    var name: String? = null
+<i class="no-highlight">19</i>&nbsp;    var logoUrl: String? = null
+<i class="no-highlight">20</i>&nbsp;    var description: String? = null
+<i class="no-highlight">21</i>&nbsp;    var foundingDate: LocalDate? = null
+<i class="no-highlight">22</i>&nbsp;    var isActive: Boolean = false
+<i class="no-highlight">23</i>&nbsp;    var applicationsOpen: Boolean = false
+<i class="no-highlight">24</i>&nbsp;    var homepage: String? = null
+<i class="no-highlight">25</i>&nbsp;    var guildHall: GuildHall? = null
+<i class="no-highlight">26</i>&nbsp;    var disbandingDate: LocalDate? = null
+<i class="no-highlight">27</i>&nbsp;    var disbandingReason: String? = null
+<i class="no-highlight">28</i>&nbsp;    val members: MutableList&lt;GuildMember&gt; = mutableListOf()
+<i class="no-highlight">29</i>&nbsp;    val invited: MutableList&lt;GuildInvite&gt; = mutableListOf()
+<i class="no-highlight">30</i>&nbsp;
+<i class="no-highlight">31</i>&nbsp;    fun guildHall(name: String, paidUntil: LocalDate) = apply { guildHall = GuildHall(name, paidUntil) }
+<i class="no-highlight">32</i>&nbsp;    fun guildHall(guildHall: GuildHall) = apply { this.guildHall = guildHall }
+<i class="no-highlight">33</i>&nbsp;
+<i class="no-highlight">34</i>&nbsp;    fun addMember(
+<i class="no-highlight">35</i>&nbsp;        rank: String,
+<i class="no-highlight">36</i>&nbsp;        name: String,
+<i class="no-highlight">37</i>&nbsp;        title: String?,
+<i class="no-highlight">38</i>&nbsp;        vocation: Vocation,
+<i class="no-highlight">39</i>&nbsp;        level: Int,
+<i class="no-highlight">40</i>&nbsp;        joiningDate: LocalDate,
+<i class="no-highlight">41</i>&nbsp;        isOnline: Boolean,
+<i class="no-highlight">42</i>&nbsp;    ) = apply {
+<i class="no-highlight">43</i>&nbsp;        members.add(GuildMember(name, rank, title, level, vocation, joiningDate, isOnline))
+<i class="no-highlight">44</i>&nbsp;    }
+<i class="no-highlight">45</i>&nbsp;
+<i class="no-highlight">46</i>&nbsp;    fun addInvite(name: String, inviteDate: LocalDate) = apply { invited.add(GuildInvite(name, inviteDate)) }
+<i class="no-highlight">47</i>&nbsp;
+<i class="no-highlight">48</i>&nbsp;    fun build(): Guild {
+<i class="no-highlight">49</i>&nbsp;        return Guild(
+<i class="no-highlight">50</i>&nbsp;            world = world ?: throw IllegalStateException(&quot;world is required&quot;),
+<i class="no-highlight">51</i>&nbsp;            name = name ?: throw IllegalStateException(&quot;name is required&quot;),
+<i class="no-highlight">52</i>&nbsp;            logoUrl = logoUrl ?: throw IllegalStateException(&quot;logoUrl is required&quot;),
+<i class="no-highlight">53</i>&nbsp;            description = description,
+<i class="no-highlight">54</i>&nbsp;            foundingDate = foundingDate ?: throw IllegalStateException(&quot;name is required&quot;),
+<i class="no-highlight">55</i>&nbsp;            isActive = isActive,
+<i class="no-highlight">56</i>&nbsp;            applicationsOpen = applicationsOpen,
+<i class="no-highlight">57</i>&nbsp;            homepage = homepage,
+<i class="no-highlight">58</i>&nbsp;            guildHall = guildHall,
+<i class="no-highlight">59</i>&nbsp;            members = members,
+<i class="no-highlight">60</i>&nbsp;            invited = invited,
+<i class="no-highlight">61</i>&nbsp;            disbandingDate = disbandingDate,
+<i class="no-highlight">62</i>&nbsp;            disbandingReason = disbandingReason,
+<i class="no-highlight">63</i>&nbsp;        )
+<i class="no-highlight">64</i>&nbsp;    }
+<i class="no-highlight">65</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -123,7 +164,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-04-16 14:30</div>
+    <div style="float:right;">generated on 2022-04-16 14:42</div>
 </div>
 </body>
 </html>
