@@ -92,6 +92,7 @@ import io.ktor.client.plugins.Charsets
 import io.ktor.client.plugins.ResponseException
 import io.ktor.client.plugins.UserAgent
 import io.ktor.client.plugins.compression.ContentEncoding
+import io.ktor.client.plugins.expectSuccess
 import io.ktor.client.request.forms.submitForm
 import io.ktor.client.request.get
 import io.ktor.client.request.header
@@ -155,13 +156,16 @@ open class TibiaKtClient constructor(
         val response: HttpResponse = try {
             when (method) {
                 HttpMethod.Get -> client.get(url) {
+                    expectSuccess = true
                     if (headers.isNotEmpty()) {
                         headers { headers.forEach { header(it.first, it.second) } }
                     }
                 }
                 HttpMethod.Post -> client.submitForm(url, formParameters = Parameters.build {
                     data.forEach { append(it.first, it.second.toString()) }
-                }, encodeInQuery = false)
+                }, encodeInQuery = false) {
+
+                }
                 else -> throw IllegalArgumentException("Unsupported method $method")
             }
         } catch (re: ResponseException) {
