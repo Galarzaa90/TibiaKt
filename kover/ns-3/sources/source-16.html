@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > ForumsSectionBuilderKt</title>
+  <title>Coverage Report > ForumThreadBuilderKt</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -20,7 +20,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">com.galarzaa.tibiakt.core.builders</a>
 </div>
 
-<h1>Coverage Summary for Class: ForumsSectionBuilderKt (com.galarzaa.tibiakt.core.builders)</h1>
+<h1>Coverage Summary for Class: ForumThreadBuilderKt (com.galarzaa.tibiakt.core.builders)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -39,7 +39,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">ForumsSectionBuilderKt</td>
+  <td class="name">ForumThreadBuilderKt</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -75,48 +75,75 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.builders
 <i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.BoardEntry
-<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.ForumSection
-<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.LastPost
-<i class="no-highlight">6</i>&nbsp;
-<i class="no-highlight">7</i>&nbsp;
-<b class="fc"><i class="no-highlight">8</i>&nbsp;inline fun forumsSectionBuilder(block: ForumsSectionBuilder.() -&gt; Unit) = ForumsSectionBuilder().apply(block)</b>
-<b class="fc"><i class="no-highlight">9</i>&nbsp;inline fun forumsSection(block: ForumsSectionBuilder.() -&gt; Unit) = forumsSectionBuilder(block).build()</b>
-<i class="no-highlight">10</i>&nbsp;
-<b class="fc"><i class="no-highlight">11</i>&nbsp;inline fun boardEntryBuilder(block: BoardEntryBuilder.() -&gt; Unit) = BoardEntryBuilder().apply(block)</b>
-<b class="fc"><i class="no-highlight">12</i>&nbsp;inline fun boardEntry(block: BoardEntryBuilder.() -&gt; Unit) = boardEntryBuilder(block).build()</b>
-<i class="no-highlight">13</i>&nbsp;
-<i class="no-highlight">14</i>&nbsp;class ForumsSectionBuilder {
-<i class="no-highlight">15</i>&nbsp;    var sectionId: Int = 0
-<i class="no-highlight">16</i>&nbsp;    val entries: MutableList&lt;BoardEntry&gt; = mutableListOf()
-<i class="no-highlight">17</i>&nbsp;
-<i class="no-highlight">18</i>&nbsp;    fun addEntry(block: BoardEntryBuilder.() -&gt; Unit) {
-<i class="no-highlight">19</i>&nbsp;        entries.add(boardEntry(block))
-<i class="no-highlight">20</i>&nbsp;    }
-<i class="no-highlight">21</i>&nbsp;
-<i class="no-highlight">22</i>&nbsp;    fun build() = ForumSection(
-<i class="no-highlight">23</i>&nbsp;        sectionId = sectionId,
-<i class="no-highlight">24</i>&nbsp;        entries = entries
-<i class="no-highlight">25</i>&nbsp;    )
-<i class="no-highlight">26</i>&nbsp;}
+<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.BaseForumAuthor
+<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.ForumEmoticon
+<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.ForumPost
+<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.ForumThread
+<i class="no-highlight">7</i>&nbsp;import java.time.Instant
+<i class="no-highlight">8</i>&nbsp;
+<b class="fc"><i class="no-highlight">9</i>&nbsp;inline fun forumThreadBuilder(block: ForumThreadBuilder.() -&gt; Unit) = ForumThreadBuilder().apply(block)</b>
+<b class="fc"><i class="no-highlight">10</i>&nbsp;inline fun forumThread(block: ForumThreadBuilder.() -&gt; Unit) = forumThreadBuilder(block).build()</b>
+<i class="no-highlight">11</i>&nbsp;
+<i class="no-highlight">12</i>&nbsp;class ForumThreadBuilder {
+<i class="no-highlight">13</i>&nbsp;    var title: String? = null
+<i class="no-highlight">14</i>&nbsp;    var threadId: Int? = null
+<i class="no-highlight">15</i>&nbsp;    var board: String? = null
+<i class="no-highlight">16</i>&nbsp;    var boardId: Int? = null
+<i class="no-highlight">17</i>&nbsp;    var section: String? = null
+<i class="no-highlight">18</i>&nbsp;    var sectionId: Int? = null
+<i class="no-highlight">19</i>&nbsp;    var previousTopicNumber: Int? = null
+<i class="no-highlight">20</i>&nbsp;    var nextTopicNumber: Int? = null
+<i class="no-highlight">21</i>&nbsp;    var goldenFrame: Boolean = false
+<i class="no-highlight">22</i>&nbsp;    var anchoredPost: ForumPost? = null
+<i class="no-highlight">23</i>&nbsp;    var currentPage: Int = 1
+<i class="no-highlight">24</i>&nbsp;    var totalPages: Int = 1
+<i class="no-highlight">25</i>&nbsp;    var resultsCount: Int = 1
+<i class="no-highlight">26</i>&nbsp;    val entries = mutableListOf&lt;ForumPost&gt;()
 <i class="no-highlight">27</i>&nbsp;
-<i class="no-highlight">28</i>&nbsp;class BoardEntryBuilder {
-<i class="no-highlight">29</i>&nbsp;    var name: String? = null
-<i class="no-highlight">30</i>&nbsp;    var boardId: Int = 0
-<i class="no-highlight">31</i>&nbsp;    var description: String? = null
-<i class="no-highlight">32</i>&nbsp;    var posts: Int = 0
-<i class="no-highlight">33</i>&nbsp;    var threads: Int = 0
-<i class="no-highlight">34</i>&nbsp;    var lastPost: LastPost? = null
-<i class="no-highlight">35</i>&nbsp;
-<i class="no-highlight">36</i>&nbsp;    fun build() = BoardEntry(
-<i class="no-highlight">37</i>&nbsp;        name = name ?: throw IllegalArgumentException(&quot;name is required&quot;),
-<i class="no-highlight">38</i>&nbsp;        boardId = boardId,
-<i class="no-highlight">39</i>&nbsp;        description = description ?: throw IllegalArgumentException(&quot;description is required&quot;),
-<i class="no-highlight">40</i>&nbsp;        posts = posts,
-<i class="no-highlight">41</i>&nbsp;        threads = threads,
-<i class="no-highlight">42</i>&nbsp;        lastPost = lastPost
-<i class="no-highlight">43</i>&nbsp;    )
-<i class="no-highlight">44</i>&nbsp;}
+<i class="no-highlight">28</i>&nbsp;    fun addPost(post: ForumPost) = apply { entries.add(post) }
+<i class="no-highlight">29</i>&nbsp;    fun addPost(block: ForumPostBuilder.() -&gt; Unit) = apply { entries.add(forumPost(block)) }
+<i class="no-highlight">30</i>&nbsp;
+<i class="no-highlight">31</i>&nbsp;
+<i class="no-highlight">32</i>&nbsp;    fun build(): ForumThread = ForumThread(title = title ?: throw IllegalStateException(&quot;title is required&quot;),
+<i class="no-highlight">33</i>&nbsp;        threadId = threadId ?: throw IllegalStateException(&quot;threadId is required&quot;),
+<i class="no-highlight">34</i>&nbsp;        board = board ?: throw IllegalStateException(&quot;board is required&quot;),
+<i class="no-highlight">35</i>&nbsp;        boardId = boardId ?: throw IllegalStateException(&quot;boardId is required&quot;),
+<i class="no-highlight">36</i>&nbsp;        section = section ?: throw IllegalStateException(&quot;section is required&quot;),
+<i class="no-highlight">37</i>&nbsp;        sectionId = sectionId ?: throw IllegalStateException(&quot;sectionId is required&quot;),
+<i class="no-highlight">38</i>&nbsp;        previousTopicNumber = previousTopicNumber,
+<i class="no-highlight">39</i>&nbsp;        nextTopicNumber = nextTopicNumber,
+<i class="no-highlight">40</i>&nbsp;        goldenFrame = goldenFrame,
+<i class="no-highlight">41</i>&nbsp;        anchoredPost = anchoredPost,
+<i class="no-highlight">42</i>&nbsp;        currentPage = currentPage,
+<i class="no-highlight">43</i>&nbsp;        totalPages = totalPages,
+<i class="no-highlight">44</i>&nbsp;        resultsCount = resultsCount,
+<i class="no-highlight">45</i>&nbsp;        entries = entries)
+<i class="no-highlight">46</i>&nbsp;}
+<i class="no-highlight">47</i>&nbsp;
+<b class="fc"><i class="no-highlight">48</i>&nbsp;inline fun forumPostBuilder(block: ForumPostBuilder.() -&gt; Unit) = ForumPostBuilder().apply(block)</b>
+<b class="fc"><i class="no-highlight">49</i>&nbsp;inline fun forumPost(block: ForumPostBuilder.() -&gt; Unit) = forumPostBuilder(block).build()</b>
+<i class="no-highlight">50</i>&nbsp;
+<i class="no-highlight">51</i>&nbsp;class ForumPostBuilder {
+<i class="no-highlight">52</i>&nbsp;    var author: BaseForumAuthor? = null
+<i class="no-highlight">53</i>&nbsp;    var emoticon: ForumEmoticon? = null
+<i class="no-highlight">54</i>&nbsp;    var title: String? = null
+<i class="no-highlight">55</i>&nbsp;    var content: String? = null
+<i class="no-highlight">56</i>&nbsp;    var signature: String? = null
+<i class="no-highlight">57</i>&nbsp;    var postId: Int? = null
+<i class="no-highlight">58</i>&nbsp;    var postedDate: Instant? = null
+<i class="no-highlight">59</i>&nbsp;    var editedDate: Instant? = null
+<i class="no-highlight">60</i>&nbsp;    var editedBy: String? = null
+<i class="no-highlight">61</i>&nbsp;
+<i class="no-highlight">62</i>&nbsp;    fun build() = ForumPost(author = author ?: throw IllegalStateException(&quot;author is required&quot;),
+<i class="no-highlight">63</i>&nbsp;        emoticon = emoticon,
+<i class="no-highlight">64</i>&nbsp;        title = title,
+<i class="no-highlight">65</i>&nbsp;        content = content ?: throw IllegalStateException(&quot;content is required&quot;),
+<i class="no-highlight">66</i>&nbsp;        signature = signature,
+<i class="no-highlight">67</i>&nbsp;        postId = postId ?: throw IllegalStateException(&quot;postId is required&quot;),
+<i class="no-highlight">68</i>&nbsp;        postedDate = postedDate ?: Instant.now(),
+<i class="no-highlight">69</i>&nbsp;        editedDate = editedDate,
+<i class="no-highlight">70</i>&nbsp;        editedBy = editedBy)
+<i class="no-highlight">71</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -143,7 +170,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-04-16 14:42</div>
+    <div style="float:right;">generated on 2022-04-17 19:16</div>
 </div>
 </body>
 </html>

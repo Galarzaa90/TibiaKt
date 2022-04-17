@@ -159,35 +159,45 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">11</i>&nbsp;    abstract val name: String
 <i class="no-highlight">12</i>&nbsp;}
 <i class="no-highlight">13</i>&nbsp;
-<i class="no-highlight">14</i>&nbsp;@Serializable
-<i class="no-highlight">15</i>&nbsp;@SerialName(&quot;unavailableForumAuthor&quot;)
-<i class="no-highlight">16</i>&nbsp;data class UnavailableForumAuthor(
-<i class="no-highlight">17</i>&nbsp;    override val name: String,
-<i class="no-highlight">18</i>&nbsp;    val deleted: Boolean,
-<i class="no-highlight">19</i>&nbsp;    val traded: Boolean,
-<i class="no-highlight">20</i>&nbsp;) : BaseForumAuthor()
-<i class="no-highlight">21</i>&nbsp;
-<b class="nc"><i class="no-highlight">22</i>&nbsp;@SerialName(&quot;forumAuthor&quot;)</b>
-<i class="no-highlight">23</i>&nbsp;@Serializable
-<i class="no-highlight">24</i>&nbsp;data class ForumAuthor(
-<b class="fc"><i class="no-highlight">25</i>&nbsp;    override val name: String,</b>
-<b class="fc"><i class="no-highlight">26</i>&nbsp;    val level: Int,</b>
-<b class="fc"><i class="no-highlight">27</i>&nbsp;    val world: String,</b>
-<b class="fc"><i class="no-highlight">28</i>&nbsp;    val position: String?,</b>
-<b class="fc"><i class="no-highlight">29</i>&nbsp;    val title: String?,</b>
-<b class="fc"><i class="no-highlight">30</i>&nbsp;    val vocation: Vocation,</b>
-<b class="fc"><i class="no-highlight">31</i>&nbsp;    val guild: GuildMembership?,</b>
-<b class="fc"><i class="no-highlight">32</i>&nbsp;    val posts: Int,</b>
-<b class="fc"><i class="no-highlight">33</i>&nbsp;    val traded: Boolean,</b>
-<b class="fc"><i class="no-highlight">34</i>&nbsp;) : BaseForumAuthor(), BaseCharacter</b>
-<i class="no-highlight">35</i>&nbsp;
-<i class="no-highlight">36</i>&nbsp;
-<i class="no-highlight">37</i>&nbsp;@SerialName(&quot;tournamentForumAuthor&quot;)
-<i class="no-highlight">38</i>&nbsp;@Serializable
-<i class="no-highlight">39</i>&nbsp;data class TournamentForumAuthor(
-<i class="no-highlight">40</i>&nbsp;    override val name: String,
-<i class="no-highlight">41</i>&nbsp;    val posts: Int,
-<i class="no-highlight">42</i>&nbsp;) : BaseForumAuthor(), BaseCharacter
+<i class="no-highlight">14</i>&nbsp;/**
+<i class="no-highlight">15</i>&nbsp; * A forum author that is no longer available due to being deleted or having been traded.
+<i class="no-highlight">16</i>&nbsp; *
+<i class="no-highlight">17</i>&nbsp; * If the author [isTraded], it means that the post was made by the account that owned the character before.
+<i class="no-highlight">18</i>&nbsp; */
+<i class="no-highlight">19</i>&nbsp;@Serializable
+<i class="no-highlight">20</i>&nbsp;@SerialName(&quot;unavailableForumAuthor&quot;)
+<i class="no-highlight">21</i>&nbsp;data class UnavailableForumAuthor(
+<i class="no-highlight">22</i>&nbsp;    override val name: String,
+<i class="no-highlight">23</i>&nbsp;    val isDeleted: Boolean,
+<i class="no-highlight">24</i>&nbsp;    val isTraded: Boolean,
+<i class="no-highlight">25</i>&nbsp;) : BaseForumAuthor()
+<i class="no-highlight">26</i>&nbsp;
+<i class="no-highlight">27</i>&nbsp;/**
+<i class="no-highlight">28</i>&nbsp; * The author of a forum post or thread.
+<i class="no-highlight">29</i>&nbsp; *
+<i class="no-highlight">30</i>&nbsp; * If the character [isRecentlyTraded], it means that the character was traded in the last 30 days, but the post was made by the new owner.
+<i class="no-highlight">31</i>&nbsp; */
+<b class="nc"><i class="no-highlight">32</i>&nbsp;@SerialName(&quot;forumAuthor&quot;)</b>
+<i class="no-highlight">33</i>&nbsp;@Serializable
+<i class="no-highlight">34</i>&nbsp;data class ForumAuthor(
+<b class="fc"><i class="no-highlight">35</i>&nbsp;    override val name: String,</b>
+<b class="fc"><i class="no-highlight">36</i>&nbsp;    val level: Int,</b>
+<b class="fc"><i class="no-highlight">37</i>&nbsp;    val world: String,</b>
+<b class="fc"><i class="no-highlight">38</i>&nbsp;    val position: String?,</b>
+<b class="fc"><i class="no-highlight">39</i>&nbsp;    val title: String?,</b>
+<b class="fc"><i class="no-highlight">40</i>&nbsp;    val vocation: Vocation,</b>
+<b class="fc"><i class="no-highlight">41</i>&nbsp;    val guild: GuildMembership?,</b>
+<b class="fc"><i class="no-highlight">42</i>&nbsp;    val posts: Int,</b>
+<b class="fc"><i class="no-highlight">43</i>&nbsp;    val isRecentlyTraded: Boolean,</b>
+<b class="fc"><i class="no-highlight">44</i>&nbsp;) : BaseForumAuthor(), BaseCharacter</b>
+<i class="no-highlight">45</i>&nbsp;
+<i class="no-highlight">46</i>&nbsp;
+<i class="no-highlight">47</i>&nbsp;@SerialName(&quot;tournamentForumAuthor&quot;)
+<i class="no-highlight">48</i>&nbsp;@Serializable
+<i class="no-highlight">49</i>&nbsp;data class TournamentForumAuthor(
+<i class="no-highlight">50</i>&nbsp;    override val name: String,
+<i class="no-highlight">51</i>&nbsp;    val posts: Int,
+<i class="no-highlight">52</i>&nbsp;) : BaseForumAuthor(), BaseCharacter
 </div>
 </pre>
 </div>
@@ -214,7 +224,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-04-16 14:42</div>
+    <div style="float:right;">generated on 2022-04-17 19:16</div>
 </div>
 </body>
 </html>

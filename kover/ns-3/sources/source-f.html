@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > ForumAnnouncementBuilderKt</title>
+  <title>Coverage Report > EventsScheduleBuilder</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -20,7 +20,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">com.galarzaa.tibiakt.core.builders</a>
 </div>
 
-<h1>Coverage Summary for Class: ForumAnnouncementBuilderKt (com.galarzaa.tibiakt.core.builders)</h1>
+<h1>Coverage Summary for Class: EventsScheduleBuilder (com.galarzaa.tibiakt.core.builders)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -35,11 +35,15 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 <th class="coverageStat 
 ">
+  Block, %
+</th>
+<th class="coverageStat 
+">
   Line, %
 </th>
 </tr>
 <tr>
-  <td class="name">ForumAnnouncementBuilderKt</td>
+  <td class="name">EventsScheduleBuilder</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -50,18 +54,26 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    66.7%
   </span>
   <span class="absValue">
-    (2/2)
+    (4/6)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    50%
   </span>
   <span class="absValue">
-    (2/2)
+    (1/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    77.8%
+  </span>
+  <span class="absValue">
+    (7/9)
   </span>
 </td>
 </tr>
@@ -75,40 +87,27 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.builders
 <i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.BaseForumAuthor
-<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.ForumAnnouncement
-<i class="no-highlight">5</i>&nbsp;import java.time.Instant
-<i class="no-highlight">6</i>&nbsp;
-<b class="fc"><i class="no-highlight">7</i>&nbsp;inline fun forumAnnouncementBuilder(block: ForumAnnouncementBuilder.() -&gt; Unit) = ForumAnnouncementBuilder().apply(block)</b>
-<b class="fc"><i class="no-highlight">8</i>&nbsp;inline fun forumAnnouncement(block: ForumAnnouncementBuilder.() -&gt; Unit) = forumAnnouncementBuilder(block).build()</b>
-<i class="no-highlight">9</i>&nbsp;
-<i class="no-highlight">10</i>&nbsp;class ForumAnnouncementBuilder {
-<i class="no-highlight">11</i>&nbsp;    var announcementId: Int? = null
-<i class="no-highlight">12</i>&nbsp;    var title: String? = null
-<i class="no-highlight">13</i>&nbsp;    var board: String? = null
-<i class="no-highlight">14</i>&nbsp;    var boardId: Int? = null
-<i class="no-highlight">15</i>&nbsp;    var section: String? = null
-<i class="no-highlight">16</i>&nbsp;    var sectionId: Int? = null
-<i class="no-highlight">17</i>&nbsp;    var author: BaseForumAuthor? = null
-<i class="no-highlight">18</i>&nbsp;    var content: String? = null
-<i class="no-highlight">19</i>&nbsp;    var startDate: Instant? = null
-<i class="no-highlight">20</i>&nbsp;    var endDate: Instant? = null
-<i class="no-highlight">21</i>&nbsp;
-<i class="no-highlight">22</i>&nbsp;    fun build(): ForumAnnouncement {
-<i class="no-highlight">23</i>&nbsp;        return ForumAnnouncement(
-<i class="no-highlight">24</i>&nbsp;            announcementId = announcementId ?: throw IllegalStateException(&quot;announcementId is required&quot;),
-<i class="no-highlight">25</i>&nbsp;            title = title ?: throw IllegalStateException(&quot;title is required&quot;),
-<i class="no-highlight">26</i>&nbsp;            board = board ?: throw IllegalStateException(&quot;board is required&quot;),
-<i class="no-highlight">27</i>&nbsp;            boardId = boardId ?: throw IllegalStateException(&quot;boardId is required&quot;),
-<i class="no-highlight">28</i>&nbsp;            section = section ?: throw IllegalStateException(&quot;section is required&quot;),
-<i class="no-highlight">29</i>&nbsp;            sectionId = sectionId ?: throw IllegalStateException(&quot;sectionId is required&quot;),
-<i class="no-highlight">30</i>&nbsp;            author = author ?: throw IllegalStateException(&quot;author is required&quot;),
-<i class="no-highlight">31</i>&nbsp;            content = content ?: throw IllegalStateException(&quot;content is required&quot;),
-<i class="no-highlight">32</i>&nbsp;            startDate = startDate ?: throw IllegalStateException(&quot;startDate is required&quot;),
-<i class="no-highlight">33</i>&nbsp;            endDate = endDate ?: throw IllegalStateException(&quot;endDate is required&quot;)
-<i class="no-highlight">34</i>&nbsp;        )
-<i class="no-highlight">35</i>&nbsp;    }
-<i class="no-highlight">36</i>&nbsp;}
+<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.models.news.EventEntry
+<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.models.news.EventsSchedule
+<i class="no-highlight">5</i>&nbsp;import java.time.LocalDate
+<i class="no-highlight">6</i>&nbsp;import java.time.YearMonth
+<i class="no-highlight">7</i>&nbsp;
+<b class="fc"><i class="no-highlight">8</i>&nbsp;class EventsScheduleBuilder {</b>
+<i class="no-highlight">9</i>&nbsp;    private var yearMonth: YearMonth? = null
+<b class="fc"><i class="no-highlight">10</i>&nbsp;    private val entries: MutableList&lt;EventEntry&gt; = mutableListOf()</b>
+<i class="no-highlight">11</i>&nbsp;
+<b class="fc"><i class="no-highlight">12</i>&nbsp;    fun yearMonth(yearMonth: YearMonth) = apply { this.yearMonth = yearMonth }</b>
+<b class="nc"><i class="no-highlight">13</i>&nbsp;    fun yearMonth(year: Int, month: Int) = apply { yearMonth = YearMonth.of(year, month) }</b>
+<i class="no-highlight">14</i>&nbsp;    fun addEntry(title: String, description: String, startDate: LocalDate?, endDate: LocalDate?) =
+<b class="nc"><i class="no-highlight">15</i>&nbsp;        apply { entries.add(EventEntry(title, description, startDate, endDate)) }</b>
+<i class="no-highlight">16</i>&nbsp;
+<b class="fc"><i class="no-highlight">17</i>&nbsp;    fun addEntry(entry: EventEntry) = apply { entries.add(entry) }</b>
+<i class="no-highlight">18</i>&nbsp;
+<b class="fc"><i class="no-highlight">19</i>&nbsp;    fun build() = EventsSchedule(</b>
+<b class="pc"><i class="no-highlight">20</i>&nbsp;        yearMonth ?: throw IllegalStateException(&quot;yearMonth is required&quot;),</b>
+<b class="fc"><i class="no-highlight">21</i>&nbsp;        entries</b>
+<i class="no-highlight">22</i>&nbsp;    )
+<i class="no-highlight">23</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -135,7 +134,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-04-16 14:42</div>
+    <div style="float:right;">generated on 2022-04-17 19:16</div>
 </div>
 </body>
 </html>

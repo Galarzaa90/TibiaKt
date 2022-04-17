@@ -70,10 +70,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    85.7%
+    87.5%
   </span>
   <span class="absValue">
-    (30/35)
+    (28/32)
   </span>
 </td>
 </tr>
@@ -88,71 +88,69 @@ Current scope:     <a href="../../index.html">all classes</a>
 <div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.parsers
 <i class="no-highlight">2</i>&nbsp;
 <i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.builders.CMPostArchiveBuilder
-<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
-<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.CMPost
-<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.CMPostArchive
-<i class="no-highlight">7</i>&nbsp;import com.galarzaa.tibiakt.core.utils.PaginationData
-<i class="no-highlight">8</i>&nbsp;import com.galarzaa.tibiakt.core.utils.cells
-<i class="no-highlight">9</i>&nbsp;import com.galarzaa.tibiakt.core.utils.formData
-<i class="no-highlight">10</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getLinkInformation
-<i class="no-highlight">11</i>&nbsp;import com.galarzaa.tibiakt.core.utils.offsetStart
-<i class="no-highlight">12</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parsePagination
-<i class="no-highlight">13</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseTablesMap
-<i class="no-highlight">14</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseTibiaDateTime
-<i class="no-highlight">15</i>&nbsp;import com.galarzaa.tibiakt.core.utils.replaceBrs
-<i class="no-highlight">16</i>&nbsp;import com.galarzaa.tibiakt.core.utils.rows
-<i class="no-highlight">17</i>&nbsp;import com.galarzaa.tibiakt.core.utils.wholeCleanText
-<i class="no-highlight">18</i>&nbsp;import org.jsoup.nodes.Element
-<i class="no-highlight">19</i>&nbsp;import java.time.LocalDate
-<i class="no-highlight">20</i>&nbsp;
-<b class="nc"><i class="no-highlight">21</i>&nbsp;object CMPostArchiveParser : Parser&lt;CMPostArchive&gt; {</b>
-<i class="no-highlight">22</i>&nbsp;    override fun fromContent(content: String): CMPostArchive {
-<b class="fc"><i class="no-highlight">23</i>&nbsp;        val boxContent = HouseParser.boxContent(content)</b>
-<b class="fc"><i class="no-highlight">24</i>&nbsp;        val tables = boxContent.parseTablesMap()</b>
-<b class="fc"><i class="no-highlight">25</i>&nbsp;        val builder = CMPostArchiveBuilder()</b>
-<b class="pc"><i class="no-highlight">26</i>&nbsp;        tables[&quot;CM Post List&quot;]?.let { parsePostList(it, builder) }</b>
-<b class="nc"><i class="no-highlight">27</i>&nbsp;            ?: throw ParsingException(&quot;Could not find CM Post List table.&quot;)</b>
-<b class="pc"><i class="no-highlight">28</i>&nbsp;        val form = boxContent.selectFirst(&quot;form&quot;) ?: throw ParsingException(&quot;Could not find search form.&quot;)</b>
-<i class="no-highlight">29</i>&nbsp;
-<b class="fc"><i class="no-highlight">30</i>&nbsp;        parseSearchTable(form, builder)</b>
-<i class="no-highlight">31</i>&nbsp;
-<b class="fc"><i class="no-highlight">32</i>&nbsp;        val paginationData =</b>
-<b class="fc"><i class="no-highlight">33</i>&nbsp;            boxContent.selectFirst(&quot;small&quot;)?.parsePagination() ?: PaginationData.default()</b>
-<b class="fc"><i class="no-highlight">34</i>&nbsp;        builder</b>
-<b class="fc"><i class="no-highlight">35</i>&nbsp;            .currentPage(paginationData.currentPage)</b>
-<b class="fc"><i class="no-highlight">36</i>&nbsp;            .totalPages(paginationData.totalPages)</b>
-<b class="fc"><i class="no-highlight">37</i>&nbsp;            .resultsCount(paginationData.resultsCount)</b>
-<b class="fc"><i class="no-highlight">38</i>&nbsp;        return builder.build()</b>
-<i class="no-highlight">39</i>&nbsp;    }
-<i class="no-highlight">40</i>&nbsp;
-<i class="no-highlight">41</i>&nbsp;    private fun parseSearchTable(form: Element, builder: CMPostArchiveBuilder) {
-<b class="fc"><i class="no-highlight">42</i>&nbsp;        val formData = form.formData()</b>
-<b class="fc"><i class="no-highlight">43</i>&nbsp;        builder.startDate(</b>
-<b class="pc"><i class="no-highlight">44</i>&nbsp;            LocalDate.of(formData.values[&quot;startyear&quot;]?.toInt()</b>
-<b class="nc"><i class="no-highlight">45</i>&nbsp;                ?: throw ParsingException(&quot;could not find startyear param&quot;),</b>
-<b class="pc"><i class="no-highlight">46</i>&nbsp;                formData.values[&quot;startmonth&quot;]?.toInt() ?: throw ParsingException(&quot;could not find startmonth param&quot;),</b>
-<b class="pc"><i class="no-highlight">47</i>&nbsp;                formData.values[&quot;startday&quot;]?.toInt() ?: throw ParsingException(&quot;could not find startday param&quot;)))</b>
-<b class="pc"><i class="no-highlight">48</i>&nbsp;            .endDate(LocalDate.of(formData.values[&quot;endyear&quot;]?.toInt()</b>
-<b class="nc"><i class="no-highlight">49</i>&nbsp;                ?: throw ParsingException(&quot;could not find endyear param&quot;),</b>
-<b class="pc"><i class="no-highlight">50</i>&nbsp;                formData.values[&quot;endmonth&quot;]?.toInt() ?: throw ParsingException(&quot;could not find endmonth param&quot;),</b>
-<b class="pc"><i class="no-highlight">51</i>&nbsp;                formData.values[&quot;endday&quot;]?.toInt() ?: throw ParsingException(&quot;could not find endday param&quot;)))</b>
-<i class="no-highlight">52</i>&nbsp;    }
-<i class="no-highlight">53</i>&nbsp;
-<i class="no-highlight">54</i>&nbsp;    private fun parsePostList(table: Element, builder: CMPostArchiveBuilder) {
-<b class="fc"><i class="no-highlight">55</i>&nbsp;        for (row in table.rows().offsetStart(1)) {</b>
-<b class="fc"><i class="no-highlight">56</i>&nbsp;            val columns = row.cells()</b>
-<b class="fc"><i class="no-highlight">57</i>&nbsp;            val dateText = columns[0].text()</b>
-<b class="fc"><i class="no-highlight">58</i>&nbsp;            val date = parseTibiaDateTime(dateText)</b>
-<b class="fc"><i class="no-highlight">59</i>&nbsp;            val (forum, thread) = columns[1].replaceBrs().wholeCleanText().split(&quot;\n&quot;)</b>
-<b class="fc"><i class="no-highlight">60</i>&nbsp;            val postLink =</b>
-<b class="pc"><i class="no-highlight">61</i>&nbsp;                columns[2]?.selectFirst(&quot;a&quot;)?.getLinkInformation() ?: throw ParsingException(&quot;could not find post link&quot;)</b>
-<b class="pc"><i class="no-highlight">62</i>&nbsp;            val postId = postLink.queryParams[&quot;postid&quot;]?.get(0)?.toInt()</b>
-<b class="nc"><i class="no-highlight">63</i>&nbsp;                ?: throw ParsingException(&quot;could not find postid in link&quot;)</b>
-<b class="fc"><i class="no-highlight">64</i>&nbsp;            builder.addEntry(CMPost(postId, date, forum, thread))</b>
-<i class="no-highlight">65</i>&nbsp;        }
-<i class="no-highlight">66</i>&nbsp;    }
-<i class="no-highlight">67</i>&nbsp;
-<i class="no-highlight">68</i>&nbsp;}
+<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.builders.cmPostArchive
+<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
+<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.CMPost
+<i class="no-highlight">7</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.CMPostArchive
+<i class="no-highlight">8</i>&nbsp;import com.galarzaa.tibiakt.core.utils.PaginationData
+<i class="no-highlight">9</i>&nbsp;import com.galarzaa.tibiakt.core.utils.cells
+<i class="no-highlight">10</i>&nbsp;import com.galarzaa.tibiakt.core.utils.formData
+<i class="no-highlight">11</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getLinkInformation
+<i class="no-highlight">12</i>&nbsp;import com.galarzaa.tibiakt.core.utils.offsetStart
+<i class="no-highlight">13</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parsePagination
+<i class="no-highlight">14</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseTablesMap
+<i class="no-highlight">15</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseTibiaDateTime
+<i class="no-highlight">16</i>&nbsp;import com.galarzaa.tibiakt.core.utils.replaceBrs
+<i class="no-highlight">17</i>&nbsp;import com.galarzaa.tibiakt.core.utils.rows
+<i class="no-highlight">18</i>&nbsp;import com.galarzaa.tibiakt.core.utils.wholeCleanText
+<i class="no-highlight">19</i>&nbsp;import org.jsoup.nodes.Element
+<i class="no-highlight">20</i>&nbsp;import java.time.LocalDate
+<i class="no-highlight">21</i>&nbsp;
+<b class="nc"><i class="no-highlight">22</i>&nbsp;object CMPostArchiveParser : Parser&lt;CMPostArchive&gt; {</b>
+<i class="no-highlight">23</i>&nbsp;    override fun fromContent(content: String): CMPostArchive {
+<b class="fc"><i class="no-highlight">24</i>&nbsp;        val boxContent = HouseParser.boxContent(content)</b>
+<b class="fc"><i class="no-highlight">25</i>&nbsp;        val tables = boxContent.parseTablesMap()</b>
+<b class="fc"><i class="no-highlight">26</i>&nbsp;        return cmPostArchive {</b>
+<b class="pc"><i class="no-highlight">27</i>&nbsp;            tables[&quot;CM Post List&quot;]?.let { parsePostList(it) }</b>
+<b class="nc"><i class="no-highlight">28</i>&nbsp;                ?: throw ParsingException(&quot;Could not find CM Post List table.&quot;)</b>
+<b class="pc"><i class="no-highlight">29</i>&nbsp;            val form = boxContent.selectFirst(&quot;form&quot;) ?: throw ParsingException(&quot;Could not find search form.&quot;)</b>
+<i class="no-highlight">30</i>&nbsp;
+<b class="fc"><i class="no-highlight">31</i>&nbsp;            parseSearchTable(form)</b>
+<i class="no-highlight">32</i>&nbsp;
+<b class="fc"><i class="no-highlight">33</i>&nbsp;            val paginationData = boxContent.selectFirst(&quot;small&quot;)?.parsePagination() ?: PaginationData.default()</b>
+<b class="fc"><i class="no-highlight">34</i>&nbsp;            currentPage = paginationData.currentPage</b>
+<b class="fc"><i class="no-highlight">35</i>&nbsp;            totalPages = paginationData.totalPages</b>
+<b class="fc"><i class="no-highlight">36</i>&nbsp;            resultsCount = paginationData.resultsCount</b>
+<b class="fc"><i class="no-highlight">37</i>&nbsp;        }</b>
+<i class="no-highlight">38</i>&nbsp;    }
+<i class="no-highlight">39</i>&nbsp;
+<i class="no-highlight">40</i>&nbsp;    private fun CMPostArchiveBuilder.parseSearchTable(form: Element) {
+<b class="fc"><i class="no-highlight">41</i>&nbsp;        val formData = form.formData()</b>
+<b class="pc"><i class="no-highlight">42</i>&nbsp;        startDate = LocalDate.of(formData.values[&quot;startyear&quot;]?.toInt()</b>
+<b class="nc"><i class="no-highlight">43</i>&nbsp;            ?: throw ParsingException(&quot;could not find startyear param&quot;),</b>
+<b class="pc"><i class="no-highlight">44</i>&nbsp;            formData.values[&quot;startmonth&quot;]?.toInt() ?: throw ParsingException(&quot;could not find startmonth param&quot;),</b>
+<b class="pc"><i class="no-highlight">45</i>&nbsp;            formData.values[&quot;startday&quot;]?.toInt() ?: throw ParsingException(&quot;could not find startday param&quot;))</b>
+<b class="fc"><i class="no-highlight">46</i>&nbsp;        endDate =</b>
+<b class="pc"><i class="no-highlight">47</i>&nbsp;            LocalDate.of(formData.values[&quot;endyear&quot;]?.toInt() ?: throw ParsingException(&quot;could not find endyear param&quot;),</b>
+<b class="pc"><i class="no-highlight">48</i>&nbsp;                formData.values[&quot;endmonth&quot;]?.toInt() ?: throw ParsingException(&quot;could not find endmonth param&quot;),</b>
+<b class="pc"><i class="no-highlight">49</i>&nbsp;                formData.values[&quot;endday&quot;]?.toInt() ?: throw ParsingException(&quot;could not find endday param&quot;))</b>
+<i class="no-highlight">50</i>&nbsp;    }
+<i class="no-highlight">51</i>&nbsp;
+<i class="no-highlight">52</i>&nbsp;    private fun CMPostArchiveBuilder.parsePostList(table: Element) {
+<b class="fc"><i class="no-highlight">53</i>&nbsp;        for (row in table.rows().offsetStart(1)) {</b>
+<b class="fc"><i class="no-highlight">54</i>&nbsp;            val columns = row.cells()</b>
+<b class="fc"><i class="no-highlight">55</i>&nbsp;            val dateText = columns[0].text()</b>
+<b class="fc"><i class="no-highlight">56</i>&nbsp;            val date = parseTibiaDateTime(dateText)</b>
+<b class="fc"><i class="no-highlight">57</i>&nbsp;            val (forum, thread) = columns[1].replaceBrs().wholeCleanText().split(&quot;\n&quot;)</b>
+<b class="fc"><i class="no-highlight">58</i>&nbsp;            val postLink =</b>
+<b class="pc"><i class="no-highlight">59</i>&nbsp;                columns[2]?.selectFirst(&quot;a&quot;)?.getLinkInformation() ?: throw ParsingException(&quot;could not find post link&quot;)</b>
+<b class="pc"><i class="no-highlight">60</i>&nbsp;            val postId = postLink.queryParams[&quot;postid&quot;]?.get(0)?.toInt()</b>
+<b class="nc"><i class="no-highlight">61</i>&nbsp;                ?: throw ParsingException(&quot;could not find postid in link&quot;)</b>
+<b class="fc"><i class="no-highlight">62</i>&nbsp;            addEntry(CMPost(postId, date, forum, thread))</b>
+<i class="no-highlight">63</i>&nbsp;        }
+<i class="no-highlight">64</i>&nbsp;    }
+<i class="no-highlight">65</i>&nbsp;
+<i class="no-highlight">66</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -179,7 +177,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-04-16 14:42</div>
+    <div style="float:right;">generated on 2022-04-17 19:16</div>
 </div>
 </body>
 </html>
