@@ -81,5 +81,5 @@ internal fun parseAuthorTable(table: Element): BaseForumAuthor {
         title = title,
         guild = guildMembership,
         posts = postsText.parseInteger(),
-        traded = recentlyTraded)
+        isRecentlyTraded = recentlyTraded)
 }

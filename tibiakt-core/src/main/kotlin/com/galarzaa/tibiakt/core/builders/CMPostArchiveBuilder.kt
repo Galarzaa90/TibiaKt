@@ -2,29 +2,33 @@ package com.galarzaa.tibiakt.core.builders
 
 import com.galarzaa.tibiakt.core.models.forums.CMPost
 import com.galarzaa.tibiakt.core.models.forums.CMPostArchive
+import com.galarzaa.tibiakt.core.utils.BuilderDsl
 import java.time.LocalDate
 
-class CMPostArchiveBuilder {
+
+@BuilderDsl
+inline fun cmPostArchive(block: CMPostArchiveBuilder.() -> Unit) = CMPostArchiveBuilder().apply(block).build()
+
+@BuilderDsl
+inline fun cmPostArchiveBuilder(block: CMPostArchiveBuilder.() -> Unit) = CMPostArchiveBuilder().apply(block)
+
+@BuilderDsl
+class CMPostArchiveBuilder : TibiaKtBuilder<CMPostArchive>() {
     var startDate: LocalDate? = null
     var endDate: LocalDate? = null
-    var currentPage: Int? = null
-    var totalPages: Int? = null
-    var resultsCount: Int? = null
+    var currentPage: Int = 1
+    var totalPages: Int = 1
+    var resultsCount: Int = 0
     val entries: MutableList<CMPost> = mutableListOf()
 
-    fun startDate(startDate: LocalDate) = apply { this.startDate = startDate }
-    fun endDate(endDate: LocalDate) = apply { this.endDate = endDate }
-    fun currentPage(currentPage: Int) = apply { this.currentPage = currentPage }
-    fun totalPages(totalPages: Int) = apply { this.totalPages = totalPages }
-    fun resultsCount(resultsCount: Int) = apply { this.resultsCount = resultsCount }
     fun addEntry(post: CMPost) = apply { entries.add(post) }
 
-    fun build() = CMPostArchive(
+    override fun build() = CMPostArchive(
         startDate = startDate ?: throw IllegalStateException("startDate is required"),
         endDate = endDate ?: throw IllegalStateException("endDate is required"),
-        currentPage = currentPage ?: throw IllegalStateException("currentPage is required"),
-        totalPages = totalPages ?: throw IllegalStateException("totalPages is required"),
-        resultsCount = resultsCount ?: throw IllegalStateException("resultsCount is required"),
-        entries = entries
+        currentPage = currentPage,
+        totalPages = totalPages,
+        resultsCount = resultsCount,
+        entries = entries,
     )
 }

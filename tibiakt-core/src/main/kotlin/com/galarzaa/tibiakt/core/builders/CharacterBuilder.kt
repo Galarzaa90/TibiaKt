@@ -12,60 +12,51 @@ import com.galarzaa.tibiakt.core.models.character.DisplayedAchievement
 import com.galarzaa.tibiakt.core.models.character.GuildMembership
 import com.galarzaa.tibiakt.core.models.character.Killer
 import com.galarzaa.tibiakt.core.models.character.OtherCharacter
+import com.galarzaa.tibiakt.core.utils.BuilderDsl
 import java.time.Instant
 import java.time.LocalDate
 
-class CharacterBuilder {
-    private var name: String? = null
-    private var level: Int = 2
-    private var residence: String? = null
-    private var vocation: Vocation? = null
-    private var sex: Sex? = null
-    private var world: String? = null
-    private var achievementPoints: Int = 0
-    private var lastLogin: Instant? = null
-    private var recentlyTraded: Boolean = false
-    private var formerNames: List<String> = listOf()
-    private var deletionDate: Instant? = null
-    private var formerWorld: String? = null
-    private var accountStatus: AccountStatus? = null
-    private var comment: String? = null
-    private var title: String? = null
-    private var position: String? = null
-    private var unlockedTitles: Int = 0
-    private var marriedTo: String? = null
-    private val houses: MutableList<CharacterHouse> = mutableListOf()
-    private var guildMembership: GuildMembership? = null
-    private val accountBadges: MutableList<AccountBadge> = mutableListOf()
-    private val achievements: MutableList<DisplayedAchievement> = mutableListOf()
-    private var accountInformation: AccountInformation? = null
-    private val deaths: MutableList<Death> = mutableListOf()
-    private val characters: MutableList<OtherCharacter> = mutableListOf()
+@BuilderDsl
+inline fun character(block: CharacterBuilder.() -> Unit) = CharacterBuilder().apply(block).build()
 
-    fun name(name: String) = apply { this.name = name }
-    fun titles(currentTitle: String?, unlockedTitles: Int) = apply {
-        title = currentTitle
-        this.unlockedTitles = unlockedTitles
-    }
+@BuilderDsl
+inline fun characterBuilder(block: CharacterBuilder.() -> Unit) = CharacterBuilder().apply(block)
 
-    fun vocation(vocation: Vocation) = apply { this.vocation = vocation }
-    fun level(level: Int) = apply { this.level = level }
-    fun sex(sex: Sex) = apply { this.sex = sex }
-    fun world(world: String) = apply { this.world = world }
-    fun achievementPoints(achievementPoints: Int) = apply { this.achievementPoints = achievementPoints }
-    fun residence(residence: String) = apply { this.residence = residence }
-    fun recentlyTraded(recentlyTraded: Boolean) = apply { this.recentlyTraded = recentlyTraded }
-    fun lastLogin(lastLogin: Instant?) = apply { this.lastLogin = lastLogin }
-    fun deletionDate(deletionDate: Instant?) = apply { this.deletionDate = deletionDate }
-    fun formerNames(formerNames: List<String>) = apply { this.formerNames = formerNames }
-    fun formerWorld(formerWorld: String?) = apply { this.formerWorld = formerWorld }
-    fun position(position: String?) = apply { this.position = position }
-    fun marriedTo(marriedTo: String?) = apply { this.marriedTo = marriedTo }
-    fun accountStatus(accountStatus: AccountStatus) = apply { this.accountStatus = accountStatus }
-    fun comment(comment: String?) = apply { this.comment = comment }
+@BuilderDsl
+class CharacterBuilder : TibiaKtBuilder<Character>() {
+    lateinit var name: String
+    var level: Int = 2
+    var residence: String? = null
+    var vocation: Vocation? = null
+    var sex: Sex? = null
+    var world: String? = null
+    var achievementPoints: Int = 0
+    var lastLogin: Instant? = null
+    var recentlyTraded: Boolean = false
+    var formerNames: List<String> = listOf()
+    var deletionDate: Instant? = null
+    var formerWorld: String? = null
+    var accountStatus: AccountStatus? = null
+    var comment: String? = null
+    var title: String? = null
+    var position: String? = null
+    var unlockedTitles: Int = 0
+    var marriedTo: String? = null
+    val houses: MutableList<CharacterHouse> = mutableListOf()
+    var guildMembership: GuildMembership? = null
+    val accountBadges: MutableList<AccountBadge> = mutableListOf()
+    val achievements: MutableList<DisplayedAchievement> = mutableListOf()
+    var accountInformation: AccountInformation? = null
+    val deaths: MutableList<Death> = mutableListOf()
+    val characters: MutableList<OtherCharacter> = mutableListOf()
+
+
     fun addHouse(name: String, houseId: Int, town: String, paidUntil: LocalDate, world: String) = apply {
         houses.add(CharacterHouse(name, houseId, town, paidUntil, world))
     }
+
+    @BuilderDsl
+    fun house(block: CharacterHouseBuilder.() -> Unit) = houses.add(CharacterHouseBuilder().apply(block).build())
 
     fun addBadge(name: String, descroption: String, iconUrl: String) = apply {
         accountBadges.add(AccountBadge(name, descroption, iconUrl))
@@ -92,14 +83,12 @@ class CharacterBuilder {
         online: Boolean = false,
         deleted: Boolean = false,
         traded: Boolean = false,
-        position: String?
-    ) =
-        apply { characters.add(OtherCharacter(name, world, main, online, deleted, traded, position)) }
+        position: String?,
+    ) = apply { characters.add(OtherCharacter(name, world, main, online, deleted, traded, position)) }
 
 
-    fun build() =
-        Character(
-            name = name ?: throw IllegalStateException("name is required"),
+    override fun build() =
+        Character(name = if (::name.isInitialized) name else throw IllegalStateException("name is required"),
             title = title,
             formerNames = formerNames,
             unlockedTitles = unlockedTitles,
@@ -123,6 +112,20 @@ class CharacterBuilder {
             achievements = achievements,
             deaths = deaths,
             accountInformation = accountInformation,
-            characters = characters
+            characters = characters)
+
+    class CharacterHouseBuilder : TibiaKtBuilder<CharacterHouse>() {
+        lateinit var name: String
+        var houseId: Int = 0
+        lateinit var town: String
+        lateinit var paidUntil: LocalDate
+        lateinit var world: String
+        override fun build() = CharacterHouse(
+            name = if (::name.isInitialized) name else throw IllegalStateException("name is required"),
+            houseId = houseId,
+            town = if (::town.isInitialized) town else throw IllegalStateException("town is required"),
+            paidUntil = if (::paidUntil.isInitialized) paidUntil else throw IllegalStateException("paidUntil is required"),
+            world = if (::world.isInitialized) world else throw IllegalStateException("world is required"),
         )
+    }
 }

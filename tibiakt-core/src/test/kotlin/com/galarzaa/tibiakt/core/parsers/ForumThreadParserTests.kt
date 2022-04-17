@@ -39,7 +39,7 @@ class ForumThreadParserTests : StringSpec({
                 author.shouldBeInstanceOf<ForumAuthor>()
                 with(author as ForumAuthor) {
                     title shouldBe "Creature of Habit (Grade 2)"
-                    traded shouldBe true
+                    isRecentlyTraded shouldBe true
                     guild?.name shouldBe "Dark Purples Faster Turtles"
                     posts shouldBe 77
                 }

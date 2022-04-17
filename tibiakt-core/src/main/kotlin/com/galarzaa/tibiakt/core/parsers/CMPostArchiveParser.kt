@@ -1,6 +1,7 @@
 package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.core.builders.CMPostArchiveBuilder
+import com.galarzaa.tibiakt.core.builders.cmPostArchive
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
 import com.galarzaa.tibiakt.core.models.forums.CMPost
 import com.galarzaa.tibiakt.core.models.forums.CMPostArchive
@@ -22,36 +23,33 @@ object CMPostArchiveParser : Parser<CMPostArchive> {
     override fun fromContent(content: String): CMPostArchive {
         val boxContent = HouseParser.boxContent(content)
         val tables = boxContent.parseTablesMap()
-        val builder = CMPostArchiveBuilder()
-        tables["CM Post List"]?.let { parsePostList(it, builder) }
-            ?: throw ParsingException("Could not find CM Post List table.")
-        val form = boxContent.selectFirst("form") ?: throw ParsingException("Could not find search form.")
+        return cmPostArchive {
+            tables["CM Post List"]?.let { parsePostList(it) }
+                ?: throw ParsingException("Could not find CM Post List table.")
+            val form = boxContent.selectFirst("form") ?: throw ParsingException("Could not find search form.")
 
-        parseSearchTable(form, builder)
+            parseSearchTable(form)
 
-        val paginationData =
-            boxContent.selectFirst("small")?.parsePagination() ?: PaginationData.default()
-        builder
-            .currentPage(paginationData.currentPage)
-            .totalPages(paginationData.totalPages)
-            .resultsCount(paginationData.resultsCount)
-        return builder.build()
+            val paginationData = boxContent.selectFirst("small")?.parsePagination() ?: PaginationData.default()
+            currentPage = paginationData.currentPage
+            totalPages = paginationData.totalPages
+            resultsCount = paginationData.resultsCount
+        }
     }
 
-    private fun parseSearchTable(form: Element, builder: CMPostArchiveBuilder) {
+    private fun CMPostArchiveBuilder.parseSearchTable(form: Element) {
         val formData = form.formData()
-        builder.startDate(
-            LocalDate.of(formData.values["startyear"]?.toInt()
-                ?: throw ParsingException("could not find startyear param"),
-                formData.values["startmonth"]?.toInt() ?: throw ParsingException("could not find startmonth param"),
-                formData.values["startday"]?.toInt() ?: throw ParsingException("could not find startday param")))
-            .endDate(LocalDate.of(formData.values["endyear"]?.toInt()
-                ?: throw ParsingException("could not find endyear param"),
+        startDate = LocalDate.of(formData.values["startyear"]?.toInt()
+            ?: throw ParsingException("could not find startyear param"),
+            formData.values["startmonth"]?.toInt() ?: throw ParsingException("could not find startmonth param"),
+            formData.values["startday"]?.toInt() ?: throw ParsingException("could not find startday param"))
+        endDate =
+            LocalDate.of(formData.values["endyear"]?.toInt() ?: throw ParsingException("could not find endyear param"),
                 formData.values["endmonth"]?.toInt() ?: throw ParsingException("could not find endmonth param"),
-                formData.values["endday"]?.toInt() ?: throw ParsingException("could not find endday param")))
+                formData.values["endday"]?.toInt() ?: throw ParsingException("could not find endday param"))
     }
 
-    private fun parsePostList(table: Element, builder: CMPostArchiveBuilder) {
+    private fun CMPostArchiveBuilder.parsePostList(table: Element) {
         for (row in table.rows().offsetStart(1)) {
             val columns = row.cells()
             val dateText = columns[0].text()
@@ -61,7 +59,7 @@ object CMPostArchiveParser : Parser<CMPostArchive> {
                 columns[2]?.selectFirst("a")?.getLinkInformation() ?: throw ParsingException("could not find post link")
             val postId = postLink.queryParams["postid"]?.get(0)?.toInt()
                 ?: throw ParsingException("could not find postid in link")
-            builder.addEntry(CMPost(postId, date, forum, thread))
+            addEntry(CMPost(postId, date, forum, thread))
         }
     }
 

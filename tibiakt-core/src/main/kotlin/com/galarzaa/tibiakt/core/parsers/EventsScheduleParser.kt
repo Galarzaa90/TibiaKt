@@ -81,7 +81,7 @@ object EventsScheduleParser : Parser<EventsSchedule> {
             }
             firstDay = false
         }
-        // Add any leftover ongoing events without a end date, as we don't know when they end.
+        // Add any leftover ongoing events without an end date, as we don't know when they end.
         onGoingEvents.forEach { builder.addEntry(it.build()) }
     }
 

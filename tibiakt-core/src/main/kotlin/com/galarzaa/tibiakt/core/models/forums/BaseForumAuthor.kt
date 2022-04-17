@@ -11,14 +11,24 @@ sealed class BaseForumAuthor {
     abstract val name: String
 }
 
+/**
+ * A forum author that is no longer available due to being deleted or having been traded.
+ *
+ * If the author [isTraded], it means that the post was made by the account that owned the character before.
+ */
 @Serializable
 @SerialName("unavailableForumAuthor")
 data class UnavailableForumAuthor(
     override val name: String,
-    val deleted: Boolean,
-    val traded: Boolean,
+    val isDeleted: Boolean,
+    val isTraded: Boolean,
 ) : BaseForumAuthor()
 
+/**
+ * The author of a forum post or thread.
+ *
+ * If the character [isRecentlyTraded], it means that the character was traded in the last 30 days, but the post was made by the new owner.
+ */
 @SerialName("forumAuthor")
 @Serializable
 data class ForumAuthor(
@@ -30,7 +40,7 @@ data class ForumAuthor(
     val vocation: Vocation,
     val guild: GuildMembership?,
     val posts: Int,
-    val traded: Boolean,
+    val isRecentlyTraded: Boolean,
 ) : BaseForumAuthor(), BaseCharacter
 
 
