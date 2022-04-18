@@ -70,6 +70,7 @@ import com.galarzaa.tibiakt.core.utils.getCreaturesSectionUrl
 import com.galarzaa.tibiakt.core.utils.getEventsScheduleUrl
 import com.galarzaa.tibiakt.core.utils.getForumAnnouncementUrl
 import com.galarzaa.tibiakt.core.utils.getForumBoardUrl
+import com.galarzaa.tibiakt.core.utils.getForumPostUrl
 import com.galarzaa.tibiakt.core.utils.getForumSectionUrl
 import com.galarzaa.tibiakt.core.utils.getForumThreadUrl
 import com.galarzaa.tibiakt.core.utils.getGuildUrl
@@ -415,6 +416,19 @@ open class TibiaKtClient constructor(
     open suspend fun fetchForumThread(threadId: Int, page: Int = 1): TibiaResponse<ForumThread?> {
         val response = this.request(HttpMethod.Get, getForumThreadUrl(threadId, page))
         return response.parse { ForumThreadParser.fromContent(it) }
+    }
+
+    /** Fetches a forum thread containing the specified post.
+     *
+     * The thread will be fetched on the page containing the [ForumThread.anchoredPost]
+     */
+    open suspend fun fetchForumPost(postId: Int): TibiaResponse<ForumThread?> {
+        val response = this.request(HttpMethod.Get, getForumPostUrl(postId))
+        return response.parse {
+            ForumThreadParser.fromContent(it)?.let { thread ->
+                thread.copy(anchoredPost = thread.entries.first { post -> post.postId == postId })
+            }
+        }
     }
 
 

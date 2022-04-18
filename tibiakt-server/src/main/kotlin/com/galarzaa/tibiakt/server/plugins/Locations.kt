@@ -135,6 +135,9 @@ data class GetForumAnnouncement(val announcementId: Int)
 @Location("/forum/threads/{threadId}")
 data class GetForumThread(val threadId: Int, val page: Int = 1)
 
+@Location("/forum/post/{postId}")
+data class GetForumPost(val postId: Int)
+
 @Location("/leaderboards/{world}")
 data class GetLeaderboards(
     val world: String,
