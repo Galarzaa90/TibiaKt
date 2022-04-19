@@ -70,10 +70,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    94.4%
+    93.9%
   </span>
   <span class="absValue">
-    (51/54)
+    (46/49)
   </span>
 </td>
 </tr>
@@ -88,25 +88,25 @@ Current scope:     <a href="../../index.html">all classes</a>
 <div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.parsers
 <i class="no-highlight">2</i>&nbsp;
 <i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.builders.HouseBuilder
-<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HouseStatus
-<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.enums.StringEnum
-<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
-<i class="no-highlight">7</i>&nbsp;import com.galarzaa.tibiakt.core.models.house.House
-<i class="no-highlight">8</i>&nbsp;import com.galarzaa.tibiakt.core.utils.cells
-<i class="no-highlight">9</i>&nbsp;import com.galarzaa.tibiakt.core.utils.clean
-<i class="no-highlight">10</i>&nbsp;import com.galarzaa.tibiakt.core.utils.cleanText
-<i class="no-highlight">11</i>&nbsp;import com.galarzaa.tibiakt.core.utils.findInteger
-<i class="no-highlight">12</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseInteger
-<i class="no-highlight">13</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseThousandSuffix
-<i class="no-highlight">14</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseTibiaDateTime
-<i class="no-highlight">15</i>&nbsp;import com.galarzaa.tibiakt.core.utils.remove
-<i class="no-highlight">16</i>&nbsp;import com.galarzaa.tibiakt.core.utils.replaceBrs
-<i class="no-highlight">17</i>&nbsp;
-<b class="nc"><i class="no-highlight">18</i>&nbsp;object HouseParser : Parser&lt;House?&gt; {</b>
-<i class="no-highlight">19</i>&nbsp;    private val rentedPattern =
-<b class="fc"><i class="no-highlight">20</i>&nbsp;        Regex(&quot;&quot;&quot;The (?&lt;type&gt;\w+) has been rented by (?&lt;owner&gt;[^.]+)\. (?&lt;pronoun&gt;\w+) has paid the rent until (?&lt;paidUntil&gt;[^.]+)\.&quot;&quot;&quot;)</b>
-<i class="no-highlight">21</i>&nbsp;    private val auctionedPattern =
-<b class="fc"><i class="no-highlight">22</i>&nbsp;        Regex(&quot;&quot;&quot;The (?&lt;type&gt;\w+) is currently being auctioned.&quot;&quot;&quot;)</b>
+<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.builders.house
+<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HouseStatus
+<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.enums.StringEnum
+<i class="no-highlight">7</i>&nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
+<i class="no-highlight">8</i>&nbsp;import com.galarzaa.tibiakt.core.models.house.House
+<i class="no-highlight">9</i>&nbsp;import com.galarzaa.tibiakt.core.utils.cells
+<i class="no-highlight">10</i>&nbsp;import com.galarzaa.tibiakt.core.utils.clean
+<i class="no-highlight">11</i>&nbsp;import com.galarzaa.tibiakt.core.utils.cleanText
+<i class="no-highlight">12</i>&nbsp;import com.galarzaa.tibiakt.core.utils.findInteger
+<i class="no-highlight">13</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseInteger
+<i class="no-highlight">14</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseThousandSuffix
+<i class="no-highlight">15</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseTibiaDateTime
+<i class="no-highlight">16</i>&nbsp;import com.galarzaa.tibiakt.core.utils.remove
+<i class="no-highlight">17</i>&nbsp;import com.galarzaa.tibiakt.core.utils.replaceBrs
+<i class="no-highlight">18</i>&nbsp;
+<b class="nc"><i class="no-highlight">19</i>&nbsp;object HouseParser : Parser&lt;House?&gt; {</b>
+<i class="no-highlight">20</i>&nbsp;    private val rentedPattern =
+<b class="fc"><i class="no-highlight">21</i>&nbsp;        Regex(&quot;&quot;&quot;The (?&lt;type&gt;\w+) has been rented by (?&lt;owner&gt;[^.]+)\. (?&lt;pronoun&gt;\w+) has paid the rent until (?&lt;paidUntil&gt;[^.]+)\.&quot;&quot;&quot;)</b>
+<b class="fc"><i class="no-highlight">22</i>&nbsp;    private val auctionedPattern = Regex(&quot;&quot;&quot;The (?&lt;type&gt;\w+) is currently being auctioned.&quot;&quot;&quot;)</b>
 <i class="no-highlight">23</i>&nbsp;    private val bidPattern =
 <b class="fc"><i class="no-highlight">24</i>&nbsp;        Regex(&quot;&quot;&quot;The auction will end at (?&lt;auctionEnd&gt;[^.]+)\. The highest bid so far is (?&lt;highestBid&gt;\d+) gold and has been submitted by (?&lt;bidder&gt;[^.]+)&quot;&quot;&quot;)</b>
 <b class="fc"><i class="no-highlight">25</i>&nbsp;    private val moveOutPattern = Regex(&quot;&quot;&quot;S?[Hh]e will move out on (?&lt;moveDate&gt;[^.]+) \(time of daily&quot;&quot;&quot;)</b>
@@ -116,62 +116,52 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">29</i>&nbsp;    override fun fromContent(content: String): House? {
 <b class="fc"><i class="no-highlight">30</i>&nbsp;        val boxContent = boxContent(content)</b>
 <b class="fc"><i class="no-highlight">31</i>&nbsp;        val infoTable = boxContent.selectFirst(&quot;table&quot;)</b>
-<b class="fc"><i class="no-highlight">32</i>&nbsp;        val builder = HouseBuilder()</b>
-<b class="fc"><i class="no-highlight">33</i>&nbsp;        val (imageRow, descriptionRow) = infoTable.cells()</b>
-<b class="fc"><i class="no-highlight">34</i>&nbsp;        if (imageRow.text().contains(&quot;No information about this house found&quot;))</b>
-<b class="fc"><i class="no-highlight">35</i>&nbsp;            return null</b>
-<b class="pc"><i class="no-highlight">36</i>&nbsp;        val imageUrl = imageRow.selectFirst(&quot;img&quot;)?.attr(&quot;src&quot;)</b>
-<b class="pc"><i class="no-highlight">37</i>&nbsp;        val houseId = imageUrl?.findInteger() ?: throw ParsingException(&quot;House image not found&quot;)</b>
-<b class="fc"><i class="no-highlight">38</i>&nbsp;        val (title, sizeStr, rentStr, world) = descriptionRow.select(&quot;b&quot;).map { it.cleanText() }</b>
-<b class="fc"><i class="no-highlight">39</i>&nbsp;        builder.name(title)</b>
-<b class="fc"><i class="no-highlight">40</i>&nbsp;            .size(sizeStr.remove(&quot;square meters&quot;).clean().toInt())</b>
-<b class="fc"><i class="no-highlight">41</i>&nbsp;            .rent(rentStr.remove(&quot;gold&quot;).parseThousandSuffix())</b>
-<b class="fc"><i class="no-highlight">42</i>&nbsp;            .world(world)</b>
-<b class="fc"><i class="no-highlight">43</i>&nbsp;            .houseId(houseId)</b>
-<b class="fc"><i class="no-highlight">44</i>&nbsp;        val descriptionLines = descriptionRow.replaceBrs().wholeText().lines()</b>
-<b class="fc"><i class="no-highlight">45</i>&nbsp;        builder.beds(descriptionLines[1].findInteger())</b>
-<b class="fc"><i class="no-highlight">46</i>&nbsp;        val statusLine = descriptionLines.last().clean()</b>
-<b class="fc"><i class="no-highlight">47</i>&nbsp;        parseStatusDescription(builder, statusLine)</b>
-<b class="fc"><i class="no-highlight">48</i>&nbsp;        return builder.build()</b>
-<i class="no-highlight">49</i>&nbsp;    }
-<i class="no-highlight">50</i>&nbsp;
-<i class="no-highlight">51</i>&nbsp;    private fun parseStatusDescription(
-<i class="no-highlight">52</i>&nbsp;        builder: HouseBuilder,
-<i class="no-highlight">53</i>&nbsp;        stateLine: String,
-<i class="no-highlight">54</i>&nbsp;    ) {
-<b class="fc"><i class="no-highlight">55</i>&nbsp;        rentedPattern.find(stateLine)?.apply {</b>
-<b class="fc"><i class="no-highlight">56</i>&nbsp;            builder.status(HouseStatus.RENTED)</b>
-<b class="fc"><i class="no-highlight">57</i>&nbsp;                .owner(groups[&quot;owner&quot;]!!.value.clean())</b>
-<b class="fc"><i class="no-highlight">58</i>&nbsp;                .paidUntil(parseTibiaDateTime(groups[&quot;paidUntil&quot;]!!.value))</b>
-<b class="fc"><i class="no-highlight">59</i>&nbsp;                .type(</b>
-<b class="pc"><i class="no-highlight">60</i>&nbsp;                    StringEnum.fromValue(&quot;${groups[&quot;type&quot;]!!.value}s&quot;)</b>
-<b class="nc"><i class="no-highlight">61</i>&nbsp;                        ?: throw ParsingException(&quot;Unknown house type found: ${groups[&quot;type&quot;]!!.value}&quot;)</b>
-<i class="no-highlight">62</i>&nbsp;                )
-<b class="fc"><i class="no-highlight">63</i>&nbsp;        }</b>
-<b class="fc"><i class="no-highlight">64</i>&nbsp;        auctionedPattern.find(stateLine)?.apply {</b>
-<b class="fc"><i class="no-highlight">65</i>&nbsp;            builder.status(HouseStatus.AUCTIONED)</b>
-<b class="fc"><i class="no-highlight">66</i>&nbsp;                .type(</b>
-<b class="pc"><i class="no-highlight">67</i>&nbsp;                    StringEnum.fromValue(&quot;${groups[&quot;type&quot;]!!.value}s&quot;)</b>
-<b class="nc"><i class="no-highlight">68</i>&nbsp;                        ?: throw ParsingException(&quot;Unknown house type found: ${groups[&quot;type&quot;]!!.value}&quot;)</b>
-<i class="no-highlight">69</i>&nbsp;                )
+<b class="fc"><i class="no-highlight">32</i>&nbsp;        return house {</b>
+<b class="fc"><i class="no-highlight">33</i>&nbsp;            val (imageRow, descriptionRow) = infoTable.cells()</b>
+<b class="fc"><i class="no-highlight">34</i>&nbsp;            if (imageRow.text().contains(&quot;No information about this house found&quot;)) return null</b>
+<b class="pc"><i class="no-highlight">35</i>&nbsp;            val imageUrl = imageRow.selectFirst(&quot;img&quot;)?.attr(&quot;src&quot;)</b>
+<b class="pc"><i class="no-highlight">36</i>&nbsp;            houseId = imageUrl?.findInteger() ?: throw ParsingException(&quot;House image not found&quot;)</b>
+<b class="fc"><i class="no-highlight">37</i>&nbsp;            val (title, sizeStr, rentStr, worldStr) = descriptionRow.select(&quot;b&quot;).map { it.cleanText() }</b>
+<b class="fc"><i class="no-highlight">38</i>&nbsp;            name = title</b>
+<b class="fc"><i class="no-highlight">39</i>&nbsp;            size = sizeStr.remove(&quot;square meters&quot;).clean().toInt()</b>
+<b class="fc"><i class="no-highlight">40</i>&nbsp;            rent = rentStr.remove(&quot;gold&quot;).parseThousandSuffix()</b>
+<b class="fc"><i class="no-highlight">41</i>&nbsp;            world = worldStr</b>
+<b class="fc"><i class="no-highlight">42</i>&nbsp;            val descriptionLines = descriptionRow.replaceBrs().wholeText().lines()</b>
+<b class="fc"><i class="no-highlight">43</i>&nbsp;            beds = descriptionLines[1].findInteger()</b>
+<b class="fc"><i class="no-highlight">44</i>&nbsp;            val statusLine = descriptionLines.last().clean()</b>
+<b class="fc"><i class="no-highlight">45</i>&nbsp;            parseStatusDescription(statusLine)</b>
+<b class="fc"><i class="no-highlight">46</i>&nbsp;        }</b>
+<i class="no-highlight">47</i>&nbsp;    }
+<i class="no-highlight">48</i>&nbsp;
+<i class="no-highlight">49</i>&nbsp;    private fun HouseBuilder.parseStatusDescription(stateLine: String) {
+<b class="fc"><i class="no-highlight">50</i>&nbsp;        rentedPattern.find(stateLine)?.apply {</b>
+<b class="fc"><i class="no-highlight">51</i>&nbsp;            status = HouseStatus.RENTED</b>
+<b class="fc"><i class="no-highlight">52</i>&nbsp;            owner = groups[&quot;owner&quot;]!!.value.clean()</b>
+<b class="fc"><i class="no-highlight">53</i>&nbsp;            paidUntil = parseTibiaDateTime(groups[&quot;paidUntil&quot;]!!.value)</b>
+<b class="pc"><i class="no-highlight">54</i>&nbsp;            type = StringEnum.fromValue(&quot;${groups[&quot;type&quot;]!!.value}s&quot;)</b>
+<b class="nc"><i class="no-highlight">55</i>&nbsp;                ?: throw ParsingException(&quot;Unknown house type found: ${groups[&quot;type&quot;]!!.value}&quot;)</b>
+<b class="fc"><i class="no-highlight">56</i>&nbsp;        }</b>
+<b class="fc"><i class="no-highlight">57</i>&nbsp;        auctionedPattern.find(stateLine)?.apply {</b>
+<b class="fc"><i class="no-highlight">58</i>&nbsp;            status = HouseStatus.AUCTIONED</b>
+<b class="pc"><i class="no-highlight">59</i>&nbsp;            type = StringEnum.fromValue(&quot;${groups[&quot;type&quot;]!!.value}s&quot;)</b>
+<b class="nc"><i class="no-highlight">60</i>&nbsp;                ?: throw ParsingException(&quot;Unknown house type found: ${groups[&quot;type&quot;]!!.value}&quot;)</b>
+<b class="fc"><i class="no-highlight">61</i>&nbsp;        }</b>
+<b class="fc"><i class="no-highlight">62</i>&nbsp;        bidPattern.find(stateLine)?.apply {</b>
+<b class="fc"><i class="no-highlight">63</i>&nbsp;            status = HouseStatus.AUCTIONED</b>
+<b class="fc"><i class="no-highlight">64</i>&nbsp;            auctionEnd = parseTibiaDateTime(groups[&quot;auctionEnd&quot;]!!.value)</b>
+<b class="fc"><i class="no-highlight">65</i>&nbsp;            highestBid = groups[&quot;highestBid&quot;]!!.value.parseInteger()</b>
+<b class="fc"><i class="no-highlight">66</i>&nbsp;            highestBidder = groups[&quot;bidder&quot;]!!.value.clean()</b>
+<b class="fc"><i class="no-highlight">67</i>&nbsp;        }</b>
+<b class="fc"><i class="no-highlight">68</i>&nbsp;        moveOutPattern.find(stateLine)?.apply {</b>
+<b class="fc"><i class="no-highlight">69</i>&nbsp;            movingDate = parseTibiaDateTime(groups[&quot;moveDate&quot;]!!.value)</b>
 <b class="fc"><i class="no-highlight">70</i>&nbsp;        }</b>
-<b class="fc"><i class="no-highlight">71</i>&nbsp;        bidPattern.find(stateLine)?.apply {</b>
-<b class="fc"><i class="no-highlight">72</i>&nbsp;            builder.status(HouseStatus.AUCTIONED)</b>
-<b class="fc"><i class="no-highlight">73</i>&nbsp;                .auctionEnd(parseTibiaDateTime(groups[&quot;auctionEnd&quot;]!!.value))</b>
-<b class="fc"><i class="no-highlight">74</i>&nbsp;                .highestBid(groups[&quot;highestBid&quot;]!!.value.parseInteger())</b>
-<b class="fc"><i class="no-highlight">75</i>&nbsp;                .highestBidder(groups[&quot;bidder&quot;]!!.value.clean())</b>
-<b class="fc"><i class="no-highlight">76</i>&nbsp;        }</b>
-<b class="fc"><i class="no-highlight">77</i>&nbsp;        moveOutPattern.find(stateLine)?.apply {</b>
-<b class="fc"><i class="no-highlight">78</i>&nbsp;            builder.movingDate(parseTibiaDateTime(groups[&quot;moveDate&quot;]!!.value))</b>
-<b class="fc"><i class="no-highlight">79</i>&nbsp;        }</b>
-<b class="fc"><i class="no-highlight">80</i>&nbsp;        transferPattern.find(stateLine)?.apply {</b>
-<b class="fc"><i class="no-highlight">81</i>&nbsp;            builder</b>
-<b class="fc"><i class="no-highlight">82</i>&nbsp;                .transferAccepted(groups[&quot;action&quot;]!!.value == &quot;will&quot;)</b>
-<b class="fc"><i class="no-highlight">83</i>&nbsp;                .transferRecipient(groups[&quot;transferee&quot;]!!.value.clean())</b>
-<b class="fc"><i class="no-highlight">84</i>&nbsp;                .transferPrice(groups[&quot;transferPrice&quot;]!!.value.toInt())</b>
-<b class="fc"><i class="no-highlight">85</i>&nbsp;        }</b>
-<i class="no-highlight">86</i>&nbsp;    }
-<i class="no-highlight">87</i>&nbsp;}
+<b class="fc"><i class="no-highlight">71</i>&nbsp;        transferPattern.find(stateLine)?.apply {</b>
+<b class="fc"><i class="no-highlight">72</i>&nbsp;            transferAccepted = groups[&quot;action&quot;]!!.value == &quot;will&quot;</b>
+<b class="fc"><i class="no-highlight">73</i>&nbsp;            transferRecipient = groups[&quot;transferee&quot;]!!.value.clean()</b>
+<b class="fc"><i class="no-highlight">74</i>&nbsp;            transferPrice = groups[&quot;transferPrice&quot;]!!.value.toInt()</b>
+<b class="fc"><i class="no-highlight">75</i>&nbsp;        }</b>
+<i class="no-highlight">76</i>&nbsp;    }
+<i class="no-highlight">77</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -198,7 +188,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-04-18 21:44</div>
+    <div style="float:right;">generated on 2022-04-19 22:01</div>
 </div>
 </body>
 </html>

@@ -90,65 +90,55 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HouseStatus
 <i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HouseType
 <i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.models.house.House
-<i class="no-highlight">6</i>&nbsp;import java.time.Instant
-<i class="no-highlight">7</i>&nbsp;
-<b class="fc"><i class="no-highlight">8</i>&nbsp;class HouseBuilder {</b>
-<i class="no-highlight">9</i>&nbsp;    private var houseId: Int? = null
-<i class="no-highlight">10</i>&nbsp;    private var name: String? = null
-<i class="no-highlight">11</i>&nbsp;    private var size: Int? = null
-<i class="no-highlight">12</i>&nbsp;    private var type: HouseType? = null
-<i class="no-highlight">13</i>&nbsp;    private var beds: Int? = null
-<i class="no-highlight">14</i>&nbsp;    private var rent: Int? = null
-<i class="no-highlight">15</i>&nbsp;    private var world: String? = null
-<i class="no-highlight">16</i>&nbsp;    private var status: HouseStatus? = null
-<i class="no-highlight">17</i>&nbsp;    private var paidUntil: Instant? = null
-<i class="no-highlight">18</i>&nbsp;    private var owner: String? = null
-<i class="no-highlight">19</i>&nbsp;    private var movingDate: Instant? = null
-<i class="no-highlight">20</i>&nbsp;    private var transferPrice: Int? = null
-<i class="no-highlight">21</i>&nbsp;    private var transferAccepted: Boolean? = null
-<i class="no-highlight">22</i>&nbsp;    private var transferRecipient: String? = null
-<i class="no-highlight">23</i>&nbsp;    private var highestBid: Int? = null
-<i class="no-highlight">24</i>&nbsp;    private var highestBidder: String? = null
-<i class="no-highlight">25</i>&nbsp;    private var auctionEnd: Instant? = null
-<i class="no-highlight">26</i>&nbsp;
-<b class="fc"><i class="no-highlight">27</i>&nbsp;    fun houseId(houseId: Int) = apply { this.houseId = houseId }</b>
-<b class="fc"><i class="no-highlight">28</i>&nbsp;    fun name(name: String) = apply { this.name = name }</b>
-<b class="fc"><i class="no-highlight">29</i>&nbsp;    fun size(size: Int) = apply { this.size = size }</b>
-<b class="fc"><i class="no-highlight">30</i>&nbsp;    fun rent(rent: Int) = apply { this.rent = rent }</b>
-<b class="fc"><i class="no-highlight">31</i>&nbsp;    fun beds(beds: Int) = apply { this.beds = beds }</b>
-<b class="fc"><i class="no-highlight">32</i>&nbsp;    fun world(world: String) = apply { this.world = world }</b>
-<b class="fc"><i class="no-highlight">33</i>&nbsp;    fun status(status: HouseStatus) = apply { this.status = status }</b>
-<b class="fc"><i class="no-highlight">34</i>&nbsp;    fun owner(owner: String) = apply { this.owner = owner }</b>
-<b class="fc"><i class="no-highlight">35</i>&nbsp;    fun paidUntil(paidUntil: Instant) = apply { this.paidUntil = paidUntil }</b>
-<b class="fc"><i class="no-highlight">36</i>&nbsp;    fun auctionEnd(auctionEnd: Instant?) = apply { this.auctionEnd = auctionEnd }</b>
-<b class="fc"><i class="no-highlight">37</i>&nbsp;    fun highestBid(highestBid: Int?) = apply { this.highestBid = highestBid }</b>
-<b class="fc"><i class="no-highlight">38</i>&nbsp;    fun highestBidder(highestBidder: String?) = apply { this.highestBidder = highestBidder }</b>
-<b class="fc"><i class="no-highlight">39</i>&nbsp;    fun type(type: HouseType) = apply { this.type = type }</b>
-<b class="fc"><i class="no-highlight">40</i>&nbsp;    fun movingDate(movingDate: Instant?) = apply { this.movingDate = movingDate }</b>
-<b class="fc"><i class="no-highlight">41</i>&nbsp;    fun transferPrice(transferPrice: Int?) = apply { this.transferPrice = transferPrice }</b>
-<b class="fc"><i class="no-highlight">42</i>&nbsp;    fun transferAccepted(transferAccepted: Boolean) = apply { this.transferAccepted = transferAccepted }</b>
-<b class="fc"><i class="no-highlight">43</i>&nbsp;    fun transferRecipient(transferRecipient: String?) = apply { this.transferRecipient = transferRecipient }</b>
-<i class="no-highlight">44</i>&nbsp;
-<b class="fc"><i class="no-highlight">45</i>&nbsp;    fun build() = House(</b>
-<b class="pc"><i class="no-highlight">46</i>&nbsp;        houseId = houseId ?: throw IllegalStateException(&quot;houseId is required&quot;),</b>
-<b class="pc"><i class="no-highlight">47</i>&nbsp;        name = name ?: throw IllegalStateException(&quot;name is required&quot;),</b>
-<b class="pc"><i class="no-highlight">48</i>&nbsp;        size = size ?: throw IllegalStateException(&quot;size is required&quot;),</b>
-<b class="pc"><i class="no-highlight">49</i>&nbsp;        type = type ?: throw IllegalStateException(&quot;type is required&quot;),</b>
-<b class="pc"><i class="no-highlight">50</i>&nbsp;        beds = beds ?: throw IllegalStateException(&quot;beds is required&quot;),</b>
-<b class="pc"><i class="no-highlight">51</i>&nbsp;        rent = rent ?: throw IllegalStateException(&quot;rent is required&quot;),</b>
-<b class="pc"><i class="no-highlight">52</i>&nbsp;        world = world ?: throw IllegalStateException(&quot;world is required&quot;),</b>
-<b class="pc"><i class="no-highlight">53</i>&nbsp;        status = status ?: throw IllegalStateException(&quot;status is required&quot;),</b>
-<b class="fc"><i class="no-highlight">54</i>&nbsp;        paidUntil = paidUntil,</b>
-<b class="fc"><i class="no-highlight">55</i>&nbsp;        owner = owner,</b>
-<b class="fc"><i class="no-highlight">56</i>&nbsp;        movingDate = movingDate,</b>
-<b class="fc"><i class="no-highlight">57</i>&nbsp;        transferPrice = transferPrice,</b>
-<b class="fc"><i class="no-highlight">58</i>&nbsp;        transferAccepted = transferAccepted,</b>
-<b class="fc"><i class="no-highlight">59</i>&nbsp;        transferRecipient = transferRecipient,</b>
-<b class="fc"><i class="no-highlight">60</i>&nbsp;        highestBid = highestBid,</b>
-<b class="fc"><i class="no-highlight">61</i>&nbsp;        highestBidder = highestBidder,</b>
-<b class="fc"><i class="no-highlight">62</i>&nbsp;        auctionEnd = auctionEnd,</b>
-<i class="no-highlight">63</i>&nbsp;    )
-<i class="no-highlight">64</i>&nbsp;}
+<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
+<i class="no-highlight">7</i>&nbsp;import java.time.Instant
+<i class="no-highlight">8</i>&nbsp;
+<i class="no-highlight">9</i>&nbsp;@BuilderDsl
+<i class="no-highlight">10</i>&nbsp;inline fun house(block: HouseBuilder.() -&gt; Unit) = HouseBuilder().apply(block).build()
+<i class="no-highlight">11</i>&nbsp;
+<i class="no-highlight">12</i>&nbsp;@BuilderDsl
+<i class="no-highlight">13</i>&nbsp;inline fun houseBuilder(block: HouseBuilder.() -&gt; Unit) = HouseBuilder().apply(block)
+<i class="no-highlight">14</i>&nbsp;
+<b class="fc"><i class="no-highlight">15</i>&nbsp;class HouseBuilder : TibiaKtBuilder&lt;House&gt;() {</b>
+<b class="fc"><i class="no-highlight">16</i>&nbsp;    var houseId: Int? = null</b>
+<b class="fc"><i class="no-highlight">17</i>&nbsp;    var name: String? = null</b>
+<b class="fc"><i class="no-highlight">18</i>&nbsp;    var size: Int? = null</b>
+<b class="fc"><i class="no-highlight">19</i>&nbsp;    var type: HouseType? = null</b>
+<b class="fc"><i class="no-highlight">20</i>&nbsp;    var beds: Int? = null</b>
+<b class="fc"><i class="no-highlight">21</i>&nbsp;    var rent: Int? = null</b>
+<b class="fc"><i class="no-highlight">22</i>&nbsp;    var world: String? = null</b>
+<b class="fc"><i class="no-highlight">23</i>&nbsp;    var status: HouseStatus? = null</b>
+<b class="fc"><i class="no-highlight">24</i>&nbsp;    var paidUntil: Instant? = null</b>
+<b class="fc"><i class="no-highlight">25</i>&nbsp;    var owner: String? = null</b>
+<b class="fc"><i class="no-highlight">26</i>&nbsp;    var movingDate: Instant? = null</b>
+<b class="fc"><i class="no-highlight">27</i>&nbsp;    var transferPrice: Int? = null</b>
+<b class="fc"><i class="no-highlight">28</i>&nbsp;    var transferAccepted: Boolean? = null</b>
+<b class="fc"><i class="no-highlight">29</i>&nbsp;    var transferRecipient: String? = null</b>
+<b class="fc"><i class="no-highlight">30</i>&nbsp;    var highestBid: Int? = null</b>
+<b class="fc"><i class="no-highlight">31</i>&nbsp;    var highestBidder: String? = null</b>
+<b class="fc"><i class="no-highlight">32</i>&nbsp;    var auctionEnd: Instant? = null</b>
+<i class="no-highlight">33</i>&nbsp;
+<i class="no-highlight">34</i>&nbsp;
+<b class="fc"><i class="no-highlight">35</i>&nbsp;    override fun build() = House(</b>
+<b class="pc"><i class="no-highlight">36</i>&nbsp;        houseId = houseId ?: throw IllegalStateException(&quot;houseId is required&quot;),</b>
+<b class="pc"><i class="no-highlight">37</i>&nbsp;        name = name ?: throw IllegalStateException(&quot;name is required&quot;),</b>
+<b class="pc"><i class="no-highlight">38</i>&nbsp;        size = size ?: throw IllegalStateException(&quot;size is required&quot;),</b>
+<b class="pc"><i class="no-highlight">39</i>&nbsp;        type = type ?: throw IllegalStateException(&quot;type is required&quot;),</b>
+<b class="pc"><i class="no-highlight">40</i>&nbsp;        beds = beds ?: throw IllegalStateException(&quot;beds is required&quot;),</b>
+<b class="pc"><i class="no-highlight">41</i>&nbsp;        rent = rent ?: throw IllegalStateException(&quot;rent is required&quot;),</b>
+<b class="pc"><i class="no-highlight">42</i>&nbsp;        world = world ?: throw IllegalStateException(&quot;world is required&quot;),</b>
+<b class="pc"><i class="no-highlight">43</i>&nbsp;        status = status ?: throw IllegalStateException(&quot;status is required&quot;),</b>
+<b class="fc"><i class="no-highlight">44</i>&nbsp;        paidUntil = paidUntil,</b>
+<b class="fc"><i class="no-highlight">45</i>&nbsp;        owner = owner,</b>
+<b class="fc"><i class="no-highlight">46</i>&nbsp;        movingDate = movingDate,</b>
+<b class="fc"><i class="no-highlight">47</i>&nbsp;        transferPrice = transferPrice,</b>
+<b class="fc"><i class="no-highlight">48</i>&nbsp;        transferAccepted = transferAccepted,</b>
+<b class="fc"><i class="no-highlight">49</i>&nbsp;        transferRecipient = transferRecipient,</b>
+<b class="fc"><i class="no-highlight">50</i>&nbsp;        highestBid = highestBid,</b>
+<b class="fc"><i class="no-highlight">51</i>&nbsp;        highestBidder = highestBidder,</b>
+<b class="fc"><i class="no-highlight">52</i>&nbsp;        auctionEnd = auctionEnd,</b>
+<i class="no-highlight">53</i>&nbsp;    )
+<i class="no-highlight">54</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -175,7 +165,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-04-18 21:44</div>
+    <div style="float:right;">generated on 2022-04-19 22:01</div>
 </div>
 </body>
 </html>
