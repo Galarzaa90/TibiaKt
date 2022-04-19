@@ -3,46 +3,36 @@ package com.galarzaa.tibiakt.core.builders
 import com.galarzaa.tibiakt.core.enums.HouseStatus
 import com.galarzaa.tibiakt.core.enums.HouseType
 import com.galarzaa.tibiakt.core.models.house.House
+import com.galarzaa.tibiakt.core.utils.BuilderDsl
 import java.time.Instant
 
-class HouseBuilder {
-    private var houseId: Int? = null
-    private var name: String? = null
-    private var size: Int? = null
-    private var type: HouseType? = null
-    private var beds: Int? = null
-    private var rent: Int? = null
-    private var world: String? = null
-    private var status: HouseStatus? = null
-    private var paidUntil: Instant? = null
-    private var owner: String? = null
-    private var movingDate: Instant? = null
-    private var transferPrice: Int? = null
-    private var transferAccepted: Boolean? = null
-    private var transferRecipient: String? = null
-    private var highestBid: Int? = null
-    private var highestBidder: String? = null
-    private var auctionEnd: Instant? = null
+@BuilderDsl
+inline fun house(block: HouseBuilder.() -> Unit) = HouseBuilder().apply(block).build()
 
-    fun houseId(houseId: Int) = apply { this.houseId = houseId }
-    fun name(name: String) = apply { this.name = name }
-    fun size(size: Int) = apply { this.size = size }
-    fun rent(rent: Int) = apply { this.rent = rent }
-    fun beds(beds: Int) = apply { this.beds = beds }
-    fun world(world: String) = apply { this.world = world }
-    fun status(status: HouseStatus) = apply { this.status = status }
-    fun owner(owner: String) = apply { this.owner = owner }
-    fun paidUntil(paidUntil: Instant) = apply { this.paidUntil = paidUntil }
-    fun auctionEnd(auctionEnd: Instant?) = apply { this.auctionEnd = auctionEnd }
-    fun highestBid(highestBid: Int?) = apply { this.highestBid = highestBid }
-    fun highestBidder(highestBidder: String?) = apply { this.highestBidder = highestBidder }
-    fun type(type: HouseType) = apply { this.type = type }
-    fun movingDate(movingDate: Instant?) = apply { this.movingDate = movingDate }
-    fun transferPrice(transferPrice: Int?) = apply { this.transferPrice = transferPrice }
-    fun transferAccepted(transferAccepted: Boolean) = apply { this.transferAccepted = transferAccepted }
-    fun transferRecipient(transferRecipient: String?) = apply { this.transferRecipient = transferRecipient }
+@BuilderDsl
+inline fun houseBuilder(block: HouseBuilder.() -> Unit) = HouseBuilder().apply(block)
 
-    fun build() = House(
+class HouseBuilder : TibiaKtBuilder<House>() {
+    var houseId: Int? = null
+    var name: String? = null
+    var size: Int? = null
+    var type: HouseType? = null
+    var beds: Int? = null
+    var rent: Int? = null
+    var world: String? = null
+    var status: HouseStatus? = null
+    var paidUntil: Instant? = null
+    var owner: String? = null
+    var movingDate: Instant? = null
+    var transferPrice: Int? = null
+    var transferAccepted: Boolean? = null
+    var transferRecipient: String? = null
+    var highestBid: Int? = null
+    var highestBidder: String? = null
+    var auctionEnd: Instant? = null
+
+
+    override fun build() = House(
         houseId = houseId ?: throw IllegalStateException("houseId is required"),
         name = name ?: throw IllegalStateException("name is required"),
         size = size ?: throw IllegalStateException("size is required"),

@@ -3,6 +3,7 @@ package com.galarzaa.tibiakt.client
 import com.galarzaa.tibiakt.client.exceptions.AjaxResponse
 import com.galarzaa.tibiakt.client.exceptions.ForbiddenException
 import com.galarzaa.tibiakt.client.exceptions.NetworkException
+import com.galarzaa.tibiakt.core.builders.BazaarFiltersBuilder
 import com.galarzaa.tibiakt.core.enums.AvailableForumSection
 import com.galarzaa.tibiakt.core.enums.BazaarType
 import com.galarzaa.tibiakt.core.enums.HighscoresBattlEyeType
@@ -464,6 +465,13 @@ open class TibiaKtClient constructor(
         val response = this.request(HttpMethod.Get, getBazaarUrl(type, filters, page))
         return response.parse { CharacterBazaarParser.fromContent(it) }
     }
+
+    suspend fun fetchBazaar(
+        type: BazaarType = BazaarType.CURRENT,
+        page: Int = 1,
+        filterBuilder: (BazaarFiltersBuilder.() -> Unit)? = null,
+    ): TibiaResponse<CharacterBazaar> =
+        fetchBazaar(type, filterBuilder?.let { BazaarFiltersBuilder().apply(it).build() }, page)
 
     /**
      * Fetch an auction from Tibia.com
