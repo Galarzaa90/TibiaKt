@@ -148,28 +148,37 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">28</i>&nbsp; * The author of a forum post or thread.
 <i class="no-highlight">29</i>&nbsp; *
 <i class="no-highlight">30</i>&nbsp; * If the character [isRecentlyTraded], it means that the character was traded in the last 30 days, but the post was made by the new owner.
-<i class="no-highlight">31</i>&nbsp; */
-<i class="no-highlight">32</i>&nbsp;@SerialName(&quot;forumAuthor&quot;)
-<i class="no-highlight">33</i>&nbsp;@Serializable
-<i class="no-highlight">34</i>&nbsp;data class ForumAuthor(
-<i class="no-highlight">35</i>&nbsp;    override val name: String,
-<i class="no-highlight">36</i>&nbsp;    val level: Int,
-<i class="no-highlight">37</i>&nbsp;    val world: String,
-<i class="no-highlight">38</i>&nbsp;    val position: String?,
-<i class="no-highlight">39</i>&nbsp;    val title: String?,
-<i class="no-highlight">40</i>&nbsp;    val vocation: Vocation,
-<i class="no-highlight">41</i>&nbsp;    val guild: GuildMembership?,
-<i class="no-highlight">42</i>&nbsp;    val posts: Int,
-<i class="no-highlight">43</i>&nbsp;    val isRecentlyTraded: Boolean,
-<i class="no-highlight">44</i>&nbsp;) : BaseForumAuthor(), BaseCharacter
-<i class="no-highlight">45</i>&nbsp;
-<i class="no-highlight">46</i>&nbsp;
-<i class="no-highlight">47</i>&nbsp;@SerialName(&quot;tournamentForumAuthor&quot;)
-<i class="no-highlight">48</i>&nbsp;@Serializable
-<i class="no-highlight">49</i>&nbsp;data class TournamentForumAuthor(
-<i class="no-highlight">50</i>&nbsp;    override val name: String,
+<i class="no-highlight">31</i>&nbsp; *
+<i class="no-highlight">32</i>&nbsp; * @property name The name of the author.
+<i class="no-highlight">33</i>&nbsp; * @property level The level of the author.
+<i class="no-highlight">34</i>&nbsp; * @property world The current world of the author.
+<i class="no-highlight">35</i>&nbsp; * @property position The official position of the author, if any.
+<i class="no-highlight">36</i>&nbsp; * @property title The selected title of the character, if any.
+<i class="no-highlight">37</i>&nbsp; * @property guild The guild of the character, if any.
+<i class="no-highlight">38</i>&nbsp; * @property posts The total number of posts by this author.
+<i class="no-highlight">39</i>&nbsp; * @property isRecentlyTraded The character was traded in the last 30 days.
+<i class="no-highlight">40</i>&nbsp; */
+<i class="no-highlight">41</i>&nbsp;@SerialName(&quot;forumAuthor&quot;)
+<i class="no-highlight">42</i>&nbsp;@Serializable
+<i class="no-highlight">43</i>&nbsp;data class ForumAuthor(
+<i class="no-highlight">44</i>&nbsp;    override val name: String,
+<i class="no-highlight">45</i>&nbsp;    val level: Int,
+<i class="no-highlight">46</i>&nbsp;    val world: String,
+<i class="no-highlight">47</i>&nbsp;    val position: String?,
+<i class="no-highlight">48</i>&nbsp;    val title: String?,
+<i class="no-highlight">49</i>&nbsp;    val vocation: Vocation,
+<i class="no-highlight">50</i>&nbsp;    val guild: GuildMembership?,
 <i class="no-highlight">51</i>&nbsp;    val posts: Int,
-<i class="no-highlight">52</i>&nbsp;) : BaseForumAuthor(), BaseCharacter
+<i class="no-highlight">52</i>&nbsp;    val isRecentlyTraded: Boolean,
+<i class="no-highlight">53</i>&nbsp;) : BaseForumAuthor(), BaseCharacter
+<i class="no-highlight">54</i>&nbsp;
+<i class="no-highlight">55</i>&nbsp;
+<i class="no-highlight">56</i>&nbsp;@SerialName(&quot;tournamentForumAuthor&quot;)
+<i class="no-highlight">57</i>&nbsp;@Serializable
+<i class="no-highlight">58</i>&nbsp;data class TournamentForumAuthor(
+<i class="no-highlight">59</i>&nbsp;    override val name: String,
+<i class="no-highlight">60</i>&nbsp;    val posts: Int,
+<i class="no-highlight">61</i>&nbsp;) : BaseForumAuthor(), BaseCharacter
 </div>
 </pre>
 </div>
@@ -196,7 +205,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-04-19 22:01</div>
+    <div style="float:right;">generated on 2022-04-20 22:27</div>
 </div>
 </body>
 </html>
