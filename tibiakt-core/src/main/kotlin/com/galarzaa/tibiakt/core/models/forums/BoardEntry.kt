@@ -3,7 +3,7 @@ package com.galarzaa.tibiakt.core.models.forums
 import kotlinx.serialization.Serializable
 
 /**
- * A forum board within a [ForumSection].
+ * A forum board listen within a [ForumSection].
  *
  * @property name The name of the board.
  * @property description The description of the board.

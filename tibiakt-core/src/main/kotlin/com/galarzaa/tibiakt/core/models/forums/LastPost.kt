@@ -4,7 +4,6 @@ package com.galarzaa.tibiakt.core.models.forums
 
 import com.galarzaa.tibiakt.core.serializers.InstantSerializer
 import com.galarzaa.tibiakt.core.utils.getCharacterUrl
-import com.galarzaa.tibiakt.core.utils.getForumPostUrl
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import java.time.Instant
@@ -21,12 +20,11 @@ import java.time.Instant
 @Serializable
 data class LastPost(
     val author: String,
-    val postId: Int,
+    override val postId: Int,
     val date: Instant,
     val deleted: Boolean,
     val traded: Boolean,
-) {
+) : BaseForumPost {
     /** The URL to the author's character page. If the author is deleted, there is no URL. */
-    val authorUrl get() = if(!deleted) getCharacterUrl(author) else null
-    val postUrl get() = getForumPostUrl(postId)
+    val authorUrl get() = if (!deleted) getCharacterUrl(author) else null
 }

@@ -3,7 +3,6 @@
 package com.galarzaa.tibiakt.core.models.forums
 
 import com.galarzaa.tibiakt.core.serializers.InstantSerializer
-import com.galarzaa.tibiakt.core.utils.getForumPostUrl
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import java.time.Instant
@@ -18,10 +17,8 @@ import java.time.Instant
  */
 @Serializable
 data class CMPost(
-    val postId: Int,
+    override val postId: Int,
     val date: Instant,
     val board: String,
     val threadTitle: String,
-) {
-    val postUrl: String get() = getForumPostUrl(postId)
-}
+) : BaseForumPost

@@ -28,6 +28,15 @@ data class UnavailableForumAuthor(
  * The author of a forum post or thread.
  *
  * If the character [isRecentlyTraded], it means that the character was traded in the last 30 days, but the post was made by the new owner.
+ *
+ * @property name The name of the author.
+ * @property level The level of the author.
+ * @property world The current world of the author.
+ * @property position The official position of the author, if any.
+ * @property title The selected title of the character, if any.
+ * @property guild The guild of the character, if any.
+ * @property posts The total number of posts by this author.
+ * @property isRecentlyTraded The character was traded in the last 30 days.
  */
 @SerialName("forumAuthor")
 @Serializable

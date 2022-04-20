@@ -5,6 +5,7 @@ import com.galarzaa.tibiakt.core.builders.forumBoard
 import com.galarzaa.tibiakt.core.enums.ThreadStatus
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
 import com.galarzaa.tibiakt.core.models.forums.ForumBoard
+import com.galarzaa.tibiakt.core.models.forums.ForumEmoticon
 import com.galarzaa.tibiakt.core.utils.cells
 import com.galarzaa.tibiakt.core.utils.cleanText
 import com.galarzaa.tibiakt.core.utils.formData
@@ -55,21 +56,25 @@ object ForumBoardParser : Parser<ForumBoard?> {
         for (row in table.rows().offsetStart(1)) {
             val columns = row.cells()
             if (columns.size != 7) continue
-            val (threadLink, pageLinks) = columns[2].select("a").mapNotNull { it.getLinkInformation() }
-                .let { it.first() to it.drop(1) }
-            var authorName = columns[3].cleanText()
-            val isTraded: Boolean
-            if ("(traded)" in authorName) {
-                authorName = authorName.replace("(traded)", "").trim()
-                isTraded = true
-            } else {
-                isTraded = false
-            }
-            val statusImageFileName = columns[0].selectFirst("img")?.attr("src")?.let {
-                fileNameRegex.find(it)?.groupValues?.get(1)
-            } ?: ""
-            val authorLink = columns[3].selectFirst("a")
             thread {
+                val (threadLink, pageLinks) = columns[2].select("a").mapNotNull { it.getLinkInformation() }
+                    .let { it.first() to it.drop(1) }
+                var authorName = columns[3].cleanText()
+                columns[1].selectFirst("img")?.also {
+                    emoticon = ForumEmoticon(it.attr("alt"), it.attr("src"))
+                }
+                val isTraded: Boolean
+                if ("(traded)" in authorName) {
+                    authorName = authorName.replace("(traded)", "").trim()
+                    isTraded = true
+                } else {
+                    isTraded = false
+                }
+                val statusImageFileName = columns[0].selectFirst("img")?.attr("src")?.let {
+                    fileNameRegex.find(it)?.groupValues?.get(1)
+                } ?: ""
+                val authorLink = columns[3].selectFirst("a")
+
                 title = threadLink.title
                 threadId = threadLink.queryParams["threadid"]?.get(0)?.toInt()
                 pages =
