@@ -27,5 +27,10 @@ class ForumAnnouncementParserTests: StringSpec({
             }
         }
     }
+
+    "Parse announcement not found" {
+        val announcement = ForumAnnouncementParser.fromContent(getResource("forums/forumAnnouncementNotFound.txt"))
+        announcement shouldBe null
+    }
 })
 

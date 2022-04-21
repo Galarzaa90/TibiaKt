@@ -16,8 +16,15 @@ object ForumAnnouncementParser : Parser<ForumAnnouncement?> {
     fun fromContent(content: String, announcementId: Int): ForumAnnouncement? {
         val boxContent = boxContent(content)
         return forumAnnouncement {
-            val (sectionLink, boardLink) = boxContent.select("div.ForumBreadCrumbs > a")
-                .mapNotNull { it.getLinkInformation() }
+            val breadCrumbs = boxContent.select("div.ForumBreadCrumbs > a")
+            if (breadCrumbs.isEmpty()) {
+                val messageBox = boxContent.selectFirst("div.InnerTableContainer")
+                if (messageBox == null || "not found" !in messageBox.text()) {
+                    throw ParsingException("Could not find Forum Breadcrumbs")
+                }
+                return null
+            }
+            val (sectionLink, boardLink) = breadCrumbs.mapNotNull { it.getLinkInformation() }
 
             sectionId = sectionLink.queryParams["sectionid"]?.first()?.toInt()
                 ?: throw ParsingException("Could not find section ID in link.")
