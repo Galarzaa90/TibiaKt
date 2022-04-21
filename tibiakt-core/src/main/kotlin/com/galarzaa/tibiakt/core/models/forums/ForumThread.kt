@@ -1,6 +1,7 @@
 package com.galarzaa.tibiakt.core.models.forums
 
-import com.galarzaa.tibiakt.core.models.Paginated
+import com.galarzaa.tibiakt.core.models.PaginatedWithUrl
+import com.galarzaa.tibiakt.core.utils.getForumThreadUrl
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -19,5 +20,9 @@ data class ForumThread(
     override val totalPages: Int,
     override val resultsCount: Int,
     override val entries: List<ForumPost>,
-): Paginated<ForumPost>
+) : PaginatedWithUrl<ForumPost> {
+
+    val url get() = getForumThreadUrl(threadId, currentPage)
+    override fun getPageUrl(page: Int): String = getForumThreadUrl(threadId, page)
+}
 

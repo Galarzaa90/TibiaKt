@@ -48,7 +48,7 @@ object GuildParser : Parser<Guild?> {
 
     private fun GuildBuilder.parseGuildMembers(parsedContent: Element) {
         val rows = parsedContent.select("tr[bgcolor]")
-        var currentRank: String = ""
+        var currentRank = ""
         for (row in rows) {
             val columns = row.select("td")
             when (columns.size) {

@@ -14,3 +14,4 @@ interface Paginated<T> {
     val resultsCount: Int
     val entries: List<T>
 }
+

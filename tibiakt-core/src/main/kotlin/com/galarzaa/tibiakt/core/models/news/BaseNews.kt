@@ -14,6 +14,5 @@ interface BaseNews {
     /**
      * The URL to the article.
      */
-    val url
-        get() = getNewsUrl(id)
+    val url get() = getNewsUrl(id)
 }

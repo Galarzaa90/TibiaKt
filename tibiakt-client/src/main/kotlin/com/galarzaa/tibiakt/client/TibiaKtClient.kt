@@ -1,6 +1,5 @@
 package com.galarzaa.tibiakt.client
 
-import com.galarzaa.tibiakt.client.exceptions.AjaxResponse
 import com.galarzaa.tibiakt.client.exceptions.ForbiddenException
 import com.galarzaa.tibiakt.client.exceptions.NetworkException
 import com.galarzaa.tibiakt.core.builders.BazaarFiltersBuilder
@@ -104,7 +103,6 @@ import io.ktor.client.statement.request
 import io.ktor.http.HttpMethod
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.Parameters
-import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import mu.KotlinLogging
 import java.time.Instant
@@ -601,7 +599,6 @@ open class TibiaKtClient constructor(
     /**
      * Fetch a single page from the auction pagination endpoint.
      */
-    @OptIn(ExperimentalSerializationApi::class)
     private suspend fun fetchAjaxPage(auctionId: Int, type: AuctionPagesType, page: Int): TimedResult<AjaxResponse> {
         val response = this.request(
             HttpMethod.Get, getAuctionAjaxPaginationUrl(auctionId, type, page),

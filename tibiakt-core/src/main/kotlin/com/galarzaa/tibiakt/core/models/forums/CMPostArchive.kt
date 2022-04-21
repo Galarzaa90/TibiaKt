@@ -3,7 +3,7 @@
 package com.galarzaa.tibiakt.core.models.forums
 
 
-import com.galarzaa.tibiakt.core.models.Paginated
+import com.galarzaa.tibiakt.core.models.PaginatedWithUrl
 import com.galarzaa.tibiakt.core.serializers.LocalDateSerializer
 import com.galarzaa.tibiakt.core.utils.getCMPostArchiveUrl
 import kotlinx.serialization.Serializable
@@ -21,8 +21,9 @@ data class CMPostArchive(
     override val totalPages: Int,
     override val resultsCount: Int,
     override val entries: List<CMPost>,
-) : Paginated<CMPost> {
-    val url
-        get() = getCMPostArchiveUrl(startDate, endDate, currentPage)
+) : PaginatedWithUrl<CMPost> {
+    val url get() = getCMPostArchiveUrl(startDate, endDate, currentPage)
+
+    override fun getPageUrl(page: Int) = getCMPostArchiveUrl(startDate, endDate, page)
 }
 

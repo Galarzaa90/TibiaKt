@@ -24,10 +24,12 @@ data class Leaderboards(
     override val totalPages: Int,
     override val resultsCount: Int,
     override val entries: List<LeaderboardsEntry>,
-) : Paginated<LeaderboardsEntry> {
+) : PaginatedWithUrl<LeaderboardsEntry> {
 
     /**
      * The URL to these leaderboards.
      */
     val url get() = getLeaderboardUrl(world, rotation, currentPage)
+
+    override fun getPageUrl(page: Int) = getLeaderboardUrl(world, rotation, page)
 }

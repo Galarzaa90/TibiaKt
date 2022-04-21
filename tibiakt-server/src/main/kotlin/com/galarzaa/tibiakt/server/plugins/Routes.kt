@@ -47,7 +47,7 @@ internal fun Application.configureRouting(client: TibiaKtClient) {
             call.respondOrNotFound(client.fetchHousesSection(it.world, it.town, it.type, it.status, it.order))
         }
         get<GetHouse> { (world, houseId) -> call.respondOrNotFound(client.fetchHouse(houseId, world)) }
-        get<GetHighscoresPage> { it ->
+        get<GetHighscoresPage> {
             val world = if (it.world.lowercase() == "all") null else it.world
             call.respondOrNotFound(client.fetchHighscoresPage(world, it.category, it.profession, it.page))
         }

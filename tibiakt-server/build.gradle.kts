@@ -30,6 +30,6 @@ tasks.withType<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar> {
     archiveFileName.set("tibiatk-server.jar")
 }
 
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>() {
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     kotlinOptions.freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
 }

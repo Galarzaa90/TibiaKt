@@ -1,7 +1,7 @@
 package com.galarzaa.tibiakt.core.models.bazaar
 
 import com.galarzaa.tibiakt.core.enums.BazaarType
-import com.galarzaa.tibiakt.core.models.Paginated
+import com.galarzaa.tibiakt.core.models.PaginatedWithUrl
 import com.galarzaa.tibiakt.core.utils.getBazaarUrl
 import kotlinx.serialization.Serializable
 
@@ -19,9 +19,10 @@ data class CharacterBazaar(
     override val totalPages: Int,
     override val resultsCount: Int,
     override val entries: List<Auction>,
-) : Paginated<Auction> {
+) : PaginatedWithUrl<Auction> {
     /**
      * The URL to the bazaar with the current filters and page.
      */
     val url get() = getBazaarUrl(type, filters, currentPage)
+    override fun getPageUrl(page: Int) = getBazaarUrl(type, filters, page)
 }

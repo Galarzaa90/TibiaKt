@@ -16,12 +16,10 @@ interface BaseHouse {
     /**
      * The URL to the house's information page.
      */
-    val url: String
-        get() = getHouseUrl(world, houseId)
+    val url: String get() = getHouseUrl(world, houseId)
 
     /**
      * URL to the house's image.
      */
-    val imageUrl: String
-        get() = getStaticFileUrl("images", "houses", "house_$houseId.png")
+    val imageUrl: String get() = getStaticFileUrl("images", "houses", "house_$houseId.png")
 }
