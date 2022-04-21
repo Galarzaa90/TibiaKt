@@ -1,0 +1,86 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Paginated</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.galarzaa.tibiakt.core.models</a>
+</div>
+
+<h1>Coverage Summary for Class: Paginated (com.galarzaa.tibiakt.core.models)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">Paginated</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.models
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;/**
+<i class="no-highlight">4</i>&nbsp; * An object made of multiple pages.
+<i class="no-highlight">5</i>&nbsp; *
+<i class="no-highlight">6</i>&nbsp; * @property currentPage The currently viewed page.
+<i class="no-highlight">7</i>&nbsp; * @property totalPages The total number of pages.
+<i class="no-highlight">8</i>&nbsp; * @property resultsCount The total number of [entries] across all pages.
+<i class="no-highlight">9</i>&nbsp; * @property entries The entries in this page.
+<i class="no-highlight">10</i>&nbsp; */
+<i class="no-highlight">11</i>&nbsp;interface Paginated&lt;T&gt; {
+<i class="no-highlight">12</i>&nbsp;    val currentPage: Int
+<i class="no-highlight">13</i>&nbsp;    val totalPages: Int
+<i class="no-highlight">14</i>&nbsp;    val resultsCount: Int
+<i class="no-highlight">15</i>&nbsp;    val entries: List&lt;T&gt;
+<i class="no-highlight">16</i>&nbsp;}
+<i class="no-highlight">17</i>&nbsp;
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-04-21 21:30</div>
+</div>
+</body>
+</html>

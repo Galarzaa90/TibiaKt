@@ -77,38 +77,42 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">2</i>&nbsp;
 <i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.BaseForumAuthor
 <i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.ForumAnnouncement
-<i class="no-highlight">5</i>&nbsp;import java.time.Instant
-<i class="no-highlight">6</i>&nbsp;
-<b class="fc"><i class="no-highlight">7</i>&nbsp;inline fun forumAnnouncementBuilder(block: ForumAnnouncementBuilder.() -&gt; Unit) = ForumAnnouncementBuilder().apply(block)</b>
-<b class="fc"><i class="no-highlight">8</i>&nbsp;inline fun forumAnnouncement(block: ForumAnnouncementBuilder.() -&gt; Unit) = forumAnnouncementBuilder(block).build()</b>
-<i class="no-highlight">9</i>&nbsp;
-<i class="no-highlight">10</i>&nbsp;class ForumAnnouncementBuilder {
-<i class="no-highlight">11</i>&nbsp;    var announcementId: Int? = null
-<i class="no-highlight">12</i>&nbsp;    var title: String? = null
-<i class="no-highlight">13</i>&nbsp;    var board: String? = null
-<i class="no-highlight">14</i>&nbsp;    var boardId: Int? = null
-<i class="no-highlight">15</i>&nbsp;    var section: String? = null
-<i class="no-highlight">16</i>&nbsp;    var sectionId: Int? = null
-<i class="no-highlight">17</i>&nbsp;    var author: BaseForumAuthor? = null
-<i class="no-highlight">18</i>&nbsp;    var content: String? = null
-<i class="no-highlight">19</i>&nbsp;    var startDate: Instant? = null
-<i class="no-highlight">20</i>&nbsp;    var endDate: Instant? = null
-<i class="no-highlight">21</i>&nbsp;
-<i class="no-highlight">22</i>&nbsp;    fun build(): ForumAnnouncement {
-<i class="no-highlight">23</i>&nbsp;        return ForumAnnouncement(
-<i class="no-highlight">24</i>&nbsp;            announcementId = announcementId ?: throw IllegalStateException(&quot;announcementId is required&quot;),
-<i class="no-highlight">25</i>&nbsp;            title = title ?: throw IllegalStateException(&quot;title is required&quot;),
-<i class="no-highlight">26</i>&nbsp;            board = board ?: throw IllegalStateException(&quot;board is required&quot;),
-<i class="no-highlight">27</i>&nbsp;            boardId = boardId ?: throw IllegalStateException(&quot;boardId is required&quot;),
-<i class="no-highlight">28</i>&nbsp;            section = section ?: throw IllegalStateException(&quot;section is required&quot;),
-<i class="no-highlight">29</i>&nbsp;            sectionId = sectionId ?: throw IllegalStateException(&quot;sectionId is required&quot;),
-<i class="no-highlight">30</i>&nbsp;            author = author ?: throw IllegalStateException(&quot;author is required&quot;),
-<i class="no-highlight">31</i>&nbsp;            content = content ?: throw IllegalStateException(&quot;content is required&quot;),
-<i class="no-highlight">32</i>&nbsp;            startDate = startDate ?: throw IllegalStateException(&quot;startDate is required&quot;),
-<i class="no-highlight">33</i>&nbsp;            endDate = endDate ?: throw IllegalStateException(&quot;endDate is required&quot;)
-<i class="no-highlight">34</i>&nbsp;        )
-<i class="no-highlight">35</i>&nbsp;    }
-<i class="no-highlight">36</i>&nbsp;}
+<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
+<i class="no-highlight">6</i>&nbsp;import java.time.Instant
+<i class="no-highlight">7</i>&nbsp;
+<i class="no-highlight">8</i>&nbsp;@BuilderDsl
+<i class="no-highlight">9</i>&nbsp;inline fun forumAnnouncementBuilder(block: ForumAnnouncementBuilder.() -&gt; Unit) =
+<b class="fc"><i class="no-highlight">10</i>&nbsp;    ForumAnnouncementBuilder().apply(block)</b>
+<i class="no-highlight">11</i>&nbsp;
+<i class="no-highlight">12</i>&nbsp;@BuilderDsl
+<b class="fc"><i class="no-highlight">13</i>&nbsp;inline fun forumAnnouncement(block: ForumAnnouncementBuilder.() -&gt; Unit) = forumAnnouncementBuilder(block).build()</b>
+<i class="no-highlight">14</i>&nbsp;
+<i class="no-highlight">15</i>&nbsp;@BuilderDsl
+<i class="no-highlight">16</i>&nbsp;class ForumAnnouncementBuilder : TibiaKtBuilder&lt;ForumAnnouncement&gt;() {
+<i class="no-highlight">17</i>&nbsp;    var announcementId: Int? = null
+<i class="no-highlight">18</i>&nbsp;    var title: String? = null
+<i class="no-highlight">19</i>&nbsp;    var board: String? = null
+<i class="no-highlight">20</i>&nbsp;    var boardId: Int? = null
+<i class="no-highlight">21</i>&nbsp;    var section: String? = null
+<i class="no-highlight">22</i>&nbsp;    var sectionId: Int? = null
+<i class="no-highlight">23</i>&nbsp;    var author: BaseForumAuthor? = null
+<i class="no-highlight">24</i>&nbsp;    var content: String? = null
+<i class="no-highlight">25</i>&nbsp;    var startDate: Instant? = null
+<i class="no-highlight">26</i>&nbsp;    var endDate: Instant? = null
+<i class="no-highlight">27</i>&nbsp;
+<i class="no-highlight">28</i>&nbsp;    override fun build() = ForumAnnouncement(
+<i class="no-highlight">29</i>&nbsp;        announcementId = announcementId ?: throw IllegalStateException(&quot;announcementId is required&quot;),
+<i class="no-highlight">30</i>&nbsp;        title = title ?: throw IllegalStateException(&quot;title is required&quot;),
+<i class="no-highlight">31</i>&nbsp;        board = board ?: throw IllegalStateException(&quot;board is required&quot;),
+<i class="no-highlight">32</i>&nbsp;        boardId = boardId ?: throw IllegalStateException(&quot;boardId is required&quot;),
+<i class="no-highlight">33</i>&nbsp;        section = section ?: throw IllegalStateException(&quot;section is required&quot;),
+<i class="no-highlight">34</i>&nbsp;        sectionId = sectionId ?: throw IllegalStateException(&quot;sectionId is required&quot;),
+<i class="no-highlight">35</i>&nbsp;        author = author ?: throw IllegalStateException(&quot;author is required&quot;),
+<i class="no-highlight">36</i>&nbsp;        content = content ?: throw IllegalStateException(&quot;content is required&quot;),
+<i class="no-highlight">37</i>&nbsp;        startDate = startDate ?: throw IllegalStateException(&quot;startDate is required&quot;),
+<i class="no-highlight">38</i>&nbsp;        endDate = endDate ?: throw IllegalStateException(&quot;endDate is required&quot;)
+<i class="no-highlight">39</i>&nbsp;    )
+<i class="no-highlight">40</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -135,7 +139,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-04-20 22:27</div>
+    <div style="float:right;">generated on 2022-04-21 21:30</div>
 </div>
 </body>
 </html>
