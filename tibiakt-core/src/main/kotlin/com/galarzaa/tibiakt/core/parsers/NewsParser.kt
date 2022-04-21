@@ -15,23 +15,21 @@ object NewsParser : Parser<News?> {
     fun fromContent(content: String, newsId: Int = 0): News? {
         val boxContent = boxContent(content)
 
-        val titleContainer =
-            boxContent.selectFirst("div.NewsHeadlineText")
-                ?: if ("not found" in (boxContent.selectFirst("div.CaptionContainer")?.cleanText() ?: ""))
-                    return null
-                else
-                    throw ParsingException("News headline not found.")
+        val titleContainer = boxContent.selectFirst("div.NewsHeadlineText")
+            ?: if ("not found" in (boxContent.selectFirst("div.CaptionContainer")?.cleanText() ?: "")) return null
+            else throw ParsingException("News headline not found.")
         val icon = boxContent.selectFirst("img.NewsHeadlineIcon") ?: throw ParsingException("News icon not found.")
         return news {
             id = newsId
             title = titleContainer.cleanText()
             category = NewsCategory.fromIcon(icon.attr("src"))
+                ?: throw ParsingException("Unexpected news icon found: ${icon.attr("src")}")
 
             val newsDate = boxContent.selectFirst("div.NewsHeadlineDate")?.cleanText()?.remove("-")?.trim()
             date = parseTibiaDate(newsDate ?: throw ParsingException("News date not found."))
 
-            val newsTable = boxContent.selectFirst("td.NewsTableContainer")?.children().toString()
-            this.content = newsTable
+            this.content = boxContent.selectFirst("td.NewsTableContainer")?.html()
+                ?: throw ParsingException("News content not found.")
 
             boxContent.selectFirst("div.NewsForumLink > a")?.apply {
                 threadId = getLinkInformation()?.queryParams?.get("threadid")?.get(0)?.toInt()
