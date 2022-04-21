@@ -4,12 +4,17 @@ import com.galarzaa.tibiakt.core.models.forums.BaseForumAuthor
 import com.galarzaa.tibiakt.core.models.forums.ForumEmoticon
 import com.galarzaa.tibiakt.core.models.forums.ForumPost
 import com.galarzaa.tibiakt.core.models.forums.ForumThread
+import com.galarzaa.tibiakt.core.utils.BuilderDsl
 import java.time.Instant
 
+@BuilderDsl
 inline fun forumThreadBuilder(block: ForumThreadBuilder.() -> Unit) = ForumThreadBuilder().apply(block)
+
+@BuilderDsl
 inline fun forumThread(block: ForumThreadBuilder.() -> Unit) = forumThreadBuilder(block).build()
 
-class ForumThreadBuilder {
+@BuilderDsl
+class ForumThreadBuilder : TibiaKtBuilder<ForumThread>() {
     var title: String? = null
     var threadId: Int? = null
     var board: String? = null
@@ -26,10 +31,12 @@ class ForumThreadBuilder {
     val entries = mutableListOf<ForumPost>()
 
     fun addPost(post: ForumPost) = apply { entries.add(post) }
+
+    @BuilderDsl
     fun addPost(block: ForumPostBuilder.() -> Unit) = apply { entries.add(forumPost(block)) }
 
 
-    fun build(): ForumThread = ForumThread(title = title ?: throw IllegalStateException("title is required"),
+    override fun build() = ForumThread(title = title ?: throw IllegalStateException("title is required"),
         threadId = threadId ?: throw IllegalStateException("threadId is required"),
         board = board ?: throw IllegalStateException("board is required"),
         boardId = boardId ?: throw IllegalStateException("boardId is required"),

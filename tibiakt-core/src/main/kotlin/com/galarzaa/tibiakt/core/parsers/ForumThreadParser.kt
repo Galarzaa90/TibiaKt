@@ -22,8 +22,15 @@ object ForumThreadParser : Parser<ForumThread?> {
     override fun fromContent(content: String): ForumThread? {
         val boxContent = boxContent(content)
         return forumThread {
-            val (sectionLink, boardLink) = boxContent.select("div.ForumBreadCrumbs > a")
-                .mapNotNull { it.getLinkInformation() }
+            val breadCrumbs = boxContent.select("div.ForumBreadCrumbs > a")
+            if (breadCrumbs.isEmpty()) {
+                val messageBox = boxContent.selectFirst("div.InnerTableContainer")
+                if (messageBox == null || "not found" !in messageBox.text()) {
+                    throw ParsingException("Could not find Forum Breadcrumbs")
+                }
+                return null
+            }
+            val (sectionLink, boardLink) = breadCrumbs.mapNotNull { it.getLinkInformation() }
 
             sectionId = sectionLink.queryParams["sectionid"]?.first()?.toInt()
                 ?: throw ParsingException("Could not find section ID in link.")
@@ -32,7 +39,14 @@ object ForumThreadParser : Parser<ForumThread?> {
                 ?: throw ParsingException("Could not find board ID in link.")
             board = boardLink.title
 
-            val forumTitleContainer = boxContent.selectFirst("div.ForumTitleText")!!
+            val forumTitleContainer = boxContent.selectFirst("div.ForumTitleText")
+            if (forumTitleContainer == null) {
+                title = boxContent.selectFirst("div.ForumBreadCrumbs > b")?.text()
+                    ?: throw ParsingException("Could not find partial title")
+                threadId = 0
+                currentPage = -1
+                return@forumThread
+            }
             val border = forumTitleContainer.parent()!!.previousSibling()!!.previousSibling()!!
             goldenFrame = "gold" in border.attr("style")
             title = forumTitleContainer.cleanText()
@@ -57,7 +71,7 @@ object ForumThreadParser : Parser<ForumThread?> {
                 nextTopicNumber = navigationLinks.first().queryParams["threadid"]?.first()?.toInt()
                     ?: throw ParsingException("Could not find next topic number in link.")
             }
-            val paginationData = boxContent.selectFirst("td.PageNavigation")!!.parsePagination()!!
+            val paginationData = boxContent.selectFirst("td.PageNavigation")!!.parsePagination()
             totalPages = paginationData.totalPages
             currentPage = paginationData.currentPage
             resultsCount = paginationData.resultsCount
@@ -69,7 +83,7 @@ object ForumThreadParser : Parser<ForumThread?> {
         }
     }
 
-    fun ForumThreadBuilder.parsePostContainer(container: Element) {
+    private fun ForumThreadBuilder.parsePostContainer(container: Element) {
         addPost {
             author = parseAuthorTable(container.selectFirst("div.PostCharacterText")!!)
             val contentContainer = container.selectFirst("div.PostText")

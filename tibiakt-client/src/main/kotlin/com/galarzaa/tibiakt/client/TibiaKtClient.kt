@@ -273,13 +273,14 @@ open class TibiaKtClient constructor(
         return response.parse { GuildParser.fromContent(it) }
     }
 
-    open suspend fun fetchWorldGuilds(name: String): TibiaResponse<GuildsSection?> {
-        val response = this.request(HttpMethod.Get, getWorldGuildsUrl(name))
+    /** Fetch active and in formation guilds in a [world]. */
+    open suspend fun fetchWorldGuilds(world: String): TibiaResponse<GuildsSection?> {
+        val response = this.request(HttpMethod.Get, getWorldGuildsUrl(world))
         return response.parse { GuildsSectionParser.fromContent(it) }
     }
 
     /**
-     * Fetch the kill statistics for a [world]
+     * Fetch the kill statistics for a [world].
      */
     open suspend fun fetchKillStatistics(world: String): TibiaResponse<KillStatistics> {
         val response = this.request(HttpMethod.Get, getKillStatisticsUrl(world))
