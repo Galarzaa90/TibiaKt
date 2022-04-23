@@ -12,6 +12,8 @@ inline fun house(block: HouseBuilder.() -> Unit) = HouseBuilder().apply(block).b
 @BuilderDsl
 inline fun houseBuilder(block: HouseBuilder.() -> Unit) = HouseBuilder().apply(block)
 
+
+@BuilderDsl
 class HouseBuilder : TibiaKtBuilder<House>() {
     var houseId: Int? = null
     var name: String? = null
@@ -30,7 +32,6 @@ class HouseBuilder : TibiaKtBuilder<House>() {
     var highestBid: Int? = null
     var highestBidder: String? = null
     var auctionEnd: Instant? = null
-
 
     override fun build() = House(
         houseId = houseId ?: throw IllegalStateException("houseId is required"),

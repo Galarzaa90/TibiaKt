@@ -43,7 +43,7 @@ object WorldOverviewParser : Parser<WorldOverview> {
     private fun WorldOverviewBuilder.parseWorldsTable(table: Element) {
         val rows = table.select("tr")
         for (row in rows.subList(1, rows.size)) {
-            world {
+            addWorld {
                 val columns = row.select("td")
                 name = columns.first()?.text() ?: throw ParsingException("No columns in world row.")
                 try {

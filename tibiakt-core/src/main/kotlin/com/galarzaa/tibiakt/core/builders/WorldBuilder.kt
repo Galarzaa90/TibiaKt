@@ -6,14 +6,19 @@ import com.galarzaa.tibiakt.core.enums.TransferType
 import com.galarzaa.tibiakt.core.enums.Vocation
 import com.galarzaa.tibiakt.core.models.world.OnlineCharacter
 import com.galarzaa.tibiakt.core.models.world.World
+import com.galarzaa.tibiakt.core.utils.BuilderDsl
 import java.time.Instant
 import java.time.LocalDate
 import java.time.YearMonth
 
+@BuilderDsl
 inline fun worldBuilder(block: WorldBuilder.() -> Unit) = WorldBuilder().apply(block)
+
+@BuilderDsl
 inline fun world(block: WorldBuilder.() -> Unit) = worldBuilder(block).build()
 
-class WorldBuilder {
+@BuilderDsl
+class WorldBuilder : TibiaKtBuilder<World>() {
     var name: String? = null
     var isOnline: Boolean = false
     var onlineCount: Int = 0
@@ -35,7 +40,7 @@ class WorldBuilder {
         playersOnline.add(OnlineCharacter(name, level, vocation))
 
 
-    fun build(): World {
+    override fun build(): World {
         return World(
             name = name ?: throw IllegalStateException("name is required"),
             isOnline = isOnline,

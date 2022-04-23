@@ -4,7 +4,10 @@ import com.galarzaa.tibiakt.core.models.forums.LastPost
 import com.galarzaa.tibiakt.core.utils.BuilderDsl
 import java.time.Instant
 
+@BuilderDsl
 inline fun lastPostBuilder(block: LastPostBuilder.() -> Unit) = LastPostBuilder().apply(block)
+
+@BuilderDsl
 inline fun lastPost(block: LastPostBuilder.() -> Unit) = lastPostBuilder(block).build()
 
 @BuilderDsl

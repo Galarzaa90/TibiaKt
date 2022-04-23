@@ -2,18 +2,25 @@ package com.galarzaa.tibiakt.core.builders
 
 import com.galarzaa.tibiakt.core.models.KillStatistics
 import com.galarzaa.tibiakt.core.models.KillsStatisticEntry
+import com.galarzaa.tibiakt.core.utils.BuilderDsl
 
+@BuilderDsl
+inline fun killStatistics(block: KillStatisticsBuilder.() -> Unit) = KillStatisticsBuilder().apply(block).build()
+
+@BuilderDsl
+inline fun killStatisticsBuilder(block: KillStatisticsBuilder.() -> Unit) = KillStatisticsBuilder().apply(block)
+
+@BuilderDsl
 class KillStatisticsBuilder {
-    private var world: String? = null
+    var world: String? = null
     val entries: MutableMap<String, KillsStatisticEntry> = mutableMapOf()
     private var total: KillsStatisticEntry = KillsStatisticEntry(0, 0, 0, 0)
 
-    fun world(world: String) = apply { this.world = world }
     fun total(
         lastDayKilledPlayers: Int,
         lastDayKilled: Int,
         lastWeekKilledPlayers: Int,
-        lastWeekKilled: Int
+        lastWeekKilled: Int,
     ) = apply {
         total = KillsStatisticEntry(lastDayKilledPlayers, lastDayKilled, lastWeekKilledPlayers, lastWeekKilled)
     }

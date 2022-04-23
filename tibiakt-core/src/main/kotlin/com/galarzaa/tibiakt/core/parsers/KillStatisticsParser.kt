@@ -2,6 +2,7 @@ package com.galarzaa.tibiakt.core.parsers
 
 
 import com.galarzaa.tibiakt.core.builders.KillStatisticsBuilder
+import com.galarzaa.tibiakt.core.builders.killStatistics
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
 import com.galarzaa.tibiakt.core.models.KillStatistics
 import com.galarzaa.tibiakt.core.utils.cellsText
@@ -19,33 +20,33 @@ object KillStatisticsParser : Parser<KillStatistics> {
         val boxContent =
             document.selectFirst("div.BoxContent") ?: throw ParsingException("BoxContent container not found")
         val tables = boxContent.parseTablesMap("table.Table1, table.Table3")
-        val builder = KillStatisticsBuilder()
-        tables["Kill Statistics"]?.apply {
-            parseKillStatisticsTable(this, builder)
-        } ?: throw ParsingException("kill statistics table not found")
-        val form = boxContent.selectFirst("form") ?: throw ParsingException("could not find form in value")
-        builder.world(form.formData().values["world"] ?: throw ParsingException("could not find world value in form"))
-        return builder.build()
+        return killStatistics {
+            tables["Kill Statistics"]?.apply {
+                parseKillStatisticsTable(this)
+            } ?: throw ParsingException("kill statistics table not found")
+            val form = boxContent.selectFirst("form") ?: throw ParsingException("could not find form in value")
+            world = form.formData().values["world"] ?: throw ParsingException("could not find world value in form")
+        }
     }
 
-    private fun parseKillStatisticsTable(table: Element, builder: KillStatisticsBuilder) {
+    private fun KillStatisticsBuilder.parseKillStatisticsTable(table: Element) {
         val innerTable = table.selectFirst("table.TableContent")
         for (row in innerTable.rows().offsetStart(2)) {
             val columnns = row.cellsText()
             if (columnns[0] == "Total") {
-                builder.total(
-                    columnns[1].toInt(),
-                    columnns[2].toInt(),
-                    columnns[3].toInt(),
-                    columnns[4].toInt(),
+                total(
+                    lastDayKilledPlayers = columnns[1].toInt(),
+                    lastDayKilled = columnns[2].toInt(),
+                    lastWeekKilledPlayers = columnns[3].toInt(),
+                    lastWeekKilled = columnns[4].toInt(),
                 )
             } else {
-                builder.addEntry(
-                    columnns[0],
-                    columnns[1].toInt(),
-                    columnns[2].toInt(),
-                    columnns[3].toInt(),
-                    columnns[4].toInt(),
+                addEntry(
+                    race = columnns[0],
+                    lastDayKilledPlayers = columnns[1].toInt(),
+                    lastDayKilled = columnns[2].toInt(),
+                    lastWeekKilledPlayers = columnns[3].toInt(),
+                    lastWeekKilled = columnns[4].toInt(),
                 )
             }
         }
