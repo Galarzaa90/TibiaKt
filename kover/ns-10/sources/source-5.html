@@ -23,12 +23,9 @@ Current scope:     <a href="../../index.html">all classes</a>
 <h1>Coverage Summary for Class: CreaturesSectionParser (com.galarzaa.tibiakt.core.parsers)</h1>
 
 <table class="coverageStats">
+
 <tr>
   <th class="name">Class</th>
-<th class="coverageStat 
-">
-  Class, %
-</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -46,6 +43,33 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name">CreaturesSectionParser</td>
 <td class="coverageStat">
   <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    56.2%
+  </span>
+  <span class="absValue">
+    (9/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    70.6%
+  </span>
+  <span class="absValue">
+    (12/17)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">CreaturesSectionParser$fromContent$1$1$1</td>
+<td class="coverageStat">
+  <span class="percent">
     100%
   </span>
   <span class="absValue">
@@ -57,7 +81,53 @@ Current scope:     <a href="../../index.html">all classes</a>
     50%
   </span>
   <span class="absValue">
-    (1/2)
+    (2/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (2/3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">CreaturesSectionParser$fromContent$1$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (2/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (2/3)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (3/4)
   </span>
 </td>
 <td class="coverageStat">
@@ -70,14 +140,13 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    72.7%
+    69.6%
   </span>
   <span class="absValue">
-    (16/22)
+    (16/23)
   </span>
 </td>
 </tr>
-
 </table>
 
 <br/>
@@ -87,44 +156,45 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.parsers
 <i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.builders.CreaturesSectionBuilder
+<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.builders.creaturesSection
 <i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
-<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.models.creatures.CreatureEntry
-<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.models.creatures.CreaturesSection
-<i class="no-highlight">7</i>&nbsp;import com.galarzaa.tibiakt.core.utils.cleanText
-<i class="no-highlight">8</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getLinkInformation
-<i class="no-highlight">9</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseTablesMap
-<i class="no-highlight">10</i>&nbsp;
-<b class="nc"><i class="no-highlight">11</i>&nbsp;object CreaturesSectionParser : Parser&lt;CreaturesSection&gt; {</b>
-<i class="no-highlight">12</i>&nbsp;    override fun fromContent(content: String): CreaturesSection {
-<b class="fc"><i class="no-highlight">13</i>&nbsp;        val boxContent = boxContent(content)</b>
-<b class="fc"><i class="no-highlight">14</i>&nbsp;        val tables = boxContent.parseTablesMap(&quot;table.Table1&quot;)</b>
-<b class="fc"><i class="no-highlight">15</i>&nbsp;        val builder = CreaturesSectionBuilder()</b>
-<b class="pc"><i class="no-highlight">16</i>&nbsp;        tables[&quot;Boosted Creature&quot;]?.let {</b>
-<b class="fc"><i class="no-highlight">17</i>&nbsp;            val boostedCreatureLink =</b>
-<b class="pc"><i class="no-highlight">18</i>&nbsp;                it.selectFirst(&quot;a&quot;)?.getLinkInformation() ?: throw ParsingException(&quot;boosted creature link not found&quot;)</b>
-<b class="fc"><i class="no-highlight">19</i>&nbsp;            builder.boostedCreature(CreatureEntry(name = boostedCreatureLink.title,</b>
-<b class="pc"><i class="no-highlight">20</i>&nbsp;                identifier = boostedCreatureLink.queryParams[&quot;race&quot;]?.get(0)</b>
-<b class="nc"><i class="no-highlight">21</i>&nbsp;                    ?: throw ParsingException(&quot;race not found in boosted creature&#39;s link&quot;)))</b>
-<b class="nc"><i class="no-highlight">22</i>&nbsp;        } ?: throw ParsingException(&quot;Boosted Creature table not found.&quot;)</b>
-<i class="no-highlight">23</i>&nbsp;
-<b class="pc"><i class="no-highlight">24</i>&nbsp;        val entriesTable = boxContent.selectFirst(&quot;div[style*=display: table]&quot;)</b>
-<b class="nc"><i class="no-highlight">25</i>&nbsp;            ?: throw ParsingException(&quot;could not find creatures list container&quot;)</b>
-<b class="fc"><i class="no-highlight">26</i>&nbsp;        val entryContainers = entriesTable.select(&quot;div[style*=float: left]&quot;)</b>
-<b class="fc"><i class="no-highlight">27</i>&nbsp;        for (entryContainer in entryContainers) {</b>
-<b class="pc"><i class="no-highlight">28</i>&nbsp;            val linkInfo = entryContainer.selectFirst(&quot;a&quot;)?.getLinkInformation()</b>
-<b class="nc"><i class="no-highlight">29</i>&nbsp;                ?: throw ParsingException(&quot;creature link not found&quot;)</b>
-<b class="fc"><i class="no-highlight">30</i>&nbsp;            builder.addCreature(CreatureEntry(</b>
-<b class="fc"><i class="no-highlight">31</i>&nbsp;                name = entryContainer.cleanText(),</b>
-<b class="pc"><i class="no-highlight">32</i>&nbsp;                identifier = linkInfo.queryParams[&quot;race&quot;]?.get(0)</b>
-<b class="nc"><i class="no-highlight">33</i>&nbsp;                    ?: throw ParsingException(&quot;race not found in creature&#39;s link&quot;)</b>
-<i class="no-highlight">34</i>&nbsp;            )
-<i class="no-highlight">35</i>&nbsp;            )
-<i class="no-highlight">36</i>&nbsp;        }
-<b class="fc"><i class="no-highlight">37</i>&nbsp;        return builder.build()</b>
-<i class="no-highlight">38</i>&nbsp;    }
-<i class="no-highlight">39</i>&nbsp;
-<i class="no-highlight">40</i>&nbsp;}
+<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.models.creatures.CreaturesSection
+<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.utils.cleanText
+<i class="no-highlight">7</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getLinkInformation
+<i class="no-highlight">8</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseTablesMap
+<i class="no-highlight">9</i>&nbsp;
+<b class="nc"><i class="no-highlight">10</i>&nbsp;object CreaturesSectionParser : Parser&lt;CreaturesSection&gt; {</b>
+<i class="no-highlight">11</i>&nbsp;    override fun fromContent(content: String): CreaturesSection {
+<b class="fc"><i class="no-highlight">12</i>&nbsp;        val boxContent = boxContent(content)</b>
+<b class="fc"><i class="no-highlight">13</i>&nbsp;        val tables = boxContent.parseTablesMap(&quot;table.Table1&quot;)</b>
+<b class="fc"><i class="no-highlight">14</i>&nbsp;        return creaturesSection {</b>
+<b class="pc"><i class="no-highlight">15</i>&nbsp;            tables[&quot;Boosted Creature&quot;]?.let {</b>
+<b class="pc"><i class="no-highlight">16</i>&nbsp;                val boostedCreatureLink = it.selectFirst(&quot;a&quot;)?.getLinkInformation()</b>
+<b class="nc"><i class="no-highlight">17</i>&nbsp;                    ?: throw ParsingException(&quot;boosted creature link not found&quot;)</b>
+<b class="fc"><i class="no-highlight">18</i>&nbsp;                boostedCreature {</b>
+<b class="fc"><i class="no-highlight">19</i>&nbsp;                    name = boostedCreatureLink.title</b>
+<b class="pc"><i class="no-highlight">20</i>&nbsp;                    identifier = boostedCreatureLink.queryParams[&quot;race&quot;]?.get(0)</b>
+<b class="nc"><i class="no-highlight">21</i>&nbsp;                        ?: throw ParsingException(&quot;race not found in boosted creature&#39;s link&quot;)</b>
+<i class="no-highlight">22</i>&nbsp;                }
+<b class="nc"><i class="no-highlight">23</i>&nbsp;            } ?: throw ParsingException(&quot;Boosted Creature table not found.&quot;)</b>
+<i class="no-highlight">24</i>&nbsp;
+<b class="pc"><i class="no-highlight">25</i>&nbsp;            val entriesTable = boxContent.selectFirst(&quot;div[style*=display: table]&quot;)</b>
+<b class="nc"><i class="no-highlight">26</i>&nbsp;                ?: throw ParsingException(&quot;could not find creatures list container&quot;)</b>
+<b class="fc"><i class="no-highlight">27</i>&nbsp;            val entryContainers = entriesTable.select(&quot;div[style*=float: left]&quot;)</b>
+<b class="fc"><i class="no-highlight">28</i>&nbsp;            for (entryContainer in entryContainers) {</b>
+<b class="pc"><i class="no-highlight">29</i>&nbsp;                val linkInfo = entryContainer.selectFirst(&quot;a&quot;)?.getLinkInformation()</b>
+<b class="nc"><i class="no-highlight">30</i>&nbsp;                    ?: throw ParsingException(&quot;creature link not found&quot;)</b>
+<b class="fc"><i class="no-highlight">31</i>&nbsp;                addCreature {</b>
+<b class="fc"><i class="no-highlight">32</i>&nbsp;                    name = entryContainer.cleanText()</b>
+<b class="pc"><i class="no-highlight">33</i>&nbsp;                    identifier = linkInfo.queryParams[&quot;race&quot;]?.get(0)</b>
+<b class="nc"><i class="no-highlight">34</i>&nbsp;                        ?: throw ParsingException(&quot;race not found in creature&#39;s link&quot;)</b>
+<i class="no-highlight">35</i>&nbsp;                }
+<i class="no-highlight">36</i>&nbsp;
+<i class="no-highlight">37</i>&nbsp;            }
+<i class="no-highlight">38</i>&nbsp;
+<b class="fc"><i class="no-highlight">39</i>&nbsp;        }</b>
+<i class="no-highlight">40</i>&nbsp;    }
+<i class="no-highlight">41</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -151,7 +221,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-04-21 21:30</div>
+    <div style="float:right;">generated on 2022-04-23 17:39</div>
 </div>
 </body>
 </html>

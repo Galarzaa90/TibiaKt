@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > GuildsSectionBuilderKt</title>
+  <title>Coverage Report > GuildsSectionBuilder</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -20,7 +20,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">com.galarzaa.tibiakt.core.builders</a>
 </div>
 
-<h1>Coverage Summary for Class: GuildsSectionBuilderKt (com.galarzaa.tibiakt.core.builders)</h1>
+<h1>Coverage Summary for Class: GuildsSectionBuilder (com.galarzaa.tibiakt.core.builders)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -35,11 +35,15 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 <th class="coverageStat 
 ">
+  Block, %
+</th>
+<th class="coverageStat 
+">
   Line, %
 </th>
 </tr>
 <tr>
-  <td class="name">GuildsSectionBuilderKt</td>
+  <td class="name">GuildsSectionBuilder</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -53,7 +57,15 @@ Current scope:     <a href="../../index.html">all classes</a>
     100%
   </span>
   <span class="absValue">
-    (2/2)
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/2)
   </span>
 </td>
 <td class="coverageStat">
@@ -61,7 +73,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     100%
   </span>
   <span class="absValue">
-    (2/2)
+    (9/9)
   </span>
 </td>
 </tr>
@@ -79,21 +91,21 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.models.guild.GuildsSection
 <i class="no-highlight">5</i>&nbsp;
 <i class="no-highlight">6</i>&nbsp;
-<b class="fc"><i class="no-highlight">7</i>&nbsp;inline fun guildsSectionBuilder(block: GuildsSectionBuilder.() -&gt; Unit) = GuildsSectionBuilder().apply(block)</b>
-<b class="fc"><i class="no-highlight">8</i>&nbsp;inline fun guildsSection(block: GuildsSectionBuilder.() -&gt; Unit) = guildsSectionBuilder(block).build()</b>
+<i class="no-highlight">7</i>&nbsp;inline fun guildsSectionBuilder(block: GuildsSectionBuilder.() -&gt; Unit) = GuildsSectionBuilder().apply(block)
+<i class="no-highlight">8</i>&nbsp;inline fun guildsSection(block: GuildsSectionBuilder.() -&gt; Unit) = guildsSectionBuilder(block).build()
 <i class="no-highlight">9</i>&nbsp;
-<i class="no-highlight">10</i>&nbsp;class GuildsSectionBuilder {
-<i class="no-highlight">11</i>&nbsp;    var world: String? = null
-<i class="no-highlight">12</i>&nbsp;    val guilds: MutableList&lt;GuildEntry&gt; = mutableListOf()
+<b class="fc"><i class="no-highlight">10</i>&nbsp;class GuildsSectionBuilder {</b>
+<b class="fc"><i class="no-highlight">11</i>&nbsp;    var world: String? = null</b>
+<b class="fc"><i class="no-highlight">12</i>&nbsp;    val guilds: MutableList&lt;GuildEntry&gt; = mutableListOf()</b>
 <i class="no-highlight">13</i>&nbsp;
-<i class="no-highlight">14</i>&nbsp;    fun addGuild(name: String, logoUrl: String, description: String? = null, isActive: Boolean) = apply {
-<i class="no-highlight">15</i>&nbsp;        guilds.add(GuildEntry(name, description, logoUrl, isActive))
-<i class="no-highlight">16</i>&nbsp;    }
+<b class="fc"><i class="no-highlight">14</i>&nbsp;    fun addGuild(name: String, logoUrl: String, description: String? = null, isActive: Boolean) = apply {</b>
+<b class="fc"><i class="no-highlight">15</i>&nbsp;        guilds.add(GuildEntry(name, description, logoUrl, isActive))</b>
+<b class="fc"><i class="no-highlight">16</i>&nbsp;    }</b>
 <i class="no-highlight">17</i>&nbsp;
 <i class="no-highlight">18</i>&nbsp;    fun build(): GuildsSection {
-<i class="no-highlight">19</i>&nbsp;        return GuildsSection(
-<i class="no-highlight">20</i>&nbsp;            world = world ?: throw IllegalStateException(&quot;name is required&quot;),
-<i class="no-highlight">21</i>&nbsp;            guilds = guilds
+<b class="fc"><i class="no-highlight">19</i>&nbsp;        return GuildsSection(</b>
+<b class="pc"><i class="no-highlight">20</i>&nbsp;            world = world ?: throw IllegalStateException(&quot;name is required&quot;),</b>
+<b class="fc"><i class="no-highlight">21</i>&nbsp;            guilds = guilds</b>
 <i class="no-highlight">22</i>&nbsp;        )
 <i class="no-highlight">23</i>&nbsp;    }
 <i class="no-highlight">24</i>&nbsp;}
@@ -123,7 +135,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-04-21 21:30</div>
+    <div style="float:right;">generated on 2022-04-23 17:39</div>
 </div>
 </body>
 </html>

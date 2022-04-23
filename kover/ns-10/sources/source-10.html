@@ -89,55 +89,56 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">2</i>&nbsp;
 <i class="no-highlight">3</i>&nbsp;
 <i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.builders.KillStatisticsBuilder
-<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
-<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.models.KillStatistics
-<i class="no-highlight">7</i>&nbsp;import com.galarzaa.tibiakt.core.utils.cellsText
-<i class="no-highlight">8</i>&nbsp;import com.galarzaa.tibiakt.core.utils.formData
-<i class="no-highlight">9</i>&nbsp;import com.galarzaa.tibiakt.core.utils.offsetStart
-<i class="no-highlight">10</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseTablesMap
-<i class="no-highlight">11</i>&nbsp;import com.galarzaa.tibiakt.core.utils.rows
-<i class="no-highlight">12</i>&nbsp;import org.jsoup.Jsoup
-<i class="no-highlight">13</i>&nbsp;import org.jsoup.nodes.Document
-<i class="no-highlight">14</i>&nbsp;import org.jsoup.nodes.Element
-<i class="no-highlight">15</i>&nbsp;
-<b class="nc"><i class="no-highlight">16</i>&nbsp;object KillStatisticsParser : Parser&lt;KillStatistics&gt; {</b>
-<i class="no-highlight">17</i>&nbsp;    override fun fromContent(content: String): KillStatistics {
-<b class="fc"><i class="no-highlight">18</i>&nbsp;        val document: Document = Jsoup.parse(content)</b>
-<b class="fc"><i class="no-highlight">19</i>&nbsp;        val boxContent =</b>
-<b class="pc"><i class="no-highlight">20</i>&nbsp;            document.selectFirst(&quot;div.BoxContent&quot;) ?: throw ParsingException(&quot;BoxContent container not found&quot;)</b>
-<b class="fc"><i class="no-highlight">21</i>&nbsp;        val tables = boxContent.parseTablesMap(&quot;table.Table1, table.Table3&quot;)</b>
-<b class="fc"><i class="no-highlight">22</i>&nbsp;        val builder = KillStatisticsBuilder()</b>
-<b class="pc"><i class="no-highlight">23</i>&nbsp;        tables[&quot;Kill Statistics&quot;]?.apply {</b>
-<b class="fc"><i class="no-highlight">24</i>&nbsp;            parseKillStatisticsTable(this, builder)</b>
-<b class="fc"><i class="no-highlight">25</i>&nbsp;        } ?: throw ParsingException(&quot;kill statistics table not found&quot;)</b>
-<b class="pc"><i class="no-highlight">26</i>&nbsp;        val form = boxContent.selectFirst(&quot;form&quot;) ?: throw ParsingException(&quot;could not find form in value&quot;)</b>
-<b class="pc"><i class="no-highlight">27</i>&nbsp;        builder.world(form.formData().values[&quot;world&quot;] ?: throw ParsingException(&quot;could not find world value in form&quot;))</b>
-<b class="fc"><i class="no-highlight">28</i>&nbsp;        return builder.build()</b>
-<i class="no-highlight">29</i>&nbsp;    }
-<i class="no-highlight">30</i>&nbsp;
-<i class="no-highlight">31</i>&nbsp;    private fun parseKillStatisticsTable(table: Element, builder: KillStatisticsBuilder) {
-<b class="fc"><i class="no-highlight">32</i>&nbsp;        val innerTable = table.selectFirst(&quot;table.TableContent&quot;)</b>
-<b class="fc"><i class="no-highlight">33</i>&nbsp;        for (row in innerTable.rows().offsetStart(2)) {</b>
-<b class="fc"><i class="no-highlight">34</i>&nbsp;            val columnns = row.cellsText()</b>
-<b class="fc"><i class="no-highlight">35</i>&nbsp;            if (columnns[0] == &quot;Total&quot;) {</b>
-<b class="fc"><i class="no-highlight">36</i>&nbsp;                builder.total(</b>
-<b class="fc"><i class="no-highlight">37</i>&nbsp;                    columnns[1].toInt(),</b>
-<b class="fc"><i class="no-highlight">38</i>&nbsp;                    columnns[2].toInt(),</b>
-<b class="fc"><i class="no-highlight">39</i>&nbsp;                    columnns[3].toInt(),</b>
-<b class="fc"><i class="no-highlight">40</i>&nbsp;                    columnns[4].toInt(),</b>
-<i class="no-highlight">41</i>&nbsp;                )
-<i class="no-highlight">42</i>&nbsp;            } else {
-<b class="fc"><i class="no-highlight">43</i>&nbsp;                builder.addEntry(</b>
-<b class="fc"><i class="no-highlight">44</i>&nbsp;                    columnns[0],</b>
-<b class="fc"><i class="no-highlight">45</i>&nbsp;                    columnns[1].toInt(),</b>
-<b class="fc"><i class="no-highlight">46</i>&nbsp;                    columnns[2].toInt(),</b>
-<b class="fc"><i class="no-highlight">47</i>&nbsp;                    columnns[3].toInt(),</b>
-<b class="fc"><i class="no-highlight">48</i>&nbsp;                    columnns[4].toInt(),</b>
-<i class="no-highlight">49</i>&nbsp;                )
-<i class="no-highlight">50</i>&nbsp;            }
-<i class="no-highlight">51</i>&nbsp;        }
-<i class="no-highlight">52</i>&nbsp;    }
-<i class="no-highlight">53</i>&nbsp;}
+<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.builders.killStatistics
+<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
+<i class="no-highlight">7</i>&nbsp;import com.galarzaa.tibiakt.core.models.KillStatistics
+<i class="no-highlight">8</i>&nbsp;import com.galarzaa.tibiakt.core.utils.cellsText
+<i class="no-highlight">9</i>&nbsp;import com.galarzaa.tibiakt.core.utils.formData
+<i class="no-highlight">10</i>&nbsp;import com.galarzaa.tibiakt.core.utils.offsetStart
+<i class="no-highlight">11</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseTablesMap
+<i class="no-highlight">12</i>&nbsp;import com.galarzaa.tibiakt.core.utils.rows
+<i class="no-highlight">13</i>&nbsp;import org.jsoup.Jsoup
+<i class="no-highlight">14</i>&nbsp;import org.jsoup.nodes.Document
+<i class="no-highlight">15</i>&nbsp;import org.jsoup.nodes.Element
+<i class="no-highlight">16</i>&nbsp;
+<b class="nc"><i class="no-highlight">17</i>&nbsp;object KillStatisticsParser : Parser&lt;KillStatistics&gt; {</b>
+<i class="no-highlight">18</i>&nbsp;    override fun fromContent(content: String): KillStatistics {
+<b class="fc"><i class="no-highlight">19</i>&nbsp;        val document: Document = Jsoup.parse(content)</b>
+<b class="fc"><i class="no-highlight">20</i>&nbsp;        val boxContent =</b>
+<b class="pc"><i class="no-highlight">21</i>&nbsp;            document.selectFirst(&quot;div.BoxContent&quot;) ?: throw ParsingException(&quot;BoxContent container not found&quot;)</b>
+<b class="fc"><i class="no-highlight">22</i>&nbsp;        val tables = boxContent.parseTablesMap(&quot;table.Table1, table.Table3&quot;)</b>
+<b class="fc"><i class="no-highlight">23</i>&nbsp;        return killStatistics {</b>
+<b class="pc"><i class="no-highlight">24</i>&nbsp;            tables[&quot;Kill Statistics&quot;]?.apply {</b>
+<b class="fc"><i class="no-highlight">25</i>&nbsp;                parseKillStatisticsTable(this)</b>
+<b class="fc"><i class="no-highlight">26</i>&nbsp;            } ?: throw ParsingException(&quot;kill statistics table not found&quot;)</b>
+<b class="pc"><i class="no-highlight">27</i>&nbsp;            val form = boxContent.selectFirst(&quot;form&quot;) ?: throw ParsingException(&quot;could not find form in value&quot;)</b>
+<b class="pc"><i class="no-highlight">28</i>&nbsp;            world = form.formData().values[&quot;world&quot;] ?: throw ParsingException(&quot;could not find world value in form&quot;)</b>
+<b class="fc"><i class="no-highlight">29</i>&nbsp;        }</b>
+<i class="no-highlight">30</i>&nbsp;    }
+<i class="no-highlight">31</i>&nbsp;
+<i class="no-highlight">32</i>&nbsp;    private fun KillStatisticsBuilder.parseKillStatisticsTable(table: Element) {
+<b class="fc"><i class="no-highlight">33</i>&nbsp;        val innerTable = table.selectFirst(&quot;table.TableContent&quot;)</b>
+<b class="fc"><i class="no-highlight">34</i>&nbsp;        for (row in innerTable.rows().offsetStart(2)) {</b>
+<b class="fc"><i class="no-highlight">35</i>&nbsp;            val columnns = row.cellsText()</b>
+<b class="fc"><i class="no-highlight">36</i>&nbsp;            if (columnns[0] == &quot;Total&quot;) {</b>
+<b class="fc"><i class="no-highlight">37</i>&nbsp;                total(</b>
+<b class="fc"><i class="no-highlight">38</i>&nbsp;                    lastDayKilledPlayers = columnns[1].toInt(),</b>
+<b class="fc"><i class="no-highlight">39</i>&nbsp;                    lastDayKilled = columnns[2].toInt(),</b>
+<b class="fc"><i class="no-highlight">40</i>&nbsp;                    lastWeekKilledPlayers = columnns[3].toInt(),</b>
+<b class="fc"><i class="no-highlight">41</i>&nbsp;                    lastWeekKilled = columnns[4].toInt(),</b>
+<i class="no-highlight">42</i>&nbsp;                )
+<i class="no-highlight">43</i>&nbsp;            } else {
+<b class="fc"><i class="no-highlight">44</i>&nbsp;                addEntry(</b>
+<b class="fc"><i class="no-highlight">45</i>&nbsp;                    race = columnns[0],</b>
+<b class="fc"><i class="no-highlight">46</i>&nbsp;                    lastDayKilledPlayers = columnns[1].toInt(),</b>
+<b class="fc"><i class="no-highlight">47</i>&nbsp;                    lastDayKilled = columnns[2].toInt(),</b>
+<b class="fc"><i class="no-highlight">48</i>&nbsp;                    lastWeekKilledPlayers = columnns[3].toInt(),</b>
+<b class="fc"><i class="no-highlight">49</i>&nbsp;                    lastWeekKilled = columnns[4].toInt(),</b>
+<i class="no-highlight">50</i>&nbsp;                )
+<i class="no-highlight">51</i>&nbsp;            }
+<i class="no-highlight">52</i>&nbsp;        }
+<i class="no-highlight">53</i>&nbsp;    }
+<i class="no-highlight">54</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -164,7 +165,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-04-21 21:30</div>
+    <div style="float:right;">generated on 2022-04-23 17:39</div>
 </div>
 </body>
 </html>

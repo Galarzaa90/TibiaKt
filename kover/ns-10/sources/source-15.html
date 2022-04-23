@@ -172,7 +172,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">43</i>&nbsp;    private fun WorldOverviewBuilder.parseWorldsTable(table: Element) {
 <b class="fc"><i class="no-highlight">44</i>&nbsp;        val rows = table.select(&quot;tr&quot;)</b>
 <b class="fc"><i class="no-highlight">45</i>&nbsp;        for (row in rows.subList(1, rows.size)) {</b>
-<b class="fc"><i class="no-highlight">46</i>&nbsp;            world {</b>
+<b class="fc"><i class="no-highlight">46</i>&nbsp;            addWorld {</b>
 <b class="fc"><i class="no-highlight">47</i>&nbsp;                val columns = row.select(&quot;td&quot;)</b>
 <b class="pc"><i class="no-highlight">48</i>&nbsp;                name = columns.first()?.text() ?: throw ParsingException(&quot;No columns in world row.&quot;)</b>
 <b class="fc"><i class="no-highlight">49</i>&nbsp;                try {</b>
@@ -238,7 +238,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-04-21 21:30</div>
+    <div style="float:right;">generated on 2022-04-23 17:39</div>
 </div>
 </body>
 </html>

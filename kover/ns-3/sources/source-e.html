@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > EventEntryBuilder</title>
+  <title>Coverage Report > CreaturesSectionBuilderKt</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -20,7 +20,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">com.galarzaa.tibiakt.core.builders</a>
 </div>
 
-<h1>Coverage Summary for Class: EventEntryBuilder (com.galarzaa.tibiakt.core.builders)</h1>
+<h1>Coverage Summary for Class: CreaturesSectionBuilderKt (com.galarzaa.tibiakt.core.builders)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -35,15 +35,11 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 <th class="coverageStat 
 ">
-  Block, %
-</th>
-<th class="coverageStat 
-">
   Line, %
 </th>
 </tr>
 <tr>
-  <td class="name">EventEntryBuilder</td>
+  <td class="name">CreaturesSectionBuilderKt</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -54,10 +50,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    87.5%
+    50%
   </span>
   <span class="absValue">
-    (7/8)
+    (1/2)
   </span>
 </td>
 <td class="coverageStat">
@@ -65,15 +61,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     50%
   </span>
   <span class="absValue">
-    (6/12)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    91.7%
-  </span>
-  <span class="absValue">
-    (11/12)
+    (1/2)
   </span>
 </td>
 </tr>
@@ -87,35 +75,45 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.builders
 <i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.models.news.EventEntry
-<i class="no-highlight">4</i>&nbsp;import java.time.LocalDate
-<i class="no-highlight">5</i>&nbsp;
-<b class="fc"><i class="no-highlight">6</i>&nbsp;class EventEntryBuilder {</b>
-<i class="no-highlight">7</i>&nbsp;    private var title: String? = null
-<i class="no-highlight">8</i>&nbsp;    private var description: String? = null
-<i class="no-highlight">9</i>&nbsp;    private var startDate: LocalDate? = null
-<i class="no-highlight">10</i>&nbsp;    private var endDate: LocalDate? = null
-<i class="no-highlight">11</i>&nbsp;
-<b class="fc"><i class="no-highlight">12</i>&nbsp;    fun title(title: String) = apply { this.title = title }</b>
-<b class="fc"><i class="no-highlight">13</i>&nbsp;    fun description(description: String) = apply { this.description = description }</b>
-<b class="fc"><i class="no-highlight">14</i>&nbsp;    fun startDate(startDate: LocalDate?) = apply { this.startDate = startDate }</b>
-<b class="fc"><i class="no-highlight">15</i>&nbsp;    fun endDate(endDate: LocalDate?) = apply { this.endDate = endDate }</b>
-<i class="no-highlight">16</i>&nbsp;
-<b class="fc"><i class="no-highlight">17</i>&nbsp;    fun build() = EventEntry(</b>
-<b class="pc"><i class="no-highlight">18</i>&nbsp;        title ?: throw IllegalStateException(&quot;title is required&quot;),</b>
-<b class="pc"><i class="no-highlight">19</i>&nbsp;        description ?: throw IllegalStateException(&quot;description is required&quot;),</b>
-<b class="fc"><i class="no-highlight">20</i>&nbsp;        startDate,</b>
-<b class="fc"><i class="no-highlight">21</i>&nbsp;        endDate</b>
-<i class="no-highlight">22</i>&nbsp;    )
+<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.models.creatures.CreatureEntry
+<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.models.creatures.CreaturesSection
+<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
+<i class="no-highlight">6</i>&nbsp;
+<i class="no-highlight">7</i>&nbsp;@BuilderDsl
+<b class="fc"><i class="no-highlight">8</i>&nbsp;inline fun creaturesSection(block: CreaturesSectionBuilder.() -&gt; Unit) = CreaturesSectionBuilder().apply(block).build()</b>
+<i class="no-highlight">9</i>&nbsp;
+<i class="no-highlight">10</i>&nbsp;@BuilderDsl
+<b class="nc"><i class="no-highlight">11</i>&nbsp;inline fun creaturesSectionBuilder(block: CreaturesSectionBuilder.() -&gt; Unit) = CreaturesSectionBuilder().apply(block)</b>
+<i class="no-highlight">12</i>&nbsp;
+<i class="no-highlight">13</i>&nbsp;@BuilderDsl
+<i class="no-highlight">14</i>&nbsp;class CreaturesSectionBuilder : TibiaKtBuilder&lt;CreaturesSection&gt;() {
+<i class="no-highlight">15</i>&nbsp;    var boostedCreature: CreatureEntry? = null
+<i class="no-highlight">16</i>&nbsp;    val creatures: MutableList&lt;CreatureEntry&gt; = mutableListOf()
+<i class="no-highlight">17</i>&nbsp;
+<i class="no-highlight">18</i>&nbsp;    fun boostedCreature(boostedCreature: CreatureEntry) = apply { this.boostedCreature = boostedCreature }
+<i class="no-highlight">19</i>&nbsp;    fun boostedCreature(block: CreatureEntryBuilder.() -&gt; Unit) =
+<i class="no-highlight">20</i>&nbsp;        apply { this.boostedCreature = CreatureEntryBuilder().apply(block).build() }
+<i class="no-highlight">21</i>&nbsp;
+<i class="no-highlight">22</i>&nbsp;    fun addCreature(creature: CreatureEntry) = apply { creatures.add(creature) }
 <i class="no-highlight">23</i>&nbsp;
-<i class="no-highlight">24</i>&nbsp;    override fun equals(other: Any?): Boolean {
-<b class="pc"><i class="no-highlight">25</i>&nbsp;        return other is EventEntryBuilder &amp;&amp; other.title == title &amp;&amp; other.description == description</b>
-<i class="no-highlight">26</i>&nbsp;    }
+<i class="no-highlight">24</i>&nbsp;    @BuilderDsl
+<i class="no-highlight">25</i>&nbsp;    fun addCreature(block: CreatureEntryBuilder.() -&gt; Unit) =
+<i class="no-highlight">26</i>&nbsp;        apply { creatures.add(CreatureEntryBuilder().apply(block).build()) }
 <i class="no-highlight">27</i>&nbsp;
-<i class="no-highlight">28</i>&nbsp;    override fun toString(): String {
-<b class="nc"><i class="no-highlight">29</i>&nbsp;        return title ?: &quot;&lt;undefined title&gt;&quot;</b>
-<i class="no-highlight">30</i>&nbsp;    }
-<i class="no-highlight">31</i>&nbsp;}
+<i class="no-highlight">28</i>&nbsp;    override fun build() = CreaturesSection(boostedCreature = boostedCreature
+<i class="no-highlight">29</i>&nbsp;        ?: throw IllegalArgumentException(&quot;boostedCreature is required&quot;), creatures = creatures)
+<i class="no-highlight">30</i>&nbsp;
+<i class="no-highlight">31</i>&nbsp;    @BuilderDsl
+<i class="no-highlight">32</i>&nbsp;    class CreatureEntryBuilder : TibiaKtBuilder&lt;CreatureEntry&gt;() {
+<i class="no-highlight">33</i>&nbsp;        lateinit var name: String
+<i class="no-highlight">34</i>&nbsp;        lateinit var identifier: String
+<i class="no-highlight">35</i>&nbsp;
+<i class="no-highlight">36</i>&nbsp;        override fun build() = CreatureEntry(
+<i class="no-highlight">37</i>&nbsp;            name = if (::name.isInitialized) name else throw IllegalArgumentException(&quot;name is required&quot;),
+<i class="no-highlight">38</i>&nbsp;            identifier = if (::identifier.isInitialized) identifier else throw IllegalArgumentException(&quot;identifier is required&quot;),
+<i class="no-highlight">39</i>&nbsp;        )
+<i class="no-highlight">40</i>&nbsp;    }
+<i class="no-highlight">41</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -142,7 +140,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-04-21 21:30</div>
+    <div style="float:right;">generated on 2022-04-23 17:39</div>
 </div>
 </body>
 </html>
