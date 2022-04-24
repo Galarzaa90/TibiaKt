@@ -8,12 +8,14 @@ import com.galarzaa.tibiakt.core.models.guild.GuildMember
 import com.galarzaa.tibiakt.core.utils.BuilderDsl
 import java.time.LocalDate
 
-
+@BuilderDsl
 inline fun guildBuilder(block: GuildBuilder.() -> Unit) = GuildBuilder().apply(block)
+
+@BuilderDsl
 inline fun guild(block: GuildBuilder.() -> Unit) = guildBuilder(block).build()
 
 @BuilderDsl
-class GuildBuilder {
+class GuildBuilder : TibiaKtBuilder<Guild>() {
     var world: String? = null
     var name: String? = null
     var logoUrl: String? = null
@@ -43,23 +45,44 @@ class GuildBuilder {
         members.add(GuildMember(name, rank, title, level, vocation, joiningDate, isOnline))
     }
 
+    @BuilderDsl
+    fun addMember(block: GuildMemberBuilder.() -> Unit) = members.add(GuildMemberBuilder().apply(block).build())
+
     fun addInvite(name: String, inviteDate: LocalDate) = apply { invited.add(GuildInvite(name, inviteDate)) }
 
-    fun build(): Guild {
-        return Guild(
-            world = world ?: throw IllegalStateException("world is required"),
-            name = name ?: throw IllegalStateException("name is required"),
-            logoUrl = logoUrl ?: throw IllegalStateException("logoUrl is required"),
-            description = description,
-            foundingDate = foundingDate ?: throw IllegalStateException("name is required"),
-            isActive = isActive,
-            applicationsOpen = applicationsOpen,
-            homepage = homepage,
-            guildHall = guildHall,
-            members = members,
-            invited = invited,
-            disbandingDate = disbandingDate,
-            disbandingReason = disbandingReason,
+    override fun build() = Guild(
+        world = world ?: throw IllegalStateException("world is required"),
+        name = name ?: throw IllegalStateException("name is required"),
+        logoUrl = logoUrl ?: throw IllegalStateException("logoUrl is required"),
+        description = description,
+        foundingDate = foundingDate ?: throw IllegalStateException("name is required"),
+        isActive = isActive,
+        applicationsOpen = applicationsOpen,
+        homepage = homepage,
+        guildHall = guildHall,
+        members = members,
+        invited = invited,
+        disbandingDate = disbandingDate,
+        disbandingReason = disbandingReason,
+    )
+
+    class GuildMemberBuilder : TibiaKtBuilder<GuildMember>() {
+        lateinit var rank: String
+        lateinit var name: String
+        var title: String? = null
+        lateinit var vocation: Vocation
+        var level: Int = 0
+        lateinit var joiningDate: LocalDate
+        var isOnline: Boolean = false
+
+        override fun build() = GuildMember(
+            rank = if (::rank.isInitialized) rank else throw IllegalStateException("rank is required"),
+            name = if (::name.isInitialized) name else throw IllegalStateException("name is required"),
+            title = title,
+            vocation = if (::vocation.isInitialized) vocation else throw IllegalStateException("vocation is required"),
+            level = level,
+            joiningDate = if (::joiningDate.isInitialized) joiningDate else throw IllegalStateException("joiningDate is required"),
+            isOnline = isOnline,
         )
     }
 }

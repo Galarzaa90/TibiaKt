@@ -5,21 +5,25 @@ import com.galarzaa.tibiakt.core.enums.HouseStatus
 import com.galarzaa.tibiakt.core.enums.HouseType
 import com.galarzaa.tibiakt.core.models.house.HouseEntry
 import com.galarzaa.tibiakt.core.models.house.HousesSection
+import com.galarzaa.tibiakt.core.utils.BuilderDsl
 import java.time.Duration
 
-class HousesSectionBuilder {
-    private var world: String? = null
-    private var town: String? = null
-    private var status: HouseStatus? = null
-    private var type: HouseType = HouseType.HOUSE
-    private var order: HouseOrder? = null
-    private val entries: MutableList<HouseEntryBuilder> = mutableListOf()
+@BuilderDsl
+inline fun housesSection(block: HousesSectionBuilder.() -> Unit) = HousesSectionBuilder().apply(block).build()
 
-    fun world(world: String) = apply { this.world = world }
-    fun town(town: String) = apply { this.town = town }
-    fun status(status: HouseStatus?) = apply { this.status = status }
-    fun type(type: HouseType) = apply { this.type = type }
-    fun order(order: HouseOrder?) = apply { this.order = order }
+@BuilderDsl
+inline fun housesSectionBuilder(block: HousesSectionBuilder.() -> Unit) = HousesSectionBuilder().apply(block)
+
+@BuilderDsl
+class HousesSectionBuilder {
+    var world: String? = null
+    var town: String? = null
+    var status: HouseStatus? = null
+    var type: HouseType = HouseType.HOUSE
+    var order: HouseOrder = HouseOrder.NAME
+    val entries: MutableList<HouseEntry> = mutableListOf()
+
+
     fun addEntry(
         name: String,
         size: Int,
@@ -27,21 +31,25 @@ class HousesSectionBuilder {
         status: HouseStatus,
         houseId: Int,
         highestBid: Int? = null,
-        timeLeft: Duration? = null
+        timeLeft: Duration? = null,
     ) = apply {
         entries.add(
-            HouseEntryBuilder()
-                .name(name)
-                .size(size)
-                .rent(rent)
-                .status(status)
-                .houseId(houseId)
-                .highestBid(highestBid)
-                .timeLeft(timeLeft)
+            HouseEntryBuilder().apply {
+                this.name = name
+                this.size = size
+                this.rent = rent
+                this.status = status
+                this.houseId = houseId
+                this.highestBid = highestBid
+                this.timeLeft = timeLeft
+            }.build()
         )
     }
 
-    fun addEntry(houseBuilder: HouseEntryBuilder) = apply { entries.add(houseBuilder) }
+    fun addEntry(houseEntry: HouseEntry) = apply { entries.add(houseEntry) }
+
+    @BuilderDsl
+    fun addEntry(block: HouseEntryBuilder.() -> Unit) = entries.add(HouseEntryBuilder().apply(block).build())
 
     fun build() = HousesSection(
         world = world ?: throw IllegalStateException("world is required"),
@@ -49,31 +57,20 @@ class HousesSectionBuilder {
         type = type,
         status = status,
         order = order ?: HouseOrder.NAME,
-        entries = entries.map { it.town(town!!).world(world!!).type(type).build() },
+        entries = entries
     )
 
     inner class HouseEntryBuilder {
-        private var houseId: Int? = null
-        private var name: String? = null
-        private var size: Int? = null
-        private var rent: Int? = null
-        private var town: String? = null
-        private var world: String? = null
-        private var type: HouseType? = null
-        private var status: HouseStatus? = null
-        private var highestBid: Int? = null
-        private var timeLeft: Duration? = null
-
-        fun houseId(houseId: Int) = apply { this.houseId = houseId }
-        fun name(name: String) = apply { this.name = name }
-        fun size(size: Int) = apply { this.size = size }
-        fun rent(rent: Int) = apply { this.rent = rent }
-        fun town(town: String) = apply { this.town = town }
-        fun world(world: String) = apply { this.world = world }
-        fun type(type: HouseType) = apply { this.type = type }
-        fun status(status: HouseStatus) = apply { this.status = status }
-        fun highestBid(highestBid: Int?) = apply { this.highestBid = highestBid }
-        fun timeLeft(timeLeft: Duration?) = apply { this.timeLeft = timeLeft }
+        var houseId: Int? = null
+        var name: String? = null
+        var size: Int? = null
+        var rent: Int? = null
+        var town: String? = null
+        var world: String? = null
+        var type: HouseType? = null
+        var status: HouseStatus? = null
+        var highestBid: Int? = null
+        var timeLeft: Duration? = null
 
         fun build() = HouseEntry(
             houseId = houseId ?: throw IllegalStateException("houseId is required"),

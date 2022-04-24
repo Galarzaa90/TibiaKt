@@ -19,7 +19,6 @@ class NewsBuilder : TibiaKtBuilder<News>() {
     lateinit var date: LocalDate
     lateinit var content: String
     var threadId: Int? = null
-
     override fun build(): News {
         return News(
             id = id ?: throw IllegalStateException("id is required"),

@@ -2,23 +2,25 @@ package com.galarzaa.tibiakt.core.builders
 
 import com.galarzaa.tibiakt.core.models.Leaderboards
 import com.galarzaa.tibiakt.core.models.LeaderboardsEntry
+import com.galarzaa.tibiakt.core.utils.BuilderDsl
 import java.time.Instant
 
-class LeaderboardsBuilder {
-    private var world: String? = null
-    private var rotation: Int? = null
-    private var lastUpdated: Instant? = null
-    private var currentPage: Int? = null
-    private var totalPages: Int? = null
-    private var resultsCount: Int? = null
-    private var entries: MutableList<LeaderboardsEntry> = mutableListOf()
+@BuilderDsl
+inline fun leaderboards(block: LeaderboardsBuilder.() -> Unit) = LeaderboardsBuilder().apply(block).build()
 
-    fun rotation(rotation: Int) = apply { this.rotation = rotation }
-    fun world(world: String) = apply { this.world = world }
-    fun lastUpdated(lastUpdated: Instant) = apply { this.lastUpdated = lastUpdated }
-    fun currentPage(currentPage: Int) = apply { this.currentPage = currentPage }
-    fun totalPages(totalPages: Int) = apply { this.totalPages = totalPages }
-    fun resultsCount(resultsCount: Int) = apply { this.resultsCount = resultsCount }
+@BuilderDsl
+inline fun leaderboardsBuilder(block: LeaderboardsBuilder.() -> Unit) = LeaderboardsBuilder().apply(block)
+
+@BuilderDsl
+class LeaderboardsBuilder {
+    var world: String? = null
+    var rotation: Int? = null
+    var lastUpdated: Instant? = null
+    var currentPage: Int? = null
+    var totalPages: Int? = null
+    var resultsCount: Int? = null
+    var entries: MutableList<LeaderboardsEntry> = mutableListOf()
+
     fun addEntry(entry: LeaderboardsEntry) = apply { entries.add(entry) }
 
     fun build() = Leaderboards(

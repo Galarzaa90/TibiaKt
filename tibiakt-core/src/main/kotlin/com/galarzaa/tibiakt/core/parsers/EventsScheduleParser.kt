@@ -2,6 +2,7 @@ package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.core.builders.EventEntryBuilder
 import com.galarzaa.tibiakt.core.builders.EventsScheduleBuilder
+import com.galarzaa.tibiakt.core.builders.eventsSchedule
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
 import com.galarzaa.tibiakt.core.models.news.EventsSchedule
 import com.galarzaa.tibiakt.core.utils.cells
@@ -16,20 +17,20 @@ import java.time.format.DateTimeFormatter
 object EventsScheduleParser : Parser<EventsSchedule> {
     override fun fromContent(content: String): EventsSchedule {
         val boxContent = boxContent(content)
-        val builder = EventsScheduleBuilder()
-        val dateBlock =
-            boxContent.selectFirst("div.eventscheduleheaderdateblock") ?: throw ParsingException("date block not found")
-        val yearMonth =
-            YearMonth.parse(dateBlock.cleanText().remove("»").remove("«"), DateTimeFormatter.ofPattern("MMMM yyyy"))
-        builder.yearMonth(yearMonth)
-        parseCalendar(builder, boxContent, yearMonth)
-        return builder.build()
+        return eventsSchedule {
+            val dateBlock =
+                boxContent.selectFirst("div.eventscheduleheaderdateblock")
+                    ?: throw ParsingException("date block not found")
+            yearMonth =
+                YearMonth.parse(dateBlock.cleanText().remove("»").remove("«"), DateTimeFormatter.ofPattern("MMMM yyyy"))
+            parseCalendar(boxContent, yearMonth)
+        }
+
     }
 
-    private fun parseCalendar(
-        builder: EventsScheduleBuilder,
+    private fun EventsScheduleBuilder.parseCalendar(
         boxContent: Element,
-        yearMonth: YearMonth
+        yearMonth: YearMonth,
     ) {
         var currentMonth = yearMonth
         val calendarTable = boxContent.selectFirst("#eventscheduletable")
@@ -75,14 +76,14 @@ object EventsScheduleParser : Parser<EventsSchedule> {
                 if (!todayEvents.contains(pendingEvent)) {
                     //If it didn't show up today, it means it ended yesterday.
                     pendingEvent.endDate(LocalDate.of(currentMonth.year, currentMonth.month, day).minusDays(1))
-                    builder.addEntry(pendingEvent.build())
+                    addEntry(pendingEvent.build())
                     onGoingEvents.remove(pendingEvent)
                 }
             }
             firstDay = false
         }
         // Add any leftover ongoing events without an end date, as we don't know when they end.
-        onGoingEvents.forEach { builder.addEntry(it.build()) }
+        onGoingEvents.forEach { addEntry(it.build()) }
     }
 
 }

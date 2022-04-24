@@ -7,7 +7,6 @@ import com.galarzaa.tibiakt.core.exceptions.ParsingException
 import com.galarzaa.tibiakt.core.models.guild.Guild
 import com.galarzaa.tibiakt.core.utils.boxContent
 import com.galarzaa.tibiakt.core.utils.clean
-import com.galarzaa.tibiakt.core.utils.nullIfBlank
 import com.galarzaa.tibiakt.core.utils.parseTablesMap
 import com.galarzaa.tibiakt.core.utils.parseTibiaDate
 import com.galarzaa.tibiakt.core.utils.remove
@@ -71,16 +70,16 @@ object GuildParser : Parser<Guild?> {
         }
         val nameLink = columns[1].selectFirst("a") ?: return currentRank
         val titleNode = nameLink.nextSibling()
-        val title = (titleNode as TextNode?)?.text()?.remove("(")?.remove(")")?.clean()
-        val name = nameLink.text().clean()
-        val vocation = columns[2].text().clean()
-        addMember(rank,
-            name,
-            title.nullIfBlank(),
-            StringEnum.fromValue(vocation) ?: throw ParsingException("unknown vocation in member '$: $vocation"),
-            columns[3].text().toInt(),
-            parseTibiaDate(columns[4].text().clean()),
-            columns[5].text().contains("online"))
+        addMember {
+            this.rank = rank
+            name = nameLink.text().clean()
+            title = (titleNode as TextNode?)?.text()?.remove("(")?.remove(")")?.clean()
+            vocation = StringEnum.fromValue(columns[2].text().clean())
+                ?: throw ParsingException("unknown vocation in member: ${columns[2].text().clean()}")
+            level = columns[3].text().toInt()
+            joiningDate = parseTibiaDate(columns[4].text().clean())
+            isOnline = columns[5].text().contains("online")
+        }
         return rank
     }
 

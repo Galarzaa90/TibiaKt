@@ -1,6 +1,7 @@
 package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.core.builders.HighscoresBuilder
+import com.galarzaa.tibiakt.core.builders.highscores
 import com.galarzaa.tibiakt.core.enums.IntEnum
 import com.galarzaa.tibiakt.core.enums.PvpType
 import com.galarzaa.tibiakt.core.enums.StringEnum
@@ -31,45 +32,46 @@ object HighscoresParser : Parser<Highscores?> {
             document.selectFirst("div.BoxContent") ?: throw ParsingException("BoxContent container not found")
         val tables = boxContent.parseTablesMap("table.Table1, table.Table3")
 
-        val builder = HighscoresBuilder()
-        tables["Highscores Filter"]?.apply {
-            val formData =
-                boxContent.selectFirst("form")?.formData() ?: throw ParsingException("could not find highscores form")
-            parseHighscoresFilter(formData, builder)
-        }
-        tables.getContaining("HighscoresLast")?.apply {
-            parseHighscoresTable(this, builder)
-        }
-        val lastUpdateText = boxContent.selectFirst("span.RightArea")?.cleanText()
-            ?: throw ParsingException("Could not find last update label")
-        numericMatch.find(lastUpdateText)?.apply {
-            val minutes = this.groups[0]!!.value.toInt()
-            builder.lastUpdate(Instant.now().minusSeconds(60L * minutes))
-        }
-        val paginationData =
-            boxContent.selectFirst("small")?.parsePagination()
+        return highscores {
+            tables["Highscores Filter"]?.also {
+                val formData = boxContent.selectFirst("form")?.formData()
+                    ?: throw ParsingException("could not find highscores form")
+                parseHighscoresFilter(formData)
+            }
+            tables.getContaining("HighscoresLast")?.also {
+                parseHighscoresTable(it)
+            }
+            val lastUpdateText = boxContent.selectFirst("span.RightArea")?.cleanText()
+                ?: throw ParsingException("Could not find last update label")
+            numericMatch.find(lastUpdateText)?.also {
+                val minutes = it.groups[0]!!.value.toInt()
+                lastUpdate = Instant.now().minusSeconds(60L * minutes)
+            }
+            val paginationData = boxContent.selectFirst("small")?.parsePagination()
                 ?: throw ParsingException("could not find pagination block")
-        builder
-            .currentPage(paginationData.currentPage)
-            .totalPages(paginationData.totalPages)
-            .resultsCount(paginationData.resultsCount)
-        return builder.build()
-    }
 
-    private fun parseHighscoresFilter(formData: FormData, builder: HighscoresBuilder) {
-        builder
-            .world(formData.values["world"].nullIfBlank())
-            .category(IntEnum.fromValue(formData.values["category"]?.toInt())
-                ?: throw ParsingException("could not find category form value"))
-            .battlEyeType(IntEnum.fromValue(formData.values["beprotection"]?.toInt())
-                ?: throw ParsingException("could not find beprotection form value"))
-            .vocation(IntEnum.fromValue(formData.values["profession"]?.toInt()))
-        for (pvpType in formData.valuesMultiple["${PvpType.highscoresQueryParam}[]"].orEmpty()) {
-            PvpType.fromHighscoresFilterValue(pvpType.toInt())?.apply { builder.addWorldType(this) }
+            currentPage = paginationData.currentPage
+            totalPages = paginationData.totalPages
+            resultsCount = paginationData.resultsCount
         }
     }
 
-    private fun parseHighscoresTable(element: Element, builder: HighscoresBuilder) {
+    private fun HighscoresBuilder.parseHighscoresFilter(formData: FormData) {
+
+        world = formData.values["world"].nullIfBlank()
+        category = IntEnum.fromValue(formData.values["category"]?.toInt())
+            ?: throw ParsingException("could not find category form value")
+        battlEyeType = IntEnum.fromValue(formData.values["beprotection"]?.toInt()
+            ?: throw ParsingException("could not find beprotection form value"))
+        vocation = IntEnum.fromValue(formData.values["profession"]?.toInt())
+        for (pvpType in formData.valuesMultiple["${PvpType.highscoresQueryParam}[]"].orEmpty()) {
+            PvpType.fromHighscoresFilterValue(pvpType.toInt())?.apply {
+                worldTypes.add(this)
+            }
+        }
+    }
+
+    private fun HighscoresBuilder.parseHighscoresTable(element: Element) {
         val entriesTable = element.selectFirst("table.TableContent")
         for (row in entriesTable.rows().offsetStart(1)) {
             val columns = row.cellsText()
@@ -78,16 +80,16 @@ object HighscoresParser : Parser<Highscores?> {
             }
             val columnOffset = if (columns.size == 7) 1 else 0
             val loyaltyTitle = if (columns.size == 7) columns[2] else null
-            builder.addEntry(
-                columns[0].toInt(),
-                columns[1 + columnOffset],
-                StringEnum.fromValue(columns[2 + columnOffset])
-                    ?: throw ParsingException("invalid vocation found: ${columns[2 + columnOffset]}"),
-                columns[3 + columnOffset],
-                columns[4 + columnOffset].toInt(),
-                columns[5 + columnOffset].parseLong(),
-                loyaltyTitle,
-            )
+            addEntry {
+                rank = columns[0].toInt()
+                name = columns[1 + columnOffset]
+                vocation = StringEnum.fromValue(columns[2 + columnOffset])
+                    ?: throw ParsingException("invalid vocation found: ${columns[2 + columnOffset]}")
+                world = columns[3 + columnOffset]
+                level = columns[4 + columnOffset].toInt()
+                value = columns[5 + columnOffset].parseLong()
+                additionalValue = loyaltyTitle
+            }
         }
     }
 }
