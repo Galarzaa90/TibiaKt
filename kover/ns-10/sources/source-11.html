@@ -70,10 +70,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    84.6%
+    89.3%
   </span>
   <span class="absValue">
-    (22/26)
+    (25/28)
   </span>
 </td>
 </tr>
@@ -88,58 +88,58 @@ Current scope:     <a href="../../index.html">all classes</a>
 <div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.parsers
 <i class="no-highlight">2</i>&nbsp;
 <i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.builders.LeaderboardsBuilder
-<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
-<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.models.Leaderboards
-<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.models.LeaderboardsEntry
-<i class="no-highlight">7</i>&nbsp;import com.galarzaa.tibiakt.core.utils.PaginationData
-<i class="no-highlight">8</i>&nbsp;import com.galarzaa.tibiakt.core.utils.cells
-<i class="no-highlight">9</i>&nbsp;import com.galarzaa.tibiakt.core.utils.clean
-<i class="no-highlight">10</i>&nbsp;import com.galarzaa.tibiakt.core.utils.formData
-<i class="no-highlight">11</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getLinkInformation
-<i class="no-highlight">12</i>&nbsp;import com.galarzaa.tibiakt.core.utils.offsetStart
-<i class="no-highlight">13</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parsePagination
-<i class="no-highlight">14</i>&nbsp;import com.galarzaa.tibiakt.core.utils.remove
-<i class="no-highlight">15</i>&nbsp;import com.galarzaa.tibiakt.core.utils.rows
-<i class="no-highlight">16</i>&nbsp;import org.jsoup.nodes.Element
-<i class="no-highlight">17</i>&nbsp;import java.time.Instant
-<i class="no-highlight">18</i>&nbsp;
-<b class="nc"><i class="no-highlight">19</i>&nbsp;object LeaderboardsParser : Parser&lt;Leaderboards?&gt; {</b>
-<i class="no-highlight">20</i>&nbsp;    override fun fromContent(content: String): Leaderboards? {
-<b class="fc"><i class="no-highlight">21</i>&nbsp;        val boxContent = boxContent(content)</b>
-<b class="fc"><i class="no-highlight">22</i>&nbsp;        val tables = boxContent.select(&quot;table.TableContent&quot;)</b>
-<b class="fc"><i class="no-highlight">23</i>&nbsp;        val builder = LeaderboardsBuilder()</b>
+<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.builders.leaderboards
+<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
+<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.models.Leaderboards
+<i class="no-highlight">7</i>&nbsp;import com.galarzaa.tibiakt.core.models.LeaderboardsEntry
+<i class="no-highlight">8</i>&nbsp;import com.galarzaa.tibiakt.core.utils.PaginationData
+<i class="no-highlight">9</i>&nbsp;import com.galarzaa.tibiakt.core.utils.cells
+<i class="no-highlight">10</i>&nbsp;import com.galarzaa.tibiakt.core.utils.clean
+<i class="no-highlight">11</i>&nbsp;import com.galarzaa.tibiakt.core.utils.formData
+<i class="no-highlight">12</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getLinkInformation
+<i class="no-highlight">13</i>&nbsp;import com.galarzaa.tibiakt.core.utils.offsetStart
+<i class="no-highlight">14</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parsePagination
+<i class="no-highlight">15</i>&nbsp;import com.galarzaa.tibiakt.core.utils.remove
+<i class="no-highlight">16</i>&nbsp;import com.galarzaa.tibiakt.core.utils.rows
+<i class="no-highlight">17</i>&nbsp;import org.jsoup.nodes.Element
+<i class="no-highlight">18</i>&nbsp;import java.time.Instant
+<i class="no-highlight">19</i>&nbsp;
+<b class="nc"><i class="no-highlight">20</i>&nbsp;object LeaderboardsParser : Parser&lt;Leaderboards?&gt; {</b>
+<i class="no-highlight">21</i>&nbsp;    override fun fromContent(content: String): Leaderboards? {
+<b class="fc"><i class="no-highlight">22</i>&nbsp;        val boxContent = boxContent(content)</b>
+<b class="fc"><i class="no-highlight">23</i>&nbsp;        val tables = boxContent.select(&quot;table.TableContent&quot;)</b>
 <i class="no-highlight">24</i>&nbsp;
-<b class="pc"><i class="no-highlight">25</i>&nbsp;        val formData = tables[1].selectFirst(&quot;form&quot;)?.formData() ?: throw ParsingException(&quot;form not found&quot;)</b>
-<b class="pc"><i class="no-highlight">26</i>&nbsp;        builder.world(formData.values[&quot;world&quot;]</b>
-<b class="nc"><i class="no-highlight">27</i>&nbsp;            ?: if (&quot;world&quot; in formData.availableOptions) return null else throw ParsingException(&quot;world form parameter not found&quot;))</b>
-<b class="pc"><i class="no-highlight">28</i>&nbsp;            .rotation(formData.values[&quot;rotation&quot;]?.toInt()</b>
-<b class="nc"><i class="no-highlight">29</i>&nbsp;                ?: throw ParsingException(&quot;rotation form parameter not found&quot;))</b>
-<i class="no-highlight">30</i>&nbsp;
-<b class="pc"><i class="no-highlight">31</i>&nbsp;        if (tables.size == 4) {</b>
-<b class="fc"><i class="no-highlight">32</i>&nbsp;            val lastUpdateString = tables[2].text()</b>
-<b class="pc"><i class="no-highlight">33</i>&nbsp;            val minutes = Regex(&quot;&quot;&quot;(\d+)&quot;&quot;&quot;).find(lastUpdateString)?.groups?.get(0)?.value?.toInt()</b>
-<b class="nc"><i class="no-highlight">34</i>&nbsp;                ?: throw ParsingException(&quot;unexpected last update text: $lastUpdateString&quot;)</b>
-<b class="fc"><i class="no-highlight">35</i>&nbsp;            builder.lastUpdated(Instant.now().minusSeconds(60L * minutes))</b>
-<i class="no-highlight">36</i>&nbsp;        }
-<i class="no-highlight">37</i>&nbsp;
-<b class="fc"><i class="no-highlight">38</i>&nbsp;        val entriesTable = tables.last()</b>
-<b class="fc"><i class="no-highlight">39</i>&nbsp;        parseLeaderboardEntries(entriesTable, builder)</b>
-<i class="no-highlight">40</i>&nbsp;
-<b class="pc"><i class="no-highlight">41</i>&nbsp;        val paginationData = boxContent.selectFirst(&quot;small&quot;)?.parsePagination() ?: PaginationData.default()</b>
-<b class="fc"><i class="no-highlight">42</i>&nbsp;        builder.currentPage(paginationData.currentPage).resultsCount(paginationData.resultsCount)</b>
-<b class="fc"><i class="no-highlight">43</i>&nbsp;            .totalPages(paginationData.totalPages)</b>
-<i class="no-highlight">44</i>&nbsp;
-<b class="fc"><i class="no-highlight">45</i>&nbsp;        return builder.build()</b>
-<i class="no-highlight">46</i>&nbsp;    }
-<i class="no-highlight">47</i>&nbsp;
-<i class="no-highlight">48</i>&nbsp;    private fun parseLeaderboardEntries(
-<i class="no-highlight">49</i>&nbsp;        entriesTable: Element?,
-<i class="no-highlight">50</i>&nbsp;        builder: LeaderboardsBuilder,
-<i class="no-highlight">51</i>&nbsp;    ) {
+<b class="fc"><i class="no-highlight">25</i>&nbsp;        return leaderboards {</b>
+<b class="pc"><i class="no-highlight">26</i>&nbsp;            val formData = tables[1].selectFirst(&quot;form&quot;)?.formData() ?: throw ParsingException(&quot;form not found&quot;)</b>
+<b class="pc"><i class="no-highlight">27</i>&nbsp;            world = formData.values[&quot;world&quot;]</b>
+<b class="nc"><i class="no-highlight">28</i>&nbsp;                ?: if (&quot;world&quot; in formData.availableOptions) return null else throw ParsingException(&quot;world form parameter not found&quot;)</b>
+<b class="fc"><i class="no-highlight">29</i>&nbsp;            rotation =</b>
+<b class="pc"><i class="no-highlight">30</i>&nbsp;                formData.values[&quot;rotation&quot;]?.toInt() ?: throw ParsingException(&quot;rotation form parameter not found&quot;)</b>
+<i class="no-highlight">31</i>&nbsp;
+<b class="pc"><i class="no-highlight">32</i>&nbsp;            if (tables.size == 4) {</b>
+<b class="fc"><i class="no-highlight">33</i>&nbsp;                val lastUpdateString = tables[2].text()</b>
+<b class="fc"><i class="no-highlight">34</i>&nbsp;                val minutes =</b>
+<b class="pc"><i class="no-highlight">35</i>&nbsp;                    Regex(&quot;&quot;&quot;(\d+)&quot;&quot;&quot;).find(lastUpdateString)?.groups?.get(0)?.value?.toInt() ?: throw ParsingException(</b>
+<b class="nc"><i class="no-highlight">36</i>&nbsp;                        &quot;unexpected last update text: $lastUpdateString&quot;)</b>
+<b class="fc"><i class="no-highlight">37</i>&nbsp;                lastUpdated = Instant.now().minusSeconds(60L * minutes)</b>
+<i class="no-highlight">38</i>&nbsp;            }
+<i class="no-highlight">39</i>&nbsp;
+<b class="fc"><i class="no-highlight">40</i>&nbsp;            val entriesTable = tables.last()</b>
+<b class="fc"><i class="no-highlight">41</i>&nbsp;            parseLeaderboardEntries(entriesTable)</b>
+<i class="no-highlight">42</i>&nbsp;
+<b class="pc"><i class="no-highlight">43</i>&nbsp;            val paginationData = boxContent.selectFirst(&quot;small&quot;)?.parsePagination() ?: PaginationData.default()</b>
+<b class="fc"><i class="no-highlight">44</i>&nbsp;            currentPage = paginationData.currentPage</b>
+<b class="fc"><i class="no-highlight">45</i>&nbsp;            resultsCount = paginationData.resultsCount</b>
+<b class="fc"><i class="no-highlight">46</i>&nbsp;            totalPages = paginationData.totalPages</b>
+<b class="fc"><i class="no-highlight">47</i>&nbsp;        }</b>
+<i class="no-highlight">48</i>&nbsp;
+<i class="no-highlight">49</i>&nbsp;    }
+<i class="no-highlight">50</i>&nbsp;
+<i class="no-highlight">51</i>&nbsp;    private fun LeaderboardsBuilder.parseLeaderboardEntries(entriesTable: Element?) {
 <b class="fc"><i class="no-highlight">52</i>&nbsp;        for (row in entriesTable.rows().offsetStart(1)) {</b>
 <b class="fc"><i class="no-highlight">53</i>&nbsp;            val cells = row.cells()</b>
 <b class="pc"><i class="no-highlight">54</i>&nbsp;            val name = cells[1].selectFirst(&quot;a&quot;)?.getLinkInformation()?.title?.clean()</b>
-<b class="fc"><i class="no-highlight">55</i>&nbsp;            builder.addEntry(LeaderboardsEntry(rank = cells[0].text().remove(&quot;.&quot;).toInt(),</b>
+<b class="fc"><i class="no-highlight">55</i>&nbsp;            addEntry(LeaderboardsEntry(rank = cells[0].text().remove(&quot;.&quot;).toInt(),</b>
 <b class="fc"><i class="no-highlight">56</i>&nbsp;                name = name,</b>
 <b class="fc"><i class="no-highlight">57</i>&nbsp;                dromeLevel = cells[2].text().toInt()))</b>
 <i class="no-highlight">58</i>&nbsp;        }
@@ -172,7 +172,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-04-23 17:39</div>
+    <div style="float:right;">generated on 2022-04-24 23:49</div>
 </div>
 </body>
 </html>
