@@ -18,7 +18,7 @@ inline fun bazaarFilters(block: BazaarFiltersBuilder.() -> Unit) = bazaarFilters
 inline fun bazaarFiltersBuilder(block: BazaarFiltersBuilder.() -> Unit) = BazaarFiltersBuilder().apply(block)
 
 @BuilderDsl
-class BazaarFiltersBuilder {
+class BazaarFiltersBuilder : TibiaKtBuilder<BazaarFilters>() {
     var world: String? = null
     var pvpType: PvpType? = null
     var battlEyeType: AuctionBattlEyeFilter? = null
@@ -33,7 +33,7 @@ class BazaarFiltersBuilder {
     var searchString: String? = null
     var searchType: AuctionSearchType? = null
 
-    fun build() = BazaarFilters(world = world,
+    override fun build() = BazaarFilters(world = world,
         pvpType = pvpType,
         battlEyeType = battlEyeType,
         vocation = vocation,

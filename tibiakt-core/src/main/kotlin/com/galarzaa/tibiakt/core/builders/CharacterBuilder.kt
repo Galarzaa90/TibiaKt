@@ -50,7 +50,6 @@ class CharacterBuilder : TibiaKtBuilder<Character>() {
     val deaths: MutableList<Death> = mutableListOf()
     val characters: MutableList<OtherCharacter> = mutableListOf()
 
-
     fun addHouse(name: String, houseId: Int, town: String, paidUntil: LocalDate, world: String) = apply {
         houses.add(CharacterHouse(name, houseId, town, paidUntil, world))
     }
@@ -85,7 +84,6 @@ class CharacterBuilder : TibiaKtBuilder<Character>() {
         traded: Boolean = false,
         position: String?,
     ) = apply { characters.add(OtherCharacter(name, world, main, online, deleted, traded, position)) }
-
 
     override fun build() =
         Character(name = if (::name.isInitialized) name else throw IllegalStateException("name is required"),

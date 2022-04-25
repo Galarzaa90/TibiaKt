@@ -15,7 +15,7 @@ inline fun housesSection(block: HousesSectionBuilder.() -> Unit) = HousesSection
 inline fun housesSectionBuilder(block: HousesSectionBuilder.() -> Unit) = HousesSectionBuilder().apply(block)
 
 @BuilderDsl
-class HousesSectionBuilder {
+class HousesSectionBuilder : TibiaKtBuilder<HousesSection>() {
     var world: String? = null
     var town: String? = null
     var status: HouseStatus? = null
@@ -51,16 +51,16 @@ class HousesSectionBuilder {
     @BuilderDsl
     fun addEntry(block: HouseEntryBuilder.() -> Unit) = entries.add(HouseEntryBuilder().apply(block).build())
 
-    fun build() = HousesSection(
+    override fun build() = HousesSection(
         world = world ?: throw IllegalStateException("world is required"),
         town = town ?: throw IllegalStateException("town is required"),
         type = type,
         status = status,
-        order = order ?: HouseOrder.NAME,
+        order = order,
         entries = entries
     )
 
-    inner class HouseEntryBuilder {
+    class HouseEntryBuilder : TibiaKtBuilder<HouseEntry>() {
         var houseId: Int? = null
         var name: String? = null
         var size: Int? = null
@@ -72,7 +72,7 @@ class HousesSectionBuilder {
         var highestBid: Int? = null
         var timeLeft: Duration? = null
 
-        fun build() = HouseEntry(
+        override fun build() = HouseEntry(
             houseId = houseId ?: throw IllegalStateException("houseId is required"),
             name = name ?: throw IllegalStateException("name is required"),
             size = size ?: throw IllegalStateException("size is required"),

@@ -2,12 +2,16 @@ package com.galarzaa.tibiakt.core.builders
 
 import com.galarzaa.tibiakt.core.models.guild.GuildEntry
 import com.galarzaa.tibiakt.core.models.guild.GuildsSection
+import com.galarzaa.tibiakt.core.utils.BuilderDsl
 
-
+@BuilderDsl
 inline fun guildsSectionBuilder(block: GuildsSectionBuilder.() -> Unit) = GuildsSectionBuilder().apply(block)
+
+@BuilderDsl
 inline fun guildsSection(block: GuildsSectionBuilder.() -> Unit) = guildsSectionBuilder(block).build()
 
-class GuildsSectionBuilder {
+@BuilderDsl
+class GuildsSectionBuilder : TibiaKtBuilder<GuildsSection>() {
     var world: String? = null
     val guilds: MutableList<GuildEntry> = mutableListOf()
 
@@ -15,7 +19,7 @@ class GuildsSectionBuilder {
         guilds.add(GuildEntry(name, description, logoUrl, isActive))
     }
 
-    fun build(): GuildsSection {
+    override fun build(): GuildsSection {
         return GuildsSection(
             world = world ?: throw IllegalStateException("name is required"),
             guilds = guilds

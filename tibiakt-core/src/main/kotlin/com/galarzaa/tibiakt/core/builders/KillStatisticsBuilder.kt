@@ -11,7 +11,7 @@ inline fun killStatistics(block: KillStatisticsBuilder.() -> Unit) = KillStatist
 inline fun killStatisticsBuilder(block: KillStatisticsBuilder.() -> Unit) = KillStatisticsBuilder().apply(block)
 
 @BuilderDsl
-class KillStatisticsBuilder {
+class KillStatisticsBuilder : TibiaKtBuilder<KillStatistics>() {
     var world: String? = null
     val entries: MutableMap<String, KillsStatisticEntry> = mutableMapOf()
     private var total: KillsStatisticEntry = KillsStatisticEntry(0, 0, 0, 0)
@@ -35,7 +35,7 @@ class KillStatisticsBuilder {
         entries[race] = KillsStatisticEntry(lastDayKilledPlayers, lastDayKilled, lastWeekKilledPlayers, lastWeekKilled)
     }
 
-    fun build() = KillStatistics(
+    override fun build() = KillStatistics(
         world = world ?: throw IllegalStateException("world is required"),
         entries = entries,
         total = total

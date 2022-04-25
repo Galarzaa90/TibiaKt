@@ -12,7 +12,7 @@ inline fun leaderboards(block: LeaderboardsBuilder.() -> Unit) = LeaderboardsBui
 inline fun leaderboardsBuilder(block: LeaderboardsBuilder.() -> Unit) = LeaderboardsBuilder().apply(block)
 
 @BuilderDsl
-class LeaderboardsBuilder {
+class LeaderboardsBuilder : TibiaKtBuilder<Leaderboards>() {
     var world: String? = null
     var rotation: Int? = null
     var lastUpdated: Instant? = null
@@ -23,7 +23,7 @@ class LeaderboardsBuilder {
 
     fun addEntry(entry: LeaderboardsEntry) = apply { entries.add(entry) }
 
-    fun build() = Leaderboards(
+    override fun build() = Leaderboards(
         world = world ?: throw IllegalArgumentException("world is required"),
         rotation = rotation ?: throw IllegalArgumentException("rotation is required"),
         lastUpdated = lastUpdated,

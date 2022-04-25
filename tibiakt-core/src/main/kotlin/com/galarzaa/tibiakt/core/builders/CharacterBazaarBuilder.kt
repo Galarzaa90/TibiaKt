@@ -13,7 +13,7 @@ inline fun characterBazaar(block: CharacterBazaarBuilder.() -> Unit) = character
 @BuilderDsl
 inline fun characterBazaarBuilder(block: CharacterBazaarBuilder.() -> Unit) = CharacterBazaarBuilder().apply(block)
 
-class CharacterBazaarBuilder {
+class CharacterBazaarBuilder : TibiaKtBuilder<CharacterBazaar>() {
     var type: BazaarType = BazaarType.CURRENT
     var currentPage: Int = 0
     var totalPages: Int = 1
@@ -27,7 +27,7 @@ class CharacterBazaarBuilder {
     @BuilderDsl
     fun auction(block: AuctionBuilder.() -> Unit) = apply { entries.add(AuctionBuilder().apply(block).build()) }
 
-    fun build() = CharacterBazaar(
+    override fun build() = CharacterBazaar(
         type = type,
         filters = filters,
         currentPage = currentPage,

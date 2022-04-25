@@ -33,7 +33,7 @@ class ForumThreadBuilder : TibiaKtBuilder<ForumThread>() {
     fun addPost(post: ForumPost) = apply { entries.add(post) }
 
     @BuilderDsl
-    fun addPost(block: ForumPostBuilder.() -> Unit) = apply { entries.add(forumPost(block)) }
+    fun addPost(block: ForumPostBuilder.() -> Unit) = apply { entries.add(ForumPostBuilder().apply(block).build()) }
 
 
     override fun build() = ForumThread(title = title ?: throw IllegalStateException("title is required"),
@@ -50,29 +50,26 @@ class ForumThreadBuilder : TibiaKtBuilder<ForumThread>() {
         totalPages = totalPages,
         resultsCount = resultsCount,
         entries = entries)
-}
 
-inline fun forumPostBuilder(block: ForumPostBuilder.() -> Unit) = ForumPostBuilder().apply(block)
-inline fun forumPost(block: ForumPostBuilder.() -> Unit) = forumPostBuilder(block).build()
+    class ForumPostBuilder : TibiaKtBuilder<ForumPost>() {
+        var author: BaseForumAuthor? = null
+        var emoticon: ForumEmoticon? = null
+        var title: String? = null
+        var content: String? = null
+        var signature: String? = null
+        var postId: Int? = null
+        var postedDate: Instant? = null
+        var editedDate: Instant? = null
+        var editedBy: String? = null
 
-class ForumPostBuilder {
-    var author: BaseForumAuthor? = null
-    var emoticon: ForumEmoticon? = null
-    var title: String? = null
-    var content: String? = null
-    var signature: String? = null
-    var postId: Int? = null
-    var postedDate: Instant? = null
-    var editedDate: Instant? = null
-    var editedBy: String? = null
-
-    fun build() = ForumPost(author = author ?: throw IllegalStateException("author is required"),
-        emoticon = emoticon,
-        title = title,
-        content = content ?: throw IllegalStateException("content is required"),
-        signature = signature,
-        postId = postId ?: throw IllegalStateException("postId is required"),
-        postedDate = postedDate ?: Instant.now(),
-        editedDate = editedDate,
-        editedBy = editedBy)
+        override fun build() = ForumPost(author = author ?: throw IllegalStateException("author is required"),
+            emoticon = emoticon,
+            title = title,
+            content = content ?: throw IllegalStateException("content is required"),
+            signature = signature,
+            postId = postId ?: throw IllegalStateException("postId is required"),
+            postedDate = postedDate ?: Instant.now(),
+            editedDate = editedDate,
+            editedBy = editedBy)
+    }
 }

@@ -32,9 +32,7 @@ class NewsArchiveBuilder : TibiaKtBuilder<NewsArchive>() {
         date: LocalDate,
         type: NewsType,
     ) = apply {
-        entries.add(NewsEntry(id, title, category, categoryIcon, date, type)
-
-        )
+        entries.add(NewsEntry(id, title, category, categoryIcon, date, type))
     }
 
     fun addEntry(builder: NewsEntryBuilder.() -> Unit) = apply {
