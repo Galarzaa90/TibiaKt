@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > GuildsSectionBuilder</title>
+  <title>Coverage Report > HouseBuilder</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -20,7 +20,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">com.galarzaa.tibiakt.core.builders</a>
 </div>
 
-<h1>Coverage Summary for Class: GuildsSectionBuilder (com.galarzaa.tibiakt.core.builders)</h1>
+<h1>Coverage Summary for Class: HouseBuilder (com.galarzaa.tibiakt.core.builders)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -43,7 +43,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">GuildsSectionBuilder</td>
+  <td class="name">HouseBuilder</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -57,7 +57,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     100%
   </span>
   <span class="absValue">
-    (4/4)
+    (19/19)
   </span>
 </td>
 <td class="coverageStat">
@@ -65,7 +65,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     50%
   </span>
   <span class="absValue">
-    (1/2)
+    (8/16)
   </span>
 </td>
 <td class="coverageStat">
@@ -73,7 +73,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     100%
   </span>
   <span class="absValue">
-    (9/9)
+    (36/36)
   </span>
 </td>
 </tr>
@@ -87,28 +87,59 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.builders
 <i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.models.guild.GuildEntry
-<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.models.guild.GuildsSection
-<i class="no-highlight">5</i>&nbsp;
-<i class="no-highlight">6</i>&nbsp;
-<i class="no-highlight">7</i>&nbsp;inline fun guildsSectionBuilder(block: GuildsSectionBuilder.() -&gt; Unit) = GuildsSectionBuilder().apply(block)
-<i class="no-highlight">8</i>&nbsp;inline fun guildsSection(block: GuildsSectionBuilder.() -&gt; Unit) = guildsSectionBuilder(block).build()
-<i class="no-highlight">9</i>&nbsp;
-<b class="fc"><i class="no-highlight">10</i>&nbsp;class GuildsSectionBuilder {</b>
-<b class="fc"><i class="no-highlight">11</i>&nbsp;    var world: String? = null</b>
-<b class="fc"><i class="no-highlight">12</i>&nbsp;    val guilds: MutableList&lt;GuildEntry&gt; = mutableListOf()</b>
-<i class="no-highlight">13</i>&nbsp;
-<b class="fc"><i class="no-highlight">14</i>&nbsp;    fun addGuild(name: String, logoUrl: String, description: String? = null, isActive: Boolean) = apply {</b>
-<b class="fc"><i class="no-highlight">15</i>&nbsp;        guilds.add(GuildEntry(name, description, logoUrl, isActive))</b>
-<b class="fc"><i class="no-highlight">16</i>&nbsp;    }</b>
-<i class="no-highlight">17</i>&nbsp;
-<i class="no-highlight">18</i>&nbsp;    fun build(): GuildsSection {
-<b class="fc"><i class="no-highlight">19</i>&nbsp;        return GuildsSection(</b>
-<b class="pc"><i class="no-highlight">20</i>&nbsp;            world = world ?: throw IllegalStateException(&quot;name is required&quot;),</b>
-<b class="fc"><i class="no-highlight">21</i>&nbsp;            guilds = guilds</b>
-<i class="no-highlight">22</i>&nbsp;        )
-<i class="no-highlight">23</i>&nbsp;    }
-<i class="no-highlight">24</i>&nbsp;}
+<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HouseStatus
+<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HouseType
+<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.models.house.House
+<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
+<i class="no-highlight">7</i>&nbsp;import java.time.Instant
+<i class="no-highlight">8</i>&nbsp;
+<i class="no-highlight">9</i>&nbsp;@BuilderDsl
+<i class="no-highlight">10</i>&nbsp;inline fun house(block: HouseBuilder.() -&gt; Unit) = HouseBuilder().apply(block).build()
+<i class="no-highlight">11</i>&nbsp;
+<i class="no-highlight">12</i>&nbsp;@BuilderDsl
+<i class="no-highlight">13</i>&nbsp;inline fun houseBuilder(block: HouseBuilder.() -&gt; Unit) = HouseBuilder().apply(block)
+<i class="no-highlight">14</i>&nbsp;
+<i class="no-highlight">15</i>&nbsp;
+<i class="no-highlight">16</i>&nbsp;@BuilderDsl
+<b class="fc"><i class="no-highlight">17</i>&nbsp;class HouseBuilder : TibiaKtBuilder&lt;House&gt;() {</b>
+<b class="fc"><i class="no-highlight">18</i>&nbsp;    var houseId: Int? = null</b>
+<b class="fc"><i class="no-highlight">19</i>&nbsp;    var name: String? = null</b>
+<b class="fc"><i class="no-highlight">20</i>&nbsp;    var size: Int? = null</b>
+<b class="fc"><i class="no-highlight">21</i>&nbsp;    var type: HouseType? = null</b>
+<b class="fc"><i class="no-highlight">22</i>&nbsp;    var beds: Int? = null</b>
+<b class="fc"><i class="no-highlight">23</i>&nbsp;    var rent: Int? = null</b>
+<b class="fc"><i class="no-highlight">24</i>&nbsp;    var world: String? = null</b>
+<b class="fc"><i class="no-highlight">25</i>&nbsp;    var status: HouseStatus? = null</b>
+<b class="fc"><i class="no-highlight">26</i>&nbsp;    var paidUntil: Instant? = null</b>
+<b class="fc"><i class="no-highlight">27</i>&nbsp;    var owner: String? = null</b>
+<b class="fc"><i class="no-highlight">28</i>&nbsp;    var movingDate: Instant? = null</b>
+<b class="fc"><i class="no-highlight">29</i>&nbsp;    var transferPrice: Int? = null</b>
+<b class="fc"><i class="no-highlight">30</i>&nbsp;    var transferAccepted: Boolean? = null</b>
+<b class="fc"><i class="no-highlight">31</i>&nbsp;    var transferRecipient: String? = null</b>
+<b class="fc"><i class="no-highlight">32</i>&nbsp;    var highestBid: Int? = null</b>
+<b class="fc"><i class="no-highlight">33</i>&nbsp;    var highestBidder: String? = null</b>
+<b class="fc"><i class="no-highlight">34</i>&nbsp;    var auctionEnd: Instant? = null</b>
+<i class="no-highlight">35</i>&nbsp;
+<b class="fc"><i class="no-highlight">36</i>&nbsp;    override fun build() = House(</b>
+<b class="pc"><i class="no-highlight">37</i>&nbsp;        houseId = houseId ?: throw IllegalStateException(&quot;houseId is required&quot;),</b>
+<b class="pc"><i class="no-highlight">38</i>&nbsp;        name = name ?: throw IllegalStateException(&quot;name is required&quot;),</b>
+<b class="pc"><i class="no-highlight">39</i>&nbsp;        size = size ?: throw IllegalStateException(&quot;size is required&quot;),</b>
+<b class="pc"><i class="no-highlight">40</i>&nbsp;        type = type ?: throw IllegalStateException(&quot;type is required&quot;),</b>
+<b class="pc"><i class="no-highlight">41</i>&nbsp;        beds = beds ?: throw IllegalStateException(&quot;beds is required&quot;),</b>
+<b class="pc"><i class="no-highlight">42</i>&nbsp;        rent = rent ?: throw IllegalStateException(&quot;rent is required&quot;),</b>
+<b class="pc"><i class="no-highlight">43</i>&nbsp;        world = world ?: throw IllegalStateException(&quot;world is required&quot;),</b>
+<b class="pc"><i class="no-highlight">44</i>&nbsp;        status = status ?: throw IllegalStateException(&quot;status is required&quot;),</b>
+<b class="fc"><i class="no-highlight">45</i>&nbsp;        paidUntil = paidUntil,</b>
+<b class="fc"><i class="no-highlight">46</i>&nbsp;        owner = owner,</b>
+<b class="fc"><i class="no-highlight">47</i>&nbsp;        movingDate = movingDate,</b>
+<b class="fc"><i class="no-highlight">48</i>&nbsp;        transferPrice = transferPrice,</b>
+<b class="fc"><i class="no-highlight">49</i>&nbsp;        transferAccepted = transferAccepted,</b>
+<b class="fc"><i class="no-highlight">50</i>&nbsp;        transferRecipient = transferRecipient,</b>
+<b class="fc"><i class="no-highlight">51</i>&nbsp;        highestBid = highestBid,</b>
+<b class="fc"><i class="no-highlight">52</i>&nbsp;        highestBidder = highestBidder,</b>
+<b class="fc"><i class="no-highlight">53</i>&nbsp;        auctionEnd = auctionEnd,</b>
+<i class="no-highlight">54</i>&nbsp;    )
+<i class="no-highlight">55</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -135,7 +166,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-04-24 23:49</div>
+    <div style="float:right;">generated on 2022-04-25 06:53</div>
 </div>
 </body>
 </html>
