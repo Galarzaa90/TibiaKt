@@ -24,6 +24,7 @@ import com.galarzaa.tibiakt.core.models.bazaar.ItemEntry
 import com.galarzaa.tibiakt.core.models.bazaar.MountEntry
 import com.galarzaa.tibiakt.core.models.bazaar.OutfitEntry
 import com.galarzaa.tibiakt.core.models.character.Character
+import com.galarzaa.tibiakt.core.models.creatures.BosstableBosses
 import com.galarzaa.tibiakt.core.models.creatures.CreaturesSection
 import com.galarzaa.tibiakt.core.models.forums.CMPostArchive
 import com.galarzaa.tibiakt.core.models.forums.ForumAnnouncement
@@ -42,6 +43,7 @@ import com.galarzaa.tibiakt.core.models.news.NewsArchive
 import com.galarzaa.tibiakt.core.models.world.World
 import com.galarzaa.tibiakt.core.models.world.WorldOverview
 import com.galarzaa.tibiakt.core.parsers.AuctionParser
+import com.galarzaa.tibiakt.core.parsers.BosstableBossesParser
 import com.galarzaa.tibiakt.core.parsers.CMPostArchiveParser
 import com.galarzaa.tibiakt.core.parsers.CharacterBazaarParser
 import com.galarzaa.tibiakt.core.parsers.CharacterParser
@@ -64,6 +66,7 @@ import com.galarzaa.tibiakt.core.parsers.WorldOverviewParser
 import com.galarzaa.tibiakt.core.parsers.WorldParser
 import com.galarzaa.tibiakt.core.utils.getAuctionUrl
 import com.galarzaa.tibiakt.core.utils.getBazaarUrl
+import com.galarzaa.tibiakt.core.utils.getBoostableBossesUrl
 import com.galarzaa.tibiakt.core.utils.getCMPostArchiveUrl
 import com.galarzaa.tibiakt.core.utils.getCharacterUrl
 import com.galarzaa.tibiakt.core.utils.getCreaturesSectionUrl
@@ -232,7 +235,13 @@ open class TibiaKtClient constructor(
     // endregion
 
     // region Library Section
+    /** Fetch the boosted boss of the day as well as the list of bosstable bosses from Tibia.com */
+    open suspend fun fetchBosstableBosses(): TibiaResponse<BosstableBosses> {
+        val response = this.request(HttpMethod.Get, getBoostableBossesUrl())
+        return response.parse { BosstableBossesParser.fromContent(it) }
+    }
 
+    /** Fetch the creatures section, containing the boosted creature */
     open suspend fun fetchCreaturesSection(): TibiaResponse<CreaturesSection> {
         val response = this.request(HttpMethod.Get, getCreaturesSectionUrl())
         return response.parse { CreaturesSectionParser.fromContent(it) }

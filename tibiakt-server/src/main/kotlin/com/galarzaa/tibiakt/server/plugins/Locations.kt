@@ -147,3 +147,7 @@ data class GetLeaderboards(
 
 @Location("/library/creatures")
 class GetCreaturesSection
+
+
+@Location("/library/bosses")
+class GetBoostableBosses

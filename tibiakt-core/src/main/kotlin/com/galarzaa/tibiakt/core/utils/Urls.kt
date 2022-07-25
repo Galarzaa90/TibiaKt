@@ -315,6 +315,12 @@ fun getLeaderboardUrl(world: String, rotation: Int? = null, page: Int = 1): Stri
  */
 fun getCreaturesSectionUrl() = buildTibiaUrl("library", "creatures")
 
+
+/**
+ * Get the URL to the Creatures section in Tibia.com.
+ */
+fun getBoostableBossesUrl() = buildTibiaUrl("library", "boostablebosses")
+
 /**
  * Get the URL to a specific creature in Tibia.com.
  */

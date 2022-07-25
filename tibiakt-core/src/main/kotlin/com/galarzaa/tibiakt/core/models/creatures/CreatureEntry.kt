@@ -1,7 +1,6 @@
 package com.galarzaa.tibiakt.core.models.creatures
 
 import com.galarzaa.tibiakt.core.utils.getCreatureUrl
-import com.galarzaa.tibiakt.core.utils.getStaticFileUrl
 import kotlinx.serialization.Serializable
 
 /**
@@ -12,16 +11,12 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 data class CreatureEntry(
-    val name: String,
-    val identifier: String,
-) {
+    override val name: String,
+    override val identifier: String,
+) : BaseCreatureEntry {
     /**
      * The URL to the creature's page.
      */
     val url get() = getCreatureUrl(identifier)
-
-    /**
-     * The URL to the creature's image.
-     */
-    val imageUrl get() = getStaticFileUrl("images", "library", "$identifier.gif")
 }
+
