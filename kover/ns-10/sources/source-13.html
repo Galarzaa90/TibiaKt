@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > NewsParser</title>
+  <title>Coverage Report > NewsArchiveParser</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -20,15 +20,12 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">com.galarzaa.tibiakt.core.parsers</a>
 </div>
 
-<h1>Coverage Summary for Class: NewsParser (com.galarzaa.tibiakt.core.parsers)</h1>
+<h1>Coverage Summary for Class: NewsArchiveParser (com.galarzaa.tibiakt.core.parsers)</h1>
 
 <table class="coverageStats">
+
 <tr>
   <th class="name">Class</th>
-<th class="coverageStat 
-">
-  Class, %
-</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -43,7 +40,34 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">NewsParser</td>
+  <td class="name">NewsArchiveParser</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (3/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    60.3%
+  </span>
+  <span class="absValue">
+    (41/68)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    81.4%
+  </span>
+  <span class="absValue">
+    (35/43)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">NewsArchiveParser$fromContent$1</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -62,22 +86,40 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    55.9%
+    100%
   </span>
   <span class="absValue">
-    (19/34)
+    (4/4)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (4/5)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    76.2%
+    59.7%
   </span>
   <span class="absValue">
-    (16/21)
+    (43/72)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    83%
+  </span>
+  <span class="absValue">
+    (39/47)
   </span>
 </td>
 </tr>
-
 </table>
 
 <br/>
@@ -87,43 +129,89 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.parsers
 <i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.builders.news
-<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.enums.NewsCategory
-<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
-<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.models.news.News
-<i class="no-highlight">7</i>&nbsp;import com.galarzaa.tibiakt.core.utils.cleanText
-<i class="no-highlight">8</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getLinkInformation
-<i class="no-highlight">9</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseTibiaDate
-<i class="no-highlight">10</i>&nbsp;import com.galarzaa.tibiakt.core.utils.remove
-<i class="no-highlight">11</i>&nbsp;
-<b class="nc"><i class="no-highlight">12</i>&nbsp;object NewsParser : Parser&lt;News?&gt; {</b>
-<b class="fc"><i class="no-highlight">13</i>&nbsp;    override fun fromContent(content: String): News? = fromContent(content, 0)</b>
-<i class="no-highlight">14</i>&nbsp;
-<b class="nc"><i class="no-highlight">15</i>&nbsp;    fun fromContent(content: String, newsId: Int = 0): News? {</b>
-<b class="fc"><i class="no-highlight">16</i>&nbsp;        val boxContent = boxContent(content)</b>
-<i class="no-highlight">17</i>&nbsp;
-<b class="fc"><i class="no-highlight">18</i>&nbsp;        val titleContainer = boxContent.selectFirst(&quot;div.NewsHeadlineText&quot;)</b>
-<b class="pc"><i class="no-highlight">19</i>&nbsp;            ?: if (&quot;not found&quot; in (boxContent.selectFirst(&quot;div.CaptionContainer&quot;)?.cleanText() ?: &quot;&quot;)) return null</b>
-<b class="nc"><i class="no-highlight">20</i>&nbsp;            else throw ParsingException(&quot;News headline not found.&quot;)</b>
-<b class="pc"><i class="no-highlight">21</i>&nbsp;        val icon = boxContent.selectFirst(&quot;img.NewsHeadlineIcon&quot;) ?: throw ParsingException(&quot;News icon not found.&quot;)</b>
-<b class="fc"><i class="no-highlight">22</i>&nbsp;        return news {</b>
-<b class="fc"><i class="no-highlight">23</i>&nbsp;            id = newsId</b>
-<b class="fc"><i class="no-highlight">24</i>&nbsp;            title = titleContainer.cleanText()</b>
-<b class="pc"><i class="no-highlight">25</i>&nbsp;            category = NewsCategory.fromIcon(icon.attr(&quot;src&quot;))</b>
-<b class="nc"><i class="no-highlight">26</i>&nbsp;                ?: throw ParsingException(&quot;Unexpected news icon found: ${icon.attr(&quot;src&quot;)}&quot;)</b>
-<i class="no-highlight">27</i>&nbsp;
-<b class="pc"><i class="no-highlight">28</i>&nbsp;            val newsDate = boxContent.selectFirst(&quot;div.NewsHeadlineDate&quot;)?.cleanText()?.remove(&quot;-&quot;)?.trim()</b>
-<b class="pc"><i class="no-highlight">29</i>&nbsp;            date = parseTibiaDate(newsDate ?: throw ParsingException(&quot;News date not found.&quot;))</b>
-<i class="no-highlight">30</i>&nbsp;
-<b class="pc"><i class="no-highlight">31</i>&nbsp;            this.content = boxContent.selectFirst(&quot;td.NewsTableContainer&quot;)?.html()</b>
-<b class="nc"><i class="no-highlight">32</i>&nbsp;                ?: throw ParsingException(&quot;News content not found.&quot;)</b>
-<i class="no-highlight">33</i>&nbsp;
-<b class="fc"><i class="no-highlight">34</i>&nbsp;            boxContent.selectFirst(&quot;div.NewsForumLink &gt; a&quot;)?.apply {</b>
-<b class="pc"><i class="no-highlight">35</i>&nbsp;                threadId = getLinkInformation()?.queryParams?.get(&quot;threadid&quot;)?.get(0)?.toInt()</b>
-<b class="fc"><i class="no-highlight">36</i>&nbsp;            }</b>
-<b class="fc"><i class="no-highlight">37</i>&nbsp;        }</b>
-<i class="no-highlight">38</i>&nbsp;    }
-<i class="no-highlight">39</i>&nbsp;}
+<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.builders.NewsArchiveBuilder
+<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.builders.newsArchive
+<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.enums.NewsCategory
+<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.enums.NewsType
+<i class="no-highlight">7</i>&nbsp;import com.galarzaa.tibiakt.core.enums.StringEnum
+<i class="no-highlight">8</i>&nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
+<i class="no-highlight">9</i>&nbsp;import com.galarzaa.tibiakt.core.models.news.NewsArchive
+<i class="no-highlight">10</i>&nbsp;import com.galarzaa.tibiakt.core.utils.cells
+<i class="no-highlight">11</i>&nbsp;import com.galarzaa.tibiakt.core.utils.cleanText
+<i class="no-highlight">12</i>&nbsp;import com.galarzaa.tibiakt.core.utils.formData
+<i class="no-highlight">13</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getLinkInformation
+<i class="no-highlight">14</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseTablesMap
+<i class="no-highlight">15</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseTibiaDate
+<i class="no-highlight">16</i>&nbsp;import com.galarzaa.tibiakt.core.utils.rows
+<i class="no-highlight">17</i>&nbsp;import org.jsoup.Jsoup
+<i class="no-highlight">18</i>&nbsp;import org.jsoup.nodes.Document
+<i class="no-highlight">19</i>&nbsp;import org.jsoup.nodes.Element
+<i class="no-highlight">20</i>&nbsp;import java.time.LocalDate
+<i class="no-highlight">21</i>&nbsp;
+<b class="nc"><i class="no-highlight">22</i>&nbsp;object NewsArchiveParser : Parser&lt;NewsArchive&gt; {</b>
+<i class="no-highlight">23</i>&nbsp;    override fun fromContent(content: String): NewsArchive {
+<b class="fc"><i class="no-highlight">24</i>&nbsp;        val document: Document = Jsoup.parse(content)</b>
+<b class="fc"><i class="no-highlight">25</i>&nbsp;        val boxContent =</b>
+<b class="pc"><i class="no-highlight">26</i>&nbsp;            document.selectFirst(&quot;div.BoxContent&quot;) ?: throw ParsingException(&quot;BoxContent container not found&quot;)</b>
+<b class="fc"><i class="no-highlight">27</i>&nbsp;        val tables = boxContent.parseTablesMap()</b>
+<b class="pc"><i class="no-highlight">28</i>&nbsp;        if (!tables.containsKey(&quot;News Archive Search&quot;)) throw ParsingException(&quot;news search not found in page&quot;)</b>
+<b class="fc"><i class="no-highlight">29</i>&nbsp;        return newsArchive {</b>
+<b class="pc"><i class="no-highlight">30</i>&nbsp;            boxContent.selectFirst(&quot;form&quot;)?.apply {</b>
+<b class="fc"><i class="no-highlight">31</i>&nbsp;                parseFilterTable(this)</b>
+<b class="fc"><i class="no-highlight">32</i>&nbsp;            }</b>
+<b class="pc"><i class="no-highlight">33</i>&nbsp;            tables[&quot;Search Results&quot;]?.let { parseResultsTable(it) }</b>
+<i class="no-highlight">34</i>&nbsp;        }
+<i class="no-highlight">35</i>&nbsp;    }
+<i class="no-highlight">36</i>&nbsp;
+<i class="no-highlight">37</i>&nbsp;    private fun NewsArchiveBuilder.parseResultsTable(table: Element) {
+<b class="fc"><i class="no-highlight">38</i>&nbsp;        for (row in table.rows()) {</b>
+<b class="fc"><i class="no-highlight">39</i>&nbsp;            val (iconColumn, dateColumn, titleColumn) = row.cells()</b>
+<b class="fc"><i class="no-highlight">40</i>&nbsp;            val iconUrl =</b>
+<b class="pc"><i class="no-highlight">41</i>&nbsp;                iconColumn.selectFirst(&quot;img&quot;)?.attr(&quot;src&quot;) ?: throw ParsingException(&quot;category icon not found&quot;)</b>
+<b class="fc"><i class="no-highlight">42</i>&nbsp;            val category =</b>
+<b class="pc"><i class="no-highlight">43</i>&nbsp;                NewsCategory.fromIcon(iconUrl) ?: throw ParsingException(&quot;unknown category icon found: $iconUrl&quot;)</b>
+<b class="pc"><i class="no-highlight">44</i>&nbsp;            val newsId = titleColumn.selectFirst(&quot;a&quot;)?.getLinkInformation()?.queryParams?.get(&quot;id&quot;)?.get(0)?.toInt()</b>
+<b class="nc"><i class="no-highlight">45</i>&nbsp;                ?: throw ParsingException(&quot;Could not find link&quot;)</b>
+<i class="no-highlight">46</i>&nbsp;
+<b class="pc"><i class="no-highlight">47</i>&nbsp;            val typeLabel = dateColumn.selectFirst(&quot;small&quot;) ?: throw ParsingException(&quot;could not find type label&quot;)</b>
+<b class="fc"><i class="no-highlight">48</i>&nbsp;            val newsType = typeLabel.cleanText()</b>
+<b class="fc"><i class="no-highlight">49</i>&nbsp;            typeLabel.remove()</b>
+<b class="fc"><i class="no-highlight">50</i>&nbsp;            addEntry(newsId,</b>
+<b class="fc"><i class="no-highlight">51</i>&nbsp;                titleColumn.cleanText(),</b>
+<b class="fc"><i class="no-highlight">52</i>&nbsp;                category,</b>
+<b class="fc"><i class="no-highlight">53</i>&nbsp;                iconUrl,</b>
+<b class="fc"><i class="no-highlight">54</i>&nbsp;                parseTibiaDate(dateColumn.cleanText()),</b>
+<b class="pc"><i class="no-highlight">55</i>&nbsp;                StringEnum.fromValue(newsType) ?: throw ParsingException(&quot;unexpected news type found: $newsType&quot;))</b>
+<i class="no-highlight">56</i>&nbsp;        }
+<i class="no-highlight">57</i>&nbsp;    }
+<i class="no-highlight">58</i>&nbsp;
+<i class="no-highlight">59</i>&nbsp;    private fun NewsArchiveBuilder.parseFilterTable(element: Element) {
+<b class="fc"><i class="no-highlight">60</i>&nbsp;        val formData = element.formData()</b>
+<b class="fc"><i class="no-highlight">61</i>&nbsp;        startDate = LocalDate.of(</b>
+<b class="pc"><i class="no-highlight">62</i>&nbsp;            formData.values[&quot;filter_begin_year&quot;]?.toInt()</b>
+<b class="nc"><i class="no-highlight">63</i>&nbsp;                ?: throw ParsingException(&quot;could not find filter_begin_year in form&quot;),</b>
+<b class="pc"><i class="no-highlight">64</i>&nbsp;            formData.values[&quot;filter_begin_month&quot;]?.toInt()</b>
+<b class="nc"><i class="no-highlight">65</i>&nbsp;                ?: throw ParsingException(&quot;could not find filter_begin_month in form&quot;),</b>
+<b class="pc"><i class="no-highlight">66</i>&nbsp;            formData.values[&quot;filter_begin_day&quot;]?.toInt()</b>
+<b class="nc"><i class="no-highlight">67</i>&nbsp;                ?: throw ParsingException(&quot;could not find filter_begin_day in form&quot;),</b>
+<i class="no-highlight">68</i>&nbsp;        )
+<b class="fc"><i class="no-highlight">69</i>&nbsp;        endDate = LocalDate.of(</b>
+<b class="pc"><i class="no-highlight">70</i>&nbsp;            formData.values[&quot;filter_end_year&quot;]?.toInt()</b>
+<b class="nc"><i class="no-highlight">71</i>&nbsp;                ?: throw ParsingException(&quot;could not find filter_end_year in form&quot;),</b>
+<b class="pc"><i class="no-highlight">72</i>&nbsp;            formData.values[&quot;filter_end_month&quot;]?.toInt()</b>
+<b class="nc"><i class="no-highlight">73</i>&nbsp;                ?: throw ParsingException(&quot;could not find filter_end_month in form&quot;),</b>
+<b class="pc"><i class="no-highlight">74</i>&nbsp;            formData.values[&quot;filter_end_day&quot;]?.toInt()</b>
+<b class="nc"><i class="no-highlight">75</i>&nbsp;                ?: throw ParsingException(&quot;could not find filter_end_day in form&quot;),</b>
+<i class="no-highlight">76</i>&nbsp;        )
+<i class="no-highlight">77</i>&nbsp;
+<b class="fc"><i class="no-highlight">78</i>&nbsp;        for (value in NewsCategory.values()) {</b>
+<b class="pc"><i class="no-highlight">79</i>&nbsp;            if (!formData.valuesMultiple[value.filterName].isNullOrEmpty()) addCategory(value)</b>
+<i class="no-highlight">80</i>&nbsp;        }
+<b class="fc"><i class="no-highlight">81</i>&nbsp;        for (value in NewsType.values()) {</b>
+<b class="pc"><i class="no-highlight">82</i>&nbsp;            if (!formData.valuesMultiple[value.filterName].isNullOrEmpty()) addType(value)</b>
+<i class="no-highlight">83</i>&nbsp;        }
+<i class="no-highlight">84</i>&nbsp;    }
+<i class="no-highlight">85</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -150,7 +238,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-06-14 19:14</div>
+    <div style="float:right;">generated on 2022-07-25 17:52</div>
 </div>
 </body>
 </html>

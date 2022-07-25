@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > LeaderboardsBuilderKt</title>
+  <title>Coverage Report > LastPostBuilderKt</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -20,7 +20,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">com.galarzaa.tibiakt.core.builders</a>
 </div>
 
-<h1>Coverage Summary for Class: LeaderboardsBuilderKt (com.galarzaa.tibiakt.core.builders)</h1>
+<h1>Coverage Summary for Class: LastPostBuilderKt (com.galarzaa.tibiakt.core.builders)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -39,7 +39,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">LeaderboardsBuilderKt</td>
+  <td class="name">LastPostBuilderKt</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -50,18 +50,18 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    50%
+    100%
   </span>
   <span class="absValue">
-    (1/2)
+    (2/2)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    50%
+    100%
   </span>
   <span class="absValue">
-    (1/2)
+    (2/2)
   </span>
 </td>
 </tr>
@@ -75,40 +75,32 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.builders
 <i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.models.Leaderboards
-<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.models.LeaderboardsEntry
-<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
-<i class="no-highlight">6</i>&nbsp;import java.time.Instant
-<i class="no-highlight">7</i>&nbsp;
-<i class="no-highlight">8</i>&nbsp;@BuilderDsl
-<b class="fc"><i class="no-highlight">9</i>&nbsp;inline fun leaderboards(block: LeaderboardsBuilder.() -&gt; Unit) = LeaderboardsBuilder().apply(block).build()</b>
-<i class="no-highlight">10</i>&nbsp;
-<i class="no-highlight">11</i>&nbsp;@BuilderDsl
-<b class="nc"><i class="no-highlight">12</i>&nbsp;inline fun leaderboardsBuilder(block: LeaderboardsBuilder.() -&gt; Unit) = LeaderboardsBuilder().apply(block)</b>
-<i class="no-highlight">13</i>&nbsp;
-<i class="no-highlight">14</i>&nbsp;@BuilderDsl
-<i class="no-highlight">15</i>&nbsp;class LeaderboardsBuilder : TibiaKtBuilder&lt;Leaderboards&gt;() {
-<i class="no-highlight">16</i>&nbsp;    var world: String? = null
-<i class="no-highlight">17</i>&nbsp;    var rotation: Int? = null
-<i class="no-highlight">18</i>&nbsp;    var lastUpdated: Instant? = null
-<i class="no-highlight">19</i>&nbsp;    var currentPage: Int? = null
-<i class="no-highlight">20</i>&nbsp;    var totalPages: Int? = null
-<i class="no-highlight">21</i>&nbsp;    var resultsCount: Int? = null
-<i class="no-highlight">22</i>&nbsp;    var entries: MutableList&lt;LeaderboardsEntry&gt; = mutableListOf()
-<i class="no-highlight">23</i>&nbsp;
-<i class="no-highlight">24</i>&nbsp;    fun addEntry(entry: LeaderboardsEntry) = apply { entries.add(entry) }
-<i class="no-highlight">25</i>&nbsp;
-<i class="no-highlight">26</i>&nbsp;    override fun build() = Leaderboards(
-<i class="no-highlight">27</i>&nbsp;        world = world ?: throw IllegalArgumentException(&quot;world is required&quot;),
-<i class="no-highlight">28</i>&nbsp;        rotation = rotation ?: throw IllegalArgumentException(&quot;rotation is required&quot;),
-<i class="no-highlight">29</i>&nbsp;        lastUpdated = lastUpdated,
-<i class="no-highlight">30</i>&nbsp;        currentPage = currentPage ?: throw IllegalArgumentException(&quot;currentPage is required&quot;),
-<i class="no-highlight">31</i>&nbsp;        totalPages = totalPages ?: throw IllegalArgumentException(&quot;totalPages is required&quot;),
-<i class="no-highlight">32</i>&nbsp;        resultsCount = resultsCount ?: throw IllegalArgumentException(&quot;resultsCount is required&quot;),
-<i class="no-highlight">33</i>&nbsp;        entries = entries
-<i class="no-highlight">34</i>&nbsp;    )
-<i class="no-highlight">35</i>&nbsp;
-<i class="no-highlight">36</i>&nbsp;}
+<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.LastPost
+<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
+<i class="no-highlight">5</i>&nbsp;import java.time.Instant
+<i class="no-highlight">6</i>&nbsp;
+<i class="no-highlight">7</i>&nbsp;@BuilderDsl
+<b class="fc"><i class="no-highlight">8</i>&nbsp;inline fun lastPostBuilder(block: LastPostBuilder.() -&gt; Unit) = LastPostBuilder().apply(block)</b>
+<i class="no-highlight">9</i>&nbsp;
+<i class="no-highlight">10</i>&nbsp;@BuilderDsl
+<b class="fc"><i class="no-highlight">11</i>&nbsp;inline fun lastPost(block: LastPostBuilder.() -&gt; Unit) = lastPostBuilder(block).build()</b>
+<i class="no-highlight">12</i>&nbsp;
+<i class="no-highlight">13</i>&nbsp;@BuilderDsl
+<i class="no-highlight">14</i>&nbsp;class LastPostBuilder : TibiaKtBuilder&lt;LastPost&gt;() {
+<i class="no-highlight">15</i>&nbsp;    var author: String? = null
+<i class="no-highlight">16</i>&nbsp;    var postId: Int? = null
+<i class="no-highlight">17</i>&nbsp;    var date: Instant? = null
+<i class="no-highlight">18</i>&nbsp;    var deleted: Boolean = false
+<i class="no-highlight">19</i>&nbsp;    var traded: Boolean = false
+<i class="no-highlight">20</i>&nbsp;
+<i class="no-highlight">21</i>&nbsp;    override fun build() = LastPost(
+<i class="no-highlight">22</i>&nbsp;        author = author ?: throw IllegalArgumentException(&quot;author is required&quot;),
+<i class="no-highlight">23</i>&nbsp;        postId = postId ?: throw IllegalArgumentException(&quot;postId is required&quot;),
+<i class="no-highlight">24</i>&nbsp;        date = date ?: throw IllegalArgumentException(&quot;date is required&quot;),
+<i class="no-highlight">25</i>&nbsp;        deleted = deleted,
+<i class="no-highlight">26</i>&nbsp;        traded = traded
+<i class="no-highlight">27</i>&nbsp;    )
+<i class="no-highlight">28</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -135,7 +127,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-06-14 19:14</div>
+    <div style="float:right;">generated on 2022-07-25 17:52</div>
 </div>
 </body>
 </html>

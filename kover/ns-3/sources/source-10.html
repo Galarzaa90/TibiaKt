@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > ForumAnnouncementBuilderKt</title>
+  <title>Coverage Report > EventsScheduleBuilderKt</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -20,7 +20,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">com.galarzaa.tibiakt.core.builders</a>
 </div>
 
-<h1>Coverage Summary for Class: ForumAnnouncementBuilderKt (com.galarzaa.tibiakt.core.builders)</h1>
+<h1>Coverage Summary for Class: EventsScheduleBuilderKt (com.galarzaa.tibiakt.core.builders)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -39,7 +39,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">ForumAnnouncementBuilderKt</td>
+  <td class="name">EventsScheduleBuilderKt</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -50,18 +50,18 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    50%
   </span>
   <span class="absValue">
-    (2/2)
+    (2/4)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    40%
   </span>
   <span class="absValue">
-    (2/2)
+    (2/5)
   </span>
 </td>
 </tr>
@@ -75,44 +75,64 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.builders
 <i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.BaseForumAuthor
-<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.ForumAnnouncement
+<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.models.news.EventEntry
+<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.models.news.EventsSchedule
 <i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
-<i class="no-highlight">6</i>&nbsp;import java.time.Instant
-<i class="no-highlight">7</i>&nbsp;
-<i class="no-highlight">8</i>&nbsp;@BuilderDsl
-<i class="no-highlight">9</i>&nbsp;inline fun forumAnnouncementBuilder(block: ForumAnnouncementBuilder.() -&gt; Unit) =
-<b class="fc"><i class="no-highlight">10</i>&nbsp;    ForumAnnouncementBuilder().apply(block)</b>
+<i class="no-highlight">6</i>&nbsp;import java.time.LocalDate
+<i class="no-highlight">7</i>&nbsp;import java.time.YearMonth
+<i class="no-highlight">8</i>&nbsp;
+<i class="no-highlight">9</i>&nbsp;@BuilderDsl
+<b class="fc"><i class="no-highlight">10</i>&nbsp;inline fun eventsSchedule(block: EventsScheduleBuilder.() -&gt; Unit) = EventsScheduleBuilder().apply(block).build()</b>
 <i class="no-highlight">11</i>&nbsp;
 <i class="no-highlight">12</i>&nbsp;@BuilderDsl
-<b class="fc"><i class="no-highlight">13</i>&nbsp;inline fun forumAnnouncement(block: ForumAnnouncementBuilder.() -&gt; Unit) = forumAnnouncementBuilder(block).build()</b>
+<b class="nc"><i class="no-highlight">13</i>&nbsp;inline fun eventsScheduleBuilder(block: EventsScheduleBuilder.() -&gt; Unit) = EventsScheduleBuilder().apply(block)</b>
 <i class="no-highlight">14</i>&nbsp;
 <i class="no-highlight">15</i>&nbsp;@BuilderDsl
-<i class="no-highlight">16</i>&nbsp;class ForumAnnouncementBuilder : TibiaKtBuilder&lt;ForumAnnouncement&gt;() {
-<i class="no-highlight">17</i>&nbsp;    var announcementId: Int? = null
-<i class="no-highlight">18</i>&nbsp;    var title: String? = null
-<i class="no-highlight">19</i>&nbsp;    var board: String? = null
-<i class="no-highlight">20</i>&nbsp;    var boardId: Int? = null
-<i class="no-highlight">21</i>&nbsp;    var section: String? = null
-<i class="no-highlight">22</i>&nbsp;    var sectionId: Int? = null
-<i class="no-highlight">23</i>&nbsp;    var author: BaseForumAuthor? = null
-<i class="no-highlight">24</i>&nbsp;    var content: String? = null
-<i class="no-highlight">25</i>&nbsp;    var startDate: Instant? = null
-<i class="no-highlight">26</i>&nbsp;    var endDate: Instant? = null
-<i class="no-highlight">27</i>&nbsp;
-<i class="no-highlight">28</i>&nbsp;    override fun build() = ForumAnnouncement(
-<i class="no-highlight">29</i>&nbsp;        announcementId = announcementId ?: throw IllegalStateException(&quot;announcementId is required&quot;),
-<i class="no-highlight">30</i>&nbsp;        title = title ?: throw IllegalStateException(&quot;title is required&quot;),
-<i class="no-highlight">31</i>&nbsp;        board = board ?: throw IllegalStateException(&quot;board is required&quot;),
-<i class="no-highlight">32</i>&nbsp;        boardId = boardId ?: throw IllegalStateException(&quot;boardId is required&quot;),
-<i class="no-highlight">33</i>&nbsp;        section = section ?: throw IllegalStateException(&quot;section is required&quot;),
-<i class="no-highlight">34</i>&nbsp;        sectionId = sectionId ?: throw IllegalStateException(&quot;sectionId is required&quot;),
-<i class="no-highlight">35</i>&nbsp;        author = author ?: throw IllegalStateException(&quot;author is required&quot;),
-<i class="no-highlight">36</i>&nbsp;        content = content ?: throw IllegalStateException(&quot;content is required&quot;),
-<i class="no-highlight">37</i>&nbsp;        startDate = startDate ?: throw IllegalStateException(&quot;startDate is required&quot;),
-<i class="no-highlight">38</i>&nbsp;        endDate = endDate ?: throw IllegalStateException(&quot;endDate is required&quot;)
-<i class="no-highlight">39</i>&nbsp;    )
-<i class="no-highlight">40</i>&nbsp;}
+<i class="no-highlight">16</i>&nbsp;internal inline fun eventEntry(block: EventsScheduleBuilder.EventEntryBuilder.() -&gt; Unit) =
+<b class="nc"><i class="no-highlight">17</i>&nbsp;    EventsScheduleBuilder.EventEntryBuilder()</b>
+<b class="nc"><i class="no-highlight">18</i>&nbsp;        .apply(block).build()</b>
+<i class="no-highlight">19</i>&nbsp;
+<i class="no-highlight">20</i>&nbsp;@BuilderDsl
+<i class="no-highlight">21</i>&nbsp;internal inline fun eventEntryBuilder(block: EventsScheduleBuilder.EventEntryBuilder.() -&gt; Unit) =
+<b class="fc"><i class="no-highlight">22</i>&nbsp;    EventsScheduleBuilder.EventEntryBuilder().apply(block)</b>
+<i class="no-highlight">23</i>&nbsp;
+<i class="no-highlight">24</i>&nbsp;@BuilderDsl
+<i class="no-highlight">25</i>&nbsp;class EventsScheduleBuilder : TibiaKtBuilder&lt;EventsSchedule&gt;() {
+<i class="no-highlight">26</i>&nbsp;    lateinit var yearMonth: YearMonth
+<i class="no-highlight">27</i>&nbsp;    val entries: MutableList&lt;EventEntry&gt; = mutableListOf()
+<i class="no-highlight">28</i>&nbsp;
+<i class="no-highlight">29</i>&nbsp;
+<i class="no-highlight">30</i>&nbsp;    fun addEntry(title: String, description: String, startDate: LocalDate?, endDate: LocalDate?) =
+<i class="no-highlight">31</i>&nbsp;        apply { entries.add(EventEntry(title, description, startDate, endDate)) }
+<i class="no-highlight">32</i>&nbsp;
+<i class="no-highlight">33</i>&nbsp;    fun addEntry(entry: EventEntry) = apply { entries.add(entry) }
+<i class="no-highlight">34</i>&nbsp;
+<i class="no-highlight">35</i>&nbsp;    override fun build() =
+<i class="no-highlight">36</i>&nbsp;        EventsSchedule(yearMonth = if (::yearMonth.isInitialized) yearMonth else throw IllegalStateException(&quot;yearMonth is required&quot;),
+<i class="no-highlight">37</i>&nbsp;            entries = entries)
+<i class="no-highlight">38</i>&nbsp;
+<i class="no-highlight">39</i>&nbsp;    class EventEntryBuilder {
+<i class="no-highlight">40</i>&nbsp;        var title: String? = null
+<i class="no-highlight">41</i>&nbsp;        var description: String? = null
+<i class="no-highlight">42</i>&nbsp;        var startDate: LocalDate? = null
+<i class="no-highlight">43</i>&nbsp;        var endDate: LocalDate? = null
+<i class="no-highlight">44</i>&nbsp;
+<i class="no-highlight">45</i>&nbsp;        fun build() = EventEntry(
+<i class="no-highlight">46</i>&nbsp;            title ?: throw IllegalStateException(&quot;title is required&quot;),
+<i class="no-highlight">47</i>&nbsp;            description ?: throw IllegalStateException(&quot;description is required&quot;),
+<i class="no-highlight">48</i>&nbsp;            startDate,
+<i class="no-highlight">49</i>&nbsp;            endDate
+<i class="no-highlight">50</i>&nbsp;        )
+<i class="no-highlight">51</i>&nbsp;
+<i class="no-highlight">52</i>&nbsp;        override fun equals(other: Any?): Boolean {
+<i class="no-highlight">53</i>&nbsp;            return other is EventEntryBuilder &amp;&amp; other.title == title &amp;&amp; other.description == description
+<i class="no-highlight">54</i>&nbsp;        }
+<i class="no-highlight">55</i>&nbsp;
+<i class="no-highlight">56</i>&nbsp;        override fun toString(): String {
+<i class="no-highlight">57</i>&nbsp;            return title ?: &quot;&lt;undefined title&gt;&quot;
+<i class="no-highlight">58</i>&nbsp;        }
+<i class="no-highlight">59</i>&nbsp;    }
+<i class="no-highlight">60</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -139,7 +159,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-06-14 19:14</div>
+    <div style="float:right;">generated on 2022-07-25 17:52</div>
 </div>
 </body>
 </html>

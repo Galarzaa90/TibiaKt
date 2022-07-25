@@ -83,9 +83,9 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">8</i>&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.Auction
 <i class="no-highlight">9</i>&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.AuctionDetails
 <i class="no-highlight">10</i>&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.AuctionSkills
-<i class="no-highlight">11</i>&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.BestiaryEntry
-<i class="no-highlight">12</i>&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.BlessingEntry
-<i class="no-highlight">13</i>&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.CharmEntry
+<i class="no-highlight">11</i>&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.BlessingEntry
+<i class="no-highlight">12</i>&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.CharmEntry
+<i class="no-highlight">13</i>&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.CreatureEntry
 <i class="no-highlight">14</i>&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.Familiars
 <i class="no-highlight">15</i>&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.ItemEntry
 <i class="no-highlight">16</i>&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.ItemSummary
@@ -205,81 +205,93 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">130</i>&nbsp;        var hirelings: Int? = null
 <i class="no-highlight">131</i>&nbsp;        var hirelingJobs: Int? = null
 <i class="no-highlight">132</i>&nbsp;        var hirelingOutfits: Int? = null
-<i class="no-highlight">133</i>&nbsp;        var items: ItemSummary? = null
-<i class="no-highlight">134</i>&nbsp;        var storeItems: ItemSummary? = null
-<i class="no-highlight">135</i>&nbsp;        var mounts: Mounts? = null
-<i class="no-highlight">136</i>&nbsp;        var storeMounts: Mounts? = null
-<i class="no-highlight">137</i>&nbsp;        var outfits: Outfits? = null
-<i class="no-highlight">138</i>&nbsp;        var storeOutfits: Outfits? = null
-<i class="no-highlight">139</i>&nbsp;        var familiars: Familiars? = null
-<i class="no-highlight">140</i>&nbsp;        val blessings: MutableList&lt;BlessingEntry&gt; = mutableListOf()
-<i class="no-highlight">141</i>&nbsp;        val imbuements: MutableList&lt;String&gt; = mutableListOf()
-<i class="no-highlight">142</i>&nbsp;        val charms: MutableList&lt;CharmEntry&gt; = mutableListOf()
-<i class="no-highlight">143</i>&nbsp;        val completedCyclopediaMapAreas: MutableList&lt;String&gt; = mutableListOf()
-<i class="no-highlight">144</i>&nbsp;        val completedQuestLines: MutableList&lt;String&gt; = mutableListOf()
-<i class="no-highlight">145</i>&nbsp;        val titles: MutableList&lt;String&gt; = mutableListOf()
-<i class="no-highlight">146</i>&nbsp;        val achievements: MutableList&lt;AchievementEntry&gt; = mutableListOf()
-<i class="no-highlight">147</i>&nbsp;        val bestiaryProgress: MutableList&lt;BestiaryEntry&gt; = mutableListOf()
-<i class="no-highlight">148</i>&nbsp;
-<i class="no-highlight">149</i>&nbsp;
-<i class="no-highlight">150</i>&nbsp;        fun addBlessing(blessingEntry: BlessingEntry) = apply { blessings.add(blessingEntry) }
-<i class="no-highlight">151</i>&nbsp;        fun addImbuement(imbuement: String) = apply { imbuements.add(imbuement) }
-<i class="no-highlight">152</i>&nbsp;        fun addCharm(charm: CharmEntry) = apply { charms.add(charm) }
+<i class="no-highlight">133</i>&nbsp;        var exaltedDust: Int? = null
+<i class="no-highlight">134</i>&nbsp;        var exaltedDustLimit: Int? = null
+<i class="no-highlight">135</i>&nbsp;        var bossPoints: Int? = null
+<i class="no-highlight">136</i>&nbsp;        var items: ItemSummary? = null
+<i class="no-highlight">137</i>&nbsp;        var storeItems: ItemSummary? = null
+<i class="no-highlight">138</i>&nbsp;        var mounts: Mounts? = null
+<i class="no-highlight">139</i>&nbsp;        var storeMounts: Mounts? = null
+<i class="no-highlight">140</i>&nbsp;        var outfits: Outfits? = null
+<i class="no-highlight">141</i>&nbsp;        var storeOutfits: Outfits? = null
+<i class="no-highlight">142</i>&nbsp;        var familiars: Familiars? = null
+<i class="no-highlight">143</i>&nbsp;        val blessings: MutableList&lt;BlessingEntry&gt; = mutableListOf()
+<i class="no-highlight">144</i>&nbsp;        val imbuements: MutableList&lt;String&gt; = mutableListOf()
+<i class="no-highlight">145</i>&nbsp;        val charms: MutableList&lt;CharmEntry&gt; = mutableListOf()
+<i class="no-highlight">146</i>&nbsp;        val completedCyclopediaMapAreas: MutableList&lt;String&gt; = mutableListOf()
+<i class="no-highlight">147</i>&nbsp;        val completedQuestLines: MutableList&lt;String&gt; = mutableListOf()
+<i class="no-highlight">148</i>&nbsp;        val titles: MutableList&lt;String&gt; = mutableListOf()
+<i class="no-highlight">149</i>&nbsp;        val achievements: MutableList&lt;AchievementEntry&gt; = mutableListOf()
+<i class="no-highlight">150</i>&nbsp;        val bestiaryProgress: MutableList&lt;CreatureEntry&gt; = mutableListOf()
+<i class="no-highlight">151</i>&nbsp;        val bosstiaryProgress: MutableList&lt;CreatureEntry&gt; = mutableListOf()
+<i class="no-highlight">152</i>&nbsp;
 <i class="no-highlight">153</i>&nbsp;
-<i class="no-highlight">154</i>&nbsp;        fun addCompletedQuestLine(completedQuestLine: String) = apply { completedQuestLines.add(completedQuestLine) }
-<i class="no-highlight">155</i>&nbsp;        fun addCompletedCyclopediaMapArea(completedCyclopediaMapArea: String) =
-<i class="no-highlight">156</i>&nbsp;            apply { completedCyclopediaMapAreas.add(completedCyclopediaMapArea) }
+<i class="no-highlight">154</i>&nbsp;        fun addBlessing(blessingEntry: BlessingEntry) = apply { blessings.add(blessingEntry) }
+<i class="no-highlight">155</i>&nbsp;        fun addImbuement(imbuement: String) = apply { imbuements.add(imbuement) }
+<i class="no-highlight">156</i>&nbsp;        fun addCharm(charm: CharmEntry) = apply { charms.add(charm) }
 <i class="no-highlight">157</i>&nbsp;
-<i class="no-highlight">158</i>&nbsp;        fun addTitle(title: String) = apply { titles.add(title) }
-<i class="no-highlight">159</i>&nbsp;        fun addAchievement(achievement: AchievementEntry) = apply { achievements.add(achievement) }
-<i class="no-highlight">160</i>&nbsp;        fun addBestiaryEntry(bestiaryEntry: BestiaryEntry) = apply { bestiaryProgress.add(bestiaryEntry) }
+<i class="no-highlight">158</i>&nbsp;        fun addCompletedQuestLine(completedQuestLine: String) = apply { completedQuestLines.add(completedQuestLine) }
+<i class="no-highlight">159</i>&nbsp;        fun addCompletedCyclopediaMapArea(completedCyclopediaMapArea: String) =
+<i class="no-highlight">160</i>&nbsp;            apply { completedCyclopediaMapAreas.add(completedCyclopediaMapArea) }
 <i class="no-highlight">161</i>&nbsp;
-<i class="no-highlight">162</i>&nbsp;        override fun build() =
-<i class="no-highlight">163</i>&nbsp;            AuctionDetails(hitPoints = hitPoints ?: throw IllegalStateException(&quot;hitPoints is required&quot;),
-<i class="no-highlight">164</i>&nbsp;                mana = mana ?: throw IllegalStateException(&quot;mana is required&quot;),
-<i class="no-highlight">165</i>&nbsp;                capacity = capacity ?: throw IllegalStateException(&quot;capacity is required&quot;),
-<i class="no-highlight">166</i>&nbsp;                speed = speed ?: throw IllegalStateException(&quot;speed is required&quot;),
-<i class="no-highlight">167</i>&nbsp;                blessingsCount = blessingsCount ?: throw IllegalStateException(&quot;blessingsCount is required&quot;),
-<i class="no-highlight">168</i>&nbsp;                mountsCount = mountsCount ?: throw IllegalStateException(&quot;mountsCount is required&quot;),
-<i class="no-highlight">169</i>&nbsp;                outfitsCount = outfitsCount ?: throw IllegalStateException(&quot;outfitsCount is required&quot;),
-<i class="no-highlight">170</i>&nbsp;                titlesCount = titlesCount ?: throw IllegalStateException(&quot;titlesCount is required&quot;),
-<i class="no-highlight">171</i>&nbsp;                skills = skills ?: throw IllegalStateException(&quot;skills is required&quot;),
-<i class="no-highlight">172</i>&nbsp;                creationDate = creationDate ?: throw IllegalStateException(&quot;creationDate is required&quot;),
-<i class="no-highlight">173</i>&nbsp;                experience = experience ?: throw IllegalStateException(&quot;experience is required&quot;),
-<i class="no-highlight">174</i>&nbsp;                gold = gold ?: throw IllegalStateException(&quot;gold is required&quot;),
-<i class="no-highlight">175</i>&nbsp;                achievementPoints = achievementPoints ?: throw IllegalStateException(&quot;achievementPoints is required&quot;),
-<i class="no-highlight">176</i>&nbsp;                regularWorldTransfersAvailable = regularWorldTransfersAvailable,
-<i class="no-highlight">177</i>&nbsp;                charmExpansion = charmExpansion ?: throw IllegalStateException(&quot;charmExpansion is required&quot;),
-<i class="no-highlight">178</i>&nbsp;                availableCharmPoints = availableCharmPoints
-<i class="no-highlight">179</i>&nbsp;                    ?: throw IllegalStateException(&quot;availableCharmPoints is required&quot;),
-<i class="no-highlight">180</i>&nbsp;                spentCharmPoints = spentCharmPoints ?: throw IllegalStateException(&quot;spentCharmPoints is required&quot;),
-<i class="no-highlight">181</i>&nbsp;                dailyRewardStreak = dailyRewardStreak ?: throw IllegalStateException(&quot;dailyRewardStreak is required&quot;),
-<i class="no-highlight">182</i>&nbsp;                permanentHuntingTaskSlots = permanentHuntingTaskSlots
-<i class="no-highlight">183</i>&nbsp;                    ?: throw IllegalStateException(&quot;permanentHuntingTaskSlots is required&quot;),
-<i class="no-highlight">184</i>&nbsp;                permanentPreySlots = permanentPreySlots
-<i class="no-highlight">185</i>&nbsp;                    ?: throw IllegalStateException(&quot;permanentPreySlots is required&quot;),
-<i class="no-highlight">186</i>&nbsp;                huntingTaskPoints = huntingTaskPoints ?: throw IllegalStateException(&quot;huntingTaskPoints is required&quot;),
-<i class="no-highlight">187</i>&nbsp;                preyWildcards = preyWildcards ?: throw IllegalStateException(&quot;preyWildcards is required&quot;),
-<i class="no-highlight">188</i>&nbsp;                hirelings = hirelings ?: throw IllegalStateException(&quot;hirelings is required&quot;),
-<i class="no-highlight">189</i>&nbsp;                hirelingJobs = hirelingJobs ?: throw IllegalStateException(&quot;hirelingJobs is required&quot;),
-<i class="no-highlight">190</i>&nbsp;                hirelingOutfits = hirelingOutfits ?: throw IllegalStateException(&quot;hirelingOutfits is required&quot;),
-<i class="no-highlight">191</i>&nbsp;                items = items ?: throw IllegalStateException(&quot;items is required&quot;),
-<i class="no-highlight">192</i>&nbsp;                storeItems = storeItems ?: throw IllegalStateException(&quot;storeItems is required&quot;),
-<i class="no-highlight">193</i>&nbsp;                mounts = mounts ?: throw IllegalStateException(&quot;mounts is required&quot;),
-<i class="no-highlight">194</i>&nbsp;                storeMounts = storeMounts ?: throw IllegalStateException(&quot;storeMounts is required&quot;),
-<i class="no-highlight">195</i>&nbsp;                outfits = outfits ?: throw IllegalStateException(&quot;outfits is required&quot;),
-<i class="no-highlight">196</i>&nbsp;                storeOutfits = storeOutfits ?: throw IllegalStateException(&quot;storeOutfits is required&quot;),
-<i class="no-highlight">197</i>&nbsp;                familiars = familiars ?: throw IllegalStateException(&quot;familiars is required&quot;),
-<i class="no-highlight">198</i>&nbsp;                blessings = blessings,
-<i class="no-highlight">199</i>&nbsp;                imbuements = imbuements,
-<i class="no-highlight">200</i>&nbsp;                charms = charms,
-<i class="no-highlight">201</i>&nbsp;                completedCyclopediaMapAreas = completedCyclopediaMapAreas,
-<i class="no-highlight">202</i>&nbsp;                completedQuestLines = completedQuestLines,
-<i class="no-highlight">203</i>&nbsp;                titles = titles,
-<i class="no-highlight">204</i>&nbsp;                achievements = achievements,
-<i class="no-highlight">205</i>&nbsp;                bestiaryProgress = bestiaryProgress)
-<i class="no-highlight">206</i>&nbsp;    }
-<i class="no-highlight">207</i>&nbsp;}
+<i class="no-highlight">162</i>&nbsp;        fun addTitle(title: String) = apply { titles.add(title) }
+<i class="no-highlight">163</i>&nbsp;        fun addAchievement(achievement: AchievementEntry) = apply { achievements.add(achievement) }
+<i class="no-highlight">164</i>&nbsp;        fun addBestiaryEntry(bestiaryEntry: CreatureEntry) = apply { bestiaryProgress.add(bestiaryEntry) }
+<i class="no-highlight">165</i>&nbsp;
+<i class="no-highlight">166</i>&nbsp;        fun addBosstiaryEntry(bosstiaryEntry: CreatureEntry) = apply { bosstiaryProgress.add(bosstiaryEntry) }
+<i class="no-highlight">167</i>&nbsp;
+<i class="no-highlight">168</i>&nbsp;        override fun build() =
+<i class="no-highlight">169</i>&nbsp;            AuctionDetails(
+<i class="no-highlight">170</i>&nbsp;                hitPoints = hitPoints ?: throw IllegalStateException(&quot;hitPoints is required&quot;),
+<i class="no-highlight">171</i>&nbsp;                mana = mana ?: throw IllegalStateException(&quot;mana is required&quot;),
+<i class="no-highlight">172</i>&nbsp;                capacity = capacity ?: throw IllegalStateException(&quot;capacity is required&quot;),
+<i class="no-highlight">173</i>&nbsp;                speed = speed ?: throw IllegalStateException(&quot;speed is required&quot;),
+<i class="no-highlight">174</i>&nbsp;                blessingsCount = blessingsCount ?: throw IllegalStateException(&quot;blessingsCount is required&quot;),
+<i class="no-highlight">175</i>&nbsp;                mountsCount = mountsCount ?: throw IllegalStateException(&quot;mountsCount is required&quot;),
+<i class="no-highlight">176</i>&nbsp;                outfitsCount = outfitsCount ?: throw IllegalStateException(&quot;outfitsCount is required&quot;),
+<i class="no-highlight">177</i>&nbsp;                titlesCount = titlesCount ?: throw IllegalStateException(&quot;titlesCount is required&quot;),
+<i class="no-highlight">178</i>&nbsp;                skills = skills ?: throw IllegalStateException(&quot;skills is required&quot;),
+<i class="no-highlight">179</i>&nbsp;                creationDate = creationDate ?: throw IllegalStateException(&quot;creationDate is required&quot;),
+<i class="no-highlight">180</i>&nbsp;                experience = experience ?: throw IllegalStateException(&quot;experience is required&quot;),
+<i class="no-highlight">181</i>&nbsp;                gold = gold ?: throw IllegalStateException(&quot;gold is required&quot;),
+<i class="no-highlight">182</i>&nbsp;                achievementPoints = achievementPoints ?: throw IllegalStateException(&quot;achievementPoints is required&quot;),
+<i class="no-highlight">183</i>&nbsp;                regularWorldTransfersAvailable = regularWorldTransfersAvailable,
+<i class="no-highlight">184</i>&nbsp;                charmExpansion = charmExpansion ?: throw IllegalStateException(&quot;charmExpansion is required&quot;),
+<i class="no-highlight">185</i>&nbsp;                availableCharmPoints = availableCharmPoints
+<i class="no-highlight">186</i>&nbsp;                    ?: throw IllegalStateException(&quot;availableCharmPoints is required&quot;),
+<i class="no-highlight">187</i>&nbsp;                spentCharmPoints = spentCharmPoints ?: throw IllegalStateException(&quot;spentCharmPoints is required&quot;),
+<i class="no-highlight">188</i>&nbsp;                dailyRewardStreak = dailyRewardStreak ?: throw IllegalStateException(&quot;dailyRewardStreak is required&quot;),
+<i class="no-highlight">189</i>&nbsp;                permanentHuntingTaskSlots = permanentHuntingTaskSlots
+<i class="no-highlight">190</i>&nbsp;                    ?: throw IllegalStateException(&quot;permanentHuntingTaskSlots is required&quot;),
+<i class="no-highlight">191</i>&nbsp;                permanentPreySlots = permanentPreySlots
+<i class="no-highlight">192</i>&nbsp;                    ?: throw IllegalStateException(&quot;permanentPreySlots is required&quot;),
+<i class="no-highlight">193</i>&nbsp;                huntingTaskPoints = huntingTaskPoints ?: throw IllegalStateException(&quot;huntingTaskPoints is required&quot;),
+<i class="no-highlight">194</i>&nbsp;                preyWildcards = preyWildcards ?: throw IllegalStateException(&quot;preyWildcards is required&quot;),
+<i class="no-highlight">195</i>&nbsp;                hirelings = hirelings ?: throw IllegalStateException(&quot;hirelings is required&quot;),
+<i class="no-highlight">196</i>&nbsp;                hirelingJobs = hirelingJobs ?: throw IllegalStateException(&quot;hirelingJobs is required&quot;),
+<i class="no-highlight">197</i>&nbsp;                hirelingOutfits = hirelingOutfits ?: throw IllegalStateException(&quot;hirelingOutfits is required&quot;),
+<i class="no-highlight">198</i>&nbsp;                exaltedDust = exaltedDust ?: throw IllegalStateException(&quot;exaltedDust is required&quot;),
+<i class="no-highlight">199</i>&nbsp;                exaltedDustLimit = exaltedDustLimit ?: throw IllegalStateException(&quot;exaltedDustLimit is required&quot;),
+<i class="no-highlight">200</i>&nbsp;                bossPoints = bossPoints ?: throw IllegalStateException(&quot;bossPoints is required&quot;),
+<i class="no-highlight">201</i>&nbsp;                items = items ?: throw IllegalStateException(&quot;items is required&quot;),
+<i class="no-highlight">202</i>&nbsp;                storeItems = storeItems ?: throw IllegalStateException(&quot;storeItems is required&quot;),
+<i class="no-highlight">203</i>&nbsp;                mounts = mounts ?: throw IllegalStateException(&quot;mounts is required&quot;),
+<i class="no-highlight">204</i>&nbsp;                storeMounts = storeMounts ?: throw IllegalStateException(&quot;storeMounts is required&quot;),
+<i class="no-highlight">205</i>&nbsp;                outfits = outfits ?: throw IllegalStateException(&quot;outfits is required&quot;),
+<i class="no-highlight">206</i>&nbsp;                storeOutfits = storeOutfits ?: throw IllegalStateException(&quot;storeOutfits is required&quot;),
+<i class="no-highlight">207</i>&nbsp;                familiars = familiars ?: throw IllegalStateException(&quot;familiars is required&quot;),
+<i class="no-highlight">208</i>&nbsp;                blessings = blessings,
+<i class="no-highlight">209</i>&nbsp;                imbuements = imbuements,
+<i class="no-highlight">210</i>&nbsp;                charms = charms,
+<i class="no-highlight">211</i>&nbsp;                completedCyclopediaMapAreas = completedCyclopediaMapAreas,
+<i class="no-highlight">212</i>&nbsp;                completedQuestLines = completedQuestLines,
+<i class="no-highlight">213</i>&nbsp;                titles = titles,
+<i class="no-highlight">214</i>&nbsp;                achievements = achievements,
+<i class="no-highlight">215</i>&nbsp;                bestiaryProgress = bestiaryProgress,
+<i class="no-highlight">216</i>&nbsp;                bosstiaryProgress = bosstiaryProgress,
+<i class="no-highlight">217</i>&nbsp;            )
+<i class="no-highlight">218</i>&nbsp;    }
+<i class="no-highlight">219</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -306,7 +318,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-06-14 19:14</div>
+    <div style="float:right;">generated on 2022-07-25 17:52</div>
 </div>
 </body>
 </html>
