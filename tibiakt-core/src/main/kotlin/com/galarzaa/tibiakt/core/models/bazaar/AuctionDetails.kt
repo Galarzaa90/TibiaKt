@@ -35,6 +35,9 @@ import java.time.Instant
  * @property hirelings The total hirelings this character has.
  * @property hirelingJobs The total hireling jobs the character has available.
  * @property hirelingOutfits The total hireling outfits the character has available.
+ * @property exaltedDust The amount of exalted dust the character has.
+ * @property exaltedDustLimit The exalted dust limit of the character.
+ * @property bossPoints The boss points of the character.
  * @property items The summary of items of the character.
  * @property storeItems The summary of store items of the character.
  * @property mounts The mounts the character has unlocked.
@@ -50,6 +53,7 @@ import java.time.Instant
  * @property titles The list of titles the character has unlocked.
  * @property achievements The list of achievements the character has unlocked.
  * @property bestiaryProgress The list of bestiary creatures and their progress.
+ * @property bosstiaryProgress The list of bosstiary bosses and their progress.
  */
 @Serializable
 data class AuctionDetails(
@@ -78,6 +82,9 @@ data class AuctionDetails(
     val hirelings: Int,
     val hirelingJobs: Int,
     val hirelingOutfits: Int,
+    val exaltedDust: Int,
+    val exaltedDustLimit: Int,
+    val bossPoints: Int,
     val items: ItemSummary,
     val storeItems: ItemSummary,
     val mounts: Mounts,
@@ -92,5 +99,6 @@ data class AuctionDetails(
     val completedQuestLines: List<String>,
     val titles: List<String>,
     val achievements: List<AchievementEntry>,
-    val bestiaryProgress: List<BestiaryEntry>,
+    val bestiaryProgress: List<CreatureEntry>,
+    val bosstiaryProgress: List<CreatureEntry>,
 )

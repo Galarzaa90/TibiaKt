@@ -8,9 +8,9 @@ import com.galarzaa.tibiakt.core.exceptions.ParsingException
 import com.galarzaa.tibiakt.core.models.bazaar.AchievementEntry
 import com.galarzaa.tibiakt.core.models.bazaar.Auction
 import com.galarzaa.tibiakt.core.models.bazaar.AuctionSkills
-import com.galarzaa.tibiakt.core.models.bazaar.BestiaryEntry
 import com.galarzaa.tibiakt.core.models.bazaar.BlessingEntry
 import com.galarzaa.tibiakt.core.models.bazaar.CharmEntry
+import com.galarzaa.tibiakt.core.models.bazaar.CreatureEntry
 import com.galarzaa.tibiakt.core.models.bazaar.FamiliarEntry
 import com.galarzaa.tibiakt.core.models.bazaar.Familiars
 import com.galarzaa.tibiakt.core.models.bazaar.ItemEntry
@@ -72,7 +72,8 @@ object AuctionParser : Parser<Auction?> {
                 }
                 detailsTables["Titles"]?.run { parseSingleColumnTable(this).forEach { addTitle(it) } }
                 detailsTables["Achievements"]?.run { parseAchievementsTable(this) }
-                detailsTables["Bestiary Progress"]?.run { parseBestiaryTable(this) }
+                detailsTables["Bestiary Progress"]?.run { parseBestiaryTable(this, false) }
+                detailsTables["Bosstiary Progress"]?.run { parseBestiaryTable(this, true) }
             }
         }
     }
@@ -95,12 +96,13 @@ object AuctionParser : Parser<Auction?> {
         }
     }
 
-    private fun AuctionBuilder.AuctionDetailsBuilder.parseBestiaryTable(table: Element) {
+    private fun AuctionBuilder.AuctionDetailsBuilder.parseBestiaryTable(table: Element, bosstiary: Boolean = false) {
         for (row in table.selectFirst("table.TableContent").rows().offsetStart(1)) {
             val columnsText = row.cellsText()
             if (columnsText.size != 3) continue
             val (step, kills, name) = columnsText
-            addBestiaryEntry(BestiaryEntry(name, kills.remove("x").parseLong(), step.toInt()))
+            val entry = CreatureEntry(name, kills.remove("x").parseLong(), step.toInt())
+            if (bosstiary) addBosstiaryEntry(entry) else addBestiaryEntry(entry)
         }
     }
 
@@ -268,6 +270,24 @@ object AuctionParser : Parser<Auction?> {
                 "Hirelings" -> hirelings = value.parseInteger()
                 "Hireling Jobs" -> hirelingJobs = value.parseInteger()
                 "Hireling Outfits" -> hirelingOutfits = value.parseInteger()
+            }
+        }
+
+        for (row in contentContainers.getOrNull(8)?.rows() ?: emptyList()) {
+            val (field, value) = getAuctionTableFieldValue(row)
+            when (field) {
+                "Exalted Dust" -> {
+                    val (current, limit) = value.split("/").map { it.parseInteger() }
+                    exaltedDust = current
+                    exaltedDustLimit = limit
+                }
+            }
+        }
+
+        for (row in contentContainers.getOrNull(9)?.rows() ?: emptyList()) {
+            val (field, value) = getAuctionTableFieldValue(row)
+            when (field) {
+                "Boss Points" -> bossPoints = value.parseInteger()
             }
         }
     }

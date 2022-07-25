@@ -14,7 +14,7 @@ import kotlinx.serialization.json.Json
 
 fun main() {
     val client = TibiaKtClient()
-    embeddedServer(CIO, port = 8080) {
+    embeddedServer(CIO, port = 8090) {
         install(ContentNegotiation) {
             json(Json {
                 encodeDefaults = true

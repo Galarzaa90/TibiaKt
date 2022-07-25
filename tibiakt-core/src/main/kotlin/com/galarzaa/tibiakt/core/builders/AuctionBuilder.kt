@@ -8,9 +8,9 @@ import com.galarzaa.tibiakt.core.models.bazaar.AchievementEntry
 import com.galarzaa.tibiakt.core.models.bazaar.Auction
 import com.galarzaa.tibiakt.core.models.bazaar.AuctionDetails
 import com.galarzaa.tibiakt.core.models.bazaar.AuctionSkills
-import com.galarzaa.tibiakt.core.models.bazaar.BestiaryEntry
 import com.galarzaa.tibiakt.core.models.bazaar.BlessingEntry
 import com.galarzaa.tibiakt.core.models.bazaar.CharmEntry
+import com.galarzaa.tibiakt.core.models.bazaar.CreatureEntry
 import com.galarzaa.tibiakt.core.models.bazaar.Familiars
 import com.galarzaa.tibiakt.core.models.bazaar.ItemEntry
 import com.galarzaa.tibiakt.core.models.bazaar.ItemSummary
@@ -130,6 +130,9 @@ class AuctionBuilder : TibiaKtBuilder<Auction>() {
         var hirelings: Int? = null
         var hirelingJobs: Int? = null
         var hirelingOutfits: Int? = null
+        var exaltedDust: Int? = null
+        var exaltedDustLimit: Int? = null
+        var bossPoints: Int? = null
         var items: ItemSummary? = null
         var storeItems: ItemSummary? = null
         var mounts: Mounts? = null
@@ -144,7 +147,8 @@ class AuctionBuilder : TibiaKtBuilder<Auction>() {
         val completedQuestLines: MutableList<String> = mutableListOf()
         val titles: MutableList<String> = mutableListOf()
         val achievements: MutableList<AchievementEntry> = mutableListOf()
-        val bestiaryProgress: MutableList<BestiaryEntry> = mutableListOf()
+        val bestiaryProgress: MutableList<CreatureEntry> = mutableListOf()
+        val bosstiaryProgress: MutableList<CreatureEntry> = mutableListOf()
 
 
         fun addBlessing(blessingEntry: BlessingEntry) = apply { blessings.add(blessingEntry) }
@@ -157,10 +161,13 @@ class AuctionBuilder : TibiaKtBuilder<Auction>() {
 
         fun addTitle(title: String) = apply { titles.add(title) }
         fun addAchievement(achievement: AchievementEntry) = apply { achievements.add(achievement) }
-        fun addBestiaryEntry(bestiaryEntry: BestiaryEntry) = apply { bestiaryProgress.add(bestiaryEntry) }
+        fun addBestiaryEntry(bestiaryEntry: CreatureEntry) = apply { bestiaryProgress.add(bestiaryEntry) }
+
+        fun addBosstiaryEntry(bosstiaryEntry: CreatureEntry) = apply { bosstiaryProgress.add(bosstiaryEntry) }
 
         override fun build() =
-            AuctionDetails(hitPoints = hitPoints ?: throw IllegalStateException("hitPoints is required"),
+            AuctionDetails(
+                hitPoints = hitPoints ?: throw IllegalStateException("hitPoints is required"),
                 mana = mana ?: throw IllegalStateException("mana is required"),
                 capacity = capacity ?: throw IllegalStateException("capacity is required"),
                 speed = speed ?: throw IllegalStateException("speed is required"),
@@ -188,6 +195,9 @@ class AuctionBuilder : TibiaKtBuilder<Auction>() {
                 hirelings = hirelings ?: throw IllegalStateException("hirelings is required"),
                 hirelingJobs = hirelingJobs ?: throw IllegalStateException("hirelingJobs is required"),
                 hirelingOutfits = hirelingOutfits ?: throw IllegalStateException("hirelingOutfits is required"),
+                exaltedDust = exaltedDust ?: throw IllegalStateException("exaltedDust is required"),
+                exaltedDustLimit = exaltedDustLimit ?: throw IllegalStateException("exaltedDustLimit is required"),
+                bossPoints = bossPoints ?: throw IllegalStateException("bossPoints is required"),
                 items = items ?: throw IllegalStateException("items is required"),
                 storeItems = storeItems ?: throw IllegalStateException("storeItems is required"),
                 mounts = mounts ?: throw IllegalStateException("mounts is required"),
@@ -202,6 +212,8 @@ class AuctionBuilder : TibiaKtBuilder<Auction>() {
                 completedQuestLines = completedQuestLines,
                 titles = titles,
                 achievements = achievements,
-                bestiaryProgress = bestiaryProgress)
+                bestiaryProgress = bestiaryProgress,
+                bosstiaryProgress = bosstiaryProgress,
+            )
     }
 }
