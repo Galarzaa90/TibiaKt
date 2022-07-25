@@ -12,24 +12,33 @@ import java.time.Instant
  * The Tibia Drome leaderboards of a world.
  *
  * @property world The name of the world.
- * @property rotation The number of the rotation.
+ * @property rotation The rotation of this leaderboards.
+ * @property availableRotations The rotations that are available to view.
  * @property lastUpdated The time when the leaderboard was last updated. Only available for the current rotation.
  */
 @Serializable
 data class Leaderboards(
     val world: String,
-    val rotation: Int,
+    val rotation: LeaderboardsRotation,
+    val availableRotations: List<LeaderboardsRotation>,
     val lastUpdated: Instant?,
     override val currentPage: Int,
     override val totalPages: Int,
     override val resultsCount: Int,
-    override val entries: List<LeaderboardsEntry>,
-) : PaginatedWithUrl<LeaderboardsEntry> {
+    override val entries: List<BaseLeaderboardEntry>,
+) : PaginatedWithUrl<BaseLeaderboardEntry> {
 
     /**
      * The URL to these leaderboards.
      */
-    val url get() = getLeaderboardUrl(world, rotation, currentPage)
+    val url get() = getLeaderboardUrl(world, rotation.rotationId, currentPage)
 
-    override fun getPageUrl(page: Int) = getLeaderboardUrl(world, rotation, page)
+    override fun getPageUrl(page: Int) = getLeaderboardUrl(world, rotation.rotationId, page)
 }
+
+@Serializable
+data class LeaderboardsRotation(
+    val rotationId: Int,
+    val current: Boolean,
+    val endDate: Instant,
+)

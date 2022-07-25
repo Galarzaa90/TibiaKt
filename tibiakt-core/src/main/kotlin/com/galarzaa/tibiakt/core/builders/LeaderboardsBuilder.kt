@@ -1,7 +1,8 @@
 package com.galarzaa.tibiakt.core.builders
 
+import com.galarzaa.tibiakt.core.models.BaseLeaderboardEntry
 import com.galarzaa.tibiakt.core.models.Leaderboards
-import com.galarzaa.tibiakt.core.models.LeaderboardsEntry
+import com.galarzaa.tibiakt.core.models.LeaderboardsRotation
 import com.galarzaa.tibiakt.core.utils.BuilderDsl
 import java.time.Instant
 
@@ -14,23 +15,45 @@ inline fun leaderboardsBuilder(block: LeaderboardsBuilder.() -> Unit) = Leaderbo
 @BuilderDsl
 class LeaderboardsBuilder : TibiaKtBuilder<Leaderboards>() {
     var world: String? = null
-    var rotation: Int? = null
+    var rotation: LeaderboardsRotation? = null
+    val availableRotations: MutableList<LeaderboardsRotation> = mutableListOf()
     var lastUpdated: Instant? = null
     var currentPage: Int? = null
     var totalPages: Int? = null
     var resultsCount: Int? = null
-    var entries: MutableList<LeaderboardsEntry> = mutableListOf()
+    var entries: MutableList<BaseLeaderboardEntry> = mutableListOf()
 
-    fun addEntry(entry: LeaderboardsEntry) = apply { entries.add(entry) }
+    @BuilderDsl
+    fun rotation(body: LeaderboardsRotationBuilder.() -> Unit) =
+        apply { rotation = LeaderboardsRotationBuilder().apply(body).build() }
+
+    @BuilderDsl
+    fun addAvailableRotation(rotation: LeaderboardsRotation) = apply { availableRotations.add(rotation) }
+
+    fun addEntry(entry: BaseLeaderboardEntry) = apply { entries.add(entry) }
+
 
     override fun build() = Leaderboards(
-        world = world ?: throw IllegalArgumentException("world is required"),
-        rotation = rotation ?: throw IllegalArgumentException("rotation is required"),
+        world = world ?: throw IllegalStateException("world is required"),
+        rotation = rotation ?: throw IllegalStateException("rotation is required"),
+        availableRotations = availableRotations,
         lastUpdated = lastUpdated,
-        currentPage = currentPage ?: throw IllegalArgumentException("currentPage is required"),
-        totalPages = totalPages ?: throw IllegalArgumentException("totalPages is required"),
-        resultsCount = resultsCount ?: throw IllegalArgumentException("resultsCount is required"),
+        currentPage = currentPage ?: throw IllegalStateException("currentPage is required"),
+        totalPages = totalPages ?: throw IllegalStateException("totalPages is required"),
+        resultsCount = resultsCount ?: throw IllegalStateException("resultsCount is required"),
         entries = entries
     )
+
+    class LeaderboardsRotationBuilder : TibiaKtBuilder<LeaderboardsRotation>() {
+        var rotationId: Int? = null
+        var current: Boolean = false
+        var endDate: Instant? = null
+        override fun build() = LeaderboardsRotation(
+            rotationId = rotationId ?: throw IllegalStateException("rotationId is required"),
+            current = current,
+            endDate = endDate ?: throw IllegalStateException("endDate is required"),
+        )
+
+    }
 
 }
