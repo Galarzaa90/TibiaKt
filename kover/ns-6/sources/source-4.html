@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > LeaderboardsEntry</title>
+  <title>Coverage Report > KillsStatisticEntry</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -20,7 +20,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">com.galarzaa.tibiakt.core.models</a>
 </div>
 
-<h1>Coverage Summary for Class: LeaderboardsEntry (com.galarzaa.tibiakt.core.models)</h1>
+<h1>Coverage Summary for Class: KillsStatisticEntry (com.galarzaa.tibiakt.core.models)</h1>
 
 <table class="coverageStats">
 
@@ -40,13 +40,13 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">LeaderboardsEntry</td>
+  <td class="name">KillsStatisticEntry</td>
 <td class="coverageStat">
   <span class="percent">
-    33.3%
+    100%
   </span>
   <span class="absValue">
-    (1/3)
+    (1/1)
   </span>
 </td>
 <td class="coverageStat">
@@ -54,20 +54,20 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/6)
+    (0/2)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    66.7%
+    100%
   </span>
   <span class="absValue">
-    (4/6)
+    (5/5)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">LeaderboardsEntry$$serializer</td>
+    <td class="name">KillsStatisticEntry$$serializer</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -81,7 +81,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/8)
+    (0/9)
   </span>
 </td>
 <td class="coverageStat">
@@ -94,7 +94,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
   </tr>
   <tr>
-    <td class="name">LeaderboardsEntry$Companion</td>
+    <td class="name">KillsStatisticEntry$Companion</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -116,10 +116,10 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    20%
+    33.3%
   </span>
   <span class="absValue">
-    (1/5)
+    (1/3)
   </span>
 </td>
 <td class="coverageStat">
@@ -127,15 +127,15 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/14)
+    (0/11)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    50%
+    71.4%
   </span>
   <span class="absValue">
-    (4/8)
+    (5/7)
   </span>
 </td>
 </tr>
@@ -148,32 +148,23 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.models
 <i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getCharacterUrl
-<i class="no-highlight">4</i>&nbsp;import kotlinx.serialization.Serializable
-<i class="no-highlight">5</i>&nbsp;
-<i class="no-highlight">6</i>&nbsp;/**
-<i class="no-highlight">7</i>&nbsp; * An entry in the [LeaderboardsEntry].
-<i class="no-highlight">8</i>&nbsp; *
-<i class="no-highlight">9</i>&nbsp; * @property name The name of the character. Will be null if the character [isDeleted].
-<i class="no-highlight">10</i>&nbsp; * @property rank The rank of the character.
-<i class="no-highlight">11</i>&nbsp; * @property dromeLevel The Drome level of the character.
+<i class="no-highlight">3</i>&nbsp;import kotlinx.serialization.Serializable
+<i class="no-highlight">4</i>&nbsp;
+<i class="no-highlight">5</i>&nbsp;/**
+<i class="no-highlight">6</i>&nbsp; * The kill statistics for a given entry.
+<i class="no-highlight">7</i>&nbsp; *
+<i class="no-highlight">8</i>&nbsp; * @property lastDayKilledPlayers The number of players killed by this race in the last day.
+<i class="no-highlight">9</i>&nbsp; * @property lastDayKilled The number of this race killed in the last day.
+<i class="no-highlight">10</i>&nbsp; * @property lastWeekKilledPlayers The number of players killed by this race in the last week.
+<i class="no-highlight">11</i>&nbsp; * @property lastWeekKilled The number of this race killed in the last week.
 <i class="no-highlight">12</i>&nbsp; */
 <b class="pc"><i class="no-highlight">13</i>&nbsp;@Serializable</b>
-<i class="no-highlight">14</i>&nbsp;data class LeaderboardsEntry(
-<b class="fc"><i class="no-highlight">15</i>&nbsp;    val rank: Int,</b>
-<b class="fc"><i class="no-highlight">16</i>&nbsp;    val name: String?,</b>
-<b class="fc"><i class="no-highlight">17</i>&nbsp;    val dromeLevel: Int,</b>
-<i class="no-highlight">18</i>&nbsp;) {
-<i class="no-highlight">19</i>&nbsp;    /**
-<i class="no-highlight">20</i>&nbsp;     * Whether the character is deleted or not.
-<i class="no-highlight">21</i>&nbsp;     */
-<b class="nc"><i class="no-highlight">22</i>&nbsp;    val isDeleted: Boolean get() = name == null</b>
-<i class="no-highlight">23</i>&nbsp;
-<i class="no-highlight">24</i>&nbsp;    /**
-<i class="no-highlight">25</i>&nbsp;     * The URL to the character&#39;s page. If the character is deleted it will be null.
-<i class="no-highlight">26</i>&nbsp;     */
-<b class="nc"><i class="no-highlight">27</i>&nbsp;    val url: String? get() = name?.let { getCharacterUrl(it) }</b>
-<i class="no-highlight">28</i>&nbsp;}
+<i class="no-highlight">14</i>&nbsp;data class KillsStatisticEntry(
+<b class="fc"><i class="no-highlight">15</i>&nbsp;    val lastDayKilledPlayers: Int,</b>
+<b class="fc"><i class="no-highlight">16</i>&nbsp;    val lastDayKilled: Int,</b>
+<b class="fc"><i class="no-highlight">17</i>&nbsp;    val lastWeekKilledPlayers: Int,</b>
+<b class="fc"><i class="no-highlight">18</i>&nbsp;    val lastWeekKilled: Int,</b>
+<i class="no-highlight">19</i>&nbsp;)
 </div>
 </pre>
 </div>
@@ -200,7 +191,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-07-25 17:52</div>
+    <div style="float:right;">generated on 2022-07-25 21:00</div>
 </div>
 </body>
 </html>
