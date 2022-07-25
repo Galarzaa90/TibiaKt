@@ -9,7 +9,7 @@ class LeaderboardsParserTests : StringSpec({
     "Parse page with results"{
         val leaderboards = LeaderboardsParser.fromContent(getResource("leaderboards/leaderbordsResults.txt"))
         leaderboards!!.world shouldBe "Adra"
-        leaderboards.rotation shouldBe 14
+        leaderboards.rotation.rotationId shouldBe 14
         leaderboards.currentPage shouldBe 1
         leaderboards.totalPages shouldBe 1
         leaderboards.resultsCount shouldBe 45
