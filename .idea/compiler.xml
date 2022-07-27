@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="1.8" />
+    <bytecodeTargetLevel target="1.8">
+      <module name="TibiaKt.buildSrc" target="16" />
+      <module name="TibiaKt.buildSrc.main" target="16" />
+      <module name="TibiaKt.buildSrc.test" target="16" />
+      <module name="TibiaKt.main" target="16" />
+      <module name="TibiaKt.test" target="16" />
+      <module name="TibiaKt.tibiakt-server" target="16" />
+      <module name="TibiaKt.tibiakt-server.main" target="16" />
+      <module name="TibiaKt.tibiakt-server.test" target="16" />
+    </bytecodeTargetLevel>
   </component>
 </project>
