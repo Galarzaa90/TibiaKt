@@ -16,7 +16,9 @@ import com.galarzaa.tibiakt.core.utils.parseTablesMap
 import com.galarzaa.tibiakt.core.utils.parseThousandSuffix
 import com.galarzaa.tibiakt.core.utils.remove
 import com.galarzaa.tibiakt.core.utils.rows
-import java.time.Duration
+import kotlin.time.Duration
+import kotlin.time.Duration.Companion.days
+import kotlin.time.Duration.Companion.hours
 
 object HousesSectionParser : Parser<HousesSection?> {
     private val auctionInfoRegex = Regex("""\((?<bid>\d+) gold; (?<timeLeft>\w)+ (?<timeUnit>day|hour)s? left\)""")
@@ -49,8 +51,8 @@ object HousesSectionParser : Parser<HousesSection?> {
                         val timeUnit = groups["timeUnit"]!!.value
                         timeLeft = groups["timeLeft"]!!.value.toLong().let {
                             when (timeUnit) {
-                                "hour" -> Duration.ofHours(it)
-                                "day" -> Duration.ofDays(it)
+                                "hour" -> it.hours
+                                "day" -> it.days
                                 else -> throw ParsingException("unknown time unit $timeUnit")
                             }
                         }

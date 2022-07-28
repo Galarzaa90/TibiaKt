@@ -1,17 +1,17 @@
 package com.galarzaa.tibiakt.core.utils
 
 import java.time.DayOfWeek
-import java.time.Duration
 import java.time.Instant
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.ZoneId
-import java.time.ZoneOffset
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeParseException
 import java.util.Locale
+import kotlin.time.Duration.Companion.hours
+import kotlin.time.toJavaDuration
 
 /**
  * The timezone Tibia time is based on.
@@ -27,7 +27,7 @@ val serverSaveTime: LocalTime = LocalTime.of(10, 0)
  *
  * A new day starts at 10:00 local time.
  */
-fun getTibiaWeekDay(): DayOfWeek = (getTibiaTime() - Duration.ofHours(10)).dayOfWeek
+fun getTibiaWeekDay(): DayOfWeek = (getTibiaTime() - 10.hours.toJavaDuration()).dayOfWeek
 
 /**
  * Get the local datetime in Tibia's servers.

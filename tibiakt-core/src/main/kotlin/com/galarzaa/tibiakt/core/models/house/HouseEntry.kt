@@ -7,7 +7,7 @@ import com.galarzaa.tibiakt.core.enums.HouseType
 import com.galarzaa.tibiakt.core.serializers.DurationSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
-import java.time.Duration
+import kotlin.time.Duration
 
 /**
  * A listed house in the Houses Section of tibia.com

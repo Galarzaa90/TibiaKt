@@ -6,7 +6,7 @@ import com.galarzaa.tibiakt.core.enums.HouseType
 import com.galarzaa.tibiakt.core.models.house.HouseEntry
 import com.galarzaa.tibiakt.core.models.house.HousesSection
 import com.galarzaa.tibiakt.core.utils.BuilderDsl
-import java.time.Duration
+import kotlin.time.Duration
 
 @BuilderDsl
 inline fun housesSection(block: HousesSectionBuilder.() -> Unit) = HousesSectionBuilder().apply(block).build()
