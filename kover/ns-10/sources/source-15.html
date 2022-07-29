@@ -32,15 +32,27 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 <th class="coverageStat 
 ">
-  Block, %
+  Branch, %
 </th>
 <th class="coverageStat 
 ">
   Line, %
 </th>
+<th class="coverageStat 
+">
+  Instruction, %
+</th>
 </tr>
   <tr>
     <td class="name">Parser$DefaultImpls</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -51,10 +63,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    75%
+    100%
   </span>
   <span class="absValue">
-    (3/4)
+    (4/4)
   </span>
 </td>
 <td class="coverageStat">
@@ -62,7 +74,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     100%
   </span>
   <span class="absValue">
-    (4/4)
+    (42/42)
   </span>
 </td>
   </tr>
@@ -73,15 +85,15 @@ Current scope:     <a href="../../index.html">all classes</a>
     100%
   </span>
   <span class="absValue">
-    (2/2)
+    (1/1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    75%
+    100%
   </span>
   <span class="absValue">
-    (3/4)
+    (2/2)
   </span>
 </td>
 <td class="coverageStat">
@@ -90,6 +102,14 @@ Current scope:     <a href="../../index.html">all classes</a>
   </span>
   <span class="absValue">
     (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (42/42)
   </span>
 </td>
 </tr>
@@ -111,7 +131,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">9</i>&nbsp;internal interface Parser&lt;T&gt; {
 <i class="no-highlight">10</i>&nbsp;    fun fromContent(content: String): T
 <i class="no-highlight">11</i>&nbsp;
-<b class="pc"><i class="no-highlight">12</i>&nbsp;    fun boxContent(content: String, parser: Parser? = null): Element {</b>
+<b class="fc"><i class="no-highlight">12</i>&nbsp;    fun boxContent(content: String, parser: Parser? = null): Element {</b>
 <b class="fc"><i class="no-highlight">13</i>&nbsp;        val document: Document = content.replaceFirst(&quot;ISO-8859-1&quot;, &quot;utf-8&quot;)</b>
 <b class="fc"><i class="no-highlight">14</i>&nbsp;            .let { if (parser == null) Jsoup.parse(it) else Jsoup.parse(it, &quot;&quot;, parser) }</b>
 <b class="fc"><i class="no-highlight">15</i>&nbsp;        return document.boxContent()</b>
@@ -143,7 +163,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-07-29 00:55</div>
+    <div style="float:right;">generated on 2022-07-29 01:42</div>
 </div>
 </body>
 </html>

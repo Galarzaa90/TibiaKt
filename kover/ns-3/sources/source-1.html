@@ -32,21 +32,25 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 <th class="coverageStat 
 ">
-  Block, %
+  Branch, %
 </th>
 <th class="coverageStat 
 ">
   Line, %
+</th>
+<th class="coverageStat 
+">
+  Instruction, %
 </th>
 </tr>
 <tr>
   <td class="name">AuctionBuilder</td>
 <td class="coverageStat">
   <span class="percent">
-    90%
+    85%
   </span>
   <span class="absValue">
-    (18/20)
+    (17/20)
   </span>
 </td>
 <td class="coverageStat">
@@ -54,15 +58,23 @@ Current scope:     <a href="../../index.html">all classes</a>
     50%
   </span>
   <span class="absValue">
-    (20/40)
+    (11/22)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    94.6%
+    91.9%
   </span>
   <span class="absValue">
-    (35/37)
+    (34/37)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    73.3%
+  </span>
+  <span class="absValue">
+    (261/356)
   </span>
 </td>
 </tr>
@@ -92,6 +104,14 @@ Current scope:     <a href="../../index.html">all classes</a>
     (97/102)
   </span>
 </td>
+<td class="coverageStat">
+  <span class="percent">
+    74.2%
+  </span>
+  <span class="absValue">
+    (637/858)
+  </span>
+</td>
   </tr>
   <tr>
     <td class="name">AuctionBuilder$ItemEntryBuilder</td>
@@ -108,7 +128,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/10)
+    (0/6)
   </span>
 </td>
 <td class="coverageStat">
@@ -117,6 +137,14 @@ Current scope:     <a href="../../index.html">all classes</a>
   </span>
   <span class="absValue">
     (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/76)
   </span>
 </td>
   </tr>
@@ -135,7 +163,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     50%
   </span>
   <span class="absValue">
-    (3/6)
+    (2/4)
   </span>
 </td>
 <td class="coverageStat">
@@ -146,31 +174,47 @@ Current scope:     <a href="../../index.html">all classes</a>
     (6/6)
   </span>
 </td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (33/44)
+  </span>
+</td>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    88%
+    86.7%
   </span>
   <span class="absValue">
-    (66/75)
+    (65/75)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    46%
+    47%
   </span>
   <span class="absValue">
-    (57/124)
+    (47/100)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    89.6%
+    89%
   </span>
   <span class="absValue">
-    (138/154)
+    (137/154)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    69.8%
+  </span>
+  <span class="absValue">
+    (931/1334)
   </span>
 </td>
 </tr>
@@ -212,21 +256,21 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">29</i>&nbsp;
 <i class="no-highlight">30</i>&nbsp;@BuilderDsl
 <b class="fc"><i class="no-highlight">31</i>&nbsp;class AuctionBuilder : TibiaKtBuilder&lt;Auction&gt;() {</b>
-<b class="pc"><i class="no-highlight">32</i>&nbsp;    lateinit var name: String</b>
+<b class="fc"><i class="no-highlight">32</i>&nbsp;    lateinit var name: String</b>
 <b class="fc"><i class="no-highlight">33</i>&nbsp;    var auctionId: Int? = null</b>
 <b class="fc"><i class="no-highlight">34</i>&nbsp;    var level: Int? = null</b>
-<b class="pc"><i class="no-highlight">35</i>&nbsp;    lateinit var world: String</b>
-<b class="pc"><i class="no-highlight">36</i>&nbsp;    lateinit var vocation: Vocation</b>
-<b class="pc"><i class="no-highlight">37</i>&nbsp;    lateinit var sex: Sex</b>
-<b class="pc"><i class="no-highlight">38</i>&nbsp;    lateinit var outfit: OutfitImage</b>
+<b class="fc"><i class="no-highlight">35</i>&nbsp;    lateinit var world: String</b>
+<b class="fc"><i class="no-highlight">36</i>&nbsp;    lateinit var vocation: Vocation</b>
+<b class="fc"><i class="no-highlight">37</i>&nbsp;    lateinit var sex: Sex</b>
+<b class="fc"><i class="no-highlight">38</i>&nbsp;    lateinit var outfit: OutfitImage</b>
 <b class="fc"><i class="no-highlight">39</i>&nbsp;    val displayedItems: MutableList&lt;ItemEntry&gt; = mutableListOf()</b>
 <b class="fc"><i class="no-highlight">40</i>&nbsp;    val salesArguments: MutableList&lt;SalesArgument&gt; = mutableListOf()</b>
-<b class="pc"><i class="no-highlight">41</i>&nbsp;    lateinit var auctionStart: Instant</b>
-<b class="pc"><i class="no-highlight">42</i>&nbsp;    lateinit var auctionEnd: Instant</b>
+<b class="fc"><i class="no-highlight">41</i>&nbsp;    lateinit var auctionStart: Instant</b>
+<b class="fc"><i class="no-highlight">42</i>&nbsp;    lateinit var auctionEnd: Instant</b>
 <b class="fc"><i class="no-highlight">43</i>&nbsp;    var bid: Int = 0</b>
-<b class="pc"><i class="no-highlight">44</i>&nbsp;    lateinit var bidType: BidType</b>
-<b class="pc"><i class="no-highlight">45</i>&nbsp;    lateinit var status: AuctionStatus</b>
-<b class="fc"><i class="no-highlight">46</i>&nbsp;    var details: AuctionDetails? = null</b>
+<b class="fc"><i class="no-highlight">44</i>&nbsp;    lateinit var bidType: BidType</b>
+<b class="fc"><i class="no-highlight">45</i>&nbsp;    lateinit var status: AuctionStatus</b>
+<b class="nc"><i class="no-highlight">46</i>&nbsp;    var details: AuctionDetails? = null</b>
 <i class="no-highlight">47</i>&nbsp;
 <b class="fc"><i class="no-highlight">48</i>&nbsp;    fun addDisplayedItem(displayedItem: ItemEntry) = apply { displayedItems.add(displayedItem) }</b>
 <i class="no-highlight">49</i>&nbsp;
@@ -278,7 +322,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">95</i>&nbsp;    @BuilderDsl
 <b class="fc"><i class="no-highlight">96</i>&nbsp;    class SalesArgumentBuilder : TibiaKtBuilder&lt;SalesArgument&gt;() {</b>
 <b class="fc"><i class="no-highlight">97</i>&nbsp;        var categoryId: Int? = null</b>
-<b class="pc"><i class="no-highlight">98</i>&nbsp;        lateinit var content: String</b>
+<b class="fc"><i class="no-highlight">98</i>&nbsp;        lateinit var content: String</b>
 <i class="no-highlight">99</i>&nbsp;
 <b class="fc"><i class="no-highlight">100</i>&nbsp;        override fun build() = SalesArgument(</b>
 <b class="pc"><i class="no-highlight">101</i>&nbsp;            categoryId = categoryId ?: throw IllegalStateException(&quot;categoryId is required&quot;),</b>
@@ -426,7 +470,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-07-29 00:55</div>
+    <div style="float:right;">generated on 2022-07-29 01:42</div>
 </div>
 </body>
 </html>

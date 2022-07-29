@@ -35,11 +35,15 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 <th class="coverageStat 
 ">
-  Block, %
+  Branch, %
 </th>
 <th class="coverageStat 
 ">
   Line, %
+</th>
+<th class="coverageStat 
+">
+  Instruction, %
 </th>
 </tr>
 <tr>
@@ -54,26 +58,34 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    75%
+    100%
   </span>
   <span class="absValue">
-    (3/4)
+    (3/3)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    56.5%
+    56.8%
   </span>
   <span class="absValue">
-    (26/46)
+    (25/44)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    89.1%
+    91.1%
   </span>
   <span class="absValue">
-    (41/46)
+    (41/45)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    85.9%
+  </span>
+  <span class="absValue">
+    (324/377)
   </span>
 </td>
 </tr>
@@ -109,7 +121,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">22</i>&nbsp;import org.jsoup.nodes.Element
 <i class="no-highlight">23</i>&nbsp;import kotlin.time.Duration.Companion.minutes
 <i class="no-highlight">24</i>&nbsp;
-<b class="nc"><i class="no-highlight">25</i>&nbsp;object LeaderboardsParser : Parser&lt;Leaderboards?&gt; {</b>
+<i class="no-highlight">25</i>&nbsp;object LeaderboardsParser : Parser&lt;Leaderboards?&gt; {
 <b class="fc"><i class="no-highlight">26</i>&nbsp;    val rotationEndPattern = Regex(&quot;&quot;&quot;ends on ([^)]+)&quot;&quot;&quot;)</b>
 <i class="no-highlight">27</i>&nbsp;
 <i class="no-highlight">28</i>&nbsp;    override fun fromContent(content: String): Leaderboards? {
@@ -203,7 +215,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-07-29 00:55</div>
+    <div style="float:right;">generated on 2022-07-29 01:42</div>
 </div>
 </body>
 </html>
