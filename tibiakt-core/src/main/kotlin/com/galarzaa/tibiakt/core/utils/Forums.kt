@@ -47,9 +47,10 @@ internal fun parseLastPostFromCell(cell: Element): LastPost? {
     }
 }
 
-val titles = listOf("Tutor", "Community Manager", "Customer Support", "Programmer", "Game Content Designer", "Tester")
-val charInfoRegex = Regex("""Inhabitant of (\w+)\nVocation: ([\w\s]+)\nLevel: (\d+)""")
-val authorPostsRegex = Regex("""Posts: (\d+)""")
+private val titles =
+    listOf("Tutor", "Community Manager", "Customer Support", "Programmer", "Game Content Designer", "Tester")
+private val charInfoRegex = Regex("""Inhabitant of (\w+)\nVocation: ([\w\s]+)\nLevel: (\d+)""")
+private val authorPostsRegex = Regex("""Posts: (\d+)""")
 
 internal fun parseAuthorTable(table: Element): BaseForumAuthor {
     val charLink = table.selectFirst("a")?.getLinkInformation()
