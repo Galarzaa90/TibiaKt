@@ -1,3 +1,19 @@
+/*
+ * Copyright © 2022 Allan Galarza
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.core.builders.ForumThreadBuilder
@@ -9,7 +25,7 @@ import com.galarzaa.tibiakt.core.utils.cleanText
 import com.galarzaa.tibiakt.core.utils.getLinkInformation
 import com.galarzaa.tibiakt.core.utils.parseAuthorTable
 import com.galarzaa.tibiakt.core.utils.parsePagination
-import com.galarzaa.tibiakt.core.utils.parseTibiaForumDate
+import com.galarzaa.tibiakt.core.utils.parseTibiaForumDateTime
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 import org.jsoup.nodes.TextNode
@@ -108,9 +124,9 @@ object ForumThreadParser : Parser<ForumThread?> {
             }
             val postDetails = container.selectFirst("div.PostDetails")!!
             val dates = datesRegex.findAll(postDetails.text()).map { it.value }.toList()
-            postedDate = parseTibiaForumDate(dates.first())
+            postedDate = parseTibiaForumDateTime(dates.first())
             if (dates.size > 1) {
-                editedDate = parseTibiaForumDate(dates[1])
+                editedDate = parseTibiaForumDateTime(dates[1])
                 editedBy = editedByRegex.find(postDetails.text())!!.groupValues[1]
             }
             val additionalBox = container.selectFirst("div.AdditionalBox")!!
