@@ -58,34 +58,34 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    50%
+    58.3%
   </span>
   <span class="absValue">
-    (6/12)
+    (7/12)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/2)
+    (2/2)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    50%
+    62.5%
   </span>
   <span class="absValue">
-    (12/24)
+    (15/24)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    45.8%
+    56.7%
   </span>
   <span class="absValue">
-    (93/203)
+    (115/203)
   </span>
 </td>
 </tr>
@@ -147,10 +147,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">48</i>&nbsp;
 <i class="no-highlight">49</i>&nbsp;/** Get the time of the last server save from a [currentTime]. */
 <b class="nc"><i class="no-highlight">50</i>&nbsp;fun getLastServerSaveTime(currentTime: ZonedDateTime = ZonedDateTime.now(TIBIA_TIMEZONE)): ZonedDateTime {</b>
-<b class="nc"><i class="no-highlight">51</i>&nbsp;    val serverSaveTime = ZonedDateTime.of(</b>
-<b class="nc"><i class="no-highlight">52</i>&nbsp;        currentTime.toLocalDate(), SERVER_SAVE_TIME, TIBIA_TIMEZONE</b>
+<b class="fc"><i class="no-highlight">51</i>&nbsp;    val serverSaveTime = ZonedDateTime.of(</b>
+<b class="fc"><i class="no-highlight">52</i>&nbsp;        currentTime.toLocalDate(), SERVER_SAVE_TIME, TIBIA_TIMEZONE</b>
 <i class="no-highlight">53</i>&nbsp;    )
-<b class="nc"><i class="no-highlight">54</i>&nbsp;    return if (currentTime &lt; serverSaveTime) serverSaveTime.minusDays(1) else serverSaveTime</b>
+<b class="fc"><i class="no-highlight">54</i>&nbsp;    return if (currentTime &lt; serverSaveTime) serverSaveTime.minusDays(1) else serverSaveTime</b>
 <i class="no-highlight">55</i>&nbsp;}
 <i class="no-highlight">56</i>&nbsp;
 <i class="no-highlight">57</i>&nbsp;/** Get the time of the last server save from a [currentTime]. */
@@ -230,7 +230,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-07-29 01:51</div>
+    <div style="float:right;">generated on 2022-07-29 19:25</div>
 </div>
 </body>
 </html>
