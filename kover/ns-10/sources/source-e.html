@@ -147,81 +147,82 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">18</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parsePagination
 <i class="no-highlight">19</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseTablesMap
 <i class="no-highlight">20</i>&nbsp;import com.galarzaa.tibiakt.core.utils.rows
-<i class="no-highlight">21</i>&nbsp;import org.jsoup.Jsoup
-<i class="no-highlight">22</i>&nbsp;import org.jsoup.nodes.Document
-<i class="no-highlight">23</i>&nbsp;import org.jsoup.nodes.Element
-<i class="no-highlight">24</i>&nbsp;import java.time.Instant
-<i class="no-highlight">25</i>&nbsp;
-<b class="nc"><i class="no-highlight">26</i>&nbsp;object HighscoresParser : Parser&lt;Highscores?&gt; {</b>
-<b class="fc"><i class="no-highlight">27</i>&nbsp;    val numericMatch = Regex(&quot;&quot;&quot;(\d+)&quot;&quot;&quot;)</b>
-<i class="no-highlight">28</i>&nbsp;
-<i class="no-highlight">29</i>&nbsp;    override fun fromContent(content: String): Highscores {
-<b class="fc"><i class="no-highlight">30</i>&nbsp;        val document: Document = Jsoup.parse(content)</b>
-<b class="fc"><i class="no-highlight">31</i>&nbsp;        val boxContent =</b>
-<b class="pc"><i class="no-highlight">32</i>&nbsp;            document.selectFirst(&quot;div.BoxContent&quot;) ?: throw ParsingException(&quot;BoxContent container not found&quot;)</b>
-<b class="fc"><i class="no-highlight">33</i>&nbsp;        val tables = boxContent.parseTablesMap(&quot;table.Table1, table.Table3&quot;)</b>
-<i class="no-highlight">34</i>&nbsp;
-<b class="fc"><i class="no-highlight">35</i>&nbsp;        return highscores {</b>
-<b class="pc"><i class="no-highlight">36</i>&nbsp;            tables[&quot;Highscores Filter&quot;]?.also {</b>
-<b class="pc"><i class="no-highlight">37</i>&nbsp;                val formData = boxContent.selectFirst(&quot;form&quot;)?.formData()</b>
-<b class="nc"><i class="no-highlight">38</i>&nbsp;                    ?: throw ParsingException(&quot;could not find highscores form&quot;)</b>
-<b class="fc"><i class="no-highlight">39</i>&nbsp;                parseHighscoresFilter(formData)</b>
-<b class="fc"><i class="no-highlight">40</i>&nbsp;            }</b>
-<b class="pc"><i class="no-highlight">41</i>&nbsp;            tables.getContaining(&quot;HighscoresLast&quot;)?.also {</b>
-<b class="fc"><i class="no-highlight">42</i>&nbsp;                parseHighscoresTable(it)</b>
-<b class="fc"><i class="no-highlight">43</i>&nbsp;            }</b>
-<b class="pc"><i class="no-highlight">44</i>&nbsp;            val lastUpdateText = boxContent.selectFirst(&quot;span.RightArea&quot;)?.cleanText()</b>
-<b class="nc"><i class="no-highlight">45</i>&nbsp;                ?: throw ParsingException(&quot;Could not find last update label&quot;)</b>
-<b class="pc"><i class="no-highlight">46</i>&nbsp;            numericMatch.find(lastUpdateText)?.also {</b>
-<b class="fc"><i class="no-highlight">47</i>&nbsp;                val minutes = it.groups[0]!!.value.toInt()</b>
-<b class="fc"><i class="no-highlight">48</i>&nbsp;                lastUpdate = Instant.now().minusSeconds(60L * minutes)</b>
-<b class="fc"><i class="no-highlight">49</i>&nbsp;            }</b>
-<b class="pc"><i class="no-highlight">50</i>&nbsp;            val paginationData = boxContent.selectFirst(&quot;small&quot;)?.parsePagination()</b>
-<b class="nc"><i class="no-highlight">51</i>&nbsp;                ?: throw ParsingException(&quot;could not find pagination block&quot;)</b>
-<i class="no-highlight">52</i>&nbsp;
-<b class="fc"><i class="no-highlight">53</i>&nbsp;            currentPage = paginationData.currentPage</b>
-<b class="fc"><i class="no-highlight">54</i>&nbsp;            totalPages = paginationData.totalPages</b>
-<b class="fc"><i class="no-highlight">55</i>&nbsp;            resultsCount = paginationData.resultsCount</b>
-<b class="fc"><i class="no-highlight">56</i>&nbsp;        }</b>
-<i class="no-highlight">57</i>&nbsp;    }
-<i class="no-highlight">58</i>&nbsp;
-<i class="no-highlight">59</i>&nbsp;    private fun HighscoresBuilder.parseHighscoresFilter(formData: FormData) {
-<i class="no-highlight">60</i>&nbsp;
-<b class="fc"><i class="no-highlight">61</i>&nbsp;        world = formData.values[&quot;world&quot;].nullIfBlank()</b>
-<b class="pc"><i class="no-highlight">62</i>&nbsp;        category = IntEnum.fromValue(formData.values[&quot;category&quot;]?.toInt())</b>
-<b class="nc"><i class="no-highlight">63</i>&nbsp;            ?: throw ParsingException(&quot;could not find category form value&quot;)</b>
-<b class="pc"><i class="no-highlight">64</i>&nbsp;        battlEyeType = IntEnum.fromValue(formData.values[&quot;beprotection&quot;]?.toInt()</b>
-<b class="nc"><i class="no-highlight">65</i>&nbsp;            ?: throw ParsingException(&quot;could not find beprotection form value&quot;))</b>
-<b class="fc"><i class="no-highlight">66</i>&nbsp;        vocation = IntEnum.fromValue(formData.values[&quot;profession&quot;]?.toInt())</b>
-<b class="fc"><i class="no-highlight">67</i>&nbsp;        for (pvpType in formData.valuesMultiple[&quot;${PvpType.highscoresQueryParam}[]&quot;].orEmpty()) {</b>
-<b class="pc"><i class="no-highlight">68</i>&nbsp;            PvpType.fromHighscoresFilterValue(pvpType.toInt())?.apply {</b>
-<b class="fc"><i class="no-highlight">69</i>&nbsp;                worldTypes.add(this)</b>
-<b class="fc"><i class="no-highlight">70</i>&nbsp;            }</b>
-<i class="no-highlight">71</i>&nbsp;        }
-<i class="no-highlight">72</i>&nbsp;    }
-<i class="no-highlight">73</i>&nbsp;
-<i class="no-highlight">74</i>&nbsp;    private fun HighscoresBuilder.parseHighscoresTable(element: Element) {
-<b class="fc"><i class="no-highlight">75</i>&nbsp;        val entriesTable = element.selectFirst(&quot;table.TableContent&quot;)</b>
-<b class="fc"><i class="no-highlight">76</i>&nbsp;        for (row in entriesTable.rows().offsetStart(1)) {</b>
-<b class="fc"><i class="no-highlight">77</i>&nbsp;            val columns = row.cellsText()</b>
-<b class="pc"><i class="no-highlight">78</i>&nbsp;            if (columns.size &lt; 6) {</b>
-<i class="no-highlight">79</i>&nbsp;                return
-<i class="no-highlight">80</i>&nbsp;            }
-<b class="fc"><i class="no-highlight">81</i>&nbsp;            val columnOffset = if (columns.size == 7) 1 else 0</b>
-<b class="fc"><i class="no-highlight">82</i>&nbsp;            val loyaltyTitle = if (columns.size == 7) columns[2] else null</b>
-<b class="fc"><i class="no-highlight">83</i>&nbsp;            addEntry {</b>
-<b class="fc"><i class="no-highlight">84</i>&nbsp;                rank = columns[0].toInt()</b>
-<b class="fc"><i class="no-highlight">85</i>&nbsp;                name = columns[1 + columnOffset]</b>
-<b class="pc"><i class="no-highlight">86</i>&nbsp;                vocation = StringEnum.fromValue(columns[2 + columnOffset])</b>
-<b class="nc"><i class="no-highlight">87</i>&nbsp;                    ?: throw ParsingException(&quot;invalid vocation found: ${columns[2 + columnOffset]}&quot;)</b>
-<b class="fc"><i class="no-highlight">88</i>&nbsp;                world = columns[3 + columnOffset]</b>
-<b class="fc"><i class="no-highlight">89</i>&nbsp;                level = columns[4 + columnOffset].toInt()</b>
-<b class="fc"><i class="no-highlight">90</i>&nbsp;                value = columns[5 + columnOffset].parseLong()</b>
-<b class="fc"><i class="no-highlight">91</i>&nbsp;                additionalValue = loyaltyTitle</b>
-<i class="no-highlight">92</i>&nbsp;            }
-<i class="no-highlight">93</i>&nbsp;        }
-<i class="no-highlight">94</i>&nbsp;    }
-<i class="no-highlight">95</i>&nbsp;}
+<i class="no-highlight">21</i>&nbsp;import kotlinx.datetime.Clock
+<i class="no-highlight">22</i>&nbsp;import org.jsoup.Jsoup
+<i class="no-highlight">23</i>&nbsp;import org.jsoup.nodes.Document
+<i class="no-highlight">24</i>&nbsp;import org.jsoup.nodes.Element
+<i class="no-highlight">25</i>&nbsp;import kotlin.time.Duration.Companion.minutes
+<i class="no-highlight">26</i>&nbsp;
+<b class="nc"><i class="no-highlight">27</i>&nbsp;object HighscoresParser : Parser&lt;Highscores?&gt; {</b>
+<b class="fc"><i class="no-highlight">28</i>&nbsp;    val numericMatch = Regex(&quot;&quot;&quot;(\d+)&quot;&quot;&quot;)</b>
+<i class="no-highlight">29</i>&nbsp;
+<i class="no-highlight">30</i>&nbsp;    override fun fromContent(content: String): Highscores {
+<b class="fc"><i class="no-highlight">31</i>&nbsp;        val document: Document = Jsoup.parse(content)</b>
+<b class="fc"><i class="no-highlight">32</i>&nbsp;        val boxContent =</b>
+<b class="pc"><i class="no-highlight">33</i>&nbsp;            document.selectFirst(&quot;div.BoxContent&quot;) ?: throw ParsingException(&quot;BoxContent container not found&quot;)</b>
+<b class="fc"><i class="no-highlight">34</i>&nbsp;        val tables = boxContent.parseTablesMap(&quot;table.Table1, table.Table3&quot;)</b>
+<i class="no-highlight">35</i>&nbsp;
+<b class="fc"><i class="no-highlight">36</i>&nbsp;        return highscores {</b>
+<b class="pc"><i class="no-highlight">37</i>&nbsp;            tables[&quot;Highscores Filter&quot;]?.also {</b>
+<b class="pc"><i class="no-highlight">38</i>&nbsp;                val formData = boxContent.selectFirst(&quot;form&quot;)?.formData()</b>
+<b class="nc"><i class="no-highlight">39</i>&nbsp;                    ?: throw ParsingException(&quot;could not find highscores form&quot;)</b>
+<b class="fc"><i class="no-highlight">40</i>&nbsp;                parseHighscoresFilter(formData)</b>
+<b class="fc"><i class="no-highlight">41</i>&nbsp;            }</b>
+<b class="pc"><i class="no-highlight">42</i>&nbsp;            tables.getContaining(&quot;HighscoresLast&quot;)?.also {</b>
+<b class="fc"><i class="no-highlight">43</i>&nbsp;                parseHighscoresTable(it)</b>
+<b class="fc"><i class="no-highlight">44</i>&nbsp;            }</b>
+<b class="pc"><i class="no-highlight">45</i>&nbsp;            val lastUpdateText = boxContent.selectFirst(&quot;span.RightArea&quot;)?.cleanText()</b>
+<b class="nc"><i class="no-highlight">46</i>&nbsp;                ?: throw ParsingException(&quot;Could not find last update label&quot;)</b>
+<b class="pc"><i class="no-highlight">47</i>&nbsp;            numericMatch.find(lastUpdateText)?.also {</b>
+<b class="fc"><i class="no-highlight">48</i>&nbsp;                val minutes = it.groups[0]!!.value.toInt()</b>
+<b class="fc"><i class="no-highlight">49</i>&nbsp;                lastUpdate = Clock.System.now().minus(minutes.minutes)</b>
+<b class="fc"><i class="no-highlight">50</i>&nbsp;            }</b>
+<b class="pc"><i class="no-highlight">51</i>&nbsp;            val paginationData = boxContent.selectFirst(&quot;small&quot;)?.parsePagination()</b>
+<b class="nc"><i class="no-highlight">52</i>&nbsp;                ?: throw ParsingException(&quot;could not find pagination block&quot;)</b>
+<i class="no-highlight">53</i>&nbsp;
+<b class="fc"><i class="no-highlight">54</i>&nbsp;            currentPage = paginationData.currentPage</b>
+<b class="fc"><i class="no-highlight">55</i>&nbsp;            totalPages = paginationData.totalPages</b>
+<b class="fc"><i class="no-highlight">56</i>&nbsp;            resultsCount = paginationData.resultsCount</b>
+<b class="fc"><i class="no-highlight">57</i>&nbsp;        }</b>
+<i class="no-highlight">58</i>&nbsp;    }
+<i class="no-highlight">59</i>&nbsp;
+<i class="no-highlight">60</i>&nbsp;    private fun HighscoresBuilder.parseHighscoresFilter(formData: FormData) {
+<i class="no-highlight">61</i>&nbsp;
+<b class="fc"><i class="no-highlight">62</i>&nbsp;        world = formData.values[&quot;world&quot;].nullIfBlank()</b>
+<b class="pc"><i class="no-highlight">63</i>&nbsp;        category = IntEnum.fromValue(formData.values[&quot;category&quot;]?.toInt())</b>
+<b class="nc"><i class="no-highlight">64</i>&nbsp;            ?: throw ParsingException(&quot;could not find category form value&quot;)</b>
+<b class="pc"><i class="no-highlight">65</i>&nbsp;        battlEyeType = IntEnum.fromValue(formData.values[&quot;beprotection&quot;]?.toInt()</b>
+<b class="nc"><i class="no-highlight">66</i>&nbsp;            ?: throw ParsingException(&quot;could not find beprotection form value&quot;))</b>
+<b class="fc"><i class="no-highlight">67</i>&nbsp;        vocation = IntEnum.fromValue(formData.values[&quot;profession&quot;]?.toInt())</b>
+<b class="fc"><i class="no-highlight">68</i>&nbsp;        for (pvpType in formData.valuesMultiple[&quot;${PvpType.highscoresQueryParam}[]&quot;].orEmpty()) {</b>
+<b class="pc"><i class="no-highlight">69</i>&nbsp;            PvpType.fromHighscoresFilterValue(pvpType.toInt())?.apply {</b>
+<b class="fc"><i class="no-highlight">70</i>&nbsp;                worldTypes.add(this)</b>
+<b class="fc"><i class="no-highlight">71</i>&nbsp;            }</b>
+<i class="no-highlight">72</i>&nbsp;        }
+<i class="no-highlight">73</i>&nbsp;    }
+<i class="no-highlight">74</i>&nbsp;
+<i class="no-highlight">75</i>&nbsp;    private fun HighscoresBuilder.parseHighscoresTable(element: Element) {
+<b class="fc"><i class="no-highlight">76</i>&nbsp;        val entriesTable = element.selectFirst(&quot;table.TableContent&quot;)</b>
+<b class="fc"><i class="no-highlight">77</i>&nbsp;        for (row in entriesTable.rows().offsetStart(1)) {</b>
+<b class="fc"><i class="no-highlight">78</i>&nbsp;            val columns = row.cellsText()</b>
+<b class="pc"><i class="no-highlight">79</i>&nbsp;            if (columns.size &lt; 6) {</b>
+<i class="no-highlight">80</i>&nbsp;                return
+<i class="no-highlight">81</i>&nbsp;            }
+<b class="fc"><i class="no-highlight">82</i>&nbsp;            val columnOffset = if (columns.size == 7) 1 else 0</b>
+<b class="fc"><i class="no-highlight">83</i>&nbsp;            val loyaltyTitle = if (columns.size == 7) columns[2] else null</b>
+<b class="fc"><i class="no-highlight">84</i>&nbsp;            addEntry {</b>
+<b class="fc"><i class="no-highlight">85</i>&nbsp;                rank = columns[0].toInt()</b>
+<b class="fc"><i class="no-highlight">86</i>&nbsp;                name = columns[1 + columnOffset]</b>
+<b class="pc"><i class="no-highlight">87</i>&nbsp;                vocation = StringEnum.fromValue(columns[2 + columnOffset])</b>
+<b class="nc"><i class="no-highlight">88</i>&nbsp;                    ?: throw ParsingException(&quot;invalid vocation found: ${columns[2 + columnOffset]}&quot;)</b>
+<b class="fc"><i class="no-highlight">89</i>&nbsp;                world = columns[3 + columnOffset]</b>
+<b class="fc"><i class="no-highlight">90</i>&nbsp;                level = columns[4 + columnOffset].toInt()</b>
+<b class="fc"><i class="no-highlight">91</i>&nbsp;                value = columns[5 + columnOffset].parseLong()</b>
+<b class="fc"><i class="no-highlight">92</i>&nbsp;                additionalValue = loyaltyTitle</b>
+<i class="no-highlight">93</i>&nbsp;            }
+<i class="no-highlight">94</i>&nbsp;        }
+<i class="no-highlight">95</i>&nbsp;    }
+<i class="no-highlight">96</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -248,7 +249,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-07-27 22:19</div>
+    <div style="float:right;">generated on 2022-07-29 00:35</div>
 </div>
 </body>
 </html>

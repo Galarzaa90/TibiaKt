@@ -86,10 +86,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    94.7%
+    95%
   </span>
   <span class="absValue">
-    (18/19)
+    (19/20)
   </span>
 </td>
   </tr>
@@ -113,10 +113,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    94%
+    94.1%
   </span>
   <span class="absValue">
-    (47/50)
+    (48/51)
   </span>
 </td>
 </tr>
@@ -134,74 +134,77 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.ForumPost
 <i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.ForumThread
 <i class="no-highlight">7</i>&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
-<i class="no-highlight">8</i>&nbsp;import java.time.Instant
-<i class="no-highlight">9</i>&nbsp;
-<i class="no-highlight">10</i>&nbsp;@BuilderDsl
-<i class="no-highlight">11</i>&nbsp;inline fun forumThreadBuilder(block: ForumThreadBuilder.() -&gt; Unit) = ForumThreadBuilder().apply(block)
-<i class="no-highlight">12</i>&nbsp;
-<i class="no-highlight">13</i>&nbsp;@BuilderDsl
-<i class="no-highlight">14</i>&nbsp;inline fun forumThread(block: ForumThreadBuilder.() -&gt; Unit) = forumThreadBuilder(block).build()
-<i class="no-highlight">15</i>&nbsp;
-<i class="no-highlight">16</i>&nbsp;@BuilderDsl
-<b class="fc"><i class="no-highlight">17</i>&nbsp;class ForumThreadBuilder : TibiaKtBuilder&lt;ForumThread&gt;() {</b>
-<b class="fc"><i class="no-highlight">18</i>&nbsp;    var title: String? = null</b>
-<b class="fc"><i class="no-highlight">19</i>&nbsp;    var threadId: Int? = null</b>
-<b class="fc"><i class="no-highlight">20</i>&nbsp;    var board: String? = null</b>
-<b class="fc"><i class="no-highlight">21</i>&nbsp;    var boardId: Int? = null</b>
-<b class="fc"><i class="no-highlight">22</i>&nbsp;    var section: String? = null</b>
-<b class="fc"><i class="no-highlight">23</i>&nbsp;    var sectionId: Int? = null</b>
-<b class="fc"><i class="no-highlight">24</i>&nbsp;    var previousTopicNumber: Int? = null</b>
-<b class="fc"><i class="no-highlight">25</i>&nbsp;    var nextTopicNumber: Int? = null</b>
-<b class="fc"><i class="no-highlight">26</i>&nbsp;    var goldenFrame: Boolean = false</b>
-<b class="nc"><i class="no-highlight">27</i>&nbsp;    var anchoredPost: ForumPost? = null</b>
-<b class="fc"><i class="no-highlight">28</i>&nbsp;    var currentPage: Int = 1</b>
-<b class="fc"><i class="no-highlight">29</i>&nbsp;    var totalPages: Int = 1</b>
-<b class="fc"><i class="no-highlight">30</i>&nbsp;    var resultsCount: Int = 1</b>
-<b class="fc"><i class="no-highlight">31</i>&nbsp;    val entries = mutableListOf&lt;ForumPost&gt;()</b>
-<i class="no-highlight">32</i>&nbsp;
-<b class="nc"><i class="no-highlight">33</i>&nbsp;    fun addPost(post: ForumPost) = apply { entries.add(post) }</b>
-<i class="no-highlight">34</i>&nbsp;
-<i class="no-highlight">35</i>&nbsp;    @BuilderDsl
-<b class="fc"><i class="no-highlight">36</i>&nbsp;    fun addPost(block: ForumPostBuilder.() -&gt; Unit) = apply { entries.add(ForumPostBuilder().apply(block).build()) }</b>
-<i class="no-highlight">37</i>&nbsp;
+<i class="no-highlight">8</i>&nbsp;import kotlinx.datetime.Clock
+<i class="no-highlight">9</i>&nbsp;import kotlinx.datetime.Instant
+<i class="no-highlight">10</i>&nbsp;
+<i class="no-highlight">11</i>&nbsp;@BuilderDsl
+<i class="no-highlight">12</i>&nbsp;inline fun forumThreadBuilder(block: ForumThreadBuilder.() -&gt; Unit) = ForumThreadBuilder().apply(block)
+<i class="no-highlight">13</i>&nbsp;
+<i class="no-highlight">14</i>&nbsp;@BuilderDsl
+<i class="no-highlight">15</i>&nbsp;inline fun forumThread(block: ForumThreadBuilder.() -&gt; Unit) = forumThreadBuilder(block).build()
+<i class="no-highlight">16</i>&nbsp;
+<i class="no-highlight">17</i>&nbsp;@BuilderDsl
+<b class="fc"><i class="no-highlight">18</i>&nbsp;class ForumThreadBuilder : TibiaKtBuilder&lt;ForumThread&gt;() {</b>
+<b class="fc"><i class="no-highlight">19</i>&nbsp;    var title: String? = null</b>
+<b class="fc"><i class="no-highlight">20</i>&nbsp;    var threadId: Int? = null</b>
+<b class="fc"><i class="no-highlight">21</i>&nbsp;    var board: String? = null</b>
+<b class="fc"><i class="no-highlight">22</i>&nbsp;    var boardId: Int? = null</b>
+<b class="fc"><i class="no-highlight">23</i>&nbsp;    var section: String? = null</b>
+<b class="fc"><i class="no-highlight">24</i>&nbsp;    var sectionId: Int? = null</b>
+<b class="fc"><i class="no-highlight">25</i>&nbsp;    var previousTopicNumber: Int? = null</b>
+<b class="fc"><i class="no-highlight">26</i>&nbsp;    var nextTopicNumber: Int? = null</b>
+<b class="fc"><i class="no-highlight">27</i>&nbsp;    var goldenFrame: Boolean = false</b>
+<b class="nc"><i class="no-highlight">28</i>&nbsp;    var anchoredPost: ForumPost? = null</b>
+<b class="fc"><i class="no-highlight">29</i>&nbsp;    var currentPage: Int = 1</b>
+<b class="fc"><i class="no-highlight">30</i>&nbsp;    var totalPages: Int = 1</b>
+<b class="fc"><i class="no-highlight">31</i>&nbsp;    var resultsCount: Int = 1</b>
+<b class="fc"><i class="no-highlight">32</i>&nbsp;    val entries = mutableListOf&lt;ForumPost&gt;()</b>
+<i class="no-highlight">33</i>&nbsp;
+<b class="nc"><i class="no-highlight">34</i>&nbsp;    fun addPost(post: ForumPost) = apply { entries.add(post) }</b>
+<i class="no-highlight">35</i>&nbsp;
+<i class="no-highlight">36</i>&nbsp;    @BuilderDsl
+<b class="fc"><i class="no-highlight">37</i>&nbsp;    fun addPost(block: ForumPostBuilder.() -&gt; Unit) = apply { entries.add(ForumPostBuilder().apply(block).build()) }</b>
 <i class="no-highlight">38</i>&nbsp;
-<b class="pc"><i class="no-highlight">39</i>&nbsp;    override fun build() = ForumThread(title = title ?: throw IllegalStateException(&quot;title is required&quot;),</b>
-<b class="pc"><i class="no-highlight">40</i>&nbsp;        threadId = threadId ?: throw IllegalStateException(&quot;threadId is required&quot;),</b>
-<b class="pc"><i class="no-highlight">41</i>&nbsp;        board = board ?: throw IllegalStateException(&quot;board is required&quot;),</b>
-<b class="pc"><i class="no-highlight">42</i>&nbsp;        boardId = boardId ?: throw IllegalStateException(&quot;boardId is required&quot;),</b>
-<b class="pc"><i class="no-highlight">43</i>&nbsp;        section = section ?: throw IllegalStateException(&quot;section is required&quot;),</b>
-<b class="pc"><i class="no-highlight">44</i>&nbsp;        sectionId = sectionId ?: throw IllegalStateException(&quot;sectionId is required&quot;),</b>
-<b class="fc"><i class="no-highlight">45</i>&nbsp;        previousTopicNumber = previousTopicNumber,</b>
-<b class="fc"><i class="no-highlight">46</i>&nbsp;        nextTopicNumber = nextTopicNumber,</b>
-<b class="fc"><i class="no-highlight">47</i>&nbsp;        goldenFrame = goldenFrame,</b>
-<b class="fc"><i class="no-highlight">48</i>&nbsp;        anchoredPost = anchoredPost,</b>
-<b class="fc"><i class="no-highlight">49</i>&nbsp;        currentPage = currentPage,</b>
-<b class="fc"><i class="no-highlight">50</i>&nbsp;        totalPages = totalPages,</b>
-<b class="fc"><i class="no-highlight">51</i>&nbsp;        resultsCount = resultsCount,</b>
-<b class="fc"><i class="no-highlight">52</i>&nbsp;        entries = entries)</b>
-<i class="no-highlight">53</i>&nbsp;
-<b class="fc"><i class="no-highlight">54</i>&nbsp;    class ForumPostBuilder : TibiaKtBuilder&lt;ForumPost&gt;() {</b>
-<b class="fc"><i class="no-highlight">55</i>&nbsp;        var author: BaseForumAuthor? = null</b>
-<b class="fc"><i class="no-highlight">56</i>&nbsp;        var emoticon: ForumEmoticon? = null</b>
-<b class="nc"><i class="no-highlight">57</i>&nbsp;        var title: String? = null</b>
-<b class="fc"><i class="no-highlight">58</i>&nbsp;        var content: String? = null</b>
-<b class="fc"><i class="no-highlight">59</i>&nbsp;        var signature: String? = null</b>
-<b class="fc"><i class="no-highlight">60</i>&nbsp;        var postId: Int? = null</b>
-<b class="fc"><i class="no-highlight">61</i>&nbsp;        var postedDate: Instant? = null</b>
-<b class="fc"><i class="no-highlight">62</i>&nbsp;        var editedDate: Instant? = null</b>
-<b class="fc"><i class="no-highlight">63</i>&nbsp;        var editedBy: String? = null</b>
-<i class="no-highlight">64</i>&nbsp;
-<b class="pc"><i class="no-highlight">65</i>&nbsp;        override fun build() = ForumPost(author = author ?: throw IllegalStateException(&quot;author is required&quot;),</b>
-<b class="fc"><i class="no-highlight">66</i>&nbsp;            emoticon = emoticon,</b>
-<b class="fc"><i class="no-highlight">67</i>&nbsp;            title = title,</b>
-<b class="pc"><i class="no-highlight">68</i>&nbsp;            content = content ?: throw IllegalStateException(&quot;content is required&quot;),</b>
-<b class="fc"><i class="no-highlight">69</i>&nbsp;            signature = signature,</b>
-<b class="pc"><i class="no-highlight">70</i>&nbsp;            postId = postId ?: throw IllegalStateException(&quot;postId is required&quot;),</b>
-<b class="pc"><i class="no-highlight">71</i>&nbsp;            postedDate = postedDate ?: Instant.now(),</b>
-<b class="fc"><i class="no-highlight">72</i>&nbsp;            editedDate = editedDate,</b>
-<b class="fc"><i class="no-highlight">73</i>&nbsp;            editedBy = editedBy)</b>
-<i class="no-highlight">74</i>&nbsp;    }
-<i class="no-highlight">75</i>&nbsp;}
+<i class="no-highlight">39</i>&nbsp;
+<b class="pc"><i class="no-highlight">40</i>&nbsp;    override fun build() = ForumThread(title = title ?: throw IllegalStateException(&quot;title is required&quot;),</b>
+<b class="pc"><i class="no-highlight">41</i>&nbsp;        threadId = threadId ?: throw IllegalStateException(&quot;threadId is required&quot;),</b>
+<b class="pc"><i class="no-highlight">42</i>&nbsp;        board = board ?: throw IllegalStateException(&quot;board is required&quot;),</b>
+<b class="pc"><i class="no-highlight">43</i>&nbsp;        boardId = boardId ?: throw IllegalStateException(&quot;boardId is required&quot;),</b>
+<b class="pc"><i class="no-highlight">44</i>&nbsp;        section = section ?: throw IllegalStateException(&quot;section is required&quot;),</b>
+<b class="pc"><i class="no-highlight">45</i>&nbsp;        sectionId = sectionId ?: throw IllegalStateException(&quot;sectionId is required&quot;),</b>
+<b class="fc"><i class="no-highlight">46</i>&nbsp;        previousTopicNumber = previousTopicNumber,</b>
+<b class="fc"><i class="no-highlight">47</i>&nbsp;        nextTopicNumber = nextTopicNumber,</b>
+<b class="fc"><i class="no-highlight">48</i>&nbsp;        goldenFrame = goldenFrame,</b>
+<b class="fc"><i class="no-highlight">49</i>&nbsp;        anchoredPost = anchoredPost,</b>
+<b class="fc"><i class="no-highlight">50</i>&nbsp;        currentPage = currentPage,</b>
+<b class="fc"><i class="no-highlight">51</i>&nbsp;        totalPages = totalPages,</b>
+<b class="fc"><i class="no-highlight">52</i>&nbsp;        resultsCount = resultsCount,</b>
+<b class="fc"><i class="no-highlight">53</i>&nbsp;        entries = entries)</b>
+<i class="no-highlight">54</i>&nbsp;
+<b class="fc"><i class="no-highlight">55</i>&nbsp;    class ForumPostBuilder : TibiaKtBuilder&lt;ForumPost&gt;() {</b>
+<b class="fc"><i class="no-highlight">56</i>&nbsp;        var author: BaseForumAuthor? = null</b>
+<b class="fc"><i class="no-highlight">57</i>&nbsp;        var emoticon: ForumEmoticon? = null</b>
+<b class="nc"><i class="no-highlight">58</i>&nbsp;        var title: String? = null</b>
+<b class="fc"><i class="no-highlight">59</i>&nbsp;        var content: String? = null</b>
+<b class="fc"><i class="no-highlight">60</i>&nbsp;        var signature: String? = null</b>
+<b class="fc"><i class="no-highlight">61</i>&nbsp;        var postId: Int? = null</b>
+<b class="fc"><i class="no-highlight">62</i>&nbsp;        var postedDate: Instant? = null</b>
+<b class="fc"><i class="no-highlight">63</i>&nbsp;        var editedDate: Instant? = null</b>
+<b class="fc"><i class="no-highlight">64</i>&nbsp;        var editedBy: String? = null</b>
+<i class="no-highlight">65</i>&nbsp;
+<b class="fc"><i class="no-highlight">66</i>&nbsp;        override fun build() = ForumPost(</b>
+<b class="pc"><i class="no-highlight">67</i>&nbsp;            author = author ?: throw IllegalStateException(&quot;author is required&quot;),</b>
+<b class="fc"><i class="no-highlight">68</i>&nbsp;            emoticon = emoticon,</b>
+<b class="fc"><i class="no-highlight">69</i>&nbsp;            title = title,</b>
+<b class="pc"><i class="no-highlight">70</i>&nbsp;            content = content ?: throw IllegalStateException(&quot;content is required&quot;),</b>
+<b class="fc"><i class="no-highlight">71</i>&nbsp;            signature = signature,</b>
+<b class="pc"><i class="no-highlight">72</i>&nbsp;            postId = postId ?: throw IllegalStateException(&quot;postId is required&quot;),</b>
+<b class="pc"><i class="no-highlight">73</i>&nbsp;            postedDate = postedDate ?: Clock.System.now(),</b>
+<b class="fc"><i class="no-highlight">74</i>&nbsp;            editedDate = editedDate,</b>
+<b class="fc"><i class="no-highlight">75</i>&nbsp;            editedBy = editedBy</b>
+<i class="no-highlight">76</i>&nbsp;        )
+<i class="no-highlight">77</i>&nbsp;    }
+<i class="no-highlight">78</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -228,7 +231,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-07-27 22:19</div>
+    <div style="float:right;">generated on 2022-07-29 00:35</div>
 </div>
 </body>
 </html>

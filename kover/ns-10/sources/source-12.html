@@ -105,77 +105,78 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">18</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseTibiaDateTime
 <i class="no-highlight">19</i>&nbsp;import com.galarzaa.tibiakt.core.utils.remove
 <i class="no-highlight">20</i>&nbsp;import com.galarzaa.tibiakt.core.utils.rows
-<i class="no-highlight">21</i>&nbsp;import org.jsoup.nodes.Element
-<i class="no-highlight">22</i>&nbsp;import java.time.Instant
-<i class="no-highlight">23</i>&nbsp;
-<b class="nc"><i class="no-highlight">24</i>&nbsp;object LeaderboardsParser : Parser&lt;Leaderboards?&gt; {</b>
-<b class="fc"><i class="no-highlight">25</i>&nbsp;    val rotationEndPattern = Regex(&quot;&quot;&quot;ends on ([^)]+)&quot;&quot;&quot;)</b>
-<i class="no-highlight">26</i>&nbsp;
-<i class="no-highlight">27</i>&nbsp;    override fun fromContent(content: String): Leaderboards? {
-<b class="fc"><i class="no-highlight">28</i>&nbsp;        val boxContent = boxContent(content)</b>
-<b class="fc"><i class="no-highlight">29</i>&nbsp;        val tables = boxContent.select(&quot;table.TableContent&quot;)</b>
-<i class="no-highlight">30</i>&nbsp;
-<b class="fc"><i class="no-highlight">31</i>&nbsp;        return leaderboards {</b>
-<b class="pc"><i class="no-highlight">32</i>&nbsp;            val formData = tables[1].selectFirst(&quot;form&quot;)?.formData() ?: throw ParsingException(&quot;form not found&quot;)</b>
-<b class="fc"><i class="no-highlight">33</i>&nbsp;            val rotationOptions = tables[1].select(&quot;select[name=rotation] &gt; option&quot;)</b>
-<b class="fc"><i class="no-highlight">34</i>&nbsp;                .associate { it.attr(&quot;value&quot;).toInt() to it.cleanText() }</b>
-<b class="fc"><i class="no-highlight">35</i>&nbsp;            for ((rotationId, label) in rotationOptions) {</b>
-<b class="fc"><i class="no-highlight">36</i>&nbsp;                var cleanLabel = label</b>
-<b class="fc"><i class="no-highlight">37</i>&nbsp;                var current = false</b>
-<b class="fc"><i class="no-highlight">38</i>&nbsp;                if (&quot;Current&quot; in label) {</b>
-<b class="pc"><i class="no-highlight">39</i>&nbsp;                    cleanLabel = rotationEndPattern.find(label)?.groupValues?.last()</b>
-<b class="nc"><i class="no-highlight">40</i>&nbsp;                        ?: throw ParsingException(&quot;rotation option label doesn&#39;t match expected format&quot;)</b>
-<b class="fc"><i class="no-highlight">41</i>&nbsp;                    current = true</b>
-<i class="no-highlight">42</i>&nbsp;                }
-<b class="fc"><i class="no-highlight">43</i>&nbsp;                val rotationEnd = parseTibiaDateTime(cleanLabel)</b>
-<b class="fc"><i class="no-highlight">44</i>&nbsp;                val rotation = LeaderboardsRotation(</b>
-<b class="fc"><i class="no-highlight">45</i>&nbsp;                    rotationId = rotationId,</b>
-<b class="fc"><i class="no-highlight">46</i>&nbsp;                    current = current,</b>
-<b class="fc"><i class="no-highlight">47</i>&nbsp;                    endDate = rotationEnd</b>
-<i class="no-highlight">48</i>&nbsp;                )
-<b class="fc"><i class="no-highlight">49</i>&nbsp;                if (current) {</b>
-<b class="fc"><i class="no-highlight">50</i>&nbsp;                    this.rotation = rotation</b>
-<i class="no-highlight">51</i>&nbsp;                }
-<b class="fc"><i class="no-highlight">52</i>&nbsp;                addAvailableRotation(rotation)</b>
-<i class="no-highlight">53</i>&nbsp;            }
-<b class="pc"><i class="no-highlight">54</i>&nbsp;            world = formData.values[&quot;world&quot;]</b>
-<b class="nc"><i class="no-highlight">55</i>&nbsp;                ?: if (&quot;world&quot; in formData.availableOptions) return null else throw ParsingException(&quot;world form parameter not found&quot;)</b>
-<i class="no-highlight">56</i>&nbsp;
-<b class="pc"><i class="no-highlight">57</i>&nbsp;            if (tables.size == 4) {</b>
-<b class="fc"><i class="no-highlight">58</i>&nbsp;                val lastUpdateString = tables[2].text()</b>
-<b class="fc"><i class="no-highlight">59</i>&nbsp;                val minutes =</b>
-<b class="pc"><i class="no-highlight">60</i>&nbsp;                    Regex(&quot;&quot;&quot;(\d+)&quot;&quot;&quot;).find(lastUpdateString)?.groups?.get(0)?.value?.toInt() ?: throw ParsingException(</b>
-<b class="nc"><i class="no-highlight">61</i>&nbsp;                        &quot;unexpected last update text: $lastUpdateString&quot;</b>
-<i class="no-highlight">62</i>&nbsp;                    )
-<b class="fc"><i class="no-highlight">63</i>&nbsp;                lastUpdated = Instant.now().minusSeconds(60L * minutes)</b>
-<i class="no-highlight">64</i>&nbsp;            }
-<i class="no-highlight">65</i>&nbsp;
-<b class="fc"><i class="no-highlight">66</i>&nbsp;            val entriesTable = tables.last()</b>
-<b class="fc"><i class="no-highlight">67</i>&nbsp;            parseLeaderboardEntries(entriesTable)</b>
-<i class="no-highlight">68</i>&nbsp;
-<b class="pc"><i class="no-highlight">69</i>&nbsp;            val paginationData = boxContent.selectFirst(&quot;small&quot;)?.parsePagination() ?: PaginationData.default()</b>
-<b class="fc"><i class="no-highlight">70</i>&nbsp;            currentPage = paginationData.currentPage</b>
-<b class="fc"><i class="no-highlight">71</i>&nbsp;            resultsCount = paginationData.resultsCount</b>
-<b class="fc"><i class="no-highlight">72</i>&nbsp;            totalPages = paginationData.totalPages</b>
-<b class="fc"><i class="no-highlight">73</i>&nbsp;        }</b>
-<i class="no-highlight">74</i>&nbsp;
-<i class="no-highlight">75</i>&nbsp;    }
-<i class="no-highlight">76</i>&nbsp;
-<i class="no-highlight">77</i>&nbsp;    private fun LeaderboardsBuilder.parseLeaderboardEntries(entriesTable: Element?) {
-<b class="fc"><i class="no-highlight">78</i>&nbsp;        for (row in entriesTable.rows().offsetStart(1)) {</b>
-<b class="fc"><i class="no-highlight">79</i>&nbsp;            val cells = row.cells()</b>
-<b class="pc"><i class="no-highlight">80</i>&nbsp;            val name = cells[1].selectFirst(&quot;a&quot;)?.getLinkInformation()?.title?.clean()</b>
-<b class="fc"><i class="no-highlight">81</i>&nbsp;            val rank = cells[0].text().remove(&quot;.&quot;).toInt()</b>
-<b class="fc"><i class="no-highlight">82</i>&nbsp;            val dromeLevel = cells[2].text().toInt()</b>
-<b class="fc"><i class="no-highlight">83</i>&nbsp;            addEntry(</b>
-<b class="pc"><i class="no-highlight">84</i>&nbsp;                if (name != null) LeaderboardsEntry(rank, name, dromeLevel) else DeletedLeaderboardsEntry(</b>
-<b class="nc"><i class="no-highlight">85</i>&nbsp;                    rank, dromeLevel</b>
-<i class="no-highlight">86</i>&nbsp;                )
-<i class="no-highlight">87</i>&nbsp;            )
-<i class="no-highlight">88</i>&nbsp;        }
-<i class="no-highlight">89</i>&nbsp;    }
-<i class="no-highlight">90</i>&nbsp;
-<i class="no-highlight">91</i>&nbsp;}
+<i class="no-highlight">21</i>&nbsp;import kotlinx.datetime.Clock
+<i class="no-highlight">22</i>&nbsp;import org.jsoup.nodes.Element
+<i class="no-highlight">23</i>&nbsp;import kotlin.time.Duration.Companion.minutes
+<i class="no-highlight">24</i>&nbsp;
+<b class="nc"><i class="no-highlight">25</i>&nbsp;object LeaderboardsParser : Parser&lt;Leaderboards?&gt; {</b>
+<b class="fc"><i class="no-highlight">26</i>&nbsp;    val rotationEndPattern = Regex(&quot;&quot;&quot;ends on ([^)]+)&quot;&quot;&quot;)</b>
+<i class="no-highlight">27</i>&nbsp;
+<i class="no-highlight">28</i>&nbsp;    override fun fromContent(content: String): Leaderboards? {
+<b class="fc"><i class="no-highlight">29</i>&nbsp;        val boxContent = boxContent(content)</b>
+<b class="fc"><i class="no-highlight">30</i>&nbsp;        val tables = boxContent.select(&quot;table.TableContent&quot;)</b>
+<i class="no-highlight">31</i>&nbsp;
+<b class="fc"><i class="no-highlight">32</i>&nbsp;        return leaderboards {</b>
+<b class="pc"><i class="no-highlight">33</i>&nbsp;            val formData = tables[1].selectFirst(&quot;form&quot;)?.formData() ?: throw ParsingException(&quot;form not found&quot;)</b>
+<b class="fc"><i class="no-highlight">34</i>&nbsp;            val rotationOptions = tables[1].select(&quot;select[name=rotation] &gt; option&quot;)</b>
+<b class="fc"><i class="no-highlight">35</i>&nbsp;                .associate { it.attr(&quot;value&quot;).toInt() to it.cleanText() }</b>
+<b class="fc"><i class="no-highlight">36</i>&nbsp;            for ((rotationId, label) in rotationOptions) {</b>
+<b class="fc"><i class="no-highlight">37</i>&nbsp;                var cleanLabel = label</b>
+<b class="fc"><i class="no-highlight">38</i>&nbsp;                var current = false</b>
+<b class="fc"><i class="no-highlight">39</i>&nbsp;                if (&quot;Current&quot; in label) {</b>
+<b class="pc"><i class="no-highlight">40</i>&nbsp;                    cleanLabel = rotationEndPattern.find(label)?.groupValues?.last()</b>
+<b class="nc"><i class="no-highlight">41</i>&nbsp;                        ?: throw ParsingException(&quot;rotation option label doesn&#39;t match expected format&quot;)</b>
+<b class="fc"><i class="no-highlight">42</i>&nbsp;                    current = true</b>
+<i class="no-highlight">43</i>&nbsp;                }
+<b class="fc"><i class="no-highlight">44</i>&nbsp;                val rotationEnd = parseTibiaDateTime(cleanLabel)</b>
+<b class="fc"><i class="no-highlight">45</i>&nbsp;                val rotation = LeaderboardsRotation(</b>
+<b class="fc"><i class="no-highlight">46</i>&nbsp;                    rotationId = rotationId,</b>
+<b class="fc"><i class="no-highlight">47</i>&nbsp;                    current = current,</b>
+<b class="fc"><i class="no-highlight">48</i>&nbsp;                    endDate = rotationEnd</b>
+<i class="no-highlight">49</i>&nbsp;                )
+<b class="fc"><i class="no-highlight">50</i>&nbsp;                if (current) {</b>
+<b class="fc"><i class="no-highlight">51</i>&nbsp;                    this.rotation = rotation</b>
+<i class="no-highlight">52</i>&nbsp;                }
+<b class="fc"><i class="no-highlight">53</i>&nbsp;                addAvailableRotation(rotation)</b>
+<i class="no-highlight">54</i>&nbsp;            }
+<b class="pc"><i class="no-highlight">55</i>&nbsp;            world = formData.values[&quot;world&quot;]</b>
+<b class="nc"><i class="no-highlight">56</i>&nbsp;                ?: if (&quot;world&quot; in formData.availableOptions) return null else throw ParsingException(&quot;world form parameter not found&quot;)</b>
+<i class="no-highlight">57</i>&nbsp;
+<b class="pc"><i class="no-highlight">58</i>&nbsp;            if (tables.size == 4) {</b>
+<b class="fc"><i class="no-highlight">59</i>&nbsp;                val lastUpdateString = tables[2].text()</b>
+<b class="fc"><i class="no-highlight">60</i>&nbsp;                val minutes =</b>
+<b class="pc"><i class="no-highlight">61</i>&nbsp;                    Regex(&quot;&quot;&quot;(\d+)&quot;&quot;&quot;).find(lastUpdateString)?.groups?.get(0)?.value?.toInt() ?: throw ParsingException(</b>
+<b class="nc"><i class="no-highlight">62</i>&nbsp;                        &quot;unexpected last update text: $lastUpdateString&quot;</b>
+<i class="no-highlight">63</i>&nbsp;                    )
+<b class="fc"><i class="no-highlight">64</i>&nbsp;                lastUpdated = Clock.System.now().minus(minutes.minutes)</b>
+<i class="no-highlight">65</i>&nbsp;            }
+<i class="no-highlight">66</i>&nbsp;
+<b class="fc"><i class="no-highlight">67</i>&nbsp;            val entriesTable = tables.last()</b>
+<b class="fc"><i class="no-highlight">68</i>&nbsp;            parseLeaderboardEntries(entriesTable)</b>
+<i class="no-highlight">69</i>&nbsp;
+<b class="pc"><i class="no-highlight">70</i>&nbsp;            val paginationData = boxContent.selectFirst(&quot;small&quot;)?.parsePagination() ?: PaginationData.default()</b>
+<b class="fc"><i class="no-highlight">71</i>&nbsp;            currentPage = paginationData.currentPage</b>
+<b class="fc"><i class="no-highlight">72</i>&nbsp;            resultsCount = paginationData.resultsCount</b>
+<b class="fc"><i class="no-highlight">73</i>&nbsp;            totalPages = paginationData.totalPages</b>
+<b class="fc"><i class="no-highlight">74</i>&nbsp;        }</b>
+<i class="no-highlight">75</i>&nbsp;
+<i class="no-highlight">76</i>&nbsp;    }
+<i class="no-highlight">77</i>&nbsp;
+<i class="no-highlight">78</i>&nbsp;    private fun LeaderboardsBuilder.parseLeaderboardEntries(entriesTable: Element?) {
+<b class="fc"><i class="no-highlight">79</i>&nbsp;        for (row in entriesTable.rows().offsetStart(1)) {</b>
+<b class="fc"><i class="no-highlight">80</i>&nbsp;            val cells = row.cells()</b>
+<b class="pc"><i class="no-highlight">81</i>&nbsp;            val name = cells[1].selectFirst(&quot;a&quot;)?.getLinkInformation()?.title?.clean()</b>
+<b class="fc"><i class="no-highlight">82</i>&nbsp;            val rank = cells[0].text().remove(&quot;.&quot;).toInt()</b>
+<b class="fc"><i class="no-highlight">83</i>&nbsp;            val dromeLevel = cells[2].text().toInt()</b>
+<b class="fc"><i class="no-highlight">84</i>&nbsp;            addEntry(</b>
+<b class="pc"><i class="no-highlight">85</i>&nbsp;                if (name != null) LeaderboardsEntry(rank, name, dromeLevel) else DeletedLeaderboardsEntry(</b>
+<b class="nc"><i class="no-highlight">86</i>&nbsp;                    rank, dromeLevel</b>
+<i class="no-highlight">87</i>&nbsp;                )
+<i class="no-highlight">88</i>&nbsp;            )
+<i class="no-highlight">89</i>&nbsp;        }
+<i class="no-highlight">90</i>&nbsp;    }
+<i class="no-highlight">91</i>&nbsp;
+<i class="no-highlight">92</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -202,7 +203,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-07-27 22:19</div>
+    <div style="float:right;">generated on 2022-07-29 00:35</div>
 </div>
 </body>
 </html>
