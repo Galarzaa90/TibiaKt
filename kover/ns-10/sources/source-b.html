@@ -146,126 +146,142 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.parsers
-<i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.builders.ForumThreadBuilder
-<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.builders.forumThread
-<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
-<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.ForumEmoticon
-<i class="no-highlight">7</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.ForumThread
-<i class="no-highlight">8</i>&nbsp;import com.galarzaa.tibiakt.core.utils.cleanText
-<i class="no-highlight">9</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getLinkInformation
-<i class="no-highlight">10</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseAuthorTable
-<i class="no-highlight">11</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parsePagination
-<i class="no-highlight">12</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseTibiaForumDate
-<i class="no-highlight">13</i>&nbsp;import org.jsoup.Jsoup
-<i class="no-highlight">14</i>&nbsp;import org.jsoup.nodes.Element
-<i class="no-highlight">15</i>&nbsp;import org.jsoup.nodes.TextNode
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;/*
+<i class="no-highlight">2</i>&nbsp; * Copyright © 2022 Allan Galarza
+<i class="no-highlight">3</i>&nbsp; *
+<i class="no-highlight">4</i>&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+<i class="no-highlight">5</i>&nbsp; * you may not use this file except in compliance with the License.
+<i class="no-highlight">6</i>&nbsp; * You may obtain a copy of the License at
+<i class="no-highlight">7</i>&nbsp; *
+<i class="no-highlight">8</i>&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+<i class="no-highlight">9</i>&nbsp; *
+<i class="no-highlight">10</i>&nbsp; * Unless required by applicable law or agreed to in writing, software
+<i class="no-highlight">11</i>&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+<i class="no-highlight">12</i>&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+<i class="no-highlight">13</i>&nbsp; * See the License for the specific language governing permissions and
+<i class="no-highlight">14</i>&nbsp; * limitations under the License.
+<i class="no-highlight">15</i>&nbsp; */
 <i class="no-highlight">16</i>&nbsp;
-<b class="nc"><i class="no-highlight">17</i>&nbsp;object ForumThreadParser : Parser&lt;ForumThread?&gt; {</b>
-<i class="no-highlight">18</i>&nbsp;    private const val SIGNATURE_SEPARATOR = &quot;________________&quot;
-<b class="fc"><i class="no-highlight">19</i>&nbsp;    private val datesRegex = Regex(&quot;&quot;&quot;(\d{2}\.\d{2}\.\d{4}\s\d{2}:\d{2}:\d{2})&quot;&quot;&quot;)</b>
-<b class="fc"><i class="no-highlight">20</i>&nbsp;    private val editedByRegex = Regex(&quot;&quot;&quot;Edited by (.*) on \d{2}&quot;&quot;&quot;)</b>
-<i class="no-highlight">21</i>&nbsp;
-<i class="no-highlight">22</i>&nbsp;    override fun fromContent(content: String): ForumThread? {
-<b class="fc"><i class="no-highlight">23</i>&nbsp;        val boxContent = boxContent(content)</b>
-<b class="fc"><i class="no-highlight">24</i>&nbsp;        return forumThread {</b>
-<b class="fc"><i class="no-highlight">25</i>&nbsp;            val breadCrumbs = boxContent.select(&quot;div.ForumBreadCrumbs &gt; a&quot;)</b>
-<b class="fc"><i class="no-highlight">26</i>&nbsp;            if (breadCrumbs.isEmpty()) {</b>
-<b class="fc"><i class="no-highlight">27</i>&nbsp;                val messageBox = boxContent.selectFirst(&quot;div.InnerTableContainer&quot;)</b>
-<b class="pc"><i class="no-highlight">28</i>&nbsp;                if (messageBox == null || &quot;not found&quot; !in messageBox.text()) {</b>
-<b class="nc"><i class="no-highlight">29</i>&nbsp;                    throw ParsingException(&quot;Could not find Forum Breadcrumbs&quot;)</b>
-<i class="no-highlight">30</i>&nbsp;                }
-<b class="fc"><i class="no-highlight">31</i>&nbsp;                return null</b>
-<i class="no-highlight">32</i>&nbsp;            }
-<b class="pc"><i class="no-highlight">33</i>&nbsp;            val (sectionLink, boardLink) = breadCrumbs.mapNotNull { it.getLinkInformation() }</b>
-<i class="no-highlight">34</i>&nbsp;
-<b class="pc"><i class="no-highlight">35</i>&nbsp;            sectionId = sectionLink.queryParams[&quot;sectionid&quot;]?.first()?.toInt()</b>
-<b class="nc"><i class="no-highlight">36</i>&nbsp;                ?: throw ParsingException(&quot;Could not find section ID in link.&quot;)</b>
-<b class="fc"><i class="no-highlight">37</i>&nbsp;            section = sectionLink.title</b>
-<b class="pc"><i class="no-highlight">38</i>&nbsp;            boardId = boardLink.queryParams[&quot;boardid&quot;]?.first()?.toInt()</b>
-<b class="nc"><i class="no-highlight">39</i>&nbsp;                ?: throw ParsingException(&quot;Could not find board ID in link.&quot;)</b>
-<b class="fc"><i class="no-highlight">40</i>&nbsp;            board = boardLink.title</b>
-<i class="no-highlight">41</i>&nbsp;
-<b class="fc"><i class="no-highlight">42</i>&nbsp;            val forumTitleContainer = boxContent.selectFirst(&quot;div.ForumTitleText&quot;)</b>
-<b class="fc"><i class="no-highlight">43</i>&nbsp;            if (forumTitleContainer == null) {</b>
-<b class="pc"><i class="no-highlight">44</i>&nbsp;                title = boxContent.selectFirst(&quot;div.ForumBreadCrumbs &gt; b&quot;)?.text()</b>
-<b class="nc"><i class="no-highlight">45</i>&nbsp;                    ?: throw ParsingException(&quot;Could not find partial title&quot;)</b>
-<b class="fc"><i class="no-highlight">46</i>&nbsp;                threadId = 0</b>
-<b class="fc"><i class="no-highlight">47</i>&nbsp;                currentPage = -1</b>
-<b class="fc"><i class="no-highlight">48</i>&nbsp;                return@forumThread</b>
-<i class="no-highlight">49</i>&nbsp;            }
-<b class="fc"><i class="no-highlight">50</i>&nbsp;            val border = forumTitleContainer.parent()!!.previousSibling()!!.previousSibling()!!</b>
-<b class="fc"><i class="no-highlight">51</i>&nbsp;            goldenFrame = &quot;gold&quot; in border.attr(&quot;style&quot;)</b>
-<b class="fc"><i class="no-highlight">52</i>&nbsp;            title = forumTitleContainer.cleanText()</b>
-<i class="no-highlight">53</i>&nbsp;
-<b class="fc"><i class="no-highlight">54</i>&nbsp;            val postTable = boxContent.selectFirst(&quot;table.TableContent&quot;)!!</b>
-<b class="fc"><i class="no-highlight">55</i>&nbsp;            val threadInfoContainer = postTable.selectFirst(&quot;div.ForumPostHeaderText&quot;)!!</b>
-<b class="fc"><i class="no-highlight">56</i>&nbsp;            val (threadNumber, navigationContainer) = threadInfoContainer.childNodes()</b>
+<i class="no-highlight">17</i>&nbsp;package com.galarzaa.tibiakt.core.parsers
+<i class="no-highlight">18</i>&nbsp;
+<i class="no-highlight">19</i>&nbsp;import com.galarzaa.tibiakt.core.builders.ForumThreadBuilder
+<i class="no-highlight">20</i>&nbsp;import com.galarzaa.tibiakt.core.builders.forumThread
+<i class="no-highlight">21</i>&nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
+<i class="no-highlight">22</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.ForumEmoticon
+<i class="no-highlight">23</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.ForumThread
+<i class="no-highlight">24</i>&nbsp;import com.galarzaa.tibiakt.core.utils.cleanText
+<i class="no-highlight">25</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getLinkInformation
+<i class="no-highlight">26</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseAuthorTable
+<i class="no-highlight">27</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parsePagination
+<i class="no-highlight">28</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseTibiaForumDateTime
+<i class="no-highlight">29</i>&nbsp;import org.jsoup.Jsoup
+<i class="no-highlight">30</i>&nbsp;import org.jsoup.nodes.Element
+<i class="no-highlight">31</i>&nbsp;import org.jsoup.nodes.TextNode
+<i class="no-highlight">32</i>&nbsp;
+<b class="nc"><i class="no-highlight">33</i>&nbsp;object ForumThreadParser : Parser&lt;ForumThread?&gt; {</b>
+<i class="no-highlight">34</i>&nbsp;    private const val SIGNATURE_SEPARATOR = &quot;________________&quot;
+<b class="fc"><i class="no-highlight">35</i>&nbsp;    private val datesRegex = Regex(&quot;&quot;&quot;(\d{2}\.\d{2}\.\d{4}\s\d{2}:\d{2}:\d{2})&quot;&quot;&quot;)</b>
+<b class="fc"><i class="no-highlight">36</i>&nbsp;    private val editedByRegex = Regex(&quot;&quot;&quot;Edited by (.*) on \d{2}&quot;&quot;&quot;)</b>
+<i class="no-highlight">37</i>&nbsp;
+<i class="no-highlight">38</i>&nbsp;    override fun fromContent(content: String): ForumThread? {
+<b class="fc"><i class="no-highlight">39</i>&nbsp;        val boxContent = boxContent(content)</b>
+<b class="fc"><i class="no-highlight">40</i>&nbsp;        return forumThread {</b>
+<b class="fc"><i class="no-highlight">41</i>&nbsp;            val breadCrumbs = boxContent.select(&quot;div.ForumBreadCrumbs &gt; a&quot;)</b>
+<b class="fc"><i class="no-highlight">42</i>&nbsp;            if (breadCrumbs.isEmpty()) {</b>
+<b class="fc"><i class="no-highlight">43</i>&nbsp;                val messageBox = boxContent.selectFirst(&quot;div.InnerTableContainer&quot;)</b>
+<b class="pc"><i class="no-highlight">44</i>&nbsp;                if (messageBox == null || &quot;not found&quot; !in messageBox.text()) {</b>
+<b class="nc"><i class="no-highlight">45</i>&nbsp;                    throw ParsingException(&quot;Could not find Forum Breadcrumbs&quot;)</b>
+<i class="no-highlight">46</i>&nbsp;                }
+<b class="fc"><i class="no-highlight">47</i>&nbsp;                return null</b>
+<i class="no-highlight">48</i>&nbsp;            }
+<b class="pc"><i class="no-highlight">49</i>&nbsp;            val (sectionLink, boardLink) = breadCrumbs.mapNotNull { it.getLinkInformation() }</b>
+<i class="no-highlight">50</i>&nbsp;
+<b class="pc"><i class="no-highlight">51</i>&nbsp;            sectionId = sectionLink.queryParams[&quot;sectionid&quot;]?.first()?.toInt()</b>
+<b class="nc"><i class="no-highlight">52</i>&nbsp;                ?: throw ParsingException(&quot;Could not find section ID in link.&quot;)</b>
+<b class="fc"><i class="no-highlight">53</i>&nbsp;            section = sectionLink.title</b>
+<b class="pc"><i class="no-highlight">54</i>&nbsp;            boardId = boardLink.queryParams[&quot;boardid&quot;]?.first()?.toInt()</b>
+<b class="nc"><i class="no-highlight">55</i>&nbsp;                ?: throw ParsingException(&quot;Could not find board ID in link.&quot;)</b>
+<b class="fc"><i class="no-highlight">56</i>&nbsp;            board = boardLink.title</b>
 <i class="no-highlight">57</i>&nbsp;
-<b class="pc"><i class="no-highlight">58</i>&nbsp;            threadId = (threadNumber as TextNode).cleanText().split(&quot;#&quot;).last().toInt()</b>
-<i class="no-highlight">59</i>&nbsp;
-<b class="pc"><i class="no-highlight">60</i>&nbsp;            val navigationLinks = (navigationContainer as Element).select(&quot;a&quot;).mapNotNull { it.getLinkInformation() }</b>
-<b class="fc"><i class="no-highlight">61</i>&nbsp;            if (navigationLinks.size == 2) {</b>
-<b class="fc"><i class="no-highlight">62</i>&nbsp;                val (prevLink, nextLink) = navigationLinks</b>
-<b class="pc"><i class="no-highlight">63</i>&nbsp;                previousTopicNumber = prevLink.queryParams[&quot;threadid&quot;]?.first()?.toInt()</b>
-<b class="nc"><i class="no-highlight">64</i>&nbsp;                    ?: throw ParsingException(&quot;Could not find previous topic number in link.&quot;)</b>
-<b class="pc"><i class="no-highlight">65</i>&nbsp;                nextTopicNumber = nextLink.queryParams[&quot;threadid&quot;]?.first()?.toInt()</b>
-<b class="nc"><i class="no-highlight">66</i>&nbsp;                    ?: throw ParsingException(&quot;Could not find next topic number in link.&quot;)</b>
-<b class="pc"><i class="no-highlight">67</i>&nbsp;            } else if (&quot;Previous&quot; in navigationLinks.first().title) {</b>
-<b class="pc"><i class="no-highlight">68</i>&nbsp;                previousTopicNumber = navigationLinks.first().queryParams[&quot;threadid&quot;]?.first()?.toInt()</b>
-<b class="nc"><i class="no-highlight">69</i>&nbsp;                    ?: throw ParsingException(&quot;Could not find previous topic number in link.&quot;)</b>
-<i class="no-highlight">70</i>&nbsp;            } else {
-<b class="nc"><i class="no-highlight">71</i>&nbsp;                nextTopicNumber = navigationLinks.first().queryParams[&quot;threadid&quot;]?.first()?.toInt()</b>
-<b class="nc"><i class="no-highlight">72</i>&nbsp;                    ?: throw ParsingException(&quot;Could not find next topic number in link.&quot;)</b>
-<i class="no-highlight">73</i>&nbsp;            }
-<b class="fc"><i class="no-highlight">74</i>&nbsp;            val paginationData = boxContent.selectFirst(&quot;td.PageNavigation&quot;)!!.parsePagination()</b>
-<b class="fc"><i class="no-highlight">75</i>&nbsp;            totalPages = paginationData.totalPages</b>
-<b class="fc"><i class="no-highlight">76</i>&nbsp;            currentPage = paginationData.currentPage</b>
-<b class="fc"><i class="no-highlight">77</i>&nbsp;            resultsCount = paginationData.resultsCount</b>
-<i class="no-highlight">78</i>&nbsp;
-<b class="fc"><i class="no-highlight">79</i>&nbsp;            val postContainers = postTable.select(&quot;div.PostBody&quot;)</b>
-<b class="fc"><i class="no-highlight">80</i>&nbsp;            for (postContainer in postContainers) {</b>
-<b class="fc"><i class="no-highlight">81</i>&nbsp;                parsePostContainer(postContainer)</b>
-<i class="no-highlight">82</i>&nbsp;            }
-<b class="fc"><i class="no-highlight">83</i>&nbsp;        }</b>
-<i class="no-highlight">84</i>&nbsp;    }
-<i class="no-highlight">85</i>&nbsp;
-<i class="no-highlight">86</i>&nbsp;    private fun ForumThreadBuilder.parsePostContainer(container: Element) {
-<b class="fc"><i class="no-highlight">87</i>&nbsp;        addPost {</b>
-<b class="fc"><i class="no-highlight">88</i>&nbsp;            author = parseAuthorTable(container.selectFirst(&quot;div.PostCharacterText&quot;)!!)</b>
-<b class="fc"><i class="no-highlight">89</i>&nbsp;            val contentContainer = container.selectFirst(&quot;div.PostText&quot;)</b>
-<b class="fc"><i class="no-highlight">90</i>&nbsp;            val signatureContainer = container.selectFirst(&quot;td.ff_pagetext&quot;)</b>
-<b class="fc"><i class="no-highlight">91</i>&nbsp;            if (signatureContainer != null) {</b>
-<b class="fc"><i class="no-highlight">92</i>&nbsp;                signature = signatureContainer.html()</b>
-<b class="fc"><i class="no-highlight">93</i>&nbsp;                signatureContainer.remove()</b>
-<i class="no-highlight">94</i>&nbsp;            }
-<b class="fc"><i class="no-highlight">95</i>&nbsp;            content = contentContainer!!.html()</b>
-<b class="fc"><i class="no-highlight">96</i>&nbsp;            if (signatureContainer != null) {</b>
-<b class="fc"><i class="no-highlight">97</i>&nbsp;                val parts = content!!.split(SIGNATURE_SEPARATOR)</b>
-<b class="fc"><i class="no-highlight">98</i>&nbsp;                content = parts.subList(0, parts.size - 1).joinToString(SIGNATURE_SEPARATOR)</b>
-<i class="no-highlight">99</i>&nbsp;            }
-<b class="fc"><i class="no-highlight">100</i>&nbsp;            val (titleRaw, cleanContent) = content!!.split(Regex(&quot;&quot;&quot;&lt;br/?&gt;\s*&lt;br/?&gt;&quot;&quot;&quot;), limit = 2)</b>
-<b class="fc"><i class="no-highlight">101</i>&nbsp;            content = cleanContent</b>
-<b class="fc"><i class="no-highlight">102</i>&nbsp;            val parsedTitle = Jsoup.parse(titleRaw)</b>
-<b class="fc"><i class="no-highlight">103</i>&nbsp;            parsedTitle.selectFirst(&quot;img&quot;)?.let {</b>
-<b class="fc"><i class="no-highlight">104</i>&nbsp;                emoticon = ForumEmoticon(it.attr(&quot;alt&quot;), it.attr(&quot;src&quot;))</b>
-<b class="fc"><i class="no-highlight">105</i>&nbsp;            }</b>
-<b class="pc"><i class="no-highlight">106</i>&nbsp;            parsedTitle.selectFirst(&quot;b&quot;)?.let {</b>
-<b class="nc"><i class="no-highlight">107</i>&nbsp;                title = it.cleanText()</b>
-<b class="nc"><i class="no-highlight">108</i>&nbsp;            }</b>
-<b class="fc"><i class="no-highlight">109</i>&nbsp;            val postDetails = container.selectFirst(&quot;div.PostDetails&quot;)!!</b>
-<b class="fc"><i class="no-highlight">110</i>&nbsp;            val dates = datesRegex.findAll(postDetails.text()).map { it.value }.toList()</b>
-<b class="fc"><i class="no-highlight">111</i>&nbsp;            postedDate = parseTibiaForumDate(dates.first())</b>
-<b class="fc"><i class="no-highlight">112</i>&nbsp;            if (dates.size &gt; 1) {</b>
-<b class="fc"><i class="no-highlight">113</i>&nbsp;                editedDate = parseTibiaForumDate(dates[1])</b>
-<b class="fc"><i class="no-highlight">114</i>&nbsp;                editedBy = editedByRegex.find(postDetails.text())!!.groupValues[1]</b>
+<b class="fc"><i class="no-highlight">58</i>&nbsp;            val forumTitleContainer = boxContent.selectFirst(&quot;div.ForumTitleText&quot;)</b>
+<b class="fc"><i class="no-highlight">59</i>&nbsp;            if (forumTitleContainer == null) {</b>
+<b class="pc"><i class="no-highlight">60</i>&nbsp;                title = boxContent.selectFirst(&quot;div.ForumBreadCrumbs &gt; b&quot;)?.text()</b>
+<b class="nc"><i class="no-highlight">61</i>&nbsp;                    ?: throw ParsingException(&quot;Could not find partial title&quot;)</b>
+<b class="fc"><i class="no-highlight">62</i>&nbsp;                threadId = 0</b>
+<b class="fc"><i class="no-highlight">63</i>&nbsp;                currentPage = -1</b>
+<b class="fc"><i class="no-highlight">64</i>&nbsp;                return@forumThread</b>
+<i class="no-highlight">65</i>&nbsp;            }
+<b class="fc"><i class="no-highlight">66</i>&nbsp;            val border = forumTitleContainer.parent()!!.previousSibling()!!.previousSibling()!!</b>
+<b class="fc"><i class="no-highlight">67</i>&nbsp;            goldenFrame = &quot;gold&quot; in border.attr(&quot;style&quot;)</b>
+<b class="fc"><i class="no-highlight">68</i>&nbsp;            title = forumTitleContainer.cleanText()</b>
+<i class="no-highlight">69</i>&nbsp;
+<b class="fc"><i class="no-highlight">70</i>&nbsp;            val postTable = boxContent.selectFirst(&quot;table.TableContent&quot;)!!</b>
+<b class="fc"><i class="no-highlight">71</i>&nbsp;            val threadInfoContainer = postTable.selectFirst(&quot;div.ForumPostHeaderText&quot;)!!</b>
+<b class="fc"><i class="no-highlight">72</i>&nbsp;            val (threadNumber, navigationContainer) = threadInfoContainer.childNodes()</b>
+<i class="no-highlight">73</i>&nbsp;
+<b class="pc"><i class="no-highlight">74</i>&nbsp;            threadId = (threadNumber as TextNode).cleanText().split(&quot;#&quot;).last().toInt()</b>
+<i class="no-highlight">75</i>&nbsp;
+<b class="pc"><i class="no-highlight">76</i>&nbsp;            val navigationLinks = (navigationContainer as Element).select(&quot;a&quot;).mapNotNull { it.getLinkInformation() }</b>
+<b class="fc"><i class="no-highlight">77</i>&nbsp;            if (navigationLinks.size == 2) {</b>
+<b class="fc"><i class="no-highlight">78</i>&nbsp;                val (prevLink, nextLink) = navigationLinks</b>
+<b class="pc"><i class="no-highlight">79</i>&nbsp;                previousTopicNumber = prevLink.queryParams[&quot;threadid&quot;]?.first()?.toInt()</b>
+<b class="nc"><i class="no-highlight">80</i>&nbsp;                    ?: throw ParsingException(&quot;Could not find previous topic number in link.&quot;)</b>
+<b class="pc"><i class="no-highlight">81</i>&nbsp;                nextTopicNumber = nextLink.queryParams[&quot;threadid&quot;]?.first()?.toInt()</b>
+<b class="nc"><i class="no-highlight">82</i>&nbsp;                    ?: throw ParsingException(&quot;Could not find next topic number in link.&quot;)</b>
+<b class="pc"><i class="no-highlight">83</i>&nbsp;            } else if (&quot;Previous&quot; in navigationLinks.first().title) {</b>
+<b class="pc"><i class="no-highlight">84</i>&nbsp;                previousTopicNumber = navigationLinks.first().queryParams[&quot;threadid&quot;]?.first()?.toInt()</b>
+<b class="nc"><i class="no-highlight">85</i>&nbsp;                    ?: throw ParsingException(&quot;Could not find previous topic number in link.&quot;)</b>
+<i class="no-highlight">86</i>&nbsp;            } else {
+<b class="nc"><i class="no-highlight">87</i>&nbsp;                nextTopicNumber = navigationLinks.first().queryParams[&quot;threadid&quot;]?.first()?.toInt()</b>
+<b class="nc"><i class="no-highlight">88</i>&nbsp;                    ?: throw ParsingException(&quot;Could not find next topic number in link.&quot;)</b>
+<i class="no-highlight">89</i>&nbsp;            }
+<b class="fc"><i class="no-highlight">90</i>&nbsp;            val paginationData = boxContent.selectFirst(&quot;td.PageNavigation&quot;)!!.parsePagination()</b>
+<b class="fc"><i class="no-highlight">91</i>&nbsp;            totalPages = paginationData.totalPages</b>
+<b class="fc"><i class="no-highlight">92</i>&nbsp;            currentPage = paginationData.currentPage</b>
+<b class="fc"><i class="no-highlight">93</i>&nbsp;            resultsCount = paginationData.resultsCount</b>
+<i class="no-highlight">94</i>&nbsp;
+<b class="fc"><i class="no-highlight">95</i>&nbsp;            val postContainers = postTable.select(&quot;div.PostBody&quot;)</b>
+<b class="fc"><i class="no-highlight">96</i>&nbsp;            for (postContainer in postContainers) {</b>
+<b class="fc"><i class="no-highlight">97</i>&nbsp;                parsePostContainer(postContainer)</b>
+<i class="no-highlight">98</i>&nbsp;            }
+<b class="fc"><i class="no-highlight">99</i>&nbsp;        }</b>
+<i class="no-highlight">100</i>&nbsp;    }
+<i class="no-highlight">101</i>&nbsp;
+<i class="no-highlight">102</i>&nbsp;    private fun ForumThreadBuilder.parsePostContainer(container: Element) {
+<b class="fc"><i class="no-highlight">103</i>&nbsp;        addPost {</b>
+<b class="fc"><i class="no-highlight">104</i>&nbsp;            author = parseAuthorTable(container.selectFirst(&quot;div.PostCharacterText&quot;)!!)</b>
+<b class="fc"><i class="no-highlight">105</i>&nbsp;            val contentContainer = container.selectFirst(&quot;div.PostText&quot;)</b>
+<b class="fc"><i class="no-highlight">106</i>&nbsp;            val signatureContainer = container.selectFirst(&quot;td.ff_pagetext&quot;)</b>
+<b class="fc"><i class="no-highlight">107</i>&nbsp;            if (signatureContainer != null) {</b>
+<b class="fc"><i class="no-highlight">108</i>&nbsp;                signature = signatureContainer.html()</b>
+<b class="fc"><i class="no-highlight">109</i>&nbsp;                signatureContainer.remove()</b>
+<i class="no-highlight">110</i>&nbsp;            }
+<b class="fc"><i class="no-highlight">111</i>&nbsp;            content = contentContainer!!.html()</b>
+<b class="fc"><i class="no-highlight">112</i>&nbsp;            if (signatureContainer != null) {</b>
+<b class="fc"><i class="no-highlight">113</i>&nbsp;                val parts = content!!.split(SIGNATURE_SEPARATOR)</b>
+<b class="fc"><i class="no-highlight">114</i>&nbsp;                content = parts.subList(0, parts.size - 1).joinToString(SIGNATURE_SEPARATOR)</b>
 <i class="no-highlight">115</i>&nbsp;            }
-<b class="fc"><i class="no-highlight">116</i>&nbsp;            val additionalBox = container.selectFirst(&quot;div.AdditionalBox&quot;)!!</b>
-<b class="fc"><i class="no-highlight">117</i>&nbsp;            postId = additionalBox.cleanText().split(&quot;#&quot;, limit = 2)[1].toInt()</b>
-<i class="no-highlight">118</i>&nbsp;        }
-<i class="no-highlight">119</i>&nbsp;    }
-<i class="no-highlight">120</i>&nbsp;}
+<b class="fc"><i class="no-highlight">116</i>&nbsp;            val (titleRaw, cleanContent) = content!!.split(Regex(&quot;&quot;&quot;&lt;br/?&gt;\s*&lt;br/?&gt;&quot;&quot;&quot;), limit = 2)</b>
+<b class="fc"><i class="no-highlight">117</i>&nbsp;            content = cleanContent</b>
+<b class="fc"><i class="no-highlight">118</i>&nbsp;            val parsedTitle = Jsoup.parse(titleRaw)</b>
+<b class="fc"><i class="no-highlight">119</i>&nbsp;            parsedTitle.selectFirst(&quot;img&quot;)?.let {</b>
+<b class="fc"><i class="no-highlight">120</i>&nbsp;                emoticon = ForumEmoticon(it.attr(&quot;alt&quot;), it.attr(&quot;src&quot;))</b>
+<b class="fc"><i class="no-highlight">121</i>&nbsp;            }</b>
+<b class="pc"><i class="no-highlight">122</i>&nbsp;            parsedTitle.selectFirst(&quot;b&quot;)?.let {</b>
+<b class="nc"><i class="no-highlight">123</i>&nbsp;                title = it.cleanText()</b>
+<b class="nc"><i class="no-highlight">124</i>&nbsp;            }</b>
+<b class="fc"><i class="no-highlight">125</i>&nbsp;            val postDetails = container.selectFirst(&quot;div.PostDetails&quot;)!!</b>
+<b class="fc"><i class="no-highlight">126</i>&nbsp;            val dates = datesRegex.findAll(postDetails.text()).map { it.value }.toList()</b>
+<b class="fc"><i class="no-highlight">127</i>&nbsp;            postedDate = parseTibiaForumDateTime(dates.first())</b>
+<b class="fc"><i class="no-highlight">128</i>&nbsp;            if (dates.size &gt; 1) {</b>
+<b class="fc"><i class="no-highlight">129</i>&nbsp;                editedDate = parseTibiaForumDateTime(dates[1])</b>
+<b class="fc"><i class="no-highlight">130</i>&nbsp;                editedBy = editedByRegex.find(postDetails.text())!!.groupValues[1]</b>
+<i class="no-highlight">131</i>&nbsp;            }
+<b class="fc"><i class="no-highlight">132</i>&nbsp;            val additionalBox = container.selectFirst(&quot;div.AdditionalBox&quot;)!!</b>
+<b class="fc"><i class="no-highlight">133</i>&nbsp;            postId = additionalBox.cleanText().split(&quot;#&quot;, limit = 2)[1].toInt()</b>
+<i class="no-highlight">134</i>&nbsp;        }
+<i class="no-highlight">135</i>&nbsp;    }
+<i class="no-highlight">136</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -292,7 +308,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-07-29 00:35</div>
+    <div style="float:right;">generated on 2022-07-29 00:55</div>
 </div>
 </body>
 </html>
