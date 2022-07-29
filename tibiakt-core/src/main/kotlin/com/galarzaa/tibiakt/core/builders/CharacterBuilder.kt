@@ -13,7 +13,7 @@ import com.galarzaa.tibiakt.core.models.character.GuildMembership
 import com.galarzaa.tibiakt.core.models.character.Killer
 import com.galarzaa.tibiakt.core.models.character.OtherCharacter
 import com.galarzaa.tibiakt.core.utils.BuilderDsl
-import java.time.Instant
+import kotlinx.datetime.Instant
 import java.time.LocalDate
 
 @BuilderDsl

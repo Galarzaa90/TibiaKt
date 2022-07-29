@@ -5,7 +5,8 @@ import com.galarzaa.tibiakt.core.models.forums.ForumEmoticon
 import com.galarzaa.tibiakt.core.models.forums.ForumPost
 import com.galarzaa.tibiakt.core.models.forums.ForumThread
 import com.galarzaa.tibiakt.core.utils.BuilderDsl
-import java.time.Instant
+import kotlinx.datetime.Clock
+import kotlinx.datetime.Instant
 
 @BuilderDsl
 inline fun forumThreadBuilder(block: ForumThreadBuilder.() -> Unit) = ForumThreadBuilder().apply(block)
@@ -62,14 +63,16 @@ class ForumThreadBuilder : TibiaKtBuilder<ForumThread>() {
         var editedDate: Instant? = null
         var editedBy: String? = null
 
-        override fun build() = ForumPost(author = author ?: throw IllegalStateException("author is required"),
+        override fun build() = ForumPost(
+            author = author ?: throw IllegalStateException("author is required"),
             emoticon = emoticon,
             title = title,
             content = content ?: throw IllegalStateException("content is required"),
             signature = signature,
             postId = postId ?: throw IllegalStateException("postId is required"),
-            postedDate = postedDate ?: Instant.now(),
+            postedDate = postedDate ?: Clock.System.now(),
             editedDate = editedDate,
-            editedBy = editedBy)
+            editedBy = editedBy
+        )
     }
 }

@@ -18,8 +18,9 @@ import com.galarzaa.tibiakt.core.utils.parsePagination
 import com.galarzaa.tibiakt.core.utils.parseTibiaDateTime
 import com.galarzaa.tibiakt.core.utils.remove
 import com.galarzaa.tibiakt.core.utils.rows
+import kotlinx.datetime.Clock
 import org.jsoup.nodes.Element
-import java.time.Instant
+import kotlin.time.Duration.Companion.minutes
 
 object LeaderboardsParser : Parser<Leaderboards?> {
     val rotationEndPattern = Regex("""ends on ([^)]+)""")
@@ -60,7 +61,7 @@ object LeaderboardsParser : Parser<Leaderboards?> {
                     Regex("""(\d+)""").find(lastUpdateString)?.groups?.get(0)?.value?.toInt() ?: throw ParsingException(
                         "unexpected last update text: $lastUpdateString"
                     )
-                lastUpdated = Instant.now().minusSeconds(60L * minutes)
+                lastUpdated = Clock.System.now().minus(minutes.minutes)
             }
 
             val entriesTable = tables.last()

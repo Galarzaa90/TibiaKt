@@ -4,7 +4,7 @@ import com.galarzaa.tibiakt.core.enums.PvpType
 import com.galarzaa.tibiakt.core.enums.Vocation
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.collections.shouldHaveSize
-import java.time.Instant
+import kotlinx.datetime.Clock
 import java.time.YearMonth
 
 class WorldBuilderTests : StringSpec({
@@ -14,7 +14,7 @@ class WorldBuilderTests : StringSpec({
             isOnline = true
             location = "North America"
             pvpType = PvpType.OPTIONAL_PVP
-            onlineRecordDateTime = Instant.now()
+            onlineRecordDateTime = Clock.System.now()
             onlineRecordCount = 425
             creationDate = YearMonth.of(2018, 4)
             addOnlinePlayer("Someone", 123, Vocation.DRUID)

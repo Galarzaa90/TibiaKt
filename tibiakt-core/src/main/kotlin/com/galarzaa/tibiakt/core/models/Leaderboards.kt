@@ -4,9 +4,9 @@ package com.galarzaa.tibiakt.core.models
 
 import com.galarzaa.tibiakt.core.serializers.InstantSerializer
 import com.galarzaa.tibiakt.core.utils.getLeaderboardUrl
+import kotlinx.datetime.Instant
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
-import java.time.Instant
 
 /**
  * The Tibia Drome leaderboards of a world.

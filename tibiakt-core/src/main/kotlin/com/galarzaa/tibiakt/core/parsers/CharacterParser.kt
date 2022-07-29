@@ -14,11 +14,11 @@ import com.galarzaa.tibiakt.core.utils.parseTibiaDate
 import com.galarzaa.tibiakt.core.utils.parseTibiaDateTime
 import com.galarzaa.tibiakt.core.utils.remove
 import com.galarzaa.tibiakt.core.utils.splitList
+import kotlinx.datetime.Instant
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 import org.jsoup.select.Elements
-import java.time.Instant
 
 
 object CharacterParser : Parser<Character?> {

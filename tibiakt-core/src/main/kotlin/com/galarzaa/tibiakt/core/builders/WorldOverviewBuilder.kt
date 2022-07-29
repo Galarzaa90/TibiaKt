@@ -6,7 +6,7 @@ import com.galarzaa.tibiakt.core.enums.TransferType
 import com.galarzaa.tibiakt.core.models.world.WorldEntry
 import com.galarzaa.tibiakt.core.models.world.WorldOverview
 import com.galarzaa.tibiakt.core.utils.BuilderDsl
-import java.time.Instant
+import kotlinx.datetime.Instant
 import java.time.LocalDate
 
 @BuilderDsl

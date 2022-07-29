@@ -106,9 +106,10 @@ import io.ktor.client.statement.request
 import io.ktor.http.HttpMethod
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.Parameters
+import kotlinx.datetime.Clock
+import kotlinx.datetime.Instant
 import kotlinx.serialization.json.Json
 import mu.KotlinLogging
-import java.time.Instant
 import java.time.LocalDate
 import java.time.YearMonth
 import kotlin.system.measureTimeMillis
@@ -324,7 +325,7 @@ open class TibiaKtClient constructor(
         battlEyeType: HighscoresBattlEyeType = HighscoresBattlEyeType.ANY_WORLD,
         pvpTypes: Set<PvpType>? = null,
     ): TibiaResponse<Highscores> {
-        val now = Instant.now()
+        val now = Clock.System.now()
         var totalPages = 0
         var currentPage = 1
         val entries = mutableListOf<HighscoresEntry>()
@@ -578,7 +579,7 @@ open class TibiaKtClient constructor(
 
     /** Convert to a [TibiaResponse]. */
     private fun <T> HttpResponse.toTibiaResponse(parsingTime: Double, data: T): TibiaResponse<T> = TibiaResponse(
-        timestamp = Instant.ofEpochMilli(responseTime.timestamp),
+        timestamp = Instant.fromEpochMilliseconds(responseTime.timestamp),
         isCached = headers["CF-Cache-Status"] == "HIT",
         cacheAge = headers["Age"]?.toInt() ?: 0,
         fetchingTime = fetchingTime,

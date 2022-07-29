@@ -92,7 +92,7 @@ class CharacterParserTests : StringSpec({
         char!!.name shouldBe "Orsty Serv"
         char.scheduledForDeletion shouldBe true
         char.deletionDate shouldNotBe null
-        char.deletionDate?.epochSecond shouldBe 1632678475
+        char.deletionDate?.epochSeconds shouldBe 1632678475
     }
 
     "Parsing a character with PvP deaths"{

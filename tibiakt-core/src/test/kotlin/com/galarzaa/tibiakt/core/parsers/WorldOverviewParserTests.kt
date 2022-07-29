@@ -7,7 +7,7 @@ import io.kotest.inspectors.forAtLeast
 import io.kotest.inspectors.forExactly
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
-import java.time.Instant
+import kotlinx.datetime.Instant
 
 class WorldOverviewParserTests : StringSpec({
     isolationMode = IsolationMode.InstancePerTest
@@ -15,7 +15,7 @@ class WorldOverviewParserTests : StringSpec({
         val worldOverview = WorldOverviewParser.fromContent(TestResources.getResource("worlds/worldsList.txt"))
         worldOverview.overallMaximumCount shouldBe 64028
         worldOverview.totalOnline shouldBe 10669
-        worldOverview.overallMaximumCountDateTime shouldBe Instant.ofEpochSecond(1196274360)
+        worldOverview.overallMaximumCountDateTime shouldBe Instant.fromEpochSeconds(1196274360)
         worldOverview.worlds shouldHaveSize 84
         worldOverview.worlds.forAtLeast(1) { it.isPremiumRestricted shouldBe true }
         worldOverview.worlds.forExactly(2) { it.isExperimental shouldBe true }

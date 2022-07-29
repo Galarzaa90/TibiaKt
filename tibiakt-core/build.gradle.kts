@@ -5,6 +5,7 @@ val kotestVersion: String by project
 val jsoupVersion: String by project
 val kotlinLoggingVersion: String by project
 val logbackVersion: String by project
+val kotlinxDatetime: String by project
 
 apply("../publish.gradle.kts")
 
@@ -24,6 +25,8 @@ dependencies {
     implementation("org.jsoup:jsoup:$jsoupVersion")
 
     implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+
+    api("org.jetbrains.kotlinx:kotlinx-datetime:$kotlinxDatetime")
 
     testImplementation("org.jetbrains.kotlin:kotlin-test:$kotlinVersion")
 

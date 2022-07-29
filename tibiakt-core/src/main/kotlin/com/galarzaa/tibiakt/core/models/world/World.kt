@@ -8,9 +8,9 @@ import com.galarzaa.tibiakt.core.enums.TransferType
 import com.galarzaa.tibiakt.core.serializers.InstantSerializer
 import com.galarzaa.tibiakt.core.serializers.LocalDateSerializer
 import com.galarzaa.tibiakt.core.serializers.YearMonthSerializer
+import kotlinx.datetime.Instant
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
-import java.time.Instant
 import java.time.LocalDate
 import java.time.YearMonth
 

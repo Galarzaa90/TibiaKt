@@ -7,7 +7,7 @@ import com.galarzaa.tibiakt.core.enums.Vocation
 import com.galarzaa.tibiakt.core.models.world.OnlineCharacter
 import com.galarzaa.tibiakt.core.models.world.World
 import com.galarzaa.tibiakt.core.utils.BuilderDsl
-import java.time.Instant
+import kotlinx.datetime.Instant
 import java.time.LocalDate
 import java.time.YearMonth
 

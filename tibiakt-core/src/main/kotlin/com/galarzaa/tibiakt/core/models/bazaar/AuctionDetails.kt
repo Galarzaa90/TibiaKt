@@ -3,9 +3,9 @@
 package com.galarzaa.tibiakt.core.models.bazaar
 
 import com.galarzaa.tibiakt.core.serializers.InstantSerializer
+import kotlinx.datetime.Instant
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
-import java.time.Instant
 
 /**
  * An auction's details

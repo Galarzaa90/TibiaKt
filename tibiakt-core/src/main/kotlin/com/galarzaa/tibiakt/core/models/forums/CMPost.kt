@@ -3,9 +3,9 @@
 package com.galarzaa.tibiakt.core.models.forums
 
 import com.galarzaa.tibiakt.core.serializers.InstantSerializer
+import kotlinx.datetime.Instant
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
-import java.time.Instant
 
 /**
  * A post made by a Community Manager in the [CMPostArchive]

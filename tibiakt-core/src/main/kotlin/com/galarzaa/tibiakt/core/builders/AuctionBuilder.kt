@@ -19,7 +19,7 @@ import com.galarzaa.tibiakt.core.models.bazaar.OutfitImage
 import com.galarzaa.tibiakt.core.models.bazaar.Outfits
 import com.galarzaa.tibiakt.core.models.bazaar.SalesArgument
 import com.galarzaa.tibiakt.core.utils.BuilderDsl
-import java.time.Instant
+import kotlinx.datetime.Instant
 
 @BuilderDsl
 inline fun auction(block: AuctionBuilder.() -> Unit) = AuctionBuilder().apply(block).build()

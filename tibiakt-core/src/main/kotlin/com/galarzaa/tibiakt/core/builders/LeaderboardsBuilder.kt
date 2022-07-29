@@ -4,7 +4,7 @@ import com.galarzaa.tibiakt.core.models.BaseLeaderboardEntry
 import com.galarzaa.tibiakt.core.models.Leaderboards
 import com.galarzaa.tibiakt.core.models.LeaderboardsRotation
 import com.galarzaa.tibiakt.core.utils.BuilderDsl
-import java.time.Instant
+import kotlinx.datetime.Instant
 
 @BuilderDsl
 inline fun leaderboards(block: LeaderboardsBuilder.() -> Unit) = LeaderboardsBuilder().apply(block).build()

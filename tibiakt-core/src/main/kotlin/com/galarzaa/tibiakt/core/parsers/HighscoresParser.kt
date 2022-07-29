@@ -18,10 +18,11 @@ import com.galarzaa.tibiakt.core.utils.parseLong
 import com.galarzaa.tibiakt.core.utils.parsePagination
 import com.galarzaa.tibiakt.core.utils.parseTablesMap
 import com.galarzaa.tibiakt.core.utils.rows
+import kotlinx.datetime.Clock
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
-import java.time.Instant
+import kotlin.time.Duration.Companion.minutes
 
 object HighscoresParser : Parser<Highscores?> {
     val numericMatch = Regex("""(\d+)""")
@@ -45,7 +46,7 @@ object HighscoresParser : Parser<Highscores?> {
                 ?: throw ParsingException("Could not find last update label")
             numericMatch.find(lastUpdateText)?.also {
                 val minutes = it.groups[0]!!.value.toInt()
-                lastUpdate = Instant.now().minusSeconds(60L * minutes)
+                lastUpdate = Clock.System.now().minus(minutes.minutes)
             }
             val paginationData = boxContent.selectFirst("small")?.parsePagination()
                 ?: throw ParsingException("could not find pagination block")

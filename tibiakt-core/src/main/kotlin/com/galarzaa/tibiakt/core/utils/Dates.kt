@@ -1,7 +1,8 @@
 package com.galarzaa.tibiakt.core.utils
 
+import kotlinx.datetime.Instant
+import kotlinx.datetime.toKotlinInstant
 import java.time.DayOfWeek
-import java.time.Instant
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
@@ -54,7 +55,7 @@ fun parseTibiaDateTime(input: String): Instant {
         LocalDateTime.parse(timeString, DateTimeFormatter.ofPattern("MMM dd yyyy, HH:mm:ss", Locale.US))
     } catch (dfe: DateTimeParseException) {
         LocalDateTime.parse(timeString, DateTimeFormatter.ofPattern("MMM dd yyyy, HH:mm", Locale.US))
-    }.atZone(tibiaTimezone).toInstant()
+    }.atZone(tibiaTimezone).toInstant().toKotlinInstant()
 }
 
 /**
@@ -73,5 +74,5 @@ fun parseTibiaFullDate(input: String): LocalDate {
 
 fun parseTibiaForumDate(input: String): Instant {
     return LocalDateTime.parse(input, DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss", Locale.US))
-        .atZone(tibiaTimezone).toInstant()
+        .atZone(tibiaTimezone).toInstant().toKotlinInstant()
 }
