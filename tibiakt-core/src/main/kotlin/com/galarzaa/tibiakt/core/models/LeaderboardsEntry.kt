@@ -1,39 +1,53 @@
+/*
+ * Copyright © 2022 Allan Galarza
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.galarzaa.tibiakt.core.models
 
-import com.galarzaa.tibiakt.core.utils.getCharacterUrl
+import com.galarzaa.tibiakt.core.models.character.BaseCharacter
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 
+/**
+ * Base class for Leaderboards entries.
+ *
+ * @property rank The rank of the character.
+ * @property dromeLevel The drome level of the character.
+ */
 @Serializable
-sealed class BaseLeaderboardEntry {
+sealed class BaseLeaderboardsEntry {
     abstract val rank: Int
     abstract val dromeLevel: Int
 }
 
 /**
  * An entry in the [LeaderboardsEntry].
- *
- * @property name The name of the character. Will be null if the character [isDeleted].
- * @property rank The rank of the character.
- * @property dromeLevel The Drome level of the character.
  */
 @Serializable
 @SerialName("leaderboardsEntry")
 data class LeaderboardsEntry(
     override val rank: Int,
-    val name: String,
+    override val name: String,
     override val dromeLevel: Int,
-) : BaseLeaderboardEntry() {
-    /**
-     * The URL to the character's page. If the character is deleted it will be null.
-     */
-    val url: String get() = getCharacterUrl(name)
-}
+) : BaseLeaderboardsEntry(), BaseCharacter
 
+/** A leaderboard entry belonging to a deleted character */
 @Serializable
 @SerialName("deletedLeaderboardsEntry")
 data class DeletedLeaderboardsEntry(
     override val rank: Int,
     override val dromeLevel: Int,
-) : BaseLeaderboardEntry()
+) : BaseLeaderboardsEntry()
