@@ -1,7 +1,24 @@
+/*
+ * Copyright © 2022 Allan Galarza
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.galarzaa.tibiakt.client
 
 import com.galarzaa.tibiakt.client.exceptions.ForbiddenException
 import com.galarzaa.tibiakt.client.exceptions.NetworkException
+import com.galarzaa.tibiakt.client.exceptions.SiteMaintenanceException
 import com.galarzaa.tibiakt.core.builders.BazaarFiltersBuilder
 import com.galarzaa.tibiakt.core.enums.AvailableForumSection
 import com.galarzaa.tibiakt.core.enums.BazaarType
@@ -135,6 +152,7 @@ open class TibiaKtClient constructor(
             register(Charsets.UTF_8)
             register(Charsets.ISO_8859_1)
         }
+        followRedirects = false
         install(ContentEncoding) {
             gzip()
             deflate()
@@ -165,14 +183,26 @@ open class TibiaKtClient constructor(
                         headers { headers.forEach { header(it.first, it.second) } }
                     }
                 }
+
                 HttpMethod.Post -> client.submitForm(url, formParameters = Parameters.build {
                     data.forEach { append(it.first, it.second.toString()) }
                 }, encodeInQuery = false) {
 
                 }
+
                 else -> throw IllegalArgumentException("Unsupported method $method")
             }
         } catch (re: ResponseException) {
+            if (re.response.status in listOf(
+                    HttpStatusCode.MovedPermanently,
+                    HttpStatusCode.Found,
+                    HttpStatusCode.TemporaryRedirect,
+                    HttpStatusCode.PermanentRedirect,
+                    HttpStatusCode.SeeOther
+                )
+            ) {
+                throw SiteMaintenanceException("Tibia.com is under maintenance.", re)
+            }
             if (re.response.status == HttpStatusCode.Forbidden) {
                 throw ForbiddenException("403 Forbidden: Might be getting rate-limited", re)
             }
@@ -343,12 +373,14 @@ open class TibiaKtClient constructor(
             }
             currentPage++
         }
-        return TibiaResponse(timestamp = now,
+        return TibiaResponse(
+            timestamp = now,
             isCached = false,
             cacheAge = 0,
             fetchingTime = fetchingTime,
             parsingTime = parsingTime,
-            data = baseHighscores!!.copy(entries = entries))
+            data = baseHighscores!!.copy(entries = entries)
+        )
     }
 
     /**
@@ -521,55 +553,59 @@ open class TibiaKtClient constructor(
         var mountEntries: List<MountEntry>? = null
         var storeMountEntries: List<MountEntry>? = null
         if (fetchItems) {
-            itemEntries = fetchAllPages(tibiaResponse.data.auctionId,
-                AuctionPagesType.ITEMS,
-                tibiaResponse.data.details!!.items).accumulateTime(accumulator)
-            storeItemEntries = fetchAllPages(tibiaResponse.data.auctionId,
-                AuctionPagesType.ITEMS_STORE,
-                tibiaResponse.data.details!!.storeItems).accumulateTime(accumulator)
+            itemEntries = fetchAllPages(
+                tibiaResponse.data.auctionId, AuctionPagesType.ITEMS, tibiaResponse.data.details!!.items
+            ).accumulateTime(accumulator)
+            storeItemEntries = fetchAllPages(
+                tibiaResponse.data.auctionId, AuctionPagesType.ITEMS_STORE, tibiaResponse.data.details!!.storeItems
+            ).accumulateTime(accumulator)
         }
         if (fetchMounts) {
-            mountEntries = fetchAllPages(tibiaResponse.data.auctionId,
-                AuctionPagesType.MOUNTS,
-                tibiaResponse.data.details!!.mounts).accumulateTime(accumulator)
-            storeMountEntries = fetchAllPages(tibiaResponse.data.auctionId,
-                AuctionPagesType.MOUNTS_STORE,
-                tibiaResponse.data.details!!.storeMounts).accumulateTime(accumulator)
+            mountEntries = fetchAllPages(
+                tibiaResponse.data.auctionId, AuctionPagesType.MOUNTS, tibiaResponse.data.details!!.mounts
+            ).accumulateTime(accumulator)
+            storeMountEntries = fetchAllPages(
+                tibiaResponse.data.auctionId, AuctionPagesType.MOUNTS_STORE, tibiaResponse.data.details!!.storeMounts
+            ).accumulateTime(accumulator)
         }
         if (fetchOutfits) {
-            outfitEntries = fetchAllPages(tibiaResponse.data.auctionId,
-                AuctionPagesType.OUTFITS,
-                tibiaResponse.data.details!!.outfits).accumulateTime(accumulator)
-            storeOutfitEntries = fetchAllPages(tibiaResponse.data.auctionId,
-                AuctionPagesType.OUTFITS_STORE,
-                tibiaResponse.data.details!!.storeOutfits).accumulateTime(accumulator)
+            outfitEntries = fetchAllPages(
+                tibiaResponse.data.auctionId, AuctionPagesType.OUTFITS, tibiaResponse.data.details!!.outfits
+            ).accumulateTime(accumulator)
+            storeOutfitEntries = fetchAllPages(
+                tibiaResponse.data.auctionId, AuctionPagesType.OUTFITS_STORE, tibiaResponse.data.details!!.storeOutfits
+            ).accumulateTime(accumulator)
         }
-        return tibiaResponse.copy(fetchingTime = accumulator.fetching,
-            parsingTime = accumulator.parsing,
-            data = tibiaResponse.data.copy(details = tibiaResponse.data.details!!.copy(
-                items = tibiaResponse.data.details!!.items.copy(
-                    entries = itemEntries ?: tibiaResponse.data.details!!.items.entries,
-                    fullyFetched = fetchItems,
-                ),
-                storeItems = tibiaResponse.data.details!!.items.copy(
-                    entries = storeItemEntries ?: tibiaResponse.data.details!!.items.entries,
-                    fullyFetched = fetchItems,
-                ),
-                mounts = tibiaResponse.data.details!!.mounts.copy(
-                    entries = mountEntries ?: tibiaResponse.data.details!!.mounts.entries,
-                    fullyFetched = fetchMounts,
-                ),
-                storeMounts = tibiaResponse.data.details!!.storeMounts.copy(entries = storeMountEntries
-                    ?: tibiaResponse.data.details!!.storeMounts.entries, fullyFetched = fetchMounts),
-                outfits = tibiaResponse.data.details!!.outfits.copy(
-                    entries = outfitEntries ?: tibiaResponse.data.details!!.outfits.entries,
-                    fullyFetched = fetchOutfits,
-                ),
-                storeOutfits = tibiaResponse.data.details!!.storeOutfits.copy(
-                    entries = storeOutfitEntries ?: tibiaResponse.data.details!!.storeOutfits.entries,
-                    fullyFetched = fetchOutfits,
-                ),
-            )))
+        return tibiaResponse.copy(
+            fetchingTime = accumulator.fetching, parsingTime = accumulator.parsing, data = tibiaResponse.data.copy(
+                details = tibiaResponse.data.details!!.copy(
+                    items = tibiaResponse.data.details!!.items.copy(
+                        entries = itemEntries ?: tibiaResponse.data.details!!.items.entries,
+                        fullyFetched = fetchItems,
+                    ),
+                    storeItems = tibiaResponse.data.details!!.items.copy(
+                        entries = storeItemEntries ?: tibiaResponse.data.details!!.items.entries,
+                        fullyFetched = fetchItems,
+                    ),
+                    mounts = tibiaResponse.data.details!!.mounts.copy(
+                        entries = mountEntries ?: tibiaResponse.data.details!!.mounts.entries,
+                        fullyFetched = fetchMounts,
+                    ),
+                    storeMounts = tibiaResponse.data.details!!.storeMounts.copy(
+                        entries = storeMountEntries ?: tibiaResponse.data.details!!.storeMounts.entries,
+                        fullyFetched = fetchMounts
+                    ),
+                    outfits = tibiaResponse.data.details!!.outfits.copy(
+                        entries = outfitEntries ?: tibiaResponse.data.details!!.outfits.entries,
+                        fullyFetched = fetchOutfits,
+                    ),
+                    storeOutfits = tibiaResponse.data.details!!.storeOutfits.copy(
+                        entries = storeOutfitEntries ?: tibiaResponse.data.details!!.storeOutfits.entries,
+                        fullyFetched = fetchOutfits,
+                    ),
+                )
+            )
+        )
     }
 
     // endregion
@@ -584,7 +620,8 @@ open class TibiaKtClient constructor(
         cacheAge = headers["Age"]?.toInt() ?: 0,
         fetchingTime = fetchingTime,
         parsingTime = parsingTime,
-        data = data)
+        data = data
+    )
 
     /**
      * Parse the [HttpResponse] into a TibiaResponse.
