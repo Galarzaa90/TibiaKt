@@ -66,26 +66,26 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    75%
+    63.3%
   </span>
   <span class="absValue">
-    (30/40)
+    (38/60)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    96.7%
+    96.8%
   </span>
   <span class="absValue">
-    (58/60)
+    (61/63)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    90.2%
+    87.1%
   </span>
   <span class="absValue">
-    (404/448)
+    (438/503)
   </span>
 </td>
 </tr>
@@ -118,7 +118,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">19</i>&nbsp;import com.galarzaa.tibiakt.core.builders.lastPost
 <i class="no-highlight">20</i>&nbsp;import com.galarzaa.tibiakt.core.enums.StringEnum
 <i class="no-highlight">21</i>&nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
-<i class="no-highlight">22</i>&nbsp;import com.galarzaa.tibiakt.core.models.character.GuildMembership
+<i class="no-highlight">22</i>&nbsp;import com.galarzaa.tibiakt.core.models.character.GuildMembershipWithTitle
 <i class="no-highlight">23</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.BaseForumAuthor
 <i class="no-highlight">24</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.ForumAuthor
 <i class="no-highlight">25</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.LastPost
@@ -127,10 +127,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">28</i>&nbsp;import org.jsoup.nodes.Element
 <i class="no-highlight">29</i>&nbsp;
 <i class="no-highlight">30</i>&nbsp;internal fun parseLastPostFromCell(cell: Element): LastPost? {
-<b class="pc"><i class="no-highlight">31</i>&nbsp;    val postDate = cell.selectFirst(&quot;div.LastPostInfo&quot;) ?: return null</b>
+<b class="pc"><i class="no-highlight">31</i>&nbsp;    val postDate = cell.selectFirst(&quot;span.LastPostInfo&quot;) ?: return null</b>
 <b class="pc"><i class="no-highlight">32</i>&nbsp;    val permalink = cell.selectFirst(&quot;a&quot;)?.getLinkInformation() ?: return null</b>
 <b class="pc"><i class="no-highlight">33</i>&nbsp;    val authorTag = cell.selectFirst(&quot;font&quot;) ?: return null</b>
-<b class="fc"><i class="no-highlight">34</i>&nbsp;    val authorLink = authorTag.selectFirst(&quot;font &gt; a&quot;)?.getLinkInformation()</b>
+<b class="fc"><i class="no-highlight">34</i>&nbsp;    val authorLink = authorTag.selectFirst(&quot;a&quot;)?.getLinkInformation()</b>
 <b class="fc"><i class="no-highlight">35</i>&nbsp;    var authorName = authorTag.cleanText().removePrefix(&quot;by &quot;)</b>
 <b class="fc"><i class="no-highlight">36</i>&nbsp;    var isTraded = false</b>
 <b class="fc"><i class="no-highlight">37</i>&nbsp;    if (&quot;(traded)&quot; in authorName) {</b>
@@ -151,54 +151,59 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc"><i class="no-highlight">52</i>&nbsp;private val charInfoRegex = Regex(&quot;&quot;&quot;Inhabitant of (\w+)\nVocation: ([\w\s]+)\nLevel: (\d+)&quot;&quot;&quot;)</b>
 <b class="fc"><i class="no-highlight">53</i>&nbsp;private val authorPostsRegex = Regex(&quot;&quot;&quot;Posts: (\d+)&quot;&quot;&quot;)</b>
 <i class="no-highlight">54</i>&nbsp;
-<i class="no-highlight">55</i>&nbsp;internal fun parseAuthorTable(table: Element): BaseForumAuthor {
-<b class="fc"><i class="no-highlight">56</i>&nbsp;    val charLink = table.selectFirst(&quot;a&quot;)?.getLinkInformation()</b>
-<b class="fc"><i class="no-highlight">57</i>&nbsp;    if (charLink == null) {</b>
-<b class="fc"><i class="no-highlight">58</i>&nbsp;        val name = table.cleanText()</b>
-<b class="fc"><i class="no-highlight">59</i>&nbsp;        val traded: Boolean = name.contains(&quot;(traded)&quot;)</b>
-<b class="pc"><i class="no-highlight">60</i>&nbsp;        return UnavailableForumAuthor(name.remove(&quot;(traded)&quot;).trim(), !traded, traded)</b>
-<i class="no-highlight">61</i>&nbsp;    }
-<b class="fc"><i class="no-highlight">62</i>&nbsp;    val positionInfo = table.select(&quot;font.ff_smallinfo&quot;)</b>
-<b class="fc"><i class="no-highlight">63</i>&nbsp;    var title: String? = null</b>
-<b class="fc"><i class="no-highlight">64</i>&nbsp;    var position: String? = null</b>
-<b class="fc"><i class="no-highlight">65</i>&nbsp;    var recentlyTraded = false</b>
-<b class="fc"><i class="no-highlight">66</i>&nbsp;    positionInfo.filter { it.parent() == table }.forEach { element -&gt;</b>
-<b class="fc"><i class="no-highlight">67</i>&nbsp;        element.replaceBrs().wholeCleanText().split(&quot;\n&quot;).forEach {</b>
-<b class="fc"><i class="no-highlight">68</i>&nbsp;            if (it in titles) position = it</b>
-<b class="fc"><i class="no-highlight">69</i>&nbsp;            else if (&quot;traded&quot; in it) recentlyTraded = true</b>
-<b class="fc"><i class="no-highlight">70</i>&nbsp;            else title = it</b>
-<b class="fc"><i class="no-highlight">71</i>&nbsp;        }</b>
-<b class="fc"><i class="no-highlight">72</i>&nbsp;    }</b>
-<b class="fc"><i class="no-highlight">73</i>&nbsp;    var guildMembership: GuildMembership? = null</b>
-<b class="fc"><i class="no-highlight">74</i>&nbsp;    val charInfo = table.selectFirst(&quot;font.ff_infotext&quot;)!!</b>
-<b class="fc"><i class="no-highlight">75</i>&nbsp;    charInfo.selectFirst(&quot;font.ff_smallinfo&quot;)?.let {</b>
-<b class="fc"><i class="no-highlight">76</i>&nbsp;        val guildLink = it.selectFirst(&quot;a&quot;)</b>
-<b class="pc"><i class="no-highlight">77</i>&nbsp;        val guildLinkInfo = guildLink?.getLinkInformation()!!</b>
-<b class="fc"><i class="no-highlight">78</i>&nbsp;        val guildName = guildLinkInfo.title</b>
-<b class="fc"><i class="no-highlight">79</i>&nbsp;        guildLink.remove()</b>
-<b class="fc"><i class="no-highlight">80</i>&nbsp;        val rank = it.cleanText().removeSuffix(&quot;of the&quot;).trim()</b>
-<b class="fc"><i class="no-highlight">81</i>&nbsp;        guildMembership = GuildMembership(guildName, rank)</b>
-<b class="fc"><i class="no-highlight">82</i>&nbsp;    }</b>
-<b class="fc"><i class="no-highlight">83</i>&nbsp;    charInfo.replaceBrs()</b>
-<b class="pc"><i class="no-highlight">84</i>&nbsp;    if (&quot;Tournament - &quot; in charInfo.cleanText()) {</b>
-<b class="nc"><i class="no-highlight">85</i>&nbsp;        return TournamentForumAuthor(charLink.title, charInfo.cleanText().findInteger())</b>
-<i class="no-highlight">86</i>&nbsp;    }
-<i class="no-highlight">87</i>&nbsp;
-<b class="pc"><i class="no-highlight">88</i>&nbsp;    val (_, world, vocation, level) = charInfoRegex.find(charInfo.wholeCleanText())?.groupValues</b>
-<b class="nc"><i class="no-highlight">89</i>&nbsp;        ?: throw ParsingException(&quot;Could not find character info&quot;)</b>
-<i class="no-highlight">90</i>&nbsp;
-<b class="fc"><i class="no-highlight">91</i>&nbsp;    val (_, postsText) = authorPostsRegex.find(charInfo.wholeCleanText())!!.groupValues</b>
-<i class="no-highlight">92</i>&nbsp;
-<b class="fc"><i class="no-highlight">93</i>&nbsp;    return ForumAuthor(name = charLink.title,</b>
-<b class="fc"><i class="no-highlight">94</i>&nbsp;        level = level.toInt(),</b>
-<b class="fc"><i class="no-highlight">95</i>&nbsp;        world = world,</b>
-<b class="pc"><i class="no-highlight">96</i>&nbsp;        vocation = StringEnum.fromValue(vocation) ?: throw ParsingException(&quot;Unknown vocation: $vocation&quot;),</b>
-<b class="fc"><i class="no-highlight">97</i>&nbsp;        position = position,</b>
-<b class="fc"><i class="no-highlight">98</i>&nbsp;        title = title,</b>
-<b class="fc"><i class="no-highlight">99</i>&nbsp;        guild = guildMembership,</b>
-<b class="fc"><i class="no-highlight">100</i>&nbsp;        posts = postsText.parseInteger(),</b>
-<b class="fc"><i class="no-highlight">101</i>&nbsp;        isRecentlyTraded = recentlyTraded)</b>
-<i class="no-highlight">102</i>&nbsp;}
+<b class="fc"><i class="no-highlight">55</i>&nbsp;private val titleRegex = Regex(&quot;&quot;&quot;\(([\w\s]+)\)&quot;&quot;&quot;)</b>
+<i class="no-highlight">56</i>&nbsp;
+<i class="no-highlight">57</i>&nbsp;internal fun parseAuthorTable(table: Element): BaseForumAuthor {
+<b class="fc"><i class="no-highlight">58</i>&nbsp;    val charLink = table.selectFirst(&quot;a&quot;)?.getLinkInformation()</b>
+<b class="fc"><i class="no-highlight">59</i>&nbsp;    if (charLink == null) {</b>
+<b class="fc"><i class="no-highlight">60</i>&nbsp;        val name = table.cleanText()</b>
+<b class="fc"><i class="no-highlight">61</i>&nbsp;        val traded: Boolean = name.contains(&quot;(traded)&quot;)</b>
+<b class="pc"><i class="no-highlight">62</i>&nbsp;        return UnavailableForumAuthor(name.remove(&quot;(traded)&quot;).trim(), !traded, traded)</b>
+<i class="no-highlight">63</i>&nbsp;    }
+<b class="fc"><i class="no-highlight">64</i>&nbsp;    val charInfo = table.selectFirst(&quot;font.ff_infotext&quot;)</b>
+<b class="fc"><i class="no-highlight">65</i>&nbsp;    val positionInfo = table.selectFirst(&quot;font.ff_smallinfo&quot;)</b>
+<b class="fc"><i class="no-highlight">66</i>&nbsp;    var title: String? = null</b>
+<b class="fc"><i class="no-highlight">67</i>&nbsp;    var position: String? = null</b>
+<b class="fc"><i class="no-highlight">68</i>&nbsp;    var recentlyTraded = false</b>
+<b class="pc"><i class="no-highlight">69</i>&nbsp;    if (positionInfo != null &amp;&amp; (charInfo == null || positionInfo.parent() != charInfo)) {</b>
+<b class="fc"><i class="no-highlight">70</i>&nbsp;        positionInfo.replaceBrs().wholeCleanText().split(&quot;\n&quot;).forEach {</b>
+<b class="fc"><i class="no-highlight">71</i>&nbsp;            if (it in titles) position = it</b>
+<b class="pc"><i class="no-highlight">72</i>&nbsp;            else if (&quot;traded&quot; in it) recentlyTraded = true</b>
+<b class="fc"><i class="no-highlight">73</i>&nbsp;            else title = it</b>
+<b class="fc"><i class="no-highlight">74</i>&nbsp;        }</b>
+<i class="no-highlight">75</i>&nbsp;    }
+<b class="fc"><i class="no-highlight">76</i>&nbsp;    var guildMembership: GuildMembershipWithTitle? = null</b>
+<b class="pc"><i class="no-highlight">77</i>&nbsp;    charInfo?.selectFirst(&quot;font.ff_smallinfo&quot;)?.let {</b>
+<b class="fc"><i class="no-highlight">78</i>&nbsp;        val guildLink = it.selectFirst(&quot;a&quot;)</b>
+<b class="pc"><i class="no-highlight">79</i>&nbsp;        val guildLinkInfo = guildLink?.getLinkInformation()!!</b>
+<b class="fc"><i class="no-highlight">80</i>&nbsp;        val guildName = guildLinkInfo.title</b>
+<b class="fc"><i class="no-highlight">81</i>&nbsp;        guildLink.remove()</b>
+<b class="fc"><i class="no-highlight">82</i>&nbsp;        var rank = it.cleanText()</b>
+<b class="pc"><i class="no-highlight">83</i>&nbsp;        val title = titleRegex.find(rank)?.groupValues?.get(1)?.also { rank = rank.remove(&quot;($it)&quot;).trim() }</b>
+<b class="fc"><i class="no-highlight">84</i>&nbsp;        rank = rank.removeSuffix(&quot;of the&quot;).trim()</b>
+<b class="fc"><i class="no-highlight">85</i>&nbsp;        guildMembership = GuildMembershipWithTitle(guildName, rank, title)</b>
+<b class="fc"><i class="no-highlight">86</i>&nbsp;    }</b>
+<b class="pc"><i class="no-highlight">87</i>&nbsp;    charInfo?.replaceBrs()</b>
+<b class="pc"><i class="no-highlight">88</i>&nbsp;    if (charInfo?.cleanText()?.contains(&quot;Tournament - &quot;) == true) {</b>
+<b class="nc"><i class="no-highlight">89</i>&nbsp;        return TournamentForumAuthor(charLink.title, charInfo.cleanText().findInteger())</b>
+<i class="no-highlight">90</i>&nbsp;    }
+<i class="no-highlight">91</i>&nbsp;
+<b class="pc"><i class="no-highlight">92</i>&nbsp;    val (_, world, vocation, level) = charInfoRegex.find(charInfo!!.wholeCleanText())?.groupValues</b>
+<b class="nc"><i class="no-highlight">93</i>&nbsp;        ?: throw ParsingException(&quot;Could not find character info&quot;)</b>
+<i class="no-highlight">94</i>&nbsp;
+<b class="fc"><i class="no-highlight">95</i>&nbsp;    val (_, postsText) = authorPostsRegex.find(charInfo!!.wholeCleanText())!!.groupValues</b>
+<i class="no-highlight">96</i>&nbsp;
+<b class="fc"><i class="no-highlight">97</i>&nbsp;    return ForumAuthor(</b>
+<b class="fc"><i class="no-highlight">98</i>&nbsp;        name = charLink.title,</b>
+<b class="fc"><i class="no-highlight">99</i>&nbsp;        level = level.toInt(),</b>
+<b class="fc"><i class="no-highlight">100</i>&nbsp;        world = world,</b>
+<b class="pc"><i class="no-highlight">101</i>&nbsp;        vocation = StringEnum.fromValue(vocation) ?: throw ParsingException(&quot;Unknown vocation: $vocation&quot;),</b>
+<b class="fc"><i class="no-highlight">102</i>&nbsp;        position = position,</b>
+<b class="fc"><i class="no-highlight">103</i>&nbsp;        title = title,</b>
+<b class="fc"><i class="no-highlight">104</i>&nbsp;        guild = guildMembership,</b>
+<b class="fc"><i class="no-highlight">105</i>&nbsp;        posts = postsText.parseInteger(),</b>
+<b class="fc"><i class="no-highlight">106</i>&nbsp;        isRecentlyTraded = recentlyTraded)</b>
+<i class="no-highlight">107</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -225,7 +230,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-08-05 22:13</div>
+    <div style="float:right;">generated on 2022-08-06 15:58</div>
 </div>
 </body>
 </html>

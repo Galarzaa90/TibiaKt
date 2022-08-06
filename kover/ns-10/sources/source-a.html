@@ -182,7 +182,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="pc"><i class="no-highlight">25</i>&nbsp;            val boardRows = tables[&quot;Boards&quot;]!!.selectFirst(&quot;table.TableContent&quot;)?.select(&quot;tr:not(.LabelH)&quot;)!!</b>
 <b class="fc"><i class="no-highlight">26</i>&nbsp;            for (row in boardRows) {</b>
 <b class="fc"><i class="no-highlight">27</i>&nbsp;                val columns = row.cells()</b>
-<b class="fc"><i class="no-highlight">28</i>&nbsp;                if (columns.size != 5) continue</b>
+<b class="fc"><i class="no-highlight">28</i>&nbsp;                if (columns.size != 6) continue</b>
 <b class="fc"><i class="no-highlight">29</i>&nbsp;                val boardColumn = columns[1]</b>
 <b class="pc"><i class="no-highlight">30</i>&nbsp;                val boardLink = boardColumn.selectFirst(&quot;a&quot;)?.getLinkInformation()!!</b>
 <i class="no-highlight">31</i>&nbsp;
@@ -231,7 +231,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-08-05 22:13</div>
+    <div style="float:right;">generated on 2022-08-06 15:58</div>
 </div>
 </body>
 </html>
