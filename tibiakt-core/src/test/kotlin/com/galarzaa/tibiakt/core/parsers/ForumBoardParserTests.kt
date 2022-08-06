@@ -37,7 +37,7 @@ class ForumBoardParserTests : StringSpec({
             ForumBoardParser.fromContent(TestResources.getResource("forums/forumBoardTradedThreadAutorAndLastPost.txt"))
         board shouldNotBe null
         with(board!!) {
-            name shouldBe "Astera"
+            name shouldBe "Batabra"
             section shouldBe "World Boards"
             sectionId shouldBe 2
             entries.forAtLeastOne {
@@ -75,8 +75,8 @@ class ForumBoardParserTests : StringSpec({
             threadAge shouldBe -1
             currentPage shouldBe 1
             announcements shouldHaveSize 5
-            totalPages shouldBe 1920
-            resultsCount shouldBe 57592
+            totalPages shouldBe 1938
+            resultsCount shouldBe 58115
             entries shouldHaveSize 30
             entries.forAll {
                 it.goldenFrame shouldBe true

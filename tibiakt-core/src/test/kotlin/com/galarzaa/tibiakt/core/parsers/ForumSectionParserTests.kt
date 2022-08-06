@@ -9,6 +9,6 @@ class ForumSectionParserTests : StringSpec({
     "World Boards" {
         val boards = ForumSectionParser.fromContent(getResource("forums/forumSectionWorldBoards.txt"))
         boards.sectionId shouldBe 2
-        boards.entries shouldHaveSize 79
+        boards.entries shouldHaveSize 82
     }
 })
