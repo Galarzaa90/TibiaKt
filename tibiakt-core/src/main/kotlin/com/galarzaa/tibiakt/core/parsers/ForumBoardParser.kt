@@ -19,7 +19,6 @@ import org.jsoup.nodes.Element
 
 object ForumBoardParser : Parser<ForumBoard?> {
     private val fileNameRegex = Regex("""([\w_]+.gif)""")
-
     override fun fromContent(content: String): ForumBoard? {
         val boxContent = boxContent(content, org.jsoup.parser.Parser.xmlParser())
         val forumBreadcrumbs = boxContent.selectFirst("div.ForumBreadCrumbs")
@@ -55,7 +54,7 @@ object ForumBoardParser : Parser<ForumBoard?> {
     private fun ForumBoardBuilder.parseThreadsTable(table: Element) {
         for (row in table.rows().offsetStart(1)) {
             val columns = row.cells()
-            if (columns.size != 7) continue
+            if (columns.size < 6) continue
             thread {
                 val (threadLink, pageLinks) = columns[2].select("a").mapNotNull { it.getLinkInformation() }
                     .let { it.first() to it.drop(1) }

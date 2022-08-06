@@ -26,7 +26,6 @@ import com.galarzaa.tibiakt.core.utils.getLinkInformation
 import com.galarzaa.tibiakt.core.utils.parseAuthorTable
 import com.galarzaa.tibiakt.core.utils.parsePagination
 import com.galarzaa.tibiakt.core.utils.parseTibiaForumDateTime
-import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 import org.jsoup.nodes.TextNode
 
@@ -102,24 +101,35 @@ object ForumThreadParser : Parser<ForumThread?> {
     private fun ForumThreadBuilder.parsePostContainer(container: Element) {
         addPost {
             author = parseAuthorTable(container.selectFirst("div.PostCharacterText")!!)
-            val contentContainer = container.selectFirst("div.PostText")
+            val contentContainer = container.selectFirst("div.PostText")!!
+            var emoticonTag: Element? = null
+            var titleTag: Element? = null
+            while (true) {
+                val child = contentContainer.child(0)
+                child.remove()
+                if (child.tagName() == "img")
+                    emoticonTag = child
+                if (child.tagName() == "b")
+                    titleTag = child
+                if (child.tagName() == "div")
+                    break
+            }
+            contentContainer.selectFirst("br")?.remove()
+
             val signatureContainer = container.selectFirst("td.ff_pagetext")
             if (signatureContainer != null) {
                 signature = signatureContainer.html()
                 signatureContainer.remove()
             }
-            content = contentContainer!!.html()
+            content = contentContainer.html()
             if (signatureContainer != null) {
                 val parts = content!!.split(SIGNATURE_SEPARATOR)
                 content = parts.subList(0, parts.size - 1).joinToString(SIGNATURE_SEPARATOR)
             }
-            val (titleRaw, cleanContent) = content!!.split(Regex("""<br/?>\s*<br/?>"""), limit = 2)
-            content = cleanContent
-            val parsedTitle = Jsoup.parse(titleRaw)
-            parsedTitle.selectFirst("img")?.let {
+            emoticonTag?.let {
                 emoticon = ForumEmoticon(it.attr("alt"), it.attr("src"))
             }
-            parsedTitle.selectFirst("b")?.let {
+            titleTag?.let {
                 title = it.cleanText()
             }
             val postDetails = container.selectFirst("div.PostDetails")!!

@@ -19,7 +19,7 @@ package com.galarzaa.tibiakt.core.utils
 import com.galarzaa.tibiakt.core.builders.lastPost
 import com.galarzaa.tibiakt.core.enums.StringEnum
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
-import com.galarzaa.tibiakt.core.models.character.GuildMembership
+import com.galarzaa.tibiakt.core.models.character.GuildMembershipWithTitle
 import com.galarzaa.tibiakt.core.models.forums.BaseForumAuthor
 import com.galarzaa.tibiakt.core.models.forums.ForumAuthor
 import com.galarzaa.tibiakt.core.models.forums.LastPost
@@ -28,10 +28,10 @@ import com.galarzaa.tibiakt.core.models.forums.UnavailableForumAuthor
 import org.jsoup.nodes.Element
 
 internal fun parseLastPostFromCell(cell: Element): LastPost? {
-    val postDate = cell.selectFirst("div.LastPostInfo") ?: return null
+    val postDate = cell.selectFirst("span.LastPostInfo") ?: return null
     val permalink = cell.selectFirst("a")?.getLinkInformation() ?: return null
     val authorTag = cell.selectFirst("font") ?: return null
-    val authorLink = authorTag.selectFirst("font > a")?.getLinkInformation()
+    val authorLink = authorTag.selectFirst("a")?.getLinkInformation()
     var authorName = authorTag.cleanText().removePrefix("by ")
     var isTraded = false
     if ("(traded)" in authorName) {
@@ -52,6 +52,8 @@ private val titles =
 private val charInfoRegex = Regex("""Inhabitant of (\w+)\nVocation: ([\w\s]+)\nLevel: (\d+)""")
 private val authorPostsRegex = Regex("""Posts: (\d+)""")
 
+private val titleRegex = Regex("""\(([\w\s]+)\)""")
+
 internal fun parseAuthorTable(table: Element): BaseForumAuthor {
     val charLink = table.selectFirst("a")?.getLinkInformation()
     if (charLink == null) {
@@ -59,38 +61,41 @@ internal fun parseAuthorTable(table: Element): BaseForumAuthor {
         val traded: Boolean = name.contains("(traded)")
         return UnavailableForumAuthor(name.remove("(traded)").trim(), !traded, traded)
     }
-    val positionInfo = table.select("font.ff_smallinfo")
+    val charInfo = table.selectFirst("font.ff_infotext")
+    val positionInfo = table.selectFirst("font.ff_smallinfo")
     var title: String? = null
     var position: String? = null
     var recentlyTraded = false
-    positionInfo.filter { it.parent() == table }.forEach { element ->
-        element.replaceBrs().wholeCleanText().split("\n").forEach {
+    if (positionInfo != null && (charInfo == null || positionInfo.parent() != charInfo)) {
+        positionInfo.replaceBrs().wholeCleanText().split("\n").forEach {
             if (it in titles) position = it
             else if ("traded" in it) recentlyTraded = true
             else title = it
         }
     }
-    var guildMembership: GuildMembership? = null
-    val charInfo = table.selectFirst("font.ff_infotext")!!
-    charInfo.selectFirst("font.ff_smallinfo")?.let {
+    var guildMembership: GuildMembershipWithTitle? = null
+    charInfo?.selectFirst("font.ff_smallinfo")?.let {
         val guildLink = it.selectFirst("a")
         val guildLinkInfo = guildLink?.getLinkInformation()!!
         val guildName = guildLinkInfo.title
         guildLink.remove()
-        val rank = it.cleanText().removeSuffix("of the").trim()
-        guildMembership = GuildMembership(guildName, rank)
+        var rank = it.cleanText()
+        val title = titleRegex.find(rank)?.groupValues?.get(1)?.also { rank = rank.remove("($it)").trim() }
+        rank = rank.removeSuffix("of the").trim()
+        guildMembership = GuildMembershipWithTitle(guildName, rank, title)
     }
-    charInfo.replaceBrs()
-    if ("Tournament - " in charInfo.cleanText()) {
+    charInfo?.replaceBrs()
+    if (charInfo?.cleanText()?.contains("Tournament - ") == true) {
         return TournamentForumAuthor(charLink.title, charInfo.cleanText().findInteger())
     }
 
-    val (_, world, vocation, level) = charInfoRegex.find(charInfo.wholeCleanText())?.groupValues
+    val (_, world, vocation, level) = charInfoRegex.find(charInfo!!.wholeCleanText())?.groupValues
         ?: throw ParsingException("Could not find character info")
 
-    val (_, postsText) = authorPostsRegex.find(charInfo.wholeCleanText())!!.groupValues
+    val (_, postsText) = authorPostsRegex.find(charInfo!!.wholeCleanText())!!.groupValues
 
-    return ForumAuthor(name = charLink.title,
+    return ForumAuthor(
+        name = charLink.title,
         level = level.toInt(),
         world = world,
         vocation = StringEnum.fromValue(vocation) ?: throw ParsingException("Unknown vocation: $vocation"),

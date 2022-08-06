@@ -25,7 +25,7 @@ object ForumSectionParser : Parser<ForumSection> {
             val boardRows = tables["Boards"]!!.selectFirst("table.TableContent")?.select("tr:not(.LabelH)")!!
             for (row in boardRows) {
                 val columns = row.cells()
-                if (columns.size != 5) continue
+                if (columns.size != 6) continue
                 val boardColumn = columns[1]
                 val boardLink = boardColumn.selectFirst("a")?.getLinkInformation()!!
 

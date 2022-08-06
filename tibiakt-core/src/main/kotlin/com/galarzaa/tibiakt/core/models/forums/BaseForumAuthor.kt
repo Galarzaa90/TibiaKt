@@ -2,7 +2,7 @@ package com.galarzaa.tibiakt.core.models.forums
 
 import com.galarzaa.tibiakt.core.enums.Vocation
 import com.galarzaa.tibiakt.core.models.character.BaseCharacter
-import com.galarzaa.tibiakt.core.models.character.GuildMembership
+import com.galarzaa.tibiakt.core.models.character.GuildMembershipWithTitle
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -47,7 +47,7 @@ data class ForumAuthor(
     val position: String?,
     val title: String?,
     val vocation: Vocation,
-    val guild: GuildMembership?,
+    val guild: GuildMembershipWithTitle?,
     val posts: Int,
     val isRecentlyTraded: Boolean,
 ) : BaseForumAuthor(), BaseCharacter
