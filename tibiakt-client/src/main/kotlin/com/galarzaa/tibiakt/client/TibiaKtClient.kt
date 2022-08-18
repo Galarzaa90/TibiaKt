@@ -345,7 +345,7 @@ open class TibiaKtClient constructor(
         page: Int = 1,
         battlEyeType: HighscoresBattlEyeType = HighscoresBattlEyeType.ANY_WORLD,
         pvpTypes: Set<PvpType>? = null,
-    ): TibiaResponse<Highscores> {
+    ): TibiaResponse<Highscores?> {
         val response =
             this.request(HttpMethod.Get, getHighscoresUrl(world, category, vocation, page, battlEyeType, pvpTypes))
         return response.parse { HighscoresParser.fromContent(it) }
@@ -357,7 +357,7 @@ open class TibiaKtClient constructor(
         vocation: HighscoresProfession = HighscoresProfession.ALL,
         battlEyeType: HighscoresBattlEyeType = HighscoresBattlEyeType.ANY_WORLD,
         pvpTypes: Set<PvpType>? = null,
-    ): TibiaResponse<Highscores> {
+    ): TibiaResponse<Highscores?> {
         val now = Clock.System.now()
         var totalPages = 0
         var currentPage = 1
@@ -367,6 +367,7 @@ open class TibiaKtClient constructor(
         var baseHighscores: Highscores? = null
         while (totalPages == 0 || currentPage <= totalPages) {
             val response = fetchHighscoresPage(world, category, vocation, currentPage, battlEyeType, pvpTypes)
+            if (response.data == null) return response
             entries.addAll(response.data.entries)
             totalPages = response.data.totalPages
             fetchingTime += response.fetchingTime
