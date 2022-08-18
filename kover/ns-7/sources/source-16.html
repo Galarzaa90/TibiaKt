@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > BestiaryEntryKt</title>
+  <title>Coverage Report > AjaxPaginator</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -20,7 +20,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">com.galarzaa.tibiakt.core.models.bazaar</a>
 </div>
 
-<h1>Coverage Summary for Class: BestiaryEntryKt (com.galarzaa.tibiakt.core.models.bazaar)</h1>
+<h1>Coverage Summary for Class: AjaxPaginator (com.galarzaa.tibiakt.core.models.bazaar)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -31,7 +31,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">BestiaryEntryKt</td>
+  <td class="name">AjaxPaginator</td>
     <td class="coverageStat"/>
 </tr>
 
@@ -44,8 +44,17 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.models.bazaar
 <i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;@Deprecated(&quot;Renamed to CreatureEntry&quot;, replaceWith = ReplaceWith(&quot;CreatureEntry&quot;))
-<i class="no-highlight">4</i>&nbsp;typealias BestiaryEntry = CreatureEntry
+<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.models.Paginated
+<i class="no-highlight">4</i>&nbsp;
+<i class="no-highlight">5</i>&nbsp;/**
+<i class="no-highlight">6</i>&nbsp; * A paginator that can be fetched via AJAX requests.
+<i class="no-highlight">7</i>&nbsp; */
+<i class="no-highlight">8</i>&nbsp;interface AjaxPaginator&lt;T&gt; : Paginated&lt;T&gt; {
+<i class="no-highlight">9</i>&nbsp;    /**
+<i class="no-highlight">10</i>&nbsp;     * Whether this result set was fully fetched or not.
+<i class="no-highlight">11</i>&nbsp;     */
+<i class="no-highlight">12</i>&nbsp;    val fullyFetched: Boolean
+<i class="no-highlight">13</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -72,7 +81,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-08-07 16:19</div>
+    <div style="float:right;">generated on 2022-08-18 02:15</div>
 </div>
 </body>
 </html>
