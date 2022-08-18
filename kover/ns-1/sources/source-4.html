@@ -1602,7 +1602,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">323</i>&nbsp;    /**
 <i class="no-highlight">324</i>&nbsp;     * Fetch the kill statistics for a [world].
 <i class="no-highlight">325</i>&nbsp;     */
-<i class="no-highlight">326</i>&nbsp;    open suspend fun fetchKillStatistics(world: String): TibiaResponse&lt;KillStatistics&gt; {
+<i class="no-highlight">326</i>&nbsp;    open suspend fun fetchKillStatistics(world: String): TibiaResponse&lt;KillStatistics?&gt; {
 <b class="nc"><i class="no-highlight">327</i>&nbsp;        val response = this.request(HttpMethod.Get, getKillStatisticsUrl(world))</b>
 <b class="nc"><i class="no-highlight">328</i>&nbsp;        return response.parse { KillStatisticsParser.fromContent(it) }</b>
 <i class="no-highlight">329</i>&nbsp;    }
@@ -2014,7 +2014,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-08-18 02:15</div>
+    <div style="float:right;">generated on 2022-08-18 02:58</div>
 </div>
 </body>
 </html>
