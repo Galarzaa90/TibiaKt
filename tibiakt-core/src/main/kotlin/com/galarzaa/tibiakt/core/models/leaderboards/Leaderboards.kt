@@ -16,8 +16,9 @@
 
 @file:UseSerializers(InstantSerializer::class)
 
-package com.galarzaa.tibiakt.core.models
+package com.galarzaa.tibiakt.core.models.leaderboards
 
+import com.galarzaa.tibiakt.core.models.PaginatedWithUrl
 import com.galarzaa.tibiakt.core.serializers.InstantSerializer
 import com.galarzaa.tibiakt.core.utils.getLeaderboardUrl
 import kotlinx.datetime.Instant
@@ -52,9 +53,3 @@ data class Leaderboards(
     override fun getPageUrl(page: Int) = getLeaderboardUrl(world, rotation.rotationId, page)
 }
 
-@Serializable
-data class LeaderboardsRotation(
-    val rotationId: Int,
-    val current: Boolean,
-    val endDate: Instant,
-)

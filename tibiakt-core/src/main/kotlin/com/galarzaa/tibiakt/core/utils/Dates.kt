@@ -39,7 +39,7 @@ val SERVER_SAVE_TIME: LocalTime = LocalTime.of(10, 0)
 
 /** Get the current day of the week in Tibia
  *
- * A new day starts at 10:00 local time.
+ * A new day starts every server save, at 10:00 CET/CEST.
  */
 fun getTibiaWeekDay(): DayOfWeek = (getTibiaDateTime() - 10.hours.toJavaDuration()).dayOfWeek
 

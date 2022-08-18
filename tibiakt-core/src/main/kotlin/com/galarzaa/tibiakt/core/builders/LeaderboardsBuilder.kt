@@ -16,9 +16,9 @@
 
 package com.galarzaa.tibiakt.core.builders
 
-import com.galarzaa.tibiakt.core.models.BaseLeaderboardsEntry
-import com.galarzaa.tibiakt.core.models.Leaderboards
-import com.galarzaa.tibiakt.core.models.LeaderboardsRotation
+import com.galarzaa.tibiakt.core.models.leaderboards.BaseLeaderboardsEntry
+import com.galarzaa.tibiakt.core.models.leaderboards.Leaderboards
+import com.galarzaa.tibiakt.core.models.leaderboards.LeaderboardsRotation
 import com.galarzaa.tibiakt.core.utils.BuilderDsl
 import kotlinx.datetime.Instant
 

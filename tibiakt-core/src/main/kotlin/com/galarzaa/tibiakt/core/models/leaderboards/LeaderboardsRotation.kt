@@ -14,18 +14,21 @@
  * limitations under the License.
  */
 
-package com.galarzaa.tibiakt.core.models
+package com.galarzaa.tibiakt.core.models.leaderboards
 
-/** An object made of multiple pages with URLs */
-interface PaginatedWithUrl<T> : Paginated<T> {
-    /** Get the URL to a specific page */
-    fun getPageUrl(page: Int): String
+import kotlinx.datetime.Instant
+import kotlinx.serialization.Serializable
 
-    /** Get the URL to the next page if there is any. */
-    val nextPageUrl: String?
-        get() = if (currentPage == totalPages) null else getPageUrl(currentPage + 1)
-
-    /** Get the URL to the previous page if there is any. */
-    val previousPageUrl: String?
-        get() = if (currentPage == 0) null else getPageUrl(currentPage - 1)
-}
+/**
+ * A rotation of the Tibia Drome leaderboards
+ *
+ * @property rotationId The internal ID of the rotation.
+ * @property current Whether this is the current rotation or not.
+ * @property endDate The date when the rotation ends.
+ */
+@Serializable
+data class LeaderboardsRotation(
+    val rotationId: Int,
+    val current: Boolean,
+    val endDate: Instant,
+)

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.galarzaa.tibiakt.core.models
+package com.galarzaa.tibiakt.core.models.leaderboards
 
 import com.galarzaa.tibiakt.core.models.character.BaseCharacter
 import kotlinx.serialization.SerialName
