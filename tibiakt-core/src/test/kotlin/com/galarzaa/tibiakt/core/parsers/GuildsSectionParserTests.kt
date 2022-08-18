@@ -18,7 +18,7 @@ class GuildsSectionParserTests : StringSpec({
         }
     }
 
-    "Parse the guilds section list with only active guilds"{
+    "Parse the guilds section list with only active guilds" {
         val guildsSection = GuildsSectionParser.fromContent(getResource("guilds/guildListActiveOnly.txt"))
         guildsSection shouldNotBe null
         guildsSection!!.world shouldBe "Bona"
@@ -26,5 +26,20 @@ class GuildsSectionParserTests : StringSpec({
         guildsSection.guilds.forExactly(0) {
             it.isActive shouldBe false
         }
+    }
+
+    "Parse the guilds section list with no active guilds" {
+        val guildsSection = GuildsSectionParser.fromContent(getResource("guilds/guildListNoActiveGuilds.txt"))
+        guildsSection shouldNotBe null
+        guildsSection!!.world shouldBe "Illusera"
+        guildsSection.guilds shouldHaveSize 2
+        guildsSection.guilds.forExactly(0) {
+            it.isActive shouldBe true
+        }
+    }
+
+    "Parse the guilds section list of a world that does not exist" {
+        val guildsSection = GuildsSectionParser.fromContent(getResource("guilds/guildListWorldDoesntExist"))
+        guildsSection shouldBe null
     }
 })

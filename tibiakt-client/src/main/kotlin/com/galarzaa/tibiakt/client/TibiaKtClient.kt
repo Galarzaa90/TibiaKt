@@ -311,7 +311,10 @@ open class TibiaKtClient constructor(
         return response.parse { GuildParser.fromContent(it) }
     }
 
-    /** Fetch active and in formation guilds in a [world]. */
+    /** Fetch active and in formation guilds in a [world].
+     *
+     * If the world does not exist, it will return null.
+     */
     open suspend fun fetchWorldGuilds(world: String): TibiaResponse<GuildsSection?> {
         val response = this.request(HttpMethod.Get, getWorldGuildsUrl(world))
         return response.parse { GuildsSectionParser.fromContent(it) }

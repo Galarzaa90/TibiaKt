@@ -3,6 +3,7 @@ package com.galarzaa.tibiakt.core.parsers
 import com.galarzaa.tibiakt.core.builders.guildsSection
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
 import com.galarzaa.tibiakt.core.models.guild.GuildsSection
+import com.galarzaa.tibiakt.core.utils.boxContent
 import com.galarzaa.tibiakt.core.utils.cleanText
 import com.galarzaa.tibiakt.core.utils.offsetStart
 import org.jsoup.Jsoup
@@ -11,12 +12,13 @@ import org.jsoup.nodes.Document
 object GuildsSectionParser : Parser<GuildsSection?> {
     override fun fromContent(content: String): GuildsSection? {
         val document: Document = Jsoup.parse(content, "")
-        val boxContent =
-            document.selectFirst("div.BoxContent") ?: throw ParsingException("BoxContent container not found")
+        val boxContent = document.boxContent()
         val tables = boxContent.select("table.TableContent")
         return guildsSection {
             val selectedWorld = boxContent.selectFirst("select[name=world]")?.selectFirst("option[selected]")
                 ?: throw ParsingException("Could not find selected world")
+            if (selectedWorld.attr("value").isBlank())
+                return null
             world = selectedWorld.cleanText()
             for ((index, table) in tables.withIndex()) {
                 val isActive = index == 0
