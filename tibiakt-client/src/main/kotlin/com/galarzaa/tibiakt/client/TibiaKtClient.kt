@@ -323,7 +323,7 @@ open class TibiaKtClient constructor(
     /**
      * Fetch the kill statistics for a [world].
      */
-    open suspend fun fetchKillStatistics(world: String): TibiaResponse<KillStatistics> {
+    open suspend fun fetchKillStatistics(world: String): TibiaResponse<KillStatistics?> {
         val response = this.request(HttpMethod.Get, getKillStatisticsUrl(world))
         return response.parse { KillStatisticsParser.fromContent(it) }
     }
