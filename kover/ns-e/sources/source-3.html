@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > EventsSchedule</title>
+  <title>Coverage Report > Leaderboards</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -17,10 +17,10 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">com.galarzaa.tibiakt.core.models.news</a>
+    <a href="../index.html">com.galarzaa.tibiakt.core.models.leaderboards</a>
 </div>
 
-<h1>Coverage Summary for Class: EventsSchedule (com.galarzaa.tibiakt.core.models.news)</h1>
+<h1>Coverage Summary for Class: Leaderboards (com.galarzaa.tibiakt.core.models.leaderboards)</h1>
 
 <table class="coverageStats">
 
@@ -44,7 +44,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">EventsSchedule</td>
+  <td class="name">Leaderboards</td>
 <td class="coverageStat">
   <span class="percent">
     33.3%
@@ -58,28 +58,28 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/12)
+    (0/2)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    42.9%
+    81.8%
   </span>
   <span class="absValue">
-    (3/7)
+    (9/11)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    41.6%
+    70.6%
   </span>
   <span class="absValue">
-    (37/89)
+    (115/163)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">EventsSchedule$$serializer</td>
+    <td class="name">Leaderboards$$serializer</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -93,7 +93,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/7)
+    (0/13)
   </span>
 </td>
 <td class="coverageStat">
@@ -109,12 +109,12 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/160)
+    (0/373)
   </span>
 </td>
   </tr>
   <tr>
-    <td class="name">EventsSchedule$Companion</td>
+    <td class="name">Leaderboards$Companion</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -156,23 +156,23 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/19)
+    (0/15)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    44.4%
+    76.9%
   </span>
   <span class="absValue">
-    (4/9)
+    (10/13)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    16.2%
+    22%
   </span>
   <span class="absValue">
-    (41/253)
+    (119/540)
   </span>
 </td>
 </tr>
@@ -183,43 +183,61 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;@file:UseSerializers(YearMonthSerializer::class)
-<i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;package com.galarzaa.tibiakt.core.models.news
-<i class="no-highlight">4</i>&nbsp;
-<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.serializers.YearMonthSerializer
-<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getEventsScheduleUrl
-<i class="no-highlight">7</i>&nbsp;import kotlinx.serialization.Serializable
-<i class="no-highlight">8</i>&nbsp;import kotlinx.serialization.UseSerializers
-<i class="no-highlight">9</i>&nbsp;import java.time.LocalDate
-<i class="no-highlight">10</i>&nbsp;import java.time.YearMonth
-<i class="no-highlight">11</i>&nbsp;
-<i class="no-highlight">12</i>&nbsp;/**
-<i class="no-highlight">13</i>&nbsp; * The event schedule, containing the events of a given month.
-<i class="no-highlight">14</i>&nbsp; *
-<i class="no-highlight">15</i>&nbsp; * @property yearMonth The month and year the schedule is for.
-<i class="no-highlight">16</i>&nbsp; * @property entries The list of events in this month.
-<i class="no-highlight">17</i>&nbsp; */
-<b class="pc"><i class="no-highlight">18</i>&nbsp;@Serializable</b>
-<i class="no-highlight">19</i>&nbsp;data class EventsSchedule(
-<b class="fc"><i class="no-highlight">20</i>&nbsp;    val yearMonth: YearMonth,</b>
-<b class="fc"><i class="no-highlight">21</i>&nbsp;    val entries: List&lt;EventEntry&gt;,</b>
-<i class="no-highlight">22</i>&nbsp;) {
-<i class="no-highlight">23</i>&nbsp;    /**
-<i class="no-highlight">24</i>&nbsp;     * The URL of the events schedule of the month.
-<i class="no-highlight">25</i>&nbsp;     */
-<b class="nc"><i class="no-highlight">26</i>&nbsp;    val url get() = getEventsScheduleUrl(yearMonth)</b>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;/*
+<i class="no-highlight">2</i>&nbsp; * Copyright © 2022 Allan Galarza
+<i class="no-highlight">3</i>&nbsp; *
+<i class="no-highlight">4</i>&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+<i class="no-highlight">5</i>&nbsp; * you may not use this file except in compliance with the License.
+<i class="no-highlight">6</i>&nbsp; * You may obtain a copy of the License at
+<i class="no-highlight">7</i>&nbsp; *
+<i class="no-highlight">8</i>&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+<i class="no-highlight">9</i>&nbsp; *
+<i class="no-highlight">10</i>&nbsp; * Unless required by applicable law or agreed to in writing, software
+<i class="no-highlight">11</i>&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+<i class="no-highlight">12</i>&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+<i class="no-highlight">13</i>&nbsp; * See the License for the specific language governing permissions and
+<i class="no-highlight">14</i>&nbsp; * limitations under the License.
+<i class="no-highlight">15</i>&nbsp; */
+<i class="no-highlight">16</i>&nbsp;
+<i class="no-highlight">17</i>&nbsp;@file:UseSerializers(InstantSerializer::class)
+<i class="no-highlight">18</i>&nbsp;
+<i class="no-highlight">19</i>&nbsp;package com.galarzaa.tibiakt.core.models.leaderboards
+<i class="no-highlight">20</i>&nbsp;
+<i class="no-highlight">21</i>&nbsp;import com.galarzaa.tibiakt.core.models.PaginatedWithUrl
+<i class="no-highlight">22</i>&nbsp;import com.galarzaa.tibiakt.core.serializers.InstantSerializer
+<i class="no-highlight">23</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getLeaderboardUrl
+<i class="no-highlight">24</i>&nbsp;import kotlinx.datetime.Instant
+<i class="no-highlight">25</i>&nbsp;import kotlinx.serialization.Serializable
+<i class="no-highlight">26</i>&nbsp;import kotlinx.serialization.UseSerializers
 <i class="no-highlight">27</i>&nbsp;
-<i class="no-highlight">28</i>&nbsp;    /**
-<i class="no-highlight">29</i>&nbsp;     * Get all the events that are active in a specific day of the month.
-<i class="no-highlight">30</i>&nbsp;     */
-<i class="no-highlight">31</i>&nbsp;    fun getEventsOn(date: LocalDate): List&lt;EventEntry&gt; {
-<b class="nc"><i class="no-highlight">32</i>&nbsp;        return entries.filter {</b>
-<b class="nc"><i class="no-highlight">33</i>&nbsp;            (it.startDate ?: LocalDate.MIN) &lt;= date &amp;&amp;</b>
-<b class="nc"><i class="no-highlight">34</i>&nbsp;                    date &lt;= (it.endDate ?: LocalDate.MAX)</b>
-<i class="no-highlight">35</i>&nbsp;        }
-<i class="no-highlight">36</i>&nbsp;    }
-<i class="no-highlight">37</i>&nbsp;}
+<i class="no-highlight">28</i>&nbsp;/**
+<i class="no-highlight">29</i>&nbsp; * The Tibia Drome leaderboards of a world.
+<i class="no-highlight">30</i>&nbsp; *
+<i class="no-highlight">31</i>&nbsp; * @property world The name of the world.
+<i class="no-highlight">32</i>&nbsp; * @property rotation The rotation of this leaderboards.
+<i class="no-highlight">33</i>&nbsp; * @property availableRotations The rotations that are available to view.
+<i class="no-highlight">34</i>&nbsp; * @property lastUpdated The time when the leaderboard was last updated. Only available for the current rotation.
+<i class="no-highlight">35</i>&nbsp; */
+<b class="pc"><i class="no-highlight">36</i>&nbsp;@Serializable</b>
+<i class="no-highlight">37</i>&nbsp;data class Leaderboards(
+<b class="fc"><i class="no-highlight">38</i>&nbsp;    val world: String,</b>
+<b class="fc"><i class="no-highlight">39</i>&nbsp;    val rotation: LeaderboardsRotation,</b>
+<b class="fc"><i class="no-highlight">40</i>&nbsp;    val availableRotations: List&lt;LeaderboardsRotation&gt;,</b>
+<b class="fc"><i class="no-highlight">41</i>&nbsp;    val lastUpdated: Instant?,</b>
+<b class="fc"><i class="no-highlight">42</i>&nbsp;    override val currentPage: Int,</b>
+<b class="fc"><i class="no-highlight">43</i>&nbsp;    override val totalPages: Int,</b>
+<b class="fc"><i class="no-highlight">44</i>&nbsp;    override val resultsCount: Int,</b>
+<b class="fc"><i class="no-highlight">45</i>&nbsp;    override val entries: List&lt;BaseLeaderboardsEntry&gt;,</b>
+<i class="no-highlight">46</i>&nbsp;) : PaginatedWithUrl&lt;BaseLeaderboardsEntry&gt; {
+<i class="no-highlight">47</i>&nbsp;
+<i class="no-highlight">48</i>&nbsp;    /**
+<i class="no-highlight">49</i>&nbsp;     * The URL to these leaderboards.
+<i class="no-highlight">50</i>&nbsp;     */
+<b class="nc"><i class="no-highlight">51</i>&nbsp;    val url get() = getLeaderboardUrl(world, rotation.rotationId, currentPage)</b>
+<i class="no-highlight">52</i>&nbsp;
+<b class="nc"><i class="no-highlight">53</i>&nbsp;    override fun getPageUrl(page: Int) = getLeaderboardUrl(world, rotation.rotationId, page)</b>
+<i class="no-highlight">54</i>&nbsp;}
+<i class="no-highlight">55</i>&nbsp;
 </div>
 </pre>
 </div>
@@ -246,7 +264,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-08-18 03:34</div>
+    <div style="float:right;">generated on 2022-08-18 04:30</div>
 </div>
 </body>
 </html>

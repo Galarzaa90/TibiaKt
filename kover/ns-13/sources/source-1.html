@@ -1,0 +1,236 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > DatesKt</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.galarzaa.tibiakt.core.utils</a>
+</div>
+
+<h1>Coverage Summary for Class: DatesKt (com.galarzaa.tibiakt.core.utils)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+<th class="coverageStat 
+">
+  Instruction, %
+</th>
+</tr>
+<tr>
+  <td class="name">DatesKt</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    58.3%
+  </span>
+  <span class="absValue">
+    (7/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    62.5%
+  </span>
+  <span class="absValue">
+    (15/24)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    56.7%
+  </span>
+  <span class="absValue">
+    (115/203)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;/*
+<i class="no-highlight">2</i>&nbsp; * Copyright © 2022 Allan Galarza
+<i class="no-highlight">3</i>&nbsp; *
+<i class="no-highlight">4</i>&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+<i class="no-highlight">5</i>&nbsp; * you may not use this file except in compliance with the License.
+<i class="no-highlight">6</i>&nbsp; * You may obtain a copy of the License at
+<i class="no-highlight">7</i>&nbsp; *
+<i class="no-highlight">8</i>&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+<i class="no-highlight">9</i>&nbsp; *
+<i class="no-highlight">10</i>&nbsp; * Unless required by applicable law or agreed to in writing, software
+<i class="no-highlight">11</i>&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+<i class="no-highlight">12</i>&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+<i class="no-highlight">13</i>&nbsp; * See the License for the specific language governing permissions and
+<i class="no-highlight">14</i>&nbsp; * limitations under the License.
+<i class="no-highlight">15</i>&nbsp; */
+<i class="no-highlight">16</i>&nbsp;
+<i class="no-highlight">17</i>&nbsp;package com.galarzaa.tibiakt.core.utils
+<i class="no-highlight">18</i>&nbsp;
+<i class="no-highlight">19</i>&nbsp;import kotlinx.datetime.Instant
+<i class="no-highlight">20</i>&nbsp;import kotlinx.datetime.toJavaInstant
+<i class="no-highlight">21</i>&nbsp;import kotlinx.datetime.toKotlinInstant
+<i class="no-highlight">22</i>&nbsp;import java.time.DayOfWeek
+<i class="no-highlight">23</i>&nbsp;import java.time.LocalDate
+<i class="no-highlight">24</i>&nbsp;import java.time.LocalDateTime
+<i class="no-highlight">25</i>&nbsp;import java.time.LocalTime
+<i class="no-highlight">26</i>&nbsp;import java.time.ZoneId
+<i class="no-highlight">27</i>&nbsp;import java.time.ZonedDateTime
+<i class="no-highlight">28</i>&nbsp;import java.time.format.DateTimeFormatter
+<i class="no-highlight">29</i>&nbsp;import java.time.format.DateTimeParseException
+<i class="no-highlight">30</i>&nbsp;import java.util.Locale
+<i class="no-highlight">31</i>&nbsp;import kotlin.time.Duration.Companion.hours
+<i class="no-highlight">32</i>&nbsp;import kotlin.time.toJavaDuration
+<i class="no-highlight">33</i>&nbsp;
+<i class="no-highlight">34</i>&nbsp;/** The timezone Tibia time is based on. */
+<b class="fc"><i class="no-highlight">35</i>&nbsp;val TIBIA_TIMEZONE: ZoneId = ZoneId.of(&quot;Europe/Berlin&quot;)</b>
+<i class="no-highlight">36</i>&nbsp;
+<i class="no-highlight">37</i>&nbsp;/** The local time when server save happens. */
+<b class="fc"><i class="no-highlight">38</i>&nbsp;val SERVER_SAVE_TIME: LocalTime = LocalTime.of(10, 0)</b>
+<i class="no-highlight">39</i>&nbsp;
+<i class="no-highlight">40</i>&nbsp;/** Get the current day of the week in Tibia
+<i class="no-highlight">41</i>&nbsp; *
+<i class="no-highlight">42</i>&nbsp; * A new day starts every server save, at 10:00 CET/CEST.
+<i class="no-highlight">43</i>&nbsp; */
+<b class="nc"><i class="no-highlight">44</i>&nbsp;fun getTibiaWeekDay(): DayOfWeek = (getTibiaDateTime() - 10.hours.toJavaDuration()).dayOfWeek</b>
+<i class="no-highlight">45</i>&nbsp;
+<i class="no-highlight">46</i>&nbsp;/** Get the local datetime in Tibia&#39;s servers. */
+<b class="nc"><i class="no-highlight">47</i>&nbsp;fun getTibiaDateTime(): LocalDateTime = LocalDateTime.now(TIBIA_TIMEZONE)</b>
+<i class="no-highlight">48</i>&nbsp;
+<i class="no-highlight">49</i>&nbsp;/** Get the time of the last server save from a [currentTime]. */
+<b class="nc"><i class="no-highlight">50</i>&nbsp;fun getLastServerSaveTime(currentTime: ZonedDateTime = ZonedDateTime.now(TIBIA_TIMEZONE)): ZonedDateTime {</b>
+<b class="fc"><i class="no-highlight">51</i>&nbsp;    val serverSaveTime = ZonedDateTime.of(</b>
+<b class="fc"><i class="no-highlight">52</i>&nbsp;        currentTime.toLocalDate(), SERVER_SAVE_TIME, TIBIA_TIMEZONE</b>
+<i class="no-highlight">53</i>&nbsp;    )
+<b class="fc"><i class="no-highlight">54</i>&nbsp;    return if (currentTime &lt; serverSaveTime) serverSaveTime.minusDays(1) else serverSaveTime</b>
+<i class="no-highlight">55</i>&nbsp;}
+<i class="no-highlight">56</i>&nbsp;
+<i class="no-highlight">57</i>&nbsp;/** Get the time of the last server save from a [currentTime]. */
+<i class="no-highlight">58</i>&nbsp;fun getLastServerSaveTime(currentTime: Instant): Instant {
+<b class="nc"><i class="no-highlight">59</i>&nbsp;    return getLastServerSaveTime(ZonedDateTime.ofInstant(currentTime.toJavaInstant(), TIBIA_TIMEZONE)).toInstant()</b>
+<b class="nc"><i class="no-highlight">60</i>&nbsp;        .toKotlinInstant()</b>
+<i class="no-highlight">61</i>&nbsp;}
+<i class="no-highlight">62</i>&nbsp;
+<i class="no-highlight">63</i>&nbsp;/** Get the time of the next server save from a [currentTime]. */
+<b class="nc"><i class="no-highlight">64</i>&nbsp;fun getNextServerSaveTime(currentTime: ZonedDateTime = ZonedDateTime.now(TIBIA_TIMEZONE)): ZonedDateTime {</b>
+<b class="nc"><i class="no-highlight">65</i>&nbsp;    return getLastServerSaveTime(currentTime).plusDays(1)</b>
+<i class="no-highlight">66</i>&nbsp;}
+<i class="no-highlight">67</i>&nbsp;
+<i class="no-highlight">68</i>&nbsp;/** Get the time of the next server save from a [currentTime]. */
+<i class="no-highlight">69</i>&nbsp;fun getNextServerSaveTime(currentTime: Instant): Instant {
+<b class="nc"><i class="no-highlight">70</i>&nbsp;    return getNextServerSaveTime(ZonedDateTime.ofInstant(currentTime.toJavaInstant(), TIBIA_TIMEZONE)).toInstant()</b>
+<b class="nc"><i class="no-highlight">71</i>&nbsp;        .toKotlinInstant()</b>
+<i class="no-highlight">72</i>&nbsp;}
+<i class="no-highlight">73</i>&nbsp;
+<i class="no-highlight">74</i>&nbsp;
+<i class="no-highlight">75</i>&nbsp;/**
+<i class="no-highlight">76</i>&nbsp; * Parses a string containing date and time from Tibia.com into an [Instant] instance.
+<i class="no-highlight">77</i>&nbsp; */
+<i class="no-highlight">78</i>&nbsp;fun parseTibiaDateTime(input: String): Instant {
+<b class="fc"><i class="no-highlight">79</i>&nbsp;    val timeString = input.clean().let { it.substring(0, it.length - 4).trim() }</b>
+<b class="fc"><i class="no-highlight">80</i>&nbsp;    return try {</b>
+<b class="fc"><i class="no-highlight">81</i>&nbsp;        LocalDateTime.parse(timeString, DateTimeFormatter.ofPattern(&quot;MMM dd yyyy, HH:mm:ss&quot;, Locale.US))</b>
+<b class="fc"><i class="no-highlight">82</i>&nbsp;    } catch (dfe: DateTimeParseException) {</b>
+<b class="fc"><i class="no-highlight">83</i>&nbsp;        LocalDateTime.parse(timeString, DateTimeFormatter.ofPattern(&quot;MMM dd yyyy, HH:mm&quot;, Locale.US))</b>
+<b class="fc"><i class="no-highlight">84</i>&nbsp;    }.atZone(TIBIA_TIMEZONE).toInstant().toKotlinInstant()</b>
+<i class="no-highlight">85</i>&nbsp;}
+<i class="no-highlight">86</i>&nbsp;
+<i class="no-highlight">87</i>&nbsp;/**
+<i class="no-highlight">88</i>&nbsp; * Parses a string containing date from Tibia.com into an [LocalDate] instance.
+<i class="no-highlight">89</i>&nbsp; */
+<i class="no-highlight">90</i>&nbsp;fun parseTibiaDate(input: String): LocalDate {
+<b class="fc"><i class="no-highlight">91</i>&nbsp;    return LocalDate.parse(input.clean(), DateTimeFormatter.ofPattern(&quot;MMM dd yyyy&quot;, Locale.US))</b>
+<i class="no-highlight">92</i>&nbsp;}
+<i class="no-highlight">93</i>&nbsp;
+<i class="no-highlight">94</i>&nbsp;/**
+<i class="no-highlight">95</i>&nbsp; * Parses a string containing date from Tibia.com into an [LocalDate] instance.
+<i class="no-highlight">96</i>&nbsp; */
+<i class="no-highlight">97</i>&nbsp;fun parseTibiaFullDate(input: String): LocalDate {
+<b class="fc"><i class="no-highlight">98</i>&nbsp;    return LocalDate.parse(input.clean(), DateTimeFormatter.ofPattern(&quot;MMMM d, yyyy&quot;, Locale.US))</b>
+<i class="no-highlight">99</i>&nbsp;}
+<i class="no-highlight">100</i>&nbsp;
+<i class="no-highlight">101</i>&nbsp;/**
+<i class="no-highlight">102</i>&nbsp; * Parses a string containing a date time from Tibia.com forums into an [Instant] instance.
+<i class="no-highlight">103</i>&nbsp; */
+<i class="no-highlight">104</i>&nbsp;fun parseTibiaForumDateTime(input: String): Instant {
+<b class="fc"><i class="no-highlight">105</i>&nbsp;    return LocalDateTime.parse(input, DateTimeFormatter.ofPattern(&quot;dd.MM.yyyy HH:mm:ss&quot;, Locale.US))</b>
+<b class="fc"><i class="no-highlight">106</i>&nbsp;        .atZone(TIBIA_TIMEZONE).toInstant().toKotlinInstant()</b>
+<i class="no-highlight">107</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-08-18 04:30</div>
+</div>
+</body>
+</html>

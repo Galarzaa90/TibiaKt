@@ -1,0 +1,237 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > LeaderboardsParser</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.galarzaa.tibiakt.core.parsers</a>
+</div>
+
+<h1>Coverage Summary for Class: LeaderboardsParser (com.galarzaa.tibiakt.core.parsers)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+<th class="coverageStat 
+">
+  Instruction, %
+</th>
+</tr>
+<tr>
+  <td class="name">LeaderboardsParser</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    56.8%
+  </span>
+  <span class="absValue">
+    (25/44)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    91.1%
+  </span>
+  <span class="absValue">
+    (41/45)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    85.9%
+  </span>
+  <span class="absValue">
+    (324/377)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;/*
+<i class="no-highlight">2</i>&nbsp; * Copyright © 2022 Allan Galarza
+<i class="no-highlight">3</i>&nbsp; *
+<i class="no-highlight">4</i>&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+<i class="no-highlight">5</i>&nbsp; * you may not use this file except in compliance with the License.
+<i class="no-highlight">6</i>&nbsp; * You may obtain a copy of the License at
+<i class="no-highlight">7</i>&nbsp; *
+<i class="no-highlight">8</i>&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+<i class="no-highlight">9</i>&nbsp; *
+<i class="no-highlight">10</i>&nbsp; * Unless required by applicable law or agreed to in writing, software
+<i class="no-highlight">11</i>&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+<i class="no-highlight">12</i>&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+<i class="no-highlight">13</i>&nbsp; * See the License for the specific language governing permissions and
+<i class="no-highlight">14</i>&nbsp; * limitations under the License.
+<i class="no-highlight">15</i>&nbsp; */
+<i class="no-highlight">16</i>&nbsp;
+<i class="no-highlight">17</i>&nbsp;package com.galarzaa.tibiakt.core.parsers
+<i class="no-highlight">18</i>&nbsp;
+<i class="no-highlight">19</i>&nbsp;import com.galarzaa.tibiakt.core.builders.LeaderboardsBuilder
+<i class="no-highlight">20</i>&nbsp;import com.galarzaa.tibiakt.core.builders.leaderboards
+<i class="no-highlight">21</i>&nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
+<i class="no-highlight">22</i>&nbsp;import com.galarzaa.tibiakt.core.models.leaderboards.DeletedLeaderboardsEntry
+<i class="no-highlight">23</i>&nbsp;import com.galarzaa.tibiakt.core.models.leaderboards.Leaderboards
+<i class="no-highlight">24</i>&nbsp;import com.galarzaa.tibiakt.core.models.leaderboards.LeaderboardsEntry
+<i class="no-highlight">25</i>&nbsp;import com.galarzaa.tibiakt.core.models.leaderboards.LeaderboardsRotation
+<i class="no-highlight">26</i>&nbsp;import com.galarzaa.tibiakt.core.utils.PaginationData
+<i class="no-highlight">27</i>&nbsp;import com.galarzaa.tibiakt.core.utils.cells
+<i class="no-highlight">28</i>&nbsp;import com.galarzaa.tibiakt.core.utils.clean
+<i class="no-highlight">29</i>&nbsp;import com.galarzaa.tibiakt.core.utils.cleanText
+<i class="no-highlight">30</i>&nbsp;import com.galarzaa.tibiakt.core.utils.formData
+<i class="no-highlight">31</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getLinkInformation
+<i class="no-highlight">32</i>&nbsp;import com.galarzaa.tibiakt.core.utils.offsetStart
+<i class="no-highlight">33</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parsePagination
+<i class="no-highlight">34</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseTibiaDateTime
+<i class="no-highlight">35</i>&nbsp;import com.galarzaa.tibiakt.core.utils.remove
+<i class="no-highlight">36</i>&nbsp;import com.galarzaa.tibiakt.core.utils.rows
+<i class="no-highlight">37</i>&nbsp;import kotlinx.datetime.Clock
+<i class="no-highlight">38</i>&nbsp;import org.jsoup.nodes.Element
+<i class="no-highlight">39</i>&nbsp;import kotlin.time.Duration.Companion.minutes
+<i class="no-highlight">40</i>&nbsp;
+<i class="no-highlight">41</i>&nbsp;object LeaderboardsParser : Parser&lt;Leaderboards?&gt; {
+<b class="fc"><i class="no-highlight">42</i>&nbsp;    val rotationEndPattern = Regex(&quot;&quot;&quot;ends on ([^)]+)&quot;&quot;&quot;)</b>
+<i class="no-highlight">43</i>&nbsp;
+<i class="no-highlight">44</i>&nbsp;    override fun fromContent(content: String): Leaderboards? {
+<b class="fc"><i class="no-highlight">45</i>&nbsp;        val boxContent = boxContent(content)</b>
+<b class="fc"><i class="no-highlight">46</i>&nbsp;        val tables = boxContent.select(&quot;table.TableContent&quot;)</b>
+<i class="no-highlight">47</i>&nbsp;
+<b class="fc"><i class="no-highlight">48</i>&nbsp;        return leaderboards {</b>
+<b class="pc"><i class="no-highlight">49</i>&nbsp;            val formData = tables[1].selectFirst(&quot;form&quot;)?.formData() ?: throw ParsingException(&quot;form not found&quot;)</b>
+<b class="fc"><i class="no-highlight">50</i>&nbsp;            val rotationOptions = tables[1].select(&quot;select[name=rotation] &gt; option&quot;)</b>
+<b class="fc"><i class="no-highlight">51</i>&nbsp;                .associate { it.attr(&quot;value&quot;).toInt() to it.cleanText() }</b>
+<b class="fc"><i class="no-highlight">52</i>&nbsp;            for ((rotationId, label) in rotationOptions) {</b>
+<b class="fc"><i class="no-highlight">53</i>&nbsp;                var cleanLabel = label</b>
+<b class="fc"><i class="no-highlight">54</i>&nbsp;                var current = false</b>
+<b class="fc"><i class="no-highlight">55</i>&nbsp;                if (&quot;Current&quot; in label) {</b>
+<b class="pc"><i class="no-highlight">56</i>&nbsp;                    cleanLabel = rotationEndPattern.find(label)?.groupValues?.last()</b>
+<b class="nc"><i class="no-highlight">57</i>&nbsp;                        ?: throw ParsingException(&quot;rotation option label doesn&#39;t match expected format&quot;)</b>
+<b class="fc"><i class="no-highlight">58</i>&nbsp;                    current = true</b>
+<i class="no-highlight">59</i>&nbsp;                }
+<b class="fc"><i class="no-highlight">60</i>&nbsp;                val rotationEnd = parseTibiaDateTime(cleanLabel)</b>
+<b class="fc"><i class="no-highlight">61</i>&nbsp;                val rotation = LeaderboardsRotation(</b>
+<b class="fc"><i class="no-highlight">62</i>&nbsp;                    rotationId = rotationId,</b>
+<b class="fc"><i class="no-highlight">63</i>&nbsp;                    current = current,</b>
+<b class="fc"><i class="no-highlight">64</i>&nbsp;                    endDate = rotationEnd</b>
+<i class="no-highlight">65</i>&nbsp;                )
+<b class="fc"><i class="no-highlight">66</i>&nbsp;                if (current) {</b>
+<b class="fc"><i class="no-highlight">67</i>&nbsp;                    this.rotation = rotation</b>
+<i class="no-highlight">68</i>&nbsp;                }
+<b class="fc"><i class="no-highlight">69</i>&nbsp;                addAvailableRotation(rotation)</b>
+<i class="no-highlight">70</i>&nbsp;            }
+<b class="pc"><i class="no-highlight">71</i>&nbsp;            world = formData.values[&quot;world&quot;]</b>
+<b class="nc"><i class="no-highlight">72</i>&nbsp;                ?: if (&quot;world&quot; in formData.availableOptions) return null else throw ParsingException(&quot;world form parameter not found&quot;)</b>
+<i class="no-highlight">73</i>&nbsp;
+<b class="pc"><i class="no-highlight">74</i>&nbsp;            if (tables.size == 4) {</b>
+<b class="fc"><i class="no-highlight">75</i>&nbsp;                val lastUpdateString = tables[2].text()</b>
+<b class="fc"><i class="no-highlight">76</i>&nbsp;                val minutes =</b>
+<b class="pc"><i class="no-highlight">77</i>&nbsp;                    Regex(&quot;&quot;&quot;(\d+)&quot;&quot;&quot;).find(lastUpdateString)?.groups?.get(0)?.value?.toInt() ?: throw ParsingException(</b>
+<b class="nc"><i class="no-highlight">78</i>&nbsp;                        &quot;unexpected last update text: $lastUpdateString&quot;</b>
+<i class="no-highlight">79</i>&nbsp;                    )
+<b class="fc"><i class="no-highlight">80</i>&nbsp;                lastUpdated = Clock.System.now().minus(minutes.minutes)</b>
+<i class="no-highlight">81</i>&nbsp;            }
+<i class="no-highlight">82</i>&nbsp;
+<b class="fc"><i class="no-highlight">83</i>&nbsp;            val entriesTable = tables.last()</b>
+<b class="fc"><i class="no-highlight">84</i>&nbsp;            parseLeaderboardEntries(entriesTable)</b>
+<i class="no-highlight">85</i>&nbsp;
+<b class="pc"><i class="no-highlight">86</i>&nbsp;            val paginationData = boxContent.selectFirst(&quot;small&quot;)?.parsePagination() ?: PaginationData.default()</b>
+<b class="fc"><i class="no-highlight">87</i>&nbsp;            currentPage = paginationData.currentPage</b>
+<b class="fc"><i class="no-highlight">88</i>&nbsp;            resultsCount = paginationData.resultsCount</b>
+<b class="fc"><i class="no-highlight">89</i>&nbsp;            totalPages = paginationData.totalPages</b>
+<b class="fc"><i class="no-highlight">90</i>&nbsp;        }</b>
+<i class="no-highlight">91</i>&nbsp;
+<i class="no-highlight">92</i>&nbsp;    }
+<i class="no-highlight">93</i>&nbsp;
+<i class="no-highlight">94</i>&nbsp;    private fun LeaderboardsBuilder.parseLeaderboardEntries(entriesTable: Element?) {
+<b class="fc"><i class="no-highlight">95</i>&nbsp;        for (row in entriesTable.rows().offsetStart(1)) {</b>
+<b class="fc"><i class="no-highlight">96</i>&nbsp;            val cells = row.cells()</b>
+<b class="pc"><i class="no-highlight">97</i>&nbsp;            val name = cells[1].selectFirst(&quot;a&quot;)?.getLinkInformation()?.title?.clean()</b>
+<b class="fc"><i class="no-highlight">98</i>&nbsp;            val rank = cells[0].text().remove(&quot;.&quot;).toInt()</b>
+<b class="fc"><i class="no-highlight">99</i>&nbsp;            val dromeLevel = cells[2].text().toInt()</b>
+<b class="fc"><i class="no-highlight">100</i>&nbsp;            addEntry(</b>
+<b class="pc"><i class="no-highlight">101</i>&nbsp;                if (name != null) LeaderboardsEntry(rank, name, dromeLevel) else DeletedLeaderboardsEntry(</b>
+<b class="nc"><i class="no-highlight">102</i>&nbsp;                    rank, dromeLevel</b>
+<i class="no-highlight">103</i>&nbsp;                )
+<i class="no-highlight">104</i>&nbsp;            )
+<i class="no-highlight">105</i>&nbsp;        }
+<i class="no-highlight">106</i>&nbsp;    }
+<i class="no-highlight">107</i>&nbsp;
+<i class="no-highlight">108</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-08-18 04:30</div>
+</div>
+</body>
+</html>

@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > BaseWorld</title>
+  <title>Coverage Report > BaseNews</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -17,10 +17,10 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">com.galarzaa.tibiakt.core.models.world</a>
+    <a href="../index.html">com.galarzaa.tibiakt.core.models.news</a>
 </div>
 
-<h1>Coverage Summary for Class: BaseWorld (com.galarzaa.tibiakt.core.models.world)</h1>
+<h1>Coverage Summary for Class: BaseNews (com.galarzaa.tibiakt.core.models.news)</h1>
 
 <table class="coverageStats">
 
@@ -44,7 +44,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
   <tr>
-    <td class="name">BaseWorld$DefaultImpls</td>
+    <td class="name">BaseNews$DefaultImpls</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -106,24 +106,42 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.models.world
-<i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getWorldUrl
-<i class="no-highlight">4</i>&nbsp;
-<i class="no-highlight">5</i>&nbsp;/**
-<i class="no-highlight">6</i>&nbsp; * Base interface for worlds
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;/*
+<i class="no-highlight">2</i>&nbsp; * Copyright © 2022 Allan Galarza
+<i class="no-highlight">3</i>&nbsp; *
+<i class="no-highlight">4</i>&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+<i class="no-highlight">5</i>&nbsp; * you may not use this file except in compliance with the License.
+<i class="no-highlight">6</i>&nbsp; * You may obtain a copy of the License at
 <i class="no-highlight">7</i>&nbsp; *
-<i class="no-highlight">8</i>&nbsp; * @property name The name of the world.
-<i class="no-highlight">9</i>&nbsp; */
-<i class="no-highlight">10</i>&nbsp;interface BaseWorld {
-<i class="no-highlight">11</i>&nbsp;    val name: String
-<i class="no-highlight">12</i>&nbsp;
-<i class="no-highlight">13</i>&nbsp;    /**
-<i class="no-highlight">14</i>&nbsp;     * The URL to the world&#39;s page in Tibia.com
-<i class="no-highlight">15</i>&nbsp;     */
-<i class="no-highlight">16</i>&nbsp;    val url
-<b class="nc"><i class="no-highlight">17</i>&nbsp;        get() = getWorldUrl(name)</b>
-<i class="no-highlight">18</i>&nbsp;}
+<i class="no-highlight">8</i>&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+<i class="no-highlight">9</i>&nbsp; *
+<i class="no-highlight">10</i>&nbsp; * Unless required by applicable law or agreed to in writing, software
+<i class="no-highlight">11</i>&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+<i class="no-highlight">12</i>&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+<i class="no-highlight">13</i>&nbsp; * See the License for the specific language governing permissions and
+<i class="no-highlight">14</i>&nbsp; * limitations under the License.
+<i class="no-highlight">15</i>&nbsp; */
+<i class="no-highlight">16</i>&nbsp;
+<i class="no-highlight">17</i>&nbsp;package com.galarzaa.tibiakt.core.models.news
+<i class="no-highlight">18</i>&nbsp;
+<i class="no-highlight">19</i>&nbsp;import com.galarzaa.tibiakt.core.enums.NewsCategory
+<i class="no-highlight">20</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getNewsUrl
+<i class="no-highlight">21</i>&nbsp;
+<i class="no-highlight">22</i>&nbsp;/**
+<i class="no-highlight">23</i>&nbsp; * Base interface for news related objects.
+<i class="no-highlight">24</i>&nbsp; *
+<i class="no-highlight">25</i>&nbsp; * @property id The internal ID of the news entry.
+<i class="no-highlight">26</i>&nbsp; * @property category The category of the entry.
+<i class="no-highlight">27</i>&nbsp; */
+<i class="no-highlight">28</i>&nbsp;interface BaseNews {
+<i class="no-highlight">29</i>&nbsp;    val id: Int
+<i class="no-highlight">30</i>&nbsp;    val category: NewsCategory
+<i class="no-highlight">31</i>&nbsp;
+<i class="no-highlight">32</i>&nbsp;    /**
+<i class="no-highlight">33</i>&nbsp;     * The URL to this article.
+<i class="no-highlight">34</i>&nbsp;     */
+<b class="nc"><i class="no-highlight">35</i>&nbsp;    val url get() = getNewsUrl(id)</b>
+<i class="no-highlight">36</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -150,7 +168,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-08-18 03:34</div>
+    <div style="float:right;">generated on 2022-08-18 04:30</div>
 </div>
 </body>
 </html>
