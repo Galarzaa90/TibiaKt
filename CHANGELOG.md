@@ -1,5 +1,20 @@
 # Changelog
 
+## v0.3.0 (20220-08-17)
+
+- Added `exaltedDust`, `bossPoints` and `bosstiaryProgress` to Auctions.
+- Added boostable bosses parsing.
+- Parse rotation information for Leaderboards.
+- Use zone instead of offsets to parse dates.
+- Added `BOSS_POINTS` highscores category.
+- Replace Java's `Duration` and `Instant` with Kotlin's.
+- Added handling for Tibia.com's site maintenance.
+- Handle `GuildsSection` for worlds that don't exist.
+- Handle `KillStatistics` for worlds that don't exist.
+- Handle `Highscores` for worlds that don't exist.
+- Properly build URL for `EventsSchedule`.
+- Various parsing bugs.
+
 ## v0.2.0 (2022-04-22)
 
 - Changed `Float` types to `Double`, easier to handle, doesn't require to suffix `f` to literals.
