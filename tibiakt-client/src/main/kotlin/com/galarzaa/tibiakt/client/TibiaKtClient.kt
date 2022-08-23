@@ -110,6 +110,7 @@ import io.ktor.client.call.body
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.engine.cio.CIO
 import io.ktor.client.plugins.Charsets
+import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.ResponseException
 import io.ktor.client.plugins.UserAgent
 import io.ktor.client.plugins.compression.ContentEncoding
@@ -148,6 +149,9 @@ open class TibiaKtClient constructor(
     constructor(userAgent: String? = null) : this(null, userAgent)
 
     private val client = HttpClient(engine ?: CIO.create()) {
+        install(HttpTimeout) {
+            requestTimeoutMillis = HttpTimeout.INFINITE_TIMEOUT_MS
+        }
         Charsets {
             register(Charsets.UTF_8)
             register(Charsets.ISO_8859_1)

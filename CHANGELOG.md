@@ -1,6 +1,10 @@
 # Changelog
 
-## v0.3.0 (20220-08-17)
+## v0.3.1 (2022-08-23)
+
+- Removed request timeout.
+
+## v0.3.0 (2022-08-17)
 
 - Added `exaltedDust`, `bossPoints` and `bosstiaryProgress` to Auctions.
 - Added boostable bosses parsing.
