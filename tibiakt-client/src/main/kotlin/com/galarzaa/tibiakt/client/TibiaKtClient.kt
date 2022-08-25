@@ -106,6 +106,7 @@ import com.galarzaa.tibiakt.core.utils.getWorldGuildsUrl
 import com.galarzaa.tibiakt.core.utils.getWorldOverviewUrl
 import com.galarzaa.tibiakt.core.utils.getWorldUrl
 import io.ktor.client.HttpClient
+import io.ktor.client.HttpClientConfig
 import io.ktor.client.call.body
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.engine.cio.CIO
@@ -131,26 +132,32 @@ import mu.KotlinLogging
 import java.time.LocalDate
 import java.time.YearMonth
 import kotlin.system.measureTimeMillis
+import kotlin.time.Duration.Companion.seconds
 
 /**
  * A coroutine based client to fetch from Tibia.com
  *
  * @param engine The ktor client engine to use, by default CIO is used.
+ * @param additionalConfig Additional configuration for the Ktor Client.
  */
 open class TibiaKtClient constructor(
     engine: HttpClientEngine?,
     private val userAgent: String? = null,
+    private val additionalConfig: (HttpClientConfig<*>.() -> Unit) = {},
 ) {
 
     /**
      * Creates an instance of the client, using the default engine (CIO)
      * @param userAgent The value that will be sent in the User-Agent header of every request.
      */
-    constructor(userAgent: String? = null) : this(null, userAgent)
+    constructor(userAgent: String? = null, additionalConfig: (HttpClientConfig<*>.() -> Unit)) : this(
+        null, userAgent, additionalConfig
+    )
 
     private val client = HttpClient(engine ?: CIO.create()) {
         install(HttpTimeout) {
             requestTimeoutMillis = HttpTimeout.INFINITE_TIMEOUT_MS
+            connectTimeoutMillis = 30.seconds.inWholeMilliseconds
         }
         Charsets {
             register(Charsets.UTF_8)
@@ -164,6 +171,7 @@ open class TibiaKtClient constructor(
         install(UserAgent) {
             agent = userAgent ?: "TibiaKtClient/? ktor/? Kotlin/${KotlinVersion.CURRENT}"
         }
+        additionalConfig(this)
     }
 
     /**
