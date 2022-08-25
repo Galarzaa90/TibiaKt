@@ -150,7 +150,7 @@ open class TibiaKtClient constructor(
      * Creates an instance of the client, using the default engine (CIO)
      * @param userAgent The value that will be sent in the User-Agent header of every request.
      */
-    constructor(userAgent: String? = null, additionalConfig: (HttpClientConfig<*>.() -> Unit)) : this(
+    constructor(userAgent: String? = null, additionalConfig: (HttpClientConfig<*>.() -> Unit) = {}) : this(
         null, userAgent, additionalConfig
     )
 
