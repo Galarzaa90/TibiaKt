@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.3.2 (2022-09-05)
+
+- Added configuration options to TibiaKtClient.
+
 ## v0.3.1 (2022-08-23)
 
 - Removed request timeout.
