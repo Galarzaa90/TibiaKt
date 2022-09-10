@@ -12,28 +12,31 @@ import com.galarzaa.tibiakt.core.utils.BuilderDsl
 
 
 @BuilderDsl
-inline fun bazaarFilters(block: BazaarFiltersBuilder.() -> Unit) = bazaarFiltersBuilder(block).build()
+public inline fun bazaarFilters(block: BazaarFiltersBuilder.() -> Unit): BazaarFilters =
+    bazaarFiltersBuilder(block).build()
 
 @BuilderDsl
-inline fun bazaarFiltersBuilder(block: BazaarFiltersBuilder.() -> Unit) = BazaarFiltersBuilder().apply(block)
+public inline fun bazaarFiltersBuilder(block: BazaarFiltersBuilder.() -> Unit): BazaarFiltersBuilder =
+    BazaarFiltersBuilder().apply(block)
 
 @BuilderDsl
-class BazaarFiltersBuilder : TibiaKtBuilder<BazaarFilters>() {
-    var world: String? = null
-    var pvpType: PvpType? = null
-    var battlEyeType: AuctionBattlEyeFilter? = null
-    var vocation: AuctionVocationFilter? = null
-    var minimumLevel: Int? = null
-    var maximumLevel: Int? = null
-    var skill: AuctionSkillFilter? = null
-    var minimumSkillLevel: Int? = null
-    var maximumSkillLevel: Int? = null
-    var orderDirection: AuctionOrderDirection? = null
-    var orderBy: AuctionOrderBy? = null
-    var searchString: String? = null
-    var searchType: AuctionSearchType? = null
+public class BazaarFiltersBuilder : TibiaKtBuilder<BazaarFilters>() {
+    public var world: String? = null
+    public var pvpType: PvpType? = null
+    public var battlEyeType: AuctionBattlEyeFilter? = null
+    public var vocation: AuctionVocationFilter? = null
+    public var minimumLevel: Int? = null
+    public var maximumLevel: Int? = null
+    public var skill: AuctionSkillFilter? = null
+    public var minimumSkillLevel: Int? = null
+    public var maximumSkillLevel: Int? = null
+    public var orderDirection: AuctionOrderDirection? = null
+    public var orderBy: AuctionOrderBy? = null
+    public var searchString: String? = null
+    public var searchType: AuctionSearchType? = null
 
-    override fun build() = BazaarFilters(world = world,
+    public override fun build(): BazaarFilters = BazaarFilters(
+        world = world,
         pvpType = pvpType,
         battlEyeType = battlEyeType,
         vocation = vocation,

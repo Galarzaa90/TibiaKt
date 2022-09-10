@@ -28,7 +28,7 @@ import com.galarzaa.tibiakt.core.utils.parseTablesMap
 import com.galarzaa.tibiakt.core.utils.rows
 import org.jsoup.nodes.Element
 
-object KillStatisticsParser : Parser<KillStatistics?> {
+public object KillStatisticsParser : Parser<KillStatistics?> {
     override fun fromContent(content: String): KillStatistics? {
         val boxContent = boxContent(content)
         val formData =
@@ -40,7 +40,7 @@ object KillStatisticsParser : Parser<KillStatistics?> {
             tables["Kill Statistics"]?.apply {
                 parseKillStatisticsTable(this)
             } ?: throw ParsingException("kill statistics table not found")
-            val form = boxContent.selectFirst("form") ?: throw ParsingException("could not find form in value")
+            boxContent.selectFirst("form") ?: throw ParsingException("could not find form in value")
             world = formData.values["world"] ?: throw ParsingException("could not find world value in form")
         }
     }

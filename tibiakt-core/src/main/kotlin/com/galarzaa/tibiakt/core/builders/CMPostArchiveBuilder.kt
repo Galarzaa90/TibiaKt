@@ -7,23 +7,25 @@ import java.time.LocalDate
 
 
 @BuilderDsl
-inline fun cmPostArchive(block: CMPostArchiveBuilder.() -> Unit) = CMPostArchiveBuilder().apply(block).build()
+public inline fun cmPostArchive(block: CMPostArchiveBuilder.() -> Unit): CMPostArchive =
+    CMPostArchiveBuilder().apply(block).build()
 
 @BuilderDsl
-inline fun cmPostArchiveBuilder(block: CMPostArchiveBuilder.() -> Unit) = CMPostArchiveBuilder().apply(block)
+public inline fun cmPostArchiveBuilder(block: CMPostArchiveBuilder.() -> Unit): CMPostArchiveBuilder =
+    CMPostArchiveBuilder().apply(block)
 
 @BuilderDsl
-class CMPostArchiveBuilder : TibiaKtBuilder<CMPostArchive>() {
-    var startDate: LocalDate? = null
-    var endDate: LocalDate? = null
-    var currentPage: Int = 1
-    var totalPages: Int = 1
-    var resultsCount: Int = 0
-    val entries: MutableList<CMPost> = mutableListOf()
+public class CMPostArchiveBuilder : TibiaKtBuilder<CMPostArchive>() {
+    public var startDate: LocalDate? = null
+    public var endDate: LocalDate? = null
+    public var currentPage: Int = 1
+    public var totalPages: Int = 1
+    public var resultsCount: Int = 0
+    public val entries: MutableList<CMPost> = mutableListOf()
 
-    fun addEntry(post: CMPost) = apply { entries.add(post) }
+    public fun addEntry(post: CMPost): CMPostArchiveBuilder = apply { entries.add(post) }
 
-    override fun build() = CMPostArchive(
+    override fun build(): CMPostArchive = CMPostArchive(
         startDate = startDate ?: throw IllegalStateException("startDate is required"),
         endDate = endDate ?: throw IllegalStateException("endDate is required"),
         currentPage = currentPage,

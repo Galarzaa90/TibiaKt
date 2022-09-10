@@ -22,46 +22,47 @@ import com.galarzaa.tibiakt.core.utils.BuilderDsl
 import kotlinx.datetime.Instant
 
 @BuilderDsl
-inline fun auction(block: AuctionBuilder.() -> Unit) = AuctionBuilder().apply(block).build()
+public inline fun auction(block: AuctionBuilder.() -> Unit): Auction = AuctionBuilder().apply(block).build()
 
 @BuilderDsl
-inline fun auctionBuilder(block: AuctionBuilder.() -> Unit) = AuctionBuilder().apply(block)
+public inline fun auctionBuilder(block: AuctionBuilder.() -> Unit): AuctionBuilder = AuctionBuilder().apply(block)
 
 @BuilderDsl
-class AuctionBuilder : TibiaKtBuilder<Auction>() {
-    lateinit var name: String
-    var auctionId: Int? = null
-    var level: Int? = null
-    lateinit var world: String
-    lateinit var vocation: Vocation
-    lateinit var sex: Sex
-    lateinit var outfit: OutfitImage
-    val displayedItems: MutableList<ItemEntry> = mutableListOf()
-    val salesArguments: MutableList<SalesArgument> = mutableListOf()
-    lateinit var auctionStart: Instant
-    lateinit var auctionEnd: Instant
-    var bid: Int = 0
-    lateinit var bidType: BidType
-    lateinit var status: AuctionStatus
-    var details: AuctionDetails? = null
+public class AuctionBuilder : TibiaKtBuilder<Auction>() {
+    public lateinit var name: String
+    public var auctionId: Int? = null
+    public var level: Int? = null
+    public lateinit var world: String
+    public lateinit var vocation: Vocation
+    public lateinit var sex: Sex
+    public lateinit var outfit: OutfitImage
+    private val displayedItems: MutableList<ItemEntry> = mutableListOf()
+    private val salesArguments: MutableList<SalesArgument> = mutableListOf()
+    public lateinit var auctionStart: Instant
+    public lateinit var auctionEnd: Instant
+    public var bid: Int = 0
+    public lateinit var bidType: BidType
+    public lateinit var status: AuctionStatus
+    public var details: AuctionDetails? = null
 
-    fun addDisplayedItem(displayedItem: ItemEntry) = apply { displayedItems.add(displayedItem) }
+    public fun addDisplayedItem(displayedItem: ItemEntry): AuctionBuilder = apply { displayedItems.add(displayedItem) }
 
     @BuilderDsl
-    fun displayedItem(block: ItemEntryBuilder.() -> Unit) =
+    public fun displayedItem(block: ItemEntryBuilder.() -> Unit): AuctionBuilder =
         apply { displayedItems.add(ItemEntryBuilder().apply(block).build()) }
 
-    fun addSalesArgument(salesArgument: SalesArgument) = apply { salesArguments.add(salesArgument) }
+    public fun addSalesArgument(salesArgument: SalesArgument): AuctionBuilder =
+        apply { salesArguments.add(salesArgument) }
 
     @BuilderDsl
-    fun salesArgument(block: SalesArgumentBuilder.() -> Unit) =
+    public fun salesArgument(block: SalesArgumentBuilder.() -> Unit): AuctionBuilder =
         apply { salesArguments.add(SalesArgumentBuilder().apply(block).build()) }
 
     @BuilderDsl
-    fun details(block: AuctionDetailsBuilder.() -> Unit) =
+    public fun details(block: AuctionDetailsBuilder.() -> Unit): AuctionBuilder =
         apply { details = AuctionDetailsBuilder().apply(block).build() }
 
-    override fun build() = Auction(
+    public override fun build(): Auction = Auction(
         name = if (::name.isInitialized) name else throw IllegalStateException("name is required"),
         auctionId = auctionId ?: throw IllegalStateException("auctionId is required"),
         level = level ?: throw IllegalStateException("level is required"),
@@ -80,92 +81,102 @@ class AuctionBuilder : TibiaKtBuilder<Auction>() {
     )
 
     @BuilderDsl
-    class ItemEntryBuilder : TibiaKtBuilder<ItemEntry>() {
-        var itemId: Int? = null
-        lateinit var name: String
-        lateinit var description: String
-        var count: Int = 1
+    public class ItemEntryBuilder : TibiaKtBuilder<ItemEntry>() {
+        public var itemId: Int? = null
+        public lateinit var name: String
+        public lateinit var description: String
+        public var count: Int = 1
 
-        override fun build() = ItemEntry(itemId = itemId ?: throw IllegalStateException("itemId is required"),
+        override fun build(): ItemEntry = ItemEntry(
+            itemId = itemId ?: throw IllegalStateException("itemId is required"),
             name = if (::name.isInitialized) name else throw IllegalStateException("name is required"),
             description = if (::description.isInitialized) description else throw IllegalStateException("description is required"),
-            count = count)
+            count = count
+        )
     }
 
     @BuilderDsl
-    class SalesArgumentBuilder : TibiaKtBuilder<SalesArgument>() {
-        var categoryId: Int? = null
-        lateinit var content: String
+    public class SalesArgumentBuilder : TibiaKtBuilder<SalesArgument>() {
+        public var categoryId: Int? = null
+        public lateinit var content: String
 
-        override fun build() = SalesArgument(
+        override fun build(): SalesArgument = SalesArgument(
             categoryId = categoryId ?: throw IllegalStateException("categoryId is required"),
             content = if (::content.isInitialized) content else throw IllegalStateException("content is required"),
         )
     }
 
     @BuilderDsl
-    class AuctionDetailsBuilder : TibiaKtBuilder<AuctionDetails>() {
-        var hitPoints: Int? = null
-        var mana: Int? = null
-        var capacity: Int? = null
-        var speed: Int? = null
-        var blessingsCount: Int? = null
-        var mountsCount: Int? = null
-        var outfitsCount: Int? = null
-        var titlesCount: Int? = null
-        var skills: AuctionSkills? = null
-        var creationDate: Instant? = null
-        var experience: Long? = null
-        var gold: Long? = null
-        var achievementPoints: Int? = null
-        var regularWorldTransfersAvailable: Instant? = null
-        var charmExpansion: Boolean? = null
-        var availableCharmPoints: Int? = null
-        var spentCharmPoints: Int? = null
-        var dailyRewardStreak: Int? = null
-        var huntingTaskPoints: Int? = null
-        var permanentHuntingTaskSlots: Int? = null
-        var permanentPreySlots: Int? = null
-        var preyWildcards: Int? = null
-        var hirelings: Int? = null
-        var hirelingJobs: Int? = null
-        var hirelingOutfits: Int? = null
-        var exaltedDust: Int? = null
-        var exaltedDustLimit: Int? = null
-        var bossPoints: Int? = null
-        var items: ItemSummary? = null
-        var storeItems: ItemSummary? = null
-        var mounts: Mounts? = null
-        var storeMounts: Mounts? = null
-        var outfits: Outfits? = null
-        var storeOutfits: Outfits? = null
-        var familiars: Familiars? = null
-        val blessings: MutableList<BlessingEntry> = mutableListOf()
-        val imbuements: MutableList<String> = mutableListOf()
-        val charms: MutableList<CharmEntry> = mutableListOf()
-        val completedCyclopediaMapAreas: MutableList<String> = mutableListOf()
-        val completedQuestLines: MutableList<String> = mutableListOf()
-        val titles: MutableList<String> = mutableListOf()
-        val achievements: MutableList<AchievementEntry> = mutableListOf()
-        val bestiaryProgress: MutableList<CreatureEntry> = mutableListOf()
-        val bosstiaryProgress: MutableList<CreatureEntry> = mutableListOf()
+    public class AuctionDetailsBuilder : TibiaKtBuilder<AuctionDetails>() {
+        public var hitPoints: Int? = null
+        public var mana: Int? = null
+        public var capacity: Int? = null
+        public var speed: Int? = null
+        public var blessingsCount: Int? = null
+        public var mountsCount: Int? = null
+        public var outfitsCount: Int? = null
+        public var titlesCount: Int? = null
+        public var skills: AuctionSkills? = null
+        public var creationDate: Instant? = null
+        public var experience: Long? = null
+        public var gold: Long? = null
+        public var achievementPoints: Int? = null
+        public var regularWorldTransfersAvailable: Instant? = null
+        public var charmExpansion: Boolean? = null
+        public var availableCharmPoints: Int? = null
+        public var spentCharmPoints: Int? = null
+        public var dailyRewardStreak: Int? = null
+        public var huntingTaskPoints: Int? = null
+        public var permanentHuntingTaskSlots: Int? = null
+        public var permanentPreySlots: Int? = null
+        public var preyWildcards: Int? = null
+        public var hirelings: Int? = null
+        public var hirelingJobs: Int? = null
+        public var hirelingOutfits: Int? = null
+        public var exaltedDust: Int? = null
+        public var exaltedDustLimit: Int? = null
+        public var bossPoints: Int? = null
+        public var items: ItemSummary? = null
+        public var storeItems: ItemSummary? = null
+        public var mounts: Mounts? = null
+        public var storeMounts: Mounts? = null
+        public var outfits: Outfits? = null
+        public var storeOutfits: Outfits? = null
+        public var familiars: Familiars? = null
+        public val blessings: MutableList<BlessingEntry> = mutableListOf()
+        public val imbuements: MutableList<String> = mutableListOf()
+        public val charms: MutableList<CharmEntry> = mutableListOf()
+        public val completedCyclopediaMapAreas: MutableList<String> = mutableListOf()
+        public val completedQuestLines: MutableList<String> = mutableListOf()
+        public val titles: MutableList<String> = mutableListOf()
+        public val achievements: MutableList<AchievementEntry> = mutableListOf()
+        public val bestiaryProgress: MutableList<CreatureEntry> = mutableListOf()
+        public val bosstiaryProgress: MutableList<CreatureEntry> = mutableListOf()
 
 
-        fun addBlessing(blessingEntry: BlessingEntry) = apply { blessings.add(blessingEntry) }
-        fun addImbuement(imbuement: String) = apply { imbuements.add(imbuement) }
-        fun addCharm(charm: CharmEntry) = apply { charms.add(charm) }
+        public fun addBlessing(blessingEntry: BlessingEntry): AuctionDetailsBuilder =
+            apply { blessings.add(blessingEntry) }
 
-        fun addCompletedQuestLine(completedQuestLine: String) = apply { completedQuestLines.add(completedQuestLine) }
-        fun addCompletedCyclopediaMapArea(completedCyclopediaMapArea: String) =
+        public fun addImbuement(imbuement: String): AuctionDetailsBuilder = apply { imbuements.add(imbuement) }
+        public fun addCharm(charm: CharmEntry): AuctionDetailsBuilder = apply { charms.add(charm) }
+
+        public fun addCompletedQuestLine(completedQuestLine: String): AuctionDetailsBuilder =
+            apply { completedQuestLines.add(completedQuestLine) }
+
+        public fun addCompletedCyclopediaMapArea(completedCyclopediaMapArea: String): AuctionDetailsBuilder =
             apply { completedCyclopediaMapAreas.add(completedCyclopediaMapArea) }
 
-        fun addTitle(title: String) = apply { titles.add(title) }
-        fun addAchievement(achievement: AchievementEntry) = apply { achievements.add(achievement) }
-        fun addBestiaryEntry(bestiaryEntry: CreatureEntry) = apply { bestiaryProgress.add(bestiaryEntry) }
+        public fun addTitle(title: String): AuctionDetailsBuilder = apply { titles.add(title) }
+        public fun addAchievement(achievement: AchievementEntry): AuctionDetailsBuilder =
+            apply { achievements.add(achievement) }
 
-        fun addBosstiaryEntry(bosstiaryEntry: CreatureEntry) = apply { bosstiaryProgress.add(bosstiaryEntry) }
+        public fun addBestiaryEntry(bestiaryEntry: CreatureEntry): AuctionDetailsBuilder =
+            apply { bestiaryProgress.add(bestiaryEntry) }
 
-        override fun build() =
+        public fun addBosstiaryEntry(bosstiaryEntry: CreatureEntry): AuctionDetailsBuilder =
+            apply { bosstiaryProgress.add(bosstiaryEntry) }
+
+        public override fun build(): AuctionDetails =
             AuctionDetails(
                 hitPoints = hitPoints ?: throw IllegalStateException("hitPoints is required"),
                 mana = mana ?: throw IllegalStateException("mana is required"),
