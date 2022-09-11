@@ -32,6 +32,7 @@ import com.galarzaa.tibiakt.core.utils.parseTibiaDateTime
 import com.galarzaa.tibiakt.core.utils.remove
 import com.galarzaa.tibiakt.core.utils.replaceBrs
 
+/** Parser for House information pages. */
 public object HouseParser : Parser<House?> {
     @Suppress("MaxLineLength")
     private val rentedPattern =

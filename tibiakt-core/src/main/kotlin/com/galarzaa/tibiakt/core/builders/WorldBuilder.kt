@@ -33,6 +33,7 @@ public inline fun worldBuilder(block: WorldBuilder.() -> Unit): WorldBuilder = W
 @BuilderDsl
 public inline fun world(block: WorldBuilder.() -> Unit): World = worldBuilder(block).build()
 
+/** Builder for [World] instances. */
 @BuilderDsl
 public class WorldBuilder : TibiaKtBuilder<World> {
     public var name: String? = null

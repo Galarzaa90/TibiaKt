@@ -28,6 +28,7 @@ public inline fun guildsSectionBuilder(block: GuildsSectionBuilder.() -> Unit): 
 public inline fun guildsSection(block: GuildsSectionBuilder.() -> Unit): GuildsSection =
     guildsSectionBuilder(block).build()
 
+/** Builder for [GuildsSection] instances. */
 @BuilderDsl
 public class GuildsSectionBuilder : TibiaKtBuilder<GuildsSection> {
     public var world: String? = null

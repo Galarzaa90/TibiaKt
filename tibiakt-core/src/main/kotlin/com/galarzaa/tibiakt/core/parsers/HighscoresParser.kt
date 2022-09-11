@@ -40,6 +40,7 @@ import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 import kotlin.time.Duration.Companion.minutes
 
+/** Parser for highscores. */
 public object HighscoresParser : Parser<Highscores?> {
     private val numericMatch = Regex("""(\d+)""")
 

@@ -29,6 +29,7 @@ public inline fun house(block: HouseBuilder.() -> Unit): House = HouseBuilder().
 public inline fun houseBuilder(block: HouseBuilder.() -> Unit): HouseBuilder = HouseBuilder().apply(block)
 
 
+/** Builder for [House] instances. */
 @BuilderDsl
 public class HouseBuilder : TibiaKtBuilder<House> {
     public var houseId: Int? = null

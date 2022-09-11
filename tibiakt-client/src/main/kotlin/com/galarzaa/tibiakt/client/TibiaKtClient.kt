@@ -136,7 +136,7 @@ import kotlin.time.Duration.Companion.seconds
 
 @Suppress("TooManyFunctions")
 /**
- * A coroutine based client to fetch from Tibia.com
+ * A coroutine based client to fetch from Tibia.com.
  *
  * @param engine The ktor client engine to use, by default CIO is used.
  * @param additionalConfig Additional configuration for the Ktor Client.
@@ -168,7 +168,8 @@ public open class TibiaKtClient constructor(
     }
 
     /**
-     * Creates an instance of the client, using the default engine (CIO)
+     * Creates an instance of the client, using the default engine (CIO).
+     *
      * @param userAgent The value that will be sent in the User-Agent header of every request.
      */
     public constructor(userAgent: String? = null, additionalConfig: (HttpClientConfig<*>.() -> Unit) = {}) : this(
@@ -259,7 +260,7 @@ public open class TibiaKtClient constructor(
         fetchRecentNews(LocalDate.now().minusDays(days.toLong()), LocalDate.now(), categories, types)
 
     /**
-     * Fetch a specific news article by its [newsId]
+     * Fetch a specific news article by its [newsId].
      */
     public open suspend fun fetchNews(newsId: Int): TibiaResponse<News?> {
         val response = this.request(HttpMethod.Get, getNewsUrl(newsId))
@@ -267,7 +268,7 @@ public open class TibiaKtClient constructor(
     }
 
     /**
-     * Fetch the events schedule for a specific year and month
+     * Fetch the events schedule for a specific year and month.
      */
     public open suspend fun fetchEventsSchedule(yearMonth: YearMonth): TibiaResponse<EventsSchedule> {
         val response = this.request(HttpMethod.Get, getEventsScheduleUrl(yearMonth))
@@ -275,7 +276,7 @@ public open class TibiaKtClient constructor(
     }
 
     /**
-     * Fetch the events schedule for a specific year and month
+     * Fetch the events schedule for a specific year and month.
      */
     public open suspend fun fetchEventsSchedule(year: Int, month: Int): TibiaResponse<EventsSchedule> =
         fetchEventsSchedule(YearMonth.of(year, month))
@@ -288,13 +289,13 @@ public open class TibiaKtClient constructor(
     // endregion
 
     // region Library Section
-    /** Fetch the boosted boss of the day as well as the list of bosstable bosses from Tibia.com */
+    /** Fetch the boosted boss of the day as well as the list of bosstable bosses from Tibia.com. */
     public open suspend fun fetchBosstableBosses(): TibiaResponse<BosstableBosses> {
         val response = this.request(HttpMethod.Get, getBoostableBossesUrl())
         return response.parse { BosstableBossesParser.fromContent(it) }
     }
 
-    /** Fetch the creatures section, containing the boosted creature */
+    /** Fetch the creatures section, containing the boosted creature. */
     public open suspend fun fetchCreaturesSection(): TibiaResponse<CreaturesSection> {
         val response = this.request(HttpMethod.Get, getCreaturesSectionUrl())
         return response.parse { CreaturesSectionParser.fromContent(it) }
@@ -305,7 +306,8 @@ public open class TibiaKtClient constructor(
     // region Community Section
 
     /**
-     * Fetch a character
+     * Fetch a character.
+     *
      * @param name The name of the character.
      */
     public open suspend fun fetchCharacter(name: String): TibiaResponse<Character?> {
@@ -484,7 +486,7 @@ public open class TibiaKtClient constructor(
         return response.parse { ForumAnnouncementParser.fromContent(it, announcementId) }
     }
 
-    /** Fetches a forum thread from Tibia.com */
+    /** Fetches a forum thread from Tibia.com. */
     public open suspend fun fetchForumThread(threadId: Int, page: Int = 1): TibiaResponse<ForumThread?> {
         val response = this.request(HttpMethod.Get, getForumThreadUrl(threadId, page))
         return response.parse { ForumThreadParser.fromContent(it) }
@@ -522,7 +524,7 @@ public open class TibiaKtClient constructor(
 
     // region Char Bazaar Section
     /**
-     * Fetch the character bazaar
+     * Fetch the character bazaar.
      *
      * @param type Whether to show current auctions or the auction history.
      * @param filters The filtering parameters to use.
@@ -537,6 +539,9 @@ public open class TibiaKtClient constructor(
         return response.parse { CharacterBazaarParser.fromContent(it) }
     }
 
+    /**
+     * Fetch the character bazaar from Tibia.com.
+     */
     public open suspend fun fetchBazaar(
         type: BazaarType = BazaarType.CURRENT,
         page: Int = 1,
@@ -545,7 +550,8 @@ public open class TibiaKtClient constructor(
         fetchBazaar(type, filterBuilder?.let { BazaarFiltersBuilder().apply(it).build() }, page)
 
     /**
-     * Fetch an auction from Tibia.com
+     * Fetch an auction from Tibia.com.
+     *
      * @param auctionId The ID of the auction to fetch.
      * @param skipDetails Whether to only fetch the auction's header and skip details.
      * @param fetchItems Whether to fetch items from further pages if necessary. Cannot be done if [skipDetails] is true.
@@ -719,7 +725,7 @@ public open class TibiaKtClient constructor(
     private data class Timing(var fetching: Double = 0.0, var parsing: Double = 0.0)
 
     /**
-     * Extract the results of [fetchAllPages] and sum the timings into the [accumulator]
+     * Extract the results of [fetchAllPages] and sum the timings into the [accumulator].
      */
     private fun <T> Pair<Timing, List<T>>.accumulateTime(accumulator: Timing): List<T> {
         accumulator.fetching += first.fetching

@@ -75,15 +75,16 @@ internal fun Elements.cleanText() = text().clean()
 internal fun Element.wholeCleanText() = wholeText().clean()
 
 
-/** Replace all br tags in an element with line jumps */
+/** Replace all br tags in an element with line jumps. */
 internal fun Element.replaceBrs() = apply {
     select("br").forEach { it.replaceWith(TextNode("\n")) }
 }
 
-/** Replace all br tags in an array of elements with line jumps */
+/** Replace all br tags in an array of elements with line jumps. */
 internal fun ArrayList<Element>.replaceBr() = forEach { it.replaceBrs() }
 
-/** Get all the field's values and available options of a form element
+/** Get all the field's values and available options of a form element.
+ *
  * @receiver An element with the form tag.
  */
 internal fun Element.formData(): FormData {
@@ -136,7 +137,7 @@ internal data class FormData(
 private val pageRegex = Regex("""(?:page|pagenumber)=(\d+)""")
 private val resultsRegex = Regex("""Results: ([\d,]+)""")
 
-/** Parse the pagination block present in many Tibia.com sections */
+/** Parse the pagination block present in many Tibia.com sections. */
 internal fun Element.parsePagination(): PaginationData {
     val (pagesDiv, resultsDiv) = select("small > div")
     val currentPageLink = pagesDiv.selectFirst(".CurrentPageLink")
@@ -167,7 +168,7 @@ internal fun Element.parsePagination(): PaginationData {
 }
 
 /**
- * Container for pagination information
+ * Container for pagination information.
  */
 internal data class PaginationData(val currentPage: Int, val totalPages: Int, val resultsCount: Int) {
     companion object {

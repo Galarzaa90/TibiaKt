@@ -39,6 +39,7 @@ internal inline fun eventEntry(block: EventsScheduleBuilder.EventEntryBuilder.()
 internal inline fun eventEntryBuilder(block: EventsScheduleBuilder.EventEntryBuilder.() -> Unit) =
     EventsScheduleBuilder.EventEntryBuilder().apply(block)
 
+/** Builder for [EventsSchedule] instances. */
 @BuilderDsl
 public class EventsScheduleBuilder : TibiaKtBuilder<EventsSchedule> {
     public lateinit var yearMonth: YearMonth

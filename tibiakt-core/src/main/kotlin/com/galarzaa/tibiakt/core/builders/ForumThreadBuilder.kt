@@ -31,6 +31,7 @@ public inline fun forumThreadBuilder(block: ForumThreadBuilder.() -> Unit): Foru
 @BuilderDsl
 public inline fun forumThread(block: ForumThreadBuilder.() -> Unit): ForumThread = forumThreadBuilder(block).build()
 
+/** Builder for [ForumThread] instances. */
 @BuilderDsl
 public class ForumThreadBuilder : TibiaKtBuilder<ForumThread> {
     public var title: String? = null

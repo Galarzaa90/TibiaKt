@@ -33,6 +33,7 @@ import com.galarzaa.tibiakt.core.utils.remove
 import com.galarzaa.tibiakt.core.utils.rows
 import org.jsoup.nodes.Element
 
+/** Parser for forum boards. */
 public object ForumBoardParser : Parser<ForumBoard?> {
     private val fileNameRegex = Regex("""([\w_]+.gif)""")
     override fun fromContent(content: String): ForumBoard? {

@@ -29,6 +29,7 @@ import com.galarzaa.tibiakt.core.utils.parseTibiaForumDateTime
 import org.jsoup.nodes.Element
 import org.jsoup.nodes.TextNode
 
+/** Parser for forum threads. */
 public object ForumThreadParser : Parser<ForumThread?> {
     private const val SIGNATURE_SEPARATOR = "________________"
     private val datesRegex = Regex("""(\d{2}\.\d{2}\.\d{4}\s\d{2}:\d{2}:\d{2})""")

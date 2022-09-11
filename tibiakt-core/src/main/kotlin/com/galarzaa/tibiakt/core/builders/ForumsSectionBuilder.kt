@@ -26,6 +26,7 @@ public inline fun forumsSectionBuilder(block: ForumsSectionBuilder.() -> Unit): 
 public inline fun forumsSection(block: ForumsSectionBuilder.() -> Unit): ForumSection =
     forumsSectionBuilder(block).build()
 
+/** Builder for [ForumSection] instances. */
 public class ForumsSectionBuilder : TibiaKtBuilder<ForumSection> {
     public var sectionId: Int = 0
     public val entries: MutableList<BoardEntry> = mutableListOf()

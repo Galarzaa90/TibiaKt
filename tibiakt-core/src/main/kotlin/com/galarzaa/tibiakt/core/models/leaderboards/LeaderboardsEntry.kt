@@ -43,7 +43,7 @@ public data class LeaderboardsEntry(
     override val dromeLevel: Int,
 ) : BaseLeaderboardsEntry(), BaseCharacter
 
-/** A leaderboard entry belonging to a deleted character */
+/** A leaderboard entry belonging to a deleted character. */
 @Serializable
 @SerialName("deletedLeaderboardsEntry")
 public data class DeletedLeaderboardsEntry(

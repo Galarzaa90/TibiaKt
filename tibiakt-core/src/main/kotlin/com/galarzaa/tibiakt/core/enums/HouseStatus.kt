@@ -16,7 +16,7 @@
 
 package com.galarzaa.tibiakt.core.enums
 
-/** Available house status */
+/** Available house status. */
 public enum class HouseStatus(override val value: String) : StringEnum {
     RENTED("rented"),
     AUCTIONED("auctioned")

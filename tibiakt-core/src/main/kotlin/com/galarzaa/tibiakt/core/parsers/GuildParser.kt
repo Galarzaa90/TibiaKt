@@ -33,6 +33,7 @@ import org.jsoup.nodes.Element
 import org.jsoup.nodes.TextNode
 import org.jsoup.select.Elements
 
+/** Parser for the guild information page. */
 public object GuildParser : Parser<Guild?> {
     private val descriptionRegex =
         Regex(

@@ -36,6 +36,7 @@ import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 import org.jsoup.select.Elements
 
+/** Parser for character information pages. */
 public object CharacterParser : Parser<Character?> {
     private val deletedRegexp = Regex("""([^,]+), will be deleted at (.*)""")
     private val titlesRegexp = Regex("""(.*)\((\d+) titles? unlocked\)""")

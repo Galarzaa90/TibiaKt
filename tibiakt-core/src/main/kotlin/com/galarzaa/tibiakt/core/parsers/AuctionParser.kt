@@ -53,6 +53,7 @@ import org.jsoup.nodes.Element
 import java.io.File
 import java.net.URL
 
+/** Parser for auction pages. */
 public object AuctionParser : Parser<Auction?> {
     private const val PERCENTAGE = 100f
 

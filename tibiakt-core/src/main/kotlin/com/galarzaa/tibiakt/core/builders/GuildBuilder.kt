@@ -30,6 +30,7 @@ public inline fun guildBuilder(block: GuildBuilder.() -> Unit): GuildBuilder = G
 @BuilderDsl
 public inline fun guild(block: GuildBuilder.() -> Unit): Guild = guildBuilder(block).build()
 
+/** Builder for [Guild] instances. */
 @BuilderDsl
 public class GuildBuilder : TibiaKtBuilder<Guild> {
     public var world: String? = null

@@ -39,6 +39,7 @@ public inline fun character(block: CharacterBuilder.() -> Unit): Character = Cha
 public inline fun characterBuilder(block: CharacterBuilder.() -> Unit): CharacterBuilder =
     CharacterBuilder().apply(block)
 
+/** Builder for [Character] instances. */
 @BuilderDsl
 public class CharacterBuilder : TibiaKtBuilder<Character> {
     public lateinit var name: String

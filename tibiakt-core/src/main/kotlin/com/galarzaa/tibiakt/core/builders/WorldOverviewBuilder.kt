@@ -33,6 +33,8 @@ public inline fun worldOverviewBuilder(block: WorldOverviewBuilder.() -> Unit): 
 public inline fun worldOverview(block: WorldOverviewBuilder.() -> Unit): WorldOverview =
     worldOverviewBuilder(block).build()
 
+
+/** Builder for world overview. */
 @BuilderDsl
 public class WorldOverviewBuilder : TibiaKtBuilder<WorldOverview> {
     public var overallMaximumCount: Int? = null
@@ -58,6 +60,7 @@ public class WorldOverviewBuilder : TibiaKtBuilder<WorldOverview> {
         )
     }
 
+    /** A builder for world entries. */
     @BuilderDsl
     public class WorldEntryBuilder : TibiaKtBuilder<WorldEntry> {
         public var name: String? = null

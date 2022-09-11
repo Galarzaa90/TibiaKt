@@ -27,6 +27,7 @@ import com.galarzaa.tibiakt.core.utils.parseTablesMap
 import com.galarzaa.tibiakt.core.utils.rows
 import org.jsoup.nodes.Element
 
+/** Parses content from the Kill Statistics section. */
 public object KillStatisticsParser : Parser<KillStatistics?> {
     override fun fromContent(content: String): KillStatistics? {
         val boxContent = boxContent(content)

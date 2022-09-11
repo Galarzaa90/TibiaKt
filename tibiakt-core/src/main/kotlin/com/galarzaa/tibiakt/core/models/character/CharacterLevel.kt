@@ -19,7 +19,7 @@ package com.galarzaa.tibiakt.core.models.character
 import kotlin.math.ceil
 import kotlin.math.floor
 
-/** A character with a level attribute */
+/** A character with a level attribute. */
 public interface CharacterLevel {
     public val level: Int
 

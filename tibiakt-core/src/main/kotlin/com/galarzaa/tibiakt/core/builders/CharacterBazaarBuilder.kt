@@ -30,6 +30,7 @@ public inline fun characterBazaar(block: CharacterBazaarBuilder.() -> Unit): Cha
 public inline fun characterBazaarBuilder(block: CharacterBazaarBuilder.() -> Unit): CharacterBazaarBuilder =
     CharacterBazaarBuilder().apply(block)
 
+/** Builder for [CharacterBazaar] instances. */
 public class CharacterBazaarBuilder : TibiaKtBuilder<CharacterBazaar> {
     public var type: BazaarType = BazaarType.CURRENT
     public var currentPage: Int = 0

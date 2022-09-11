@@ -29,6 +29,7 @@ public inline fun cmPostArchive(block: CMPostArchiveBuilder.() -> Unit): CMPostA
 public inline fun cmPostArchiveBuilder(block: CMPostArchiveBuilder.() -> Unit): CMPostArchiveBuilder =
     CMPostArchiveBuilder().apply(block)
 
+/** Builder for [CMPostArchive] instances. */
 @BuilderDsl
 public class CMPostArchiveBuilder : TibiaKtBuilder<CMPostArchive> {
     public var startDate: LocalDate? = null

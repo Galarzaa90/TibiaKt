@@ -61,7 +61,7 @@ comments:
   DeprecatedBlockTag:
     active: false
   EndOfSentenceFormat:
-    active: false
+    active: true
     endOfSentenceFormat: '([.?!][ \t\n\r\f<])|([.?!:]$)'
   KDocReferencesNonPublicProperty:
     active: false
@@ -72,10 +72,10 @@ comments:
     matchDeclarationsOrder: true
     allowParamOnConstructorProperties: false
   UndocumentedPublicClass:
-    active: false
+    active: true
     excludes: [ '**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**' ]
-    searchInNestedClass: true
-    searchInInnerClass: true
+    searchInNestedClass: false
+    searchInInnerClass: false
     searchInInnerObject: true
     searchInInnerInterface: true
   UndocumentedPublicFunction:

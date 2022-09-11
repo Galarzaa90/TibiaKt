@@ -25,6 +25,7 @@ import com.galarzaa.tibiakt.core.utils.offsetStart
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 
+/** Parser for the guild section. */
 public object GuildsSectionParser : Parser<GuildsSection?> {
     override fun fromContent(content: String): GuildsSection? {
         val document: Document = Jsoup.parse(content, "")

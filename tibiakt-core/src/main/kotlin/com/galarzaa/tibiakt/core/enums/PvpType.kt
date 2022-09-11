@@ -17,7 +17,7 @@
 package com.galarzaa.tibiakt.core.enums
 
 /**
- * A world PvP type
+ * A world PvP type.
  */
 public enum class PvpType(override val value: String) : StringEnum {
     OPEN_PVP("Open PvP") {

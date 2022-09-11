@@ -30,6 +30,7 @@ public fun newsArchive(block: NewsArchiveBuilder.() -> Unit): NewsArchive = news
 public fun newsArchiveBuilder(block: NewsArchiveBuilder.() -> Unit): NewsArchiveBuilder =
     NewsArchiveBuilder().apply(block)
 
+/** Builder for [NewsArchive] instances. */
 @BuilderDsl
 public class NewsArchiveBuilder : TibiaKtBuilder<NewsArchive> {
     public var startDate: LocalDate? = null

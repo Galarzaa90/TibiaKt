@@ -28,6 +28,7 @@ public inline fun creaturesSection(block: CreaturesSectionBuilder.() -> Unit): C
 public inline fun creaturesSectionBuilder(block: CreaturesSectionBuilder.() -> Unit): CreaturesSectionBuilder =
     CreaturesSectionBuilder().apply(block)
 
+/** Builder for [CreaturesSection] instances. */
 @BuilderDsl
 public class CreaturesSectionBuilder : TibiaKtBuilder<CreaturesSection> {
     public var boostedCreature: CreatureEntry? = null

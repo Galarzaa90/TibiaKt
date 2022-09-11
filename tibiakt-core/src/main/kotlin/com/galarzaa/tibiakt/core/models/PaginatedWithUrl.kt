@@ -16,7 +16,7 @@
 
 package com.galarzaa.tibiakt.core.models
 
-/** An object made of multiple pages with URLs */
+/** An object made of multiple pages with URLs. */
 public interface PaginatedWithUrl<T> : Paginated<T> {
     /** Get the URL to the next page if there is any. */
     public val nextPageUrl: String?
@@ -26,6 +26,6 @@ public interface PaginatedWithUrl<T> : Paginated<T> {
     public val previousPageUrl: String?
         get() = if (currentPage == 0) null else getPageUrl(currentPage - 1)
 
-    /** Get the URL to a specific page */
+    /** Get the URL to a specific page. */
     public fun getPageUrl(page: Int): String
 }

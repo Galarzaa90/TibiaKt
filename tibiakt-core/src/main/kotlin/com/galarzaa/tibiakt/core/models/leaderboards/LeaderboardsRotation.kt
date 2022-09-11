@@ -20,7 +20,7 @@ import kotlinx.datetime.Instant
 import kotlinx.serialization.Serializable
 
 /**
- * A rotation of the Tibia Drome leaderboards
+ * A rotation of the Tibia Drome leaderboards.
  *
  * @property rotationId The internal ID of the rotation.
  * @property current Whether this is the current rotation or not.

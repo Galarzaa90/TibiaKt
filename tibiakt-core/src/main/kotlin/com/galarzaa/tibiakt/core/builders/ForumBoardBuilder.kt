@@ -30,6 +30,7 @@ public inline fun forumBoardBuilder(block: ForumBoardBuilder.() -> Unit): ForumB
 
 public inline fun forumBoard(block: ForumBoardBuilder.() -> Unit): ForumBoard = forumBoardBuilder(block).build()
 
+/** Builder for [ForumBoard] instances. */
 @BuilderDsl
 public class ForumBoardBuilder : TibiaKtBuilder<ForumBoard> {
     public var name: String? = null

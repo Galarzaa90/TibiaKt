@@ -34,6 +34,7 @@ public inline fun bazaarFilters(block: BazaarFiltersBuilder.() -> Unit): BazaarF
 public inline fun bazaarFiltersBuilder(block: BazaarFiltersBuilder.() -> Unit): BazaarFiltersBuilder =
     BazaarFiltersBuilder().apply(block)
 
+/** Builder for [BazaarFilters] instances. */
 @BuilderDsl
 public class BazaarFiltersBuilder : TibiaKtBuilder<BazaarFilters> {
     public var world: String? = null

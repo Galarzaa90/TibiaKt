@@ -19,7 +19,7 @@ package com.galarzaa.tibiakt.core.models.creatures
 import com.galarzaa.tibiakt.core.utils.getStaticFileUrl
 
 /**
- * Base interface for creatures in the library
+ * Base interface for creatures in the library.
  *
  * @property name The name of the creature.
  * @property identifier The internal name of the creature, used for images and links (where applicable).

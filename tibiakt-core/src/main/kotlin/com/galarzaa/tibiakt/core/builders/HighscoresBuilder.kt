@@ -33,6 +33,7 @@ public inline fun highscores(block: HighscoresBuilder.() -> Unit): Highscores = 
 public inline fun highscoresBuilder(block: HighscoresBuilder.() -> Unit): HighscoresBuilder =
     HighscoresBuilder().apply(block)
 
+/** Builder for [Highscores] instances. */
 @BuilderDsl
 public class HighscoresBuilder : TibiaKtBuilder<Highscores> {
     public var world: String? = null

@@ -20,18 +20,18 @@ package com.galarzaa.tibiakt.core.enums
  * Possible fields to order houses or guildhalls by.
  */
 public enum class HouseOrder(override val value: String) : StringEnum {
-    /** Order by name, alphabetically */
+    /** Order by name, alphabetically. */
     NAME("name"),
 
-    /** Order by size */
+    /** Order by size. */
     SIZE("size"),
 
-    /** Order by rent */
+    /** Order by rent. */
     RENT("rent"),
 
-    /** Order by bid */
+    /** Order by bid. */
     BID("bid"),
 
-    /** Order by auction's end date */
+    /** Order by auction's end date. */
     AUCTION_END("end"),
 }

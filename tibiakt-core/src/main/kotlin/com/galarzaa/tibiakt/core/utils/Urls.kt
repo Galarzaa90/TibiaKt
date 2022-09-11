@@ -80,7 +80,7 @@ public fun buildTibiaUrl(
 }
 
 /**
- * Get the URL of a static asset in Tibia.com
+ * Get the URL of a static asset in Tibia.com.
  *
  * @param path The path to the asset.
  * @param test Whether to use the testing version of Tibia.com or not.
@@ -89,7 +89,7 @@ public fun getStaticFileUrl(path: String, test: Boolean = false): String =
     "https://${if (test) "test." else ""}static.tibia.com/${path.replace("//", "/")}"
 
 /**
- * Get the URL of a static asset in Tibia.com
+ * Get the URL of a static asset in Tibia.com.
  *
  * @param path The path to the asset, represented as an array of directories with the filename at the end.
  * @param test Whether to use the testing version of Tibia.com or not.
@@ -120,7 +120,7 @@ public fun getHouseUrl(world: String, houseId: Int): String =
     buildTibiaUrl("community", "houses", "page" to "view", "world" to world, "houseid" to houseId)
 
 /**
- * Get the URL to the World Overview section
+ * Get the URL to the World Overview section.
  */
 public fun getWorldOverviewUrl(): String = buildTibiaUrl("community", "worlds")
 
@@ -135,7 +135,7 @@ public fun getWorldUrl(name: String): String = buildTibiaUrl("community", "world
 public fun getNewsArchiveUrl(): String = buildTibiaUrl("news", "newsarchive")
 
 /**
- * Get the post parameters to filter news in the News Archive
+ * Get the post parameters to filter news in the News Archive.
  */
 public fun getNewArchiveFormData(
     startDate: LocalDate,
@@ -162,20 +162,20 @@ public fun getNewArchiveFormData(
 }
 
 /**
- * Get the URL to a specific news article
+ * Get the URL to a specific news article.
  */
 public fun getNewsUrl(newsId: Int): String = buildTibiaUrl("news", "newsarchive", "id" to newsId)
 
 
 /**
- * Get the URL to a specific forum section
+ * Get the URL to a specific forum section.
  */
 public fun getForumSectionUrl(sectionId: Int): String =
     buildTibiaUrl("forum", "action" to "main", "sectionid" to sectionId)
 
 
 /**
- * Get the URL to a specific forum section
+ * Get the URL to a specific forum section.
  */
 public fun getForumSectionUrl(section: AvailableForumSection): String =
     buildTibiaUrl("forum", "subtopoic" to section.subtopic)
@@ -185,11 +185,12 @@ public fun getForumSectionUrl(section: AvailableForumSection): String =
  */
 public fun getForumSectionUrl(sectionName: String): String = buildTibiaUrl("forum", sectionName)
 
+/** Get the URL to a forum board. */
 public fun getForumBoardUrl(boardId: Int, page: Int = 1, threadAge: Int? = null): String = buildTibiaUrl(
     "forum", "action" to "board", "boardid" to boardId, "pagenumber" to page, "threadage" to threadAge
 )
 
-
+/** Get the URL to a forum announcement. */
 public fun getForumAnnouncementUrl(announcementId: Int): String =
     buildTibiaUrl("forum", "action" to "announcement", "announcementid" to announcementId)
 
@@ -297,7 +298,7 @@ private fun BazaarFilters?.getQueryParams(): Array<Pair<String, Any?>> {
 }
 
 /**
- * Get the URL to the CM Post Archive in Tibia.com
+ * Get the URL to the CM Post Archive in Tibia.com.
  */
 public fun getCMPostArchiveUrl(startDate: LocalDate, endDate: LocalDate, page: Int = 1): String {
     return buildTibiaUrl(

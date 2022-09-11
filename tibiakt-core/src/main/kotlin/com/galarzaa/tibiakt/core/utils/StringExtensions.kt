@@ -57,12 +57,12 @@ public fun String.parseLong(): Long = remove(",").trim().toLong()
 public fun String.findInteger(): Int = filter { it.isDigit() }.toInt()
 
 /**
- * Return null if the string is blank
+ * Return null if the string is blank.
  */
 public fun String?.nullIfBlank(): String? = takeIf { !it.isNullOrBlank() }
 
 /**
- *  Parses strings with numbers using "k" as a thousand suffix
+ *  Parses strings with numbers using "k" as a thousand suffix.
  */
 public fun String.parseThousandSuffix(): Int =
     remove("k", true).parseInteger() * (count { it == 'k' || it == 'K' } * 1000)

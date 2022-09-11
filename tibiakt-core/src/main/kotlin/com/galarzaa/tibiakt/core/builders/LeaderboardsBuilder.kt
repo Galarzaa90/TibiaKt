@@ -30,6 +30,7 @@ public inline fun leaderboards(block: LeaderboardsBuilder.() -> Unit): Leaderboa
 public inline fun leaderboardsBuilder(block: LeaderboardsBuilder.() -> Unit): LeaderboardsBuilder =
     LeaderboardsBuilder().apply(block)
 
+/** Builder for [Leaderboards] instances. */
 @BuilderDsl
 public class LeaderboardsBuilder : TibiaKtBuilder<Leaderboards> {
     public var world: String? = null

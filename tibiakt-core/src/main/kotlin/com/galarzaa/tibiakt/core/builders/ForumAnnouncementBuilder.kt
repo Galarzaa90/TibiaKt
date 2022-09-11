@@ -29,6 +29,7 @@ public inline fun forumAnnouncementBuilder(block: ForumAnnouncementBuilder.() ->
 public inline fun forumAnnouncement(block: ForumAnnouncementBuilder.() -> Unit): ForumAnnouncement =
     forumAnnouncementBuilder(block).build()
 
+/** Builder for [ForumAnnouncement] instances. */
 @BuilderDsl
 public class ForumAnnouncementBuilder : TibiaKtBuilder<ForumAnnouncement> {
     public var announcementId: Int? = null

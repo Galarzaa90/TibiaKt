@@ -43,6 +43,7 @@ public inline fun auction(block: AuctionBuilder.() -> Unit): Auction = AuctionBu
 @BuilderDsl
 public inline fun auctionBuilder(block: AuctionBuilder.() -> Unit): AuctionBuilder = AuctionBuilder().apply(block)
 
+/** Builder for [AuctionBuilder] instances. */
 @BuilderDsl
 public class AuctionBuilder : TibiaKtBuilder<Auction> {
     public lateinit var name: String

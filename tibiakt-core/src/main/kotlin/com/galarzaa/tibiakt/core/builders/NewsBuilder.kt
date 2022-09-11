@@ -27,6 +27,7 @@ public inline fun newsBuilder(block: NewsBuilder.() -> Unit): NewsBuilder = News
 @BuilderDsl
 public inline fun news(block: NewsBuilder.() -> Unit): News = newsBuilder(block).build()
 
+/** Builder for [News] instances. */
 @BuilderDsl
 public class NewsBuilder : TibiaKtBuilder<News> {
     public var id: Int? = null

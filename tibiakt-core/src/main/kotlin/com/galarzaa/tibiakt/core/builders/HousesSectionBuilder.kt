@@ -32,6 +32,7 @@ public inline fun housesSection(block: HousesSectionBuilder.() -> Unit): HousesS
 public inline fun housesSectionBuilder(block: HousesSectionBuilder.() -> Unit): HousesSectionBuilder =
     HousesSectionBuilder().apply(block)
 
+/** Builder for [HousesSection] instances. */
 @BuilderDsl
 public class HousesSectionBuilder : TibiaKtBuilder<HousesSection> {
     public var world: String? = null

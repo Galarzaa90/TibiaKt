@@ -23,7 +23,7 @@ import com.galarzaa.tibiakt.core.models.character.GuildMembershipWithTitle
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-/** Base interface for forum author classes */
+/** Base interface for forum author classes. */
 @Serializable
 public sealed class BaseForumAuthor {
     public abstract val name: String
@@ -70,7 +70,9 @@ public data class ForumAuthor(
     val isRecentlyTraded: Boolean,
 ) : BaseForumAuthor(), BaseCharacter, CharacterLevel
 
-
+/**
+ * An author from a tournmanet world.
+ */
 @SerialName("tournamentForumAuthor")
 @Serializable
 public data class TournamentForumAuthor(

@@ -28,6 +28,7 @@ public inline fun bosstableBosses(block: BosstableBossesBuilder.() -> Unit): Bos
 public inline fun bosstableBossesBuilder(block: BosstableBossesBuilder.() -> Unit): BosstableBossesBuilder =
     BosstableBossesBuilder().apply(block)
 
+/** Builder for [BosstableBosses] instances. */
 @BuilderDsl
 public class BosstableBossesBuilder : TibiaKtBuilder<BosstableBosses> {
     public var boostedBoss: BossEntry? = null

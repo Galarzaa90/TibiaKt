@@ -26,6 +26,7 @@ import kotlinx.serialization.UseSerializers
 
 public const val DEFAULT_THREAD_AGE: Int = 30
 
+/** A board in the Tibia forums. */
 @Serializable
 public data class ForumBoard(
     val name: String,

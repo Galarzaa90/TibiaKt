@@ -26,6 +26,7 @@ public inline fun lastPostBuilder(block: LastPostBuilder.() -> Unit): LastPostBu
 @BuilderDsl
 public inline fun lastPost(block: LastPostBuilder.() -> Unit): LastPost = lastPostBuilder(block).build()
 
+/** Builder for [LastPost] instances. */
 @BuilderDsl
 public class LastPostBuilder : TibiaKtBuilder<LastPost> {
     public var author: String? = null

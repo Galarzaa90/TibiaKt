@@ -25,6 +25,7 @@ import com.galarzaa.tibiakt.core.utils.parseAuthorTable
 import com.galarzaa.tibiakt.core.utils.parseTibiaForumDateTime
 import com.galarzaa.tibiakt.core.utils.remove
 
+/** Parser for forum announcements. */
 public object ForumAnnouncementParser : Parser<ForumAnnouncement?> {
     override fun fromContent(content: String): ForumAnnouncement? = fromContent(content, 0)
 

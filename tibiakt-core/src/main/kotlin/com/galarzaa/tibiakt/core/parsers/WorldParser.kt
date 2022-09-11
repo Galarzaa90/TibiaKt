@@ -37,6 +37,7 @@ import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 import java.time.YearMonth
 
+/** Parser for world pages. */
 public object WorldParser : Parser<World?> {
     private val recordRegex = Regex("""(?<count>[\d.,]+) players \(on (?<date>[^)]+)\)""")
     private val battlEyeRegex = Regex("""since ([^.]+).""")
@@ -80,11 +81,13 @@ public object WorldParser : Parser<World?> {
                 "Location" -> location = value
                 "PvP Type" -> pvpType =
                     StringEnum.fromValue(value) ?: throw ParsingException("unknown pvp type found: $value")
+
                 "Premium Type" -> isPremiumRestricted = true
                 "Transfer Type" -> parseTransferType(value)
                 "World Quest Titles" -> if (!value.contains("has no title", true)) {
                     value.split(",").map { worldQuest(it.clean()) }
                 }
+
                 "BattlEye Status" -> parseBattlEyeStatus(value)
                 "Game World Type" -> isExperimental = (value.contains("experimental", true))
             }

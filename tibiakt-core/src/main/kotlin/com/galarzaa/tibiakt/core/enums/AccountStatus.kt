@@ -16,7 +16,7 @@
 
 package com.galarzaa.tibiakt.core.enums
 
-/** The possible status for a Tibia account */
+/** The possible status for a Tibia account. */
 public enum class AccountStatus(override val value: String) : StringEnum {
     FREE_ACCOUNT("Free Account"),
     PREMIUM_ACCOUNT("Premium Account")

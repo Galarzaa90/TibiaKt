@@ -28,6 +28,8 @@ public inline fun killStatistics(block: KillStatisticsBuilder.() -> Unit): KillS
 public inline fun killStatisticsBuilder(block: KillStatisticsBuilder.() -> Unit): KillStatisticsBuilder =
     KillStatisticsBuilder().apply(block)
 
+
+/** Builder for [KillStatistics] instances. */
 @BuilderDsl
 public class KillStatisticsBuilder : TibiaKtBuilder<KillStatistics> {
     public var world: String? = null

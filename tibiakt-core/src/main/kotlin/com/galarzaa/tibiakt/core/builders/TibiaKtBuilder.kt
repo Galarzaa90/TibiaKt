@@ -16,7 +16,7 @@
 
 package com.galarzaa.tibiakt.core.builders
 
-/** Interface */
+/** Interface for builders of TibiaKt models. */
 public interface TibiaKtBuilder<T> {
     /** Builds an instance with the current data in the builder.
      *
