@@ -118,22 +118,23 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">26</i>&nbsp;@BuilderDsl
 <b class="fc"><i class="no-highlight">27</i>&nbsp;public inline fun lastPost(block: LastPostBuilder.() -&gt; Unit): LastPost = lastPostBuilder(block).build()</b>
 <i class="no-highlight">28</i>&nbsp;
-<i class="no-highlight">29</i>&nbsp;@BuilderDsl
-<i class="no-highlight">30</i>&nbsp;public class LastPostBuilder : TibiaKtBuilder&lt;LastPost&gt; {
-<i class="no-highlight">31</i>&nbsp;    public var author: String? = null
-<i class="no-highlight">32</i>&nbsp;    public var postId: Int? = null
-<i class="no-highlight">33</i>&nbsp;    public var date: Instant? = null
-<i class="no-highlight">34</i>&nbsp;    public var deleted: Boolean = false
-<i class="no-highlight">35</i>&nbsp;    public var traded: Boolean = false
-<i class="no-highlight">36</i>&nbsp;
-<i class="no-highlight">37</i>&nbsp;    override fun build(): LastPost = LastPost(
-<i class="no-highlight">38</i>&nbsp;        author = author ?: throw IllegalArgumentException(&quot;author is required&quot;),
-<i class="no-highlight">39</i>&nbsp;        postId = postId ?: throw IllegalArgumentException(&quot;postId is required&quot;),
-<i class="no-highlight">40</i>&nbsp;        date = date ?: throw IllegalArgumentException(&quot;date is required&quot;),
-<i class="no-highlight">41</i>&nbsp;        deleted = deleted,
-<i class="no-highlight">42</i>&nbsp;        traded = traded
-<i class="no-highlight">43</i>&nbsp;    )
-<i class="no-highlight">44</i>&nbsp;}
+<i class="no-highlight">29</i>&nbsp;/** Builder for [LastPost] instances. */
+<i class="no-highlight">30</i>&nbsp;@BuilderDsl
+<i class="no-highlight">31</i>&nbsp;public class LastPostBuilder : TibiaKtBuilder&lt;LastPost&gt; {
+<i class="no-highlight">32</i>&nbsp;    public var author: String? = null
+<i class="no-highlight">33</i>&nbsp;    public var postId: Int? = null
+<i class="no-highlight">34</i>&nbsp;    public var date: Instant? = null
+<i class="no-highlight">35</i>&nbsp;    public var deleted: Boolean = false
+<i class="no-highlight">36</i>&nbsp;    public var traded: Boolean = false
+<i class="no-highlight">37</i>&nbsp;
+<i class="no-highlight">38</i>&nbsp;    override fun build(): LastPost = LastPost(
+<i class="no-highlight">39</i>&nbsp;        author = author ?: throw IllegalArgumentException(&quot;author is required&quot;),
+<i class="no-highlight">40</i>&nbsp;        postId = postId ?: throw IllegalArgumentException(&quot;postId is required&quot;),
+<i class="no-highlight">41</i>&nbsp;        date = date ?: throw IllegalArgumentException(&quot;date is required&quot;),
+<i class="no-highlight">42</i>&nbsp;        deleted = deleted,
+<i class="no-highlight">43</i>&nbsp;        traded = traded
+<i class="no-highlight">44</i>&nbsp;    )
+<i class="no-highlight">45</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -160,7 +161,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-11 06:50</div>
+    <div style="float:right;">generated on 2022-09-11 07:13</div>
 </div>
 </body>
 </html>

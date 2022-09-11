@@ -190,47 +190,64 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.parsers
-<i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.builders.creaturesSection
-<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
-<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.models.creatures.CreaturesSection
-<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.utils.cleanText
-<i class="no-highlight">7</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getLinkInformation
-<i class="no-highlight">8</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseTablesMap
-<i class="no-highlight">9</i>&nbsp;
-<i class="no-highlight">10</i>&nbsp;public object CreaturesSectionParser : Parser&lt;CreaturesSection&gt; {
-<i class="no-highlight">11</i>&nbsp;    override fun fromContent(content: String): CreaturesSection {
-<b class="fc"><i class="no-highlight">12</i>&nbsp;        val boxContent = boxContent(content)</b>
-<b class="fc"><i class="no-highlight">13</i>&nbsp;        val tables = boxContent.parseTablesMap(&quot;table.Table1&quot;)</b>
-<b class="fc"><i class="no-highlight">14</i>&nbsp;        return creaturesSection {</b>
-<b class="pc"><i class="no-highlight">15</i>&nbsp;            tables[&quot;Boosted Creature&quot;]?.let {</b>
-<b class="pc"><i class="no-highlight">16</i>&nbsp;                val boostedCreatureLink = it.selectFirst(&quot;a&quot;)?.getLinkInformation()</b>
-<b class="nc"><i class="no-highlight">17</i>&nbsp;                    ?: throw ParsingException(&quot;boosted creature link not found&quot;)</b>
-<b class="fc"><i class="no-highlight">18</i>&nbsp;                boostedCreature {</b>
-<b class="fc"><i class="no-highlight">19</i>&nbsp;                    name = boostedCreatureLink.title</b>
-<b class="pc"><i class="no-highlight">20</i>&nbsp;                    identifier = boostedCreatureLink.queryParams[&quot;race&quot;]?.get(0)</b>
-<b class="nc"><i class="no-highlight">21</i>&nbsp;                        ?: throw ParsingException(&quot;race not found in boosted creature&#39;s link&quot;)</b>
-<i class="no-highlight">22</i>&nbsp;                }
-<b class="nc"><i class="no-highlight">23</i>&nbsp;            } ?: throw ParsingException(&quot;Boosted Creature table not found.&quot;)</b>
-<i class="no-highlight">24</i>&nbsp;
-<b class="pc"><i class="no-highlight">25</i>&nbsp;            val entriesTable = boxContent.selectFirst(&quot;div[style*=display: table]&quot;)</b>
-<b class="nc"><i class="no-highlight">26</i>&nbsp;                ?: throw ParsingException(&quot;could not find creatures list container&quot;)</b>
-<b class="fc"><i class="no-highlight">27</i>&nbsp;            val entryContainers = entriesTable.select(&quot;div[style*=float: left]&quot;)</b>
-<b class="fc"><i class="no-highlight">28</i>&nbsp;            for (entryContainer in entryContainers) {</b>
-<b class="pc"><i class="no-highlight">29</i>&nbsp;                val linkInfo = entryContainer.selectFirst(&quot;a&quot;)?.getLinkInformation()</b>
-<b class="nc"><i class="no-highlight">30</i>&nbsp;                    ?: throw ParsingException(&quot;creature link not found&quot;)</b>
-<b class="fc"><i class="no-highlight">31</i>&nbsp;                addCreature {</b>
-<b class="fc"><i class="no-highlight">32</i>&nbsp;                    name = entryContainer.cleanText()</b>
-<b class="pc"><i class="no-highlight">33</i>&nbsp;                    identifier = linkInfo.queryParams[&quot;race&quot;]?.get(0)</b>
-<b class="nc"><i class="no-highlight">34</i>&nbsp;                        ?: throw ParsingException(&quot;race not found in creature&#39;s link&quot;)</b>
-<i class="no-highlight">35</i>&nbsp;                }
-<i class="no-highlight">36</i>&nbsp;
-<i class="no-highlight">37</i>&nbsp;            }
-<i class="no-highlight">38</i>&nbsp;
-<b class="fc"><i class="no-highlight">39</i>&nbsp;        }</b>
-<i class="no-highlight">40</i>&nbsp;    }
-<i class="no-highlight">41</i>&nbsp;}
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;/*
+<i class="no-highlight">2</i>&nbsp; * Copyright © 2022 Allan Galarza
+<i class="no-highlight">3</i>&nbsp; *
+<i class="no-highlight">4</i>&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+<i class="no-highlight">5</i>&nbsp; * you may not use this file except in compliance with the License.
+<i class="no-highlight">6</i>&nbsp; * You may obtain a copy of the License at
+<i class="no-highlight">7</i>&nbsp; *
+<i class="no-highlight">8</i>&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+<i class="no-highlight">9</i>&nbsp; *
+<i class="no-highlight">10</i>&nbsp; * Unless required by applicable law or agreed to in writing, software
+<i class="no-highlight">11</i>&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+<i class="no-highlight">12</i>&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+<i class="no-highlight">13</i>&nbsp; * See the License for the specific language governing permissions and
+<i class="no-highlight">14</i>&nbsp; * limitations under the License.
+<i class="no-highlight">15</i>&nbsp; */
+<i class="no-highlight">16</i>&nbsp;
+<i class="no-highlight">17</i>&nbsp;package com.galarzaa.tibiakt.core.parsers
+<i class="no-highlight">18</i>&nbsp;
+<i class="no-highlight">19</i>&nbsp;import com.galarzaa.tibiakt.core.builders.creaturesSection
+<i class="no-highlight">20</i>&nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
+<i class="no-highlight">21</i>&nbsp;import com.galarzaa.tibiakt.core.models.creatures.CreaturesSection
+<i class="no-highlight">22</i>&nbsp;import com.galarzaa.tibiakt.core.utils.cleanText
+<i class="no-highlight">23</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getLinkInformation
+<i class="no-highlight">24</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseTablesMap
+<i class="no-highlight">25</i>&nbsp;
+<i class="no-highlight">26</i>&nbsp;/** Parser for the creatures section. */
+<i class="no-highlight">27</i>&nbsp;public object CreaturesSectionParser : Parser&lt;CreaturesSection&gt; {
+<i class="no-highlight">28</i>&nbsp;    override fun fromContent(content: String): CreaturesSection {
+<b class="fc"><i class="no-highlight">29</i>&nbsp;        val boxContent = boxContent(content)</b>
+<b class="fc"><i class="no-highlight">30</i>&nbsp;        val tables = boxContent.parseTablesMap(&quot;table.Table1&quot;)</b>
+<b class="fc"><i class="no-highlight">31</i>&nbsp;        return creaturesSection {</b>
+<b class="pc"><i class="no-highlight">32</i>&nbsp;            tables[&quot;Boosted Creature&quot;]?.let {</b>
+<b class="pc"><i class="no-highlight">33</i>&nbsp;                val boostedCreatureLink = it.selectFirst(&quot;a&quot;)?.getLinkInformation()</b>
+<b class="nc"><i class="no-highlight">34</i>&nbsp;                    ?: throw ParsingException(&quot;boosted creature link not found&quot;)</b>
+<b class="fc"><i class="no-highlight">35</i>&nbsp;                boostedCreature {</b>
+<b class="fc"><i class="no-highlight">36</i>&nbsp;                    name = boostedCreatureLink.title</b>
+<b class="pc"><i class="no-highlight">37</i>&nbsp;                    identifier = boostedCreatureLink.queryParams[&quot;race&quot;]?.get(0)</b>
+<b class="nc"><i class="no-highlight">38</i>&nbsp;                        ?: throw ParsingException(&quot;race not found in boosted creature&#39;s link&quot;)</b>
+<i class="no-highlight">39</i>&nbsp;                }
+<b class="nc"><i class="no-highlight">40</i>&nbsp;            } ?: throw ParsingException(&quot;Boosted Creature table not found.&quot;)</b>
+<i class="no-highlight">41</i>&nbsp;
+<b class="pc"><i class="no-highlight">42</i>&nbsp;            val entriesTable = boxContent.selectFirst(&quot;div[style*=display: table]&quot;)</b>
+<b class="nc"><i class="no-highlight">43</i>&nbsp;                ?: throw ParsingException(&quot;could not find creatures list container&quot;)</b>
+<b class="fc"><i class="no-highlight">44</i>&nbsp;            val entryContainers = entriesTable.select(&quot;div[style*=float: left]&quot;)</b>
+<b class="fc"><i class="no-highlight">45</i>&nbsp;            for (entryContainer in entryContainers) {</b>
+<b class="pc"><i class="no-highlight">46</i>&nbsp;                val linkInfo = entryContainer.selectFirst(&quot;a&quot;)?.getLinkInformation()</b>
+<b class="nc"><i class="no-highlight">47</i>&nbsp;                    ?: throw ParsingException(&quot;creature link not found&quot;)</b>
+<b class="fc"><i class="no-highlight">48</i>&nbsp;                addCreature {</b>
+<b class="fc"><i class="no-highlight">49</i>&nbsp;                    name = entryContainer.cleanText()</b>
+<b class="pc"><i class="no-highlight">50</i>&nbsp;                    identifier = linkInfo.queryParams[&quot;race&quot;]?.get(0)</b>
+<b class="nc"><i class="no-highlight">51</i>&nbsp;                        ?: throw ParsingException(&quot;race not found in creature&#39;s link&quot;)</b>
+<i class="no-highlight">52</i>&nbsp;                }
+<i class="no-highlight">53</i>&nbsp;
+<i class="no-highlight">54</i>&nbsp;            }
+<i class="no-highlight">55</i>&nbsp;
+<b class="fc"><i class="no-highlight">56</i>&nbsp;        }</b>
+<i class="no-highlight">57</i>&nbsp;    }
+<i class="no-highlight">58</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -257,7 +274,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-11 06:50</div>
+    <div style="float:right;">generated on 2022-09-11 07:13</div>
 </div>
 </body>
 </html>

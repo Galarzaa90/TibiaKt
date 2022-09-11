@@ -122,59 +122,60 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">30</i>&nbsp;public fun newsArchiveBuilder(block: NewsArchiveBuilder.() -&gt; Unit): NewsArchiveBuilder =
 <b class="fc"><i class="no-highlight">31</i>&nbsp;    NewsArchiveBuilder().apply(block)</b>
 <i class="no-highlight">32</i>&nbsp;
-<i class="no-highlight">33</i>&nbsp;@BuilderDsl
-<i class="no-highlight">34</i>&nbsp;public class NewsArchiveBuilder : TibiaKtBuilder&lt;NewsArchive&gt; {
-<i class="no-highlight">35</i>&nbsp;    public var startDate: LocalDate? = null
-<i class="no-highlight">36</i>&nbsp;    public var endDate: LocalDate? = null
-<i class="no-highlight">37</i>&nbsp;    public val types: MutableSet&lt;NewsType&gt; = mutableSetOf()
-<i class="no-highlight">38</i>&nbsp;    public val categories: MutableSet&lt;NewsCategory&gt; = mutableSetOf()
-<i class="no-highlight">39</i>&nbsp;    public val entries: MutableList&lt;NewsEntry&gt; = mutableListOf()
-<i class="no-highlight">40</i>&nbsp;    public fun addCategory(category: NewsCategory): NewsArchiveBuilder = apply { categories.add(category) }
-<i class="no-highlight">41</i>&nbsp;
-<i class="no-highlight">42</i>&nbsp;    public fun addType(type: NewsType): NewsArchiveBuilder = apply { types.add(type) }
-<i class="no-highlight">43</i>&nbsp;
-<i class="no-highlight">44</i>&nbsp;    public fun addEntry(
-<i class="no-highlight">45</i>&nbsp;        id: Int,
-<i class="no-highlight">46</i>&nbsp;        title: String,
-<i class="no-highlight">47</i>&nbsp;        category: NewsCategory,
-<i class="no-highlight">48</i>&nbsp;        categoryIcon: String,
-<i class="no-highlight">49</i>&nbsp;        date: LocalDate,
-<i class="no-highlight">50</i>&nbsp;        type: NewsType,
-<i class="no-highlight">51</i>&nbsp;    ): NewsArchiveBuilder = apply {
-<i class="no-highlight">52</i>&nbsp;        entries.add(NewsEntry(id, title, category, categoryIcon, date, type))
-<i class="no-highlight">53</i>&nbsp;    }
-<i class="no-highlight">54</i>&nbsp;
-<i class="no-highlight">55</i>&nbsp;    public fun addEntry(builder: NewsEntryBuilder.() -&gt; Unit): NewsArchiveBuilder = apply {
-<i class="no-highlight">56</i>&nbsp;        entries.add(NewsEntryBuilder().apply(builder).build())
-<i class="no-highlight">57</i>&nbsp;    }
-<i class="no-highlight">58</i>&nbsp;
+<i class="no-highlight">33</i>&nbsp;/** Builder for [NewsArchive] instances. */
+<i class="no-highlight">34</i>&nbsp;@BuilderDsl
+<i class="no-highlight">35</i>&nbsp;public class NewsArchiveBuilder : TibiaKtBuilder&lt;NewsArchive&gt; {
+<i class="no-highlight">36</i>&nbsp;    public var startDate: LocalDate? = null
+<i class="no-highlight">37</i>&nbsp;    public var endDate: LocalDate? = null
+<i class="no-highlight">38</i>&nbsp;    public val types: MutableSet&lt;NewsType&gt; = mutableSetOf()
+<i class="no-highlight">39</i>&nbsp;    public val categories: MutableSet&lt;NewsCategory&gt; = mutableSetOf()
+<i class="no-highlight">40</i>&nbsp;    public val entries: MutableList&lt;NewsEntry&gt; = mutableListOf()
+<i class="no-highlight">41</i>&nbsp;    public fun addCategory(category: NewsCategory): NewsArchiveBuilder = apply { categories.add(category) }
+<i class="no-highlight">42</i>&nbsp;
+<i class="no-highlight">43</i>&nbsp;    public fun addType(type: NewsType): NewsArchiveBuilder = apply { types.add(type) }
+<i class="no-highlight">44</i>&nbsp;
+<i class="no-highlight">45</i>&nbsp;    public fun addEntry(
+<i class="no-highlight">46</i>&nbsp;        id: Int,
+<i class="no-highlight">47</i>&nbsp;        title: String,
+<i class="no-highlight">48</i>&nbsp;        category: NewsCategory,
+<i class="no-highlight">49</i>&nbsp;        categoryIcon: String,
+<i class="no-highlight">50</i>&nbsp;        date: LocalDate,
+<i class="no-highlight">51</i>&nbsp;        type: NewsType,
+<i class="no-highlight">52</i>&nbsp;    ): NewsArchiveBuilder = apply {
+<i class="no-highlight">53</i>&nbsp;        entries.add(NewsEntry(id, title, category, categoryIcon, date, type))
+<i class="no-highlight">54</i>&nbsp;    }
+<i class="no-highlight">55</i>&nbsp;
+<i class="no-highlight">56</i>&nbsp;    public fun addEntry(builder: NewsEntryBuilder.() -&gt; Unit): NewsArchiveBuilder = apply {
+<i class="no-highlight">57</i>&nbsp;        entries.add(NewsEntryBuilder().apply(builder).build())
+<i class="no-highlight">58</i>&nbsp;    }
 <i class="no-highlight">59</i>&nbsp;
-<i class="no-highlight">60</i>&nbsp;    override fun build(): NewsArchive = NewsArchive(
-<i class="no-highlight">61</i>&nbsp;        startDate = startDate ?: error(&quot;startDate is required&quot;),
-<i class="no-highlight">62</i>&nbsp;        endDate = endDate ?: error(&quot;endDate is required&quot;),
-<i class="no-highlight">63</i>&nbsp;        types = types,
-<i class="no-highlight">64</i>&nbsp;        categories = categories,
-<i class="no-highlight">65</i>&nbsp;        entries = entries,
-<i class="no-highlight">66</i>&nbsp;    )
-<i class="no-highlight">67</i>&nbsp;
-<i class="no-highlight">68</i>&nbsp;    public class NewsEntryBuilder : TibiaKtBuilder&lt;NewsEntry&gt; {
-<i class="no-highlight">69</i>&nbsp;        public val id: Int = 0
-<i class="no-highlight">70</i>&nbsp;        public val title: String? = null
-<i class="no-highlight">71</i>&nbsp;        public val category: NewsCategory? = null
-<i class="no-highlight">72</i>&nbsp;        public val categoryIcon: String? = null
-<i class="no-highlight">73</i>&nbsp;        public val date: LocalDate? = null
-<i class="no-highlight">74</i>&nbsp;        public val type: NewsType? = null
-<i class="no-highlight">75</i>&nbsp;
-<i class="no-highlight">76</i>&nbsp;        override fun build(): NewsEntry = NewsEntry(
-<i class="no-highlight">77</i>&nbsp;            id = id,
-<i class="no-highlight">78</i>&nbsp;            title = title ?: error(&quot;title is required&quot;),
-<i class="no-highlight">79</i>&nbsp;            category = category ?: error(&quot;category is required&quot;),
-<i class="no-highlight">80</i>&nbsp;            categoryIcon = categoryIcon ?: error(&quot;categoryIcon is required&quot;),
-<i class="no-highlight">81</i>&nbsp;            date = date ?: error(&quot;date is required&quot;),
-<i class="no-highlight">82</i>&nbsp;            type = type ?: error(&quot;type is required&quot;),
-<i class="no-highlight">83</i>&nbsp;        )
-<i class="no-highlight">84</i>&nbsp;    }
-<i class="no-highlight">85</i>&nbsp;}
+<i class="no-highlight">60</i>&nbsp;
+<i class="no-highlight">61</i>&nbsp;    override fun build(): NewsArchive = NewsArchive(
+<i class="no-highlight">62</i>&nbsp;        startDate = startDate ?: error(&quot;startDate is required&quot;),
+<i class="no-highlight">63</i>&nbsp;        endDate = endDate ?: error(&quot;endDate is required&quot;),
+<i class="no-highlight">64</i>&nbsp;        types = types,
+<i class="no-highlight">65</i>&nbsp;        categories = categories,
+<i class="no-highlight">66</i>&nbsp;        entries = entries,
+<i class="no-highlight">67</i>&nbsp;    )
+<i class="no-highlight">68</i>&nbsp;
+<i class="no-highlight">69</i>&nbsp;    public class NewsEntryBuilder : TibiaKtBuilder&lt;NewsEntry&gt; {
+<i class="no-highlight">70</i>&nbsp;        public val id: Int = 0
+<i class="no-highlight">71</i>&nbsp;        public val title: String? = null
+<i class="no-highlight">72</i>&nbsp;        public val category: NewsCategory? = null
+<i class="no-highlight">73</i>&nbsp;        public val categoryIcon: String? = null
+<i class="no-highlight">74</i>&nbsp;        public val date: LocalDate? = null
+<i class="no-highlight">75</i>&nbsp;        public val type: NewsType? = null
+<i class="no-highlight">76</i>&nbsp;
+<i class="no-highlight">77</i>&nbsp;        override fun build(): NewsEntry = NewsEntry(
+<i class="no-highlight">78</i>&nbsp;            id = id,
+<i class="no-highlight">79</i>&nbsp;            title = title ?: error(&quot;title is required&quot;),
+<i class="no-highlight">80</i>&nbsp;            category = category ?: error(&quot;category is required&quot;),
+<i class="no-highlight">81</i>&nbsp;            categoryIcon = categoryIcon ?: error(&quot;categoryIcon is required&quot;),
+<i class="no-highlight">82</i>&nbsp;            date = date ?: error(&quot;date is required&quot;),
+<i class="no-highlight">83</i>&nbsp;            type = type ?: error(&quot;type is required&quot;),
+<i class="no-highlight">84</i>&nbsp;        )
+<i class="no-highlight">85</i>&nbsp;    }
+<i class="no-highlight">86</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -201,7 +202,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-11 06:50</div>
+    <div style="float:right;">generated on 2022-09-11 07:13</div>
 </div>
 </body>
 </html>

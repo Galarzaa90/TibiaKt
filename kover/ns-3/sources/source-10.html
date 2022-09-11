@@ -131,51 +131,52 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">39</i>&nbsp;internal inline fun eventEntryBuilder(block: EventsScheduleBuilder.EventEntryBuilder.() -&gt; Unit) =
 <b class="fc"><i class="no-highlight">40</i>&nbsp;    EventsScheduleBuilder.EventEntryBuilder().apply(block)</b>
 <i class="no-highlight">41</i>&nbsp;
-<i class="no-highlight">42</i>&nbsp;@BuilderDsl
-<i class="no-highlight">43</i>&nbsp;public class EventsScheduleBuilder : TibiaKtBuilder&lt;EventsSchedule&gt; {
-<i class="no-highlight">44</i>&nbsp;    public lateinit var yearMonth: YearMonth
-<i class="no-highlight">45</i>&nbsp;    public val entries: MutableList&lt;EventEntry&gt; = mutableListOf()
-<i class="no-highlight">46</i>&nbsp;
+<i class="no-highlight">42</i>&nbsp;/** Builder for [EventsSchedule] instances. */
+<i class="no-highlight">43</i>&nbsp;@BuilderDsl
+<i class="no-highlight">44</i>&nbsp;public class EventsScheduleBuilder : TibiaKtBuilder&lt;EventsSchedule&gt; {
+<i class="no-highlight">45</i>&nbsp;    public lateinit var yearMonth: YearMonth
+<i class="no-highlight">46</i>&nbsp;    public val entries: MutableList&lt;EventEntry&gt; = mutableListOf()
 <i class="no-highlight">47</i>&nbsp;
-<i class="no-highlight">48</i>&nbsp;    public fun addEntry(
-<i class="no-highlight">49</i>&nbsp;        title: String,
-<i class="no-highlight">50</i>&nbsp;        description: String,
-<i class="no-highlight">51</i>&nbsp;        startDate: LocalDate?,
-<i class="no-highlight">52</i>&nbsp;        endDate: LocalDate?,
-<i class="no-highlight">53</i>&nbsp;    ): EventsScheduleBuilder =
-<i class="no-highlight">54</i>&nbsp;        apply { entries.add(EventEntry(title, description, startDate, endDate)) }
-<i class="no-highlight">55</i>&nbsp;
-<i class="no-highlight">56</i>&nbsp;    public fun addEntry(entry: EventEntry): EventsScheduleBuilder = apply { entries.add(entry) }
-<i class="no-highlight">57</i>&nbsp;
-<i class="no-highlight">58</i>&nbsp;    override fun build(): EventsSchedule =
-<i class="no-highlight">59</i>&nbsp;        EventsSchedule(
-<i class="no-highlight">60</i>&nbsp;            yearMonth = if (::yearMonth.isInitialized) yearMonth else error(&quot;yearMonth is required&quot;),
-<i class="no-highlight">61</i>&nbsp;            entries = entries
-<i class="no-highlight">62</i>&nbsp;        )
-<i class="no-highlight">63</i>&nbsp;
-<i class="no-highlight">64</i>&nbsp;    public class EventEntryBuilder {
-<i class="no-highlight">65</i>&nbsp;        public var title: String? = null
-<i class="no-highlight">66</i>&nbsp;        public var description: String? = null
-<i class="no-highlight">67</i>&nbsp;        public var startDate: LocalDate? = null
-<i class="no-highlight">68</i>&nbsp;        public var endDate: LocalDate? = null
-<i class="no-highlight">69</i>&nbsp;
-<i class="no-highlight">70</i>&nbsp;        public fun build(): EventEntry = EventEntry(
-<i class="no-highlight">71</i>&nbsp;            title ?: error(&quot;title is required&quot;),
-<i class="no-highlight">72</i>&nbsp;            description ?: error(&quot;description is required&quot;),
-<i class="no-highlight">73</i>&nbsp;            startDate,
-<i class="no-highlight">74</i>&nbsp;            endDate
-<i class="no-highlight">75</i>&nbsp;        )
-<i class="no-highlight">76</i>&nbsp;
-<i class="no-highlight">77</i>&nbsp;        override fun equals(other: Any?): Boolean =
-<i class="no-highlight">78</i>&nbsp;            other is EventEntryBuilder &amp;&amp; other.title == title &amp;&amp; other.description == description
-<i class="no-highlight">79</i>&nbsp;
-<i class="no-highlight">80</i>&nbsp;        override fun hashCode(): Int = 31 * (title?.hashCode() ?: 0) + (description?.hashCode() ?: 0)
-<i class="no-highlight">81</i>&nbsp;
-<i class="no-highlight">82</i>&nbsp;        override fun toString(): String = title ?: &quot;&lt;undefined title&gt;&quot;
-<i class="no-highlight">83</i>&nbsp;
+<i class="no-highlight">48</i>&nbsp;
+<i class="no-highlight">49</i>&nbsp;    public fun addEntry(
+<i class="no-highlight">50</i>&nbsp;        title: String,
+<i class="no-highlight">51</i>&nbsp;        description: String,
+<i class="no-highlight">52</i>&nbsp;        startDate: LocalDate?,
+<i class="no-highlight">53</i>&nbsp;        endDate: LocalDate?,
+<i class="no-highlight">54</i>&nbsp;    ): EventsScheduleBuilder =
+<i class="no-highlight">55</i>&nbsp;        apply { entries.add(EventEntry(title, description, startDate, endDate)) }
+<i class="no-highlight">56</i>&nbsp;
+<i class="no-highlight">57</i>&nbsp;    public fun addEntry(entry: EventEntry): EventsScheduleBuilder = apply { entries.add(entry) }
+<i class="no-highlight">58</i>&nbsp;
+<i class="no-highlight">59</i>&nbsp;    override fun build(): EventsSchedule =
+<i class="no-highlight">60</i>&nbsp;        EventsSchedule(
+<i class="no-highlight">61</i>&nbsp;            yearMonth = if (::yearMonth.isInitialized) yearMonth else error(&quot;yearMonth is required&quot;),
+<i class="no-highlight">62</i>&nbsp;            entries = entries
+<i class="no-highlight">63</i>&nbsp;        )
+<i class="no-highlight">64</i>&nbsp;
+<i class="no-highlight">65</i>&nbsp;    public class EventEntryBuilder {
+<i class="no-highlight">66</i>&nbsp;        public var title: String? = null
+<i class="no-highlight">67</i>&nbsp;        public var description: String? = null
+<i class="no-highlight">68</i>&nbsp;        public var startDate: LocalDate? = null
+<i class="no-highlight">69</i>&nbsp;        public var endDate: LocalDate? = null
+<i class="no-highlight">70</i>&nbsp;
+<i class="no-highlight">71</i>&nbsp;        public fun build(): EventEntry = EventEntry(
+<i class="no-highlight">72</i>&nbsp;            title ?: error(&quot;title is required&quot;),
+<i class="no-highlight">73</i>&nbsp;            description ?: error(&quot;description is required&quot;),
+<i class="no-highlight">74</i>&nbsp;            startDate,
+<i class="no-highlight">75</i>&nbsp;            endDate
+<i class="no-highlight">76</i>&nbsp;        )
+<i class="no-highlight">77</i>&nbsp;
+<i class="no-highlight">78</i>&nbsp;        override fun equals(other: Any?): Boolean =
+<i class="no-highlight">79</i>&nbsp;            other is EventEntryBuilder &amp;&amp; other.title == title &amp;&amp; other.description == description
+<i class="no-highlight">80</i>&nbsp;
+<i class="no-highlight">81</i>&nbsp;        override fun hashCode(): Int = 31 * (title?.hashCode() ?: 0) + (description?.hashCode() ?: 0)
+<i class="no-highlight">82</i>&nbsp;
+<i class="no-highlight">83</i>&nbsp;        override fun toString(): String = title ?: &quot;&lt;undefined title&gt;&quot;
 <i class="no-highlight">84</i>&nbsp;
-<i class="no-highlight">85</i>&nbsp;    }
-<i class="no-highlight">86</i>&nbsp;}
+<i class="no-highlight">85</i>&nbsp;
+<i class="no-highlight">86</i>&nbsp;    }
+<i class="no-highlight">87</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -202,7 +203,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-11 06:50</div>
+    <div style="float:right;">generated on 2022-09-11 07:13</div>
 </div>
 </body>
 </html>

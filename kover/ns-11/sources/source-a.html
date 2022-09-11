@@ -187,39 +187,40 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">30</i>&nbsp;import java.net.URLDecoder
 <i class="no-highlight">31</i>&nbsp;import java.nio.charset.StandardCharsets
 <i class="no-highlight">32</i>&nbsp;
-<i class="no-highlight">33</i>&nbsp;public object ForumSectionParser : Parser&lt;ForumSection&gt; {
-<i class="no-highlight">34</i>&nbsp;    override fun fromContent(content: String): ForumSection {
-<b class="fc"><i class="no-highlight">35</i>&nbsp;        val boxContent = boxContent(content)</b>
-<b class="fc"><i class="no-highlight">36</i>&nbsp;        val tables = boxContent.parseTablesMap()</b>
-<b class="pc"><i class="no-highlight">37</i>&nbsp;        if (&quot;Boards&quot; !in tables) throw ParsingException(&quot;Boards table not found&quot;)</b>
-<i class="no-highlight">38</i>&nbsp;
-<b class="fc"><i class="no-highlight">39</i>&nbsp;        return forumsSection {</b>
-<b class="pc"><i class="no-highlight">40</i>&nbsp;            val boardRows = tables[&quot;Boards&quot;]!!.selectFirst(&quot;table.TableContent&quot;)?.select(&quot;tr:not(.LabelH)&quot;)!!</b>
-<b class="fc"><i class="no-highlight">41</i>&nbsp;            for (row in boardRows) {</b>
-<b class="fc"><i class="no-highlight">42</i>&nbsp;                val columns = row.cells()</b>
-<b class="fc"><i class="no-highlight">43</i>&nbsp;                if (columns.size != 6) continue</b>
-<b class="fc"><i class="no-highlight">44</i>&nbsp;                val boardColumn = columns[1]</b>
-<b class="pc"><i class="no-highlight">45</i>&nbsp;                val boardLink = boardColumn.selectFirst(&quot;a&quot;)?.getLinkInformation()!!</b>
-<i class="no-highlight">46</i>&nbsp;
-<b class="fc"><i class="no-highlight">47</i>&nbsp;                addEntry {</b>
-<b class="fc"><i class="no-highlight">48</i>&nbsp;                    name = boardLink.title</b>
-<b class="fc"><i class="no-highlight">49</i>&nbsp;                    boardId = boardLink.queryParams[&quot;boardid&quot;]!!.first().toInt()</b>
-<b class="pc"><i class="no-highlight">50</i>&nbsp;                    description = boardColumn.selectFirst(&quot;font&quot;)?.cleanText().orEmpty()</b>
-<b class="fc"><i class="no-highlight">51</i>&nbsp;                    posts = columns[2].text().remove(&quot;,&quot;).toInt()</b>
-<b class="fc"><i class="no-highlight">52</i>&nbsp;                    threads = columns[3].text().remove(&quot;,&quot;).toInt()</b>
-<b class="fc"><i class="no-highlight">53</i>&nbsp;                    lastPost = parseLastPostFromCell(columns[4])</b>
-<i class="no-highlight">54</i>&nbsp;                }
-<i class="no-highlight">55</i>&nbsp;            }
-<i class="no-highlight">56</i>&nbsp;            // Try to get section ID from login link
-<b class="pc"><i class="no-highlight">57</i>&nbsp;            sectionId = boxContent.selectFirst(&quot;p.ForumWelcome &gt; a&quot;)?.getLinkInformation()?.let {</b>
-<b class="pc"><i class="no-highlight">58</i>&nbsp;                val query = it.queryParams[&quot;redirect&quot;]?.first() ?: return@let null</b>
-<b class="fc"><i class="no-highlight">59</i>&nbsp;                val decodedUrl = URL(URLDecoder.decode(query, StandardCharsets.UTF_8))</b>
-<b class="pc"><i class="no-highlight">60</i>&nbsp;                decodedUrl.queryParams()[&quot;sectionid&quot;]?.first()?.toInt()</b>
-<b class="nc"><i class="no-highlight">61</i>&nbsp;            } ?: 0</b>
-<b class="fc"><i class="no-highlight">62</i>&nbsp;        }</b>
-<i class="no-highlight">63</i>&nbsp;
-<i class="no-highlight">64</i>&nbsp;    }
-<i class="no-highlight">65</i>&nbsp;}
+<i class="no-highlight">33</i>&nbsp;/** Parser for a forum section. */
+<i class="no-highlight">34</i>&nbsp;public object ForumSectionParser : Parser&lt;ForumSection&gt; {
+<i class="no-highlight">35</i>&nbsp;    override fun fromContent(content: String): ForumSection {
+<b class="fc"><i class="no-highlight">36</i>&nbsp;        val boxContent = boxContent(content)</b>
+<b class="fc"><i class="no-highlight">37</i>&nbsp;        val tables = boxContent.parseTablesMap()</b>
+<b class="pc"><i class="no-highlight">38</i>&nbsp;        if (&quot;Boards&quot; !in tables) throw ParsingException(&quot;Boards table not found&quot;)</b>
+<i class="no-highlight">39</i>&nbsp;
+<b class="fc"><i class="no-highlight">40</i>&nbsp;        return forumsSection {</b>
+<b class="pc"><i class="no-highlight">41</i>&nbsp;            val boardRows = tables[&quot;Boards&quot;]!!.selectFirst(&quot;table.TableContent&quot;)?.select(&quot;tr:not(.LabelH)&quot;)!!</b>
+<b class="fc"><i class="no-highlight">42</i>&nbsp;            for (row in boardRows) {</b>
+<b class="fc"><i class="no-highlight">43</i>&nbsp;                val columns = row.cells()</b>
+<b class="fc"><i class="no-highlight">44</i>&nbsp;                if (columns.size != 6) continue</b>
+<b class="fc"><i class="no-highlight">45</i>&nbsp;                val boardColumn = columns[1]</b>
+<b class="pc"><i class="no-highlight">46</i>&nbsp;                val boardLink = boardColumn.selectFirst(&quot;a&quot;)?.getLinkInformation()!!</b>
+<i class="no-highlight">47</i>&nbsp;
+<b class="fc"><i class="no-highlight">48</i>&nbsp;                addEntry {</b>
+<b class="fc"><i class="no-highlight">49</i>&nbsp;                    name = boardLink.title</b>
+<b class="fc"><i class="no-highlight">50</i>&nbsp;                    boardId = boardLink.queryParams[&quot;boardid&quot;]!!.first().toInt()</b>
+<b class="pc"><i class="no-highlight">51</i>&nbsp;                    description = boardColumn.selectFirst(&quot;font&quot;)?.cleanText().orEmpty()</b>
+<b class="fc"><i class="no-highlight">52</i>&nbsp;                    posts = columns[2].text().remove(&quot;,&quot;).toInt()</b>
+<b class="fc"><i class="no-highlight">53</i>&nbsp;                    threads = columns[3].text().remove(&quot;,&quot;).toInt()</b>
+<b class="fc"><i class="no-highlight">54</i>&nbsp;                    lastPost = parseLastPostFromCell(columns[4])</b>
+<i class="no-highlight">55</i>&nbsp;                }
+<i class="no-highlight">56</i>&nbsp;            }
+<i class="no-highlight">57</i>&nbsp;            // Try to get section ID from login link
+<b class="pc"><i class="no-highlight">58</i>&nbsp;            sectionId = boxContent.selectFirst(&quot;p.ForumWelcome &gt; a&quot;)?.getLinkInformation()?.let {</b>
+<b class="pc"><i class="no-highlight">59</i>&nbsp;                val query = it.queryParams[&quot;redirect&quot;]?.first() ?: return@let null</b>
+<b class="fc"><i class="no-highlight">60</i>&nbsp;                val decodedUrl = URL(URLDecoder.decode(query, StandardCharsets.UTF_8))</b>
+<b class="pc"><i class="no-highlight">61</i>&nbsp;                decodedUrl.queryParams()[&quot;sectionid&quot;]?.first()?.toInt()</b>
+<b class="nc"><i class="no-highlight">62</i>&nbsp;            } ?: 0</b>
+<b class="fc"><i class="no-highlight">63</i>&nbsp;        }</b>
+<i class="no-highlight">64</i>&nbsp;
+<i class="no-highlight">65</i>&nbsp;    }
+<i class="no-highlight">66</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -246,7 +247,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-11 06:50</div>
+    <div style="float:right;">generated on 2022-09-11 07:13</div>
 </div>
 </body>
 </html>

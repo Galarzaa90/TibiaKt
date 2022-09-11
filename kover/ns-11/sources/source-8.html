@@ -124,49 +124,50 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">25</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseTibiaForumDateTime
 <i class="no-highlight">26</i>&nbsp;import com.galarzaa.tibiakt.core.utils.remove
 <i class="no-highlight">27</i>&nbsp;
-<i class="no-highlight">28</i>&nbsp;public object ForumAnnouncementParser : Parser&lt;ForumAnnouncement?&gt; {
-<b class="fc"><i class="no-highlight">29</i>&nbsp;    override fun fromContent(content: String): ForumAnnouncement? = fromContent(content, 0)</b>
-<i class="no-highlight">30</i>&nbsp;
-<i class="no-highlight">31</i>&nbsp;    public fun fromContent(content: String, announcementId: Int): ForumAnnouncement? {
-<b class="fc"><i class="no-highlight">32</i>&nbsp;        val boxContent = boxContent(content)</b>
-<b class="fc"><i class="no-highlight">33</i>&nbsp;        return forumAnnouncement {</b>
-<b class="fc"><i class="no-highlight">34</i>&nbsp;            val breadCrumbs = boxContent.select(&quot;div.ForumBreadCrumbs &gt; a&quot;)</b>
-<b class="fc"><i class="no-highlight">35</i>&nbsp;            if (breadCrumbs.isEmpty()) {</b>
-<b class="fc"><i class="no-highlight">36</i>&nbsp;                val messageBox = boxContent.selectFirst(&quot;div.InnerTableContainer&quot;)</b>
-<b class="pc"><i class="no-highlight">37</i>&nbsp;                if (messageBox == null || &quot;not found&quot; !in messageBox.text()) {</b>
-<b class="nc"><i class="no-highlight">38</i>&nbsp;                    throw ParsingException(&quot;Could not find Forum Breadcrumbs&quot;)</b>
-<i class="no-highlight">39</i>&nbsp;                }
-<b class="fc"><i class="no-highlight">40</i>&nbsp;                return null</b>
-<i class="no-highlight">41</i>&nbsp;            }
-<b class="pc"><i class="no-highlight">42</i>&nbsp;            val (sectionLink, boardLink) = breadCrumbs.mapNotNull { it.getLinkInformation() }</b>
-<i class="no-highlight">43</i>&nbsp;
-<b class="pc"><i class="no-highlight">44</i>&nbsp;            sectionId = sectionLink.queryParams[&quot;sectionid&quot;]?.first()?.toInt()</b>
-<b class="nc"><i class="no-highlight">45</i>&nbsp;                ?: throw ParsingException(&quot;Could not find section ID in link.&quot;)</b>
-<b class="fc"><i class="no-highlight">46</i>&nbsp;            section = sectionLink.title</b>
-<b class="pc"><i class="no-highlight">47</i>&nbsp;            boardId = boardLink.queryParams[&quot;boardid&quot;]?.first()?.toInt()</b>
-<b class="nc"><i class="no-highlight">48</i>&nbsp;                ?: throw ParsingException(&quot;Could not find board ID in link.&quot;)</b>
-<b class="fc"><i class="no-highlight">49</i>&nbsp;            board = boardLink.title</b>
-<b class="fc"><i class="no-highlight">50</i>&nbsp;            this.announcementId = announcementId</b>
-<b class="fc"><i class="no-highlight">51</i>&nbsp;            author = parseAuthorTable(boxContent.selectFirst(&quot;div.PostCharacterText&quot;)!!)</b>
-<i class="no-highlight">52</i>&nbsp;
+<i class="no-highlight">28</i>&nbsp;/** Parser for forum announcements. */
+<i class="no-highlight">29</i>&nbsp;public object ForumAnnouncementParser : Parser&lt;ForumAnnouncement?&gt; {
+<b class="fc"><i class="no-highlight">30</i>&nbsp;    override fun fromContent(content: String): ForumAnnouncement? = fromContent(content, 0)</b>
+<i class="no-highlight">31</i>&nbsp;
+<i class="no-highlight">32</i>&nbsp;    public fun fromContent(content: String, announcementId: Int): ForumAnnouncement? {
+<b class="fc"><i class="no-highlight">33</i>&nbsp;        val boxContent = boxContent(content)</b>
+<b class="fc"><i class="no-highlight">34</i>&nbsp;        return forumAnnouncement {</b>
+<b class="fc"><i class="no-highlight">35</i>&nbsp;            val breadCrumbs = boxContent.select(&quot;div.ForumBreadCrumbs &gt; a&quot;)</b>
+<b class="fc"><i class="no-highlight">36</i>&nbsp;            if (breadCrumbs.isEmpty()) {</b>
+<b class="fc"><i class="no-highlight">37</i>&nbsp;                val messageBox = boxContent.selectFirst(&quot;div.InnerTableContainer&quot;)</b>
+<b class="pc"><i class="no-highlight">38</i>&nbsp;                if (messageBox == null || &quot;not found&quot; !in messageBox.text()) {</b>
+<b class="nc"><i class="no-highlight">39</i>&nbsp;                    throw ParsingException(&quot;Could not find Forum Breadcrumbs&quot;)</b>
+<i class="no-highlight">40</i>&nbsp;                }
+<b class="fc"><i class="no-highlight">41</i>&nbsp;                return null</b>
+<i class="no-highlight">42</i>&nbsp;            }
+<b class="pc"><i class="no-highlight">43</i>&nbsp;            val (sectionLink, boardLink) = breadCrumbs.mapNotNull { it.getLinkInformation() }</b>
+<i class="no-highlight">44</i>&nbsp;
+<b class="pc"><i class="no-highlight">45</i>&nbsp;            sectionId = sectionLink.queryParams[&quot;sectionid&quot;]?.first()?.toInt()</b>
+<b class="nc"><i class="no-highlight">46</i>&nbsp;                ?: throw ParsingException(&quot;Could not find section ID in link.&quot;)</b>
+<b class="fc"><i class="no-highlight">47</i>&nbsp;            section = sectionLink.title</b>
+<b class="pc"><i class="no-highlight">48</i>&nbsp;            boardId = boardLink.queryParams[&quot;boardid&quot;]?.first()?.toInt()</b>
+<b class="nc"><i class="no-highlight">49</i>&nbsp;                ?: throw ParsingException(&quot;Could not find board ID in link.&quot;)</b>
+<b class="fc"><i class="no-highlight">50</i>&nbsp;            board = boardLink.title</b>
+<b class="fc"><i class="no-highlight">51</i>&nbsp;            this.announcementId = announcementId</b>
+<b class="fc"><i class="no-highlight">52</i>&nbsp;            author = parseAuthorTable(boxContent.selectFirst(&quot;div.PostCharacterText&quot;)!!)</b>
 <i class="no-highlight">53</i>&nbsp;
-<b class="fc"><i class="no-highlight">54</i>&nbsp;            val postContainer = boxContent.selectFirst(&quot;div.ForumPost&quot;)!!</b>
-<b class="fc"><i class="no-highlight">55</i>&nbsp;            val postTextContainer = postContainer.selectFirst(&quot;div.PostText&quot;)!!</b>
-<b class="fc"><i class="no-highlight">56</i>&nbsp;            val titleTag = postTextContainer.selectFirst(&quot;b&quot;)</b>
-<b class="fc"><i class="no-highlight">57</i>&nbsp;            val datesContainer = postTextContainer.selectFirst(&quot;font&quot;)!!</b>
-<i class="no-highlight">58</i>&nbsp;
-<b class="fc"><i class="no-highlight">59</i>&nbsp;            val (startDateText, endDateText) = datesContainer.cleanText().remove(&quot;(&quot;).remove(&quot;)&quot;).split(&quot; until &quot;)</b>
-<b class="pc"><i class="no-highlight">60</i>&nbsp;            title = titleTag?.text() ?: throw ParsingException(&quot;Could not find title in post.&quot;)</b>
-<b class="fc"><i class="no-highlight">61</i>&nbsp;            titleTag.remove()</b>
-<b class="fc"><i class="no-highlight">62</i>&nbsp;            datesContainer.remove()</b>
-<i class="no-highlight">63</i>&nbsp;
-<b class="fc"><i class="no-highlight">64</i>&nbsp;            this.content = postTextContainer.html().split(&quot;&lt;hr&gt;&quot;, limit = 2).last()</b>
-<b class="fc"><i class="no-highlight">65</i>&nbsp;            startDate = parseTibiaForumDateTime(startDateText)</b>
-<b class="fc"><i class="no-highlight">66</i>&nbsp;            endDate = parseTibiaForumDateTime(endDateText)</b>
-<i class="no-highlight">67</i>&nbsp;
-<b class="fc"><i class="no-highlight">68</i>&nbsp;        }</b>
-<i class="no-highlight">69</i>&nbsp;    }
-<i class="no-highlight">70</i>&nbsp;}
+<i class="no-highlight">54</i>&nbsp;
+<b class="fc"><i class="no-highlight">55</i>&nbsp;            val postContainer = boxContent.selectFirst(&quot;div.ForumPost&quot;)!!</b>
+<b class="fc"><i class="no-highlight">56</i>&nbsp;            val postTextContainer = postContainer.selectFirst(&quot;div.PostText&quot;)!!</b>
+<b class="fc"><i class="no-highlight">57</i>&nbsp;            val titleTag = postTextContainer.selectFirst(&quot;b&quot;)</b>
+<b class="fc"><i class="no-highlight">58</i>&nbsp;            val datesContainer = postTextContainer.selectFirst(&quot;font&quot;)!!</b>
+<i class="no-highlight">59</i>&nbsp;
+<b class="fc"><i class="no-highlight">60</i>&nbsp;            val (startDateText, endDateText) = datesContainer.cleanText().remove(&quot;(&quot;).remove(&quot;)&quot;).split(&quot; until &quot;)</b>
+<b class="pc"><i class="no-highlight">61</i>&nbsp;            title = titleTag?.text() ?: throw ParsingException(&quot;Could not find title in post.&quot;)</b>
+<b class="fc"><i class="no-highlight">62</i>&nbsp;            titleTag.remove()</b>
+<b class="fc"><i class="no-highlight">63</i>&nbsp;            datesContainer.remove()</b>
+<i class="no-highlight">64</i>&nbsp;
+<b class="fc"><i class="no-highlight">65</i>&nbsp;            this.content = postTextContainer.html().split(&quot;&lt;hr&gt;&quot;, limit = 2).last()</b>
+<b class="fc"><i class="no-highlight">66</i>&nbsp;            startDate = parseTibiaForumDateTime(startDateText)</b>
+<b class="fc"><i class="no-highlight">67</i>&nbsp;            endDate = parseTibiaForumDateTime(endDateText)</b>
+<i class="no-highlight">68</i>&nbsp;
+<b class="fc"><i class="no-highlight">69</i>&nbsp;        }</b>
+<i class="no-highlight">70</i>&nbsp;    }
+<i class="no-highlight">71</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -193,7 +194,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-11 06:50</div>
+    <div style="float:right;">generated on 2022-09-11 07:13</div>
 </div>
 </body>
 </html>

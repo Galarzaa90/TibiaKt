@@ -121,46 +121,47 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="nc"><i class="no-highlight">29</i>&nbsp;public inline fun houseBuilder(block: HouseBuilder.() -&gt; Unit): HouseBuilder = HouseBuilder().apply(block)</b>
 <i class="no-highlight">30</i>&nbsp;
 <i class="no-highlight">31</i>&nbsp;
-<i class="no-highlight">32</i>&nbsp;@BuilderDsl
-<i class="no-highlight">33</i>&nbsp;public class HouseBuilder : TibiaKtBuilder&lt;House&gt; {
-<i class="no-highlight">34</i>&nbsp;    public var houseId: Int? = null
-<i class="no-highlight">35</i>&nbsp;    public var name: String? = null
-<i class="no-highlight">36</i>&nbsp;    public var size: Int? = null
-<i class="no-highlight">37</i>&nbsp;    public var type: HouseType? = null
-<i class="no-highlight">38</i>&nbsp;    public var beds: Int? = null
-<i class="no-highlight">39</i>&nbsp;    public var rent: Int? = null
-<i class="no-highlight">40</i>&nbsp;    public var world: String? = null
-<i class="no-highlight">41</i>&nbsp;    public var status: HouseStatus? = null
-<i class="no-highlight">42</i>&nbsp;    public var paidUntil: Instant? = null
-<i class="no-highlight">43</i>&nbsp;    public var owner: String? = null
-<i class="no-highlight">44</i>&nbsp;    public var movingDate: Instant? = null
-<i class="no-highlight">45</i>&nbsp;    public var transferPrice: Int? = null
-<i class="no-highlight">46</i>&nbsp;    public var transferAccepted: Boolean? = null
-<i class="no-highlight">47</i>&nbsp;    public var transferRecipient: String? = null
-<i class="no-highlight">48</i>&nbsp;    public var highestBid: Int? = null
-<i class="no-highlight">49</i>&nbsp;    public var highestBidder: String? = null
-<i class="no-highlight">50</i>&nbsp;    public var auctionEnd: Instant? = null
-<i class="no-highlight">51</i>&nbsp;
-<i class="no-highlight">52</i>&nbsp;    override fun build(): House = House(
-<i class="no-highlight">53</i>&nbsp;        houseId = houseId ?: error(&quot;houseId is required&quot;),
-<i class="no-highlight">54</i>&nbsp;        name = name ?: error(&quot;name is required&quot;),
-<i class="no-highlight">55</i>&nbsp;        size = size ?: error(&quot;size is required&quot;),
-<i class="no-highlight">56</i>&nbsp;        type = type ?: error(&quot;type is required&quot;),
-<i class="no-highlight">57</i>&nbsp;        beds = beds ?: error(&quot;beds is required&quot;),
-<i class="no-highlight">58</i>&nbsp;        rent = rent ?: error(&quot;rent is required&quot;),
-<i class="no-highlight">59</i>&nbsp;        world = world ?: error(&quot;world is required&quot;),
-<i class="no-highlight">60</i>&nbsp;        status = status ?: error(&quot;status is required&quot;),
-<i class="no-highlight">61</i>&nbsp;        paidUntil = paidUntil,
-<i class="no-highlight">62</i>&nbsp;        owner = owner,
-<i class="no-highlight">63</i>&nbsp;        movingDate = movingDate,
-<i class="no-highlight">64</i>&nbsp;        transferPrice = transferPrice,
-<i class="no-highlight">65</i>&nbsp;        transferAccepted = transferAccepted,
-<i class="no-highlight">66</i>&nbsp;        transferRecipient = transferRecipient,
-<i class="no-highlight">67</i>&nbsp;        highestBid = highestBid,
-<i class="no-highlight">68</i>&nbsp;        highestBidder = highestBidder,
-<i class="no-highlight">69</i>&nbsp;        auctionEnd = auctionEnd,
-<i class="no-highlight">70</i>&nbsp;    )
-<i class="no-highlight">71</i>&nbsp;}
+<i class="no-highlight">32</i>&nbsp;/** Builder for [House] instances. */
+<i class="no-highlight">33</i>&nbsp;@BuilderDsl
+<i class="no-highlight">34</i>&nbsp;public class HouseBuilder : TibiaKtBuilder&lt;House&gt; {
+<i class="no-highlight">35</i>&nbsp;    public var houseId: Int? = null
+<i class="no-highlight">36</i>&nbsp;    public var name: String? = null
+<i class="no-highlight">37</i>&nbsp;    public var size: Int? = null
+<i class="no-highlight">38</i>&nbsp;    public var type: HouseType? = null
+<i class="no-highlight">39</i>&nbsp;    public var beds: Int? = null
+<i class="no-highlight">40</i>&nbsp;    public var rent: Int? = null
+<i class="no-highlight">41</i>&nbsp;    public var world: String? = null
+<i class="no-highlight">42</i>&nbsp;    public var status: HouseStatus? = null
+<i class="no-highlight">43</i>&nbsp;    public var paidUntil: Instant? = null
+<i class="no-highlight">44</i>&nbsp;    public var owner: String? = null
+<i class="no-highlight">45</i>&nbsp;    public var movingDate: Instant? = null
+<i class="no-highlight">46</i>&nbsp;    public var transferPrice: Int? = null
+<i class="no-highlight">47</i>&nbsp;    public var transferAccepted: Boolean? = null
+<i class="no-highlight">48</i>&nbsp;    public var transferRecipient: String? = null
+<i class="no-highlight">49</i>&nbsp;    public var highestBid: Int? = null
+<i class="no-highlight">50</i>&nbsp;    public var highestBidder: String? = null
+<i class="no-highlight">51</i>&nbsp;    public var auctionEnd: Instant? = null
+<i class="no-highlight">52</i>&nbsp;
+<i class="no-highlight">53</i>&nbsp;    override fun build(): House = House(
+<i class="no-highlight">54</i>&nbsp;        houseId = houseId ?: error(&quot;houseId is required&quot;),
+<i class="no-highlight">55</i>&nbsp;        name = name ?: error(&quot;name is required&quot;),
+<i class="no-highlight">56</i>&nbsp;        size = size ?: error(&quot;size is required&quot;),
+<i class="no-highlight">57</i>&nbsp;        type = type ?: error(&quot;type is required&quot;),
+<i class="no-highlight">58</i>&nbsp;        beds = beds ?: error(&quot;beds is required&quot;),
+<i class="no-highlight">59</i>&nbsp;        rent = rent ?: error(&quot;rent is required&quot;),
+<i class="no-highlight">60</i>&nbsp;        world = world ?: error(&quot;world is required&quot;),
+<i class="no-highlight">61</i>&nbsp;        status = status ?: error(&quot;status is required&quot;),
+<i class="no-highlight">62</i>&nbsp;        paidUntil = paidUntil,
+<i class="no-highlight">63</i>&nbsp;        owner = owner,
+<i class="no-highlight">64</i>&nbsp;        movingDate = movingDate,
+<i class="no-highlight">65</i>&nbsp;        transferPrice = transferPrice,
+<i class="no-highlight">66</i>&nbsp;        transferAccepted = transferAccepted,
+<i class="no-highlight">67</i>&nbsp;        transferRecipient = transferRecipient,
+<i class="no-highlight">68</i>&nbsp;        highestBid = highestBid,
+<i class="no-highlight">69</i>&nbsp;        highestBidder = highestBidder,
+<i class="no-highlight">70</i>&nbsp;        auctionEnd = auctionEnd,
+<i class="no-highlight">71</i>&nbsp;    )
+<i class="no-highlight">72</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -187,7 +188,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-11 06:50</div>
+    <div style="float:right;">generated on 2022-09-11 07:13</div>
 </div>
 </body>
 </html>

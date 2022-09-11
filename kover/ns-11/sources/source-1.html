@@ -266,371 +266,372 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">53</i>&nbsp;import java.io.File
 <i class="no-highlight">54</i>&nbsp;import java.net.URL
 <i class="no-highlight">55</i>&nbsp;
-<i class="no-highlight">56</i>&nbsp;public object AuctionParser : Parser&lt;Auction?&gt; {
-<i class="no-highlight">57</i>&nbsp;    private const val PERCENTAGE = 100f
-<i class="no-highlight">58</i>&nbsp;
-<b class="fc"><i class="no-highlight">59</i>&nbsp;    private val charInfoRegex = Regex(&quot;&quot;&quot;Level: (\d+) \| Vocation: ([\w\s]+)\| (\w+) \| World: (\w+)&quot;&quot;&quot;)</b>
-<b class="fc"><i class="no-highlight">60</i>&nbsp;    private val idAddonsRegex = Regex(&quot;&quot;&quot;/(\d+)_(\d+)&quot;&quot;&quot;)</b>
-<b class="fc"><i class="no-highlight">61</i>&nbsp;    private val amountRegex = Regex(&quot;&quot;&quot;([\d,]+)x &quot;&quot;&quot;)</b>
-<b class="fc"><i class="no-highlight">62</i>&nbsp;    private val idRegex = Regex(&quot;&quot;&quot;(\d+).(?:gif|png)&quot;&quot;&quot;)</b>
-<i class="no-highlight">63</i>&nbsp;
-<b class="fc"><i class="no-highlight">64</i>&nbsp;    override fun fromContent(content: String): Auction? = fromContent(content, 0, true)</b>
-<b class="nc"><i class="no-highlight">65</i>&nbsp;    public fun fromContent(content: String, auctionId: Int, parseDetails: Boolean = true): Auction? {</b>
-<b class="fc"><i class="no-highlight">66</i>&nbsp;        val document = Jsoup.parse(content)</b>
-<b class="fc"><i class="no-highlight">67</i>&nbsp;        return auction {</b>
-<b class="fc"><i class="no-highlight">68</i>&nbsp;            this.auctionId = auctionId</b>
-<b class="fc"><i class="no-highlight">69</i>&nbsp;            document.selectFirst(&quot;div.Auction&quot;)?.let { parseAuctionContainer(it) } ?: return null</b>
-<b class="fc"><i class="no-highlight">70</i>&nbsp;            val detailsTables = document.parseTablesMap(&quot;table.Table3, table.Table5&quot;)</b>
-<b class="pc"><i class="no-highlight">71</i>&nbsp;            if (!parseDetails) return@auction</b>
-<i class="no-highlight">72</i>&nbsp;
-<b class="fc"><i class="no-highlight">73</i>&nbsp;            details {</b>
-<b class="pc"><i class="no-highlight">74</i>&nbsp;                detailsTables[&quot;General&quot;]?.apply { parseGeneralTable(this) }</b>
-<b class="pc"><i class="no-highlight">75</i>&nbsp;                detailsTables[&quot;Item Summary&quot;]?.apply { items = parseItemsTable(this) }</b>
-<b class="pc"><i class="no-highlight">76</i>&nbsp;                detailsTables[&quot;Store Item Summary&quot;]?.apply { storeItems = parseItemsTable(this) }</b>
-<b class="pc"><i class="no-highlight">77</i>&nbsp;                detailsTables[&quot;Mounts&quot;]?.apply { mounts = parseMountsTable(this) }</b>
-<b class="pc"><i class="no-highlight">78</i>&nbsp;                detailsTables[&quot;Store Mounts&quot;]?.apply { storeMounts = parseMountsTable(this) }</b>
-<b class="pc"><i class="no-highlight">79</i>&nbsp;                detailsTables[&quot;Outfits&quot;]?.apply { outfits = parseOutfitsTable(this) }</b>
-<b class="pc"><i class="no-highlight">80</i>&nbsp;                detailsTables[&quot;Store Outfits&quot;]?.apply { storeOutfits = parseOutfitsTable(this) }</b>
-<b class="pc"><i class="no-highlight">81</i>&nbsp;                detailsTables[&quot;Familiars&quot;]?.apply { familiars = parseFamiliarsTable(this) }</b>
-<b class="pc"><i class="no-highlight">82</i>&nbsp;                detailsTables[&quot;Blessings&quot;]?.apply { parseBlessingsTable(this) }</b>
-<b class="pc"><i class="no-highlight">83</i>&nbsp;                detailsTables[&quot;Imbuements&quot;]?.apply { parseSingleColumnTable(this).forEach { addImbuement(it) } }</b>
-<b class="pc"><i class="no-highlight">84</i>&nbsp;                detailsTables[&quot;Charms&quot;]?.apply { parseCharmsTable(this) }</b>
-<b class="pc"><i class="no-highlight">85</i>&nbsp;                detailsTables[&quot;Completed Cyclopedia Map Areas&quot;]?.apply {</b>
-<b class="fc"><i class="no-highlight">86</i>&nbsp;                    parseSingleColumnTable(this).forEach { addCompletedCyclopediaMapArea(it) }</b>
-<b class="fc"><i class="no-highlight">87</i>&nbsp;                }</b>
-<b class="pc"><i class="no-highlight">88</i>&nbsp;                detailsTables[&quot;Completed Quest Lines&quot;]?.apply {</b>
-<b class="fc"><i class="no-highlight">89</i>&nbsp;                    parseSingleColumnTable(this).forEach { addCompletedQuestLine(it) }</b>
-<b class="fc"><i class="no-highlight">90</i>&nbsp;                }</b>
-<b class="pc"><i class="no-highlight">91</i>&nbsp;                detailsTables[&quot;Titles&quot;]?.run { parseSingleColumnTable(this).forEach { addTitle(it) } }</b>
-<b class="pc"><i class="no-highlight">92</i>&nbsp;                detailsTables[&quot;Achievements&quot;]?.run { parseAchievementsTable(this) }</b>
-<b class="pc"><i class="no-highlight">93</i>&nbsp;                detailsTables[&quot;Bestiary Progress&quot;]?.run { parseBestiaryTable(this, false) }</b>
-<b class="pc"><i class="no-highlight">94</i>&nbsp;                detailsTables[&quot;Bosstiary Progress&quot;]?.run { parseBestiaryTable(this, true) }</b>
-<i class="no-highlight">95</i>&nbsp;            }
-<b class="fc"><i class="no-highlight">96</i>&nbsp;        }</b>
-<i class="no-highlight">97</i>&nbsp;    }
-<i class="no-highlight">98</i>&nbsp;
-<i class="no-highlight">99</i>&nbsp;    private fun AuctionBuilder.AuctionDetailsBuilder.parseCharmsTable(table: Element) {
-<b class="fc"><i class="no-highlight">100</i>&nbsp;        for (row in table.selectFirst(&quot;table.TableContent&quot;).rows().offsetStart(1)) {</b>
-<b class="fc"><i class="no-highlight">101</i>&nbsp;            val colsText = row.cellsText()</b>
-<b class="pc"><i class="no-highlight">102</i>&nbsp;            if (colsText.size != 2) continue</b>
-<b class="fc"><i class="no-highlight">103</i>&nbsp;            val (cost, name) = colsText</b>
-<b class="fc"><i class="no-highlight">104</i>&nbsp;            addCharm(CharmEntry(name, cost.parseInteger()))</b>
-<i class="no-highlight">105</i>&nbsp;        }
-<i class="no-highlight">106</i>&nbsp;    }
-<i class="no-highlight">107</i>&nbsp;
-<i class="no-highlight">108</i>&nbsp;    private fun AuctionBuilder.AuctionDetailsBuilder.parseAchievementsTable(table: Element) {
-<b class="fc"><i class="no-highlight">109</i>&nbsp;        for (row in table.selectFirst(&quot;table.TableContent&quot;).rows().offsetStart(1)) {</b>
-<b class="fc"><i class="no-highlight">110</i>&nbsp;            val text = row.cleanText()</b>
-<b class="fc"><i class="no-highlight">111</i>&nbsp;            if (text.contains(&quot;more entries&quot;)) continue</b>
-<b class="fc"><i class="no-highlight">112</i>&nbsp;            val secret = row.selectFirst(&quot;img&quot;) != null</b>
-<b class="fc"><i class="no-highlight">113</i>&nbsp;            addAchievement(AchievementEntry(text, secret))</b>
-<i class="no-highlight">114</i>&nbsp;        }
-<i class="no-highlight">115</i>&nbsp;    }
-<i class="no-highlight">116</i>&nbsp;
-<b class="nc"><i class="no-highlight">117</i>&nbsp;    private fun AuctionBuilder.AuctionDetailsBuilder.parseBestiaryTable(table: Element, bosstiary: Boolean = false) {</b>
-<b class="fc"><i class="no-highlight">118</i>&nbsp;        for (row in table.selectFirst(&quot;table.TableContent&quot;).rows().offsetStart(1)) {</b>
-<b class="fc"><i class="no-highlight">119</i>&nbsp;            val columnsText = row.cellsText()</b>
-<b class="fc"><i class="no-highlight">120</i>&nbsp;            if (columnsText.size != 3) continue</b>
-<b class="fc"><i class="no-highlight">121</i>&nbsp;            val (step, kills, name) = columnsText</b>
-<b class="fc"><i class="no-highlight">122</i>&nbsp;            val entry = CreatureEntry(name, kills.remove(&quot;x&quot;).parseLong(), step.toInt())</b>
-<b class="fc"><i class="no-highlight">123</i>&nbsp;            if (bosstiary) addBosstiaryEntry(entry) else addBestiaryEntry(entry)</b>
-<i class="no-highlight">124</i>&nbsp;        }
-<i class="no-highlight">125</i>&nbsp;    }
-<i class="no-highlight">126</i>&nbsp;
-<i class="no-highlight">127</i>&nbsp;    private fun AuctionBuilder.AuctionDetailsBuilder.parseBlessingsTable(table: Element) {
-<b class="fc"><i class="no-highlight">128</i>&nbsp;        for (row in table.selectFirst(&quot;table.TableContent&quot;).rows().offsetStart(1)) {</b>
-<b class="fc"><i class="no-highlight">129</i>&nbsp;            val colsText = row.cellsText()</b>
-<b class="pc"><i class="no-highlight">130</i>&nbsp;            if (colsText.size != 2) continue</b>
-<b class="fc"><i class="no-highlight">131</i>&nbsp;            val (amount, name) = colsText</b>
-<b class="fc"><i class="no-highlight">132</i>&nbsp;            addBlessing(BlessingEntry(name, amount.remove(&quot;x&quot;).parseInteger()))</b>
-<i class="no-highlight">133</i>&nbsp;        }
-<i class="no-highlight">134</i>&nbsp;    }
-<i class="no-highlight">135</i>&nbsp;
-<i class="no-highlight">136</i>&nbsp;    private fun parseSingleColumnTable(table: Element): List&lt;String&gt; {
-<b class="fc"><i class="no-highlight">137</i>&nbsp;        val innerTable = table.select(&quot;table.TableContent&quot;).last()</b>
-<b class="fc"><i class="no-highlight">138</i>&nbsp;        val values = mutableListOf&lt;String&gt;()</b>
-<b class="fc"><i class="no-highlight">139</i>&nbsp;        for (row in innerTable.rows().offsetStart(1)) {</b>
-<b class="pc"><i class="no-highlight">140</i>&nbsp;            val text = row.selectFirst(&quot;td&quot;)?.cleanText().orEmpty()</b>
-<b class="fc"><i class="no-highlight">141</i>&nbsp;            if (text.contains(&quot;more entries&quot;)) continue</b>
-<b class="fc"><i class="no-highlight">142</i>&nbsp;            values.add(text)</b>
-<i class="no-highlight">143</i>&nbsp;        }
-<b class="fc"><i class="no-highlight">144</i>&nbsp;        return values</b>
-<i class="no-highlight">145</i>&nbsp;    }
-<i class="no-highlight">146</i>&nbsp;
-<i class="no-highlight">147</i>&nbsp;    private fun parseFamiliarsTable(table: Element): Familiars {
-<b class="pc"><i class="no-highlight">148</i>&nbsp;        val paginationData = table.selectFirst(&quot;div.BlockPageNavigationRow&quot;)?.parsePagination() ?: return Familiars(1,</b>
-<b class="nc"><i class="no-highlight">149</i>&nbsp;            0,</b>
+<i class="no-highlight">56</i>&nbsp;/** Parser for auction pages. */
+<i class="no-highlight">57</i>&nbsp;public object AuctionParser : Parser&lt;Auction?&gt; {
+<i class="no-highlight">58</i>&nbsp;    private const val PERCENTAGE = 100f
+<i class="no-highlight">59</i>&nbsp;
+<b class="fc"><i class="no-highlight">60</i>&nbsp;    private val charInfoRegex = Regex(&quot;&quot;&quot;Level: (\d+) \| Vocation: ([\w\s]+)\| (\w+) \| World: (\w+)&quot;&quot;&quot;)</b>
+<b class="fc"><i class="no-highlight">61</i>&nbsp;    private val idAddonsRegex = Regex(&quot;&quot;&quot;/(\d+)_(\d+)&quot;&quot;&quot;)</b>
+<b class="fc"><i class="no-highlight">62</i>&nbsp;    private val amountRegex = Regex(&quot;&quot;&quot;([\d,]+)x &quot;&quot;&quot;)</b>
+<b class="fc"><i class="no-highlight">63</i>&nbsp;    private val idRegex = Regex(&quot;&quot;&quot;(\d+).(?:gif|png)&quot;&quot;&quot;)</b>
+<i class="no-highlight">64</i>&nbsp;
+<b class="fc"><i class="no-highlight">65</i>&nbsp;    override fun fromContent(content: String): Auction? = fromContent(content, 0, true)</b>
+<b class="nc"><i class="no-highlight">66</i>&nbsp;    public fun fromContent(content: String, auctionId: Int, parseDetails: Boolean = true): Auction? {</b>
+<b class="fc"><i class="no-highlight">67</i>&nbsp;        val document = Jsoup.parse(content)</b>
+<b class="fc"><i class="no-highlight">68</i>&nbsp;        return auction {</b>
+<b class="fc"><i class="no-highlight">69</i>&nbsp;            this.auctionId = auctionId</b>
+<b class="fc"><i class="no-highlight">70</i>&nbsp;            document.selectFirst(&quot;div.Auction&quot;)?.let { parseAuctionContainer(it) } ?: return null</b>
+<b class="fc"><i class="no-highlight">71</i>&nbsp;            val detailsTables = document.parseTablesMap(&quot;table.Table3, table.Table5&quot;)</b>
+<b class="pc"><i class="no-highlight">72</i>&nbsp;            if (!parseDetails) return@auction</b>
+<i class="no-highlight">73</i>&nbsp;
+<b class="fc"><i class="no-highlight">74</i>&nbsp;            details {</b>
+<b class="pc"><i class="no-highlight">75</i>&nbsp;                detailsTables[&quot;General&quot;]?.apply { parseGeneralTable(this) }</b>
+<b class="pc"><i class="no-highlight">76</i>&nbsp;                detailsTables[&quot;Item Summary&quot;]?.apply { items = parseItemsTable(this) }</b>
+<b class="pc"><i class="no-highlight">77</i>&nbsp;                detailsTables[&quot;Store Item Summary&quot;]?.apply { storeItems = parseItemsTable(this) }</b>
+<b class="pc"><i class="no-highlight">78</i>&nbsp;                detailsTables[&quot;Mounts&quot;]?.apply { mounts = parseMountsTable(this) }</b>
+<b class="pc"><i class="no-highlight">79</i>&nbsp;                detailsTables[&quot;Store Mounts&quot;]?.apply { storeMounts = parseMountsTable(this) }</b>
+<b class="pc"><i class="no-highlight">80</i>&nbsp;                detailsTables[&quot;Outfits&quot;]?.apply { outfits = parseOutfitsTable(this) }</b>
+<b class="pc"><i class="no-highlight">81</i>&nbsp;                detailsTables[&quot;Store Outfits&quot;]?.apply { storeOutfits = parseOutfitsTable(this) }</b>
+<b class="pc"><i class="no-highlight">82</i>&nbsp;                detailsTables[&quot;Familiars&quot;]?.apply { familiars = parseFamiliarsTable(this) }</b>
+<b class="pc"><i class="no-highlight">83</i>&nbsp;                detailsTables[&quot;Blessings&quot;]?.apply { parseBlessingsTable(this) }</b>
+<b class="pc"><i class="no-highlight">84</i>&nbsp;                detailsTables[&quot;Imbuements&quot;]?.apply { parseSingleColumnTable(this).forEach { addImbuement(it) } }</b>
+<b class="pc"><i class="no-highlight">85</i>&nbsp;                detailsTables[&quot;Charms&quot;]?.apply { parseCharmsTable(this) }</b>
+<b class="pc"><i class="no-highlight">86</i>&nbsp;                detailsTables[&quot;Completed Cyclopedia Map Areas&quot;]?.apply {</b>
+<b class="fc"><i class="no-highlight">87</i>&nbsp;                    parseSingleColumnTable(this).forEach { addCompletedCyclopediaMapArea(it) }</b>
+<b class="fc"><i class="no-highlight">88</i>&nbsp;                }</b>
+<b class="pc"><i class="no-highlight">89</i>&nbsp;                detailsTables[&quot;Completed Quest Lines&quot;]?.apply {</b>
+<b class="fc"><i class="no-highlight">90</i>&nbsp;                    parseSingleColumnTable(this).forEach { addCompletedQuestLine(it) }</b>
+<b class="fc"><i class="no-highlight">91</i>&nbsp;                }</b>
+<b class="pc"><i class="no-highlight">92</i>&nbsp;                detailsTables[&quot;Titles&quot;]?.run { parseSingleColumnTable(this).forEach { addTitle(it) } }</b>
+<b class="pc"><i class="no-highlight">93</i>&nbsp;                detailsTables[&quot;Achievements&quot;]?.run { parseAchievementsTable(this) }</b>
+<b class="pc"><i class="no-highlight">94</i>&nbsp;                detailsTables[&quot;Bestiary Progress&quot;]?.run { parseBestiaryTable(this, false) }</b>
+<b class="pc"><i class="no-highlight">95</i>&nbsp;                detailsTables[&quot;Bosstiary Progress&quot;]?.run { parseBestiaryTable(this, true) }</b>
+<i class="no-highlight">96</i>&nbsp;            }
+<b class="fc"><i class="no-highlight">97</i>&nbsp;        }</b>
+<i class="no-highlight">98</i>&nbsp;    }
+<i class="no-highlight">99</i>&nbsp;
+<i class="no-highlight">100</i>&nbsp;    private fun AuctionBuilder.AuctionDetailsBuilder.parseCharmsTable(table: Element) {
+<b class="fc"><i class="no-highlight">101</i>&nbsp;        for (row in table.selectFirst(&quot;table.TableContent&quot;).rows().offsetStart(1)) {</b>
+<b class="fc"><i class="no-highlight">102</i>&nbsp;            val colsText = row.cellsText()</b>
+<b class="pc"><i class="no-highlight">103</i>&nbsp;            if (colsText.size != 2) continue</b>
+<b class="fc"><i class="no-highlight">104</i>&nbsp;            val (cost, name) = colsText</b>
+<b class="fc"><i class="no-highlight">105</i>&nbsp;            addCharm(CharmEntry(name, cost.parseInteger()))</b>
+<i class="no-highlight">106</i>&nbsp;        }
+<i class="no-highlight">107</i>&nbsp;    }
+<i class="no-highlight">108</i>&nbsp;
+<i class="no-highlight">109</i>&nbsp;    private fun AuctionBuilder.AuctionDetailsBuilder.parseAchievementsTable(table: Element) {
+<b class="fc"><i class="no-highlight">110</i>&nbsp;        for (row in table.selectFirst(&quot;table.TableContent&quot;).rows().offsetStart(1)) {</b>
+<b class="fc"><i class="no-highlight">111</i>&nbsp;            val text = row.cleanText()</b>
+<b class="fc"><i class="no-highlight">112</i>&nbsp;            if (text.contains(&quot;more entries&quot;)) continue</b>
+<b class="fc"><i class="no-highlight">113</i>&nbsp;            val secret = row.selectFirst(&quot;img&quot;) != null</b>
+<b class="fc"><i class="no-highlight">114</i>&nbsp;            addAchievement(AchievementEntry(text, secret))</b>
+<i class="no-highlight">115</i>&nbsp;        }
+<i class="no-highlight">116</i>&nbsp;    }
+<i class="no-highlight">117</i>&nbsp;
+<b class="nc"><i class="no-highlight">118</i>&nbsp;    private fun AuctionBuilder.AuctionDetailsBuilder.parseBestiaryTable(table: Element, bosstiary: Boolean = false) {</b>
+<b class="fc"><i class="no-highlight">119</i>&nbsp;        for (row in table.selectFirst(&quot;table.TableContent&quot;).rows().offsetStart(1)) {</b>
+<b class="fc"><i class="no-highlight">120</i>&nbsp;            val columnsText = row.cellsText()</b>
+<b class="fc"><i class="no-highlight">121</i>&nbsp;            if (columnsText.size != 3) continue</b>
+<b class="fc"><i class="no-highlight">122</i>&nbsp;            val (step, kills, name) = columnsText</b>
+<b class="fc"><i class="no-highlight">123</i>&nbsp;            val entry = CreatureEntry(name, kills.remove(&quot;x&quot;).parseLong(), step.toInt())</b>
+<b class="fc"><i class="no-highlight">124</i>&nbsp;            if (bosstiary) addBosstiaryEntry(entry) else addBestiaryEntry(entry)</b>
+<i class="no-highlight">125</i>&nbsp;        }
+<i class="no-highlight">126</i>&nbsp;    }
+<i class="no-highlight">127</i>&nbsp;
+<i class="no-highlight">128</i>&nbsp;    private fun AuctionBuilder.AuctionDetailsBuilder.parseBlessingsTable(table: Element) {
+<b class="fc"><i class="no-highlight">129</i>&nbsp;        for (row in table.selectFirst(&quot;table.TableContent&quot;).rows().offsetStart(1)) {</b>
+<b class="fc"><i class="no-highlight">130</i>&nbsp;            val colsText = row.cellsText()</b>
+<b class="pc"><i class="no-highlight">131</i>&nbsp;            if (colsText.size != 2) continue</b>
+<b class="fc"><i class="no-highlight">132</i>&nbsp;            val (amount, name) = colsText</b>
+<b class="fc"><i class="no-highlight">133</i>&nbsp;            addBlessing(BlessingEntry(name, amount.remove(&quot;x&quot;).parseInteger()))</b>
+<i class="no-highlight">134</i>&nbsp;        }
+<i class="no-highlight">135</i>&nbsp;    }
+<i class="no-highlight">136</i>&nbsp;
+<i class="no-highlight">137</i>&nbsp;    private fun parseSingleColumnTable(table: Element): List&lt;String&gt; {
+<b class="fc"><i class="no-highlight">138</i>&nbsp;        val innerTable = table.select(&quot;table.TableContent&quot;).last()</b>
+<b class="fc"><i class="no-highlight">139</i>&nbsp;        val values = mutableListOf&lt;String&gt;()</b>
+<b class="fc"><i class="no-highlight">140</i>&nbsp;        for (row in innerTable.rows().offsetStart(1)) {</b>
+<b class="pc"><i class="no-highlight">141</i>&nbsp;            val text = row.selectFirst(&quot;td&quot;)?.cleanText().orEmpty()</b>
+<b class="fc"><i class="no-highlight">142</i>&nbsp;            if (text.contains(&quot;more entries&quot;)) continue</b>
+<b class="fc"><i class="no-highlight">143</i>&nbsp;            values.add(text)</b>
+<i class="no-highlight">144</i>&nbsp;        }
+<b class="fc"><i class="no-highlight">145</i>&nbsp;        return values</b>
+<i class="no-highlight">146</i>&nbsp;    }
+<i class="no-highlight">147</i>&nbsp;
+<i class="no-highlight">148</i>&nbsp;    private fun parseFamiliarsTable(table: Element): Familiars {
+<b class="pc"><i class="no-highlight">149</i>&nbsp;        val paginationData = table.selectFirst(&quot;div.BlockPageNavigationRow&quot;)?.parsePagination() ?: return Familiars(1,</b>
 <b class="nc"><i class="no-highlight">150</i>&nbsp;            0,</b>
-<b class="nc"><i class="no-highlight">151</i>&nbsp;            emptyList(),</b>
-<b class="nc"><i class="no-highlight">152</i>&nbsp;            false)</b>
-<b class="fc"><i class="no-highlight">153</i>&nbsp;        val familiarBoxes = table.select(&quot;div.CVIcon&quot;)</b>
-<b class="fc"><i class="no-highlight">154</i>&nbsp;        val familiars = mutableListOf&lt;FamiliarEntry&gt;()</b>
-<b class="fc"><i class="no-highlight">155</i>&nbsp;        for (mountBox in familiarBoxes) {</b>
-<b class="fc"><i class="no-highlight">156</i>&nbsp;            val name = mountBox.attr(&quot;title&quot;).split(&quot;(&quot;).first().clean()</b>
-<b class="pc"><i class="no-highlight">157</i>&nbsp;            val (_, id) = idRegex.find(mountBox.selectFirst(&quot;img&quot;)?.attr(&quot;src&quot;).orEmpty())?.groupValues</b>
-<b class="nc"><i class="no-highlight">158</i>&nbsp;                ?: throw ParsingException(&quot;familiar image did not match expected pattern&quot;)</b>
-<b class="fc"><i class="no-highlight">159</i>&nbsp;            familiars.add(FamiliarEntry(name, id.toInt()))</b>
-<i class="no-highlight">160</i>&nbsp;        }
-<b class="fc"><i class="no-highlight">161</i>&nbsp;        return Familiars(paginationData.currentPage,</b>
-<b class="fc"><i class="no-highlight">162</i>&nbsp;            paginationData.totalPages,</b>
-<b class="fc"><i class="no-highlight">163</i>&nbsp;            paginationData.resultsCount,</b>
-<b class="fc"><i class="no-highlight">164</i>&nbsp;            familiars,</b>
-<b class="fc"><i class="no-highlight">165</i>&nbsp;            false)</b>
-<i class="no-highlight">166</i>&nbsp;    }
-<i class="no-highlight">167</i>&nbsp;
-<i class="no-highlight">168</i>&nbsp;    private fun parseOutfitsTable(table: Element): Outfits {
-<b class="pc"><i class="no-highlight">169</i>&nbsp;        val paginationData = table.selectFirst(&quot;div.BlockPageNavigationRow&quot;)?.parsePagination() ?: return Outfits(1,</b>
-<b class="fc"><i class="no-highlight">170</i>&nbsp;            0,</b>
+<b class="nc"><i class="no-highlight">151</i>&nbsp;            0,</b>
+<b class="nc"><i class="no-highlight">152</i>&nbsp;            emptyList(),</b>
+<b class="nc"><i class="no-highlight">153</i>&nbsp;            false)</b>
+<b class="fc"><i class="no-highlight">154</i>&nbsp;        val familiarBoxes = table.select(&quot;div.CVIcon&quot;)</b>
+<b class="fc"><i class="no-highlight">155</i>&nbsp;        val familiars = mutableListOf&lt;FamiliarEntry&gt;()</b>
+<b class="fc"><i class="no-highlight">156</i>&nbsp;        for (mountBox in familiarBoxes) {</b>
+<b class="fc"><i class="no-highlight">157</i>&nbsp;            val name = mountBox.attr(&quot;title&quot;).split(&quot;(&quot;).first().clean()</b>
+<b class="pc"><i class="no-highlight">158</i>&nbsp;            val (_, id) = idRegex.find(mountBox.selectFirst(&quot;img&quot;)?.attr(&quot;src&quot;).orEmpty())?.groupValues</b>
+<b class="nc"><i class="no-highlight">159</i>&nbsp;                ?: throw ParsingException(&quot;familiar image did not match expected pattern&quot;)</b>
+<b class="fc"><i class="no-highlight">160</i>&nbsp;            familiars.add(FamiliarEntry(name, id.toInt()))</b>
+<i class="no-highlight">161</i>&nbsp;        }
+<b class="fc"><i class="no-highlight">162</i>&nbsp;        return Familiars(paginationData.currentPage,</b>
+<b class="fc"><i class="no-highlight">163</i>&nbsp;            paginationData.totalPages,</b>
+<b class="fc"><i class="no-highlight">164</i>&nbsp;            paginationData.resultsCount,</b>
+<b class="fc"><i class="no-highlight">165</i>&nbsp;            familiars,</b>
+<b class="fc"><i class="no-highlight">166</i>&nbsp;            false)</b>
+<i class="no-highlight">167</i>&nbsp;    }
+<i class="no-highlight">168</i>&nbsp;
+<i class="no-highlight">169</i>&nbsp;    private fun parseOutfitsTable(table: Element): Outfits {
+<b class="pc"><i class="no-highlight">170</i>&nbsp;        val paginationData = table.selectFirst(&quot;div.BlockPageNavigationRow&quot;)?.parsePagination() ?: return Outfits(1,</b>
 <b class="fc"><i class="no-highlight">171</i>&nbsp;            0,</b>
-<b class="fc"><i class="no-highlight">172</i>&nbsp;            emptyList(),</b>
-<b class="fc"><i class="no-highlight">173</i>&nbsp;            false)</b>
-<b class="fc"><i class="no-highlight">174</i>&nbsp;        val outfitBoxes = table.select(&quot;div.CVIcon&quot;)</b>
-<b class="fc"><i class="no-highlight">175</i>&nbsp;        val outfits = outfitBoxes.map { parseDisplayedOutfit(it) }</b>
-<b class="fc"><i class="no-highlight">176</i>&nbsp;        return Outfits(paginationData.currentPage,</b>
-<b class="fc"><i class="no-highlight">177</i>&nbsp;            paginationData.totalPages,</b>
-<b class="fc"><i class="no-highlight">178</i>&nbsp;            paginationData.resultsCount,</b>
-<b class="fc"><i class="no-highlight">179</i>&nbsp;            outfits,</b>
-<b class="fc"><i class="no-highlight">180</i>&nbsp;            false)</b>
-<i class="no-highlight">181</i>&nbsp;    }
-<i class="no-highlight">182</i>&nbsp;
-<i class="no-highlight">183</i>&nbsp;    private fun parseMountsTable(mountsTable: Element): Mounts {
-<b class="fc"><i class="no-highlight">184</i>&nbsp;        val paginationData =</b>
-<b class="pc"><i class="no-highlight">185</i>&nbsp;            mountsTable.selectFirst(&quot;div.BlockPageNavigationRow&quot;)?.parsePagination() ?: return Mounts(1,</b>
-<b class="nc"><i class="no-highlight">186</i>&nbsp;                0,</b>
+<b class="fc"><i class="no-highlight">172</i>&nbsp;            0,</b>
+<b class="fc"><i class="no-highlight">173</i>&nbsp;            emptyList(),</b>
+<b class="fc"><i class="no-highlight">174</i>&nbsp;            false)</b>
+<b class="fc"><i class="no-highlight">175</i>&nbsp;        val outfitBoxes = table.select(&quot;div.CVIcon&quot;)</b>
+<b class="fc"><i class="no-highlight">176</i>&nbsp;        val outfits = outfitBoxes.map { parseDisplayedOutfit(it) }</b>
+<b class="fc"><i class="no-highlight">177</i>&nbsp;        return Outfits(paginationData.currentPage,</b>
+<b class="fc"><i class="no-highlight">178</i>&nbsp;            paginationData.totalPages,</b>
+<b class="fc"><i class="no-highlight">179</i>&nbsp;            paginationData.resultsCount,</b>
+<b class="fc"><i class="no-highlight">180</i>&nbsp;            outfits,</b>
+<b class="fc"><i class="no-highlight">181</i>&nbsp;            false)</b>
+<i class="no-highlight">182</i>&nbsp;    }
+<i class="no-highlight">183</i>&nbsp;
+<i class="no-highlight">184</i>&nbsp;    private fun parseMountsTable(mountsTable: Element): Mounts {
+<b class="fc"><i class="no-highlight">185</i>&nbsp;        val paginationData =</b>
+<b class="pc"><i class="no-highlight">186</i>&nbsp;            mountsTable.selectFirst(&quot;div.BlockPageNavigationRow&quot;)?.parsePagination() ?: return Mounts(1,</b>
 <b class="nc"><i class="no-highlight">187</i>&nbsp;                0,</b>
-<b class="nc"><i class="no-highlight">188</i>&nbsp;                emptyList(),</b>
-<b class="nc"><i class="no-highlight">189</i>&nbsp;                false)</b>
-<b class="fc"><i class="no-highlight">190</i>&nbsp;        val mountsBoxes = mountsTable.select(&quot;div.CVIcon&quot;)</b>
-<b class="fc"><i class="no-highlight">191</i>&nbsp;        val mounts = mountsBoxes.map { parseDisplayedMount(it) }</b>
-<b class="fc"><i class="no-highlight">192</i>&nbsp;        return Mounts(paginationData.currentPage, paginationData.totalPages, paginationData.resultsCount, mounts, false)</b>
-<i class="no-highlight">193</i>&nbsp;    }
-<i class="no-highlight">194</i>&nbsp;
-<i class="no-highlight">195</i>&nbsp;    private fun parseItemsTable(itemsTable: Element): ItemSummary {
-<b class="fc"><i class="no-highlight">196</i>&nbsp;        val paginationData =</b>
-<b class="pc"><i class="no-highlight">197</i>&nbsp;            itemsTable.selectFirst(&quot;div.BlockPageNavigationRow&quot;)?.parsePagination() ?: return ItemSummary(1,</b>
-<b class="nc"><i class="no-highlight">198</i>&nbsp;                0,</b>
+<b class="nc"><i class="no-highlight">188</i>&nbsp;                0,</b>
+<b class="nc"><i class="no-highlight">189</i>&nbsp;                emptyList(),</b>
+<b class="nc"><i class="no-highlight">190</i>&nbsp;                false)</b>
+<b class="fc"><i class="no-highlight">191</i>&nbsp;        val mountsBoxes = mountsTable.select(&quot;div.CVIcon&quot;)</b>
+<b class="fc"><i class="no-highlight">192</i>&nbsp;        val mounts = mountsBoxes.map { parseDisplayedMount(it) }</b>
+<b class="fc"><i class="no-highlight">193</i>&nbsp;        return Mounts(paginationData.currentPage, paginationData.totalPages, paginationData.resultsCount, mounts, false)</b>
+<i class="no-highlight">194</i>&nbsp;    }
+<i class="no-highlight">195</i>&nbsp;
+<i class="no-highlight">196</i>&nbsp;    private fun parseItemsTable(itemsTable: Element): ItemSummary {
+<b class="fc"><i class="no-highlight">197</i>&nbsp;        val paginationData =</b>
+<b class="pc"><i class="no-highlight">198</i>&nbsp;            itemsTable.selectFirst(&quot;div.BlockPageNavigationRow&quot;)?.parsePagination() ?: return ItemSummary(1,</b>
 <b class="nc"><i class="no-highlight">199</i>&nbsp;                0,</b>
-<b class="nc"><i class="no-highlight">200</i>&nbsp;                emptyList(),</b>
-<b class="nc"><i class="no-highlight">201</i>&nbsp;                false)</b>
-<b class="fc"><i class="no-highlight">202</i>&nbsp;        val itemBoxes = itemsTable.select(&quot;div.CVIcon&quot;)</b>
-<b class="fc"><i class="no-highlight">203</i>&nbsp;        val items = mutableListOf&lt;ItemEntry&gt;()</b>
-<b class="fc"><i class="no-highlight">204</i>&nbsp;        for (itemBox in itemBoxes) {</b>
-<b class="pc"><i class="no-highlight">205</i>&nbsp;            parseDisplayedItem(itemBox)?.run { items.add(this) }</b>
-<i class="no-highlight">206</i>&nbsp;        }
-<b class="fc"><i class="no-highlight">207</i>&nbsp;        return ItemSummary(paginationData.currentPage,</b>
-<b class="fc"><i class="no-highlight">208</i>&nbsp;            paginationData.totalPages,</b>
-<b class="fc"><i class="no-highlight">209</i>&nbsp;            paginationData.resultsCount,</b>
-<b class="fc"><i class="no-highlight">210</i>&nbsp;            items,</b>
-<b class="fc"><i class="no-highlight">211</i>&nbsp;            false)</b>
-<i class="no-highlight">212</i>&nbsp;    }
-<i class="no-highlight">213</i>&nbsp;
-<i class="no-highlight">214</i>&nbsp;    private fun getAuctionTableFieldValue(row: Element): Pair&lt;String, String&gt; {
-<b class="fc"><i class="no-highlight">215</i>&nbsp;        val field =</b>
-<b class="pc"><i class="no-highlight">216</i>&nbsp;            row.selectFirst(&quot;span&quot;)?.cleanText()?.remove(&quot;:&quot;) ?: throw ParsingException(&quot;could not find field&#39;s span&quot;)</b>
-<b class="pc"><i class="no-highlight">217</i>&nbsp;        val value = row.selectFirst(&quot;div&quot;)?.cleanText() ?: throw ParsingException(&quot;could not find value&#39;s div&quot;)</b>
-<b class="fc"><i class="no-highlight">218</i>&nbsp;        return field to value</b>
-<i class="no-highlight">219</i>&nbsp;    }
-<i class="no-highlight">220</i>&nbsp;
-<i class="no-highlight">221</i>&nbsp;    private fun AuctionBuilder.AuctionDetailsBuilder.parseGeneralTable(table: Element) {
-<b class="fc"><i class="no-highlight">222</i>&nbsp;        val contentContainers = table.select(&quot;table.TableContent&quot;)</b>
-<b class="fc"><i class="no-highlight">223</i>&nbsp;        for (row in contentContainers[0].rows()) {</b>
-<b class="fc"><i class="no-highlight">224</i>&nbsp;            val (field, value) = getAuctionTableFieldValue(row)</b>
-<b class="pc"><i class="no-highlight">225</i>&nbsp;            when (field) {</b>
-<b class="fc"><i class="no-highlight">226</i>&nbsp;                &quot;Hit Points&quot; -&gt; hitPoints = value.parseInteger()</b>
-<b class="fc"><i class="no-highlight">227</i>&nbsp;                &quot;Mana&quot; -&gt; mana = value.parseInteger()</b>
-<b class="fc"><i class="no-highlight">228</i>&nbsp;                &quot;Capacity&quot; -&gt; capacity = value.parseInteger()</b>
-<b class="fc"><i class="no-highlight">229</i>&nbsp;                &quot;Speed&quot; -&gt; speed = value.parseInteger()</b>
-<b class="fc"><i class="no-highlight">230</i>&nbsp;                &quot;Blessings&quot; -&gt; blessingsCount = value.split(&quot;/&quot;).first().parseInteger()</b>
-<b class="fc"><i class="no-highlight">231</i>&nbsp;                &quot;Mounts&quot; -&gt; mountsCount = value.parseInteger()</b>
-<b class="fc"><i class="no-highlight">232</i>&nbsp;                &quot;Outfits&quot; -&gt; outfitsCount = value.parseInteger()</b>
-<b class="fc"><i class="no-highlight">233</i>&nbsp;                &quot;Titles&quot; -&gt; titlesCount = value.parseInteger()</b>
-<i class="no-highlight">234</i>&nbsp;            }
-<i class="no-highlight">235</i>&nbsp;        }
-<b class="pc"><i class="no-highlight">236</i>&nbsp;        val skillsMap = mutableMapOf&lt;String, Double&gt;().withDefault { 0.0 }</b>
-<b class="fc"><i class="no-highlight">237</i>&nbsp;        for (row in contentContainers[1].rows()) {</b>
-<b class="fc"><i class="no-highlight">238</i>&nbsp;            val (name, level, progress) = row.cellsText()</b>
-<b class="fc"><i class="no-highlight">239</i>&nbsp;            skillsMap[name] = level.parseInteger() + (progress.remove(&quot;%&quot;).toDouble() / PERCENTAGE)</b>
-<i class="no-highlight">240</i>&nbsp;        }
-<b class="fc"><i class="no-highlight">241</i>&nbsp;        skills = AuctionSkills(</b>
-<b class="fc"><i class="no-highlight">242</i>&nbsp;            axeFighting = skillsMap.getValue(&quot;Axe Fighting&quot;),</b>
-<b class="fc"><i class="no-highlight">243</i>&nbsp;            clubFighting = skillsMap.getValue(&quot;Club Fighting&quot;),</b>
-<b class="fc"><i class="no-highlight">244</i>&nbsp;            swordFighting = skillsMap.getValue(&quot;Sword Fighting&quot;),</b>
-<b class="fc"><i class="no-highlight">245</i>&nbsp;            distanceFighting = skillsMap.getValue(&quot;Distance Fighting&quot;),</b>
-<b class="fc"><i class="no-highlight">246</i>&nbsp;            fishing = skillsMap.getValue(&quot;Fishing&quot;),</b>
-<b class="fc"><i class="no-highlight">247</i>&nbsp;            magicLevel = skillsMap.getValue(&quot;Magic Level&quot;),</b>
-<b class="fc"><i class="no-highlight">248</i>&nbsp;            fistFighting = skillsMap.getValue(&quot;Fist Fighting&quot;),</b>
-<b class="fc"><i class="no-highlight">249</i>&nbsp;            shielding = skillsMap.getValue(&quot;Shielding&quot;),</b>
-<i class="no-highlight">250</i>&nbsp;        )
-<b class="fc"><i class="no-highlight">251</i>&nbsp;        for (row in contentContainers[2].rows()) {</b>
-<b class="fc"><i class="no-highlight">252</i>&nbsp;            val (field, value) = getAuctionTableFieldValue(row)</b>
-<b class="pc"><i class="no-highlight">253</i>&nbsp;            when (field) {</b>
-<b class="fc"><i class="no-highlight">254</i>&nbsp;                &quot;Creation Date&quot; -&gt; creationDate = parseTibiaDateTime(value)</b>
-<b class="fc"><i class="no-highlight">255</i>&nbsp;                &quot;Experience&quot; -&gt; experience = value.parseLong()</b>
-<b class="fc"><i class="no-highlight">256</i>&nbsp;                &quot;Gold&quot; -&gt; gold = value.parseLong()</b>
-<b class="fc"><i class="no-highlight">257</i>&nbsp;                &quot;Achievement Points&quot; -&gt; achievementPoints = value.parseInteger()</b>
-<i class="no-highlight">258</i>&nbsp;            }
-<i class="no-highlight">259</i>&nbsp;        }
-<b class="pc"><i class="no-highlight">260</i>&nbsp;        contentContainers[3].selectFirst(&quot;div&quot;)?.cleanText()?.run {</b>
-<b class="pc"><i class="no-highlight">261</i>&nbsp;            if (contains(&quot;after&quot;)) {</b>
-<b class="nc"><i class="no-highlight">262</i>&nbsp;                regularWorldTransfersAvailable = parseTibiaDateTime(split(&quot;after&quot;)[1])</b>
-<i class="no-highlight">263</i>&nbsp;            }
-<b class="fc"><i class="no-highlight">264</i>&nbsp;        }</b>
-<i class="no-highlight">265</i>&nbsp;
-<b class="fc"><i class="no-highlight">266</i>&nbsp;        for (row in contentContainers[4].rows()) {</b>
-<b class="fc"><i class="no-highlight">267</i>&nbsp;            val (field, value) = getAuctionTableFieldValue(row)</b>
-<b class="pc"><i class="no-highlight">268</i>&nbsp;            when (field) {</b>
-<b class="fc"><i class="no-highlight">269</i>&nbsp;                &quot;Charm Expansion&quot; -&gt; charmExpansion = value.contains(&quot;yes&quot;)</b>
-<b class="fc"><i class="no-highlight">270</i>&nbsp;                &quot;Available Charm Points&quot; -&gt; availableCharmPoints = value.parseInteger()</b>
-<b class="fc"><i class="no-highlight">271</i>&nbsp;                &quot;Spent Charm Points&quot; -&gt; spentCharmPoints = value.parseInteger()</b>
-<i class="no-highlight">272</i>&nbsp;            }
-<i class="no-highlight">273</i>&nbsp;        }
-<b class="pc"><i class="no-highlight">274</i>&nbsp;        dailyRewardStreak = contentContainers[5].selectFirst(&quot;div&quot;)?.cleanText()?.toInt() ?: 0</b>
-<b class="fc"><i class="no-highlight">275</i>&nbsp;        for (row in contentContainers[6].rows()) {</b>
-<b class="fc"><i class="no-highlight">276</i>&nbsp;            val (field, value) = getAuctionTableFieldValue(row)</b>
-<b class="pc"><i class="no-highlight">277</i>&nbsp;            when (field) {</b>
-<b class="fc"><i class="no-highlight">278</i>&nbsp;                &quot;Hunting Task Points&quot; -&gt; huntingTaskPoints = value.parseInteger()</b>
-<b class="fc"><i class="no-highlight">279</i>&nbsp;                &quot;Permanent Hunting Task Slots&quot; -&gt; permanentHuntingTaskSlots = value.parseInteger()</b>
-<b class="fc"><i class="no-highlight">280</i>&nbsp;                &quot;Permanent Prey Slots&quot; -&gt; permanentPreySlots = value.parseInteger()</b>
-<b class="fc"><i class="no-highlight">281</i>&nbsp;                &quot;Prey Wildcards&quot; -&gt; preyWildcards = value.parseInteger()</b>
-<i class="no-highlight">282</i>&nbsp;            }
-<i class="no-highlight">283</i>&nbsp;        }
-<i class="no-highlight">284</i>&nbsp;
-<b class="fc"><i class="no-highlight">285</i>&nbsp;        for (row in contentContainers[7].rows()) {</b>
-<b class="fc"><i class="no-highlight">286</i>&nbsp;            val (field, value) = getAuctionTableFieldValue(row)</b>
-<b class="pc"><i class="no-highlight">287</i>&nbsp;            when (field) {</b>
-<b class="fc"><i class="no-highlight">288</i>&nbsp;                &quot;Hirelings&quot; -&gt; hirelings = value.parseInteger()</b>
-<b class="fc"><i class="no-highlight">289</i>&nbsp;                &quot;Hireling Jobs&quot; -&gt; hirelingJobs = value.parseInteger()</b>
-<b class="fc"><i class="no-highlight">290</i>&nbsp;                &quot;Hireling Outfits&quot; -&gt; hirelingOutfits = value.parseInteger()</b>
-<i class="no-highlight">291</i>&nbsp;            }
-<i class="no-highlight">292</i>&nbsp;        }
-<i class="no-highlight">293</i>&nbsp;
-<b class="pc"><i class="no-highlight">294</i>&nbsp;        for (row in contentContainers.getOrNull(8)?.rows().orEmpty()) {</b>
-<b class="fc"><i class="no-highlight">295</i>&nbsp;            val (field, value) = getAuctionTableFieldValue(row)</b>
-<b class="fc"><i class="no-highlight">296</i>&nbsp;            when (field) {</b>
-<b class="pc"><i class="no-highlight">297</i>&nbsp;                &quot;Exalted Dust&quot; -&gt; {</b>
-<b class="fc"><i class="no-highlight">298</i>&nbsp;                    val (current, limit) = value.split(&quot;/&quot;).map { it.parseInteger() }</b>
-<b class="fc"><i class="no-highlight">299</i>&nbsp;                    exaltedDust = current</b>
-<b class="fc"><i class="no-highlight">300</i>&nbsp;                    exaltedDustLimit = limit</b>
-<i class="no-highlight">301</i>&nbsp;                }
-<i class="no-highlight">302</i>&nbsp;            }
-<i class="no-highlight">303</i>&nbsp;        }
-<i class="no-highlight">304</i>&nbsp;
-<b class="pc"><i class="no-highlight">305</i>&nbsp;        for (row in contentContainers.getOrNull(9)?.rows().orEmpty()) {</b>
-<b class="fc"><i class="no-highlight">306</i>&nbsp;            val (field, value) = getAuctionTableFieldValue(row)</b>
-<b class="fc"><i class="no-highlight">307</i>&nbsp;            when (field) {</b>
-<b class="pc"><i class="no-highlight">308</i>&nbsp;                &quot;Boss Points&quot; -&gt; bossPoints = value.parseInteger()</b>
-<i class="no-highlight">309</i>&nbsp;            }
-<i class="no-highlight">310</i>&nbsp;        }
-<i class="no-highlight">311</i>&nbsp;    }
-<i class="no-highlight">312</i>&nbsp;
-<i class="no-highlight">313</i>&nbsp;    internal fun AuctionBuilder.parseAuctionContainer(auctionContainer: Element) {
-<b class="fc"><i class="no-highlight">314</i>&nbsp;        val headerContainer =</b>
-<b class="pc"><i class="no-highlight">315</i>&nbsp;            auctionContainer.selectFirst(&quot;div.AuctionHeader&quot;) ?: throw ParsingException(&quot;auction header not found&quot;)</b>
-<b class="pc"><i class="no-highlight">316</i>&nbsp;        name = headerContainer.selectFirst(&quot;div.AuctionCharacterName&quot;)?.cleanText()</b>
-<b class="nc"><i class="no-highlight">317</i>&nbsp;            ?: throw ParsingException(&quot;character name not found&quot;)</b>
-<b class="fc"><i class="no-highlight">318</i>&nbsp;        headerContainer.selectFirst(&quot;div.AuctionCharacterName &gt; a&quot;)?.apply {</b>
-<b class="fc"><i class="no-highlight">319</i>&nbsp;            val auctionLinkInfo = getLinkInformation()!!</b>
-<b class="pc"><i class="no-highlight">320</i>&nbsp;            auctionId = auctionLinkInfo.queryParams[&quot;auctionid&quot;]?.first()?.toInt()</b>
-<b class="nc"><i class="no-highlight">321</i>&nbsp;                ?: throw ParsingException(&quot;auctionId not found in link&quot;)</b>
-<b class="fc"><i class="no-highlight">322</i>&nbsp;            remove()</b>
-<b class="fc"><i class="no-highlight">323</i>&nbsp;        }</b>
-<i class="no-highlight">324</i>&nbsp;
-<b class="pc"><i class="no-highlight">325</i>&nbsp;        charInfoRegex.find(headerContainer.cleanText())?.run {</b>
-<b class="fc"><i class="no-highlight">326</i>&nbsp;            val (_, levelStr, vocationStr, sexStr, worldStr) = groupValues</b>
-<b class="fc"><i class="no-highlight">327</i>&nbsp;            level = levelStr.toInt()</b>
-<b class="fc"><i class="no-highlight">328</i>&nbsp;            vocation =</b>
-<b class="pc"><i class="no-highlight">329</i>&nbsp;                StringEnum.fromValue(vocationStr.trim())</b>
-<b class="nc"><i class="no-highlight">330</i>&nbsp;                    ?: throw ParsingException(&quot;Unknown vocation found: $vocationStr&quot;)</b>
-<b class="fc"><i class="no-highlight">331</i>&nbsp;            sex =</b>
-<b class="pc"><i class="no-highlight">332</i>&nbsp;                StringEnum.fromValue(sexStr.lowercase().trim()) ?: throw ParsingException(&quot;Unknown sex found: $sexStr&quot;)</b>
-<b class="fc"><i class="no-highlight">333</i>&nbsp;            world = worldStr.trim()</b>
-<b class="fc"><i class="no-highlight">334</i>&nbsp;        }</b>
-<b class="pc"><i class="no-highlight">335</i>&nbsp;        val outfitImageUrl = auctionContainer.selectFirst(&quot;img.AuctionOutfitImage&quot;)?.attr(&quot;src&quot;)</b>
-<b class="nc"><i class="no-highlight">336</i>&nbsp;            ?: throw ParsingException(&quot;outfit image not found&quot;)</b>
-<b class="pc"><i class="no-highlight">337</i>&nbsp;        val (_, outfitId, addons) = idAddonsRegex.find(outfitImageUrl)?.groupValues</b>
-<b class="nc"><i class="no-highlight">338</i>&nbsp;            ?: throw ParsingException(&quot;image URL does not match expected pattern&quot;)</b>
-<i class="no-highlight">339</i>&nbsp;
-<b class="fc"><i class="no-highlight">340</i>&nbsp;        auctionContainer.select(&quot;.CVIcon&quot;).forEach {</b>
-<b class="fc"><i class="no-highlight">341</i>&nbsp;            parseDisplayedItem(it)?.run { addDisplayedItem(this) }</b>
-<b class="fc"><i class="no-highlight">342</i>&nbsp;        }</b>
-<i class="no-highlight">343</i>&nbsp;
-<b class="fc"><i class="no-highlight">344</i>&nbsp;        outfit = OutfitImage(outfitId = outfitId.toInt(), addons = addons.toInt())</b>
-<i class="no-highlight">345</i>&nbsp;
-<b class="fc"><i class="no-highlight">346</i>&nbsp;        auctionContainer.select(&quot;div.Entry&quot;).forEach {</b>
-<b class="fc"><i class="no-highlight">347</i>&nbsp;            val img = it.select(&quot;img&quot;)</b>
-<b class="fc"><i class="no-highlight">348</i>&nbsp;            val imgUrl = img.attr(&quot;src&quot;)</b>
-<b class="pc"><i class="no-highlight">349</i>&nbsp;            val (_, id) = idRegex.find(imgUrl)?.groupValues</b>
-<b class="nc"><i class="no-highlight">350</i>&nbsp;                ?: throw ParsingException(&quot;sales argument image does not match pattern.&quot;)</b>
-<b class="fc"><i class="no-highlight">351</i>&nbsp;            salesArgument {</b>
-<b class="fc"><i class="no-highlight">352</i>&nbsp;                categoryId = id.toInt()</b>
-<b class="fc"><i class="no-highlight">353</i>&nbsp;                content = it.cleanText()</b>
-<i class="no-highlight">354</i>&nbsp;            }
-<b class="fc"><i class="no-highlight">355</i>&nbsp;        }</b>
-<i class="no-highlight">356</i>&nbsp;
-<b class="fc"><i class="no-highlight">357</i>&nbsp;        val (startDate, endDate, _) = auctionContainer.select(&quot;div.ShortAuctionDataValue&quot;).map { it.cleanText() }</b>
-<b class="fc"><i class="no-highlight">358</i>&nbsp;        auctionStart = parseTibiaDateTime(startDate)</b>
-<b class="fc"><i class="no-highlight">359</i>&nbsp;        auctionEnd = parseTibiaDateTime(endDate)</b>
-<b class="pc"><i class="no-highlight">360</i>&nbsp;        auctionContainer.selectFirst(&quot;div.ShortAuctionDataBidRow&quot;)?.run {</b>
-<b class="pc"><i class="no-highlight">361</i>&nbsp;            val bidTag = selectFirst(&quot;div.ShortAuctionDataValue&quot;) ?: throw ParsingException(&quot;Could not find bid&quot;)</b>
-<b class="fc"><i class="no-highlight">362</i>&nbsp;            val bidTypeTag =</b>
-<b class="pc"><i class="no-highlight">363</i>&nbsp;                selectFirst(&quot;div.ShortAuctionDataLabel&quot;) ?: throw ParsingException(&quot;could not find bid type&quot;)</b>
-<b class="fc"><i class="no-highlight">364</i>&nbsp;            val bidTypeStr = bidTypeTag.cleanText().remove(&quot;:&quot;)</b>
-<b class="fc"><i class="no-highlight">365</i>&nbsp;            bid = bidTag.text().parseInteger()</b>
-<b class="pc"><i class="no-highlight">366</i>&nbsp;            bidType = StringEnum.fromValue(bidTypeStr) ?: throw ParsingException(&quot;unknown bid type: $bidTypeStr&quot;)</b>
-<b class="fc"><i class="no-highlight">367</i>&nbsp;        }</b>
-<i class="no-highlight">368</i>&nbsp;
-<b class="pc"><i class="no-highlight">369</i>&nbsp;        status = auctionContainer.selectFirst(&quot;div.AuctionInfo&quot;)?.cleanText()?.let { StringEnum.fromValue(it) }</b>
-<b class="fc"><i class="no-highlight">370</i>&nbsp;            ?: AuctionStatus.IN_PROGRESS</b>
-<i class="no-highlight">371</i>&nbsp;    }
-<i class="no-highlight">372</i>&nbsp;
-<i class="no-highlight">373</i>&nbsp;    @PublishedApi
-<i class="no-highlight">374</i>&nbsp;    internal fun parseDisplayedItem(displayItemContainer: Element): ItemEntry? {
-<b class="fc"><i class="no-highlight">375</i>&nbsp;        val title = displayItemContainer.attr(&quot;title&quot;)</b>
-<b class="fc"><i class="no-highlight">376</i>&nbsp;        val fileUrl = displayItemContainer.selectFirst(&quot;img&quot;)?.attr(&quot;src&quot;) ?: return null</b>
-<b class="fc"><i class="no-highlight">377</i>&nbsp;        val fileName = File(URL(fileUrl).path).name</b>
-<b class="fc"><i class="no-highlight">378</i>&nbsp;        val itemId = fileName.remove(&quot;.gif&quot;).toInt()</b>
-<b class="fc"><i class="no-highlight">379</i>&nbsp;        val titleLines = title.split(&quot;\n&quot;)</b>
-<b class="fc"><i class="no-highlight">380</i>&nbsp;        var name = titleLines.first()</b>
-<b class="fc"><i class="no-highlight">381</i>&nbsp;        val description = if (titleLines.size &gt; 1) {</b>
-<b class="fc"><i class="no-highlight">382</i>&nbsp;            titleLines.offsetStart(1).joinToString(&quot;\n&quot;)</b>
-<i class="no-highlight">383</i>&nbsp;        } else {
-<b class="fc"><i class="no-highlight">384</i>&nbsp;            null</b>
-<i class="no-highlight">385</i>&nbsp;        }
-<b class="fc"><i class="no-highlight">386</i>&nbsp;        var amount = 1</b>
-<b class="fc"><i class="no-highlight">387</i>&nbsp;        amountRegex.find(name)?.apply {</b>
-<b class="fc"><i class="no-highlight">388</i>&nbsp;            amount = groups[1]!!.value.parseInteger()</b>
-<b class="fc"><i class="no-highlight">389</i>&nbsp;            name = amountRegex.replace(name, &quot;&quot;)</b>
-<b class="fc"><i class="no-highlight">390</i>&nbsp;        }</b>
-<b class="fc"><i class="no-highlight">391</i>&nbsp;        return ItemEntry(itemId, name, description, amount)</b>
-<i class="no-highlight">392</i>&nbsp;    }
-<i class="no-highlight">393</i>&nbsp;
-<i class="no-highlight">394</i>&nbsp;    @PublishedApi
-<i class="no-highlight">395</i>&nbsp;    internal fun parseDisplayedOutfit(container: Element): OutfitEntry {
-<b class="fc"><i class="no-highlight">396</i>&nbsp;        val name = container.attr(&quot;title&quot;).split(&quot;(&quot;).first().clean()</b>
-<b class="pc"><i class="no-highlight">397</i>&nbsp;        val (_, id, addons) = idAddonsRegex.find(container.selectFirst(&quot;img&quot;)?.attr(&quot;src&quot;).orEmpty())?.groupValues</b>
-<b class="nc"><i class="no-highlight">398</i>&nbsp;            ?: throw ParsingException(&quot;outfit image did not match expected pattern&quot;)</b>
-<b class="fc"><i class="no-highlight">399</i>&nbsp;        return OutfitEntry(name, id.toInt(), addons.toInt())</b>
-<i class="no-highlight">400</i>&nbsp;    }
-<i class="no-highlight">401</i>&nbsp;
-<i class="no-highlight">402</i>&nbsp;    @PublishedApi
-<i class="no-highlight">403</i>&nbsp;    internal fun parseDisplayedMount(container: Element): MountEntry {
-<b class="fc"><i class="no-highlight">404</i>&nbsp;        val name = container.attr(&quot;title&quot;)</b>
-<b class="pc"><i class="no-highlight">405</i>&nbsp;        val (_, id) = idRegex.find(container.selectFirst(&quot;img&quot;)?.attr(&quot;src&quot;).orEmpty())?.groupValues</b>
-<b class="nc"><i class="no-highlight">406</i>&nbsp;            ?: throw ParsingException(&quot;mount image did not match expected pattern&quot;)</b>
-<b class="fc"><i class="no-highlight">407</i>&nbsp;        return MountEntry(name, id.toInt())</b>
-<i class="no-highlight">408</i>&nbsp;    }
-<i class="no-highlight">409</i>&nbsp;
-<i class="no-highlight">410</i>&nbsp;    public inline fun &lt;reified T&gt; parsePageItems(content: String): List&lt;T&gt; {
-<b class="nc"><i class="no-highlight">411</i>&nbsp;        val document = Jsoup.parse(content)</b>
-<b class="nc"><i class="no-highlight">412</i>&nbsp;        val cvIcon = document.select(&quot;div.CVIcon&quot;)</b>
-<b class="nc"><i class="no-highlight">413</i>&nbsp;        return when (T::class) {</b>
-<b class="nc"><i class="no-highlight">414</i>&nbsp;            ItemEntry::class -&gt; cvIcon.mapNotNull { parseDisplayedItem(it) as T }</b>
-<b class="nc"><i class="no-highlight">415</i>&nbsp;            OutfitEntry::class -&gt; cvIcon.mapNotNull { parseDisplayedOutfit(it) as T }</b>
-<b class="nc"><i class="no-highlight">416</i>&nbsp;            MountEntry::class -&gt; cvIcon.mapNotNull { parseDisplayedMount(it) as T }</b>
-<b class="nc"><i class="no-highlight">417</i>&nbsp;            else -&gt; emptyList()</b>
-<i class="no-highlight">418</i>&nbsp;        }
-<i class="no-highlight">419</i>&nbsp;    }
-<i class="no-highlight">420</i>&nbsp;}
+<b class="nc"><i class="no-highlight">200</i>&nbsp;                0,</b>
+<b class="nc"><i class="no-highlight">201</i>&nbsp;                emptyList(),</b>
+<b class="nc"><i class="no-highlight">202</i>&nbsp;                false)</b>
+<b class="fc"><i class="no-highlight">203</i>&nbsp;        val itemBoxes = itemsTable.select(&quot;div.CVIcon&quot;)</b>
+<b class="fc"><i class="no-highlight">204</i>&nbsp;        val items = mutableListOf&lt;ItemEntry&gt;()</b>
+<b class="fc"><i class="no-highlight">205</i>&nbsp;        for (itemBox in itemBoxes) {</b>
+<b class="pc"><i class="no-highlight">206</i>&nbsp;            parseDisplayedItem(itemBox)?.run { items.add(this) }</b>
+<i class="no-highlight">207</i>&nbsp;        }
+<b class="fc"><i class="no-highlight">208</i>&nbsp;        return ItemSummary(paginationData.currentPage,</b>
+<b class="fc"><i class="no-highlight">209</i>&nbsp;            paginationData.totalPages,</b>
+<b class="fc"><i class="no-highlight">210</i>&nbsp;            paginationData.resultsCount,</b>
+<b class="fc"><i class="no-highlight">211</i>&nbsp;            items,</b>
+<b class="fc"><i class="no-highlight">212</i>&nbsp;            false)</b>
+<i class="no-highlight">213</i>&nbsp;    }
+<i class="no-highlight">214</i>&nbsp;
+<i class="no-highlight">215</i>&nbsp;    private fun getAuctionTableFieldValue(row: Element): Pair&lt;String, String&gt; {
+<b class="fc"><i class="no-highlight">216</i>&nbsp;        val field =</b>
+<b class="pc"><i class="no-highlight">217</i>&nbsp;            row.selectFirst(&quot;span&quot;)?.cleanText()?.remove(&quot;:&quot;) ?: throw ParsingException(&quot;could not find field&#39;s span&quot;)</b>
+<b class="pc"><i class="no-highlight">218</i>&nbsp;        val value = row.selectFirst(&quot;div&quot;)?.cleanText() ?: throw ParsingException(&quot;could not find value&#39;s div&quot;)</b>
+<b class="fc"><i class="no-highlight">219</i>&nbsp;        return field to value</b>
+<i class="no-highlight">220</i>&nbsp;    }
+<i class="no-highlight">221</i>&nbsp;
+<i class="no-highlight">222</i>&nbsp;    private fun AuctionBuilder.AuctionDetailsBuilder.parseGeneralTable(table: Element) {
+<b class="fc"><i class="no-highlight">223</i>&nbsp;        val contentContainers = table.select(&quot;table.TableContent&quot;)</b>
+<b class="fc"><i class="no-highlight">224</i>&nbsp;        for (row in contentContainers[0].rows()) {</b>
+<b class="fc"><i class="no-highlight">225</i>&nbsp;            val (field, value) = getAuctionTableFieldValue(row)</b>
+<b class="pc"><i class="no-highlight">226</i>&nbsp;            when (field) {</b>
+<b class="fc"><i class="no-highlight">227</i>&nbsp;                &quot;Hit Points&quot; -&gt; hitPoints = value.parseInteger()</b>
+<b class="fc"><i class="no-highlight">228</i>&nbsp;                &quot;Mana&quot; -&gt; mana = value.parseInteger()</b>
+<b class="fc"><i class="no-highlight">229</i>&nbsp;                &quot;Capacity&quot; -&gt; capacity = value.parseInteger()</b>
+<b class="fc"><i class="no-highlight">230</i>&nbsp;                &quot;Speed&quot; -&gt; speed = value.parseInteger()</b>
+<b class="fc"><i class="no-highlight">231</i>&nbsp;                &quot;Blessings&quot; -&gt; blessingsCount = value.split(&quot;/&quot;).first().parseInteger()</b>
+<b class="fc"><i class="no-highlight">232</i>&nbsp;                &quot;Mounts&quot; -&gt; mountsCount = value.parseInteger()</b>
+<b class="fc"><i class="no-highlight">233</i>&nbsp;                &quot;Outfits&quot; -&gt; outfitsCount = value.parseInteger()</b>
+<b class="fc"><i class="no-highlight">234</i>&nbsp;                &quot;Titles&quot; -&gt; titlesCount = value.parseInteger()</b>
+<i class="no-highlight">235</i>&nbsp;            }
+<i class="no-highlight">236</i>&nbsp;        }
+<b class="pc"><i class="no-highlight">237</i>&nbsp;        val skillsMap = mutableMapOf&lt;String, Double&gt;().withDefault { 0.0 }</b>
+<b class="fc"><i class="no-highlight">238</i>&nbsp;        for (row in contentContainers[1].rows()) {</b>
+<b class="fc"><i class="no-highlight">239</i>&nbsp;            val (name, level, progress) = row.cellsText()</b>
+<b class="fc"><i class="no-highlight">240</i>&nbsp;            skillsMap[name] = level.parseInteger() + (progress.remove(&quot;%&quot;).toDouble() / PERCENTAGE)</b>
+<i class="no-highlight">241</i>&nbsp;        }
+<b class="fc"><i class="no-highlight">242</i>&nbsp;        skills = AuctionSkills(</b>
+<b class="fc"><i class="no-highlight">243</i>&nbsp;            axeFighting = skillsMap.getValue(&quot;Axe Fighting&quot;),</b>
+<b class="fc"><i class="no-highlight">244</i>&nbsp;            clubFighting = skillsMap.getValue(&quot;Club Fighting&quot;),</b>
+<b class="fc"><i class="no-highlight">245</i>&nbsp;            swordFighting = skillsMap.getValue(&quot;Sword Fighting&quot;),</b>
+<b class="fc"><i class="no-highlight">246</i>&nbsp;            distanceFighting = skillsMap.getValue(&quot;Distance Fighting&quot;),</b>
+<b class="fc"><i class="no-highlight">247</i>&nbsp;            fishing = skillsMap.getValue(&quot;Fishing&quot;),</b>
+<b class="fc"><i class="no-highlight">248</i>&nbsp;            magicLevel = skillsMap.getValue(&quot;Magic Level&quot;),</b>
+<b class="fc"><i class="no-highlight">249</i>&nbsp;            fistFighting = skillsMap.getValue(&quot;Fist Fighting&quot;),</b>
+<b class="fc"><i class="no-highlight">250</i>&nbsp;            shielding = skillsMap.getValue(&quot;Shielding&quot;),</b>
+<i class="no-highlight">251</i>&nbsp;        )
+<b class="fc"><i class="no-highlight">252</i>&nbsp;        for (row in contentContainers[2].rows()) {</b>
+<b class="fc"><i class="no-highlight">253</i>&nbsp;            val (field, value) = getAuctionTableFieldValue(row)</b>
+<b class="pc"><i class="no-highlight">254</i>&nbsp;            when (field) {</b>
+<b class="fc"><i class="no-highlight">255</i>&nbsp;                &quot;Creation Date&quot; -&gt; creationDate = parseTibiaDateTime(value)</b>
+<b class="fc"><i class="no-highlight">256</i>&nbsp;                &quot;Experience&quot; -&gt; experience = value.parseLong()</b>
+<b class="fc"><i class="no-highlight">257</i>&nbsp;                &quot;Gold&quot; -&gt; gold = value.parseLong()</b>
+<b class="fc"><i class="no-highlight">258</i>&nbsp;                &quot;Achievement Points&quot; -&gt; achievementPoints = value.parseInteger()</b>
+<i class="no-highlight">259</i>&nbsp;            }
+<i class="no-highlight">260</i>&nbsp;        }
+<b class="pc"><i class="no-highlight">261</i>&nbsp;        contentContainers[3].selectFirst(&quot;div&quot;)?.cleanText()?.run {</b>
+<b class="pc"><i class="no-highlight">262</i>&nbsp;            if (contains(&quot;after&quot;)) {</b>
+<b class="nc"><i class="no-highlight">263</i>&nbsp;                regularWorldTransfersAvailable = parseTibiaDateTime(split(&quot;after&quot;)[1])</b>
+<i class="no-highlight">264</i>&nbsp;            }
+<b class="fc"><i class="no-highlight">265</i>&nbsp;        }</b>
+<i class="no-highlight">266</i>&nbsp;
+<b class="fc"><i class="no-highlight">267</i>&nbsp;        for (row in contentContainers[4].rows()) {</b>
+<b class="fc"><i class="no-highlight">268</i>&nbsp;            val (field, value) = getAuctionTableFieldValue(row)</b>
+<b class="pc"><i class="no-highlight">269</i>&nbsp;            when (field) {</b>
+<b class="fc"><i class="no-highlight">270</i>&nbsp;                &quot;Charm Expansion&quot; -&gt; charmExpansion = value.contains(&quot;yes&quot;)</b>
+<b class="fc"><i class="no-highlight">271</i>&nbsp;                &quot;Available Charm Points&quot; -&gt; availableCharmPoints = value.parseInteger()</b>
+<b class="fc"><i class="no-highlight">272</i>&nbsp;                &quot;Spent Charm Points&quot; -&gt; spentCharmPoints = value.parseInteger()</b>
+<i class="no-highlight">273</i>&nbsp;            }
+<i class="no-highlight">274</i>&nbsp;        }
+<b class="pc"><i class="no-highlight">275</i>&nbsp;        dailyRewardStreak = contentContainers[5].selectFirst(&quot;div&quot;)?.cleanText()?.toInt() ?: 0</b>
+<b class="fc"><i class="no-highlight">276</i>&nbsp;        for (row in contentContainers[6].rows()) {</b>
+<b class="fc"><i class="no-highlight">277</i>&nbsp;            val (field, value) = getAuctionTableFieldValue(row)</b>
+<b class="pc"><i class="no-highlight">278</i>&nbsp;            when (field) {</b>
+<b class="fc"><i class="no-highlight">279</i>&nbsp;                &quot;Hunting Task Points&quot; -&gt; huntingTaskPoints = value.parseInteger()</b>
+<b class="fc"><i class="no-highlight">280</i>&nbsp;                &quot;Permanent Hunting Task Slots&quot; -&gt; permanentHuntingTaskSlots = value.parseInteger()</b>
+<b class="fc"><i class="no-highlight">281</i>&nbsp;                &quot;Permanent Prey Slots&quot; -&gt; permanentPreySlots = value.parseInteger()</b>
+<b class="fc"><i class="no-highlight">282</i>&nbsp;                &quot;Prey Wildcards&quot; -&gt; preyWildcards = value.parseInteger()</b>
+<i class="no-highlight">283</i>&nbsp;            }
+<i class="no-highlight">284</i>&nbsp;        }
+<i class="no-highlight">285</i>&nbsp;
+<b class="fc"><i class="no-highlight">286</i>&nbsp;        for (row in contentContainers[7].rows()) {</b>
+<b class="fc"><i class="no-highlight">287</i>&nbsp;            val (field, value) = getAuctionTableFieldValue(row)</b>
+<b class="pc"><i class="no-highlight">288</i>&nbsp;            when (field) {</b>
+<b class="fc"><i class="no-highlight">289</i>&nbsp;                &quot;Hirelings&quot; -&gt; hirelings = value.parseInteger()</b>
+<b class="fc"><i class="no-highlight">290</i>&nbsp;                &quot;Hireling Jobs&quot; -&gt; hirelingJobs = value.parseInteger()</b>
+<b class="fc"><i class="no-highlight">291</i>&nbsp;                &quot;Hireling Outfits&quot; -&gt; hirelingOutfits = value.parseInteger()</b>
+<i class="no-highlight">292</i>&nbsp;            }
+<i class="no-highlight">293</i>&nbsp;        }
+<i class="no-highlight">294</i>&nbsp;
+<b class="pc"><i class="no-highlight">295</i>&nbsp;        for (row in contentContainers.getOrNull(8)?.rows().orEmpty()) {</b>
+<b class="fc"><i class="no-highlight">296</i>&nbsp;            val (field, value) = getAuctionTableFieldValue(row)</b>
+<b class="fc"><i class="no-highlight">297</i>&nbsp;            when (field) {</b>
+<b class="pc"><i class="no-highlight">298</i>&nbsp;                &quot;Exalted Dust&quot; -&gt; {</b>
+<b class="fc"><i class="no-highlight">299</i>&nbsp;                    val (current, limit) = value.split(&quot;/&quot;).map { it.parseInteger() }</b>
+<b class="fc"><i class="no-highlight">300</i>&nbsp;                    exaltedDust = current</b>
+<b class="fc"><i class="no-highlight">301</i>&nbsp;                    exaltedDustLimit = limit</b>
+<i class="no-highlight">302</i>&nbsp;                }
+<i class="no-highlight">303</i>&nbsp;            }
+<i class="no-highlight">304</i>&nbsp;        }
+<i class="no-highlight">305</i>&nbsp;
+<b class="pc"><i class="no-highlight">306</i>&nbsp;        for (row in contentContainers.getOrNull(9)?.rows().orEmpty()) {</b>
+<b class="fc"><i class="no-highlight">307</i>&nbsp;            val (field, value) = getAuctionTableFieldValue(row)</b>
+<b class="fc"><i class="no-highlight">308</i>&nbsp;            when (field) {</b>
+<b class="pc"><i class="no-highlight">309</i>&nbsp;                &quot;Boss Points&quot; -&gt; bossPoints = value.parseInteger()</b>
+<i class="no-highlight">310</i>&nbsp;            }
+<i class="no-highlight">311</i>&nbsp;        }
+<i class="no-highlight">312</i>&nbsp;    }
+<i class="no-highlight">313</i>&nbsp;
+<i class="no-highlight">314</i>&nbsp;    internal fun AuctionBuilder.parseAuctionContainer(auctionContainer: Element) {
+<b class="fc"><i class="no-highlight">315</i>&nbsp;        val headerContainer =</b>
+<b class="pc"><i class="no-highlight">316</i>&nbsp;            auctionContainer.selectFirst(&quot;div.AuctionHeader&quot;) ?: throw ParsingException(&quot;auction header not found&quot;)</b>
+<b class="pc"><i class="no-highlight">317</i>&nbsp;        name = headerContainer.selectFirst(&quot;div.AuctionCharacterName&quot;)?.cleanText()</b>
+<b class="nc"><i class="no-highlight">318</i>&nbsp;            ?: throw ParsingException(&quot;character name not found&quot;)</b>
+<b class="fc"><i class="no-highlight">319</i>&nbsp;        headerContainer.selectFirst(&quot;div.AuctionCharacterName &gt; a&quot;)?.apply {</b>
+<b class="fc"><i class="no-highlight">320</i>&nbsp;            val auctionLinkInfo = getLinkInformation()!!</b>
+<b class="pc"><i class="no-highlight">321</i>&nbsp;            auctionId = auctionLinkInfo.queryParams[&quot;auctionid&quot;]?.first()?.toInt()</b>
+<b class="nc"><i class="no-highlight">322</i>&nbsp;                ?: throw ParsingException(&quot;auctionId not found in link&quot;)</b>
+<b class="fc"><i class="no-highlight">323</i>&nbsp;            remove()</b>
+<b class="fc"><i class="no-highlight">324</i>&nbsp;        }</b>
+<i class="no-highlight">325</i>&nbsp;
+<b class="pc"><i class="no-highlight">326</i>&nbsp;        charInfoRegex.find(headerContainer.cleanText())?.run {</b>
+<b class="fc"><i class="no-highlight">327</i>&nbsp;            val (_, levelStr, vocationStr, sexStr, worldStr) = groupValues</b>
+<b class="fc"><i class="no-highlight">328</i>&nbsp;            level = levelStr.toInt()</b>
+<b class="fc"><i class="no-highlight">329</i>&nbsp;            vocation =</b>
+<b class="pc"><i class="no-highlight">330</i>&nbsp;                StringEnum.fromValue(vocationStr.trim())</b>
+<b class="nc"><i class="no-highlight">331</i>&nbsp;                    ?: throw ParsingException(&quot;Unknown vocation found: $vocationStr&quot;)</b>
+<b class="fc"><i class="no-highlight">332</i>&nbsp;            sex =</b>
+<b class="pc"><i class="no-highlight">333</i>&nbsp;                StringEnum.fromValue(sexStr.lowercase().trim()) ?: throw ParsingException(&quot;Unknown sex found: $sexStr&quot;)</b>
+<b class="fc"><i class="no-highlight">334</i>&nbsp;            world = worldStr.trim()</b>
+<b class="fc"><i class="no-highlight">335</i>&nbsp;        }</b>
+<b class="pc"><i class="no-highlight">336</i>&nbsp;        val outfitImageUrl = auctionContainer.selectFirst(&quot;img.AuctionOutfitImage&quot;)?.attr(&quot;src&quot;)</b>
+<b class="nc"><i class="no-highlight">337</i>&nbsp;            ?: throw ParsingException(&quot;outfit image not found&quot;)</b>
+<b class="pc"><i class="no-highlight">338</i>&nbsp;        val (_, outfitId, addons) = idAddonsRegex.find(outfitImageUrl)?.groupValues</b>
+<b class="nc"><i class="no-highlight">339</i>&nbsp;            ?: throw ParsingException(&quot;image URL does not match expected pattern&quot;)</b>
+<i class="no-highlight">340</i>&nbsp;
+<b class="fc"><i class="no-highlight">341</i>&nbsp;        auctionContainer.select(&quot;.CVIcon&quot;).forEach {</b>
+<b class="fc"><i class="no-highlight">342</i>&nbsp;            parseDisplayedItem(it)?.run { addDisplayedItem(this) }</b>
+<b class="fc"><i class="no-highlight">343</i>&nbsp;        }</b>
+<i class="no-highlight">344</i>&nbsp;
+<b class="fc"><i class="no-highlight">345</i>&nbsp;        outfit = OutfitImage(outfitId = outfitId.toInt(), addons = addons.toInt())</b>
+<i class="no-highlight">346</i>&nbsp;
+<b class="fc"><i class="no-highlight">347</i>&nbsp;        auctionContainer.select(&quot;div.Entry&quot;).forEach {</b>
+<b class="fc"><i class="no-highlight">348</i>&nbsp;            val img = it.select(&quot;img&quot;)</b>
+<b class="fc"><i class="no-highlight">349</i>&nbsp;            val imgUrl = img.attr(&quot;src&quot;)</b>
+<b class="pc"><i class="no-highlight">350</i>&nbsp;            val (_, id) = idRegex.find(imgUrl)?.groupValues</b>
+<b class="nc"><i class="no-highlight">351</i>&nbsp;                ?: throw ParsingException(&quot;sales argument image does not match pattern.&quot;)</b>
+<b class="fc"><i class="no-highlight">352</i>&nbsp;            salesArgument {</b>
+<b class="fc"><i class="no-highlight">353</i>&nbsp;                categoryId = id.toInt()</b>
+<b class="fc"><i class="no-highlight">354</i>&nbsp;                content = it.cleanText()</b>
+<i class="no-highlight">355</i>&nbsp;            }
+<b class="fc"><i class="no-highlight">356</i>&nbsp;        }</b>
+<i class="no-highlight">357</i>&nbsp;
+<b class="fc"><i class="no-highlight">358</i>&nbsp;        val (startDate, endDate, _) = auctionContainer.select(&quot;div.ShortAuctionDataValue&quot;).map { it.cleanText() }</b>
+<b class="fc"><i class="no-highlight">359</i>&nbsp;        auctionStart = parseTibiaDateTime(startDate)</b>
+<b class="fc"><i class="no-highlight">360</i>&nbsp;        auctionEnd = parseTibiaDateTime(endDate)</b>
+<b class="pc"><i class="no-highlight">361</i>&nbsp;        auctionContainer.selectFirst(&quot;div.ShortAuctionDataBidRow&quot;)?.run {</b>
+<b class="pc"><i class="no-highlight">362</i>&nbsp;            val bidTag = selectFirst(&quot;div.ShortAuctionDataValue&quot;) ?: throw ParsingException(&quot;Could not find bid&quot;)</b>
+<b class="fc"><i class="no-highlight">363</i>&nbsp;            val bidTypeTag =</b>
+<b class="pc"><i class="no-highlight">364</i>&nbsp;                selectFirst(&quot;div.ShortAuctionDataLabel&quot;) ?: throw ParsingException(&quot;could not find bid type&quot;)</b>
+<b class="fc"><i class="no-highlight">365</i>&nbsp;            val bidTypeStr = bidTypeTag.cleanText().remove(&quot;:&quot;)</b>
+<b class="fc"><i class="no-highlight">366</i>&nbsp;            bid = bidTag.text().parseInteger()</b>
+<b class="pc"><i class="no-highlight">367</i>&nbsp;            bidType = StringEnum.fromValue(bidTypeStr) ?: throw ParsingException(&quot;unknown bid type: $bidTypeStr&quot;)</b>
+<b class="fc"><i class="no-highlight">368</i>&nbsp;        }</b>
+<i class="no-highlight">369</i>&nbsp;
+<b class="pc"><i class="no-highlight">370</i>&nbsp;        status = auctionContainer.selectFirst(&quot;div.AuctionInfo&quot;)?.cleanText()?.let { StringEnum.fromValue(it) }</b>
+<b class="fc"><i class="no-highlight">371</i>&nbsp;            ?: AuctionStatus.IN_PROGRESS</b>
+<i class="no-highlight">372</i>&nbsp;    }
+<i class="no-highlight">373</i>&nbsp;
+<i class="no-highlight">374</i>&nbsp;    @PublishedApi
+<i class="no-highlight">375</i>&nbsp;    internal fun parseDisplayedItem(displayItemContainer: Element): ItemEntry? {
+<b class="fc"><i class="no-highlight">376</i>&nbsp;        val title = displayItemContainer.attr(&quot;title&quot;)</b>
+<b class="fc"><i class="no-highlight">377</i>&nbsp;        val fileUrl = displayItemContainer.selectFirst(&quot;img&quot;)?.attr(&quot;src&quot;) ?: return null</b>
+<b class="fc"><i class="no-highlight">378</i>&nbsp;        val fileName = File(URL(fileUrl).path).name</b>
+<b class="fc"><i class="no-highlight">379</i>&nbsp;        val itemId = fileName.remove(&quot;.gif&quot;).toInt()</b>
+<b class="fc"><i class="no-highlight">380</i>&nbsp;        val titleLines = title.split(&quot;\n&quot;)</b>
+<b class="fc"><i class="no-highlight">381</i>&nbsp;        var name = titleLines.first()</b>
+<b class="fc"><i class="no-highlight">382</i>&nbsp;        val description = if (titleLines.size &gt; 1) {</b>
+<b class="fc"><i class="no-highlight">383</i>&nbsp;            titleLines.offsetStart(1).joinToString(&quot;\n&quot;)</b>
+<i class="no-highlight">384</i>&nbsp;        } else {
+<b class="fc"><i class="no-highlight">385</i>&nbsp;            null</b>
+<i class="no-highlight">386</i>&nbsp;        }
+<b class="fc"><i class="no-highlight">387</i>&nbsp;        var amount = 1</b>
+<b class="fc"><i class="no-highlight">388</i>&nbsp;        amountRegex.find(name)?.apply {</b>
+<b class="fc"><i class="no-highlight">389</i>&nbsp;            amount = groups[1]!!.value.parseInteger()</b>
+<b class="fc"><i class="no-highlight">390</i>&nbsp;            name = amountRegex.replace(name, &quot;&quot;)</b>
+<b class="fc"><i class="no-highlight">391</i>&nbsp;        }</b>
+<b class="fc"><i class="no-highlight">392</i>&nbsp;        return ItemEntry(itemId, name, description, amount)</b>
+<i class="no-highlight">393</i>&nbsp;    }
+<i class="no-highlight">394</i>&nbsp;
+<i class="no-highlight">395</i>&nbsp;    @PublishedApi
+<i class="no-highlight">396</i>&nbsp;    internal fun parseDisplayedOutfit(container: Element): OutfitEntry {
+<b class="fc"><i class="no-highlight">397</i>&nbsp;        val name = container.attr(&quot;title&quot;).split(&quot;(&quot;).first().clean()</b>
+<b class="pc"><i class="no-highlight">398</i>&nbsp;        val (_, id, addons) = idAddonsRegex.find(container.selectFirst(&quot;img&quot;)?.attr(&quot;src&quot;).orEmpty())?.groupValues</b>
+<b class="nc"><i class="no-highlight">399</i>&nbsp;            ?: throw ParsingException(&quot;outfit image did not match expected pattern&quot;)</b>
+<b class="fc"><i class="no-highlight">400</i>&nbsp;        return OutfitEntry(name, id.toInt(), addons.toInt())</b>
+<i class="no-highlight">401</i>&nbsp;    }
+<i class="no-highlight">402</i>&nbsp;
+<i class="no-highlight">403</i>&nbsp;    @PublishedApi
+<i class="no-highlight">404</i>&nbsp;    internal fun parseDisplayedMount(container: Element): MountEntry {
+<b class="fc"><i class="no-highlight">405</i>&nbsp;        val name = container.attr(&quot;title&quot;)</b>
+<b class="pc"><i class="no-highlight">406</i>&nbsp;        val (_, id) = idRegex.find(container.selectFirst(&quot;img&quot;)?.attr(&quot;src&quot;).orEmpty())?.groupValues</b>
+<b class="nc"><i class="no-highlight">407</i>&nbsp;            ?: throw ParsingException(&quot;mount image did not match expected pattern&quot;)</b>
+<b class="fc"><i class="no-highlight">408</i>&nbsp;        return MountEntry(name, id.toInt())</b>
+<i class="no-highlight">409</i>&nbsp;    }
+<i class="no-highlight">410</i>&nbsp;
+<i class="no-highlight">411</i>&nbsp;    public inline fun &lt;reified T&gt; parsePageItems(content: String): List&lt;T&gt; {
+<b class="nc"><i class="no-highlight">412</i>&nbsp;        val document = Jsoup.parse(content)</b>
+<b class="nc"><i class="no-highlight">413</i>&nbsp;        val cvIcon = document.select(&quot;div.CVIcon&quot;)</b>
+<b class="nc"><i class="no-highlight">414</i>&nbsp;        return when (T::class) {</b>
+<b class="nc"><i class="no-highlight">415</i>&nbsp;            ItemEntry::class -&gt; cvIcon.mapNotNull { parseDisplayedItem(it) as T }</b>
+<b class="nc"><i class="no-highlight">416</i>&nbsp;            OutfitEntry::class -&gt; cvIcon.mapNotNull { parseDisplayedOutfit(it) as T }</b>
+<b class="nc"><i class="no-highlight">417</i>&nbsp;            MountEntry::class -&gt; cvIcon.mapNotNull { parseDisplayedMount(it) as T }</b>
+<b class="nc"><i class="no-highlight">418</i>&nbsp;            else -&gt; emptyList()</b>
+<i class="no-highlight">419</i>&nbsp;        }
+<i class="no-highlight">420</i>&nbsp;    }
+<i class="no-highlight">421</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -657,7 +658,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-11 06:50</div>
+    <div style="float:right;">generated on 2022-09-11 07:13</div>
 </div>
 </body>
 </html>

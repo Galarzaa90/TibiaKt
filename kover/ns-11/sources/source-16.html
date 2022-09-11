@@ -155,91 +155,108 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.parsers
-<i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.builders.WorldOverviewBuilder
-<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.builders.worldOverviewBuilder
-<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.enums.BattlEyeType
-<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.enums.StringEnum
-<i class="no-highlight">7</i>&nbsp;import com.galarzaa.tibiakt.core.enums.TransferType
-<i class="no-highlight">8</i>&nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
-<i class="no-highlight">9</i>&nbsp;import com.galarzaa.tibiakt.core.models.world.WorldOverview
-<i class="no-highlight">10</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseInteger
-<i class="no-highlight">11</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parsePopup
-<i class="no-highlight">12</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseTibiaDateTime
-<i class="no-highlight">13</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseTibiaFullDate
-<i class="no-highlight">14</i>&nbsp;import org.jsoup.Jsoup
-<i class="no-highlight">15</i>&nbsp;import org.jsoup.nodes.Document
-<i class="no-highlight">16</i>&nbsp;import org.jsoup.nodes.Element
-<i class="no-highlight">17</i>&nbsp;import java.time.format.DateTimeParseException
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;/*
+<i class="no-highlight">2</i>&nbsp; * Copyright © 2022 Allan Galarza
+<i class="no-highlight">3</i>&nbsp; *
+<i class="no-highlight">4</i>&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+<i class="no-highlight">5</i>&nbsp; * you may not use this file except in compliance with the License.
+<i class="no-highlight">6</i>&nbsp; * You may obtain a copy of the License at
+<i class="no-highlight">7</i>&nbsp; *
+<i class="no-highlight">8</i>&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+<i class="no-highlight">9</i>&nbsp; *
+<i class="no-highlight">10</i>&nbsp; * Unless required by applicable law or agreed to in writing, software
+<i class="no-highlight">11</i>&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+<i class="no-highlight">12</i>&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+<i class="no-highlight">13</i>&nbsp; * See the License for the specific language governing permissions and
+<i class="no-highlight">14</i>&nbsp; * limitations under the License.
+<i class="no-highlight">15</i>&nbsp; */
+<i class="no-highlight">16</i>&nbsp;
+<i class="no-highlight">17</i>&nbsp;package com.galarzaa.tibiakt.core.parsers
 <i class="no-highlight">18</i>&nbsp;
-<i class="no-highlight">19</i>&nbsp;public object WorldOverviewParser : Parser&lt;WorldOverview&gt; {
-<b class="fc"><i class="no-highlight">20</i>&nbsp;    private val recordRegex = Regex(&quot;&quot;&quot;(?&lt;count&gt;[\d.,]+) players \(on (?&lt;date&gt;[^)]+)\)&quot;&quot;&quot;)</b>
-<b class="fc"><i class="no-highlight">21</i>&nbsp;    private val battlEyeRegex = Regex(&quot;&quot;&quot;since ([^.]+).&quot;&quot;&quot;)</b>
-<i class="no-highlight">22</i>&nbsp;
-<i class="no-highlight">23</i>&nbsp;    override fun fromContent(content: String): WorldOverview {
-<b class="fc"><i class="no-highlight">24</i>&nbsp;        val document: Document = Jsoup.parse(content, &quot;&quot;, org.jsoup.parser.Parser.xmlParser())</b>
-<b class="fc"><i class="no-highlight">25</i>&nbsp;        val boxContent =</b>
-<b class="pc"><i class="no-highlight">26</i>&nbsp;            document.selectFirst(&quot;div.BoxContent&quot;) ?: throw ParsingException(&quot;BoxContent container not found&quot;)</b>
-<b class="fc"><i class="no-highlight">27</i>&nbsp;        val tables = boxContent.select(&quot;table.TableContent&quot;)</b>
-<b class="fc"><i class="no-highlight">28</i>&nbsp;        val builder = worldOverviewBuilder {</b>
-<b class="pc"><i class="no-highlight">29</i>&nbsp;            recordRegex.find(tables.first()?.text() ?: throw ParsingException(&quot;No content tables found.&quot;))?.apply {</b>
-<b class="fc"><i class="no-highlight">30</i>&nbsp;                val (_, recordCount, recordDate) = groupValues</b>
-<b class="fc"><i class="no-highlight">31</i>&nbsp;                overallMaximumCount = recordCount.parseInteger()</b>
-<b class="fc"><i class="no-highlight">32</i>&nbsp;                overallMaximumCountDateTime = parseTibiaDateTime(recordDate)</b>
-<b class="fc"><i class="no-highlight">33</i>&nbsp;            }</b>
-<b class="pc"><i class="no-highlight">34</i>&nbsp;            for (i in 1..tables.lastIndex step 2) {</b>
-<b class="fc"><i class="no-highlight">35</i>&nbsp;                val headerTable = tables[i]</b>
-<b class="fc"><i class="no-highlight">36</i>&nbsp;                val worldsTable = tables[i + 1]</b>
-<b class="fc"><i class="no-highlight">37</i>&nbsp;                if (headerTable.text().contains(&quot;Regular&quot;)) parseWorldsTable(worldsTable)</b>
-<i class="no-highlight">38</i>&nbsp;            }
-<b class="fc"><i class="no-highlight">39</i>&nbsp;        }</b>
-<b class="fc"><i class="no-highlight">40</i>&nbsp;        return builder.build()</b>
-<i class="no-highlight">41</i>&nbsp;    }
-<i class="no-highlight">42</i>&nbsp;
-<i class="no-highlight">43</i>&nbsp;    private fun WorldOverviewBuilder.parseWorldsTable(table: Element) {
-<b class="fc"><i class="no-highlight">44</i>&nbsp;        val rows = table.select(&quot;tr&quot;)</b>
-<b class="fc"><i class="no-highlight">45</i>&nbsp;        for (row in rows.subList(1, rows.size)) {</b>
-<b class="fc"><i class="no-highlight">46</i>&nbsp;            addWorld {</b>
-<b class="fc"><i class="no-highlight">47</i>&nbsp;                val columns = row.select(&quot;td&quot;)</b>
-<b class="pc"><i class="no-highlight">48</i>&nbsp;                name = columns.first()?.text() ?: throw ParsingException(&quot;No columns in world row.&quot;)</b>
-<b class="fc"><i class="no-highlight">49</i>&nbsp;                try {</b>
-<b class="fc"><i class="no-highlight">50</i>&nbsp;                    onlineCount = columns[1].text().parseInteger()</b>
-<b class="fc"><i class="no-highlight">51</i>&nbsp;                    isOnline = true</b>
-<b class="fc"><i class="no-highlight">52</i>&nbsp;                } catch (nfe: NumberFormatException) {</b>
-<b class="fc"><i class="no-highlight">53</i>&nbsp;                    onlineCount = 0</b>
-<b class="fc"><i class="no-highlight">54</i>&nbsp;                    isOnline = false</b>
-<i class="no-highlight">55</i>&nbsp;                }
-<b class="fc"><i class="no-highlight">56</i>&nbsp;                location = columns[2].text()</b>
-<b class="pc"><i class="no-highlight">57</i>&nbsp;                pvpType = StringEnum.fromValue(columns[3].text())</b>
-<b class="nc"><i class="no-highlight">58</i>&nbsp;                    ?: throw ParsingException(&quot;Unknown PvP type found: ${columns[3].text()}&quot;)</b>
+<i class="no-highlight">19</i>&nbsp;import com.galarzaa.tibiakt.core.builders.WorldOverviewBuilder
+<i class="no-highlight">20</i>&nbsp;import com.galarzaa.tibiakt.core.builders.worldOverviewBuilder
+<i class="no-highlight">21</i>&nbsp;import com.galarzaa.tibiakt.core.enums.BattlEyeType
+<i class="no-highlight">22</i>&nbsp;import com.galarzaa.tibiakt.core.enums.StringEnum
+<i class="no-highlight">23</i>&nbsp;import com.galarzaa.tibiakt.core.enums.TransferType
+<i class="no-highlight">24</i>&nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
+<i class="no-highlight">25</i>&nbsp;import com.galarzaa.tibiakt.core.models.world.WorldOverview
+<i class="no-highlight">26</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseInteger
+<i class="no-highlight">27</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parsePopup
+<i class="no-highlight">28</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseTibiaDateTime
+<i class="no-highlight">29</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseTibiaFullDate
+<i class="no-highlight">30</i>&nbsp;import org.jsoup.Jsoup
+<i class="no-highlight">31</i>&nbsp;import org.jsoup.nodes.Document
+<i class="no-highlight">32</i>&nbsp;import org.jsoup.nodes.Element
+<i class="no-highlight">33</i>&nbsp;import java.time.format.DateTimeParseException
+<i class="no-highlight">34</i>&nbsp;
+<i class="no-highlight">35</i>&nbsp;/** Parses content from the world overview section. */
+<i class="no-highlight">36</i>&nbsp;public object WorldOverviewParser : Parser&lt;WorldOverview&gt; {
+<b class="fc"><i class="no-highlight">37</i>&nbsp;    private val recordRegex = Regex(&quot;&quot;&quot;(?&lt;count&gt;[\d.,]+) players \(on (?&lt;date&gt;[^)]+)\)&quot;&quot;&quot;)</b>
+<b class="fc"><i class="no-highlight">38</i>&nbsp;    private val battlEyeRegex = Regex(&quot;&quot;&quot;since ([^.]+).&quot;&quot;&quot;)</b>
+<i class="no-highlight">39</i>&nbsp;
+<i class="no-highlight">40</i>&nbsp;    override fun fromContent(content: String): WorldOverview {
+<b class="fc"><i class="no-highlight">41</i>&nbsp;        val document: Document = Jsoup.parse(content, &quot;&quot;, org.jsoup.parser.Parser.xmlParser())</b>
+<b class="fc"><i class="no-highlight">42</i>&nbsp;        val boxContent =</b>
+<b class="pc"><i class="no-highlight">43</i>&nbsp;            document.selectFirst(&quot;div.BoxContent&quot;) ?: throw ParsingException(&quot;BoxContent container not found&quot;)</b>
+<b class="fc"><i class="no-highlight">44</i>&nbsp;        val tables = boxContent.select(&quot;table.TableContent&quot;)</b>
+<b class="fc"><i class="no-highlight">45</i>&nbsp;        val builder = worldOverviewBuilder {</b>
+<b class="pc"><i class="no-highlight">46</i>&nbsp;            recordRegex.find(tables.first()?.text() ?: throw ParsingException(&quot;No content tables found.&quot;))?.apply {</b>
+<b class="fc"><i class="no-highlight">47</i>&nbsp;                val (_, recordCount, recordDate) = groupValues</b>
+<b class="fc"><i class="no-highlight">48</i>&nbsp;                overallMaximumCount = recordCount.parseInteger()</b>
+<b class="fc"><i class="no-highlight">49</i>&nbsp;                overallMaximumCountDateTime = parseTibiaDateTime(recordDate)</b>
+<b class="fc"><i class="no-highlight">50</i>&nbsp;            }</b>
+<b class="pc"><i class="no-highlight">51</i>&nbsp;            for (i in 1..tables.lastIndex step 2) {</b>
+<b class="fc"><i class="no-highlight">52</i>&nbsp;                val headerTable = tables[i]</b>
+<b class="fc"><i class="no-highlight">53</i>&nbsp;                val worldsTable = tables[i + 1]</b>
+<b class="fc"><i class="no-highlight">54</i>&nbsp;                if (headerTable.text().contains(&quot;Regular&quot;)) parseWorldsTable(worldsTable)</b>
+<i class="no-highlight">55</i>&nbsp;            }
+<b class="fc"><i class="no-highlight">56</i>&nbsp;        }</b>
+<b class="fc"><i class="no-highlight">57</i>&nbsp;        return builder.build()</b>
+<i class="no-highlight">58</i>&nbsp;    }
 <i class="no-highlight">59</i>&nbsp;
-<b class="fc"><i class="no-highlight">60</i>&nbsp;                battlEyeType = BattlEyeType.UNPROTECTED</b>
-<b class="fc"><i class="no-highlight">61</i>&nbsp;                columns[4].selectFirst(&quot;span.HelperDivIndicator&quot;)?.apply {</b>
-<b class="fc"><i class="no-highlight">62</i>&nbsp;                    val (_, popUp) = parsePopup(attr(&quot;onmouseover&quot;))</b>
-<b class="pc"><i class="no-highlight">63</i>&nbsp;                    battlEyeRegex.find(popUp.text())?.apply {</b>
-<b class="fc"><i class="no-highlight">64</i>&nbsp;                        try {</b>
-<b class="fc"><i class="no-highlight">65</i>&nbsp;                            battlEyeStartDate = parseTibiaFullDate(groups[1]!!.value)</b>
-<b class="fc"><i class="no-highlight">66</i>&nbsp;                        } catch (e: DateTimeParseException) {</b>
-<i class="no-highlight">67</i>&nbsp;                            // Leave value as none
-<i class="no-highlight">68</i>&nbsp;                        }
-<b class="fc"><i class="no-highlight">69</i>&nbsp;                    }</b>
-<b class="fc"><i class="no-highlight">70</i>&nbsp;                    battlEyeType = if (battlEyeStartDate == null) BattlEyeType.GREEN else BattlEyeType.YELLOW</b>
-<b class="fc"><i class="no-highlight">71</i>&nbsp;                }</b>
-<b class="fc"><i class="no-highlight">72</i>&nbsp;                val additionalProperties = columns[5].text()</b>
-<b class="fc"><i class="no-highlight">73</i>&nbsp;                transferType = if (additionalProperties.contains(&quot;blocked&quot;)) {</b>
-<b class="fc"><i class="no-highlight">74</i>&nbsp;                    TransferType.BLOCKED</b>
-<b class="fc"><i class="no-highlight">75</i>&nbsp;                } else if (additionalProperties.contains(&quot;locked&quot;)) {</b>
-<b class="fc"><i class="no-highlight">76</i>&nbsp;                    TransferType.LOCKED</b>
-<i class="no-highlight">77</i>&nbsp;                } else {
-<b class="fc"><i class="no-highlight">78</i>&nbsp;                    TransferType.REGULAR</b>
-<i class="no-highlight">79</i>&nbsp;                }
-<b class="fc"><i class="no-highlight">80</i>&nbsp;                isPremiumRestricted = additionalProperties.contains(&quot;premium&quot;)</b>
-<b class="fc"><i class="no-highlight">81</i>&nbsp;                isExperimental = additionalProperties.contains(&quot;experimental&quot;)</b>
-<i class="no-highlight">82</i>&nbsp;            }
-<i class="no-highlight">83</i>&nbsp;        }
-<i class="no-highlight">84</i>&nbsp;    }
-<i class="no-highlight">85</i>&nbsp;}
+<i class="no-highlight">60</i>&nbsp;    private fun WorldOverviewBuilder.parseWorldsTable(table: Element) {
+<b class="fc"><i class="no-highlight">61</i>&nbsp;        val rows = table.select(&quot;tr&quot;)</b>
+<b class="fc"><i class="no-highlight">62</i>&nbsp;        for (row in rows.subList(1, rows.size)) {</b>
+<b class="fc"><i class="no-highlight">63</i>&nbsp;            addWorld {</b>
+<b class="fc"><i class="no-highlight">64</i>&nbsp;                val columns = row.select(&quot;td&quot;)</b>
+<b class="pc"><i class="no-highlight">65</i>&nbsp;                name = columns.first()?.text() ?: throw ParsingException(&quot;No columns in world row.&quot;)</b>
+<b class="fc"><i class="no-highlight">66</i>&nbsp;                try {</b>
+<b class="fc"><i class="no-highlight">67</i>&nbsp;                    onlineCount = columns[1].text().parseInteger()</b>
+<b class="fc"><i class="no-highlight">68</i>&nbsp;                    isOnline = true</b>
+<b class="fc"><i class="no-highlight">69</i>&nbsp;                } catch (nfe: NumberFormatException) {</b>
+<b class="fc"><i class="no-highlight">70</i>&nbsp;                    onlineCount = 0</b>
+<b class="fc"><i class="no-highlight">71</i>&nbsp;                    isOnline = false</b>
+<i class="no-highlight">72</i>&nbsp;                }
+<b class="fc"><i class="no-highlight">73</i>&nbsp;                location = columns[2].text()</b>
+<b class="pc"><i class="no-highlight">74</i>&nbsp;                pvpType = StringEnum.fromValue(columns[3].text())</b>
+<b class="nc"><i class="no-highlight">75</i>&nbsp;                    ?: throw ParsingException(&quot;Unknown PvP type found: ${columns[3].text()}&quot;)</b>
+<i class="no-highlight">76</i>&nbsp;
+<b class="fc"><i class="no-highlight">77</i>&nbsp;                battlEyeType = BattlEyeType.UNPROTECTED</b>
+<b class="fc"><i class="no-highlight">78</i>&nbsp;                columns[4].selectFirst(&quot;span.HelperDivIndicator&quot;)?.apply {</b>
+<b class="fc"><i class="no-highlight">79</i>&nbsp;                    val (_, popUp) = parsePopup(attr(&quot;onmouseover&quot;))</b>
+<b class="pc"><i class="no-highlight">80</i>&nbsp;                    battlEyeRegex.find(popUp.text())?.apply {</b>
+<b class="fc"><i class="no-highlight">81</i>&nbsp;                        try {</b>
+<b class="fc"><i class="no-highlight">82</i>&nbsp;                            battlEyeStartDate = parseTibiaFullDate(groups[1]!!.value)</b>
+<b class="fc"><i class="no-highlight">83</i>&nbsp;                        } catch (e: DateTimeParseException) {</b>
+<i class="no-highlight">84</i>&nbsp;                            // Leave value as none
+<i class="no-highlight">85</i>&nbsp;                        }
+<b class="fc"><i class="no-highlight">86</i>&nbsp;                    }</b>
+<b class="fc"><i class="no-highlight">87</i>&nbsp;                    battlEyeType = if (battlEyeStartDate == null) BattlEyeType.GREEN else BattlEyeType.YELLOW</b>
+<b class="fc"><i class="no-highlight">88</i>&nbsp;                }</b>
+<b class="fc"><i class="no-highlight">89</i>&nbsp;                val additionalProperties = columns[5].text()</b>
+<b class="fc"><i class="no-highlight">90</i>&nbsp;                transferType = if (additionalProperties.contains(&quot;blocked&quot;)) {</b>
+<b class="fc"><i class="no-highlight">91</i>&nbsp;                    TransferType.BLOCKED</b>
+<b class="fc"><i class="no-highlight">92</i>&nbsp;                } else if (additionalProperties.contains(&quot;locked&quot;)) {</b>
+<b class="fc"><i class="no-highlight">93</i>&nbsp;                    TransferType.LOCKED</b>
+<i class="no-highlight">94</i>&nbsp;                } else {
+<b class="fc"><i class="no-highlight">95</i>&nbsp;                    TransferType.REGULAR</b>
+<i class="no-highlight">96</i>&nbsp;                }
+<b class="fc"><i class="no-highlight">97</i>&nbsp;                isPremiumRestricted = additionalProperties.contains(&quot;premium&quot;)</b>
+<b class="fc"><i class="no-highlight">98</i>&nbsp;                isExperimental = additionalProperties.contains(&quot;experimental&quot;)</b>
+<i class="no-highlight">99</i>&nbsp;            }
+<i class="no-highlight">100</i>&nbsp;        }
+<i class="no-highlight">101</i>&nbsp;    }
+<i class="no-highlight">102</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -266,7 +283,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-11 06:50</div>
+    <div style="float:right;">generated on 2022-09-11 07:13</div>
 </div>
 </body>
 </html>

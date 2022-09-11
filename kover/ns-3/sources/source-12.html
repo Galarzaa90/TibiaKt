@@ -121,32 +121,33 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">29</i>&nbsp;public inline fun forumAnnouncement(block: ForumAnnouncementBuilder.() -&gt; Unit): ForumAnnouncement =
 <b class="fc"><i class="no-highlight">30</i>&nbsp;    forumAnnouncementBuilder(block).build()</b>
 <i class="no-highlight">31</i>&nbsp;
-<i class="no-highlight">32</i>&nbsp;@BuilderDsl
-<i class="no-highlight">33</i>&nbsp;public class ForumAnnouncementBuilder : TibiaKtBuilder&lt;ForumAnnouncement&gt; {
-<i class="no-highlight">34</i>&nbsp;    public var announcementId: Int? = null
-<i class="no-highlight">35</i>&nbsp;    public var title: String? = null
-<i class="no-highlight">36</i>&nbsp;    public var board: String? = null
-<i class="no-highlight">37</i>&nbsp;    public var boardId: Int? = null
-<i class="no-highlight">38</i>&nbsp;    public var section: String? = null
-<i class="no-highlight">39</i>&nbsp;    public var sectionId: Int? = null
-<i class="no-highlight">40</i>&nbsp;    public var author: BaseForumAuthor? = null
-<i class="no-highlight">41</i>&nbsp;    public var content: String? = null
-<i class="no-highlight">42</i>&nbsp;    public var startDate: Instant? = null
-<i class="no-highlight">43</i>&nbsp;    public var endDate: Instant? = null
-<i class="no-highlight">44</i>&nbsp;
-<i class="no-highlight">45</i>&nbsp;    override fun build(): ForumAnnouncement = ForumAnnouncement(
-<i class="no-highlight">46</i>&nbsp;        announcementId = announcementId ?: error(&quot;announcementId is required&quot;),
-<i class="no-highlight">47</i>&nbsp;        title = title ?: error(&quot;title is required&quot;),
-<i class="no-highlight">48</i>&nbsp;        board = board ?: error(&quot;board is required&quot;),
-<i class="no-highlight">49</i>&nbsp;        boardId = boardId ?: error(&quot;boardId is required&quot;),
-<i class="no-highlight">50</i>&nbsp;        section = section ?: error(&quot;section is required&quot;),
-<i class="no-highlight">51</i>&nbsp;        sectionId = sectionId ?: error(&quot;sectionId is required&quot;),
-<i class="no-highlight">52</i>&nbsp;        author = author ?: error(&quot;author is required&quot;),
-<i class="no-highlight">53</i>&nbsp;        content = content ?: error(&quot;content is required&quot;),
-<i class="no-highlight">54</i>&nbsp;        startDate = startDate ?: error(&quot;startDate is required&quot;),
-<i class="no-highlight">55</i>&nbsp;        endDate = endDate ?: error(&quot;endDate is required&quot;)
-<i class="no-highlight">56</i>&nbsp;    )
-<i class="no-highlight">57</i>&nbsp;}
+<i class="no-highlight">32</i>&nbsp;/** Builder for [ForumAnnouncement] instances. */
+<i class="no-highlight">33</i>&nbsp;@BuilderDsl
+<i class="no-highlight">34</i>&nbsp;public class ForumAnnouncementBuilder : TibiaKtBuilder&lt;ForumAnnouncement&gt; {
+<i class="no-highlight">35</i>&nbsp;    public var announcementId: Int? = null
+<i class="no-highlight">36</i>&nbsp;    public var title: String? = null
+<i class="no-highlight">37</i>&nbsp;    public var board: String? = null
+<i class="no-highlight">38</i>&nbsp;    public var boardId: Int? = null
+<i class="no-highlight">39</i>&nbsp;    public var section: String? = null
+<i class="no-highlight">40</i>&nbsp;    public var sectionId: Int? = null
+<i class="no-highlight">41</i>&nbsp;    public var author: BaseForumAuthor? = null
+<i class="no-highlight">42</i>&nbsp;    public var content: String? = null
+<i class="no-highlight">43</i>&nbsp;    public var startDate: Instant? = null
+<i class="no-highlight">44</i>&nbsp;    public var endDate: Instant? = null
+<i class="no-highlight">45</i>&nbsp;
+<i class="no-highlight">46</i>&nbsp;    override fun build(): ForumAnnouncement = ForumAnnouncement(
+<i class="no-highlight">47</i>&nbsp;        announcementId = announcementId ?: error(&quot;announcementId is required&quot;),
+<i class="no-highlight">48</i>&nbsp;        title = title ?: error(&quot;title is required&quot;),
+<i class="no-highlight">49</i>&nbsp;        board = board ?: error(&quot;board is required&quot;),
+<i class="no-highlight">50</i>&nbsp;        boardId = boardId ?: error(&quot;boardId is required&quot;),
+<i class="no-highlight">51</i>&nbsp;        section = section ?: error(&quot;section is required&quot;),
+<i class="no-highlight">52</i>&nbsp;        sectionId = sectionId ?: error(&quot;sectionId is required&quot;),
+<i class="no-highlight">53</i>&nbsp;        author = author ?: error(&quot;author is required&quot;),
+<i class="no-highlight">54</i>&nbsp;        content = content ?: error(&quot;content is required&quot;),
+<i class="no-highlight">55</i>&nbsp;        startDate = startDate ?: error(&quot;startDate is required&quot;),
+<i class="no-highlight">56</i>&nbsp;        endDate = endDate ?: error(&quot;endDate is required&quot;)
+<i class="no-highlight">57</i>&nbsp;    )
+<i class="no-highlight">58</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -173,7 +174,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-11 06:50</div>
+    <div style="float:right;">generated on 2022-09-11 07:13</div>
 </div>
 </body>
 </html>

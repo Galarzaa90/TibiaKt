@@ -126,37 +126,38 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">34</i>&nbsp;public inline fun bazaarFiltersBuilder(block: BazaarFiltersBuilder.() -&gt; Unit): BazaarFiltersBuilder =
 <i class="no-highlight">35</i>&nbsp;    BazaarFiltersBuilder().apply(block)
 <i class="no-highlight">36</i>&nbsp;
-<b class="fc"><i class="no-highlight">37</i>&nbsp;@BuilderDsl</b>
-<i class="no-highlight">38</i>&nbsp;public class BazaarFiltersBuilder : TibiaKtBuilder&lt;BazaarFilters&gt; {
-<b class="fc"><i class="no-highlight">39</i>&nbsp;    public var world: String? = null</b>
-<b class="fc"><i class="no-highlight">40</i>&nbsp;    public var pvpType: PvpType? = null</b>
-<b class="fc"><i class="no-highlight">41</i>&nbsp;    public var battlEyeType: AuctionBattlEyeFilter? = null</b>
-<b class="fc"><i class="no-highlight">42</i>&nbsp;    public var vocation: AuctionVocationFilter? = null</b>
-<b class="fc"><i class="no-highlight">43</i>&nbsp;    public var minimumLevel: Int? = null</b>
-<b class="fc"><i class="no-highlight">44</i>&nbsp;    public var maximumLevel: Int? = null</b>
-<b class="fc"><i class="no-highlight">45</i>&nbsp;    public var skill: AuctionSkillFilter? = null</b>
-<b class="fc"><i class="no-highlight">46</i>&nbsp;    public var minimumSkillLevel: Int? = null</b>
-<b class="fc"><i class="no-highlight">47</i>&nbsp;    public var maximumSkillLevel: Int? = null</b>
-<b class="fc"><i class="no-highlight">48</i>&nbsp;    public var orderDirection: AuctionOrderDirection? = null</b>
-<b class="fc"><i class="no-highlight">49</i>&nbsp;    public var orderBy: AuctionOrderBy? = null</b>
-<b class="fc"><i class="no-highlight">50</i>&nbsp;    public var searchString: String? = null</b>
-<b class="fc"><i class="no-highlight">51</i>&nbsp;    public var searchType: AuctionSearchType? = null</b>
-<i class="no-highlight">52</i>&nbsp;
-<b class="fc"><i class="no-highlight">53</i>&nbsp;    public override fun build(): BazaarFilters = BazaarFilters(</b>
-<b class="fc"><i class="no-highlight">54</i>&nbsp;        world = world,</b>
-<b class="fc"><i class="no-highlight">55</i>&nbsp;        pvpType = pvpType,</b>
-<b class="fc"><i class="no-highlight">56</i>&nbsp;        battlEyeType = battlEyeType,</b>
-<b class="fc"><i class="no-highlight">57</i>&nbsp;        vocation = vocation,</b>
-<b class="fc"><i class="no-highlight">58</i>&nbsp;        minimumLevel = minimumLevel,</b>
-<b class="fc"><i class="no-highlight">59</i>&nbsp;        maximumLevel = maximumLevel,</b>
-<b class="fc"><i class="no-highlight">60</i>&nbsp;        skill = skill,</b>
-<b class="fc"><i class="no-highlight">61</i>&nbsp;        minimumSkillLevel = minimumSkillLevel,</b>
-<b class="fc"><i class="no-highlight">62</i>&nbsp;        maximumSkillLevel = maximumSkillLevel,</b>
-<b class="fc"><i class="no-highlight">63</i>&nbsp;        searchString = searchString,</b>
-<b class="fc"><i class="no-highlight">64</i>&nbsp;        searchType = searchType,</b>
-<b class="fc"><i class="no-highlight">65</i>&nbsp;        orderDirection = orderDirection,</b>
-<b class="fc"><i class="no-highlight">66</i>&nbsp;        orderBy = orderBy)</b>
-<i class="no-highlight">67</i>&nbsp;}
+<i class="no-highlight">37</i>&nbsp;/** Builder for [BazaarFilters] instances. */
+<b class="fc"><i class="no-highlight">38</i>&nbsp;@BuilderDsl</b>
+<i class="no-highlight">39</i>&nbsp;public class BazaarFiltersBuilder : TibiaKtBuilder&lt;BazaarFilters&gt; {
+<b class="fc"><i class="no-highlight">40</i>&nbsp;    public var world: String? = null</b>
+<b class="fc"><i class="no-highlight">41</i>&nbsp;    public var pvpType: PvpType? = null</b>
+<b class="fc"><i class="no-highlight">42</i>&nbsp;    public var battlEyeType: AuctionBattlEyeFilter? = null</b>
+<b class="fc"><i class="no-highlight">43</i>&nbsp;    public var vocation: AuctionVocationFilter? = null</b>
+<b class="fc"><i class="no-highlight">44</i>&nbsp;    public var minimumLevel: Int? = null</b>
+<b class="fc"><i class="no-highlight">45</i>&nbsp;    public var maximumLevel: Int? = null</b>
+<b class="fc"><i class="no-highlight">46</i>&nbsp;    public var skill: AuctionSkillFilter? = null</b>
+<b class="fc"><i class="no-highlight">47</i>&nbsp;    public var minimumSkillLevel: Int? = null</b>
+<b class="fc"><i class="no-highlight">48</i>&nbsp;    public var maximumSkillLevel: Int? = null</b>
+<b class="fc"><i class="no-highlight">49</i>&nbsp;    public var orderDirection: AuctionOrderDirection? = null</b>
+<b class="fc"><i class="no-highlight">50</i>&nbsp;    public var orderBy: AuctionOrderBy? = null</b>
+<b class="fc"><i class="no-highlight">51</i>&nbsp;    public var searchString: String? = null</b>
+<b class="fc"><i class="no-highlight">52</i>&nbsp;    public var searchType: AuctionSearchType? = null</b>
+<i class="no-highlight">53</i>&nbsp;
+<b class="fc"><i class="no-highlight">54</i>&nbsp;    public override fun build(): BazaarFilters = BazaarFilters(</b>
+<b class="fc"><i class="no-highlight">55</i>&nbsp;        world = world,</b>
+<b class="fc"><i class="no-highlight">56</i>&nbsp;        pvpType = pvpType,</b>
+<b class="fc"><i class="no-highlight">57</i>&nbsp;        battlEyeType = battlEyeType,</b>
+<b class="fc"><i class="no-highlight">58</i>&nbsp;        vocation = vocation,</b>
+<b class="fc"><i class="no-highlight">59</i>&nbsp;        minimumLevel = minimumLevel,</b>
+<b class="fc"><i class="no-highlight">60</i>&nbsp;        maximumLevel = maximumLevel,</b>
+<b class="fc"><i class="no-highlight">61</i>&nbsp;        skill = skill,</b>
+<b class="fc"><i class="no-highlight">62</i>&nbsp;        minimumSkillLevel = minimumSkillLevel,</b>
+<b class="fc"><i class="no-highlight">63</i>&nbsp;        maximumSkillLevel = maximumSkillLevel,</b>
+<b class="fc"><i class="no-highlight">64</i>&nbsp;        searchString = searchString,</b>
+<b class="fc"><i class="no-highlight">65</i>&nbsp;        searchType = searchType,</b>
+<b class="fc"><i class="no-highlight">66</i>&nbsp;        orderDirection = orderDirection,</b>
+<b class="fc"><i class="no-highlight">67</i>&nbsp;        orderBy = orderBy)</b>
+<i class="no-highlight">68</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -183,7 +184,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-11 06:50</div>
+    <div style="float:right;">generated on 2022-09-11 07:13</div>
 </div>
 </body>
 </html>

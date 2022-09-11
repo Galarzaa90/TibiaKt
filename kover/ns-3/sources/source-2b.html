@@ -126,25 +126,26 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">27</i>&nbsp;@BuilderDsl
 <i class="no-highlight">28</i>&nbsp;public inline fun news(block: NewsBuilder.() -&gt; Unit): News = newsBuilder(block).build()
 <i class="no-highlight">29</i>&nbsp;
-<b class="fc"><i class="no-highlight">30</i>&nbsp;@BuilderDsl</b>
-<i class="no-highlight">31</i>&nbsp;public class NewsBuilder : TibiaKtBuilder&lt;News&gt; {
-<b class="fc"><i class="no-highlight">32</i>&nbsp;    public var id: Int? = null</b>
-<b class="fc"><i class="no-highlight">33</i>&nbsp;    public lateinit var title: String</b>
-<b class="fc"><i class="no-highlight">34</i>&nbsp;    public lateinit var category: NewsCategory</b>
-<b class="fc"><i class="no-highlight">35</i>&nbsp;    public lateinit var date: LocalDate</b>
-<b class="fc"><i class="no-highlight">36</i>&nbsp;    public lateinit var content: String</b>
-<b class="fc"><i class="no-highlight">37</i>&nbsp;    public var threadId: Int? = null</b>
-<i class="no-highlight">38</i>&nbsp;    override fun build(): News {
-<b class="fc"><i class="no-highlight">39</i>&nbsp;        return News(</b>
-<b class="pc"><i class="no-highlight">40</i>&nbsp;            id = id ?: error(&quot;id is required&quot;),</b>
-<b class="pc"><i class="no-highlight">41</i>&nbsp;            title = if (::title.isInitialized) title else error(&quot;title is required&quot;),</b>
-<b class="pc"><i class="no-highlight">42</i>&nbsp;            category = if (::category.isInitialized) category else error(&quot;category is required&quot;),</b>
-<b class="pc"><i class="no-highlight">43</i>&nbsp;            date = if (::date.isInitialized) date else error(&quot;date is required&quot;),</b>
-<b class="pc"><i class="no-highlight">44</i>&nbsp;            content = if (::content.isInitialized) content else error(&quot;content is required&quot;),</b>
-<b class="fc"><i class="no-highlight">45</i>&nbsp;            threadId = threadId,</b>
-<i class="no-highlight">46</i>&nbsp;        )
-<i class="no-highlight">47</i>&nbsp;    }
-<i class="no-highlight">48</i>&nbsp;}
+<i class="no-highlight">30</i>&nbsp;/** Builder for [News] instances. */
+<b class="fc"><i class="no-highlight">31</i>&nbsp;@BuilderDsl</b>
+<i class="no-highlight">32</i>&nbsp;public class NewsBuilder : TibiaKtBuilder&lt;News&gt; {
+<b class="fc"><i class="no-highlight">33</i>&nbsp;    public var id: Int? = null</b>
+<b class="fc"><i class="no-highlight">34</i>&nbsp;    public lateinit var title: String</b>
+<b class="fc"><i class="no-highlight">35</i>&nbsp;    public lateinit var category: NewsCategory</b>
+<b class="fc"><i class="no-highlight">36</i>&nbsp;    public lateinit var date: LocalDate</b>
+<b class="fc"><i class="no-highlight">37</i>&nbsp;    public lateinit var content: String</b>
+<b class="fc"><i class="no-highlight">38</i>&nbsp;    public var threadId: Int? = null</b>
+<i class="no-highlight">39</i>&nbsp;    override fun build(): News {
+<b class="fc"><i class="no-highlight">40</i>&nbsp;        return News(</b>
+<b class="pc"><i class="no-highlight">41</i>&nbsp;            id = id ?: error(&quot;id is required&quot;),</b>
+<b class="pc"><i class="no-highlight">42</i>&nbsp;            title = if (::title.isInitialized) title else error(&quot;title is required&quot;),</b>
+<b class="pc"><i class="no-highlight">43</i>&nbsp;            category = if (::category.isInitialized) category else error(&quot;category is required&quot;),</b>
+<b class="pc"><i class="no-highlight">44</i>&nbsp;            date = if (::date.isInitialized) date else error(&quot;date is required&quot;),</b>
+<b class="pc"><i class="no-highlight">45</i>&nbsp;            content = if (::content.isInitialized) content else error(&quot;content is required&quot;),</b>
+<b class="fc"><i class="no-highlight">46</i>&nbsp;            threadId = threadId,</b>
+<i class="no-highlight">47</i>&nbsp;        )
+<i class="no-highlight">48</i>&nbsp;    }
+<i class="no-highlight">49</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -171,7 +172,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-11 06:50</div>
+    <div style="float:right;">generated on 2022-09-11 07:13</div>
 </div>
 </body>
 </html>

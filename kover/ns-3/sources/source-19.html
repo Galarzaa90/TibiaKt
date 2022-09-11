@@ -187,82 +187,83 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">30</i>&nbsp;@BuilderDsl
 <i class="no-highlight">31</i>&nbsp;public inline fun guild(block: GuildBuilder.() -&gt; Unit): Guild = guildBuilder(block).build()
 <i class="no-highlight">32</i>&nbsp;
-<b class="fc"><i class="no-highlight">33</i>&nbsp;@BuilderDsl</b>
-<i class="no-highlight">34</i>&nbsp;public class GuildBuilder : TibiaKtBuilder&lt;Guild&gt; {
-<b class="fc"><i class="no-highlight">35</i>&nbsp;    public var world: String? = null</b>
-<b class="fc"><i class="no-highlight">36</i>&nbsp;    public var name: String? = null</b>
-<b class="fc"><i class="no-highlight">37</i>&nbsp;    public var logoUrl: String? = null</b>
-<b class="fc"><i class="no-highlight">38</i>&nbsp;    public var description: String? = null</b>
-<b class="fc"><i class="no-highlight">39</i>&nbsp;    public var foundingDate: LocalDate? = null</b>
-<b class="fc"><i class="no-highlight">40</i>&nbsp;    public var isActive: Boolean = false</b>
-<b class="fc"><i class="no-highlight">41</i>&nbsp;    public var applicationsOpen: Boolean = false</b>
-<b class="fc"><i class="no-highlight">42</i>&nbsp;    public var homepage: String? = null</b>
-<b class="nc"><i class="no-highlight">43</i>&nbsp;    public var guildHall: GuildHall? = null</b>
-<b class="fc"><i class="no-highlight">44</i>&nbsp;    public var disbandingDate: LocalDate? = null</b>
-<b class="fc"><i class="no-highlight">45</i>&nbsp;    public var disbandingReason: String? = null</b>
-<b class="fc"><i class="no-highlight">46</i>&nbsp;    public val members: MutableList&lt;GuildMember&gt; = mutableListOf()</b>
-<b class="fc"><i class="no-highlight">47</i>&nbsp;    public val invited: MutableList&lt;GuildInvite&gt; = mutableListOf()</b>
-<i class="no-highlight">48</i>&nbsp;
-<i class="no-highlight">49</i>&nbsp;    public fun guildHall(name: String, paidUntil: LocalDate): GuildBuilder =
-<b class="fc"><i class="no-highlight">50</i>&nbsp;        apply { guildHall = GuildHall(name, paidUntil) }</b>
-<i class="no-highlight">51</i>&nbsp;
-<b class="nc"><i class="no-highlight">52</i>&nbsp;    public fun guildHall(guildHall: GuildHall): GuildBuilder = apply { this.guildHall = guildHall }</b>
-<i class="no-highlight">53</i>&nbsp;
-<i class="no-highlight">54</i>&nbsp;    public fun addMember(
-<i class="no-highlight">55</i>&nbsp;        rank: String,
-<i class="no-highlight">56</i>&nbsp;        name: String,
-<i class="no-highlight">57</i>&nbsp;        title: String?,
-<i class="no-highlight">58</i>&nbsp;        vocation: Vocation,
-<i class="no-highlight">59</i>&nbsp;        level: Int,
-<i class="no-highlight">60</i>&nbsp;        joiningDate: LocalDate,
-<i class="no-highlight">61</i>&nbsp;        isOnline: Boolean,
-<b class="nc"><i class="no-highlight">62</i>&nbsp;    ): GuildBuilder = apply {</b>
-<b class="nc"><i class="no-highlight">63</i>&nbsp;        members.add(GuildMember(name, rank, title, level, vocation, joiningDate, isOnline))</b>
-<b class="nc"><i class="no-highlight">64</i>&nbsp;    }</b>
-<i class="no-highlight">65</i>&nbsp;
-<i class="no-highlight">66</i>&nbsp;    @BuilderDsl
-<i class="no-highlight">67</i>&nbsp;    public fun addMember(block: GuildMemberBuilder.() -&gt; Unit): Boolean =
-<b class="fc"><i class="no-highlight">68</i>&nbsp;        members.add(GuildMemberBuilder().apply(block).build())</b>
-<i class="no-highlight">69</i>&nbsp;
-<i class="no-highlight">70</i>&nbsp;    public fun addInvite(name: String, inviteDate: LocalDate): GuildBuilder =
-<b class="fc"><i class="no-highlight">71</i>&nbsp;        apply { invited.add(GuildInvite(name, inviteDate)) }</b>
-<i class="no-highlight">72</i>&nbsp;
-<b class="fc"><i class="no-highlight">73</i>&nbsp;    override fun build(): Guild = Guild(</b>
-<b class="fc"><i class="no-highlight">74</i>&nbsp;        world = world ?: error(&quot;world is required&quot;),</b>
-<b class="pc"><i class="no-highlight">75</i>&nbsp;        name = name ?: error(&quot;name is required&quot;),</b>
-<b class="pc"><i class="no-highlight">76</i>&nbsp;        logoUrl = logoUrl ?: error(&quot;logoUrl is required&quot;),</b>
-<b class="fc"><i class="no-highlight">77</i>&nbsp;        description = description,</b>
-<b class="pc"><i class="no-highlight">78</i>&nbsp;        foundingDate = foundingDate ?: error(&quot;name is required&quot;),</b>
-<b class="fc"><i class="no-highlight">79</i>&nbsp;        isActive = isActive,</b>
-<b class="fc"><i class="no-highlight">80</i>&nbsp;        applicationsOpen = applicationsOpen,</b>
-<b class="fc"><i class="no-highlight">81</i>&nbsp;        homepage = homepage,</b>
-<b class="fc"><i class="no-highlight">82</i>&nbsp;        guildHall = guildHall,</b>
-<b class="fc"><i class="no-highlight">83</i>&nbsp;        members = members,</b>
-<b class="fc"><i class="no-highlight">84</i>&nbsp;        invited = invited,</b>
-<b class="fc"><i class="no-highlight">85</i>&nbsp;        disbandingDate = disbandingDate,</b>
-<b class="fc"><i class="no-highlight">86</i>&nbsp;        disbandingReason = disbandingReason,</b>
-<i class="no-highlight">87</i>&nbsp;    )
-<i class="no-highlight">88</i>&nbsp;
-<b class="fc"><i class="no-highlight">89</i>&nbsp;    public class GuildMemberBuilder : TibiaKtBuilder&lt;GuildMember&gt; {</b>
-<b class="fc"><i class="no-highlight">90</i>&nbsp;        public lateinit var rank: String</b>
-<b class="fc"><i class="no-highlight">91</i>&nbsp;        public lateinit var name: String</b>
-<b class="fc"><i class="no-highlight">92</i>&nbsp;        public var title: String? = null</b>
-<b class="fc"><i class="no-highlight">93</i>&nbsp;        public lateinit var vocation: Vocation</b>
-<b class="fc"><i class="no-highlight">94</i>&nbsp;        public var level: Int = 0</b>
-<b class="fc"><i class="no-highlight">95</i>&nbsp;        public lateinit var joiningDate: LocalDate</b>
-<b class="fc"><i class="no-highlight">96</i>&nbsp;        public var isOnline: Boolean = false</b>
-<i class="no-highlight">97</i>&nbsp;
-<b class="fc"><i class="no-highlight">98</i>&nbsp;        override fun build(): GuildMember = GuildMember(</b>
-<b class="fc"><i class="no-highlight">99</i>&nbsp;            rank = if (::rank.isInitialized) rank else error(&quot;rank is required&quot;),</b>
-<b class="pc"><i class="no-highlight">100</i>&nbsp;            name = if (::name.isInitialized) name else error(&quot;name is required&quot;),</b>
-<b class="fc"><i class="no-highlight">101</i>&nbsp;            title = title,</b>
-<b class="pc"><i class="no-highlight">102</i>&nbsp;            vocation = if (::vocation.isInitialized) vocation else error(&quot;vocation is required&quot;),</b>
-<b class="fc"><i class="no-highlight">103</i>&nbsp;            level = level,</b>
-<b class="pc"><i class="no-highlight">104</i>&nbsp;            joiningDate = if (::joiningDate.isInitialized) joiningDate else error(&quot;joiningDate is required&quot;),</b>
-<b class="fc"><i class="no-highlight">105</i>&nbsp;            isOnline = isOnline,</b>
-<i class="no-highlight">106</i>&nbsp;        )
-<i class="no-highlight">107</i>&nbsp;    }
-<i class="no-highlight">108</i>&nbsp;}
+<i class="no-highlight">33</i>&nbsp;/** Builder for [Guild] instances. */
+<b class="fc"><i class="no-highlight">34</i>&nbsp;@BuilderDsl</b>
+<i class="no-highlight">35</i>&nbsp;public class GuildBuilder : TibiaKtBuilder&lt;Guild&gt; {
+<b class="fc"><i class="no-highlight">36</i>&nbsp;    public var world: String? = null</b>
+<b class="fc"><i class="no-highlight">37</i>&nbsp;    public var name: String? = null</b>
+<b class="fc"><i class="no-highlight">38</i>&nbsp;    public var logoUrl: String? = null</b>
+<b class="fc"><i class="no-highlight">39</i>&nbsp;    public var description: String? = null</b>
+<b class="fc"><i class="no-highlight">40</i>&nbsp;    public var foundingDate: LocalDate? = null</b>
+<b class="fc"><i class="no-highlight">41</i>&nbsp;    public var isActive: Boolean = false</b>
+<b class="fc"><i class="no-highlight">42</i>&nbsp;    public var applicationsOpen: Boolean = false</b>
+<b class="fc"><i class="no-highlight">43</i>&nbsp;    public var homepage: String? = null</b>
+<b class="nc"><i class="no-highlight">44</i>&nbsp;    public var guildHall: GuildHall? = null</b>
+<b class="fc"><i class="no-highlight">45</i>&nbsp;    public var disbandingDate: LocalDate? = null</b>
+<b class="fc"><i class="no-highlight">46</i>&nbsp;    public var disbandingReason: String? = null</b>
+<b class="fc"><i class="no-highlight">47</i>&nbsp;    public val members: MutableList&lt;GuildMember&gt; = mutableListOf()</b>
+<b class="fc"><i class="no-highlight">48</i>&nbsp;    public val invited: MutableList&lt;GuildInvite&gt; = mutableListOf()</b>
+<i class="no-highlight">49</i>&nbsp;
+<i class="no-highlight">50</i>&nbsp;    public fun guildHall(name: String, paidUntil: LocalDate): GuildBuilder =
+<b class="fc"><i class="no-highlight">51</i>&nbsp;        apply { guildHall = GuildHall(name, paidUntil) }</b>
+<i class="no-highlight">52</i>&nbsp;
+<b class="nc"><i class="no-highlight">53</i>&nbsp;    public fun guildHall(guildHall: GuildHall): GuildBuilder = apply { this.guildHall = guildHall }</b>
+<i class="no-highlight">54</i>&nbsp;
+<i class="no-highlight">55</i>&nbsp;    public fun addMember(
+<i class="no-highlight">56</i>&nbsp;        rank: String,
+<i class="no-highlight">57</i>&nbsp;        name: String,
+<i class="no-highlight">58</i>&nbsp;        title: String?,
+<i class="no-highlight">59</i>&nbsp;        vocation: Vocation,
+<i class="no-highlight">60</i>&nbsp;        level: Int,
+<i class="no-highlight">61</i>&nbsp;        joiningDate: LocalDate,
+<i class="no-highlight">62</i>&nbsp;        isOnline: Boolean,
+<b class="nc"><i class="no-highlight">63</i>&nbsp;    ): GuildBuilder = apply {</b>
+<b class="nc"><i class="no-highlight">64</i>&nbsp;        members.add(GuildMember(name, rank, title, level, vocation, joiningDate, isOnline))</b>
+<b class="nc"><i class="no-highlight">65</i>&nbsp;    }</b>
+<i class="no-highlight">66</i>&nbsp;
+<i class="no-highlight">67</i>&nbsp;    @BuilderDsl
+<i class="no-highlight">68</i>&nbsp;    public fun addMember(block: GuildMemberBuilder.() -&gt; Unit): Boolean =
+<b class="fc"><i class="no-highlight">69</i>&nbsp;        members.add(GuildMemberBuilder().apply(block).build())</b>
+<i class="no-highlight">70</i>&nbsp;
+<i class="no-highlight">71</i>&nbsp;    public fun addInvite(name: String, inviteDate: LocalDate): GuildBuilder =
+<b class="fc"><i class="no-highlight">72</i>&nbsp;        apply { invited.add(GuildInvite(name, inviteDate)) }</b>
+<i class="no-highlight">73</i>&nbsp;
+<b class="fc"><i class="no-highlight">74</i>&nbsp;    override fun build(): Guild = Guild(</b>
+<b class="fc"><i class="no-highlight">75</i>&nbsp;        world = world ?: error(&quot;world is required&quot;),</b>
+<b class="pc"><i class="no-highlight">76</i>&nbsp;        name = name ?: error(&quot;name is required&quot;),</b>
+<b class="pc"><i class="no-highlight">77</i>&nbsp;        logoUrl = logoUrl ?: error(&quot;logoUrl is required&quot;),</b>
+<b class="fc"><i class="no-highlight">78</i>&nbsp;        description = description,</b>
+<b class="pc"><i class="no-highlight">79</i>&nbsp;        foundingDate = foundingDate ?: error(&quot;name is required&quot;),</b>
+<b class="fc"><i class="no-highlight">80</i>&nbsp;        isActive = isActive,</b>
+<b class="fc"><i class="no-highlight">81</i>&nbsp;        applicationsOpen = applicationsOpen,</b>
+<b class="fc"><i class="no-highlight">82</i>&nbsp;        homepage = homepage,</b>
+<b class="fc"><i class="no-highlight">83</i>&nbsp;        guildHall = guildHall,</b>
+<b class="fc"><i class="no-highlight">84</i>&nbsp;        members = members,</b>
+<b class="fc"><i class="no-highlight">85</i>&nbsp;        invited = invited,</b>
+<b class="fc"><i class="no-highlight">86</i>&nbsp;        disbandingDate = disbandingDate,</b>
+<b class="fc"><i class="no-highlight">87</i>&nbsp;        disbandingReason = disbandingReason,</b>
+<i class="no-highlight">88</i>&nbsp;    )
+<i class="no-highlight">89</i>&nbsp;
+<b class="fc"><i class="no-highlight">90</i>&nbsp;    public class GuildMemberBuilder : TibiaKtBuilder&lt;GuildMember&gt; {</b>
+<b class="fc"><i class="no-highlight">91</i>&nbsp;        public lateinit var rank: String</b>
+<b class="fc"><i class="no-highlight">92</i>&nbsp;        public lateinit var name: String</b>
+<b class="fc"><i class="no-highlight">93</i>&nbsp;        public var title: String? = null</b>
+<b class="fc"><i class="no-highlight">94</i>&nbsp;        public lateinit var vocation: Vocation</b>
+<b class="fc"><i class="no-highlight">95</i>&nbsp;        public var level: Int = 0</b>
+<b class="fc"><i class="no-highlight">96</i>&nbsp;        public lateinit var joiningDate: LocalDate</b>
+<b class="fc"><i class="no-highlight">97</i>&nbsp;        public var isOnline: Boolean = false</b>
+<i class="no-highlight">98</i>&nbsp;
+<b class="fc"><i class="no-highlight">99</i>&nbsp;        override fun build(): GuildMember = GuildMember(</b>
+<b class="fc"><i class="no-highlight">100</i>&nbsp;            rank = if (::rank.isInitialized) rank else error(&quot;rank is required&quot;),</b>
+<b class="pc"><i class="no-highlight">101</i>&nbsp;            name = if (::name.isInitialized) name else error(&quot;name is required&quot;),</b>
+<b class="fc"><i class="no-highlight">102</i>&nbsp;            title = title,</b>
+<b class="pc"><i class="no-highlight">103</i>&nbsp;            vocation = if (::vocation.isInitialized) vocation else error(&quot;vocation is required&quot;),</b>
+<b class="fc"><i class="no-highlight">104</i>&nbsp;            level = level,</b>
+<b class="pc"><i class="no-highlight">105</i>&nbsp;            joiningDate = if (::joiningDate.isInitialized) joiningDate else error(&quot;joiningDate is required&quot;),</b>
+<b class="fc"><i class="no-highlight">106</i>&nbsp;            isOnline = isOnline,</b>
+<i class="no-highlight">107</i>&nbsp;        )
+<i class="no-highlight">108</i>&nbsp;    }
+<i class="no-highlight">109</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -289,7 +290,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-11 06:50</div>
+    <div style="float:right;">generated on 2022-09-11 07:13</div>
 </div>
 </body>
 </html>

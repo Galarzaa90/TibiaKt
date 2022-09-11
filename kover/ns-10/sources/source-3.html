@@ -183,71 +183,87 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;@file:UseSerializers(InstantSerializer::class, LocalDateSerializer::class, YearMonthSerializer::class)
-<i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;package com.galarzaa.tibiakt.core.models.world
-<i class="no-highlight">4</i>&nbsp;
-<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.enums.BattlEyeType
-<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.enums.PvpType
-<i class="no-highlight">7</i>&nbsp;import com.galarzaa.tibiakt.core.enums.TransferType
-<i class="no-highlight">8</i>&nbsp;import com.galarzaa.tibiakt.core.serializers.InstantSerializer
-<i class="no-highlight">9</i>&nbsp;import com.galarzaa.tibiakt.core.serializers.LocalDateSerializer
-<i class="no-highlight">10</i>&nbsp;import com.galarzaa.tibiakt.core.serializers.YearMonthSerializer
-<i class="no-highlight">11</i>&nbsp;import kotlinx.datetime.Instant
-<i class="no-highlight">12</i>&nbsp;import kotlinx.serialization.Serializable
-<i class="no-highlight">13</i>&nbsp;import kotlinx.serialization.UseSerializers
-<i class="no-highlight">14</i>&nbsp;import java.time.LocalDate
-<i class="no-highlight">15</i>&nbsp;import java.time.YearMonth
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;/*
+<i class="no-highlight">2</i>&nbsp; * Copyright © 2022 Allan Galarza
+<i class="no-highlight">3</i>&nbsp; *
+<i class="no-highlight">4</i>&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+<i class="no-highlight">5</i>&nbsp; * you may not use this file except in compliance with the License.
+<i class="no-highlight">6</i>&nbsp; * You may obtain a copy of the License at
+<i class="no-highlight">7</i>&nbsp; *
+<i class="no-highlight">8</i>&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+<i class="no-highlight">9</i>&nbsp; *
+<i class="no-highlight">10</i>&nbsp; * Unless required by applicable law or agreed to in writing, software
+<i class="no-highlight">11</i>&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+<i class="no-highlight">12</i>&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+<i class="no-highlight">13</i>&nbsp; * See the License for the specific language governing permissions and
+<i class="no-highlight">14</i>&nbsp; * limitations under the License.
+<i class="no-highlight">15</i>&nbsp; */
 <i class="no-highlight">16</i>&nbsp;
-<i class="no-highlight">17</i>&nbsp;/**
-<i class="no-highlight">18</i>&nbsp; * A game world.
-<i class="no-highlight">19</i>&nbsp; *
-<i class="no-highlight">20</i>&nbsp; * @property isOnline Whether this world is currently online or not.
-<i class="no-highlight">21</i>&nbsp; * @property onlineCount The total of online players in this world.
-<i class="no-highlight">22</i>&nbsp; * @property location The geographical location of the server.
-<i class="no-highlight">23</i>&nbsp; * @property pvpType The type of PvP in this world.
-<i class="no-highlight">24</i>&nbsp; * @property battlEyeType The type of BattlEye protection present in this world.
-<i class="no-highlight">25</i>&nbsp; * @property battlEyeStartDate The date when BattlEye was implemented in this world.
-<i class="no-highlight">26</i>&nbsp; * @property transferType The type of transfer restrictions this world has.
-<i class="no-highlight">27</i>&nbsp; * @property isPremiumRestricted Whether the world can only be played by premium account characters or not.
-<i class="no-highlight">28</i>&nbsp; * @property isExperimental Whether the world is experimental or not.
-<i class="no-highlight">29</i>&nbsp; * @property onlineRecordCount The maximum online players recorded on this world.
-<i class="no-highlight">30</i>&nbsp; * @property onlineRecordDateTime The date and time when the maximum online players record was set.
-<i class="no-highlight">31</i>&nbsp; * @property creationDate The year and month when this world was created.
-<i class="no-highlight">32</i>&nbsp; * @property worldQuests The list of world quests completed.
-<i class="no-highlight">33</i>&nbsp; * @property playersOnline The list of online players in this world.
-<i class="no-highlight">34</i>&nbsp; */
-<b class="pc"><i class="no-highlight">35</i>&nbsp;@Serializable</b>
-<i class="no-highlight">36</i>&nbsp;public data class World(
-<b class="fc"><i class="no-highlight">37</i>&nbsp;    override val name: String,</b>
-<b class="fc"><i class="no-highlight">38</i>&nbsp;    val isOnline: Boolean,</b>
-<b class="fc"><i class="no-highlight">39</i>&nbsp;    val onlineCount: Int,</b>
-<b class="fc"><i class="no-highlight">40</i>&nbsp;    val location: String,</b>
-<b class="fc"><i class="no-highlight">41</i>&nbsp;    val pvpType: PvpType,</b>
-<b class="fc"><i class="no-highlight">42</i>&nbsp;    val battlEyeType: BattlEyeType,</b>
-<b class="fc"><i class="no-highlight">43</i>&nbsp;    val battlEyeStartDate: LocalDate?,</b>
-<b class="fc"><i class="no-highlight">44</i>&nbsp;    val transferType: TransferType,</b>
-<b class="fc"><i class="no-highlight">45</i>&nbsp;    val isPremiumRestricted: Boolean,</b>
-<b class="fc"><i class="no-highlight">46</i>&nbsp;    val isExperimental: Boolean,</b>
-<b class="fc"><i class="no-highlight">47</i>&nbsp;    val onlineRecordCount: Int,</b>
-<b class="fc"><i class="no-highlight">48</i>&nbsp;    val onlineRecordDateTime: Instant,</b>
-<b class="fc"><i class="no-highlight">49</i>&nbsp;    val creationDate: YearMonth,</b>
-<b class="fc"><i class="no-highlight">50</i>&nbsp;    val worldQuests: List&lt;String&gt; ,</b>
-<b class="fc"><i class="no-highlight">51</i>&nbsp;    val playersOnline: List&lt;OnlineCharacter&gt;,</b>
-<i class="no-highlight">52</i>&nbsp;) : BaseWorld {
-<i class="no-highlight">53</i>&nbsp;
-<i class="no-highlight">54</i>&nbsp;    /** Check if a character from this world can be transferred to [target] world. */
-<i class="no-highlight">55</i>&nbsp;    private fun transferableTo(target: World): Boolean {
-<b class="nc"><i class="no-highlight">56</i>&nbsp;        return pvpType.weight &gt;= target.pvpType.weight &amp;&amp;</b>
-<b class="nc"><i class="no-highlight">57</i>&nbsp;                isExperimental == target.isExperimental &amp;&amp;</b>
-<b class="nc"><i class="no-highlight">58</i>&nbsp;                transferType != TransferType.LOCKED &amp;&amp;</b>
-<b class="nc"><i class="no-highlight">59</i>&nbsp;                target.transferType != TransferType.BLOCKED &amp;&amp;</b>
-<b class="nc"><i class="no-highlight">60</i>&nbsp;                battlEyeType.weight &gt;= target.battlEyeType.weight</b>
-<i class="no-highlight">61</i>&nbsp;    }
-<i class="no-highlight">62</i>&nbsp;
-<i class="no-highlight">63</i>&nbsp;    /** Check if a character from the [origin] world can transfer to this world */
-<b class="nc"><i class="no-highlight">64</i>&nbsp;    public fun transferableFrom(origin: World): Boolean = origin.transferableTo(this)</b>
-<i class="no-highlight">65</i>&nbsp;}
+<i class="no-highlight">17</i>&nbsp;@file:UseSerializers(InstantSerializer::class, LocalDateSerializer::class, YearMonthSerializer::class)
+<i class="no-highlight">18</i>&nbsp;
+<i class="no-highlight">19</i>&nbsp;package com.galarzaa.tibiakt.core.models.world
+<i class="no-highlight">20</i>&nbsp;
+<i class="no-highlight">21</i>&nbsp;import com.galarzaa.tibiakt.core.enums.BattlEyeType
+<i class="no-highlight">22</i>&nbsp;import com.galarzaa.tibiakt.core.enums.PvpType
+<i class="no-highlight">23</i>&nbsp;import com.galarzaa.tibiakt.core.enums.TransferType
+<i class="no-highlight">24</i>&nbsp;import com.galarzaa.tibiakt.core.serializers.InstantSerializer
+<i class="no-highlight">25</i>&nbsp;import com.galarzaa.tibiakt.core.serializers.LocalDateSerializer
+<i class="no-highlight">26</i>&nbsp;import com.galarzaa.tibiakt.core.serializers.YearMonthSerializer
+<i class="no-highlight">27</i>&nbsp;import kotlinx.datetime.Instant
+<i class="no-highlight">28</i>&nbsp;import kotlinx.serialization.Serializable
+<i class="no-highlight">29</i>&nbsp;import kotlinx.serialization.UseSerializers
+<i class="no-highlight">30</i>&nbsp;import java.time.LocalDate
+<i class="no-highlight">31</i>&nbsp;import java.time.YearMonth
+<i class="no-highlight">32</i>&nbsp;
+<i class="no-highlight">33</i>&nbsp;/**
+<i class="no-highlight">34</i>&nbsp; * A game world.
+<i class="no-highlight">35</i>&nbsp; *
+<i class="no-highlight">36</i>&nbsp; * @property isOnline Whether this world is currently online or not.
+<i class="no-highlight">37</i>&nbsp; * @property onlineCount The total of online players in this world.
+<i class="no-highlight">38</i>&nbsp; * @property location The geographical location of the server.
+<i class="no-highlight">39</i>&nbsp; * @property pvpType The type of PvP in this world.
+<i class="no-highlight">40</i>&nbsp; * @property battlEyeType The type of BattlEye protection present in this world.
+<i class="no-highlight">41</i>&nbsp; * @property battlEyeStartDate The date when BattlEye was implemented in this world.
+<i class="no-highlight">42</i>&nbsp; * @property transferType The type of transfer restrictions this world has.
+<i class="no-highlight">43</i>&nbsp; * @property isPremiumRestricted Whether the world can only be played by premium account characters or not.
+<i class="no-highlight">44</i>&nbsp; * @property isExperimental Whether the world is experimental or not.
+<i class="no-highlight">45</i>&nbsp; * @property onlineRecordCount The maximum online players recorded on this world.
+<i class="no-highlight">46</i>&nbsp; * @property onlineRecordDateTime The date and time when the maximum online players record was set.
+<i class="no-highlight">47</i>&nbsp; * @property creationDate The year and month when this world was created.
+<i class="no-highlight">48</i>&nbsp; * @property worldQuests The list of world quests completed.
+<i class="no-highlight">49</i>&nbsp; * @property playersOnline The list of online players in this world.
+<i class="no-highlight">50</i>&nbsp; */
+<b class="pc"><i class="no-highlight">51</i>&nbsp;@Serializable</b>
+<i class="no-highlight">52</i>&nbsp;public data class World(
+<b class="fc"><i class="no-highlight">53</i>&nbsp;    override val name: String,</b>
+<b class="fc"><i class="no-highlight">54</i>&nbsp;    val isOnline: Boolean,</b>
+<b class="fc"><i class="no-highlight">55</i>&nbsp;    val onlineCount: Int,</b>
+<b class="fc"><i class="no-highlight">56</i>&nbsp;    val location: String,</b>
+<b class="fc"><i class="no-highlight">57</i>&nbsp;    val pvpType: PvpType,</b>
+<b class="fc"><i class="no-highlight">58</i>&nbsp;    val battlEyeType: BattlEyeType,</b>
+<b class="fc"><i class="no-highlight">59</i>&nbsp;    val battlEyeStartDate: LocalDate?,</b>
+<b class="fc"><i class="no-highlight">60</i>&nbsp;    val transferType: TransferType,</b>
+<b class="fc"><i class="no-highlight">61</i>&nbsp;    val isPremiumRestricted: Boolean,</b>
+<b class="fc"><i class="no-highlight">62</i>&nbsp;    val isExperimental: Boolean,</b>
+<b class="fc"><i class="no-highlight">63</i>&nbsp;    val onlineRecordCount: Int,</b>
+<b class="fc"><i class="no-highlight">64</i>&nbsp;    val onlineRecordDateTime: Instant,</b>
+<b class="fc"><i class="no-highlight">65</i>&nbsp;    val creationDate: YearMonth,</b>
+<b class="fc"><i class="no-highlight">66</i>&nbsp;    val worldQuests: List&lt;String&gt; ,</b>
+<b class="fc"><i class="no-highlight">67</i>&nbsp;    val playersOnline: List&lt;OnlineCharacter&gt;,</b>
+<i class="no-highlight">68</i>&nbsp;) : BaseWorld {
+<i class="no-highlight">69</i>&nbsp;
+<i class="no-highlight">70</i>&nbsp;    /** Check if a character from this world can be transferred to [target] world. */
+<i class="no-highlight">71</i>&nbsp;    private fun transferableTo(target: World): Boolean {
+<b class="nc"><i class="no-highlight">72</i>&nbsp;        return pvpType.weight &gt;= target.pvpType.weight &amp;&amp;</b>
+<b class="nc"><i class="no-highlight">73</i>&nbsp;                isExperimental == target.isExperimental &amp;&amp;</b>
+<b class="nc"><i class="no-highlight">74</i>&nbsp;                transferType != TransferType.LOCKED &amp;&amp;</b>
+<b class="nc"><i class="no-highlight">75</i>&nbsp;                target.transferType != TransferType.BLOCKED &amp;&amp;</b>
+<b class="nc"><i class="no-highlight">76</i>&nbsp;                battlEyeType.weight &gt;= target.battlEyeType.weight</b>
+<i class="no-highlight">77</i>&nbsp;    }
+<i class="no-highlight">78</i>&nbsp;
+<i class="no-highlight">79</i>&nbsp;    /** Check if a character from the [origin] world can transfer to this world. */
+<b class="nc"><i class="no-highlight">80</i>&nbsp;    public fun transferableFrom(origin: World): Boolean = origin.transferableTo(this)</b>
+<i class="no-highlight">81</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -274,7 +290,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-11 06:50</div>
+    <div style="float:right;">generated on 2022-09-11 07:13</div>
 </div>
 </body>
 </html>

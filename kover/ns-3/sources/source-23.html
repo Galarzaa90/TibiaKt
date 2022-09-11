@@ -127,37 +127,39 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">28</i>&nbsp;public inline fun killStatisticsBuilder(block: KillStatisticsBuilder.() -&gt; Unit): KillStatisticsBuilder =
 <i class="no-highlight">29</i>&nbsp;    KillStatisticsBuilder().apply(block)
 <i class="no-highlight">30</i>&nbsp;
-<b class="fc"><i class="no-highlight">31</i>&nbsp;@BuilderDsl</b>
-<i class="no-highlight">32</i>&nbsp;public class KillStatisticsBuilder : TibiaKtBuilder&lt;KillStatistics&gt; {
-<b class="fc"><i class="no-highlight">33</i>&nbsp;    public var world: String? = null</b>
-<b class="fc"><i class="no-highlight">34</i>&nbsp;    public val entries: MutableMap&lt;String, KillsStatisticEntry&gt; = mutableMapOf()</b>
-<b class="fc"><i class="no-highlight">35</i>&nbsp;    private var total: KillsStatisticEntry = KillsStatisticEntry(0, 0, 0, 0)</b>
-<i class="no-highlight">36</i>&nbsp;
-<i class="no-highlight">37</i>&nbsp;    public fun total(
-<i class="no-highlight">38</i>&nbsp;        lastDayKilledPlayers: Int,
-<i class="no-highlight">39</i>&nbsp;        lastDayKilled: Int,
-<i class="no-highlight">40</i>&nbsp;        lastWeekKilledPlayers: Int,
-<i class="no-highlight">41</i>&nbsp;        lastWeekKilled: Int,
-<b class="fc"><i class="no-highlight">42</i>&nbsp;    ): KillStatisticsBuilder = apply {</b>
-<b class="fc"><i class="no-highlight">43</i>&nbsp;        total = KillsStatisticEntry(lastDayKilledPlayers, lastDayKilled, lastWeekKilledPlayers, lastWeekKilled)</b>
-<b class="fc"><i class="no-highlight">44</i>&nbsp;    }</b>
-<i class="no-highlight">45</i>&nbsp;
-<i class="no-highlight">46</i>&nbsp;    public fun addEntry(
-<i class="no-highlight">47</i>&nbsp;        race: String,
-<i class="no-highlight">48</i>&nbsp;        lastDayKilledPlayers: Int,
-<i class="no-highlight">49</i>&nbsp;        lastDayKilled: Int,
-<i class="no-highlight">50</i>&nbsp;        lastWeekKilledPlayers: Int,
-<i class="no-highlight">51</i>&nbsp;        lastWeekKilled: Int,
-<b class="fc"><i class="no-highlight">52</i>&nbsp;    ): KillStatisticsBuilder = apply {</b>
-<b class="fc"><i class="no-highlight">53</i>&nbsp;        entries[race] = KillsStatisticEntry(lastDayKilledPlayers, lastDayKilled, lastWeekKilledPlayers, lastWeekKilled)</b>
-<b class="fc"><i class="no-highlight">54</i>&nbsp;    }</b>
-<i class="no-highlight">55</i>&nbsp;
-<b class="fc"><i class="no-highlight">56</i>&nbsp;    override fun build(): KillStatistics = KillStatistics(</b>
-<b class="pc"><i class="no-highlight">57</i>&nbsp;        world = world ?: error(&quot;world is required&quot;),</b>
-<b class="fc"><i class="no-highlight">58</i>&nbsp;        entries = entries,</b>
-<b class="fc"><i class="no-highlight">59</i>&nbsp;        total = total</b>
-<i class="no-highlight">60</i>&nbsp;    )
-<i class="no-highlight">61</i>&nbsp;}
+<i class="no-highlight">31</i>&nbsp;
+<i class="no-highlight">32</i>&nbsp;/** Builder for [KillStatistics] instances. */
+<b class="fc"><i class="no-highlight">33</i>&nbsp;@BuilderDsl</b>
+<i class="no-highlight">34</i>&nbsp;public class KillStatisticsBuilder : TibiaKtBuilder&lt;KillStatistics&gt; {
+<b class="fc"><i class="no-highlight">35</i>&nbsp;    public var world: String? = null</b>
+<b class="fc"><i class="no-highlight">36</i>&nbsp;    public val entries: MutableMap&lt;String, KillsStatisticEntry&gt; = mutableMapOf()</b>
+<b class="fc"><i class="no-highlight">37</i>&nbsp;    private var total: KillsStatisticEntry = KillsStatisticEntry(0, 0, 0, 0)</b>
+<i class="no-highlight">38</i>&nbsp;
+<i class="no-highlight">39</i>&nbsp;    public fun total(
+<i class="no-highlight">40</i>&nbsp;        lastDayKilledPlayers: Int,
+<i class="no-highlight">41</i>&nbsp;        lastDayKilled: Int,
+<i class="no-highlight">42</i>&nbsp;        lastWeekKilledPlayers: Int,
+<i class="no-highlight">43</i>&nbsp;        lastWeekKilled: Int,
+<b class="fc"><i class="no-highlight">44</i>&nbsp;    ): KillStatisticsBuilder = apply {</b>
+<b class="fc"><i class="no-highlight">45</i>&nbsp;        total = KillsStatisticEntry(lastDayKilledPlayers, lastDayKilled, lastWeekKilledPlayers, lastWeekKilled)</b>
+<b class="fc"><i class="no-highlight">46</i>&nbsp;    }</b>
+<i class="no-highlight">47</i>&nbsp;
+<i class="no-highlight">48</i>&nbsp;    public fun addEntry(
+<i class="no-highlight">49</i>&nbsp;        race: String,
+<i class="no-highlight">50</i>&nbsp;        lastDayKilledPlayers: Int,
+<i class="no-highlight">51</i>&nbsp;        lastDayKilled: Int,
+<i class="no-highlight">52</i>&nbsp;        lastWeekKilledPlayers: Int,
+<i class="no-highlight">53</i>&nbsp;        lastWeekKilled: Int,
+<b class="fc"><i class="no-highlight">54</i>&nbsp;    ): KillStatisticsBuilder = apply {</b>
+<b class="fc"><i class="no-highlight">55</i>&nbsp;        entries[race] = KillsStatisticEntry(lastDayKilledPlayers, lastDayKilled, lastWeekKilledPlayers, lastWeekKilled)</b>
+<b class="fc"><i class="no-highlight">56</i>&nbsp;    }</b>
+<i class="no-highlight">57</i>&nbsp;
+<b class="fc"><i class="no-highlight">58</i>&nbsp;    override fun build(): KillStatistics = KillStatistics(</b>
+<b class="pc"><i class="no-highlight">59</i>&nbsp;        world = world ?: error(&quot;world is required&quot;),</b>
+<b class="fc"><i class="no-highlight">60</i>&nbsp;        entries = entries,</b>
+<b class="fc"><i class="no-highlight">61</i>&nbsp;        total = total</b>
+<i class="no-highlight">62</i>&nbsp;    )
+<i class="no-highlight">63</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -184,7 +186,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-11 06:50</div>
+    <div style="float:right;">generated on 2022-09-11 07:13</div>
 </div>
 </body>
 </html>

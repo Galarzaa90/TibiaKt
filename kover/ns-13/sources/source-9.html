@@ -156,12 +156,12 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc"><i class="no-highlight">57</i>&nbsp;public fun String.findInteger(): Int = filter { it.isDigit() }.toInt()</b>
 <i class="no-highlight">58</i>&nbsp;
 <i class="no-highlight">59</i>&nbsp;/**
-<i class="no-highlight">60</i>&nbsp; * Return null if the string is blank
+<i class="no-highlight">60</i>&nbsp; * Return null if the string is blank.
 <i class="no-highlight">61</i>&nbsp; */
 <b class="pc"><i class="no-highlight">62</i>&nbsp;public fun String?.nullIfBlank(): String? = takeIf { !it.isNullOrBlank() }</b>
 <i class="no-highlight">63</i>&nbsp;
 <i class="no-highlight">64</i>&nbsp;/**
-<i class="no-highlight">65</i>&nbsp; *  Parses strings with numbers using &quot;k&quot; as a thousand suffix
+<i class="no-highlight">65</i>&nbsp; *  Parses strings with numbers using &quot;k&quot; as a thousand suffix.
 <i class="no-highlight">66</i>&nbsp; */
 <i class="no-highlight">67</i>&nbsp;public fun String.parseThousandSuffix(): Int =
 <b class="pc"><i class="no-highlight">68</i>&nbsp;    remove(&quot;k&quot;, true).parseInteger() * (count { it == &#39;k&#39; || it == &#39;K&#39; } * 1000)</b>
@@ -191,7 +191,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-11 06:50</div>
+    <div style="float:right;">generated on 2022-09-11 07:13</div>
 </div>
 </body>
 </html>

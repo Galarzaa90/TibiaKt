@@ -97,92 +97,109 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.parsers
-<i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.builders.EventsScheduleBuilder
-<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.builders.eventEntryBuilder
-<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.builders.eventsSchedule
-<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
-<i class="no-highlight">7</i>&nbsp;import com.galarzaa.tibiakt.core.models.news.EventsSchedule
-<i class="no-highlight">8</i>&nbsp;import com.galarzaa.tibiakt.core.utils.cells
-<i class="no-highlight">9</i>&nbsp;import com.galarzaa.tibiakt.core.utils.cleanText
-<i class="no-highlight">10</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parsePopup
-<i class="no-highlight">11</i>&nbsp;import com.galarzaa.tibiakt.core.utils.remove
-<i class="no-highlight">12</i>&nbsp;import org.jsoup.nodes.Element
-<i class="no-highlight">13</i>&nbsp;import java.time.LocalDate
-<i class="no-highlight">14</i>&nbsp;import java.time.YearMonth
-<i class="no-highlight">15</i>&nbsp;import java.time.format.DateTimeFormatter
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;/*
+<i class="no-highlight">2</i>&nbsp; * Copyright © 2022 Allan Galarza
+<i class="no-highlight">3</i>&nbsp; *
+<i class="no-highlight">4</i>&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+<i class="no-highlight">5</i>&nbsp; * you may not use this file except in compliance with the License.
+<i class="no-highlight">6</i>&nbsp; * You may obtain a copy of the License at
+<i class="no-highlight">7</i>&nbsp; *
+<i class="no-highlight">8</i>&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+<i class="no-highlight">9</i>&nbsp; *
+<i class="no-highlight">10</i>&nbsp; * Unless required by applicable law or agreed to in writing, software
+<i class="no-highlight">11</i>&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+<i class="no-highlight">12</i>&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+<i class="no-highlight">13</i>&nbsp; * See the License for the specific language governing permissions and
+<i class="no-highlight">14</i>&nbsp; * limitations under the License.
+<i class="no-highlight">15</i>&nbsp; */
 <i class="no-highlight">16</i>&nbsp;
-<i class="no-highlight">17</i>&nbsp;public object EventsScheduleParser : Parser&lt;EventsSchedule&gt; {
-<i class="no-highlight">18</i>&nbsp;    override fun fromContent(content: String): EventsSchedule {
-<b class="fc"><i class="no-highlight">19</i>&nbsp;        val boxContent = boxContent(content)</b>
-<b class="fc"><i class="no-highlight">20</i>&nbsp;        return eventsSchedule {</b>
-<b class="pc"><i class="no-highlight">21</i>&nbsp;            val dateBlock = boxContent.selectFirst(&quot;div.eventscheduleheaderdateblock&quot;)</b>
-<b class="nc"><i class="no-highlight">22</i>&nbsp;                ?: throw ParsingException(&quot;date block not found&quot;)</b>
-<b class="fc"><i class="no-highlight">23</i>&nbsp;            yearMonth =</b>
-<b class="fc"><i class="no-highlight">24</i>&nbsp;                YearMonth.parse(dateBlock.cleanText().remove(&quot;»&quot;).remove(&quot;«&quot;), DateTimeFormatter.ofPattern(&quot;MMMM yyyy&quot;))</b>
-<b class="fc"><i class="no-highlight">25</i>&nbsp;            parseCalendar(boxContent, yearMonth)</b>
-<b class="fc"><i class="no-highlight">26</i>&nbsp;        }</b>
-<i class="no-highlight">27</i>&nbsp;
-<i class="no-highlight">28</i>&nbsp;    }
-<i class="no-highlight">29</i>&nbsp;
-<i class="no-highlight">30</i>&nbsp;    private fun EventsScheduleBuilder.parseCalendar(
-<i class="no-highlight">31</i>&nbsp;        boxContent: Element,
-<i class="no-highlight">32</i>&nbsp;        yearMonth: YearMonth,
-<i class="no-highlight">33</i>&nbsp;    ) {
-<b class="fc"><i class="no-highlight">34</i>&nbsp;        var currentMonth = yearMonth</b>
-<b class="fc"><i class="no-highlight">35</i>&nbsp;        val calendarTable = boxContent.selectFirst(&quot;#eventscheduletable&quot;)</b>
-<b class="fc"><i class="no-highlight">36</i>&nbsp;        var onGoingDay = 1</b>
-<b class="fc"><i class="no-highlight">37</i>&nbsp;        var firstDay = true</b>
-<b class="fc"><i class="no-highlight">38</i>&nbsp;        val onGoingEvents: MutableList&lt;EventsScheduleBuilder.EventEntryBuilder&gt; = mutableListOf()</b>
-<b class="fc"><i class="no-highlight">39</i>&nbsp;        for (cell in calendarTable.cells()) {</b>
-<b class="pc"><i class="no-highlight">40</i>&nbsp;            val dayDiv = cell.selectFirst(&quot;div&quot;) ?: throw ParsingException(&quot;could not find day&#39;s div&quot;)</b>
-<b class="fc"><i class="no-highlight">41</i>&nbsp;            val day = dayDiv.cleanText().toInt()</b>
-<b class="fc"><i class="no-highlight">42</i>&nbsp;            val spans = cell.select(&quot;span.HelperDivIndicator&quot;)</b>
-<i class="no-highlight">43</i>&nbsp;            // The calendar might start with a day from the previous month
-<b class="fc"><i class="no-highlight">44</i>&nbsp;            if (onGoingDay &lt; day) currentMonth = currentMonth.minusMonths(1)</b>
-<b class="fc"><i class="no-highlight">45</i>&nbsp;            if (day &lt; onGoingDay) {</b>
-<b class="fc"><i class="no-highlight">46</i>&nbsp;                currentMonth = currentMonth.plusMonths(1)</b>
-<i class="no-highlight">47</i>&nbsp;            }
-<b class="fc"><i class="no-highlight">48</i>&nbsp;            onGoingDay = day + 1</b>
-<b class="fc"><i class="no-highlight">49</i>&nbsp;            val todayEvents: MutableList&lt;EventsScheduleBuilder.EventEntryBuilder&gt; = mutableListOf()</b>
-<b class="fc"><i class="no-highlight">50</i>&nbsp;            for (popup in spans) {</b>
-<b class="fc"><i class="no-highlight">51</i>&nbsp;                val (_, popupContent) = parsePopup(popup.attr(&quot;onmouseover&quot;))</b>
-<b class="fc"><i class="no-highlight">52</i>&nbsp;                val divs = popupContent.select(&quot;div&quot;)</b>
-<i class="no-highlight">53</i>&nbsp;                // Multiple events might be described in the same popup, divs come in pairs, title and content
-<b class="fc"><i class="no-highlight">54</i>&nbsp;                for (index in 0..divs.lastIndex step 2) {</b>
-<b class="fc"><i class="no-highlight">55</i>&nbsp;                    val event = eventEntryBuilder {</b>
-<b class="fc"><i class="no-highlight">56</i>&nbsp;                        title = divs[index].cleanText().remove(&quot;:&quot;)</b>
-<b class="fc"><i class="no-highlight">57</i>&nbsp;                        description = divs[index + 1].cleanText().remove(&quot;• &quot;)</b>
-<b class="fc"><i class="no-highlight">58</i>&nbsp;                    }</b>
-<b class="fc"><i class="no-highlight">59</i>&nbsp;                    todayEvents.add(event)</b>
-<i class="no-highlight">60</i>&nbsp;                    // If this is not an event that was already ongoing from a previous day, add to list
-<b class="fc"><i class="no-highlight">61</i>&nbsp;                    if (!onGoingEvents.contains(event)) {</b>
-<i class="no-highlight">62</i>&nbsp;                        // Only add start date if this is not the first day of the calendar.
-<i class="no-highlight">63</i>&nbsp;                        // If it&#39;s the first day, we have no way to know if the event started that day or before
-<b class="fc"><i class="no-highlight">64</i>&nbsp;                        if (!firstDay) {</b>
-<b class="fc"><i class="no-highlight">65</i>&nbsp;                            event.startDate = LocalDate.of(currentMonth.year, currentMonth.month, day)</b>
-<i class="no-highlight">66</i>&nbsp;                        }
-<b class="fc"><i class="no-highlight">67</i>&nbsp;                        onGoingEvents.add(event)</b>
-<i class="no-highlight">68</i>&nbsp;                    }
-<i class="no-highlight">69</i>&nbsp;                }
-<i class="no-highlight">70</i>&nbsp;            }
-<i class="no-highlight">71</i>&nbsp;            // Check which of the ongoing events did not show up today, meaning it has ended now
-<b class="fc"><i class="no-highlight">72</i>&nbsp;            for (pendingEvent in onGoingEvents.toList()) {</b>
-<b class="fc"><i class="no-highlight">73</i>&nbsp;                if (!todayEvents.contains(pendingEvent)) {</b>
-<i class="no-highlight">74</i>&nbsp;                    //If it didn&#39;t show up today, it means it ended yesterday.
-<b class="fc"><i class="no-highlight">75</i>&nbsp;                    pendingEvent.endDate = LocalDate.of(currentMonth.year, currentMonth.month, day).minusDays(1)</b>
-<b class="fc"><i class="no-highlight">76</i>&nbsp;                    addEntry(pendingEvent.build())</b>
-<b class="fc"><i class="no-highlight">77</i>&nbsp;                    onGoingEvents.remove(pendingEvent)</b>
-<i class="no-highlight">78</i>&nbsp;                }
-<i class="no-highlight">79</i>&nbsp;            }
-<b class="fc"><i class="no-highlight">80</i>&nbsp;            firstDay = false</b>
-<i class="no-highlight">81</i>&nbsp;        }
-<i class="no-highlight">82</i>&nbsp;        // Add any leftover ongoing events without an end date, as we don&#39;t know when they end.
-<b class="fc"><i class="no-highlight">83</i>&nbsp;        onGoingEvents.forEach { addEntry(it.build()) }</b>
-<i class="no-highlight">84</i>&nbsp;    }
-<i class="no-highlight">85</i>&nbsp;
-<i class="no-highlight">86</i>&nbsp;}
+<i class="no-highlight">17</i>&nbsp;package com.galarzaa.tibiakt.core.parsers
+<i class="no-highlight">18</i>&nbsp;
+<i class="no-highlight">19</i>&nbsp;import com.galarzaa.tibiakt.core.builders.EventsScheduleBuilder
+<i class="no-highlight">20</i>&nbsp;import com.galarzaa.tibiakt.core.builders.eventEntryBuilder
+<i class="no-highlight">21</i>&nbsp;import com.galarzaa.tibiakt.core.builders.eventsSchedule
+<i class="no-highlight">22</i>&nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
+<i class="no-highlight">23</i>&nbsp;import com.galarzaa.tibiakt.core.models.news.EventsSchedule
+<i class="no-highlight">24</i>&nbsp;import com.galarzaa.tibiakt.core.utils.cells
+<i class="no-highlight">25</i>&nbsp;import com.galarzaa.tibiakt.core.utils.cleanText
+<i class="no-highlight">26</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parsePopup
+<i class="no-highlight">27</i>&nbsp;import com.galarzaa.tibiakt.core.utils.remove
+<i class="no-highlight">28</i>&nbsp;import org.jsoup.nodes.Element
+<i class="no-highlight">29</i>&nbsp;import java.time.LocalDate
+<i class="no-highlight">30</i>&nbsp;import java.time.YearMonth
+<i class="no-highlight">31</i>&nbsp;import java.time.format.DateTimeFormatter
+<i class="no-highlight">32</i>&nbsp;
+<i class="no-highlight">33</i>&nbsp;/** Parser for the events schedule. */
+<i class="no-highlight">34</i>&nbsp;public object EventsScheduleParser : Parser&lt;EventsSchedule&gt; {
+<i class="no-highlight">35</i>&nbsp;    override fun fromContent(content: String): EventsSchedule {
+<b class="fc"><i class="no-highlight">36</i>&nbsp;        val boxContent = boxContent(content)</b>
+<b class="fc"><i class="no-highlight">37</i>&nbsp;        return eventsSchedule {</b>
+<b class="pc"><i class="no-highlight">38</i>&nbsp;            val dateBlock = boxContent.selectFirst(&quot;div.eventscheduleheaderdateblock&quot;)</b>
+<b class="nc"><i class="no-highlight">39</i>&nbsp;                ?: throw ParsingException(&quot;date block not found&quot;)</b>
+<b class="fc"><i class="no-highlight">40</i>&nbsp;            yearMonth =</b>
+<b class="fc"><i class="no-highlight">41</i>&nbsp;                YearMonth.parse(dateBlock.cleanText().remove(&quot;»&quot;).remove(&quot;«&quot;), DateTimeFormatter.ofPattern(&quot;MMMM yyyy&quot;))</b>
+<b class="fc"><i class="no-highlight">42</i>&nbsp;            parseCalendar(boxContent, yearMonth)</b>
+<b class="fc"><i class="no-highlight">43</i>&nbsp;        }</b>
+<i class="no-highlight">44</i>&nbsp;
+<i class="no-highlight">45</i>&nbsp;    }
+<i class="no-highlight">46</i>&nbsp;
+<i class="no-highlight">47</i>&nbsp;    private fun EventsScheduleBuilder.parseCalendar(
+<i class="no-highlight">48</i>&nbsp;        boxContent: Element,
+<i class="no-highlight">49</i>&nbsp;        yearMonth: YearMonth,
+<i class="no-highlight">50</i>&nbsp;    ) {
+<b class="fc"><i class="no-highlight">51</i>&nbsp;        var currentMonth = yearMonth</b>
+<b class="fc"><i class="no-highlight">52</i>&nbsp;        val calendarTable = boxContent.selectFirst(&quot;#eventscheduletable&quot;)</b>
+<b class="fc"><i class="no-highlight">53</i>&nbsp;        var onGoingDay = 1</b>
+<b class="fc"><i class="no-highlight">54</i>&nbsp;        var firstDay = true</b>
+<b class="fc"><i class="no-highlight">55</i>&nbsp;        val onGoingEvents: MutableList&lt;EventsScheduleBuilder.EventEntryBuilder&gt; = mutableListOf()</b>
+<b class="fc"><i class="no-highlight">56</i>&nbsp;        for (cell in calendarTable.cells()) {</b>
+<b class="pc"><i class="no-highlight">57</i>&nbsp;            val dayDiv = cell.selectFirst(&quot;div&quot;) ?: throw ParsingException(&quot;could not find day&#39;s div&quot;)</b>
+<b class="fc"><i class="no-highlight">58</i>&nbsp;            val day = dayDiv.cleanText().toInt()</b>
+<b class="fc"><i class="no-highlight">59</i>&nbsp;            val spans = cell.select(&quot;span.HelperDivIndicator&quot;)</b>
+<i class="no-highlight">60</i>&nbsp;            // The calendar might start with a day from the previous month
+<b class="fc"><i class="no-highlight">61</i>&nbsp;            if (onGoingDay &lt; day) currentMonth = currentMonth.minusMonths(1)</b>
+<b class="fc"><i class="no-highlight">62</i>&nbsp;            if (day &lt; onGoingDay) {</b>
+<b class="fc"><i class="no-highlight">63</i>&nbsp;                currentMonth = currentMonth.plusMonths(1)</b>
+<i class="no-highlight">64</i>&nbsp;            }
+<b class="fc"><i class="no-highlight">65</i>&nbsp;            onGoingDay = day + 1</b>
+<b class="fc"><i class="no-highlight">66</i>&nbsp;            val todayEvents: MutableList&lt;EventsScheduleBuilder.EventEntryBuilder&gt; = mutableListOf()</b>
+<b class="fc"><i class="no-highlight">67</i>&nbsp;            for (popup in spans) {</b>
+<b class="fc"><i class="no-highlight">68</i>&nbsp;                val (_, popupContent) = parsePopup(popup.attr(&quot;onmouseover&quot;))</b>
+<b class="fc"><i class="no-highlight">69</i>&nbsp;                val divs = popupContent.select(&quot;div&quot;)</b>
+<i class="no-highlight">70</i>&nbsp;                // Multiple events might be described in the same popup, divs come in pairs, title and content
+<b class="fc"><i class="no-highlight">71</i>&nbsp;                for (index in 0..divs.lastIndex step 2) {</b>
+<b class="fc"><i class="no-highlight">72</i>&nbsp;                    val event = eventEntryBuilder {</b>
+<b class="fc"><i class="no-highlight">73</i>&nbsp;                        title = divs[index].cleanText().remove(&quot;:&quot;)</b>
+<b class="fc"><i class="no-highlight">74</i>&nbsp;                        description = divs[index + 1].cleanText().remove(&quot;• &quot;)</b>
+<b class="fc"><i class="no-highlight">75</i>&nbsp;                    }</b>
+<b class="fc"><i class="no-highlight">76</i>&nbsp;                    todayEvents.add(event)</b>
+<i class="no-highlight">77</i>&nbsp;                    // If this is not an event that was already ongoing from a previous day, add to list
+<b class="fc"><i class="no-highlight">78</i>&nbsp;                    if (!onGoingEvents.contains(event)) {</b>
+<i class="no-highlight">79</i>&nbsp;                        // Only add start date if this is not the first day of the calendar.
+<i class="no-highlight">80</i>&nbsp;                        // If it&#39;s the first day, we have no way to know if the event started that day or before
+<b class="fc"><i class="no-highlight">81</i>&nbsp;                        if (!firstDay) {</b>
+<b class="fc"><i class="no-highlight">82</i>&nbsp;                            event.startDate = LocalDate.of(currentMonth.year, currentMonth.month, day)</b>
+<i class="no-highlight">83</i>&nbsp;                        }
+<b class="fc"><i class="no-highlight">84</i>&nbsp;                        onGoingEvents.add(event)</b>
+<i class="no-highlight">85</i>&nbsp;                    }
+<i class="no-highlight">86</i>&nbsp;                }
+<i class="no-highlight">87</i>&nbsp;            }
+<i class="no-highlight">88</i>&nbsp;            // Check which of the ongoing events did not show up today, meaning it has ended now
+<b class="fc"><i class="no-highlight">89</i>&nbsp;            for (pendingEvent in onGoingEvents.toList()) {</b>
+<b class="fc"><i class="no-highlight">90</i>&nbsp;                if (!todayEvents.contains(pendingEvent)) {</b>
+<i class="no-highlight">91</i>&nbsp;                    //If it didn&#39;t show up today, it means it ended yesterday.
+<b class="fc"><i class="no-highlight">92</i>&nbsp;                    pendingEvent.endDate = LocalDate.of(currentMonth.year, currentMonth.month, day).minusDays(1)</b>
+<b class="fc"><i class="no-highlight">93</i>&nbsp;                    addEntry(pendingEvent.build())</b>
+<b class="fc"><i class="no-highlight">94</i>&nbsp;                    onGoingEvents.remove(pendingEvent)</b>
+<i class="no-highlight">95</i>&nbsp;                }
+<i class="no-highlight">96</i>&nbsp;            }
+<b class="fc"><i class="no-highlight">97</i>&nbsp;            firstDay = false</b>
+<i class="no-highlight">98</i>&nbsp;        }
+<i class="no-highlight">99</i>&nbsp;        // Add any leftover ongoing events without an end date, as we don&#39;t know when they end.
+<b class="fc"><i class="no-highlight">100</i>&nbsp;        onGoingEvents.forEach { addEntry(it.build()) }</b>
+<i class="no-highlight">101</i>&nbsp;    }
+<i class="no-highlight">102</i>&nbsp;
+<i class="no-highlight">103</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -209,7 +226,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-11 06:50</div>
+    <div style="float:right;">generated on 2022-09-11 07:13</div>
 </div>
 </body>
 </html>

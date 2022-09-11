@@ -126,46 +126,47 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">27</i>&nbsp;import com.galarzaa.tibiakt.core.utils.rows
 <i class="no-highlight">28</i>&nbsp;import org.jsoup.nodes.Element
 <i class="no-highlight">29</i>&nbsp;
-<i class="no-highlight">30</i>&nbsp;public object KillStatisticsParser : Parser&lt;KillStatistics?&gt; {
-<i class="no-highlight">31</i>&nbsp;    override fun fromContent(content: String): KillStatistics? {
-<b class="fc"><i class="no-highlight">32</i>&nbsp;        val boxContent = boxContent(content)</b>
-<b class="fc"><i class="no-highlight">33</i>&nbsp;        val formData =</b>
-<b class="pc"><i class="no-highlight">34</i>&nbsp;            boxContent.selectFirst(&quot;form&quot;)?.formData() ?: throw ParsingException(&quot;Could not find world selection form&quot;)</b>
-<b class="pc"><i class="no-highlight">35</i>&nbsp;        if (formData.values[&quot;world&quot;].isNullOrBlank())</b>
-<b class="fc"><i class="no-highlight">36</i>&nbsp;            return null</b>
-<b class="fc"><i class="no-highlight">37</i>&nbsp;        val tables = boxContent.parseTablesMap(&quot;table.Table1, table.Table3&quot;)</b>
-<b class="fc"><i class="no-highlight">38</i>&nbsp;        return killStatistics {</b>
-<b class="pc"><i class="no-highlight">39</i>&nbsp;            tables[&quot;Kill Statistics&quot;]?.apply {</b>
-<b class="fc"><i class="no-highlight">40</i>&nbsp;                parseKillStatisticsTable(this)</b>
-<b class="fc"><i class="no-highlight">41</i>&nbsp;            } ?: throw ParsingException(&quot;kill statistics table not found&quot;)</b>
-<b class="pc"><i class="no-highlight">42</i>&nbsp;            boxContent.selectFirst(&quot;form&quot;) ?: throw ParsingException(&quot;could not find form in value&quot;)</b>
-<b class="pc"><i class="no-highlight">43</i>&nbsp;            world = formData.values[&quot;world&quot;] ?: throw ParsingException(&quot;could not find world value in form&quot;)</b>
-<b class="fc"><i class="no-highlight">44</i>&nbsp;        }</b>
-<i class="no-highlight">45</i>&nbsp;    }
-<i class="no-highlight">46</i>&nbsp;
-<i class="no-highlight">47</i>&nbsp;    private fun KillStatisticsBuilder.parseKillStatisticsTable(table: Element) {
-<b class="fc"><i class="no-highlight">48</i>&nbsp;        val innerTable = table.selectFirst(&quot;table.TableContent&quot;)</b>
-<b class="fc"><i class="no-highlight">49</i>&nbsp;        for (row in innerTable.rows().offsetStart(2)) {</b>
-<b class="fc"><i class="no-highlight">50</i>&nbsp;            val columnns = row.cellsText()</b>
-<b class="fc"><i class="no-highlight">51</i>&nbsp;            if (columnns[0] == &quot;Total&quot;) {</b>
-<b class="fc"><i class="no-highlight">52</i>&nbsp;                total(</b>
-<b class="fc"><i class="no-highlight">53</i>&nbsp;                    lastDayKilledPlayers = columnns[1].toInt(),</b>
-<b class="fc"><i class="no-highlight">54</i>&nbsp;                    lastDayKilled = columnns[2].toInt(),</b>
-<b class="fc"><i class="no-highlight">55</i>&nbsp;                    lastWeekKilledPlayers = columnns[3].toInt(),</b>
-<b class="fc"><i class="no-highlight">56</i>&nbsp;                    lastWeekKilled = columnns[4].toInt(),</b>
-<i class="no-highlight">57</i>&nbsp;                )
-<i class="no-highlight">58</i>&nbsp;            } else {
-<b class="fc"><i class="no-highlight">59</i>&nbsp;                addEntry(</b>
-<b class="fc"><i class="no-highlight">60</i>&nbsp;                    race = columnns[0],</b>
-<b class="fc"><i class="no-highlight">61</i>&nbsp;                    lastDayKilledPlayers = columnns[1].toInt(),</b>
-<b class="fc"><i class="no-highlight">62</i>&nbsp;                    lastDayKilled = columnns[2].toInt(),</b>
-<b class="fc"><i class="no-highlight">63</i>&nbsp;                    lastWeekKilledPlayers = columnns[3].toInt(),</b>
-<b class="fc"><i class="no-highlight">64</i>&nbsp;                    lastWeekKilled = columnns[4].toInt(),</b>
-<i class="no-highlight">65</i>&nbsp;                )
-<i class="no-highlight">66</i>&nbsp;            }
-<i class="no-highlight">67</i>&nbsp;        }
-<i class="no-highlight">68</i>&nbsp;    }
-<i class="no-highlight">69</i>&nbsp;}
+<i class="no-highlight">30</i>&nbsp;/** Parses content from the Kill Statistics section. */
+<i class="no-highlight">31</i>&nbsp;public object KillStatisticsParser : Parser&lt;KillStatistics?&gt; {
+<i class="no-highlight">32</i>&nbsp;    override fun fromContent(content: String): KillStatistics? {
+<b class="fc"><i class="no-highlight">33</i>&nbsp;        val boxContent = boxContent(content)</b>
+<b class="fc"><i class="no-highlight">34</i>&nbsp;        val formData =</b>
+<b class="pc"><i class="no-highlight">35</i>&nbsp;            boxContent.selectFirst(&quot;form&quot;)?.formData() ?: throw ParsingException(&quot;Could not find world selection form&quot;)</b>
+<b class="pc"><i class="no-highlight">36</i>&nbsp;        if (formData.values[&quot;world&quot;].isNullOrBlank())</b>
+<b class="fc"><i class="no-highlight">37</i>&nbsp;            return null</b>
+<b class="fc"><i class="no-highlight">38</i>&nbsp;        val tables = boxContent.parseTablesMap(&quot;table.Table1, table.Table3&quot;)</b>
+<b class="fc"><i class="no-highlight">39</i>&nbsp;        return killStatistics {</b>
+<b class="pc"><i class="no-highlight">40</i>&nbsp;            tables[&quot;Kill Statistics&quot;]?.apply {</b>
+<b class="fc"><i class="no-highlight">41</i>&nbsp;                parseKillStatisticsTable(this)</b>
+<b class="fc"><i class="no-highlight">42</i>&nbsp;            } ?: throw ParsingException(&quot;kill statistics table not found&quot;)</b>
+<b class="pc"><i class="no-highlight">43</i>&nbsp;            boxContent.selectFirst(&quot;form&quot;) ?: throw ParsingException(&quot;could not find form in value&quot;)</b>
+<b class="pc"><i class="no-highlight">44</i>&nbsp;            world = formData.values[&quot;world&quot;] ?: throw ParsingException(&quot;could not find world value in form&quot;)</b>
+<b class="fc"><i class="no-highlight">45</i>&nbsp;        }</b>
+<i class="no-highlight">46</i>&nbsp;    }
+<i class="no-highlight">47</i>&nbsp;
+<i class="no-highlight">48</i>&nbsp;    private fun KillStatisticsBuilder.parseKillStatisticsTable(table: Element) {
+<b class="fc"><i class="no-highlight">49</i>&nbsp;        val innerTable = table.selectFirst(&quot;table.TableContent&quot;)</b>
+<b class="fc"><i class="no-highlight">50</i>&nbsp;        for (row in innerTable.rows().offsetStart(2)) {</b>
+<b class="fc"><i class="no-highlight">51</i>&nbsp;            val columnns = row.cellsText()</b>
+<b class="fc"><i class="no-highlight">52</i>&nbsp;            if (columnns[0] == &quot;Total&quot;) {</b>
+<b class="fc"><i class="no-highlight">53</i>&nbsp;                total(</b>
+<b class="fc"><i class="no-highlight">54</i>&nbsp;                    lastDayKilledPlayers = columnns[1].toInt(),</b>
+<b class="fc"><i class="no-highlight">55</i>&nbsp;                    lastDayKilled = columnns[2].toInt(),</b>
+<b class="fc"><i class="no-highlight">56</i>&nbsp;                    lastWeekKilledPlayers = columnns[3].toInt(),</b>
+<b class="fc"><i class="no-highlight">57</i>&nbsp;                    lastWeekKilled = columnns[4].toInt(),</b>
+<i class="no-highlight">58</i>&nbsp;                )
+<i class="no-highlight">59</i>&nbsp;            } else {
+<b class="fc"><i class="no-highlight">60</i>&nbsp;                addEntry(</b>
+<b class="fc"><i class="no-highlight">61</i>&nbsp;                    race = columnns[0],</b>
+<b class="fc"><i class="no-highlight">62</i>&nbsp;                    lastDayKilledPlayers = columnns[1].toInt(),</b>
+<b class="fc"><i class="no-highlight">63</i>&nbsp;                    lastDayKilled = columnns[2].toInt(),</b>
+<b class="fc"><i class="no-highlight">64</i>&nbsp;                    lastWeekKilledPlayers = columnns[3].toInt(),</b>
+<b class="fc"><i class="no-highlight">65</i>&nbsp;                    lastWeekKilled = columnns[4].toInt(),</b>
+<i class="no-highlight">66</i>&nbsp;                )
+<i class="no-highlight">67</i>&nbsp;            }
+<i class="no-highlight">68</i>&nbsp;        }
+<i class="no-highlight">69</i>&nbsp;    }
+<i class="no-highlight">70</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -192,7 +193,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-11 06:50</div>
+    <div style="float:right;">generated on 2022-09-11 07:13</div>
 </div>
 </body>
 </html>

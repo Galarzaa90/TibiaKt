@@ -124,34 +124,35 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">25</i>&nbsp;import org.jsoup.Jsoup
 <i class="no-highlight">26</i>&nbsp;import org.jsoup.nodes.Document
 <i class="no-highlight">27</i>&nbsp;
-<i class="no-highlight">28</i>&nbsp;public object GuildsSectionParser : Parser&lt;GuildsSection?&gt; {
-<i class="no-highlight">29</i>&nbsp;    override fun fromContent(content: String): GuildsSection? {
-<b class="fc"><i class="no-highlight">30</i>&nbsp;        val document: Document = Jsoup.parse(content, &quot;&quot;)</b>
-<b class="fc"><i class="no-highlight">31</i>&nbsp;        val boxContent = document.boxContent()</b>
-<b class="fc"><i class="no-highlight">32</i>&nbsp;        val tables = boxContent.select(&quot;table.TableContent&quot;)</b>
-<b class="fc"><i class="no-highlight">33</i>&nbsp;        return guildsSection {</b>
-<b class="pc"><i class="no-highlight">34</i>&nbsp;            val selectedWorld = boxContent.selectFirst(&quot;select[name=world]&quot;)?.selectFirst(&quot;option[selected]&quot;)</b>
-<b class="nc"><i class="no-highlight">35</i>&nbsp;                ?: throw ParsingException(&quot;Could not find selected world&quot;)</b>
-<b class="fc"><i class="no-highlight">36</i>&nbsp;            if (selectedWorld.attr(&quot;value&quot;).isBlank())</b>
-<b class="fc"><i class="no-highlight">37</i>&nbsp;                return null</b>
-<b class="fc"><i class="no-highlight">38</i>&nbsp;            world = selectedWorld.cleanText()</b>
-<b class="fc"><i class="no-highlight">39</i>&nbsp;            for ((index, table) in tables.withIndex()) {</b>
-<b class="fc"><i class="no-highlight">40</i>&nbsp;                val isActive = index == 0</b>
-<b class="pc"><i class="no-highlight">41</i>&nbsp;                val rows = table?.select(&quot;tr&quot;).orEmpty()</b>
-<b class="fc"><i class="no-highlight">42</i>&nbsp;                for (row in rows.offsetStart(1)) {</b>
-<b class="fc"><i class="no-highlight">43</i>&nbsp;                    val (logoColumn, nameColumn, _) = row.select(&quot;td&quot;)</b>
-<b class="pc"><i class="no-highlight">44</i>&nbsp;                    val nameContainer = nameColumn.selectFirst(&quot;b&quot;) ?: continue</b>
-<b class="fc"><i class="no-highlight">45</i>&nbsp;                    val logoUrl =</b>
-<b class="pc"><i class="no-highlight">46</i>&nbsp;                        logoColumn.selectFirst(&quot;img&quot;)?.attr(&quot;src&quot;) ?: throw ParsingException(&quot;could not find logo URL&quot;)</b>
-<b class="fc"><i class="no-highlight">47</i>&nbsp;                    val name = nameContainer.cleanText()</b>
-<b class="fc"><i class="no-highlight">48</i>&nbsp;                    nameContainer.remove()</b>
-<b class="fc"><i class="no-highlight">49</i>&nbsp;                    val description = nameColumn.cleanText().ifBlank { null }</b>
-<b class="fc"><i class="no-highlight">50</i>&nbsp;                    addGuild(name, logoUrl, description, isActive)</b>
-<i class="no-highlight">51</i>&nbsp;                }
-<i class="no-highlight">52</i>&nbsp;            }
-<b class="fc"><i class="no-highlight">53</i>&nbsp;        }</b>
-<i class="no-highlight">54</i>&nbsp;    }
-<i class="no-highlight">55</i>&nbsp;}
+<i class="no-highlight">28</i>&nbsp;/** Parser for the guild section. */
+<i class="no-highlight">29</i>&nbsp;public object GuildsSectionParser : Parser&lt;GuildsSection?&gt; {
+<i class="no-highlight">30</i>&nbsp;    override fun fromContent(content: String): GuildsSection? {
+<b class="fc"><i class="no-highlight">31</i>&nbsp;        val document: Document = Jsoup.parse(content, &quot;&quot;)</b>
+<b class="fc"><i class="no-highlight">32</i>&nbsp;        val boxContent = document.boxContent()</b>
+<b class="fc"><i class="no-highlight">33</i>&nbsp;        val tables = boxContent.select(&quot;table.TableContent&quot;)</b>
+<b class="fc"><i class="no-highlight">34</i>&nbsp;        return guildsSection {</b>
+<b class="pc"><i class="no-highlight">35</i>&nbsp;            val selectedWorld = boxContent.selectFirst(&quot;select[name=world]&quot;)?.selectFirst(&quot;option[selected]&quot;)</b>
+<b class="nc"><i class="no-highlight">36</i>&nbsp;                ?: throw ParsingException(&quot;Could not find selected world&quot;)</b>
+<b class="fc"><i class="no-highlight">37</i>&nbsp;            if (selectedWorld.attr(&quot;value&quot;).isBlank())</b>
+<b class="fc"><i class="no-highlight">38</i>&nbsp;                return null</b>
+<b class="fc"><i class="no-highlight">39</i>&nbsp;            world = selectedWorld.cleanText()</b>
+<b class="fc"><i class="no-highlight">40</i>&nbsp;            for ((index, table) in tables.withIndex()) {</b>
+<b class="fc"><i class="no-highlight">41</i>&nbsp;                val isActive = index == 0</b>
+<b class="pc"><i class="no-highlight">42</i>&nbsp;                val rows = table?.select(&quot;tr&quot;).orEmpty()</b>
+<b class="fc"><i class="no-highlight">43</i>&nbsp;                for (row in rows.offsetStart(1)) {</b>
+<b class="fc"><i class="no-highlight">44</i>&nbsp;                    val (logoColumn, nameColumn, _) = row.select(&quot;td&quot;)</b>
+<b class="pc"><i class="no-highlight">45</i>&nbsp;                    val nameContainer = nameColumn.selectFirst(&quot;b&quot;) ?: continue</b>
+<b class="fc"><i class="no-highlight">46</i>&nbsp;                    val logoUrl =</b>
+<b class="pc"><i class="no-highlight">47</i>&nbsp;                        logoColumn.selectFirst(&quot;img&quot;)?.attr(&quot;src&quot;) ?: throw ParsingException(&quot;could not find logo URL&quot;)</b>
+<b class="fc"><i class="no-highlight">48</i>&nbsp;                    val name = nameContainer.cleanText()</b>
+<b class="fc"><i class="no-highlight">49</i>&nbsp;                    nameContainer.remove()</b>
+<b class="fc"><i class="no-highlight">50</i>&nbsp;                    val description = nameColumn.cleanText().ifBlank { null }</b>
+<b class="fc"><i class="no-highlight">51</i>&nbsp;                    addGuild(name, logoUrl, description, isActive)</b>
+<i class="no-highlight">52</i>&nbsp;                }
+<i class="no-highlight">53</i>&nbsp;            }
+<b class="fc"><i class="no-highlight">54</i>&nbsp;        }</b>
+<i class="no-highlight">55</i>&nbsp;    }
+<i class="no-highlight">56</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -178,7 +179,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-11 06:50</div>
+    <div style="float:right;">generated on 2022-09-11 07:13</div>
 </div>
 </body>
 </html>

@@ -125,50 +125,51 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">33</i>&nbsp;@BuilderDsl
 <b class="fc"><i class="no-highlight">34</i>&nbsp;public inline fun world(block: WorldBuilder.() -&gt; Unit): World = worldBuilder(block).build()</b>
 <i class="no-highlight">35</i>&nbsp;
-<i class="no-highlight">36</i>&nbsp;@BuilderDsl
-<i class="no-highlight">37</i>&nbsp;public class WorldBuilder : TibiaKtBuilder&lt;World&gt; {
-<i class="no-highlight">38</i>&nbsp;    public var name: String? = null
-<i class="no-highlight">39</i>&nbsp;    public var isOnline: Boolean = false
-<i class="no-highlight">40</i>&nbsp;    public var onlineCount: Int = 0
-<i class="no-highlight">41</i>&nbsp;    public var location: String? = null
-<i class="no-highlight">42</i>&nbsp;    public var pvpType: PvpType? = null
-<i class="no-highlight">43</i>&nbsp;    public var battlEyeType: BattlEyeType = BattlEyeType.UNPROTECTED
-<i class="no-highlight">44</i>&nbsp;    public var battlEyeStartDate: LocalDate? = null
-<i class="no-highlight">45</i>&nbsp;    public var transferType: TransferType = TransferType.REGULAR
-<i class="no-highlight">46</i>&nbsp;    public var isPremiumRestricted: Boolean = false
-<i class="no-highlight">47</i>&nbsp;    public var isExperimental: Boolean = false
-<i class="no-highlight">48</i>&nbsp;    public var onlineRecordCount: Int = 0
-<i class="no-highlight">49</i>&nbsp;    public var onlineRecordDateTime: Instant? = null
-<i class="no-highlight">50</i>&nbsp;    public var creationDate: YearMonth? = null
-<i class="no-highlight">51</i>&nbsp;    public val worldQuests: MutableList&lt;String&gt; = mutableListOf()
-<i class="no-highlight">52</i>&nbsp;    public val playersOnline: MutableList&lt;OnlineCharacter&gt; = mutableListOf()
-<i class="no-highlight">53</i>&nbsp;
-<i class="no-highlight">54</i>&nbsp;    public fun worldQuest(quest: String): Boolean = worldQuests.add(quest)
-<i class="no-highlight">55</i>&nbsp;    public fun addOnlinePlayer(name: String, level: Int, vocation: Vocation): Boolean =
-<i class="no-highlight">56</i>&nbsp;        playersOnline.add(OnlineCharacter(name, level, vocation))
-<i class="no-highlight">57</i>&nbsp;
+<i class="no-highlight">36</i>&nbsp;/** Builder for [World] instances. */
+<i class="no-highlight">37</i>&nbsp;@BuilderDsl
+<i class="no-highlight">38</i>&nbsp;public class WorldBuilder : TibiaKtBuilder&lt;World&gt; {
+<i class="no-highlight">39</i>&nbsp;    public var name: String? = null
+<i class="no-highlight">40</i>&nbsp;    public var isOnline: Boolean = false
+<i class="no-highlight">41</i>&nbsp;    public var onlineCount: Int = 0
+<i class="no-highlight">42</i>&nbsp;    public var location: String? = null
+<i class="no-highlight">43</i>&nbsp;    public var pvpType: PvpType? = null
+<i class="no-highlight">44</i>&nbsp;    public var battlEyeType: BattlEyeType = BattlEyeType.UNPROTECTED
+<i class="no-highlight">45</i>&nbsp;    public var battlEyeStartDate: LocalDate? = null
+<i class="no-highlight">46</i>&nbsp;    public var transferType: TransferType = TransferType.REGULAR
+<i class="no-highlight">47</i>&nbsp;    public var isPremiumRestricted: Boolean = false
+<i class="no-highlight">48</i>&nbsp;    public var isExperimental: Boolean = false
+<i class="no-highlight">49</i>&nbsp;    public var onlineRecordCount: Int = 0
+<i class="no-highlight">50</i>&nbsp;    public var onlineRecordDateTime: Instant? = null
+<i class="no-highlight">51</i>&nbsp;    public var creationDate: YearMonth? = null
+<i class="no-highlight">52</i>&nbsp;    public val worldQuests: MutableList&lt;String&gt; = mutableListOf()
+<i class="no-highlight">53</i>&nbsp;    public val playersOnline: MutableList&lt;OnlineCharacter&gt; = mutableListOf()
+<i class="no-highlight">54</i>&nbsp;
+<i class="no-highlight">55</i>&nbsp;    public fun worldQuest(quest: String): Boolean = worldQuests.add(quest)
+<i class="no-highlight">56</i>&nbsp;    public fun addOnlinePlayer(name: String, level: Int, vocation: Vocation): Boolean =
+<i class="no-highlight">57</i>&nbsp;        playersOnline.add(OnlineCharacter(name, level, vocation))
 <i class="no-highlight">58</i>&nbsp;
-<i class="no-highlight">59</i>&nbsp;    override fun build(): World {
-<i class="no-highlight">60</i>&nbsp;        return World(
-<i class="no-highlight">61</i>&nbsp;            name = name ?: error(&quot;name is required&quot;),
-<i class="no-highlight">62</i>&nbsp;            isOnline = isOnline,
-<i class="no-highlight">63</i>&nbsp;            onlineCount = onlineCount,
-<i class="no-highlight">64</i>&nbsp;            location = location ?: error(&quot;location is required&quot;),
-<i class="no-highlight">65</i>&nbsp;            pvpType = pvpType ?: error(&quot;pvpType is required&quot;),
-<i class="no-highlight">66</i>&nbsp;            battlEyeType = battlEyeType,
-<i class="no-highlight">67</i>&nbsp;            battlEyeStartDate = battlEyeStartDate,
-<i class="no-highlight">68</i>&nbsp;            transferType = transferType,
-<i class="no-highlight">69</i>&nbsp;            isPremiumRestricted = isPremiumRestricted,
-<i class="no-highlight">70</i>&nbsp;            onlineRecordCount = onlineRecordCount,
-<i class="no-highlight">71</i>&nbsp;            onlineRecordDateTime = onlineRecordDateTime
-<i class="no-highlight">72</i>&nbsp;                ?: error(&quot;onlineRecordDateTime is required&quot;),
-<i class="no-highlight">73</i>&nbsp;            isExperimental = isExperimental,
-<i class="no-highlight">74</i>&nbsp;            creationDate = creationDate ?: error(&quot;creationDate is required&quot;),
-<i class="no-highlight">75</i>&nbsp;            playersOnline = playersOnline,
-<i class="no-highlight">76</i>&nbsp;            worldQuests = worldQuests,
-<i class="no-highlight">77</i>&nbsp;        )
-<i class="no-highlight">78</i>&nbsp;    }
-<i class="no-highlight">79</i>&nbsp;}
+<i class="no-highlight">59</i>&nbsp;
+<i class="no-highlight">60</i>&nbsp;    override fun build(): World {
+<i class="no-highlight">61</i>&nbsp;        return World(
+<i class="no-highlight">62</i>&nbsp;            name = name ?: error(&quot;name is required&quot;),
+<i class="no-highlight">63</i>&nbsp;            isOnline = isOnline,
+<i class="no-highlight">64</i>&nbsp;            onlineCount = onlineCount,
+<i class="no-highlight">65</i>&nbsp;            location = location ?: error(&quot;location is required&quot;),
+<i class="no-highlight">66</i>&nbsp;            pvpType = pvpType ?: error(&quot;pvpType is required&quot;),
+<i class="no-highlight">67</i>&nbsp;            battlEyeType = battlEyeType,
+<i class="no-highlight">68</i>&nbsp;            battlEyeStartDate = battlEyeStartDate,
+<i class="no-highlight">69</i>&nbsp;            transferType = transferType,
+<i class="no-highlight">70</i>&nbsp;            isPremiumRestricted = isPremiumRestricted,
+<i class="no-highlight">71</i>&nbsp;            onlineRecordCount = onlineRecordCount,
+<i class="no-highlight">72</i>&nbsp;            onlineRecordDateTime = onlineRecordDateTime
+<i class="no-highlight">73</i>&nbsp;                ?: error(&quot;onlineRecordDateTime is required&quot;),
+<i class="no-highlight">74</i>&nbsp;            isExperimental = isExperimental,
+<i class="no-highlight">75</i>&nbsp;            creationDate = creationDate ?: error(&quot;creationDate is required&quot;),
+<i class="no-highlight">76</i>&nbsp;            playersOnline = playersOnline,
+<i class="no-highlight">77</i>&nbsp;            worldQuests = worldQuests,
+<i class="no-highlight">78</i>&nbsp;        )
+<i class="no-highlight">79</i>&nbsp;    }
+<i class="no-highlight">80</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -195,7 +196,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-11 06:50</div>
+    <div style="float:right;">generated on 2022-09-11 07:13</div>
 </div>
 </body>
 </html>

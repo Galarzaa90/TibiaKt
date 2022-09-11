@@ -185,39 +185,40 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">28</i>&nbsp;public inline fun creaturesSectionBuilder(block: CreaturesSectionBuilder.() -&gt; Unit): CreaturesSectionBuilder =
 <i class="no-highlight">29</i>&nbsp;    CreaturesSectionBuilder().apply(block)
 <i class="no-highlight">30</i>&nbsp;
-<b class="fc"><i class="no-highlight">31</i>&nbsp;@BuilderDsl</b>
-<i class="no-highlight">32</i>&nbsp;public class CreaturesSectionBuilder : TibiaKtBuilder&lt;CreaturesSection&gt; {
-<b class="nc"><i class="no-highlight">33</i>&nbsp;    public var boostedCreature: CreatureEntry? = null</b>
-<b class="fc"><i class="no-highlight">34</i>&nbsp;    public val creatures: MutableList&lt;CreatureEntry&gt; = mutableListOf()</b>
-<i class="no-highlight">35</i>&nbsp;
-<i class="no-highlight">36</i>&nbsp;    public fun boostedCreature(boostedCreature: CreatureEntry): CreaturesSectionBuilder =
-<b class="nc"><i class="no-highlight">37</i>&nbsp;        apply { this.boostedCreature = boostedCreature }</b>
-<i class="no-highlight">38</i>&nbsp;
-<i class="no-highlight">39</i>&nbsp;    public fun boostedCreature(block: CreatureEntryBuilder.() -&gt; Unit): CreaturesSectionBuilder =
-<b class="fc"><i class="no-highlight">40</i>&nbsp;        apply { this.boostedCreature = CreatureEntryBuilder().apply(block).build() }</b>
-<i class="no-highlight">41</i>&nbsp;
-<b class="nc"><i class="no-highlight">42</i>&nbsp;    public fun addCreature(creature: CreatureEntry): CreaturesSectionBuilder = apply { creatures.add(creature) }</b>
-<i class="no-highlight">43</i>&nbsp;
-<i class="no-highlight">44</i>&nbsp;    @BuilderDsl
-<i class="no-highlight">45</i>&nbsp;    public fun addCreature(block: CreatureEntryBuilder.() -&gt; Unit): CreaturesSectionBuilder =
-<b class="fc"><i class="no-highlight">46</i>&nbsp;        apply { creatures.add(CreatureEntryBuilder().apply(block).build()) }</b>
-<i class="no-highlight">47</i>&nbsp;
-<b class="fc"><i class="no-highlight">48</i>&nbsp;    public override fun build(): CreaturesSection = CreaturesSection(</b>
-<b class="pc"><i class="no-highlight">49</i>&nbsp;        boostedCreature = boostedCreature</b>
-<b class="nc"><i class="no-highlight">50</i>&nbsp;            ?: throw IllegalArgumentException(&quot;boostedCreature is required&quot;), creatures = creatures</b>
-<i class="no-highlight">51</i>&nbsp;    )
-<i class="no-highlight">52</i>&nbsp;
-<b class="fc"><i class="no-highlight">53</i>&nbsp;    @BuilderDsl</b>
-<i class="no-highlight">54</i>&nbsp;    public class CreatureEntryBuilder : TibiaKtBuilder&lt;CreatureEntry&gt; {
-<b class="fc"><i class="no-highlight">55</i>&nbsp;        public lateinit var name: String</b>
-<b class="fc"><i class="no-highlight">56</i>&nbsp;        public lateinit var identifier: String</b>
-<i class="no-highlight">57</i>&nbsp;
-<b class="fc"><i class="no-highlight">58</i>&nbsp;        public override fun build(): CreatureEntry = CreatureEntry(</b>
-<b class="pc"><i class="no-highlight">59</i>&nbsp;            name = if (::name.isInitialized) name else error(&quot;name is required&quot;),</b>
-<b class="pc"><i class="no-highlight">60</i>&nbsp;            identifier = if (::identifier.isInitialized) identifier else error(&quot;identifier is required&quot;),</b>
-<i class="no-highlight">61</i>&nbsp;        )
-<i class="no-highlight">62</i>&nbsp;    }
-<i class="no-highlight">63</i>&nbsp;}
+<i class="no-highlight">31</i>&nbsp;/** Builder for [CreaturesSection] instances. */
+<b class="fc"><i class="no-highlight">32</i>&nbsp;@BuilderDsl</b>
+<i class="no-highlight">33</i>&nbsp;public class CreaturesSectionBuilder : TibiaKtBuilder&lt;CreaturesSection&gt; {
+<b class="nc"><i class="no-highlight">34</i>&nbsp;    public var boostedCreature: CreatureEntry? = null</b>
+<b class="fc"><i class="no-highlight">35</i>&nbsp;    public val creatures: MutableList&lt;CreatureEntry&gt; = mutableListOf()</b>
+<i class="no-highlight">36</i>&nbsp;
+<i class="no-highlight">37</i>&nbsp;    public fun boostedCreature(boostedCreature: CreatureEntry): CreaturesSectionBuilder =
+<b class="nc"><i class="no-highlight">38</i>&nbsp;        apply { this.boostedCreature = boostedCreature }</b>
+<i class="no-highlight">39</i>&nbsp;
+<i class="no-highlight">40</i>&nbsp;    public fun boostedCreature(block: CreatureEntryBuilder.() -&gt; Unit): CreaturesSectionBuilder =
+<b class="fc"><i class="no-highlight">41</i>&nbsp;        apply { this.boostedCreature = CreatureEntryBuilder().apply(block).build() }</b>
+<i class="no-highlight">42</i>&nbsp;
+<b class="nc"><i class="no-highlight">43</i>&nbsp;    public fun addCreature(creature: CreatureEntry): CreaturesSectionBuilder = apply { creatures.add(creature) }</b>
+<i class="no-highlight">44</i>&nbsp;
+<i class="no-highlight">45</i>&nbsp;    @BuilderDsl
+<i class="no-highlight">46</i>&nbsp;    public fun addCreature(block: CreatureEntryBuilder.() -&gt; Unit): CreaturesSectionBuilder =
+<b class="fc"><i class="no-highlight">47</i>&nbsp;        apply { creatures.add(CreatureEntryBuilder().apply(block).build()) }</b>
+<i class="no-highlight">48</i>&nbsp;
+<b class="fc"><i class="no-highlight">49</i>&nbsp;    public override fun build(): CreaturesSection = CreaturesSection(</b>
+<b class="pc"><i class="no-highlight">50</i>&nbsp;        boostedCreature = boostedCreature</b>
+<b class="nc"><i class="no-highlight">51</i>&nbsp;            ?: throw IllegalArgumentException(&quot;boostedCreature is required&quot;), creatures = creatures</b>
+<i class="no-highlight">52</i>&nbsp;    )
+<i class="no-highlight">53</i>&nbsp;
+<b class="fc"><i class="no-highlight">54</i>&nbsp;    @BuilderDsl</b>
+<i class="no-highlight">55</i>&nbsp;    public class CreatureEntryBuilder : TibiaKtBuilder&lt;CreatureEntry&gt; {
+<b class="fc"><i class="no-highlight">56</i>&nbsp;        public lateinit var name: String</b>
+<b class="fc"><i class="no-highlight">57</i>&nbsp;        public lateinit var identifier: String</b>
+<i class="no-highlight">58</i>&nbsp;
+<b class="fc"><i class="no-highlight">59</i>&nbsp;        public override fun build(): CreatureEntry = CreatureEntry(</b>
+<b class="pc"><i class="no-highlight">60</i>&nbsp;            name = if (::name.isInitialized) name else error(&quot;name is required&quot;),</b>
+<b class="pc"><i class="no-highlight">61</i>&nbsp;            identifier = if (::identifier.isInitialized) identifier else error(&quot;identifier is required&quot;),</b>
+<i class="no-highlight">62</i>&nbsp;        )
+<i class="no-highlight">63</i>&nbsp;    }
+<i class="no-highlight">64</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -244,7 +245,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-11 06:50</div>
+    <div style="float:right;">generated on 2022-09-11 07:13</div>
 </div>
 </body>
 </html>

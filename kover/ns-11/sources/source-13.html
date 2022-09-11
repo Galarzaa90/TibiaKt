@@ -155,91 +155,108 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.parsers
-<i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.builders.NewsArchiveBuilder
-<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.builders.newsArchive
-<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.enums.NewsCategory
-<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.enums.NewsType
-<i class="no-highlight">7</i>&nbsp;import com.galarzaa.tibiakt.core.enums.StringEnum
-<i class="no-highlight">8</i>&nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
-<i class="no-highlight">9</i>&nbsp;import com.galarzaa.tibiakt.core.models.news.NewsArchive
-<i class="no-highlight">10</i>&nbsp;import com.galarzaa.tibiakt.core.utils.cells
-<i class="no-highlight">11</i>&nbsp;import com.galarzaa.tibiakt.core.utils.cleanText
-<i class="no-highlight">12</i>&nbsp;import com.galarzaa.tibiakt.core.utils.formData
-<i class="no-highlight">13</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getLinkInformation
-<i class="no-highlight">14</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseTablesMap
-<i class="no-highlight">15</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseTibiaDate
-<i class="no-highlight">16</i>&nbsp;import com.galarzaa.tibiakt.core.utils.rows
-<i class="no-highlight">17</i>&nbsp;import org.jsoup.Jsoup
-<i class="no-highlight">18</i>&nbsp;import org.jsoup.nodes.Document
-<i class="no-highlight">19</i>&nbsp;import org.jsoup.nodes.Element
-<i class="no-highlight">20</i>&nbsp;import java.time.LocalDate
-<i class="no-highlight">21</i>&nbsp;
-<i class="no-highlight">22</i>&nbsp;public object NewsArchiveParser : Parser&lt;NewsArchive&gt; {
-<i class="no-highlight">23</i>&nbsp;    override fun fromContent(content: String): NewsArchive {
-<b class="fc"><i class="no-highlight">24</i>&nbsp;        val document: Document = Jsoup.parse(content)</b>
-<b class="fc"><i class="no-highlight">25</i>&nbsp;        val boxContent =</b>
-<b class="pc"><i class="no-highlight">26</i>&nbsp;            document.selectFirst(&quot;div.BoxContent&quot;) ?: throw ParsingException(&quot;BoxContent container not found&quot;)</b>
-<b class="fc"><i class="no-highlight">27</i>&nbsp;        val tables = boxContent.parseTablesMap()</b>
-<b class="pc"><i class="no-highlight">28</i>&nbsp;        if (!tables.containsKey(&quot;News Archive Search&quot;)) throw ParsingException(&quot;news search not found in page&quot;)</b>
-<b class="fc"><i class="no-highlight">29</i>&nbsp;        return newsArchive {</b>
-<b class="pc"><i class="no-highlight">30</i>&nbsp;            boxContent.selectFirst(&quot;form&quot;)?.apply {</b>
-<b class="fc"><i class="no-highlight">31</i>&nbsp;                parseFilterTable(this)</b>
-<b class="fc"><i class="no-highlight">32</i>&nbsp;            }</b>
-<b class="pc"><i class="no-highlight">33</i>&nbsp;            tables[&quot;Search Results&quot;]?.let { parseResultsTable(it) }</b>
-<i class="no-highlight">34</i>&nbsp;        }
-<i class="no-highlight">35</i>&nbsp;    }
-<i class="no-highlight">36</i>&nbsp;
-<i class="no-highlight">37</i>&nbsp;    private fun NewsArchiveBuilder.parseResultsTable(table: Element) {
-<b class="fc"><i class="no-highlight">38</i>&nbsp;        for (row in table.rows()) {</b>
-<b class="fc"><i class="no-highlight">39</i>&nbsp;            val (iconColumn, dateColumn, titleColumn) = row.cells()</b>
-<b class="fc"><i class="no-highlight">40</i>&nbsp;            val iconUrl =</b>
-<b class="pc"><i class="no-highlight">41</i>&nbsp;                iconColumn.selectFirst(&quot;img&quot;)?.attr(&quot;src&quot;) ?: throw ParsingException(&quot;category icon not found&quot;)</b>
-<b class="fc"><i class="no-highlight">42</i>&nbsp;            val category =</b>
-<b class="pc"><i class="no-highlight">43</i>&nbsp;                NewsCategory.fromIcon(iconUrl) ?: throw ParsingException(&quot;unknown category icon found: $iconUrl&quot;)</b>
-<b class="pc"><i class="no-highlight">44</i>&nbsp;            val newsId = titleColumn.selectFirst(&quot;a&quot;)?.getLinkInformation()?.queryParams?.get(&quot;id&quot;)?.get(0)?.toInt()</b>
-<b class="nc"><i class="no-highlight">45</i>&nbsp;                ?: throw ParsingException(&quot;Could not find link&quot;)</b>
-<i class="no-highlight">46</i>&nbsp;
-<b class="pc"><i class="no-highlight">47</i>&nbsp;            val typeLabel = dateColumn.selectFirst(&quot;small&quot;) ?: throw ParsingException(&quot;could not find type label&quot;)</b>
-<b class="fc"><i class="no-highlight">48</i>&nbsp;            val newsType = typeLabel.cleanText()</b>
-<b class="fc"><i class="no-highlight">49</i>&nbsp;            typeLabel.remove()</b>
-<b class="fc"><i class="no-highlight">50</i>&nbsp;            addEntry(newsId,</b>
-<b class="fc"><i class="no-highlight">51</i>&nbsp;                titleColumn.cleanText(),</b>
-<b class="fc"><i class="no-highlight">52</i>&nbsp;                category,</b>
-<b class="fc"><i class="no-highlight">53</i>&nbsp;                iconUrl,</b>
-<b class="fc"><i class="no-highlight">54</i>&nbsp;                parseTibiaDate(dateColumn.cleanText()),</b>
-<b class="pc"><i class="no-highlight">55</i>&nbsp;                StringEnum.fromValue(newsType) ?: throw ParsingException(&quot;unexpected news type found: $newsType&quot;))</b>
-<i class="no-highlight">56</i>&nbsp;        }
-<i class="no-highlight">57</i>&nbsp;    }
-<i class="no-highlight">58</i>&nbsp;
-<i class="no-highlight">59</i>&nbsp;    private fun NewsArchiveBuilder.parseFilterTable(element: Element) {
-<b class="fc"><i class="no-highlight">60</i>&nbsp;        val formData = element.formData()</b>
-<b class="fc"><i class="no-highlight">61</i>&nbsp;        startDate = LocalDate.of(</b>
-<b class="pc"><i class="no-highlight">62</i>&nbsp;            formData.values[&quot;filter_begin_year&quot;]?.toInt()</b>
-<b class="nc"><i class="no-highlight">63</i>&nbsp;                ?: throw ParsingException(&quot;could not find filter_begin_year in form&quot;),</b>
-<b class="pc"><i class="no-highlight">64</i>&nbsp;            formData.values[&quot;filter_begin_month&quot;]?.toInt()</b>
-<b class="nc"><i class="no-highlight">65</i>&nbsp;                ?: throw ParsingException(&quot;could not find filter_begin_month in form&quot;),</b>
-<b class="pc"><i class="no-highlight">66</i>&nbsp;            formData.values[&quot;filter_begin_day&quot;]?.toInt()</b>
-<b class="nc"><i class="no-highlight">67</i>&nbsp;                ?: throw ParsingException(&quot;could not find filter_begin_day in form&quot;),</b>
-<i class="no-highlight">68</i>&nbsp;        )
-<b class="fc"><i class="no-highlight">69</i>&nbsp;        endDate = LocalDate.of(</b>
-<b class="pc"><i class="no-highlight">70</i>&nbsp;            formData.values[&quot;filter_end_year&quot;]?.toInt()</b>
-<b class="nc"><i class="no-highlight">71</i>&nbsp;                ?: throw ParsingException(&quot;could not find filter_end_year in form&quot;),</b>
-<b class="pc"><i class="no-highlight">72</i>&nbsp;            formData.values[&quot;filter_end_month&quot;]?.toInt()</b>
-<b class="nc"><i class="no-highlight">73</i>&nbsp;                ?: throw ParsingException(&quot;could not find filter_end_month in form&quot;),</b>
-<b class="pc"><i class="no-highlight">74</i>&nbsp;            formData.values[&quot;filter_end_day&quot;]?.toInt()</b>
-<b class="nc"><i class="no-highlight">75</i>&nbsp;                ?: throw ParsingException(&quot;could not find filter_end_day in form&quot;),</b>
-<i class="no-highlight">76</i>&nbsp;        )
-<i class="no-highlight">77</i>&nbsp;
-<b class="fc"><i class="no-highlight">78</i>&nbsp;        for (value in NewsCategory.values()) {</b>
-<b class="pc"><i class="no-highlight">79</i>&nbsp;            if (!formData.valuesMultiple[value.filterName].isNullOrEmpty()) addCategory(value)</b>
-<i class="no-highlight">80</i>&nbsp;        }
-<b class="fc"><i class="no-highlight">81</i>&nbsp;        for (value in NewsType.values()) {</b>
-<b class="pc"><i class="no-highlight">82</i>&nbsp;            if (!formData.valuesMultiple[value.filterName].isNullOrEmpty()) addType(value)</b>
-<i class="no-highlight">83</i>&nbsp;        }
-<i class="no-highlight">84</i>&nbsp;    }
-<i class="no-highlight">85</i>&nbsp;}
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;/*
+<i class="no-highlight">2</i>&nbsp; * Copyright © 2022 Allan Galarza
+<i class="no-highlight">3</i>&nbsp; *
+<i class="no-highlight">4</i>&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+<i class="no-highlight">5</i>&nbsp; * you may not use this file except in compliance with the License.
+<i class="no-highlight">6</i>&nbsp; * You may obtain a copy of the License at
+<i class="no-highlight">7</i>&nbsp; *
+<i class="no-highlight">8</i>&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+<i class="no-highlight">9</i>&nbsp; *
+<i class="no-highlight">10</i>&nbsp; * Unless required by applicable law or agreed to in writing, software
+<i class="no-highlight">11</i>&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+<i class="no-highlight">12</i>&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+<i class="no-highlight">13</i>&nbsp; * See the License for the specific language governing permissions and
+<i class="no-highlight">14</i>&nbsp; * limitations under the License.
+<i class="no-highlight">15</i>&nbsp; */
+<i class="no-highlight">16</i>&nbsp;
+<i class="no-highlight">17</i>&nbsp;package com.galarzaa.tibiakt.core.parsers
+<i class="no-highlight">18</i>&nbsp;
+<i class="no-highlight">19</i>&nbsp;import com.galarzaa.tibiakt.core.builders.NewsArchiveBuilder
+<i class="no-highlight">20</i>&nbsp;import com.galarzaa.tibiakt.core.builders.newsArchive
+<i class="no-highlight">21</i>&nbsp;import com.galarzaa.tibiakt.core.enums.NewsCategory
+<i class="no-highlight">22</i>&nbsp;import com.galarzaa.tibiakt.core.enums.NewsType
+<i class="no-highlight">23</i>&nbsp;import com.galarzaa.tibiakt.core.enums.StringEnum
+<i class="no-highlight">24</i>&nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
+<i class="no-highlight">25</i>&nbsp;import com.galarzaa.tibiakt.core.models.news.NewsArchive
+<i class="no-highlight">26</i>&nbsp;import com.galarzaa.tibiakt.core.utils.cells
+<i class="no-highlight">27</i>&nbsp;import com.galarzaa.tibiakt.core.utils.cleanText
+<i class="no-highlight">28</i>&nbsp;import com.galarzaa.tibiakt.core.utils.formData
+<i class="no-highlight">29</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getLinkInformation
+<i class="no-highlight">30</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseTablesMap
+<i class="no-highlight">31</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseTibiaDate
+<i class="no-highlight">32</i>&nbsp;import com.galarzaa.tibiakt.core.utils.rows
+<i class="no-highlight">33</i>&nbsp;import org.jsoup.Jsoup
+<i class="no-highlight">34</i>&nbsp;import org.jsoup.nodes.Document
+<i class="no-highlight">35</i>&nbsp;import org.jsoup.nodes.Element
+<i class="no-highlight">36</i>&nbsp;import java.time.LocalDate
+<i class="no-highlight">37</i>&nbsp;
+<i class="no-highlight">38</i>&nbsp;/** Parses content from the news archive. */
+<i class="no-highlight">39</i>&nbsp;public object NewsArchiveParser : Parser&lt;NewsArchive&gt; {
+<i class="no-highlight">40</i>&nbsp;    override fun fromContent(content: String): NewsArchive {
+<b class="fc"><i class="no-highlight">41</i>&nbsp;        val document: Document = Jsoup.parse(content)</b>
+<b class="fc"><i class="no-highlight">42</i>&nbsp;        val boxContent =</b>
+<b class="pc"><i class="no-highlight">43</i>&nbsp;            document.selectFirst(&quot;div.BoxContent&quot;) ?: throw ParsingException(&quot;BoxContent container not found&quot;)</b>
+<b class="fc"><i class="no-highlight">44</i>&nbsp;        val tables = boxContent.parseTablesMap()</b>
+<b class="pc"><i class="no-highlight">45</i>&nbsp;        if (!tables.containsKey(&quot;News Archive Search&quot;)) throw ParsingException(&quot;news search not found in page&quot;)</b>
+<b class="fc"><i class="no-highlight">46</i>&nbsp;        return newsArchive {</b>
+<b class="pc"><i class="no-highlight">47</i>&nbsp;            boxContent.selectFirst(&quot;form&quot;)?.apply {</b>
+<b class="fc"><i class="no-highlight">48</i>&nbsp;                parseFilterTable(this)</b>
+<b class="fc"><i class="no-highlight">49</i>&nbsp;            }</b>
+<b class="pc"><i class="no-highlight">50</i>&nbsp;            tables[&quot;Search Results&quot;]?.let { parseResultsTable(it) }</b>
+<i class="no-highlight">51</i>&nbsp;        }
+<i class="no-highlight">52</i>&nbsp;    }
+<i class="no-highlight">53</i>&nbsp;
+<i class="no-highlight">54</i>&nbsp;    private fun NewsArchiveBuilder.parseResultsTable(table: Element) {
+<b class="fc"><i class="no-highlight">55</i>&nbsp;        for (row in table.rows()) {</b>
+<b class="fc"><i class="no-highlight">56</i>&nbsp;            val (iconColumn, dateColumn, titleColumn) = row.cells()</b>
+<b class="fc"><i class="no-highlight">57</i>&nbsp;            val iconUrl =</b>
+<b class="pc"><i class="no-highlight">58</i>&nbsp;                iconColumn.selectFirst(&quot;img&quot;)?.attr(&quot;src&quot;) ?: throw ParsingException(&quot;category icon not found&quot;)</b>
+<b class="fc"><i class="no-highlight">59</i>&nbsp;            val category =</b>
+<b class="pc"><i class="no-highlight">60</i>&nbsp;                NewsCategory.fromIcon(iconUrl) ?: throw ParsingException(&quot;unknown category icon found: $iconUrl&quot;)</b>
+<b class="pc"><i class="no-highlight">61</i>&nbsp;            val newsId = titleColumn.selectFirst(&quot;a&quot;)?.getLinkInformation()?.queryParams?.get(&quot;id&quot;)?.get(0)?.toInt()</b>
+<b class="nc"><i class="no-highlight">62</i>&nbsp;                ?: throw ParsingException(&quot;Could not find link&quot;)</b>
+<i class="no-highlight">63</i>&nbsp;
+<b class="pc"><i class="no-highlight">64</i>&nbsp;            val typeLabel = dateColumn.selectFirst(&quot;small&quot;) ?: throw ParsingException(&quot;could not find type label&quot;)</b>
+<b class="fc"><i class="no-highlight">65</i>&nbsp;            val newsType = typeLabel.cleanText()</b>
+<b class="fc"><i class="no-highlight">66</i>&nbsp;            typeLabel.remove()</b>
+<b class="fc"><i class="no-highlight">67</i>&nbsp;            addEntry(newsId,</b>
+<b class="fc"><i class="no-highlight">68</i>&nbsp;                titleColumn.cleanText(),</b>
+<b class="fc"><i class="no-highlight">69</i>&nbsp;                category,</b>
+<b class="fc"><i class="no-highlight">70</i>&nbsp;                iconUrl,</b>
+<b class="fc"><i class="no-highlight">71</i>&nbsp;                parseTibiaDate(dateColumn.cleanText()),</b>
+<b class="pc"><i class="no-highlight">72</i>&nbsp;                StringEnum.fromValue(newsType) ?: throw ParsingException(&quot;unexpected news type found: $newsType&quot;))</b>
+<i class="no-highlight">73</i>&nbsp;        }
+<i class="no-highlight">74</i>&nbsp;    }
+<i class="no-highlight">75</i>&nbsp;
+<i class="no-highlight">76</i>&nbsp;    private fun NewsArchiveBuilder.parseFilterTable(element: Element) {
+<b class="fc"><i class="no-highlight">77</i>&nbsp;        val formData = element.formData()</b>
+<b class="fc"><i class="no-highlight">78</i>&nbsp;        startDate = LocalDate.of(</b>
+<b class="pc"><i class="no-highlight">79</i>&nbsp;            formData.values[&quot;filter_begin_year&quot;]?.toInt()</b>
+<b class="nc"><i class="no-highlight">80</i>&nbsp;                ?: throw ParsingException(&quot;could not find filter_begin_year in form&quot;),</b>
+<b class="pc"><i class="no-highlight">81</i>&nbsp;            formData.values[&quot;filter_begin_month&quot;]?.toInt()</b>
+<b class="nc"><i class="no-highlight">82</i>&nbsp;                ?: throw ParsingException(&quot;could not find filter_begin_month in form&quot;),</b>
+<b class="pc"><i class="no-highlight">83</i>&nbsp;            formData.values[&quot;filter_begin_day&quot;]?.toInt()</b>
+<b class="nc"><i class="no-highlight">84</i>&nbsp;                ?: throw ParsingException(&quot;could not find filter_begin_day in form&quot;),</b>
+<i class="no-highlight">85</i>&nbsp;        )
+<b class="fc"><i class="no-highlight">86</i>&nbsp;        endDate = LocalDate.of(</b>
+<b class="pc"><i class="no-highlight">87</i>&nbsp;            formData.values[&quot;filter_end_year&quot;]?.toInt()</b>
+<b class="nc"><i class="no-highlight">88</i>&nbsp;                ?: throw ParsingException(&quot;could not find filter_end_year in form&quot;),</b>
+<b class="pc"><i class="no-highlight">89</i>&nbsp;            formData.values[&quot;filter_end_month&quot;]?.toInt()</b>
+<b class="nc"><i class="no-highlight">90</i>&nbsp;                ?: throw ParsingException(&quot;could not find filter_end_month in form&quot;),</b>
+<b class="pc"><i class="no-highlight">91</i>&nbsp;            formData.values[&quot;filter_end_day&quot;]?.toInt()</b>
+<b class="nc"><i class="no-highlight">92</i>&nbsp;                ?: throw ParsingException(&quot;could not find filter_end_day in form&quot;),</b>
+<i class="no-highlight">93</i>&nbsp;        )
+<i class="no-highlight">94</i>&nbsp;
+<b class="fc"><i class="no-highlight">95</i>&nbsp;        for (value in NewsCategory.values()) {</b>
+<b class="pc"><i class="no-highlight">96</i>&nbsp;            if (!formData.valuesMultiple[value.filterName].isNullOrEmpty()) addCategory(value)</b>
+<i class="no-highlight">97</i>&nbsp;        }
+<b class="fc"><i class="no-highlight">98</i>&nbsp;        for (value in NewsType.values()) {</b>
+<b class="pc"><i class="no-highlight">99</i>&nbsp;            if (!formData.valuesMultiple[value.filterName].isNullOrEmpty()) addType(value)</b>
+<i class="no-highlight">100</i>&nbsp;        }
+<i class="no-highlight">101</i>&nbsp;    }
+<i class="no-highlight">102</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -266,7 +283,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-11 06:50</div>
+    <div style="float:right;">generated on 2022-09-11 07:13</div>
 </div>
 </body>
 </html>

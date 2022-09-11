@@ -124,34 +124,35 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">25</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseTibiaDate
 <i class="no-highlight">26</i>&nbsp;import com.galarzaa.tibiakt.core.utils.remove
 <i class="no-highlight">27</i>&nbsp;
-<i class="no-highlight">28</i>&nbsp;public object NewsParser : Parser&lt;News?&gt; {
-<b class="fc"><i class="no-highlight">29</i>&nbsp;    override fun fromContent(content: String): News? = fromContent(content, 0)</b>
-<i class="no-highlight">30</i>&nbsp;
-<b class="nc"><i class="no-highlight">31</i>&nbsp;    public fun fromContent(content: String, newsId: Int = 0): News? {</b>
-<b class="fc"><i class="no-highlight">32</i>&nbsp;        val boxContent = boxContent(content)</b>
-<i class="no-highlight">33</i>&nbsp;
-<b class="fc"><i class="no-highlight">34</i>&nbsp;        val titleContainer = boxContent.selectFirst(&quot;div.NewsHeadlineText&quot;)</b>
-<b class="pc"><i class="no-highlight">35</i>&nbsp;            ?: if (&quot;not found&quot; in (boxContent.selectFirst(&quot;div.CaptionContainer&quot;)?.cleanText().orEmpty())) return null</b>
-<b class="nc"><i class="no-highlight">36</i>&nbsp;            else throw ParsingException(&quot;News headline not found.&quot;)</b>
-<b class="pc"><i class="no-highlight">37</i>&nbsp;        val icon = boxContent.selectFirst(&quot;img.NewsHeadlineIcon&quot;) ?: throw ParsingException(&quot;News icon not found.&quot;)</b>
-<b class="fc"><i class="no-highlight">38</i>&nbsp;        return news {</b>
-<b class="fc"><i class="no-highlight">39</i>&nbsp;            id = newsId</b>
-<b class="fc"><i class="no-highlight">40</i>&nbsp;            title = titleContainer.cleanText()</b>
-<b class="pc"><i class="no-highlight">41</i>&nbsp;            category = NewsCategory.fromIcon(icon.attr(&quot;src&quot;))</b>
-<b class="nc"><i class="no-highlight">42</i>&nbsp;                ?: throw ParsingException(&quot;Unexpected news icon found: ${icon.attr(&quot;src&quot;)}&quot;)</b>
-<i class="no-highlight">43</i>&nbsp;
-<b class="pc"><i class="no-highlight">44</i>&nbsp;            val newsDate = boxContent.selectFirst(&quot;div.NewsHeadlineDate&quot;)?.cleanText()?.remove(&quot;-&quot;)?.trim()</b>
-<b class="pc"><i class="no-highlight">45</i>&nbsp;            date = parseTibiaDate(newsDate ?: throw ParsingException(&quot;News date not found.&quot;))</b>
-<i class="no-highlight">46</i>&nbsp;
-<b class="pc"><i class="no-highlight">47</i>&nbsp;            this.content = boxContent.selectFirst(&quot;td.NewsTableContainer&quot;)?.html()</b>
-<b class="nc"><i class="no-highlight">48</i>&nbsp;                ?: throw ParsingException(&quot;News content not found.&quot;)</b>
-<i class="no-highlight">49</i>&nbsp;
-<b class="fc"><i class="no-highlight">50</i>&nbsp;            boxContent.selectFirst(&quot;div.NewsForumLink &gt; a&quot;)?.apply {</b>
-<b class="pc"><i class="no-highlight">51</i>&nbsp;                threadId = getLinkInformation()?.queryParams?.get(&quot;threadid&quot;)?.get(0)?.toInt()</b>
-<b class="fc"><i class="no-highlight">52</i>&nbsp;            }</b>
-<b class="fc"><i class="no-highlight">53</i>&nbsp;        }</b>
-<i class="no-highlight">54</i>&nbsp;    }
-<i class="no-highlight">55</i>&nbsp;}
+<i class="no-highlight">28</i>&nbsp;/** Parser for news articles. */
+<i class="no-highlight">29</i>&nbsp;public object NewsParser : Parser&lt;News?&gt; {
+<b class="fc"><i class="no-highlight">30</i>&nbsp;    override fun fromContent(content: String): News? = fromContent(content, 0)</b>
+<i class="no-highlight">31</i>&nbsp;
+<b class="nc"><i class="no-highlight">32</i>&nbsp;    public fun fromContent(content: String, newsId: Int = 0): News? {</b>
+<b class="fc"><i class="no-highlight">33</i>&nbsp;        val boxContent = boxContent(content)</b>
+<i class="no-highlight">34</i>&nbsp;
+<b class="fc"><i class="no-highlight">35</i>&nbsp;        val titleContainer = boxContent.selectFirst(&quot;div.NewsHeadlineText&quot;)</b>
+<b class="pc"><i class="no-highlight">36</i>&nbsp;            ?: if (&quot;not found&quot; in (boxContent.selectFirst(&quot;div.CaptionContainer&quot;)?.cleanText().orEmpty())) return null</b>
+<b class="nc"><i class="no-highlight">37</i>&nbsp;            else throw ParsingException(&quot;News headline not found.&quot;)</b>
+<b class="pc"><i class="no-highlight">38</i>&nbsp;        val icon = boxContent.selectFirst(&quot;img.NewsHeadlineIcon&quot;) ?: throw ParsingException(&quot;News icon not found.&quot;)</b>
+<b class="fc"><i class="no-highlight">39</i>&nbsp;        return news {</b>
+<b class="fc"><i class="no-highlight">40</i>&nbsp;            id = newsId</b>
+<b class="fc"><i class="no-highlight">41</i>&nbsp;            title = titleContainer.cleanText()</b>
+<b class="pc"><i class="no-highlight">42</i>&nbsp;            category = NewsCategory.fromIcon(icon.attr(&quot;src&quot;))</b>
+<b class="nc"><i class="no-highlight">43</i>&nbsp;                ?: throw ParsingException(&quot;Unexpected news icon found: ${icon.attr(&quot;src&quot;)}&quot;)</b>
+<i class="no-highlight">44</i>&nbsp;
+<b class="pc"><i class="no-highlight">45</i>&nbsp;            val newsDate = boxContent.selectFirst(&quot;div.NewsHeadlineDate&quot;)?.cleanText()?.remove(&quot;-&quot;)?.trim()</b>
+<b class="pc"><i class="no-highlight">46</i>&nbsp;            date = parseTibiaDate(newsDate ?: throw ParsingException(&quot;News date not found.&quot;))</b>
+<i class="no-highlight">47</i>&nbsp;
+<b class="pc"><i class="no-highlight">48</i>&nbsp;            this.content = boxContent.selectFirst(&quot;td.NewsTableContainer&quot;)?.html()</b>
+<b class="nc"><i class="no-highlight">49</i>&nbsp;                ?: throw ParsingException(&quot;News content not found.&quot;)</b>
+<i class="no-highlight">50</i>&nbsp;
+<b class="fc"><i class="no-highlight">51</i>&nbsp;            boxContent.selectFirst(&quot;div.NewsForumLink &gt; a&quot;)?.apply {</b>
+<b class="pc"><i class="no-highlight">52</i>&nbsp;                threadId = getLinkInformation()?.queryParams?.get(&quot;threadid&quot;)?.get(0)?.toInt()</b>
+<b class="fc"><i class="no-highlight">53</i>&nbsp;            }</b>
+<b class="fc"><i class="no-highlight">54</i>&nbsp;        }</b>
+<i class="no-highlight">55</i>&nbsp;    }
+<i class="no-highlight">56</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -178,7 +179,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-11 06:50</div>
+    <div style="float:right;">generated on 2022-09-11 07:13</div>
 </div>
 </body>
 </html>

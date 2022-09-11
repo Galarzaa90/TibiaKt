@@ -125,69 +125,70 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">33</i>&nbsp;public inline fun highscoresBuilder(block: HighscoresBuilder.() -&gt; Unit): HighscoresBuilder =
 <b class="nc"><i class="no-highlight">34</i>&nbsp;    HighscoresBuilder().apply(block)</b>
 <i class="no-highlight">35</i>&nbsp;
-<i class="no-highlight">36</i>&nbsp;@BuilderDsl
-<i class="no-highlight">37</i>&nbsp;public class HighscoresBuilder : TibiaKtBuilder&lt;Highscores&gt; {
-<i class="no-highlight">38</i>&nbsp;    public var world: String? = null
-<i class="no-highlight">39</i>&nbsp;    public var category: HighscoresCategory? = null
-<i class="no-highlight">40</i>&nbsp;    public var vocation: HighscoresProfession? = null
-<i class="no-highlight">41</i>&nbsp;    public val worldTypes: MutableSet&lt;PvpType&gt; = mutableSetOf()
-<i class="no-highlight">42</i>&nbsp;    public var battlEyeType: HighscoresBattlEyeType? = null
-<i class="no-highlight">43</i>&nbsp;    public var lastUpdate: Instant? = null
-<i class="no-highlight">44</i>&nbsp;    public var currentPage: Int = 1
-<i class="no-highlight">45</i>&nbsp;    public var totalPages: Int = 1
-<i class="no-highlight">46</i>&nbsp;    public var resultsCount: Int = 0
-<i class="no-highlight">47</i>&nbsp;    public val entries: MutableList&lt;HighscoresEntry&gt; = mutableListOf()
-<i class="no-highlight">48</i>&nbsp;
-<i class="no-highlight">49</i>&nbsp;    public fun addEntry(
-<i class="no-highlight">50</i>&nbsp;        rank: Int,
-<i class="no-highlight">51</i>&nbsp;        name: String,
-<i class="no-highlight">52</i>&nbsp;        vocation: Vocation,
-<i class="no-highlight">53</i>&nbsp;        world: String,
-<i class="no-highlight">54</i>&nbsp;        level: Int,
-<i class="no-highlight">55</i>&nbsp;        points: Long,
-<i class="no-highlight">56</i>&nbsp;        extra: String? = null,
-<i class="no-highlight">57</i>&nbsp;    ): HighscoresBuilder = apply {
-<i class="no-highlight">58</i>&nbsp;        entries.add(HighscoresEntry(rank, name, level, world, vocation, points, extra))
-<i class="no-highlight">59</i>&nbsp;    }
-<i class="no-highlight">60</i>&nbsp;
-<i class="no-highlight">61</i>&nbsp;    @BuilderDsl
-<i class="no-highlight">62</i>&nbsp;    public fun addEntry(block: HighscoresEntryBuilder.() -&gt; Unit): Boolean =
-<i class="no-highlight">63</i>&nbsp;        entries.add(HighscoresEntryBuilder().apply(block).build())
-<i class="no-highlight">64</i>&nbsp;
-<i class="no-highlight">65</i>&nbsp;    override fun build(): Highscores = Highscores(
-<i class="no-highlight">66</i>&nbsp;        world = world,
-<i class="no-highlight">67</i>&nbsp;        category = category ?: HighscoresCategory.EXPERIENCE_POINTS,
-<i class="no-highlight">68</i>&nbsp;        vocation = vocation ?: HighscoresProfession.ALL,
-<i class="no-highlight">69</i>&nbsp;        worldTypes = worldTypes,
-<i class="no-highlight">70</i>&nbsp;        battlEyeType = battlEyeType ?: HighscoresBattlEyeType.ANY_WORLD,
-<i class="no-highlight">71</i>&nbsp;        lastUpdate = lastUpdate ?: error(&quot;lastUpdate is required&quot;),
-<i class="no-highlight">72</i>&nbsp;        currentPage = currentPage,
-<i class="no-highlight">73</i>&nbsp;        totalPages = totalPages,
-<i class="no-highlight">74</i>&nbsp;        resultsCount = resultsCount,
-<i class="no-highlight">75</i>&nbsp;        entries = entries
-<i class="no-highlight">76</i>&nbsp;    )
-<i class="no-highlight">77</i>&nbsp;
-<i class="no-highlight">78</i>&nbsp;    @BuilderDsl
-<i class="no-highlight">79</i>&nbsp;    public class HighscoresEntryBuilder : TibiaKtBuilder&lt;HighscoresEntry&gt; {
-<i class="no-highlight">80</i>&nbsp;        public var rank: Int = 0
-<i class="no-highlight">81</i>&nbsp;        public lateinit var name: String
-<i class="no-highlight">82</i>&nbsp;        public lateinit var vocation: Vocation
-<i class="no-highlight">83</i>&nbsp;        public lateinit var world: String
-<i class="no-highlight">84</i>&nbsp;        public var level: Int = 0
-<i class="no-highlight">85</i>&nbsp;        public var value: Long = 0
-<i class="no-highlight">86</i>&nbsp;        public var additionalValue: String? = null
-<i class="no-highlight">87</i>&nbsp;
-<i class="no-highlight">88</i>&nbsp;        override fun build(): HighscoresEntry = HighscoresEntry(
-<i class="no-highlight">89</i>&nbsp;            rank = rank,
-<i class="no-highlight">90</i>&nbsp;            name = if (::name.isInitialized) name else error(&quot;name is required&quot;),
-<i class="no-highlight">91</i>&nbsp;            vocation = if (::vocation.isInitialized) vocation else error(&quot;vocation is required&quot;),
-<i class="no-highlight">92</i>&nbsp;            world = if (::world.isInitialized) world else error(&quot;world is required&quot;),
-<i class="no-highlight">93</i>&nbsp;            level = level,
-<i class="no-highlight">94</i>&nbsp;            value = value,
-<i class="no-highlight">95</i>&nbsp;            additionalValue = additionalValue,
-<i class="no-highlight">96</i>&nbsp;        )
-<i class="no-highlight">97</i>&nbsp;    }
-<i class="no-highlight">98</i>&nbsp;}
+<i class="no-highlight">36</i>&nbsp;/** Builder for [Highscores] instances. */
+<i class="no-highlight">37</i>&nbsp;@BuilderDsl
+<i class="no-highlight">38</i>&nbsp;public class HighscoresBuilder : TibiaKtBuilder&lt;Highscores&gt; {
+<i class="no-highlight">39</i>&nbsp;    public var world: String? = null
+<i class="no-highlight">40</i>&nbsp;    public var category: HighscoresCategory? = null
+<i class="no-highlight">41</i>&nbsp;    public var vocation: HighscoresProfession? = null
+<i class="no-highlight">42</i>&nbsp;    public val worldTypes: MutableSet&lt;PvpType&gt; = mutableSetOf()
+<i class="no-highlight">43</i>&nbsp;    public var battlEyeType: HighscoresBattlEyeType? = null
+<i class="no-highlight">44</i>&nbsp;    public var lastUpdate: Instant? = null
+<i class="no-highlight">45</i>&nbsp;    public var currentPage: Int = 1
+<i class="no-highlight">46</i>&nbsp;    public var totalPages: Int = 1
+<i class="no-highlight">47</i>&nbsp;    public var resultsCount: Int = 0
+<i class="no-highlight">48</i>&nbsp;    public val entries: MutableList&lt;HighscoresEntry&gt; = mutableListOf()
+<i class="no-highlight">49</i>&nbsp;
+<i class="no-highlight">50</i>&nbsp;    public fun addEntry(
+<i class="no-highlight">51</i>&nbsp;        rank: Int,
+<i class="no-highlight">52</i>&nbsp;        name: String,
+<i class="no-highlight">53</i>&nbsp;        vocation: Vocation,
+<i class="no-highlight">54</i>&nbsp;        world: String,
+<i class="no-highlight">55</i>&nbsp;        level: Int,
+<i class="no-highlight">56</i>&nbsp;        points: Long,
+<i class="no-highlight">57</i>&nbsp;        extra: String? = null,
+<i class="no-highlight">58</i>&nbsp;    ): HighscoresBuilder = apply {
+<i class="no-highlight">59</i>&nbsp;        entries.add(HighscoresEntry(rank, name, level, world, vocation, points, extra))
+<i class="no-highlight">60</i>&nbsp;    }
+<i class="no-highlight">61</i>&nbsp;
+<i class="no-highlight">62</i>&nbsp;    @BuilderDsl
+<i class="no-highlight">63</i>&nbsp;    public fun addEntry(block: HighscoresEntryBuilder.() -&gt; Unit): Boolean =
+<i class="no-highlight">64</i>&nbsp;        entries.add(HighscoresEntryBuilder().apply(block).build())
+<i class="no-highlight">65</i>&nbsp;
+<i class="no-highlight">66</i>&nbsp;    override fun build(): Highscores = Highscores(
+<i class="no-highlight">67</i>&nbsp;        world = world,
+<i class="no-highlight">68</i>&nbsp;        category = category ?: HighscoresCategory.EXPERIENCE_POINTS,
+<i class="no-highlight">69</i>&nbsp;        vocation = vocation ?: HighscoresProfession.ALL,
+<i class="no-highlight">70</i>&nbsp;        worldTypes = worldTypes,
+<i class="no-highlight">71</i>&nbsp;        battlEyeType = battlEyeType ?: HighscoresBattlEyeType.ANY_WORLD,
+<i class="no-highlight">72</i>&nbsp;        lastUpdate = lastUpdate ?: error(&quot;lastUpdate is required&quot;),
+<i class="no-highlight">73</i>&nbsp;        currentPage = currentPage,
+<i class="no-highlight">74</i>&nbsp;        totalPages = totalPages,
+<i class="no-highlight">75</i>&nbsp;        resultsCount = resultsCount,
+<i class="no-highlight">76</i>&nbsp;        entries = entries
+<i class="no-highlight">77</i>&nbsp;    )
+<i class="no-highlight">78</i>&nbsp;
+<i class="no-highlight">79</i>&nbsp;    @BuilderDsl
+<i class="no-highlight">80</i>&nbsp;    public class HighscoresEntryBuilder : TibiaKtBuilder&lt;HighscoresEntry&gt; {
+<i class="no-highlight">81</i>&nbsp;        public var rank: Int = 0
+<i class="no-highlight">82</i>&nbsp;        public lateinit var name: String
+<i class="no-highlight">83</i>&nbsp;        public lateinit var vocation: Vocation
+<i class="no-highlight">84</i>&nbsp;        public lateinit var world: String
+<i class="no-highlight">85</i>&nbsp;        public var level: Int = 0
+<i class="no-highlight">86</i>&nbsp;        public var value: Long = 0
+<i class="no-highlight">87</i>&nbsp;        public var additionalValue: String? = null
+<i class="no-highlight">88</i>&nbsp;
+<i class="no-highlight">89</i>&nbsp;        override fun build(): HighscoresEntry = HighscoresEntry(
+<i class="no-highlight">90</i>&nbsp;            rank = rank,
+<i class="no-highlight">91</i>&nbsp;            name = if (::name.isInitialized) name else error(&quot;name is required&quot;),
+<i class="no-highlight">92</i>&nbsp;            vocation = if (::vocation.isInitialized) vocation else error(&quot;vocation is required&quot;),
+<i class="no-highlight">93</i>&nbsp;            world = if (::world.isInitialized) world else error(&quot;world is required&quot;),
+<i class="no-highlight">94</i>&nbsp;            level = level,
+<i class="no-highlight">95</i>&nbsp;            value = value,
+<i class="no-highlight">96</i>&nbsp;            additionalValue = additionalValue,
+<i class="no-highlight">97</i>&nbsp;        )
+<i class="no-highlight">98</i>&nbsp;    }
+<i class="no-highlight">99</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -214,7 +215,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-11 06:50</div>
+    <div style="float:right;">generated on 2022-09-11 07:13</div>
 </div>
 </body>
 </html>

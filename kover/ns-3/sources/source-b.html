@@ -196,130 +196,131 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">39</i>&nbsp;public inline fun characterBuilder(block: CharacterBuilder.() -&gt; Unit): CharacterBuilder =
 <i class="no-highlight">40</i>&nbsp;    CharacterBuilder().apply(block)
 <i class="no-highlight">41</i>&nbsp;
-<b class="fc"><i class="no-highlight">42</i>&nbsp;@BuilderDsl</b>
-<i class="no-highlight">43</i>&nbsp;public class CharacterBuilder : TibiaKtBuilder&lt;Character&gt; {
-<b class="fc"><i class="no-highlight">44</i>&nbsp;    public lateinit var name: String</b>
-<b class="fc"><i class="no-highlight">45</i>&nbsp;    public var level: Int = 2</b>
-<b class="fc"><i class="no-highlight">46</i>&nbsp;    public var residence: String? = null</b>
-<b class="fc"><i class="no-highlight">47</i>&nbsp;    public var vocation: Vocation? = null</b>
-<b class="fc"><i class="no-highlight">48</i>&nbsp;    public var sex: Sex? = null</b>
-<b class="fc"><i class="no-highlight">49</i>&nbsp;    public var world: String? = null</b>
-<b class="fc"><i class="no-highlight">50</i>&nbsp;    public var achievementPoints: Int = 0</b>
-<b class="fc"><i class="no-highlight">51</i>&nbsp;    public var lastLogin: Instant? = null</b>
-<b class="nc"><i class="no-highlight">52</i>&nbsp;    public var recentlyTraded: Boolean = false</b>
-<b class="fc"><i class="no-highlight">53</i>&nbsp;    public var formerNames: List&lt;String&gt; = emptyList()</b>
-<b class="fc"><i class="no-highlight">54</i>&nbsp;    public var deletionDate: Instant? = null</b>
-<b class="fc"><i class="no-highlight">55</i>&nbsp;    public var formerWorld: String? = null</b>
-<b class="fc"><i class="no-highlight">56</i>&nbsp;    public var accountStatus: AccountStatus? = null</b>
-<b class="fc"><i class="no-highlight">57</i>&nbsp;    public var comment: String? = null</b>
-<b class="fc"><i class="no-highlight">58</i>&nbsp;    public var title: String? = null</b>
-<b class="fc"><i class="no-highlight">59</i>&nbsp;    public var position: String? = null</b>
-<b class="fc"><i class="no-highlight">60</i>&nbsp;    public var unlockedTitles: Int = 0</b>
-<b class="fc"><i class="no-highlight">61</i>&nbsp;    public var marriedTo: String? = null</b>
-<b class="fc"><i class="no-highlight">62</i>&nbsp;    public val houses: MutableList&lt;CharacterHouse&gt; = mutableListOf()</b>
-<b class="nc"><i class="no-highlight">63</i>&nbsp;    public var guildMembership: GuildMembership? = null</b>
-<b class="fc"><i class="no-highlight">64</i>&nbsp;    public val accountBadges: MutableList&lt;AccountBadge&gt; = mutableListOf()</b>
-<b class="fc"><i class="no-highlight">65</i>&nbsp;    public val achievements: MutableList&lt;DisplayedAchievement&gt; = mutableListOf()</b>
-<b class="nc"><i class="no-highlight">66</i>&nbsp;    public var accountInformation: AccountInformation? = null</b>
-<b class="fc"><i class="no-highlight">67</i>&nbsp;    public val deaths: MutableList&lt;Death&gt; = mutableListOf()</b>
-<b class="fc"><i class="no-highlight">68</i>&nbsp;    public val characters: MutableList&lt;OtherCharacter&gt; = mutableListOf()</b>
-<i class="no-highlight">69</i>&nbsp;
-<i class="no-highlight">70</i>&nbsp;    public fun addHouse(
-<i class="no-highlight">71</i>&nbsp;        name: String,
-<i class="no-highlight">72</i>&nbsp;        houseId: Int,
-<i class="no-highlight">73</i>&nbsp;        town: String,
-<i class="no-highlight">74</i>&nbsp;        paidUntil: LocalDate,
-<i class="no-highlight">75</i>&nbsp;        world: String,
-<b class="fc"><i class="no-highlight">76</i>&nbsp;    ): CharacterBuilder = apply {</b>
-<b class="fc"><i class="no-highlight">77</i>&nbsp;        houses.add(CharacterHouse(name, houseId, town, paidUntil, world))</b>
-<b class="fc"><i class="no-highlight">78</i>&nbsp;    }</b>
-<i class="no-highlight">79</i>&nbsp;
-<i class="no-highlight">80</i>&nbsp;    @BuilderDsl
-<i class="no-highlight">81</i>&nbsp;    public fun house(block: CharacterHouseBuilder.() -&gt; Unit): CharacterBuilder =
-<b class="nc"><i class="no-highlight">82</i>&nbsp;        apply { houses.add(CharacterHouseBuilder().apply(block).build()) }</b>
-<i class="no-highlight">83</i>&nbsp;
-<b class="fc"><i class="no-highlight">84</i>&nbsp;    public fun addBadge(name: String, descroption: String, iconUrl: String): CharacterBuilder = apply {</b>
-<b class="fc"><i class="no-highlight">85</i>&nbsp;        accountBadges.add(AccountBadge(name, descroption, iconUrl))</b>
-<b class="fc"><i class="no-highlight">86</i>&nbsp;    }</b>
-<i class="no-highlight">87</i>&nbsp;
-<b class="fc"><i class="no-highlight">88</i>&nbsp;    public fun addAchievement(name: String, grade: Int, secret: Boolean): CharacterBuilder = apply {</b>
-<b class="fc"><i class="no-highlight">89</i>&nbsp;        achievements.add(DisplayedAchievement(name, grade, secret))</b>
-<b class="fc"><i class="no-highlight">90</i>&nbsp;    }</b>
-<i class="no-highlight">91</i>&nbsp;
-<i class="no-highlight">92</i>&nbsp;    public fun accountInformation(
-<i class="no-highlight">93</i>&nbsp;        created: Instant,
-<i class="no-highlight">94</i>&nbsp;        loyaltyTitle: String?,
-<i class="no-highlight">95</i>&nbsp;        position: String?,
-<i class="no-highlight">96</i>&nbsp;        tutorStars: Int?,
-<b class="fc"><i class="no-highlight">97</i>&nbsp;    ): CharacterBuilder = apply {</b>
-<b class="fc"><i class="no-highlight">98</i>&nbsp;        accountInformation = AccountInformation(created, loyaltyTitle, position, tutorStars)</b>
-<b class="fc"><i class="no-highlight">99</i>&nbsp;    }</b>
-<i class="no-highlight">100</i>&nbsp;
-<i class="no-highlight">101</i>&nbsp;    public fun guild(rank: String, guild: String): CharacterBuilder =
-<b class="fc"><i class="no-highlight">102</i>&nbsp;        apply { guildMembership = GuildMembership(guild, rank) }</b>
-<i class="no-highlight">103</i>&nbsp;
-<i class="no-highlight">104</i>&nbsp;    public fun addDeath(
-<i class="no-highlight">105</i>&nbsp;        timestamp: Instant,
-<i class="no-highlight">106</i>&nbsp;        level: Int,
-<i class="no-highlight">107</i>&nbsp;        killers: List&lt;Killer&gt;,
-<i class="no-highlight">108</i>&nbsp;        assists: List&lt;Killer&gt;,
-<b class="fc"><i class="no-highlight">109</i>&nbsp;    ): CharacterBuilder = apply {</b>
-<b class="fc"><i class="no-highlight">110</i>&nbsp;        deaths.add(Death(timestamp, level, killers, assists))</b>
-<b class="fc"><i class="no-highlight">111</i>&nbsp;    }</b>
-<i class="no-highlight">112</i>&nbsp;
-<i class="no-highlight">113</i>&nbsp;    public fun addCharacter(
-<i class="no-highlight">114</i>&nbsp;        name: String,
-<i class="no-highlight">115</i>&nbsp;        world: String,
-<b class="nc"><i class="no-highlight">116</i>&nbsp;        main: Boolean = false,</b>
-<b class="nc"><i class="no-highlight">117</i>&nbsp;        online: Boolean = false,</b>
-<b class="nc"><i class="no-highlight">118</i>&nbsp;        deleted: Boolean = false,</b>
-<b class="nc"><i class="no-highlight">119</i>&nbsp;        traded: Boolean = false,</b>
-<i class="no-highlight">120</i>&nbsp;        position: String?,
-<b class="fc"><i class="no-highlight">121</i>&nbsp;    ): CharacterBuilder = apply { characters.add(OtherCharacter(name, world, main, online, deleted, traded, position)) }</b>
-<i class="no-highlight">122</i>&nbsp;
-<b class="fc"><i class="no-highlight">123</i>&nbsp;    override fun build(): Character = Character(</b>
-<b class="pc"><i class="no-highlight">124</i>&nbsp;        name = if (::name.isInitialized) name else error(&quot;name is required&quot;),</b>
-<b class="fc"><i class="no-highlight">125</i>&nbsp;        title = title,</b>
-<b class="fc"><i class="no-highlight">126</i>&nbsp;        formerNames = formerNames,</b>
-<b class="fc"><i class="no-highlight">127</i>&nbsp;        unlockedTitles = unlockedTitles,</b>
-<b class="pc"><i class="no-highlight">128</i>&nbsp;        sex = sex ?: error(&quot;sex is required&quot;),</b>
-<b class="pc"><i class="no-highlight">129</i>&nbsp;        vocation = vocation ?: error(&quot;vocation is required&quot;),</b>
-<b class="fc"><i class="no-highlight">130</i>&nbsp;        level = level,</b>
-<b class="fc"><i class="no-highlight">131</i>&nbsp;        achievementPoints = achievementPoints,</b>
-<b class="pc"><i class="no-highlight">132</i>&nbsp;        world = world ?: error(&quot;world is required&quot;),</b>
-<b class="fc"><i class="no-highlight">133</i>&nbsp;        formerWorld = formerWorld,</b>
-<b class="pc"><i class="no-highlight">134</i>&nbsp;        residence = residence ?: error(&quot;residence is required&quot;),</b>
-<b class="fc"><i class="no-highlight">135</i>&nbsp;        marriedTo = marriedTo,</b>
-<b class="fc"><i class="no-highlight">136</i>&nbsp;        houses = houses,</b>
-<b class="fc"><i class="no-highlight">137</i>&nbsp;        guildMembership = guildMembership,</b>
-<b class="fc"><i class="no-highlight">138</i>&nbsp;        lastLogin = lastLogin,</b>
-<b class="fc"><i class="no-highlight">139</i>&nbsp;        position = position,</b>
-<b class="fc"><i class="no-highlight">140</i>&nbsp;        comment = comment,</b>
-<b class="pc"><i class="no-highlight">141</i>&nbsp;        accountStatus = accountStatus ?: error(&quot;accountStatus is required&quot;),</b>
-<b class="fc"><i class="no-highlight">142</i>&nbsp;        recentlyTraded = recentlyTraded,</b>
-<b class="fc"><i class="no-highlight">143</i>&nbsp;        deletionDate = deletionDate,</b>
-<b class="fc"><i class="no-highlight">144</i>&nbsp;        badges = accountBadges,</b>
-<b class="fc"><i class="no-highlight">145</i>&nbsp;        achievements = achievements,</b>
-<b class="fc"><i class="no-highlight">146</i>&nbsp;        deaths = deaths,</b>
-<b class="fc"><i class="no-highlight">147</i>&nbsp;        accountInformation = accountInformation,</b>
-<b class="fc"><i class="no-highlight">148</i>&nbsp;        characters = characters</b>
-<i class="no-highlight">149</i>&nbsp;    )
-<i class="no-highlight">150</i>&nbsp;
-<b class="nc"><i class="no-highlight">151</i>&nbsp;    public class CharacterHouseBuilder : TibiaKtBuilder&lt;CharacterHouse&gt; {</b>
-<b class="nc"><i class="no-highlight">152</i>&nbsp;        public lateinit var name: String</b>
-<b class="nc"><i class="no-highlight">153</i>&nbsp;        public var houseId: Int = 0</b>
-<b class="nc"><i class="no-highlight">154</i>&nbsp;        public lateinit var town: String</b>
-<b class="nc"><i class="no-highlight">155</i>&nbsp;        public lateinit var paidUntil: LocalDate</b>
-<b class="nc"><i class="no-highlight">156</i>&nbsp;        public lateinit var world: String</b>
-<b class="nc"><i class="no-highlight">157</i>&nbsp;        public override fun build(): CharacterHouse = CharacterHouse(</b>
-<b class="nc"><i class="no-highlight">158</i>&nbsp;            name = if (::name.isInitialized) name else error(&quot;name is required&quot;),</b>
-<b class="nc"><i class="no-highlight">159</i>&nbsp;            houseId = houseId,</b>
-<b class="nc"><i class="no-highlight">160</i>&nbsp;            town = if (::town.isInitialized) town else error(&quot;town is required&quot;),</b>
-<b class="nc"><i class="no-highlight">161</i>&nbsp;            paidUntil = if (::paidUntil.isInitialized) paidUntil else error(&quot;paidUntil is required&quot;),</b>
-<b class="nc"><i class="no-highlight">162</i>&nbsp;            world = if (::world.isInitialized) world else error(&quot;world is required&quot;),</b>
-<i class="no-highlight">163</i>&nbsp;        )
-<i class="no-highlight">164</i>&nbsp;    }
-<i class="no-highlight">165</i>&nbsp;}
+<i class="no-highlight">42</i>&nbsp;/** Builder for [Character] instances. */
+<b class="fc"><i class="no-highlight">43</i>&nbsp;@BuilderDsl</b>
+<i class="no-highlight">44</i>&nbsp;public class CharacterBuilder : TibiaKtBuilder&lt;Character&gt; {
+<b class="fc"><i class="no-highlight">45</i>&nbsp;    public lateinit var name: String</b>
+<b class="fc"><i class="no-highlight">46</i>&nbsp;    public var level: Int = 2</b>
+<b class="fc"><i class="no-highlight">47</i>&nbsp;    public var residence: String? = null</b>
+<b class="fc"><i class="no-highlight">48</i>&nbsp;    public var vocation: Vocation? = null</b>
+<b class="fc"><i class="no-highlight">49</i>&nbsp;    public var sex: Sex? = null</b>
+<b class="fc"><i class="no-highlight">50</i>&nbsp;    public var world: String? = null</b>
+<b class="fc"><i class="no-highlight">51</i>&nbsp;    public var achievementPoints: Int = 0</b>
+<b class="fc"><i class="no-highlight">52</i>&nbsp;    public var lastLogin: Instant? = null</b>
+<b class="nc"><i class="no-highlight">53</i>&nbsp;    public var recentlyTraded: Boolean = false</b>
+<b class="fc"><i class="no-highlight">54</i>&nbsp;    public var formerNames: List&lt;String&gt; = emptyList()</b>
+<b class="fc"><i class="no-highlight">55</i>&nbsp;    public var deletionDate: Instant? = null</b>
+<b class="fc"><i class="no-highlight">56</i>&nbsp;    public var formerWorld: String? = null</b>
+<b class="fc"><i class="no-highlight">57</i>&nbsp;    public var accountStatus: AccountStatus? = null</b>
+<b class="fc"><i class="no-highlight">58</i>&nbsp;    public var comment: String? = null</b>
+<b class="fc"><i class="no-highlight">59</i>&nbsp;    public var title: String? = null</b>
+<b class="fc"><i class="no-highlight">60</i>&nbsp;    public var position: String? = null</b>
+<b class="fc"><i class="no-highlight">61</i>&nbsp;    public var unlockedTitles: Int = 0</b>
+<b class="fc"><i class="no-highlight">62</i>&nbsp;    public var marriedTo: String? = null</b>
+<b class="fc"><i class="no-highlight">63</i>&nbsp;    public val houses: MutableList&lt;CharacterHouse&gt; = mutableListOf()</b>
+<b class="nc"><i class="no-highlight">64</i>&nbsp;    public var guildMembership: GuildMembership? = null</b>
+<b class="fc"><i class="no-highlight">65</i>&nbsp;    public val accountBadges: MutableList&lt;AccountBadge&gt; = mutableListOf()</b>
+<b class="fc"><i class="no-highlight">66</i>&nbsp;    public val achievements: MutableList&lt;DisplayedAchievement&gt; = mutableListOf()</b>
+<b class="nc"><i class="no-highlight">67</i>&nbsp;    public var accountInformation: AccountInformation? = null</b>
+<b class="fc"><i class="no-highlight">68</i>&nbsp;    public val deaths: MutableList&lt;Death&gt; = mutableListOf()</b>
+<b class="fc"><i class="no-highlight">69</i>&nbsp;    public val characters: MutableList&lt;OtherCharacter&gt; = mutableListOf()</b>
+<i class="no-highlight">70</i>&nbsp;
+<i class="no-highlight">71</i>&nbsp;    public fun addHouse(
+<i class="no-highlight">72</i>&nbsp;        name: String,
+<i class="no-highlight">73</i>&nbsp;        houseId: Int,
+<i class="no-highlight">74</i>&nbsp;        town: String,
+<i class="no-highlight">75</i>&nbsp;        paidUntil: LocalDate,
+<i class="no-highlight">76</i>&nbsp;        world: String,
+<b class="fc"><i class="no-highlight">77</i>&nbsp;    ): CharacterBuilder = apply {</b>
+<b class="fc"><i class="no-highlight">78</i>&nbsp;        houses.add(CharacterHouse(name, houseId, town, paidUntil, world))</b>
+<b class="fc"><i class="no-highlight">79</i>&nbsp;    }</b>
+<i class="no-highlight">80</i>&nbsp;
+<i class="no-highlight">81</i>&nbsp;    @BuilderDsl
+<i class="no-highlight">82</i>&nbsp;    public fun house(block: CharacterHouseBuilder.() -&gt; Unit): CharacterBuilder =
+<b class="nc"><i class="no-highlight">83</i>&nbsp;        apply { houses.add(CharacterHouseBuilder().apply(block).build()) }</b>
+<i class="no-highlight">84</i>&nbsp;
+<b class="fc"><i class="no-highlight">85</i>&nbsp;    public fun addBadge(name: String, descroption: String, iconUrl: String): CharacterBuilder = apply {</b>
+<b class="fc"><i class="no-highlight">86</i>&nbsp;        accountBadges.add(AccountBadge(name, descroption, iconUrl))</b>
+<b class="fc"><i class="no-highlight">87</i>&nbsp;    }</b>
+<i class="no-highlight">88</i>&nbsp;
+<b class="fc"><i class="no-highlight">89</i>&nbsp;    public fun addAchievement(name: String, grade: Int, secret: Boolean): CharacterBuilder = apply {</b>
+<b class="fc"><i class="no-highlight">90</i>&nbsp;        achievements.add(DisplayedAchievement(name, grade, secret))</b>
+<b class="fc"><i class="no-highlight">91</i>&nbsp;    }</b>
+<i class="no-highlight">92</i>&nbsp;
+<i class="no-highlight">93</i>&nbsp;    public fun accountInformation(
+<i class="no-highlight">94</i>&nbsp;        created: Instant,
+<i class="no-highlight">95</i>&nbsp;        loyaltyTitle: String?,
+<i class="no-highlight">96</i>&nbsp;        position: String?,
+<i class="no-highlight">97</i>&nbsp;        tutorStars: Int?,
+<b class="fc"><i class="no-highlight">98</i>&nbsp;    ): CharacterBuilder = apply {</b>
+<b class="fc"><i class="no-highlight">99</i>&nbsp;        accountInformation = AccountInformation(created, loyaltyTitle, position, tutorStars)</b>
+<b class="fc"><i class="no-highlight">100</i>&nbsp;    }</b>
+<i class="no-highlight">101</i>&nbsp;
+<i class="no-highlight">102</i>&nbsp;    public fun guild(rank: String, guild: String): CharacterBuilder =
+<b class="fc"><i class="no-highlight">103</i>&nbsp;        apply { guildMembership = GuildMembership(guild, rank) }</b>
+<i class="no-highlight">104</i>&nbsp;
+<i class="no-highlight">105</i>&nbsp;    public fun addDeath(
+<i class="no-highlight">106</i>&nbsp;        timestamp: Instant,
+<i class="no-highlight">107</i>&nbsp;        level: Int,
+<i class="no-highlight">108</i>&nbsp;        killers: List&lt;Killer&gt;,
+<i class="no-highlight">109</i>&nbsp;        assists: List&lt;Killer&gt;,
+<b class="fc"><i class="no-highlight">110</i>&nbsp;    ): CharacterBuilder = apply {</b>
+<b class="fc"><i class="no-highlight">111</i>&nbsp;        deaths.add(Death(timestamp, level, killers, assists))</b>
+<b class="fc"><i class="no-highlight">112</i>&nbsp;    }</b>
+<i class="no-highlight">113</i>&nbsp;
+<i class="no-highlight">114</i>&nbsp;    public fun addCharacter(
+<i class="no-highlight">115</i>&nbsp;        name: String,
+<i class="no-highlight">116</i>&nbsp;        world: String,
+<b class="nc"><i class="no-highlight">117</i>&nbsp;        main: Boolean = false,</b>
+<b class="nc"><i class="no-highlight">118</i>&nbsp;        online: Boolean = false,</b>
+<b class="nc"><i class="no-highlight">119</i>&nbsp;        deleted: Boolean = false,</b>
+<b class="nc"><i class="no-highlight">120</i>&nbsp;        traded: Boolean = false,</b>
+<i class="no-highlight">121</i>&nbsp;        position: String?,
+<b class="fc"><i class="no-highlight">122</i>&nbsp;    ): CharacterBuilder = apply { characters.add(OtherCharacter(name, world, main, online, deleted, traded, position)) }</b>
+<i class="no-highlight">123</i>&nbsp;
+<b class="fc"><i class="no-highlight">124</i>&nbsp;    override fun build(): Character = Character(</b>
+<b class="pc"><i class="no-highlight">125</i>&nbsp;        name = if (::name.isInitialized) name else error(&quot;name is required&quot;),</b>
+<b class="fc"><i class="no-highlight">126</i>&nbsp;        title = title,</b>
+<b class="fc"><i class="no-highlight">127</i>&nbsp;        formerNames = formerNames,</b>
+<b class="fc"><i class="no-highlight">128</i>&nbsp;        unlockedTitles = unlockedTitles,</b>
+<b class="pc"><i class="no-highlight">129</i>&nbsp;        sex = sex ?: error(&quot;sex is required&quot;),</b>
+<b class="pc"><i class="no-highlight">130</i>&nbsp;        vocation = vocation ?: error(&quot;vocation is required&quot;),</b>
+<b class="fc"><i class="no-highlight">131</i>&nbsp;        level = level,</b>
+<b class="fc"><i class="no-highlight">132</i>&nbsp;        achievementPoints = achievementPoints,</b>
+<b class="pc"><i class="no-highlight">133</i>&nbsp;        world = world ?: error(&quot;world is required&quot;),</b>
+<b class="fc"><i class="no-highlight">134</i>&nbsp;        formerWorld = formerWorld,</b>
+<b class="pc"><i class="no-highlight">135</i>&nbsp;        residence = residence ?: error(&quot;residence is required&quot;),</b>
+<b class="fc"><i class="no-highlight">136</i>&nbsp;        marriedTo = marriedTo,</b>
+<b class="fc"><i class="no-highlight">137</i>&nbsp;        houses = houses,</b>
+<b class="fc"><i class="no-highlight">138</i>&nbsp;        guildMembership = guildMembership,</b>
+<b class="fc"><i class="no-highlight">139</i>&nbsp;        lastLogin = lastLogin,</b>
+<b class="fc"><i class="no-highlight">140</i>&nbsp;        position = position,</b>
+<b class="fc"><i class="no-highlight">141</i>&nbsp;        comment = comment,</b>
+<b class="pc"><i class="no-highlight">142</i>&nbsp;        accountStatus = accountStatus ?: error(&quot;accountStatus is required&quot;),</b>
+<b class="fc"><i class="no-highlight">143</i>&nbsp;        recentlyTraded = recentlyTraded,</b>
+<b class="fc"><i class="no-highlight">144</i>&nbsp;        deletionDate = deletionDate,</b>
+<b class="fc"><i class="no-highlight">145</i>&nbsp;        badges = accountBadges,</b>
+<b class="fc"><i class="no-highlight">146</i>&nbsp;        achievements = achievements,</b>
+<b class="fc"><i class="no-highlight">147</i>&nbsp;        deaths = deaths,</b>
+<b class="fc"><i class="no-highlight">148</i>&nbsp;        accountInformation = accountInformation,</b>
+<b class="fc"><i class="no-highlight">149</i>&nbsp;        characters = characters</b>
+<i class="no-highlight">150</i>&nbsp;    )
+<i class="no-highlight">151</i>&nbsp;
+<b class="nc"><i class="no-highlight">152</i>&nbsp;    public class CharacterHouseBuilder : TibiaKtBuilder&lt;CharacterHouse&gt; {</b>
+<b class="nc"><i class="no-highlight">153</i>&nbsp;        public lateinit var name: String</b>
+<b class="nc"><i class="no-highlight">154</i>&nbsp;        public var houseId: Int = 0</b>
+<b class="nc"><i class="no-highlight">155</i>&nbsp;        public lateinit var town: String</b>
+<b class="nc"><i class="no-highlight">156</i>&nbsp;        public lateinit var paidUntil: LocalDate</b>
+<b class="nc"><i class="no-highlight">157</i>&nbsp;        public lateinit var world: String</b>
+<b class="nc"><i class="no-highlight">158</i>&nbsp;        public override fun build(): CharacterHouse = CharacterHouse(</b>
+<b class="nc"><i class="no-highlight">159</i>&nbsp;            name = if (::name.isInitialized) name else error(&quot;name is required&quot;),</b>
+<b class="nc"><i class="no-highlight">160</i>&nbsp;            houseId = houseId,</b>
+<b class="nc"><i class="no-highlight">161</i>&nbsp;            town = if (::town.isInitialized) town else error(&quot;town is required&quot;),</b>
+<b class="nc"><i class="no-highlight">162</i>&nbsp;            paidUntil = if (::paidUntil.isInitialized) paidUntil else error(&quot;paidUntil is required&quot;),</b>
+<b class="nc"><i class="no-highlight">163</i>&nbsp;            world = if (::world.isInitialized) world else error(&quot;world is required&quot;),</b>
+<i class="no-highlight">164</i>&nbsp;        )
+<i class="no-highlight">165</i>&nbsp;    }
+<i class="no-highlight">166</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -346,7 +347,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-11 06:50</div>
+    <div style="float:right;">generated on 2022-09-11 07:13</div>
 </div>
 </body>
 </html>

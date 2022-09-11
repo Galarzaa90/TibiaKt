@@ -123,71 +123,72 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">31</i>&nbsp;@BuilderDsl
 <b class="fc"><i class="no-highlight">32</i>&nbsp;public inline fun forumThread(block: ForumThreadBuilder.() -&gt; Unit): ForumThread = forumThreadBuilder(block).build()</b>
 <i class="no-highlight">33</i>&nbsp;
-<i class="no-highlight">34</i>&nbsp;@BuilderDsl
-<i class="no-highlight">35</i>&nbsp;public class ForumThreadBuilder : TibiaKtBuilder&lt;ForumThread&gt; {
-<i class="no-highlight">36</i>&nbsp;    public var title: String? = null
-<i class="no-highlight">37</i>&nbsp;    public var threadId: Int? = null
-<i class="no-highlight">38</i>&nbsp;    public var board: String? = null
-<i class="no-highlight">39</i>&nbsp;    public var boardId: Int? = null
-<i class="no-highlight">40</i>&nbsp;    public var section: String? = null
-<i class="no-highlight">41</i>&nbsp;    public var sectionId: Int? = null
-<i class="no-highlight">42</i>&nbsp;    public var previousTopicNumber: Int? = null
-<i class="no-highlight">43</i>&nbsp;    public var nextTopicNumber: Int? = null
-<i class="no-highlight">44</i>&nbsp;    public var goldenFrame: Boolean = false
-<i class="no-highlight">45</i>&nbsp;    public var anchoredPost: ForumPost? = null
-<i class="no-highlight">46</i>&nbsp;    public var currentPage: Int = 1
-<i class="no-highlight">47</i>&nbsp;    public var totalPages: Int = 1
-<i class="no-highlight">48</i>&nbsp;    public var resultsCount: Int = 1
-<i class="no-highlight">49</i>&nbsp;    public val entries: MutableList&lt;ForumPost&gt; = mutableListOf()
-<i class="no-highlight">50</i>&nbsp;
-<i class="no-highlight">51</i>&nbsp;    public fun addPost(post: ForumPost): ForumThreadBuilder = apply { entries.add(post) }
-<i class="no-highlight">52</i>&nbsp;
-<i class="no-highlight">53</i>&nbsp;    @BuilderDsl
-<i class="no-highlight">54</i>&nbsp;    public fun addPost(block: ForumPostBuilder.() -&gt; Unit): ForumThreadBuilder =
-<i class="no-highlight">55</i>&nbsp;        apply { entries.add(ForumPostBuilder().apply(block).build()) }
-<i class="no-highlight">56</i>&nbsp;
+<i class="no-highlight">34</i>&nbsp;/** Builder for [ForumThread] instances. */
+<i class="no-highlight">35</i>&nbsp;@BuilderDsl
+<i class="no-highlight">36</i>&nbsp;public class ForumThreadBuilder : TibiaKtBuilder&lt;ForumThread&gt; {
+<i class="no-highlight">37</i>&nbsp;    public var title: String? = null
+<i class="no-highlight">38</i>&nbsp;    public var threadId: Int? = null
+<i class="no-highlight">39</i>&nbsp;    public var board: String? = null
+<i class="no-highlight">40</i>&nbsp;    public var boardId: Int? = null
+<i class="no-highlight">41</i>&nbsp;    public var section: String? = null
+<i class="no-highlight">42</i>&nbsp;    public var sectionId: Int? = null
+<i class="no-highlight">43</i>&nbsp;    public var previousTopicNumber: Int? = null
+<i class="no-highlight">44</i>&nbsp;    public var nextTopicNumber: Int? = null
+<i class="no-highlight">45</i>&nbsp;    public var goldenFrame: Boolean = false
+<i class="no-highlight">46</i>&nbsp;    public var anchoredPost: ForumPost? = null
+<i class="no-highlight">47</i>&nbsp;    public var currentPage: Int = 1
+<i class="no-highlight">48</i>&nbsp;    public var totalPages: Int = 1
+<i class="no-highlight">49</i>&nbsp;    public var resultsCount: Int = 1
+<i class="no-highlight">50</i>&nbsp;    public val entries: MutableList&lt;ForumPost&gt; = mutableListOf()
+<i class="no-highlight">51</i>&nbsp;
+<i class="no-highlight">52</i>&nbsp;    public fun addPost(post: ForumPost): ForumThreadBuilder = apply { entries.add(post) }
+<i class="no-highlight">53</i>&nbsp;
+<i class="no-highlight">54</i>&nbsp;    @BuilderDsl
+<i class="no-highlight">55</i>&nbsp;    public fun addPost(block: ForumPostBuilder.() -&gt; Unit): ForumThreadBuilder =
+<i class="no-highlight">56</i>&nbsp;        apply { entries.add(ForumPostBuilder().apply(block).build()) }
 <i class="no-highlight">57</i>&nbsp;
-<i class="no-highlight">58</i>&nbsp;    override fun build(): ForumThread = ForumThread(
-<i class="no-highlight">59</i>&nbsp;        title = title ?: error(&quot;title is required&quot;),
-<i class="no-highlight">60</i>&nbsp;        threadId = threadId ?: error(&quot;threadId is required&quot;),
-<i class="no-highlight">61</i>&nbsp;        board = board ?: error(&quot;board is required&quot;),
-<i class="no-highlight">62</i>&nbsp;        boardId = boardId ?: error(&quot;boardId is required&quot;),
-<i class="no-highlight">63</i>&nbsp;        section = section ?: error(&quot;section is required&quot;),
-<i class="no-highlight">64</i>&nbsp;        sectionId = sectionId ?: error(&quot;sectionId is required&quot;),
-<i class="no-highlight">65</i>&nbsp;        previousTopicNumber = previousTopicNumber,
-<i class="no-highlight">66</i>&nbsp;        nextTopicNumber = nextTopicNumber,
-<i class="no-highlight">67</i>&nbsp;        goldenFrame = goldenFrame,
-<i class="no-highlight">68</i>&nbsp;        anchoredPost = anchoredPost,
-<i class="no-highlight">69</i>&nbsp;        currentPage = currentPage,
-<i class="no-highlight">70</i>&nbsp;        totalPages = totalPages,
-<i class="no-highlight">71</i>&nbsp;        resultsCount = resultsCount,
-<i class="no-highlight">72</i>&nbsp;        entries = entries
-<i class="no-highlight">73</i>&nbsp;    )
-<i class="no-highlight">74</i>&nbsp;
-<i class="no-highlight">75</i>&nbsp;    public class ForumPostBuilder : TibiaKtBuilder&lt;ForumPost&gt; {
-<i class="no-highlight">76</i>&nbsp;        public var author: BaseForumAuthor? = null
-<i class="no-highlight">77</i>&nbsp;        public var emoticon: ForumEmoticon? = null
-<i class="no-highlight">78</i>&nbsp;        public var title: String? = null
-<i class="no-highlight">79</i>&nbsp;        public var content: String? = null
-<i class="no-highlight">80</i>&nbsp;        public var signature: String? = null
-<i class="no-highlight">81</i>&nbsp;        public var postId: Int? = null
-<i class="no-highlight">82</i>&nbsp;        public var postedDate: Instant? = null
-<i class="no-highlight">83</i>&nbsp;        public var editedDate: Instant? = null
-<i class="no-highlight">84</i>&nbsp;        public var editedBy: String? = null
-<i class="no-highlight">85</i>&nbsp;
-<i class="no-highlight">86</i>&nbsp;        override fun build(): ForumPost = ForumPost(
-<i class="no-highlight">87</i>&nbsp;            author = author ?: error(&quot;author is required&quot;),
-<i class="no-highlight">88</i>&nbsp;            emoticon = emoticon,
-<i class="no-highlight">89</i>&nbsp;            title = title,
-<i class="no-highlight">90</i>&nbsp;            content = content ?: error(&quot;content is required&quot;),
-<i class="no-highlight">91</i>&nbsp;            signature = signature,
-<i class="no-highlight">92</i>&nbsp;            postId = postId ?: error(&quot;postId is required&quot;),
-<i class="no-highlight">93</i>&nbsp;            postedDate = postedDate ?: Clock.System.now(),
-<i class="no-highlight">94</i>&nbsp;            editedDate = editedDate,
-<i class="no-highlight">95</i>&nbsp;            editedBy = editedBy
-<i class="no-highlight">96</i>&nbsp;        )
-<i class="no-highlight">97</i>&nbsp;    }
-<i class="no-highlight">98</i>&nbsp;}
+<i class="no-highlight">58</i>&nbsp;
+<i class="no-highlight">59</i>&nbsp;    override fun build(): ForumThread = ForumThread(
+<i class="no-highlight">60</i>&nbsp;        title = title ?: error(&quot;title is required&quot;),
+<i class="no-highlight">61</i>&nbsp;        threadId = threadId ?: error(&quot;threadId is required&quot;),
+<i class="no-highlight">62</i>&nbsp;        board = board ?: error(&quot;board is required&quot;),
+<i class="no-highlight">63</i>&nbsp;        boardId = boardId ?: error(&quot;boardId is required&quot;),
+<i class="no-highlight">64</i>&nbsp;        section = section ?: error(&quot;section is required&quot;),
+<i class="no-highlight">65</i>&nbsp;        sectionId = sectionId ?: error(&quot;sectionId is required&quot;),
+<i class="no-highlight">66</i>&nbsp;        previousTopicNumber = previousTopicNumber,
+<i class="no-highlight">67</i>&nbsp;        nextTopicNumber = nextTopicNumber,
+<i class="no-highlight">68</i>&nbsp;        goldenFrame = goldenFrame,
+<i class="no-highlight">69</i>&nbsp;        anchoredPost = anchoredPost,
+<i class="no-highlight">70</i>&nbsp;        currentPage = currentPage,
+<i class="no-highlight">71</i>&nbsp;        totalPages = totalPages,
+<i class="no-highlight">72</i>&nbsp;        resultsCount = resultsCount,
+<i class="no-highlight">73</i>&nbsp;        entries = entries
+<i class="no-highlight">74</i>&nbsp;    )
+<i class="no-highlight">75</i>&nbsp;
+<i class="no-highlight">76</i>&nbsp;    public class ForumPostBuilder : TibiaKtBuilder&lt;ForumPost&gt; {
+<i class="no-highlight">77</i>&nbsp;        public var author: BaseForumAuthor? = null
+<i class="no-highlight">78</i>&nbsp;        public var emoticon: ForumEmoticon? = null
+<i class="no-highlight">79</i>&nbsp;        public var title: String? = null
+<i class="no-highlight">80</i>&nbsp;        public var content: String? = null
+<i class="no-highlight">81</i>&nbsp;        public var signature: String? = null
+<i class="no-highlight">82</i>&nbsp;        public var postId: Int? = null
+<i class="no-highlight">83</i>&nbsp;        public var postedDate: Instant? = null
+<i class="no-highlight">84</i>&nbsp;        public var editedDate: Instant? = null
+<i class="no-highlight">85</i>&nbsp;        public var editedBy: String? = null
+<i class="no-highlight">86</i>&nbsp;
+<i class="no-highlight">87</i>&nbsp;        override fun build(): ForumPost = ForumPost(
+<i class="no-highlight">88</i>&nbsp;            author = author ?: error(&quot;author is required&quot;),
+<i class="no-highlight">89</i>&nbsp;            emoticon = emoticon,
+<i class="no-highlight">90</i>&nbsp;            title = title,
+<i class="no-highlight">91</i>&nbsp;            content = content ?: error(&quot;content is required&quot;),
+<i class="no-highlight">92</i>&nbsp;            signature = signature,
+<i class="no-highlight">93</i>&nbsp;            postId = postId ?: error(&quot;postId is required&quot;),
+<i class="no-highlight">94</i>&nbsp;            postedDate = postedDate ?: Clock.System.now(),
+<i class="no-highlight">95</i>&nbsp;            editedDate = editedDate,
+<i class="no-highlight">96</i>&nbsp;            editedBy = editedBy
+<i class="no-highlight">97</i>&nbsp;        )
+<i class="no-highlight">98</i>&nbsp;    }
+<i class="no-highlight">99</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -214,7 +215,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-11 06:50</div>
+    <div style="float:right;">generated on 2022-09-11 07:13</div>
 </div>
 </body>
 </html>

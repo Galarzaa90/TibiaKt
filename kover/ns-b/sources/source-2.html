@@ -183,82 +183,98 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;@file:UseSerializers(LocalDateSerializer::class)
-<i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;package com.galarzaa.tibiakt.core.models.guild
-<i class="no-highlight">4</i>&nbsp;
-<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.serializers.LocalDateSerializer
-<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.utils.offsetStart
-<i class="no-highlight">7</i>&nbsp;import kotlinx.serialization.Serializable
-<i class="no-highlight">8</i>&nbsp;import kotlinx.serialization.UseSerializers
-<i class="no-highlight">9</i>&nbsp;import java.time.LocalDate
-<i class="no-highlight">10</i>&nbsp;
-<i class="no-highlight">11</i>&nbsp;/**
-<i class="no-highlight">12</i>&nbsp; * A Tibia guild
-<i class="no-highlight">13</i>&nbsp; *
-<i class="no-highlight">14</i>&nbsp; * @property world The world where the guild is in.
-<i class="no-highlight">15</i>&nbsp; * @property logoUrl The URL to the guild&#39;s logo, or the default logo.
-<i class="no-highlight">16</i>&nbsp; * @property description The description of the guild.
-<i class="no-highlight">17</i>&nbsp; * @property foundingDate The date when the guild was founded.
-<i class="no-highlight">18</i>&nbsp; * @property isActive Whether the guild is active or still in formation.
-<i class="no-highlight">19</i>&nbsp; * @property applicationsOpen Whether applications are open or not.
-<i class="no-highlight">20</i>&nbsp; * @property homepage The URL to the guild&#39;s homepage, if set.
-<i class="no-highlight">21</i>&nbsp; * @property guildHall The guildhall rented by the guild.
-<i class="no-highlight">22</i>&nbsp; * @property disbandingDate The date when the guild is set to be disbanded.
-<i class="no-highlight">23</i>&nbsp; * @property disbandingReason The reason why it will be disbanded.
-<i class="no-highlight">24</i>&nbsp; * @property members The list of members in the guild.
-<i class="no-highlight">25</i>&nbsp; * @property invited The list of characters currently invited to the guild.
-<i class="no-highlight">26</i>&nbsp; */
-<b class="pc"><i class="no-highlight">27</i>&nbsp;@Serializable</b>
-<i class="no-highlight">28</i>&nbsp;public data class Guild(
-<b class="fc"><i class="no-highlight">29</i>&nbsp;    override val name: String,</b>
-<b class="fc"><i class="no-highlight">30</i>&nbsp;    val world: String,</b>
-<b class="fc"><i class="no-highlight">31</i>&nbsp;    val logoUrl: String,</b>
-<b class="fc"><i class="no-highlight">32</i>&nbsp;    val description: String?,</b>
-<b class="fc"><i class="no-highlight">33</i>&nbsp;    val foundingDate: LocalDate,</b>
-<b class="fc"><i class="no-highlight">34</i>&nbsp;    val isActive: Boolean,</b>
-<b class="fc"><i class="no-highlight">35</i>&nbsp;    val applicationsOpen: Boolean,</b>
-<b class="fc"><i class="no-highlight">36</i>&nbsp;    val homepage: String?,</b>
-<b class="fc"><i class="no-highlight">37</i>&nbsp;    val guildHall: GuildHall?,</b>
-<b class="fc"><i class="no-highlight">38</i>&nbsp;    val disbandingDate: LocalDate?,</b>
-<b class="fc"><i class="no-highlight">39</i>&nbsp;    val disbandingReason: String?,</b>
-<b class="fc"><i class="no-highlight">40</i>&nbsp;    val members: List&lt;GuildMember&gt;,</b>
-<b class="fc"><i class="no-highlight">41</i>&nbsp;    val invited: List&lt;GuildInvite&gt;,</b>
-<i class="no-highlight">42</i>&nbsp;) : BaseGuild {
-<i class="no-highlight">43</i>&nbsp;    /**
-<i class="no-highlight">44</i>&nbsp;     * A list of the guild ranks.
-<i class="no-highlight">45</i>&nbsp;     */
-<i class="no-highlight">46</i>&nbsp;    val ranks: List&lt;String&gt;
-<b class="nc"><i class="no-highlight">47</i>&nbsp;        get() = members.map { it.rank }.distinct()</b>
-<i class="no-highlight">48</i>&nbsp;
-<i class="no-highlight">49</i>&nbsp;    /** The leader of the guild */
-<i class="no-highlight">50</i>&nbsp;    val leader: GuildMember
-<b class="nc"><i class="no-highlight">51</i>&nbsp;        get() = members.first()</b>
-<i class="no-highlight">52</i>&nbsp;
-<i class="no-highlight">53</i>&nbsp;    /** The vice leaders of the guild */
-<i class="no-highlight">54</i>&nbsp;    val viceLeaders: List&lt;GuildMember&gt;
-<b class="nc"><i class="no-highlight">55</i>&nbsp;        get() = members.offsetStart(1).takeWhile { it.rank == members[1].rank }</b>
-<i class="no-highlight">56</i>&nbsp;
-<i class="no-highlight">57</i>&nbsp;    /** A mapping of the members by their rank */
-<i class="no-highlight">58</i>&nbsp;    val membersByRank: Map&lt;String, List&lt;GuildMember&gt;&gt;
-<b class="nc"><i class="no-highlight">59</i>&nbsp;        get() = members.groupBy { it.rank }</b>
-<i class="no-highlight">60</i>&nbsp;
-<i class="no-highlight">61</i>&nbsp;    /** The number of members in the guild. */
-<i class="no-highlight">62</i>&nbsp;    val memberCount: Int
-<b class="nc"><i class="no-highlight">63</i>&nbsp;        get() = members.size</b>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;/*
+<i class="no-highlight">2</i>&nbsp; * Copyright © 2022 Allan Galarza
+<i class="no-highlight">3</i>&nbsp; *
+<i class="no-highlight">4</i>&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+<i class="no-highlight">5</i>&nbsp; * you may not use this file except in compliance with the License.
+<i class="no-highlight">6</i>&nbsp; * You may obtain a copy of the License at
+<i class="no-highlight">7</i>&nbsp; *
+<i class="no-highlight">8</i>&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+<i class="no-highlight">9</i>&nbsp; *
+<i class="no-highlight">10</i>&nbsp; * Unless required by applicable law or agreed to in writing, software
+<i class="no-highlight">11</i>&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+<i class="no-highlight">12</i>&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+<i class="no-highlight">13</i>&nbsp; * See the License for the specific language governing permissions and
+<i class="no-highlight">14</i>&nbsp; * limitations under the License.
+<i class="no-highlight">15</i>&nbsp; */
+<i class="no-highlight">16</i>&nbsp;
+<i class="no-highlight">17</i>&nbsp;@file:UseSerializers(LocalDateSerializer::class)
+<i class="no-highlight">18</i>&nbsp;
+<i class="no-highlight">19</i>&nbsp;package com.galarzaa.tibiakt.core.models.guild
+<i class="no-highlight">20</i>&nbsp;
+<i class="no-highlight">21</i>&nbsp;import com.galarzaa.tibiakt.core.serializers.LocalDateSerializer
+<i class="no-highlight">22</i>&nbsp;import com.galarzaa.tibiakt.core.utils.offsetStart
+<i class="no-highlight">23</i>&nbsp;import kotlinx.serialization.Serializable
+<i class="no-highlight">24</i>&nbsp;import kotlinx.serialization.UseSerializers
+<i class="no-highlight">25</i>&nbsp;import java.time.LocalDate
+<i class="no-highlight">26</i>&nbsp;
+<i class="no-highlight">27</i>&nbsp;/**
+<i class="no-highlight">28</i>&nbsp; * A Tibia guild.
+<i class="no-highlight">29</i>&nbsp; *
+<i class="no-highlight">30</i>&nbsp; * @property world The world where the guild is in.
+<i class="no-highlight">31</i>&nbsp; * @property logoUrl The URL to the guild&#39;s logo, or the default logo.
+<i class="no-highlight">32</i>&nbsp; * @property description The description of the guild.
+<i class="no-highlight">33</i>&nbsp; * @property foundingDate The date when the guild was founded.
+<i class="no-highlight">34</i>&nbsp; * @property isActive Whether the guild is active or still in formation.
+<i class="no-highlight">35</i>&nbsp; * @property applicationsOpen Whether applications are open or not.
+<i class="no-highlight">36</i>&nbsp; * @property homepage The URL to the guild&#39;s homepage, if set.
+<i class="no-highlight">37</i>&nbsp; * @property guildHall The guildhall rented by the guild.
+<i class="no-highlight">38</i>&nbsp; * @property disbandingDate The date when the guild is set to be disbanded.
+<i class="no-highlight">39</i>&nbsp; * @property disbandingReason The reason why it will be disbanded.
+<i class="no-highlight">40</i>&nbsp; * @property members The list of members in the guild.
+<i class="no-highlight">41</i>&nbsp; * @property invited The list of characters currently invited to the guild.
+<i class="no-highlight">42</i>&nbsp; */
+<b class="pc"><i class="no-highlight">43</i>&nbsp;@Serializable</b>
+<i class="no-highlight">44</i>&nbsp;public data class Guild(
+<b class="fc"><i class="no-highlight">45</i>&nbsp;    override val name: String,</b>
+<b class="fc"><i class="no-highlight">46</i>&nbsp;    val world: String,</b>
+<b class="fc"><i class="no-highlight">47</i>&nbsp;    val logoUrl: String,</b>
+<b class="fc"><i class="no-highlight">48</i>&nbsp;    val description: String?,</b>
+<b class="fc"><i class="no-highlight">49</i>&nbsp;    val foundingDate: LocalDate,</b>
+<b class="fc"><i class="no-highlight">50</i>&nbsp;    val isActive: Boolean,</b>
+<b class="fc"><i class="no-highlight">51</i>&nbsp;    val applicationsOpen: Boolean,</b>
+<b class="fc"><i class="no-highlight">52</i>&nbsp;    val homepage: String?,</b>
+<b class="fc"><i class="no-highlight">53</i>&nbsp;    val guildHall: GuildHall?,</b>
+<b class="fc"><i class="no-highlight">54</i>&nbsp;    val disbandingDate: LocalDate?,</b>
+<b class="fc"><i class="no-highlight">55</i>&nbsp;    val disbandingReason: String?,</b>
+<b class="fc"><i class="no-highlight">56</i>&nbsp;    val members: List&lt;GuildMember&gt;,</b>
+<b class="fc"><i class="no-highlight">57</i>&nbsp;    val invited: List&lt;GuildInvite&gt;,</b>
+<i class="no-highlight">58</i>&nbsp;) : BaseGuild {
+<i class="no-highlight">59</i>&nbsp;    /**
+<i class="no-highlight">60</i>&nbsp;     * A list of the guild ranks.
+<i class="no-highlight">61</i>&nbsp;     */
+<i class="no-highlight">62</i>&nbsp;    val ranks: List&lt;String&gt;
+<b class="nc"><i class="no-highlight">63</i>&nbsp;        get() = members.map { it.rank }.distinct()</b>
 <i class="no-highlight">64</i>&nbsp;
-<i class="no-highlight">65</i>&nbsp;    /**
-<i class="no-highlight">66</i>&nbsp;     * The list of members currently online.
-<i class="no-highlight">67</i>&nbsp;     */
-<i class="no-highlight">68</i>&nbsp;    val onlineMembers: List&lt;GuildMember&gt;
-<b class="nc"><i class="no-highlight">69</i>&nbsp;        get() = members.filter { it.isOnline }</b>
-<i class="no-highlight">70</i>&nbsp;
-<i class="no-highlight">71</i>&nbsp;    /**
-<i class="no-highlight">72</i>&nbsp;     * The number of online members in the guild
-<i class="no-highlight">73</i>&nbsp;     */
-<i class="no-highlight">74</i>&nbsp;    val onlineCount: Int
-<b class="nc"><i class="no-highlight">75</i>&nbsp;        get() = onlineMembers.count()</b>
-<i class="no-highlight">76</i>&nbsp;}
+<i class="no-highlight">65</i>&nbsp;    /** The leader of the guild. */
+<i class="no-highlight">66</i>&nbsp;    val leader: GuildMember
+<b class="nc"><i class="no-highlight">67</i>&nbsp;        get() = members.first()</b>
+<i class="no-highlight">68</i>&nbsp;
+<i class="no-highlight">69</i>&nbsp;    /** The vice leaders of the guild. */
+<i class="no-highlight">70</i>&nbsp;    val viceLeaders: List&lt;GuildMember&gt;
+<b class="nc"><i class="no-highlight">71</i>&nbsp;        get() = members.offsetStart(1).takeWhile { it.rank == members[1].rank }</b>
+<i class="no-highlight">72</i>&nbsp;
+<i class="no-highlight">73</i>&nbsp;    /** A mapping of the members by their rank. */
+<i class="no-highlight">74</i>&nbsp;    val membersByRank: Map&lt;String, List&lt;GuildMember&gt;&gt;
+<b class="nc"><i class="no-highlight">75</i>&nbsp;        get() = members.groupBy { it.rank }</b>
+<i class="no-highlight">76</i>&nbsp;
+<i class="no-highlight">77</i>&nbsp;    /** The number of members in the guild. */
+<i class="no-highlight">78</i>&nbsp;    val memberCount: Int
+<b class="nc"><i class="no-highlight">79</i>&nbsp;        get() = members.size</b>
+<i class="no-highlight">80</i>&nbsp;
+<i class="no-highlight">81</i>&nbsp;    /**
+<i class="no-highlight">82</i>&nbsp;     * The list of members currently online.
+<i class="no-highlight">83</i>&nbsp;     */
+<i class="no-highlight">84</i>&nbsp;    val onlineMembers: List&lt;GuildMember&gt;
+<b class="nc"><i class="no-highlight">85</i>&nbsp;        get() = members.filter { it.isOnline }</b>
+<i class="no-highlight">86</i>&nbsp;
+<i class="no-highlight">87</i>&nbsp;    /**
+<i class="no-highlight">88</i>&nbsp;     * The number of online members in the guild.
+<i class="no-highlight">89</i>&nbsp;     */
+<i class="no-highlight">90</i>&nbsp;    val onlineCount: Int
+<b class="nc"><i class="no-highlight">91</i>&nbsp;        get() = onlineMembers.count()</b>
+<i class="no-highlight">92</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -285,7 +301,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-11 06:50</div>
+    <div style="float:right;">generated on 2022-09-11 07:13</div>
 </div>
 </body>
 </html>
