@@ -1,3 +1,19 @@
+/*
+ * Copyright © 2022 Allan Galarza
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.galarzaa.tibiakt.core.builders
 
 import com.galarzaa.tibiakt.core.enums.HighscoresBattlEyeType
@@ -18,7 +34,7 @@ public inline fun highscoresBuilder(block: HighscoresBuilder.() -> Unit): Highsc
     HighscoresBuilder().apply(block)
 
 @BuilderDsl
-public class HighscoresBuilder : TibiaKtBuilder<Highscores>() {
+public class HighscoresBuilder : TibiaKtBuilder<Highscores> {
     public var world: String? = null
     public var category: HighscoresCategory? = null
     public var vocation: HighscoresProfession? = null
@@ -52,7 +68,7 @@ public class HighscoresBuilder : TibiaKtBuilder<Highscores>() {
         vocation = vocation ?: HighscoresProfession.ALL,
         worldTypes = worldTypes,
         battlEyeType = battlEyeType ?: HighscoresBattlEyeType.ANY_WORLD,
-        lastUpdate = lastUpdate ?: throw IllegalStateException("lastUpdate is required"),
+        lastUpdate = lastUpdate ?: error("lastUpdate is required"),
         currentPage = currentPage,
         totalPages = totalPages,
         resultsCount = resultsCount,
@@ -60,7 +76,7 @@ public class HighscoresBuilder : TibiaKtBuilder<Highscores>() {
     )
 
     @BuilderDsl
-    public class HighscoresEntryBuilder : TibiaKtBuilder<HighscoresEntry>() {
+    public class HighscoresEntryBuilder : TibiaKtBuilder<HighscoresEntry> {
         public var rank: Int = 0
         public lateinit var name: String
         public lateinit var vocation: Vocation
@@ -71,9 +87,9 @@ public class HighscoresBuilder : TibiaKtBuilder<Highscores>() {
 
         override fun build(): HighscoresEntry = HighscoresEntry(
             rank = rank,
-            name = if (::name.isInitialized) name else throw IllegalStateException("name is required"),
-            vocation = if (::vocation.isInitialized) vocation else throw IllegalStateException("vocation is required"),
-            world = if (::world.isInitialized) world else throw IllegalStateException("world is required"),
+            name = if (::name.isInitialized) name else error("name is required"),
+            vocation = if (::vocation.isInitialized) vocation else error("vocation is required"),
+            world = if (::world.isInitialized) world else error("world is required"),
             level = level,
             value = value,
             additionalValue = additionalValue,

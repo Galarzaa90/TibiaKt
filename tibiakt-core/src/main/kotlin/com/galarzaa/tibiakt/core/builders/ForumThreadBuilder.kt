@@ -1,3 +1,19 @@
+/*
+ * Copyright © 2022 Allan Galarza
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.galarzaa.tibiakt.core.builders
 
 import com.galarzaa.tibiakt.core.models.forums.BaseForumAuthor
@@ -16,7 +32,7 @@ public inline fun forumThreadBuilder(block: ForumThreadBuilder.() -> Unit): Foru
 public inline fun forumThread(block: ForumThreadBuilder.() -> Unit): ForumThread = forumThreadBuilder(block).build()
 
 @BuilderDsl
-public class ForumThreadBuilder : TibiaKtBuilder<ForumThread>() {
+public class ForumThreadBuilder : TibiaKtBuilder<ForumThread> {
     public var title: String? = null
     public var threadId: Int? = null
     public var board: String? = null
@@ -40,12 +56,12 @@ public class ForumThreadBuilder : TibiaKtBuilder<ForumThread>() {
 
 
     override fun build(): ForumThread = ForumThread(
-        title = title ?: throw IllegalStateException("title is required"),
-        threadId = threadId ?: throw IllegalStateException("threadId is required"),
-        board = board ?: throw IllegalStateException("board is required"),
-        boardId = boardId ?: throw IllegalStateException("boardId is required"),
-        section = section ?: throw IllegalStateException("section is required"),
-        sectionId = sectionId ?: throw IllegalStateException("sectionId is required"),
+        title = title ?: error("title is required"),
+        threadId = threadId ?: error("threadId is required"),
+        board = board ?: error("board is required"),
+        boardId = boardId ?: error("boardId is required"),
+        section = section ?: error("section is required"),
+        sectionId = sectionId ?: error("sectionId is required"),
         previousTopicNumber = previousTopicNumber,
         nextTopicNumber = nextTopicNumber,
         goldenFrame = goldenFrame,
@@ -56,7 +72,7 @@ public class ForumThreadBuilder : TibiaKtBuilder<ForumThread>() {
         entries = entries
     )
 
-    public class ForumPostBuilder : TibiaKtBuilder<ForumPost>() {
+    public class ForumPostBuilder : TibiaKtBuilder<ForumPost> {
         public var author: BaseForumAuthor? = null
         public var emoticon: ForumEmoticon? = null
         public var title: String? = null
@@ -68,12 +84,12 @@ public class ForumThreadBuilder : TibiaKtBuilder<ForumThread>() {
         public var editedBy: String? = null
 
         override fun build(): ForumPost = ForumPost(
-            author = author ?: throw IllegalStateException("author is required"),
+            author = author ?: error("author is required"),
             emoticon = emoticon,
             title = title,
-            content = content ?: throw IllegalStateException("content is required"),
+            content = content ?: error("content is required"),
             signature = signature,
-            postId = postId ?: throw IllegalStateException("postId is required"),
+            postId = postId ?: error("postId is required"),
             postedDate = postedDate ?: Clock.System.now(),
             editedDate = editedDate,
             editedBy = editedBy

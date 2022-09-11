@@ -1,3 +1,19 @@
+/*
+ * Copyright © 2022 Allan Galarza
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.galarzaa.tibiakt.core.builders
 
 import com.galarzaa.tibiakt.core.enums.HouseOrder
@@ -17,7 +33,7 @@ public inline fun housesSectionBuilder(block: HousesSectionBuilder.() -> Unit): 
     HousesSectionBuilder().apply(block)
 
 @BuilderDsl
-public class HousesSectionBuilder : TibiaKtBuilder<HousesSection>() {
+public class HousesSectionBuilder : TibiaKtBuilder<HousesSection> {
     public var world: String? = null
     public var town: String? = null
     public var status: HouseStatus? = null
@@ -55,15 +71,15 @@ public class HousesSectionBuilder : TibiaKtBuilder<HousesSection>() {
         entries.add(HouseEntryBuilder().apply(block).build())
 
     override fun build(): HousesSection = HousesSection(
-        world = world ?: throw IllegalStateException("world is required"),
-        town = town ?: throw IllegalStateException("town is required"),
+        world = world ?: error("world is required"),
+        town = town ?: error("town is required"),
         type = type,
         status = status,
         order = order,
         entries = entries
     )
 
-    public class HouseEntryBuilder : TibiaKtBuilder<HouseEntry>() {
+    public class HouseEntryBuilder : TibiaKtBuilder<HouseEntry> {
         public var houseId: Int? = null
         public var name: String? = null
         public var size: Int? = null
@@ -76,14 +92,14 @@ public class HousesSectionBuilder : TibiaKtBuilder<HousesSection>() {
         public var timeLeft: Duration? = null
 
         override fun build(): HouseEntry = HouseEntry(
-            houseId = houseId ?: throw IllegalStateException("houseId is required"),
-            name = name ?: throw IllegalStateException("name is required"),
-            size = size ?: throw IllegalStateException("size is required"),
-            rent = rent ?: throw IllegalStateException("rent is required"),
-            town = town ?: throw IllegalStateException("town is required"),
-            world = world ?: throw IllegalStateException("world is required"),
-            type = type ?: throw IllegalStateException("type is required"),
-            status = status ?: throw IllegalStateException("status is required"),
+            houseId = houseId ?: error("houseId is required"),
+            name = name ?: error("name is required"),
+            size = size ?: error("size is required"),
+            rent = rent ?: error("rent is required"),
+            town = town ?: error("town is required"),
+            world = world ?: error("world is required"),
+            type = type ?: error("type is required"),
+            status = status ?: error("status is required"),
             highestBid = highestBid,
             timeLeft = timeLeft,
         )

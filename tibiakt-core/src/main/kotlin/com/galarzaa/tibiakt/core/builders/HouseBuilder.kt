@@ -1,3 +1,19 @@
+/*
+ * Copyright © 2022 Allan Galarza
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.galarzaa.tibiakt.core.builders
 
 import com.galarzaa.tibiakt.core.enums.HouseStatus
@@ -14,7 +30,7 @@ public inline fun houseBuilder(block: HouseBuilder.() -> Unit): HouseBuilder = H
 
 
 @BuilderDsl
-public class HouseBuilder : TibiaKtBuilder<House>() {
+public class HouseBuilder : TibiaKtBuilder<House> {
     public var houseId: Int? = null
     public var name: String? = null
     public var size: Int? = null
@@ -34,14 +50,14 @@ public class HouseBuilder : TibiaKtBuilder<House>() {
     public var auctionEnd: Instant? = null
 
     override fun build(): House = House(
-        houseId = houseId ?: throw IllegalStateException("houseId is required"),
-        name = name ?: throw IllegalStateException("name is required"),
-        size = size ?: throw IllegalStateException("size is required"),
-        type = type ?: throw IllegalStateException("type is required"),
-        beds = beds ?: throw IllegalStateException("beds is required"),
-        rent = rent ?: throw IllegalStateException("rent is required"),
-        world = world ?: throw IllegalStateException("world is required"),
-        status = status ?: throw IllegalStateException("status is required"),
+        houseId = houseId ?: error("houseId is required"),
+        name = name ?: error("name is required"),
+        size = size ?: error("size is required"),
+        type = type ?: error("type is required"),
+        beds = beds ?: error("beds is required"),
+        rent = rent ?: error("rent is required"),
+        world = world ?: error("world is required"),
+        status = status ?: error("status is required"),
         paidUntil = paidUntil,
         owner = owner,
         movingDate = movingDate,

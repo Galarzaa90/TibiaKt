@@ -1,3 +1,19 @@
+/*
+ * Copyright © 2022 Allan Galarza
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.galarzaa.tibiakt.core.utils
 
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
@@ -21,8 +37,7 @@ internal fun Element.parseTables(contentTableSelector: String = "table.TableCont
         val captionContainer = table.selectFirst("div.CaptionContainer")
         val contentTable = table.selectFirst(contentTableSelector)
         val caption = captionContainer?.text() ?: throw ParsingException("table has no caption container")
-        if (contentTable == null)
-            continue
+        if (contentTable == null) continue
         val rows = contentTable.select("tr")
         output[caption] = rows
     }
@@ -54,7 +69,7 @@ internal fun Element.cellsText(): List<String> = cells().map { it.cleanText() }
 internal fun Element.cleanText() = text().clean()
 internal fun TextNode.cleanText() = text().clean()
 
-/** Get the text contained in an list of element, cleaned out of extraneous characters. */
+/** Get the text contained in a list of element, cleaned out of extraneous characters. */
 internal fun Elements.cleanText() = text().clean()
 
 /** Get the text contained in an element, cleaned out of extraneous characters. */
@@ -73,8 +88,9 @@ internal fun ArrayList<Element>.replaceBr() = forEach { it.replaceBrs() }
  * @receiver An element with the form tag.
  */
 internal fun Element.formData(): FormData {
-    if (this.tagName().lowercase() != "form")
-        throw IllegalArgumentException("expected element with 'form' tag, got element with '${this.tagName()}' tag")
+    require(this.tagName().lowercase() == "form") {
+        "expected element with 'form' tag, got element with '${this.tagName()}' tag"
+    }
     val data = mutableMapOf<String, String>()
     val dataMultiple = mutableMapOf<String, MutableList<String>>()
     val availableOptions = mutableMapOf<String, MutableList<String>>()
@@ -84,23 +100,20 @@ internal fun Element.formData(): FormData {
             val value = opt.attr("value")
             val name = it.attr("name")
             availableOptions.getOrPut(name) { mutableListOf() }.add(value)
-            if (opt.hasAttr("selected"))
-                data[name] = value
+            if (opt.hasAttr("selected")) data[name] = value
         }
     }
     select("input[type=checkbox]").forEach {
         val name = it.attr("name")
         val value = it.attr("value")
         availableOptions.getOrPut(name) { mutableListOf() }.add(value)
-        if (it.hasAttr("checked"))
-            dataMultiple.getOrPut(name) { mutableListOf() }.add(value)
+        if (it.hasAttr("checked")) dataMultiple.getOrPut(name) { mutableListOf() }.add(value)
     }
     select("input[type=radio]").forEach {
         val name = it.attr("name")
         val value = it.attr("value")
         availableOptions.getOrPut(name) { mutableListOf() }.add(value)
-        if (it.hasAttr("checked"))
-            data[name] = value
+        if (it.hasAttr("checked")) data[name] = value
     }
     return FormData(data, dataMultiple, availableOptions, action = attr("action"), method = attr("method"))
 }
@@ -127,8 +140,7 @@ private val resultsRegex = Regex("""Results: ([\d,]+)""")
 /** Parse the pagination block present in many Tibia.com sections */
 internal fun Element.parsePagination(): PaginationData {
     val (pagesDiv, resultsDiv) = select("small > div")
-    val currentPageLink =
-        pagesDiv.selectFirst(".CurrentPageLink")
+    val currentPageLink = pagesDiv.selectFirst(".CurrentPageLink")
     val pageLinks = pagesDiv.select(".PageLink")
     val firstOrLastPages = pagesDiv.select(".FirstOrLastElement")
     val totalPages = if (!firstOrLastPages.isEmpty()) {
@@ -146,10 +158,8 @@ internal fun Element.parsePagination(): PaginationData {
     val page = try {
         currentPageLink?.text()?.toInt() ?: totalPages
     } catch (nfe: NumberFormatException) {
-        if (currentPageLink?.text()?.contains("First") == true)
-            1
-        else
-            totalPages
+        if (currentPageLink?.text()?.contains("First") == true) 1
+        else totalPages
     }
     val resultsCount: Int = resultsRegex.find(resultsDiv.text())?.let {
         it.groups[1]!!.value.parseInteger()
@@ -168,23 +178,15 @@ internal data class PaginationData(val currentPage: Int, val totalPages: Int, va
 
 internal fun parsePopup(content: String): Pair<String, Document> {
     val parts = content.split(",", limit = 3)
-    val title = parts[1]
-        .replace("'", "")
-        .trim()
-    val html = parts[parts.size - 1]
-        .replace("\\'", "\"")
-        .replace("'", "")
-        .replace(",);", "")
-        .replace(", );", "")
-        .trim()
+    val title = parts[1].replace("'", "").trim()
+    val html = parts[parts.size - 1].replace("\\'", "\"").replace("'", "").replace(",);", "").replace(", );", "").trim()
     val parsedHtml = Jsoup.parse(html, "", Parser.xmlParser())
     return Pair(title, parsedHtml)
 }
 
 private val queryStringRegex = Regex("([^&=]+)=([^&]*)")
 internal fun Element.getLinkInformation(): LinkInformation? {
-    if (this.tagName() != "a")
-        return null
+    if (this.tagName() != "a") return null
     return LinkInformation(this.text(), this.attr("href"))
 }
 
@@ -205,4 +207,3 @@ internal fun URL.queryParams(): HashMap<String, MutableList<String>> {
     }
     return map
 }
-

@@ -1,3 +1,19 @@
+/*
+ * Copyright © 2022 Allan Galarza
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.galarzaa.tibiakt.core.builders
 
 import com.galarzaa.tibiakt.core.enums.AccountStatus
@@ -24,7 +40,7 @@ public inline fun characterBuilder(block: CharacterBuilder.() -> Unit): Characte
     CharacterBuilder().apply(block)
 
 @BuilderDsl
-public class CharacterBuilder : TibiaKtBuilder<Character>() {
+public class CharacterBuilder : TibiaKtBuilder<Character> {
     public lateinit var name: String
     public var level: Int = 2
     public var residence: String? = null
@@ -105,24 +121,24 @@ public class CharacterBuilder : TibiaKtBuilder<Character>() {
     ): CharacterBuilder = apply { characters.add(OtherCharacter(name, world, main, online, deleted, traded, position)) }
 
     override fun build(): Character = Character(
-        name = if (::name.isInitialized) name else throw IllegalStateException("name is required"),
+        name = if (::name.isInitialized) name else error("name is required"),
         title = title,
         formerNames = formerNames,
         unlockedTitles = unlockedTitles,
-        sex = sex ?: throw IllegalStateException("sex is required"),
-        vocation = vocation ?: throw IllegalStateException("vocation is required"),
+        sex = sex ?: error("sex is required"),
+        vocation = vocation ?: error("vocation is required"),
         level = level,
         achievementPoints = achievementPoints,
-        world = world ?: throw IllegalStateException("world is required"),
+        world = world ?: error("world is required"),
         formerWorld = formerWorld,
-        residence = residence ?: throw IllegalStateException("residence is required"),
+        residence = residence ?: error("residence is required"),
         marriedTo = marriedTo,
         houses = houses,
         guildMembership = guildMembership,
         lastLogin = lastLogin,
         position = position,
         comment = comment,
-        accountStatus = accountStatus ?: throw IllegalStateException("accountStatus is required"),
+        accountStatus = accountStatus ?: error("accountStatus is required"),
         recentlyTraded = recentlyTraded,
         deletionDate = deletionDate,
         badges = accountBadges,
@@ -132,18 +148,18 @@ public class CharacterBuilder : TibiaKtBuilder<Character>() {
         characters = characters
     )
 
-    public class CharacterHouseBuilder : TibiaKtBuilder<CharacterHouse>() {
+    public class CharacterHouseBuilder : TibiaKtBuilder<CharacterHouse> {
         public lateinit var name: String
         public var houseId: Int = 0
         public lateinit var town: String
         public lateinit var paidUntil: LocalDate
         public lateinit var world: String
         public override fun build(): CharacterHouse = CharacterHouse(
-            name = if (::name.isInitialized) name else throw IllegalStateException("name is required"),
+            name = if (::name.isInitialized) name else error("name is required"),
             houseId = houseId,
-            town = if (::town.isInitialized) town else throw IllegalStateException("town is required"),
-            paidUntil = if (::paidUntil.isInitialized) paidUntil else throw IllegalStateException("paidUntil is required"),
-            world = if (::world.isInitialized) world else throw IllegalStateException("world is required"),
+            town = if (::town.isInitialized) town else error("town is required"),
+            paidUntil = if (::paidUntil.isInitialized) paidUntil else error("paidUntil is required"),
+            world = if (::world.isInitialized) world else error("world is required"),
         )
     }
 }

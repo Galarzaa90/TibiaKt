@@ -1,3 +1,19 @@
+/*
+ * Copyright © 2022 Allan Galarza
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.galarzaa.tibiakt.core.builders
 
 import com.galarzaa.tibiakt.core.enums.AuctionStatus
@@ -28,7 +44,7 @@ public inline fun auction(block: AuctionBuilder.() -> Unit): Auction = AuctionBu
 public inline fun auctionBuilder(block: AuctionBuilder.() -> Unit): AuctionBuilder = AuctionBuilder().apply(block)
 
 @BuilderDsl
-public class AuctionBuilder : TibiaKtBuilder<Auction>() {
+public class AuctionBuilder : TibiaKtBuilder<Auction> {
     public lateinit var name: String
     public var auctionId: Int? = null
     public var level: Int? = null
@@ -63,51 +79,51 @@ public class AuctionBuilder : TibiaKtBuilder<Auction>() {
         apply { details = AuctionDetailsBuilder().apply(block).build() }
 
     public override fun build(): Auction = Auction(
-        name = if (::name.isInitialized) name else throw IllegalStateException("name is required"),
-        auctionId = auctionId ?: throw IllegalStateException("auctionId is required"),
-        level = level ?: throw IllegalStateException("level is required"),
-        world = if (::world.isInitialized) world else throw IllegalStateException("world is required"),
-        vocation = if (::vocation.isInitialized) vocation else throw IllegalStateException("vocation is required"),
-        sex = if (::sex.isInitialized) sex else throw IllegalStateException("sex is required"),
-        outfit = if (::outfit.isInitialized) outfit else throw IllegalStateException("outfit is required"),
+        name = if (::name.isInitialized) name else error("name is required"),
+        auctionId = auctionId ?: error("auctionId is required"),
+        level = level ?: error("level is required"),
+        world = if (::world.isInitialized) world else error("world is required"),
+        vocation = if (::vocation.isInitialized) vocation else error("vocation is required"),
+        sex = if (::sex.isInitialized) sex else error("sex is required"),
+        outfit = if (::outfit.isInitialized) outfit else error("outfit is required"),
         displayedItems = displayedItems,
         salesArguments = salesArguments,
-        auctionStart = if (::auctionStart.isInitialized) auctionStart else throw IllegalStateException("auctionStart is required"),
-        auctionEnd = if (::auctionEnd.isInitialized) auctionEnd else throw IllegalStateException("auctionEnd is required"),
+        auctionStart = if (::auctionStart.isInitialized) auctionStart else error("auctionStart is required"),
+        auctionEnd = if (::auctionEnd.isInitialized) auctionEnd else error("auctionEnd is required"),
         bid = bid,
-        bidType = if (::bidType.isInitialized) bidType else throw IllegalStateException("bidType is required"),
-        status = if (::status.isInitialized) status else throw IllegalStateException("status is required"),
+        bidType = if (::bidType.isInitialized) bidType else error("bidType is required"),
+        status = if (::status.isInitialized) status else error("status is required"),
         details = details,
     )
 
     @BuilderDsl
-    public class ItemEntryBuilder : TibiaKtBuilder<ItemEntry>() {
+    public class ItemEntryBuilder : TibiaKtBuilder<ItemEntry> {
         public var itemId: Int? = null
         public lateinit var name: String
         public lateinit var description: String
         public var count: Int = 1
 
         override fun build(): ItemEntry = ItemEntry(
-            itemId = itemId ?: throw IllegalStateException("itemId is required"),
-            name = if (::name.isInitialized) name else throw IllegalStateException("name is required"),
-            description = if (::description.isInitialized) description else throw IllegalStateException("description is required"),
+            itemId = itemId ?: error("itemId is required"),
+            name = if (::name.isInitialized) name else error("name is required"),
+            description = if (::description.isInitialized) description else error("description is required"),
             count = count
         )
     }
 
     @BuilderDsl
-    public class SalesArgumentBuilder : TibiaKtBuilder<SalesArgument>() {
+    public class SalesArgumentBuilder : TibiaKtBuilder<SalesArgument> {
         public var categoryId: Int? = null
         public lateinit var content: String
 
         override fun build(): SalesArgument = SalesArgument(
-            categoryId = categoryId ?: throw IllegalStateException("categoryId is required"),
-            content = if (::content.isInitialized) content else throw IllegalStateException("content is required"),
+            categoryId = categoryId ?: error("categoryId is required"),
+            content = if (::content.isInitialized) content else error("content is required"),
         )
     }
 
     @BuilderDsl
-    public class AuctionDetailsBuilder : TibiaKtBuilder<AuctionDetails>() {
+    public class AuctionDetailsBuilder : TibiaKtBuilder<AuctionDetails> {
         public var hitPoints: Int? = null
         public var mana: Int? = null
         public var capacity: Int? = null
@@ -178,44 +194,44 @@ public class AuctionBuilder : TibiaKtBuilder<Auction>() {
 
         public override fun build(): AuctionDetails =
             AuctionDetails(
-                hitPoints = hitPoints ?: throw IllegalStateException("hitPoints is required"),
-                mana = mana ?: throw IllegalStateException("mana is required"),
-                capacity = capacity ?: throw IllegalStateException("capacity is required"),
-                speed = speed ?: throw IllegalStateException("speed is required"),
-                blessingsCount = blessingsCount ?: throw IllegalStateException("blessingsCount is required"),
-                mountsCount = mountsCount ?: throw IllegalStateException("mountsCount is required"),
-                outfitsCount = outfitsCount ?: throw IllegalStateException("outfitsCount is required"),
-                titlesCount = titlesCount ?: throw IllegalStateException("titlesCount is required"),
-                skills = skills ?: throw IllegalStateException("skills is required"),
-                creationDate = creationDate ?: throw IllegalStateException("creationDate is required"),
-                experience = experience ?: throw IllegalStateException("experience is required"),
-                gold = gold ?: throw IllegalStateException("gold is required"),
-                achievementPoints = achievementPoints ?: throw IllegalStateException("achievementPoints is required"),
+                hitPoints = hitPoints ?: error("hitPoints is required"),
+                mana = mana ?: error("mana is required"),
+                capacity = capacity ?: error("capacity is required"),
+                speed = speed ?: error("speed is required"),
+                blessingsCount = blessingsCount ?: error("blessingsCount is required"),
+                mountsCount = mountsCount ?: error("mountsCount is required"),
+                outfitsCount = outfitsCount ?: error("outfitsCount is required"),
+                titlesCount = titlesCount ?: error("titlesCount is required"),
+                skills = skills ?: error("skills is required"),
+                creationDate = creationDate ?: error("creationDate is required"),
+                experience = experience ?: error("experience is required"),
+                gold = gold ?: error("gold is required"),
+                achievementPoints = achievementPoints ?: error("achievementPoints is required"),
                 regularWorldTransfersAvailable = regularWorldTransfersAvailable,
-                charmExpansion = charmExpansion ?: throw IllegalStateException("charmExpansion is required"),
+                charmExpansion = charmExpansion ?: error("charmExpansion is required"),
                 availableCharmPoints = availableCharmPoints
-                    ?: throw IllegalStateException("availableCharmPoints is required"),
-                spentCharmPoints = spentCharmPoints ?: throw IllegalStateException("spentCharmPoints is required"),
-                dailyRewardStreak = dailyRewardStreak ?: throw IllegalStateException("dailyRewardStreak is required"),
+                    ?: error("availableCharmPoints is required"),
+                spentCharmPoints = spentCharmPoints ?: error("spentCharmPoints is required"),
+                dailyRewardStreak = dailyRewardStreak ?: error("dailyRewardStreak is required"),
                 permanentHuntingTaskSlots = permanentHuntingTaskSlots
-                    ?: throw IllegalStateException("permanentHuntingTaskSlots is required"),
+                    ?: error("permanentHuntingTaskSlots is required"),
                 permanentPreySlots = permanentPreySlots
-                    ?: throw IllegalStateException("permanentPreySlots is required"),
-                huntingTaskPoints = huntingTaskPoints ?: throw IllegalStateException("huntingTaskPoints is required"),
-                preyWildcards = preyWildcards ?: throw IllegalStateException("preyWildcards is required"),
-                hirelings = hirelings ?: throw IllegalStateException("hirelings is required"),
-                hirelingJobs = hirelingJobs ?: throw IllegalStateException("hirelingJobs is required"),
-                hirelingOutfits = hirelingOutfits ?: throw IllegalStateException("hirelingOutfits is required"),
-                exaltedDust = exaltedDust ?: throw IllegalStateException("exaltedDust is required"),
-                exaltedDustLimit = exaltedDustLimit ?: throw IllegalStateException("exaltedDustLimit is required"),
-                bossPoints = bossPoints ?: throw IllegalStateException("bossPoints is required"),
-                items = items ?: throw IllegalStateException("items is required"),
-                storeItems = storeItems ?: throw IllegalStateException("storeItems is required"),
-                mounts = mounts ?: throw IllegalStateException("mounts is required"),
-                storeMounts = storeMounts ?: throw IllegalStateException("storeMounts is required"),
-                outfits = outfits ?: throw IllegalStateException("outfits is required"),
-                storeOutfits = storeOutfits ?: throw IllegalStateException("storeOutfits is required"),
-                familiars = familiars ?: throw IllegalStateException("familiars is required"),
+                    ?: error("permanentPreySlots is required"),
+                huntingTaskPoints = huntingTaskPoints ?: error("huntingTaskPoints is required"),
+                preyWildcards = preyWildcards ?: error("preyWildcards is required"),
+                hirelings = hirelings ?: error("hirelings is required"),
+                hirelingJobs = hirelingJobs ?: error("hirelingJobs is required"),
+                hirelingOutfits = hirelingOutfits ?: error("hirelingOutfits is required"),
+                exaltedDust = exaltedDust ?: error("exaltedDust is required"),
+                exaltedDustLimit = exaltedDustLimit ?: error("exaltedDustLimit is required"),
+                bossPoints = bossPoints ?: error("bossPoints is required"),
+                items = items ?: error("items is required"),
+                storeItems = storeItems ?: error("storeItems is required"),
+                mounts = mounts ?: error("mounts is required"),
+                storeMounts = storeMounts ?: error("storeMounts is required"),
+                outfits = outfits ?: error("outfits is required"),
+                storeOutfits = storeOutfits ?: error("storeOutfits is required"),
+                familiars = familiars ?: error("familiars is required"),
                 blessings = blessings,
                 imbuements = imbuements,
                 charms = charms,

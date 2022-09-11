@@ -59,17 +59,15 @@ public object LeaderboardsParser : Parser<Leaderboards?> {
                 }
                 val rotationEnd = parseTibiaDateTime(cleanLabel)
                 val rotation = LeaderboardsRotation(
-                    rotationId = rotationId,
-                    current = current,
-                    endDate = rotationEnd
+                    rotationId = rotationId, current = current, endDate = rotationEnd
                 )
                 if (current) {
                     this.rotation = rotation
                 }
                 addAvailableRotation(rotation)
             }
-            world = formData.values["world"]
-                ?: if ("world" in formData.availableOptions) return null else throw ParsingException("world form parameter not found")
+            world = formData.values["world"] ?: if ("world" in formData.availableOptions) return null
+            else throw ParsingException("world form parameter not found")
 
             if (tables.size == 4) {
                 val lastUpdateString = tables[2].text()

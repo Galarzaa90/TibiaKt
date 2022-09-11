@@ -1,3 +1,19 @@
+/*
+ * Copyright © 2022 Allan Galarza
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.galarzaa.tibiakt.core.builders
 
 import com.galarzaa.tibiakt.core.models.forums.BaseForumAuthor
@@ -14,7 +30,7 @@ public inline fun forumAnnouncement(block: ForumAnnouncementBuilder.() -> Unit):
     forumAnnouncementBuilder(block).build()
 
 @BuilderDsl
-public class ForumAnnouncementBuilder : TibiaKtBuilder<ForumAnnouncement>() {
+public class ForumAnnouncementBuilder : TibiaKtBuilder<ForumAnnouncement> {
     public var announcementId: Int? = null
     public var title: String? = null
     public var board: String? = null
@@ -27,15 +43,15 @@ public class ForumAnnouncementBuilder : TibiaKtBuilder<ForumAnnouncement>() {
     public var endDate: Instant? = null
 
     override fun build(): ForumAnnouncement = ForumAnnouncement(
-        announcementId = announcementId ?: throw IllegalStateException("announcementId is required"),
-        title = title ?: throw IllegalStateException("title is required"),
-        board = board ?: throw IllegalStateException("board is required"),
-        boardId = boardId ?: throw IllegalStateException("boardId is required"),
-        section = section ?: throw IllegalStateException("section is required"),
-        sectionId = sectionId ?: throw IllegalStateException("sectionId is required"),
-        author = author ?: throw IllegalStateException("author is required"),
-        content = content ?: throw IllegalStateException("content is required"),
-        startDate = startDate ?: throw IllegalStateException("startDate is required"),
-        endDate = endDate ?: throw IllegalStateException("endDate is required")
+        announcementId = announcementId ?: error("announcementId is required"),
+        title = title ?: error("title is required"),
+        board = board ?: error("board is required"),
+        boardId = boardId ?: error("boardId is required"),
+        section = section ?: error("section is required"),
+        sectionId = sectionId ?: error("sectionId is required"),
+        author = author ?: error("author is required"),
+        content = content ?: error("content is required"),
+        startDate = startDate ?: error("startDate is required"),
+        endDate = endDate ?: error("endDate is required")
     )
 }

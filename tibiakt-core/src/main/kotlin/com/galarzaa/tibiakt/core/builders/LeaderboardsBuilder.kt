@@ -31,7 +31,7 @@ public inline fun leaderboardsBuilder(block: LeaderboardsBuilder.() -> Unit): Le
     LeaderboardsBuilder().apply(block)
 
 @BuilderDsl
-public class LeaderboardsBuilder : TibiaKtBuilder<Leaderboards>() {
+public class LeaderboardsBuilder : TibiaKtBuilder<Leaderboards> {
     public var world: String? = null
     public var rotation: LeaderboardsRotation? = null
     public val availableRotations: MutableList<LeaderboardsRotation> = mutableListOf()
@@ -39,7 +39,7 @@ public class LeaderboardsBuilder : TibiaKtBuilder<Leaderboards>() {
     public var currentPage: Int? = null
     public var totalPages: Int? = null
     public var resultsCount: Int? = null
-    public var entries: MutableList<BaseLeaderboardsEntry> = mutableListOf()
+    public val entries: MutableList<BaseLeaderboardsEntry> = mutableListOf()
 
     @BuilderDsl
     public fun rotation(body: LeaderboardsRotationBuilder.() -> Unit): LeaderboardsBuilder =
@@ -53,24 +53,24 @@ public class LeaderboardsBuilder : TibiaKtBuilder<Leaderboards>() {
 
 
     override fun build(): Leaderboards = Leaderboards(
-        world = world ?: throw IllegalStateException("world is required"),
-        rotation = rotation ?: throw IllegalStateException("rotation is required"),
+        world = world ?: error("world is required"),
+        rotation = rotation ?: error("rotation is required"),
         availableRotations = availableRotations,
         lastUpdated = lastUpdated,
-        currentPage = currentPage ?: throw IllegalStateException("currentPage is required"),
-        totalPages = totalPages ?: throw IllegalStateException("totalPages is required"),
-        resultsCount = resultsCount ?: throw IllegalStateException("resultsCount is required"),
+        currentPage = currentPage ?: error("currentPage is required"),
+        totalPages = totalPages ?: error("totalPages is required"),
+        resultsCount = resultsCount ?: error("resultsCount is required"),
         entries = entries
     )
 
-    public class LeaderboardsRotationBuilder : TibiaKtBuilder<LeaderboardsRotation>() {
+    public class LeaderboardsRotationBuilder : TibiaKtBuilder<LeaderboardsRotation> {
         public var rotationId: Int? = null
         public var current: Boolean = false
         public var endDate: Instant? = null
         override fun build(): LeaderboardsRotation = LeaderboardsRotation(
-            rotationId = rotationId ?: throw IllegalStateException("rotationId is required"),
+            rotationId = rotationId ?: error("rotationId is required"),
             current = current,
-            endDate = endDate ?: throw IllegalStateException("endDate is required"),
+            endDate = endDate ?: error("endDate is required"),
         )
 
     }

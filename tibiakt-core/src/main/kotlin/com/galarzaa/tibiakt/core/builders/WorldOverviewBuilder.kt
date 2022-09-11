@@ -1,3 +1,19 @@
+/*
+ * Copyright © 2022 Allan Galarza
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.galarzaa.tibiakt.core.builders
 
 import com.galarzaa.tibiakt.core.enums.BattlEyeType
@@ -18,11 +34,11 @@ public inline fun worldOverview(block: WorldOverviewBuilder.() -> Unit): WorldOv
     worldOverviewBuilder(block).build()
 
 @BuilderDsl
-public class WorldOverviewBuilder : TibiaKtBuilder<WorldOverview>() {
+public class WorldOverviewBuilder : TibiaKtBuilder<WorldOverview> {
     public var overallMaximumCount: Int? = null
     public var overallMaximumCountDateTime: Instant? = null
-    public var worlds: MutableList<WorldEntry> = mutableListOf()
-    public var tournamentWorlds: MutableList<WorldEntry> = mutableListOf()
+    public val worlds: MutableList<WorldEntry> = mutableListOf()
+    public val tournamentWorlds: MutableList<WorldEntry> = mutableListOf()
 
 
     public fun addWorld(world: WorldEntry): Boolean = worlds.add(world)
@@ -34,15 +50,16 @@ public class WorldOverviewBuilder : TibiaKtBuilder<WorldOverview>() {
     override fun build(): WorldOverview {
         return WorldOverview(
             overallMaximumCount = overallMaximumCount
-                ?: throw IllegalStateException("overallMaximumCount is required"),
+                ?: error("overallMaximumCount is required"),
             overallMaximumCountDateTime = overallMaximumCountDateTime
-                ?: throw IllegalStateException("overallMaximumCountDateTime is required"),
+                ?: error("overallMaximumCountDateTime is required"),
             worlds = worlds,
-            tournamentWorlds = tournamentWorlds)
+            tournamentWorlds = tournamentWorlds
+        )
     }
 
     @BuilderDsl
-    public class WorldEntryBuilder : TibiaKtBuilder<WorldEntry>() {
+    public class WorldEntryBuilder : TibiaKtBuilder<WorldEntry> {
         public var name: String? = null
         public var isOnline: Boolean = false
         public var onlineCount: Int = 0
@@ -58,11 +75,11 @@ public class WorldOverviewBuilder : TibiaKtBuilder<WorldOverview>() {
 
         override fun build(): WorldEntry {
             return WorldEntry(
-                name = name ?: throw IllegalStateException("name is required"),
+                name = name ?: error("name is required"),
                 isOnline = isOnline,
                 onlineCount = onlineCount,
-                location = location ?: throw IllegalStateException("location is required"),
-                pvpType = pvpType ?: throw IllegalStateException("pvpType is required"),
+                location = location ?: error("location is required"),
+                pvpType = pvpType ?: error("pvpType is required"),
                 battlEyeType = battlEyeType,
                 battlEyeStartDate = battlEyeStartDate,
                 transferType = transferType,
