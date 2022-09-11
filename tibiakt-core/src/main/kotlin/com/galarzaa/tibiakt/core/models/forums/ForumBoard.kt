@@ -9,7 +9,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 
 @Serializable
-data class ForumBoard(
+public data class ForumBoard(
     val name: String,
     override val boardId: Int,
     val sectionId: Int,
@@ -22,7 +22,6 @@ data class ForumBoard(
     override val entries: List<ThreadEntry>,
 ) : PaginatedWithUrl<ThreadEntry>, BaseForumBoard {
 
-    override val url get() = getForumBoardUrl(boardId, currentPage, threadAge)
-    override fun getPageUrl(page: Int) = getForumBoardUrl(boardId, page, threadAge)
+    override val url: String get() = getForumBoardUrl(boardId, currentPage, threadAge)
+    override fun getPageUrl(page: Int): String = getForumBoardUrl(boardId, page, threadAge)
 }
-

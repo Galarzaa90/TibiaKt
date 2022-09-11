@@ -7,13 +7,15 @@ import java.time.LocalDate
 import java.time.YearMonth
 
 @BuilderDsl
-inline fun eventsSchedule(block: EventsScheduleBuilder.() -> Unit) = EventsScheduleBuilder().apply(block).build()
+public inline fun eventsSchedule(block: EventsScheduleBuilder.() -> Unit): EventsSchedule =
+    EventsScheduleBuilder().apply(block).build()
 
 @BuilderDsl
-inline fun eventsScheduleBuilder(block: EventsScheduleBuilder.() -> Unit) = EventsScheduleBuilder().apply(block)
+public inline fun eventsScheduleBuilder(block: EventsScheduleBuilder.() -> Unit): EventsScheduleBuilder =
+    EventsScheduleBuilder().apply(block)
 
 @BuilderDsl
-internal inline fun eventEntry(block: EventsScheduleBuilder.EventEntryBuilder.() -> Unit) =
+internal inline fun eventEntry(block: EventsScheduleBuilder.EventEntryBuilder.() -> Unit): EventEntry =
     EventsScheduleBuilder.EventEntryBuilder()
         .apply(block).build()
 
@@ -22,27 +24,34 @@ internal inline fun eventEntryBuilder(block: EventsScheduleBuilder.EventEntryBui
     EventsScheduleBuilder.EventEntryBuilder().apply(block)
 
 @BuilderDsl
-class EventsScheduleBuilder : TibiaKtBuilder<EventsSchedule>() {
-    lateinit var yearMonth: YearMonth
-    val entries: MutableList<EventEntry> = mutableListOf()
+public class EventsScheduleBuilder : TibiaKtBuilder<EventsSchedule>() {
+    public lateinit var yearMonth: YearMonth
+    public val entries: MutableList<EventEntry> = mutableListOf()
 
 
-    fun addEntry(title: String, description: String, startDate: LocalDate?, endDate: LocalDate?) =
+    public fun addEntry(
+        title: String,
+        description: String,
+        startDate: LocalDate?,
+        endDate: LocalDate?,
+    ): EventsScheduleBuilder =
         apply { entries.add(EventEntry(title, description, startDate, endDate)) }
 
-    fun addEntry(entry: EventEntry) = apply { entries.add(entry) }
+    public fun addEntry(entry: EventEntry): EventsScheduleBuilder = apply { entries.add(entry) }
 
-    override fun build() =
-        EventsSchedule(yearMonth = if (::yearMonth.isInitialized) yearMonth else throw IllegalStateException("yearMonth is required"),
-            entries = entries)
+    override fun build(): EventsSchedule =
+        EventsSchedule(
+            yearMonth = if (::yearMonth.isInitialized) yearMonth else throw IllegalStateException("yearMonth is required"),
+            entries = entries
+        )
 
-    class EventEntryBuilder {
-        var title: String? = null
-        var description: String? = null
-        var startDate: LocalDate? = null
-        var endDate: LocalDate? = null
+    public class EventEntryBuilder {
+        public var title: String? = null
+        public var description: String? = null
+        public var startDate: LocalDate? = null
+        public var endDate: LocalDate? = null
 
-        fun build() = EventEntry(
+        public fun build(): EventEntry = EventEntry(
             title ?: throw IllegalStateException("title is required"),
             description ?: throw IllegalStateException("description is required"),
             startDate,

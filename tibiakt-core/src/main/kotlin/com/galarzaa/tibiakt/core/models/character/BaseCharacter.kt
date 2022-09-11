@@ -8,7 +8,7 @@ import com.galarzaa.tibiakt.core.utils.getCharacterUrl
  * @property name The name of the character.
  * @property url The URL to the character's information page.
  */
-interface BaseCharacter {
-    val name: String
-    val url: String get() = getCharacterUrl(name)
+public interface BaseCharacter {
+    public val name: String
+    public val url: String get() = getCharacterUrl(name)
 }

@@ -3,7 +3,7 @@ package com.galarzaa.tibiakt.core.enums
 /**
  * A world PvP type
  */
-enum class PvpType(override val value: String) : StringEnum {
+public enum class PvpType(override val value: String) : StringEnum {
     OPEN_PVP("Open PvP") {
         override val weight: Int = 2
         override val highscoresFilterValue: Int = 0
@@ -33,24 +33,25 @@ enum class PvpType(override val value: String) : StringEnum {
     /**
      * The restriction weight of this type, used to check transferability between worlds.
      */
-    abstract val weight: Int
+    public abstract val weight: Int
 
     /**
      * The value used internally to filter Highscores.
      */
-    abstract val highscoresFilterValue: Int
+    public abstract val highscoresFilterValue: Int
 
     /**
      * The value used internally to filter the CharacterBazaar.
      */
-    abstract val bazaarFilterValue: Int
+    public abstract val bazaarFilterValue: Int
 
-    companion object {
-        const val highscoresQueryParam: String = "worldtypes"
-        fun fromHighscoresFilterValue(value: Int?) =
+    public companion object {
+        public const val highscoresQueryParam: String = "worldtypes"
+        public fun fromHighscoresFilterValue(value: Int?): PvpType? =
             enumValues<PvpType>().firstOrNull { it.highscoresFilterValue == value }
 
-        const val bazaarQueryParam = "filter_worldpvptype"
-        fun fromBazaarFilterValue(value: Int?) = enumValues<PvpType>().firstOrNull { it.bazaarFilterValue == value }
+        public const val bazaarQueryParam: String = "filter_worldpvptype"
+        public fun fromBazaarFilterValue(value: Int?): PvpType? =
+            enumValues<PvpType>().firstOrNull { it.bazaarFilterValue == value }
     }
 }

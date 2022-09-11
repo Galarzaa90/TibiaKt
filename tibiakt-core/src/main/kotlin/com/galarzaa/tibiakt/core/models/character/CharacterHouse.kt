@@ -16,7 +16,7 @@ import java.time.LocalDate
  * @property paidUntil The date when the last paid rent is due.
  */
 @Serializable
-data class CharacterHouse(
+public data class CharacterHouse(
     val name: String,
     override val houseId: Int,
     val town: String,

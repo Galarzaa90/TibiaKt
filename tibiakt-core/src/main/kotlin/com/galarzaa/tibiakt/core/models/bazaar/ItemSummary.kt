@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
  * A collection of items of an auctioned character.
  */
 @Serializable
-data class ItemSummary(
+public data class ItemSummary(
     override val currentPage: Int,
     override val totalPages: Int,
     override val resultsCount: Int,

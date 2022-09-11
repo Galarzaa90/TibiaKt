@@ -9,7 +9,7 @@ import com.galarzaa.tibiakt.core.utils.remove
 import java.io.File
 import java.net.URL
 
-object BosstableBossesParser : Parser<BosstableBosses> {
+public object BosstableBossesParser : Parser<BosstableBosses> {
     override fun fromContent(content: String): BosstableBosses {
         val boxContent = boxContent(content)
         val tables = boxContent.parseTablesMap("table.Table1")

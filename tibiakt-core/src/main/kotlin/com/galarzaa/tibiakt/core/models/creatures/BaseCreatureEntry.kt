@@ -24,12 +24,12 @@ import com.galarzaa.tibiakt.core.utils.getStaticFileUrl
  * @property name The name of the creature.
  * @property identifier The internal name of the creature, used for images and links (where applicable).
  */
-interface BaseCreatureEntry {
-    val name: String
-    val identifier: String
+public interface BaseCreatureEntry {
+    public val name: String
+    public val identifier: String
 
     /**
      * The URL to the creature's image.
      */
-    val imageUrl get() = getStaticFileUrl("images", "library", "$identifier.gif")
+    public val imageUrl: String get() = getStaticFileUrl("images", "library", "$identifier.gif")
 }

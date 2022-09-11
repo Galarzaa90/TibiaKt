@@ -3,7 +3,7 @@ package com.galarzaa.tibiakt.core.enums
 /**
  * The type of transfer rules applied to this server.
  */
-enum class TransferType {
+public enum class TransferType {
     /**
      * No special rules besides the regular PvP and BattlEye restrictions.
      */

@@ -10,12 +10,12 @@ import kotlinx.serialization.Serializable
  * @property familiarId The internal ID of the familiar.
  */
 @Serializable
-data class FamiliarEntry(
+public data class FamiliarEntry(
     val name: String,
     val familiarId: Int,
 ) {
     /**
      * The URL to the familiar's image.
      */
-    val imageUrl get() = getStaticFileUrl("images", "charactertrade", "summons", "$familiarId.gif")
+    val imageUrl: String get() = getStaticFileUrl("images", "charactertrade", "summons", "$familiarId.gif")
 }

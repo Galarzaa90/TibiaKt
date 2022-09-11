@@ -16,7 +16,7 @@ import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 import java.time.format.DateTimeParseException
 
-object WorldOverviewParser : Parser<WorldOverview> {
+public object WorldOverviewParser : Parser<WorldOverview> {
     private val recordRegex = Regex("""(?<count>[\d.,]+) players \(on (?<date>[^)]+)\)""")
     private val battlEyeRegex = Regex("""since ([^.]+).""")
 

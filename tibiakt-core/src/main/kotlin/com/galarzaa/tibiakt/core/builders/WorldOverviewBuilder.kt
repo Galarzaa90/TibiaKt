@@ -10,27 +10,31 @@ import kotlinx.datetime.Instant
 import java.time.LocalDate
 
 @BuilderDsl
-inline fun worldOverviewBuilder(block: WorldOverviewBuilder.() -> Unit) = WorldOverviewBuilder().apply(block)
+public inline fun worldOverviewBuilder(block: WorldOverviewBuilder.() -> Unit): WorldOverviewBuilder =
+    WorldOverviewBuilder().apply(block)
 
 @BuilderDsl
-inline fun worldOverview(block: WorldOverviewBuilder.() -> Unit) = worldOverviewBuilder(block).build()
+public inline fun worldOverview(block: WorldOverviewBuilder.() -> Unit): WorldOverview =
+    worldOverviewBuilder(block).build()
 
 @BuilderDsl
-class WorldOverviewBuilder : TibiaKtBuilder<WorldOverview>() {
-    var overallMaximumCount: Int? = null
-    var overallMaximumCountDateTime: Instant? = null
-    var worlds: MutableList<WorldEntry> = mutableListOf()
-    var tournamentWorlds: MutableList<WorldEntry> = mutableListOf()
+public class WorldOverviewBuilder : TibiaKtBuilder<WorldOverview>() {
+    public var overallMaximumCount: Int? = null
+    public var overallMaximumCountDateTime: Instant? = null
+    public var worlds: MutableList<WorldEntry> = mutableListOf()
+    public var tournamentWorlds: MutableList<WorldEntry> = mutableListOf()
 
 
-    fun addWorld(world: WorldEntry) = worlds.add(world)
+    public fun addWorld(world: WorldEntry): Boolean = worlds.add(world)
 
     @BuilderDsl
-    fun addWorld(block: WorldEntryBuilder.() -> Unit) = worlds.add(WorldEntryBuilder().apply(block).build())
+    public fun addWorld(block: WorldEntryBuilder.() -> Unit): Boolean =
+        worlds.add(WorldEntryBuilder().apply(block).build())
 
     override fun build(): WorldOverview {
-        return WorldOverview(overallMaximumCount = overallMaximumCount
-            ?: throw IllegalStateException("overallMaximumCount is required"),
+        return WorldOverview(
+            overallMaximumCount = overallMaximumCount
+                ?: throw IllegalStateException("overallMaximumCount is required"),
             overallMaximumCountDateTime = overallMaximumCountDateTime
                 ?: throw IllegalStateException("overallMaximumCountDateTime is required"),
             worlds = worlds,
@@ -38,18 +42,18 @@ class WorldOverviewBuilder : TibiaKtBuilder<WorldOverview>() {
     }
 
     @BuilderDsl
-    class WorldEntryBuilder : TibiaKtBuilder<WorldEntry>() {
-        var name: String? = null
-        var isOnline: Boolean = false
-        var onlineCount: Int = 0
-        var location: String? = null
-        var pvpType: PvpType? = null
-        var battlEyeType: BattlEyeType = BattlEyeType.UNPROTECTED
-        var battlEyeStartDate: LocalDate? = null
-        var transferType: TransferType = TransferType.REGULAR
-        var isPremiumRestricted: Boolean = false
-        var isExperimental: Boolean = false
-        var onlineRecordDateTime: Instant? = null
+    public class WorldEntryBuilder : TibiaKtBuilder<WorldEntry>() {
+        public var name: String? = null
+        public var isOnline: Boolean = false
+        public var onlineCount: Int = 0
+        public var location: String? = null
+        public var pvpType: PvpType? = null
+        public var battlEyeType: BattlEyeType = BattlEyeType.UNPROTECTED
+        public var battlEyeStartDate: LocalDate? = null
+        public var transferType: TransferType = TransferType.REGULAR
+        public var isPremiumRestricted: Boolean = false
+        public var isExperimental: Boolean = false
+        public var onlineRecordDateTime: Instant? = null
 
 
         override fun build(): WorldEntry {

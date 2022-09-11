@@ -16,7 +16,7 @@ import com.galarzaa.tibiakt.core.utils.parseTibiaDateTime
 import com.galarzaa.tibiakt.core.utils.remove
 import com.galarzaa.tibiakt.core.utils.replaceBrs
 
-object HouseParser : Parser<House?> {
+public object HouseParser : Parser<House?> {
     private val rentedPattern =
         Regex("""The (?<type>\w+) has been rented by (?<owner>[^.]+)\. (?<pronoun>\w+) has paid the rent until (?<paidUntil>[^.]+)\.""")
     private val auctionedPattern = Regex("""The (?<type>\w+) is currently being auctioned.""")

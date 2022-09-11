@@ -6,26 +6,27 @@ import com.galarzaa.tibiakt.core.utils.BuilderDsl
 import kotlinx.datetime.Instant
 
 @BuilderDsl
-inline fun forumAnnouncementBuilder(block: ForumAnnouncementBuilder.() -> Unit) =
+public inline fun forumAnnouncementBuilder(block: ForumAnnouncementBuilder.() -> Unit): ForumAnnouncementBuilder =
     ForumAnnouncementBuilder().apply(block)
 
 @BuilderDsl
-inline fun forumAnnouncement(block: ForumAnnouncementBuilder.() -> Unit) = forumAnnouncementBuilder(block).build()
+public inline fun forumAnnouncement(block: ForumAnnouncementBuilder.() -> Unit): ForumAnnouncement =
+    forumAnnouncementBuilder(block).build()
 
 @BuilderDsl
-class ForumAnnouncementBuilder : TibiaKtBuilder<ForumAnnouncement>() {
-    var announcementId: Int? = null
-    var title: String? = null
-    var board: String? = null
-    var boardId: Int? = null
-    var section: String? = null
-    var sectionId: Int? = null
-    var author: BaseForumAuthor? = null
-    var content: String? = null
-    var startDate: Instant? = null
-    var endDate: Instant? = null
+public class ForumAnnouncementBuilder : TibiaKtBuilder<ForumAnnouncement>() {
+    public var announcementId: Int? = null
+    public var title: String? = null
+    public var board: String? = null
+    public var boardId: Int? = null
+    public var section: String? = null
+    public var sectionId: Int? = null
+    public var author: BaseForumAuthor? = null
+    public var content: String? = null
+    public var startDate: Instant? = null
+    public var endDate: Instant? = null
 
-    override fun build() = ForumAnnouncement(
+    override fun build(): ForumAnnouncement = ForumAnnouncement(
         announcementId = announcementId ?: throw IllegalStateException("announcementId is required"),
         title = title ?: throw IllegalStateException("title is required"),
         board = board ?: throw IllegalStateException("board is required"),

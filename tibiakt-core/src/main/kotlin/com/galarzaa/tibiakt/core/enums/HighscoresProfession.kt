@@ -1,6 +1,6 @@
 package com.galarzaa.tibiakt.core.enums
 
-enum class HighscoresProfession(override val value: Int) : IntEnum {
+public enum class HighscoresProfession(override val value: Int) : IntEnum {
     ALL(0),
     NONE(1),
     KNIGHTS(2),

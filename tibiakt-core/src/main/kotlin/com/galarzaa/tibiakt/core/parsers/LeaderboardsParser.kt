@@ -38,8 +38,8 @@ import kotlinx.datetime.Clock
 import org.jsoup.nodes.Element
 import kotlin.time.Duration.Companion.minutes
 
-object LeaderboardsParser : Parser<Leaderboards?> {
-    val rotationEndPattern = Regex("""ends on ([^)]+)""")
+public object LeaderboardsParser : Parser<Leaderboards?> {
+    private val rotationEndPattern = Regex("""ends on ([^)]+)""")
 
     override fun fromContent(content: String): Leaderboards? {
         val boxContent = boxContent(content)

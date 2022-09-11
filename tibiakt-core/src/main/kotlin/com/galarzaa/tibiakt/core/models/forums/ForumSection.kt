@@ -10,10 +10,10 @@ import kotlinx.serialization.Serializable
  * @property entries The boards in the forum section.
  */
 @Serializable
-data class ForumSection(
+public data class ForumSection(
     val sectionId: Int,
     val entries: List<BoardEntry>,
 ) {
     /** The URL to this section. */
-    val url get() = getForumSectionUrl(sectionId)
+    val url: String get() = getForumSectionUrl(sectionId)
 }

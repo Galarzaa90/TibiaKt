@@ -3,7 +3,7 @@ package com.galarzaa.tibiakt.core.models.bazaar
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Mounts(
+public data class Mounts(
     override val currentPage: Int,
     override val totalPages: Int,
     override val resultsCount: Int,

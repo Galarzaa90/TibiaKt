@@ -11,9 +11,9 @@ import kotlinx.serialization.Serializable
  * @property summon The summoned creature that caused this death, if applicable.
  */
 @Serializable
-data class Killer(
+public data class Killer(
     val name: String,
     val isPlayer: Boolean,
     val summon: String?,
-    val traded: Boolean
+    val traded: Boolean,
 )

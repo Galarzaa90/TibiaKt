@@ -7,12 +7,12 @@ import com.galarzaa.tibiakt.core.utils.getWorldUrl
  *
  * @property name The name of the world.
  */
-interface BaseWorld {
-    val name: String
+public interface BaseWorld {
+    public val name: String
 
     /**
      * The URL to the world's page in Tibia.com
      */
-    val url
+    public val url: String
         get() = getWorldUrl(name)
 }

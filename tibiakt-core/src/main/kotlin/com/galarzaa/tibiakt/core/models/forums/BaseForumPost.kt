@@ -23,9 +23,9 @@ import com.galarzaa.tibiakt.core.utils.getForumPostUrl
  *
  * @property postId The internal ID of the post.
  */
-interface BaseForumPost {
-    val postId: Int
+public interface BaseForumPost {
+    public val postId: Int
 
     /** The URL to this post */
-    val url get() = getForumPostUrl(postId)
+    public val url: String get() = getForumPostUrl(postId)
 }

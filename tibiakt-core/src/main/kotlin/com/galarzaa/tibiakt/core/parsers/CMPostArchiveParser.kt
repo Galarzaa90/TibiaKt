@@ -19,7 +19,7 @@ import com.galarzaa.tibiakt.core.utils.wholeCleanText
 import org.jsoup.nodes.Element
 import java.time.LocalDate
 
-object CMPostArchiveParser : Parser<CMPostArchive> {
+public object CMPostArchiveParser : Parser<CMPostArchive> {
     override fun fromContent(content: String): CMPostArchive {
         val boxContent = HouseParser.boxContent(content)
         val tables = boxContent.parseTablesMap()

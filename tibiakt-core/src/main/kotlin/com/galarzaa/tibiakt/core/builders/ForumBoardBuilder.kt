@@ -8,31 +8,33 @@ import com.galarzaa.tibiakt.core.models.forums.LastPost
 import com.galarzaa.tibiakt.core.models.forums.ThreadEntry
 import com.galarzaa.tibiakt.core.utils.BuilderDsl
 
-inline fun forumBoardBuilder(block: ForumBoardBuilder.() -> Unit) = ForumBoardBuilder().apply(block)
-inline fun forumBoard(block: ForumBoardBuilder.() -> Unit) = forumBoardBuilder(block).build()
+public inline fun forumBoardBuilder(block: ForumBoardBuilder.() -> Unit): ForumBoardBuilder =
+    ForumBoardBuilder().apply(block)
+
+public inline fun forumBoard(block: ForumBoardBuilder.() -> Unit): ForumBoard = forumBoardBuilder(block).build()
 
 @BuilderDsl
-class ForumBoardBuilder : TibiaKtBuilder<ForumBoard>() {
-    var name: String? = null
-    var boardId: Int? = null
-    var sectionId: Int? = null
-    var section: String? = null
-    var threadAge: Int = 30
-    var currentPage: Int = 1
-    var totalPages: Int = 1
-    var resultsCount: Int = 0
-    val announcements: MutableList<AnnouncementEntry> = mutableListOf()
-    val entries: MutableList<ThreadEntry> = mutableListOf()
+public class ForumBoardBuilder : TibiaKtBuilder<ForumBoard>() {
+    public var name: String? = null
+    public var boardId: Int? = null
+    public var sectionId: Int? = null
+    public var section: String? = null
+    public var threadAge: Int = 30
+    public var currentPage: Int = 1
+    public var totalPages: Int = 1
+    public var resultsCount: Int = 0
+    public val announcements: MutableList<AnnouncementEntry> = mutableListOf()
+    public val entries: MutableList<ThreadEntry> = mutableListOf()
 
-    fun announcement(block: AnnouncementEntryBuilder.() -> Unit) {
+    public fun announcement(block: AnnouncementEntryBuilder.() -> Unit) {
         announcements.add(AnnouncementEntryBuilder().apply(block).build())
     }
 
-    fun thread(block: ThreadEntryBuilder.() -> Unit) {
+    public fun thread(block: ThreadEntryBuilder.() -> Unit) {
         entries.add(ThreadEntryBuilder().apply(block).build())
     }
 
-    override fun build() = ForumBoard(
+    override fun build(): ForumBoard = ForumBoard(
         name = name ?: throw IllegalStateException("name is required"),
         boardId = boardId ?: throw IllegalStateException("boardId is required"),
         sectionId = sectionId ?: throw IllegalStateException("sectionId is required"),
@@ -46,12 +48,12 @@ class ForumBoardBuilder : TibiaKtBuilder<ForumBoard>() {
     )
 
     @BuilderDsl
-    class AnnouncementEntryBuilder : TibiaKtBuilder<AnnouncementEntry>() {
-        var title: String? = null
-        var announcementId: Int? = null
-        var author: String? = null
+    public class AnnouncementEntryBuilder : TibiaKtBuilder<AnnouncementEntry>() {
+        public var title: String? = null
+        public var announcementId: Int? = null
+        public var author: String? = null
 
-        override fun build() = AnnouncementEntry(
+        override fun build(): AnnouncementEntry = AnnouncementEntry(
             title = title ?: throw IllegalStateException("title is required"),
             announcementId = announcementId ?: throw IllegalStateException("announcementId is required"),
             author = author ?: throw IllegalStateException("author is required")
@@ -59,21 +61,21 @@ class ForumBoardBuilder : TibiaKtBuilder<ForumBoard>() {
     }
 
     @BuilderDsl
-    class ThreadEntryBuilder : TibiaKtBuilder<ThreadEntry>() {
-        var title: String? = null
-        var threadId: Int? = null
-        var author: String? = null
-        var authorTraded: Boolean = false
-        var authorDeleted: Boolean = false
-        var replies: Int = 0
-        var emoticon: ForumEmoticon? = null
-        var views: Int = 0
-        var lastPost: LastPost? = null
-        val status: MutableSet<ThreadStatus> = mutableSetOf()
-        var pages: Int = 1
-        var goldenFrame: Boolean = false
+    public class ThreadEntryBuilder : TibiaKtBuilder<ThreadEntry>() {
+        public var title: String? = null
+        public var threadId: Int? = null
+        public var author: String? = null
+        public var authorTraded: Boolean = false
+        public var authorDeleted: Boolean = false
+        public var replies: Int = 0
+        public var emoticon: ForumEmoticon? = null
+        public var views: Int = 0
+        public var lastPost: LastPost? = null
+        public val status: MutableSet<ThreadStatus> = mutableSetOf()
+        public var pages: Int = 1
+        public var goldenFrame: Boolean = false
 
-        override fun build() = ThreadEntry(
+        override fun build(): ThreadEntry = ThreadEntry(
             title = title ?: throw IllegalStateException("title is required"),
             threadId = threadId ?: throw IllegalStateException("threadId is required"),
             author = author ?: throw IllegalStateException("author is required"),

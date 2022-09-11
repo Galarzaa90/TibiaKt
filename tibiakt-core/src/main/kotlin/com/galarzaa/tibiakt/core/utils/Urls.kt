@@ -47,7 +47,7 @@ private typealias P<A, B> = Pair<A, B>
  * @param params The query arguments to pass.
  * @param test Whether to get a URL to the testing version of Tibia.com.
  */
-fun buildTibiaUrl(
+public fun buildTibiaUrl(
     section: String,
     vararg params: Pair<String, Any?>,
     test: Boolean = false,
@@ -69,7 +69,7 @@ fun buildTibiaUrl(
  * @param params The query arguments to pass.
  * @param test Whether to get a URL to the testing version of Tibia.com.
  */
-fun buildTibiaUrl(
+public fun buildTibiaUrl(
     section: String,
     subtopic: String,
     vararg params: Pair<String, Any?>,
@@ -87,7 +87,7 @@ fun buildTibiaUrl(
  * @param path The path to the asset.
  * @param test Whether to use the testing version of Tibia.com or not.
  */
-fun getStaticFileUrl(path: String, test: Boolean = false): String {
+public fun getStaticFileUrl(path: String, test: Boolean = false): String {
     return "https://${if (test) "test." else ""}static.tibia.com/${path.replace("//", "/")}"
 }
 
@@ -97,50 +97,51 @@ fun getStaticFileUrl(path: String, test: Boolean = false): String {
  * @param path The path to the asset, represented as an array of directories with the filename at the end.
  * @param test Whether to use the testing version of Tibia.com or not.
  */
-fun getStaticFileUrl(vararg path: String, test: Boolean = false): String {
+public fun getStaticFileUrl(vararg path: String, test: Boolean = false): String {
     return getStaticFileUrl(path.joinToString("/"), test)
 }
 
 /**
  * Get the URL to specific character.
  */
-fun getCharacterUrl(name: String) = buildTibiaUrl("community", "characters", P("name", name))
+public fun getCharacterUrl(name: String): String = buildTibiaUrl("community", "characters", P("name", name))
 
 /**
  * Get the URL to the list of guilds for a specific [world].
  */
-fun getWorldGuildsUrl(world: String) = buildTibiaUrl("community", "guilds", P("world", world))
+public fun getWorldGuildsUrl(world: String): String = buildTibiaUrl("community", "guilds", P("world", world))
 
 /**
  * Get the URL to a specific guild.
  */
-fun getGuildUrl(name: String) = buildTibiaUrl("community", "guilds", P("GuildName", name), P("page", "view"))
+public fun getGuildUrl(name: String): String =
+    buildTibiaUrl("community", "guilds", P("GuildName", name), P("page", "view"))
 
 /**
  * Get the URL to a house on a specific [world].
  */
-fun getHouseUrl(world: String, houseId: Int) =
+public fun getHouseUrl(world: String, houseId: Int): String =
     buildTibiaUrl("community", "houses", P("page", "view"), P("world", world), P("houseid", houseId))
 
 /**
  * Get the URL to the World Overview section
  */
-fun getWorldOverviewUrl() = buildTibiaUrl("community", "worlds")
+public fun getWorldOverviewUrl(): String = buildTibiaUrl("community", "worlds")
 
 /**
  * Get the URL to a specific world.
  */
-fun getWorldUrl(name: String) = buildTibiaUrl("community", "worlds", P("world", name))
+public fun getWorldUrl(name: String): String = buildTibiaUrl("community", "worlds", P("world", name))
 
 /**
  * Get the URL to the News Archive.
  */
-fun getNewsArchiveUrl() = buildTibiaUrl("news", "newsarchive")
+public fun getNewsArchiveUrl(): String = buildTibiaUrl("news", "newsarchive")
 
 /**
  * Get the post parameters to filter news in the News Archive
  */
-fun getNewArchiveFormData(
+public fun getNewArchiveFormData(
     startDate: LocalDate,
     endDate: LocalDate,
     categories: Set<NewsCategory>? = null,
@@ -169,39 +170,43 @@ fun getNewArchiveFormData(
 /**
  * Get the URL to a specific news article
  */
-fun getNewsUrl(newsId: Int) = buildTibiaUrl("news", "newsarchive", P("id", newsId))
+public fun getNewsUrl(newsId: Int): String = buildTibiaUrl("news", "newsarchive", P("id", newsId))
 
 
 /**
  * Get the URL to a specific forum section
  */
-fun getForumSectionUrl(sectionId: Int) = buildTibiaUrl("forum", P("action", "main"), P("sectionid", sectionId))
+public fun getForumSectionUrl(sectionId: Int): String =
+    buildTibiaUrl("forum", P("action", "main"), P("sectionid", sectionId))
 
 
 /**
  * Get the URL to a specific forum section
  */
-fun getForumSectionUrl(section: AvailableForumSection) = buildTibiaUrl("forum", P("subtopoic", section.subtopic))
+public fun getForumSectionUrl(section: AvailableForumSection): String =
+    buildTibiaUrl("forum", P("subtopoic", section.subtopic))
 
 /**
  * Get the URL to a specific forum section by its name.
  */
-fun getForumSectionUrl(sectionName: String) = buildTibiaUrl("forum", sectionName)
+public fun getForumSectionUrl(sectionName: String): String = buildTibiaUrl("forum", sectionName)
 
-fun getForumBoardUrl(boardId: Int, page: Int = 1, threadAge: Int? = null) = buildTibiaUrl("forum",
+public fun getForumBoardUrl(boardId: Int, page: Int = 1, threadAge: Int? = null): String = buildTibiaUrl(
+    "forum",
     P("action", "board"),
     P("boardid", boardId),
     P("pagenumber", page),
-    P("threadage", threadAge))
+    P("threadage", threadAge)
+)
 
 
-fun getForumAnnouncementUrl(announcementId: Int) =
+public fun getForumAnnouncementUrl(announcementId: Int): String =
     buildTibiaUrl("forum", P("action", "announcement"), P("announcementid", announcementId))
 
 /**
  * Get the URL to a specific thread in the forums.
  */
-fun getForumThreadUrl(threadId: Int, page: Int = 1) =
+public fun getForumThreadUrl(threadId: Int, page: Int = 1): String =
     buildTibiaUrl("forum", P("action", "thread"), P("threadid", threadId), P("pagenumber", page))
 
 /**
@@ -209,26 +214,27 @@ fun getForumThreadUrl(threadId: Int, page: Int = 1) =
  *
  * @param world If null, the highscores for all worlds will be displayed.
  */
-fun getHighscoresUrl(
+public fun getHighscoresUrl(
     world: String?,
     category: HighscoresCategory = HighscoresCategory.EXPERIENCE_POINTS,
     vocations: HighscoresProfession = HighscoresProfession.ALL,
     page: Int = 1,
     battleEye: HighscoresBattlEyeType = HighscoresBattlEyeType.ANY_WORLD,
     worldTypes: Set<PvpType>? = null,
-) = buildTibiaUrl("community",
+): String = buildTibiaUrl("community",
     P("subtopic", "highscores"),
     P("world", world),
     P("profession", vocations.value),
     P("currentpage", page),
     P("category", category.value),
     P("beprotection", battleEye.value),
-    *worldTypes.orEmpty().map { P("${PvpType.highscoresQueryParam}[]", it.highscoresFilterValue) }.toTypedArray())
+    *worldTypes.orEmpty().map { P("${PvpType.highscoresQueryParam}[]", it.highscoresFilterValue) }.toTypedArray()
+)
 
 /**
  * Get the URL to the kill statistics of a specific world.
  */
-fun getKillStatisticsUrl(world: String) = buildTibiaUrl("community", "killstatistics", P("world", world))
+public fun getKillStatisticsUrl(world: String): String = buildTibiaUrl("community", "killstatistics", P("world", world))
 
 /**
  * Get the URL to the events schedule.
@@ -237,7 +243,7 @@ fun getKillStatisticsUrl(world: String) = buildTibiaUrl("community", "killstatis
  *
  * Note that going past the allowed limits, will take you the current month and year.
  */
-fun getEventsScheduleUrl(yearMonth: YearMonth? = null): String {
+public fun getEventsScheduleUrl(yearMonth: YearMonth? = null): String {
     val params =
         if (yearMonth != null) arrayOf(P("calendarmonth", yearMonth.month.value), P("calendaryear", yearMonth.year))
         else emptyArray()
@@ -248,13 +254,13 @@ fun getEventsScheduleUrl(yearMonth: YearMonth? = null): String {
 /**
  * Get the URL to the houses section with the provided parameters.
  */
-fun getHousesSectionUrl(
+public fun getHousesSectionUrl(
     world: String,
     town: String,
     type: HouseType? = null,
     status: HouseStatus? = null,
     order: HouseOrder? = null,
-) = buildTibiaUrl(
+): String = buildTibiaUrl(
     "community",
     "houses",
     P("world", world),
@@ -267,7 +273,7 @@ fun getHousesSectionUrl(
 /**
  * Get the URL to a specific auction.
  */
-fun getAuctionUrl(auctionId: Int) =
+public fun getAuctionUrl(auctionId: Int): String =
     buildTibiaUrl("charactertrade", "currentcharactertrades", P("page", "details"), P("auctionid", auctionId))
 
 /**
@@ -275,7 +281,7 @@ fun getAuctionUrl(auctionId: Int) =
  *
  * @param type Whether to show current auctions or the auction history.
  */
-fun getBazaarUrl(type: BazaarType = BazaarType.CURRENT, filters: BazaarFilters? = null, page: Int = 1): String {
+public fun getBazaarUrl(type: BazaarType = BazaarType.CURRENT, filters: BazaarFilters? = null, page: Int = 1): String {
     return buildTibiaUrl("charactertrade", type.subtopic, P("currentpage", page), *filters.getQueryParams())
 }
 
@@ -300,8 +306,9 @@ private fun BazaarFilters?.getQueryParams(): Array<P<String, Any?>> {
 /**
  * Get the URL to the CM Post Archive in Tibia.com
  */
-fun getCMPostArchiveUrl(startDate: LocalDate, endDate: LocalDate, page: Int = 1): String {
-    return buildTibiaUrl("forum",
+public fun getCMPostArchiveUrl(startDate: LocalDate, endDate: LocalDate, page: Int = 1): String {
+    return buildTibiaUrl(
+        "forum",
         "forum",
         P("action", "cm_post_archive"),
         P("startyear", startDate.year),
@@ -310,34 +317,35 @@ fun getCMPostArchiveUrl(startDate: LocalDate, endDate: LocalDate, page: Int = 1)
         P("endyear", endDate.year),
         P("endmonth", endDate.monthValue),
         P("endday", endDate.dayOfMonth),
-        P("currentpage", page))
+        P("currentpage", page)
+    )
 }
 
 
 /**
  * Get the URL of a forum post with a specific [postId] in Tibia.com.
  */
-fun getForumPostUrl(postId: Int): String =
+public fun getForumPostUrl(postId: Int): String =
     buildTibiaUrl("forum", P("action", "thread"), P("postid", postId), anchor = "post$postId")
 
 /**
  * Get the URL to the Leaderboard of a specific [world] in Tibia.com.
  */
-fun getLeaderboardUrl(world: String, rotation: Int? = null, page: Int = 1): String =
+public fun getLeaderboardUrl(world: String, rotation: Int? = null, page: Int = 1): String =
     buildTibiaUrl("community", "leaderboards", P("world", world), P("rotation", rotation), P("currentpage", page))
 
 /**
  * Get the URL to the Creatures section in Tibia.com.
  */
-fun getCreaturesSectionUrl() = buildTibiaUrl("library", "creatures")
+public fun getCreaturesSectionUrl(): String = buildTibiaUrl("library", "creatures")
 
 
 /**
  * Get the URL to the Creatures section in Tibia.com.
  */
-fun getBoostableBossesUrl() = buildTibiaUrl("library", "boostablebosses")
+public fun getBoostableBossesUrl(): String = buildTibiaUrl("library", "boostablebosses")
 
 /**
  * Get the URL to a specific creature in Tibia.com.
  */
-fun getCreatureUrl(identifier: String) = buildTibiaUrl("library", "creatures", P("race", identifier))
+public fun getCreatureUrl(identifier: String): String = buildTibiaUrl("library", "creatures", P("race", identifier))

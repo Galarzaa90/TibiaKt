@@ -30,7 +30,7 @@ import kotlinx.serialization.UseSerializers
  * @property auctionEnd The date and time when the auction will end.
  */
 @Serializable
-data class House(
+public data class House(
     override val houseId: Int,
     val name: String,
     val size: Int,
@@ -50,7 +50,7 @@ data class House(
     val auctionEnd: Instant?,
 ) : BaseHouse {
 
-    val ownerUrl get() = owner?.let { getCharacterUrl(it) }
-    val transferRecipientUrl get() = transferRecipient?.let { getCharacterUrl(it) }
-    val highestBidderUrl get() = highestBidder?.let { getCharacterUrl(it) }
+    val ownerUrl: String? get() = owner?.let { getCharacterUrl(it) }
+    val transferRecipientUrl: String? get() = transferRecipient?.let { getCharacterUrl(it) }
+    val highestBidderUrl: String? get() = highestBidder?.let { getCharacterUrl(it) }
 }

@@ -15,7 +15,7 @@ import kotlinx.serialization.UseSerializers
  * @property overallMaximumCountDateTime The date and time when the record for online players was set.
  */
 @Serializable
-data class WorldOverview(
+public data class WorldOverview(
     val overallMaximumCount: Int,
     val overallMaximumCountDateTime: Instant,
     val worlds: List<WorldEntry>,

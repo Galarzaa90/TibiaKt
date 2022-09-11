@@ -1,6 +1,6 @@
 package com.galarzaa.tibiakt.core.enums
 
-enum class BattlEyeType(val weight: Int) {
+public enum class BattlEyeType(public val weight: Int) {
     /**
      * Protected by BattlEye since the beginning.
      */

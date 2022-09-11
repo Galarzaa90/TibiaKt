@@ -3,7 +3,7 @@ package com.galarzaa.tibiakt.core.enums
 /**
  * The possible values an auction might have.
  */
-enum class AuctionStatus(override val value: String) : StringEnum {
+public enum class AuctionStatus(override val value: String) : StringEnum {
     /**
      * The auction is currently active.
      *
@@ -23,4 +23,3 @@ enum class AuctionStatus(override val value: String) : StringEnum {
     /** The auction either finished with no bids or the character was transferred to the new owner already. */
     FINISHED("finished"),
 }
-

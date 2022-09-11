@@ -15,7 +15,7 @@ import java.net.URLDecoder
 import java.nio.charset.StandardCharsets
 
 
-object ForumSectionParser : Parser<ForumSection> {
+public object ForumSectionParser : Parser<ForumSection> {
     override fun fromContent(content: String): ForumSection {
         val boxContent = boxContent(content)
         val tables = boxContent.parseTablesMap()

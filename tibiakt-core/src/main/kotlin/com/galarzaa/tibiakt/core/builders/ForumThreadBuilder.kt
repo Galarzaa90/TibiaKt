@@ -9,35 +9,38 @@ import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 
 @BuilderDsl
-inline fun forumThreadBuilder(block: ForumThreadBuilder.() -> Unit) = ForumThreadBuilder().apply(block)
+public inline fun forumThreadBuilder(block: ForumThreadBuilder.() -> Unit): ForumThreadBuilder =
+    ForumThreadBuilder().apply(block)
 
 @BuilderDsl
-inline fun forumThread(block: ForumThreadBuilder.() -> Unit) = forumThreadBuilder(block).build()
+public inline fun forumThread(block: ForumThreadBuilder.() -> Unit): ForumThread = forumThreadBuilder(block).build()
 
 @BuilderDsl
-class ForumThreadBuilder : TibiaKtBuilder<ForumThread>() {
-    var title: String? = null
-    var threadId: Int? = null
-    var board: String? = null
-    var boardId: Int? = null
-    var section: String? = null
-    var sectionId: Int? = null
-    var previousTopicNumber: Int? = null
-    var nextTopicNumber: Int? = null
-    var goldenFrame: Boolean = false
-    var anchoredPost: ForumPost? = null
-    var currentPage: Int = 1
-    var totalPages: Int = 1
-    var resultsCount: Int = 1
-    val entries = mutableListOf<ForumPost>()
+public class ForumThreadBuilder : TibiaKtBuilder<ForumThread>() {
+    public var title: String? = null
+    public var threadId: Int? = null
+    public var board: String? = null
+    public var boardId: Int? = null
+    public var section: String? = null
+    public var sectionId: Int? = null
+    public var previousTopicNumber: Int? = null
+    public var nextTopicNumber: Int? = null
+    public var goldenFrame: Boolean = false
+    public var anchoredPost: ForumPost? = null
+    public var currentPage: Int = 1
+    public var totalPages: Int = 1
+    public var resultsCount: Int = 1
+    public val entries: MutableList<ForumPost> = mutableListOf()
 
-    fun addPost(post: ForumPost) = apply { entries.add(post) }
+    public fun addPost(post: ForumPost): ForumThreadBuilder = apply { entries.add(post) }
 
     @BuilderDsl
-    fun addPost(block: ForumPostBuilder.() -> Unit) = apply { entries.add(ForumPostBuilder().apply(block).build()) }
+    public fun addPost(block: ForumPostBuilder.() -> Unit): ForumThreadBuilder =
+        apply { entries.add(ForumPostBuilder().apply(block).build()) }
 
 
-    override fun build() = ForumThread(title = title ?: throw IllegalStateException("title is required"),
+    override fun build(): ForumThread = ForumThread(
+        title = title ?: throw IllegalStateException("title is required"),
         threadId = threadId ?: throw IllegalStateException("threadId is required"),
         board = board ?: throw IllegalStateException("board is required"),
         boardId = boardId ?: throw IllegalStateException("boardId is required"),
@@ -50,20 +53,21 @@ class ForumThreadBuilder : TibiaKtBuilder<ForumThread>() {
         currentPage = currentPage,
         totalPages = totalPages,
         resultsCount = resultsCount,
-        entries = entries)
+        entries = entries
+    )
 
-    class ForumPostBuilder : TibiaKtBuilder<ForumPost>() {
-        var author: BaseForumAuthor? = null
-        var emoticon: ForumEmoticon? = null
-        var title: String? = null
-        var content: String? = null
-        var signature: String? = null
-        var postId: Int? = null
-        var postedDate: Instant? = null
-        var editedDate: Instant? = null
-        var editedBy: String? = null
+    public class ForumPostBuilder : TibiaKtBuilder<ForumPost>() {
+        public var author: BaseForumAuthor? = null
+        public var emoticon: ForumEmoticon? = null
+        public var title: String? = null
+        public var content: String? = null
+        public var signature: String? = null
+        public var postId: Int? = null
+        public var postedDate: Instant? = null
+        public var editedDate: Instant? = null
+        public var editedBy: String? = null
 
-        override fun build() = ForumPost(
+        override fun build(): ForumPost = ForumPost(
             author = author ?: throw IllegalStateException("author is required"),
             emoticon = emoticon,
             title = title,

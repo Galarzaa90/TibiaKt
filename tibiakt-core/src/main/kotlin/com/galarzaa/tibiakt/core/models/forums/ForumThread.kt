@@ -5,7 +5,7 @@ import com.galarzaa.tibiakt.core.utils.getForumThreadUrl
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ForumThread(
+public data class ForumThread(
     val title: String,
     val threadId: Int,
     val board: String,
@@ -22,7 +22,6 @@ data class ForumThread(
     override val entries: List<ForumPost>,
 ) : PaginatedWithUrl<ForumPost> {
 
-    val url get() = getForumThreadUrl(threadId, currentPage)
+    val url: String get() = getForumThreadUrl(threadId, currentPage)
     override fun getPageUrl(page: Int): String = getForumThreadUrl(threadId, page)
 }
-

@@ -40,8 +40,8 @@ import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 import kotlin.time.Duration.Companion.minutes
 
-object HighscoresParser : Parser<Highscores?> {
-    val numericMatch = Regex("""(\d+)""")
+public object HighscoresParser : Parser<Highscores?> {
+    private val numericMatch = Regex("""(\d+)""")
 
     override fun fromContent(content: String): Highscores? {
         val document: Document = Jsoup.parse(content)

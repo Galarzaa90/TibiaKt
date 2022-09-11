@@ -9,7 +9,7 @@ import kotlinx.serialization.Serializable
  * @property identifier The internal name of the boss. Used for images.
  */
 @Serializable
-data class BossEntry(
+public data class BossEntry(
     override val name: String,
     override val identifier: String,
 ) : BaseCreatureEntry

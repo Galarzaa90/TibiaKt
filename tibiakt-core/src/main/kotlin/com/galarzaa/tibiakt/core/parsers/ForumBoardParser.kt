@@ -17,7 +17,7 @@ import com.galarzaa.tibiakt.core.utils.remove
 import com.galarzaa.tibiakt.core.utils.rows
 import org.jsoup.nodes.Element
 
-object ForumBoardParser : Parser<ForumBoard?> {
+public object ForumBoardParser : Parser<ForumBoard?> {
     private val fileNameRegex = Regex("""([\w_]+.gif)""")
     override fun fromContent(content: String): ForumBoard? {
         val boxContent = boxContent(content, org.jsoup.parser.Parser.xmlParser())

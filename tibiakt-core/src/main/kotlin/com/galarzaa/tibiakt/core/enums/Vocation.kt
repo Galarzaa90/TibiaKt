@@ -1,6 +1,6 @@
 package com.galarzaa.tibiakt.core.enums
 
-enum class Vocation(override val value: String) : StringEnum {
+public enum class Vocation(override val value: String) : StringEnum {
     NONE("None"),
     DRUID("Druid"),
     SORCERER("Sorcerer"),
@@ -14,7 +14,7 @@ enum class Vocation(override val value: String) : StringEnum {
     /**
      * Gets the base form of a vocation.
      */
-    val base
+    public val base: Vocation
         get() = when (this) {
             ELDER_DRUID -> DRUID
             MASTER_SORCERER -> SORCERER

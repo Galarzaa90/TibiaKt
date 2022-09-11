@@ -5,37 +5,39 @@ import com.galarzaa.tibiakt.core.models.KillsStatisticEntry
 import com.galarzaa.tibiakt.core.utils.BuilderDsl
 
 @BuilderDsl
-inline fun killStatistics(block: KillStatisticsBuilder.() -> Unit) = KillStatisticsBuilder().apply(block).build()
+public inline fun killStatistics(block: KillStatisticsBuilder.() -> Unit): KillStatistics =
+    KillStatisticsBuilder().apply(block).build()
 
 @BuilderDsl
-inline fun killStatisticsBuilder(block: KillStatisticsBuilder.() -> Unit) = KillStatisticsBuilder().apply(block)
+public inline fun killStatisticsBuilder(block: KillStatisticsBuilder.() -> Unit): KillStatisticsBuilder =
+    KillStatisticsBuilder().apply(block)
 
 @BuilderDsl
-class KillStatisticsBuilder : TibiaKtBuilder<KillStatistics>() {
-    var world: String? = null
-    val entries: MutableMap<String, KillsStatisticEntry> = mutableMapOf()
+public class KillStatisticsBuilder : TibiaKtBuilder<KillStatistics>() {
+    public var world: String? = null
+    public val entries: MutableMap<String, KillsStatisticEntry> = mutableMapOf()
     private var total: KillsStatisticEntry = KillsStatisticEntry(0, 0, 0, 0)
 
-    fun total(
+    public fun total(
         lastDayKilledPlayers: Int,
         lastDayKilled: Int,
         lastWeekKilledPlayers: Int,
         lastWeekKilled: Int,
-    ) = apply {
+    ): KillStatisticsBuilder = apply {
         total = KillsStatisticEntry(lastDayKilledPlayers, lastDayKilled, lastWeekKilledPlayers, lastWeekKilled)
     }
 
-    fun addEntry(
+    public fun addEntry(
         race: String,
         lastDayKilledPlayers: Int,
         lastDayKilled: Int,
         lastWeekKilledPlayers: Int,
-        lastWeekKilled: Int
-    ) = apply {
+        lastWeekKilled: Int,
+    ): KillStatisticsBuilder = apply {
         entries[race] = KillsStatisticEntry(lastDayKilledPlayers, lastDayKilled, lastWeekKilledPlayers, lastWeekKilled)
     }
 
-    override fun build() = KillStatistics(
+    override fun build(): KillStatistics = KillStatistics(
         world = world ?: throw IllegalStateException("world is required"),
         entries = entries,
         total = total

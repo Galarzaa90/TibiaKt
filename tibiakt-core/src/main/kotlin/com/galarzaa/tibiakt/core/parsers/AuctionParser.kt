@@ -37,14 +37,14 @@ import org.jsoup.nodes.Element
 import java.io.File
 import java.net.URL
 
-object AuctionParser : Parser<Auction?> {
+public object AuctionParser : Parser<Auction?> {
     private val charInfoRegex = Regex("""Level: (\d+) \| Vocation: ([\w\s]+)\| (\w+) \| World: (\w+)""")
     private val idAddonsRegex = Regex("""/(\d+)_(\d+)""")
     private val amountRegex = Regex("""([\d,]+)x """)
     private val idRegex = Regex("""(\d+).(?:gif|png)""")
 
-    override fun fromContent(content: String) = fromContent(content, 0, true)
-    fun fromContent(content: String, auctionId: Int, parseDetails: Boolean = true): Auction? {
+    override fun fromContent(content: String): Auction? = fromContent(content, 0, true)
+    public fun fromContent(content: String, auctionId: Int, parseDetails: Boolean = true): Auction? {
         val document = Jsoup.parse(content)
         return auction {
             this.auctionId = auctionId
@@ -389,7 +389,7 @@ object AuctionParser : Parser<Auction?> {
         return MountEntry(name, id.toInt())
     }
 
-    inline fun <reified T> parsePageItems(content: String): List<T> {
+    public inline fun <reified T> parsePageItems(content: String): List<T> {
         val document = Jsoup.parse(content)
         val cvIcon = document.select("div.CVIcon")
         return when (T::class) {

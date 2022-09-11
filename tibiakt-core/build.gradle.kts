@@ -54,5 +54,5 @@ tasks.withType<org.jetbrains.dokka.gradle.DokkaTaskPartial>().configureEach {
 }
 
 kotlin {
-    explicitApiWarning()
+    explicitApi()
 }

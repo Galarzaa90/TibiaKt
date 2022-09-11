@@ -12,7 +12,7 @@ import kotlinx.serialization.Serializable
  * @property count The amount of this item the character has.
  */
 @Serializable
-data class ItemEntry(
+public data class ItemEntry(
     val itemId: Int,
     val name: String,
     val description: String?,
@@ -21,5 +21,5 @@ data class ItemEntry(
     /**
      * The URL to the item's image.
      */
-    val imageUrl get() = getStaticFileUrl("images", "charactertrade", "objects", "$itemId.gif")
+    val imageUrl: String get() = getStaticFileUrl("images", "charactertrade", "objects", "$itemId.gif")
 }

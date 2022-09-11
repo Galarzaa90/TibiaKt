@@ -25,8 +25,8 @@ import kotlinx.serialization.Serializable
 
 /** Base interface for forum author classes */
 @Serializable
-sealed class BaseForumAuthor {
-    abstract val name: String
+public sealed class BaseForumAuthor {
+    public abstract val name: String
 }
 
 /**
@@ -36,7 +36,7 @@ sealed class BaseForumAuthor {
  */
 @Serializable
 @SerialName("unavailableForumAuthor")
-data class UnavailableForumAuthor(
+public data class UnavailableForumAuthor(
     override val name: String,
     val isDeleted: Boolean,
     val isTraded: Boolean,
@@ -58,7 +58,7 @@ data class UnavailableForumAuthor(
  */
 @SerialName("forumAuthor")
 @Serializable
-data class ForumAuthor(
+public data class ForumAuthor(
     override val name: String,
     override val level: Int,
     val world: String,
@@ -73,7 +73,7 @@ data class ForumAuthor(
 
 @SerialName("tournamentForumAuthor")
 @Serializable
-data class TournamentForumAuthor(
+public data class TournamentForumAuthor(
     override val name: String,
     val posts: Int,
 ) : BaseForumAuthor(), BaseCharacter

@@ -3,7 +3,7 @@ package com.galarzaa.tibiakt.core.enums
 /**
  * The possible BattlEye protection type filters for auctions
  */
-enum class AuctionBattlEyeFilter(override val value: Int) : IntEnum {
+public enum class AuctionBattlEyeFilter(override val value: Int) : IntEnum {
     /**
      * Worlds that have been protected from the beginning, these have a green icon.
      */
@@ -19,7 +19,7 @@ enum class AuctionBattlEyeFilter(override val value: Int) : IntEnum {
      */
     NOT_PROTECTED(3);
 
-    companion object {
-        const val queryParam = "filter_worldbattleyestate"
+    public companion object {
+        public const val queryParam: String = "filter_worldbattleyestate"
     }
 }

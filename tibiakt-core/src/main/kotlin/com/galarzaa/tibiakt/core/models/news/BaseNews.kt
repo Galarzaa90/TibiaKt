@@ -25,12 +25,12 @@ import com.galarzaa.tibiakt.core.utils.getNewsUrl
  * @property id The internal ID of the news entry.
  * @property category The category of the entry.
  */
-interface BaseNews {
-    val id: Int
-    val category: NewsCategory
+public interface BaseNews {
+    public val id: Int
+    public val category: NewsCategory
 
     /**
      * The URL to this article.
      */
-    val url get() = getNewsUrl(id)
+    public val url: String get() = getNewsUrl(id)
 }

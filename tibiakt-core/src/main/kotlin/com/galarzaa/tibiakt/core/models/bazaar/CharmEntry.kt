@@ -9,7 +9,7 @@ import kotlinx.serialization.Serializable
  * @property cost The cost of the charm in charm points.
  */
 @Serializable
-data class CharmEntry(
+public data class CharmEntry(
     val name: String,
     val cost: Int,
 )

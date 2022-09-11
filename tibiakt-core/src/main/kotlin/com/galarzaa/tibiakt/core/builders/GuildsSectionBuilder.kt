@@ -5,17 +5,24 @@ import com.galarzaa.tibiakt.core.models.guild.GuildsSection
 import com.galarzaa.tibiakt.core.utils.BuilderDsl
 
 @BuilderDsl
-inline fun guildsSectionBuilder(block: GuildsSectionBuilder.() -> Unit) = GuildsSectionBuilder().apply(block)
+public inline fun guildsSectionBuilder(block: GuildsSectionBuilder.() -> Unit): GuildsSectionBuilder =
+    GuildsSectionBuilder().apply(block)
 
 @BuilderDsl
-inline fun guildsSection(block: GuildsSectionBuilder.() -> Unit) = guildsSectionBuilder(block).build()
+public inline fun guildsSection(block: GuildsSectionBuilder.() -> Unit): GuildsSection =
+    guildsSectionBuilder(block).build()
 
 @BuilderDsl
-class GuildsSectionBuilder : TibiaKtBuilder<GuildsSection>() {
-    var world: String? = null
-    val guilds: MutableList<GuildEntry> = mutableListOf()
+public class GuildsSectionBuilder : TibiaKtBuilder<GuildsSection>() {
+    public var world: String? = null
+    public val guilds: MutableList<GuildEntry> = mutableListOf()
 
-    fun addGuild(name: String, logoUrl: String, description: String? = null, isActive: Boolean) = apply {
+    public fun addGuild(
+        name: String,
+        logoUrl: String,
+        description: String? = null,
+        isActive: Boolean,
+    ): GuildsSectionBuilder = apply {
         guilds.add(GuildEntry(name, description, logoUrl, isActive))
     }
 

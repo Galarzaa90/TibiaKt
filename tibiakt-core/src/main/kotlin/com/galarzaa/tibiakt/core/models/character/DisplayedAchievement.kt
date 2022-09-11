@@ -10,4 +10,4 @@ import kotlinx.serialization.Serializable
  * @property secret Whether this is a secret achievement or not.
  */
 @Serializable
-data class DisplayedAchievement(val name: String, val grade: Int, val secret: Boolean)
+public data class DisplayedAchievement(val name: String, val grade: Int, val secret: Boolean)

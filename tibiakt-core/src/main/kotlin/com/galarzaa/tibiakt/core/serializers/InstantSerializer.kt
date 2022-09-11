@@ -11,9 +11,9 @@ import kotlinx.serialization.encoding.Encoder
 /**
  * Serializer for [Instant] objects, using ISO-8601's standard for date times.
  */
-object InstantSerializer : KSerializer<Instant> {
+public object InstantSerializer : KSerializer<Instant> {
     override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("DateTime", PrimitiveKind.STRING)
-    override fun serialize(encoder: Encoder, value: Instant) =
+    override fun serialize(encoder: Encoder, value: Instant): Unit =
         encoder.encodeString(value.toString())
 
     override fun deserialize(decoder: Decoder): Instant = Instant.parse(decoder.decodeString())

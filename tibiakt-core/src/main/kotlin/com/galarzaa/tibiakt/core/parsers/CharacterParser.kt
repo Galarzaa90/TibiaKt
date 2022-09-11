@@ -21,7 +21,7 @@ import org.jsoup.nodes.Element
 import org.jsoup.select.Elements
 
 
-object CharacterParser : Parser<Character?> {
+public object CharacterParser : Parser<Character?> {
     private val deletedRegexp = Regex("""([^,]+), will be deleted at (.*)""")
     private val titlesRegexp = Regex("""(.*)\((\d+) titles? unlocked\)""")
     private val houseRegexp = Regex("""\(([^)]+)\) is paid until (.*)""")

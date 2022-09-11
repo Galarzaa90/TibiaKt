@@ -140,7 +140,7 @@ import kotlin.time.Duration.Companion.seconds
  * @param engine The ktor client engine to use, by default CIO is used.
  * @param additionalConfig Additional configuration for the Ktor Client.
  */
-open class TibiaKtClient constructor(
+public open class TibiaKtClient constructor(
     engine: HttpClientEngine?,
     private val userAgent: String? = null,
     private val additionalConfig: (HttpClientConfig<*>.() -> Unit) = {},
@@ -150,7 +150,7 @@ open class TibiaKtClient constructor(
      * Creates an instance of the client, using the default engine (CIO)
      * @param userAgent The value that will be sent in the User-Agent header of every request.
      */
-    constructor(userAgent: String? = null, additionalConfig: (HttpClientConfig<*>.() -> Unit) = {}) : this(
+    public constructor(userAgent: String? = null, additionalConfig: (HttpClientConfig<*>.() -> Unit) = {}) : this(
         null, userAgent, additionalConfig
     )
 
@@ -181,7 +181,7 @@ open class TibiaKtClient constructor(
      * @param data The form parameters to add.
      * @param headers Additional headers to add.
      */
-    open suspend fun request(
+    public open suspend fun request(
         method: HttpMethod,
         url: String,
         data: List<Pair<String, Any>> = emptyList(),
@@ -229,7 +229,7 @@ open class TibiaKtClient constructor(
     /**
      * Fetch the news for a given interval.
      */
-    open suspend fun fetchRecentNews(
+    public open suspend fun fetchRecentNews(
         startDate: LocalDate,
         endDate: LocalDate,
         categories: Set<NewsCategory>? = null,
@@ -243,16 +243,17 @@ open class TibiaKtClient constructor(
     /**
      * Fetch the news from today to the last provided days.
      */
-    open suspend fun fetchRecentNews(
+    public open suspend fun fetchRecentNews(
         days: Int = 30,
         categories: Set<NewsCategory>? = null,
         types: Set<NewsType>? = null,
-    ) = fetchRecentNews(LocalDate.now().minusDays(days.toLong()), LocalDate.now(), categories, types)
+    ): TibiaResponse<NewsArchive> =
+        fetchRecentNews(LocalDate.now().minusDays(days.toLong()), LocalDate.now(), categories, types)
 
     /**
      * Fetch a specific news article by its [newsId]
      */
-    open suspend fun fetchNews(newsId: Int): TibiaResponse<News?> {
+    public open suspend fun fetchNews(newsId: Int): TibiaResponse<News?> {
         val response = this.request(HttpMethod.Get, getNewsUrl(newsId))
         return response.parse { NewsParser.fromContent(it, newsId) }
     }
@@ -260,7 +261,7 @@ open class TibiaKtClient constructor(
     /**
      * Fetch the events schedule for a specific year and month
      */
-    open suspend fun fetchEventsSchedule(yearMonth: YearMonth): TibiaResponse<EventsSchedule> {
+    public open suspend fun fetchEventsSchedule(yearMonth: YearMonth): TibiaResponse<EventsSchedule> {
         val response = this.request(HttpMethod.Get, getEventsScheduleUrl(yearMonth))
         return response.parse { EventsScheduleParser.fromContent(it) }
     }
@@ -268,24 +269,25 @@ open class TibiaKtClient constructor(
     /**
      * Fetch the events schedule for a specific year and month
      */
-    open suspend fun fetchEventsSchedule(year: Int, month: Int) = fetchEventsSchedule(YearMonth.of(year, month))
+    public open suspend fun fetchEventsSchedule(year: Int, month: Int): TibiaResponse<EventsSchedule> =
+        fetchEventsSchedule(YearMonth.of(year, month))
 
     /**
      * Fetch the events schedule for the current month.
      */
-    open suspend fun fetchEventsSchedule() = fetchEventsSchedule(YearMonth.now())
+    public open suspend fun fetchEventsSchedule(): TibiaResponse<EventsSchedule> = fetchEventsSchedule(YearMonth.now())
 
     // endregion
 
     // region Library Section
     /** Fetch the boosted boss of the day as well as the list of bosstable bosses from Tibia.com */
-    open suspend fun fetchBosstableBosses(): TibiaResponse<BosstableBosses> {
+    public open suspend fun fetchBosstableBosses(): TibiaResponse<BosstableBosses> {
         val response = this.request(HttpMethod.Get, getBoostableBossesUrl())
         return response.parse { BosstableBossesParser.fromContent(it) }
     }
 
     /** Fetch the creatures section, containing the boosted creature */
-    open suspend fun fetchCreaturesSection(): TibiaResponse<CreaturesSection> {
+    public open suspend fun fetchCreaturesSection(): TibiaResponse<CreaturesSection> {
         val response = this.request(HttpMethod.Get, getCreaturesSectionUrl())
         return response.parse { CreaturesSectionParser.fromContent(it) }
     }
@@ -298,7 +300,7 @@ open class TibiaKtClient constructor(
      * Fetch a character
      * @param name The name of the character.
      */
-    open suspend fun fetchCharacter(name: String): TibiaResponse<Character?> {
+    public open suspend fun fetchCharacter(name: String): TibiaResponse<Character?> {
         val response = this.request(HttpMethod.Get, getCharacterUrl(name))
         return response.parse { CharacterParser.fromContent(it) }
     }
@@ -306,19 +308,19 @@ open class TibiaKtClient constructor(
     /**
      * Fetch the world overview, containing the list of worlds.
      */
-    open suspend fun fetchWorldOverview(): TibiaResponse<WorldOverview> {
+    public open suspend fun fetchWorldOverview(): TibiaResponse<WorldOverview> {
         val response = this.request(HttpMethod.Get, getWorldOverviewUrl())
         return response.parse { WorldOverviewParser.fromContent(it) }
     }
 
     /** Fetch a world's information. */
-    open suspend fun fetchWorld(name: String): TibiaResponse<World?> {
+    public open suspend fun fetchWorld(name: String): TibiaResponse<World?> {
         val response = this.request(HttpMethod.Get, getWorldUrl(name))
         return response.parse { WorldParser.fromContent(it) }
     }
 
     /** Fetch a guild by its [name]. */
-    open suspend fun fetchGuild(name: String): TibiaResponse<Guild?> {
+    public open suspend fun fetchGuild(name: String): TibiaResponse<Guild?> {
         val response = this.request(HttpMethod.Get, getGuildUrl(name))
         return response.parse { GuildParser.fromContent(it) }
     }
@@ -327,7 +329,7 @@ open class TibiaKtClient constructor(
      *
      * If the world does not exist, it will return null.
      */
-    open suspend fun fetchWorldGuilds(world: String): TibiaResponse<GuildsSection?> {
+    public open suspend fun fetchWorldGuilds(world: String): TibiaResponse<GuildsSection?> {
         val response = this.request(HttpMethod.Get, getWorldGuildsUrl(world))
         return response.parse { GuildsSectionParser.fromContent(it) }
     }
@@ -335,7 +337,7 @@ open class TibiaKtClient constructor(
     /**
      * Fetch the kill statistics for a [world].
      */
-    open suspend fun fetchKillStatistics(world: String): TibiaResponse<KillStatistics?> {
+    public open suspend fun fetchKillStatistics(world: String): TibiaResponse<KillStatistics?> {
         val response = this.request(HttpMethod.Get, getKillStatisticsUrl(world))
         return response.parse { KillStatisticsParser.fromContent(it) }
     }
@@ -350,7 +352,7 @@ open class TibiaKtClient constructor(
      * @param battlEyeType The BattlEye type of the worlds to fetch. Only applies when [world] is null.
      * @param pvpTypes The PvP type of the worlds to fetch. Only applies when [world] is null.
      */
-    open suspend fun fetchHighscoresPage(
+    public open suspend fun fetchHighscoresPage(
         world: String?,
         category: HighscoresCategory,
         vocation: HighscoresProfession = HighscoresProfession.ALL,
@@ -363,7 +365,7 @@ open class TibiaKtClient constructor(
         return response.parse { HighscoresParser.fromContent(it) }
     }
 
-    open suspend fun fetchHigscores(
+    public open suspend fun fetchHigscores(
         world: String?,
         category: HighscoresCategory,
         vocation: HighscoresProfession = HighscoresProfession.ALL,
@@ -402,7 +404,7 @@ open class TibiaKtClient constructor(
     /**
      * Fetch the houses section for a [world] and [town].
      */
-    open suspend fun fetchHousesSection(
+    public open suspend fun fetchHousesSection(
         world: String,
         town: String,
         type: HouseType? = null,
@@ -414,7 +416,7 @@ open class TibiaKtClient constructor(
     }
 
     /** Fetch a house by its [houseId] in a specific world. */
-    open suspend fun fetchHouse(
+    public open suspend fun fetchHouse(
         houseId: Int,
         world: String,
     ): TibiaResponse<House?> {
@@ -428,7 +430,7 @@ open class TibiaKtClient constructor(
      * If the world does not exist, the leaderboards will be null.
      * @param rotation The rotation number to see. Tibia.com only allows viewing the current and last rotations. Any other value takes you to the current leaderboard.
      */
-    open suspend fun fetchLeaderboards(
+    public open suspend fun fetchLeaderboards(
         world: String,
         rotation: Int? = null,
         page: Int = 1,
@@ -444,13 +446,13 @@ open class TibiaKtClient constructor(
     /**
      * Fetches a forum section by its internal [sectionId].
      */
-    open suspend fun fetchForumSection(sectionId: Int): TibiaResponse<ForumSection?> {
+    public open suspend fun fetchForumSection(sectionId: Int): TibiaResponse<ForumSection?> {
         val response = this.request(HttpMethod.Get, getForumSectionUrl(sectionId))
         return response.parse { ForumSectionParser.fromContent(it) }
     }
 
     /** Fetches a specific forum section. */
-    open suspend fun fetchForumSection(section: AvailableForumSection): TibiaResponse<ForumSection?> {
+    public open suspend fun fetchForumSection(section: AvailableForumSection): TibiaResponse<ForumSection?> {
         val response = this.request(HttpMethod.Get, getForumSectionUrl(section))
         return response.parse { ForumSectionParser.fromContent(it) }
     }
@@ -459,19 +461,23 @@ open class TibiaKtClient constructor(
      *
      * @param threadAge The maximum age of displayed threads. A value of -1 means no limit. Null means the server limit will be used.
      */
-    open suspend fun fetchForumBoard(boardId: Int, page: Int = 1, threadAge: Int? = null): TibiaResponse<ForumBoard?> {
+    public open suspend fun fetchForumBoard(
+        boardId: Int,
+        page: Int = 1,
+        threadAge: Int? = null,
+    ): TibiaResponse<ForumBoard?> {
         val response = this.request(HttpMethod.Get, getForumBoardUrl(boardId, page, threadAge))
         return response.parse { ForumBoardParser.fromContent(it) }
     }
 
     /** Fetches a thread from the Tibia.com forum. */
-    open suspend fun fetchForumAnnouncement(announcementId: Int): TibiaResponse<ForumAnnouncement?> {
+    public open suspend fun fetchForumAnnouncement(announcementId: Int): TibiaResponse<ForumAnnouncement?> {
         val response = this.request(HttpMethod.Get, getForumAnnouncementUrl(announcementId))
         return response.parse { ForumAnnouncementParser.fromContent(it, announcementId) }
     }
 
     /** Fetches a forum thread from Tibia.com */
-    open suspend fun fetchForumThread(threadId: Int, page: Int = 1): TibiaResponse<ForumThread?> {
+    public open suspend fun fetchForumThread(threadId: Int, page: Int = 1): TibiaResponse<ForumThread?> {
         val response = this.request(HttpMethod.Get, getForumThreadUrl(threadId, page))
         return response.parse { ForumThreadParser.fromContent(it) }
     }
@@ -480,7 +486,7 @@ open class TibiaKtClient constructor(
      *
      * The thread will be fetched on the page containing the [ForumThread.anchoredPost]
      */
-    open suspend fun fetchForumPost(postId: Int): TibiaResponse<ForumThread?> {
+    public open suspend fun fetchForumPost(postId: Int): TibiaResponse<ForumThread?> {
         val response = this.request(HttpMethod.Get, getForumPostUrl(postId))
         return response.parse {
             ForumThreadParser.fromContent(it)?.let { thread ->
@@ -491,7 +497,7 @@ open class TibiaKtClient constructor(
 
 
     /** Fetch CM posts between two dates. */
-    open suspend fun fetchCMPostArchive(
+    public open suspend fun fetchCMPostArchive(
         startDate: LocalDate,
         endDate: LocalDate,
         page: Int = 0,
@@ -501,7 +507,7 @@ open class TibiaKtClient constructor(
     }
 
     /** Fetch CM posts from today to the last specified [days]. */
-    open suspend fun fetchCMPostArchive(days: Int, page: Int = 0) =
+    public open suspend fun fetchCMPostArchive(days: Int, page: Int = 0): TibiaResponse<CMPostArchive> =
         fetchCMPostArchive(LocalDate.now().minusDays(days.toLong()), LocalDate.now(), page)
 
     // endregion
@@ -514,7 +520,7 @@ open class TibiaKtClient constructor(
      * @param filters The filtering parameters to use.
      * @param page The page to display.
      */
-    open suspend fun fetchBazaar(
+    public open suspend fun fetchBazaar(
         type: BazaarType = BazaarType.CURRENT,
         filters: BazaarFilters? = null,
         page: Int = 1,
@@ -523,7 +529,7 @@ open class TibiaKtClient constructor(
         return response.parse { CharacterBazaarParser.fromContent(it) }
     }
 
-    suspend fun fetchBazaar(
+    public open suspend fun fetchBazaar(
         type: BazaarType = BazaarType.CURRENT,
         page: Int = 1,
         filterBuilder: (BazaarFiltersBuilder.() -> Unit)? = null,
@@ -538,7 +544,7 @@ open class TibiaKtClient constructor(
      * @param fetchOutfits Whether to fetch outfits from further pages if necessary. Cannot be done if [skipDetails] is true.
      * @param fetchMounts Whether to fetch mounts from further pages if necessary. Cannot be done if [skipDetails] is true.
      */
-    open suspend fun fetchAuction(
+    public open suspend fun fetchAuction(
         auctionId: Int,
         skipDetails: Boolean = false,
         fetchItems: Boolean = false,
@@ -721,4 +727,3 @@ open class TibiaKtClient constructor(
         internal val logger = KotlinLogging.logger { }
     }
 }
-

@@ -14,7 +14,7 @@ import java.time.LocalDate
  * The CM Post Archive, displaying recent posts by Community Managers.
  */
 @Serializable
-data class CMPostArchive(
+public data class CMPostArchive(
     val startDate: LocalDate,
     val endDate: LocalDate,
     override val currentPage: Int,
@@ -22,8 +22,7 @@ data class CMPostArchive(
     override val resultsCount: Int,
     override val entries: List<CMPost>,
 ) : PaginatedWithUrl<CMPost> {
-    val url get() = getCMPostArchiveUrl(startDate, endDate, currentPage)
+    val url: String get() = getCMPostArchiveUrl(startDate, endDate, currentPage)
 
-    override fun getPageUrl(page: Int) = getCMPostArchiveUrl(startDate, endDate, page)
+    override fun getPageUrl(page: Int): String = getCMPostArchiveUrl(startDate, endDate, page)
 }
-

@@ -23,7 +23,7 @@ import com.galarzaa.tibiakt.core.utils.parseTablesMap
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 
-object CharacterBazaarParser : Parser<CharacterBazaar> {
+public object CharacterBazaarParser : Parser<CharacterBazaar> {
 
     override fun fromContent(content: String): CharacterBazaar {
         val document = Jsoup.parse(content)

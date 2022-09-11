@@ -19,7 +19,7 @@ package com.galarzaa.tibiakt.core.enums
 /**
  * The possible fields you can order auctions by
  */
-enum class AuctionOrderBy(override val value: Int) : IntEnum {
+public enum class AuctionOrderBy(override val value: Int) : IntEnum {
     BID(100),
     END_DATE(101),
     LEVEL(102),
@@ -33,7 +33,7 @@ enum class AuctionOrderBy(override val value: Int) : IntEnum {
     SHIELDING(6),
     SWORD_FIGHTING(8);
 
-    companion object {
-        const val queryParam = "order_column"
+    public companion object {
+        public const val queryParam: String = "order_column"
     }
 }

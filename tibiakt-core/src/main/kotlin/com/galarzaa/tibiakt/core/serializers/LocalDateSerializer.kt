@@ -12,9 +12,9 @@ import java.time.format.DateTimeFormatter
 /**
  * Serializer for [LocalDate] objects, using ISO-8601's standard for dates.
  */
-object LocalDateSerializer : KSerializer<LocalDate> {
+public object LocalDateSerializer : KSerializer<LocalDate> {
     override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("Date", PrimitiveKind.STRING)
-    override fun serialize(encoder: Encoder, value: LocalDate) =
+    override fun serialize(encoder: Encoder, value: LocalDate): Unit =
         encoder.encodeString(value.format(DateTimeFormatter.ISO_DATE))
 
     override fun deserialize(decoder: Decoder): LocalDate =

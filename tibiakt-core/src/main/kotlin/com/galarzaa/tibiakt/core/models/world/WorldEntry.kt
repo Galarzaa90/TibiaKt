@@ -24,7 +24,7 @@ import java.time.LocalDate
  * @property isExperimental Whether the world is experimental or not.
  */
 @Serializable
-data class WorldEntry(
+public data class WorldEntry(
     override val name: String,
     val isOnline: Boolean,
     val onlineCount: Int,

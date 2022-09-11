@@ -13,7 +13,7 @@ import java.time.LocalDate
  * @property paidUntil The date when the last paid rent is due.
  */
 @Serializable
-data class GuildHall(
+public data class GuildHall(
     val name: String,
     val paidUntil: LocalDate,
 )

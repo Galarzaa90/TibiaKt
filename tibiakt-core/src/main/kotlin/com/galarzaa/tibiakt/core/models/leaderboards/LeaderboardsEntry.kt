@@ -28,9 +28,9 @@ import kotlinx.serialization.Serializable
  * @property dromeLevel The drome level of the character.
  */
 @Serializable
-sealed class BaseLeaderboardsEntry {
-    abstract val rank: Int
-    abstract val dromeLevel: Int
+public sealed class BaseLeaderboardsEntry {
+    public abstract val rank: Int
+    public abstract val dromeLevel: Int
 }
 
 /**
@@ -38,7 +38,7 @@ sealed class BaseLeaderboardsEntry {
  */
 @Serializable
 @SerialName("leaderboardsEntry")
-data class LeaderboardsEntry(
+public data class LeaderboardsEntry(
     override val rank: Int,
     override val name: String,
     override val dromeLevel: Int,
@@ -47,7 +47,7 @@ data class LeaderboardsEntry(
 /** A leaderboard entry belonging to a deleted character */
 @Serializable
 @SerialName("deletedLeaderboardsEntry")
-data class DeletedLeaderboardsEntry(
+public data class DeletedLeaderboardsEntry(
     override val rank: Int,
     override val dromeLevel: Int,
 ) : BaseLeaderboardsEntry()

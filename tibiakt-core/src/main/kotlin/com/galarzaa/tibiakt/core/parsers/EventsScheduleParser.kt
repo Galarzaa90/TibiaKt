@@ -14,7 +14,7 @@ import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 
-object EventsScheduleParser : Parser<EventsSchedule> {
+public object EventsScheduleParser : Parser<EventsSchedule> {
     override fun fromContent(content: String): EventsSchedule {
         val boxContent = boxContent(content)
         return eventsSchedule {

@@ -16,19 +16,19 @@ import java.time.YearMonth
  * @property entries The list of events in this month.
  */
 @Serializable
-data class EventsSchedule(
+public data class EventsSchedule(
     val yearMonth: YearMonth,
     val entries: List<EventEntry>,
 ) {
     /**
      * The URL of the events schedule of the month.
      */
-    val url get() = getEventsScheduleUrl(yearMonth)
+    val url: String get() = getEventsScheduleUrl(yearMonth)
 
     /**
      * Get all the events that are active in a specific day of the month.
      */
-    fun getEventsOn(date: LocalDate): List<EventEntry> {
+    public fun getEventsOn(date: LocalDate): List<EventEntry> {
         return entries.filter {
             (it.startDate ?: LocalDate.MIN) <= date &&
                     date <= (it.endDate ?: LocalDate.MAX)

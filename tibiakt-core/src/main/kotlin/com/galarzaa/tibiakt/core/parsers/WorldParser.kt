@@ -21,7 +21,7 @@ import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 import java.time.YearMonth
 
-object WorldParser : Parser<World?> {
+public object WorldParser : Parser<World?> {
     private val recordRegex = Regex("""(?<count>[\d.,]+) players \(on (?<date>[^)]+)\)""")
     private val battlEyeRegex = Regex("""since ([^.]+).""")
 

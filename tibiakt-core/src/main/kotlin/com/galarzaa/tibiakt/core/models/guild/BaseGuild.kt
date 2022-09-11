@@ -8,8 +8,8 @@ import com.galarzaa.tibiakt.core.utils.getGuildUrl
  * @property name The name of the guild.
  * @property url The URL to the guild's page on Tibia.com
  */
-interface BaseGuild {
-    val name: String
+public interface BaseGuild {
+    public val name: String
 
-    val url: String get() = getGuildUrl(name)
+    public val url: String get() = getGuildUrl(name)
 }

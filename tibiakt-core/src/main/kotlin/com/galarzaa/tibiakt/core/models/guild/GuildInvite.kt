@@ -14,7 +14,7 @@ import java.time.LocalDate
  * @property inviteDate The date when the character was invited.
  */
 @Serializable
-data class GuildInvite(
+public data class GuildInvite(
     override val name: String,
-    val inviteDate: LocalDate
+    val inviteDate: LocalDate,
 ) : BaseCharacter

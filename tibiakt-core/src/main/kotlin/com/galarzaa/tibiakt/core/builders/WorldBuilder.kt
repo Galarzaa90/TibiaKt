@@ -12,31 +12,31 @@ import java.time.LocalDate
 import java.time.YearMonth
 
 @BuilderDsl
-inline fun worldBuilder(block: WorldBuilder.() -> Unit) = WorldBuilder().apply(block)
+public inline fun worldBuilder(block: WorldBuilder.() -> Unit): WorldBuilder = WorldBuilder().apply(block)
 
 @BuilderDsl
-inline fun world(block: WorldBuilder.() -> Unit) = worldBuilder(block).build()
+public inline fun world(block: WorldBuilder.() -> Unit): World = worldBuilder(block).build()
 
 @BuilderDsl
-class WorldBuilder : TibiaKtBuilder<World>() {
-    var name: String? = null
-    var isOnline: Boolean = false
-    var onlineCount: Int = 0
-    var location: String? = null
-    var pvpType: PvpType? = null
-    var battlEyeType: BattlEyeType = BattlEyeType.UNPROTECTED
-    var battlEyeStartDate: LocalDate? = null
-    var transferType: TransferType = TransferType.REGULAR
-    var isPremiumRestricted: Boolean = false
-    var isExperimental: Boolean = false
-    var onlineRecordCount: Int = 0
-    var onlineRecordDateTime: Instant? = null
-    var creationDate: YearMonth? = null
-    var worldQuests: MutableList<String> = mutableListOf()
-    var playersOnline: MutableList<OnlineCharacter> = mutableListOf()
+public class WorldBuilder : TibiaKtBuilder<World>() {
+    public var name: String? = null
+    public var isOnline: Boolean = false
+    public var onlineCount: Int = 0
+    public var location: String? = null
+    public var pvpType: PvpType? = null
+    public var battlEyeType: BattlEyeType = BattlEyeType.UNPROTECTED
+    public var battlEyeStartDate: LocalDate? = null
+    public var transferType: TransferType = TransferType.REGULAR
+    public var isPremiumRestricted: Boolean = false
+    public var isExperimental: Boolean = false
+    public var onlineRecordCount: Int = 0
+    public var onlineRecordDateTime: Instant? = null
+    public var creationDate: YearMonth? = null
+    public var worldQuests: MutableList<String> = mutableListOf()
+    public var playersOnline: MutableList<OnlineCharacter> = mutableListOf()
 
-    fun worldQuest(quest: String) = worldQuests.add(quest)
-    fun addOnlinePlayer(name: String, level: Int, vocation: Vocation) =
+    public fun worldQuest(quest: String): Boolean = worldQuests.add(quest)
+    public fun addOnlinePlayer(name: String, level: Int, vocation: Vocation): Boolean =
         playersOnline.add(OnlineCharacter(name, level, vocation))
 
 

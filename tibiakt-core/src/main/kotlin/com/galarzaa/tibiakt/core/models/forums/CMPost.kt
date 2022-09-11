@@ -16,7 +16,7 @@ import kotlinx.serialization.UseSerializers
  * @property threadTitle The title of the thread where the post is.
  */
 @Serializable
-data class CMPost(
+public data class CMPost(
     override val postId: Int,
     val date: Instant,
     val board: String,

@@ -12,7 +12,7 @@ import kotlinx.serialization.Serializable
  * @property lastPost The last post in the board.
  */
 @Serializable
-data class BoardEntry(
+public data class BoardEntry(
     val name: String,
     override val boardId: Int,
     val description: String,

@@ -13,12 +13,12 @@ import kotlinx.serialization.Serializable
  * @property position Any special position the character holds.
  */
 @Serializable
-data class OtherCharacter(
+public data class OtherCharacter(
     override val name: String,
     val world: String,
     val main: Boolean,
     val isOnline: Boolean,
     val isDeleted: Boolean,
     val recentlyTraded: Boolean,
-    val position: String?
+    val position: String?,
 ) : BaseCharacter

@@ -8,10 +8,8 @@ import kotlinx.serialization.Serializable
  * @property name The name of the outfit.
  */
 @Serializable
-data class OutfitEntry(
+public data class OutfitEntry(
     val name: String,
     override val outfitId: Int,
     override val addons: Int,
 ) : BaseOutfit
-
-

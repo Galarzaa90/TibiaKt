@@ -29,7 +29,7 @@ import kotlinx.serialization.Serializable
  * @property searchType The type of search to perform.
  */
 @Serializable
-data class BazaarFilters(
+public data class BazaarFilters(
     val world: String? = null,
     val pvpType: PvpType? = null,
     val battlEyeType: AuctionBattlEyeFilter? = null,

@@ -25,7 +25,7 @@ import java.time.LocalDate
  * @property invited The list of characters currently invited to the guild.
  */
 @Serializable
-data class Guild(
+public data class Guild(
     override val name: String,
     val world: String,
     val logoUrl: String,
@@ -59,7 +59,7 @@ data class Guild(
         get() = members.groupBy { it.rank }
 
     /** The number of members in the guild. */
-    val memberCount
+    val memberCount: Int
         get() = members.size
 
     /**
@@ -71,6 +71,6 @@ data class Guild(
     /**
      * The number of online members in the guild
      */
-    val onlineCount
+    val onlineCount: Int
         get() = onlineMembers.count()
 }

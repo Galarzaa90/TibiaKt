@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
  * The outfits of a character in an [Auction].
  */
 @Serializable
-data class Outfits(
+public data class Outfits(
     override val currentPage: Int,
     override val totalPages: Int,
     override val resultsCount: Int,

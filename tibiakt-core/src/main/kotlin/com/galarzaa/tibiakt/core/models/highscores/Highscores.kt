@@ -24,7 +24,7 @@ import kotlinx.serialization.UseSerializers
  * @property lastUpdate The time when the currently displayed results were last updated.
  */
 @Serializable
-data class Highscores(
+public data class Highscores(
     val world: String?,
     val category: HighscoresCategory,
     val vocation: HighscoresProfession,
@@ -37,6 +37,7 @@ data class Highscores(
     override val entries: List<HighscoresEntry>,
 ) : PaginatedWithUrl<HighscoresEntry> {
 
-    val url get() = getHighscoresUrl(world, category, vocation, currentPage, battlEyeType, worldTypes)
-    override fun getPageUrl(page: Int) = getHighscoresUrl(world, category, vocation, page, battlEyeType, worldTypes)
+    val url: String get() = getHighscoresUrl(world, category, vocation, currentPage, battlEyeType, worldTypes)
+    override fun getPageUrl(page: Int): String =
+        getHighscoresUrl(world, category, vocation, page, battlEyeType, worldTypes)
 }

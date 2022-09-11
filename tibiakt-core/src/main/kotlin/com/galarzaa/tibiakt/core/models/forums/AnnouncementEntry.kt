@@ -11,13 +11,12 @@ import kotlinx.serialization.Serializable
  * @property author The name of the author of the announcement.
  */
 @Serializable
-data class AnnouncementEntry(
+public data class AnnouncementEntry(
     override val title: String,
     override val announcementId: Int,
     val author: String,
 ) : BaseForumAnnouncement {
 
     /** The URL to the author's character page. */
-    val authorUrl get() = getCharacterUrl(author)
+    val authorUrl: String get() = getCharacterUrl(author)
 }
-

@@ -23,33 +23,36 @@ import com.galarzaa.tibiakt.core.utils.BuilderDsl
 import kotlinx.datetime.Instant
 
 @BuilderDsl
-inline fun leaderboards(block: LeaderboardsBuilder.() -> Unit) = LeaderboardsBuilder().apply(block).build()
+public inline fun leaderboards(block: LeaderboardsBuilder.() -> Unit): Leaderboards =
+    LeaderboardsBuilder().apply(block).build()
 
 @BuilderDsl
-inline fun leaderboardsBuilder(block: LeaderboardsBuilder.() -> Unit) = LeaderboardsBuilder().apply(block)
+public inline fun leaderboardsBuilder(block: LeaderboardsBuilder.() -> Unit): LeaderboardsBuilder =
+    LeaderboardsBuilder().apply(block)
 
 @BuilderDsl
-class LeaderboardsBuilder : TibiaKtBuilder<Leaderboards>() {
-    var world: String? = null
-    var rotation: LeaderboardsRotation? = null
-    val availableRotations: MutableList<LeaderboardsRotation> = mutableListOf()
-    var lastUpdated: Instant? = null
-    var currentPage: Int? = null
-    var totalPages: Int? = null
-    var resultsCount: Int? = null
-    var entries: MutableList<BaseLeaderboardsEntry> = mutableListOf()
+public class LeaderboardsBuilder : TibiaKtBuilder<Leaderboards>() {
+    public var world: String? = null
+    public var rotation: LeaderboardsRotation? = null
+    public val availableRotations: MutableList<LeaderboardsRotation> = mutableListOf()
+    public var lastUpdated: Instant? = null
+    public var currentPage: Int? = null
+    public var totalPages: Int? = null
+    public var resultsCount: Int? = null
+    public var entries: MutableList<BaseLeaderboardsEntry> = mutableListOf()
 
     @BuilderDsl
-    fun rotation(body: LeaderboardsRotationBuilder.() -> Unit) =
+    public fun rotation(body: LeaderboardsRotationBuilder.() -> Unit): LeaderboardsBuilder =
         apply { rotation = LeaderboardsRotationBuilder().apply(body).build() }
 
     @BuilderDsl
-    fun addAvailableRotation(rotation: LeaderboardsRotation) = apply { availableRotations.add(rotation) }
+    public fun addAvailableRotation(rotation: LeaderboardsRotation): LeaderboardsBuilder =
+        apply { availableRotations.add(rotation) }
 
-    fun addEntry(entry: BaseLeaderboardsEntry) = apply { entries.add(entry) }
+    public fun addEntry(entry: BaseLeaderboardsEntry): LeaderboardsBuilder = apply { entries.add(entry) }
 
 
-    override fun build() = Leaderboards(
+    override fun build(): Leaderboards = Leaderboards(
         world = world ?: throw IllegalStateException("world is required"),
         rotation = rotation ?: throw IllegalStateException("rotation is required"),
         availableRotations = availableRotations,
@@ -60,11 +63,11 @@ class LeaderboardsBuilder : TibiaKtBuilder<Leaderboards>() {
         entries = entries
     )
 
-    class LeaderboardsRotationBuilder : TibiaKtBuilder<LeaderboardsRotation>() {
-        var rotationId: Int? = null
-        var current: Boolean = false
-        var endDate: Instant? = null
-        override fun build() = LeaderboardsRotation(
+    public class LeaderboardsRotationBuilder : TibiaKtBuilder<LeaderboardsRotation>() {
+        public var rotationId: Int? = null
+        public var current: Boolean = false
+        public var endDate: Instant? = null
+        override fun build(): LeaderboardsRotation = LeaderboardsRotation(
             rotationId = rotationId ?: throw IllegalStateException("rotationId is required"),
             current = current,
             endDate = endDate ?: throw IllegalStateException("endDate is required"),

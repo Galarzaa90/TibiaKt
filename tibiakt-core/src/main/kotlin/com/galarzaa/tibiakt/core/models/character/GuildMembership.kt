@@ -9,6 +9,4 @@ import kotlinx.serialization.Serializable
  * @property rank The name of the rank the character holds in the guild.
  */
 @Serializable
-data class GuildMembership(override val name: String, val rank: String) : BaseGuild
-
-
+public data class GuildMembership(override val name: String, val rank: String) : BaseGuild

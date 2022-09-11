@@ -19,7 +19,7 @@ package com.galarzaa.tibiakt.core.enums
 /**
  * Possible fields to order houses or guildhalls by.
  */
-enum class HouseOrder(override val value: String) : StringEnum {
+public enum class HouseOrder(override val value: String) : StringEnum {
     /** Order by name, alphabetically */
     NAME("name"),
 

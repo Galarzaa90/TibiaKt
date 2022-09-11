@@ -22,7 +22,7 @@ import kotlin.time.Duration
  * @property timeLeft The remaining time for the auction to end. Note that the resolution of this is either days or hours.
  */
 @Serializable
-data class HouseEntry(
+public data class HouseEntry(
     override val houseId: Int,
     val name: String,
     val size: Int,
@@ -32,5 +32,5 @@ data class HouseEntry(
     val type: HouseType,
     val status: HouseStatus,
     val highestBid: Int?,
-    val timeLeft: Duration?
+    val timeLeft: Duration?,
 ) : BaseHouse

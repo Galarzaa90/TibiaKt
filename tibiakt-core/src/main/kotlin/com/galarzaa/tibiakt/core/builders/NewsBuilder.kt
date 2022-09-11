@@ -6,19 +6,19 @@ import com.galarzaa.tibiakt.core.utils.BuilderDsl
 import java.time.LocalDate
 
 @BuilderDsl
-inline fun newsBuilder(block: NewsBuilder.() -> Unit) = NewsBuilder().apply(block)
+public inline fun newsBuilder(block: NewsBuilder.() -> Unit): NewsBuilder = NewsBuilder().apply(block)
 
 @BuilderDsl
-inline fun news(block: NewsBuilder.() -> Unit) = newsBuilder(block).build()
+public inline fun news(block: NewsBuilder.() -> Unit): News = newsBuilder(block).build()
 
 @BuilderDsl
-class NewsBuilder : TibiaKtBuilder<News>() {
-    var id: Int? = null
-    lateinit var title: String
-    lateinit var category: NewsCategory
-    lateinit var date: LocalDate
-    lateinit var content: String
-    var threadId: Int? = null
+public class NewsBuilder : TibiaKtBuilder<News>() {
+    public var id: Int? = null
+    public lateinit var title: String
+    public lateinit var category: NewsCategory
+    public lateinit var date: LocalDate
+    public lateinit var content: String
+    public var threadId: Int? = null
     override fun build(): News {
         return News(
             id = id ?: throw IllegalStateException("id is required"),

@@ -11,9 +11,9 @@ import kotlin.time.Duration
 /**
  * Serializer for [Duration] objects, using ISO-8601's standard for durations.
  */
-object DurationSerializer : KSerializer<Duration> {
+public object DurationSerializer : KSerializer<Duration> {
     override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("Duration", PrimitiveKind.STRING)
-    override fun serialize(encoder: Encoder, value: Duration) =
+    override fun serialize(encoder: Encoder, value: Duration): Unit =
         encoder.encodeString(value.toString())
 
     override fun deserialize(decoder: Decoder): Duration =

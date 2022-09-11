@@ -9,10 +9,10 @@ import com.galarzaa.tibiakt.core.utils.getLinkInformation
 import com.galarzaa.tibiakt.core.utils.parseTibiaDate
 import com.galarzaa.tibiakt.core.utils.remove
 
-object NewsParser : Parser<News?> {
+public object NewsParser : Parser<News?> {
     override fun fromContent(content: String): News? = fromContent(content, 0)
 
-    fun fromContent(content: String, newsId: Int = 0): News? {
+    public fun fromContent(content: String, newsId: Int = 0): News? {
         val boxContent = boxContent(content)
 
         val titleContainer = boxContent.selectFirst("div.NewsHeadlineText")

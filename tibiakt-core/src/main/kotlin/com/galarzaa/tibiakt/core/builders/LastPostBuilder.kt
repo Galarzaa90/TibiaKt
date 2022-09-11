@@ -5,20 +5,20 @@ import com.galarzaa.tibiakt.core.utils.BuilderDsl
 import kotlinx.datetime.Instant
 
 @BuilderDsl
-inline fun lastPostBuilder(block: LastPostBuilder.() -> Unit) = LastPostBuilder().apply(block)
+public inline fun lastPostBuilder(block: LastPostBuilder.() -> Unit): LastPostBuilder = LastPostBuilder().apply(block)
 
 @BuilderDsl
-inline fun lastPost(block: LastPostBuilder.() -> Unit) = lastPostBuilder(block).build()
+public inline fun lastPost(block: LastPostBuilder.() -> Unit): LastPost = lastPostBuilder(block).build()
 
 @BuilderDsl
-class LastPostBuilder : TibiaKtBuilder<LastPost>() {
-    var author: String? = null
-    var postId: Int? = null
-    var date: Instant? = null
-    var deleted: Boolean = false
-    var traded: Boolean = false
+public class LastPostBuilder : TibiaKtBuilder<LastPost>() {
+    public var author: String? = null
+    public var postId: Int? = null
+    public var date: Instant? = null
+    public var deleted: Boolean = false
+    public var traded: Boolean = false
 
-    override fun build() = LastPost(
+    override fun build(): LastPost = LastPost(
         author = author ?: throw IllegalArgumentException("author is required"),
         postId = postId ?: throw IllegalArgumentException("postId is required"),
         date = date ?: throw IllegalArgumentException("date is required"),

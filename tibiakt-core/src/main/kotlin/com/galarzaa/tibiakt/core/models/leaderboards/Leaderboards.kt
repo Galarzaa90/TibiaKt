@@ -34,7 +34,7 @@ import kotlinx.serialization.UseSerializers
  * @property lastUpdated The time when the leaderboard was last updated. Only available for the current rotation.
  */
 @Serializable
-data class Leaderboards(
+public data class Leaderboards(
     val world: String,
     val rotation: LeaderboardsRotation,
     val availableRotations: List<LeaderboardsRotation>,
@@ -48,8 +48,7 @@ data class Leaderboards(
     /**
      * The URL to these leaderboards.
      */
-    val url get() = getLeaderboardUrl(world, rotation.rotationId, currentPage)
+    val url: String get() = getLeaderboardUrl(world, rotation.rotationId, currentPage)
 
-    override fun getPageUrl(page: Int) = getLeaderboardUrl(world, rotation.rotationId, page)
+    override fun getPageUrl(page: Int): String = getLeaderboardUrl(world, rotation.rotationId, page)
 }
-

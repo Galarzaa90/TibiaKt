@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
  * @property total The kill statistics totals.
  */
 @Serializable
-data class KillStatistics(
+public data class KillStatistics(
     val world: String,
     val entries: Map<String, KillsStatisticEntry>,
     val total: KillsStatisticEntry,
@@ -18,12 +18,12 @@ data class KillStatistics(
     /**
      * The URL to these kill stastistics.
      */
-    val url
+    val url: String
         get() = getKillStatisticsUrl(world)
 
     /**
      * The kill statistics for players.
      */
-    val players
+    val players: KillsStatisticEntry
         get() = entries.getOrDefault("players", KillsStatisticEntry(0, 0, 0, 0))
 }

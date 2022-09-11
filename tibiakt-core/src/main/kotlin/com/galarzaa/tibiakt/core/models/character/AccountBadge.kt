@@ -10,4 +10,4 @@ import kotlinx.serialization.Serializable
  * @property imageUrl The URL to the badge's image.
  */
 @Serializable
-data class AccountBadge(val name: String, val description: String, val imageUrl: String)
+public data class AccountBadge(val name: String, val description: String, val imageUrl: String)

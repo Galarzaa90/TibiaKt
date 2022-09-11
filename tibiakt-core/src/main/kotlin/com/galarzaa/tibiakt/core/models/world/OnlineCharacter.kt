@@ -12,8 +12,8 @@ import kotlinx.serialization.Serializable
  * @property vocation The vocation of the character
  */
 @Serializable
-data class OnlineCharacter(
+public data class OnlineCharacter(
     override val name: String,
     override val level: Int,
-    val vocation: Vocation
+    val vocation: Vocation,
 ) : BaseCharacter, CharacterLevel

@@ -1,13 +1,13 @@
 package com.galarzaa.tibiakt.core.enums
 
-enum class NewsType(override val value: String) : StringEnum {
+public enum class NewsType(override val value: String) : StringEnum {
     NEWS("News"),
     NEWS_TICKER("News Ticker"),
     FEATURED_ARTICLE("Featured Article");
 
-    val filterName
+    public val filterName: String
         get() = "filter_$filterValue"
 
-    val filterValue
+    public val filterValue: String
         get() = value.split(" ").last().lowercase()
 }

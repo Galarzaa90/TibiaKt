@@ -11,25 +11,26 @@ import com.galarzaa.tibiakt.core.utils.BuilderDsl
 import kotlinx.datetime.Instant
 
 @BuilderDsl
-inline fun highscores(block: HighscoresBuilder.() -> Unit) = HighscoresBuilder().apply(block).build()
+public inline fun highscores(block: HighscoresBuilder.() -> Unit): Highscores = HighscoresBuilder().apply(block).build()
 
 @BuilderDsl
-inline fun highscoresBuilder(block: HighscoresBuilder.() -> Unit) = HighscoresBuilder().apply(block)
+public inline fun highscoresBuilder(block: HighscoresBuilder.() -> Unit): HighscoresBuilder =
+    HighscoresBuilder().apply(block)
 
 @BuilderDsl
-class HighscoresBuilder : TibiaKtBuilder<Highscores>() {
-    var world: String? = null
-    var category: HighscoresCategory? = null
-    var vocation: HighscoresProfession? = null
-    val worldTypes: MutableSet<PvpType> = mutableSetOf()
-    var battlEyeType: HighscoresBattlEyeType? = null
-    var lastUpdate: Instant? = null
-    var currentPage: Int = 1
-    var totalPages: Int = 1
-    var resultsCount: Int = 0
-    val entries: MutableList<HighscoresEntry> = mutableListOf()
+public class HighscoresBuilder : TibiaKtBuilder<Highscores>() {
+    public var world: String? = null
+    public var category: HighscoresCategory? = null
+    public var vocation: HighscoresProfession? = null
+    public val worldTypes: MutableSet<PvpType> = mutableSetOf()
+    public var battlEyeType: HighscoresBattlEyeType? = null
+    public var lastUpdate: Instant? = null
+    public var currentPage: Int = 1
+    public var totalPages: Int = 1
+    public var resultsCount: Int = 0
+    public val entries: MutableList<HighscoresEntry> = mutableListOf()
 
-    fun addEntry(
+    public fun addEntry(
         rank: Int,
         name: String,
         vocation: Vocation,
@@ -37,14 +38,16 @@ class HighscoresBuilder : TibiaKtBuilder<Highscores>() {
         level: Int,
         points: Long,
         extra: String? = null,
-    ) = apply {
+    ): HighscoresBuilder = apply {
         entries.add(HighscoresEntry(rank, name, level, world, vocation, points, extra))
     }
 
     @BuilderDsl
-    fun addEntry(block: HighscoresEntryBuilder.() -> Unit) = entries.add(HighscoresEntryBuilder().apply(block).build())
+    public fun addEntry(block: HighscoresEntryBuilder.() -> Unit): Boolean =
+        entries.add(HighscoresEntryBuilder().apply(block).build())
 
-    override fun build() = Highscores(world = world,
+    override fun build(): Highscores = Highscores(
+        world = world,
         category = category ?: HighscoresCategory.EXPERIENCE_POINTS,
         vocation = vocation ?: HighscoresProfession.ALL,
         worldTypes = worldTypes,
@@ -53,19 +56,20 @@ class HighscoresBuilder : TibiaKtBuilder<Highscores>() {
         currentPage = currentPage,
         totalPages = totalPages,
         resultsCount = resultsCount,
-        entries = entries)
+        entries = entries
+    )
 
     @BuilderDsl
-    class HighscoresEntryBuilder : TibiaKtBuilder<HighscoresEntry>() {
-        var rank: Int = 0
-        lateinit var name: String
-        lateinit var vocation: Vocation
-        lateinit var world: String
-        var level: Int = 0
-        var value: Long = 0
-        var additionalValue: String? = null
+    public class HighscoresEntryBuilder : TibiaKtBuilder<HighscoresEntry>() {
+        public var rank: Int = 0
+        public lateinit var name: String
+        public lateinit var vocation: Vocation
+        public lateinit var world: String
+        public var level: Int = 0
+        public var value: Long = 0
+        public var additionalValue: String? = null
 
-        override fun build() = HighscoresEntry(
+        override fun build(): HighscoresEntry = HighscoresEntry(
             rank = rank,
             name = if (::name.isInitialized) name else throw IllegalStateException("name is required"),
             vocation = if (::vocation.isInitialized) vocation else throw IllegalStateException("vocation is required"),

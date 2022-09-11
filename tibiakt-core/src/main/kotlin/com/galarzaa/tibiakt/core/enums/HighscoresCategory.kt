@@ -1,6 +1,6 @@
 package com.galarzaa.tibiakt.core.enums
 
-enum class HighscoresCategory(override val value: Int) : IntEnum {
+public enum class HighscoresCategory(override val value: Int) : IntEnum {
     ACHIEVEMENTS(1),
     AXE_FIGHTING(2),
     BOSS_POINTS(15),
