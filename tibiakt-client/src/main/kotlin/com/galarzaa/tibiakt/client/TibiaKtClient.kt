@@ -134,6 +134,7 @@ import java.time.YearMonth
 import kotlin.system.measureTimeMillis
 import kotlin.time.Duration.Companion.seconds
 
+@Suppress("TooManyFunctions")
 /**
  * A coroutine based client to fetch from Tibia.com
  *
@@ -220,7 +221,14 @@ public open class TibiaKtClient constructor(
             }
             throw NetworkException("${re.response.status.value} ${re.response.status.description}", re)
         }
-        logger.info { "$url | ${method.value.uppercase()} | ${response.status.value} ${response.status.description} | ${response.fetchingTimeMillis}ms" }
+        logger.info {
+            listOf(
+                url,
+                method.value.uppercase(),
+                "${response.status.value} ${response.status.description}",
+                "${response.fetchingTimeMillis}ms"
+            ).joinToString("| ")
+        }
         return response
     }
 
@@ -658,6 +666,7 @@ public open class TibiaKtClient constructor(
         return toTibiaResponse(parsingTime, data)
     }
 
+    @Suppress("MaxLineLength")
     /**
      * Get the URL to the endpoint to get page items for auctions.
      */
