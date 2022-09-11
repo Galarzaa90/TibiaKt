@@ -32,7 +32,7 @@ class ForumThreadParserTests : StringSpec({
         thread shouldNotBe null
         with(thread!!) {
             title shouldBe "*ASAP* New Balancing Changes - Buff OLD Areas and Creatures!"
-            threadId shouldBe 4807028
+            threadId shouldBe 4_807_028
             boardId shouldBe 10
             currentPage shouldBe 1
             totalPages shouldBe 16
@@ -47,7 +47,7 @@ class ForumThreadParserTests : StringSpec({
         thread shouldNotBe null
         with(thread!!) {
             title shouldBe "heffaklumparna!!"
-            threadId shouldBe 4927392
+            threadId shouldBe 4_927_392
             boardId shouldBe 25
             currentPage shouldBe 1
             totalPages shouldBe 1
@@ -72,7 +72,7 @@ class ForumThreadParserTests : StringSpec({
         with(thread!!) {
             title shouldBe "Bald Dwarfs Rec..."
             board shouldBe "Gladera"
-            boardId shouldBe 143609
+            boardId shouldBe 143_609
             section shouldBe "World Boards"
             sectionId shouldBe 2
         }

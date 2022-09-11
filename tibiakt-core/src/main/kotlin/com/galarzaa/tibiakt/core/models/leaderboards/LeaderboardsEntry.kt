@@ -20,7 +20,6 @@ import com.galarzaa.tibiakt.core.models.character.BaseCharacter
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-
 /**
  * Base class for Leaderboards entries.
  *

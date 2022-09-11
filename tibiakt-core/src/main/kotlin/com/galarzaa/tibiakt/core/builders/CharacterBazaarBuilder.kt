@@ -22,7 +22,6 @@ import com.galarzaa.tibiakt.core.models.bazaar.BazaarFilters
 import com.galarzaa.tibiakt.core.models.bazaar.CharacterBazaar
 import com.galarzaa.tibiakt.core.utils.BuilderDsl
 
-
 @BuilderDsl
 public inline fun characterBazaar(block: CharacterBazaarBuilder.() -> Unit): CharacterBazaar =
     characterBazaarBuilder(block).build()

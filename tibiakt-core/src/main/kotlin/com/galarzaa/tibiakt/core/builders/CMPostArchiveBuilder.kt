@@ -21,7 +21,6 @@ import com.galarzaa.tibiakt.core.models.forums.CMPostArchive
 import com.galarzaa.tibiakt.core.utils.BuilderDsl
 import java.time.LocalDate
 
-
 @BuilderDsl
 public inline fun cmPostArchive(block: CMPostArchiveBuilder.() -> Unit): CMPostArchive =
     CMPostArchiveBuilder().apply(block).build()

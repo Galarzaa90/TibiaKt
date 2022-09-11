@@ -396,11 +396,11 @@ potential-bugs:
     forbiddenTypePatterns:
       - 'kotlin.String'
   CastToNullableType:
-    active: false
+    active: true
   Deprecation:
     active: false
   DontDowncastCollectionTypes:
-    active: false
+    active: true
   DoubleMutabilityForCollection:
     active: true
     mutableTypes:
@@ -465,7 +465,7 @@ potential-bugs:
   RedundantElseInWhen:
     active: true
   UnconditionalJumpStatementInLoop:
-    active: false
+    active: true
   UnnecessaryNotNullOperator:
     active: true
   UnnecessarySafeCall:
@@ -489,14 +489,14 @@ potential-bugs:
 style:
   active: true
   CanBeNonNullable:
-    active: false
+    active: true
   CascadingCallWrapping:
     active: false
     includeElvis: true
   ClassOrdering:
-    active: false
+    active: true
   CollapsibleIfStatements:
-    active: false
+    active: true
   DataClassContainsFunctions:
     active: false
     conversionFunctionPrefix: 'to'
@@ -510,11 +510,11 @@ style:
   EqualsOnSignatureLine:
     active: false
   ExplicitCollectionElementAccessMethod:
-    active: false
+    active: true
   ExplicitItLambdaParameter:
     active: true
   ExpressionBodySyntax:
-    active: false
+    active: true
     includeLineWrapping: false
   ForbiddenComment:
     active: true
@@ -529,7 +529,7 @@ style:
     imports: [ ]
     forbiddenPatterns: ''
   ForbiddenMethodCall:
-    active: false
+    active: true
     methods:
       - 'kotlin.io.print'
       - 'kotlin.io.println'
@@ -604,9 +604,9 @@ style:
   NewLineAtEndOfFile:
     active: true
   NoTabs:
-    active: false
+    active: true
   NullableBooleanCheck:
-    active: false
+    active: true
   ObjectLiteralToLambda:
     active: true
   OptionalAbstractKeyword:
@@ -614,9 +614,9 @@ style:
   OptionalUnit:
     active: false
   OptionalWhenBraces:
-    active: false
+    active: true
   PreferToOverPairSyntax:
-    active: false
+    active: true
   ProtectedMemberInFinalClass:
     active: true
   RedundantExplicitType:
@@ -637,21 +637,21 @@ style:
   SerialVersionUIDInSerializableClass:
     active: true
   SpacingBetweenPackageAndImports:
-    active: false
+    active: true
   ThrowsCount:
     active: false
     max: 2
     excludeGuardClauses: false
   TrailingWhitespace:
-    active: false
+    active: true
   UnderscoresInNumericLiterals:
-    active: false
+    active: true
     acceptableLength: 4
     allowNonStandardGrouping: false
   UnnecessaryAbstractClass:
     active: true
   UnnecessaryAnnotationUseSiteTarget:
-    active: false
+    active: true
   UnnecessaryApply:
     active: false
   UnnecessaryBackticks:
@@ -663,7 +663,7 @@ style:
   UnnecessaryInnerClass:
     active: false
   UnnecessaryLet:
-    active: false
+    active: true
   UnnecessaryParentheses:
     active: false
   UntilInsteadOfRangeTo:
@@ -687,11 +687,11 @@ style:
     active: false
     allowVars: false
   UseEmptyCounterpart:
-    active: false
+    active: true
   UseIfEmptyOrIfBlank:
-    active: false
+    active: true
   UseIfInsteadOfWhen:
-    active: false
+    active: true
   UseIsNullOrEmpty:
     active: true
   UseOrEmpty:

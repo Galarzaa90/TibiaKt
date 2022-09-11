@@ -24,7 +24,6 @@ import com.galarzaa.tibiakt.core.utils.getForumBoardUrl
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 
-
 public const val DEFAULT_THREAD_AGE: Int = 30
 
 @Serializable

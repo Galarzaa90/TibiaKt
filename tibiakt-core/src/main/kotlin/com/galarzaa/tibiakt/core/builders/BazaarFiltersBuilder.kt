@@ -26,7 +26,6 @@ import com.galarzaa.tibiakt.core.enums.PvpType
 import com.galarzaa.tibiakt.core.models.bazaar.BazaarFilters
 import com.galarzaa.tibiakt.core.utils.BuilderDsl
 
-
 @BuilderDsl
 public inline fun bazaarFilters(block: BazaarFiltersBuilder.() -> Unit): BazaarFilters =
     bazaarFiltersBuilder(block).build()

@@ -92,7 +92,7 @@ class ForumBoardParserTests : StringSpec({
             currentPage shouldBe 1
             announcements shouldHaveSize 5
             totalPages shouldBe 1938
-            resultsCount shouldBe 58115
+            resultsCount shouldBe 58_115
             entries shouldHaveSize 30
             entries.forAll {
                 it.goldenFrame shouldBe true

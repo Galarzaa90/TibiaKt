@@ -25,9 +25,8 @@ import org.jsoup.parser.Parser
 import org.jsoup.select.Elements
 import java.net.URL
 
-internal fun Element.boxContent(): Element {
-    return selectFirst("div.BoxContent") ?: throw ParsingException("BoxContent container not found")
-}
+internal fun Element.boxContent(): Element =
+    selectFirst("div.BoxContent") ?: throw ParsingException("BoxContent container not found")
 
 
 internal fun Element.parseTables(contentTableSelector: String = "table.TableContent"): Map<String, Elements> {
@@ -181,7 +180,7 @@ internal fun parsePopup(content: String): Pair<String, Document> {
     val title = parts[1].replace("'", "").trim()
     val html = parts[parts.size - 1].replace("\\'", "\"").replace("'", "").replace(",);", "").replace(", );", "").trim()
     val parsedHtml = Jsoup.parse(html, "", Parser.xmlParser())
-    return Pair(title, parsedHtml)
+    return title to parsedHtml
 }
 
 private val queryStringRegex = Regex("([^&=]+)=([^&]*)")
@@ -191,11 +190,11 @@ internal fun Element.getLinkInformation(): LinkInformation? {
 }
 
 internal data class LinkInformation(val title: String, val targetUrl: URL) {
+    val queryParams
+        get() = targetUrl.queryParams()
 
     constructor(title: String, targetUrl: String) : this(title, URL(targetUrl))
 
-    val queryParams
-        get() = targetUrl.queryParams()
 }
 
 internal fun URL.queryParams(): HashMap<String, MutableList<String>> {

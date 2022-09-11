@@ -50,7 +50,7 @@ public class CharacterBuilder : TibiaKtBuilder<Character> {
     public var achievementPoints: Int = 0
     public var lastLogin: Instant? = null
     public var recentlyTraded: Boolean = false
-    public var formerNames: List<String> = listOf()
+    public var formerNames: List<String> = emptyList()
     public var deletionDate: Instant? = null
     public var formerWorld: String? = null
     public var accountStatus: AccountStatus? = null

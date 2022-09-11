@@ -5,10 +5,10 @@ COPY buildSrc/ /home/gradle/app/buildSrc/
 WORKDIR /home/gradle/app
 
 # This step will fail because source is still not there, but at least dependencies will be downloaded
-RUN ./gradlew build -x check --parallel --continue > /dev/null 2>&1 || true
+RUN ./gradlew build -x check -x detekt --parallel --continue > /dev/null 2>&1 || true
 
 COPY . /home/gradle/app
-RUN ./gradlew build -x test shadowJar --parallel
+RUN ./gradlew build -x test -x detekt shadowJar --parallel
 
 FROM adoptopenjdk/openjdk16:debianslim-jre
 COPY --from=builder ./home/gradle/app/tibiakt-server/build/libs/tibiatk-server.jar .

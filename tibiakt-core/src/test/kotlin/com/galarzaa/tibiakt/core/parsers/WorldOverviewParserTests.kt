@@ -29,9 +29,9 @@ class WorldOverviewParserTests : StringSpec({
     isolationMode = IsolationMode.InstancePerTest
     "Parse the world overview" {
         val worldOverview = WorldOverviewParser.fromContent(TestResources.getResource("worlds/worldsList.txt"))
-        worldOverview.overallMaximumCount shouldBe 64028
-        worldOverview.totalOnline shouldBe 10669
-        worldOverview.overallMaximumCountDateTime shouldBe Instant.fromEpochSeconds(1196274360)
+        worldOverview.overallMaximumCount shouldBe 64_028
+        worldOverview.totalOnline shouldBe 10_669
+        worldOverview.overallMaximumCountDateTime shouldBe Instant.fromEpochSeconds(1_196_274_360)
         worldOverview.worlds shouldHaveSize 84
         worldOverview.worlds.forAtLeast(1) { it.isPremiumRestricted shouldBe true }
         worldOverview.worlds.forExactly(2) { it.isExperimental shouldBe true }

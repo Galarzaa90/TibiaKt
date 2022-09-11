@@ -55,21 +55,18 @@ public fun getLastServerSaveTime(currentTime: ZonedDateTime = ZonedDateTime.now(
 }
 
 /** Get the time of the last server save from a [currentTime]. */
-public fun getLastServerSaveTime(currentTime: Instant): Instant {
-    return getLastServerSaveTime(ZonedDateTime.ofInstant(currentTime.toJavaInstant(), TIBIA_TIMEZONE)).toInstant()
+public fun getLastServerSaveTime(currentTime: Instant): Instant =
+    getLastServerSaveTime(ZonedDateTime.ofInstant(currentTime.toJavaInstant(), TIBIA_TIMEZONE)).toInstant()
         .toKotlinInstant()
-}
 
 /** Get the time of the next server save from a [currentTime]. */
-public fun getNextServerSaveTime(currentTime: ZonedDateTime = ZonedDateTime.now(TIBIA_TIMEZONE)): ZonedDateTime {
-    return getLastServerSaveTime(currentTime).plusDays(1)
-}
+public fun getNextServerSaveTime(currentTime: ZonedDateTime = ZonedDateTime.now(TIBIA_TIMEZONE)): ZonedDateTime =
+    getLastServerSaveTime(currentTime).plusDays(1)
 
 /** Get the time of the next server save from a [currentTime]. */
-public fun getNextServerSaveTime(currentTime: Instant): Instant {
-    return getNextServerSaveTime(ZonedDateTime.ofInstant(currentTime.toJavaInstant(), TIBIA_TIMEZONE)).toInstant()
+public fun getNextServerSaveTime(currentTime: Instant): Instant =
+    getNextServerSaveTime(ZonedDateTime.ofInstant(currentTime.toJavaInstant(), TIBIA_TIMEZONE)).toInstant()
         .toKotlinInstant()
-}
 
 
 /**
@@ -87,16 +84,14 @@ public fun parseTibiaDateTime(input: String): Instant {
 /**
  * Parses a string containing date from Tibia.com into an [LocalDate] instance.
  */
-public fun parseTibiaDate(input: String): LocalDate {
-    return LocalDate.parse(input.clean(), DateTimeFormatter.ofPattern("MMM dd yyyy", Locale.US))
-}
+public fun parseTibiaDate(input: String): LocalDate =
+    LocalDate.parse(input.clean(), DateTimeFormatter.ofPattern("MMM dd yyyy", Locale.US))
 
 /**
  * Parses a string containing date from Tibia.com into an [LocalDate] instance.
  */
-public fun parseTibiaFullDate(input: String): LocalDate {
-    return LocalDate.parse(input.clean(), DateTimeFormatter.ofPattern("MMMM d, yyyy", Locale.US))
-}
+public fun parseTibiaFullDate(input: String): LocalDate =
+    LocalDate.parse(input.clean(), DateTimeFormatter.ofPattern("MMMM d, yyyy", Locale.US))
 
 /**
  * Parses a string containing a date time from Tibia.com forums into an [Instant] instance.

@@ -147,14 +147,6 @@ public open class TibiaKtClient constructor(
     private val additionalConfig: (HttpClientConfig<*>.() -> Unit) = {},
 ) {
 
-    /**
-     * Creates an instance of the client, using the default engine (CIO)
-     * @param userAgent The value that will be sent in the User-Agent header of every request.
-     */
-    public constructor(userAgent: String? = null, additionalConfig: (HttpClientConfig<*>.() -> Unit) = {}) : this(
-        null, userAgent, additionalConfig
-    )
-
     private val client = HttpClient(engine ?: CIO.create()) {
         install(HttpTimeout) {
             requestTimeoutMillis = HttpTimeout.INFINITE_TIMEOUT_MS
@@ -174,6 +166,14 @@ public open class TibiaKtClient constructor(
         }
         additionalConfig(this)
     }
+
+    /**
+     * Creates an instance of the client, using the default engine (CIO)
+     * @param userAgent The value that will be sent in the User-Agent header of every request.
+     */
+    public constructor(userAgent: String? = null, additionalConfig: (HttpClientConfig<*>.() -> Unit) = {}) : this(
+        null, userAgent, additionalConfig
+    )
 
     /**
      * Perform a request using the required headers.
@@ -640,8 +640,6 @@ public open class TibiaKtClient constructor(
 
     // endregion
 
-    private val HttpResponse.fetchingTime get() = (responseTime.timestamp - requestTime.timestamp) / 1000.0
-    private val HttpResponse.fetchingTimeMillis get() = (fetchingTime * 1000).toInt()
 
     /** Convert to a [TibiaResponse]. */
     private fun <T> HttpResponse.toTibiaResponse(parsingTime: Double, data: T): TibiaResponse<T> = TibiaResponse(
@@ -670,9 +668,8 @@ public open class TibiaKtClient constructor(
     /**
      * Get the URL to the endpoint to get page items for auctions.
      */
-    private fun getAuctionAjaxPaginationUrl(auctionId: Int, type: AuctionPagesType, page: Int): String {
-        return "https://www.tibia.com/websiteservices/handle_charactertrades.php?auctionid=$auctionId&type=${type.typeId}&currentpage=$page"
-    }
+    private fun getAuctionAjaxPaginationUrl(auctionId: Int, type: AuctionPagesType, page: Int): String =
+        "https://www.tibia.com/websiteservices/handle_charactertrades.php?auctionid=$auctionId&type=${type.typeId}&currentpage=$page"
 
     /**
      * Fetch a single page from the auction pagination endpoint.
@@ -680,7 +677,7 @@ public open class TibiaKtClient constructor(
     private suspend fun fetchAjaxPage(auctionId: Int, type: AuctionPagesType, page: Int): TimedResult<AjaxResponse> {
         val response = this.request(
             HttpMethod.Get, getAuctionAjaxPaginationUrl(auctionId, type, page),
-            headers = listOf(Pair("x-requested-with", "XMLHttpRequest")),
+            headers = listOf("x-requested-with" to "XMLHttpRequest"),
         )
         return TimedResult(response.fetchingTime, Json.decodeFromString(AjaxResponse.serializer(), response.body()))
     }
@@ -713,7 +710,7 @@ public open class TibiaKtClient constructor(
             }
             currentPage++
         }
-        return Pair(timing, entries)
+        return timing to entries
     }
 
     /**
@@ -734,5 +731,8 @@ public open class TibiaKtClient constructor(
 
     internal companion object {
         internal val logger = KotlinLogging.logger { }
+
+        private val HttpResponse.fetchingTime get() = (responseTime.timestamp - requestTime.timestamp) / 1000.0
+        private val HttpResponse.fetchingTimeMillis get() = (fetchingTime * 1000).toInt()
     }
 }

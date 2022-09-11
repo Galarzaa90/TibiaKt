@@ -16,7 +16,6 @@
 
 package com.galarzaa.tibiakt.core.parsers
 
-
 import com.galarzaa.tibiakt.core.builders.KillStatisticsBuilder
 import com.galarzaa.tibiakt.core.builders.killStatistics
 import com.galarzaa.tibiakt.core.exceptions.ParsingException

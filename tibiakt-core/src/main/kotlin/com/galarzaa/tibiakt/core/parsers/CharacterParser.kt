@@ -36,7 +36,6 @@ import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 import org.jsoup.select.Elements
 
-
 public object CharacterParser : Parser<Character?> {
     private val deletedRegexp = Regex("""([^,]+), will be deleted at (.*)""")
     private val titlesRegexp = Regex("""(.*)\((\d+) titles? unlocked\)""")
@@ -83,15 +82,15 @@ public object CharacterParser : Parser<Character?> {
                 "achievement_points" -> achievementPoints = value.toInt()
                 "world" -> world = value
                 "residence" -> residence = value
-                "last_login" -> {
-                    if (!value.contains("never logged", true)) {
-                        lastLogin = parseTibiaDateTime(value)
-                    }
+                "last_login" -> if (!value.contains("never logged", true)) {
+                    lastLogin = parseTibiaDateTime(value)
                 }
+
                 "position" -> position = value
                 "comment" -> comment = value
                 "account_status" -> accountStatus =
                     StringEnum.fromValue(value) ?: throw ParsingException("Unknown account status: $value")
+
                 "married_to" -> marriedTo = value
                 "house" -> parseHouseColumn(columns[1])
                 "guild_membership" -> parseGuildColumn(columns[1])
@@ -167,15 +166,12 @@ public object CharacterParser : Parser<Character?> {
             val columns = row.select("td")
             var (field, value) = columns.map { it.wholeText().clean() }
             field = field.replace(" ", "_").remove(":").lowercase()
-            when (field) {
-                "position" -> {
-                    if (value.contains("tutor", true)) {
-                        valueMap["stars"] = columns[1].select("img").size.toString()
-                    }
-                    valueMap[field] = value
+            if (field == "position") {
+                if (value.contains("tutor", true)) {
+                    valueMap["stars"] = columns[1].select("img").size.toString()
                 }
-                else -> valueMap[field] = value
-            }
+                valueMap[field] = value
+            } else valueMap[field] = value
         }
         accountInformation(created = parseTibiaDateTime(valueMap["created"] ?: return),
             loyaltyTitle = valueMap["loyalty_title"],

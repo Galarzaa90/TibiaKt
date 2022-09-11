@@ -20,7 +20,6 @@ import com.galarzaa.tibiakt.core.models.forums.BoardEntry
 import com.galarzaa.tibiakt.core.models.forums.ForumSection
 import com.galarzaa.tibiakt.core.models.forums.LastPost
 
-
 public inline fun forumsSectionBuilder(block: ForumsSectionBuilder.() -> Unit): ForumsSectionBuilder =
     ForumsSectionBuilder().apply(block)
 

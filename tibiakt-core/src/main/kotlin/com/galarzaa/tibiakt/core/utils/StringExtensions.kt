@@ -1,3 +1,19 @@
+/*
+ * Copyright © 2022 Allan Galarza
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.galarzaa.tibiakt.core.utils
 
 /**
@@ -16,16 +32,12 @@ public fun String?.splitList(separator: String = ",", lastSeparator: String = " 
 /**
  * Remove an arbitrary string from a string, as many times as it is found.
  */
-public fun String.remove(value: String, ignoreCase: Boolean = false): String {
-    return replace(value, "", ignoreCase)
-}
+public fun String.remove(value: String, ignoreCase: Boolean = false): String = replace(value, "", ignoreCase)
 
 /**
  * Clean the string of non-breaking spaces and trims whitespace.
  */
-public fun String.clean(): String {
-    return replace("\u00A0", " ").replace("&#xa0;", " ").trim()
-}
+public fun String.clean(): String = replace("\u00A0", " ").replace("&#xa0;", " ").trim()
 
 /**
  * Parse a string into an integer, removing any thousand separators.
@@ -52,6 +64,5 @@ public fun String?.nullIfBlank(): String? = takeIf { !it.isNullOrBlank() }
 /**
  *  Parses strings with numbers using "k" as a thousand suffix
  */
-public fun String.parseThousandSuffix(): Int {
-    return remove("k", true).parseInteger() * (count { it == 'k' || it == 'K' } * 1000)
-}
+public fun String.parseThousandSuffix(): Int =
+    remove("k", true).parseInteger() * (count { it == 'k' || it == 'K' } * 1000)

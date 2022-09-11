@@ -34,7 +34,7 @@ class CharacterBazaarParserTests : StringSpec({
         bazaar.resultsCount shouldBe 3155
         bazaar.entries.first().run {
             name shouldBe "White Kalashnikov"
-            auctionId shouldBe 663323
+            auctionId shouldBe 663_323
             level shouldBe 528
             world shouldBe "Pacembra"
             bid shouldBe 2_888
@@ -58,7 +58,7 @@ class CharacterBazaarParserTests : StringSpec({
         bazaar.resultsCount shouldBe 125
         bazaar.entries.first().run {
             name shouldBe "Healing ohara"
-            auctionId shouldBe 647142
+            auctionId shouldBe 647_142
             level shouldBe 393
             world shouldBe "Antica"
             bid shouldBe 3700

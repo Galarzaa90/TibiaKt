@@ -40,7 +40,7 @@ class NewsParserTests : StringSpec({
         news!!.title shouldBe "Memories from 2020"
         news.category shouldBe NewsCategory.COMMUNITY
         news.date shouldBe LocalDate.of(2021, 2, 4)
-        news.threadId shouldBe 4846119
+        news.threadId shouldBe 4_846_119
         news.content shouldNotBe null
     }
 
@@ -50,7 +50,7 @@ class NewsParserTests : StringSpec({
         news!!.title shouldBe "Sneak Peek: Tibia Observer"
         news.category shouldBe NewsCategory.DEVELOPMENT
         news.date shouldBe LocalDate.of(2021, 9, 22)
-        news.threadId shouldBe 4889730
+        news.threadId shouldBe 4_889_730
         news.content shouldNotBe null
     }
 

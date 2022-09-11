@@ -27,7 +27,7 @@ class HouseParserTests : StringSpec({
     "Rented house"{
         val house = HouseParser.fromContent(getResource("houses/houseRented.txt"))
         house shouldNotBe null
-        house!!.houseId shouldBe 40501
+        house!!.houseId shouldBe 40_501
         house.name shouldBe "Coastwood 1"
         house.size shouldBe 16
         house.beds shouldBe 2
@@ -41,7 +41,7 @@ class HouseParserTests : StringSpec({
     "Guildhall on auction with bids"{
         val house = HouseParser.fromContent(getResource("houses/houseAuctionedBidsGuildhall.txt"))
         house shouldNotBe null
-        house!!.houseId shouldBe 20002
+        house!!.houseId shouldBe 20_002
         house.name shouldBe "House of Recreation"
         house.size shouldBe 401
         house.beds shouldBe 16
@@ -58,7 +58,7 @@ class HouseParserTests : StringSpec({
     "House set to be transferred but not accepted"{
         val house = HouseParser.fromContent(getResource("houses/houseTransferNotAccepted.txt"))
         house shouldNotBe null
-        house!!.houseId shouldBe 59048
+        house!!.houseId shouldBe 59_048
         house.name shouldBe "Unklath II b"
         house.size shouldBe 17
         house.beds shouldBe 1
@@ -77,7 +77,7 @@ class HouseParserTests : StringSpec({
     "House set to be transferred, and accepted"{
         val house = HouseParser.fromContent(getResource("houses/houseTransferAccepted.txt"))
         house shouldNotBe null
-        house!!.houseId shouldBe 37016
+        house!!.houseId shouldBe 37_016
         house.name shouldBe "Radiant Plaza 4"
         house.size shouldBe 186
         house.beds shouldBe 3

@@ -215,7 +215,7 @@ public object AuctionParser : Parser<Auction?> {
         val field =
             row.selectFirst("span")?.cleanText()?.remove(":") ?: throw ParsingException("could not find field's span")
         val value = row.selectFirst("div")?.cleanText() ?: throw ParsingException("could not find value's div")
-        return Pair(field, value)
+        return field to value
     }
 
     private fun AuctionBuilder.AuctionDetailsBuilder.parseGeneralTable(table: Element) {

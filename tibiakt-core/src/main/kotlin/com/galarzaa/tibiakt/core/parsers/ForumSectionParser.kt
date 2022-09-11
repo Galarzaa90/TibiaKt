@@ -30,7 +30,6 @@ import java.net.URL
 import java.net.URLDecoder
 import java.nio.charset.StandardCharsets
 
-
 public object ForumSectionParser : Parser<ForumSection> {
     override fun fromContent(content: String): ForumSection {
         val boxContent = boxContent(content)

@@ -74,17 +74,12 @@ public class EventsScheduleBuilder : TibiaKtBuilder<EventsSchedule> {
             endDate
         )
 
-        override fun equals(other: Any?): Boolean {
-            return other is EventEntryBuilder && other.title == title && other.description == description
-        }
+        override fun equals(other: Any?): Boolean =
+            other is EventEntryBuilder && other.title == title && other.description == description
 
-        override fun hashCode(): Int {
-            return 31 * (title?.hashCode() ?: 0) + (description?.hashCode() ?: 0)
-        }
+        override fun hashCode(): Int = 31 * (title?.hashCode() ?: 0) + (description?.hashCode() ?: 0)
 
-        override fun toString(): String {
-            return title ?: "<undefined title>"
-        }
+        override fun toString(): String = title ?: "<undefined title>"
 
 
     }
