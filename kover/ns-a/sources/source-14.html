@@ -68,26 +68,25 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">24</i>&nbsp;import kotlinx.serialization.Serializable
 <i class="no-highlight">25</i>&nbsp;import kotlinx.serialization.UseSerializers
 <i class="no-highlight">26</i>&nbsp;
-<i class="no-highlight">27</i>&nbsp;
-<i class="no-highlight">28</i>&nbsp;public const val DEFAULT_THREAD_AGE: Int = 30
-<i class="no-highlight">29</i>&nbsp;
-<i class="no-highlight">30</i>&nbsp;@Serializable
-<i class="no-highlight">31</i>&nbsp;public data class ForumBoard(
-<i class="no-highlight">32</i>&nbsp;    val name: String,
-<i class="no-highlight">33</i>&nbsp;    override val boardId: Int,
-<i class="no-highlight">34</i>&nbsp;    val sectionId: Int,
-<i class="no-highlight">35</i>&nbsp;    val section: String,
-<i class="no-highlight">36</i>&nbsp;    val threadAge: Int,
-<i class="no-highlight">37</i>&nbsp;    val announcements: List&lt;AnnouncementEntry&gt;,
-<i class="no-highlight">38</i>&nbsp;    override val currentPage: Int,
-<i class="no-highlight">39</i>&nbsp;    override val totalPages: Int,
-<i class="no-highlight">40</i>&nbsp;    override val resultsCount: Int,
-<i class="no-highlight">41</i>&nbsp;    override val entries: List&lt;ThreadEntry&gt;,
-<i class="no-highlight">42</i>&nbsp;) : PaginatedWithUrl&lt;ThreadEntry&gt;, BaseForumBoard {
-<i class="no-highlight">43</i>&nbsp;
-<i class="no-highlight">44</i>&nbsp;    override val url: String get() = getForumBoardUrl(boardId, currentPage, threadAge)
-<i class="no-highlight">45</i>&nbsp;    override fun getPageUrl(page: Int): String = getForumBoardUrl(boardId, page, threadAge)
-<i class="no-highlight">46</i>&nbsp;}
+<i class="no-highlight">27</i>&nbsp;public const val DEFAULT_THREAD_AGE: Int = 30
+<i class="no-highlight">28</i>&nbsp;
+<i class="no-highlight">29</i>&nbsp;@Serializable
+<i class="no-highlight">30</i>&nbsp;public data class ForumBoard(
+<i class="no-highlight">31</i>&nbsp;    val name: String,
+<i class="no-highlight">32</i>&nbsp;    override val boardId: Int,
+<i class="no-highlight">33</i>&nbsp;    val sectionId: Int,
+<i class="no-highlight">34</i>&nbsp;    val section: String,
+<i class="no-highlight">35</i>&nbsp;    val threadAge: Int,
+<i class="no-highlight">36</i>&nbsp;    val announcements: List&lt;AnnouncementEntry&gt;,
+<i class="no-highlight">37</i>&nbsp;    override val currentPage: Int,
+<i class="no-highlight">38</i>&nbsp;    override val totalPages: Int,
+<i class="no-highlight">39</i>&nbsp;    override val resultsCount: Int,
+<i class="no-highlight">40</i>&nbsp;    override val entries: List&lt;ThreadEntry&gt;,
+<i class="no-highlight">41</i>&nbsp;) : PaginatedWithUrl&lt;ThreadEntry&gt;, BaseForumBoard {
+<i class="no-highlight">42</i>&nbsp;
+<i class="no-highlight">43</i>&nbsp;    override val url: String get() = getForumBoardUrl(boardId, currentPage, threadAge)
+<i class="no-highlight">44</i>&nbsp;    override fun getPageUrl(page: Int): String = getForumBoardUrl(boardId, page, threadAge)
+<i class="no-highlight">45</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -114,7 +113,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-11 06:14</div>
+    <div style="float:right;">generated on 2022-09-11 06:50</div>
 </div>
 </body>
 </html>

@@ -74,7 +74,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     83.7%
   </span>
   <span class="absValue">
-    (1965/2347)
+    (1963/2345)
   </span>
 </td>
 </tr>
@@ -200,7 +200,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     84.5%
   </span>
   <span class="absValue">
-    (2275/2693)
+    (2273/2691)
   </span>
 </td>
 </tr>
@@ -428,7 +428,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc"><i class="no-highlight">215</i>&nbsp;        val field =</b>
 <b class="pc"><i class="no-highlight">216</i>&nbsp;            row.selectFirst(&quot;span&quot;)?.cleanText()?.remove(&quot;:&quot;) ?: throw ParsingException(&quot;could not find field&#39;s span&quot;)</b>
 <b class="pc"><i class="no-highlight">217</i>&nbsp;        val value = row.selectFirst(&quot;div&quot;)?.cleanText() ?: throw ParsingException(&quot;could not find value&#39;s div&quot;)</b>
-<b class="fc"><i class="no-highlight">218</i>&nbsp;        return Pair(field, value)</b>
+<b class="fc"><i class="no-highlight">218</i>&nbsp;        return field to value</b>
 <i class="no-highlight">219</i>&nbsp;    }
 <i class="no-highlight">220</i>&nbsp;
 <i class="no-highlight">221</i>&nbsp;    private fun AuctionBuilder.AuctionDetailsBuilder.parseGeneralTable(table: Element) {
@@ -657,7 +657,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-11 06:14</div>
+    <div style="float:right;">generated on 2022-09-11 06:50</div>
 </div>
 </body>
 </html>

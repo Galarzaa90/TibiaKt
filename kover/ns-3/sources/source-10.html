@@ -166,21 +166,16 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">74</i>&nbsp;            endDate
 <i class="no-highlight">75</i>&nbsp;        )
 <i class="no-highlight">76</i>&nbsp;
-<i class="no-highlight">77</i>&nbsp;        override fun equals(other: Any?): Boolean {
-<i class="no-highlight">78</i>&nbsp;            return other is EventEntryBuilder &amp;&amp; other.title == title &amp;&amp; other.description == description
-<i class="no-highlight">79</i>&nbsp;        }
-<i class="no-highlight">80</i>&nbsp;
-<i class="no-highlight">81</i>&nbsp;        override fun hashCode(): Int {
-<i class="no-highlight">82</i>&nbsp;            return 31 * (title?.hashCode() ?: 0) + (description?.hashCode() ?: 0)
-<i class="no-highlight">83</i>&nbsp;        }
+<i class="no-highlight">77</i>&nbsp;        override fun equals(other: Any?): Boolean =
+<i class="no-highlight">78</i>&nbsp;            other is EventEntryBuilder &amp;&amp; other.title == title &amp;&amp; other.description == description
+<i class="no-highlight">79</i>&nbsp;
+<i class="no-highlight">80</i>&nbsp;        override fun hashCode(): Int = 31 * (title?.hashCode() ?: 0) + (description?.hashCode() ?: 0)
+<i class="no-highlight">81</i>&nbsp;
+<i class="no-highlight">82</i>&nbsp;        override fun toString(): String = title ?: &quot;&lt;undefined title&gt;&quot;
+<i class="no-highlight">83</i>&nbsp;
 <i class="no-highlight">84</i>&nbsp;
-<i class="no-highlight">85</i>&nbsp;        override fun toString(): String {
-<i class="no-highlight">86</i>&nbsp;            return title ?: &quot;&lt;undefined title&gt;&quot;
-<i class="no-highlight">87</i>&nbsp;        }
-<i class="no-highlight">88</i>&nbsp;
-<i class="no-highlight">89</i>&nbsp;
-<i class="no-highlight">90</i>&nbsp;    }
-<i class="no-highlight">91</i>&nbsp;}
+<i class="no-highlight">85</i>&nbsp;    }
+<i class="no-highlight">86</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -207,7 +202,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-11 06:14</div>
+    <div style="float:right;">generated on 2022-09-11 06:50</div>
 </div>
 </body>
 </html>

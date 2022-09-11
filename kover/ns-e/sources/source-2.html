@@ -205,37 +205,36 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">20</i>&nbsp;import kotlinx.serialization.SerialName
 <i class="no-highlight">21</i>&nbsp;import kotlinx.serialization.Serializable
 <i class="no-highlight">22</i>&nbsp;
-<i class="no-highlight">23</i>&nbsp;
-<i class="no-highlight">24</i>&nbsp;/**
-<i class="no-highlight">25</i>&nbsp; * Base class for Leaderboards entries.
-<i class="no-highlight">26</i>&nbsp; *
-<i class="no-highlight">27</i>&nbsp; * @property rank The rank of the character.
-<i class="no-highlight">28</i>&nbsp; * @property dromeLevel The drome level of the character.
-<i class="no-highlight">29</i>&nbsp; */
-<i class="no-highlight">30</i>&nbsp;@Serializable
-<i class="no-highlight">31</i>&nbsp;public sealed class BaseLeaderboardsEntry {
-<i class="no-highlight">32</i>&nbsp;    public abstract val rank: Int
-<i class="no-highlight">33</i>&nbsp;    public abstract val dromeLevel: Int
-<i class="no-highlight">34</i>&nbsp;}
-<i class="no-highlight">35</i>&nbsp;
-<i class="no-highlight">36</i>&nbsp;/**
-<i class="no-highlight">37</i>&nbsp; * An entry in the [LeaderboardsEntry].
-<i class="no-highlight">38</i>&nbsp; */
-<i class="no-highlight">39</i>&nbsp;@Serializable
-<i class="no-highlight">40</i>&nbsp;@SerialName(&quot;leaderboardsEntry&quot;)
-<i class="no-highlight">41</i>&nbsp;public data class LeaderboardsEntry(
-<i class="no-highlight">42</i>&nbsp;    override val rank: Int,
-<i class="no-highlight">43</i>&nbsp;    override val name: String,
-<i class="no-highlight">44</i>&nbsp;    override val dromeLevel: Int,
-<i class="no-highlight">45</i>&nbsp;) : BaseLeaderboardsEntry(), BaseCharacter
-<i class="no-highlight">46</i>&nbsp;
-<i class="no-highlight">47</i>&nbsp;/** A leaderboard entry belonging to a deleted character */
-<b class="nc"><i class="no-highlight">48</i>&nbsp;@Serializable</b>
-<i class="no-highlight">49</i>&nbsp;@SerialName(&quot;deletedLeaderboardsEntry&quot;)
-<i class="no-highlight">50</i>&nbsp;public data class DeletedLeaderboardsEntry(
-<b class="nc"><i class="no-highlight">51</i>&nbsp;    override val rank: Int,</b>
-<b class="nc"><i class="no-highlight">52</i>&nbsp;    override val dromeLevel: Int,</b>
-<b class="nc"><i class="no-highlight">53</i>&nbsp;) : BaseLeaderboardsEntry()</b>
+<i class="no-highlight">23</i>&nbsp;/**
+<i class="no-highlight">24</i>&nbsp; * Base class for Leaderboards entries.
+<i class="no-highlight">25</i>&nbsp; *
+<i class="no-highlight">26</i>&nbsp; * @property rank The rank of the character.
+<i class="no-highlight">27</i>&nbsp; * @property dromeLevel The drome level of the character.
+<i class="no-highlight">28</i>&nbsp; */
+<i class="no-highlight">29</i>&nbsp;@Serializable
+<i class="no-highlight">30</i>&nbsp;public sealed class BaseLeaderboardsEntry {
+<i class="no-highlight">31</i>&nbsp;    public abstract val rank: Int
+<i class="no-highlight">32</i>&nbsp;    public abstract val dromeLevel: Int
+<i class="no-highlight">33</i>&nbsp;}
+<i class="no-highlight">34</i>&nbsp;
+<i class="no-highlight">35</i>&nbsp;/**
+<i class="no-highlight">36</i>&nbsp; * An entry in the [LeaderboardsEntry].
+<i class="no-highlight">37</i>&nbsp; */
+<i class="no-highlight">38</i>&nbsp;@Serializable
+<i class="no-highlight">39</i>&nbsp;@SerialName(&quot;leaderboardsEntry&quot;)
+<i class="no-highlight">40</i>&nbsp;public data class LeaderboardsEntry(
+<i class="no-highlight">41</i>&nbsp;    override val rank: Int,
+<i class="no-highlight">42</i>&nbsp;    override val name: String,
+<i class="no-highlight">43</i>&nbsp;    override val dromeLevel: Int,
+<i class="no-highlight">44</i>&nbsp;) : BaseLeaderboardsEntry(), BaseCharacter
+<i class="no-highlight">45</i>&nbsp;
+<i class="no-highlight">46</i>&nbsp;/** A leaderboard entry belonging to a deleted character */
+<b class="nc"><i class="no-highlight">47</i>&nbsp;@Serializable</b>
+<i class="no-highlight">48</i>&nbsp;@SerialName(&quot;deletedLeaderboardsEntry&quot;)
+<i class="no-highlight">49</i>&nbsp;public data class DeletedLeaderboardsEntry(
+<b class="nc"><i class="no-highlight">50</i>&nbsp;    override val rank: Int,</b>
+<b class="nc"><i class="no-highlight">51</i>&nbsp;    override val dromeLevel: Int,</b>
+<b class="nc"><i class="no-highlight">52</i>&nbsp;) : BaseLeaderboardsEntry()</b>
 </div>
 </pre>
 </div>
@@ -262,7 +261,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-11 06:14</div>
+    <div style="float:right;">generated on 2022-09-11 06:50</div>
 </div>
 </body>
 </html>

@@ -170,44 +170,43 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">20</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.ForumSection
 <i class="no-highlight">21</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.LastPost
 <i class="no-highlight">22</i>&nbsp;
-<i class="no-highlight">23</i>&nbsp;
-<i class="no-highlight">24</i>&nbsp;public inline fun forumsSectionBuilder(block: ForumsSectionBuilder.() -&gt; Unit): ForumsSectionBuilder =
-<i class="no-highlight">25</i>&nbsp;    ForumsSectionBuilder().apply(block)
-<i class="no-highlight">26</i>&nbsp;
-<i class="no-highlight">27</i>&nbsp;public inline fun forumsSection(block: ForumsSectionBuilder.() -&gt; Unit): ForumSection =
-<i class="no-highlight">28</i>&nbsp;    forumsSectionBuilder(block).build()
-<i class="no-highlight">29</i>&nbsp;
-<b class="fc"><i class="no-highlight">30</i>&nbsp;public class ForumsSectionBuilder : TibiaKtBuilder&lt;ForumSection&gt; {</b>
-<b class="fc"><i class="no-highlight">31</i>&nbsp;    public var sectionId: Int = 0</b>
-<b class="fc"><i class="no-highlight">32</i>&nbsp;    public val entries: MutableList&lt;BoardEntry&gt; = mutableListOf()</b>
-<i class="no-highlight">33</i>&nbsp;
-<i class="no-highlight">34</i>&nbsp;    public fun addEntry(block: BoardEntryBuilder.() -&gt; Unit) {
-<b class="fc"><i class="no-highlight">35</i>&nbsp;        entries.add(BoardEntryBuilder().apply(block).build())</b>
-<i class="no-highlight">36</i>&nbsp;    }
-<i class="no-highlight">37</i>&nbsp;
-<b class="fc"><i class="no-highlight">38</i>&nbsp;    override fun build(): ForumSection = ForumSection(</b>
-<b class="fc"><i class="no-highlight">39</i>&nbsp;        sectionId = sectionId,</b>
-<b class="fc"><i class="no-highlight">40</i>&nbsp;        entries = entries</b>
-<i class="no-highlight">41</i>&nbsp;    )
-<i class="no-highlight">42</i>&nbsp;
-<b class="fc"><i class="no-highlight">43</i>&nbsp;    public class BoardEntryBuilder : TibiaKtBuilder&lt;BoardEntry&gt; {</b>
-<b class="fc"><i class="no-highlight">44</i>&nbsp;        public var name: String? = null</b>
-<b class="fc"><i class="no-highlight">45</i>&nbsp;        public var boardId: Int = 0</b>
-<b class="fc"><i class="no-highlight">46</i>&nbsp;        public var description: String? = null</b>
-<b class="fc"><i class="no-highlight">47</i>&nbsp;        public var posts: Int = 0</b>
-<b class="fc"><i class="no-highlight">48</i>&nbsp;        public var threads: Int = 0</b>
-<b class="fc"><i class="no-highlight">49</i>&nbsp;        public var lastPost: LastPost? = null</b>
-<i class="no-highlight">50</i>&nbsp;
-<b class="fc"><i class="no-highlight">51</i>&nbsp;        override fun build(): BoardEntry = BoardEntry(</b>
-<b class="pc"><i class="no-highlight">52</i>&nbsp;            name = name ?: throw IllegalArgumentException(&quot;name is required&quot;),</b>
-<b class="fc"><i class="no-highlight">53</i>&nbsp;            boardId = boardId,</b>
-<b class="pc"><i class="no-highlight">54</i>&nbsp;            description = description ?: throw IllegalArgumentException(&quot;description is required&quot;),</b>
-<b class="fc"><i class="no-highlight">55</i>&nbsp;            posts = posts,</b>
-<b class="fc"><i class="no-highlight">56</i>&nbsp;            threads = threads,</b>
-<b class="fc"><i class="no-highlight">57</i>&nbsp;            lastPost = lastPost</b>
-<i class="no-highlight">58</i>&nbsp;        )
-<i class="no-highlight">59</i>&nbsp;    }
-<i class="no-highlight">60</i>&nbsp;}
+<i class="no-highlight">23</i>&nbsp;public inline fun forumsSectionBuilder(block: ForumsSectionBuilder.() -&gt; Unit): ForumsSectionBuilder =
+<i class="no-highlight">24</i>&nbsp;    ForumsSectionBuilder().apply(block)
+<i class="no-highlight">25</i>&nbsp;
+<i class="no-highlight">26</i>&nbsp;public inline fun forumsSection(block: ForumsSectionBuilder.() -&gt; Unit): ForumSection =
+<i class="no-highlight">27</i>&nbsp;    forumsSectionBuilder(block).build()
+<i class="no-highlight">28</i>&nbsp;
+<b class="fc"><i class="no-highlight">29</i>&nbsp;public class ForumsSectionBuilder : TibiaKtBuilder&lt;ForumSection&gt; {</b>
+<b class="fc"><i class="no-highlight">30</i>&nbsp;    public var sectionId: Int = 0</b>
+<b class="fc"><i class="no-highlight">31</i>&nbsp;    public val entries: MutableList&lt;BoardEntry&gt; = mutableListOf()</b>
+<i class="no-highlight">32</i>&nbsp;
+<i class="no-highlight">33</i>&nbsp;    public fun addEntry(block: BoardEntryBuilder.() -&gt; Unit) {
+<b class="fc"><i class="no-highlight">34</i>&nbsp;        entries.add(BoardEntryBuilder().apply(block).build())</b>
+<i class="no-highlight">35</i>&nbsp;    }
+<i class="no-highlight">36</i>&nbsp;
+<b class="fc"><i class="no-highlight">37</i>&nbsp;    override fun build(): ForumSection = ForumSection(</b>
+<b class="fc"><i class="no-highlight">38</i>&nbsp;        sectionId = sectionId,</b>
+<b class="fc"><i class="no-highlight">39</i>&nbsp;        entries = entries</b>
+<i class="no-highlight">40</i>&nbsp;    )
+<i class="no-highlight">41</i>&nbsp;
+<b class="fc"><i class="no-highlight">42</i>&nbsp;    public class BoardEntryBuilder : TibiaKtBuilder&lt;BoardEntry&gt; {</b>
+<b class="fc"><i class="no-highlight">43</i>&nbsp;        public var name: String? = null</b>
+<b class="fc"><i class="no-highlight">44</i>&nbsp;        public var boardId: Int = 0</b>
+<b class="fc"><i class="no-highlight">45</i>&nbsp;        public var description: String? = null</b>
+<b class="fc"><i class="no-highlight">46</i>&nbsp;        public var posts: Int = 0</b>
+<b class="fc"><i class="no-highlight">47</i>&nbsp;        public var threads: Int = 0</b>
+<b class="fc"><i class="no-highlight">48</i>&nbsp;        public var lastPost: LastPost? = null</b>
+<i class="no-highlight">49</i>&nbsp;
+<b class="fc"><i class="no-highlight">50</i>&nbsp;        override fun build(): BoardEntry = BoardEntry(</b>
+<b class="pc"><i class="no-highlight">51</i>&nbsp;            name = name ?: throw IllegalArgumentException(&quot;name is required&quot;),</b>
+<b class="fc"><i class="no-highlight">52</i>&nbsp;            boardId = boardId,</b>
+<b class="pc"><i class="no-highlight">53</i>&nbsp;            description = description ?: throw IllegalArgumentException(&quot;description is required&quot;),</b>
+<b class="fc"><i class="no-highlight">54</i>&nbsp;            posts = posts,</b>
+<b class="fc"><i class="no-highlight">55</i>&nbsp;            threads = threads,</b>
+<b class="fc"><i class="no-highlight">56</i>&nbsp;            lastPost = lastPost</b>
+<i class="no-highlight">57</i>&nbsp;        )
+<i class="no-highlight">58</i>&nbsp;    }
+<i class="no-highlight">59</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -234,7 +233,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-11 06:14</div>
+    <div style="float:right;">generated on 2022-09-11 06:50</div>
 </div>
 </body>
 </html>

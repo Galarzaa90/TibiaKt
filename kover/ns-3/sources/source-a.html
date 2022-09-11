@@ -114,39 +114,38 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">22</i>&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.CharacterBazaar
 <i class="no-highlight">23</i>&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
 <i class="no-highlight">24</i>&nbsp;
-<i class="no-highlight">25</i>&nbsp;
-<i class="no-highlight">26</i>&nbsp;@BuilderDsl
-<i class="no-highlight">27</i>&nbsp;public inline fun characterBazaar(block: CharacterBazaarBuilder.() -&gt; Unit): CharacterBazaar =
-<b class="fc"><i class="no-highlight">28</i>&nbsp;    characterBazaarBuilder(block).build()</b>
-<i class="no-highlight">29</i>&nbsp;
-<i class="no-highlight">30</i>&nbsp;@BuilderDsl
-<i class="no-highlight">31</i>&nbsp;public inline fun characterBazaarBuilder(block: CharacterBazaarBuilder.() -&gt; Unit): CharacterBazaarBuilder =
-<b class="fc"><i class="no-highlight">32</i>&nbsp;    CharacterBazaarBuilder().apply(block)</b>
-<i class="no-highlight">33</i>&nbsp;
-<i class="no-highlight">34</i>&nbsp;public class CharacterBazaarBuilder : TibiaKtBuilder&lt;CharacterBazaar&gt; {
-<i class="no-highlight">35</i>&nbsp;    public var type: BazaarType = BazaarType.CURRENT
-<i class="no-highlight">36</i>&nbsp;    public var currentPage: Int = 0
-<i class="no-highlight">37</i>&nbsp;    public var totalPages: Int = 1
-<i class="no-highlight">38</i>&nbsp;    public var resultsCount: Int = 0
-<i class="no-highlight">39</i>&nbsp;    public var filters: BazaarFilters = BazaarFilters()
-<i class="no-highlight">40</i>&nbsp;    private val entries: MutableList&lt;Auction&gt; = mutableListOf()
+<i class="no-highlight">25</i>&nbsp;@BuilderDsl
+<i class="no-highlight">26</i>&nbsp;public inline fun characterBazaar(block: CharacterBazaarBuilder.() -&gt; Unit): CharacterBazaar =
+<b class="fc"><i class="no-highlight">27</i>&nbsp;    characterBazaarBuilder(block).build()</b>
+<i class="no-highlight">28</i>&nbsp;
+<i class="no-highlight">29</i>&nbsp;@BuilderDsl
+<i class="no-highlight">30</i>&nbsp;public inline fun characterBazaarBuilder(block: CharacterBazaarBuilder.() -&gt; Unit): CharacterBazaarBuilder =
+<b class="fc"><i class="no-highlight">31</i>&nbsp;    CharacterBazaarBuilder().apply(block)</b>
+<i class="no-highlight">32</i>&nbsp;
+<i class="no-highlight">33</i>&nbsp;public class CharacterBazaarBuilder : TibiaKtBuilder&lt;CharacterBazaar&gt; {
+<i class="no-highlight">34</i>&nbsp;    public var type: BazaarType = BazaarType.CURRENT
+<i class="no-highlight">35</i>&nbsp;    public var currentPage: Int = 0
+<i class="no-highlight">36</i>&nbsp;    public var totalPages: Int = 1
+<i class="no-highlight">37</i>&nbsp;    public var resultsCount: Int = 0
+<i class="no-highlight">38</i>&nbsp;    public var filters: BazaarFilters = BazaarFilters()
+<i class="no-highlight">39</i>&nbsp;    private val entries: MutableList&lt;Auction&gt; = mutableListOf()
+<i class="no-highlight">40</i>&nbsp;
 <i class="no-highlight">41</i>&nbsp;
-<i class="no-highlight">42</i>&nbsp;
-<i class="no-highlight">43</i>&nbsp;    public fun addEntry(entry: Auction): CharacterBazaarBuilder = apply { entries.add(entry) }
-<i class="no-highlight">44</i>&nbsp;
-<i class="no-highlight">45</i>&nbsp;    @BuilderDsl
-<i class="no-highlight">46</i>&nbsp;    public fun auction(block: AuctionBuilder.() -&gt; Unit): CharacterBazaarBuilder =
-<i class="no-highlight">47</i>&nbsp;        apply { entries.add(AuctionBuilder().apply(block).build()) }
-<i class="no-highlight">48</i>&nbsp;
-<i class="no-highlight">49</i>&nbsp;    override fun build(): CharacterBazaar = CharacterBazaar(
-<i class="no-highlight">50</i>&nbsp;        type = type,
-<i class="no-highlight">51</i>&nbsp;        filters = filters,
-<i class="no-highlight">52</i>&nbsp;        currentPage = currentPage,
-<i class="no-highlight">53</i>&nbsp;        totalPages = totalPages,
-<i class="no-highlight">54</i>&nbsp;        resultsCount = resultsCount,
-<i class="no-highlight">55</i>&nbsp;        entries = entries,
-<i class="no-highlight">56</i>&nbsp;    )
-<i class="no-highlight">57</i>&nbsp;}
+<i class="no-highlight">42</i>&nbsp;    public fun addEntry(entry: Auction): CharacterBazaarBuilder = apply { entries.add(entry) }
+<i class="no-highlight">43</i>&nbsp;
+<i class="no-highlight">44</i>&nbsp;    @BuilderDsl
+<i class="no-highlight">45</i>&nbsp;    public fun auction(block: AuctionBuilder.() -&gt; Unit): CharacterBazaarBuilder =
+<i class="no-highlight">46</i>&nbsp;        apply { entries.add(AuctionBuilder().apply(block).build()) }
+<i class="no-highlight">47</i>&nbsp;
+<i class="no-highlight">48</i>&nbsp;    override fun build(): CharacterBazaar = CharacterBazaar(
+<i class="no-highlight">49</i>&nbsp;        type = type,
+<i class="no-highlight">50</i>&nbsp;        filters = filters,
+<i class="no-highlight">51</i>&nbsp;        currentPage = currentPage,
+<i class="no-highlight">52</i>&nbsp;        totalPages = totalPages,
+<i class="no-highlight">53</i>&nbsp;        resultsCount = resultsCount,
+<i class="no-highlight">54</i>&nbsp;        entries = entries,
+<i class="no-highlight">55</i>&nbsp;    )
+<i class="no-highlight">56</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -173,7 +172,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-11 06:14</div>
+    <div style="float:right;">generated on 2022-09-11 06:50</div>
 </div>
 </body>
 </html>
