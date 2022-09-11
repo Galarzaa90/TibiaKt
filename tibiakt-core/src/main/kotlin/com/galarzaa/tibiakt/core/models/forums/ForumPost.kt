@@ -20,7 +20,7 @@ import kotlinx.serialization.UseSerializers
  * @property editedBy The name of the character that last edited the post. CipSoft members might edit posts.
  */
 @Serializable
-data class ForumPost(
+public data class ForumPost(
     val author: BaseForumAuthor,
     val emoticon: ForumEmoticon?,
     val title: String?,

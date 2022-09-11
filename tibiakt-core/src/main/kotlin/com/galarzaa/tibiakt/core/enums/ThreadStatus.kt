@@ -5,7 +5,7 @@ package com.galarzaa.tibiakt.core.enums
  *
  * Threads can have a combination of multiple status.
  */
-enum class ThreadStatus {
+public enum class ThreadStatus {
     /** Thread has more than 16 replies. */
     HOT,
 

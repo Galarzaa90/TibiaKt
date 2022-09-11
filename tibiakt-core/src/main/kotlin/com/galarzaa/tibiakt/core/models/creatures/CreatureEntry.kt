@@ -10,13 +10,12 @@ import kotlinx.serialization.Serializable
  * @property identifier Internal name for the creature's race. Used for links and images.
  */
 @Serializable
-data class CreatureEntry(
+public data class CreatureEntry(
     override val name: String,
     override val identifier: String,
 ) : BaseCreatureEntry {
     /**
      * The URL to the creature's page.
      */
-    val url get() = getCreatureUrl(identifier)
+    val url: String get() = getCreatureUrl(identifier)
 }
-

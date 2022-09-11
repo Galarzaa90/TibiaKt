@@ -80,9 +80,9 @@ internal fun parseAuthorTable(table: Element): BaseForumAuthor {
         val guildName = guildLinkInfo.title
         guildLink.remove()
         var rank = it.cleanText()
-        val title = titleRegex.find(rank)?.groupValues?.get(1)?.also { rank = rank.remove("($it)").trim() }
+        val guildTitle = titleRegex.find(rank)?.groupValues?.get(1)?.also { g -> rank = rank.remove("($g)").trim() }
         rank = rank.removeSuffix("of the").trim()
-        guildMembership = GuildMembershipWithTitle(guildName, rank, title)
+        guildMembership = GuildMembershipWithTitle(guildName, rank, guildTitle)
     }
     charInfo?.replaceBrs()
     if (charInfo?.cleanText()?.contains("Tournament - ") == true) {
@@ -92,7 +92,7 @@ internal fun parseAuthorTable(table: Element): BaseForumAuthor {
     val (_, world, vocation, level) = charInfoRegex.find(charInfo!!.wholeCleanText())?.groupValues
         ?: throw ParsingException("Could not find character info")
 
-    val (_, postsText) = authorPostsRegex.find(charInfo!!.wholeCleanText())!!.groupValues
+    val (_, postsText) = authorPostsRegex.find(charInfo.wholeCleanText())!!.groupValues
 
     return ForumAuthor(
         name = charLink.title,

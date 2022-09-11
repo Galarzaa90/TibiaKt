@@ -4,7 +4,7 @@ import com.galarzaa.tibiakt.core.enums.ThreadStatus
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ThreadEntry(
+public data class ThreadEntry(
     val title: String,
     val threadId: Int,
     val author: String,

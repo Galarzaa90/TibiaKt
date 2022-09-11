@@ -5,4 +5,4 @@ package com.galarzaa.tibiakt.client.exceptions
  *
  * When Tibia.com is under maintenance, all sections of the website redirect to maintenance.tibia.com.
  */
-open class SiteMaintenanceException(message: String?, cause: Throwable?) : NetworkException(message, cause)
+public open class SiteMaintenanceException(message: String?, cause: Throwable?) : NetworkException(message, cause)

@@ -20,7 +20,7 @@ import kotlin.time.Duration
 import kotlin.time.Duration.Companion.days
 import kotlin.time.Duration.Companion.hours
 
-object HousesSectionParser : Parser<HousesSection?> {
+public object HousesSectionParser : Parser<HousesSection?> {
     private val auctionInfoRegex = Regex("""\((?<bid>\d+) gold; (?<timeLeft>\w)+ (?<timeUnit>day|hour)s? left\)""")
 
     override fun fromContent(content: String): HousesSection? {

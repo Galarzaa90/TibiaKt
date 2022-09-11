@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 
 @Serializable
-data class ForumAnnouncement(
+public data class ForumAnnouncement(
     override val announcementId: Int,
     override val title: String,
     val board: String,

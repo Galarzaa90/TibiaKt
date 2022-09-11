@@ -17,7 +17,7 @@ import kotlinx.serialization.Serializable
  * @property swordFighting The current Sword Fighting level.
  */
 @Serializable
-data class AuctionSkills(
+public data class AuctionSkills(
     val axeFighting: Double,
     val clubFighting: Double,
     val distanceFighting: Double,

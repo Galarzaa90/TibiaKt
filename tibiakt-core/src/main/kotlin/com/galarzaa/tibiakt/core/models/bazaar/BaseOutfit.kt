@@ -8,12 +8,18 @@ import com.galarzaa.tibiakt.core.utils.getStaticFileUrl
  * @property outfitId The internal ID of the outfit.
  * @property addons The selected or unlocked addons.
  */
-interface BaseOutfit {
-    val outfitId: Int
-    val addons: Int
+public interface BaseOutfit {
+    public val outfitId: Int
+    public val addons: Int
 
     /**
      * The URL to the outfit's image.
      */
-    val imageUrl get() = getStaticFileUrl("images", "charactertrade", "outfits", "${outfitId}_$addons.gif")
+    public val imageUrl: String
+        get() = getStaticFileUrl(
+            "images",
+            "charactertrade",
+            "outfits",
+            "${outfitId}_$addons.gif"
+        )
 }

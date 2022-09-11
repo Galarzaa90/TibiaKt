@@ -22,4 +22,4 @@ package com.galarzaa.tibiakt.core.exceptions
  * Parsing might fail when the wrong [com.galarzaa.tibiakt.core.parsers.Parser] was used for a specific HTML content.
  * Alternatively, it might fail when Tibia.com changes its HTML structure.
  */
-open class ParsingException(message: String? = null, cause: Throwable? = null) : TibiaKtException(message, cause)
+public open class ParsingException(message: String? = null, cause: Throwable? = null) : TibiaKtException(message, cause)

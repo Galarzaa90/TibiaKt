@@ -19,11 +19,11 @@ import kotlinx.serialization.UseSerializers
  * @param T The type of the data returned.
  */
 @Serializable
-data class TibiaResponse<T>(
+public data class TibiaResponse<T>(
     val timestamp: Instant,
     val isCached: Boolean,
     val cacheAge: Int,
     val fetchingTime: Double,
     val parsingTime: Double,
-    val data: T
+    val data: T,
 )

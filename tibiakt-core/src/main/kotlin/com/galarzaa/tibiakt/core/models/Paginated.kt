@@ -8,10 +8,9 @@ package com.galarzaa.tibiakt.core.models
  * @property resultsCount The total number of [entries] across all pages.
  * @property entries The entries in this page.
  */
-interface Paginated<T> {
-    val currentPage: Int
-    val totalPages: Int
-    val resultsCount: Int
-    val entries: List<T>
+public interface Paginated<T> {
+    public val currentPage: Int
+    public val totalPages: Int
+    public val resultsCount: Int
+    public val entries: List<T>
 }
-

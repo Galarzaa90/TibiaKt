@@ -3,7 +3,7 @@ package com.galarzaa.tibiakt.core.enums
 /**
  * The possible ordering directions for auctions
  */
-enum class AuctionOrderDirection(override val value: Int) : IntEnum {
+public enum class AuctionOrderDirection(override val value: Int) : IntEnum {
     /**
      * Descending order
      */
@@ -14,7 +14,7 @@ enum class AuctionOrderDirection(override val value: Int) : IntEnum {
      */
     LOWEST_EARLIEST(1);
 
-    companion object {
-        const val queryParam = "order_direction"
+    public companion object {
+        public const val queryParam: String = "order_direction"
     }
 }

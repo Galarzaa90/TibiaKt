@@ -16,12 +16,12 @@ import kotlinx.serialization.Serializable
  * @property additionalValue Additional information displayed in some categories, such as Loyalty Title.
  */
 @Serializable
-data class HighscoresEntry(
+public data class HighscoresEntry(
     val rank: Int,
     override val name: String,
     override val level: Int,
     val world: String,
     val vocation: Vocation,
     val value: Long,
-    val additionalValue: String?
+    val additionalValue: String?,
 ) : BaseCharacter, CharacterLevel

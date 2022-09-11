@@ -33,7 +33,7 @@ import kotlinx.serialization.UseSerializers
  * @property details The details of the auction.
  */
 @Serializable
-data class Auction(
+public data class Auction(
     val name: String,
     val auctionId: Int,
     val level: Int,

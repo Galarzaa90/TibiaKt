@@ -11,9 +11,9 @@ import java.time.YearMonth
 /**
  * Serializer for [YearMonth] objects, using YYYY-MM format.
  */
-object YearMonthSerializer : KSerializer<YearMonth> {
+public object YearMonthSerializer : KSerializer<YearMonth> {
     override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("YearMonth", PrimitiveKind.STRING)
-    override fun serialize(encoder: Encoder, value: YearMonth) =
+    override fun serialize(encoder: Encoder, value: YearMonth): Unit =
         encoder.encodeString(value.toString())
 
     override fun deserialize(decoder: Decoder): YearMonth =

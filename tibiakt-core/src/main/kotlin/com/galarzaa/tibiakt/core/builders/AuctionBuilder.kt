@@ -1,3 +1,19 @@
+/*
+ * Copyright © 2022 Allan Galarza
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.galarzaa.tibiakt.core.builders
 
 import com.galarzaa.tibiakt.core.enums.AuctionStatus
@@ -22,189 +38,200 @@ import com.galarzaa.tibiakt.core.utils.BuilderDsl
 import kotlinx.datetime.Instant
 
 @BuilderDsl
-inline fun auction(block: AuctionBuilder.() -> Unit) = AuctionBuilder().apply(block).build()
+public inline fun auction(block: AuctionBuilder.() -> Unit): Auction = AuctionBuilder().apply(block).build()
 
 @BuilderDsl
-inline fun auctionBuilder(block: AuctionBuilder.() -> Unit) = AuctionBuilder().apply(block)
+public inline fun auctionBuilder(block: AuctionBuilder.() -> Unit): AuctionBuilder = AuctionBuilder().apply(block)
 
 @BuilderDsl
-class AuctionBuilder : TibiaKtBuilder<Auction>() {
-    lateinit var name: String
-    var auctionId: Int? = null
-    var level: Int? = null
-    lateinit var world: String
-    lateinit var vocation: Vocation
-    lateinit var sex: Sex
-    lateinit var outfit: OutfitImage
-    val displayedItems: MutableList<ItemEntry> = mutableListOf()
-    val salesArguments: MutableList<SalesArgument> = mutableListOf()
-    lateinit var auctionStart: Instant
-    lateinit var auctionEnd: Instant
-    var bid: Int = 0
-    lateinit var bidType: BidType
-    lateinit var status: AuctionStatus
-    var details: AuctionDetails? = null
+public class AuctionBuilder : TibiaKtBuilder<Auction> {
+    public lateinit var name: String
+    public var auctionId: Int? = null
+    public var level: Int? = null
+    public lateinit var world: String
+    public lateinit var vocation: Vocation
+    public lateinit var sex: Sex
+    public lateinit var outfit: OutfitImage
+    private val displayedItems: MutableList<ItemEntry> = mutableListOf()
+    private val salesArguments: MutableList<SalesArgument> = mutableListOf()
+    public lateinit var auctionStart: Instant
+    public lateinit var auctionEnd: Instant
+    public var bid: Int = 0
+    public lateinit var bidType: BidType
+    public lateinit var status: AuctionStatus
+    public var details: AuctionDetails? = null
 
-    fun addDisplayedItem(displayedItem: ItemEntry) = apply { displayedItems.add(displayedItem) }
+    public fun addDisplayedItem(displayedItem: ItemEntry): AuctionBuilder = apply { displayedItems.add(displayedItem) }
 
     @BuilderDsl
-    fun displayedItem(block: ItemEntryBuilder.() -> Unit) =
+    public fun displayedItem(block: ItemEntryBuilder.() -> Unit): AuctionBuilder =
         apply { displayedItems.add(ItemEntryBuilder().apply(block).build()) }
 
-    fun addSalesArgument(salesArgument: SalesArgument) = apply { salesArguments.add(salesArgument) }
+    public fun addSalesArgument(salesArgument: SalesArgument): AuctionBuilder =
+        apply { salesArguments.add(salesArgument) }
 
     @BuilderDsl
-    fun salesArgument(block: SalesArgumentBuilder.() -> Unit) =
+    public fun salesArgument(block: SalesArgumentBuilder.() -> Unit): AuctionBuilder =
         apply { salesArguments.add(SalesArgumentBuilder().apply(block).build()) }
 
     @BuilderDsl
-    fun details(block: AuctionDetailsBuilder.() -> Unit) =
+    public fun details(block: AuctionDetailsBuilder.() -> Unit): AuctionBuilder =
         apply { details = AuctionDetailsBuilder().apply(block).build() }
 
-    override fun build() = Auction(
-        name = if (::name.isInitialized) name else throw IllegalStateException("name is required"),
-        auctionId = auctionId ?: throw IllegalStateException("auctionId is required"),
-        level = level ?: throw IllegalStateException("level is required"),
-        world = if (::world.isInitialized) world else throw IllegalStateException("world is required"),
-        vocation = if (::vocation.isInitialized) vocation else throw IllegalStateException("vocation is required"),
-        sex = if (::sex.isInitialized) sex else throw IllegalStateException("sex is required"),
-        outfit = if (::outfit.isInitialized) outfit else throw IllegalStateException("outfit is required"),
+    public override fun build(): Auction = Auction(
+        name = if (::name.isInitialized) name else error("name is required"),
+        auctionId = auctionId ?: error("auctionId is required"),
+        level = level ?: error("level is required"),
+        world = if (::world.isInitialized) world else error("world is required"),
+        vocation = if (::vocation.isInitialized) vocation else error("vocation is required"),
+        sex = if (::sex.isInitialized) sex else error("sex is required"),
+        outfit = if (::outfit.isInitialized) outfit else error("outfit is required"),
         displayedItems = displayedItems,
         salesArguments = salesArguments,
-        auctionStart = if (::auctionStart.isInitialized) auctionStart else throw IllegalStateException("auctionStart is required"),
-        auctionEnd = if (::auctionEnd.isInitialized) auctionEnd else throw IllegalStateException("auctionEnd is required"),
+        auctionStart = if (::auctionStart.isInitialized) auctionStart else error("auctionStart is required"),
+        auctionEnd = if (::auctionEnd.isInitialized) auctionEnd else error("auctionEnd is required"),
         bid = bid,
-        bidType = if (::bidType.isInitialized) bidType else throw IllegalStateException("bidType is required"),
-        status = if (::status.isInitialized) status else throw IllegalStateException("status is required"),
+        bidType = if (::bidType.isInitialized) bidType else error("bidType is required"),
+        status = if (::status.isInitialized) status else error("status is required"),
         details = details,
     )
 
     @BuilderDsl
-    class ItemEntryBuilder : TibiaKtBuilder<ItemEntry>() {
-        var itemId: Int? = null
-        lateinit var name: String
-        lateinit var description: String
-        var count: Int = 1
+    public class ItemEntryBuilder : TibiaKtBuilder<ItemEntry> {
+        public var itemId: Int? = null
+        public lateinit var name: String
+        public lateinit var description: String
+        public var count: Int = 1
 
-        override fun build() = ItemEntry(itemId = itemId ?: throw IllegalStateException("itemId is required"),
-            name = if (::name.isInitialized) name else throw IllegalStateException("name is required"),
-            description = if (::description.isInitialized) description else throw IllegalStateException("description is required"),
-            count = count)
-    }
-
-    @BuilderDsl
-    class SalesArgumentBuilder : TibiaKtBuilder<SalesArgument>() {
-        var categoryId: Int? = null
-        lateinit var content: String
-
-        override fun build() = SalesArgument(
-            categoryId = categoryId ?: throw IllegalStateException("categoryId is required"),
-            content = if (::content.isInitialized) content else throw IllegalStateException("content is required"),
+        override fun build(): ItemEntry = ItemEntry(
+            itemId = itemId ?: error("itemId is required"),
+            name = if (::name.isInitialized) name else error("name is required"),
+            description = if (::description.isInitialized) description else error("description is required"),
+            count = count
         )
     }
 
     @BuilderDsl
-    class AuctionDetailsBuilder : TibiaKtBuilder<AuctionDetails>() {
-        var hitPoints: Int? = null
-        var mana: Int? = null
-        var capacity: Int? = null
-        var speed: Int? = null
-        var blessingsCount: Int? = null
-        var mountsCount: Int? = null
-        var outfitsCount: Int? = null
-        var titlesCount: Int? = null
-        var skills: AuctionSkills? = null
-        var creationDate: Instant? = null
-        var experience: Long? = null
-        var gold: Long? = null
-        var achievementPoints: Int? = null
-        var regularWorldTransfersAvailable: Instant? = null
-        var charmExpansion: Boolean? = null
-        var availableCharmPoints: Int? = null
-        var spentCharmPoints: Int? = null
-        var dailyRewardStreak: Int? = null
-        var huntingTaskPoints: Int? = null
-        var permanentHuntingTaskSlots: Int? = null
-        var permanentPreySlots: Int? = null
-        var preyWildcards: Int? = null
-        var hirelings: Int? = null
-        var hirelingJobs: Int? = null
-        var hirelingOutfits: Int? = null
-        var exaltedDust: Int? = null
-        var exaltedDustLimit: Int? = null
-        var bossPoints: Int? = null
-        var items: ItemSummary? = null
-        var storeItems: ItemSummary? = null
-        var mounts: Mounts? = null
-        var storeMounts: Mounts? = null
-        var outfits: Outfits? = null
-        var storeOutfits: Outfits? = null
-        var familiars: Familiars? = null
-        val blessings: MutableList<BlessingEntry> = mutableListOf()
-        val imbuements: MutableList<String> = mutableListOf()
-        val charms: MutableList<CharmEntry> = mutableListOf()
-        val completedCyclopediaMapAreas: MutableList<String> = mutableListOf()
-        val completedQuestLines: MutableList<String> = mutableListOf()
-        val titles: MutableList<String> = mutableListOf()
-        val achievements: MutableList<AchievementEntry> = mutableListOf()
-        val bestiaryProgress: MutableList<CreatureEntry> = mutableListOf()
-        val bosstiaryProgress: MutableList<CreatureEntry> = mutableListOf()
+    public class SalesArgumentBuilder : TibiaKtBuilder<SalesArgument> {
+        public var categoryId: Int? = null
+        public lateinit var content: String
+
+        override fun build(): SalesArgument = SalesArgument(
+            categoryId = categoryId ?: error("categoryId is required"),
+            content = if (::content.isInitialized) content else error("content is required"),
+        )
+    }
+
+    @BuilderDsl
+    public class AuctionDetailsBuilder : TibiaKtBuilder<AuctionDetails> {
+        public var hitPoints: Int? = null
+        public var mana: Int? = null
+        public var capacity: Int? = null
+        public var speed: Int? = null
+        public var blessingsCount: Int? = null
+        public var mountsCount: Int? = null
+        public var outfitsCount: Int? = null
+        public var titlesCount: Int? = null
+        public var skills: AuctionSkills? = null
+        public var creationDate: Instant? = null
+        public var experience: Long? = null
+        public var gold: Long? = null
+        public var achievementPoints: Int? = null
+        public var regularWorldTransfersAvailable: Instant? = null
+        public var charmExpansion: Boolean? = null
+        public var availableCharmPoints: Int? = null
+        public var spentCharmPoints: Int? = null
+        public var dailyRewardStreak: Int? = null
+        public var huntingTaskPoints: Int? = null
+        public var permanentHuntingTaskSlots: Int? = null
+        public var permanentPreySlots: Int? = null
+        public var preyWildcards: Int? = null
+        public var hirelings: Int? = null
+        public var hirelingJobs: Int? = null
+        public var hirelingOutfits: Int? = null
+        public var exaltedDust: Int? = null
+        public var exaltedDustLimit: Int? = null
+        public var bossPoints: Int? = null
+        public var items: ItemSummary? = null
+        public var storeItems: ItemSummary? = null
+        public var mounts: Mounts? = null
+        public var storeMounts: Mounts? = null
+        public var outfits: Outfits? = null
+        public var storeOutfits: Outfits? = null
+        public var familiars: Familiars? = null
+        public val blessings: MutableList<BlessingEntry> = mutableListOf()
+        public val imbuements: MutableList<String> = mutableListOf()
+        public val charms: MutableList<CharmEntry> = mutableListOf()
+        public val completedCyclopediaMapAreas: MutableList<String> = mutableListOf()
+        public val completedQuestLines: MutableList<String> = mutableListOf()
+        public val titles: MutableList<String> = mutableListOf()
+        public val achievements: MutableList<AchievementEntry> = mutableListOf()
+        public val bestiaryProgress: MutableList<CreatureEntry> = mutableListOf()
+        public val bosstiaryProgress: MutableList<CreatureEntry> = mutableListOf()
 
 
-        fun addBlessing(blessingEntry: BlessingEntry) = apply { blessings.add(blessingEntry) }
-        fun addImbuement(imbuement: String) = apply { imbuements.add(imbuement) }
-        fun addCharm(charm: CharmEntry) = apply { charms.add(charm) }
+        public fun addBlessing(blessingEntry: BlessingEntry): AuctionDetailsBuilder =
+            apply { blessings.add(blessingEntry) }
 
-        fun addCompletedQuestLine(completedQuestLine: String) = apply { completedQuestLines.add(completedQuestLine) }
-        fun addCompletedCyclopediaMapArea(completedCyclopediaMapArea: String) =
+        public fun addImbuement(imbuement: String): AuctionDetailsBuilder = apply { imbuements.add(imbuement) }
+        public fun addCharm(charm: CharmEntry): AuctionDetailsBuilder = apply { charms.add(charm) }
+
+        public fun addCompletedQuestLine(completedQuestLine: String): AuctionDetailsBuilder =
+            apply { completedQuestLines.add(completedQuestLine) }
+
+        public fun addCompletedCyclopediaMapArea(completedCyclopediaMapArea: String): AuctionDetailsBuilder =
             apply { completedCyclopediaMapAreas.add(completedCyclopediaMapArea) }
 
-        fun addTitle(title: String) = apply { titles.add(title) }
-        fun addAchievement(achievement: AchievementEntry) = apply { achievements.add(achievement) }
-        fun addBestiaryEntry(bestiaryEntry: CreatureEntry) = apply { bestiaryProgress.add(bestiaryEntry) }
+        public fun addTitle(title: String): AuctionDetailsBuilder = apply { titles.add(title) }
+        public fun addAchievement(achievement: AchievementEntry): AuctionDetailsBuilder =
+            apply { achievements.add(achievement) }
 
-        fun addBosstiaryEntry(bosstiaryEntry: CreatureEntry) = apply { bosstiaryProgress.add(bosstiaryEntry) }
+        public fun addBestiaryEntry(bestiaryEntry: CreatureEntry): AuctionDetailsBuilder =
+            apply { bestiaryProgress.add(bestiaryEntry) }
 
-        override fun build() =
+        public fun addBosstiaryEntry(bosstiaryEntry: CreatureEntry): AuctionDetailsBuilder =
+            apply { bosstiaryProgress.add(bosstiaryEntry) }
+
+        public override fun build(): AuctionDetails =
             AuctionDetails(
-                hitPoints = hitPoints ?: throw IllegalStateException("hitPoints is required"),
-                mana = mana ?: throw IllegalStateException("mana is required"),
-                capacity = capacity ?: throw IllegalStateException("capacity is required"),
-                speed = speed ?: throw IllegalStateException("speed is required"),
-                blessingsCount = blessingsCount ?: throw IllegalStateException("blessingsCount is required"),
-                mountsCount = mountsCount ?: throw IllegalStateException("mountsCount is required"),
-                outfitsCount = outfitsCount ?: throw IllegalStateException("outfitsCount is required"),
-                titlesCount = titlesCount ?: throw IllegalStateException("titlesCount is required"),
-                skills = skills ?: throw IllegalStateException("skills is required"),
-                creationDate = creationDate ?: throw IllegalStateException("creationDate is required"),
-                experience = experience ?: throw IllegalStateException("experience is required"),
-                gold = gold ?: throw IllegalStateException("gold is required"),
-                achievementPoints = achievementPoints ?: throw IllegalStateException("achievementPoints is required"),
+                hitPoints = hitPoints ?: error("hitPoints is required"),
+                mana = mana ?: error("mana is required"),
+                capacity = capacity ?: error("capacity is required"),
+                speed = speed ?: error("speed is required"),
+                blessingsCount = blessingsCount ?: error("blessingsCount is required"),
+                mountsCount = mountsCount ?: error("mountsCount is required"),
+                outfitsCount = outfitsCount ?: error("outfitsCount is required"),
+                titlesCount = titlesCount ?: error("titlesCount is required"),
+                skills = skills ?: error("skills is required"),
+                creationDate = creationDate ?: error("creationDate is required"),
+                experience = experience ?: error("experience is required"),
+                gold = gold ?: error("gold is required"),
+                achievementPoints = achievementPoints ?: error("achievementPoints is required"),
                 regularWorldTransfersAvailable = regularWorldTransfersAvailable,
-                charmExpansion = charmExpansion ?: throw IllegalStateException("charmExpansion is required"),
+                charmExpansion = charmExpansion ?: error("charmExpansion is required"),
                 availableCharmPoints = availableCharmPoints
-                    ?: throw IllegalStateException("availableCharmPoints is required"),
-                spentCharmPoints = spentCharmPoints ?: throw IllegalStateException("spentCharmPoints is required"),
-                dailyRewardStreak = dailyRewardStreak ?: throw IllegalStateException("dailyRewardStreak is required"),
+                    ?: error("availableCharmPoints is required"),
+                spentCharmPoints = spentCharmPoints ?: error("spentCharmPoints is required"),
+                dailyRewardStreak = dailyRewardStreak ?: error("dailyRewardStreak is required"),
                 permanentHuntingTaskSlots = permanentHuntingTaskSlots
-                    ?: throw IllegalStateException("permanentHuntingTaskSlots is required"),
+                    ?: error("permanentHuntingTaskSlots is required"),
                 permanentPreySlots = permanentPreySlots
-                    ?: throw IllegalStateException("permanentPreySlots is required"),
-                huntingTaskPoints = huntingTaskPoints ?: throw IllegalStateException("huntingTaskPoints is required"),
-                preyWildcards = preyWildcards ?: throw IllegalStateException("preyWildcards is required"),
-                hirelings = hirelings ?: throw IllegalStateException("hirelings is required"),
-                hirelingJobs = hirelingJobs ?: throw IllegalStateException("hirelingJobs is required"),
-                hirelingOutfits = hirelingOutfits ?: throw IllegalStateException("hirelingOutfits is required"),
-                exaltedDust = exaltedDust ?: throw IllegalStateException("exaltedDust is required"),
-                exaltedDustLimit = exaltedDustLimit ?: throw IllegalStateException("exaltedDustLimit is required"),
-                bossPoints = bossPoints ?: throw IllegalStateException("bossPoints is required"),
-                items = items ?: throw IllegalStateException("items is required"),
-                storeItems = storeItems ?: throw IllegalStateException("storeItems is required"),
-                mounts = mounts ?: throw IllegalStateException("mounts is required"),
-                storeMounts = storeMounts ?: throw IllegalStateException("storeMounts is required"),
-                outfits = outfits ?: throw IllegalStateException("outfits is required"),
-                storeOutfits = storeOutfits ?: throw IllegalStateException("storeOutfits is required"),
-                familiars = familiars ?: throw IllegalStateException("familiars is required"),
+                    ?: error("permanentPreySlots is required"),
+                huntingTaskPoints = huntingTaskPoints ?: error("huntingTaskPoints is required"),
+                preyWildcards = preyWildcards ?: error("preyWildcards is required"),
+                hirelings = hirelings ?: error("hirelings is required"),
+                hirelingJobs = hirelingJobs ?: error("hirelingJobs is required"),
+                hirelingOutfits = hirelingOutfits ?: error("hirelingOutfits is required"),
+                exaltedDust = exaltedDust ?: error("exaltedDust is required"),
+                exaltedDustLimit = exaltedDustLimit ?: error("exaltedDustLimit is required"),
+                bossPoints = bossPoints ?: error("bossPoints is required"),
+                items = items ?: error("items is required"),
+                storeItems = storeItems ?: error("storeItems is required"),
+                mounts = mounts ?: error("mounts is required"),
+                storeMounts = storeMounts ?: error("storeMounts is required"),
+                outfits = outfits ?: error("outfits is required"),
+                storeOutfits = storeOutfits ?: error("storeOutfits is required"),
+                familiars = familiars ?: error("familiars is required"),
                 blessings = blessings,
                 imbuements = imbuements,
                 charms = charms,

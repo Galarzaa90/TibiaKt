@@ -56,7 +56,7 @@ import kotlinx.serialization.UseSerializers
  * @property bosstiaryProgress The list of bosstiary bosses and their progress.
  */
 @Serializable
-data class AuctionDetails(
+public data class AuctionDetails(
     val hitPoints: Int,
     val mana: Int,
     val capacity: Int,

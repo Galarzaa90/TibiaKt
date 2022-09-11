@@ -7,9 +7,9 @@ import com.galarzaa.tibiakt.core.utils.getForumBoardUrl
  *
  * @property boardId The internal ID of the board. Used for linking.
  */
-interface BaseForumBoard {
-    val boardId: Int
+public interface BaseForumBoard {
+    public val boardId: Int
 
     /** The URL to this board. */
-    val url get() = getForumBoardUrl(boardId)
+    public val url: String get() = getForumBoardUrl(boardId)
 }

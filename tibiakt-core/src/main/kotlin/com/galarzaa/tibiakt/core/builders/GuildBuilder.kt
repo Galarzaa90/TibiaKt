@@ -1,3 +1,19 @@
+/*
+ * Copyright © 2022 Allan Galarza
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.galarzaa.tibiakt.core.builders
 
 import com.galarzaa.tibiakt.core.enums.Vocation
@@ -9,31 +25,33 @@ import com.galarzaa.tibiakt.core.utils.BuilderDsl
 import java.time.LocalDate
 
 @BuilderDsl
-inline fun guildBuilder(block: GuildBuilder.() -> Unit) = GuildBuilder().apply(block)
+public inline fun guildBuilder(block: GuildBuilder.() -> Unit): GuildBuilder = GuildBuilder().apply(block)
 
 @BuilderDsl
-inline fun guild(block: GuildBuilder.() -> Unit) = guildBuilder(block).build()
+public inline fun guild(block: GuildBuilder.() -> Unit): Guild = guildBuilder(block).build()
 
 @BuilderDsl
-class GuildBuilder : TibiaKtBuilder<Guild>() {
-    var world: String? = null
-    var name: String? = null
-    var logoUrl: String? = null
-    var description: String? = null
-    var foundingDate: LocalDate? = null
-    var isActive: Boolean = false
-    var applicationsOpen: Boolean = false
-    var homepage: String? = null
-    var guildHall: GuildHall? = null
-    var disbandingDate: LocalDate? = null
-    var disbandingReason: String? = null
-    val members: MutableList<GuildMember> = mutableListOf()
-    val invited: MutableList<GuildInvite> = mutableListOf()
+public class GuildBuilder : TibiaKtBuilder<Guild> {
+    public var world: String? = null
+    public var name: String? = null
+    public var logoUrl: String? = null
+    public var description: String? = null
+    public var foundingDate: LocalDate? = null
+    public var isActive: Boolean = false
+    public var applicationsOpen: Boolean = false
+    public var homepage: String? = null
+    public var guildHall: GuildHall? = null
+    public var disbandingDate: LocalDate? = null
+    public var disbandingReason: String? = null
+    public val members: MutableList<GuildMember> = mutableListOf()
+    public val invited: MutableList<GuildInvite> = mutableListOf()
 
-    fun guildHall(name: String, paidUntil: LocalDate) = apply { guildHall = GuildHall(name, paidUntil) }
-    fun guildHall(guildHall: GuildHall) = apply { this.guildHall = guildHall }
+    public fun guildHall(name: String, paidUntil: LocalDate): GuildBuilder =
+        apply { guildHall = GuildHall(name, paidUntil) }
 
-    fun addMember(
+    public fun guildHall(guildHall: GuildHall): GuildBuilder = apply { this.guildHall = guildHall }
+
+    public fun addMember(
         rank: String,
         name: String,
         title: String?,
@@ -41,21 +59,23 @@ class GuildBuilder : TibiaKtBuilder<Guild>() {
         level: Int,
         joiningDate: LocalDate,
         isOnline: Boolean,
-    ) = apply {
+    ): GuildBuilder = apply {
         members.add(GuildMember(name, rank, title, level, vocation, joiningDate, isOnline))
     }
 
     @BuilderDsl
-    fun addMember(block: GuildMemberBuilder.() -> Unit) = members.add(GuildMemberBuilder().apply(block).build())
+    public fun addMember(block: GuildMemberBuilder.() -> Unit): Boolean =
+        members.add(GuildMemberBuilder().apply(block).build())
 
-    fun addInvite(name: String, inviteDate: LocalDate) = apply { invited.add(GuildInvite(name, inviteDate)) }
+    public fun addInvite(name: String, inviteDate: LocalDate): GuildBuilder =
+        apply { invited.add(GuildInvite(name, inviteDate)) }
 
-    override fun build() = Guild(
-        world = world ?: throw IllegalStateException("world is required"),
-        name = name ?: throw IllegalStateException("name is required"),
-        logoUrl = logoUrl ?: throw IllegalStateException("logoUrl is required"),
+    override fun build(): Guild = Guild(
+        world = world ?: error("world is required"),
+        name = name ?: error("name is required"),
+        logoUrl = logoUrl ?: error("logoUrl is required"),
         description = description,
-        foundingDate = foundingDate ?: throw IllegalStateException("name is required"),
+        foundingDate = foundingDate ?: error("name is required"),
         isActive = isActive,
         applicationsOpen = applicationsOpen,
         homepage = homepage,
@@ -66,22 +86,22 @@ class GuildBuilder : TibiaKtBuilder<Guild>() {
         disbandingReason = disbandingReason,
     )
 
-    class GuildMemberBuilder : TibiaKtBuilder<GuildMember>() {
-        lateinit var rank: String
-        lateinit var name: String
-        var title: String? = null
-        lateinit var vocation: Vocation
-        var level: Int = 0
-        lateinit var joiningDate: LocalDate
-        var isOnline: Boolean = false
+    public class GuildMemberBuilder : TibiaKtBuilder<GuildMember> {
+        public lateinit var rank: String
+        public lateinit var name: String
+        public var title: String? = null
+        public lateinit var vocation: Vocation
+        public var level: Int = 0
+        public lateinit var joiningDate: LocalDate
+        public var isOnline: Boolean = false
 
-        override fun build() = GuildMember(
-            rank = if (::rank.isInitialized) rank else throw IllegalStateException("rank is required"),
-            name = if (::name.isInitialized) name else throw IllegalStateException("name is required"),
+        override fun build(): GuildMember = GuildMember(
+            rank = if (::rank.isInitialized) rank else error("rank is required"),
+            name = if (::name.isInitialized) name else error("name is required"),
             title = title,
-            vocation = if (::vocation.isInitialized) vocation else throw IllegalStateException("vocation is required"),
+            vocation = if (::vocation.isInitialized) vocation else error("vocation is required"),
             level = level,
-            joiningDate = if (::joiningDate.isInitialized) joiningDate else throw IllegalStateException("joiningDate is required"),
+            joiningDate = if (::joiningDate.isInitialized) joiningDate else error("joiningDate is required"),
             isOnline = isOnline,
         )
     }

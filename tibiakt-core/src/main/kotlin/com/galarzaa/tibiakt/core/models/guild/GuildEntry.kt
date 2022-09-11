@@ -10,9 +10,9 @@ import kotlinx.serialization.Serializable
  * @property isActive Whether the guild is active or still in formation.
  */
 @Serializable
-data class GuildEntry(
+public data class GuildEntry(
     override val name: String,
     val description: String?,
     val logoUrl: String,
-    val isActive: Boolean
+    val isActive: Boolean,
 ) : BaseGuild

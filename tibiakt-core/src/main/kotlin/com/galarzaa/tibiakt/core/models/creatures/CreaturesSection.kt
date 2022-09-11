@@ -10,14 +10,12 @@ import kotlinx.serialization.Serializable
  * @property creatures The list of creatures in the library. Not all creatures in-game are visible.
  */
 @Serializable
-data class CreaturesSection(
+public data class CreaturesSection(
     val boostedCreature: CreatureEntry,
     val creatures: List<CreatureEntry>,
 ) {
     /**
      * The URL to the creatures section.
      */
-    val url get() = getCreaturesSectionUrl()
+    val url: String get() = getCreaturesSectionUrl()
 }
-
-

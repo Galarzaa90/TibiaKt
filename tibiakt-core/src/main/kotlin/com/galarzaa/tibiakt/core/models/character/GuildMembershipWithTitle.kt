@@ -23,4 +23,4 @@ import kotlinx.serialization.Serializable
  * The guild a [Character] belongs to.
  */
 @Serializable
-data class GuildMembershipWithTitle(override val name: String, val rank: String, val title: String?) : BaseGuild
+public data class GuildMembershipWithTitle(override val name: String, val rank: String, val title: String?) : BaseGuild

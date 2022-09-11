@@ -12,7 +12,7 @@ import kotlinx.serialization.Serializable
  * @property filters The currently active filters for the bazaar.
  */
 @Serializable
-data class CharacterBazaar(
+public data class CharacterBazaar(
     val type: BazaarType,
     val filters: BazaarFilters = BazaarFilters(),
     override val currentPage: Int,
@@ -23,6 +23,6 @@ data class CharacterBazaar(
     /**
      * The URL to the bazaar with the current filters and page.
      */
-    val url get() = getBazaarUrl(type, filters, currentPage)
-    override fun getPageUrl(page: Int) = getBazaarUrl(type, filters, page)
+    val url: String get() = getBazaarUrl(type, filters, currentPage)
+    override fun getPageUrl(page: Int): String = getBazaarUrl(type, filters, page)
 }

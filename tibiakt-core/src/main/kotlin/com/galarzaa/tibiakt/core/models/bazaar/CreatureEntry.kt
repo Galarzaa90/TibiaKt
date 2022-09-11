@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
  * @property step The current unlock step of the character.
  */
 @Serializable
-data class CreatureEntry(
+public data class CreatureEntry(
     val name: String,
     val kills: Long,
     val step: Int,
@@ -18,5 +18,5 @@ data class CreatureEntry(
     /**
      * Whether the entry is complete or not.
      */
-    val isComplete get() = step == 4
+    val isComplete: Boolean get() = step == 4
 }

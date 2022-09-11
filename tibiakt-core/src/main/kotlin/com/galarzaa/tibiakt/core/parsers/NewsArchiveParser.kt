@@ -19,7 +19,7 @@ import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 import java.time.LocalDate
 
-object NewsArchiveParser : Parser<NewsArchive> {
+public object NewsArchiveParser : Parser<NewsArchive> {
     override fun fromContent(content: String): NewsArchive {
         val document: Document = Jsoup.parse(content)
         val boxContent =

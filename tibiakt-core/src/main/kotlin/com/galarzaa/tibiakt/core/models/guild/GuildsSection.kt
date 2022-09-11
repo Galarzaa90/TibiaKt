@@ -10,14 +10,14 @@ import kotlinx.serialization.Serializable
  * @property guilds A list of all the guilds in the world.
  */
 @Serializable
-data class GuildsSection(
+public data class GuildsSection(
     val world: String,
     val guilds: List<GuildEntry>,
 ) {
     /**
      * The URL to this guilds section.
      */
-    val url
+    val url: String
         get() = getWorldGuildsUrl(world)
 
     /**
@@ -30,4 +30,3 @@ data class GuildsSection(
      */
     val guildsInFormation: List<GuildEntry> get() = guilds.filter { !it.isActive }
 }
-

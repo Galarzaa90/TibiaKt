@@ -32,22 +32,22 @@ import kotlin.time.Duration.Companion.hours
 import kotlin.time.toJavaDuration
 
 /** The timezone Tibia time is based on. */
-val TIBIA_TIMEZONE: ZoneId = ZoneId.of("Europe/Berlin")
+public val TIBIA_TIMEZONE: ZoneId = ZoneId.of("Europe/Berlin")
 
 /** The local time when server save happens. */
-val SERVER_SAVE_TIME: LocalTime = LocalTime.of(10, 0)
+public val SERVER_SAVE_TIME: LocalTime = LocalTime.of(10, 0)
 
 /** Get the current day of the week in Tibia
  *
  * A new day starts every server save, at 10:00 CET/CEST.
  */
-fun getTibiaWeekDay(): DayOfWeek = (getTibiaDateTime() - 10.hours.toJavaDuration()).dayOfWeek
+public fun getTibiaWeekDay(): DayOfWeek = (getTibiaDateTime() - 10.hours.toJavaDuration()).dayOfWeek
 
 /** Get the local datetime in Tibia's servers. */
-fun getTibiaDateTime(): LocalDateTime = LocalDateTime.now(TIBIA_TIMEZONE)
+public fun getTibiaDateTime(): LocalDateTime = LocalDateTime.now(TIBIA_TIMEZONE)
 
 /** Get the time of the last server save from a [currentTime]. */
-fun getLastServerSaveTime(currentTime: ZonedDateTime = ZonedDateTime.now(TIBIA_TIMEZONE)): ZonedDateTime {
+public fun getLastServerSaveTime(currentTime: ZonedDateTime = ZonedDateTime.now(TIBIA_TIMEZONE)): ZonedDateTime {
     val serverSaveTime = ZonedDateTime.of(
         currentTime.toLocalDate(), SERVER_SAVE_TIME, TIBIA_TIMEZONE
     )
@@ -55,18 +55,18 @@ fun getLastServerSaveTime(currentTime: ZonedDateTime = ZonedDateTime.now(TIBIA_T
 }
 
 /** Get the time of the last server save from a [currentTime]. */
-fun getLastServerSaveTime(currentTime: Instant): Instant {
+public fun getLastServerSaveTime(currentTime: Instant): Instant {
     return getLastServerSaveTime(ZonedDateTime.ofInstant(currentTime.toJavaInstant(), TIBIA_TIMEZONE)).toInstant()
         .toKotlinInstant()
 }
 
 /** Get the time of the next server save from a [currentTime]. */
-fun getNextServerSaveTime(currentTime: ZonedDateTime = ZonedDateTime.now(TIBIA_TIMEZONE)): ZonedDateTime {
+public fun getNextServerSaveTime(currentTime: ZonedDateTime = ZonedDateTime.now(TIBIA_TIMEZONE)): ZonedDateTime {
     return getLastServerSaveTime(currentTime).plusDays(1)
 }
 
 /** Get the time of the next server save from a [currentTime]. */
-fun getNextServerSaveTime(currentTime: Instant): Instant {
+public fun getNextServerSaveTime(currentTime: Instant): Instant {
     return getNextServerSaveTime(ZonedDateTime.ofInstant(currentTime.toJavaInstant(), TIBIA_TIMEZONE)).toInstant()
         .toKotlinInstant()
 }
@@ -75,7 +75,7 @@ fun getNextServerSaveTime(currentTime: Instant): Instant {
 /**
  * Parses a string containing date and time from Tibia.com into an [Instant] instance.
  */
-fun parseTibiaDateTime(input: String): Instant {
+public fun parseTibiaDateTime(input: String): Instant {
     val timeString = input.clean().let { it.substring(0, it.length - 4).trim() }
     return try {
         LocalDateTime.parse(timeString, DateTimeFormatter.ofPattern("MMM dd yyyy, HH:mm:ss", Locale.US))
@@ -87,21 +87,21 @@ fun parseTibiaDateTime(input: String): Instant {
 /**
  * Parses a string containing date from Tibia.com into an [LocalDate] instance.
  */
-fun parseTibiaDate(input: String): LocalDate {
+public fun parseTibiaDate(input: String): LocalDate {
     return LocalDate.parse(input.clean(), DateTimeFormatter.ofPattern("MMM dd yyyy", Locale.US))
 }
 
 /**
  * Parses a string containing date from Tibia.com into an [LocalDate] instance.
  */
-fun parseTibiaFullDate(input: String): LocalDate {
+public fun parseTibiaFullDate(input: String): LocalDate {
     return LocalDate.parse(input.clean(), DateTimeFormatter.ofPattern("MMMM d, yyyy", Locale.US))
 }
 
 /**
  * Parses a string containing a date time from Tibia.com forums into an [Instant] instance.
  */
-fun parseTibiaForumDateTime(input: String): Instant {
+public fun parseTibiaForumDateTime(input: String): Instant {
     return LocalDateTime.parse(input, DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss", Locale.US))
         .atZone(TIBIA_TIMEZONE).toInstant().toKotlinInstant()
 }

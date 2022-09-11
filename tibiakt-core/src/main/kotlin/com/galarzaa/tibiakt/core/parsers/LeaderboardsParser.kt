@@ -38,8 +38,8 @@ import kotlinx.datetime.Clock
 import org.jsoup.nodes.Element
 import kotlin.time.Duration.Companion.minutes
 
-object LeaderboardsParser : Parser<Leaderboards?> {
-    val rotationEndPattern = Regex("""ends on ([^)]+)""")
+public object LeaderboardsParser : Parser<Leaderboards?> {
+    private val rotationEndPattern = Regex("""ends on ([^)]+)""")
 
     override fun fromContent(content: String): Leaderboards? {
         val boxContent = boxContent(content)
@@ -59,17 +59,15 @@ object LeaderboardsParser : Parser<Leaderboards?> {
                 }
                 val rotationEnd = parseTibiaDateTime(cleanLabel)
                 val rotation = LeaderboardsRotation(
-                    rotationId = rotationId,
-                    current = current,
-                    endDate = rotationEnd
+                    rotationId = rotationId, current = current, endDate = rotationEnd
                 )
                 if (current) {
                     this.rotation = rotation
                 }
                 addAvailableRotation(rotation)
             }
-            world = formData.values["world"]
-                ?: if ("world" in formData.availableOptions) return null else throw ParsingException("world form parameter not found")
+            world = formData.values["world"] ?: if ("world" in formData.availableOptions) return null
+            else throw ParsingException("world form parameter not found")
 
             if (tables.size == 4) {
                 val lastUpdateString = tables[2].text()

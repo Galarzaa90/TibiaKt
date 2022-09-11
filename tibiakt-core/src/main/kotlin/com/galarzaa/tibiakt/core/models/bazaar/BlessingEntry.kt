@@ -9,7 +9,7 @@ import kotlinx.serialization.Serializable
  * @property amount The amount of this blessing the character has.
  */
 @Serializable
-data class BlessingEntry(
+public data class BlessingEntry(
     val name: String,
     val amount: Int,
 )

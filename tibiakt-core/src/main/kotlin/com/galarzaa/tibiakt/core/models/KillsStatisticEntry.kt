@@ -11,7 +11,7 @@ import kotlinx.serialization.Serializable
  * @property lastWeekKilled The number of this race killed in the last week.
  */
 @Serializable
-data class KillsStatisticEntry(
+public data class KillsStatisticEntry(
     val lastDayKilledPlayers: Int,
     val lastDayKilled: Int,
     val lastWeekKilledPlayers: Int,

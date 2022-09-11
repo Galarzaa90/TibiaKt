@@ -1,3 +1,19 @@
+/*
+ * Copyright © 2022 Allan Galarza
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.core.builders.HouseBuilder
@@ -16,13 +32,18 @@ import com.galarzaa.tibiakt.core.utils.parseTibiaDateTime
 import com.galarzaa.tibiakt.core.utils.remove
 import com.galarzaa.tibiakt.core.utils.replaceBrs
 
-object HouseParser : Parser<House?> {
+public object HouseParser : Parser<House?> {
+    @Suppress("MaxLineLength")
     private val rentedPattern =
         Regex("""The (?<type>\w+) has been rented by (?<owner>[^.]+)\. (?<pronoun>\w+) has paid the rent until (?<paidUntil>[^.]+)\.""")
     private val auctionedPattern = Regex("""The (?<type>\w+) is currently being auctioned.""")
+
+    @Suppress("MaxLineLength")
     private val bidPattern =
         Regex("""The auction will end at (?<auctionEnd>[^.]+)\. The highest bid so far is (?<highestBid>\d+) gold and has been submitted by (?<bidder>[^.]+)""")
     private val moveOutPattern = Regex("""S?[Hh]e will move out on (?<moveDate>[^.]+) \(time of daily""")
+
+    @Suppress("MaxLineLength")
     private val transferPattern =
         Regex("""and (?<action>wants to|will) pass the house to (?<transferee>[\w\s]+) for (?<transferPrice>\d+) gold coin""")
 

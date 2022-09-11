@@ -19,7 +19,7 @@ package com.galarzaa.tibiakt.core.enums
 /**
  * The possible skills to filter auctions by.
  */
-enum class AuctionSkillFilter(override val value: Int) : IntEnum {
+public enum class AuctionSkillFilter(override val value: Int) : IntEnum {
     AXE_FIGHTING(10),
     CLUB_FIGHTING(9),
     DISTANCE_FIGHTING(7),
@@ -29,7 +29,7 @@ enum class AuctionSkillFilter(override val value: Int) : IntEnum {
     SHIELDING(6),
     SWORD_FIGHTING(8);
 
-    companion object {
-        const val queryParam = "filter_skillid"
+    public companion object {
+        public const val queryParam: String = "filter_skillid"
     }
 }

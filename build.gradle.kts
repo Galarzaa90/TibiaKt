@@ -29,6 +29,7 @@ plugins {
     id("org.jetbrains.kotlinx.kover") version "0.5.1"
     id("org.sonarqube") version "3.4.0.2513"
     id("com.github.ben-manes.versions") version "0.42.0"
+    id("io.gitlab.arturbosch.detekt") version "1.21.0"
 }
 
 group = "com.galarzaa"

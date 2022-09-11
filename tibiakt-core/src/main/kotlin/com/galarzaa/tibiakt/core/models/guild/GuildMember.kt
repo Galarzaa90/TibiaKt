@@ -21,7 +21,7 @@ import java.time.LocalDate
  * @property isOnline Whether the character is currently online or not.
  */
 @Serializable
-data class GuildMember(
+public data class GuildMember(
     override val name: String,
     val rank: String,
     val title: String?,

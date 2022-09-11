@@ -1,3 +1,19 @@
+/*
+ * Copyright © 2022 Allan Galarza
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.galarzaa.tibiakt.core.builders
 
 import com.galarzaa.tibiakt.core.enums.NewsCategory
@@ -8,61 +24,62 @@ import com.galarzaa.tibiakt.core.utils.BuilderDsl
 import java.time.LocalDate
 
 @BuilderDsl
-fun newsArchive(block: NewsArchiveBuilder.() -> Unit) = newsArchiveBuilder(block).build()
+public fun newsArchive(block: NewsArchiveBuilder.() -> Unit): NewsArchive = newsArchiveBuilder(block).build()
 
 @BuilderDsl
-fun newsArchiveBuilder(block: NewsArchiveBuilder.() -> Unit) = NewsArchiveBuilder().apply(block)
+public fun newsArchiveBuilder(block: NewsArchiveBuilder.() -> Unit): NewsArchiveBuilder =
+    NewsArchiveBuilder().apply(block)
 
 @BuilderDsl
-class NewsArchiveBuilder : TibiaKtBuilder<NewsArchive>() {
-    var startDate: LocalDate? = null
-    var endDate: LocalDate? = null
-    val types: MutableSet<NewsType> = mutableSetOf()
-    val categories: MutableSet<NewsCategory> = mutableSetOf()
-    val entries: MutableList<NewsEntry> = mutableListOf()
-    fun addCategory(category: NewsCategory) = apply { categories.add(category) }
+public class NewsArchiveBuilder : TibiaKtBuilder<NewsArchive> {
+    public var startDate: LocalDate? = null
+    public var endDate: LocalDate? = null
+    public val types: MutableSet<NewsType> = mutableSetOf()
+    public val categories: MutableSet<NewsCategory> = mutableSetOf()
+    public val entries: MutableList<NewsEntry> = mutableListOf()
+    public fun addCategory(category: NewsCategory): NewsArchiveBuilder = apply { categories.add(category) }
 
-    fun addType(type: NewsType) = apply { types.add(type) }
+    public fun addType(type: NewsType): NewsArchiveBuilder = apply { types.add(type) }
 
-    fun addEntry(
+    public fun addEntry(
         id: Int,
         title: String,
         category: NewsCategory,
         categoryIcon: String,
         date: LocalDate,
         type: NewsType,
-    ) = apply {
+    ): NewsArchiveBuilder = apply {
         entries.add(NewsEntry(id, title, category, categoryIcon, date, type))
     }
 
-    fun addEntry(builder: NewsEntryBuilder.() -> Unit) = apply {
+    public fun addEntry(builder: NewsEntryBuilder.() -> Unit): NewsArchiveBuilder = apply {
         entries.add(NewsEntryBuilder().apply(builder).build())
     }
 
 
-    override fun build() = NewsArchive(
-        startDate = startDate ?: throw IllegalStateException("startDate is required"),
-        endDate = endDate ?: throw IllegalStateException("endDate is required"),
+    override fun build(): NewsArchive = NewsArchive(
+        startDate = startDate ?: error("startDate is required"),
+        endDate = endDate ?: error("endDate is required"),
         types = types,
         categories = categories,
         entries = entries,
     )
 
-    class NewsEntryBuilder : TibiaKtBuilder<NewsEntry>() {
-        val id: Int = 0
-        val title: String? = null
-        val category: NewsCategory? = null
-        val categoryIcon: String? = null
-        val date: LocalDate? = null
-        val type: NewsType? = null
+    public class NewsEntryBuilder : TibiaKtBuilder<NewsEntry> {
+        public val id: Int = 0
+        public val title: String? = null
+        public val category: NewsCategory? = null
+        public val categoryIcon: String? = null
+        public val date: LocalDate? = null
+        public val type: NewsType? = null
 
-        override fun build() = NewsEntry(
+        override fun build(): NewsEntry = NewsEntry(
             id = id,
-            title = title ?: throw IllegalStateException("title is required"),
-            category = category ?: throw IllegalStateException("category is required"),
-            categoryIcon = categoryIcon ?: throw IllegalStateException("categoryIcon is required"),
-            date = date ?: throw IllegalStateException("date is required"),
-            type = type ?: throw IllegalStateException("type is required"),
+            title = title ?: error("title is required"),
+            category = category ?: error("category is required"),
+            categoryIcon = categoryIcon ?: error("categoryIcon is required"),
+            date = date ?: error("date is required"),
+            type = type ?: error("type is required"),
         )
     }
 }

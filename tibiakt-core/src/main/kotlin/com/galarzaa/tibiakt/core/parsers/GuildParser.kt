@@ -18,10 +18,12 @@ import org.jsoup.nodes.TextNode
 import org.jsoup.select.Elements
 
 
-object GuildParser : Parser<Guild?> {
+public object GuildParser : Parser<Guild?> {
     private val descriptionRegex =
-        Regex("""(?<description>.*)?The guild was founded on (?<world>\w+) on (?<date>[^.]+)\.""",
-            setOf(RegexOption.DOT_MATCHES_ALL, RegexOption.MULTILINE))
+        Regex(
+            """(?<description>.*)?The guild was founded on (?<world>\w+) on (?<date>[^.]+)\.""",
+            setOf(RegexOption.DOT_MATCHES_ALL, RegexOption.MULTILINE)
+        )
     private val guildHallRegex =
         Regex("""Their home on (?<world>\w+) is (?<name>[^.]+)\. The rent is paid until (?<paidUntil>[^.]+)""")
     private val disbandingRegex = Regex("""It will be disbanded on (\w+\s\d+\s\d+)\s([^.]+).""")

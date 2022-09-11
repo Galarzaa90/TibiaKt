@@ -17,7 +17,7 @@ import java.time.Period
  * @property endDate The date when the event ends. If null, it means the event ends in a following month and the date is unavailable.
  */
 @Serializable
-data class EventEntry(
+public data class EventEntry(
     val title: String,
     val description: String,
     val startDate: LocalDate?,

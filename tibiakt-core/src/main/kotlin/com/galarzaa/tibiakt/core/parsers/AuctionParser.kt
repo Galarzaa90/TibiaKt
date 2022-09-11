@@ -1,3 +1,19 @@
+/*
+ * Copyright © 2022 Allan Galarza
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.core.builders.AuctionBuilder
@@ -37,14 +53,16 @@ import org.jsoup.nodes.Element
 import java.io.File
 import java.net.URL
 
-object AuctionParser : Parser<Auction?> {
+public object AuctionParser : Parser<Auction?> {
+    private const val PERCENTAGE = 100f
+
     private val charInfoRegex = Regex("""Level: (\d+) \| Vocation: ([\w\s]+)\| (\w+) \| World: (\w+)""")
     private val idAddonsRegex = Regex("""/(\d+)_(\d+)""")
     private val amountRegex = Regex("""([\d,]+)x """)
     private val idRegex = Regex("""(\d+).(?:gif|png)""")
 
-    override fun fromContent(content: String) = fromContent(content, 0, true)
-    fun fromContent(content: String, auctionId: Int, parseDetails: Boolean = true): Auction? {
+    override fun fromContent(content: String): Auction? = fromContent(content, 0, true)
+    public fun fromContent(content: String, auctionId: Int, parseDetails: Boolean = true): Auction? {
         val document = Jsoup.parse(content)
         return auction {
             this.auctionId = auctionId
@@ -119,7 +137,7 @@ object AuctionParser : Parser<Auction?> {
         val innerTable = table.select("table.TableContent").last()
         val values = mutableListOf<String>()
         for (row in innerTable.rows().offsetStart(1)) {
-            val text = row.selectFirst("td")?.cleanText() ?: ""
+            val text = row.selectFirst("td")?.cleanText().orEmpty()
             if (text.contains("more entries")) continue
             values.add(text)
         }
@@ -136,7 +154,7 @@ object AuctionParser : Parser<Auction?> {
         val familiars = mutableListOf<FamiliarEntry>()
         for (mountBox in familiarBoxes) {
             val name = mountBox.attr("title").split("(").first().clean()
-            val (_, id) = idRegex.find(mountBox.selectFirst("img")?.attr("src") ?: "")?.groupValues
+            val (_, id) = idRegex.find(mountBox.selectFirst("img")?.attr("src").orEmpty())?.groupValues
                 ?: throw ParsingException("familiar image did not match expected pattern")
             familiars.add(FamiliarEntry(name, id.toInt()))
         }
@@ -218,7 +236,7 @@ object AuctionParser : Parser<Auction?> {
         val skillsMap = mutableMapOf<String, Double>().withDefault { 0.0 }
         for (row in contentContainers[1].rows()) {
             val (name, level, progress) = row.cellsText()
-            skillsMap[name] = level.parseInteger() + (progress.remove("%").toDouble() / 100f)
+            skillsMap[name] = level.parseInteger() + (progress.remove("%").toDouble() / PERCENTAGE)
         }
         skills = AuctionSkills(
             axeFighting = skillsMap.getValue("Axe Fighting"),
@@ -273,7 +291,7 @@ object AuctionParser : Parser<Auction?> {
             }
         }
 
-        for (row in contentContainers.getOrNull(8)?.rows() ?: emptyList()) {
+        for (row in contentContainers.getOrNull(8)?.rows().orEmpty()) {
             val (field, value) = getAuctionTableFieldValue(row)
             when (field) {
                 "Exalted Dust" -> {
@@ -284,7 +302,7 @@ object AuctionParser : Parser<Auction?> {
             }
         }
 
-        for (row in contentContainers.getOrNull(9)?.rows() ?: emptyList()) {
+        for (row in contentContainers.getOrNull(9)?.rows().orEmpty()) {
             val (field, value) = getAuctionTableFieldValue(row)
             when (field) {
                 "Boss Points" -> bossPoints = value.parseInteger()
@@ -376,7 +394,7 @@ object AuctionParser : Parser<Auction?> {
     @PublishedApi
     internal fun parseDisplayedOutfit(container: Element): OutfitEntry {
         val name = container.attr("title").split("(").first().clean()
-        val (_, id, addons) = idAddonsRegex.find(container.selectFirst("img")?.attr("src") ?: "")?.groupValues
+        val (_, id, addons) = idAddonsRegex.find(container.selectFirst("img")?.attr("src").orEmpty())?.groupValues
             ?: throw ParsingException("outfit image did not match expected pattern")
         return OutfitEntry(name, id.toInt(), addons.toInt())
     }
@@ -384,12 +402,12 @@ object AuctionParser : Parser<Auction?> {
     @PublishedApi
     internal fun parseDisplayedMount(container: Element): MountEntry {
         val name = container.attr("title")
-        val (_, id) = idRegex.find(container.selectFirst("img")?.attr("src") ?: "")?.groupValues
+        val (_, id) = idRegex.find(container.selectFirst("img")?.attr("src").orEmpty())?.groupValues
             ?: throw ParsingException("mount image did not match expected pattern")
         return MountEntry(name, id.toInt())
     }
 
-    inline fun <reified T> parsePageItems(content: String): List<T> {
+    public inline fun <reified T> parsePageItems(content: String): List<T> {
         val document = Jsoup.parse(content)
         val cvIcon = document.select("div.CVIcon")
         return when (T::class) {

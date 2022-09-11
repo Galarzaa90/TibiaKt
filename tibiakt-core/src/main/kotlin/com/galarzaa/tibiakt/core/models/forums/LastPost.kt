@@ -18,7 +18,7 @@ import kotlinx.serialization.UseSerializers
  * @property traded Whether the post was made by a character that was traded afterwards.
  */
 @Serializable
-data class LastPost(
+public data class LastPost(
     val author: String,
     override val postId: Int,
     val date: Instant,
@@ -26,5 +26,5 @@ data class LastPost(
     val traded: Boolean,
 ) : BaseForumPost {
     /** The URL to the author's character page. If the author is deleted, there is no URL. */
-    val authorUrl get() = if (!deleted) getCharacterUrl(author) else null
+    val authorUrl: String? get() = if (!deleted) getCharacterUrl(author) else null
 }

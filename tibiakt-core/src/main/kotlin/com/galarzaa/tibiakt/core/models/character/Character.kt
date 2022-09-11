@@ -40,7 +40,7 @@ import kotlinx.serialization.UseSerializers
  * @property characters The list of visible characters in the same account. Might be [hidden].
  */
 @Serializable
-data class Character(
+public data class Character(
     override val name: String,
     val title: String?,
     val formerNames: List<String>,

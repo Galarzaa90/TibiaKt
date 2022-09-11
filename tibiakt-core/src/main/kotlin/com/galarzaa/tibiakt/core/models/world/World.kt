@@ -33,7 +33,7 @@ import java.time.YearMonth
  * @property playersOnline The list of online players in this world.
  */
 @Serializable
-data class World(
+public data class World(
     override val name: String,
     val isOnline: Boolean,
     val onlineCount: Int,
@@ -42,7 +42,7 @@ data class World(
     val battlEyeType: BattlEyeType,
     val battlEyeStartDate: LocalDate?,
     val transferType: TransferType,
-    val isPremiumRestricted: Boolean ,
+    val isPremiumRestricted: Boolean,
     val isExperimental: Boolean,
     val onlineRecordCount: Int,
     val onlineRecordDateTime: Instant,
@@ -52,7 +52,7 @@ data class World(
 ) : BaseWorld {
 
     /** Check if a character from this world can be transferred to [target] world. */
-    fun transferableTo(target: World): Boolean {
+    private fun transferableTo(target: World): Boolean {
         return pvpType.weight >= target.pvpType.weight &&
                 isExperimental == target.isExperimental &&
                 transferType != TransferType.LOCKED &&
@@ -61,5 +61,5 @@ data class World(
     }
 
     /** Check if a character from the [origin] world can transfer to this world */
-    fun transferableFrom(origin: World): Boolean = origin.transferableTo(this)
+    public fun transferableFrom(origin: World): Boolean = origin.transferableTo(this)
 }

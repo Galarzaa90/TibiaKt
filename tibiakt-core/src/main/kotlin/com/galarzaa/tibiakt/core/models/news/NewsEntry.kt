@@ -17,7 +17,7 @@ import java.time.LocalDate
  * @property type The type of the entry.
  */
 @Serializable
-data class NewsEntry(
+public data class NewsEntry(
     override val id: Int,
     val title: String,
     override val category: NewsCategory,

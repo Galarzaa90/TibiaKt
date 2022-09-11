@@ -26,10 +26,10 @@ import com.galarzaa.tibiakt.core.utils.parseTibiaForumDateTime
 import com.galarzaa.tibiakt.core.utils.remove
 
 
-object ForumAnnouncementParser : Parser<ForumAnnouncement?> {
-    override fun fromContent(content: String) = fromContent(content, 0)
+public object ForumAnnouncementParser : Parser<ForumAnnouncement?> {
+    override fun fromContent(content: String): ForumAnnouncement? = fromContent(content, 0)
 
-    fun fromContent(content: String, announcementId: Int): ForumAnnouncement? {
+    public fun fromContent(content: String, announcementId: Int): ForumAnnouncement? {
         val boxContent = boxContent(content)
         return forumAnnouncement {
             val breadCrumbs = boxContent.select("div.ForumBreadCrumbs > a")

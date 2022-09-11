@@ -3,7 +3,7 @@ package com.galarzaa.tibiakt.core.enums
 /**
  * The possible bid types an auction might have.
  */
-enum class BidType(override val value: String) : StringEnum {
+public enum class BidType(override val value: String) : StringEnum {
     /**
      * The current highest bid, meaning the auction has received at least one bid.
      */

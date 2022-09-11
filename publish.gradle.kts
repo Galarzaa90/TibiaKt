@@ -65,4 +65,3 @@ signing {
         sign(publications)
     }
 }
-

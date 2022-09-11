@@ -20,13 +20,13 @@ import kotlin.math.ceil
 import kotlin.math.floor
 
 /** A character with a level attribute */
-interface CharacterLevel {
-    val level: Int
+public interface CharacterLevel {
+    public val level: Int
 
     /**
      * The party shared experience range of the character.
      */
-    val shareRange: IntRange
+    public val shareRange: IntRange
         get() {
             val minLevel = floor((level / 3.0) * 2).toInt()
             val maxLevel = ceil((level / 2.0) * 3).toInt() + if (level % 2 == 0) 1 else 0

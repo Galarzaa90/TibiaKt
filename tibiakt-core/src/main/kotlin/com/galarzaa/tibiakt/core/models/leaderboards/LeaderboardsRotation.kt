@@ -27,7 +27,7 @@ import kotlinx.serialization.Serializable
  * @property endDate The date when the rotation ends.
  */
 @Serializable
-data class LeaderboardsRotation(
+public data class LeaderboardsRotation(
     val rotationId: Int,
     val current: Boolean,
     val endDate: Instant,

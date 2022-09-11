@@ -17,7 +17,7 @@ import kotlinx.serialization.Serializable
  * @property entries The list of houses matching the provided filters.
  */
 @Serializable
-data class HousesSection(
+public data class HousesSection(
     val world: String,
     val town: String,
     val status: HouseStatus?,
@@ -26,7 +26,6 @@ data class HousesSection(
     val entries: List<HouseEntry>,
 ) {
 
-    val url
+    val url: String
         get() = getHousesSectionUrl(world, town, type, status, order)
 }
-

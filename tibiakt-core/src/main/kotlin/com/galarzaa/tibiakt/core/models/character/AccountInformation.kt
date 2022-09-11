@@ -16,9 +16,9 @@ import kotlinx.serialization.UseSerializers
  * @property tutorStars The amount of stars the tutor has.
  */
 @Serializable
-data class AccountInformation(
+public data class AccountInformation(
     val creation: Instant,
     val loyaltyTitle: String?,
     val position: String?,
-    val tutorStars: Int?
+    val tutorStars: Int?,
 )

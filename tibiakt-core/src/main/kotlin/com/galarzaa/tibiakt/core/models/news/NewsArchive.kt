@@ -19,7 +19,7 @@ import java.time.LocalDate
  * @property entries The entries matching the filters.
  */
 @Serializable
-data class NewsArchive(
+public data class NewsArchive(
     val startDate: LocalDate,
     val endDate: LocalDate,
     val types: Set<NewsType>,

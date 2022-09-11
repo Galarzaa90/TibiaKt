@@ -20,7 +20,7 @@ import java.time.LocalDate
  * @property threadId The discussion thread specific for this entry, if any.
  */
 @Serializable
-data class News(
+public data class News(
     override val id: Int,
     val title: String,
     override val category: NewsCategory,

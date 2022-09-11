@@ -3,7 +3,7 @@ package com.galarzaa.tibiakt.core.enums
 /**
  * The types of search for the input field in the character bazaar.
  */
-enum class AuctionSearchType(override val value: Int) : IntEnum {
+public enum class AuctionSearchType(override val value: Int) : IntEnum {
     /**
      * Searches everything that includes the words on the search string.
      */
@@ -19,7 +19,7 @@ enum class AuctionSearchType(override val value: Int) : IntEnum {
      */
     CHARACTER_NAME(2);
 
-    companion object {
-        const val queryParam = "searchtype"
+    public companion object {
+        public const val queryParam: String = "searchtype"
     }
 }

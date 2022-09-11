@@ -1,6 +1,22 @@
+/*
+ * Copyright © 2022 Allan Galarza
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.galarzaa.tibiakt.core.parsers
 
-import com.galarzaa.tibiakt.TestResources
+import com.galarzaa.tibiakt.TestResources.getResource
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.inspectors.forAll
 import io.kotest.inspectors.forAtLeastOne
@@ -12,7 +28,7 @@ import io.kotest.matchers.shouldNotBe
 
 class ForumBoardParserTests : StringSpec({
     "Forum board with announcements"{
-        val board = ForumBoardParser.fromContent(TestResources.getResource("forums/forumBoardWithAnnouncements.txt"))
+        val board = ForumBoardParser.fromContent(getResource("forums/forumBoardWithAnnouncements.txt"))
         board shouldNotBe null
         with(board!!){
             name shouldBe "Payment Support"
@@ -34,7 +50,7 @@ class ForumBoardParserTests : StringSpec({
     }
     "Forum with traded author and last post"{
         val board =
-            ForumBoardParser.fromContent(TestResources.getResource("forums/forumBoardTradedThreadAutorAndLastPost.txt"))
+            ForumBoardParser.fromContent(getResource("forums/forumBoardTradedThreadAutorAndLastPost.txt"))
         board shouldNotBe null
         with(board!!) {
             name shouldBe "Batabra"
@@ -50,7 +66,7 @@ class ForumBoardParserTests : StringSpec({
     }
     "Forum with deleted author and last post"{
         val board =
-            ForumBoardParser.fromContent(TestResources.getResource("forums/forumBoardDeletedThreadAuthorAndLastPost.txt"))
+            ForumBoardParser.fromContent(getResource("forums/forumBoardDeletedThreadAuthorAndLastPost.txt"))
         board shouldNotBe null
         with(board!!) {
             name shouldBe "Zunera - Trade"
@@ -65,7 +81,7 @@ class ForumBoardParserTests : StringSpec({
         }
     }
     "Forum with golden frame threads"{
-        val board = ForumBoardParser.fromContent(TestResources.getResource("forums/forumBoardGoldenFramePosts.txt"))
+        val board = ForumBoardParser.fromContent(getResource("forums/forumBoardGoldenFramePosts.txt"))
         board shouldNotBe null
         with(board!!) {
             name shouldBe "Proposals (English Only)"

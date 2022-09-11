@@ -10,12 +10,12 @@ import kotlinx.serialization.Serializable
  * @property categoryId The id of the category of the argument.
  */
 @Serializable
-data class SalesArgument(
+public data class SalesArgument(
     val categoryId: Int,
     val content: String,
 ) {
     /**
      * The URL to the image corresponding to the category.
      */
-    val categoryImageUrl get() = getStaticFileUrl("images", "charactertrade", "usp-category-$categoryId.png")
+    val categoryImageUrl: String get() = getStaticFileUrl("images", "charactertrade", "usp-category-$categoryId.png")
 }

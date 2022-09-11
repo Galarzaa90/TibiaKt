@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
  * @property mountId The internal ID of the mount.
  */
 @Serializable
-data class MountEntry(
+public data class MountEntry(
     val name: String,
     val mountId: Int,
 ) {

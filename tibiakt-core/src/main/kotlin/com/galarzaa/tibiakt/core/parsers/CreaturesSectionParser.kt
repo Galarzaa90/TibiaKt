@@ -7,7 +7,7 @@ import com.galarzaa.tibiakt.core.utils.cleanText
 import com.galarzaa.tibiakt.core.utils.getLinkInformation
 import com.galarzaa.tibiakt.core.utils.parseTablesMap
 
-object CreaturesSectionParser : Parser<CreaturesSection> {
+public object CreaturesSectionParser : Parser<CreaturesSection> {
     override fun fromContent(content: String): CreaturesSection {
         val boxContent = boxContent(content)
         val tables = boxContent.parseTablesMap("table.Table1")

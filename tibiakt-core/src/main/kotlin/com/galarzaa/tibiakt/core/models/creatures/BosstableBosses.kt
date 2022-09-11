@@ -9,7 +9,7 @@ import kotlinx.serialization.Serializable
  * @property bosses The list of bostable bosses.
  */
 @Serializable
-data class BosstableBosses(
+public data class BosstableBosses(
     val boostedBoss: BossEntry,
     val bosses: List<BossEntry>,
 )

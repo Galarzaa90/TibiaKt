@@ -6,7 +6,7 @@ package com.galarzaa.tibiakt.core.utils
  * @param key The key to search for.
  * @param default The value to return if the key is not found.
  */
-fun <V> Map<String, V>.getContaining(key: String, default: V? = null): V? {
+public fun <V> Map<String, V>.getContaining(key: String, default: V? = null): V? {
     for ((k, v) in this)
         if (k.contains(key))
             return v
