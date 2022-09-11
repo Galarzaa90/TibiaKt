@@ -125,10 +125,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">26</i>&nbsp;import com.galarzaa.tibiakt.core.utils.remove
 <i class="no-highlight">27</i>&nbsp;
 <i class="no-highlight">28</i>&nbsp;
-<i class="no-highlight">29</i>&nbsp;object ForumAnnouncementParser : Parser&lt;ForumAnnouncement?&gt; {
-<b class="fc"><i class="no-highlight">30</i>&nbsp;    override fun fromContent(content: String) = fromContent(content, 0)</b>
+<i class="no-highlight">29</i>&nbsp;public object ForumAnnouncementParser : Parser&lt;ForumAnnouncement?&gt; {
+<b class="fc"><i class="no-highlight">30</i>&nbsp;    override fun fromContent(content: String): ForumAnnouncement? = fromContent(content, 0)</b>
 <i class="no-highlight">31</i>&nbsp;
-<i class="no-highlight">32</i>&nbsp;    fun fromContent(content: String, announcementId: Int): ForumAnnouncement? {
+<i class="no-highlight">32</i>&nbsp;    public fun fromContent(content: String, announcementId: Int): ForumAnnouncement? {
 <b class="fc"><i class="no-highlight">33</i>&nbsp;        val boxContent = boxContent(content)</b>
 <b class="fc"><i class="no-highlight">34</i>&nbsp;        return forumAnnouncement {</b>
 <b class="fc"><i class="no-highlight">35</i>&nbsp;            val breadCrumbs = boxContent.select(&quot;div.ForumBreadCrumbs &gt; a&quot;)</b>
@@ -194,7 +194,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-05 18:53</div>
+    <div style="float:right;">generated on 2022-09-11 06:14</div>
 </div>
 </body>
 </html>

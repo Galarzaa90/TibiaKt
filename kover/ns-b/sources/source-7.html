@@ -195,14 +195,14 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">10</i>&nbsp; * @property guilds A list of all the guilds in the world.
 <i class="no-highlight">11</i>&nbsp; */
 <b class="pc"><i class="no-highlight">12</i>&nbsp;@Serializable</b>
-<i class="no-highlight">13</i>&nbsp;data class GuildsSection(
+<i class="no-highlight">13</i>&nbsp;public data class GuildsSection(
 <b class="fc"><i class="no-highlight">14</i>&nbsp;    val world: String,</b>
 <b class="fc"><i class="no-highlight">15</i>&nbsp;    val guilds: List&lt;GuildEntry&gt;,</b>
 <i class="no-highlight">16</i>&nbsp;) {
 <i class="no-highlight">17</i>&nbsp;    /**
 <i class="no-highlight">18</i>&nbsp;     * The URL to this guilds section.
 <i class="no-highlight">19</i>&nbsp;     */
-<i class="no-highlight">20</i>&nbsp;    val url
+<i class="no-highlight">20</i>&nbsp;    val url: String
 <b class="nc"><i class="no-highlight">21</i>&nbsp;        get() = getWorldGuildsUrl(world)</b>
 <i class="no-highlight">22</i>&nbsp;
 <i class="no-highlight">23</i>&nbsp;    /**
@@ -215,7 +215,6 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">30</i>&nbsp;     */
 <b class="nc"><i class="no-highlight">31</i>&nbsp;    val guildsInFormation: List&lt;GuildEntry&gt; get() = guilds.filter { !it.isActive }</b>
 <i class="no-highlight">32</i>&nbsp;}
-<i class="no-highlight">33</i>&nbsp;
 </div>
 </pre>
 </div>
@@ -242,7 +241,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-05 18:53</div>
+    <div style="float:right;">generated on 2022-09-11 06:14</div>
 </div>
 </body>
 </html>

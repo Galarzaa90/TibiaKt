@@ -155,7 +155,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">19</i>&nbsp;/**
 <i class="no-highlight">20</i>&nbsp; * The possible skills to filter auctions by.
 <i class="no-highlight">21</i>&nbsp; */
-<b class="fc"><i class="no-highlight">22</i>&nbsp;enum class AuctionSkillFilter(override val value: Int) : IntEnum {</b>
+<b class="fc"><i class="no-highlight">22</i>&nbsp;public enum class AuctionSkillFilter(override val value: Int) : IntEnum {</b>
 <b class="fc"><i class="no-highlight">23</i>&nbsp;    AXE_FIGHTING(10),</b>
 <b class="fc"><i class="no-highlight">24</i>&nbsp;    CLUB_FIGHTING(9),</b>
 <b class="fc"><i class="no-highlight">25</i>&nbsp;    DISTANCE_FIGHTING(7),</b>
@@ -165,8 +165,8 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc"><i class="no-highlight">29</i>&nbsp;    SHIELDING(6),</b>
 <b class="fc"><i class="no-highlight">30</i>&nbsp;    SWORD_FIGHTING(8);</b>
 <i class="no-highlight">31</i>&nbsp;
-<b class="fc"><i class="no-highlight">32</i>&nbsp;    companion object {</b>
-<i class="no-highlight">33</i>&nbsp;        const val queryParam = &quot;filter_skillid&quot;
+<b class="fc"><i class="no-highlight">32</i>&nbsp;    public companion object {</b>
+<i class="no-highlight">33</i>&nbsp;        public const val queryParam: String = &quot;filter_skillid&quot;
 <i class="no-highlight">34</i>&nbsp;    }
 <i class="no-highlight">35</i>&nbsp;}
 </div>
@@ -195,7 +195,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-05 18:53</div>
+    <div style="float:right;">generated on 2022-09-11 06:14</div>
 </div>
 </body>
 </html>

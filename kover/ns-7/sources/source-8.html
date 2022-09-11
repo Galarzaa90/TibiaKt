@@ -197,7 +197,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">12</i>&nbsp; * @property filters The currently active filters for the bazaar.
 <i class="no-highlight">13</i>&nbsp; */
 <b class="pc"><i class="no-highlight">14</i>&nbsp;@Serializable</b>
-<i class="no-highlight">15</i>&nbsp;data class CharacterBazaar(
+<i class="no-highlight">15</i>&nbsp;public data class CharacterBazaar(
 <b class="fc"><i class="no-highlight">16</i>&nbsp;    val type: BazaarType,</b>
 <b class="pc"><i class="no-highlight">17</i>&nbsp;    val filters: BazaarFilters = BazaarFilters(),</b>
 <b class="fc"><i class="no-highlight">18</i>&nbsp;    override val currentPage: Int,</b>
@@ -208,8 +208,8 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">23</i>&nbsp;    /**
 <i class="no-highlight">24</i>&nbsp;     * The URL to the bazaar with the current filters and page.
 <i class="no-highlight">25</i>&nbsp;     */
-<b class="nc"><i class="no-highlight">26</i>&nbsp;    val url get() = getBazaarUrl(type, filters, currentPage)</b>
-<b class="nc"><i class="no-highlight">27</i>&nbsp;    override fun getPageUrl(page: Int) = getBazaarUrl(type, filters, page)</b>
+<b class="nc"><i class="no-highlight">26</i>&nbsp;    val url: String get() = getBazaarUrl(type, filters, currentPage)</b>
+<b class="nc"><i class="no-highlight">27</i>&nbsp;    override fun getPageUrl(page: Int): String = getBazaarUrl(type, filters, page)</b>
 <i class="no-highlight">28</i>&nbsp;}
 </div>
 </pre>
@@ -237,7 +237,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-05 18:53</div>
+    <div style="float:right;">generated on 2022-09-11 06:14</div>
 </div>
 </body>
 </html>

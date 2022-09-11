@@ -218,7 +218,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">33</i>&nbsp; * @property playersOnline The list of online players in this world.
 <i class="no-highlight">34</i>&nbsp; */
 <b class="pc"><i class="no-highlight">35</i>&nbsp;@Serializable</b>
-<i class="no-highlight">36</i>&nbsp;data class World(
+<i class="no-highlight">36</i>&nbsp;public data class World(
 <b class="fc"><i class="no-highlight">37</i>&nbsp;    override val name: String,</b>
 <b class="fc"><i class="no-highlight">38</i>&nbsp;    val isOnline: Boolean,</b>
 <b class="fc"><i class="no-highlight">39</i>&nbsp;    val onlineCount: Int,</b>
@@ -227,7 +227,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc"><i class="no-highlight">42</i>&nbsp;    val battlEyeType: BattlEyeType,</b>
 <b class="fc"><i class="no-highlight">43</i>&nbsp;    val battlEyeStartDate: LocalDate?,</b>
 <b class="fc"><i class="no-highlight">44</i>&nbsp;    val transferType: TransferType,</b>
-<b class="fc"><i class="no-highlight">45</i>&nbsp;    val isPremiumRestricted: Boolean ,</b>
+<b class="fc"><i class="no-highlight">45</i>&nbsp;    val isPremiumRestricted: Boolean,</b>
 <b class="fc"><i class="no-highlight">46</i>&nbsp;    val isExperimental: Boolean,</b>
 <b class="fc"><i class="no-highlight">47</i>&nbsp;    val onlineRecordCount: Int,</b>
 <b class="fc"><i class="no-highlight">48</i>&nbsp;    val onlineRecordDateTime: Instant,</b>
@@ -237,7 +237,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">52</i>&nbsp;) : BaseWorld {
 <i class="no-highlight">53</i>&nbsp;
 <i class="no-highlight">54</i>&nbsp;    /** Check if a character from this world can be transferred to [target] world. */
-<i class="no-highlight">55</i>&nbsp;    fun transferableTo(target: World): Boolean {
+<i class="no-highlight">55</i>&nbsp;    private fun transferableTo(target: World): Boolean {
 <b class="nc"><i class="no-highlight">56</i>&nbsp;        return pvpType.weight &gt;= target.pvpType.weight &amp;&amp;</b>
 <b class="nc"><i class="no-highlight">57</i>&nbsp;                isExperimental == target.isExperimental &amp;&amp;</b>
 <b class="nc"><i class="no-highlight">58</i>&nbsp;                transferType != TransferType.LOCKED &amp;&amp;</b>
@@ -246,7 +246,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">61</i>&nbsp;    }
 <i class="no-highlight">62</i>&nbsp;
 <i class="no-highlight">63</i>&nbsp;    /** Check if a character from the [origin] world can transfer to this world */
-<b class="nc"><i class="no-highlight">64</i>&nbsp;    fun transferableFrom(origin: World): Boolean = origin.transferableTo(this)</b>
+<b class="nc"><i class="no-highlight">64</i>&nbsp;    public fun transferableFrom(origin: World): Boolean = origin.transferableTo(this)</b>
 <i class="no-highlight">65</i>&nbsp;}
 </div>
 </pre>
@@ -274,7 +274,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-05 18:53</div>
+    <div style="float:right;">generated on 2022-09-11 06:14</div>
 </div>
 </body>
 </html>

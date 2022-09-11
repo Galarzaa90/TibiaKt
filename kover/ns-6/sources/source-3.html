@@ -139,16 +139,16 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">17</i>&nbsp;package com.galarzaa.tibiakt.core.models
 <i class="no-highlight">18</i>&nbsp;
 <i class="no-highlight">19</i>&nbsp;/** An object made of multiple pages with URLs */
-<i class="no-highlight">20</i>&nbsp;interface PaginatedWithUrl&lt;T&gt; : Paginated&lt;T&gt; {
+<i class="no-highlight">20</i>&nbsp;public interface PaginatedWithUrl&lt;T&gt; : Paginated&lt;T&gt; {
 <i class="no-highlight">21</i>&nbsp;    /** Get the URL to a specific page */
-<i class="no-highlight">22</i>&nbsp;    fun getPageUrl(page: Int): String
+<i class="no-highlight">22</i>&nbsp;    public fun getPageUrl(page: Int): String
 <i class="no-highlight">23</i>&nbsp;
 <i class="no-highlight">24</i>&nbsp;    /** Get the URL to the next page if there is any. */
-<i class="no-highlight">25</i>&nbsp;    val nextPageUrl: String?
+<i class="no-highlight">25</i>&nbsp;    public val nextPageUrl: String?
 <b class="nc"><i class="no-highlight">26</i>&nbsp;        get() = if (currentPage == totalPages) null else getPageUrl(currentPage + 1)</b>
 <i class="no-highlight">27</i>&nbsp;
 <i class="no-highlight">28</i>&nbsp;    /** Get the URL to the previous page if there is any. */
-<i class="no-highlight">29</i>&nbsp;    val previousPageUrl: String?
+<i class="no-highlight">29</i>&nbsp;    public val previousPageUrl: String?
 <b class="nc"><i class="no-highlight">30</i>&nbsp;        get() = if (currentPage == 0) null else getPageUrl(currentPage - 1)</b>
 <i class="no-highlight">31</i>&nbsp;}
 </div>
@@ -177,7 +177,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-05 18:53</div>
+    <div style="float:right;">generated on 2022-09-11 06:14</div>
 </div>
 </body>
 </html>

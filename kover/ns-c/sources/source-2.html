@@ -201,14 +201,14 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">16</i>&nbsp; * @property additionalValue Additional information displayed in some categories, such as Loyalty Title.
 <i class="no-highlight">17</i>&nbsp; */
 <b class="pc"><i class="no-highlight">18</i>&nbsp;@Serializable</b>
-<i class="no-highlight">19</i>&nbsp;data class HighscoresEntry(
+<i class="no-highlight">19</i>&nbsp;public data class HighscoresEntry(
 <b class="fc"><i class="no-highlight">20</i>&nbsp;    val rank: Int,</b>
 <b class="fc"><i class="no-highlight">21</i>&nbsp;    override val name: String,</b>
 <b class="fc"><i class="no-highlight">22</i>&nbsp;    override val level: Int,</b>
 <b class="fc"><i class="no-highlight">23</i>&nbsp;    val world: String,</b>
 <b class="fc"><i class="no-highlight">24</i>&nbsp;    val vocation: Vocation,</b>
 <b class="fc"><i class="no-highlight">25</i>&nbsp;    val value: Long,</b>
-<b class="fc"><i class="no-highlight">26</i>&nbsp;    val additionalValue: String?</b>
+<b class="fc"><i class="no-highlight">26</i>&nbsp;    val additionalValue: String?,</b>
 <i class="no-highlight">27</i>&nbsp;) : BaseCharacter, CharacterLevel
 </div>
 </pre>
@@ -236,7 +236,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-05 18:53</div>
+    <div style="float:right;">generated on 2022-09-11 06:14</div>
 </div>
 </body>
 </html>

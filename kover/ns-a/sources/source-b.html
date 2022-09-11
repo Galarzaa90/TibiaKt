@@ -183,34 +183,52 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;@file:UseSerializers(InstantSerializer::class)
-<i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;package com.galarzaa.tibiakt.core.models.forums
-<i class="no-highlight">4</i>&nbsp;
-<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.models.PaginatedWithUrl
-<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.serializers.InstantSerializer
-<i class="no-highlight">7</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getForumBoardUrl
-<i class="no-highlight">8</i>&nbsp;import kotlinx.serialization.Serializable
-<i class="no-highlight">9</i>&nbsp;import kotlinx.serialization.UseSerializers
-<i class="no-highlight">10</i>&nbsp;
-<b class="pc"><i class="no-highlight">11</i>&nbsp;@Serializable</b>
-<i class="no-highlight">12</i>&nbsp;data class ForumBoard(
-<b class="fc"><i class="no-highlight">13</i>&nbsp;    val name: String,</b>
-<b class="fc"><i class="no-highlight">14</i>&nbsp;    override val boardId: Int,</b>
-<b class="fc"><i class="no-highlight">15</i>&nbsp;    val sectionId: Int,</b>
-<b class="fc"><i class="no-highlight">16</i>&nbsp;    val section: String,</b>
-<b class="fc"><i class="no-highlight">17</i>&nbsp;    val threadAge: Int,</b>
-<b class="fc"><i class="no-highlight">18</i>&nbsp;    val announcements: List&lt;AnnouncementEntry&gt;,</b>
-<b class="fc"><i class="no-highlight">19</i>&nbsp;    override val currentPage: Int,</b>
-<b class="fc"><i class="no-highlight">20</i>&nbsp;    override val totalPages: Int,</b>
-<b class="fc"><i class="no-highlight">21</i>&nbsp;    override val resultsCount: Int,</b>
-<b class="fc"><i class="no-highlight">22</i>&nbsp;    override val entries: List&lt;ThreadEntry&gt;,</b>
-<i class="no-highlight">23</i>&nbsp;) : PaginatedWithUrl&lt;ThreadEntry&gt;, BaseForumBoard {
-<i class="no-highlight">24</i>&nbsp;
-<b class="nc"><i class="no-highlight">25</i>&nbsp;    override val url get() = getForumBoardUrl(boardId, currentPage, threadAge)</b>
-<b class="nc"><i class="no-highlight">26</i>&nbsp;    override fun getPageUrl(page: Int) = getForumBoardUrl(boardId, page, threadAge)</b>
-<i class="no-highlight">27</i>&nbsp;}
-<i class="no-highlight">28</i>&nbsp;
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;/*
+<i class="no-highlight">2</i>&nbsp; * Copyright © 2022 Allan Galarza
+<i class="no-highlight">3</i>&nbsp; *
+<i class="no-highlight">4</i>&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+<i class="no-highlight">5</i>&nbsp; * you may not use this file except in compliance with the License.
+<i class="no-highlight">6</i>&nbsp; * You may obtain a copy of the License at
+<i class="no-highlight">7</i>&nbsp; *
+<i class="no-highlight">8</i>&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+<i class="no-highlight">9</i>&nbsp; *
+<i class="no-highlight">10</i>&nbsp; * Unless required by applicable law or agreed to in writing, software
+<i class="no-highlight">11</i>&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+<i class="no-highlight">12</i>&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+<i class="no-highlight">13</i>&nbsp; * See the License for the specific language governing permissions and
+<i class="no-highlight">14</i>&nbsp; * limitations under the License.
+<i class="no-highlight">15</i>&nbsp; */
+<i class="no-highlight">16</i>&nbsp;
+<i class="no-highlight">17</i>&nbsp;@file:UseSerializers(InstantSerializer::class)
+<i class="no-highlight">18</i>&nbsp;
+<i class="no-highlight">19</i>&nbsp;package com.galarzaa.tibiakt.core.models.forums
+<i class="no-highlight">20</i>&nbsp;
+<i class="no-highlight">21</i>&nbsp;import com.galarzaa.tibiakt.core.models.PaginatedWithUrl
+<i class="no-highlight">22</i>&nbsp;import com.galarzaa.tibiakt.core.serializers.InstantSerializer
+<i class="no-highlight">23</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getForumBoardUrl
+<i class="no-highlight">24</i>&nbsp;import kotlinx.serialization.Serializable
+<i class="no-highlight">25</i>&nbsp;import kotlinx.serialization.UseSerializers
+<i class="no-highlight">26</i>&nbsp;
+<i class="no-highlight">27</i>&nbsp;
+<i class="no-highlight">28</i>&nbsp;public const val DEFAULT_THREAD_AGE: Int = 30
+<i class="no-highlight">29</i>&nbsp;
+<b class="pc"><i class="no-highlight">30</i>&nbsp;@Serializable</b>
+<i class="no-highlight">31</i>&nbsp;public data class ForumBoard(
+<b class="fc"><i class="no-highlight">32</i>&nbsp;    val name: String,</b>
+<b class="fc"><i class="no-highlight">33</i>&nbsp;    override val boardId: Int,</b>
+<b class="fc"><i class="no-highlight">34</i>&nbsp;    val sectionId: Int,</b>
+<b class="fc"><i class="no-highlight">35</i>&nbsp;    val section: String,</b>
+<b class="fc"><i class="no-highlight">36</i>&nbsp;    val threadAge: Int,</b>
+<b class="fc"><i class="no-highlight">37</i>&nbsp;    val announcements: List&lt;AnnouncementEntry&gt;,</b>
+<b class="fc"><i class="no-highlight">38</i>&nbsp;    override val currentPage: Int,</b>
+<b class="fc"><i class="no-highlight">39</i>&nbsp;    override val totalPages: Int,</b>
+<b class="fc"><i class="no-highlight">40</i>&nbsp;    override val resultsCount: Int,</b>
+<b class="fc"><i class="no-highlight">41</i>&nbsp;    override val entries: List&lt;ThreadEntry&gt;,</b>
+<i class="no-highlight">42</i>&nbsp;) : PaginatedWithUrl&lt;ThreadEntry&gt;, BaseForumBoard {
+<i class="no-highlight">43</i>&nbsp;
+<b class="nc"><i class="no-highlight">44</i>&nbsp;    override val url: String get() = getForumBoardUrl(boardId, currentPage, threadAge)</b>
+<b class="nc"><i class="no-highlight">45</i>&nbsp;    override fun getPageUrl(page: Int): String = getForumBoardUrl(boardId, page, threadAge)</b>
+<i class="no-highlight">46</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -237,7 +255,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-05 18:53</div>
+    <div style="float:right;">generated on 2022-09-11 06:14</div>
 </div>
 </body>
 </html>

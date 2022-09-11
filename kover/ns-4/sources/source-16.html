@@ -293,7 +293,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">3</i>&nbsp;/**
 <i class="no-highlight">4</i>&nbsp; * A world PvP type
 <i class="no-highlight">5</i>&nbsp; */
-<b class="fc"><i class="no-highlight">6</i>&nbsp;enum class PvpType(override val value: String) : StringEnum {</b>
+<b class="fc"><i class="no-highlight">6</i>&nbsp;public enum class PvpType(override val value: String) : StringEnum {</b>
 <b class="fc"><i class="no-highlight">7</i>&nbsp;    OPEN_PVP(&quot;Open PvP&quot;) {</b>
 <b class="fc"><i class="no-highlight">8</i>&nbsp;        override val weight: Int = 2</b>
 <b class="fc"><i class="no-highlight">9</i>&nbsp;        override val highscoresFilterValue: Int = 0</b>
@@ -323,27 +323,28 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">33</i>&nbsp;    /**
 <i class="no-highlight">34</i>&nbsp;     * The restriction weight of this type, used to check transferability between worlds.
 <i class="no-highlight">35</i>&nbsp;     */
-<i class="no-highlight">36</i>&nbsp;    abstract val weight: Int
+<i class="no-highlight">36</i>&nbsp;    public abstract val weight: Int
 <i class="no-highlight">37</i>&nbsp;
 <i class="no-highlight">38</i>&nbsp;    /**
 <i class="no-highlight">39</i>&nbsp;     * The value used internally to filter Highscores.
 <i class="no-highlight">40</i>&nbsp;     */
-<i class="no-highlight">41</i>&nbsp;    abstract val highscoresFilterValue: Int
+<i class="no-highlight">41</i>&nbsp;    public abstract val highscoresFilterValue: Int
 <i class="no-highlight">42</i>&nbsp;
 <i class="no-highlight">43</i>&nbsp;    /**
 <i class="no-highlight">44</i>&nbsp;     * The value used internally to filter the CharacterBazaar.
 <i class="no-highlight">45</i>&nbsp;     */
-<i class="no-highlight">46</i>&nbsp;    abstract val bazaarFilterValue: Int
+<i class="no-highlight">46</i>&nbsp;    public abstract val bazaarFilterValue: Int
 <i class="no-highlight">47</i>&nbsp;
-<i class="no-highlight">48</i>&nbsp;    companion object {
-<i class="no-highlight">49</i>&nbsp;        const val highscoresQueryParam: String = &quot;worldtypes&quot;
-<i class="no-highlight">50</i>&nbsp;        fun fromHighscoresFilterValue(value: Int?) =
+<i class="no-highlight">48</i>&nbsp;    public companion object {
+<i class="no-highlight">49</i>&nbsp;        public const val highscoresQueryParam: String = &quot;worldtypes&quot;
+<i class="no-highlight">50</i>&nbsp;        public fun fromHighscoresFilterValue(value: Int?): PvpType? =
 <b class="fc"><i class="no-highlight">51</i>&nbsp;            enumValues&lt;PvpType&gt;().firstOrNull { it.highscoresFilterValue == value }</b>
 <i class="no-highlight">52</i>&nbsp;
-<i class="no-highlight">53</i>&nbsp;        const val bazaarQueryParam = &quot;filter_worldpvptype&quot;
-<b class="nc"><i class="no-highlight">54</i>&nbsp;        fun fromBazaarFilterValue(value: Int?) = enumValues&lt;PvpType&gt;().firstOrNull { it.bazaarFilterValue == value }</b>
-<i class="no-highlight">55</i>&nbsp;    }
-<i class="no-highlight">56</i>&nbsp;}
+<i class="no-highlight">53</i>&nbsp;        public const val bazaarQueryParam: String = &quot;filter_worldpvptype&quot;
+<i class="no-highlight">54</i>&nbsp;        public fun fromBazaarFilterValue(value: Int?): PvpType? =
+<b class="nc"><i class="no-highlight">55</i>&nbsp;            enumValues&lt;PvpType&gt;().firstOrNull { it.bazaarFilterValue == value }</b>
+<i class="no-highlight">56</i>&nbsp;    }
+<i class="no-highlight">57</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -370,7 +371,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-05 18:53</div>
+    <div style="float:right;">generated on 2022-09-11 06:14</div>
 </div>
 </body>
 </html>

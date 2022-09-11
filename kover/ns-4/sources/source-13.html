@@ -122,16 +122,17 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.enums
 <i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;interface IntEnum {
-<i class="no-highlight">4</i>&nbsp;    val value: Int
+<i class="no-highlight">3</i>&nbsp;public interface IntEnum {
+<i class="no-highlight">4</i>&nbsp;    public val value: Int
 <i class="no-highlight">5</i>&nbsp;
-<i class="no-highlight">6</i>&nbsp;    companion object {
-<i class="no-highlight">7</i>&nbsp;        inline fun &lt;reified T&gt; fromValue(value: String?): T? where T : Enum&lt;T&gt;, T : IntEnum =
+<i class="no-highlight">6</i>&nbsp;    public companion object {
+<i class="no-highlight">7</i>&nbsp;        public inline fun &lt;reified T&gt; fromValue(value: String?): T? where T : Enum&lt;T&gt;, T : IntEnum =
 <b class="pc"><i class="no-highlight">8</i>&nbsp;            T::class.java.takeIf { it.isEnum }?.enumConstants?.find { it.value.toString() == value || it.name == value }</b>
 <i class="no-highlight">9</i>&nbsp;
-<b class="fc"><i class="no-highlight">10</i>&nbsp;        inline fun &lt;reified T&gt; fromValue(value: Int?): T? where T : Enum&lt;T&gt;, T : IntEnum = fromValue(value.toString())</b>
-<i class="no-highlight">11</i>&nbsp;    }
-<i class="no-highlight">12</i>&nbsp;}
+<i class="no-highlight">10</i>&nbsp;        public inline fun &lt;reified T&gt; fromValue(value: Int?): T? where T : Enum&lt;T&gt;, T : IntEnum =
+<b class="fc"><i class="no-highlight">11</i>&nbsp;            fromValue(value.toString())</b>
+<i class="no-highlight">12</i>&nbsp;    }
+<i class="no-highlight">13</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -158,7 +159,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-05 18:53</div>
+    <div style="float:right;">generated on 2022-09-11 06:14</div>
 </div>
 </body>
 </html>

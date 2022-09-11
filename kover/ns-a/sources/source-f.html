@@ -190,7 +190,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">5</i>&nbsp;import kotlinx.serialization.Serializable
 <i class="no-highlight">6</i>&nbsp;
 <b class="pc"><i class="no-highlight">7</i>&nbsp;@Serializable</b>
-<i class="no-highlight">8</i>&nbsp;data class ForumThread(
+<i class="no-highlight">8</i>&nbsp;public data class ForumThread(
 <b class="fc"><i class="no-highlight">9</i>&nbsp;    val title: String,</b>
 <b class="fc"><i class="no-highlight">10</i>&nbsp;    val threadId: Int,</b>
 <b class="fc"><i class="no-highlight">11</i>&nbsp;    val board: String,</b>
@@ -207,10 +207,9 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc"><i class="no-highlight">22</i>&nbsp;    override val entries: List&lt;ForumPost&gt;,</b>
 <i class="no-highlight">23</i>&nbsp;) : PaginatedWithUrl&lt;ForumPost&gt; {
 <i class="no-highlight">24</i>&nbsp;
-<b class="nc"><i class="no-highlight">25</i>&nbsp;    val url get() = getForumThreadUrl(threadId, currentPage)</b>
+<b class="nc"><i class="no-highlight">25</i>&nbsp;    val url: String get() = getForumThreadUrl(threadId, currentPage)</b>
 <b class="nc"><i class="no-highlight">26</i>&nbsp;    override fun getPageUrl(page: Int): String = getForumThreadUrl(threadId, page)</b>
 <i class="no-highlight">27</i>&nbsp;}
-<i class="no-highlight">28</i>&nbsp;
 </div>
 </pre>
 </div>
@@ -237,7 +236,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-05 18:53</div>
+    <div style="float:right;">generated on 2022-09-11 06:14</div>
 </div>
 </body>
 </html>

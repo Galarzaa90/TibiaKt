@@ -71,10 +71,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    82.9%
+    82.8%
   </span>
   <span class="absValue">
-    (320/386)
+    (317/383)
   </span>
 </td>
 </tr>
@@ -141,10 +141,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    81.5%
+    81.4%
   </span>
   <span class="absValue">
-    (393/482)
+    (390/479)
   </span>
 </td>
 </tr>
@@ -197,8 +197,8 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">40</i>&nbsp;import org.jsoup.nodes.Element
 <i class="no-highlight">41</i>&nbsp;import kotlin.time.Duration.Companion.minutes
 <i class="no-highlight">42</i>&nbsp;
-<i class="no-highlight">43</i>&nbsp;object HighscoresParser : Parser&lt;Highscores?&gt; {
-<b class="fc"><i class="no-highlight">44</i>&nbsp;    val numericMatch = Regex(&quot;&quot;&quot;(\d+)&quot;&quot;&quot;)</b>
+<i class="no-highlight">43</i>&nbsp;public object HighscoresParser : Parser&lt;Highscores?&gt; {
+<b class="fc"><i class="no-highlight">44</i>&nbsp;    private val numericMatch = Regex(&quot;&quot;&quot;(\d+)&quot;&quot;&quot;)</b>
 <i class="no-highlight">45</i>&nbsp;
 <i class="no-highlight">46</i>&nbsp;    override fun fromContent(content: String): Highscores? {
 <b class="fc"><i class="no-highlight">47</i>&nbsp;        val document: Document = Jsoup.parse(content)</b>
@@ -294,7 +294,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-05 18:53</div>
+    <div style="float:right;">generated on 2022-09-11 06:14</div>
 </div>
 </body>
 </html>

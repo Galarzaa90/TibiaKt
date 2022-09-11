@@ -115,11 +115,11 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">7</i>&nbsp; * @property title The title of the announcement.
 <i class="no-highlight">8</i>&nbsp; * @property announcementId The internal ID of the announcement, used for linking.
 <i class="no-highlight">9</i>&nbsp; */
-<i class="no-highlight">10</i>&nbsp;interface BaseForumAnnouncement {
-<i class="no-highlight">11</i>&nbsp;    val title: String
-<i class="no-highlight">12</i>&nbsp;    val announcementId: Int
+<i class="no-highlight">10</i>&nbsp;public interface BaseForumAnnouncement {
+<i class="no-highlight">11</i>&nbsp;    public val title: String
+<i class="no-highlight">12</i>&nbsp;    public val announcementId: Int
 <i class="no-highlight">13</i>&nbsp;
-<b class="nc"><i class="no-highlight">14</i>&nbsp;    val url get() = getForumAnnouncementUrl(announcementId)</b>
+<b class="nc"><i class="no-highlight">14</i>&nbsp;    public val url: String get() = getForumAnnouncementUrl(announcementId)</b>
 <i class="no-highlight">15</i>&nbsp;}
 </div>
 </pre>
@@ -147,7 +147,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-05 18:53</div>
+    <div style="float:right;">generated on 2022-09-11 06:14</div>
 </div>
 </body>
 </html>

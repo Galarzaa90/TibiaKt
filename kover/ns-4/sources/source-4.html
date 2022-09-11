@@ -139,7 +139,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">3</i>&nbsp;/**
 <i class="no-highlight">4</i>&nbsp; * The possible ordering directions for auctions
 <i class="no-highlight">5</i>&nbsp; */
-<b class="fc"><i class="no-highlight">6</i>&nbsp;enum class AuctionOrderDirection(override val value: Int) : IntEnum {</b>
+<b class="fc"><i class="no-highlight">6</i>&nbsp;public enum class AuctionOrderDirection(override val value: Int) : IntEnum {</b>
 <i class="no-highlight">7</i>&nbsp;    /**
 <i class="no-highlight">8</i>&nbsp;     * Descending order
 <i class="no-highlight">9</i>&nbsp;     */
@@ -150,8 +150,8 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">14</i>&nbsp;     */
 <b class="fc"><i class="no-highlight">15</i>&nbsp;    LOWEST_EARLIEST(1);</b>
 <i class="no-highlight">16</i>&nbsp;
-<b class="fc"><i class="no-highlight">17</i>&nbsp;    companion object {</b>
-<i class="no-highlight">18</i>&nbsp;        const val queryParam = &quot;order_direction&quot;
+<b class="fc"><i class="no-highlight">17</i>&nbsp;    public companion object {</b>
+<i class="no-highlight">18</i>&nbsp;        public const val queryParam: String = &quot;order_direction&quot;
 <i class="no-highlight">19</i>&nbsp;    }
 <i class="no-highlight">20</i>&nbsp;}
 </div>
@@ -180,7 +180,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-05 18:53</div>
+    <div style="float:right;">generated on 2022-09-11 06:14</div>
 </div>
 </body>
 </html>

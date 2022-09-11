@@ -201,19 +201,19 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">16</i>&nbsp; * @property entries The list of events in this month.
 <i class="no-highlight">17</i>&nbsp; */
 <b class="pc"><i class="no-highlight">18</i>&nbsp;@Serializable</b>
-<i class="no-highlight">19</i>&nbsp;data class EventsSchedule(
+<i class="no-highlight">19</i>&nbsp;public data class EventsSchedule(
 <b class="fc"><i class="no-highlight">20</i>&nbsp;    val yearMonth: YearMonth,</b>
 <b class="fc"><i class="no-highlight">21</i>&nbsp;    val entries: List&lt;EventEntry&gt;,</b>
 <i class="no-highlight">22</i>&nbsp;) {
 <i class="no-highlight">23</i>&nbsp;    /**
 <i class="no-highlight">24</i>&nbsp;     * The URL of the events schedule of the month.
 <i class="no-highlight">25</i>&nbsp;     */
-<b class="nc"><i class="no-highlight">26</i>&nbsp;    val url get() = getEventsScheduleUrl(yearMonth)</b>
+<b class="nc"><i class="no-highlight">26</i>&nbsp;    val url: String get() = getEventsScheduleUrl(yearMonth)</b>
 <i class="no-highlight">27</i>&nbsp;
 <i class="no-highlight">28</i>&nbsp;    /**
 <i class="no-highlight">29</i>&nbsp;     * Get all the events that are active in a specific day of the month.
 <i class="no-highlight">30</i>&nbsp;     */
-<i class="no-highlight">31</i>&nbsp;    fun getEventsOn(date: LocalDate): List&lt;EventEntry&gt; {
+<i class="no-highlight">31</i>&nbsp;    public fun getEventsOn(date: LocalDate): List&lt;EventEntry&gt; {
 <b class="nc"><i class="no-highlight">32</i>&nbsp;        return entries.filter {</b>
 <b class="nc"><i class="no-highlight">33</i>&nbsp;            (it.startDate ?: LocalDate.MIN) &lt;= date &amp;&amp;</b>
 <b class="nc"><i class="no-highlight">34</i>&nbsp;                    date &lt;= (it.endDate ?: LocalDate.MAX)</b>
@@ -246,7 +246,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-05 18:53</div>
+    <div style="float:right;">generated on 2022-09-11 06:14</div>
 </div>
 </body>
 </html>

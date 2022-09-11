@@ -207,7 +207,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">22</i>&nbsp; * @property timeLeft The remaining time for the auction to end. Note that the resolution of this is either days or hours.
 <i class="no-highlight">23</i>&nbsp; */
 <b class="pc"><i class="no-highlight">24</i>&nbsp;@Serializable</b>
-<i class="no-highlight">25</i>&nbsp;data class HouseEntry(
+<i class="no-highlight">25</i>&nbsp;public data class HouseEntry(
 <b class="fc"><i class="no-highlight">26</i>&nbsp;    override val houseId: Int,</b>
 <b class="fc"><i class="no-highlight">27</i>&nbsp;    val name: String,</b>
 <b class="fc"><i class="no-highlight">28</i>&nbsp;    val size: Int,</b>
@@ -217,7 +217,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc"><i class="no-highlight">32</i>&nbsp;    val type: HouseType,</b>
 <b class="fc"><i class="no-highlight">33</i>&nbsp;    val status: HouseStatus,</b>
 <b class="fc"><i class="no-highlight">34</i>&nbsp;    val highestBid: Int?,</b>
-<b class="fc"><i class="no-highlight">35</i>&nbsp;    val timeLeft: Duration?</b>
+<b class="fc"><i class="no-highlight">35</i>&nbsp;    val timeLeft: Duration?,</b>
 <i class="no-highlight">36</i>&nbsp;) : BaseHouse
 </div>
 </pre>
@@ -245,7 +245,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-05 18:53</div>
+    <div style="float:right;">generated on 2022-09-11 06:14</div>
 </div>
 </body>
 </html>

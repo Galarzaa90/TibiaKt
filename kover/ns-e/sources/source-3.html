@@ -214,12 +214,12 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">29</i>&nbsp; * The Tibia Drome leaderboards of a world.
 <i class="no-highlight">30</i>&nbsp; *
 <i class="no-highlight">31</i>&nbsp; * @property world The name of the world.
-<i class="no-highlight">32</i>&nbsp; * @property rotation The rotation of this leaderboards.
+<i class="no-highlight">32</i>&nbsp; * @property rotation The rotation of these leaderboards.
 <i class="no-highlight">33</i>&nbsp; * @property availableRotations The rotations that are available to view.
 <i class="no-highlight">34</i>&nbsp; * @property lastUpdated The time when the leaderboard was last updated. Only available for the current rotation.
 <i class="no-highlight">35</i>&nbsp; */
 <b class="pc"><i class="no-highlight">36</i>&nbsp;@Serializable</b>
-<i class="no-highlight">37</i>&nbsp;data class Leaderboards(
+<i class="no-highlight">37</i>&nbsp;public data class Leaderboards(
 <b class="fc"><i class="no-highlight">38</i>&nbsp;    val world: String,</b>
 <b class="fc"><i class="no-highlight">39</i>&nbsp;    val rotation: LeaderboardsRotation,</b>
 <b class="fc"><i class="no-highlight">40</i>&nbsp;    val availableRotations: List&lt;LeaderboardsRotation&gt;,</b>
@@ -233,11 +233,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">48</i>&nbsp;    /**
 <i class="no-highlight">49</i>&nbsp;     * The URL to these leaderboards.
 <i class="no-highlight">50</i>&nbsp;     */
-<b class="nc"><i class="no-highlight">51</i>&nbsp;    val url get() = getLeaderboardUrl(world, rotation.rotationId, currentPage)</b>
+<b class="nc"><i class="no-highlight">51</i>&nbsp;    val url: String get() = getLeaderboardUrl(world, rotation.rotationId, currentPage)</b>
 <i class="no-highlight">52</i>&nbsp;
-<b class="nc"><i class="no-highlight">53</i>&nbsp;    override fun getPageUrl(page: Int) = getLeaderboardUrl(world, rotation.rotationId, page)</b>
+<b class="nc"><i class="no-highlight">53</i>&nbsp;    override fun getPageUrl(page: Int): String = getLeaderboardUrl(world, rotation.rotationId, page)</b>
 <i class="no-highlight">54</i>&nbsp;}
-<i class="no-highlight">55</i>&nbsp;
 </div>
 </pre>
 </div>
@@ -264,7 +263,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-05 18:53</div>
+    <div style="float:right;">generated on 2022-09-11 06:14</div>
 </div>
 </body>
 </html>

@@ -133,14 +133,14 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">25</i>&nbsp; * @property id The internal ID of the news entry.
 <i class="no-highlight">26</i>&nbsp; * @property category The category of the entry.
 <i class="no-highlight">27</i>&nbsp; */
-<i class="no-highlight">28</i>&nbsp;interface BaseNews {
-<i class="no-highlight">29</i>&nbsp;    val id: Int
-<i class="no-highlight">30</i>&nbsp;    val category: NewsCategory
+<i class="no-highlight">28</i>&nbsp;public interface BaseNews {
+<i class="no-highlight">29</i>&nbsp;    public val id: Int
+<i class="no-highlight">30</i>&nbsp;    public val category: NewsCategory
 <i class="no-highlight">31</i>&nbsp;
 <i class="no-highlight">32</i>&nbsp;    /**
 <i class="no-highlight">33</i>&nbsp;     * The URL to this article.
 <i class="no-highlight">34</i>&nbsp;     */
-<b class="nc"><i class="no-highlight">35</i>&nbsp;    val url get() = getNewsUrl(id)</b>
+<b class="nc"><i class="no-highlight">35</i>&nbsp;    public val url: String get() = getNewsUrl(id)</b>
 <i class="no-highlight">36</i>&nbsp;}
 </div>
 </pre>
@@ -168,7 +168,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-05 18:53</div>
+    <div style="float:right;">generated on 2022-09-11 06:14</div>
 </div>
 </body>
 </html>

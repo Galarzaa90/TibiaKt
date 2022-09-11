@@ -92,15 +92,15 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.enums
 <i class="no-highlight">2</i>&nbsp;
-<b class="fc"><i class="no-highlight">3</i>&nbsp;enum class NewsType(override val value: String) : StringEnum {</b>
+<b class="fc"><i class="no-highlight">3</i>&nbsp;public enum class NewsType(override val value: String) : StringEnum {</b>
 <b class="fc"><i class="no-highlight">4</i>&nbsp;    NEWS(&quot;News&quot;),</b>
 <b class="fc"><i class="no-highlight">5</i>&nbsp;    NEWS_TICKER(&quot;News Ticker&quot;),</b>
 <b class="fc"><i class="no-highlight">6</i>&nbsp;    FEATURED_ARTICLE(&quot;Featured Article&quot;);</b>
 <i class="no-highlight">7</i>&nbsp;
-<i class="no-highlight">8</i>&nbsp;    val filterName
+<i class="no-highlight">8</i>&nbsp;    public val filterName: String
 <b class="fc"><i class="no-highlight">9</i>&nbsp;        get() = &quot;filter_$filterValue&quot;</b>
 <i class="no-highlight">10</i>&nbsp;
-<i class="no-highlight">11</i>&nbsp;    val filterValue
+<i class="no-highlight">11</i>&nbsp;    public val filterValue: String
 <b class="fc"><i class="no-highlight">12</i>&nbsp;        get() = value.split(&quot; &quot;).last().lowercase()</b>
 <i class="no-highlight">13</i>&nbsp;}
 </div>
@@ -129,7 +129,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-05 18:53</div>
+    <div style="float:right;">generated on 2022-09-11 06:14</div>
 </div>
 </body>
 </html>

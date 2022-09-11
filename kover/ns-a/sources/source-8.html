@@ -199,7 +199,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">14</i>&nbsp; * The CM Post Archive, displaying recent posts by Community Managers.
 <i class="no-highlight">15</i>&nbsp; */
 <b class="pc"><i class="no-highlight">16</i>&nbsp;@Serializable</b>
-<i class="no-highlight">17</i>&nbsp;data class CMPostArchive(
+<i class="no-highlight">17</i>&nbsp;public data class CMPostArchive(
 <b class="fc"><i class="no-highlight">18</i>&nbsp;    val startDate: LocalDate,</b>
 <b class="fc"><i class="no-highlight">19</i>&nbsp;    val endDate: LocalDate,</b>
 <b class="fc"><i class="no-highlight">20</i>&nbsp;    override val currentPage: Int,</b>
@@ -207,11 +207,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc"><i class="no-highlight">22</i>&nbsp;    override val resultsCount: Int,</b>
 <b class="fc"><i class="no-highlight">23</i>&nbsp;    override val entries: List&lt;CMPost&gt;,</b>
 <i class="no-highlight">24</i>&nbsp;) : PaginatedWithUrl&lt;CMPost&gt; {
-<b class="nc"><i class="no-highlight">25</i>&nbsp;    val url get() = getCMPostArchiveUrl(startDate, endDate, currentPage)</b>
+<b class="nc"><i class="no-highlight">25</i>&nbsp;    val url: String get() = getCMPostArchiveUrl(startDate, endDate, currentPage)</b>
 <i class="no-highlight">26</i>&nbsp;
-<b class="nc"><i class="no-highlight">27</i>&nbsp;    override fun getPageUrl(page: Int) = getCMPostArchiveUrl(startDate, endDate, page)</b>
+<b class="nc"><i class="no-highlight">27</i>&nbsp;    override fun getPageUrl(page: Int): String = getCMPostArchiveUrl(startDate, endDate, page)</b>
 <i class="no-highlight">28</i>&nbsp;}
-<i class="no-highlight">29</i>&nbsp;
 </div>
 </pre>
 </div>
@@ -238,7 +237,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-05 18:53</div>
+    <div style="float:right;">generated on 2022-09-11 06:14</div>
 </div>
 </body>
 </html>

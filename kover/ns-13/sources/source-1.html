@@ -131,22 +131,22 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">32</i>&nbsp;import kotlin.time.toJavaDuration
 <i class="no-highlight">33</i>&nbsp;
 <i class="no-highlight">34</i>&nbsp;/** The timezone Tibia time is based on. */
-<b class="fc"><i class="no-highlight">35</i>&nbsp;val TIBIA_TIMEZONE: ZoneId = ZoneId.of(&quot;Europe/Berlin&quot;)</b>
+<b class="fc"><i class="no-highlight">35</i>&nbsp;public val TIBIA_TIMEZONE: ZoneId = ZoneId.of(&quot;Europe/Berlin&quot;)</b>
 <i class="no-highlight">36</i>&nbsp;
 <i class="no-highlight">37</i>&nbsp;/** The local time when server save happens. */
-<b class="fc"><i class="no-highlight">38</i>&nbsp;val SERVER_SAVE_TIME: LocalTime = LocalTime.of(10, 0)</b>
+<b class="fc"><i class="no-highlight">38</i>&nbsp;public val SERVER_SAVE_TIME: LocalTime = LocalTime.of(10, 0)</b>
 <i class="no-highlight">39</i>&nbsp;
 <i class="no-highlight">40</i>&nbsp;/** Get the current day of the week in Tibia
 <i class="no-highlight">41</i>&nbsp; *
 <i class="no-highlight">42</i>&nbsp; * A new day starts every server save, at 10:00 CET/CEST.
 <i class="no-highlight">43</i>&nbsp; */
-<b class="nc"><i class="no-highlight">44</i>&nbsp;fun getTibiaWeekDay(): DayOfWeek = (getTibiaDateTime() - 10.hours.toJavaDuration()).dayOfWeek</b>
+<b class="nc"><i class="no-highlight">44</i>&nbsp;public fun getTibiaWeekDay(): DayOfWeek = (getTibiaDateTime() - 10.hours.toJavaDuration()).dayOfWeek</b>
 <i class="no-highlight">45</i>&nbsp;
 <i class="no-highlight">46</i>&nbsp;/** Get the local datetime in Tibia&#39;s servers. */
-<b class="nc"><i class="no-highlight">47</i>&nbsp;fun getTibiaDateTime(): LocalDateTime = LocalDateTime.now(TIBIA_TIMEZONE)</b>
+<b class="nc"><i class="no-highlight">47</i>&nbsp;public fun getTibiaDateTime(): LocalDateTime = LocalDateTime.now(TIBIA_TIMEZONE)</b>
 <i class="no-highlight">48</i>&nbsp;
 <i class="no-highlight">49</i>&nbsp;/** Get the time of the last server save from a [currentTime]. */
-<b class="nc"><i class="no-highlight">50</i>&nbsp;fun getLastServerSaveTime(currentTime: ZonedDateTime = ZonedDateTime.now(TIBIA_TIMEZONE)): ZonedDateTime {</b>
+<b class="nc"><i class="no-highlight">50</i>&nbsp;public fun getLastServerSaveTime(currentTime: ZonedDateTime = ZonedDateTime.now(TIBIA_TIMEZONE)): ZonedDateTime {</b>
 <b class="fc"><i class="no-highlight">51</i>&nbsp;    val serverSaveTime = ZonedDateTime.of(</b>
 <b class="fc"><i class="no-highlight">52</i>&nbsp;        currentTime.toLocalDate(), SERVER_SAVE_TIME, TIBIA_TIMEZONE</b>
 <i class="no-highlight">53</i>&nbsp;    )
@@ -154,18 +154,18 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">55</i>&nbsp;}
 <i class="no-highlight">56</i>&nbsp;
 <i class="no-highlight">57</i>&nbsp;/** Get the time of the last server save from a [currentTime]. */
-<i class="no-highlight">58</i>&nbsp;fun getLastServerSaveTime(currentTime: Instant): Instant {
+<i class="no-highlight">58</i>&nbsp;public fun getLastServerSaveTime(currentTime: Instant): Instant {
 <b class="nc"><i class="no-highlight">59</i>&nbsp;    return getLastServerSaveTime(ZonedDateTime.ofInstant(currentTime.toJavaInstant(), TIBIA_TIMEZONE)).toInstant()</b>
 <b class="nc"><i class="no-highlight">60</i>&nbsp;        .toKotlinInstant()</b>
 <i class="no-highlight">61</i>&nbsp;}
 <i class="no-highlight">62</i>&nbsp;
 <i class="no-highlight">63</i>&nbsp;/** Get the time of the next server save from a [currentTime]. */
-<b class="nc"><i class="no-highlight">64</i>&nbsp;fun getNextServerSaveTime(currentTime: ZonedDateTime = ZonedDateTime.now(TIBIA_TIMEZONE)): ZonedDateTime {</b>
+<b class="nc"><i class="no-highlight">64</i>&nbsp;public fun getNextServerSaveTime(currentTime: ZonedDateTime = ZonedDateTime.now(TIBIA_TIMEZONE)): ZonedDateTime {</b>
 <b class="nc"><i class="no-highlight">65</i>&nbsp;    return getLastServerSaveTime(currentTime).plusDays(1)</b>
 <i class="no-highlight">66</i>&nbsp;}
 <i class="no-highlight">67</i>&nbsp;
 <i class="no-highlight">68</i>&nbsp;/** Get the time of the next server save from a [currentTime]. */
-<i class="no-highlight">69</i>&nbsp;fun getNextServerSaveTime(currentTime: Instant): Instant {
+<i class="no-highlight">69</i>&nbsp;public fun getNextServerSaveTime(currentTime: Instant): Instant {
 <b class="nc"><i class="no-highlight">70</i>&nbsp;    return getNextServerSaveTime(ZonedDateTime.ofInstant(currentTime.toJavaInstant(), TIBIA_TIMEZONE)).toInstant()</b>
 <b class="nc"><i class="no-highlight">71</i>&nbsp;        .toKotlinInstant()</b>
 <i class="no-highlight">72</i>&nbsp;}
@@ -174,7 +174,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">75</i>&nbsp;/**
 <i class="no-highlight">76</i>&nbsp; * Parses a string containing date and time from Tibia.com into an [Instant] instance.
 <i class="no-highlight">77</i>&nbsp; */
-<i class="no-highlight">78</i>&nbsp;fun parseTibiaDateTime(input: String): Instant {
+<i class="no-highlight">78</i>&nbsp;public fun parseTibiaDateTime(input: String): Instant {
 <b class="fc"><i class="no-highlight">79</i>&nbsp;    val timeString = input.clean().let { it.substring(0, it.length - 4).trim() }</b>
 <b class="fc"><i class="no-highlight">80</i>&nbsp;    return try {</b>
 <b class="fc"><i class="no-highlight">81</i>&nbsp;        LocalDateTime.parse(timeString, DateTimeFormatter.ofPattern(&quot;MMM dd yyyy, HH:mm:ss&quot;, Locale.US))</b>
@@ -186,21 +186,21 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">87</i>&nbsp;/**
 <i class="no-highlight">88</i>&nbsp; * Parses a string containing date from Tibia.com into an [LocalDate] instance.
 <i class="no-highlight">89</i>&nbsp; */
-<i class="no-highlight">90</i>&nbsp;fun parseTibiaDate(input: String): LocalDate {
+<i class="no-highlight">90</i>&nbsp;public fun parseTibiaDate(input: String): LocalDate {
 <b class="fc"><i class="no-highlight">91</i>&nbsp;    return LocalDate.parse(input.clean(), DateTimeFormatter.ofPattern(&quot;MMM dd yyyy&quot;, Locale.US))</b>
 <i class="no-highlight">92</i>&nbsp;}
 <i class="no-highlight">93</i>&nbsp;
 <i class="no-highlight">94</i>&nbsp;/**
 <i class="no-highlight">95</i>&nbsp; * Parses a string containing date from Tibia.com into an [LocalDate] instance.
 <i class="no-highlight">96</i>&nbsp; */
-<i class="no-highlight">97</i>&nbsp;fun parseTibiaFullDate(input: String): LocalDate {
+<i class="no-highlight">97</i>&nbsp;public fun parseTibiaFullDate(input: String): LocalDate {
 <b class="fc"><i class="no-highlight">98</i>&nbsp;    return LocalDate.parse(input.clean(), DateTimeFormatter.ofPattern(&quot;MMMM d, yyyy&quot;, Locale.US))</b>
 <i class="no-highlight">99</i>&nbsp;}
 <i class="no-highlight">100</i>&nbsp;
 <i class="no-highlight">101</i>&nbsp;/**
 <i class="no-highlight">102</i>&nbsp; * Parses a string containing a date time from Tibia.com forums into an [Instant] instance.
 <i class="no-highlight">103</i>&nbsp; */
-<i class="no-highlight">104</i>&nbsp;fun parseTibiaForumDateTime(input: String): Instant {
+<i class="no-highlight">104</i>&nbsp;public fun parseTibiaForumDateTime(input: String): Instant {
 <b class="fc"><i class="no-highlight">105</i>&nbsp;    return LocalDateTime.parse(input, DateTimeFormatter.ofPattern(&quot;dd.MM.yyyy HH:mm:ss&quot;, Locale.US))</b>
 <b class="fc"><i class="no-highlight">106</i>&nbsp;        .atZone(TIBIA_TIMEZONE).toInstant().toKotlinInstant()</b>
 <i class="no-highlight">107</i>&nbsp;}
@@ -230,7 +230,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-05 18:53</div>
+    <div style="float:right;">generated on 2022-09-11 06:14</div>
 </div>
 </body>
 </html>

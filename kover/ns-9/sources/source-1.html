@@ -132,14 +132,14 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">24</i>&nbsp; * @property name The name of the creature.
 <i class="no-highlight">25</i>&nbsp; * @property identifier The internal name of the creature, used for images and links (where applicable).
 <i class="no-highlight">26</i>&nbsp; */
-<i class="no-highlight">27</i>&nbsp;interface BaseCreatureEntry {
-<i class="no-highlight">28</i>&nbsp;    val name: String
-<i class="no-highlight">29</i>&nbsp;    val identifier: String
+<i class="no-highlight">27</i>&nbsp;public interface BaseCreatureEntry {
+<i class="no-highlight">28</i>&nbsp;    public val name: String
+<i class="no-highlight">29</i>&nbsp;    public val identifier: String
 <i class="no-highlight">30</i>&nbsp;
 <i class="no-highlight">31</i>&nbsp;    /**
 <i class="no-highlight">32</i>&nbsp;     * The URL to the creature&#39;s image.
 <i class="no-highlight">33</i>&nbsp;     */
-<b class="nc"><i class="no-highlight">34</i>&nbsp;    val imageUrl get() = getStaticFileUrl(&quot;images&quot;, &quot;library&quot;, &quot;$identifier.gif&quot;)</b>
+<b class="nc"><i class="no-highlight">34</i>&nbsp;    public val imageUrl: String get() = getStaticFileUrl(&quot;images&quot;, &quot;library&quot;, &quot;$identifier.gif&quot;)</b>
 <i class="no-highlight">35</i>&nbsp;}
 </div>
 </pre>
@@ -167,7 +167,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-05 18:53</div>
+    <div style="float:right;">generated on 2022-09-11 06:14</div>
 </div>
 </body>
 </html>

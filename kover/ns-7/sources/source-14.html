@@ -195,14 +195,14 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">10</i>&nbsp; * @property categoryId The id of the category of the argument.
 <i class="no-highlight">11</i>&nbsp; */
 <b class="pc"><i class="no-highlight">12</i>&nbsp;@Serializable</b>
-<i class="no-highlight">13</i>&nbsp;data class SalesArgument(
+<i class="no-highlight">13</i>&nbsp;public data class SalesArgument(
 <b class="fc"><i class="no-highlight">14</i>&nbsp;    val categoryId: Int,</b>
 <b class="fc"><i class="no-highlight">15</i>&nbsp;    val content: String,</b>
 <i class="no-highlight">16</i>&nbsp;) {
 <i class="no-highlight">17</i>&nbsp;    /**
 <i class="no-highlight">18</i>&nbsp;     * The URL to the image corresponding to the category.
 <i class="no-highlight">19</i>&nbsp;     */
-<b class="nc"><i class="no-highlight">20</i>&nbsp;    val categoryImageUrl get() = getStaticFileUrl(&quot;images&quot;, &quot;charactertrade&quot;, &quot;usp-category-$categoryId.png&quot;)</b>
+<b class="nc"><i class="no-highlight">20</i>&nbsp;    val categoryImageUrl: String get() = getStaticFileUrl(&quot;images&quot;, &quot;charactertrade&quot;, &quot;usp-category-$categoryId.png&quot;)</b>
 <i class="no-highlight">21</i>&nbsp;}
 </div>
 </pre>
@@ -230,7 +230,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-05 18:53</div>
+    <div style="float:right;">generated on 2022-09-11 06:14</div>
 </div>
 </body>
 </html>

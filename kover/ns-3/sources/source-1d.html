@@ -63,18 +63,18 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    84.6%
+    85.2%
   </span>
   <span class="absValue">
-    (22/26)
+    (23/27)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    75.3%
+    74.8%
   </span>
   <span class="absValue">
-    (110/146)
+    (110/147)
   </span>
 </td>
 </tr>
@@ -106,10 +106,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    86.7%
+    84.5%
   </span>
   <span class="absValue">
-    (98/113)
+    (98/116)
   </span>
 </td>
   </tr>
@@ -133,18 +133,18 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    90.5%
+    90.7%
   </span>
   <span class="absValue">
-    (38/42)
+    (39/43)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    80.3%
+    79.1%
   </span>
   <span class="absValue">
-    (208/259)
+    (208/263)
   </span>
 </td>
 </tr>
@@ -155,84 +155,104 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.builders
-<i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HighscoresBattlEyeType
-<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HighscoresCategory
-<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HighscoresProfession
-<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.enums.PvpType
-<i class="no-highlight">7</i>&nbsp;import com.galarzaa.tibiakt.core.enums.Vocation
-<i class="no-highlight">8</i>&nbsp;import com.galarzaa.tibiakt.core.models.highscores.Highscores
-<i class="no-highlight">9</i>&nbsp;import com.galarzaa.tibiakt.core.models.highscores.HighscoresEntry
-<i class="no-highlight">10</i>&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
-<i class="no-highlight">11</i>&nbsp;import kotlinx.datetime.Instant
-<i class="no-highlight">12</i>&nbsp;
-<i class="no-highlight">13</i>&nbsp;@BuilderDsl
-<i class="no-highlight">14</i>&nbsp;inline fun highscores(block: HighscoresBuilder.() -&gt; Unit) = HighscoresBuilder().apply(block).build()
-<i class="no-highlight">15</i>&nbsp;
-<i class="no-highlight">16</i>&nbsp;@BuilderDsl
-<i class="no-highlight">17</i>&nbsp;inline fun highscoresBuilder(block: HighscoresBuilder.() -&gt; Unit) = HighscoresBuilder().apply(block)
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;/*
+<i class="no-highlight">2</i>&nbsp; * Copyright © 2022 Allan Galarza
+<i class="no-highlight">3</i>&nbsp; *
+<i class="no-highlight">4</i>&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+<i class="no-highlight">5</i>&nbsp; * you may not use this file except in compliance with the License.
+<i class="no-highlight">6</i>&nbsp; * You may obtain a copy of the License at
+<i class="no-highlight">7</i>&nbsp; *
+<i class="no-highlight">8</i>&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+<i class="no-highlight">9</i>&nbsp; *
+<i class="no-highlight">10</i>&nbsp; * Unless required by applicable law or agreed to in writing, software
+<i class="no-highlight">11</i>&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+<i class="no-highlight">12</i>&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+<i class="no-highlight">13</i>&nbsp; * See the License for the specific language governing permissions and
+<i class="no-highlight">14</i>&nbsp; * limitations under the License.
+<i class="no-highlight">15</i>&nbsp; */
+<i class="no-highlight">16</i>&nbsp;
+<i class="no-highlight">17</i>&nbsp;package com.galarzaa.tibiakt.core.builders
 <i class="no-highlight">18</i>&nbsp;
-<i class="no-highlight">19</i>&nbsp;@BuilderDsl
-<b class="fc"><i class="no-highlight">20</i>&nbsp;class HighscoresBuilder : TibiaKtBuilder&lt;Highscores&gt;() {</b>
-<b class="fc"><i class="no-highlight">21</i>&nbsp;    var world: String? = null</b>
-<b class="fc"><i class="no-highlight">22</i>&nbsp;    var category: HighscoresCategory? = null</b>
-<b class="fc"><i class="no-highlight">23</i>&nbsp;    var vocation: HighscoresProfession? = null</b>
-<b class="fc"><i class="no-highlight">24</i>&nbsp;    val worldTypes: MutableSet&lt;PvpType&gt; = mutableSetOf()</b>
-<b class="fc"><i class="no-highlight">25</i>&nbsp;    var battlEyeType: HighscoresBattlEyeType? = null</b>
-<b class="fc"><i class="no-highlight">26</i>&nbsp;    var lastUpdate: Instant? = null</b>
-<b class="fc"><i class="no-highlight">27</i>&nbsp;    var currentPage: Int = 1</b>
-<b class="fc"><i class="no-highlight">28</i>&nbsp;    var totalPages: Int = 1</b>
-<b class="fc"><i class="no-highlight">29</i>&nbsp;    var resultsCount: Int = 0</b>
-<b class="fc"><i class="no-highlight">30</i>&nbsp;    val entries: MutableList&lt;HighscoresEntry&gt; = mutableListOf()</b>
+<i class="no-highlight">19</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HighscoresBattlEyeType
+<i class="no-highlight">20</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HighscoresCategory
+<i class="no-highlight">21</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HighscoresProfession
+<i class="no-highlight">22</i>&nbsp;import com.galarzaa.tibiakt.core.enums.PvpType
+<i class="no-highlight">23</i>&nbsp;import com.galarzaa.tibiakt.core.enums.Vocation
+<i class="no-highlight">24</i>&nbsp;import com.galarzaa.tibiakt.core.models.highscores.Highscores
+<i class="no-highlight">25</i>&nbsp;import com.galarzaa.tibiakt.core.models.highscores.HighscoresEntry
+<i class="no-highlight">26</i>&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
+<i class="no-highlight">27</i>&nbsp;import kotlinx.datetime.Instant
+<i class="no-highlight">28</i>&nbsp;
+<i class="no-highlight">29</i>&nbsp;@BuilderDsl
+<i class="no-highlight">30</i>&nbsp;public inline fun highscores(block: HighscoresBuilder.() -&gt; Unit): Highscores = HighscoresBuilder().apply(block).build()
 <i class="no-highlight">31</i>&nbsp;
-<i class="no-highlight">32</i>&nbsp;    fun addEntry(
-<i class="no-highlight">33</i>&nbsp;        rank: Int,
-<i class="no-highlight">34</i>&nbsp;        name: String,
-<i class="no-highlight">35</i>&nbsp;        vocation: Vocation,
-<i class="no-highlight">36</i>&nbsp;        world: String,
-<i class="no-highlight">37</i>&nbsp;        level: Int,
-<i class="no-highlight">38</i>&nbsp;        points: Long,
-<b class="nc"><i class="no-highlight">39</i>&nbsp;        extra: String? = null,</b>
-<b class="nc"><i class="no-highlight">40</i>&nbsp;    ) = apply {</b>
-<b class="nc"><i class="no-highlight">41</i>&nbsp;        entries.add(HighscoresEntry(rank, name, level, world, vocation, points, extra))</b>
-<b class="nc"><i class="no-highlight">42</i>&nbsp;    }</b>
-<i class="no-highlight">43</i>&nbsp;
-<i class="no-highlight">44</i>&nbsp;    @BuilderDsl
-<b class="fc"><i class="no-highlight">45</i>&nbsp;    fun addEntry(block: HighscoresEntryBuilder.() -&gt; Unit) = entries.add(HighscoresEntryBuilder().apply(block).build())</b>
-<i class="no-highlight">46</i>&nbsp;
-<b class="fc"><i class="no-highlight">47</i>&nbsp;    override fun build() = Highscores(world = world,</b>
-<b class="pc"><i class="no-highlight">48</i>&nbsp;        category = category ?: HighscoresCategory.EXPERIENCE_POINTS,</b>
-<b class="fc"><i class="no-highlight">49</i>&nbsp;        vocation = vocation ?: HighscoresProfession.ALL,</b>
-<b class="fc"><i class="no-highlight">50</i>&nbsp;        worldTypes = worldTypes,</b>
-<b class="pc"><i class="no-highlight">51</i>&nbsp;        battlEyeType = battlEyeType ?: HighscoresBattlEyeType.ANY_WORLD,</b>
-<b class="pc"><i class="no-highlight">52</i>&nbsp;        lastUpdate = lastUpdate ?: throw IllegalStateException(&quot;lastUpdate is required&quot;),</b>
-<b class="fc"><i class="no-highlight">53</i>&nbsp;        currentPage = currentPage,</b>
-<b class="fc"><i class="no-highlight">54</i>&nbsp;        totalPages = totalPages,</b>
-<b class="fc"><i class="no-highlight">55</i>&nbsp;        resultsCount = resultsCount,</b>
-<b class="fc"><i class="no-highlight">56</i>&nbsp;        entries = entries)</b>
-<i class="no-highlight">57</i>&nbsp;
-<i class="no-highlight">58</i>&nbsp;    @BuilderDsl
-<b class="fc"><i class="no-highlight">59</i>&nbsp;    class HighscoresEntryBuilder : TibiaKtBuilder&lt;HighscoresEntry&gt;() {</b>
-<b class="fc"><i class="no-highlight">60</i>&nbsp;        var rank: Int = 0</b>
-<b class="fc"><i class="no-highlight">61</i>&nbsp;        lateinit var name: String</b>
-<b class="fc"><i class="no-highlight">62</i>&nbsp;        lateinit var vocation: Vocation</b>
-<b class="fc"><i class="no-highlight">63</i>&nbsp;        lateinit var world: String</b>
-<b class="fc"><i class="no-highlight">64</i>&nbsp;        var level: Int = 0</b>
-<b class="fc"><i class="no-highlight">65</i>&nbsp;        var value: Long = 0</b>
-<b class="fc"><i class="no-highlight">66</i>&nbsp;        var additionalValue: String? = null</b>
-<i class="no-highlight">67</i>&nbsp;
-<b class="fc"><i class="no-highlight">68</i>&nbsp;        override fun build() = HighscoresEntry(</b>
-<b class="fc"><i class="no-highlight">69</i>&nbsp;            rank = rank,</b>
-<b class="pc"><i class="no-highlight">70</i>&nbsp;            name = if (::name.isInitialized) name else throw IllegalStateException(&quot;name is required&quot;),</b>
-<b class="pc"><i class="no-highlight">71</i>&nbsp;            vocation = if (::vocation.isInitialized) vocation else throw IllegalStateException(&quot;vocation is required&quot;),</b>
-<b class="pc"><i class="no-highlight">72</i>&nbsp;            world = if (::world.isInitialized) world else throw IllegalStateException(&quot;world is required&quot;),</b>
-<b class="fc"><i class="no-highlight">73</i>&nbsp;            level = level,</b>
-<b class="fc"><i class="no-highlight">74</i>&nbsp;            value = value,</b>
-<b class="fc"><i class="no-highlight">75</i>&nbsp;            additionalValue = additionalValue,</b>
-<i class="no-highlight">76</i>&nbsp;        )
-<i class="no-highlight">77</i>&nbsp;    }
-<i class="no-highlight">78</i>&nbsp;}
+<i class="no-highlight">32</i>&nbsp;@BuilderDsl
+<i class="no-highlight">33</i>&nbsp;public inline fun highscoresBuilder(block: HighscoresBuilder.() -&gt; Unit): HighscoresBuilder =
+<i class="no-highlight">34</i>&nbsp;    HighscoresBuilder().apply(block)
+<i class="no-highlight">35</i>&nbsp;
+<b class="fc"><i class="no-highlight">36</i>&nbsp;@BuilderDsl</b>
+<i class="no-highlight">37</i>&nbsp;public class HighscoresBuilder : TibiaKtBuilder&lt;Highscores&gt; {
+<b class="fc"><i class="no-highlight">38</i>&nbsp;    public var world: String? = null</b>
+<b class="fc"><i class="no-highlight">39</i>&nbsp;    public var category: HighscoresCategory? = null</b>
+<b class="fc"><i class="no-highlight">40</i>&nbsp;    public var vocation: HighscoresProfession? = null</b>
+<b class="fc"><i class="no-highlight">41</i>&nbsp;    public val worldTypes: MutableSet&lt;PvpType&gt; = mutableSetOf()</b>
+<b class="fc"><i class="no-highlight">42</i>&nbsp;    public var battlEyeType: HighscoresBattlEyeType? = null</b>
+<b class="fc"><i class="no-highlight">43</i>&nbsp;    public var lastUpdate: Instant? = null</b>
+<b class="fc"><i class="no-highlight">44</i>&nbsp;    public var currentPage: Int = 1</b>
+<b class="fc"><i class="no-highlight">45</i>&nbsp;    public var totalPages: Int = 1</b>
+<b class="fc"><i class="no-highlight">46</i>&nbsp;    public var resultsCount: Int = 0</b>
+<b class="fc"><i class="no-highlight">47</i>&nbsp;    public val entries: MutableList&lt;HighscoresEntry&gt; = mutableListOf()</b>
+<i class="no-highlight">48</i>&nbsp;
+<i class="no-highlight">49</i>&nbsp;    public fun addEntry(
+<i class="no-highlight">50</i>&nbsp;        rank: Int,
+<i class="no-highlight">51</i>&nbsp;        name: String,
+<i class="no-highlight">52</i>&nbsp;        vocation: Vocation,
+<i class="no-highlight">53</i>&nbsp;        world: String,
+<i class="no-highlight">54</i>&nbsp;        level: Int,
+<i class="no-highlight">55</i>&nbsp;        points: Long,
+<b class="nc"><i class="no-highlight">56</i>&nbsp;        extra: String? = null,</b>
+<b class="nc"><i class="no-highlight">57</i>&nbsp;    ): HighscoresBuilder = apply {</b>
+<b class="nc"><i class="no-highlight">58</i>&nbsp;        entries.add(HighscoresEntry(rank, name, level, world, vocation, points, extra))</b>
+<b class="nc"><i class="no-highlight">59</i>&nbsp;    }</b>
+<i class="no-highlight">60</i>&nbsp;
+<i class="no-highlight">61</i>&nbsp;    @BuilderDsl
+<i class="no-highlight">62</i>&nbsp;    public fun addEntry(block: HighscoresEntryBuilder.() -&gt; Unit): Boolean =
+<b class="fc"><i class="no-highlight">63</i>&nbsp;        entries.add(HighscoresEntryBuilder().apply(block).build())</b>
+<i class="no-highlight">64</i>&nbsp;
+<b class="fc"><i class="no-highlight">65</i>&nbsp;    override fun build(): Highscores = Highscores(</b>
+<b class="fc"><i class="no-highlight">66</i>&nbsp;        world = world,</b>
+<b class="pc"><i class="no-highlight">67</i>&nbsp;        category = category ?: HighscoresCategory.EXPERIENCE_POINTS,</b>
+<b class="fc"><i class="no-highlight">68</i>&nbsp;        vocation = vocation ?: HighscoresProfession.ALL,</b>
+<b class="fc"><i class="no-highlight">69</i>&nbsp;        worldTypes = worldTypes,</b>
+<b class="pc"><i class="no-highlight">70</i>&nbsp;        battlEyeType = battlEyeType ?: HighscoresBattlEyeType.ANY_WORLD,</b>
+<b class="pc"><i class="no-highlight">71</i>&nbsp;        lastUpdate = lastUpdate ?: error(&quot;lastUpdate is required&quot;),</b>
+<b class="fc"><i class="no-highlight">72</i>&nbsp;        currentPage = currentPage,</b>
+<b class="fc"><i class="no-highlight">73</i>&nbsp;        totalPages = totalPages,</b>
+<b class="fc"><i class="no-highlight">74</i>&nbsp;        resultsCount = resultsCount,</b>
+<b class="fc"><i class="no-highlight">75</i>&nbsp;        entries = entries</b>
+<i class="no-highlight">76</i>&nbsp;    )
+<i class="no-highlight">77</i>&nbsp;
+<b class="fc"><i class="no-highlight">78</i>&nbsp;    @BuilderDsl</b>
+<i class="no-highlight">79</i>&nbsp;    public class HighscoresEntryBuilder : TibiaKtBuilder&lt;HighscoresEntry&gt; {
+<b class="fc"><i class="no-highlight">80</i>&nbsp;        public var rank: Int = 0</b>
+<b class="fc"><i class="no-highlight">81</i>&nbsp;        public lateinit var name: String</b>
+<b class="fc"><i class="no-highlight">82</i>&nbsp;        public lateinit var vocation: Vocation</b>
+<b class="fc"><i class="no-highlight">83</i>&nbsp;        public lateinit var world: String</b>
+<b class="fc"><i class="no-highlight">84</i>&nbsp;        public var level: Int = 0</b>
+<b class="fc"><i class="no-highlight">85</i>&nbsp;        public var value: Long = 0</b>
+<b class="fc"><i class="no-highlight">86</i>&nbsp;        public var additionalValue: String? = null</b>
+<i class="no-highlight">87</i>&nbsp;
+<b class="fc"><i class="no-highlight">88</i>&nbsp;        override fun build(): HighscoresEntry = HighscoresEntry(</b>
+<b class="fc"><i class="no-highlight">89</i>&nbsp;            rank = rank,</b>
+<b class="pc"><i class="no-highlight">90</i>&nbsp;            name = if (::name.isInitialized) name else error(&quot;name is required&quot;),</b>
+<b class="pc"><i class="no-highlight">91</i>&nbsp;            vocation = if (::vocation.isInitialized) vocation else error(&quot;vocation is required&quot;),</b>
+<b class="pc"><i class="no-highlight">92</i>&nbsp;            world = if (::world.isInitialized) world else error(&quot;world is required&quot;),</b>
+<b class="fc"><i class="no-highlight">93</i>&nbsp;            level = level,</b>
+<b class="fc"><i class="no-highlight">94</i>&nbsp;            value = value,</b>
+<b class="fc"><i class="no-highlight">95</i>&nbsp;            additionalValue = additionalValue,</b>
+<i class="no-highlight">96</i>&nbsp;        )
+<i class="no-highlight">97</i>&nbsp;    }
+<i class="no-highlight">98</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -259,7 +279,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-05 18:53</div>
+    <div style="float:right;">generated on 2022-09-11 06:14</div>
 </div>
 </body>
 </html>

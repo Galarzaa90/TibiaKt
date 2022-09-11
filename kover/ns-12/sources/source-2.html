@@ -103,9 +103,9 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">11</i>&nbsp;/**
 <i class="no-highlight">12</i>&nbsp; * Serializer for [Instant] objects, using ISO-8601&#39;s standard for date times.
 <i class="no-highlight">13</i>&nbsp; */
-<i class="no-highlight">14</i>&nbsp;object InstantSerializer : KSerializer&lt;Instant&gt; {
+<i class="no-highlight">14</i>&nbsp;public object InstantSerializer : KSerializer&lt;Instant&gt; {
 <b class="nc"><i class="no-highlight">15</i>&nbsp;    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(&quot;DateTime&quot;, PrimitiveKind.STRING)</b>
-<i class="no-highlight">16</i>&nbsp;    override fun serialize(encoder: Encoder, value: Instant) =
+<i class="no-highlight">16</i>&nbsp;    override fun serialize(encoder: Encoder, value: Instant): Unit =
 <b class="nc"><i class="no-highlight">17</i>&nbsp;        encoder.encodeString(value.toString())</b>
 <i class="no-highlight">18</i>&nbsp;
 <b class="nc"><i class="no-highlight">19</i>&nbsp;    override fun deserialize(decoder: Decoder): Instant = Instant.parse(decoder.decodeString())</b>
@@ -136,7 +136,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-05 18:53</div>
+    <div style="float:right;">generated on 2022-09-11 06:14</div>
 </div>
 </body>
 </html>

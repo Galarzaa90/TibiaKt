@@ -104,9 +104,9 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">12</i>&nbsp;/**
 <i class="no-highlight">13</i>&nbsp; * Serializer for [LocalDate] objects, using ISO-8601&#39;s standard for dates.
 <i class="no-highlight">14</i>&nbsp; */
-<i class="no-highlight">15</i>&nbsp;object LocalDateSerializer : KSerializer&lt;LocalDate&gt; {
+<i class="no-highlight">15</i>&nbsp;public object LocalDateSerializer : KSerializer&lt;LocalDate&gt; {
 <b class="nc"><i class="no-highlight">16</i>&nbsp;    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(&quot;Date&quot;, PrimitiveKind.STRING)</b>
-<i class="no-highlight">17</i>&nbsp;    override fun serialize(encoder: Encoder, value: LocalDate) =
+<i class="no-highlight">17</i>&nbsp;    override fun serialize(encoder: Encoder, value: LocalDate): Unit =
 <b class="nc"><i class="no-highlight">18</i>&nbsp;        encoder.encodeString(value.format(DateTimeFormatter.ISO_DATE))</b>
 <i class="no-highlight">19</i>&nbsp;
 <i class="no-highlight">20</i>&nbsp;    override fun deserialize(decoder: Decoder): LocalDate =
@@ -138,7 +138,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-05 18:53</div>
+    <div style="float:right;">generated on 2022-09-11 06:14</div>
 </div>
 </body>
 </html>

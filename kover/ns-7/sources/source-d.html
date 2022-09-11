@@ -197,7 +197,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">12</i>&nbsp; * @property count The amount of this item the character has.
 <i class="no-highlight">13</i>&nbsp; */
 <b class="pc"><i class="no-highlight">14</i>&nbsp;@Serializable</b>
-<i class="no-highlight">15</i>&nbsp;data class ItemEntry(
+<i class="no-highlight">15</i>&nbsp;public data class ItemEntry(
 <b class="fc"><i class="no-highlight">16</i>&nbsp;    val itemId: Int,</b>
 <b class="fc"><i class="no-highlight">17</i>&nbsp;    val name: String,</b>
 <b class="fc"><i class="no-highlight">18</i>&nbsp;    val description: String?,</b>
@@ -206,7 +206,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">21</i>&nbsp;    /**
 <i class="no-highlight">22</i>&nbsp;     * The URL to the item&#39;s image.
 <i class="no-highlight">23</i>&nbsp;     */
-<b class="nc"><i class="no-highlight">24</i>&nbsp;    val imageUrl get() = getStaticFileUrl(&quot;images&quot;, &quot;charactertrade&quot;, &quot;objects&quot;, &quot;$itemId.gif&quot;)</b>
+<b class="nc"><i class="no-highlight">24</i>&nbsp;    val imageUrl: String get() = getStaticFileUrl(&quot;images&quot;, &quot;charactertrade&quot;, &quot;objects&quot;, &quot;$itemId.gif&quot;)</b>
 <i class="no-highlight">25</i>&nbsp;}
 </div>
 </pre>
@@ -234,7 +234,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-05 18:53</div>
+    <div style="float:right;">generated on 2022-09-11 06:14</div>
 </div>
 </body>
 </html>

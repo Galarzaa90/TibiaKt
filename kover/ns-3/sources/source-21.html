@@ -71,10 +71,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    51.8%
+    51.2%
   </span>
   <span class="absValue">
-    (85/164)
+    (85/166)
   </span>
 </td>
 </tr>
@@ -106,10 +106,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    67.1%
+    63.6%
   </span>
   <span class="absValue">
-    (98/146)
+    (98/154)
   </span>
 </td>
   </tr>
@@ -141,10 +141,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    59%
+    57.2%
   </span>
   <span class="absValue">
-    (183/310)
+    (183/320)
   </span>
 </td>
 </tr>
@@ -155,94 +155,113 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.builders
-<i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HouseOrder
-<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HouseStatus
-<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HouseType
-<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.models.house.HouseEntry
-<i class="no-highlight">7</i>&nbsp;import com.galarzaa.tibiakt.core.models.house.HousesSection
-<i class="no-highlight">8</i>&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
-<i class="no-highlight">9</i>&nbsp;import kotlin.time.Duration
-<i class="no-highlight">10</i>&nbsp;
-<i class="no-highlight">11</i>&nbsp;@BuilderDsl
-<i class="no-highlight">12</i>&nbsp;inline fun housesSection(block: HousesSectionBuilder.() -&gt; Unit) = HousesSectionBuilder().apply(block).build()
-<i class="no-highlight">13</i>&nbsp;
-<i class="no-highlight">14</i>&nbsp;@BuilderDsl
-<i class="no-highlight">15</i>&nbsp;inline fun housesSectionBuilder(block: HousesSectionBuilder.() -&gt; Unit) = HousesSectionBuilder().apply(block)
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;/*
+<i class="no-highlight">2</i>&nbsp; * Copyright © 2022 Allan Galarza
+<i class="no-highlight">3</i>&nbsp; *
+<i class="no-highlight">4</i>&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+<i class="no-highlight">5</i>&nbsp; * you may not use this file except in compliance with the License.
+<i class="no-highlight">6</i>&nbsp; * You may obtain a copy of the License at
+<i class="no-highlight">7</i>&nbsp; *
+<i class="no-highlight">8</i>&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+<i class="no-highlight">9</i>&nbsp; *
+<i class="no-highlight">10</i>&nbsp; * Unless required by applicable law or agreed to in writing, software
+<i class="no-highlight">11</i>&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+<i class="no-highlight">12</i>&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+<i class="no-highlight">13</i>&nbsp; * See the License for the specific language governing permissions and
+<i class="no-highlight">14</i>&nbsp; * limitations under the License.
+<i class="no-highlight">15</i>&nbsp; */
 <i class="no-highlight">16</i>&nbsp;
-<i class="no-highlight">17</i>&nbsp;@BuilderDsl
-<b class="fc"><i class="no-highlight">18</i>&nbsp;class HousesSectionBuilder : TibiaKtBuilder&lt;HousesSection&gt;() {</b>
-<b class="fc"><i class="no-highlight">19</i>&nbsp;    var world: String? = null</b>
-<b class="fc"><i class="no-highlight">20</i>&nbsp;    var town: String? = null</b>
-<b class="fc"><i class="no-highlight">21</i>&nbsp;    var status: HouseStatus? = null</b>
-<b class="fc"><i class="no-highlight">22</i>&nbsp;    var type: HouseType = HouseType.HOUSE</b>
-<b class="fc"><i class="no-highlight">23</i>&nbsp;    var order: HouseOrder = HouseOrder.NAME</b>
-<b class="fc"><i class="no-highlight">24</i>&nbsp;    val entries: MutableList&lt;HouseEntry&gt; = mutableListOf()</b>
-<i class="no-highlight">25</i>&nbsp;
+<i class="no-highlight">17</i>&nbsp;package com.galarzaa.tibiakt.core.builders
+<i class="no-highlight">18</i>&nbsp;
+<i class="no-highlight">19</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HouseOrder
+<i class="no-highlight">20</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HouseStatus
+<i class="no-highlight">21</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HouseType
+<i class="no-highlight">22</i>&nbsp;import com.galarzaa.tibiakt.core.models.house.HouseEntry
+<i class="no-highlight">23</i>&nbsp;import com.galarzaa.tibiakt.core.models.house.HousesSection
+<i class="no-highlight">24</i>&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
+<i class="no-highlight">25</i>&nbsp;import kotlin.time.Duration
 <i class="no-highlight">26</i>&nbsp;
-<i class="no-highlight">27</i>&nbsp;    fun addEntry(
-<i class="no-highlight">28</i>&nbsp;        name: String,
-<i class="no-highlight">29</i>&nbsp;        size: Int,
-<i class="no-highlight">30</i>&nbsp;        rent: Int,
-<i class="no-highlight">31</i>&nbsp;        status: HouseStatus,
-<i class="no-highlight">32</i>&nbsp;        houseId: Int,
-<b class="nc"><i class="no-highlight">33</i>&nbsp;        highestBid: Int? = null,</b>
-<b class="nc"><i class="no-highlight">34</i>&nbsp;        timeLeft: Duration? = null,</b>
-<b class="nc"><i class="no-highlight">35</i>&nbsp;    ) = apply {</b>
-<b class="nc"><i class="no-highlight">36</i>&nbsp;        entries.add(</b>
-<b class="nc"><i class="no-highlight">37</i>&nbsp;            HouseEntryBuilder().apply {</b>
-<b class="nc"><i class="no-highlight">38</i>&nbsp;                this.name = name</b>
-<b class="nc"><i class="no-highlight">39</i>&nbsp;                this.size = size</b>
-<b class="nc"><i class="no-highlight">40</i>&nbsp;                this.rent = rent</b>
-<b class="nc"><i class="no-highlight">41</i>&nbsp;                this.status = status</b>
-<b class="nc"><i class="no-highlight">42</i>&nbsp;                this.houseId = houseId</b>
-<b class="nc"><i class="no-highlight">43</i>&nbsp;                this.highestBid = highestBid</b>
-<b class="nc"><i class="no-highlight">44</i>&nbsp;                this.timeLeft = timeLeft</b>
-<b class="nc"><i class="no-highlight">45</i>&nbsp;            }.build()</b>
-<i class="no-highlight">46</i>&nbsp;        )
-<b class="nc"><i class="no-highlight">47</i>&nbsp;    }</b>
-<i class="no-highlight">48</i>&nbsp;
-<b class="nc"><i class="no-highlight">49</i>&nbsp;    fun addEntry(houseEntry: HouseEntry) = apply { entries.add(houseEntry) }</b>
-<i class="no-highlight">50</i>&nbsp;
-<i class="no-highlight">51</i>&nbsp;    @BuilderDsl
-<b class="fc"><i class="no-highlight">52</i>&nbsp;    fun addEntry(block: HouseEntryBuilder.() -&gt; Unit) = entries.add(HouseEntryBuilder().apply(block).build())</b>
-<i class="no-highlight">53</i>&nbsp;
-<b class="fc"><i class="no-highlight">54</i>&nbsp;    override fun build() = HousesSection(</b>
-<b class="pc"><i class="no-highlight">55</i>&nbsp;        world = world ?: throw IllegalStateException(&quot;world is required&quot;),</b>
-<b class="pc"><i class="no-highlight">56</i>&nbsp;        town = town ?: throw IllegalStateException(&quot;town is required&quot;),</b>
-<b class="fc"><i class="no-highlight">57</i>&nbsp;        type = type,</b>
-<b class="fc"><i class="no-highlight">58</i>&nbsp;        status = status,</b>
-<b class="fc"><i class="no-highlight">59</i>&nbsp;        order = order,</b>
-<b class="fc"><i class="no-highlight">60</i>&nbsp;        entries = entries</b>
-<i class="no-highlight">61</i>&nbsp;    )
-<i class="no-highlight">62</i>&nbsp;
-<b class="fc"><i class="no-highlight">63</i>&nbsp;    class HouseEntryBuilder : TibiaKtBuilder&lt;HouseEntry&gt;() {</b>
-<b class="fc"><i class="no-highlight">64</i>&nbsp;        var houseId: Int? = null</b>
-<b class="fc"><i class="no-highlight">65</i>&nbsp;        var name: String? = null</b>
-<b class="fc"><i class="no-highlight">66</i>&nbsp;        var size: Int? = null</b>
-<b class="fc"><i class="no-highlight">67</i>&nbsp;        var rent: Int? = null</b>
-<b class="fc"><i class="no-highlight">68</i>&nbsp;        var town: String? = null</b>
-<b class="fc"><i class="no-highlight">69</i>&nbsp;        var world: String? = null</b>
-<b class="fc"><i class="no-highlight">70</i>&nbsp;        var type: HouseType? = null</b>
-<b class="fc"><i class="no-highlight">71</i>&nbsp;        var status: HouseStatus? = null</b>
-<b class="fc"><i class="no-highlight">72</i>&nbsp;        var highestBid: Int? = null</b>
-<b class="fc"><i class="no-highlight">73</i>&nbsp;        var timeLeft: Duration? = null</b>
-<i class="no-highlight">74</i>&nbsp;
-<b class="fc"><i class="no-highlight">75</i>&nbsp;        override fun build() = HouseEntry(</b>
-<b class="pc"><i class="no-highlight">76</i>&nbsp;            houseId = houseId ?: throw IllegalStateException(&quot;houseId is required&quot;),</b>
-<b class="pc"><i class="no-highlight">77</i>&nbsp;            name = name ?: throw IllegalStateException(&quot;name is required&quot;),</b>
-<b class="pc"><i class="no-highlight">78</i>&nbsp;            size = size ?: throw IllegalStateException(&quot;size is required&quot;),</b>
-<b class="pc"><i class="no-highlight">79</i>&nbsp;            rent = rent ?: throw IllegalStateException(&quot;rent is required&quot;),</b>
-<b class="pc"><i class="no-highlight">80</i>&nbsp;            town = town ?: throw IllegalStateException(&quot;town is required&quot;),</b>
-<b class="pc"><i class="no-highlight">81</i>&nbsp;            world = world ?: throw IllegalStateException(&quot;world is required&quot;),</b>
-<b class="pc"><i class="no-highlight">82</i>&nbsp;            type = type ?: throw IllegalStateException(&quot;type is required&quot;),</b>
-<b class="pc"><i class="no-highlight">83</i>&nbsp;            status = status ?: throw IllegalStateException(&quot;status is required&quot;),</b>
-<b class="fc"><i class="no-highlight">84</i>&nbsp;            highestBid = highestBid,</b>
-<b class="fc"><i class="no-highlight">85</i>&nbsp;            timeLeft = timeLeft,</b>
-<i class="no-highlight">86</i>&nbsp;        )
-<i class="no-highlight">87</i>&nbsp;    }
-<i class="no-highlight">88</i>&nbsp;}
+<i class="no-highlight">27</i>&nbsp;@BuilderDsl
+<i class="no-highlight">28</i>&nbsp;public inline fun housesSection(block: HousesSectionBuilder.() -&gt; Unit): HousesSection =
+<i class="no-highlight">29</i>&nbsp;    HousesSectionBuilder().apply(block).build()
+<i class="no-highlight">30</i>&nbsp;
+<i class="no-highlight">31</i>&nbsp;@BuilderDsl
+<i class="no-highlight">32</i>&nbsp;public inline fun housesSectionBuilder(block: HousesSectionBuilder.() -&gt; Unit): HousesSectionBuilder =
+<i class="no-highlight">33</i>&nbsp;    HousesSectionBuilder().apply(block)
+<i class="no-highlight">34</i>&nbsp;
+<b class="fc"><i class="no-highlight">35</i>&nbsp;@BuilderDsl</b>
+<i class="no-highlight">36</i>&nbsp;public class HousesSectionBuilder : TibiaKtBuilder&lt;HousesSection&gt; {
+<b class="fc"><i class="no-highlight">37</i>&nbsp;    public var world: String? = null</b>
+<b class="fc"><i class="no-highlight">38</i>&nbsp;    public var town: String? = null</b>
+<b class="fc"><i class="no-highlight">39</i>&nbsp;    public var status: HouseStatus? = null</b>
+<b class="fc"><i class="no-highlight">40</i>&nbsp;    public var type: HouseType = HouseType.HOUSE</b>
+<b class="fc"><i class="no-highlight">41</i>&nbsp;    public var order: HouseOrder = HouseOrder.NAME</b>
+<b class="fc"><i class="no-highlight">42</i>&nbsp;    public val entries: MutableList&lt;HouseEntry&gt; = mutableListOf()</b>
+<i class="no-highlight">43</i>&nbsp;
+<i class="no-highlight">44</i>&nbsp;
+<i class="no-highlight">45</i>&nbsp;    public fun addEntry(
+<i class="no-highlight">46</i>&nbsp;        name: String,
+<i class="no-highlight">47</i>&nbsp;        size: Int,
+<i class="no-highlight">48</i>&nbsp;        rent: Int,
+<i class="no-highlight">49</i>&nbsp;        status: HouseStatus,
+<i class="no-highlight">50</i>&nbsp;        houseId: Int,
+<b class="nc"><i class="no-highlight">51</i>&nbsp;        highestBid: Int? = null,</b>
+<b class="nc"><i class="no-highlight">52</i>&nbsp;        timeLeft: Duration? = null,</b>
+<b class="nc"><i class="no-highlight">53</i>&nbsp;    ): HousesSectionBuilder = apply {</b>
+<b class="nc"><i class="no-highlight">54</i>&nbsp;        entries.add(</b>
+<b class="nc"><i class="no-highlight">55</i>&nbsp;            HouseEntryBuilder().apply {</b>
+<b class="nc"><i class="no-highlight">56</i>&nbsp;                this.name = name</b>
+<b class="nc"><i class="no-highlight">57</i>&nbsp;                this.size = size</b>
+<b class="nc"><i class="no-highlight">58</i>&nbsp;                this.rent = rent</b>
+<b class="nc"><i class="no-highlight">59</i>&nbsp;                this.status = status</b>
+<b class="nc"><i class="no-highlight">60</i>&nbsp;                this.houseId = houseId</b>
+<b class="nc"><i class="no-highlight">61</i>&nbsp;                this.highestBid = highestBid</b>
+<b class="nc"><i class="no-highlight">62</i>&nbsp;                this.timeLeft = timeLeft</b>
+<b class="nc"><i class="no-highlight">63</i>&nbsp;            }.build()</b>
+<i class="no-highlight">64</i>&nbsp;        )
+<b class="nc"><i class="no-highlight">65</i>&nbsp;    }</b>
+<i class="no-highlight">66</i>&nbsp;
+<b class="nc"><i class="no-highlight">67</i>&nbsp;    public fun addEntry(houseEntry: HouseEntry): HousesSectionBuilder = apply { entries.add(houseEntry) }</b>
+<i class="no-highlight">68</i>&nbsp;
+<i class="no-highlight">69</i>&nbsp;    @BuilderDsl
+<i class="no-highlight">70</i>&nbsp;    public fun addEntry(block: HouseEntryBuilder.() -&gt; Unit): Boolean =
+<b class="fc"><i class="no-highlight">71</i>&nbsp;        entries.add(HouseEntryBuilder().apply(block).build())</b>
+<i class="no-highlight">72</i>&nbsp;
+<b class="fc"><i class="no-highlight">73</i>&nbsp;    override fun build(): HousesSection = HousesSection(</b>
+<b class="fc"><i class="no-highlight">74</i>&nbsp;        world = world ?: error(&quot;world is required&quot;),</b>
+<b class="pc"><i class="no-highlight">75</i>&nbsp;        town = town ?: error(&quot;town is required&quot;),</b>
+<b class="fc"><i class="no-highlight">76</i>&nbsp;        type = type,</b>
+<b class="fc"><i class="no-highlight">77</i>&nbsp;        status = status,</b>
+<b class="fc"><i class="no-highlight">78</i>&nbsp;        order = order,</b>
+<b class="fc"><i class="no-highlight">79</i>&nbsp;        entries = entries</b>
+<i class="no-highlight">80</i>&nbsp;    )
+<i class="no-highlight">81</i>&nbsp;
+<b class="fc"><i class="no-highlight">82</i>&nbsp;    public class HouseEntryBuilder : TibiaKtBuilder&lt;HouseEntry&gt; {</b>
+<b class="fc"><i class="no-highlight">83</i>&nbsp;        public var houseId: Int? = null</b>
+<b class="fc"><i class="no-highlight">84</i>&nbsp;        public var name: String? = null</b>
+<b class="fc"><i class="no-highlight">85</i>&nbsp;        public var size: Int? = null</b>
+<b class="fc"><i class="no-highlight">86</i>&nbsp;        public var rent: Int? = null</b>
+<b class="fc"><i class="no-highlight">87</i>&nbsp;        public var town: String? = null</b>
+<b class="fc"><i class="no-highlight">88</i>&nbsp;        public var world: String? = null</b>
+<b class="fc"><i class="no-highlight">89</i>&nbsp;        public var type: HouseType? = null</b>
+<b class="fc"><i class="no-highlight">90</i>&nbsp;        public var status: HouseStatus? = null</b>
+<b class="fc"><i class="no-highlight">91</i>&nbsp;        public var highestBid: Int? = null</b>
+<b class="fc"><i class="no-highlight">92</i>&nbsp;        public var timeLeft: Duration? = null</b>
+<i class="no-highlight">93</i>&nbsp;
+<b class="fc"><i class="no-highlight">94</i>&nbsp;        override fun build(): HouseEntry = HouseEntry(</b>
+<b class="pc"><i class="no-highlight">95</i>&nbsp;            houseId = houseId ?: error(&quot;houseId is required&quot;),</b>
+<b class="pc"><i class="no-highlight">96</i>&nbsp;            name = name ?: error(&quot;name is required&quot;),</b>
+<b class="pc"><i class="no-highlight">97</i>&nbsp;            size = size ?: error(&quot;size is required&quot;),</b>
+<b class="pc"><i class="no-highlight">98</i>&nbsp;            rent = rent ?: error(&quot;rent is required&quot;),</b>
+<b class="pc"><i class="no-highlight">99</i>&nbsp;            town = town ?: error(&quot;town is required&quot;),</b>
+<b class="pc"><i class="no-highlight">100</i>&nbsp;            world = world ?: error(&quot;world is required&quot;),</b>
+<b class="pc"><i class="no-highlight">101</i>&nbsp;            type = type ?: error(&quot;type is required&quot;),</b>
+<b class="pc"><i class="no-highlight">102</i>&nbsp;            status = status ?: error(&quot;status is required&quot;),</b>
+<b class="fc"><i class="no-highlight">103</i>&nbsp;            highestBid = highestBid,</b>
+<b class="fc"><i class="no-highlight">104</i>&nbsp;            timeLeft = timeLeft,</b>
+<i class="no-highlight">105</i>&nbsp;        )
+<i class="no-highlight">106</i>&nbsp;    }
+<i class="no-highlight">107</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -269,7 +288,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-05 18:53</div>
+    <div style="float:right;">generated on 2022-09-11 06:14</div>
 </div>
 </body>
 </html>

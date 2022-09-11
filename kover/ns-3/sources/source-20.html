@@ -90,61 +90,77 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.builders
-<i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HouseStatus
-<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HouseType
-<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.models.house.House
-<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
-<i class="no-highlight">7</i>&nbsp;import kotlinx.datetime.Instant
-<i class="no-highlight">8</i>&nbsp;
-<i class="no-highlight">9</i>&nbsp;@BuilderDsl
-<b class="fc"><i class="no-highlight">10</i>&nbsp;inline fun house(block: HouseBuilder.() -&gt; Unit) = HouseBuilder().apply(block).build()</b>
-<i class="no-highlight">11</i>&nbsp;
-<i class="no-highlight">12</i>&nbsp;@BuilderDsl
-<b class="nc"><i class="no-highlight">13</i>&nbsp;inline fun houseBuilder(block: HouseBuilder.() -&gt; Unit) = HouseBuilder().apply(block)</b>
-<i class="no-highlight">14</i>&nbsp;
-<i class="no-highlight">15</i>&nbsp;
-<i class="no-highlight">16</i>&nbsp;@BuilderDsl
-<i class="no-highlight">17</i>&nbsp;class HouseBuilder : TibiaKtBuilder&lt;House&gt;() {
-<i class="no-highlight">18</i>&nbsp;    var houseId: Int? = null
-<i class="no-highlight">19</i>&nbsp;    var name: String? = null
-<i class="no-highlight">20</i>&nbsp;    var size: Int? = null
-<i class="no-highlight">21</i>&nbsp;    var type: HouseType? = null
-<i class="no-highlight">22</i>&nbsp;    var beds: Int? = null
-<i class="no-highlight">23</i>&nbsp;    var rent: Int? = null
-<i class="no-highlight">24</i>&nbsp;    var world: String? = null
-<i class="no-highlight">25</i>&nbsp;    var status: HouseStatus? = null
-<i class="no-highlight">26</i>&nbsp;    var paidUntil: Instant? = null
-<i class="no-highlight">27</i>&nbsp;    var owner: String? = null
-<i class="no-highlight">28</i>&nbsp;    var movingDate: Instant? = null
-<i class="no-highlight">29</i>&nbsp;    var transferPrice: Int? = null
-<i class="no-highlight">30</i>&nbsp;    var transferAccepted: Boolean? = null
-<i class="no-highlight">31</i>&nbsp;    var transferRecipient: String? = null
-<i class="no-highlight">32</i>&nbsp;    var highestBid: Int? = null
-<i class="no-highlight">33</i>&nbsp;    var highestBidder: String? = null
-<i class="no-highlight">34</i>&nbsp;    var auctionEnd: Instant? = null
-<i class="no-highlight">35</i>&nbsp;
-<i class="no-highlight">36</i>&nbsp;    override fun build() = House(
-<i class="no-highlight">37</i>&nbsp;        houseId = houseId ?: throw IllegalStateException(&quot;houseId is required&quot;),
-<i class="no-highlight">38</i>&nbsp;        name = name ?: throw IllegalStateException(&quot;name is required&quot;),
-<i class="no-highlight">39</i>&nbsp;        size = size ?: throw IllegalStateException(&quot;size is required&quot;),
-<i class="no-highlight">40</i>&nbsp;        type = type ?: throw IllegalStateException(&quot;type is required&quot;),
-<i class="no-highlight">41</i>&nbsp;        beds = beds ?: throw IllegalStateException(&quot;beds is required&quot;),
-<i class="no-highlight">42</i>&nbsp;        rent = rent ?: throw IllegalStateException(&quot;rent is required&quot;),
-<i class="no-highlight">43</i>&nbsp;        world = world ?: throw IllegalStateException(&quot;world is required&quot;),
-<i class="no-highlight">44</i>&nbsp;        status = status ?: throw IllegalStateException(&quot;status is required&quot;),
-<i class="no-highlight">45</i>&nbsp;        paidUntil = paidUntil,
-<i class="no-highlight">46</i>&nbsp;        owner = owner,
-<i class="no-highlight">47</i>&nbsp;        movingDate = movingDate,
-<i class="no-highlight">48</i>&nbsp;        transferPrice = transferPrice,
-<i class="no-highlight">49</i>&nbsp;        transferAccepted = transferAccepted,
-<i class="no-highlight">50</i>&nbsp;        transferRecipient = transferRecipient,
-<i class="no-highlight">51</i>&nbsp;        highestBid = highestBid,
-<i class="no-highlight">52</i>&nbsp;        highestBidder = highestBidder,
-<i class="no-highlight">53</i>&nbsp;        auctionEnd = auctionEnd,
-<i class="no-highlight">54</i>&nbsp;    )
-<i class="no-highlight">55</i>&nbsp;}
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;/*
+<i class="no-highlight">2</i>&nbsp; * Copyright © 2022 Allan Galarza
+<i class="no-highlight">3</i>&nbsp; *
+<i class="no-highlight">4</i>&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+<i class="no-highlight">5</i>&nbsp; * you may not use this file except in compliance with the License.
+<i class="no-highlight">6</i>&nbsp; * You may obtain a copy of the License at
+<i class="no-highlight">7</i>&nbsp; *
+<i class="no-highlight">8</i>&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+<i class="no-highlight">9</i>&nbsp; *
+<i class="no-highlight">10</i>&nbsp; * Unless required by applicable law or agreed to in writing, software
+<i class="no-highlight">11</i>&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+<i class="no-highlight">12</i>&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+<i class="no-highlight">13</i>&nbsp; * See the License for the specific language governing permissions and
+<i class="no-highlight">14</i>&nbsp; * limitations under the License.
+<i class="no-highlight">15</i>&nbsp; */
+<i class="no-highlight">16</i>&nbsp;
+<i class="no-highlight">17</i>&nbsp;package com.galarzaa.tibiakt.core.builders
+<i class="no-highlight">18</i>&nbsp;
+<i class="no-highlight">19</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HouseStatus
+<i class="no-highlight">20</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HouseType
+<i class="no-highlight">21</i>&nbsp;import com.galarzaa.tibiakt.core.models.house.House
+<i class="no-highlight">22</i>&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
+<i class="no-highlight">23</i>&nbsp;import kotlinx.datetime.Instant
+<i class="no-highlight">24</i>&nbsp;
+<i class="no-highlight">25</i>&nbsp;@BuilderDsl
+<b class="fc"><i class="no-highlight">26</i>&nbsp;public inline fun house(block: HouseBuilder.() -&gt; Unit): House = HouseBuilder().apply(block).build()</b>
+<i class="no-highlight">27</i>&nbsp;
+<i class="no-highlight">28</i>&nbsp;@BuilderDsl
+<b class="nc"><i class="no-highlight">29</i>&nbsp;public inline fun houseBuilder(block: HouseBuilder.() -&gt; Unit): HouseBuilder = HouseBuilder().apply(block)</b>
+<i class="no-highlight">30</i>&nbsp;
+<i class="no-highlight">31</i>&nbsp;
+<i class="no-highlight">32</i>&nbsp;@BuilderDsl
+<i class="no-highlight">33</i>&nbsp;public class HouseBuilder : TibiaKtBuilder&lt;House&gt; {
+<i class="no-highlight">34</i>&nbsp;    public var houseId: Int? = null
+<i class="no-highlight">35</i>&nbsp;    public var name: String? = null
+<i class="no-highlight">36</i>&nbsp;    public var size: Int? = null
+<i class="no-highlight">37</i>&nbsp;    public var type: HouseType? = null
+<i class="no-highlight">38</i>&nbsp;    public var beds: Int? = null
+<i class="no-highlight">39</i>&nbsp;    public var rent: Int? = null
+<i class="no-highlight">40</i>&nbsp;    public var world: String? = null
+<i class="no-highlight">41</i>&nbsp;    public var status: HouseStatus? = null
+<i class="no-highlight">42</i>&nbsp;    public var paidUntil: Instant? = null
+<i class="no-highlight">43</i>&nbsp;    public var owner: String? = null
+<i class="no-highlight">44</i>&nbsp;    public var movingDate: Instant? = null
+<i class="no-highlight">45</i>&nbsp;    public var transferPrice: Int? = null
+<i class="no-highlight">46</i>&nbsp;    public var transferAccepted: Boolean? = null
+<i class="no-highlight">47</i>&nbsp;    public var transferRecipient: String? = null
+<i class="no-highlight">48</i>&nbsp;    public var highestBid: Int? = null
+<i class="no-highlight">49</i>&nbsp;    public var highestBidder: String? = null
+<i class="no-highlight">50</i>&nbsp;    public var auctionEnd: Instant? = null
+<i class="no-highlight">51</i>&nbsp;
+<i class="no-highlight">52</i>&nbsp;    override fun build(): House = House(
+<i class="no-highlight">53</i>&nbsp;        houseId = houseId ?: error(&quot;houseId is required&quot;),
+<i class="no-highlight">54</i>&nbsp;        name = name ?: error(&quot;name is required&quot;),
+<i class="no-highlight">55</i>&nbsp;        size = size ?: error(&quot;size is required&quot;),
+<i class="no-highlight">56</i>&nbsp;        type = type ?: error(&quot;type is required&quot;),
+<i class="no-highlight">57</i>&nbsp;        beds = beds ?: error(&quot;beds is required&quot;),
+<i class="no-highlight">58</i>&nbsp;        rent = rent ?: error(&quot;rent is required&quot;),
+<i class="no-highlight">59</i>&nbsp;        world = world ?: error(&quot;world is required&quot;),
+<i class="no-highlight">60</i>&nbsp;        status = status ?: error(&quot;status is required&quot;),
+<i class="no-highlight">61</i>&nbsp;        paidUntil = paidUntil,
+<i class="no-highlight">62</i>&nbsp;        owner = owner,
+<i class="no-highlight">63</i>&nbsp;        movingDate = movingDate,
+<i class="no-highlight">64</i>&nbsp;        transferPrice = transferPrice,
+<i class="no-highlight">65</i>&nbsp;        transferAccepted = transferAccepted,
+<i class="no-highlight">66</i>&nbsp;        transferRecipient = transferRecipient,
+<i class="no-highlight">67</i>&nbsp;        highestBid = highestBid,
+<i class="no-highlight">68</i>&nbsp;        highestBidder = highestBidder,
+<i class="no-highlight">69</i>&nbsp;        auctionEnd = auctionEnd,
+<i class="no-highlight">70</i>&nbsp;    )
+<i class="no-highlight">71</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -171,7 +187,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-05 18:53</div>
+    <div style="float:right;">generated on 2022-09-11 06:14</div>
 </div>
 </body>
 </html>

@@ -82,10 +82,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    77.8%
+    74.6%
   </span>
   <span class="absValue">
-    (91/117)
+    (91/122)
   </span>
 </td>
 </tr>
@@ -97,38 +97,54 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.builders
-<i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.enums.NewsCategory
-<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.models.news.News
-<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
-<i class="no-highlight">6</i>&nbsp;import java.time.LocalDate
-<i class="no-highlight">7</i>&nbsp;
-<i class="no-highlight">8</i>&nbsp;@BuilderDsl
-<i class="no-highlight">9</i>&nbsp;inline fun newsBuilder(block: NewsBuilder.() -&gt; Unit) = NewsBuilder().apply(block)
-<i class="no-highlight">10</i>&nbsp;
-<i class="no-highlight">11</i>&nbsp;@BuilderDsl
-<i class="no-highlight">12</i>&nbsp;inline fun news(block: NewsBuilder.() -&gt; Unit) = newsBuilder(block).build()
-<i class="no-highlight">13</i>&nbsp;
-<i class="no-highlight">14</i>&nbsp;@BuilderDsl
-<b class="fc"><i class="no-highlight">15</i>&nbsp;class NewsBuilder : TibiaKtBuilder&lt;News&gt;() {</b>
-<b class="fc"><i class="no-highlight">16</i>&nbsp;    var id: Int? = null</b>
-<b class="fc"><i class="no-highlight">17</i>&nbsp;    lateinit var title: String</b>
-<b class="fc"><i class="no-highlight">18</i>&nbsp;    lateinit var category: NewsCategory</b>
-<b class="fc"><i class="no-highlight">19</i>&nbsp;    lateinit var date: LocalDate</b>
-<b class="fc"><i class="no-highlight">20</i>&nbsp;    lateinit var content: String</b>
-<b class="fc"><i class="no-highlight">21</i>&nbsp;    var threadId: Int? = null</b>
-<i class="no-highlight">22</i>&nbsp;    override fun build(): News {
-<b class="fc"><i class="no-highlight">23</i>&nbsp;        return News(</b>
-<b class="pc"><i class="no-highlight">24</i>&nbsp;            id = id ?: throw IllegalStateException(&quot;id is required&quot;),</b>
-<b class="pc"><i class="no-highlight">25</i>&nbsp;            title = if (::title.isInitialized) title else throw IllegalStateException(&quot;title is required&quot;),</b>
-<b class="pc"><i class="no-highlight">26</i>&nbsp;            category = if (::category.isInitialized) category else throw IllegalStateException(&quot;category is required&quot;),</b>
-<b class="pc"><i class="no-highlight">27</i>&nbsp;            date = if (::date.isInitialized) date else throw IllegalStateException(&quot;date is required&quot;),</b>
-<b class="pc"><i class="no-highlight">28</i>&nbsp;            content = if (::content.isInitialized) content else throw IllegalStateException(&quot;content is required&quot;),</b>
-<b class="fc"><i class="no-highlight">29</i>&nbsp;            threadId = threadId,</b>
-<i class="no-highlight">30</i>&nbsp;        )
-<i class="no-highlight">31</i>&nbsp;    }
-<i class="no-highlight">32</i>&nbsp;}
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;/*
+<i class="no-highlight">2</i>&nbsp; * Copyright © 2022 Allan Galarza
+<i class="no-highlight">3</i>&nbsp; *
+<i class="no-highlight">4</i>&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+<i class="no-highlight">5</i>&nbsp; * you may not use this file except in compliance with the License.
+<i class="no-highlight">6</i>&nbsp; * You may obtain a copy of the License at
+<i class="no-highlight">7</i>&nbsp; *
+<i class="no-highlight">8</i>&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+<i class="no-highlight">9</i>&nbsp; *
+<i class="no-highlight">10</i>&nbsp; * Unless required by applicable law or agreed to in writing, software
+<i class="no-highlight">11</i>&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+<i class="no-highlight">12</i>&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+<i class="no-highlight">13</i>&nbsp; * See the License for the specific language governing permissions and
+<i class="no-highlight">14</i>&nbsp; * limitations under the License.
+<i class="no-highlight">15</i>&nbsp; */
+<i class="no-highlight">16</i>&nbsp;
+<i class="no-highlight">17</i>&nbsp;package com.galarzaa.tibiakt.core.builders
+<i class="no-highlight">18</i>&nbsp;
+<i class="no-highlight">19</i>&nbsp;import com.galarzaa.tibiakt.core.enums.NewsCategory
+<i class="no-highlight">20</i>&nbsp;import com.galarzaa.tibiakt.core.models.news.News
+<i class="no-highlight">21</i>&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
+<i class="no-highlight">22</i>&nbsp;import java.time.LocalDate
+<i class="no-highlight">23</i>&nbsp;
+<i class="no-highlight">24</i>&nbsp;@BuilderDsl
+<i class="no-highlight">25</i>&nbsp;public inline fun newsBuilder(block: NewsBuilder.() -&gt; Unit): NewsBuilder = NewsBuilder().apply(block)
+<i class="no-highlight">26</i>&nbsp;
+<i class="no-highlight">27</i>&nbsp;@BuilderDsl
+<i class="no-highlight">28</i>&nbsp;public inline fun news(block: NewsBuilder.() -&gt; Unit): News = newsBuilder(block).build()
+<i class="no-highlight">29</i>&nbsp;
+<b class="fc"><i class="no-highlight">30</i>&nbsp;@BuilderDsl</b>
+<i class="no-highlight">31</i>&nbsp;public class NewsBuilder : TibiaKtBuilder&lt;News&gt; {
+<b class="fc"><i class="no-highlight">32</i>&nbsp;    public var id: Int? = null</b>
+<b class="fc"><i class="no-highlight">33</i>&nbsp;    public lateinit var title: String</b>
+<b class="fc"><i class="no-highlight">34</i>&nbsp;    public lateinit var category: NewsCategory</b>
+<b class="fc"><i class="no-highlight">35</i>&nbsp;    public lateinit var date: LocalDate</b>
+<b class="fc"><i class="no-highlight">36</i>&nbsp;    public lateinit var content: String</b>
+<b class="fc"><i class="no-highlight">37</i>&nbsp;    public var threadId: Int? = null</b>
+<i class="no-highlight">38</i>&nbsp;    override fun build(): News {
+<b class="fc"><i class="no-highlight">39</i>&nbsp;        return News(</b>
+<b class="pc"><i class="no-highlight">40</i>&nbsp;            id = id ?: error(&quot;id is required&quot;),</b>
+<b class="pc"><i class="no-highlight">41</i>&nbsp;            title = if (::title.isInitialized) title else error(&quot;title is required&quot;),</b>
+<b class="pc"><i class="no-highlight">42</i>&nbsp;            category = if (::category.isInitialized) category else error(&quot;category is required&quot;),</b>
+<b class="pc"><i class="no-highlight">43</i>&nbsp;            date = if (::date.isInitialized) date else error(&quot;date is required&quot;),</b>
+<b class="pc"><i class="no-highlight">44</i>&nbsp;            content = if (::content.isInitialized) content else error(&quot;content is required&quot;),</b>
+<b class="fc"><i class="no-highlight">45</i>&nbsp;            threadId = threadId,</b>
+<i class="no-highlight">46</i>&nbsp;        )
+<i class="no-highlight">47</i>&nbsp;    }
+<i class="no-highlight">48</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -155,7 +171,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-05 18:53</div>
+    <div style="float:right;">generated on 2022-09-11 06:14</div>
 </div>
 </body>
 </html>

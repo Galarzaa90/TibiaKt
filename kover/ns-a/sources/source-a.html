@@ -210,8 +210,8 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">25</i>&nbsp;
 <i class="no-highlight">26</i>&nbsp;/** Base interface for forum author classes */
 <i class="no-highlight">27</i>&nbsp;@Serializable
-<i class="no-highlight">28</i>&nbsp;sealed class BaseForumAuthor {
-<i class="no-highlight">29</i>&nbsp;    abstract val name: String
+<i class="no-highlight">28</i>&nbsp;public sealed class BaseForumAuthor {
+<i class="no-highlight">29</i>&nbsp;    public abstract val name: String
 <i class="no-highlight">30</i>&nbsp;}
 <i class="no-highlight">31</i>&nbsp;
 <i class="no-highlight">32</i>&nbsp;/**
@@ -221,7 +221,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">36</i>&nbsp; */
 <i class="no-highlight">37</i>&nbsp;@Serializable
 <i class="no-highlight">38</i>&nbsp;@SerialName(&quot;unavailableForumAuthor&quot;)
-<i class="no-highlight">39</i>&nbsp;data class UnavailableForumAuthor(
+<i class="no-highlight">39</i>&nbsp;public data class UnavailableForumAuthor(
 <i class="no-highlight">40</i>&nbsp;    override val name: String,
 <i class="no-highlight">41</i>&nbsp;    val isDeleted: Boolean,
 <i class="no-highlight">42</i>&nbsp;    val isTraded: Boolean,
@@ -243,7 +243,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">58</i>&nbsp; */
 <b class="pc"><i class="no-highlight">59</i>&nbsp;@SerialName(&quot;forumAuthor&quot;)</b>
 <i class="no-highlight">60</i>&nbsp;@Serializable
-<i class="no-highlight">61</i>&nbsp;data class ForumAuthor(
+<i class="no-highlight">61</i>&nbsp;public data class ForumAuthor(
 <b class="fc"><i class="no-highlight">62</i>&nbsp;    override val name: String,</b>
 <b class="fc"><i class="no-highlight">63</i>&nbsp;    override val level: Int,</b>
 <b class="fc"><i class="no-highlight">64</i>&nbsp;    val world: String,</b>
@@ -258,7 +258,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">73</i>&nbsp;
 <i class="no-highlight">74</i>&nbsp;@SerialName(&quot;tournamentForumAuthor&quot;)
 <i class="no-highlight">75</i>&nbsp;@Serializable
-<i class="no-highlight">76</i>&nbsp;data class TournamentForumAuthor(
+<i class="no-highlight">76</i>&nbsp;public data class TournamentForumAuthor(
 <i class="no-highlight">77</i>&nbsp;    override val name: String,
 <i class="no-highlight">78</i>&nbsp;    val posts: Int,
 <i class="no-highlight">79</i>&nbsp;) : BaseForumAuthor(), BaseCharacter
@@ -288,7 +288,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-05 18:53</div>
+    <div style="float:right;">generated on 2022-09-11 06:14</div>
 </div>
 </body>
 </html>

@@ -82,10 +82,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    84.8%
+    84.5%
   </span>
   <span class="absValue">
-    (167/197)
+    (164/194)
   </span>
 </td>
 </tr>
@@ -127,7 +127,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">28</i>&nbsp;import com.galarzaa.tibiakt.core.utils.rows
 <i class="no-highlight">29</i>&nbsp;import org.jsoup.nodes.Element
 <i class="no-highlight">30</i>&nbsp;
-<i class="no-highlight">31</i>&nbsp;object KillStatisticsParser : Parser&lt;KillStatistics?&gt; {
+<i class="no-highlight">31</i>&nbsp;public object KillStatisticsParser : Parser&lt;KillStatistics?&gt; {
 <i class="no-highlight">32</i>&nbsp;    override fun fromContent(content: String): KillStatistics? {
 <b class="fc"><i class="no-highlight">33</i>&nbsp;        val boxContent = boxContent(content)</b>
 <b class="fc"><i class="no-highlight">34</i>&nbsp;        val formData =</b>
@@ -139,7 +139,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="pc"><i class="no-highlight">40</i>&nbsp;            tables[&quot;Kill Statistics&quot;]?.apply {</b>
 <b class="fc"><i class="no-highlight">41</i>&nbsp;                parseKillStatisticsTable(this)</b>
 <b class="fc"><i class="no-highlight">42</i>&nbsp;            } ?: throw ParsingException(&quot;kill statistics table not found&quot;)</b>
-<b class="pc"><i class="no-highlight">43</i>&nbsp;            val form = boxContent.selectFirst(&quot;form&quot;) ?: throw ParsingException(&quot;could not find form in value&quot;)</b>
+<b class="pc"><i class="no-highlight">43</i>&nbsp;            boxContent.selectFirst(&quot;form&quot;) ?: throw ParsingException(&quot;could not find form in value&quot;)</b>
 <b class="pc"><i class="no-highlight">44</i>&nbsp;            world = formData.values[&quot;world&quot;] ?: throw ParsingException(&quot;could not find world value in form&quot;)</b>
 <b class="fc"><i class="no-highlight">45</i>&nbsp;        }</b>
 <i class="no-highlight">46</i>&nbsp;    }
@@ -193,7 +193,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-05 18:53</div>
+    <div style="float:right;">generated on 2022-09-11 06:14</div>
 </div>
 </body>
 </html>

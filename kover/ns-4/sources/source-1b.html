@@ -126,7 +126,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.enums
 <i class="no-highlight">2</i>&nbsp;
-<b class="fc"><i class="no-highlight">3</i>&nbsp;enum class Vocation(override val value: String) : StringEnum {</b>
+<b class="fc"><i class="no-highlight">3</i>&nbsp;public enum class Vocation(override val value: String) : StringEnum {</b>
 <b class="fc"><i class="no-highlight">4</i>&nbsp;    NONE(&quot;None&quot;),</b>
 <b class="fc"><i class="no-highlight">5</i>&nbsp;    DRUID(&quot;Druid&quot;),</b>
 <b class="fc"><i class="no-highlight">6</i>&nbsp;    SORCERER(&quot;Sorcerer&quot;),</b>
@@ -140,7 +140,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">14</i>&nbsp;    /**
 <i class="no-highlight">15</i>&nbsp;     * Gets the base form of a vocation.
 <i class="no-highlight">16</i>&nbsp;     */
-<i class="no-highlight">17</i>&nbsp;    val base
+<i class="no-highlight">17</i>&nbsp;    public val base: Vocation
 <b class="nc"><i class="no-highlight">18</i>&nbsp;        get() = when (this) {</b>
 <b class="nc"><i class="no-highlight">19</i>&nbsp;            ELDER_DRUID -&gt; DRUID</b>
 <b class="nc"><i class="no-highlight">20</i>&nbsp;            MASTER_SORCERER -&gt; SORCERER</b>
@@ -175,7 +175,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-05 18:53</div>
+    <div style="float:right;">generated on 2022-09-11 06:14</div>
 </div>
 </body>
 </html>

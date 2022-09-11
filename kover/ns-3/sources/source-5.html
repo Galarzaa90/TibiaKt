@@ -109,7 +109,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/49)
+    (0/51)
   </span>
 </td>
   </tr>
@@ -144,7 +144,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/141)
+    (0/143)
   </span>
 </td>
 </tr>
@@ -155,49 +155,68 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.builders
-<i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.models.creatures.BossEntry
-<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.models.creatures.BosstableBosses
-<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
-<i class="no-highlight">6</i>&nbsp;
-<i class="no-highlight">7</i>&nbsp;@BuilderDsl
-<i class="no-highlight">8</i>&nbsp;inline fun bosstableBosses(block: BosstableBossesBuilder.() -&gt; Unit) = BosstableBossesBuilder().apply(block).build()
-<i class="no-highlight">9</i>&nbsp;
-<i class="no-highlight">10</i>&nbsp;@BuilderDsl
-<i class="no-highlight">11</i>&nbsp;inline fun bosstableBossesBuilder(block: BosstableBossesBuilder.() -&gt; Unit) = BosstableBossesBuilder().apply(block)
-<i class="no-highlight">12</i>&nbsp;
-<i class="no-highlight">13</i>&nbsp;@BuilderDsl
-<b class="nc"><i class="no-highlight">14</i>&nbsp;class BosstableBossesBuilder : TibiaKtBuilder&lt;BosstableBosses&gt;() {</b>
-<b class="nc"><i class="no-highlight">15</i>&nbsp;    var boostedBoss: BossEntry? = null</b>
-<b class="nc"><i class="no-highlight">16</i>&nbsp;    val bosses: MutableList&lt;BossEntry&gt; = mutableListOf()</b>
-<i class="no-highlight">17</i>&nbsp;
-<b class="nc"><i class="no-highlight">18</i>&nbsp;    fun boostedBoss(boostedBoss: BossEntry) = apply { this.boostedBoss = boostedBoss }</b>
-<i class="no-highlight">19</i>&nbsp;
-<i class="no-highlight">20</i>&nbsp;    @BuilderDsl
-<i class="no-highlight">21</i>&nbsp;    fun boostedBoss(block: BossEntryBuilder.() -&gt; Unit) =
-<b class="nc"><i class="no-highlight">22</i>&nbsp;        apply { this.boostedBoss = BossEntryBuilder().apply(block).build() }</b>
-<i class="no-highlight">23</i>&nbsp;
-<b class="nc"><i class="no-highlight">24</i>&nbsp;    fun addCreature(creature: BossEntry) = apply { bosses.add(creature) }</b>
-<i class="no-highlight">25</i>&nbsp;
-<i class="no-highlight">26</i>&nbsp;    @BuilderDsl
-<b class="nc"><i class="no-highlight">27</i>&nbsp;    fun addCreature(block: BossEntryBuilder.() -&gt; Unit) = apply { bosses.add(BossEntryBuilder().apply(block).build()) }</b>
-<i class="no-highlight">28</i>&nbsp;
-<b class="nc"><i class="no-highlight">29</i>&nbsp;    override fun build() = BosstableBosses(</b>
-<b class="nc"><i class="no-highlight">30</i>&nbsp;        boostedBoss = boostedBoss ?: throw IllegalArgumentException(&quot;boostedBoss is required&quot;), bosses = bosses</b>
-<i class="no-highlight">31</i>&nbsp;    )
-<i class="no-highlight">32</i>&nbsp;
-<i class="no-highlight">33</i>&nbsp;    @BuilderDsl
-<b class="nc"><i class="no-highlight">34</i>&nbsp;    class BossEntryBuilder : TibiaKtBuilder&lt;BossEntry&gt;() {</b>
-<b class="nc"><i class="no-highlight">35</i>&nbsp;        lateinit var name: String</b>
-<b class="nc"><i class="no-highlight">36</i>&nbsp;        lateinit var identifier: String</b>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;/*
+<i class="no-highlight">2</i>&nbsp; * Copyright © 2022 Allan Galarza
+<i class="no-highlight">3</i>&nbsp; *
+<i class="no-highlight">4</i>&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+<i class="no-highlight">5</i>&nbsp; * you may not use this file except in compliance with the License.
+<i class="no-highlight">6</i>&nbsp; * You may obtain a copy of the License at
+<i class="no-highlight">7</i>&nbsp; *
+<i class="no-highlight">8</i>&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+<i class="no-highlight">9</i>&nbsp; *
+<i class="no-highlight">10</i>&nbsp; * Unless required by applicable law or agreed to in writing, software
+<i class="no-highlight">11</i>&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+<i class="no-highlight">12</i>&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+<i class="no-highlight">13</i>&nbsp; * See the License for the specific language governing permissions and
+<i class="no-highlight">14</i>&nbsp; * limitations under the License.
+<i class="no-highlight">15</i>&nbsp; */
+<i class="no-highlight">16</i>&nbsp;
+<i class="no-highlight">17</i>&nbsp;package com.galarzaa.tibiakt.core.builders
+<i class="no-highlight">18</i>&nbsp;
+<i class="no-highlight">19</i>&nbsp;import com.galarzaa.tibiakt.core.models.creatures.BossEntry
+<i class="no-highlight">20</i>&nbsp;import com.galarzaa.tibiakt.core.models.creatures.BosstableBosses
+<i class="no-highlight">21</i>&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
+<i class="no-highlight">22</i>&nbsp;
+<i class="no-highlight">23</i>&nbsp;@BuilderDsl
+<i class="no-highlight">24</i>&nbsp;public inline fun bosstableBosses(block: BosstableBossesBuilder.() -&gt; Unit): BosstableBosses =
+<i class="no-highlight">25</i>&nbsp;    BosstableBossesBuilder().apply(block).build()
+<i class="no-highlight">26</i>&nbsp;
+<i class="no-highlight">27</i>&nbsp;@BuilderDsl
+<i class="no-highlight">28</i>&nbsp;public inline fun bosstableBossesBuilder(block: BosstableBossesBuilder.() -&gt; Unit): BosstableBossesBuilder =
+<i class="no-highlight">29</i>&nbsp;    BosstableBossesBuilder().apply(block)
+<i class="no-highlight">30</i>&nbsp;
+<b class="nc"><i class="no-highlight">31</i>&nbsp;@BuilderDsl</b>
+<i class="no-highlight">32</i>&nbsp;public class BosstableBossesBuilder : TibiaKtBuilder&lt;BosstableBosses&gt; {
+<b class="nc"><i class="no-highlight">33</i>&nbsp;    public var boostedBoss: BossEntry? = null</b>
+<b class="nc"><i class="no-highlight">34</i>&nbsp;    public val bosses: MutableList&lt;BossEntry&gt; = mutableListOf()</b>
+<i class="no-highlight">35</i>&nbsp;
+<b class="nc"><i class="no-highlight">36</i>&nbsp;    public fun boostedBoss(boostedBoss: BossEntry): BosstableBossesBuilder = apply { this.boostedBoss = boostedBoss }</b>
 <i class="no-highlight">37</i>&nbsp;
-<b class="nc"><i class="no-highlight">38</i>&nbsp;        override fun build() = BossEntry(</b>
-<b class="nc"><i class="no-highlight">39</i>&nbsp;            name = if (::name.isInitialized) name else throw IllegalArgumentException(&quot;name is required&quot;),</b>
-<b class="nc"><i class="no-highlight">40</i>&nbsp;            identifier = if (::identifier.isInitialized) identifier else throw IllegalArgumentException(&quot;identifier is required&quot;),</b>
-<i class="no-highlight">41</i>&nbsp;        )
-<i class="no-highlight">42</i>&nbsp;    }
-<i class="no-highlight">43</i>&nbsp;}
+<i class="no-highlight">38</i>&nbsp;    @BuilderDsl
+<i class="no-highlight">39</i>&nbsp;    public fun boostedBoss(block: BossEntryBuilder.() -&gt; Unit): BosstableBossesBuilder =
+<b class="nc"><i class="no-highlight">40</i>&nbsp;        apply { this.boostedBoss = BossEntryBuilder().apply(block).build() }</b>
+<i class="no-highlight">41</i>&nbsp;
+<b class="nc"><i class="no-highlight">42</i>&nbsp;    public fun addCreature(creature: BossEntry): BosstableBossesBuilder = apply { bosses.add(creature) }</b>
+<i class="no-highlight">43</i>&nbsp;
+<i class="no-highlight">44</i>&nbsp;    @BuilderDsl
+<i class="no-highlight">45</i>&nbsp;    public fun addCreature(block: BossEntryBuilder.() -&gt; Unit): BosstableBossesBuilder =
+<b class="nc"><i class="no-highlight">46</i>&nbsp;        apply { bosses.add(BossEntryBuilder().apply(block).build()) }</b>
+<i class="no-highlight">47</i>&nbsp;
+<b class="nc"><i class="no-highlight">48</i>&nbsp;    override fun build(): BosstableBosses = BosstableBosses(</b>
+<b class="nc"><i class="no-highlight">49</i>&nbsp;        boostedBoss = boostedBoss ?: throw IllegalArgumentException(&quot;boostedBoss is required&quot;), bosses = bosses</b>
+<i class="no-highlight">50</i>&nbsp;    )
+<i class="no-highlight">51</i>&nbsp;
+<b class="nc"><i class="no-highlight">52</i>&nbsp;    @BuilderDsl</b>
+<i class="no-highlight">53</i>&nbsp;    public class BossEntryBuilder : TibiaKtBuilder&lt;BossEntry&gt; {
+<b class="nc"><i class="no-highlight">54</i>&nbsp;        public lateinit var name: String</b>
+<b class="nc"><i class="no-highlight">55</i>&nbsp;        public lateinit var identifier: String</b>
+<i class="no-highlight">56</i>&nbsp;
+<b class="nc"><i class="no-highlight">57</i>&nbsp;        override fun build(): BossEntry = BossEntry(</b>
+<b class="nc"><i class="no-highlight">58</i>&nbsp;            name = if (::name.isInitialized) name else error(&quot;name is required&quot;),</b>
+<b class="nc"><i class="no-highlight">59</i>&nbsp;            identifier = if (::identifier.isInitialized) identifier else error(&quot;identifier is required&quot;),</b>
+<i class="no-highlight">60</i>&nbsp;        )
+<i class="no-highlight">61</i>&nbsp;    }
+<i class="no-highlight">62</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -224,7 +243,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-05 18:53</div>
+    <div style="float:right;">generated on 2022-09-11 06:14</div>
 </div>
 </body>
 </html>

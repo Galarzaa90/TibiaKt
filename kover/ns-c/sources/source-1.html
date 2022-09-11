@@ -209,7 +209,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">24</i>&nbsp; * @property lastUpdate The time when the currently displayed results were last updated.
 <i class="no-highlight">25</i>&nbsp; */
 <b class="pc"><i class="no-highlight">26</i>&nbsp;@Serializable</b>
-<i class="no-highlight">27</i>&nbsp;data class Highscores(
+<i class="no-highlight">27</i>&nbsp;public data class Highscores(
 <b class="fc"><i class="no-highlight">28</i>&nbsp;    val world: String?,</b>
 <b class="fc"><i class="no-highlight">29</i>&nbsp;    val category: HighscoresCategory,</b>
 <b class="fc"><i class="no-highlight">30</i>&nbsp;    val vocation: HighscoresProfession,</b>
@@ -222,9 +222,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc"><i class="no-highlight">37</i>&nbsp;    override val entries: List&lt;HighscoresEntry&gt;,</b>
 <i class="no-highlight">38</i>&nbsp;) : PaginatedWithUrl&lt;HighscoresEntry&gt; {
 <i class="no-highlight">39</i>&nbsp;
-<b class="nc"><i class="no-highlight">40</i>&nbsp;    val url get() = getHighscoresUrl(world, category, vocation, currentPage, battlEyeType, worldTypes)</b>
-<b class="nc"><i class="no-highlight">41</i>&nbsp;    override fun getPageUrl(page: Int) = getHighscoresUrl(world, category, vocation, page, battlEyeType, worldTypes)</b>
-<i class="no-highlight">42</i>&nbsp;}
+<b class="nc"><i class="no-highlight">40</i>&nbsp;    val url: String get() = getHighscoresUrl(world, category, vocation, currentPage, battlEyeType, worldTypes)</b>
+<i class="no-highlight">41</i>&nbsp;    override fun getPageUrl(page: Int): String =
+<b class="nc"><i class="no-highlight">42</i>&nbsp;        getHighscoresUrl(world, category, vocation, page, battlEyeType, worldTypes)</b>
+<i class="no-highlight">43</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -251,7 +252,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-05 18:53</div>
+    <div style="float:right;">generated on 2022-09-11 06:14</div>
 </div>
 </body>
 </html>

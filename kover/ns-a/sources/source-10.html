@@ -203,7 +203,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">18</i>&nbsp; * @property traded Whether the post was made by a character that was traded afterwards.
 <i class="no-highlight">19</i>&nbsp; */
 <b class="pc"><i class="no-highlight">20</i>&nbsp;@Serializable</b>
-<i class="no-highlight">21</i>&nbsp;data class LastPost(
+<i class="no-highlight">21</i>&nbsp;public data class LastPost(
 <b class="fc"><i class="no-highlight">22</i>&nbsp;    val author: String,</b>
 <b class="fc"><i class="no-highlight">23</i>&nbsp;    override val postId: Int,</b>
 <b class="fc"><i class="no-highlight">24</i>&nbsp;    val date: Instant,</b>
@@ -211,7 +211,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc"><i class="no-highlight">26</i>&nbsp;    val traded: Boolean,</b>
 <i class="no-highlight">27</i>&nbsp;) : BaseForumPost {
 <i class="no-highlight">28</i>&nbsp;    /** The URL to the author&#39;s character page. If the author is deleted, there is no URL. */
-<b class="nc"><i class="no-highlight">29</i>&nbsp;    val authorUrl get() = if (!deleted) getCharacterUrl(author) else null</b>
+<b class="nc"><i class="no-highlight">29</i>&nbsp;    val authorUrl: String? get() = if (!deleted) getCharacterUrl(author) else null</b>
 <i class="no-highlight">30</i>&nbsp;}
 </div>
 </pre>
@@ -239,7 +239,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-05 18:53</div>
+    <div style="float:right;">generated on 2022-09-11 06:14</div>
 </div>
 </body>
 </html>

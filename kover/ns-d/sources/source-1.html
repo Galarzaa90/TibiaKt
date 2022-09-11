@@ -117,19 +117,19 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">9</i>&nbsp; * @property houseId The internal ID of the house.
 <i class="no-highlight">10</i>&nbsp; * @property world The world where this house is located.
 <i class="no-highlight">11</i>&nbsp; */
-<i class="no-highlight">12</i>&nbsp;interface BaseHouse {
-<i class="no-highlight">13</i>&nbsp;    val houseId: Int
-<i class="no-highlight">14</i>&nbsp;    val world: String
+<i class="no-highlight">12</i>&nbsp;public interface BaseHouse {
+<i class="no-highlight">13</i>&nbsp;    public val houseId: Int
+<i class="no-highlight">14</i>&nbsp;    public val world: String
 <i class="no-highlight">15</i>&nbsp;
 <i class="no-highlight">16</i>&nbsp;    /**
 <i class="no-highlight">17</i>&nbsp;     * The URL to the house&#39;s information page.
 <i class="no-highlight">18</i>&nbsp;     */
-<b class="nc"><i class="no-highlight">19</i>&nbsp;    val url: String get() = getHouseUrl(world, houseId)</b>
+<b class="nc"><i class="no-highlight">19</i>&nbsp;    public val url: String get() = getHouseUrl(world, houseId)</b>
 <i class="no-highlight">20</i>&nbsp;
 <i class="no-highlight">21</i>&nbsp;    /**
 <i class="no-highlight">22</i>&nbsp;     * URL to the house&#39;s image.
 <i class="no-highlight">23</i>&nbsp;     */
-<b class="nc"><i class="no-highlight">24</i>&nbsp;    val imageUrl: String get() = getStaticFileUrl(&quot;images&quot;, &quot;houses&quot;, &quot;house_$houseId.png&quot;)</b>
+<b class="nc"><i class="no-highlight">24</i>&nbsp;    public val imageUrl: String get() = getStaticFileUrl(&quot;images&quot;, &quot;houses&quot;, &quot;house_$houseId.png&quot;)</b>
 <i class="no-highlight">25</i>&nbsp;}
 </div>
 </pre>
@@ -157,7 +157,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-05 18:53</div>
+    <div style="float:right;">generated on 2022-09-11 06:14</div>
 </div>
 </body>
 </html>

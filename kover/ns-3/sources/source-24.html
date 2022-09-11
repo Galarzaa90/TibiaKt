@@ -90,49 +90,67 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.builders
-<i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.models.KillStatistics
-<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.models.KillsStatisticEntry
-<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
-<i class="no-highlight">6</i>&nbsp;
-<i class="no-highlight">7</i>&nbsp;@BuilderDsl
-<b class="fc"><i class="no-highlight">8</i>&nbsp;inline fun killStatistics(block: KillStatisticsBuilder.() -&gt; Unit) = KillStatisticsBuilder().apply(block).build()</b>
-<i class="no-highlight">9</i>&nbsp;
-<i class="no-highlight">10</i>&nbsp;@BuilderDsl
-<b class="nc"><i class="no-highlight">11</i>&nbsp;inline fun killStatisticsBuilder(block: KillStatisticsBuilder.() -&gt; Unit) = KillStatisticsBuilder().apply(block)</b>
-<i class="no-highlight">12</i>&nbsp;
-<i class="no-highlight">13</i>&nbsp;@BuilderDsl
-<i class="no-highlight">14</i>&nbsp;class KillStatisticsBuilder : TibiaKtBuilder&lt;KillStatistics&gt;() {
-<i class="no-highlight">15</i>&nbsp;    var world: String? = null
-<i class="no-highlight">16</i>&nbsp;    val entries: MutableMap&lt;String, KillsStatisticEntry&gt; = mutableMapOf()
-<i class="no-highlight">17</i>&nbsp;    private var total: KillsStatisticEntry = KillsStatisticEntry(0, 0, 0, 0)
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;/*
+<i class="no-highlight">2</i>&nbsp; * Copyright © 2022 Allan Galarza
+<i class="no-highlight">3</i>&nbsp; *
+<i class="no-highlight">4</i>&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+<i class="no-highlight">5</i>&nbsp; * you may not use this file except in compliance with the License.
+<i class="no-highlight">6</i>&nbsp; * You may obtain a copy of the License at
+<i class="no-highlight">7</i>&nbsp; *
+<i class="no-highlight">8</i>&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+<i class="no-highlight">9</i>&nbsp; *
+<i class="no-highlight">10</i>&nbsp; * Unless required by applicable law or agreed to in writing, software
+<i class="no-highlight">11</i>&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+<i class="no-highlight">12</i>&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+<i class="no-highlight">13</i>&nbsp; * See the License for the specific language governing permissions and
+<i class="no-highlight">14</i>&nbsp; * limitations under the License.
+<i class="no-highlight">15</i>&nbsp; */
+<i class="no-highlight">16</i>&nbsp;
+<i class="no-highlight">17</i>&nbsp;package com.galarzaa.tibiakt.core.builders
 <i class="no-highlight">18</i>&nbsp;
-<i class="no-highlight">19</i>&nbsp;    fun total(
-<i class="no-highlight">20</i>&nbsp;        lastDayKilledPlayers: Int,
-<i class="no-highlight">21</i>&nbsp;        lastDayKilled: Int,
-<i class="no-highlight">22</i>&nbsp;        lastWeekKilledPlayers: Int,
-<i class="no-highlight">23</i>&nbsp;        lastWeekKilled: Int,
-<i class="no-highlight">24</i>&nbsp;    ) = apply {
-<i class="no-highlight">25</i>&nbsp;        total = KillsStatisticEntry(lastDayKilledPlayers, lastDayKilled, lastWeekKilledPlayers, lastWeekKilled)
-<i class="no-highlight">26</i>&nbsp;    }
-<i class="no-highlight">27</i>&nbsp;
-<i class="no-highlight">28</i>&nbsp;    fun addEntry(
-<i class="no-highlight">29</i>&nbsp;        race: String,
-<i class="no-highlight">30</i>&nbsp;        lastDayKilledPlayers: Int,
-<i class="no-highlight">31</i>&nbsp;        lastDayKilled: Int,
-<i class="no-highlight">32</i>&nbsp;        lastWeekKilledPlayers: Int,
-<i class="no-highlight">33</i>&nbsp;        lastWeekKilled: Int
-<i class="no-highlight">34</i>&nbsp;    ) = apply {
-<i class="no-highlight">35</i>&nbsp;        entries[race] = KillsStatisticEntry(lastDayKilledPlayers, lastDayKilled, lastWeekKilledPlayers, lastWeekKilled)
-<i class="no-highlight">36</i>&nbsp;    }
-<i class="no-highlight">37</i>&nbsp;
-<i class="no-highlight">38</i>&nbsp;    override fun build() = KillStatistics(
-<i class="no-highlight">39</i>&nbsp;        world = world ?: throw IllegalStateException(&quot;world is required&quot;),
-<i class="no-highlight">40</i>&nbsp;        entries = entries,
-<i class="no-highlight">41</i>&nbsp;        total = total
-<i class="no-highlight">42</i>&nbsp;    )
-<i class="no-highlight">43</i>&nbsp;}
+<i class="no-highlight">19</i>&nbsp;import com.galarzaa.tibiakt.core.models.KillStatistics
+<i class="no-highlight">20</i>&nbsp;import com.galarzaa.tibiakt.core.models.KillsStatisticEntry
+<i class="no-highlight">21</i>&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
+<i class="no-highlight">22</i>&nbsp;
+<i class="no-highlight">23</i>&nbsp;@BuilderDsl
+<i class="no-highlight">24</i>&nbsp;public inline fun killStatistics(block: KillStatisticsBuilder.() -&gt; Unit): KillStatistics =
+<b class="fc"><i class="no-highlight">25</i>&nbsp;    KillStatisticsBuilder().apply(block).build()</b>
+<i class="no-highlight">26</i>&nbsp;
+<i class="no-highlight">27</i>&nbsp;@BuilderDsl
+<i class="no-highlight">28</i>&nbsp;public inline fun killStatisticsBuilder(block: KillStatisticsBuilder.() -&gt; Unit): KillStatisticsBuilder =
+<b class="nc"><i class="no-highlight">29</i>&nbsp;    KillStatisticsBuilder().apply(block)</b>
+<i class="no-highlight">30</i>&nbsp;
+<i class="no-highlight">31</i>&nbsp;@BuilderDsl
+<i class="no-highlight">32</i>&nbsp;public class KillStatisticsBuilder : TibiaKtBuilder&lt;KillStatistics&gt; {
+<i class="no-highlight">33</i>&nbsp;    public var world: String? = null
+<i class="no-highlight">34</i>&nbsp;    public val entries: MutableMap&lt;String, KillsStatisticEntry&gt; = mutableMapOf()
+<i class="no-highlight">35</i>&nbsp;    private var total: KillsStatisticEntry = KillsStatisticEntry(0, 0, 0, 0)
+<i class="no-highlight">36</i>&nbsp;
+<i class="no-highlight">37</i>&nbsp;    public fun total(
+<i class="no-highlight">38</i>&nbsp;        lastDayKilledPlayers: Int,
+<i class="no-highlight">39</i>&nbsp;        lastDayKilled: Int,
+<i class="no-highlight">40</i>&nbsp;        lastWeekKilledPlayers: Int,
+<i class="no-highlight">41</i>&nbsp;        lastWeekKilled: Int,
+<i class="no-highlight">42</i>&nbsp;    ): KillStatisticsBuilder = apply {
+<i class="no-highlight">43</i>&nbsp;        total = KillsStatisticEntry(lastDayKilledPlayers, lastDayKilled, lastWeekKilledPlayers, lastWeekKilled)
+<i class="no-highlight">44</i>&nbsp;    }
+<i class="no-highlight">45</i>&nbsp;
+<i class="no-highlight">46</i>&nbsp;    public fun addEntry(
+<i class="no-highlight">47</i>&nbsp;        race: String,
+<i class="no-highlight">48</i>&nbsp;        lastDayKilledPlayers: Int,
+<i class="no-highlight">49</i>&nbsp;        lastDayKilled: Int,
+<i class="no-highlight">50</i>&nbsp;        lastWeekKilledPlayers: Int,
+<i class="no-highlight">51</i>&nbsp;        lastWeekKilled: Int,
+<i class="no-highlight">52</i>&nbsp;    ): KillStatisticsBuilder = apply {
+<i class="no-highlight">53</i>&nbsp;        entries[race] = KillsStatisticEntry(lastDayKilledPlayers, lastDayKilled, lastWeekKilledPlayers, lastWeekKilled)
+<i class="no-highlight">54</i>&nbsp;    }
+<i class="no-highlight">55</i>&nbsp;
+<i class="no-highlight">56</i>&nbsp;    override fun build(): KillStatistics = KillStatistics(
+<i class="no-highlight">57</i>&nbsp;        world = world ?: error(&quot;world is required&quot;),
+<i class="no-highlight">58</i>&nbsp;        entries = entries,
+<i class="no-highlight">59</i>&nbsp;        total = total
+<i class="no-highlight">60</i>&nbsp;    )
+<i class="no-highlight">61</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -159,7 +177,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-05 18:53</div>
+    <div style="float:right;">generated on 2022-09-11 06:14</div>
 </div>
 </body>
 </html>

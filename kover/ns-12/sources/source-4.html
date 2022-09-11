@@ -103,9 +103,9 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">11</i>&nbsp;/**
 <i class="no-highlight">12</i>&nbsp; * Serializer for [YearMonth] objects, using YYYY-MM format.
 <i class="no-highlight">13</i>&nbsp; */
-<i class="no-highlight">14</i>&nbsp;object YearMonthSerializer : KSerializer&lt;YearMonth&gt; {
+<i class="no-highlight">14</i>&nbsp;public object YearMonthSerializer : KSerializer&lt;YearMonth&gt; {
 <b class="nc"><i class="no-highlight">15</i>&nbsp;    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(&quot;YearMonth&quot;, PrimitiveKind.STRING)</b>
-<i class="no-highlight">16</i>&nbsp;    override fun serialize(encoder: Encoder, value: YearMonth) =
+<i class="no-highlight">16</i>&nbsp;    override fun serialize(encoder: Encoder, value: YearMonth): Unit =
 <b class="nc"><i class="no-highlight">17</i>&nbsp;        encoder.encodeString(value.toString())</b>
 <i class="no-highlight">18</i>&nbsp;
 <i class="no-highlight">19</i>&nbsp;    override fun deserialize(decoder: Decoder): YearMonth =
@@ -137,7 +137,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-05 18:53</div>
+    <div style="float:right;">generated on 2022-09-11 06:14</div>
 </div>
 </body>
 </html>

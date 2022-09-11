@@ -90,34 +90,50 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.builders
-<i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.LastPost
-<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
-<i class="no-highlight">5</i>&nbsp;import kotlinx.datetime.Instant
-<i class="no-highlight">6</i>&nbsp;
-<i class="no-highlight">7</i>&nbsp;@BuilderDsl
-<b class="fc"><i class="no-highlight">8</i>&nbsp;inline fun lastPostBuilder(block: LastPostBuilder.() -&gt; Unit) = LastPostBuilder().apply(block)</b>
-<i class="no-highlight">9</i>&nbsp;
-<i class="no-highlight">10</i>&nbsp;@BuilderDsl
-<b class="fc"><i class="no-highlight">11</i>&nbsp;inline fun lastPost(block: LastPostBuilder.() -&gt; Unit) = lastPostBuilder(block).build()</b>
-<i class="no-highlight">12</i>&nbsp;
-<i class="no-highlight">13</i>&nbsp;@BuilderDsl
-<i class="no-highlight">14</i>&nbsp;class LastPostBuilder : TibiaKtBuilder&lt;LastPost&gt;() {
-<i class="no-highlight">15</i>&nbsp;    var author: String? = null
-<i class="no-highlight">16</i>&nbsp;    var postId: Int? = null
-<i class="no-highlight">17</i>&nbsp;    var date: Instant? = null
-<i class="no-highlight">18</i>&nbsp;    var deleted: Boolean = false
-<i class="no-highlight">19</i>&nbsp;    var traded: Boolean = false
-<i class="no-highlight">20</i>&nbsp;
-<i class="no-highlight">21</i>&nbsp;    override fun build() = LastPost(
-<i class="no-highlight">22</i>&nbsp;        author = author ?: throw IllegalArgumentException(&quot;author is required&quot;),
-<i class="no-highlight">23</i>&nbsp;        postId = postId ?: throw IllegalArgumentException(&quot;postId is required&quot;),
-<i class="no-highlight">24</i>&nbsp;        date = date ?: throw IllegalArgumentException(&quot;date is required&quot;),
-<i class="no-highlight">25</i>&nbsp;        deleted = deleted,
-<i class="no-highlight">26</i>&nbsp;        traded = traded
-<i class="no-highlight">27</i>&nbsp;    )
-<i class="no-highlight">28</i>&nbsp;}
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;/*
+<i class="no-highlight">2</i>&nbsp; * Copyright © 2022 Allan Galarza
+<i class="no-highlight">3</i>&nbsp; *
+<i class="no-highlight">4</i>&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+<i class="no-highlight">5</i>&nbsp; * you may not use this file except in compliance with the License.
+<i class="no-highlight">6</i>&nbsp; * You may obtain a copy of the License at
+<i class="no-highlight">7</i>&nbsp; *
+<i class="no-highlight">8</i>&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+<i class="no-highlight">9</i>&nbsp; *
+<i class="no-highlight">10</i>&nbsp; * Unless required by applicable law or agreed to in writing, software
+<i class="no-highlight">11</i>&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+<i class="no-highlight">12</i>&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+<i class="no-highlight">13</i>&nbsp; * See the License for the specific language governing permissions and
+<i class="no-highlight">14</i>&nbsp; * limitations under the License.
+<i class="no-highlight">15</i>&nbsp; */
+<i class="no-highlight">16</i>&nbsp;
+<i class="no-highlight">17</i>&nbsp;package com.galarzaa.tibiakt.core.builders
+<i class="no-highlight">18</i>&nbsp;
+<i class="no-highlight">19</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.LastPost
+<i class="no-highlight">20</i>&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
+<i class="no-highlight">21</i>&nbsp;import kotlinx.datetime.Instant
+<i class="no-highlight">22</i>&nbsp;
+<i class="no-highlight">23</i>&nbsp;@BuilderDsl
+<b class="fc"><i class="no-highlight">24</i>&nbsp;public inline fun lastPostBuilder(block: LastPostBuilder.() -&gt; Unit): LastPostBuilder = LastPostBuilder().apply(block)</b>
+<i class="no-highlight">25</i>&nbsp;
+<i class="no-highlight">26</i>&nbsp;@BuilderDsl
+<b class="fc"><i class="no-highlight">27</i>&nbsp;public inline fun lastPost(block: LastPostBuilder.() -&gt; Unit): LastPost = lastPostBuilder(block).build()</b>
+<i class="no-highlight">28</i>&nbsp;
+<i class="no-highlight">29</i>&nbsp;@BuilderDsl
+<i class="no-highlight">30</i>&nbsp;public class LastPostBuilder : TibiaKtBuilder&lt;LastPost&gt; {
+<i class="no-highlight">31</i>&nbsp;    public var author: String? = null
+<i class="no-highlight">32</i>&nbsp;    public var postId: Int? = null
+<i class="no-highlight">33</i>&nbsp;    public var date: Instant? = null
+<i class="no-highlight">34</i>&nbsp;    public var deleted: Boolean = false
+<i class="no-highlight">35</i>&nbsp;    public var traded: Boolean = false
+<i class="no-highlight">36</i>&nbsp;
+<i class="no-highlight">37</i>&nbsp;    override fun build(): LastPost = LastPost(
+<i class="no-highlight">38</i>&nbsp;        author = author ?: throw IllegalArgumentException(&quot;author is required&quot;),
+<i class="no-highlight">39</i>&nbsp;        postId = postId ?: throw IllegalArgumentException(&quot;postId is required&quot;),
+<i class="no-highlight">40</i>&nbsp;        date = date ?: throw IllegalArgumentException(&quot;date is required&quot;),
+<i class="no-highlight">41</i>&nbsp;        deleted = deleted,
+<i class="no-highlight">42</i>&nbsp;        traded = traded
+<i class="no-highlight">43</i>&nbsp;    )
+<i class="no-highlight">44</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -144,7 +160,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-05 18:53</div>
+    <div style="float:right;">generated on 2022-09-11 06:14</div>
 </div>
 </body>
 </html>

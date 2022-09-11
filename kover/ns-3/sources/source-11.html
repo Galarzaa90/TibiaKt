@@ -82,10 +82,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    62.7%
+    59.1%
   </span>
   <span class="absValue">
-    (101/161)
+    (101/171)
   </span>
 </td>
 </tr>
@@ -97,46 +97,63 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.builders
-<i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.BaseForumAuthor
-<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.ForumAnnouncement
-<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
-<i class="no-highlight">6</i>&nbsp;import kotlinx.datetime.Instant
-<i class="no-highlight">7</i>&nbsp;
-<i class="no-highlight">8</i>&nbsp;@BuilderDsl
-<i class="no-highlight">9</i>&nbsp;inline fun forumAnnouncementBuilder(block: ForumAnnouncementBuilder.() -&gt; Unit) =
-<i class="no-highlight">10</i>&nbsp;    ForumAnnouncementBuilder().apply(block)
-<i class="no-highlight">11</i>&nbsp;
-<i class="no-highlight">12</i>&nbsp;@BuilderDsl
-<i class="no-highlight">13</i>&nbsp;inline fun forumAnnouncement(block: ForumAnnouncementBuilder.() -&gt; Unit) = forumAnnouncementBuilder(block).build()
-<i class="no-highlight">14</i>&nbsp;
-<i class="no-highlight">15</i>&nbsp;@BuilderDsl
-<b class="fc"><i class="no-highlight">16</i>&nbsp;class ForumAnnouncementBuilder : TibiaKtBuilder&lt;ForumAnnouncement&gt;() {</b>
-<b class="fc"><i class="no-highlight">17</i>&nbsp;    var announcementId: Int? = null</b>
-<b class="fc"><i class="no-highlight">18</i>&nbsp;    var title: String? = null</b>
-<b class="fc"><i class="no-highlight">19</i>&nbsp;    var board: String? = null</b>
-<b class="fc"><i class="no-highlight">20</i>&nbsp;    var boardId: Int? = null</b>
-<b class="fc"><i class="no-highlight">21</i>&nbsp;    var section: String? = null</b>
-<b class="fc"><i class="no-highlight">22</i>&nbsp;    var sectionId: Int? = null</b>
-<b class="fc"><i class="no-highlight">23</i>&nbsp;    var author: BaseForumAuthor? = null</b>
-<b class="fc"><i class="no-highlight">24</i>&nbsp;    var content: String? = null</b>
-<b class="fc"><i class="no-highlight">25</i>&nbsp;    var startDate: Instant? = null</b>
-<b class="fc"><i class="no-highlight">26</i>&nbsp;    var endDate: Instant? = null</b>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;/*
+<i class="no-highlight">2</i>&nbsp; * Copyright © 2022 Allan Galarza
+<i class="no-highlight">3</i>&nbsp; *
+<i class="no-highlight">4</i>&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+<i class="no-highlight">5</i>&nbsp; * you may not use this file except in compliance with the License.
+<i class="no-highlight">6</i>&nbsp; * You may obtain a copy of the License at
+<i class="no-highlight">7</i>&nbsp; *
+<i class="no-highlight">8</i>&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+<i class="no-highlight">9</i>&nbsp; *
+<i class="no-highlight">10</i>&nbsp; * Unless required by applicable law or agreed to in writing, software
+<i class="no-highlight">11</i>&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+<i class="no-highlight">12</i>&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+<i class="no-highlight">13</i>&nbsp; * See the License for the specific language governing permissions and
+<i class="no-highlight">14</i>&nbsp; * limitations under the License.
+<i class="no-highlight">15</i>&nbsp; */
+<i class="no-highlight">16</i>&nbsp;
+<i class="no-highlight">17</i>&nbsp;package com.galarzaa.tibiakt.core.builders
+<i class="no-highlight">18</i>&nbsp;
+<i class="no-highlight">19</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.BaseForumAuthor
+<i class="no-highlight">20</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.ForumAnnouncement
+<i class="no-highlight">21</i>&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
+<i class="no-highlight">22</i>&nbsp;import kotlinx.datetime.Instant
+<i class="no-highlight">23</i>&nbsp;
+<i class="no-highlight">24</i>&nbsp;@BuilderDsl
+<i class="no-highlight">25</i>&nbsp;public inline fun forumAnnouncementBuilder(block: ForumAnnouncementBuilder.() -&gt; Unit): ForumAnnouncementBuilder =
+<i class="no-highlight">26</i>&nbsp;    ForumAnnouncementBuilder().apply(block)
 <i class="no-highlight">27</i>&nbsp;
-<b class="fc"><i class="no-highlight">28</i>&nbsp;    override fun build() = ForumAnnouncement(</b>
-<b class="pc"><i class="no-highlight">29</i>&nbsp;        announcementId = announcementId ?: throw IllegalStateException(&quot;announcementId is required&quot;),</b>
-<b class="pc"><i class="no-highlight">30</i>&nbsp;        title = title ?: throw IllegalStateException(&quot;title is required&quot;),</b>
-<b class="pc"><i class="no-highlight">31</i>&nbsp;        board = board ?: throw IllegalStateException(&quot;board is required&quot;),</b>
-<b class="pc"><i class="no-highlight">32</i>&nbsp;        boardId = boardId ?: throw IllegalStateException(&quot;boardId is required&quot;),</b>
-<b class="pc"><i class="no-highlight">33</i>&nbsp;        section = section ?: throw IllegalStateException(&quot;section is required&quot;),</b>
-<b class="pc"><i class="no-highlight">34</i>&nbsp;        sectionId = sectionId ?: throw IllegalStateException(&quot;sectionId is required&quot;),</b>
-<b class="pc"><i class="no-highlight">35</i>&nbsp;        author = author ?: throw IllegalStateException(&quot;author is required&quot;),</b>
-<b class="pc"><i class="no-highlight">36</i>&nbsp;        content = content ?: throw IllegalStateException(&quot;content is required&quot;),</b>
-<b class="pc"><i class="no-highlight">37</i>&nbsp;        startDate = startDate ?: throw IllegalStateException(&quot;startDate is required&quot;),</b>
-<b class="pc"><i class="no-highlight">38</i>&nbsp;        endDate = endDate ?: throw IllegalStateException(&quot;endDate is required&quot;)</b>
-<i class="no-highlight">39</i>&nbsp;    )
-<i class="no-highlight">40</i>&nbsp;}
+<i class="no-highlight">28</i>&nbsp;@BuilderDsl
+<i class="no-highlight">29</i>&nbsp;public inline fun forumAnnouncement(block: ForumAnnouncementBuilder.() -&gt; Unit): ForumAnnouncement =
+<i class="no-highlight">30</i>&nbsp;    forumAnnouncementBuilder(block).build()
+<i class="no-highlight">31</i>&nbsp;
+<b class="fc"><i class="no-highlight">32</i>&nbsp;@BuilderDsl</b>
+<i class="no-highlight">33</i>&nbsp;public class ForumAnnouncementBuilder : TibiaKtBuilder&lt;ForumAnnouncement&gt; {
+<b class="fc"><i class="no-highlight">34</i>&nbsp;    public var announcementId: Int? = null</b>
+<b class="fc"><i class="no-highlight">35</i>&nbsp;    public var title: String? = null</b>
+<b class="fc"><i class="no-highlight">36</i>&nbsp;    public var board: String? = null</b>
+<b class="fc"><i class="no-highlight">37</i>&nbsp;    public var boardId: Int? = null</b>
+<b class="fc"><i class="no-highlight">38</i>&nbsp;    public var section: String? = null</b>
+<b class="fc"><i class="no-highlight">39</i>&nbsp;    public var sectionId: Int? = null</b>
+<b class="fc"><i class="no-highlight">40</i>&nbsp;    public var author: BaseForumAuthor? = null</b>
+<b class="fc"><i class="no-highlight">41</i>&nbsp;    public var content: String? = null</b>
+<b class="fc"><i class="no-highlight">42</i>&nbsp;    public var startDate: Instant? = null</b>
+<b class="fc"><i class="no-highlight">43</i>&nbsp;    public var endDate: Instant? = null</b>
+<i class="no-highlight">44</i>&nbsp;
+<b class="fc"><i class="no-highlight">45</i>&nbsp;    override fun build(): ForumAnnouncement = ForumAnnouncement(</b>
+<b class="pc"><i class="no-highlight">46</i>&nbsp;        announcementId = announcementId ?: error(&quot;announcementId is required&quot;),</b>
+<b class="pc"><i class="no-highlight">47</i>&nbsp;        title = title ?: error(&quot;title is required&quot;),</b>
+<b class="pc"><i class="no-highlight">48</i>&nbsp;        board = board ?: error(&quot;board is required&quot;),</b>
+<b class="pc"><i class="no-highlight">49</i>&nbsp;        boardId = boardId ?: error(&quot;boardId is required&quot;),</b>
+<b class="pc"><i class="no-highlight">50</i>&nbsp;        section = section ?: error(&quot;section is required&quot;),</b>
+<b class="pc"><i class="no-highlight">51</i>&nbsp;        sectionId = sectionId ?: error(&quot;sectionId is required&quot;),</b>
+<b class="pc"><i class="no-highlight">52</i>&nbsp;        author = author ?: error(&quot;author is required&quot;),</b>
+<b class="pc"><i class="no-highlight">53</i>&nbsp;        content = content ?: error(&quot;content is required&quot;),</b>
+<b class="pc"><i class="no-highlight">54</i>&nbsp;        startDate = startDate ?: error(&quot;startDate is required&quot;),</b>
+<b class="pc"><i class="no-highlight">55</i>&nbsp;        endDate = endDate ?: error(&quot;endDate is required&quot;)</b>
+<i class="no-highlight">56</i>&nbsp;    )
+<i class="no-highlight">57</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -163,7 +180,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-05 18:53</div>
+    <div style="float:right;">generated on 2022-09-11 06:14</div>
 </div>
 </body>
 </html>

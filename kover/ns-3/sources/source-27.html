@@ -71,10 +71,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    69.2%
+    66.5%
   </span>
   <span class="absValue">
-    (110/159)
+    (107/161)
   </span>
 </td>
 </tr>
@@ -109,7 +109,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/44)
+    (0/46)
   </span>
 </td>
   </tr>
@@ -141,10 +141,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    54.2%
+    51.7%
   </span>
   <span class="absValue">
-    (110/203)
+    (107/207)
   </span>
 </td>
 </tr>
@@ -180,56 +180,59 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">23</i>&nbsp;import kotlinx.datetime.Instant
 <i class="no-highlight">24</i>&nbsp;
 <i class="no-highlight">25</i>&nbsp;@BuilderDsl
-<i class="no-highlight">26</i>&nbsp;inline fun leaderboards(block: LeaderboardsBuilder.() -&gt; Unit) = LeaderboardsBuilder().apply(block).build()
-<i class="no-highlight">27</i>&nbsp;
-<i class="no-highlight">28</i>&nbsp;@BuilderDsl
-<i class="no-highlight">29</i>&nbsp;inline fun leaderboardsBuilder(block: LeaderboardsBuilder.() -&gt; Unit) = LeaderboardsBuilder().apply(block)
-<i class="no-highlight">30</i>&nbsp;
-<i class="no-highlight">31</i>&nbsp;@BuilderDsl
-<b class="fc"><i class="no-highlight">32</i>&nbsp;class LeaderboardsBuilder : TibiaKtBuilder&lt;Leaderboards&gt;() {</b>
-<b class="fc"><i class="no-highlight">33</i>&nbsp;    var world: String? = null</b>
-<b class="fc"><i class="no-highlight">34</i>&nbsp;    var rotation: LeaderboardsRotation? = null</b>
-<b class="fc"><i class="no-highlight">35</i>&nbsp;    val availableRotations: MutableList&lt;LeaderboardsRotation&gt; = mutableListOf()</b>
-<b class="fc"><i class="no-highlight">36</i>&nbsp;    var lastUpdated: Instant? = null</b>
-<b class="fc"><i class="no-highlight">37</i>&nbsp;    var currentPage: Int? = null</b>
-<b class="fc"><i class="no-highlight">38</i>&nbsp;    var totalPages: Int? = null</b>
-<b class="fc"><i class="no-highlight">39</i>&nbsp;    var resultsCount: Int? = null</b>
-<b class="fc"><i class="no-highlight">40</i>&nbsp;    var entries: MutableList&lt;BaseLeaderboardsEntry&gt; = mutableListOf()</b>
-<i class="no-highlight">41</i>&nbsp;
-<i class="no-highlight">42</i>&nbsp;    @BuilderDsl
-<i class="no-highlight">43</i>&nbsp;    fun rotation(body: LeaderboardsRotationBuilder.() -&gt; Unit) =
-<b class="nc"><i class="no-highlight">44</i>&nbsp;        apply { rotation = LeaderboardsRotationBuilder().apply(body).build() }</b>
-<i class="no-highlight">45</i>&nbsp;
-<i class="no-highlight">46</i>&nbsp;    @BuilderDsl
-<b class="fc"><i class="no-highlight">47</i>&nbsp;    fun addAvailableRotation(rotation: LeaderboardsRotation) = apply { availableRotations.add(rotation) }</b>
-<i class="no-highlight">48</i>&nbsp;
-<b class="fc"><i class="no-highlight">49</i>&nbsp;    fun addEntry(entry: BaseLeaderboardsEntry) = apply { entries.add(entry) }</b>
-<i class="no-highlight">50</i>&nbsp;
+<i class="no-highlight">26</i>&nbsp;public inline fun leaderboards(block: LeaderboardsBuilder.() -&gt; Unit): Leaderboards =
+<i class="no-highlight">27</i>&nbsp;    LeaderboardsBuilder().apply(block).build()
+<i class="no-highlight">28</i>&nbsp;
+<i class="no-highlight">29</i>&nbsp;@BuilderDsl
+<i class="no-highlight">30</i>&nbsp;public inline fun leaderboardsBuilder(block: LeaderboardsBuilder.() -&gt; Unit): LeaderboardsBuilder =
+<i class="no-highlight">31</i>&nbsp;    LeaderboardsBuilder().apply(block)
+<i class="no-highlight">32</i>&nbsp;
+<b class="fc"><i class="no-highlight">33</i>&nbsp;@BuilderDsl</b>
+<i class="no-highlight">34</i>&nbsp;public class LeaderboardsBuilder : TibiaKtBuilder&lt;Leaderboards&gt; {
+<b class="fc"><i class="no-highlight">35</i>&nbsp;    public var world: String? = null</b>
+<b class="fc"><i class="no-highlight">36</i>&nbsp;    public var rotation: LeaderboardsRotation? = null</b>
+<b class="fc"><i class="no-highlight">37</i>&nbsp;    public val availableRotations: MutableList&lt;LeaderboardsRotation&gt; = mutableListOf()</b>
+<b class="fc"><i class="no-highlight">38</i>&nbsp;    public var lastUpdated: Instant? = null</b>
+<b class="fc"><i class="no-highlight">39</i>&nbsp;    public var currentPage: Int? = null</b>
+<b class="fc"><i class="no-highlight">40</i>&nbsp;    public var totalPages: Int? = null</b>
+<b class="fc"><i class="no-highlight">41</i>&nbsp;    public var resultsCount: Int? = null</b>
+<b class="fc"><i class="no-highlight">42</i>&nbsp;    public val entries: MutableList&lt;BaseLeaderboardsEntry&gt; = mutableListOf()</b>
+<i class="no-highlight">43</i>&nbsp;
+<i class="no-highlight">44</i>&nbsp;    @BuilderDsl
+<i class="no-highlight">45</i>&nbsp;    public fun rotation(body: LeaderboardsRotationBuilder.() -&gt; Unit): LeaderboardsBuilder =
+<b class="nc"><i class="no-highlight">46</i>&nbsp;        apply { rotation = LeaderboardsRotationBuilder().apply(body).build() }</b>
+<i class="no-highlight">47</i>&nbsp;
+<i class="no-highlight">48</i>&nbsp;    @BuilderDsl
+<i class="no-highlight">49</i>&nbsp;    public fun addAvailableRotation(rotation: LeaderboardsRotation): LeaderboardsBuilder =
+<b class="fc"><i class="no-highlight">50</i>&nbsp;        apply { availableRotations.add(rotation) }</b>
 <i class="no-highlight">51</i>&nbsp;
-<b class="fc"><i class="no-highlight">52</i>&nbsp;    override fun build() = Leaderboards(</b>
-<b class="pc"><i class="no-highlight">53</i>&nbsp;        world = world ?: throw IllegalStateException(&quot;world is required&quot;),</b>
-<b class="pc"><i class="no-highlight">54</i>&nbsp;        rotation = rotation ?: throw IllegalStateException(&quot;rotation is required&quot;),</b>
-<b class="fc"><i class="no-highlight">55</i>&nbsp;        availableRotations = availableRotations,</b>
-<b class="fc"><i class="no-highlight">56</i>&nbsp;        lastUpdated = lastUpdated,</b>
-<b class="pc"><i class="no-highlight">57</i>&nbsp;        currentPage = currentPage ?: throw IllegalStateException(&quot;currentPage is required&quot;),</b>
-<b class="pc"><i class="no-highlight">58</i>&nbsp;        totalPages = totalPages ?: throw IllegalStateException(&quot;totalPages is required&quot;),</b>
-<b class="pc"><i class="no-highlight">59</i>&nbsp;        resultsCount = resultsCount ?: throw IllegalStateException(&quot;resultsCount is required&quot;),</b>
-<b class="fc"><i class="no-highlight">60</i>&nbsp;        entries = entries</b>
-<i class="no-highlight">61</i>&nbsp;    )
-<i class="no-highlight">62</i>&nbsp;
-<b class="nc"><i class="no-highlight">63</i>&nbsp;    class LeaderboardsRotationBuilder : TibiaKtBuilder&lt;LeaderboardsRotation&gt;() {</b>
-<b class="nc"><i class="no-highlight">64</i>&nbsp;        var rotationId: Int? = null</b>
-<b class="nc"><i class="no-highlight">65</i>&nbsp;        var current: Boolean = false</b>
-<b class="nc"><i class="no-highlight">66</i>&nbsp;        var endDate: Instant? = null</b>
-<b class="nc"><i class="no-highlight">67</i>&nbsp;        override fun build() = LeaderboardsRotation(</b>
-<b class="nc"><i class="no-highlight">68</i>&nbsp;            rotationId = rotationId ?: throw IllegalStateException(&quot;rotationId is required&quot;),</b>
-<b class="nc"><i class="no-highlight">69</i>&nbsp;            current = current,</b>
-<b class="nc"><i class="no-highlight">70</i>&nbsp;            endDate = endDate ?: throw IllegalStateException(&quot;endDate is required&quot;),</b>
-<i class="no-highlight">71</i>&nbsp;        )
-<i class="no-highlight">72</i>&nbsp;
-<i class="no-highlight">73</i>&nbsp;    }
-<i class="no-highlight">74</i>&nbsp;
-<i class="no-highlight">75</i>&nbsp;}
+<b class="fc"><i class="no-highlight">52</i>&nbsp;    public fun addEntry(entry: BaseLeaderboardsEntry): LeaderboardsBuilder = apply { entries.add(entry) }</b>
+<i class="no-highlight">53</i>&nbsp;
+<i class="no-highlight">54</i>&nbsp;
+<b class="fc"><i class="no-highlight">55</i>&nbsp;    override fun build(): Leaderboards = Leaderboards(</b>
+<b class="pc"><i class="no-highlight">56</i>&nbsp;        world = world ?: error(&quot;world is required&quot;),</b>
+<b class="pc"><i class="no-highlight">57</i>&nbsp;        rotation = rotation ?: error(&quot;rotation is required&quot;),</b>
+<b class="fc"><i class="no-highlight">58</i>&nbsp;        availableRotations = availableRotations,</b>
+<b class="fc"><i class="no-highlight">59</i>&nbsp;        lastUpdated = lastUpdated,</b>
+<b class="pc"><i class="no-highlight">60</i>&nbsp;        currentPage = currentPage ?: error(&quot;currentPage is required&quot;),</b>
+<b class="pc"><i class="no-highlight">61</i>&nbsp;        totalPages = totalPages ?: error(&quot;totalPages is required&quot;),</b>
+<b class="pc"><i class="no-highlight">62</i>&nbsp;        resultsCount = resultsCount ?: error(&quot;resultsCount is required&quot;),</b>
+<b class="fc"><i class="no-highlight">63</i>&nbsp;        entries = entries</b>
+<i class="no-highlight">64</i>&nbsp;    )
+<i class="no-highlight">65</i>&nbsp;
+<b class="nc"><i class="no-highlight">66</i>&nbsp;    public class LeaderboardsRotationBuilder : TibiaKtBuilder&lt;LeaderboardsRotation&gt; {</b>
+<b class="nc"><i class="no-highlight">67</i>&nbsp;        public var rotationId: Int? = null</b>
+<b class="nc"><i class="no-highlight">68</i>&nbsp;        public var current: Boolean = false</b>
+<b class="nc"><i class="no-highlight">69</i>&nbsp;        public var endDate: Instant? = null</b>
+<b class="nc"><i class="no-highlight">70</i>&nbsp;        override fun build(): LeaderboardsRotation = LeaderboardsRotation(</b>
+<b class="nc"><i class="no-highlight">71</i>&nbsp;            rotationId = rotationId ?: error(&quot;rotationId is required&quot;),</b>
+<b class="nc"><i class="no-highlight">72</i>&nbsp;            current = current,</b>
+<b class="nc"><i class="no-highlight">73</i>&nbsp;            endDate = endDate ?: error(&quot;endDate is required&quot;),</b>
+<i class="no-highlight">74</i>&nbsp;        )
+<i class="no-highlight">75</i>&nbsp;
+<i class="no-highlight">76</i>&nbsp;    }
+<i class="no-highlight">77</i>&nbsp;
+<i class="no-highlight">78</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -256,7 +259,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-05 18:53</div>
+    <div style="float:right;">generated on 2022-09-11 06:14</div>
 </div>
 </body>
 </html>

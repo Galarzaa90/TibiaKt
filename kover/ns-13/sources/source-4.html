@@ -179,9 +179,9 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc"><i class="no-highlight">80</i>&nbsp;        val guildName = guildLinkInfo.title</b>
 <b class="fc"><i class="no-highlight">81</i>&nbsp;        guildLink.remove()</b>
 <b class="fc"><i class="no-highlight">82</i>&nbsp;        var rank = it.cleanText()</b>
-<b class="pc"><i class="no-highlight">83</i>&nbsp;        val title = titleRegex.find(rank)?.groupValues?.get(1)?.also { rank = rank.remove(&quot;($it)&quot;).trim() }</b>
+<b class="pc"><i class="no-highlight">83</i>&nbsp;        val guildTitle = titleRegex.find(rank)?.groupValues?.get(1)?.also { g -&gt; rank = rank.remove(&quot;($g)&quot;).trim() }</b>
 <b class="fc"><i class="no-highlight">84</i>&nbsp;        rank = rank.removeSuffix(&quot;of the&quot;).trim()</b>
-<b class="fc"><i class="no-highlight">85</i>&nbsp;        guildMembership = GuildMembershipWithTitle(guildName, rank, title)</b>
+<b class="fc"><i class="no-highlight">85</i>&nbsp;        guildMembership = GuildMembershipWithTitle(guildName, rank, guildTitle)</b>
 <b class="fc"><i class="no-highlight">86</i>&nbsp;    }</b>
 <b class="pc"><i class="no-highlight">87</i>&nbsp;    charInfo?.replaceBrs()</b>
 <b class="pc"><i class="no-highlight">88</i>&nbsp;    if (charInfo?.cleanText()?.contains(&quot;Tournament - &quot;) == true) {</b>
@@ -191,7 +191,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="pc"><i class="no-highlight">92</i>&nbsp;    val (_, world, vocation, level) = charInfoRegex.find(charInfo!!.wholeCleanText())?.groupValues</b>
 <b class="nc"><i class="no-highlight">93</i>&nbsp;        ?: throw ParsingException(&quot;Could not find character info&quot;)</b>
 <i class="no-highlight">94</i>&nbsp;
-<b class="fc"><i class="no-highlight">95</i>&nbsp;    val (_, postsText) = authorPostsRegex.find(charInfo!!.wholeCleanText())!!.groupValues</b>
+<b class="fc"><i class="no-highlight">95</i>&nbsp;    val (_, postsText) = authorPostsRegex.find(charInfo.wholeCleanText())!!.groupValues</b>
 <i class="no-highlight">96</i>&nbsp;
 <b class="fc"><i class="no-highlight">97</i>&nbsp;    return ForumAuthor(</b>
 <b class="fc"><i class="no-highlight">98</i>&nbsp;        name = charLink.title,</b>
@@ -230,7 +230,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-05 18:53</div>
+    <div style="float:right;">generated on 2022-09-11 06:14</div>
 </div>
 </body>
 </html>
