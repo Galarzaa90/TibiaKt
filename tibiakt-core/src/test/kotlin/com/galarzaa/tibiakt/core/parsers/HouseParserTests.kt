@@ -19,9 +19,11 @@ package com.galarzaa.tibiakt.core.parsers
 import com.galarzaa.tibiakt.TestResources.getResource
 import com.galarzaa.tibiakt.core.enums.HouseStatus
 import com.galarzaa.tibiakt.core.enums.HouseType
+import com.galarzaa.tibiakt.core.models.house.House
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
+import io.kotest.matchers.types.shouldBeTypeOf
 
 class HouseParserTests : StringSpec({
     "Rented house"{
@@ -32,9 +34,10 @@ class HouseParserTests : StringSpec({
         house.size shouldBe 16
         house.beds shouldBe 2
         house.rent shouldBe 50_000
-        house.type shouldBe HouseType.HOUSE
+        house.houseType shouldBe HouseType.HOUSE
         house.world shouldBe "Alumbra"
         house.status shouldBe HouseStatus.RENTED
+        house.shouldBeTypeOf<House.Rented>()
         house.paidUntil shouldNotBe null
     }
 
@@ -46,10 +49,10 @@ class HouseParserTests : StringSpec({
         house.size shouldBe 401
         house.beds shouldBe 16
         house.rent shouldBe 500_000
-        house.type shouldBe HouseType.GUILDHALL
+        house.houseType shouldBe HouseType.GUILDHALL
         house.world shouldBe "Ferobra"
         house.status shouldBe HouseStatus.AUCTIONED
-        house.paidUntil shouldBe null
+        house.shouldBeTypeOf<House.Auctioned>()
         house.auctionEnd shouldNotBe null
         house.highestBidder shouldBe "Eiike"
         house.highestBid shouldBe 0
@@ -63,10 +66,11 @@ class HouseParserTests : StringSpec({
         house.size shouldBe 17
         house.beds shouldBe 1
         house.rent shouldBe 50_000
-        house.type shouldBe HouseType.HOUSE
+        house.houseType shouldBe HouseType.HOUSE
         house.world shouldBe "Monza"
-        house.owner shouldBe "Grandpa Asan"
         house.status shouldBe HouseStatus.RENTED
+        house.shouldBeTypeOf<House.Rented>()
+        house.owner shouldBe "Grandpa Asan"
         house.paidUntil shouldNotBe null
         house.movingDate shouldNotBe null
         house.transferAccepted shouldNotBe true
@@ -82,10 +86,11 @@ class HouseParserTests : StringSpec({
         house.size shouldBe 186
         house.beds shouldBe 3
         house.rent shouldBe 800_000
-        house.type shouldBe HouseType.HOUSE
+        house.houseType shouldBe HouseType.HOUSE
         house.world shouldBe "Ferobra"
-        house.owner shouldBe "Valeth Ossa"
         house.status shouldBe HouseStatus.RENTED
+        house.shouldBeTypeOf<House.Rented>()
+        house.owner shouldBe "Valeth Ossa"
         house.paidUntil shouldNotBe null
         house.movingDate shouldNotBe null
         house.transferAccepted shouldBe true

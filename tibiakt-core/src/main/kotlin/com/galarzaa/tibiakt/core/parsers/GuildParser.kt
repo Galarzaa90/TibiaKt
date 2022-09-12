@@ -108,7 +108,7 @@ public object GuildParser : Parser<Guild?> {
             foundingDate = parseTibiaDate(groups["date"]!!.value)
             world = groups["world"]!!.value
         }
-        applicationsOpen = containerText.contains("opened for applications")
+        hasOpenApplications = containerText.contains("opened for applications")
         isActive = containerText.contains("it is currently active", true)
         container.selectFirst("a")?.apply { homepage = text() }
         guildHallRegex.find(containerText)?.apply {

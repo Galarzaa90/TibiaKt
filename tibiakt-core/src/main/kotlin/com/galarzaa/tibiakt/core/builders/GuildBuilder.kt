@@ -39,7 +39,7 @@ public class GuildBuilder : TibiaKtBuilder<Guild> {
     public var description: String? = null
     public var foundingDate: LocalDate? = null
     public var isActive: Boolean = false
-    public var applicationsOpen: Boolean = false
+    public var hasOpenApplications: Boolean = false
     public var homepage: String? = null
     public var guildHall: GuildHall? = null
     public var disbandingDate: LocalDate? = null
@@ -78,7 +78,7 @@ public class GuildBuilder : TibiaKtBuilder<Guild> {
         description = description,
         foundingDate = foundingDate ?: error("name is required"),
         isActive = isActive,
-        applicationsOpen = applicationsOpen,
+        applicationsOpen = hasOpenApplications,
         homepage = homepage,
         guildHall = guildHall,
         members = members,

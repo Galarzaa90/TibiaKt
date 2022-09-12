@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.4.0 (2022-09-12)
+
+- `House` is now a sealed class with subtypes `Rented` and `Auctioned` for a cleaner model.
+- Renamed all boolean properties to start with `is`, `has` or `are`.
+
 ## v0.3.2 (2022-09-05)
 
 - Added configuration options to TibiaKtClient.

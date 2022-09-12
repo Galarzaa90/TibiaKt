@@ -42,8 +42,8 @@ internal fun parseLastPostFromCell(cell: Element): LastPost? {
         postId = permalink.queryParams["postid"]!!.first().toInt()
         date = parseTibiaForumDateTime(postDate.cleanText())
         author = authorName
-        deleted = authorLink == null && !isTraded
-        traded = isTraded
+        isDeleted = authorLink == null && !isTraded
+        this.isTraded = isTraded
     }
 }
 
@@ -58,18 +58,18 @@ internal fun parseAuthorTable(table: Element): BaseForumAuthor {
     val charLink = table.selectFirst("a")?.getLinkInformation()
     if (charLink == null) {
         val name = table.cleanText()
-        val traded: Boolean = name.contains("(traded)")
-        return UnavailableForumAuthor(name.remove("(traded)").trim(), !traded, traded)
+        val isTraded: Boolean = name.contains("(traded)")
+        return UnavailableForumAuthor(name.remove("(traded)").trim(), !isTraded, isTraded)
     }
     val charInfo = table.selectFirst("font.ff_infotext")
     val positionInfo = table.selectFirst("font.ff_smallinfo")
     var title: String? = null
     var position: String? = null
-    var recentlyTraded = false
+    var isRecentlyTraded = false
     if (positionInfo != null && (charInfo == null || positionInfo.parent() != charInfo)) {
         positionInfo.replaceBrs().wholeCleanText().split("\n").forEach {
             if (it in titles) position = it
-            else if ("traded" in it) recentlyTraded = true
+            else if ("traded" in it) isRecentlyTraded = true
             else title = it
         }
     }
@@ -103,5 +103,6 @@ internal fun parseAuthorTable(table: Element): BaseForumAuthor {
         title = title,
         guild = guildMembership,
         posts = postsText.parseInteger(),
-        isRecentlyTraded = recentlyTraded)
+        isRecentlyTraded = isRecentlyTraded
+    )
 }

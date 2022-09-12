@@ -35,7 +35,7 @@ public class HouseBuilder : TibiaKtBuilder<House> {
     public var houseId: Int? = null
     public var name: String? = null
     public var size: Int? = null
-    public var type: HouseType? = null
+    public var houseType: HouseType? = null
     public var beds: Int? = null
     public var rent: Int? = null
     public var world: String? = null
@@ -44,29 +44,43 @@ public class HouseBuilder : TibiaKtBuilder<House> {
     public var owner: String? = null
     public var movingDate: Instant? = null
     public var transferPrice: Int? = null
-    public var transferAccepted: Boolean? = null
+    public var isTransferAccepted: Boolean? = null
     public var transferRecipient: String? = null
     public var highestBid: Int? = null
     public var highestBidder: String? = null
     public var auctionEnd: Instant? = null
 
-    override fun build(): House = House(
-        houseId = houseId ?: error("houseId is required"),
-        name = name ?: error("name is required"),
-        size = size ?: error("size is required"),
-        type = type ?: error("type is required"),
-        beds = beds ?: error("beds is required"),
-        rent = rent ?: error("rent is required"),
-        world = world ?: error("world is required"),
-        status = status ?: error("status is required"),
-        paidUntil = paidUntil,
-        owner = owner,
-        movingDate = movingDate,
-        transferPrice = transferPrice,
-        transferAccepted = transferAccepted,
-        transferRecipient = transferRecipient,
-        highestBid = highestBid,
-        highestBidder = highestBidder,
-        auctionEnd = auctionEnd,
-    )
+    @Suppress("ComplexMethod")
+    override fun build(): House = when (status) {
+        HouseStatus.RENTED -> House.Rented(
+            houseId = houseId ?: error("houseId is required"),
+            name = name ?: error("name is required"),
+            size = size ?: error("size is required"),
+            houseType = houseType ?: error("type is required"),
+            beds = beds ?: error("beds is required"),
+            rent = rent ?: error("rent is required"),
+            world = world ?: error("world is required"),
+            paidUntil = paidUntil ?: error("paidUntil is required"),
+            owner = owner ?: error("Owner is required"),
+            movingDate = movingDate,
+            transferPrice = transferPrice,
+            transferAccepted = isTransferAccepted,
+            transferRecipient = transferRecipient
+        )
+
+        HouseStatus.AUCTIONED -> House.Auctioned(
+            houseId = houseId ?: error("houseId is required"),
+            name = name ?: error("name is required"),
+            size = size ?: error("size is required"),
+            houseType = houseType ?: error("type is required"),
+            beds = beds ?: error("beds is required"),
+            rent = rent ?: error("rent is required"),
+            world = world ?: error("world is required"),
+            highestBid = highestBid,
+            highestBidder = highestBidder,
+            auctionEnd = auctionEnd,
+        )
+
+        else -> error("status is required")
+    }
 }

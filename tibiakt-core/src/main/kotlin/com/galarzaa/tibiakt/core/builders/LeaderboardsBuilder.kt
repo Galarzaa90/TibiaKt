@@ -66,11 +66,11 @@ public class LeaderboardsBuilder : TibiaKtBuilder<Leaderboards> {
 
     public class LeaderboardsRotationBuilder : TibiaKtBuilder<LeaderboardsRotation> {
         public var rotationId: Int? = null
-        public var current: Boolean = false
+        public var isCurrent: Boolean = false
         public var endDate: Instant? = null
         override fun build(): LeaderboardsRotation = LeaderboardsRotation(
             rotationId = rotationId ?: error("rotationId is required"),
-            current = current,
+            current = isCurrent,
             endDate = endDate ?: error("endDate is required"),
         )
 

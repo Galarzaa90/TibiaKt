@@ -110,8 +110,8 @@ public object AuctionParser : Parser<Auction?> {
         for (row in table.selectFirst("table.TableContent").rows().offsetStart(1)) {
             val text = row.cleanText()
             if (text.contains("more entries")) continue
-            val secret = row.selectFirst("img") != null
-            addAchievement(AchievementEntry(text, secret))
+            val isSecret = row.selectFirst("img") != null
+            addAchievement(AchievementEntry(text, isSecret))
         }
     }
 
@@ -267,7 +267,7 @@ public object AuctionParser : Parser<Auction?> {
         for (row in contentContainers[4].rows()) {
             val (field, value) = getAuctionTableFieldValue(row)
             when (field) {
-                "Charm Expansion" -> charmExpansion = value.contains("yes")
+                "Charm Expansion" -> hasCharmExpansion = value.contains("yes")
                 "Available Charm Points" -> availableCharmPoints = value.parseInteger()
                 "Spent Charm Points" -> spentCharmPoints = value.parseInteger()
             }

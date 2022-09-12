@@ -23,6 +23,7 @@ import com.galarzaa.tibiakt.core.enums.HouseType
 import com.galarzaa.tibiakt.core.serializers.InstantSerializer
 import com.galarzaa.tibiakt.core.utils.getCharacterUrl
 import kotlinx.datetime.Instant
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 
@@ -31,42 +32,86 @@ import kotlinx.serialization.UseSerializers
  *
  * @property name The name of the house.
  * @property size The size of the house in square meters (tiles).
- * @property type The type of the house.
+ * @property houseType The type of the house.
  * @property beds The maximum amount of beds that can be placed in there.
  * @property rent The monthly rent paid for this house in gold coins.
  * @property status The current status of the house.
- * @property paidUntil The date when the last paid rent is due.
- * @property owner The character that currently owns the house.
- * @property movingDate The date when the current owner will move out of the house.
- * @property transferPrice When the house is being transferred to someone else, the amount of gold paid for the transfer.
- * @property transferAccepted Whether the transfer has been accepted by the recipient or not.
- * @property transferRecipient The character that will receive the house.
- * @property highestBid If the house is on auction, the highest bid received, if any.
- * @property highestBidder The character that placed the highest bid.
- * @property auctionEnd The date and time when the auction will end.
  */
 @Serializable
-public data class House(
-    override val houseId: Int,
-    val name: String,
-    val size: Int,
-    val type: HouseType,
-    val beds: Int,
-    val rent: Int,
-    override val world: String,
-    val status: HouseStatus,
-    val paidUntil: Instant?,
-    val owner: String?,
-    val movingDate: Instant?,
-    val transferPrice: Int?,
-    val transferAccepted: Boolean?,
-    val transferRecipient: String?,
-    val highestBid: Int?,
-    val highestBidder: String?,
-    val auctionEnd: Instant?,
-) : BaseHouse {
+public sealed class House : BaseHouse {
+    abstract override val houseId: Int
+    public abstract val name: String
+    public abstract val size: Int
+    public abstract val houseType: HouseType
+    public abstract val beds: Int
+    public abstract val rent: Int
+    abstract override val world: String
+    public abstract val status: HouseStatus
 
-    val ownerUrl: String? get() = owner?.let { getCharacterUrl(it) }
-    val transferRecipientUrl: String? get() = transferRecipient?.let { getCharacterUrl(it) }
-    val highestBidderUrl: String? get() = highestBidder?.let { getCharacterUrl(it) }
+    /**
+     * A rented house or guildhall.
+     *
+     * @property paidUntil The date when the last paid rent is due.
+     * @property owner The character that currently owns the house.
+     * @property movingDate The date when the current owner will move out of the house.
+     * @property transferPrice The amount of gold coins to be paid for transferring the house.
+     * @property transferAccepted Whether the transfer has been accepted by the recipient or not.
+     * @property transferRecipient The character that will receive the house.
+     */
+    @Serializable
+    @SerialName("RENTED")
+    public data class Rented(
+        override val houseId: Int,
+        override val name: String,
+        override val size: Int,
+        override val houseType: HouseType,
+        override val beds: Int,
+        override val rent: Int,
+        override val world: String,
+        val paidUntil: Instant,
+        val owner: String,
+        val movingDate: Instant?,
+        val transferPrice: Int?,
+        val transferAccepted: Boolean?,
+        val transferRecipient: String?,
+    ) : House() {
+        override val status: HouseStatus = HouseStatus.RENTED
+
+        /**
+         * URL to the owner's information page.
+         */
+        val ownerUrl: String get() = getCharacterUrl(owner)
+
+        /** URL to the transfer recipient's information page, if any. */
+        val transferRecipientUrl: String? get() = transferRecipient?.let { getCharacterUrl(it) }
+    }
+
+    /**
+     * An auctioned house or guildhall.
+     *
+     * @property highestBid If the house is on auction, the highest bid received, if any.
+     * @property highestBidder The character that placed the highest bid.
+     * @property auctionEnd The date and time when the auction will end.
+     */
+    @Serializable
+    @SerialName("AUCTIONED")
+    public data class Auctioned(
+        override val houseId: Int,
+        override val name: String,
+        override val size: Int,
+        override val houseType: HouseType,
+        override val beds: Int,
+        override val rent: Int,
+        override val world: String,
+        val highestBid: Int?,
+        val highestBidder: String?,
+        val auctionEnd: Instant?,
+    ) : House() {
+        override val status: HouseStatus = HouseStatus.AUCTIONED
+
+        /**
+         * The URL to the information page of the highest bidder, if any.
+         */
+        val highestBidderUrl: String? get() = highestBidder?.let { getCharacterUrl(it) }
+    }
 }

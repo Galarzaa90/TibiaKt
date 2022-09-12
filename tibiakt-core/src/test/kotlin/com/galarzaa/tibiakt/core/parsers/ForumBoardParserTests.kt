@@ -57,8 +57,8 @@ class ForumBoardParserTests : StringSpec({
             section shouldBe "World Boards"
             sectionId shouldBe 2
             entries.forAtLeastOne {
-                it.authorTraded shouldBe true
-                it.authorDeleted shouldBe false
+                it.isAuthorTraded shouldBe true
+                it.isAuthorDeleted shouldBe false
                 it.lastPost.traded shouldBe true
                 it.lastPost.deleted shouldBe false
             }
@@ -73,8 +73,8 @@ class ForumBoardParserTests : StringSpec({
             section shouldBe "Trade Boards"
             sectionId shouldBe 3
             entries.forAtLeastOne {
-                it.authorTraded shouldBe false
-                it.authorDeleted shouldBe true
+                it.isAuthorTraded shouldBe false
+                it.isAuthorDeleted shouldBe true
                 it.lastPost.traded shouldBe false
                 it.lastPost.deleted shouldBe true
             }

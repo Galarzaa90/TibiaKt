@@ -139,7 +139,7 @@ public class AuctionBuilder : TibiaKtBuilder<Auction> {
         public var gold: Long? = null
         public var achievementPoints: Int? = null
         public var regularWorldTransfersAvailable: Instant? = null
-        public var charmExpansion: Boolean? = null
+        public var hasCharmExpansion: Boolean? = null
         public var availableCharmPoints: Int? = null
         public var spentCharmPoints: Int? = null
         public var dailyRewardStreak: Int? = null
@@ -209,7 +209,7 @@ public class AuctionBuilder : TibiaKtBuilder<Auction> {
                 gold = gold ?: error("gold is required"),
                 achievementPoints = achievementPoints ?: error("achievementPoints is required"),
                 regularWorldTransfersAvailable = regularWorldTransfersAvailable,
-                charmExpansion = charmExpansion ?: error("charmExpansion is required"),
+                charmExpansion = hasCharmExpansion ?: error("charmExpansion is required"),
                 availableCharmPoints = availableCharmPoints
                     ?: error("availableCharmPoints is required"),
                 spentCharmPoints = spentCharmPoints ?: error("spentCharmPoints is required"),

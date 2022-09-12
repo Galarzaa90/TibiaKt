@@ -83,29 +83,29 @@ public class ForumBoardBuilder : TibiaKtBuilder<ForumBoard> {
         public var title: String? = null
         public var threadId: Int? = null
         public var author: String? = null
-        public var authorTraded: Boolean = false
-        public var authorDeleted: Boolean = false
+        public var isAuthorTraded: Boolean = false
+        public var isAuthorDeleted: Boolean = false
         public var replies: Int = 0
         public var emoticon: ForumEmoticon? = null
         public var views: Int = 0
         public var lastPost: LastPost? = null
         public val status: MutableSet<ThreadStatus> = mutableSetOf()
         public var pages: Int = 1
-        public var goldenFrame: Boolean = false
+        public var hasGoldenFrame: Boolean = false
 
         override fun build(): ThreadEntry = ThreadEntry(
             title = title ?: error("title is required"),
             threadId = threadId ?: error("threadId is required"),
             author = author ?: error("author is required"),
-            authorTraded = authorTraded,
-            authorDeleted = authorDeleted,
+            isAuthorTraded = isAuthorTraded,
+            isAuthorDeleted = isAuthorDeleted,
             emoticon = emoticon,
             replies = replies,
             views = views,
             status = status,
             lastPost = lastPost ?: error("lastPost is required"),
             pages = pages,
-            goldenFrame = goldenFrame
+            goldenFrame = hasGoldenFrame
         )
     }
 }

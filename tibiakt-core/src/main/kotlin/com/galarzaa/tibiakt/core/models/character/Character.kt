@@ -46,13 +46,13 @@ import kotlinx.serialization.UseSerializers
  * @property position The special position the character holds.
  * @property comment The character's comment.
  * @property accountStatus The current status of the account.
- * @property recentlyTraded Whether the character was recently traded. If its name was changed afterwards, this flag is removed.
+ * @property isRecentlyTraded Whether the character was recently traded. If its name was changed afterwards, this flag is removed.
  * @property deletionDate The date when this character is scheduled to be deleted.
  * @property badges The visible badges of the character.
  * @property achievements The visible achievements for the character.
  * @property deaths The recent deaths of the character.
- * @property accountInformation The character's account information. Might be [hidden].
- * @property characters The list of visible characters in the same account. Might be [hidden].
+ * @property accountInformation The character's account information. Might be [isHidden].
+ * @property characters The list of visible characters in the same account. Might be [isHidden].
  */
 @Serializable
 public data class Character(
@@ -74,7 +74,7 @@ public data class Character(
     val position: String?,
     val comment: String?,
     val accountStatus: AccountStatus,
-    val recentlyTraded: Boolean,
+    val isRecentlyTraded: Boolean,
     val deletionDate: Instant?,
     val badges: List<AccountBadge>,
     val achievements: List<DisplayedAchievement>,
@@ -86,12 +86,12 @@ public data class Character(
     /**
      * Whether this character is scheduled for deletion or nto.
      */
-    val scheduledForDeletion: Boolean get() = deletionDate != null
+    val isScheduledForDeletion: Boolean get() = deletionDate != null
 
     /**
      * Whether this character is hidden or not.
      */
-    val hidden: Boolean get() = characters.isEmpty()
+    val isHidden: Boolean get() = characters.isEmpty()
 
     /**
      * URL to the character this character is married to, if any.

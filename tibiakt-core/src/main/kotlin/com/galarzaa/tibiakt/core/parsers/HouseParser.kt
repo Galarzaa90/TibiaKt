@@ -73,12 +73,12 @@ public object HouseParser : Parser<House?> {
             status = HouseStatus.RENTED
             owner = groups["owner"]!!.value.clean()
             paidUntil = parseTibiaDateTime(groups["paidUntil"]!!.value)
-            type = StringEnum.fromValue("${groups["type"]!!.value}s")
+            houseType = StringEnum.fromValue("${groups["type"]!!.value}s")
                 ?: throw ParsingException("Unknown house type found: ${groups["type"]!!.value}")
         }
         auctionedPattern.find(stateLine)?.apply {
             status = HouseStatus.AUCTIONED
-            type = StringEnum.fromValue("${groups["type"]!!.value}s")
+            houseType = StringEnum.fromValue("${groups["type"]!!.value}s")
                 ?: throw ParsingException("Unknown house type found: ${groups["type"]!!.value}")
         }
         bidPattern.find(stateLine)?.apply {
@@ -91,7 +91,7 @@ public object HouseParser : Parser<House?> {
             movingDate = parseTibiaDateTime(groups["moveDate"]!!.value)
         }
         transferPattern.find(stateLine)?.apply {
-            transferAccepted = groups["action"]!!.value == "will"
+            isTransferAccepted = groups["action"]!!.value == "will"
             transferRecipient = groups["transferee"]!!.value.clean()
             transferPrice = groups["transferPrice"]!!.value.toInt()
         }

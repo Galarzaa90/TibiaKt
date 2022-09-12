@@ -98,14 +98,14 @@ class CharacterParserTests : StringSpec({
         char.formerWorld shouldNotBe null
         char.characters.forAtLeastOne { it.isDeleted shouldBe true }
         char.characters.forAtLeastOne { it.isOnline shouldBe true }
-        char.characters.forAtMostOne { it.main shouldBe true }
+        char.characters.forAtMostOne { it.isMain shouldBe true }
     }
 
     "Parsing a character scheduld for deletion" {
         val char = CharacterParser.fromContent(getResource("characters/characterDeleted.txt"))
         char shouldNotBe null
         char!!.name shouldBe "Orsty Serv"
-        char.scheduledForDeletion shouldBe true
+        char.isScheduledForDeletion shouldBe true
         char.deletionDate shouldNotBe null
         char.deletionDate?.epochSeconds shouldBe 1_632_678_475
     }

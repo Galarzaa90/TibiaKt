@@ -617,27 +617,27 @@ public open class TibiaKtClient constructor(
                 details = tibiaResponse.data.details!!.copy(
                     items = tibiaResponse.data.details!!.items.copy(
                         entries = itemEntries ?: tibiaResponse.data.details!!.items.entries,
-                        fullyFetched = fetchItems,
+                        isFullyFetched = fetchItems,
                     ),
                     storeItems = tibiaResponse.data.details!!.items.copy(
                         entries = storeItemEntries ?: tibiaResponse.data.details!!.items.entries,
-                        fullyFetched = fetchItems,
+                        isFullyFetched = fetchItems,
                     ),
                     mounts = tibiaResponse.data.details!!.mounts.copy(
                         entries = mountEntries ?: tibiaResponse.data.details!!.mounts.entries,
-                        fullyFetched = fetchMounts,
+                        isFullyFetched = fetchMounts,
                     ),
                     storeMounts = tibiaResponse.data.details!!.storeMounts.copy(
                         entries = storeMountEntries ?: tibiaResponse.data.details!!.storeMounts.entries,
-                        fullyFetched = fetchMounts
+                        isFullyFetched = fetchMounts
                     ),
                     outfits = tibiaResponse.data.details!!.outfits.copy(
                         entries = outfitEntries ?: tibiaResponse.data.details!!.outfits.entries,
-                        fullyFetched = fetchOutfits,
+                        isFullyFetched = fetchOutfits,
                     ),
                     storeOutfits = tibiaResponse.data.details!!.storeOutfits.copy(
                         entries = storeOutfitEntries ?: tibiaResponse.data.details!!.storeOutfits.entries,
-                        fullyFetched = fetchOutfits,
+                        isFullyFetched = fetchOutfits,
                     ),
                 )
             )

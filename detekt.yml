@@ -295,7 +295,7 @@ exceptions:
 naming:
   active: true
   BooleanPropertyNaming:
-    active: false
+    active: true
     allowedPattern: '^(is|has|are)'
     ignoreOverridden: true
   ClassNaming:

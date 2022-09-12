@@ -32,14 +32,14 @@ public class LastPostBuilder : TibiaKtBuilder<LastPost> {
     public var author: String? = null
     public var postId: Int? = null
     public var date: Instant? = null
-    public var deleted: Boolean = false
-    public var traded: Boolean = false
+    public var isDeleted: Boolean = false
+    public var isTraded: Boolean = false
 
     override fun build(): LastPost = LastPost(
-        author = author ?: throw IllegalArgumentException("author is required"),
-        postId = postId ?: throw IllegalArgumentException("postId is required"),
-        date = date ?: throw IllegalArgumentException("date is required"),
-        deleted = deleted,
-        traded = traded
+        author = author ?: error("author is required"),
+        postId = postId ?: error("postId is required"),
+        date = date ?: error("date is required"),
+        deleted = isDeleted,
+        traded = isTraded
     )
 }

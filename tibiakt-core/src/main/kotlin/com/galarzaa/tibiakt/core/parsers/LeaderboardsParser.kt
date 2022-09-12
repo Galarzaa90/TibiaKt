@@ -52,17 +52,17 @@ public object LeaderboardsParser : Parser<Leaderboards?> {
                 .associate { it.attr("value").toInt() to it.cleanText() }
             for ((rotationId, label) in rotationOptions) {
                 var cleanLabel = label
-                var current = false
+                var isCurrent = false
                 if ("Current" in label) {
                     cleanLabel = rotationEndPattern.find(label)?.groupValues?.last()
                         ?: throw ParsingException("rotation option label doesn't match expected format")
-                    current = true
+                    isCurrent = true
                 }
                 val rotationEnd = parseTibiaDateTime(cleanLabel)
                 val rotation = LeaderboardsRotation(
-                    rotationId = rotationId, current = current, endDate = rotationEnd
+                    rotationId = rotationId, current = isCurrent, endDate = rotationEnd
                 )
-                if (current) {
+                if (isCurrent) {
                     this.rotation = rotation
                 }
                 addAvailableRotation(rotation)

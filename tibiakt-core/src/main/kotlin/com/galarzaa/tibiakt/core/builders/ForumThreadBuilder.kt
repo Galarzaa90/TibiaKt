@@ -42,7 +42,7 @@ public class ForumThreadBuilder : TibiaKtBuilder<ForumThread> {
     public var sectionId: Int? = null
     public var previousTopicNumber: Int? = null
     public var nextTopicNumber: Int? = null
-    public var goldenFrame: Boolean = false
+    public var hasGoldenFrame: Boolean = false
     public var anchoredPost: ForumPost? = null
     public var currentPage: Int = 1
     public var totalPages: Int = 1
@@ -65,7 +65,7 @@ public class ForumThreadBuilder : TibiaKtBuilder<ForumThread> {
         sectionId = sectionId ?: error("sectionId is required"),
         previousTopicNumber = previousTopicNumber,
         nextTopicNumber = nextTopicNumber,
-        goldenFrame = goldenFrame,
+        goldenFrame = hasGoldenFrame,
         anchoredPost = anchoredPost,
         currentPage = currentPage,
         totalPages = totalPages,

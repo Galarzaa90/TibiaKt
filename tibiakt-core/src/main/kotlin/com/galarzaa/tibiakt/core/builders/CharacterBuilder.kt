@@ -50,7 +50,7 @@ public class CharacterBuilder : TibiaKtBuilder<Character> {
     public var world: String? = null
     public var achievementPoints: Int = 0
     public var lastLogin: Instant? = null
-    public var recentlyTraded: Boolean = false
+    public var isRecentlyTraded: Boolean = false
     public var formerNames: List<String> = emptyList()
     public var deletionDate: Instant? = null
     public var formerWorld: String? = null
@@ -140,7 +140,7 @@ public class CharacterBuilder : TibiaKtBuilder<Character> {
         position = position,
         comment = comment,
         accountStatus = accountStatus ?: error("accountStatus is required"),
-        recentlyTraded = recentlyTraded,
+        isRecentlyTraded = isRecentlyTraded,
         deletionDate = deletionDate,
         badges = accountBadges,
         achievements = achievements,

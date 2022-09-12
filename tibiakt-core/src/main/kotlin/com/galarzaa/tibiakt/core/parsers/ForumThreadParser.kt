@@ -64,7 +64,7 @@ public object ForumThreadParser : Parser<ForumThread?> {
                 return@forumThread
             }
             val border = forumTitleContainer.parent()!!.previousSibling()!!.previousSibling()!!
-            goldenFrame = "gold" in border.attr("style")
+            hasGoldenFrame = "gold" in border.attr("style")
             title = forumTitleContainer.cleanText()
 
             val postTable = boxContent.selectFirst("table.TableContent")!!

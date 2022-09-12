@@ -96,13 +96,13 @@ public object ForumBoardParser : Parser<ForumBoard?> {
                 pages =
                     pageLinks.takeIf { it.isNotEmpty() }?.last()?.queryParams?.get("pagenumber")?.get(0)?.toInt() ?: 1
                 author = authorName
-                authorTraded = isTraded
-                authorDeleted = authorLink == null && !isTraded
+                isAuthorTraded = isTraded
+                isAuthorDeleted = authorLink == null && !isTraded
                 ThreadStatus.values().filter { it.name.lowercase() in statusImageFileName }.forEach { status.add(it) }
                 lastPost = parseLastPostFromCell(columns[6]) ?: throw ParsingException("last post not found")
                 replies = columns[4].text().remove(",").toInt()
                 views = columns[5].text().remove(",").toInt()
-                goldenFrame = "ClassifiedProposal" in row.attr("class")
+                hasGoldenFrame = "ClassifiedProposal" in row.attr("class")
             }
         }
     }

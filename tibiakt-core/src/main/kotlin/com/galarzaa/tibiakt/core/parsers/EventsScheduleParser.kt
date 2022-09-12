@@ -51,7 +51,7 @@ public object EventsScheduleParser : Parser<EventsSchedule> {
         var currentMonth = yearMonth
         val calendarTable = boxContent.selectFirst("#eventscheduletable")
         var onGoingDay = 1
-        var firstDay = true
+        var isFirstDay = true
         val onGoingEvents: MutableList<EventsScheduleBuilder.EventEntryBuilder> = mutableListOf()
         for (cell in calendarTable.cells()) {
             val dayDiv = cell.selectFirst("div") ?: throw ParsingException("could not find day's div")
@@ -78,7 +78,7 @@ public object EventsScheduleParser : Parser<EventsSchedule> {
                     if (!onGoingEvents.contains(event)) {
                         // Only add start date if this is not the first day of the calendar.
                         // If it's the first day, we have no way to know if the event started that day or before
-                        if (!firstDay) {
+                        if (!isFirstDay) {
                             event.startDate = LocalDate.of(currentMonth.year, currentMonth.month, day)
                         }
                         onGoingEvents.add(event)
@@ -94,7 +94,7 @@ public object EventsScheduleParser : Parser<EventsSchedule> {
                     onGoingEvents.remove(pendingEvent)
                 }
             }
-            firstDay = false
+            isFirstDay = false
         }
         // Add any leftover ongoing events without an end date, as we don't know when they end.
         onGoingEvents.forEach { addEntry(it.build()) }

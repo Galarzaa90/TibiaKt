@@ -133,7 +133,7 @@ public object CharacterParser : Parser<Character?> {
             value
         }
         if (name.contains(tradedLabel)) {
-            recentlyTraded = true
+            isRecentlyTraded = true
             name = name.remove(tradedLabel).trim()
         }
     }
@@ -156,8 +156,8 @@ public object CharacterParser : Parser<Character?> {
             val (gradeColumn, nameColumn) = columns
             val grade = gradeColumn.select("img").size
             val name = nameColumn.text()
-            val secret = nameColumn.selectFirst("img") != null
-            addAchievement(name, grade, secret)
+            val isSecret = nameColumn.selectFirst("img") != null
+            addAchievement(name, grade, isSecret)
         }
     }
 
@@ -205,43 +205,43 @@ public object CharacterParser : Parser<Character?> {
 
     private fun parseKiller(killerHtml: String): Killer? {
         var name: String = killerHtml
-        var player = false
-        var traded = false
+        var isPlayer = false
+        var isTraded = false
         var summon: String? = null
         if (killerHtml.contains(tradedLabel)) {
             name = killerHtml.clean().remove(tradedLabel).trim()
-            traded = true
-            player = true
+            isTraded = true
+            isPlayer = true
         }
         if (killerHtml.contains("href")) {
             name = linkContent.find(killerHtml)?.groups?.get(1)?.value ?: return null
-            player = true
+            isPlayer = true
         }
         deathSummon.find(name)?.apply {
             summon = groups["summon"]!!.value.clean()
             name = groups["name"]!!.value.clean()
         }
 
-        return Killer(name.clean(), player, summon, traded)
+        return Killer(name.clean(), isPlayer, summon, isTraded)
     }
 
     private fun CharacterBuilder.parseCharacters(rows: Elements) {
         for (row: Element in rows.subList(1, rows.size)) {
             val columns = row.select("td")
             val (nameColumn, worldColumn, statusColumn, _) = columns
-            var traded = false
+            var isTraded = false
             var name = nameColumn.text().splitList(".").last().clean()
             if (name.contains(tradedLabel, true)) {
                 name = name.remove(tradedLabel).trim()
-                traded = true
+                isTraded = true
             }
-            val main = nameColumn.selectFirst("img") != null
+            val isMain = nameColumn.selectFirst("img") != null
             val world = worldColumn.text().clean()
             val status = statusColumn.text().clean()
-            val online = status.contains("online")
-            val deleted = status.contains("deleted")
+            val isOnline = status.contains("online")
+            val isDeleted = status.contains("deleted")
             val position = if (status.contains("CipSoft Member")) "CipSoft Member" else null
-            addCharacter(name, world, main, online, deleted, traded, position)
+            addCharacter(name, world, isMain, isOnline, isDeleted, isTraded, position)
         }
     }
 }
