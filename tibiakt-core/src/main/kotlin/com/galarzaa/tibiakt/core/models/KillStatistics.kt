@@ -32,7 +32,7 @@ public data class KillStatistics(
     val total: KillsStatisticEntry,
 ) {
     /**
-     * The URL to these kill stastistics.
+     * The URL to these kill statistics.
      */
     val url: String
         get() = getKillStatisticsUrl(world)

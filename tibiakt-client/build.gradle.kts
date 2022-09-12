@@ -15,6 +15,7 @@
  */
 
 import java.net.URL
+
 val ktorVersion: String by project
 val kotestVersion: String by project
 val kotlinLoggingVersion: String by project
@@ -35,19 +36,19 @@ tasks.test {
 
 dependencies {
     api(project(":tibiakt-core"))
-    implementation("io.ktor:ktor-client-encoding:$ktorVersion")
-    implementation("io.ktor:ktor-client-cio:$ktorVersion")
-    implementation("io.ktor:ktor-client-core:$ktorVersion")
-    implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
-    implementation("io.ktor:ktor-client-encoding:$ktorVersion")
+    implementation("io.ktor", "ktor-client-encoding", ktorVersion)
+    implementation("io.ktor", "ktor-client-cio", ktorVersion)
+    implementation("io.ktor", "ktor-client-core", ktorVersion)
+    implementation("io.ktor", "ktor-serialization-kotlinx-json", ktorVersion)
+    implementation("io.ktor", "ktor-client-encoding", ktorVersion)
 
-    implementation("io.github.microutils:kotlin-logging:$kotlinLoggingVersion")
+    implementation("io.github.microutils", "kotlin-logging", kotlinLoggingVersion)
 
-    testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
-    testImplementation("io.kotest:kotest-assertions-core:$kotestVersion")
-    testImplementation("io.kotest:kotest-property:$kotestVersion")
-    testImplementation("io.kotest:kotest-framework-datatest:$kotestVersion")
-    testImplementation("io.ktor:ktor-client-mock:${ktorVersion}")
+    testImplementation("io.kotest", "kotest-runner-junit5", kotestVersion)
+    testImplementation("io.kotest", "kotest-assertions-core", kotestVersion)
+    testImplementation("io.kotest", "kotest-property", kotestVersion)
+    testImplementation("io.kotest", "kotest-framework-datatest", kotestVersion)
+    testImplementation("io.ktor", "ktor-client-mock", ktorVersion)
 }
 
 tasks.withType<org.jetbrains.dokka.gradle.DokkaTaskPartial>().configureEach {

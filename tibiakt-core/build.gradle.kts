@@ -22,6 +22,7 @@ val jsoupVersion: String by project
 val kotlinLoggingVersion: String by project
 val logbackVersion: String by project
 val kotlinxDatetime: String by project
+val kotlinxSerialization: String by project
 
 apply("../publish.gradle.kts")
 
@@ -38,17 +39,17 @@ tasks.test {
 
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion")
-    implementation("org.jsoup:jsoup:$jsoupVersion")
+    implementation("org.jetbrains.kotlinx", "kotlinx-serialization-json", kotlinxSerialization)
+    implementation("org.jsoup", "jsoup", jsoupVersion)
 
-    api("org.jetbrains.kotlinx:kotlinx-datetime:$kotlinxDatetime")
+    api("org.jetbrains.kotlinx","kotlinx-datetime", kotlinxDatetime)
 
-    testImplementation("org.jetbrains.kotlin:kotlin-test:$kotlinVersion")
+    testImplementation("org.jetbrains.kotlin", "kotlin-test", kotlinVersion)
 
-    testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
-    testImplementation("io.kotest:kotest-assertions-core:$kotestVersion")
-    testImplementation("io.kotest:kotest-property:$kotestVersion")
-    testImplementation("io.kotest:kotest-framework-datatest:$kotestVersion")
+    testImplementation("io.kotest", "kotest-runner-junit5", kotestVersion)
+    testImplementation("io.kotest", "kotest-assertions-core", kotestVersion)
+    testImplementation("io.kotest", "kotest-property", kotestVersion)
+    testImplementation("io.kotest", "kotest-framework-datatest", kotestVersion)
 }
 
 
