@@ -41,8 +41,6 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion")
     implementation("org.jsoup:jsoup:$jsoupVersion")
 
-    implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
-
     api("org.jetbrains.kotlinx:kotlinx-datetime:$kotlinxDatetime")
 
     testImplementation("org.jetbrains.kotlin:kotlin-test:$kotlinVersion")
