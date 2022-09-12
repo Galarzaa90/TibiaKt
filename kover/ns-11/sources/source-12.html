@@ -151,17 +151,17 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc"><i class="no-highlight">52</i>&nbsp;                .associate { it.attr(&quot;value&quot;).toInt() to it.cleanText() }</b>
 <b class="fc"><i class="no-highlight">53</i>&nbsp;            for ((rotationId, label) in rotationOptions) {</b>
 <b class="fc"><i class="no-highlight">54</i>&nbsp;                var cleanLabel = label</b>
-<b class="fc"><i class="no-highlight">55</i>&nbsp;                var current = false</b>
+<b class="fc"><i class="no-highlight">55</i>&nbsp;                var isCurrent = false</b>
 <b class="fc"><i class="no-highlight">56</i>&nbsp;                if (&quot;Current&quot; in label) {</b>
 <b class="pc"><i class="no-highlight">57</i>&nbsp;                    cleanLabel = rotationEndPattern.find(label)?.groupValues?.last()</b>
 <b class="nc"><i class="no-highlight">58</i>&nbsp;                        ?: throw ParsingException(&quot;rotation option label doesn&#39;t match expected format&quot;)</b>
-<b class="fc"><i class="no-highlight">59</i>&nbsp;                    current = true</b>
+<b class="fc"><i class="no-highlight">59</i>&nbsp;                    isCurrent = true</b>
 <i class="no-highlight">60</i>&nbsp;                }
 <b class="fc"><i class="no-highlight">61</i>&nbsp;                val rotationEnd = parseTibiaDateTime(cleanLabel)</b>
 <b class="fc"><i class="no-highlight">62</i>&nbsp;                val rotation = LeaderboardsRotation(</b>
-<b class="fc"><i class="no-highlight">63</i>&nbsp;                    rotationId = rotationId, current = current, endDate = rotationEnd</b>
+<b class="fc"><i class="no-highlight">63</i>&nbsp;                    rotationId = rotationId, current = isCurrent, endDate = rotationEnd</b>
 <i class="no-highlight">64</i>&nbsp;                )
-<b class="fc"><i class="no-highlight">65</i>&nbsp;                if (current) {</b>
+<b class="fc"><i class="no-highlight">65</i>&nbsp;                if (isCurrent) {</b>
 <b class="fc"><i class="no-highlight">66</i>&nbsp;                    this.rotation = rotation</b>
 <i class="no-highlight">67</i>&nbsp;                }
 <b class="fc"><i class="no-highlight">68</i>&nbsp;                addAvailableRotation(rotation)</b>
@@ -230,7 +230,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-11 07:13</div>
+    <div style="float:right;">generated on 2022-09-12 15:44</div>
 </div>
 </body>
 </html>

@@ -82,10 +82,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    72.7%
+    69.6%
   </span>
   <span class="absValue">
-    (48/66)
+    (48/69)
   </span>
 </td>
 </tr>
@@ -131,15 +131,15 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc"><i class="no-highlight">32</i>&nbsp;    public var author: String? = null</b>
 <b class="fc"><i class="no-highlight">33</i>&nbsp;    public var postId: Int? = null</b>
 <b class="fc"><i class="no-highlight">34</i>&nbsp;    public var date: Instant? = null</b>
-<b class="fc"><i class="no-highlight">35</i>&nbsp;    public var deleted: Boolean = false</b>
-<b class="fc"><i class="no-highlight">36</i>&nbsp;    public var traded: Boolean = false</b>
+<b class="fc"><i class="no-highlight">35</i>&nbsp;    public var isDeleted: Boolean = false</b>
+<b class="fc"><i class="no-highlight">36</i>&nbsp;    public var isTraded: Boolean = false</b>
 <i class="no-highlight">37</i>&nbsp;
 <b class="fc"><i class="no-highlight">38</i>&nbsp;    override fun build(): LastPost = LastPost(</b>
-<b class="pc"><i class="no-highlight">39</i>&nbsp;        author = author ?: throw IllegalArgumentException(&quot;author is required&quot;),</b>
-<b class="pc"><i class="no-highlight">40</i>&nbsp;        postId = postId ?: throw IllegalArgumentException(&quot;postId is required&quot;),</b>
-<b class="pc"><i class="no-highlight">41</i>&nbsp;        date = date ?: throw IllegalArgumentException(&quot;date is required&quot;),</b>
-<b class="fc"><i class="no-highlight">42</i>&nbsp;        deleted = deleted,</b>
-<b class="fc"><i class="no-highlight">43</i>&nbsp;        traded = traded</b>
+<b class="pc"><i class="no-highlight">39</i>&nbsp;        author = author ?: error(&quot;author is required&quot;),</b>
+<b class="pc"><i class="no-highlight">40</i>&nbsp;        postId = postId ?: error(&quot;postId is required&quot;),</b>
+<b class="pc"><i class="no-highlight">41</i>&nbsp;        date = date ?: error(&quot;date is required&quot;),</b>
+<b class="fc"><i class="no-highlight">42</i>&nbsp;        deleted = isDeleted,</b>
+<b class="fc"><i class="no-highlight">43</i>&nbsp;        traded = isTraded</b>
 <i class="no-highlight">44</i>&nbsp;    )
 <i class="no-highlight">45</i>&nbsp;}
 </div>
@@ -168,7 +168,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-11 07:13</div>
+    <div style="float:right;">generated on 2022-09-12 15:44</div>
 </div>
 </body>
 </html>

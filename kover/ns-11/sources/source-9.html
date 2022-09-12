@@ -288,13 +288,13 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc"><i class="no-highlight">96</i>&nbsp;                pages =</b>
 <b class="pc"><i class="no-highlight">97</i>&nbsp;                    pageLinks.takeIf { it.isNotEmpty() }?.last()?.queryParams?.get(&quot;pagenumber&quot;)?.get(0)?.toInt() ?: 1</b>
 <b class="fc"><i class="no-highlight">98</i>&nbsp;                author = authorName</b>
-<b class="fc"><i class="no-highlight">99</i>&nbsp;                authorTraded = isTraded</b>
-<b class="fc"><i class="no-highlight">100</i>&nbsp;                authorDeleted = authorLink == null &amp;&amp; !isTraded</b>
+<b class="fc"><i class="no-highlight">99</i>&nbsp;                isAuthorTraded = isTraded</b>
+<b class="fc"><i class="no-highlight">100</i>&nbsp;                isAuthorDeleted = authorLink == null &amp;&amp; !isTraded</b>
 <b class="fc"><i class="no-highlight">101</i>&nbsp;                ThreadStatus.values().filter { it.name.lowercase() in statusImageFileName }.forEach { status.add(it) }</b>
 <b class="pc"><i class="no-highlight">102</i>&nbsp;                lastPost = parseLastPostFromCell(columns[6]) ?: throw ParsingException(&quot;last post not found&quot;)</b>
 <b class="fc"><i class="no-highlight">103</i>&nbsp;                replies = columns[4].text().remove(&quot;,&quot;).toInt()</b>
 <b class="fc"><i class="no-highlight">104</i>&nbsp;                views = columns[5].text().remove(&quot;,&quot;).toInt()</b>
-<b class="fc"><i class="no-highlight">105</i>&nbsp;                goldenFrame = &quot;ClassifiedProposal&quot; in row.attr(&quot;class&quot;)</b>
+<b class="fc"><i class="no-highlight">105</i>&nbsp;                hasGoldenFrame = &quot;ClassifiedProposal&quot; in row.attr(&quot;class&quot;)</b>
 <i class="no-highlight">106</i>&nbsp;            }
 <i class="no-highlight">107</i>&nbsp;        }
 <i class="no-highlight">108</i>&nbsp;    }
@@ -336,7 +336,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-11 07:13</div>
+    <div style="float:right;">generated on 2022-09-12 15:44</div>
 </div>
 </body>
 </html>

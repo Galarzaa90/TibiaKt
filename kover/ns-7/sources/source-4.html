@@ -183,35 +183,51 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.models.bazaar
-<i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import kotlinx.serialization.Serializable
-<i class="no-highlight">4</i>&nbsp;
-<i class="no-highlight">5</i>&nbsp;/**
-<i class="no-highlight">6</i>&nbsp; * The skill levels of the character in the auction.
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;/*
+<i class="no-highlight">2</i>&nbsp; * Copyright © 2022 Allan Galarza
+<i class="no-highlight">3</i>&nbsp; *
+<i class="no-highlight">4</i>&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+<i class="no-highlight">5</i>&nbsp; * you may not use this file except in compliance with the License.
+<i class="no-highlight">6</i>&nbsp; * You may obtain a copy of the License at
 <i class="no-highlight">7</i>&nbsp; *
-<i class="no-highlight">8</i>&nbsp; * Decimal values represent the percentage of progress towards the next level.
+<i class="no-highlight">8</i>&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
 <i class="no-highlight">9</i>&nbsp; *
-<i class="no-highlight">10</i>&nbsp; * @property axeFighting The current Axe Fighting level.
-<i class="no-highlight">11</i>&nbsp; * @property clubFighting The current Club Fighting level.
-<i class="no-highlight">12</i>&nbsp; * @property distanceFighting The current Distance Fighting level.
-<i class="no-highlight">13</i>&nbsp; * @property fishing The current Fishing level.
-<i class="no-highlight">14</i>&nbsp; * @property fistFighting The current Fist Fighting level.
-<i class="no-highlight">15</i>&nbsp; * @property magicLevel The current Magic Level.
-<i class="no-highlight">16</i>&nbsp; * @property shielding The current Shielding level.
-<i class="no-highlight">17</i>&nbsp; * @property swordFighting The current Sword Fighting level.
-<i class="no-highlight">18</i>&nbsp; */
-<b class="pc"><i class="no-highlight">19</i>&nbsp;@Serializable</b>
-<i class="no-highlight">20</i>&nbsp;public data class AuctionSkills(
-<b class="fc"><i class="no-highlight">21</i>&nbsp;    val axeFighting: Double,</b>
-<b class="fc"><i class="no-highlight">22</i>&nbsp;    val clubFighting: Double,</b>
-<b class="fc"><i class="no-highlight">23</i>&nbsp;    val distanceFighting: Double,</b>
-<b class="fc"><i class="no-highlight">24</i>&nbsp;    val fishing: Double,</b>
-<b class="fc"><i class="no-highlight">25</i>&nbsp;    val fistFighting: Double,</b>
-<b class="fc"><i class="no-highlight">26</i>&nbsp;    val magicLevel: Double,</b>
-<b class="fc"><i class="no-highlight">27</i>&nbsp;    val shielding: Double,</b>
-<b class="fc"><i class="no-highlight">28</i>&nbsp;    val swordFighting: Double,</b>
-<i class="no-highlight">29</i>&nbsp;)
+<i class="no-highlight">10</i>&nbsp; * Unless required by applicable law or agreed to in writing, software
+<i class="no-highlight">11</i>&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+<i class="no-highlight">12</i>&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+<i class="no-highlight">13</i>&nbsp; * See the License for the specific language governing permissions and
+<i class="no-highlight">14</i>&nbsp; * limitations under the License.
+<i class="no-highlight">15</i>&nbsp; */
+<i class="no-highlight">16</i>&nbsp;
+<i class="no-highlight">17</i>&nbsp;package com.galarzaa.tibiakt.core.models.bazaar
+<i class="no-highlight">18</i>&nbsp;
+<i class="no-highlight">19</i>&nbsp;import kotlinx.serialization.Serializable
+<i class="no-highlight">20</i>&nbsp;
+<i class="no-highlight">21</i>&nbsp;/**
+<i class="no-highlight">22</i>&nbsp; * The skill levels of the character in the auction.
+<i class="no-highlight">23</i>&nbsp; *
+<i class="no-highlight">24</i>&nbsp; * Decimal values represent the percentage of progress towards the next level.
+<i class="no-highlight">25</i>&nbsp; *
+<i class="no-highlight">26</i>&nbsp; * @property axeFighting The current Axe Fighting level.
+<i class="no-highlight">27</i>&nbsp; * @property clubFighting The current Club Fighting level.
+<i class="no-highlight">28</i>&nbsp; * @property distanceFighting The current Distance Fighting level.
+<i class="no-highlight">29</i>&nbsp; * @property fishing The current Fishing level.
+<i class="no-highlight">30</i>&nbsp; * @property fistFighting The current Fist Fighting level.
+<i class="no-highlight">31</i>&nbsp; * @property magicLevel The current Magic Level.
+<i class="no-highlight">32</i>&nbsp; * @property shielding The current Shielding level.
+<i class="no-highlight">33</i>&nbsp; * @property swordFighting The current Sword Fighting level.
+<i class="no-highlight">34</i>&nbsp; */
+<b class="pc"><i class="no-highlight">35</i>&nbsp;@Serializable</b>
+<i class="no-highlight">36</i>&nbsp;public data class AuctionSkills(
+<b class="fc"><i class="no-highlight">37</i>&nbsp;    val axeFighting: Double,</b>
+<b class="fc"><i class="no-highlight">38</i>&nbsp;    val clubFighting: Double,</b>
+<b class="fc"><i class="no-highlight">39</i>&nbsp;    val distanceFighting: Double,</b>
+<b class="fc"><i class="no-highlight">40</i>&nbsp;    val fishing: Double,</b>
+<b class="fc"><i class="no-highlight">41</i>&nbsp;    val fistFighting: Double,</b>
+<b class="fc"><i class="no-highlight">42</i>&nbsp;    val magicLevel: Double,</b>
+<b class="fc"><i class="no-highlight">43</i>&nbsp;    val shielding: Double,</b>
+<b class="fc"><i class="no-highlight">44</i>&nbsp;    val swordFighting: Double,</b>
+<i class="no-highlight">45</i>&nbsp;)
 </div>
 </pre>
 </div>
@@ -238,7 +254,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-11 07:13</div>
+    <div style="float:right;">generated on 2022-09-12 15:44</div>
 </div>
 </body>
 </html>

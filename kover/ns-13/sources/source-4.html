@@ -141,8 +141,8 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc"><i class="no-highlight">42</i>&nbsp;        postId = permalink.queryParams[&quot;postid&quot;]!!.first().toInt()</b>
 <b class="fc"><i class="no-highlight">43</i>&nbsp;        date = parseTibiaForumDateTime(postDate.cleanText())</b>
 <b class="fc"><i class="no-highlight">44</i>&nbsp;        author = authorName</b>
-<b class="fc"><i class="no-highlight">45</i>&nbsp;        deleted = authorLink == null &amp;&amp; !isTraded</b>
-<b class="fc"><i class="no-highlight">46</i>&nbsp;        traded = isTraded</b>
+<b class="fc"><i class="no-highlight">45</i>&nbsp;        isDeleted = authorLink == null &amp;&amp; !isTraded</b>
+<b class="fc"><i class="no-highlight">46</i>&nbsp;        this.isTraded = isTraded</b>
 <b class="fc"><i class="no-highlight">47</i>&nbsp;    }</b>
 <i class="no-highlight">48</i>&nbsp;}
 <i class="no-highlight">49</i>&nbsp;
@@ -157,18 +157,18 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc"><i class="no-highlight">58</i>&nbsp;    val charLink = table.selectFirst(&quot;a&quot;)?.getLinkInformation()</b>
 <b class="fc"><i class="no-highlight">59</i>&nbsp;    if (charLink == null) {</b>
 <b class="fc"><i class="no-highlight">60</i>&nbsp;        val name = table.cleanText()</b>
-<b class="fc"><i class="no-highlight">61</i>&nbsp;        val traded: Boolean = name.contains(&quot;(traded)&quot;)</b>
-<b class="pc"><i class="no-highlight">62</i>&nbsp;        return UnavailableForumAuthor(name.remove(&quot;(traded)&quot;).trim(), !traded, traded)</b>
+<b class="fc"><i class="no-highlight">61</i>&nbsp;        val isTraded: Boolean = name.contains(&quot;(traded)&quot;)</b>
+<b class="pc"><i class="no-highlight">62</i>&nbsp;        return UnavailableForumAuthor(name.remove(&quot;(traded)&quot;).trim(), !isTraded, isTraded)</b>
 <i class="no-highlight">63</i>&nbsp;    }
 <b class="fc"><i class="no-highlight">64</i>&nbsp;    val charInfo = table.selectFirst(&quot;font.ff_infotext&quot;)</b>
 <b class="fc"><i class="no-highlight">65</i>&nbsp;    val positionInfo = table.selectFirst(&quot;font.ff_smallinfo&quot;)</b>
 <b class="fc"><i class="no-highlight">66</i>&nbsp;    var title: String? = null</b>
 <b class="fc"><i class="no-highlight">67</i>&nbsp;    var position: String? = null</b>
-<b class="fc"><i class="no-highlight">68</i>&nbsp;    var recentlyTraded = false</b>
+<b class="fc"><i class="no-highlight">68</i>&nbsp;    var isRecentlyTraded = false</b>
 <b class="pc"><i class="no-highlight">69</i>&nbsp;    if (positionInfo != null &amp;&amp; (charInfo == null || positionInfo.parent() != charInfo)) {</b>
 <b class="fc"><i class="no-highlight">70</i>&nbsp;        positionInfo.replaceBrs().wholeCleanText().split(&quot;\n&quot;).forEach {</b>
 <b class="fc"><i class="no-highlight">71</i>&nbsp;            if (it in titles) position = it</b>
-<b class="fc"><i class="no-highlight">72</i>&nbsp;            else if (&quot;traded&quot; in it) recentlyTraded = true</b>
+<b class="fc"><i class="no-highlight">72</i>&nbsp;            else if (&quot;traded&quot; in it) isRecentlyTraded = true</b>
 <b class="fc"><i class="no-highlight">73</i>&nbsp;            else title = it</b>
 <b class="fc"><i class="no-highlight">74</i>&nbsp;        }</b>
 <i class="no-highlight">75</i>&nbsp;    }
@@ -202,8 +202,9 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc"><i class="no-highlight">103</i>&nbsp;        title = title,</b>
 <b class="fc"><i class="no-highlight">104</i>&nbsp;        guild = guildMembership,</b>
 <b class="fc"><i class="no-highlight">105</i>&nbsp;        posts = postsText.parseInteger(),</b>
-<b class="fc"><i class="no-highlight">106</i>&nbsp;        isRecentlyTraded = recentlyTraded)</b>
-<i class="no-highlight">107</i>&nbsp;}
+<b class="fc"><i class="no-highlight">106</i>&nbsp;        isRecentlyTraded = isRecentlyTraded</b>
+<i class="no-highlight">107</i>&nbsp;    )
+<i class="no-highlight">108</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -230,7 +231,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-11 07:13</div>
+    <div style="float:right;">generated on 2022-09-12 15:44</div>
 </div>
 </body>
 </html>

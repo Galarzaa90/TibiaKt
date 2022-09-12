@@ -150,7 +150,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc"><i class="no-highlight">51</i>&nbsp;        var currentMonth = yearMonth</b>
 <b class="fc"><i class="no-highlight">52</i>&nbsp;        val calendarTable = boxContent.selectFirst(&quot;#eventscheduletable&quot;)</b>
 <b class="fc"><i class="no-highlight">53</i>&nbsp;        var onGoingDay = 1</b>
-<b class="fc"><i class="no-highlight">54</i>&nbsp;        var firstDay = true</b>
+<b class="fc"><i class="no-highlight">54</i>&nbsp;        var isFirstDay = true</b>
 <b class="fc"><i class="no-highlight">55</i>&nbsp;        val onGoingEvents: MutableList&lt;EventsScheduleBuilder.EventEntryBuilder&gt; = mutableListOf()</b>
 <b class="fc"><i class="no-highlight">56</i>&nbsp;        for (cell in calendarTable.cells()) {</b>
 <b class="pc"><i class="no-highlight">57</i>&nbsp;            val dayDiv = cell.selectFirst(&quot;div&quot;) ?: throw ParsingException(&quot;could not find day&#39;s div&quot;)</b>
@@ -177,7 +177,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc"><i class="no-highlight">78</i>&nbsp;                    if (!onGoingEvents.contains(event)) {</b>
 <i class="no-highlight">79</i>&nbsp;                        // Only add start date if this is not the first day of the calendar.
 <i class="no-highlight">80</i>&nbsp;                        // If it&#39;s the first day, we have no way to know if the event started that day or before
-<b class="fc"><i class="no-highlight">81</i>&nbsp;                        if (!firstDay) {</b>
+<b class="fc"><i class="no-highlight">81</i>&nbsp;                        if (!isFirstDay) {</b>
 <b class="fc"><i class="no-highlight">82</i>&nbsp;                            event.startDate = LocalDate.of(currentMonth.year, currentMonth.month, day)</b>
 <i class="no-highlight">83</i>&nbsp;                        }
 <b class="fc"><i class="no-highlight">84</i>&nbsp;                        onGoingEvents.add(event)</b>
@@ -193,7 +193,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc"><i class="no-highlight">94</i>&nbsp;                    onGoingEvents.remove(pendingEvent)</b>
 <i class="no-highlight">95</i>&nbsp;                }
 <i class="no-highlight">96</i>&nbsp;            }
-<b class="fc"><i class="no-highlight">97</i>&nbsp;            firstDay = false</b>
+<b class="fc"><i class="no-highlight">97</i>&nbsp;            isFirstDay = false</b>
 <i class="no-highlight">98</i>&nbsp;        }
 <i class="no-highlight">99</i>&nbsp;        // Add any leftover ongoing events without an end date, as we don&#39;t know when they end.
 <b class="fc"><i class="no-highlight">100</i>&nbsp;        onGoingEvents.forEach { addEntry(it.build()) }</b>
@@ -226,7 +226,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-11 07:13</div>
+    <div style="float:right;">generated on 2022-09-12 15:44</div>
 </div>
 </body>
 </html>

@@ -323,8 +323,8 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc"><i class="no-highlight">110</i>&nbsp;        for (row in table.selectFirst(&quot;table.TableContent&quot;).rows().offsetStart(1)) {</b>
 <b class="fc"><i class="no-highlight">111</i>&nbsp;            val text = row.cleanText()</b>
 <b class="fc"><i class="no-highlight">112</i>&nbsp;            if (text.contains(&quot;more entries&quot;)) continue</b>
-<b class="fc"><i class="no-highlight">113</i>&nbsp;            val secret = row.selectFirst(&quot;img&quot;) != null</b>
-<b class="fc"><i class="no-highlight">114</i>&nbsp;            addAchievement(AchievementEntry(text, secret))</b>
+<b class="fc"><i class="no-highlight">113</i>&nbsp;            val isSecret = row.selectFirst(&quot;img&quot;) != null</b>
+<b class="fc"><i class="no-highlight">114</i>&nbsp;            addAchievement(AchievementEntry(text, isSecret))</b>
 <i class="no-highlight">115</i>&nbsp;        }
 <i class="no-highlight">116</i>&nbsp;    }
 <i class="no-highlight">117</i>&nbsp;
@@ -480,7 +480,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc"><i class="no-highlight">267</i>&nbsp;        for (row in contentContainers[4].rows()) {</b>
 <b class="fc"><i class="no-highlight">268</i>&nbsp;            val (field, value) = getAuctionTableFieldValue(row)</b>
 <b class="pc"><i class="no-highlight">269</i>&nbsp;            when (field) {</b>
-<b class="fc"><i class="no-highlight">270</i>&nbsp;                &quot;Charm Expansion&quot; -&gt; charmExpansion = value.contains(&quot;yes&quot;)</b>
+<b class="fc"><i class="no-highlight">270</i>&nbsp;                &quot;Charm Expansion&quot; -&gt; hasCharmExpansion = value.contains(&quot;yes&quot;)</b>
 <b class="fc"><i class="no-highlight">271</i>&nbsp;                &quot;Available Charm Points&quot; -&gt; availableCharmPoints = value.parseInteger()</b>
 <b class="fc"><i class="no-highlight">272</i>&nbsp;                &quot;Spent Charm Points&quot; -&gt; spentCharmPoints = value.parseInteger()</b>
 <i class="no-highlight">273</i>&nbsp;            }
@@ -658,7 +658,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-11 07:13</div>
+    <div style="float:right;">generated on 2022-09-12 15:44</div>
 </div>
 </body>
 </html>

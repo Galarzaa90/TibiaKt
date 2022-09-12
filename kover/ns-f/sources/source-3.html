@@ -183,43 +183,59 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;@file:UseSerializers(YearMonthSerializer::class)
-<i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;package com.galarzaa.tibiakt.core.models.news
-<i class="no-highlight">4</i>&nbsp;
-<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.serializers.YearMonthSerializer
-<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getEventsScheduleUrl
-<i class="no-highlight">7</i>&nbsp;import kotlinx.serialization.Serializable
-<i class="no-highlight">8</i>&nbsp;import kotlinx.serialization.UseSerializers
-<i class="no-highlight">9</i>&nbsp;import java.time.LocalDate
-<i class="no-highlight">10</i>&nbsp;import java.time.YearMonth
-<i class="no-highlight">11</i>&nbsp;
-<i class="no-highlight">12</i>&nbsp;/**
-<i class="no-highlight">13</i>&nbsp; * The event schedule, containing the events of a given month.
-<i class="no-highlight">14</i>&nbsp; *
-<i class="no-highlight">15</i>&nbsp; * @property yearMonth The month and year the schedule is for.
-<i class="no-highlight">16</i>&nbsp; * @property entries The list of events in this month.
-<i class="no-highlight">17</i>&nbsp; */
-<b class="pc"><i class="no-highlight">18</i>&nbsp;@Serializable</b>
-<i class="no-highlight">19</i>&nbsp;public data class EventsSchedule(
-<b class="fc"><i class="no-highlight">20</i>&nbsp;    val yearMonth: YearMonth,</b>
-<b class="fc"><i class="no-highlight">21</i>&nbsp;    val entries: List&lt;EventEntry&gt;,</b>
-<i class="no-highlight">22</i>&nbsp;) {
-<i class="no-highlight">23</i>&nbsp;    /**
-<i class="no-highlight">24</i>&nbsp;     * The URL of the events schedule of the month.
-<i class="no-highlight">25</i>&nbsp;     */
-<b class="nc"><i class="no-highlight">26</i>&nbsp;    val url: String get() = getEventsScheduleUrl(yearMonth)</b>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;/*
+<i class="no-highlight">2</i>&nbsp; * Copyright © 2022 Allan Galarza
+<i class="no-highlight">3</i>&nbsp; *
+<i class="no-highlight">4</i>&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+<i class="no-highlight">5</i>&nbsp; * you may not use this file except in compliance with the License.
+<i class="no-highlight">6</i>&nbsp; * You may obtain a copy of the License at
+<i class="no-highlight">7</i>&nbsp; *
+<i class="no-highlight">8</i>&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+<i class="no-highlight">9</i>&nbsp; *
+<i class="no-highlight">10</i>&nbsp; * Unless required by applicable law or agreed to in writing, software
+<i class="no-highlight">11</i>&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+<i class="no-highlight">12</i>&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+<i class="no-highlight">13</i>&nbsp; * See the License for the specific language governing permissions and
+<i class="no-highlight">14</i>&nbsp; * limitations under the License.
+<i class="no-highlight">15</i>&nbsp; */
+<i class="no-highlight">16</i>&nbsp;
+<i class="no-highlight">17</i>&nbsp;@file:UseSerializers(YearMonthSerializer::class)
+<i class="no-highlight">18</i>&nbsp;
+<i class="no-highlight">19</i>&nbsp;package com.galarzaa.tibiakt.core.models.news
+<i class="no-highlight">20</i>&nbsp;
+<i class="no-highlight">21</i>&nbsp;import com.galarzaa.tibiakt.core.serializers.YearMonthSerializer
+<i class="no-highlight">22</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getEventsScheduleUrl
+<i class="no-highlight">23</i>&nbsp;import kotlinx.serialization.Serializable
+<i class="no-highlight">24</i>&nbsp;import kotlinx.serialization.UseSerializers
+<i class="no-highlight">25</i>&nbsp;import java.time.LocalDate
+<i class="no-highlight">26</i>&nbsp;import java.time.YearMonth
 <i class="no-highlight">27</i>&nbsp;
-<i class="no-highlight">28</i>&nbsp;    /**
-<i class="no-highlight">29</i>&nbsp;     * Get all the events that are active in a specific day of the month.
-<i class="no-highlight">30</i>&nbsp;     */
-<i class="no-highlight">31</i>&nbsp;    public fun getEventsOn(date: LocalDate): List&lt;EventEntry&gt; {
-<b class="nc"><i class="no-highlight">32</i>&nbsp;        return entries.filter {</b>
-<b class="nc"><i class="no-highlight">33</i>&nbsp;            (it.startDate ?: LocalDate.MIN) &lt;= date &amp;&amp;</b>
-<b class="nc"><i class="no-highlight">34</i>&nbsp;                    date &lt;= (it.endDate ?: LocalDate.MAX)</b>
-<i class="no-highlight">35</i>&nbsp;        }
-<i class="no-highlight">36</i>&nbsp;    }
-<i class="no-highlight">37</i>&nbsp;}
+<i class="no-highlight">28</i>&nbsp;/**
+<i class="no-highlight">29</i>&nbsp; * The event schedule, containing the events of a given month.
+<i class="no-highlight">30</i>&nbsp; *
+<i class="no-highlight">31</i>&nbsp; * @property yearMonth The month and year the schedule is for.
+<i class="no-highlight">32</i>&nbsp; * @property entries The list of events in this month.
+<i class="no-highlight">33</i>&nbsp; */
+<b class="pc"><i class="no-highlight">34</i>&nbsp;@Serializable</b>
+<i class="no-highlight">35</i>&nbsp;public data class EventsSchedule(
+<b class="fc"><i class="no-highlight">36</i>&nbsp;    val yearMonth: YearMonth,</b>
+<b class="fc"><i class="no-highlight">37</i>&nbsp;    val entries: List&lt;EventEntry&gt;,</b>
+<i class="no-highlight">38</i>&nbsp;) {
+<i class="no-highlight">39</i>&nbsp;    /**
+<i class="no-highlight">40</i>&nbsp;     * The URL of the events schedule of the month.
+<i class="no-highlight">41</i>&nbsp;     */
+<b class="nc"><i class="no-highlight">42</i>&nbsp;    val url: String get() = getEventsScheduleUrl(yearMonth)</b>
+<i class="no-highlight">43</i>&nbsp;
+<i class="no-highlight">44</i>&nbsp;    /**
+<i class="no-highlight">45</i>&nbsp;     * Get all the events that are active in a specific day of the month.
+<i class="no-highlight">46</i>&nbsp;     */
+<i class="no-highlight">47</i>&nbsp;    public fun getEventsOn(date: LocalDate): List&lt;EventEntry&gt; {
+<b class="nc"><i class="no-highlight">48</i>&nbsp;        return entries.filter {</b>
+<b class="nc"><i class="no-highlight">49</i>&nbsp;            (it.startDate ?: LocalDate.MIN) &lt;= date &amp;&amp;</b>
+<b class="nc"><i class="no-highlight">50</i>&nbsp;                    date &lt;= (it.endDate ?: LocalDate.MAX)</b>
+<i class="no-highlight">51</i>&nbsp;        }
+<i class="no-highlight">52</i>&nbsp;    }
+<i class="no-highlight">53</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -246,7 +262,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-11 07:13</div>
+    <div style="float:right;">generated on 2022-09-12 15:44</div>
 </div>
 </body>
 </html>

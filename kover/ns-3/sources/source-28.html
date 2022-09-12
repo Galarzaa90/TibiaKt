@@ -158,11 +158,11 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">66</i>&nbsp;
 <i class="no-highlight">67</i>&nbsp;    public class LeaderboardsRotationBuilder : TibiaKtBuilder&lt;LeaderboardsRotation&gt; {
 <i class="no-highlight">68</i>&nbsp;        public var rotationId: Int? = null
-<i class="no-highlight">69</i>&nbsp;        public var current: Boolean = false
+<i class="no-highlight">69</i>&nbsp;        public var isCurrent: Boolean = false
 <i class="no-highlight">70</i>&nbsp;        public var endDate: Instant? = null
 <i class="no-highlight">71</i>&nbsp;        override fun build(): LeaderboardsRotation = LeaderboardsRotation(
 <i class="no-highlight">72</i>&nbsp;            rotationId = rotationId ?: error(&quot;rotationId is required&quot;),
-<i class="no-highlight">73</i>&nbsp;            current = current,
+<i class="no-highlight">73</i>&nbsp;            current = isCurrent,
 <i class="no-highlight">74</i>&nbsp;            endDate = endDate ?: error(&quot;endDate is required&quot;),
 <i class="no-highlight">75</i>&nbsp;        )
 <i class="no-highlight">76</i>&nbsp;
@@ -195,7 +195,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-11 07:13</div>
+    <div style="float:right;">generated on 2022-09-12 15:44</div>
 </div>
 </body>
 </html>

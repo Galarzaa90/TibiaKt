@@ -183,33 +183,49 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.models.highscores
-<i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.enums.Vocation
-<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.models.character.BaseCharacter
-<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.models.character.CharacterLevel
-<i class="no-highlight">6</i>&nbsp;import kotlinx.serialization.Serializable
-<i class="no-highlight">7</i>&nbsp;
-<i class="no-highlight">8</i>&nbsp;/**
-<i class="no-highlight">9</i>&nbsp; * An entry in the [Highscores].
-<i class="no-highlight">10</i>&nbsp; *
-<i class="no-highlight">11</i>&nbsp; * @property rank The rank of the character. Multiple entries might have the same rank if they are tied.
-<i class="no-highlight">12</i>&nbsp; * @property level The level of the character.
-<i class="no-highlight">13</i>&nbsp; * @property world The world of the character.
-<i class="no-highlight">14</i>&nbsp; * @property vocation The vocation of the character.
-<i class="no-highlight">15</i>&nbsp; * @property value The value of the entry (e.g. distance level, magic level, experience)
-<i class="no-highlight">16</i>&nbsp; * @property additionalValue Additional information displayed in some categories, such as Loyalty Title.
-<i class="no-highlight">17</i>&nbsp; */
-<b class="pc"><i class="no-highlight">18</i>&nbsp;@Serializable</b>
-<i class="no-highlight">19</i>&nbsp;public data class HighscoresEntry(
-<b class="fc"><i class="no-highlight">20</i>&nbsp;    val rank: Int,</b>
-<b class="fc"><i class="no-highlight">21</i>&nbsp;    override val name: String,</b>
-<b class="fc"><i class="no-highlight">22</i>&nbsp;    override val level: Int,</b>
-<b class="fc"><i class="no-highlight">23</i>&nbsp;    val world: String,</b>
-<b class="fc"><i class="no-highlight">24</i>&nbsp;    val vocation: Vocation,</b>
-<b class="fc"><i class="no-highlight">25</i>&nbsp;    val value: Long,</b>
-<b class="fc"><i class="no-highlight">26</i>&nbsp;    val additionalValue: String?,</b>
-<i class="no-highlight">27</i>&nbsp;) : BaseCharacter, CharacterLevel
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;/*
+<i class="no-highlight">2</i>&nbsp; * Copyright © 2022 Allan Galarza
+<i class="no-highlight">3</i>&nbsp; *
+<i class="no-highlight">4</i>&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+<i class="no-highlight">5</i>&nbsp; * you may not use this file except in compliance with the License.
+<i class="no-highlight">6</i>&nbsp; * You may obtain a copy of the License at
+<i class="no-highlight">7</i>&nbsp; *
+<i class="no-highlight">8</i>&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+<i class="no-highlight">9</i>&nbsp; *
+<i class="no-highlight">10</i>&nbsp; * Unless required by applicable law or agreed to in writing, software
+<i class="no-highlight">11</i>&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+<i class="no-highlight">12</i>&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+<i class="no-highlight">13</i>&nbsp; * See the License for the specific language governing permissions and
+<i class="no-highlight">14</i>&nbsp; * limitations under the License.
+<i class="no-highlight">15</i>&nbsp; */
+<i class="no-highlight">16</i>&nbsp;
+<i class="no-highlight">17</i>&nbsp;package com.galarzaa.tibiakt.core.models.highscores
+<i class="no-highlight">18</i>&nbsp;
+<i class="no-highlight">19</i>&nbsp;import com.galarzaa.tibiakt.core.enums.Vocation
+<i class="no-highlight">20</i>&nbsp;import com.galarzaa.tibiakt.core.models.character.BaseCharacter
+<i class="no-highlight">21</i>&nbsp;import com.galarzaa.tibiakt.core.models.character.CharacterLevel
+<i class="no-highlight">22</i>&nbsp;import kotlinx.serialization.Serializable
+<i class="no-highlight">23</i>&nbsp;
+<i class="no-highlight">24</i>&nbsp;/**
+<i class="no-highlight">25</i>&nbsp; * An entry in the [Highscores].
+<i class="no-highlight">26</i>&nbsp; *
+<i class="no-highlight">27</i>&nbsp; * @property rank The rank of the character. Multiple entries might have the same rank if they are tied.
+<i class="no-highlight">28</i>&nbsp; * @property level The level of the character.
+<i class="no-highlight">29</i>&nbsp; * @property world The world of the character.
+<i class="no-highlight">30</i>&nbsp; * @property vocation The vocation of the character.
+<i class="no-highlight">31</i>&nbsp; * @property value The value of the entry (e.g. distance level, magic level, experience)
+<i class="no-highlight">32</i>&nbsp; * @property additionalValue Additional information displayed in some categories, such as Loyalty Title.
+<i class="no-highlight">33</i>&nbsp; */
+<b class="pc"><i class="no-highlight">34</i>&nbsp;@Serializable</b>
+<i class="no-highlight">35</i>&nbsp;public data class HighscoresEntry(
+<b class="fc"><i class="no-highlight">36</i>&nbsp;    val rank: Int,</b>
+<b class="fc"><i class="no-highlight">37</i>&nbsp;    override val name: String,</b>
+<b class="fc"><i class="no-highlight">38</i>&nbsp;    override val level: Int,</b>
+<b class="fc"><i class="no-highlight">39</i>&nbsp;    val world: String,</b>
+<b class="fc"><i class="no-highlight">40</i>&nbsp;    val vocation: Vocation,</b>
+<b class="fc"><i class="no-highlight">41</i>&nbsp;    val value: Long,</b>
+<b class="fc"><i class="no-highlight">42</i>&nbsp;    val additionalValue: String?,</b>
+<i class="no-highlight">43</i>&nbsp;) : BaseCharacter, CharacterLevel
 </div>
 </pre>
 </div>
@@ -236,7 +252,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-11 07:13</div>
+    <div style="float:right;">generated on 2022-09-12 15:44</div>
 </div>
 </body>
 </html>

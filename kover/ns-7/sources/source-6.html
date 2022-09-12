@@ -183,52 +183,68 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.galarzaa.tibiakt.core.models.bazaar
-<i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionBattlEyeFilter
-<i class="no-highlight">4</i>&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionOrderBy
-<i class="no-highlight">5</i>&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionOrderDirection
-<i class="no-highlight">6</i>&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionSearchType
-<i class="no-highlight">7</i>&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionSkillFilter
-<i class="no-highlight">8</i>&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionVocationFilter
-<i class="no-highlight">9</i>&nbsp;import com.galarzaa.tibiakt.core.enums.PvpType
-<i class="no-highlight">10</i>&nbsp;import kotlinx.serialization.Serializable
-<i class="no-highlight">11</i>&nbsp;
-<i class="no-highlight">12</i>&nbsp;/**
-<i class="no-highlight">13</i>&nbsp; * Filtering parameters for the [CharacterBazaar]
-<i class="no-highlight">14</i>&nbsp; *
-<i class="no-highlight">15</i>&nbsp; * All values are optional, only set values are considered when filtering.
-<i class="no-highlight">16</i>&nbsp; *
-<i class="no-highlight">17</i>&nbsp; * @property world Only show auctions of characters of this world.
-<i class="no-highlight">18</i>&nbsp; * @property pvpType Only show auctions of characters in worlds with this PvP type.
-<i class="no-highlight">19</i>&nbsp; * @property battlEyeType Only show auctions of characters in worlds with this BattlEye type.
-<i class="no-highlight">20</i>&nbsp; * @property vocation Only show auctions of characters of this vocation, including promoted vocations.
-<i class="no-highlight">21</i>&nbsp; * @property minimumLevel Only show characters above this level.
-<i class="no-highlight">22</i>&nbsp; * @property maximumLevel Only show characters below this level.
-<i class="no-highlight">23</i>&nbsp; * @property skill The skill to use for filtering by [minimumSkillLevel] and [maximumSkillLevel].
-<i class="no-highlight">24</i>&nbsp; * @property minimumSkillLevel Only show characters with a level on the selected [skill] above this.
-<i class="no-highlight">25</i>&nbsp; * @property maximumSkillLevel Only show characters with a level on the selected [skill] below this.
-<i class="no-highlight">26</i>&nbsp; * @property orderDirection The ordering direction for the results.
-<i class="no-highlight">27</i>&nbsp; * @property orderBy The column or value to order by.
-<i class="no-highlight">28</i>&nbsp; * @property searchString The string used to search based on the [searchType].
-<i class="no-highlight">29</i>&nbsp; * @property searchType The type of search to perform.
-<i class="no-highlight">30</i>&nbsp; */
-<b class="pc"><i class="no-highlight">31</i>&nbsp;@Serializable</b>
-<i class="no-highlight">32</i>&nbsp;public data class BazaarFilters(
-<b class="fc"><i class="no-highlight">33</i>&nbsp;    val world: String? = null,</b>
-<b class="fc"><i class="no-highlight">34</i>&nbsp;    val pvpType: PvpType? = null,</b>
-<b class="fc"><i class="no-highlight">35</i>&nbsp;    val battlEyeType: AuctionBattlEyeFilter? = null,</b>
-<b class="fc"><i class="no-highlight">36</i>&nbsp;    val vocation: AuctionVocationFilter? = null,</b>
-<b class="fc"><i class="no-highlight">37</i>&nbsp;    val minimumLevel: Int? = null,</b>
-<b class="fc"><i class="no-highlight">38</i>&nbsp;    val maximumLevel: Int? = null,</b>
-<b class="fc"><i class="no-highlight">39</i>&nbsp;    val skill: AuctionSkillFilter? = null,</b>
-<b class="fc"><i class="no-highlight">40</i>&nbsp;    val minimumSkillLevel: Int? = null,</b>
-<b class="fc"><i class="no-highlight">41</i>&nbsp;    val maximumSkillLevel: Int? = null,</b>
-<b class="fc"><i class="no-highlight">42</i>&nbsp;    val orderDirection: AuctionOrderDirection? = null,</b>
-<b class="fc"><i class="no-highlight">43</i>&nbsp;    val orderBy: AuctionOrderBy? = null,</b>
-<b class="fc"><i class="no-highlight">44</i>&nbsp;    val searchString: String? = null,</b>
-<b class="fc"><i class="no-highlight">45</i>&nbsp;    val searchType: AuctionSearchType? = null,</b>
-<i class="no-highlight">46</i>&nbsp;)
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;/*
+<i class="no-highlight">2</i>&nbsp; * Copyright © 2022 Allan Galarza
+<i class="no-highlight">3</i>&nbsp; *
+<i class="no-highlight">4</i>&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+<i class="no-highlight">5</i>&nbsp; * you may not use this file except in compliance with the License.
+<i class="no-highlight">6</i>&nbsp; * You may obtain a copy of the License at
+<i class="no-highlight">7</i>&nbsp; *
+<i class="no-highlight">8</i>&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+<i class="no-highlight">9</i>&nbsp; *
+<i class="no-highlight">10</i>&nbsp; * Unless required by applicable law or agreed to in writing, software
+<i class="no-highlight">11</i>&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+<i class="no-highlight">12</i>&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+<i class="no-highlight">13</i>&nbsp; * See the License for the specific language governing permissions and
+<i class="no-highlight">14</i>&nbsp; * limitations under the License.
+<i class="no-highlight">15</i>&nbsp; */
+<i class="no-highlight">16</i>&nbsp;
+<i class="no-highlight">17</i>&nbsp;package com.galarzaa.tibiakt.core.models.bazaar
+<i class="no-highlight">18</i>&nbsp;
+<i class="no-highlight">19</i>&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionBattlEyeFilter
+<i class="no-highlight">20</i>&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionOrderBy
+<i class="no-highlight">21</i>&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionOrderDirection
+<i class="no-highlight">22</i>&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionSearchType
+<i class="no-highlight">23</i>&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionSkillFilter
+<i class="no-highlight">24</i>&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionVocationFilter
+<i class="no-highlight">25</i>&nbsp;import com.galarzaa.tibiakt.core.enums.PvpType
+<i class="no-highlight">26</i>&nbsp;import kotlinx.serialization.Serializable
+<i class="no-highlight">27</i>&nbsp;
+<i class="no-highlight">28</i>&nbsp;/**
+<i class="no-highlight">29</i>&nbsp; * Filtering parameters for the [CharacterBazaar]
+<i class="no-highlight">30</i>&nbsp; *
+<i class="no-highlight">31</i>&nbsp; * All values are optional, only set values are considered when filtering.
+<i class="no-highlight">32</i>&nbsp; *
+<i class="no-highlight">33</i>&nbsp; * @property world Only show auctions of characters of this world.
+<i class="no-highlight">34</i>&nbsp; * @property pvpType Only show auctions of characters in worlds with this PvP type.
+<i class="no-highlight">35</i>&nbsp; * @property battlEyeType Only show auctions of characters in worlds with this BattlEye type.
+<i class="no-highlight">36</i>&nbsp; * @property vocation Only show auctions of characters of this vocation, including promoted vocations.
+<i class="no-highlight">37</i>&nbsp; * @property minimumLevel Only show characters above this level.
+<i class="no-highlight">38</i>&nbsp; * @property maximumLevel Only show characters below this level.
+<i class="no-highlight">39</i>&nbsp; * @property skill The skill to use for filtering by [minimumSkillLevel] and [maximumSkillLevel].
+<i class="no-highlight">40</i>&nbsp; * @property minimumSkillLevel Only show characters with a level on the selected [skill] above this.
+<i class="no-highlight">41</i>&nbsp; * @property maximumSkillLevel Only show characters with a level on the selected [skill] below this.
+<i class="no-highlight">42</i>&nbsp; * @property orderDirection The ordering direction for the results.
+<i class="no-highlight">43</i>&nbsp; * @property orderBy The column or value to order by.
+<i class="no-highlight">44</i>&nbsp; * @property searchString The string used to search based on the [searchType].
+<i class="no-highlight">45</i>&nbsp; * @property searchType The type of search to perform.
+<i class="no-highlight">46</i>&nbsp; */
+<b class="pc"><i class="no-highlight">47</i>&nbsp;@Serializable</b>
+<i class="no-highlight">48</i>&nbsp;public data class BazaarFilters(
+<b class="fc"><i class="no-highlight">49</i>&nbsp;    val world: String? = null,</b>
+<b class="fc"><i class="no-highlight">50</i>&nbsp;    val pvpType: PvpType? = null,</b>
+<b class="fc"><i class="no-highlight">51</i>&nbsp;    val battlEyeType: AuctionBattlEyeFilter? = null,</b>
+<b class="fc"><i class="no-highlight">52</i>&nbsp;    val vocation: AuctionVocationFilter? = null,</b>
+<b class="fc"><i class="no-highlight">53</i>&nbsp;    val minimumLevel: Int? = null,</b>
+<b class="fc"><i class="no-highlight">54</i>&nbsp;    val maximumLevel: Int? = null,</b>
+<b class="fc"><i class="no-highlight">55</i>&nbsp;    val skill: AuctionSkillFilter? = null,</b>
+<b class="fc"><i class="no-highlight">56</i>&nbsp;    val minimumSkillLevel: Int? = null,</b>
+<b class="fc"><i class="no-highlight">57</i>&nbsp;    val maximumSkillLevel: Int? = null,</b>
+<b class="fc"><i class="no-highlight">58</i>&nbsp;    val orderDirection: AuctionOrderDirection? = null,</b>
+<b class="fc"><i class="no-highlight">59</i>&nbsp;    val orderBy: AuctionOrderBy? = null,</b>
+<b class="fc"><i class="no-highlight">60</i>&nbsp;    val searchString: String? = null,</b>
+<b class="fc"><i class="no-highlight">61</i>&nbsp;    val searchType: AuctionSearchType? = null,</b>
+<i class="no-highlight">62</i>&nbsp;)
 </div>
 </pre>
 </div>
@@ -255,7 +271,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-11 07:13</div>
+    <div style="float:right;">generated on 2022-09-12 15:44</div>
 </div>
 </body>
 </html>

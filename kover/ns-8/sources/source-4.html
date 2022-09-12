@@ -231,13 +231,13 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">46</i>&nbsp; * @property position The special position the character holds.
 <i class="no-highlight">47</i>&nbsp; * @property comment The character&#39;s comment.
 <i class="no-highlight">48</i>&nbsp; * @property accountStatus The current status of the account.
-<i class="no-highlight">49</i>&nbsp; * @property recentlyTraded Whether the character was recently traded. If its name was changed afterwards, this flag is removed.
+<i class="no-highlight">49</i>&nbsp; * @property isRecentlyTraded Whether the character was recently traded. If its name was changed afterwards, this flag is removed.
 <i class="no-highlight">50</i>&nbsp; * @property deletionDate The date when this character is scheduled to be deleted.
 <i class="no-highlight">51</i>&nbsp; * @property badges The visible badges of the character.
 <i class="no-highlight">52</i>&nbsp; * @property achievements The visible achievements for the character.
 <i class="no-highlight">53</i>&nbsp; * @property deaths The recent deaths of the character.
-<i class="no-highlight">54</i>&nbsp; * @property accountInformation The character&#39;s account information. Might be [hidden].
-<i class="no-highlight">55</i>&nbsp; * @property characters The list of visible characters in the same account. Might be [hidden].
+<i class="no-highlight">54</i>&nbsp; * @property accountInformation The character&#39;s account information. Might be [isHidden].
+<i class="no-highlight">55</i>&nbsp; * @property characters The list of visible characters in the same account. Might be [isHidden].
 <i class="no-highlight">56</i>&nbsp; */
 <b class="pc"><i class="no-highlight">57</i>&nbsp;@Serializable</b>
 <i class="no-highlight">58</i>&nbsp;public data class Character(
@@ -259,7 +259,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc"><i class="no-highlight">74</i>&nbsp;    val position: String?,</b>
 <b class="fc"><i class="no-highlight">75</i>&nbsp;    val comment: String?,</b>
 <b class="fc"><i class="no-highlight">76</i>&nbsp;    val accountStatus: AccountStatus,</b>
-<b class="fc"><i class="no-highlight">77</i>&nbsp;    val recentlyTraded: Boolean,</b>
+<b class="fc"><i class="no-highlight">77</i>&nbsp;    val isRecentlyTraded: Boolean,</b>
 <b class="fc"><i class="no-highlight">78</i>&nbsp;    val deletionDate: Instant?,</b>
 <b class="fc"><i class="no-highlight">79</i>&nbsp;    val badges: List&lt;AccountBadge&gt;,</b>
 <b class="fc"><i class="no-highlight">80</i>&nbsp;    val achievements: List&lt;DisplayedAchievement&gt;,</b>
@@ -271,12 +271,12 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">86</i>&nbsp;    /**
 <i class="no-highlight">87</i>&nbsp;     * Whether this character is scheduled for deletion or nto.
 <i class="no-highlight">88</i>&nbsp;     */
-<b class="pc"><i class="no-highlight">89</i>&nbsp;    val scheduledForDeletion: Boolean get() = deletionDate != null</b>
+<b class="pc"><i class="no-highlight">89</i>&nbsp;    val isScheduledForDeletion: Boolean get() = deletionDate != null</b>
 <i class="no-highlight">90</i>&nbsp;
 <i class="no-highlight">91</i>&nbsp;    /**
 <i class="no-highlight">92</i>&nbsp;     * Whether this character is hidden or not.
 <i class="no-highlight">93</i>&nbsp;     */
-<b class="nc"><i class="no-highlight">94</i>&nbsp;    val hidden: Boolean get() = characters.isEmpty()</b>
+<b class="nc"><i class="no-highlight">94</i>&nbsp;    val isHidden: Boolean get() = characters.isEmpty()</b>
 <i class="no-highlight">95</i>&nbsp;
 <i class="no-highlight">96</i>&nbsp;    /**
 <i class="no-highlight">97</i>&nbsp;     * URL to the character this character is married to, if any.
@@ -309,7 +309,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-11 07:13</div>
+    <div style="float:right;">generated on 2022-09-12 15:44</div>
 </div>
 </body>
 </html>
