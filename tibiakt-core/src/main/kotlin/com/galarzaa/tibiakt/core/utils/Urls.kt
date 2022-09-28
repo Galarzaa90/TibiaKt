@@ -178,7 +178,7 @@ public fun getForumSectionUrl(sectionId: Int): String =
  * Get the URL to a specific forum section.
  */
 public fun getForumSectionUrl(section: AvailableForumSection): String =
-    buildTibiaUrl("forum", "subtopoic" to section.subtopic)
+    buildTibiaUrl("forum", section.subtopic)
 
 /**
  * Get the URL to a specific forum section by its name.

@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.4.1 (2022-09-28)
+
+- Fixed incorrect URL building for forum sections.
+
 ## v0.4.0 (2022-09-12)
 
 - `House` is now a sealed class with subtypes `Rented` and `Auctioned` for a cleaner model.
