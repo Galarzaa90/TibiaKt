@@ -485,7 +485,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc"><i class="no-highlight">272</i>&nbsp;                &quot;Spent Charm Points&quot; -&gt; spentCharmPoints = value.parseInteger()</b>
 <i class="no-highlight">273</i>&nbsp;            }
 <i class="no-highlight">274</i>&nbsp;        }
-<b class="pc"><i class="no-highlight">275</i>&nbsp;        dailyRewardStreak = contentContainers[5].selectFirst(&quot;div&quot;)?.cleanText()?.toInt() ?: 0</b>
+<b class="pc"><i class="no-highlight">275</i>&nbsp;        dailyRewardStreak = contentContainers[5].selectFirst(&quot;div&quot;)?.cleanText()?.parseInteger() ?: 0</b>
 <b class="fc"><i class="no-highlight">276</i>&nbsp;        for (row in contentContainers[6].rows()) {</b>
 <b class="fc"><i class="no-highlight">277</i>&nbsp;            val (field, value) = getAuctionTableFieldValue(row)</b>
 <b class="pc"><i class="no-highlight">278</i>&nbsp;            when (field) {</b>
@@ -658,7 +658,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-28 19:12</div>
+    <div style="float:right;">generated on 2022-09-29 18:20</div>
 </div>
 </body>
 </html>
