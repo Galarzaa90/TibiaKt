@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.4.2 (2022-09-29)
+
+- Fixed auctions not being parsed for daily rewards streaks over 1000.
+
 ## v0.4.1 (2022-09-28)
 
 - Fixed incorrect URL building for forum sections.

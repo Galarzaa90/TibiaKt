@@ -272,7 +272,7 @@ public object AuctionParser : Parser<Auction?> {
                 "Spent Charm Points" -> spentCharmPoints = value.parseInteger()
             }
         }
-        dailyRewardStreak = contentContainers[5].selectFirst("div")?.cleanText()?.toInt() ?: 0
+        dailyRewardStreak = contentContainers[5].selectFirst("div")?.cleanText()?.parseInteger() ?: 0
         for (row in contentContainers[6].rows()) {
             val (field, value) = getAuctionTableFieldValue(row)
             when (field) {

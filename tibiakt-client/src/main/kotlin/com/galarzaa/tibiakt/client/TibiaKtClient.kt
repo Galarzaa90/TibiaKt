@@ -228,7 +228,7 @@ public open class TibiaKtClient constructor(
                 method.value.uppercase(),
                 "${response.status.value} ${response.status.description}",
                 "${response.fetchingTimeMillis}ms"
-            ).joinToString("| ")
+            ).joinToString(" | ")
         }
         return response
     }
