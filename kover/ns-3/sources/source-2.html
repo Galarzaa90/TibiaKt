@@ -195,148 +195,150 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">103</i>&nbsp;        public lateinit var name: String
 <i class="no-highlight">104</i>&nbsp;        public lateinit var description: String
 <i class="no-highlight">105</i>&nbsp;        public var count: Int = 1
-<i class="no-highlight">106</i>&nbsp;
-<i class="no-highlight">107</i>&nbsp;        override fun build(): ItemEntry = ItemEntry(
-<i class="no-highlight">108</i>&nbsp;            itemId = itemId ?: error(&quot;itemId is required&quot;),
-<i class="no-highlight">109</i>&nbsp;            name = if (::name.isInitialized) name else error(&quot;name is required&quot;),
-<i class="no-highlight">110</i>&nbsp;            description = if (::description.isInitialized) description else error(&quot;description is required&quot;),
-<i class="no-highlight">111</i>&nbsp;            count = count
-<i class="no-highlight">112</i>&nbsp;        )
-<i class="no-highlight">113</i>&nbsp;    }
-<i class="no-highlight">114</i>&nbsp;
-<i class="no-highlight">115</i>&nbsp;    @BuilderDsl
-<i class="no-highlight">116</i>&nbsp;    public class SalesArgumentBuilder : TibiaKtBuilder&lt;SalesArgument&gt; {
-<i class="no-highlight">117</i>&nbsp;        public var categoryId: Int? = null
-<i class="no-highlight">118</i>&nbsp;        public lateinit var content: String
-<i class="no-highlight">119</i>&nbsp;
-<i class="no-highlight">120</i>&nbsp;        override fun build(): SalesArgument = SalesArgument(
-<i class="no-highlight">121</i>&nbsp;            categoryId = categoryId ?: error(&quot;categoryId is required&quot;),
-<i class="no-highlight">122</i>&nbsp;            content = if (::content.isInitialized) content else error(&quot;content is required&quot;),
-<i class="no-highlight">123</i>&nbsp;        )
-<i class="no-highlight">124</i>&nbsp;    }
-<i class="no-highlight">125</i>&nbsp;
-<i class="no-highlight">126</i>&nbsp;    @BuilderDsl
-<i class="no-highlight">127</i>&nbsp;    public class AuctionDetailsBuilder : TibiaKtBuilder&lt;AuctionDetails&gt; {
-<i class="no-highlight">128</i>&nbsp;        public var hitPoints: Int? = null
-<i class="no-highlight">129</i>&nbsp;        public var mana: Int? = null
-<i class="no-highlight">130</i>&nbsp;        public var capacity: Int? = null
-<i class="no-highlight">131</i>&nbsp;        public var speed: Int? = null
-<i class="no-highlight">132</i>&nbsp;        public var blessingsCount: Int? = null
-<i class="no-highlight">133</i>&nbsp;        public var mountsCount: Int? = null
-<i class="no-highlight">134</i>&nbsp;        public var outfitsCount: Int? = null
-<i class="no-highlight">135</i>&nbsp;        public var titlesCount: Int? = null
-<i class="no-highlight">136</i>&nbsp;        public var skills: AuctionSkills? = null
-<i class="no-highlight">137</i>&nbsp;        public var creationDate: Instant? = null
-<i class="no-highlight">138</i>&nbsp;        public var experience: Long? = null
-<i class="no-highlight">139</i>&nbsp;        public var gold: Long? = null
-<i class="no-highlight">140</i>&nbsp;        public var achievementPoints: Int? = null
-<i class="no-highlight">141</i>&nbsp;        public var regularWorldTransfersAvailable: Instant? = null
-<i class="no-highlight">142</i>&nbsp;        public var hasCharmExpansion: Boolean? = null
-<i class="no-highlight">143</i>&nbsp;        public var availableCharmPoints: Int? = null
-<i class="no-highlight">144</i>&nbsp;        public var spentCharmPoints: Int? = null
-<i class="no-highlight">145</i>&nbsp;        public var dailyRewardStreak: Int? = null
-<i class="no-highlight">146</i>&nbsp;        public var huntingTaskPoints: Int? = null
-<i class="no-highlight">147</i>&nbsp;        public var permanentHuntingTaskSlots: Int? = null
-<i class="no-highlight">148</i>&nbsp;        public var permanentPreySlots: Int? = null
-<i class="no-highlight">149</i>&nbsp;        public var preyWildcards: Int? = null
-<i class="no-highlight">150</i>&nbsp;        public var hirelings: Int? = null
-<i class="no-highlight">151</i>&nbsp;        public var hirelingJobs: Int? = null
-<i class="no-highlight">152</i>&nbsp;        public var hirelingOutfits: Int? = null
-<i class="no-highlight">153</i>&nbsp;        public var exaltedDust: Int? = null
-<i class="no-highlight">154</i>&nbsp;        public var exaltedDustLimit: Int? = null
-<i class="no-highlight">155</i>&nbsp;        public var bossPoints: Int? = null
-<i class="no-highlight">156</i>&nbsp;        public var items: ItemSummary? = null
-<i class="no-highlight">157</i>&nbsp;        public var storeItems: ItemSummary? = null
-<i class="no-highlight">158</i>&nbsp;        public var mounts: Mounts? = null
-<i class="no-highlight">159</i>&nbsp;        public var storeMounts: Mounts? = null
-<i class="no-highlight">160</i>&nbsp;        public var outfits: Outfits? = null
-<i class="no-highlight">161</i>&nbsp;        public var storeOutfits: Outfits? = null
-<i class="no-highlight">162</i>&nbsp;        public var familiars: Familiars? = null
-<i class="no-highlight">163</i>&nbsp;        public val blessings: MutableList&lt;BlessingEntry&gt; = mutableListOf()
-<i class="no-highlight">164</i>&nbsp;        public val imbuements: MutableList&lt;String&gt; = mutableListOf()
-<i class="no-highlight">165</i>&nbsp;        public val charms: MutableList&lt;CharmEntry&gt; = mutableListOf()
-<i class="no-highlight">166</i>&nbsp;        public val completedCyclopediaMapAreas: MutableList&lt;String&gt; = mutableListOf()
-<i class="no-highlight">167</i>&nbsp;        public val completedQuestLines: MutableList&lt;String&gt; = mutableListOf()
-<i class="no-highlight">168</i>&nbsp;        public val titles: MutableList&lt;String&gt; = mutableListOf()
-<i class="no-highlight">169</i>&nbsp;        public val achievements: MutableList&lt;AchievementEntry&gt; = mutableListOf()
-<i class="no-highlight">170</i>&nbsp;        public val bestiaryProgress: MutableList&lt;CreatureEntry&gt; = mutableListOf()
-<i class="no-highlight">171</i>&nbsp;        public val bosstiaryProgress: MutableList&lt;CreatureEntry&gt; = mutableListOf()
-<i class="no-highlight">172</i>&nbsp;
-<i class="no-highlight">173</i>&nbsp;
-<i class="no-highlight">174</i>&nbsp;        public fun addBlessing(blessingEntry: BlessingEntry): AuctionDetailsBuilder =
-<i class="no-highlight">175</i>&nbsp;            apply { blessings.add(blessingEntry) }
-<i class="no-highlight">176</i>&nbsp;
-<i class="no-highlight">177</i>&nbsp;        public fun addImbuement(imbuement: String): AuctionDetailsBuilder = apply { imbuements.add(imbuement) }
-<i class="no-highlight">178</i>&nbsp;        public fun addCharm(charm: CharmEntry): AuctionDetailsBuilder = apply { charms.add(charm) }
-<i class="no-highlight">179</i>&nbsp;
-<i class="no-highlight">180</i>&nbsp;        public fun addCompletedQuestLine(completedQuestLine: String): AuctionDetailsBuilder =
-<i class="no-highlight">181</i>&nbsp;            apply { completedQuestLines.add(completedQuestLine) }
-<i class="no-highlight">182</i>&nbsp;
-<i class="no-highlight">183</i>&nbsp;        public fun addCompletedCyclopediaMapArea(completedCyclopediaMapArea: String): AuctionDetailsBuilder =
-<i class="no-highlight">184</i>&nbsp;            apply { completedCyclopediaMapAreas.add(completedCyclopediaMapArea) }
-<i class="no-highlight">185</i>&nbsp;
-<i class="no-highlight">186</i>&nbsp;        public fun addTitle(title: String): AuctionDetailsBuilder = apply { titles.add(title) }
-<i class="no-highlight">187</i>&nbsp;        public fun addAchievement(achievement: AchievementEntry): AuctionDetailsBuilder =
-<i class="no-highlight">188</i>&nbsp;            apply { achievements.add(achievement) }
-<i class="no-highlight">189</i>&nbsp;
-<i class="no-highlight">190</i>&nbsp;        public fun addBestiaryEntry(bestiaryEntry: CreatureEntry): AuctionDetailsBuilder =
-<i class="no-highlight">191</i>&nbsp;            apply { bestiaryProgress.add(bestiaryEntry) }
-<i class="no-highlight">192</i>&nbsp;
-<i class="no-highlight">193</i>&nbsp;        public fun addBosstiaryEntry(bosstiaryEntry: CreatureEntry): AuctionDetailsBuilder =
-<i class="no-highlight">194</i>&nbsp;            apply { bosstiaryProgress.add(bosstiaryEntry) }
-<i class="no-highlight">195</i>&nbsp;
-<i class="no-highlight">196</i>&nbsp;        public override fun build(): AuctionDetails =
-<i class="no-highlight">197</i>&nbsp;            AuctionDetails(
-<i class="no-highlight">198</i>&nbsp;                hitPoints = hitPoints ?: error(&quot;hitPoints is required&quot;),
-<i class="no-highlight">199</i>&nbsp;                mana = mana ?: error(&quot;mana is required&quot;),
-<i class="no-highlight">200</i>&nbsp;                capacity = capacity ?: error(&quot;capacity is required&quot;),
-<i class="no-highlight">201</i>&nbsp;                speed = speed ?: error(&quot;speed is required&quot;),
-<i class="no-highlight">202</i>&nbsp;                blessingsCount = blessingsCount ?: error(&quot;blessingsCount is required&quot;),
-<i class="no-highlight">203</i>&nbsp;                mountsCount = mountsCount ?: error(&quot;mountsCount is required&quot;),
-<i class="no-highlight">204</i>&nbsp;                outfitsCount = outfitsCount ?: error(&quot;outfitsCount is required&quot;),
-<i class="no-highlight">205</i>&nbsp;                titlesCount = titlesCount ?: error(&quot;titlesCount is required&quot;),
-<i class="no-highlight">206</i>&nbsp;                skills = skills ?: error(&quot;skills is required&quot;),
-<i class="no-highlight">207</i>&nbsp;                creationDate = creationDate ?: error(&quot;creationDate is required&quot;),
-<i class="no-highlight">208</i>&nbsp;                experience = experience ?: error(&quot;experience is required&quot;),
-<i class="no-highlight">209</i>&nbsp;                gold = gold ?: error(&quot;gold is required&quot;),
-<i class="no-highlight">210</i>&nbsp;                achievementPoints = achievementPoints ?: error(&quot;achievementPoints is required&quot;),
-<i class="no-highlight">211</i>&nbsp;                regularWorldTransfersAvailable = regularWorldTransfersAvailable,
-<i class="no-highlight">212</i>&nbsp;                charmExpansion = hasCharmExpansion ?: error(&quot;charmExpansion is required&quot;),
-<i class="no-highlight">213</i>&nbsp;                availableCharmPoints = availableCharmPoints
-<i class="no-highlight">214</i>&nbsp;                    ?: error(&quot;availableCharmPoints is required&quot;),
-<i class="no-highlight">215</i>&nbsp;                spentCharmPoints = spentCharmPoints ?: error(&quot;spentCharmPoints is required&quot;),
-<i class="no-highlight">216</i>&nbsp;                dailyRewardStreak = dailyRewardStreak ?: error(&quot;dailyRewardStreak is required&quot;),
-<i class="no-highlight">217</i>&nbsp;                permanentHuntingTaskSlots = permanentHuntingTaskSlots
-<i class="no-highlight">218</i>&nbsp;                    ?: error(&quot;permanentHuntingTaskSlots is required&quot;),
-<i class="no-highlight">219</i>&nbsp;                permanentPreySlots = permanentPreySlots
-<i class="no-highlight">220</i>&nbsp;                    ?: error(&quot;permanentPreySlots is required&quot;),
-<i class="no-highlight">221</i>&nbsp;                huntingTaskPoints = huntingTaskPoints ?: error(&quot;huntingTaskPoints is required&quot;),
-<i class="no-highlight">222</i>&nbsp;                preyWildcards = preyWildcards ?: error(&quot;preyWildcards is required&quot;),
-<i class="no-highlight">223</i>&nbsp;                hirelings = hirelings ?: error(&quot;hirelings is required&quot;),
-<i class="no-highlight">224</i>&nbsp;                hirelingJobs = hirelingJobs ?: error(&quot;hirelingJobs is required&quot;),
-<i class="no-highlight">225</i>&nbsp;                hirelingOutfits = hirelingOutfits ?: error(&quot;hirelingOutfits is required&quot;),
-<i class="no-highlight">226</i>&nbsp;                exaltedDust = exaltedDust ?: error(&quot;exaltedDust is required&quot;),
-<i class="no-highlight">227</i>&nbsp;                exaltedDustLimit = exaltedDustLimit ?: error(&quot;exaltedDustLimit is required&quot;),
-<i class="no-highlight">228</i>&nbsp;                bossPoints = bossPoints ?: error(&quot;bossPoints is required&quot;),
-<i class="no-highlight">229</i>&nbsp;                items = items ?: error(&quot;items is required&quot;),
-<i class="no-highlight">230</i>&nbsp;                storeItems = storeItems ?: error(&quot;storeItems is required&quot;),
-<i class="no-highlight">231</i>&nbsp;                mounts = mounts ?: error(&quot;mounts is required&quot;),
-<i class="no-highlight">232</i>&nbsp;                storeMounts = storeMounts ?: error(&quot;storeMounts is required&quot;),
-<i class="no-highlight">233</i>&nbsp;                outfits = outfits ?: error(&quot;outfits is required&quot;),
-<i class="no-highlight">234</i>&nbsp;                storeOutfits = storeOutfits ?: error(&quot;storeOutfits is required&quot;),
-<i class="no-highlight">235</i>&nbsp;                familiars = familiars ?: error(&quot;familiars is required&quot;),
-<i class="no-highlight">236</i>&nbsp;                blessings = blessings,
-<i class="no-highlight">237</i>&nbsp;                imbuements = imbuements,
-<i class="no-highlight">238</i>&nbsp;                charms = charms,
-<i class="no-highlight">239</i>&nbsp;                completedCyclopediaMapAreas = completedCyclopediaMapAreas,
-<i class="no-highlight">240</i>&nbsp;                completedQuestLines = completedQuestLines,
-<i class="no-highlight">241</i>&nbsp;                titles = titles,
-<i class="no-highlight">242</i>&nbsp;                achievements = achievements,
-<i class="no-highlight">243</i>&nbsp;                bestiaryProgress = bestiaryProgress,
-<i class="no-highlight">244</i>&nbsp;                bosstiaryProgress = bosstiaryProgress,
-<i class="no-highlight">245</i>&nbsp;            )
-<i class="no-highlight">246</i>&nbsp;    }
-<i class="no-highlight">247</i>&nbsp;}
+<i class="no-highlight">106</i>&nbsp;        public var tier: Int = 0
+<i class="no-highlight">107</i>&nbsp;
+<i class="no-highlight">108</i>&nbsp;        override fun build(): ItemEntry = ItemEntry(
+<i class="no-highlight">109</i>&nbsp;            itemId = itemId ?: error(&quot;itemId is required&quot;),
+<i class="no-highlight">110</i>&nbsp;            name = if (::name.isInitialized) name else error(&quot;name is required&quot;),
+<i class="no-highlight">111</i>&nbsp;            description = if (::description.isInitialized) description else error(&quot;description is required&quot;),
+<i class="no-highlight">112</i>&nbsp;            count = count,
+<i class="no-highlight">113</i>&nbsp;            tier = tier
+<i class="no-highlight">114</i>&nbsp;        )
+<i class="no-highlight">115</i>&nbsp;    }
+<i class="no-highlight">116</i>&nbsp;
+<i class="no-highlight">117</i>&nbsp;    @BuilderDsl
+<i class="no-highlight">118</i>&nbsp;    public class SalesArgumentBuilder : TibiaKtBuilder&lt;SalesArgument&gt; {
+<i class="no-highlight">119</i>&nbsp;        public var categoryId: Int? = null
+<i class="no-highlight">120</i>&nbsp;        public lateinit var content: String
+<i class="no-highlight">121</i>&nbsp;
+<i class="no-highlight">122</i>&nbsp;        override fun build(): SalesArgument = SalesArgument(
+<i class="no-highlight">123</i>&nbsp;            categoryId = categoryId ?: error(&quot;categoryId is required&quot;),
+<i class="no-highlight">124</i>&nbsp;            content = if (::content.isInitialized) content else error(&quot;content is required&quot;),
+<i class="no-highlight">125</i>&nbsp;        )
+<i class="no-highlight">126</i>&nbsp;    }
+<i class="no-highlight">127</i>&nbsp;
+<i class="no-highlight">128</i>&nbsp;    @BuilderDsl
+<i class="no-highlight">129</i>&nbsp;    public class AuctionDetailsBuilder : TibiaKtBuilder&lt;AuctionDetails&gt; {
+<i class="no-highlight">130</i>&nbsp;        public var hitPoints: Int? = null
+<i class="no-highlight">131</i>&nbsp;        public var mana: Int? = null
+<i class="no-highlight">132</i>&nbsp;        public var capacity: Int? = null
+<i class="no-highlight">133</i>&nbsp;        public var speed: Int? = null
+<i class="no-highlight">134</i>&nbsp;        public var blessingsCount: Int? = null
+<i class="no-highlight">135</i>&nbsp;        public var mountsCount: Int? = null
+<i class="no-highlight">136</i>&nbsp;        public var outfitsCount: Int? = null
+<i class="no-highlight">137</i>&nbsp;        public var titlesCount: Int? = null
+<i class="no-highlight">138</i>&nbsp;        public var skills: AuctionSkills? = null
+<i class="no-highlight">139</i>&nbsp;        public var creationDate: Instant? = null
+<i class="no-highlight">140</i>&nbsp;        public var experience: Long? = null
+<i class="no-highlight">141</i>&nbsp;        public var gold: Long? = null
+<i class="no-highlight">142</i>&nbsp;        public var achievementPoints: Int? = null
+<i class="no-highlight">143</i>&nbsp;        public var regularWorldTransfersAvailable: Instant? = null
+<i class="no-highlight">144</i>&nbsp;        public var hasCharmExpansion: Boolean? = null
+<i class="no-highlight">145</i>&nbsp;        public var availableCharmPoints: Int? = null
+<i class="no-highlight">146</i>&nbsp;        public var spentCharmPoints: Int? = null
+<i class="no-highlight">147</i>&nbsp;        public var dailyRewardStreak: Int? = null
+<i class="no-highlight">148</i>&nbsp;        public var huntingTaskPoints: Int? = null
+<i class="no-highlight">149</i>&nbsp;        public var permanentHuntingTaskSlots: Int? = null
+<i class="no-highlight">150</i>&nbsp;        public var permanentPreySlots: Int? = null
+<i class="no-highlight">151</i>&nbsp;        public var preyWildcards: Int? = null
+<i class="no-highlight">152</i>&nbsp;        public var hirelings: Int? = null
+<i class="no-highlight">153</i>&nbsp;        public var hirelingJobs: Int? = null
+<i class="no-highlight">154</i>&nbsp;        public var hirelingOutfits: Int? = null
+<i class="no-highlight">155</i>&nbsp;        public var exaltedDust: Int? = null
+<i class="no-highlight">156</i>&nbsp;        public var exaltedDustLimit: Int? = null
+<i class="no-highlight">157</i>&nbsp;        public var bossPoints: Int? = null
+<i class="no-highlight">158</i>&nbsp;        public var items: ItemSummary? = null
+<i class="no-highlight">159</i>&nbsp;        public var storeItems: ItemSummary? = null
+<i class="no-highlight">160</i>&nbsp;        public var mounts: Mounts? = null
+<i class="no-highlight">161</i>&nbsp;        public var storeMounts: Mounts? = null
+<i class="no-highlight">162</i>&nbsp;        public var outfits: Outfits? = null
+<i class="no-highlight">163</i>&nbsp;        public var storeOutfits: Outfits? = null
+<i class="no-highlight">164</i>&nbsp;        public var familiars: Familiars? = null
+<i class="no-highlight">165</i>&nbsp;        public val blessings: MutableList&lt;BlessingEntry&gt; = mutableListOf()
+<i class="no-highlight">166</i>&nbsp;        public val imbuements: MutableList&lt;String&gt; = mutableListOf()
+<i class="no-highlight">167</i>&nbsp;        public val charms: MutableList&lt;CharmEntry&gt; = mutableListOf()
+<i class="no-highlight">168</i>&nbsp;        public val completedCyclopediaMapAreas: MutableList&lt;String&gt; = mutableListOf()
+<i class="no-highlight">169</i>&nbsp;        public val completedQuestLines: MutableList&lt;String&gt; = mutableListOf()
+<i class="no-highlight">170</i>&nbsp;        public val titles: MutableList&lt;String&gt; = mutableListOf()
+<i class="no-highlight">171</i>&nbsp;        public val achievements: MutableList&lt;AchievementEntry&gt; = mutableListOf()
+<i class="no-highlight">172</i>&nbsp;        public val bestiaryProgress: MutableList&lt;CreatureEntry&gt; = mutableListOf()
+<i class="no-highlight">173</i>&nbsp;        public val bosstiaryProgress: MutableList&lt;CreatureEntry&gt; = mutableListOf()
+<i class="no-highlight">174</i>&nbsp;
+<i class="no-highlight">175</i>&nbsp;
+<i class="no-highlight">176</i>&nbsp;        public fun addBlessing(blessingEntry: BlessingEntry): AuctionDetailsBuilder =
+<i class="no-highlight">177</i>&nbsp;            apply { blessings.add(blessingEntry) }
+<i class="no-highlight">178</i>&nbsp;
+<i class="no-highlight">179</i>&nbsp;        public fun addImbuement(imbuement: String): AuctionDetailsBuilder = apply { imbuements.add(imbuement) }
+<i class="no-highlight">180</i>&nbsp;        public fun addCharm(charm: CharmEntry): AuctionDetailsBuilder = apply { charms.add(charm) }
+<i class="no-highlight">181</i>&nbsp;
+<i class="no-highlight">182</i>&nbsp;        public fun addCompletedQuestLine(completedQuestLine: String): AuctionDetailsBuilder =
+<i class="no-highlight">183</i>&nbsp;            apply { completedQuestLines.add(completedQuestLine) }
+<i class="no-highlight">184</i>&nbsp;
+<i class="no-highlight">185</i>&nbsp;        public fun addCompletedCyclopediaMapArea(completedCyclopediaMapArea: String): AuctionDetailsBuilder =
+<i class="no-highlight">186</i>&nbsp;            apply { completedCyclopediaMapAreas.add(completedCyclopediaMapArea) }
+<i class="no-highlight">187</i>&nbsp;
+<i class="no-highlight">188</i>&nbsp;        public fun addTitle(title: String): AuctionDetailsBuilder = apply { titles.add(title) }
+<i class="no-highlight">189</i>&nbsp;        public fun addAchievement(achievement: AchievementEntry): AuctionDetailsBuilder =
+<i class="no-highlight">190</i>&nbsp;            apply { achievements.add(achievement) }
+<i class="no-highlight">191</i>&nbsp;
+<i class="no-highlight">192</i>&nbsp;        public fun addBestiaryEntry(bestiaryEntry: CreatureEntry): AuctionDetailsBuilder =
+<i class="no-highlight">193</i>&nbsp;            apply { bestiaryProgress.add(bestiaryEntry) }
+<i class="no-highlight">194</i>&nbsp;
+<i class="no-highlight">195</i>&nbsp;        public fun addBosstiaryEntry(bosstiaryEntry: CreatureEntry): AuctionDetailsBuilder =
+<i class="no-highlight">196</i>&nbsp;            apply { bosstiaryProgress.add(bosstiaryEntry) }
+<i class="no-highlight">197</i>&nbsp;
+<i class="no-highlight">198</i>&nbsp;        public override fun build(): AuctionDetails =
+<i class="no-highlight">199</i>&nbsp;            AuctionDetails(
+<i class="no-highlight">200</i>&nbsp;                hitPoints = hitPoints ?: error(&quot;hitPoints is required&quot;),
+<i class="no-highlight">201</i>&nbsp;                mana = mana ?: error(&quot;mana is required&quot;),
+<i class="no-highlight">202</i>&nbsp;                capacity = capacity ?: error(&quot;capacity is required&quot;),
+<i class="no-highlight">203</i>&nbsp;                speed = speed ?: error(&quot;speed is required&quot;),
+<i class="no-highlight">204</i>&nbsp;                blessingsCount = blessingsCount ?: error(&quot;blessingsCount is required&quot;),
+<i class="no-highlight">205</i>&nbsp;                mountsCount = mountsCount ?: error(&quot;mountsCount is required&quot;),
+<i class="no-highlight">206</i>&nbsp;                outfitsCount = outfitsCount ?: error(&quot;outfitsCount is required&quot;),
+<i class="no-highlight">207</i>&nbsp;                titlesCount = titlesCount ?: error(&quot;titlesCount is required&quot;),
+<i class="no-highlight">208</i>&nbsp;                skills = skills ?: error(&quot;skills is required&quot;),
+<i class="no-highlight">209</i>&nbsp;                creationDate = creationDate ?: error(&quot;creationDate is required&quot;),
+<i class="no-highlight">210</i>&nbsp;                experience = experience ?: error(&quot;experience is required&quot;),
+<i class="no-highlight">211</i>&nbsp;                gold = gold ?: error(&quot;gold is required&quot;),
+<i class="no-highlight">212</i>&nbsp;                achievementPoints = achievementPoints ?: error(&quot;achievementPoints is required&quot;),
+<i class="no-highlight">213</i>&nbsp;                regularWorldTransfersAvailable = regularWorldTransfersAvailable,
+<i class="no-highlight">214</i>&nbsp;                charmExpansion = hasCharmExpansion ?: error(&quot;charmExpansion is required&quot;),
+<i class="no-highlight">215</i>&nbsp;                availableCharmPoints = availableCharmPoints
+<i class="no-highlight">216</i>&nbsp;                    ?: error(&quot;availableCharmPoints is required&quot;),
+<i class="no-highlight">217</i>&nbsp;                spentCharmPoints = spentCharmPoints ?: error(&quot;spentCharmPoints is required&quot;),
+<i class="no-highlight">218</i>&nbsp;                dailyRewardStreak = dailyRewardStreak ?: error(&quot;dailyRewardStreak is required&quot;),
+<i class="no-highlight">219</i>&nbsp;                permanentHuntingTaskSlots = permanentHuntingTaskSlots
+<i class="no-highlight">220</i>&nbsp;                    ?: error(&quot;permanentHuntingTaskSlots is required&quot;),
+<i class="no-highlight">221</i>&nbsp;                permanentPreySlots = permanentPreySlots
+<i class="no-highlight">222</i>&nbsp;                    ?: error(&quot;permanentPreySlots is required&quot;),
+<i class="no-highlight">223</i>&nbsp;                huntingTaskPoints = huntingTaskPoints ?: error(&quot;huntingTaskPoints is required&quot;),
+<i class="no-highlight">224</i>&nbsp;                preyWildcards = preyWildcards ?: error(&quot;preyWildcards is required&quot;),
+<i class="no-highlight">225</i>&nbsp;                hirelings = hirelings ?: error(&quot;hirelings is required&quot;),
+<i class="no-highlight">226</i>&nbsp;                hirelingJobs = hirelingJobs ?: error(&quot;hirelingJobs is required&quot;),
+<i class="no-highlight">227</i>&nbsp;                hirelingOutfits = hirelingOutfits ?: error(&quot;hirelingOutfits is required&quot;),
+<i class="no-highlight">228</i>&nbsp;                exaltedDust = exaltedDust ?: error(&quot;exaltedDust is required&quot;),
+<i class="no-highlight">229</i>&nbsp;                exaltedDustLimit = exaltedDustLimit ?: error(&quot;exaltedDustLimit is required&quot;),
+<i class="no-highlight">230</i>&nbsp;                bossPoints = bossPoints ?: error(&quot;bossPoints is required&quot;),
+<i class="no-highlight">231</i>&nbsp;                items = items ?: error(&quot;items is required&quot;),
+<i class="no-highlight">232</i>&nbsp;                storeItems = storeItems ?: error(&quot;storeItems is required&quot;),
+<i class="no-highlight">233</i>&nbsp;                mounts = mounts ?: error(&quot;mounts is required&quot;),
+<i class="no-highlight">234</i>&nbsp;                storeMounts = storeMounts ?: error(&quot;storeMounts is required&quot;),
+<i class="no-highlight">235</i>&nbsp;                outfits = outfits ?: error(&quot;outfits is required&quot;),
+<i class="no-highlight">236</i>&nbsp;                storeOutfits = storeOutfits ?: error(&quot;storeOutfits is required&quot;),
+<i class="no-highlight">237</i>&nbsp;                familiars = familiars ?: error(&quot;familiars is required&quot;),
+<i class="no-highlight">238</i>&nbsp;                blessings = blessings,
+<i class="no-highlight">239</i>&nbsp;                imbuements = imbuements,
+<i class="no-highlight">240</i>&nbsp;                charms = charms,
+<i class="no-highlight">241</i>&nbsp;                completedCyclopediaMapAreas = completedCyclopediaMapAreas,
+<i class="no-highlight">242</i>&nbsp;                completedQuestLines = completedQuestLines,
+<i class="no-highlight">243</i>&nbsp;                titles = titles,
+<i class="no-highlight">244</i>&nbsp;                achievements = achievements,
+<i class="no-highlight">245</i>&nbsp;                bestiaryProgress = bestiaryProgress,
+<i class="no-highlight">246</i>&nbsp;                bosstiaryProgress = bosstiaryProgress,
+<i class="no-highlight">247</i>&nbsp;            )
+<i class="no-highlight">248</i>&nbsp;    }
+<i class="no-highlight">249</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -363,7 +365,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-09-29 18:20</div>
+    <div style="float:right;">generated on 2023-02-24 13:54</div>
 </div>
 </body>
 </html>
