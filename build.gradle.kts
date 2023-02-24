@@ -22,14 +22,14 @@ plugins {
     `java-library`
     `maven-publish`
     signing
-    kotlin("jvm") version "1.7.10"
-    kotlin("plugin.serialization") version "1.7.10"
-    id("org.jetbrains.dokka") version "1.7.10"
-    id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
+    kotlin("jvm") version "1.8.10"
+    kotlin("plugin.serialization") version "1.8.10"
+    id("org.jetbrains.dokka") version "1.7.20"
+    id("io.github.gradle-nexus.publish-plugin") version "1.2.0"
     id("org.jetbrains.kotlinx.kover") version "0.5.1"
-    id("org.sonarqube") version "3.4.0.2513"
-    id("com.github.ben-manes.versions") version "0.42.0"
-    id("io.gitlab.arturbosch.detekt") version "1.21.0"
+    id("org.sonarqube") version "4.0.0.2929"
+    id("com.github.ben-manes.versions") version "0.46.0"
+    id("io.gitlab.arturbosch.detekt") version "1.22.0"
 }
 
 group = "com.galarzaa"
