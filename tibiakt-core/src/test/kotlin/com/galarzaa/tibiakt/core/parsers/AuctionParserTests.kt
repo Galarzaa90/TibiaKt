@@ -18,6 +18,7 @@ package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.TestResources.getResource
 import io.kotest.core.spec.style.StringSpec
+import io.kotest.inspectors.shouldForAtLeastOne
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
 
@@ -38,6 +39,19 @@ class AuctionParserTests : StringSpec({
             experience shouldBe 2_896_070_948
             gold shouldBe 24_652
         }
+    }
+
+    "Parsing auction with upgraded items"{
+        val auction = AuctionParser.fromContent(getResource("auctions/auctionUpgradedItems.txt"))
+        auction shouldNotBe null
+        auction!!.name shouldBe "El Pepin"
+        auction.displayedItems.shouldForAtLeastOne {
+            it.tier shouldBe 1
+        }
+        auction.details!!.items.entries.shouldForAtLeastOne {
+            it.tier shouldBe 1
+        }
+
     }
 
     "Parsing auction not found page"{
