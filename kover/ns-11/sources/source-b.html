@@ -55,10 +55,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    54.3%
+    54.8%
   </span>
   <span class="absValue">
-    (25/46)
+    (23/42)
   </span>
 </td>
 <td class="coverageStat">
@@ -71,10 +71,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    80.9%
+    80.7%
   </span>
   <span class="absValue">
-    (399/493)
+    (392/486)
   </span>
 </td>
 </tr>
@@ -153,10 +153,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    62.5%
+    63.3%
   </span>
   <span class="absValue">
-    (40/64)
+    (38/60)
   </span>
 </td>
 <td class="coverageStat">
@@ -169,10 +169,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    86%
+    85.9%
   </span>
   <span class="absValue">
-    (635/738)
+    (628/731)
   </span>
 </td>
 </tr>
@@ -231,7 +231,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">46</i>&nbsp;                }
 <b class="fc"><i class="no-highlight">47</i>&nbsp;                return null</b>
 <i class="no-highlight">48</i>&nbsp;            }
-<b class="pc"><i class="no-highlight">49</i>&nbsp;            val (sectionLink, boardLink) = breadCrumbs.mapNotNull { it.getLinkInformation() }</b>
+<b class="fc"><i class="no-highlight">49</i>&nbsp;            val (sectionLink, boardLink) = breadCrumbs.mapNotNull { it.getLinkInformation() }</b>
 <i class="no-highlight">50</i>&nbsp;
 <b class="pc"><i class="no-highlight">51</i>&nbsp;            sectionId = sectionLink.queryParams[&quot;sectionid&quot;]?.first()?.toInt()</b>
 <b class="nc"><i class="no-highlight">52</i>&nbsp;                ?: throw ParsingException(&quot;Could not find section ID in link.&quot;)</b>
@@ -258,7 +258,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">73</i>&nbsp;
 <b class="fc"><i class="no-highlight">74</i>&nbsp;            threadId = (threadNumber as TextNode).cleanText().split(&quot;#&quot;).last().toInt()</b>
 <i class="no-highlight">75</i>&nbsp;
-<b class="pc"><i class="no-highlight">76</i>&nbsp;            val navigationLinks = (navigationContainer as Element).select(&quot;a&quot;).mapNotNull { it.getLinkInformation() }</b>
+<b class="fc"><i class="no-highlight">76</i>&nbsp;            val navigationLinks = (navigationContainer as Element).select(&quot;a&quot;).mapNotNull { it.getLinkInformation() }</b>
 <b class="fc"><i class="no-highlight">77</i>&nbsp;            if (navigationLinks.size == 2) {</b>
 <b class="fc"><i class="no-highlight">78</i>&nbsp;                val (prevLink, nextLink) = navigationLinks</b>
 <b class="pc"><i class="no-highlight">79</i>&nbsp;                previousTopicNumber = prevLink.queryParams[&quot;threadid&quot;]?.first()?.toInt()</b>
@@ -356,7 +356,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-02-24 13:54</div>
+    <div style="float:right;">generated on 2023-02-24 23:58</div>
 </div>
 </body>
 </html>
