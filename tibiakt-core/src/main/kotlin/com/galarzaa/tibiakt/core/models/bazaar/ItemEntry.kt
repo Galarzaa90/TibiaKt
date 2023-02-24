@@ -33,6 +33,7 @@ public data class ItemEntry(
     val name: String,
     val description: String?,
     val count: Int,
+    val tier: Int,
 ) {
     /**
      * The URL to the item's image.

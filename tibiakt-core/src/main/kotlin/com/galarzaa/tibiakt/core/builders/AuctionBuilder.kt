@@ -103,12 +103,14 @@ public class AuctionBuilder : TibiaKtBuilder<Auction> {
         public lateinit var name: String
         public lateinit var description: String
         public var count: Int = 1
+        public var tier: Int = 0
 
         override fun build(): ItemEntry = ItemEntry(
             itemId = itemId ?: error("itemId is required"),
             name = if (::name.isInitialized) name else error("name is required"),
             description = if (::description.isInitialized) description else error("description is required"),
-            count = count
+            count = count,
+            tier = tier
         )
     }
 

@@ -60,6 +60,7 @@ public object AuctionParser : Parser<Auction?> {
     private val charInfoRegex = Regex("""Level: (\d+) \| Vocation: ([\w\s]+)\| (\w+) \| World: (\w+)""")
     private val idAddonsRegex = Regex("""/(\d+)_(\d+)""")
     private val amountRegex = Regex("""([\d,]+)x """)
+    private val tierRegex = Regex("""(.*)\s\(tier (\d)\)""")
     private val idRegex = Regex("""(\d+).(?:gif|png)""")
 
     override fun fromContent(content: String): Auction? = fromContent(content, 0, true)
@@ -389,7 +390,12 @@ public object AuctionParser : Parser<Auction?> {
             amount = groups[1]!!.value.parseInteger()
             name = amountRegex.replace(name, "")
         }
-        return ItemEntry(itemId, name, description, amount)
+        var tier = 0
+        tierRegex.find(name)?.apply {
+            tier = groups[2]!!.value.parseInteger()
+            name = groups[1]!!.value
+        }
+        return ItemEntry(itemId, name, description, amount, tier)
     }
 
     @PublishedApi
