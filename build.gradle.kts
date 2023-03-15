@@ -46,13 +46,17 @@ tasks.dokkaHtmlMultiModule.configure {
     outputDirectory.set(buildDir.resolve("dokka"))
 
 }
-/*
-extensions.configure<KoverMergedConfig> {
-    isEnabled = true
-    htmlReportDir.set(layout.buildDirectory.dir("kover/"))
-    excludes = listOf("com.galarzaa.tibiakt.server.*")
+
+extensions.configure<kotlinx.kover.api.KoverMergedConfig> {
+    enable()
+    htmlReport {
+    }
+    filters {
+        classes {
+            excludes.add("com.galarzaa.tibiakt.server.*")
+        }
+    }
 }
- */
 
 
 sonarqube {
@@ -62,13 +66,4 @@ sonarqube {
         property("sonar.host.url", "https://sonarcloud.io")
         property("sonar.coverage.jacoco.xmlReportPaths", "tibiakt-core/build/reports/kover/report.xml")
     }
-}
-
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-    kotlinOptions.jvmTarget = JavaVersion.VERSION_1_8.toString()
-}
-
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
 }

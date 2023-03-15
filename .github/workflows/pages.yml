@@ -34,7 +34,7 @@ jobs:
       - name: Organize files 📁
         run: |
           mv build/dokka public
-          mv build/kover public/kover
+          mv build/reports/kover/merged/html public/kover
 
       - name: Deploy to GitHub Pages🚀
         if: ${{github.event_name == 'push'}}
