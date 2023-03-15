@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.5.0 (2022-03-15)
+
+- Added upgrade tier to item in auctions.
+- Renamed `BosstableBosses` to `BoostableBosses` and all related classes.
+- Upgrade to Kotlin 1.8.10
+
 ## v0.4.2 (2022-09-29)
 
 - Fixed auctions not being parsed for daily rewards streaks over 1000.
