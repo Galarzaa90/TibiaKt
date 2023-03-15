@@ -24,9 +24,9 @@ plugins {
     signing
     kotlin("jvm") version "1.8.10"
     kotlin("plugin.serialization") version "1.8.10"
-    id("org.jetbrains.dokka") version "1.7.20"
+    id("org.jetbrains.dokka") version "1.8.10"
     id("io.github.gradle-nexus.publish-plugin") version "1.2.0"
-    id("org.jetbrains.kotlinx.kover") version "0.5.1"
+    id("org.jetbrains.kotlinx.kover") version "0.6.1"
     id("org.sonarqube") version "4.0.0.2929"
     id("com.github.ben-manes.versions") version "0.46.0"
     id("io.gitlab.arturbosch.detekt") version "1.22.0"
@@ -46,12 +46,13 @@ tasks.dokkaHtmlMultiModule.configure {
     outputDirectory.set(buildDir.resolve("dokka"))
 
 }
-
-tasks.koverMergedHtmlReport {
+/*
+extensions.configure<KoverMergedConfig> {
     isEnabled = true
     htmlReportDir.set(layout.buildDirectory.dir("kover/"))
     excludes = listOf("com.galarzaa.tibiakt.server.*")
 }
+ */
 
 
 sonarqube {
@@ -61,4 +62,13 @@ sonarqube {
         property("sonar.host.url", "https://sonarcloud.io")
         property("sonar.coverage.jacoco.xmlReportPaths", "tibiakt-core/build/reports/kover/report.xml")
     }
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    kotlinOptions.jvmTarget = JavaVersion.VERSION_1_8.toString()
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }
