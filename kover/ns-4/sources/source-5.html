@@ -7,9 +7,10 @@
   <title>Coverage Report > AuctionSearchType</title>
   <style type="text/css">
     @import "../../css/coverage.css";
-    @import "../../css/highlight-idea.css";
+    @import "../../css/idea.min.css";
   </style>
-  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
 </head>
 
 <body>
@@ -134,48 +135,48 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;/*
-<i class="no-highlight">2</i>&nbsp; * Copyright © 2022 Allan Galarza
-<i class="no-highlight">3</i>&nbsp; *
-<i class="no-highlight">4</i>&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
-<i class="no-highlight">5</i>&nbsp; * you may not use this file except in compliance with the License.
-<i class="no-highlight">6</i>&nbsp; * You may obtain a copy of the License at
-<i class="no-highlight">7</i>&nbsp; *
-<i class="no-highlight">8</i>&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
-<i class="no-highlight">9</i>&nbsp; *
-<i class="no-highlight">10</i>&nbsp; * Unless required by applicable law or agreed to in writing, software
-<i class="no-highlight">11</i>&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-<i class="no-highlight">12</i>&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-<i class="no-highlight">13</i>&nbsp; * See the License for the specific language governing permissions and
-<i class="no-highlight">14</i>&nbsp; * limitations under the License.
-<i class="no-highlight">15</i>&nbsp; */
-<i class="no-highlight">16</i>&nbsp;
-<i class="no-highlight">17</i>&nbsp;package com.galarzaa.tibiakt.core.enums
-<i class="no-highlight">18</i>&nbsp;
-<i class="no-highlight">19</i>&nbsp;/**
-<i class="no-highlight">20</i>&nbsp; * The types of search for the input field in the character bazaar.
-<i class="no-highlight">21</i>&nbsp; */
-<b class="fc"><i class="no-highlight">22</i>&nbsp;public enum class AuctionSearchType(override val value: Int) : IntEnum {</b>
-<i class="no-highlight">23</i>&nbsp;    /**
-<i class="no-highlight">24</i>&nbsp;     * Searches everything that includes the words on the search string.
-<i class="no-highlight">25</i>&nbsp;     */
-<b class="fc"><i class="no-highlight">26</i>&nbsp;    ITEM_DEFAULT(0),</b>
-<i class="no-highlight">27</i>&nbsp;
-<i class="no-highlight">28</i>&nbsp;    /**
-<i class="no-highlight">29</i>&nbsp;     * Searches everything that includes the search string.
-<i class="no-highlight">30</i>&nbsp;     */
-<b class="fc"><i class="no-highlight">31</i>&nbsp;    ITEM_WILDCARD(1),</b>
-<i class="no-highlight">32</i>&nbsp;
-<i class="no-highlight">33</i>&nbsp;    /**
-<i class="no-highlight">34</i>&nbsp;     * Searches a character’s name.
-<i class="no-highlight">35</i>&nbsp;     */
-<b class="fc"><i class="no-highlight">36</i>&nbsp;    CHARACTER_NAME(2);</b>
-<i class="no-highlight">37</i>&nbsp;
-<b class="fc"><i class="no-highlight">38</i>&nbsp;    public companion object {</b>
-<i class="no-highlight">39</i>&nbsp;        public const val queryParam: String = &quot;searchtype&quot;
-<i class="no-highlight">40</i>&nbsp;    }
-<i class="no-highlight">41</i>&nbsp;}
-</div>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.galarzaa.tibiakt.core.enums
+&nbsp;
+&nbsp;/**
+&nbsp; * The types of search for the input field in the character bazaar.
+&nbsp; */
+<b class="fc">&nbsp;public enum class AuctionSearchType(override val value: Int) : IntEnum {</b>
+&nbsp;    /**
+&nbsp;     * Searches everything that includes the words on the search string.
+&nbsp;     */
+<b class="fc">&nbsp;    ITEM_DEFAULT(0),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Searches everything that includes the search string.
+&nbsp;     */
+<b class="fc">&nbsp;    ITEM_WILDCARD(1),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Searches a character’s name.
+&nbsp;     */
+<b class="fc">&nbsp;    CHARACTER_NAME(2);</b>
+&nbsp;
+<b class="fc">&nbsp;    public companion object {</b>
+&nbsp;        public const val queryParam: String = &quot;searchtype&quot;
+&nbsp;    }
+&nbsp;}
+</code>
 </pre>
 </div>
 
@@ -190,18 +191,15 @@ Current scope:     <a href="../../index.html">all classes</a>
     @*/
 
     if (!msie || msie && msie9) {
-        var codeBlock = document.getElementById('sourceCode');
-
-        if (codeBlock) {
-            hljs.highlightBlock(codeBlock);
-        }
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
     }
 })();
 </script>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-02-24 23:58</div>
+    <div style="float:right;">generated on 2023-03-15 02:46</div>
 </div>
 </body>
 </html>

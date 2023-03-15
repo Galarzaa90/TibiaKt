@@ -7,9 +7,10 @@
   <title>Coverage Report > WorldBuilder</title>
   <style type="text/css">
     @import "../../css/coverage.css";
-    @import "../../css/highlight-idea.css";
+    @import "../../css/idea.min.css";
   </style>
-  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
 </head>
 
 <body>
@@ -97,87 +98,87 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;/*
-<i class="no-highlight">2</i>&nbsp; * Copyright © 2022 Allan Galarza
-<i class="no-highlight">3</i>&nbsp; *
-<i class="no-highlight">4</i>&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
-<i class="no-highlight">5</i>&nbsp; * you may not use this file except in compliance with the License.
-<i class="no-highlight">6</i>&nbsp; * You may obtain a copy of the License at
-<i class="no-highlight">7</i>&nbsp; *
-<i class="no-highlight">8</i>&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
-<i class="no-highlight">9</i>&nbsp; *
-<i class="no-highlight">10</i>&nbsp; * Unless required by applicable law or agreed to in writing, software
-<i class="no-highlight">11</i>&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-<i class="no-highlight">12</i>&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-<i class="no-highlight">13</i>&nbsp; * See the License for the specific language governing permissions and
-<i class="no-highlight">14</i>&nbsp; * limitations under the License.
-<i class="no-highlight">15</i>&nbsp; */
-<i class="no-highlight">16</i>&nbsp;
-<i class="no-highlight">17</i>&nbsp;package com.galarzaa.tibiakt.core.builders
-<i class="no-highlight">18</i>&nbsp;
-<i class="no-highlight">19</i>&nbsp;import com.galarzaa.tibiakt.core.enums.BattlEyeType
-<i class="no-highlight">20</i>&nbsp;import com.galarzaa.tibiakt.core.enums.PvpType
-<i class="no-highlight">21</i>&nbsp;import com.galarzaa.tibiakt.core.enums.TransferType
-<i class="no-highlight">22</i>&nbsp;import com.galarzaa.tibiakt.core.enums.Vocation
-<i class="no-highlight">23</i>&nbsp;import com.galarzaa.tibiakt.core.models.world.OnlineCharacter
-<i class="no-highlight">24</i>&nbsp;import com.galarzaa.tibiakt.core.models.world.World
-<i class="no-highlight">25</i>&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
-<i class="no-highlight">26</i>&nbsp;import kotlinx.datetime.Instant
-<i class="no-highlight">27</i>&nbsp;import java.time.LocalDate
-<i class="no-highlight">28</i>&nbsp;import java.time.YearMonth
-<i class="no-highlight">29</i>&nbsp;
-<i class="no-highlight">30</i>&nbsp;@BuilderDsl
-<i class="no-highlight">31</i>&nbsp;public inline fun worldBuilder(block: WorldBuilder.() -&gt; Unit): WorldBuilder = WorldBuilder().apply(block)
-<i class="no-highlight">32</i>&nbsp;
-<i class="no-highlight">33</i>&nbsp;@BuilderDsl
-<i class="no-highlight">34</i>&nbsp;public inline fun world(block: WorldBuilder.() -&gt; Unit): World = worldBuilder(block).build()
-<i class="no-highlight">35</i>&nbsp;
-<i class="no-highlight">36</i>&nbsp;/** Builder for [World] instances. */
-<b class="fc"><i class="no-highlight">37</i>&nbsp;@BuilderDsl</b>
-<i class="no-highlight">38</i>&nbsp;public class WorldBuilder : TibiaKtBuilder&lt;World&gt; {
-<b class="fc"><i class="no-highlight">39</i>&nbsp;    public var name: String? = null</b>
-<b class="fc"><i class="no-highlight">40</i>&nbsp;    public var isOnline: Boolean = false</b>
-<b class="fc"><i class="no-highlight">41</i>&nbsp;    public var onlineCount: Int = 0</b>
-<b class="fc"><i class="no-highlight">42</i>&nbsp;    public var location: String? = null</b>
-<b class="fc"><i class="no-highlight">43</i>&nbsp;    public var pvpType: PvpType? = null</b>
-<b class="fc"><i class="no-highlight">44</i>&nbsp;    public var battlEyeType: BattlEyeType = BattlEyeType.UNPROTECTED</b>
-<b class="fc"><i class="no-highlight">45</i>&nbsp;    public var battlEyeStartDate: LocalDate? = null</b>
-<b class="fc"><i class="no-highlight">46</i>&nbsp;    public var transferType: TransferType = TransferType.REGULAR</b>
-<b class="fc"><i class="no-highlight">47</i>&nbsp;    public var isPremiumRestricted: Boolean = false</b>
-<b class="fc"><i class="no-highlight">48</i>&nbsp;    public var isExperimental: Boolean = false</b>
-<b class="fc"><i class="no-highlight">49</i>&nbsp;    public var onlineRecordCount: Int = 0</b>
-<b class="fc"><i class="no-highlight">50</i>&nbsp;    public var onlineRecordDateTime: Instant? = null</b>
-<b class="fc"><i class="no-highlight">51</i>&nbsp;    public var creationDate: YearMonth? = null</b>
-<b class="fc"><i class="no-highlight">52</i>&nbsp;    public val worldQuests: MutableList&lt;String&gt; = mutableListOf()</b>
-<b class="fc"><i class="no-highlight">53</i>&nbsp;    public val playersOnline: MutableList&lt;OnlineCharacter&gt; = mutableListOf()</b>
-<i class="no-highlight">54</i>&nbsp;
-<b class="fc"><i class="no-highlight">55</i>&nbsp;    public fun worldQuest(quest: String): Boolean = worldQuests.add(quest)</b>
-<i class="no-highlight">56</i>&nbsp;    public fun addOnlinePlayer(name: String, level: Int, vocation: Vocation): Boolean =
-<b class="fc"><i class="no-highlight">57</i>&nbsp;        playersOnline.add(OnlineCharacter(name, level, vocation))</b>
-<i class="no-highlight">58</i>&nbsp;
-<i class="no-highlight">59</i>&nbsp;
-<i class="no-highlight">60</i>&nbsp;    override fun build(): World {
-<b class="fc"><i class="no-highlight">61</i>&nbsp;        return World(</b>
-<b class="fc"><i class="no-highlight">62</i>&nbsp;            name = name ?: error(&quot;name is required&quot;),</b>
-<b class="fc"><i class="no-highlight">63</i>&nbsp;            isOnline = isOnline,</b>
-<b class="fc"><i class="no-highlight">64</i>&nbsp;            onlineCount = onlineCount,</b>
-<b class="pc"><i class="no-highlight">65</i>&nbsp;            location = location ?: error(&quot;location is required&quot;),</b>
-<b class="pc"><i class="no-highlight">66</i>&nbsp;            pvpType = pvpType ?: error(&quot;pvpType is required&quot;),</b>
-<b class="fc"><i class="no-highlight">67</i>&nbsp;            battlEyeType = battlEyeType,</b>
-<b class="fc"><i class="no-highlight">68</i>&nbsp;            battlEyeStartDate = battlEyeStartDate,</b>
-<b class="fc"><i class="no-highlight">69</i>&nbsp;            transferType = transferType,</b>
-<b class="fc"><i class="no-highlight">70</i>&nbsp;            isPremiumRestricted = isPremiumRestricted,</b>
-<b class="fc"><i class="no-highlight">71</i>&nbsp;            onlineRecordCount = onlineRecordCount,</b>
-<b class="pc"><i class="no-highlight">72</i>&nbsp;            onlineRecordDateTime = onlineRecordDateTime</b>
-<b class="nc"><i class="no-highlight">73</i>&nbsp;                ?: error(&quot;onlineRecordDateTime is required&quot;),</b>
-<b class="fc"><i class="no-highlight">74</i>&nbsp;            isExperimental = isExperimental,</b>
-<b class="pc"><i class="no-highlight">75</i>&nbsp;            creationDate = creationDate ?: error(&quot;creationDate is required&quot;),</b>
-<b class="fc"><i class="no-highlight">76</i>&nbsp;            playersOnline = playersOnline,</b>
-<b class="fc"><i class="no-highlight">77</i>&nbsp;            worldQuests = worldQuests,</b>
-<i class="no-highlight">78</i>&nbsp;        )
-<i class="no-highlight">79</i>&nbsp;    }
-<i class="no-highlight">80</i>&nbsp;}
-</div>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.galarzaa.tibiakt.core.builders
+&nbsp;
+&nbsp;import com.galarzaa.tibiakt.core.enums.BattlEyeType
+&nbsp;import com.galarzaa.tibiakt.core.enums.PvpType
+&nbsp;import com.galarzaa.tibiakt.core.enums.TransferType
+&nbsp;import com.galarzaa.tibiakt.core.enums.Vocation
+&nbsp;import com.galarzaa.tibiakt.core.models.world.OnlineCharacter
+&nbsp;import com.galarzaa.tibiakt.core.models.world.World
+&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
+&nbsp;import kotlinx.datetime.Instant
+&nbsp;import java.time.LocalDate
+&nbsp;import java.time.YearMonth
+&nbsp;
+&nbsp;@BuilderDsl
+&nbsp;public inline fun worldBuilder(block: WorldBuilder.() -&gt; Unit): WorldBuilder = WorldBuilder().apply(block)
+&nbsp;
+&nbsp;@BuilderDsl
+&nbsp;public inline fun world(block: WorldBuilder.() -&gt; Unit): World = worldBuilder(block).build()
+&nbsp;
+&nbsp;/** Builder for [World] instances. */
+<b class="fc">&nbsp;@BuilderDsl</b>
+&nbsp;public class WorldBuilder : TibiaKtBuilder&lt;World&gt; {
+<b class="fc">&nbsp;    public var name: String? = null</b>
+<b class="fc">&nbsp;    public var isOnline: Boolean = false</b>
+<b class="fc">&nbsp;    public var onlineCount: Int = 0</b>
+<b class="fc">&nbsp;    public var location: String? = null</b>
+<b class="fc">&nbsp;    public var pvpType: PvpType? = null</b>
+<b class="fc">&nbsp;    public var battlEyeType: BattlEyeType = BattlEyeType.UNPROTECTED</b>
+<b class="fc">&nbsp;    public var battlEyeStartDate: LocalDate? = null</b>
+<b class="fc">&nbsp;    public var transferType: TransferType = TransferType.REGULAR</b>
+<b class="fc">&nbsp;    public var isPremiumRestricted: Boolean = false</b>
+<b class="fc">&nbsp;    public var isExperimental: Boolean = false</b>
+<b class="fc">&nbsp;    public var onlineRecordCount: Int = 0</b>
+<b class="fc">&nbsp;    public var onlineRecordDateTime: Instant? = null</b>
+<b class="fc">&nbsp;    public var creationDate: YearMonth? = null</b>
+<b class="fc">&nbsp;    public val worldQuests: MutableList&lt;String&gt; = mutableListOf()</b>
+<b class="fc">&nbsp;    public val playersOnline: MutableList&lt;OnlineCharacter&gt; = mutableListOf()</b>
+&nbsp;
+<b class="fc">&nbsp;    public fun worldQuest(quest: String): Boolean = worldQuests.add(quest)</b>
+&nbsp;    public fun addOnlinePlayer(name: String, level: Int, vocation: Vocation): Boolean =
+<b class="fc">&nbsp;        playersOnline.add(OnlineCharacter(name, level, vocation))</b>
+&nbsp;
+&nbsp;
+&nbsp;    override fun build(): World {
+<b class="fc">&nbsp;        return World(</b>
+<b class="fc">&nbsp;            name = name ?: error(&quot;name is required&quot;),</b>
+<b class="fc">&nbsp;            isOnline = isOnline,</b>
+<b class="fc">&nbsp;            onlineCount = onlineCount,</b>
+<b class="pc">&nbsp;            location = location ?: error(&quot;location is required&quot;),</b>
+<b class="pc">&nbsp;            pvpType = pvpType ?: error(&quot;pvpType is required&quot;),</b>
+<b class="fc">&nbsp;            battlEyeType = battlEyeType,</b>
+<b class="fc">&nbsp;            battlEyeStartDate = battlEyeStartDate,</b>
+<b class="fc">&nbsp;            transferType = transferType,</b>
+<b class="fc">&nbsp;            isPremiumRestricted = isPremiumRestricted,</b>
+<b class="fc">&nbsp;            onlineRecordCount = onlineRecordCount,</b>
+<b class="pc">&nbsp;            onlineRecordDateTime = onlineRecordDateTime</b>
+<b class="nc">&nbsp;                ?: error(&quot;onlineRecordDateTime is required&quot;),</b>
+<b class="fc">&nbsp;            isExperimental = isExperimental,</b>
+<b class="pc">&nbsp;            creationDate = creationDate ?: error(&quot;creationDate is required&quot;),</b>
+<b class="fc">&nbsp;            playersOnline = playersOnline,</b>
+<b class="fc">&nbsp;            worldQuests = worldQuests,</b>
+&nbsp;        )
+&nbsp;    }
+&nbsp;}
+</code>
 </pre>
 </div>
 
@@ -192,18 +193,15 @@ Current scope:     <a href="../../index.html">all classes</a>
     @*/
 
     if (!msie || msie && msie9) {
-        var codeBlock = document.getElementById('sourceCode');
-
-        if (codeBlock) {
-            hljs.highlightBlock(codeBlock);
-        }
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
     }
 })();
 </script>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-02-24 23:58</div>
+    <div style="float:right;">generated on 2023-03-15 02:46</div>
 </div>
 </body>
 </html>

@@ -7,9 +7,10 @@
   <title>Coverage Report > NewsParser</title>
   <style type="text/css">
     @import "../../css/coverage.css";
-    @import "../../css/highlight-idea.css";
+    @import "../../css/idea.min.css";
   </style>
-  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
 </head>
 
 <body>
@@ -97,63 +98,63 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;/*
-<i class="no-highlight">2</i>&nbsp; * Copyright © 2022 Allan Galarza
-<i class="no-highlight">3</i>&nbsp; *
-<i class="no-highlight">4</i>&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
-<i class="no-highlight">5</i>&nbsp; * you may not use this file except in compliance with the License.
-<i class="no-highlight">6</i>&nbsp; * You may obtain a copy of the License at
-<i class="no-highlight">7</i>&nbsp; *
-<i class="no-highlight">8</i>&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
-<i class="no-highlight">9</i>&nbsp; *
-<i class="no-highlight">10</i>&nbsp; * Unless required by applicable law or agreed to in writing, software
-<i class="no-highlight">11</i>&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-<i class="no-highlight">12</i>&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-<i class="no-highlight">13</i>&nbsp; * See the License for the specific language governing permissions and
-<i class="no-highlight">14</i>&nbsp; * limitations under the License.
-<i class="no-highlight">15</i>&nbsp; */
-<i class="no-highlight">16</i>&nbsp;
-<i class="no-highlight">17</i>&nbsp;package com.galarzaa.tibiakt.core.parsers
-<i class="no-highlight">18</i>&nbsp;
-<i class="no-highlight">19</i>&nbsp;import com.galarzaa.tibiakt.core.builders.news
-<i class="no-highlight">20</i>&nbsp;import com.galarzaa.tibiakt.core.enums.NewsCategory
-<i class="no-highlight">21</i>&nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
-<i class="no-highlight">22</i>&nbsp;import com.galarzaa.tibiakt.core.models.news.News
-<i class="no-highlight">23</i>&nbsp;import com.galarzaa.tibiakt.core.utils.cleanText
-<i class="no-highlight">24</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getLinkInformation
-<i class="no-highlight">25</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseTibiaDate
-<i class="no-highlight">26</i>&nbsp;import com.galarzaa.tibiakt.core.utils.remove
-<i class="no-highlight">27</i>&nbsp;
-<i class="no-highlight">28</i>&nbsp;/** Parser for news articles. */
-<i class="no-highlight">29</i>&nbsp;public object NewsParser : Parser&lt;News?&gt; {
-<b class="fc"><i class="no-highlight">30</i>&nbsp;    override fun fromContent(content: String): News? = fromContent(content, 0)</b>
-<i class="no-highlight">31</i>&nbsp;
-<b class="nc"><i class="no-highlight">32</i>&nbsp;    public fun fromContent(content: String, newsId: Int = 0): News? {</b>
-<b class="fc"><i class="no-highlight">33</i>&nbsp;        val boxContent = boxContent(content)</b>
-<i class="no-highlight">34</i>&nbsp;
-<b class="fc"><i class="no-highlight">35</i>&nbsp;        val titleContainer = boxContent.selectFirst(&quot;div.NewsHeadlineText&quot;)</b>
-<b class="pc"><i class="no-highlight">36</i>&nbsp;            ?: if (&quot;not found&quot; in (boxContent.selectFirst(&quot;div.CaptionContainer&quot;)?.cleanText().orEmpty())) return null</b>
-<b class="nc"><i class="no-highlight">37</i>&nbsp;            else throw ParsingException(&quot;News headline not found.&quot;)</b>
-<b class="pc"><i class="no-highlight">38</i>&nbsp;        val icon = boxContent.selectFirst(&quot;img.NewsHeadlineIcon&quot;) ?: throw ParsingException(&quot;News icon not found.&quot;)</b>
-<b class="fc"><i class="no-highlight">39</i>&nbsp;        return news {</b>
-<b class="fc"><i class="no-highlight">40</i>&nbsp;            id = newsId</b>
-<b class="fc"><i class="no-highlight">41</i>&nbsp;            title = titleContainer.cleanText()</b>
-<b class="pc"><i class="no-highlight">42</i>&nbsp;            category = NewsCategory.fromIcon(icon.attr(&quot;src&quot;))</b>
-<b class="nc"><i class="no-highlight">43</i>&nbsp;                ?: throw ParsingException(&quot;Unexpected news icon found: ${icon.attr(&quot;src&quot;)}&quot;)</b>
-<i class="no-highlight">44</i>&nbsp;
-<b class="pc"><i class="no-highlight">45</i>&nbsp;            val newsDate = boxContent.selectFirst(&quot;div.NewsHeadlineDate&quot;)?.cleanText()?.remove(&quot;-&quot;)?.trim()</b>
-<b class="pc"><i class="no-highlight">46</i>&nbsp;            date = parseTibiaDate(newsDate ?: throw ParsingException(&quot;News date not found.&quot;))</b>
-<i class="no-highlight">47</i>&nbsp;
-<b class="pc"><i class="no-highlight">48</i>&nbsp;            this.content = boxContent.selectFirst(&quot;td.NewsTableContainer&quot;)?.html()</b>
-<b class="nc"><i class="no-highlight">49</i>&nbsp;                ?: throw ParsingException(&quot;News content not found.&quot;)</b>
-<i class="no-highlight">50</i>&nbsp;
-<b class="fc"><i class="no-highlight">51</i>&nbsp;            boxContent.selectFirst(&quot;div.NewsForumLink &gt; a&quot;)?.apply {</b>
-<b class="pc"><i class="no-highlight">52</i>&nbsp;                threadId = getLinkInformation()?.queryParams?.get(&quot;threadid&quot;)?.get(0)?.toInt()</b>
-<b class="fc"><i class="no-highlight">53</i>&nbsp;            }</b>
-<b class="fc"><i class="no-highlight">54</i>&nbsp;        }</b>
-<i class="no-highlight">55</i>&nbsp;    }
-<i class="no-highlight">56</i>&nbsp;}
-</div>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.galarzaa.tibiakt.core.parsers
+&nbsp;
+&nbsp;import com.galarzaa.tibiakt.core.builders.news
+&nbsp;import com.galarzaa.tibiakt.core.enums.NewsCategory
+&nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
+&nbsp;import com.galarzaa.tibiakt.core.models.news.News
+&nbsp;import com.galarzaa.tibiakt.core.utils.cleanText
+&nbsp;import com.galarzaa.tibiakt.core.utils.getLinkInformation
+&nbsp;import com.galarzaa.tibiakt.core.utils.parseTibiaDate
+&nbsp;import com.galarzaa.tibiakt.core.utils.remove
+&nbsp;
+&nbsp;/** Parser for news articles. */
+&nbsp;public object NewsParser : Parser&lt;News?&gt; {
+<b class="fc">&nbsp;    override fun fromContent(content: String): News? = fromContent(content, 0)</b>
+&nbsp;
+<b class="nc">&nbsp;    public fun fromContent(content: String, newsId: Int = 0): News? {</b>
+<b class="fc">&nbsp;        val boxContent = boxContent(content)</b>
+&nbsp;
+<b class="fc">&nbsp;        val titleContainer = boxContent.selectFirst(&quot;div.NewsHeadlineText&quot;)</b>
+<b class="pc">&nbsp;            ?: if (&quot;not found&quot; in (boxContent.selectFirst(&quot;div.CaptionContainer&quot;)?.cleanText().orEmpty())) return null</b>
+<b class="nc">&nbsp;            else throw ParsingException(&quot;News headline not found.&quot;)</b>
+<b class="pc">&nbsp;        val icon = boxContent.selectFirst(&quot;img.NewsHeadlineIcon&quot;) ?: throw ParsingException(&quot;News icon not found.&quot;)</b>
+<b class="fc">&nbsp;        return news {</b>
+<b class="fc">&nbsp;            id = newsId</b>
+<b class="fc">&nbsp;            title = titleContainer.cleanText()</b>
+<b class="pc">&nbsp;            category = NewsCategory.fromIcon(icon.attr(&quot;src&quot;))</b>
+<b class="nc">&nbsp;                ?: throw ParsingException(&quot;Unexpected news icon found: ${icon.attr(&quot;src&quot;)}&quot;)</b>
+&nbsp;
+<b class="pc">&nbsp;            val newsDate = boxContent.selectFirst(&quot;div.NewsHeadlineDate&quot;)?.cleanText()?.remove(&quot;-&quot;)?.trim()</b>
+<b class="pc">&nbsp;            date = parseTibiaDate(newsDate ?: throw ParsingException(&quot;News date not found.&quot;))</b>
+&nbsp;
+<b class="pc">&nbsp;            this.content = boxContent.selectFirst(&quot;td.NewsTableContainer&quot;)?.html()</b>
+<b class="nc">&nbsp;                ?: throw ParsingException(&quot;News content not found.&quot;)</b>
+&nbsp;
+<b class="fc">&nbsp;            boxContent.selectFirst(&quot;div.NewsForumLink &gt; a&quot;)?.apply {</b>
+<b class="pc">&nbsp;                threadId = getLinkInformation()?.queryParams?.get(&quot;threadid&quot;)?.get(0)?.toInt()</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;}
+</code>
 </pre>
 </div>
 
@@ -168,18 +169,15 @@ Current scope:     <a href="../../index.html">all classes</a>
     @*/
 
     if (!msie || msie && msie9) {
-        var codeBlock = document.getElementById('sourceCode');
-
-        if (codeBlock) {
-            hljs.highlightBlock(codeBlock);
-        }
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
     }
 })();
 </script>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-02-24 23:58</div>
+    <div style="float:right;">generated on 2023-03-15 02:46</div>
 </div>
 </body>
 </html>

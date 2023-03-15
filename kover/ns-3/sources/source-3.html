@@ -7,9 +7,10 @@
   <title>Coverage Report > BazaarFiltersBuilder</title>
   <style type="text/css">
     @import "../../css/coverage.css";
-    @import "../../css/highlight-idea.css";
+    @import "../../css/idea.min.css";
   </style>
-  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
 </head>
 
 <body>
@@ -90,75 +91,75 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;/*
-<i class="no-highlight">2</i>&nbsp; * Copyright © 2022 Allan Galarza
-<i class="no-highlight">3</i>&nbsp; *
-<i class="no-highlight">4</i>&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
-<i class="no-highlight">5</i>&nbsp; * you may not use this file except in compliance with the License.
-<i class="no-highlight">6</i>&nbsp; * You may obtain a copy of the License at
-<i class="no-highlight">7</i>&nbsp; *
-<i class="no-highlight">8</i>&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
-<i class="no-highlight">9</i>&nbsp; *
-<i class="no-highlight">10</i>&nbsp; * Unless required by applicable law or agreed to in writing, software
-<i class="no-highlight">11</i>&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-<i class="no-highlight">12</i>&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-<i class="no-highlight">13</i>&nbsp; * See the License for the specific language governing permissions and
-<i class="no-highlight">14</i>&nbsp; * limitations under the License.
-<i class="no-highlight">15</i>&nbsp; */
-<i class="no-highlight">16</i>&nbsp;
-<i class="no-highlight">17</i>&nbsp;package com.galarzaa.tibiakt.core.builders
-<i class="no-highlight">18</i>&nbsp;
-<i class="no-highlight">19</i>&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionBattlEyeFilter
-<i class="no-highlight">20</i>&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionOrderBy
-<i class="no-highlight">21</i>&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionOrderDirection
-<i class="no-highlight">22</i>&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionSearchType
-<i class="no-highlight">23</i>&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionSkillFilter
-<i class="no-highlight">24</i>&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionVocationFilter
-<i class="no-highlight">25</i>&nbsp;import com.galarzaa.tibiakt.core.enums.PvpType
-<i class="no-highlight">26</i>&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.BazaarFilters
-<i class="no-highlight">27</i>&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
-<i class="no-highlight">28</i>&nbsp;
-<i class="no-highlight">29</i>&nbsp;@BuilderDsl
-<i class="no-highlight">30</i>&nbsp;public inline fun bazaarFilters(block: BazaarFiltersBuilder.() -&gt; Unit): BazaarFilters =
-<i class="no-highlight">31</i>&nbsp;    bazaarFiltersBuilder(block).build()
-<i class="no-highlight">32</i>&nbsp;
-<i class="no-highlight">33</i>&nbsp;@BuilderDsl
-<i class="no-highlight">34</i>&nbsp;public inline fun bazaarFiltersBuilder(block: BazaarFiltersBuilder.() -&gt; Unit): BazaarFiltersBuilder =
-<i class="no-highlight">35</i>&nbsp;    BazaarFiltersBuilder().apply(block)
-<i class="no-highlight">36</i>&nbsp;
-<i class="no-highlight">37</i>&nbsp;/** Builder for [BazaarFilters] instances. */
-<b class="fc"><i class="no-highlight">38</i>&nbsp;@BuilderDsl</b>
-<i class="no-highlight">39</i>&nbsp;public class BazaarFiltersBuilder : TibiaKtBuilder&lt;BazaarFilters&gt; {
-<b class="fc"><i class="no-highlight">40</i>&nbsp;    public var world: String? = null</b>
-<b class="fc"><i class="no-highlight">41</i>&nbsp;    public var pvpType: PvpType? = null</b>
-<b class="fc"><i class="no-highlight">42</i>&nbsp;    public var battlEyeType: AuctionBattlEyeFilter? = null</b>
-<b class="fc"><i class="no-highlight">43</i>&nbsp;    public var vocation: AuctionVocationFilter? = null</b>
-<b class="fc"><i class="no-highlight">44</i>&nbsp;    public var minimumLevel: Int? = null</b>
-<b class="fc"><i class="no-highlight">45</i>&nbsp;    public var maximumLevel: Int? = null</b>
-<b class="fc"><i class="no-highlight">46</i>&nbsp;    public var skill: AuctionSkillFilter? = null</b>
-<b class="fc"><i class="no-highlight">47</i>&nbsp;    public var minimumSkillLevel: Int? = null</b>
-<b class="fc"><i class="no-highlight">48</i>&nbsp;    public var maximumSkillLevel: Int? = null</b>
-<b class="fc"><i class="no-highlight">49</i>&nbsp;    public var orderDirection: AuctionOrderDirection? = null</b>
-<b class="fc"><i class="no-highlight">50</i>&nbsp;    public var orderBy: AuctionOrderBy? = null</b>
-<b class="fc"><i class="no-highlight">51</i>&nbsp;    public var searchString: String? = null</b>
-<b class="fc"><i class="no-highlight">52</i>&nbsp;    public var searchType: AuctionSearchType? = null</b>
-<i class="no-highlight">53</i>&nbsp;
-<b class="fc"><i class="no-highlight">54</i>&nbsp;    public override fun build(): BazaarFilters = BazaarFilters(</b>
-<b class="fc"><i class="no-highlight">55</i>&nbsp;        world = world,</b>
-<b class="fc"><i class="no-highlight">56</i>&nbsp;        pvpType = pvpType,</b>
-<b class="fc"><i class="no-highlight">57</i>&nbsp;        battlEyeType = battlEyeType,</b>
-<b class="fc"><i class="no-highlight">58</i>&nbsp;        vocation = vocation,</b>
-<b class="fc"><i class="no-highlight">59</i>&nbsp;        minimumLevel = minimumLevel,</b>
-<b class="fc"><i class="no-highlight">60</i>&nbsp;        maximumLevel = maximumLevel,</b>
-<b class="fc"><i class="no-highlight">61</i>&nbsp;        skill = skill,</b>
-<b class="fc"><i class="no-highlight">62</i>&nbsp;        minimumSkillLevel = minimumSkillLevel,</b>
-<b class="fc"><i class="no-highlight">63</i>&nbsp;        maximumSkillLevel = maximumSkillLevel,</b>
-<b class="fc"><i class="no-highlight">64</i>&nbsp;        searchString = searchString,</b>
-<b class="fc"><i class="no-highlight">65</i>&nbsp;        searchType = searchType,</b>
-<b class="fc"><i class="no-highlight">66</i>&nbsp;        orderDirection = orderDirection,</b>
-<b class="fc"><i class="no-highlight">67</i>&nbsp;        orderBy = orderBy)</b>
-<i class="no-highlight">68</i>&nbsp;}
-</div>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.galarzaa.tibiakt.core.builders
+&nbsp;
+&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionBattlEyeFilter
+&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionOrderBy
+&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionOrderDirection
+&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionSearchType
+&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionSkillFilter
+&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionVocationFilter
+&nbsp;import com.galarzaa.tibiakt.core.enums.PvpType
+&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.BazaarFilters
+&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
+&nbsp;
+&nbsp;@BuilderDsl
+&nbsp;public inline fun bazaarFilters(block: BazaarFiltersBuilder.() -&gt; Unit): BazaarFilters =
+&nbsp;    bazaarFiltersBuilder(block).build()
+&nbsp;
+&nbsp;@BuilderDsl
+&nbsp;public inline fun bazaarFiltersBuilder(block: BazaarFiltersBuilder.() -&gt; Unit): BazaarFiltersBuilder =
+&nbsp;    BazaarFiltersBuilder().apply(block)
+&nbsp;
+&nbsp;/** Builder for [BazaarFilters] instances. */
+<b class="fc">&nbsp;@BuilderDsl</b>
+&nbsp;public class BazaarFiltersBuilder : TibiaKtBuilder&lt;BazaarFilters&gt; {
+<b class="fc">&nbsp;    public var world: String? = null</b>
+<b class="fc">&nbsp;    public var pvpType: PvpType? = null</b>
+<b class="fc">&nbsp;    public var battlEyeType: AuctionBattlEyeFilter? = null</b>
+<b class="fc">&nbsp;    public var vocation: AuctionVocationFilter? = null</b>
+<b class="fc">&nbsp;    public var minimumLevel: Int? = null</b>
+<b class="fc">&nbsp;    public var maximumLevel: Int? = null</b>
+<b class="fc">&nbsp;    public var skill: AuctionSkillFilter? = null</b>
+<b class="fc">&nbsp;    public var minimumSkillLevel: Int? = null</b>
+<b class="fc">&nbsp;    public var maximumSkillLevel: Int? = null</b>
+<b class="fc">&nbsp;    public var orderDirection: AuctionOrderDirection? = null</b>
+<b class="fc">&nbsp;    public var orderBy: AuctionOrderBy? = null</b>
+<b class="fc">&nbsp;    public var searchString: String? = null</b>
+<b class="fc">&nbsp;    public var searchType: AuctionSearchType? = null</b>
+&nbsp;
+<b class="fc">&nbsp;    public override fun build(): BazaarFilters = BazaarFilters(</b>
+<b class="fc">&nbsp;        world = world,</b>
+<b class="fc">&nbsp;        pvpType = pvpType,</b>
+<b class="fc">&nbsp;        battlEyeType = battlEyeType,</b>
+<b class="fc">&nbsp;        vocation = vocation,</b>
+<b class="fc">&nbsp;        minimumLevel = minimumLevel,</b>
+<b class="fc">&nbsp;        maximumLevel = maximumLevel,</b>
+<b class="fc">&nbsp;        skill = skill,</b>
+<b class="fc">&nbsp;        minimumSkillLevel = minimumSkillLevel,</b>
+<b class="fc">&nbsp;        maximumSkillLevel = maximumSkillLevel,</b>
+<b class="fc">&nbsp;        searchString = searchString,</b>
+<b class="fc">&nbsp;        searchType = searchType,</b>
+<b class="fc">&nbsp;        orderDirection = orderDirection,</b>
+<b class="fc">&nbsp;        orderBy = orderBy)</b>
+&nbsp;}
+</code>
 </pre>
 </div>
 
@@ -173,18 +174,15 @@ Current scope:     <a href="../../index.html">all classes</a>
     @*/
 
     if (!msie || msie && msie9) {
-        var codeBlock = document.getElementById('sourceCode');
-
-        if (codeBlock) {
-            hljs.highlightBlock(codeBlock);
-        }
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
     }
 })();
 </script>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-02-24 23:58</div>
+    <div style="float:right;">generated on 2023-03-15 02:46</div>
 </div>
 </body>
 </html>

@@ -7,9 +7,10 @@
   <title>Coverage Report > CharacterBazaarParser</title>
   <style type="text/css">
     @import "../../css/coverage.css";
-    @import "../../css/highlight-idea.css";
+    @import "../../css/idea.min.css";
   </style>
-  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
 </head>
 
 <body>
@@ -176,103 +177,103 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;/*
-<i class="no-highlight">2</i>&nbsp; * Copyright © 2022 Allan Galarza
-<i class="no-highlight">3</i>&nbsp; *
-<i class="no-highlight">4</i>&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
-<i class="no-highlight">5</i>&nbsp; * you may not use this file except in compliance with the License.
-<i class="no-highlight">6</i>&nbsp; * You may obtain a copy of the License at
-<i class="no-highlight">7</i>&nbsp; *
-<i class="no-highlight">8</i>&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
-<i class="no-highlight">9</i>&nbsp; *
-<i class="no-highlight">10</i>&nbsp; * Unless required by applicable law or agreed to in writing, software
-<i class="no-highlight">11</i>&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-<i class="no-highlight">12</i>&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-<i class="no-highlight">13</i>&nbsp; * See the License for the specific language governing permissions and
-<i class="no-highlight">14</i>&nbsp; * limitations under the License.
-<i class="no-highlight">15</i>&nbsp; */
-<i class="no-highlight">16</i>&nbsp;
-<i class="no-highlight">17</i>&nbsp;package com.galarzaa.tibiakt.core.parsers
-<i class="no-highlight">18</i>&nbsp;
-<i class="no-highlight">19</i>&nbsp;import com.galarzaa.tibiakt.core.builders.CharacterBazaarBuilder
-<i class="no-highlight">20</i>&nbsp;import com.galarzaa.tibiakt.core.builders.bazaarFilters
-<i class="no-highlight">21</i>&nbsp;import com.galarzaa.tibiakt.core.builders.characterBazaar
-<i class="no-highlight">22</i>&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionBattlEyeFilter
-<i class="no-highlight">23</i>&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionOrderBy
-<i class="no-highlight">24</i>&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionOrderDirection
-<i class="no-highlight">25</i>&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionSearchType
-<i class="no-highlight">26</i>&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionSkillFilter
-<i class="no-highlight">27</i>&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionVocationFilter
-<i class="no-highlight">28</i>&nbsp;import com.galarzaa.tibiakt.core.enums.BazaarType
-<i class="no-highlight">29</i>&nbsp;import com.galarzaa.tibiakt.core.enums.IntEnum
-<i class="no-highlight">30</i>&nbsp;import com.galarzaa.tibiakt.core.enums.PvpType
-<i class="no-highlight">31</i>&nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
-<i class="no-highlight">32</i>&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.CharacterBazaar
-<i class="no-highlight">33</i>&nbsp;import com.galarzaa.tibiakt.core.parsers.AuctionParser.parseAuctionContainer
-<i class="no-highlight">34</i>&nbsp;import com.galarzaa.tibiakt.core.utils.formData
-<i class="no-highlight">35</i>&nbsp;import com.galarzaa.tibiakt.core.utils.nullIfBlank
-<i class="no-highlight">36</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseInteger
-<i class="no-highlight">37</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parsePagination
-<i class="no-highlight">38</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseTablesMap
-<i class="no-highlight">39</i>&nbsp;import org.jsoup.Jsoup
-<i class="no-highlight">40</i>&nbsp;import org.jsoup.nodes.Element
-<i class="no-highlight">41</i>&nbsp;
-<i class="no-highlight">42</i>&nbsp;/** Parser for the character bazaar. */
-<i class="no-highlight">43</i>&nbsp;public object CharacterBazaarParser : Parser&lt;CharacterBazaar&gt; {
-<i class="no-highlight">44</i>&nbsp;
-<i class="no-highlight">45</i>&nbsp;    override fun fromContent(content: String): CharacterBazaar {
-<b class="fc"><i class="no-highlight">46</i>&nbsp;        val document = Jsoup.parse(content)</b>
-<b class="fc"><i class="no-highlight">47</i>&nbsp;        val tables = document.parseTablesMap(&quot;table.Table3&quot;)</b>
-<b class="fc"><i class="no-highlight">48</i>&nbsp;        return characterBazaar {</b>
-<b class="pc"><i class="no-highlight">49</i>&nbsp;            tables[&quot;Filter Auctions&quot;]?.apply { parseAuctionFilters(this) }</b>
-<b class="fc"><i class="no-highlight">50</i>&nbsp;            tables[&quot;Current Auctions&quot;]?.apply {</b>
-<b class="fc"><i class="no-highlight">51</i>&nbsp;                select(&quot;div.Auction&quot;).forEach {</b>
-<b class="fc"><i class="no-highlight">52</i>&nbsp;                    auction { parseAuctionContainer(it) }</b>
-<b class="fc"><i class="no-highlight">53</i>&nbsp;                }</b>
-<b class="fc"><i class="no-highlight">54</i>&nbsp;                type = BazaarType.CURRENT</b>
-<b class="fc"><i class="no-highlight">55</i>&nbsp;            }</b>
-<b class="fc"><i class="no-highlight">56</i>&nbsp;            tables[&quot;Auction History&quot;]?.apply {</b>
-<b class="fc"><i class="no-highlight">57</i>&nbsp;                select(&quot;div.Auction&quot;).forEach {</b>
-<b class="fc"><i class="no-highlight">58</i>&nbsp;                    auction { parseAuctionContainer(it) }</b>
-<b class="fc"><i class="no-highlight">59</i>&nbsp;                }</b>
-<b class="fc"><i class="no-highlight">60</i>&nbsp;                type = BazaarType.HISTORY</b>
-<b class="fc"><i class="no-highlight">61</i>&nbsp;            }</b>
-<b class="fc"><i class="no-highlight">62</i>&nbsp;            val paginationBlock = document.selectFirst(&quot;td.PageNavigation&quot;)</b>
-<b class="pc"><i class="no-highlight">63</i>&nbsp;            paginationBlock?.parsePagination()?.let {</b>
-<b class="fc"><i class="no-highlight">64</i>&nbsp;                totalPages = it.totalPages</b>
-<b class="fc"><i class="no-highlight">65</i>&nbsp;                currentPage = it.currentPage</b>
-<b class="fc"><i class="no-highlight">66</i>&nbsp;                resultsCount = it.resultsCount</b>
-<b class="fc"><i class="no-highlight">67</i>&nbsp;            }</b>
-<b class="fc"><i class="no-highlight">68</i>&nbsp;        }</b>
-<i class="no-highlight">69</i>&nbsp;
-<i class="no-highlight">70</i>&nbsp;    }
-<i class="no-highlight">71</i>&nbsp;
-<i class="no-highlight">72</i>&nbsp;    private fun CharacterBazaarBuilder.parseAuctionFilters(filtersTable: Element) {
-<b class="fc"><i class="no-highlight">73</i>&nbsp;        val forms = filtersTable.select(&quot;form&quot;)</b>
-<b class="pc"><i class="no-highlight">74</i>&nbsp;        val searchData = forms.first()?.formData() ?: throw ParsingException(&quot;could not find search form&quot;)</b>
-<i class="no-highlight">75</i>&nbsp;
-<b class="fc"><i class="no-highlight">76</i>&nbsp;        filters = bazaarFilters {</b>
-<b class="fc"><i class="no-highlight">77</i>&nbsp;            world = searchData.values[&quot;filter_world&quot;]</b>
-<b class="pc"><i class="no-highlight">78</i>&nbsp;            pvpType = PvpType.fromHighscoresFilterValue(searchData.values[PvpType.bazaarQueryParam]?.toInt())</b>
-<b class="fc"><i class="no-highlight">79</i>&nbsp;            battlEyeType = IntEnum.fromValue(searchData.values[AuctionBattlEyeFilter.queryParam])</b>
-<b class="fc"><i class="no-highlight">80</i>&nbsp;            vocation = IntEnum.fromValue(searchData.values[AuctionVocationFilter.queryParam])</b>
-<b class="fc"><i class="no-highlight">81</i>&nbsp;            skill = IntEnum.fromValue(searchData.values[AuctionSkillFilter.queryParam])</b>
-<b class="fc"><i class="no-highlight">82</i>&nbsp;            orderBy = IntEnum.fromValue(searchData.values[AuctionOrderBy.queryParam])</b>
-<b class="fc"><i class="no-highlight">83</i>&nbsp;            orderDirection = IntEnum.fromValue(searchData.values[AuctionOrderDirection.queryParam])</b>
-<b class="pc"><i class="no-highlight">84</i>&nbsp;            minimumLevel = searchData.values[&quot;filter_levelrangefrom&quot;]?.nullIfBlank()?.parseInteger()</b>
-<b class="pc"><i class="no-highlight">85</i>&nbsp;            maximumLevel = searchData.values[&quot;filter_levelrangeto&quot;]?.nullIfBlank()?.parseInteger()</b>
-<b class="pc"><i class="no-highlight">86</i>&nbsp;            minimumSkillLevel = searchData.values[&quot;filter_skillrangefrom&quot;]?.nullIfBlank()?.parseInteger()</b>
-<b class="pc"><i class="no-highlight">87</i>&nbsp;            maximumSkillLevel = searchData.values[&quot;filter_skillrangeto&quot;]?.nullIfBlank()?.parseInteger()</b>
-<i class="no-highlight">88</i>&nbsp;
-<b class="fc"><i class="no-highlight">89</i>&nbsp;            if (forms.size &gt; 1) {</b>
-<b class="fc"><i class="no-highlight">90</i>&nbsp;                val additionalData = forms[1].formData()</b>
-<b class="pc"><i class="no-highlight">91</i>&nbsp;                searchString = additionalData.values[&quot;searchstring&quot;]?.nullIfBlank()</b>
-<b class="fc"><i class="no-highlight">92</i>&nbsp;                searchType = IntEnum.fromValue(additionalData.values[AuctionSearchType.queryParam])</b>
-<i class="no-highlight">93</i>&nbsp;            }
-<b class="fc"><i class="no-highlight">94</i>&nbsp;        }</b>
-<i class="no-highlight">95</i>&nbsp;    }
-<i class="no-highlight">96</i>&nbsp;}
-</div>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.galarzaa.tibiakt.core.parsers
+&nbsp;
+&nbsp;import com.galarzaa.tibiakt.core.builders.CharacterBazaarBuilder
+&nbsp;import com.galarzaa.tibiakt.core.builders.bazaarFilters
+&nbsp;import com.galarzaa.tibiakt.core.builders.characterBazaar
+&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionBattlEyeFilter
+&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionOrderBy
+&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionOrderDirection
+&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionSearchType
+&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionSkillFilter
+&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionVocationFilter
+&nbsp;import com.galarzaa.tibiakt.core.enums.BazaarType
+&nbsp;import com.galarzaa.tibiakt.core.enums.IntEnum
+&nbsp;import com.galarzaa.tibiakt.core.enums.PvpType
+&nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
+&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.CharacterBazaar
+&nbsp;import com.galarzaa.tibiakt.core.parsers.AuctionParser.parseAuctionContainer
+&nbsp;import com.galarzaa.tibiakt.core.utils.formData
+&nbsp;import com.galarzaa.tibiakt.core.utils.nullIfBlank
+&nbsp;import com.galarzaa.tibiakt.core.utils.parseInteger
+&nbsp;import com.galarzaa.tibiakt.core.utils.parsePagination
+&nbsp;import com.galarzaa.tibiakt.core.utils.parseTablesMap
+&nbsp;import org.jsoup.Jsoup
+&nbsp;import org.jsoup.nodes.Element
+&nbsp;
+&nbsp;/** Parser for the character bazaar. */
+&nbsp;public object CharacterBazaarParser : Parser&lt;CharacterBazaar&gt; {
+&nbsp;
+&nbsp;    override fun fromContent(content: String): CharacterBazaar {
+<b class="fc">&nbsp;        val document = Jsoup.parse(content)</b>
+<b class="fc">&nbsp;        val tables = document.parseTablesMap(&quot;table.Table3&quot;)</b>
+<b class="fc">&nbsp;        return characterBazaar {</b>
+<b class="pc">&nbsp;            tables[&quot;Filter Auctions&quot;]?.apply { parseAuctionFilters(this) }</b>
+<b class="fc">&nbsp;            tables[&quot;Current Auctions&quot;]?.apply {</b>
+<b class="fc">&nbsp;                select(&quot;div.Auction&quot;).forEach {</b>
+<b class="fc">&nbsp;                    auction { parseAuctionContainer(it) }</b>
+<b class="fc">&nbsp;                }</b>
+<b class="fc">&nbsp;                type = BazaarType.CURRENT</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;            tables[&quot;Auction History&quot;]?.apply {</b>
+<b class="fc">&nbsp;                select(&quot;div.Auction&quot;).forEach {</b>
+<b class="fc">&nbsp;                    auction { parseAuctionContainer(it) }</b>
+<b class="fc">&nbsp;                }</b>
+<b class="fc">&nbsp;                type = BazaarType.HISTORY</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;            val paginationBlock = document.selectFirst(&quot;td.PageNavigation&quot;)</b>
+<b class="pc">&nbsp;            paginationBlock?.parsePagination()?.let {</b>
+<b class="fc">&nbsp;                totalPages = it.totalPages</b>
+<b class="fc">&nbsp;                currentPage = it.currentPage</b>
+<b class="fc">&nbsp;                resultsCount = it.resultsCount</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    private fun CharacterBazaarBuilder.parseAuctionFilters(filtersTable: Element) {
+<b class="fc">&nbsp;        val forms = filtersTable.select(&quot;form&quot;)</b>
+<b class="pc">&nbsp;        val searchData = forms.first()?.formData() ?: throw ParsingException(&quot;could not find search form&quot;)</b>
+&nbsp;
+<b class="fc">&nbsp;        filters = bazaarFilters {</b>
+<b class="fc">&nbsp;            world = searchData.values[&quot;filter_world&quot;]</b>
+<b class="pc">&nbsp;            pvpType = PvpType.fromHighscoresFilterValue(searchData.values[PvpType.bazaarQueryParam]?.toInt())</b>
+<b class="fc">&nbsp;            battlEyeType = IntEnum.fromValue(searchData.values[AuctionBattlEyeFilter.queryParam])</b>
+<b class="fc">&nbsp;            vocation = IntEnum.fromValue(searchData.values[AuctionVocationFilter.queryParam])</b>
+<b class="fc">&nbsp;            skill = IntEnum.fromValue(searchData.values[AuctionSkillFilter.queryParam])</b>
+<b class="fc">&nbsp;            orderBy = IntEnum.fromValue(searchData.values[AuctionOrderBy.queryParam])</b>
+<b class="fc">&nbsp;            orderDirection = IntEnum.fromValue(searchData.values[AuctionOrderDirection.queryParam])</b>
+<b class="pc">&nbsp;            minimumLevel = searchData.values[&quot;filter_levelrangefrom&quot;]?.nullIfBlank()?.parseInteger()</b>
+<b class="pc">&nbsp;            maximumLevel = searchData.values[&quot;filter_levelrangeto&quot;]?.nullIfBlank()?.parseInteger()</b>
+<b class="pc">&nbsp;            minimumSkillLevel = searchData.values[&quot;filter_skillrangefrom&quot;]?.nullIfBlank()?.parseInteger()</b>
+<b class="pc">&nbsp;            maximumSkillLevel = searchData.values[&quot;filter_skillrangeto&quot;]?.nullIfBlank()?.parseInteger()</b>
+&nbsp;
+<b class="fc">&nbsp;            if (forms.size &gt; 1) {</b>
+<b class="fc">&nbsp;                val additionalData = forms[1].formData()</b>
+<b class="pc">&nbsp;                searchString = additionalData.values[&quot;searchstring&quot;]?.nullIfBlank()</b>
+<b class="fc">&nbsp;                searchType = IntEnum.fromValue(additionalData.values[AuctionSearchType.queryParam])</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;}
+</code>
 </pre>
 </div>
 
@@ -287,18 +288,15 @@ Current scope:     <a href="../../index.html">all classes</a>
     @*/
 
     if (!msie || msie && msie9) {
-        var codeBlock = document.getElementById('sourceCode');
-
-        if (codeBlock) {
-            hljs.highlightBlock(codeBlock);
-        }
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
     }
 })();
 </script>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-02-24 23:58</div>
+    <div style="float:right;">generated on 2023-03-15 02:46</div>
 </div>
 </body>
 </html>

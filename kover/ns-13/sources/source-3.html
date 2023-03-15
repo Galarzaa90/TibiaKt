@@ -7,9 +7,10 @@
   <title>Coverage Report > FormData</title>
   <style type="text/css">
     @import "../../css/coverage.css";
-    @import "../../css/highlight-idea.css";
+    @import "../../css/idea.min.css";
   </style>
-  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
 </head>
 
 <body>
@@ -90,216 +91,216 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;/*
-<i class="no-highlight">2</i>&nbsp; * Copyright © 2022 Allan Galarza
-<i class="no-highlight">3</i>&nbsp; *
-<i class="no-highlight">4</i>&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
-<i class="no-highlight">5</i>&nbsp; * you may not use this file except in compliance with the License.
-<i class="no-highlight">6</i>&nbsp; * You may obtain a copy of the License at
-<i class="no-highlight">7</i>&nbsp; *
-<i class="no-highlight">8</i>&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
-<i class="no-highlight">9</i>&nbsp; *
-<i class="no-highlight">10</i>&nbsp; * Unless required by applicable law or agreed to in writing, software
-<i class="no-highlight">11</i>&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-<i class="no-highlight">12</i>&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-<i class="no-highlight">13</i>&nbsp; * See the License for the specific language governing permissions and
-<i class="no-highlight">14</i>&nbsp; * limitations under the License.
-<i class="no-highlight">15</i>&nbsp; */
-<i class="no-highlight">16</i>&nbsp;
-<i class="no-highlight">17</i>&nbsp;package com.galarzaa.tibiakt.core.utils
-<i class="no-highlight">18</i>&nbsp;
-<i class="no-highlight">19</i>&nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
-<i class="no-highlight">20</i>&nbsp;import org.jsoup.Jsoup
-<i class="no-highlight">21</i>&nbsp;import org.jsoup.nodes.Document
-<i class="no-highlight">22</i>&nbsp;import org.jsoup.nodes.Element
-<i class="no-highlight">23</i>&nbsp;import org.jsoup.nodes.TextNode
-<i class="no-highlight">24</i>&nbsp;import org.jsoup.parser.Parser
-<i class="no-highlight">25</i>&nbsp;import org.jsoup.select.Elements
-<i class="no-highlight">26</i>&nbsp;import java.net.URL
-<i class="no-highlight">27</i>&nbsp;
-<i class="no-highlight">28</i>&nbsp;internal fun Element.boxContent(): Element =
-<i class="no-highlight">29</i>&nbsp;    selectFirst(&quot;div.BoxContent&quot;) ?: throw ParsingException(&quot;BoxContent container not found&quot;)
-<i class="no-highlight">30</i>&nbsp;
-<i class="no-highlight">31</i>&nbsp;
-<i class="no-highlight">32</i>&nbsp;internal fun Element.parseTables(contentTableSelector: String = &quot;table.TableContent&quot;): Map&lt;String, Elements&gt; {
-<i class="no-highlight">33</i>&nbsp;    val tables = select(&quot;div.TableContainer&quot;)
-<i class="no-highlight">34</i>&nbsp;    val output = mutableMapOf&lt;String, Elements&gt;()
-<i class="no-highlight">35</i>&nbsp;    for (table: Element in tables) {
-<i class="no-highlight">36</i>&nbsp;        val captionContainer = table.selectFirst(&quot;div.CaptionContainer&quot;)
-<i class="no-highlight">37</i>&nbsp;        val contentTable = table.selectFirst(contentTableSelector)
-<i class="no-highlight">38</i>&nbsp;        val caption = captionContainer?.text() ?: throw ParsingException(&quot;table has no caption container&quot;)
-<i class="no-highlight">39</i>&nbsp;        if (contentTable == null) continue
-<i class="no-highlight">40</i>&nbsp;        val rows = contentTable.select(&quot;tr&quot;)
-<i class="no-highlight">41</i>&nbsp;        output[caption] = rows
-<i class="no-highlight">42</i>&nbsp;    }
-<i class="no-highlight">43</i>&nbsp;    return output
-<i class="no-highlight">44</i>&nbsp;}
-<i class="no-highlight">45</i>&nbsp;
-<i class="no-highlight">46</i>&nbsp;internal fun Element.parseTablesMap(contentSelector: String = &quot;div.TableContentContainer&quot;): Map&lt;String, Element&gt; {
-<i class="no-highlight">47</i>&nbsp;    val tables = select(&quot;div.TableContainer&quot;)
-<i class="no-highlight">48</i>&nbsp;    val output = mutableMapOf&lt;String, Element&gt;()
-<i class="no-highlight">49</i>&nbsp;    for (table: Element in tables) {
-<i class="no-highlight">50</i>&nbsp;        val caption: String =
-<i class="no-highlight">51</i>&nbsp;            table.selectFirst(&quot;div.Text&quot;)?.cleanText() ?: throw ParsingException(&quot;table has no caption&quot;)
-<i class="no-highlight">52</i>&nbsp;        val contentTable = table.selectFirst(contentSelector)
-<i class="no-highlight">53</i>&nbsp;        output[caption] = contentTable ?: continue
-<i class="no-highlight">54</i>&nbsp;    }
-<i class="no-highlight">55</i>&nbsp;    return output
-<i class="no-highlight">56</i>&nbsp;}
-<i class="no-highlight">57</i>&nbsp;
-<i class="no-highlight">58</i>&nbsp;/** Get a list of rows in the element. */
-<i class="no-highlight">59</i>&nbsp;internal fun Element?.rows(): Elements = this?.select(&quot;tr&quot;) ?: Elements()
-<i class="no-highlight">60</i>&nbsp;
-<i class="no-highlight">61</i>&nbsp;/** Get a list of cells found in the elmenet. */
-<i class="no-highlight">62</i>&nbsp;internal fun Element?.cells(): Elements = this?.select(&quot;td&quot;) ?: Elements()
-<i class="no-highlight">63</i>&nbsp;
-<i class="no-highlight">64</i>&nbsp;/** Get a list of the text contained in all cells in the element.*/
-<i class="no-highlight">65</i>&nbsp;internal fun Element.cellsText(): List&lt;String&gt; = cells().map { it.cleanText() }
-<i class="no-highlight">66</i>&nbsp;
-<i class="no-highlight">67</i>&nbsp;/** Get the text contained in an element, cleaned out of extraneous characters. */
-<i class="no-highlight">68</i>&nbsp;internal fun Element.cleanText() = text().clean()
-<i class="no-highlight">69</i>&nbsp;internal fun TextNode.cleanText() = text().clean()
-<i class="no-highlight">70</i>&nbsp;
-<i class="no-highlight">71</i>&nbsp;/** Get the text contained in a list of element, cleaned out of extraneous characters. */
-<i class="no-highlight">72</i>&nbsp;internal fun Elements.cleanText() = text().clean()
-<i class="no-highlight">73</i>&nbsp;
-<i class="no-highlight">74</i>&nbsp;/** Get the text contained in an element, cleaned out of extraneous characters. */
-<i class="no-highlight">75</i>&nbsp;internal fun Element.wholeCleanText() = wholeText().clean()
-<i class="no-highlight">76</i>&nbsp;
-<i class="no-highlight">77</i>&nbsp;
-<i class="no-highlight">78</i>&nbsp;/** Replace all br tags in an element with line jumps. */
-<i class="no-highlight">79</i>&nbsp;internal fun Element.replaceBrs() = apply {
-<i class="no-highlight">80</i>&nbsp;    select(&quot;br&quot;).forEach { it.replaceWith(TextNode(&quot;\n&quot;)) }
-<i class="no-highlight">81</i>&nbsp;}
-<i class="no-highlight">82</i>&nbsp;
-<i class="no-highlight">83</i>&nbsp;/** Replace all br tags in an array of elements with line jumps. */
-<i class="no-highlight">84</i>&nbsp;internal fun ArrayList&lt;Element&gt;.replaceBr() = forEach { it.replaceBrs() }
-<i class="no-highlight">85</i>&nbsp;
-<i class="no-highlight">86</i>&nbsp;/** Get all the field&#39;s values and available options of a form element.
-<i class="no-highlight">87</i>&nbsp; *
-<i class="no-highlight">88</i>&nbsp; * @receiver An element with the form tag.
-<i class="no-highlight">89</i>&nbsp; */
-<i class="no-highlight">90</i>&nbsp;internal fun Element.formData(): FormData {
-<i class="no-highlight">91</i>&nbsp;    require(this.tagName().lowercase() == &quot;form&quot;) {
-<i class="no-highlight">92</i>&nbsp;        &quot;expected element with &#39;form&#39; tag, got element with &#39;${this.tagName()}&#39; tag&quot;
-<i class="no-highlight">93</i>&nbsp;    }
-<i class="no-highlight">94</i>&nbsp;    val data = mutableMapOf&lt;String, String&gt;()
-<i class="no-highlight">95</i>&nbsp;    val dataMultiple = mutableMapOf&lt;String, MutableList&lt;String&gt;&gt;()
-<i class="no-highlight">96</i>&nbsp;    val availableOptions = mutableMapOf&lt;String, MutableList&lt;String&gt;&gt;()
-<i class="no-highlight">97</i>&nbsp;    select(&quot;input[type=text], input[type=hidden]&quot;).forEach { data[it.attr(&quot;name&quot;)] = it.attr(&quot;value&quot;) }
-<i class="no-highlight">98</i>&nbsp;    select(&quot;select&quot;).forEach {
-<i class="no-highlight">99</i>&nbsp;        it.select(&quot;option&quot;).forEach { opt -&gt;
-<i class="no-highlight">100</i>&nbsp;            val value = opt.attr(&quot;value&quot;)
-<i class="no-highlight">101</i>&nbsp;            val name = it.attr(&quot;name&quot;)
-<i class="no-highlight">102</i>&nbsp;            availableOptions.getOrPut(name) { mutableListOf() }.add(value)
-<i class="no-highlight">103</i>&nbsp;            if (opt.hasAttr(&quot;selected&quot;)) data[name] = value
-<i class="no-highlight">104</i>&nbsp;        }
-<i class="no-highlight">105</i>&nbsp;    }
-<i class="no-highlight">106</i>&nbsp;    select(&quot;input[type=checkbox]&quot;).forEach {
-<i class="no-highlight">107</i>&nbsp;        val name = it.attr(&quot;name&quot;)
-<i class="no-highlight">108</i>&nbsp;        val value = it.attr(&quot;value&quot;)
-<i class="no-highlight">109</i>&nbsp;        availableOptions.getOrPut(name) { mutableListOf() }.add(value)
-<i class="no-highlight">110</i>&nbsp;        if (it.hasAttr(&quot;checked&quot;)) dataMultiple.getOrPut(name) { mutableListOf() }.add(value)
-<i class="no-highlight">111</i>&nbsp;    }
-<i class="no-highlight">112</i>&nbsp;    select(&quot;input[type=radio]&quot;).forEach {
-<i class="no-highlight">113</i>&nbsp;        val name = it.attr(&quot;name&quot;)
-<i class="no-highlight">114</i>&nbsp;        val value = it.attr(&quot;value&quot;)
-<i class="no-highlight">115</i>&nbsp;        availableOptions.getOrPut(name) { mutableListOf() }.add(value)
-<i class="no-highlight">116</i>&nbsp;        if (it.hasAttr(&quot;checked&quot;)) data[name] = value
-<i class="no-highlight">117</i>&nbsp;    }
-<i class="no-highlight">118</i>&nbsp;    return FormData(data, dataMultiple, availableOptions, action = attr(&quot;action&quot;), method = attr(&quot;method&quot;))
-<i class="no-highlight">119</i>&nbsp;}
-<i class="no-highlight">120</i>&nbsp;
-<i class="no-highlight">121</i>&nbsp;/**
-<i class="no-highlight">122</i>&nbsp; * Contains the data extracted from a form.
-<i class="no-highlight">123</i>&nbsp; * @property values Mapping of form fields to their selected value.
-<i class="no-highlight">124</i>&nbsp; * @property valuesMultiple Mapping of form fields that might have multiple values.
-<i class="no-highlight">125</i>&nbsp; * @property availableOptions Mapping of the available options for selection in the form.
-<i class="no-highlight">126</i>&nbsp; * @property action Where the form would be submitted to.
-<i class="no-highlight">127</i>&nbsp; * @property method The HTTP method used
-<i class="no-highlight">128</i>&nbsp; */
-<b class="fc"><i class="no-highlight">129</i>&nbsp;internal data class FormData(</b>
-<b class="fc"><i class="no-highlight">130</i>&nbsp;    val values: Map&lt;String, String&gt; = emptyMap(),</b>
-<b class="fc"><i class="no-highlight">131</i>&nbsp;    val valuesMultiple: Map&lt;String, List&lt;String&gt;&gt; = emptyMap(),</b>
-<b class="fc"><i class="no-highlight">132</i>&nbsp;    val availableOptions: Map&lt;String, List&lt;String&gt;&gt; = emptyMap(),</b>
-<b class="fc"><i class="no-highlight">133</i>&nbsp;    val action: String? = null,</b>
-<b class="fc"><i class="no-highlight">134</i>&nbsp;    val method: String? = null,</b>
-<i class="no-highlight">135</i>&nbsp;)
-<i class="no-highlight">136</i>&nbsp;
-<i class="no-highlight">137</i>&nbsp;private val pageRegex = Regex(&quot;&quot;&quot;(?:page|pagenumber)=(\d+)&quot;&quot;&quot;)
-<i class="no-highlight">138</i>&nbsp;private val resultsRegex = Regex(&quot;&quot;&quot;Results: ([\d,]+)&quot;&quot;&quot;)
-<i class="no-highlight">139</i>&nbsp;
-<i class="no-highlight">140</i>&nbsp;/** Parse the pagination block present in many Tibia.com sections. */
-<i class="no-highlight">141</i>&nbsp;internal fun Element.parsePagination(): PaginationData {
-<i class="no-highlight">142</i>&nbsp;    val (pagesDiv, resultsDiv) = select(&quot;small &gt; div&quot;)
-<i class="no-highlight">143</i>&nbsp;    val currentPageLink = pagesDiv.selectFirst(&quot;.CurrentPageLink&quot;)
-<i class="no-highlight">144</i>&nbsp;    val pageLinks = pagesDiv.select(&quot;.PageLink&quot;)
-<i class="no-highlight">145</i>&nbsp;    val firstOrLastPages = pagesDiv.select(&quot;.FirstOrLastElement&quot;)
-<i class="no-highlight">146</i>&nbsp;    val totalPages = if (!firstOrLastPages.isEmpty()) {
-<i class="no-highlight">147</i>&nbsp;        val lastPageLink = firstOrLastPages.last()?.selectFirst(&quot;a&quot;)
-<i class="no-highlight">148</i>&nbsp;        if (lastPageLink != null) {
-<i class="no-highlight">149</i>&nbsp;            pageRegex.find(lastPageLink.attr(&quot;href&quot;))?.let {
-<i class="no-highlight">150</i>&nbsp;                it.groups[1]!!.value.toInt()
-<i class="no-highlight">151</i>&nbsp;            } ?: throw ParsingException(&quot;Could not parse pagination info&quot;)
-<i class="no-highlight">152</i>&nbsp;        } else {
-<i class="no-highlight">153</i>&nbsp;            pageLinks[pageLinks.size - 2].text().toInt()
-<i class="no-highlight">154</i>&nbsp;        }
-<i class="no-highlight">155</i>&nbsp;    } else {
-<i class="no-highlight">156</i>&nbsp;        pageLinks.last()?.text()?.toInt() ?: throw ParsingException(&quot;could not find last page link&quot;)
-<i class="no-highlight">157</i>&nbsp;    }
-<i class="no-highlight">158</i>&nbsp;    val page = try {
-<i class="no-highlight">159</i>&nbsp;        currentPageLink?.text()?.toInt() ?: totalPages
-<i class="no-highlight">160</i>&nbsp;    } catch (nfe: NumberFormatException) {
-<i class="no-highlight">161</i>&nbsp;        if (currentPageLink?.text()?.contains(&quot;First&quot;) == true) 1
-<i class="no-highlight">162</i>&nbsp;        else totalPages
-<i class="no-highlight">163</i>&nbsp;    }
-<i class="no-highlight">164</i>&nbsp;    val resultsCount: Int = resultsRegex.find(resultsDiv.text())?.let {
-<i class="no-highlight">165</i>&nbsp;        it.groups[1]!!.value.parseInteger()
-<i class="no-highlight">166</i>&nbsp;    } ?: 0
-<i class="no-highlight">167</i>&nbsp;    return PaginationData(page, totalPages, resultsCount)
-<i class="no-highlight">168</i>&nbsp;}
-<i class="no-highlight">169</i>&nbsp;
-<i class="no-highlight">170</i>&nbsp;/**
-<i class="no-highlight">171</i>&nbsp; * Container for pagination information.
-<i class="no-highlight">172</i>&nbsp; */
-<i class="no-highlight">173</i>&nbsp;internal data class PaginationData(val currentPage: Int, val totalPages: Int, val resultsCount: Int) {
-<i class="no-highlight">174</i>&nbsp;    companion object {
-<i class="no-highlight">175</i>&nbsp;        fun default() = PaginationData(1, 1, 0)
-<i class="no-highlight">176</i>&nbsp;    }
-<i class="no-highlight">177</i>&nbsp;}
-<i class="no-highlight">178</i>&nbsp;
-<i class="no-highlight">179</i>&nbsp;internal fun parsePopup(content: String): Pair&lt;String, Document&gt; {
-<i class="no-highlight">180</i>&nbsp;    val parts = content.split(&quot;,&quot;, limit = 3)
-<i class="no-highlight">181</i>&nbsp;    val title = parts[1].replace(&quot;&#39;&quot;, &quot;&quot;).trim()
-<i class="no-highlight">182</i>&nbsp;    val html = parts[parts.size - 1].replace(&quot;\\&#39;&quot;, &quot;\&quot;&quot;).replace(&quot;&#39;&quot;, &quot;&quot;).replace(&quot;,);&quot;, &quot;&quot;).replace(&quot;, );&quot;, &quot;&quot;).trim()
-<i class="no-highlight">183</i>&nbsp;    val parsedHtml = Jsoup.parse(html, &quot;&quot;, Parser.xmlParser())
-<i class="no-highlight">184</i>&nbsp;    return title to parsedHtml
-<i class="no-highlight">185</i>&nbsp;}
-<i class="no-highlight">186</i>&nbsp;
-<i class="no-highlight">187</i>&nbsp;private val queryStringRegex = Regex(&quot;([^&amp;=]+)=([^&amp;]*)&quot;)
-<i class="no-highlight">188</i>&nbsp;internal fun Element.getLinkInformation(): LinkInformation? {
-<i class="no-highlight">189</i>&nbsp;    if (this.tagName() != &quot;a&quot;) return null
-<i class="no-highlight">190</i>&nbsp;    return LinkInformation(this.text(), this.attr(&quot;href&quot;))
-<i class="no-highlight">191</i>&nbsp;}
-<i class="no-highlight">192</i>&nbsp;
-<i class="no-highlight">193</i>&nbsp;internal data class LinkInformation(val title: String, val targetUrl: URL) {
-<i class="no-highlight">194</i>&nbsp;    val queryParams
-<i class="no-highlight">195</i>&nbsp;        get() = targetUrl.queryParams()
-<i class="no-highlight">196</i>&nbsp;
-<i class="no-highlight">197</i>&nbsp;    constructor(title: String, targetUrl: String) : this(title, URL(targetUrl))
-<i class="no-highlight">198</i>&nbsp;
-<i class="no-highlight">199</i>&nbsp;}
-<i class="no-highlight">200</i>&nbsp;
-<i class="no-highlight">201</i>&nbsp;internal fun URL.queryParams(): HashMap&lt;String, MutableList&lt;String&gt;&gt; {
-<i class="no-highlight">202</i>&nbsp;    val matches = queryStringRegex.findAll(this.query)
-<i class="no-highlight">203</i>&nbsp;    val map: HashMap&lt;String, MutableList&lt;String&gt;&gt; = hashMapOf()
-<i class="no-highlight">204</i>&nbsp;    for (match: MatchResult in matches) {
-<i class="no-highlight">205</i>&nbsp;        val (_, name, value) = match.groupValues
-<i class="no-highlight">206</i>&nbsp;        map.getOrPut(name) { mutableListOf() }.add(value)
-<i class="no-highlight">207</i>&nbsp;    }
-<i class="no-highlight">208</i>&nbsp;    return map
-<i class="no-highlight">209</i>&nbsp;}
-</div>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.galarzaa.tibiakt.core.utils
+&nbsp;
+&nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
+&nbsp;import org.jsoup.Jsoup
+&nbsp;import org.jsoup.nodes.Document
+&nbsp;import org.jsoup.nodes.Element
+&nbsp;import org.jsoup.nodes.TextNode
+&nbsp;import org.jsoup.parser.Parser
+&nbsp;import org.jsoup.select.Elements
+&nbsp;import java.net.URL
+&nbsp;
+&nbsp;internal fun Element.boxContent(): Element =
+&nbsp;    selectFirst(&quot;div.BoxContent&quot;) ?: throw ParsingException(&quot;BoxContent container not found&quot;)
+&nbsp;
+&nbsp;
+&nbsp;internal fun Element.parseTables(contentTableSelector: String = &quot;table.TableContent&quot;): Map&lt;String, Elements&gt; {
+&nbsp;    val tables = select(&quot;div.TableContainer&quot;)
+&nbsp;    val output = mutableMapOf&lt;String, Elements&gt;()
+&nbsp;    for (table: Element in tables) {
+&nbsp;        val captionContainer = table.selectFirst(&quot;div.CaptionContainer&quot;)
+&nbsp;        val contentTable = table.selectFirst(contentTableSelector)
+&nbsp;        val caption = captionContainer?.text() ?: throw ParsingException(&quot;table has no caption container&quot;)
+&nbsp;        if (contentTable == null) continue
+&nbsp;        val rows = contentTable.select(&quot;tr&quot;)
+&nbsp;        output[caption] = rows
+&nbsp;    }
+&nbsp;    return output
+&nbsp;}
+&nbsp;
+&nbsp;internal fun Element.parseTablesMap(contentSelector: String = &quot;div.TableContentContainer&quot;): Map&lt;String, Element&gt; {
+&nbsp;    val tables = select(&quot;div.TableContainer&quot;)
+&nbsp;    val output = mutableMapOf&lt;String, Element&gt;()
+&nbsp;    for (table: Element in tables) {
+&nbsp;        val caption: String =
+&nbsp;            table.selectFirst(&quot;div.Text&quot;)?.cleanText() ?: throw ParsingException(&quot;table has no caption&quot;)
+&nbsp;        val contentTable = table.selectFirst(contentSelector)
+&nbsp;        output[caption] = contentTable ?: continue
+&nbsp;    }
+&nbsp;    return output
+&nbsp;}
+&nbsp;
+&nbsp;/** Get a list of rows in the element. */
+&nbsp;internal fun Element?.rows(): Elements = this?.select(&quot;tr&quot;) ?: Elements()
+&nbsp;
+&nbsp;/** Get a list of cells found in the elmenet. */
+&nbsp;internal fun Element?.cells(): Elements = this?.select(&quot;td&quot;) ?: Elements()
+&nbsp;
+&nbsp;/** Get a list of the text contained in all cells in the element.*/
+&nbsp;internal fun Element.cellsText(): List&lt;String&gt; = cells().map { it.cleanText() }
+&nbsp;
+&nbsp;/** Get the text contained in an element, cleaned out of extraneous characters. */
+&nbsp;internal fun Element.cleanText() = text().clean()
+&nbsp;internal fun TextNode.cleanText() = text().clean()
+&nbsp;
+&nbsp;/** Get the text contained in a list of element, cleaned out of extraneous characters. */
+&nbsp;internal fun Elements.cleanText() = text().clean()
+&nbsp;
+&nbsp;/** Get the text contained in an element, cleaned out of extraneous characters. */
+&nbsp;internal fun Element.wholeCleanText() = wholeText().clean()
+&nbsp;
+&nbsp;
+&nbsp;/** Replace all br tags in an element with line jumps. */
+&nbsp;internal fun Element.replaceBrs() = apply {
+&nbsp;    select(&quot;br&quot;).forEach { it.replaceWith(TextNode(&quot;\n&quot;)) }
+&nbsp;}
+&nbsp;
+&nbsp;/** Replace all br tags in an array of elements with line jumps. */
+&nbsp;internal fun ArrayList&lt;Element&gt;.replaceBr() = forEach { it.replaceBrs() }
+&nbsp;
+&nbsp;/** Get all the field&#39;s values and available options of a form element.
+&nbsp; *
+&nbsp; * @receiver An element with the form tag.
+&nbsp; */
+&nbsp;internal fun Element.formData(): FormData {
+&nbsp;    require(this.tagName().lowercase() == &quot;form&quot;) {
+&nbsp;        &quot;expected element with &#39;form&#39; tag, got element with &#39;${this.tagName()}&#39; tag&quot;
+&nbsp;    }
+&nbsp;    val data = mutableMapOf&lt;String, String&gt;()
+&nbsp;    val dataMultiple = mutableMapOf&lt;String, MutableList&lt;String&gt;&gt;()
+&nbsp;    val availableOptions = mutableMapOf&lt;String, MutableList&lt;String&gt;&gt;()
+&nbsp;    select(&quot;input[type=text], input[type=hidden]&quot;).forEach { data[it.attr(&quot;name&quot;)] = it.attr(&quot;value&quot;) }
+&nbsp;    select(&quot;select&quot;).forEach {
+&nbsp;        it.select(&quot;option&quot;).forEach { opt -&gt;
+&nbsp;            val value = opt.attr(&quot;value&quot;)
+&nbsp;            val name = it.attr(&quot;name&quot;)
+&nbsp;            availableOptions.getOrPut(name) { mutableListOf() }.add(value)
+&nbsp;            if (opt.hasAttr(&quot;selected&quot;)) data[name] = value
+&nbsp;        }
+&nbsp;    }
+&nbsp;    select(&quot;input[type=checkbox]&quot;).forEach {
+&nbsp;        val name = it.attr(&quot;name&quot;)
+&nbsp;        val value = it.attr(&quot;value&quot;)
+&nbsp;        availableOptions.getOrPut(name) { mutableListOf() }.add(value)
+&nbsp;        if (it.hasAttr(&quot;checked&quot;)) dataMultiple.getOrPut(name) { mutableListOf() }.add(value)
+&nbsp;    }
+&nbsp;    select(&quot;input[type=radio]&quot;).forEach {
+&nbsp;        val name = it.attr(&quot;name&quot;)
+&nbsp;        val value = it.attr(&quot;value&quot;)
+&nbsp;        availableOptions.getOrPut(name) { mutableListOf() }.add(value)
+&nbsp;        if (it.hasAttr(&quot;checked&quot;)) data[name] = value
+&nbsp;    }
+&nbsp;    return FormData(data, dataMultiple, availableOptions, action = attr(&quot;action&quot;), method = attr(&quot;method&quot;))
+&nbsp;}
+&nbsp;
+&nbsp;/**
+&nbsp; * Contains the data extracted from a form.
+&nbsp; * @property values Mapping of form fields to their selected value.
+&nbsp; * @property valuesMultiple Mapping of form fields that might have multiple values.
+&nbsp; * @property availableOptions Mapping of the available options for selection in the form.
+&nbsp; * @property action Where the form would be submitted to.
+&nbsp; * @property method The HTTP method used
+&nbsp; */
+<b class="fc">&nbsp;internal data class FormData(</b>
+<b class="fc">&nbsp;    val values: Map&lt;String, String&gt; = emptyMap(),</b>
+<b class="fc">&nbsp;    val valuesMultiple: Map&lt;String, List&lt;String&gt;&gt; = emptyMap(),</b>
+<b class="fc">&nbsp;    val availableOptions: Map&lt;String, List&lt;String&gt;&gt; = emptyMap(),</b>
+<b class="fc">&nbsp;    val action: String? = null,</b>
+<b class="fc">&nbsp;    val method: String? = null,</b>
+&nbsp;)
+&nbsp;
+&nbsp;private val pageRegex = Regex(&quot;&quot;&quot;(?:page|pagenumber)=(\d+)&quot;&quot;&quot;)
+&nbsp;private val resultsRegex = Regex(&quot;&quot;&quot;Results: ([\d,]+)&quot;&quot;&quot;)
+&nbsp;
+&nbsp;/** Parse the pagination block present in many Tibia.com sections. */
+&nbsp;internal fun Element.parsePagination(): PaginationData {
+&nbsp;    val (pagesDiv, resultsDiv) = select(&quot;small &gt; div&quot;)
+&nbsp;    val currentPageLink = pagesDiv.selectFirst(&quot;.CurrentPageLink&quot;)
+&nbsp;    val pageLinks = pagesDiv.select(&quot;.PageLink&quot;)
+&nbsp;    val firstOrLastPages = pagesDiv.select(&quot;.FirstOrLastElement&quot;)
+&nbsp;    val totalPages = if (!firstOrLastPages.isEmpty()) {
+&nbsp;        val lastPageLink = firstOrLastPages.last()?.selectFirst(&quot;a&quot;)
+&nbsp;        if (lastPageLink != null) {
+&nbsp;            pageRegex.find(lastPageLink.attr(&quot;href&quot;))?.let {
+&nbsp;                it.groups[1]!!.value.toInt()
+&nbsp;            } ?: throw ParsingException(&quot;Could not parse pagination info&quot;)
+&nbsp;        } else {
+&nbsp;            pageLinks[pageLinks.size - 2].text().toInt()
+&nbsp;        }
+&nbsp;    } else {
+&nbsp;        pageLinks.last()?.text()?.toInt() ?: throw ParsingException(&quot;could not find last page link&quot;)
+&nbsp;    }
+&nbsp;    val page = try {
+&nbsp;        currentPageLink?.text()?.toInt() ?: totalPages
+&nbsp;    } catch (nfe: NumberFormatException) {
+&nbsp;        if (currentPageLink?.text()?.contains(&quot;First&quot;) == true) 1
+&nbsp;        else totalPages
+&nbsp;    }
+&nbsp;    val resultsCount: Int = resultsRegex.find(resultsDiv.text())?.let {
+&nbsp;        it.groups[1]!!.value.parseInteger()
+&nbsp;    } ?: 0
+&nbsp;    return PaginationData(page, totalPages, resultsCount)
+&nbsp;}
+&nbsp;
+&nbsp;/**
+&nbsp; * Container for pagination information.
+&nbsp; */
+&nbsp;internal data class PaginationData(val currentPage: Int, val totalPages: Int, val resultsCount: Int) {
+&nbsp;    companion object {
+&nbsp;        fun default() = PaginationData(1, 1, 0)
+&nbsp;    }
+&nbsp;}
+&nbsp;
+&nbsp;internal fun parsePopup(content: String): Pair&lt;String, Document&gt; {
+&nbsp;    val parts = content.split(&quot;,&quot;, limit = 3)
+&nbsp;    val title = parts[1].replace(&quot;&#39;&quot;, &quot;&quot;).trim()
+&nbsp;    val html = parts[parts.size - 1].replace(&quot;\\&#39;&quot;, &quot;\&quot;&quot;).replace(&quot;&#39;&quot;, &quot;&quot;).replace(&quot;,);&quot;, &quot;&quot;).replace(&quot;, );&quot;, &quot;&quot;).trim()
+&nbsp;    val parsedHtml = Jsoup.parse(html, &quot;&quot;, Parser.xmlParser())
+&nbsp;    return title to parsedHtml
+&nbsp;}
+&nbsp;
+&nbsp;private val queryStringRegex = Regex(&quot;([^&amp;=]+)=([^&amp;]*)&quot;)
+&nbsp;internal fun Element.getLinkInformation(): LinkInformation? {
+&nbsp;    if (this.tagName() != &quot;a&quot;) return null
+&nbsp;    return LinkInformation(this.text(), this.attr(&quot;href&quot;))
+&nbsp;}
+&nbsp;
+&nbsp;internal data class LinkInformation(val title: String, val targetUrl: URL) {
+&nbsp;    val queryParams
+&nbsp;        get() = targetUrl.queryParams()
+&nbsp;
+&nbsp;    constructor(title: String, targetUrl: String) : this(title, URL(targetUrl))
+&nbsp;
+&nbsp;}
+&nbsp;
+&nbsp;internal fun URL.queryParams(): HashMap&lt;String, MutableList&lt;String&gt;&gt; {
+&nbsp;    val matches = queryStringRegex.findAll(this.query)
+&nbsp;    val map: HashMap&lt;String, MutableList&lt;String&gt;&gt; = hashMapOf()
+&nbsp;    for (match: MatchResult in matches) {
+&nbsp;        val (_, name, value) = match.groupValues
+&nbsp;        map.getOrPut(name) { mutableListOf() }.add(value)
+&nbsp;    }
+&nbsp;    return map
+&nbsp;}
+</code>
 </pre>
 </div>
 
@@ -314,18 +315,15 @@ Current scope:     <a href="../../index.html">all classes</a>
     @*/
 
     if (!msie || msie && msie9) {
-        var codeBlock = document.getElementById('sourceCode');
-
-        if (codeBlock) {
-            hljs.highlightBlock(codeBlock);
-        }
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
     }
 })();
 </script>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-02-24 23:58</div>
+    <div style="float:right;">generated on 2023-03-15 02:46</div>
 </div>
 </body>
 </html>

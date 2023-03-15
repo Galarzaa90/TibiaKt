@@ -37,6 +37,9 @@
     <div>0.2.0
     </div>
     <div class="pull-right d-flex">
+        <div class="filter-section" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":tibiakt-core:dokkaHtmlPartial/main">jvm</button>
+        </div>
         <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
         <div id="searchBar"></div>
     </div>
@@ -46,104 +49,108 @@
         <div id="sideMenu"></div>
     </div>
     <div id="main">
-<div class="main-content" id="content" pageids="tibiakt-core::com.galarzaa.tibiakt.core.models.news/EventEntry///PointingToDeclaration//-185655222">
+<div class="main-content" data-page-type="classlike" id="content" pageids="tibiakt-core::com.galarzaa.tibiakt.core.models.news/EventEntry///PointingToDeclaration//-185655222">
   <div class="breadcrumbs"><a href="../../index.html">tibiakt-core</a><span class="delimiter">/</span><a href="../index.html">com.galarzaa.tibiakt.core.models.news</a><span class="delimiter">/</span><span class="current">EventEntry</span></div>
   <div class="cover ">
     <h1 class="cover"><span>Event</span><wbr><span><span>Entry</span></span></h1>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="kotlinx.serialization/Serializable///PointingToDeclaration/"><span class="token annotation builtin">Serializable</span></span></div></div><span class="token keyword">data </span><span class="token keyword">class </span><a href="index.html">EventEntry</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>title<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>description<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>startDate<span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html">LocalDate</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>endDate<span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html">LocalDate</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="clearfix"><span class="floating-right">(<a href="https://github.com/Galarzaa90/TibiaKt/blob/main/tibiakt-core/src/main/kotlin/com/galarzaa/tibiakt/core/models/news/EventEntry.kt#L27">source</a>)</span></span></div><p class="paragraph">An event in the <a href="../-events-schedule/index.html">EventsSchedule</a>.</p></div></div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="kotlinx.serialization/Serializable///PointingToDeclaration/"><span class="token annotation builtin">Serializable</span></span></div></div><span class="token keyword">data </span><span class="token keyword">class </span><a href="index.html">EventEntry</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>title<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>description<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>startDate<span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html">LocalDate</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>endDate<span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html">LocalDate</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="clearfix"><span class="floating-right">(<a href="https://github.com/Galarzaa90/TibiaKt/blob/main/tibiakt-core/src/main/kotlin/com/galarzaa/tibiakt/core/models/news/EventEntry.kt#L36">source</a>)</span></span></div><p class="paragraph">An event in the <a href="../-events-schedule/index.html">EventsSchedule</a>.</p></div></div>
   </div>
   <div class="tabbedcontent">
-    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Constructors">Constructors</button><button class="section-tab" data-togglable="Properties">Properties</button></div>
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,FUNCTION,PROPERTY">Members</button></div>
     <div class="tabs-section-body">
-      <h2 class="tabbedcontent">Constructors</h2>
-      <div class="table" data-togglable="Constructors"><a data-name="1954151614%2FConstructors%2F-185655222" anchor-label="EventEntry" id="1954151614%2FConstructors%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
-        <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
-          <div class="main-subrow keyValue TabbedContent">
-            <div class=""><span class="inline-flex">
-                <div><a href="-event-entry.html"><span>Event</span><wbr><span><span>Entry</span></span></a></div>
+      <div data-togglable="CONSTRUCTOR">
+        <h2 class="">Constructors</h2>
+        <div class="table"><a data-name="1954151614%2FConstructors%2F-185655222" anchor-label="EventEntry" id="1954151614%2FConstructors%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-togglable="CONSTRUCTOR" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-event-entry.html"><span>Event</span><wbr><span><span>Entry</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1954151614%2FConstructors%2F-185655222"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="-event-entry.html"><span class="token function">EventEntry</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">title<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">description<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">startDate<span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html">LocalDate</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">endDate<span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html">LocalDate</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">title<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">description<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">startDate<span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html">LocalDate</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">endDate<span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html">LocalDate</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <h2 class="">Properties</h2>
-      <div class="table" data-togglable="Properties"><a data-name="1927504987%2FProperties%2F-185655222" anchor-label="description" id="1927504987%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
-        <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="description.html"><span><span>description</span></span></a></div>
+      <div data-togglable="PROPERTY">
+        <h2 class="">Properties</h2>
+        <div class="table"><a data-name="1927504987%2FProperties%2F-185655222" anchor-label="description" id="1927504987%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="description.html"><span><span>description</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1927504987%2FProperties%2F-185655222"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><a data-name="1927504987%2FProperties%2F-185655222" anchor-label="description" id="1927504987%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="description.html">description</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><a data-name="1927504987%2FProperties%2F-185655222" anchor-label="description" id="1927504987%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><p class="paragraph">A brief description of the event.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="description.html">description</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">A brief description of the event.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-1404364337%2FProperties%2F-185655222" anchor-label="duration" id="-1404364337%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
-        <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="duration.html"><span><span>duration</span></span></a></div>
+          <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="duration.html"><span><span>duration</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1404364337%2FProperties%2F-185655222"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><a data-name="-1404364337%2FProperties%2F-185655222" anchor-label="duration" id="-1404364337%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="duration.html">duration</a><span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/time/Period.html">Period</a><span class="token operator">?</span></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="duration.html">duration</a><span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/time/Period.html">Period</a><span class="token operator">?</span></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="822246094%2FProperties%2F-185655222" anchor-label="endDate" id="822246094%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
-        <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="end-date.html"><span>end</span><wbr><span><span>Date</span></span></a></div>
+          <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="end-date.html"><span>end</span><wbr><span><span>Date</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="822246094%2FProperties%2F-185655222"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><a data-name="822246094%2FProperties%2F-185655222" anchor-label="endDate" id="822246094%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="end-date.html">endDate</a><span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html">LocalDate</a><span class="token operator">?</span></div><div class="brief "><a data-name="822246094%2FProperties%2F-185655222" anchor-label="endDate" id="822246094%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><p class="paragraph">The date when the event ends. If null, it means the event ends in a following month and the date is unavailable.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="end-date.html">endDate</a><span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html">LocalDate</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">The date when the event ends. If null, it means the event ends in a following month and the date is unavailable.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-1010662873%2FProperties%2F-185655222" anchor-label="startDate" id="-1010662873%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
-        <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="start-date.html"><span>start</span><wbr><span><span>Date</span></span></a></div>
+          <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="start-date.html"><span>start</span><wbr><span><span>Date</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1010662873%2FProperties%2F-185655222"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><a data-name="-1010662873%2FProperties%2F-185655222" anchor-label="startDate" id="-1010662873%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="start-date.html">startDate</a><span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html">LocalDate</a><span class="token operator">?</span></div><div class="brief "><a data-name="-1010662873%2FProperties%2F-185655222" anchor-label="startDate" id="-1010662873%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><p class="paragraph">The date when the event starts. If null, it means the event started in a previous month and the date is unavailable.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="start-date.html">startDate</a><span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html">LocalDate</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">The date when the event starts. If null, it means the event started in a previous month and the date is unavailable.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="1601028351%2FProperties%2F-185655222" anchor-label="title" id="1601028351%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
-        <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="title.html"><span><span>title</span></span></a></div>
+          <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="title.html"><span><span>title</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1601028351%2FProperties%2F-185655222"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><a data-name="1601028351%2FProperties%2F-185655222" anchor-label="title" id="1601028351%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="title.html">title</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><a data-name="1601028351%2FProperties%2F-185655222" anchor-label="title" id="1601028351%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><p class="paragraph">The title or name of the event.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="title.html">title</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">The title or name of the event.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
@@ -157,6 +164,6 @@
       </div>
     </div>
 </div>
-
-</body></html>
+</body>
+</html>
 

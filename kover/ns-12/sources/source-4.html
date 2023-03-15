@@ -7,9 +7,10 @@
   <title>Coverage Report > YearMonthSerializer</title>
   <style type="text/css">
     @import "../../css/coverage.css";
-    @import "../../css/highlight-idea.css";
+    @import "../../css/idea.min.css";
   </style>
-  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
 </head>
 
 <body>
@@ -90,44 +91,44 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;/*
-<i class="no-highlight">2</i>&nbsp; * Copyright © 2022 Allan Galarza
-<i class="no-highlight">3</i>&nbsp; *
-<i class="no-highlight">4</i>&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
-<i class="no-highlight">5</i>&nbsp; * you may not use this file except in compliance with the License.
-<i class="no-highlight">6</i>&nbsp; * You may obtain a copy of the License at
-<i class="no-highlight">7</i>&nbsp; *
-<i class="no-highlight">8</i>&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
-<i class="no-highlight">9</i>&nbsp; *
-<i class="no-highlight">10</i>&nbsp; * Unless required by applicable law or agreed to in writing, software
-<i class="no-highlight">11</i>&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-<i class="no-highlight">12</i>&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-<i class="no-highlight">13</i>&nbsp; * See the License for the specific language governing permissions and
-<i class="no-highlight">14</i>&nbsp; * limitations under the License.
-<i class="no-highlight">15</i>&nbsp; */
-<i class="no-highlight">16</i>&nbsp;
-<i class="no-highlight">17</i>&nbsp;package com.galarzaa.tibiakt.core.serializers
-<i class="no-highlight">18</i>&nbsp;
-<i class="no-highlight">19</i>&nbsp;import kotlinx.serialization.KSerializer
-<i class="no-highlight">20</i>&nbsp;import kotlinx.serialization.descriptors.PrimitiveKind
-<i class="no-highlight">21</i>&nbsp;import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
-<i class="no-highlight">22</i>&nbsp;import kotlinx.serialization.descriptors.SerialDescriptor
-<i class="no-highlight">23</i>&nbsp;import kotlinx.serialization.encoding.Decoder
-<i class="no-highlight">24</i>&nbsp;import kotlinx.serialization.encoding.Encoder
-<i class="no-highlight">25</i>&nbsp;import java.time.YearMonth
-<i class="no-highlight">26</i>&nbsp;
-<i class="no-highlight">27</i>&nbsp;/**
-<i class="no-highlight">28</i>&nbsp; * Serializer for [YearMonth] objects, using YYYY-MM format.
-<i class="no-highlight">29</i>&nbsp; */
-<i class="no-highlight">30</i>&nbsp;public object YearMonthSerializer : KSerializer&lt;YearMonth&gt; {
-<b class="nc"><i class="no-highlight">31</i>&nbsp;    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(&quot;YearMonth&quot;, PrimitiveKind.STRING)</b>
-<i class="no-highlight">32</i>&nbsp;    override fun serialize(encoder: Encoder, value: YearMonth): Unit =
-<b class="nc"><i class="no-highlight">33</i>&nbsp;        encoder.encodeString(value.toString())</b>
-<i class="no-highlight">34</i>&nbsp;
-<i class="no-highlight">35</i>&nbsp;    override fun deserialize(decoder: Decoder): YearMonth =
-<b class="nc"><i class="no-highlight">36</i>&nbsp;        YearMonth.parse(decoder.decodeString())</b>
-<i class="no-highlight">37</i>&nbsp;}
-</div>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.galarzaa.tibiakt.core.serializers
+&nbsp;
+&nbsp;import kotlinx.serialization.KSerializer
+&nbsp;import kotlinx.serialization.descriptors.PrimitiveKind
+&nbsp;import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
+&nbsp;import kotlinx.serialization.descriptors.SerialDescriptor
+&nbsp;import kotlinx.serialization.encoding.Decoder
+&nbsp;import kotlinx.serialization.encoding.Encoder
+&nbsp;import java.time.YearMonth
+&nbsp;
+&nbsp;/**
+&nbsp; * Serializer for [YearMonth] objects, using YYYY-MM format.
+&nbsp; */
+&nbsp;public object YearMonthSerializer : KSerializer&lt;YearMonth&gt; {
+<b class="nc">&nbsp;    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(&quot;YearMonth&quot;, PrimitiveKind.STRING)</b>
+&nbsp;    override fun serialize(encoder: Encoder, value: YearMonth): Unit =
+<b class="nc">&nbsp;        encoder.encodeString(value.toString())</b>
+&nbsp;
+&nbsp;    override fun deserialize(decoder: Decoder): YearMonth =
+<b class="nc">&nbsp;        YearMonth.parse(decoder.decodeString())</b>
+&nbsp;}
+</code>
 </pre>
 </div>
 
@@ -142,18 +143,15 @@ Current scope:     <a href="../../index.html">all classes</a>
     @*/
 
     if (!msie || msie && msie9) {
-        var codeBlock = document.getElementById('sourceCode');
-
-        if (codeBlock) {
-            hljs.highlightBlock(codeBlock);
-        }
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
     }
 })();
 </script>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-02-24 23:58</div>
+    <div style="float:right;">generated on 2023-03-15 02:46</div>
 </div>
 </body>
 </html>

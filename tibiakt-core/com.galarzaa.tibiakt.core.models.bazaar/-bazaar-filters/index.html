@@ -37,6 +37,9 @@
     <div>0.2.0
     </div>
     <div class="pull-right d-flex">
+        <div class="filter-section" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":tibiakt-core:dokkaHtmlPartial/main">jvm</button>
+        </div>
         <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
         <div id="searchBar"></div>
     </div>
@@ -46,224 +49,228 @@
         <div id="sideMenu"></div>
     </div>
     <div id="main">
-<div class="main-content" id="content" pageids="tibiakt-core::com.galarzaa.tibiakt.core.models.bazaar/BazaarFilters///PointingToDeclaration//-185655222">
+<div class="main-content" data-page-type="classlike" id="content" pageids="tibiakt-core::com.galarzaa.tibiakt.core.models.bazaar/BazaarFilters///PointingToDeclaration//-185655222">
   <div class="breadcrumbs"><a href="../../index.html">tibiakt-core</a><span class="delimiter">/</span><a href="../index.html">com.galarzaa.tibiakt.core.models.bazaar</a><span class="delimiter">/</span><span class="current">BazaarFilters</span></div>
   <div class="cover ">
     <h1 class="cover"><span>Bazaar</span><wbr><span><span>Filters</span></span></h1>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="kotlinx.serialization/Serializable///PointingToDeclaration/"><span class="token annotation builtin">Serializable</span></span></div></div><span class="token keyword">data </span><span class="token keyword">class </span><a href="index.html">BazaarFilters</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>world<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>pvpType<span class="token operator">: </span><a href="../../com.galarzaa.tibiakt.core.enums/-pvp-type/index.html">PvpType</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>battlEyeType<span class="token operator">: </span><a href="../../com.galarzaa.tibiakt.core.enums/-auction-battl-eye-filter/index.html">AuctionBattlEyeFilter</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>vocation<span class="token operator">: </span><a href="../../com.galarzaa.tibiakt.core.enums/-auction-vocation-filter/index.html">AuctionVocationFilter</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>minimumLevel<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>maximumLevel<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>skill<span class="token operator">: </span><a href="../../com.galarzaa.tibiakt.core.enums/-auction-skill-filter/index.html">AuctionSkillFilter</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>minimumSkillLevel<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>maximumSkillLevel<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>orderDirection<span class="token operator">: </span><a href="../../com.galarzaa.tibiakt.core.enums/-auction-order-direction/index.html">AuctionOrderDirection</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>orderBy<span class="token operator">: </span><a href="../../com.galarzaa.tibiakt.core.enums/-auction-order-by/index.html">AuctionOrderBy</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>searchString<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>searchType<span class="token operator">: </span><a href="../../com.galarzaa.tibiakt.core.enums/-auction-search-type/index.html">AuctionSearchType</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span><span class="clearfix"><span class="floating-right">(<a href="https://github.com/Galarzaa90/TibiaKt/blob/main/tibiakt-core/src/main/kotlin/com/galarzaa/tibiakt/core/models/bazaar/BazaarFilters.kt#L28">source</a>)</span></span></div><p class="paragraph">Filtering parameters for the <a href="../-character-bazaar/index.html">CharacterBazaar</a></p><p class="paragraph">All values are optional, only set values are considered when filtering.</p></div></div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="kotlinx.serialization/Serializable///PointingToDeclaration/"><span class="token annotation builtin">Serializable</span></span></div></div><span class="token keyword">data </span><span class="token keyword">class </span><a href="index.html">BazaarFilters</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>world<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>pvpType<span class="token operator">: </span><a href="../../com.galarzaa.tibiakt.core.enums/-pvp-type/index.html">PvpType</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>battlEyeType<span class="token operator">: </span><a href="../../com.galarzaa.tibiakt.core.enums/-auction-battl-eye-filter/index.html">AuctionBattlEyeFilter</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>vocation<span class="token operator">: </span><a href="../../com.galarzaa.tibiakt.core.enums/-auction-vocation-filter/index.html">AuctionVocationFilter</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>minimumLevel<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>maximumLevel<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>skill<span class="token operator">: </span><a href="../../com.galarzaa.tibiakt.core.enums/-auction-skill-filter/index.html">AuctionSkillFilter</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>minimumSkillLevel<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>maximumSkillLevel<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>orderDirection<span class="token operator">: </span><a href="../../com.galarzaa.tibiakt.core.enums/-auction-order-direction/index.html">AuctionOrderDirection</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>orderBy<span class="token operator">: </span><a href="../../com.galarzaa.tibiakt.core.enums/-auction-order-by/index.html">AuctionOrderBy</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>searchString<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>searchType<span class="token operator">: </span><a href="../../com.galarzaa.tibiakt.core.enums/-auction-search-type/index.html">AuctionSearchType</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span><span class="clearfix"><span class="floating-right">(<a href="https://github.com/Galarzaa90/TibiaKt/blob/main/tibiakt-core/src/main/kotlin/com/galarzaa/tibiakt/core/models/bazaar/BazaarFilters.kt#L48">source</a>)</span></span></div><p class="paragraph">Filtering parameters for the <a href="../-character-bazaar/index.html">CharacterBazaar</a></p><p class="paragraph">All values are optional, only set values are considered when filtering.</p></div></div>
   </div>
   <div class="tabbedcontent">
-    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Constructors">Constructors</button><button class="section-tab" data-togglable="Properties">Properties</button></div>
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,FUNCTION,PROPERTY">Members</button></div>
     <div class="tabs-section-body">
-      <h2 class="tabbedcontent">Constructors</h2>
-      <div class="table" data-togglable="Constructors"><a data-name="-1678054897%2FConstructors%2F-185655222" anchor-label="BazaarFilters" id="-1678054897%2FConstructors%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
-        <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
-          <div class="main-subrow keyValue TabbedContent">
-            <div class=""><span class="inline-flex">
-                <div><a href="-bazaar-filters.html"><span>Bazaar</span><wbr><span><span>Filters</span></span></a></div>
+      <div data-togglable="CONSTRUCTOR">
+        <h2 class="">Constructors</h2>
+        <div class="table"><a data-name="-1678054897%2FConstructors%2F-185655222" anchor-label="BazaarFilters" id="-1678054897%2FConstructors%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-togglable="CONSTRUCTOR" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-bazaar-filters.html"><span>Bazaar</span><wbr><span><span>Filters</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1678054897%2FConstructors%2F-185655222"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="-bazaar-filters.html"><span class="token function">BazaarFilters</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">world<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">pvpType<span class="token operator">: </span><a href="../../com.galarzaa.tibiakt.core.enums/-pvp-type/index.html">PvpType</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">battlEyeType<span class="token operator">: </span><a href="../../com.galarzaa.tibiakt.core.enums/-auction-battl-eye-filter/index.html">AuctionBattlEyeFilter</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">vocation<span class="token operator">: </span><a href="../../com.galarzaa.tibiakt.core.enums/-auction-vocation-filter/index.html">AuctionVocationFilter</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">minimumLevel<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">maximumLevel<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">skill<span class="token operator">: </span><a href="../../com.galarzaa.tibiakt.core.enums/-auction-skill-filter/index.html">AuctionSkillFilter</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">minimumSkillLevel<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">maximumSkillLevel<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">orderDirection<span class="token operator">: </span><a href="../../com.galarzaa.tibiakt.core.enums/-auction-order-direction/index.html">AuctionOrderDirection</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">orderBy<span class="token operator">: </span><a href="../../com.galarzaa.tibiakt.core.enums/-auction-order-by/index.html">AuctionOrderBy</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">searchString<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">searchType<span class="token operator">: </span><a href="../../com.galarzaa.tibiakt.core.enums/-auction-search-type/index.html">AuctionSearchType</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">world<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">pvpType<span class="token operator">: </span><a href="../../com.galarzaa.tibiakt.core.enums/-pvp-type/index.html">PvpType</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">battlEyeType<span class="token operator">: </span><a href="../../com.galarzaa.tibiakt.core.enums/-auction-battl-eye-filter/index.html">AuctionBattlEyeFilter</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">vocation<span class="token operator">: </span><a href="../../com.galarzaa.tibiakt.core.enums/-auction-vocation-filter/index.html">AuctionVocationFilter</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">minimumLevel<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">maximumLevel<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">skill<span class="token operator">: </span><a href="../../com.galarzaa.tibiakt.core.enums/-auction-skill-filter/index.html">AuctionSkillFilter</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">minimumSkillLevel<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">maximumSkillLevel<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">orderDirection<span class="token operator">: </span><a href="../../com.galarzaa.tibiakt.core.enums/-auction-order-direction/index.html">AuctionOrderDirection</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">orderBy<span class="token operator">: </span><a href="../../com.galarzaa.tibiakt.core.enums/-auction-order-by/index.html">AuctionOrderBy</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">searchString<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">searchType<span class="token operator">: </span><a href="../../com.galarzaa.tibiakt.core.enums/-auction-search-type/index.html">AuctionSearchType</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <h2 class="">Properties</h2>
-      <div class="table" data-togglable="Properties"><a data-name="2092149243%2FProperties%2F-185655222" anchor-label="battlEyeType" id="2092149243%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
-        <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="battl-eye-type.html"><span>battl</span><wbr><span>Eye</span><wbr><span><span>Type</span></span></a></div>
+      <div data-togglable="PROPERTY">
+        <h2 class="">Properties</h2>
+        <div class="table"><a data-name="2092149243%2FProperties%2F-185655222" anchor-label="battlEyeType" id="2092149243%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="battl-eye-type.html"><span>battl</span><wbr><span>Eye</span><wbr><span><span>Type</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2092149243%2FProperties%2F-185655222"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><a data-name="2092149243%2FProperties%2F-185655222" anchor-label="battlEyeType" id="2092149243%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="battl-eye-type.html">battlEyeType</a><span class="token operator">: </span><a href="../../com.galarzaa.tibiakt.core.enums/-auction-battl-eye-filter/index.html">AuctionBattlEyeFilter</a><span class="token operator">?</span><span class="token operator"> = </span>null</div><div class="brief "><a data-name="2092149243%2FProperties%2F-185655222" anchor-label="battlEyeType" id="2092149243%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><p class="paragraph">Only show auctions of characters in worlds with this BattlEye type.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="battl-eye-type.html">battlEyeType</a><span class="token operator">: </span><a href="../../com.galarzaa.tibiakt.core.enums/-auction-battl-eye-filter/index.html">AuctionBattlEyeFilter</a><span class="token operator">?</span><span class="token operator"> = </span>null</div><div class="brief "><p class="paragraph">Only show auctions of characters in worlds with this BattlEye type.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-849508747%2FProperties%2F-185655222" anchor-label="maximumLevel" id="-849508747%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
-        <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="maximum-level.html"><span>maximum</span><wbr><span><span>Level</span></span></a></div>
+          <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="maximum-level.html"><span>maximum</span><wbr><span><span>Level</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-849508747%2FProperties%2F-185655222"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><a data-name="-849508747%2FProperties%2F-185655222" anchor-label="maximumLevel" id="-849508747%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="maximum-level.html">maximumLevel</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span><span class="token operator"> = </span>null</div><div class="brief "><a data-name="-849508747%2FProperties%2F-185655222" anchor-label="maximumLevel" id="-849508747%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><p class="paragraph">Only show characters below this level.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="maximum-level.html">maximumLevel</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span><span class="token operator"> = </span>null</div><div class="brief "><p class="paragraph">Only show characters below this level.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-1149244626%2FProperties%2F-185655222" anchor-label="maximumSkillLevel" id="-1149244626%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
-        <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="maximum-skill-level.html"><span>maximum</span><wbr><span>Skill</span><wbr><span><span>Level</span></span></a></div>
+          <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="maximum-skill-level.html"><span>maximum</span><wbr><span>Skill</span><wbr><span><span>Level</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1149244626%2FProperties%2F-185655222"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><a data-name="-1149244626%2FProperties%2F-185655222" anchor-label="maximumSkillLevel" id="-1149244626%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="maximum-skill-level.html">maximumSkillLevel</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span><span class="token operator"> = </span>null</div><div class="brief "><a data-name="-1149244626%2FProperties%2F-185655222" anchor-label="maximumSkillLevel" id="-1149244626%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><p class="paragraph">Only show characters with a level on the selected <a href="skill.html">skill</a> below this.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="maximum-skill-level.html">maximumSkillLevel</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span><span class="token operator"> = </span>null</div><div class="brief "><p class="paragraph">Only show characters with a level on the selected <a href="skill.html">skill</a> below this.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="1793051619%2FProperties%2F-185655222" anchor-label="minimumLevel" id="1793051619%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
-        <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="minimum-level.html"><span>minimum</span><wbr><span><span>Level</span></span></a></div>
+          <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="minimum-level.html"><span>minimum</span><wbr><span><span>Level</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1793051619%2FProperties%2F-185655222"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><a data-name="1793051619%2FProperties%2F-185655222" anchor-label="minimumLevel" id="1793051619%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="minimum-level.html">minimumLevel</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span><span class="token operator"> = </span>null</div><div class="brief "><a data-name="1793051619%2FProperties%2F-185655222" anchor-label="minimumLevel" id="1793051619%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><p class="paragraph">Only show characters above this level.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="minimum-level.html">minimumLevel</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span><span class="token operator"> = </span>null</div><div class="brief "><p class="paragraph">Only show characters above this level.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-1185555840%2FProperties%2F-185655222" anchor-label="minimumSkillLevel" id="-1185555840%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
-        <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="minimum-skill-level.html"><span>minimum</span><wbr><span>Skill</span><wbr><span><span>Level</span></span></a></div>
+          <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="minimum-skill-level.html"><span>minimum</span><wbr><span>Skill</span><wbr><span><span>Level</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1185555840%2FProperties%2F-185655222"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><a data-name="-1185555840%2FProperties%2F-185655222" anchor-label="minimumSkillLevel" id="-1185555840%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="minimum-skill-level.html">minimumSkillLevel</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span><span class="token operator"> = </span>null</div><div class="brief "><a data-name="-1185555840%2FProperties%2F-185655222" anchor-label="minimumSkillLevel" id="-1185555840%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><p class="paragraph">Only show characters with a level on the selected <a href="skill.html">skill</a> above this.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="minimum-skill-level.html">minimumSkillLevel</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span><span class="token operator"> = </span>null</div><div class="brief "><p class="paragraph">Only show characters with a level on the selected <a href="skill.html">skill</a> above this.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="1007247900%2FProperties%2F-185655222" anchor-label="orderBy" id="1007247900%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
-        <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="order-by.html"><span>order</span><wbr><span><span>By</span></span></a></div>
+          <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="order-by.html"><span>order</span><wbr><span><span>By</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1007247900%2FProperties%2F-185655222"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><a data-name="1007247900%2FProperties%2F-185655222" anchor-label="orderBy" id="1007247900%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="order-by.html">orderBy</a><span class="token operator">: </span><a href="../../com.galarzaa.tibiakt.core.enums/-auction-order-by/index.html">AuctionOrderBy</a><span class="token operator">?</span><span class="token operator"> = </span>null</div><div class="brief "><a data-name="1007247900%2FProperties%2F-185655222" anchor-label="orderBy" id="1007247900%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><p class="paragraph">The column or value to order by.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="order-by.html">orderBy</a><span class="token operator">: </span><a href="../../com.galarzaa.tibiakt.core.enums/-auction-order-by/index.html">AuctionOrderBy</a><span class="token operator">?</span><span class="token operator"> = </span>null</div><div class="brief "><p class="paragraph">The column or value to order by.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="1924723080%2FProperties%2F-185655222" anchor-label="orderDirection" id="1924723080%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
-        <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="order-direction.html"><span>order</span><wbr><span><span>Direction</span></span></a></div>
+          <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="order-direction.html"><span>order</span><wbr><span><span>Direction</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1924723080%2FProperties%2F-185655222"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><a data-name="1924723080%2FProperties%2F-185655222" anchor-label="orderDirection" id="1924723080%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="order-direction.html">orderDirection</a><span class="token operator">: </span><a href="../../com.galarzaa.tibiakt.core.enums/-auction-order-direction/index.html">AuctionOrderDirection</a><span class="token operator">?</span><span class="token operator"> = </span>null</div><div class="brief "><a data-name="1924723080%2FProperties%2F-185655222" anchor-label="orderDirection" id="1924723080%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><p class="paragraph">The ordering direction for the results.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="order-direction.html">orderDirection</a><span class="token operator">: </span><a href="../../com.galarzaa.tibiakt.core.enums/-auction-order-direction/index.html">AuctionOrderDirection</a><span class="token operator">?</span><span class="token operator"> = </span>null</div><div class="brief "><p class="paragraph">The ordering direction for the results.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="519330237%2FProperties%2F-185655222" anchor-label="pvpType" id="519330237%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
-        <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="pvp-type.html"><span>pvp</span><wbr><span><span>Type</span></span></a></div>
+          <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="pvp-type.html"><span>pvp</span><wbr><span><span>Type</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="519330237%2FProperties%2F-185655222"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><a data-name="519330237%2FProperties%2F-185655222" anchor-label="pvpType" id="519330237%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="pvp-type.html">pvpType</a><span class="token operator">: </span><a href="../../com.galarzaa.tibiakt.core.enums/-pvp-type/index.html">PvpType</a><span class="token operator">?</span><span class="token operator"> = </span>null</div><div class="brief "><a data-name="519330237%2FProperties%2F-185655222" anchor-label="pvpType" id="519330237%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><p class="paragraph">Only show auctions of characters in worlds with this PvP type.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="pvp-type.html">pvpType</a><span class="token operator">: </span><a href="../../com.galarzaa.tibiakt.core.enums/-pvp-type/index.html">PvpType</a><span class="token operator">?</span><span class="token operator"> = </span>null</div><div class="brief "><p class="paragraph">Only show auctions of characters in worlds with this PvP type.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-59761280%2FProperties%2F-185655222" anchor-label="searchString" id="-59761280%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
-        <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="search-string.html"><span>search</span><wbr><span><span>String</span></span></a></div>
+          <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="search-string.html"><span>search</span><wbr><span><span>String</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-59761280%2FProperties%2F-185655222"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><a data-name="-59761280%2FProperties%2F-185655222" anchor-label="searchString" id="-59761280%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="search-string.html">searchString</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null</div><div class="brief "><a data-name="-59761280%2FProperties%2F-185655222" anchor-label="searchString" id="-59761280%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><p class="paragraph">The string used to search based on the <a href="search-type.html">searchType</a>.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="search-string.html">searchString</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null</div><div class="brief "><p class="paragraph">The string used to search based on the <a href="search-type.html">searchType</a>.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="1588968311%2FProperties%2F-185655222" anchor-label="searchType" id="1588968311%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
-        <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="search-type.html"><span>search</span><wbr><span><span>Type</span></span></a></div>
+          <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="search-type.html"><span>search</span><wbr><span><span>Type</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1588968311%2FProperties%2F-185655222"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><a data-name="1588968311%2FProperties%2F-185655222" anchor-label="searchType" id="1588968311%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="search-type.html">searchType</a><span class="token operator">: </span><a href="../../com.galarzaa.tibiakt.core.enums/-auction-search-type/index.html">AuctionSearchType</a><span class="token operator">?</span><span class="token operator"> = </span>null</div><div class="brief "><a data-name="1588968311%2FProperties%2F-185655222" anchor-label="searchType" id="1588968311%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><p class="paragraph">The type of search to perform.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="search-type.html">searchType</a><span class="token operator">: </span><a href="../../com.galarzaa.tibiakt.core.enums/-auction-search-type/index.html">AuctionSearchType</a><span class="token operator">?</span><span class="token operator"> = </span>null</div><div class="brief "><p class="paragraph">The type of search to perform.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-1235541360%2FProperties%2F-185655222" anchor-label="skill" id="-1235541360%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
-        <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="skill.html"><span><span>skill</span></span></a></div>
+          <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="skill.html"><span><span>skill</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1235541360%2FProperties%2F-185655222"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><a data-name="-1235541360%2FProperties%2F-185655222" anchor-label="skill" id="-1235541360%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="skill.html">skill</a><span class="token operator">: </span><a href="../../com.galarzaa.tibiakt.core.enums/-auction-skill-filter/index.html">AuctionSkillFilter</a><span class="token operator">?</span><span class="token operator"> = </span>null</div><div class="brief "><a data-name="-1235541360%2FProperties%2F-185655222" anchor-label="skill" id="-1235541360%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><p class="paragraph">The skill to use for filtering by <a href="minimum-skill-level.html">minimumSkillLevel</a> and <a href="maximum-skill-level.html">maximumSkillLevel</a>.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="skill.html">skill</a><span class="token operator">: </span><a href="../../com.galarzaa.tibiakt.core.enums/-auction-skill-filter/index.html">AuctionSkillFilter</a><span class="token operator">?</span><span class="token operator"> = </span>null</div><div class="brief "><p class="paragraph">The skill to use for filtering by <a href="minimum-skill-level.html">minimumSkillLevel</a> and <a href="maximum-skill-level.html">maximumSkillLevel</a>.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="524719918%2FProperties%2F-185655222" anchor-label="vocation" id="524719918%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
-        <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="vocation.html"><span><span>vocation</span></span></a></div>
+          <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="vocation.html"><span><span>vocation</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="524719918%2FProperties%2F-185655222"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><a data-name="524719918%2FProperties%2F-185655222" anchor-label="vocation" id="524719918%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="vocation.html">vocation</a><span class="token operator">: </span><a href="../../com.galarzaa.tibiakt.core.enums/-auction-vocation-filter/index.html">AuctionVocationFilter</a><span class="token operator">?</span><span class="token operator"> = </span>null</div><div class="brief "><a data-name="524719918%2FProperties%2F-185655222" anchor-label="vocation" id="524719918%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><p class="paragraph">Only show auctions of characters of this vocation, including promoted vocations.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="vocation.html">vocation</a><span class="token operator">: </span><a href="../../com.galarzaa.tibiakt.core.enums/-auction-vocation-filter/index.html">AuctionVocationFilter</a><span class="token operator">?</span><span class="token operator"> = </span>null</div><div class="brief "><p class="paragraph">Only show auctions of characters of this vocation, including promoted vocations.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-958657425%2FProperties%2F-185655222" anchor-label="world" id="-958657425%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
-        <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="world.html"><span><span>world</span></span></a></div>
+          <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="world.html"><span><span>world</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-958657425%2FProperties%2F-185655222"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><a data-name="-958657425%2FProperties%2F-185655222" anchor-label="world" id="-958657425%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="world.html">world</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null</div><div class="brief "><a data-name="-958657425%2FProperties%2F-185655222" anchor-label="world" id="-958657425%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><p class="paragraph">Only show auctions of characters of this world.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="world.html">world</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null</div><div class="brief "><p class="paragraph">Only show auctions of characters of this world.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
@@ -277,6 +284,6 @@
       </div>
     </div>
 </div>
-
-</body></html>
+</body>
+</html>
 

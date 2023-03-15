@@ -7,9 +7,10 @@
   <title>Coverage Report > StringExtensionsKt</title>
   <style type="text/css">
     @import "../../css/coverage.css";
-    @import "../../css/highlight-idea.css";
+    @import "../../css/idea.min.css";
   </style>
-  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
 </head>
 
 <body>
@@ -97,75 +98,75 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;/*
-<i class="no-highlight">2</i>&nbsp; * Copyright © 2022 Allan Galarza
-<i class="no-highlight">3</i>&nbsp; *
-<i class="no-highlight">4</i>&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
-<i class="no-highlight">5</i>&nbsp; * you may not use this file except in compliance with the License.
-<i class="no-highlight">6</i>&nbsp; * You may obtain a copy of the License at
-<i class="no-highlight">7</i>&nbsp; *
-<i class="no-highlight">8</i>&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
-<i class="no-highlight">9</i>&nbsp; *
-<i class="no-highlight">10</i>&nbsp; * Unless required by applicable law or agreed to in writing, software
-<i class="no-highlight">11</i>&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-<i class="no-highlight">12</i>&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-<i class="no-highlight">13</i>&nbsp; * See the License for the specific language governing permissions and
-<i class="no-highlight">14</i>&nbsp; * limitations under the License.
-<i class="no-highlight">15</i>&nbsp; */
-<i class="no-highlight">16</i>&nbsp;
-<i class="no-highlight">17</i>&nbsp;package com.galarzaa.tibiakt.core.utils
-<i class="no-highlight">18</i>&nbsp;
-<i class="no-highlight">19</i>&nbsp;/**
-<i class="no-highlight">20</i>&nbsp; * Split a string enumerating elements, using a different separator for the last item.
-<i class="no-highlight">21</i>&nbsp; */
-<b class="fc"><i class="no-highlight">22</i>&nbsp;public fun String?.splitList(separator: String = &quot;,&quot;, lastSeparator: String = &quot; and &quot;): List&lt;String&gt; {</b>
-<b class="pc"><i class="no-highlight">23</i>&nbsp;    val items = this?.nullIfBlank()?.split(separator)?.toMutableList() ?: return emptyList()</b>
-<b class="fc"><i class="no-highlight">24</i>&nbsp;    val lastSplit: List&lt;String&gt; = items.last().split(lastSeparator)</b>
-<b class="fc"><i class="no-highlight">25</i>&nbsp;    if (lastSplit.size &gt; 1) {</b>
-<b class="fc"><i class="no-highlight">26</i>&nbsp;        items[items.lastIndex] = lastSplit.subList(0, lastSplit.lastIndex).joinToString(lastSeparator)</b>
-<b class="fc"><i class="no-highlight">27</i>&nbsp;        items.add(lastSplit.last())</b>
-<i class="no-highlight">28</i>&nbsp;    }
-<b class="fc"><i class="no-highlight">29</i>&nbsp;    return items.map { it.trim() }</b>
-<i class="no-highlight">30</i>&nbsp;}
-<i class="no-highlight">31</i>&nbsp;
-<i class="no-highlight">32</i>&nbsp;/**
-<i class="no-highlight">33</i>&nbsp; * Remove an arbitrary string from a string, as many times as it is found.
-<i class="no-highlight">34</i>&nbsp; */
-<b class="fc"><i class="no-highlight">35</i>&nbsp;public fun String.remove(value: String, ignoreCase: Boolean = false): String = replace(value, &quot;&quot;, ignoreCase)</b>
-<i class="no-highlight">36</i>&nbsp;
-<i class="no-highlight">37</i>&nbsp;/**
-<i class="no-highlight">38</i>&nbsp; * Clean the string of non-breaking spaces and trims whitespace.
-<i class="no-highlight">39</i>&nbsp; */
-<b class="fc"><i class="no-highlight">40</i>&nbsp;public fun String.clean(): String = replace(&quot;\u00A0&quot;, &quot; &quot;).replace(&quot;&amp;#xa0;&quot;, &quot; &quot;).trim()</b>
-<i class="no-highlight">41</i>&nbsp;
-<i class="no-highlight">42</i>&nbsp;/**
-<i class="no-highlight">43</i>&nbsp; * Parse a string into an integer, removing any thousand separators.
-<i class="no-highlight">44</i>&nbsp; */
-<b class="fc"><i class="no-highlight">45</i>&nbsp;public fun String.parseInteger(): Int = remove(&quot;,&quot;).trim().toInt()</b>
-<i class="no-highlight">46</i>&nbsp;
-<i class="no-highlight">47</i>&nbsp;/**
-<i class="no-highlight">48</i>&nbsp; * Parse a string into a long integer, removing any thousand separators.
-<i class="no-highlight">49</i>&nbsp; */
-<b class="fc"><i class="no-highlight">50</i>&nbsp;public fun String.parseLong(): Long = remove(&quot;,&quot;).trim().toLong()</b>
-<i class="no-highlight">51</i>&nbsp;
-<i class="no-highlight">52</i>&nbsp;/**
-<i class="no-highlight">53</i>&nbsp; * Find and parse an integer from a string, ignoring everything that is not a digit.
-<i class="no-highlight">54</i>&nbsp; *
-<i class="no-highlight">55</i>&nbsp; * Note that this may cause unexpected results such as &quot;I have 2 apples and 3 oranges&quot; being converted into 23.
-<i class="no-highlight">56</i>&nbsp; */
-<b class="fc"><i class="no-highlight">57</i>&nbsp;public fun String.findInteger(): Int = filter { it.isDigit() }.toInt()</b>
-<i class="no-highlight">58</i>&nbsp;
-<i class="no-highlight">59</i>&nbsp;/**
-<i class="no-highlight">60</i>&nbsp; * Return null if the string is blank.
-<i class="no-highlight">61</i>&nbsp; */
-<b class="pc"><i class="no-highlight">62</i>&nbsp;public fun String?.nullIfBlank(): String? = takeIf { !it.isNullOrBlank() }</b>
-<i class="no-highlight">63</i>&nbsp;
-<i class="no-highlight">64</i>&nbsp;/**
-<i class="no-highlight">65</i>&nbsp; *  Parses strings with numbers using &quot;k&quot; as a thousand suffix.
-<i class="no-highlight">66</i>&nbsp; */
-<i class="no-highlight">67</i>&nbsp;public fun String.parseThousandSuffix(): Int =
-<b class="pc"><i class="no-highlight">68</i>&nbsp;    remove(&quot;k&quot;, true).parseInteger() * (count { it == &#39;k&#39; || it == &#39;K&#39; } * 1000)</b>
-</div>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.galarzaa.tibiakt.core.utils
+&nbsp;
+&nbsp;/**
+&nbsp; * Split a string enumerating elements, using a different separator for the last item.
+&nbsp; */
+<b class="fc">&nbsp;public fun String?.splitList(separator: String = &quot;,&quot;, lastSeparator: String = &quot; and &quot;): List&lt;String&gt; {</b>
+<b class="pc">&nbsp;    val items = this?.nullIfBlank()?.split(separator)?.toMutableList() ?: return emptyList()</b>
+<b class="fc">&nbsp;    val lastSplit: List&lt;String&gt; = items.last().split(lastSeparator)</b>
+<b class="fc">&nbsp;    if (lastSplit.size &gt; 1) {</b>
+<b class="fc">&nbsp;        items[items.lastIndex] = lastSplit.subList(0, lastSplit.lastIndex).joinToString(lastSeparator)</b>
+<b class="fc">&nbsp;        items.add(lastSplit.last())</b>
+&nbsp;    }
+<b class="fc">&nbsp;    return items.map { it.trim() }</b>
+&nbsp;}
+&nbsp;
+&nbsp;/**
+&nbsp; * Remove an arbitrary string from a string, as many times as it is found.
+&nbsp; */
+<b class="fc">&nbsp;public fun String.remove(value: String, ignoreCase: Boolean = false): String = replace(value, &quot;&quot;, ignoreCase)</b>
+&nbsp;
+&nbsp;/**
+&nbsp; * Clean the string of non-breaking spaces and trims whitespace.
+&nbsp; */
+<b class="fc">&nbsp;public fun String.clean(): String = replace(&quot;\u00A0&quot;, &quot; &quot;).replace(&quot;&amp;#xa0;&quot;, &quot; &quot;).trim()</b>
+&nbsp;
+&nbsp;/**
+&nbsp; * Parse a string into an integer, removing any thousand separators.
+&nbsp; */
+<b class="fc">&nbsp;public fun String.parseInteger(): Int = remove(&quot;,&quot;).trim().toInt()</b>
+&nbsp;
+&nbsp;/**
+&nbsp; * Parse a string into a long integer, removing any thousand separators.
+&nbsp; */
+<b class="fc">&nbsp;public fun String.parseLong(): Long = remove(&quot;,&quot;).trim().toLong()</b>
+&nbsp;
+&nbsp;/**
+&nbsp; * Find and parse an integer from a string, ignoring everything that is not a digit.
+&nbsp; *
+&nbsp; * Note that this may cause unexpected results such as &quot;I have 2 apples and 3 oranges&quot; being converted into 23.
+&nbsp; */
+<b class="fc">&nbsp;public fun String.findInteger(): Int = filter { it.isDigit() }.toInt()</b>
+&nbsp;
+&nbsp;/**
+&nbsp; * Return null if the string is blank.
+&nbsp; */
+<b class="pc">&nbsp;public fun String?.nullIfBlank(): String? = takeIf { !it.isNullOrBlank() }</b>
+&nbsp;
+&nbsp;/**
+&nbsp; *  Parses strings with numbers using &quot;k&quot; as a thousand suffix.
+&nbsp; */
+&nbsp;public fun String.parseThousandSuffix(): Int =
+<b class="pc">&nbsp;    remove(&quot;k&quot;, true).parseInteger() * (count { it == &#39;k&#39; || it == &#39;K&#39; } * 1000)</b>
+</code>
 </pre>
 </div>
 
@@ -180,18 +181,15 @@ Current scope:     <a href="../../index.html">all classes</a>
     @*/
 
     if (!msie || msie && msie9) {
-        var codeBlock = document.getElementById('sourceCode');
-
-        if (codeBlock) {
-            hljs.highlightBlock(codeBlock);
-        }
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
     }
 })();
 </script>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-02-24 23:58</div>
+    <div style="float:right;">generated on 2023-03-15 02:46</div>
 </div>
 </body>
 </html>

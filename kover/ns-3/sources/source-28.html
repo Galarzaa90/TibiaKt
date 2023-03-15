@@ -7,9 +7,10 @@
   <title>Coverage Report > LeaderboardsBuilderKt</title>
   <style type="text/css">
     @import "../../css/coverage.css";
-    @import "../../css/highlight-idea.css";
+    @import "../../css/idea.min.css";
   </style>
-  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
 </head>
 
 <body>
@@ -90,86 +91,86 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;/*
-<i class="no-highlight">2</i>&nbsp; * Copyright © 2022 Allan Galarza
-<i class="no-highlight">3</i>&nbsp; *
-<i class="no-highlight">4</i>&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
-<i class="no-highlight">5</i>&nbsp; * you may not use this file except in compliance with the License.
-<i class="no-highlight">6</i>&nbsp; * You may obtain a copy of the License at
-<i class="no-highlight">7</i>&nbsp; *
-<i class="no-highlight">8</i>&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
-<i class="no-highlight">9</i>&nbsp; *
-<i class="no-highlight">10</i>&nbsp; * Unless required by applicable law or agreed to in writing, software
-<i class="no-highlight">11</i>&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-<i class="no-highlight">12</i>&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-<i class="no-highlight">13</i>&nbsp; * See the License for the specific language governing permissions and
-<i class="no-highlight">14</i>&nbsp; * limitations under the License.
-<i class="no-highlight">15</i>&nbsp; */
-<i class="no-highlight">16</i>&nbsp;
-<i class="no-highlight">17</i>&nbsp;package com.galarzaa.tibiakt.core.builders
-<i class="no-highlight">18</i>&nbsp;
-<i class="no-highlight">19</i>&nbsp;import com.galarzaa.tibiakt.core.models.leaderboards.BaseLeaderboardsEntry
-<i class="no-highlight">20</i>&nbsp;import com.galarzaa.tibiakt.core.models.leaderboards.Leaderboards
-<i class="no-highlight">21</i>&nbsp;import com.galarzaa.tibiakt.core.models.leaderboards.LeaderboardsRotation
-<i class="no-highlight">22</i>&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
-<i class="no-highlight">23</i>&nbsp;import kotlinx.datetime.Instant
-<i class="no-highlight">24</i>&nbsp;
-<i class="no-highlight">25</i>&nbsp;@BuilderDsl
-<i class="no-highlight">26</i>&nbsp;public inline fun leaderboards(block: LeaderboardsBuilder.() -&gt; Unit): Leaderboards =
-<b class="fc"><i class="no-highlight">27</i>&nbsp;    LeaderboardsBuilder().apply(block).build()</b>
-<i class="no-highlight">28</i>&nbsp;
-<i class="no-highlight">29</i>&nbsp;@BuilderDsl
-<i class="no-highlight">30</i>&nbsp;public inline fun leaderboardsBuilder(block: LeaderboardsBuilder.() -&gt; Unit): LeaderboardsBuilder =
-<b class="nc"><i class="no-highlight">31</i>&nbsp;    LeaderboardsBuilder().apply(block)</b>
-<i class="no-highlight">32</i>&nbsp;
-<i class="no-highlight">33</i>&nbsp;/** Builder for [Leaderboards] instances. */
-<i class="no-highlight">34</i>&nbsp;@BuilderDsl
-<i class="no-highlight">35</i>&nbsp;public class LeaderboardsBuilder : TibiaKtBuilder&lt;Leaderboards&gt; {
-<i class="no-highlight">36</i>&nbsp;    public var world: String? = null
-<i class="no-highlight">37</i>&nbsp;    public var rotation: LeaderboardsRotation? = null
-<i class="no-highlight">38</i>&nbsp;    public val availableRotations: MutableList&lt;LeaderboardsRotation&gt; = mutableListOf()
-<i class="no-highlight">39</i>&nbsp;    public var lastUpdated: Instant? = null
-<i class="no-highlight">40</i>&nbsp;    public var currentPage: Int? = null
-<i class="no-highlight">41</i>&nbsp;    public var totalPages: Int? = null
-<i class="no-highlight">42</i>&nbsp;    public var resultsCount: Int? = null
-<i class="no-highlight">43</i>&nbsp;    public val entries: MutableList&lt;BaseLeaderboardsEntry&gt; = mutableListOf()
-<i class="no-highlight">44</i>&nbsp;
-<i class="no-highlight">45</i>&nbsp;    @BuilderDsl
-<i class="no-highlight">46</i>&nbsp;    public fun rotation(body: LeaderboardsRotationBuilder.() -&gt; Unit): LeaderboardsBuilder =
-<i class="no-highlight">47</i>&nbsp;        apply { rotation = LeaderboardsRotationBuilder().apply(body).build() }
-<i class="no-highlight">48</i>&nbsp;
-<i class="no-highlight">49</i>&nbsp;    @BuilderDsl
-<i class="no-highlight">50</i>&nbsp;    public fun addAvailableRotation(rotation: LeaderboardsRotation): LeaderboardsBuilder =
-<i class="no-highlight">51</i>&nbsp;        apply { availableRotations.add(rotation) }
-<i class="no-highlight">52</i>&nbsp;
-<i class="no-highlight">53</i>&nbsp;    public fun addEntry(entry: BaseLeaderboardsEntry): LeaderboardsBuilder = apply { entries.add(entry) }
-<i class="no-highlight">54</i>&nbsp;
-<i class="no-highlight">55</i>&nbsp;
-<i class="no-highlight">56</i>&nbsp;    override fun build(): Leaderboards = Leaderboards(
-<i class="no-highlight">57</i>&nbsp;        world = world ?: error(&quot;world is required&quot;),
-<i class="no-highlight">58</i>&nbsp;        rotation = rotation ?: error(&quot;rotation is required&quot;),
-<i class="no-highlight">59</i>&nbsp;        availableRotations = availableRotations,
-<i class="no-highlight">60</i>&nbsp;        lastUpdated = lastUpdated,
-<i class="no-highlight">61</i>&nbsp;        currentPage = currentPage ?: error(&quot;currentPage is required&quot;),
-<i class="no-highlight">62</i>&nbsp;        totalPages = totalPages ?: error(&quot;totalPages is required&quot;),
-<i class="no-highlight">63</i>&nbsp;        resultsCount = resultsCount ?: error(&quot;resultsCount is required&quot;),
-<i class="no-highlight">64</i>&nbsp;        entries = entries
-<i class="no-highlight">65</i>&nbsp;    )
-<i class="no-highlight">66</i>&nbsp;
-<i class="no-highlight">67</i>&nbsp;    public class LeaderboardsRotationBuilder : TibiaKtBuilder&lt;LeaderboardsRotation&gt; {
-<i class="no-highlight">68</i>&nbsp;        public var rotationId: Int? = null
-<i class="no-highlight">69</i>&nbsp;        public var isCurrent: Boolean = false
-<i class="no-highlight">70</i>&nbsp;        public var endDate: Instant? = null
-<i class="no-highlight">71</i>&nbsp;        override fun build(): LeaderboardsRotation = LeaderboardsRotation(
-<i class="no-highlight">72</i>&nbsp;            rotationId = rotationId ?: error(&quot;rotationId is required&quot;),
-<i class="no-highlight">73</i>&nbsp;            current = isCurrent,
-<i class="no-highlight">74</i>&nbsp;            endDate = endDate ?: error(&quot;endDate is required&quot;),
-<i class="no-highlight">75</i>&nbsp;        )
-<i class="no-highlight">76</i>&nbsp;
-<i class="no-highlight">77</i>&nbsp;    }
-<i class="no-highlight">78</i>&nbsp;
-<i class="no-highlight">79</i>&nbsp;}
-</div>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.galarzaa.tibiakt.core.builders
+&nbsp;
+&nbsp;import com.galarzaa.tibiakt.core.models.leaderboards.BaseLeaderboardsEntry
+&nbsp;import com.galarzaa.tibiakt.core.models.leaderboards.Leaderboards
+&nbsp;import com.galarzaa.tibiakt.core.models.leaderboards.LeaderboardsRotation
+&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
+&nbsp;import kotlinx.datetime.Instant
+&nbsp;
+&nbsp;@BuilderDsl
+&nbsp;public inline fun leaderboards(block: LeaderboardsBuilder.() -&gt; Unit): Leaderboards =
+<b class="fc">&nbsp;    LeaderboardsBuilder().apply(block).build()</b>
+&nbsp;
+&nbsp;@BuilderDsl
+&nbsp;public inline fun leaderboardsBuilder(block: LeaderboardsBuilder.() -&gt; Unit): LeaderboardsBuilder =
+<b class="nc">&nbsp;    LeaderboardsBuilder().apply(block)</b>
+&nbsp;
+&nbsp;/** Builder for [Leaderboards] instances. */
+&nbsp;@BuilderDsl
+&nbsp;public class LeaderboardsBuilder : TibiaKtBuilder&lt;Leaderboards&gt; {
+&nbsp;    public var world: String? = null
+&nbsp;    public var rotation: LeaderboardsRotation? = null
+&nbsp;    public val availableRotations: MutableList&lt;LeaderboardsRotation&gt; = mutableListOf()
+&nbsp;    public var lastUpdated: Instant? = null
+&nbsp;    public var currentPage: Int? = null
+&nbsp;    public var totalPages: Int? = null
+&nbsp;    public var resultsCount: Int? = null
+&nbsp;    public val entries: MutableList&lt;BaseLeaderboardsEntry&gt; = mutableListOf()
+&nbsp;
+&nbsp;    @BuilderDsl
+&nbsp;    public fun rotation(body: LeaderboardsRotationBuilder.() -&gt; Unit): LeaderboardsBuilder =
+&nbsp;        apply { rotation = LeaderboardsRotationBuilder().apply(body).build() }
+&nbsp;
+&nbsp;    @BuilderDsl
+&nbsp;    public fun addAvailableRotation(rotation: LeaderboardsRotation): LeaderboardsBuilder =
+&nbsp;        apply { availableRotations.add(rotation) }
+&nbsp;
+&nbsp;    public fun addEntry(entry: BaseLeaderboardsEntry): LeaderboardsBuilder = apply { entries.add(entry) }
+&nbsp;
+&nbsp;
+&nbsp;    override fun build(): Leaderboards = Leaderboards(
+&nbsp;        world = world ?: error(&quot;world is required&quot;),
+&nbsp;        rotation = rotation ?: error(&quot;rotation is required&quot;),
+&nbsp;        availableRotations = availableRotations,
+&nbsp;        lastUpdated = lastUpdated,
+&nbsp;        currentPage = currentPage ?: error(&quot;currentPage is required&quot;),
+&nbsp;        totalPages = totalPages ?: error(&quot;totalPages is required&quot;),
+&nbsp;        resultsCount = resultsCount ?: error(&quot;resultsCount is required&quot;),
+&nbsp;        entries = entries
+&nbsp;    )
+&nbsp;
+&nbsp;    public class LeaderboardsRotationBuilder : TibiaKtBuilder&lt;LeaderboardsRotation&gt; {
+&nbsp;        public var rotationId: Int? = null
+&nbsp;        public var isCurrent: Boolean = false
+&nbsp;        public var endDate: Instant? = null
+&nbsp;        override fun build(): LeaderboardsRotation = LeaderboardsRotation(
+&nbsp;            rotationId = rotationId ?: error(&quot;rotationId is required&quot;),
+&nbsp;            current = isCurrent,
+&nbsp;            endDate = endDate ?: error(&quot;endDate is required&quot;),
+&nbsp;        )
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
 </pre>
 </div>
 
@@ -184,18 +185,15 @@ Current scope:     <a href="../../index.html">all classes</a>
     @*/
 
     if (!msie || msie && msie9) {
-        var codeBlock = document.getElementById('sourceCode');
-
-        if (codeBlock) {
-            hljs.highlightBlock(codeBlock);
-        }
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
     }
 })();
 </script>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-02-24 23:58</div>
+    <div style="float:right;">generated on 2023-03-15 02:46</div>
 </div>
 </body>
 </html>

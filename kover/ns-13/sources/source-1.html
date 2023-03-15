@@ -7,9 +7,10 @@
   <title>Coverage Report > DatesKt</title>
   <style type="text/css">
     @import "../../css/coverage.css";
-    @import "../../css/highlight-idea.css";
+    @import "../../css/idea.min.css";
   </style>
-  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
 </head>
 
 <body>
@@ -97,109 +98,109 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;/*
-<i class="no-highlight">2</i>&nbsp; * Copyright © 2022 Allan Galarza
-<i class="no-highlight">3</i>&nbsp; *
-<i class="no-highlight">4</i>&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
-<i class="no-highlight">5</i>&nbsp; * you may not use this file except in compliance with the License.
-<i class="no-highlight">6</i>&nbsp; * You may obtain a copy of the License at
-<i class="no-highlight">7</i>&nbsp; *
-<i class="no-highlight">8</i>&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
-<i class="no-highlight">9</i>&nbsp; *
-<i class="no-highlight">10</i>&nbsp; * Unless required by applicable law or agreed to in writing, software
-<i class="no-highlight">11</i>&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-<i class="no-highlight">12</i>&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-<i class="no-highlight">13</i>&nbsp; * See the License for the specific language governing permissions and
-<i class="no-highlight">14</i>&nbsp; * limitations under the License.
-<i class="no-highlight">15</i>&nbsp; */
-<i class="no-highlight">16</i>&nbsp;
-<i class="no-highlight">17</i>&nbsp;package com.galarzaa.tibiakt.core.utils
-<i class="no-highlight">18</i>&nbsp;
-<i class="no-highlight">19</i>&nbsp;import kotlinx.datetime.Instant
-<i class="no-highlight">20</i>&nbsp;import kotlinx.datetime.toJavaInstant
-<i class="no-highlight">21</i>&nbsp;import kotlinx.datetime.toKotlinInstant
-<i class="no-highlight">22</i>&nbsp;import java.time.DayOfWeek
-<i class="no-highlight">23</i>&nbsp;import java.time.LocalDate
-<i class="no-highlight">24</i>&nbsp;import java.time.LocalDateTime
-<i class="no-highlight">25</i>&nbsp;import java.time.LocalTime
-<i class="no-highlight">26</i>&nbsp;import java.time.ZoneId
-<i class="no-highlight">27</i>&nbsp;import java.time.ZonedDateTime
-<i class="no-highlight">28</i>&nbsp;import java.time.format.DateTimeFormatter
-<i class="no-highlight">29</i>&nbsp;import java.time.format.DateTimeParseException
-<i class="no-highlight">30</i>&nbsp;import java.util.Locale
-<i class="no-highlight">31</i>&nbsp;import kotlin.time.Duration.Companion.hours
-<i class="no-highlight">32</i>&nbsp;import kotlin.time.toJavaDuration
-<i class="no-highlight">33</i>&nbsp;
-<i class="no-highlight">34</i>&nbsp;/** The timezone Tibia time is based on. */
-<b class="fc"><i class="no-highlight">35</i>&nbsp;public val TIBIA_TIMEZONE: ZoneId = ZoneId.of(&quot;Europe/Berlin&quot;)</b>
-<i class="no-highlight">36</i>&nbsp;
-<i class="no-highlight">37</i>&nbsp;/** The local time when server save happens. */
-<b class="fc"><i class="no-highlight">38</i>&nbsp;public val SERVER_SAVE_TIME: LocalTime = LocalTime.of(10, 0)</b>
-<i class="no-highlight">39</i>&nbsp;
-<i class="no-highlight">40</i>&nbsp;/** Get the current day of the week in Tibia
-<i class="no-highlight">41</i>&nbsp; *
-<i class="no-highlight">42</i>&nbsp; * A new day starts every server save, at 10:00 CET/CEST.
-<i class="no-highlight">43</i>&nbsp; */
-<b class="nc"><i class="no-highlight">44</i>&nbsp;public fun getTibiaWeekDay(): DayOfWeek = (getTibiaDateTime() - 10.hours.toJavaDuration()).dayOfWeek</b>
-<i class="no-highlight">45</i>&nbsp;
-<i class="no-highlight">46</i>&nbsp;/** Get the local datetime in Tibia&#39;s servers. */
-<b class="nc"><i class="no-highlight">47</i>&nbsp;public fun getTibiaDateTime(): LocalDateTime = LocalDateTime.now(TIBIA_TIMEZONE)</b>
-<i class="no-highlight">48</i>&nbsp;
-<i class="no-highlight">49</i>&nbsp;/** Get the time of the last server save from a [currentTime]. */
-<b class="nc"><i class="no-highlight">50</i>&nbsp;public fun getLastServerSaveTime(currentTime: ZonedDateTime = ZonedDateTime.now(TIBIA_TIMEZONE)): ZonedDateTime {</b>
-<b class="fc"><i class="no-highlight">51</i>&nbsp;    val serverSaveTime = ZonedDateTime.of(</b>
-<b class="fc"><i class="no-highlight">52</i>&nbsp;        currentTime.toLocalDate(), SERVER_SAVE_TIME, TIBIA_TIMEZONE</b>
-<i class="no-highlight">53</i>&nbsp;    )
-<b class="fc"><i class="no-highlight">54</i>&nbsp;    return if (currentTime &lt; serverSaveTime) serverSaveTime.minusDays(1) else serverSaveTime</b>
-<i class="no-highlight">55</i>&nbsp;}
-<i class="no-highlight">56</i>&nbsp;
-<i class="no-highlight">57</i>&nbsp;/** Get the time of the last server save from a [currentTime]. */
-<i class="no-highlight">58</i>&nbsp;public fun getLastServerSaveTime(currentTime: Instant): Instant =
-<b class="nc"><i class="no-highlight">59</i>&nbsp;    getLastServerSaveTime(ZonedDateTime.ofInstant(currentTime.toJavaInstant(), TIBIA_TIMEZONE)).toInstant()</b>
-<b class="nc"><i class="no-highlight">60</i>&nbsp;        .toKotlinInstant()</b>
-<i class="no-highlight">61</i>&nbsp;
-<i class="no-highlight">62</i>&nbsp;/** Get the time of the next server save from a [currentTime]. */
-<b class="nc"><i class="no-highlight">63</i>&nbsp;public fun getNextServerSaveTime(currentTime: ZonedDateTime = ZonedDateTime.now(TIBIA_TIMEZONE)): ZonedDateTime =</b>
-<b class="nc"><i class="no-highlight">64</i>&nbsp;    getLastServerSaveTime(currentTime).plusDays(1)</b>
-<i class="no-highlight">65</i>&nbsp;
-<i class="no-highlight">66</i>&nbsp;/** Get the time of the next server save from a [currentTime]. */
-<i class="no-highlight">67</i>&nbsp;public fun getNextServerSaveTime(currentTime: Instant): Instant =
-<b class="nc"><i class="no-highlight">68</i>&nbsp;    getNextServerSaveTime(ZonedDateTime.ofInstant(currentTime.toJavaInstant(), TIBIA_TIMEZONE)).toInstant()</b>
-<b class="nc"><i class="no-highlight">69</i>&nbsp;        .toKotlinInstant()</b>
-<i class="no-highlight">70</i>&nbsp;
-<i class="no-highlight">71</i>&nbsp;
-<i class="no-highlight">72</i>&nbsp;/**
-<i class="no-highlight">73</i>&nbsp; * Parses a string containing date and time from Tibia.com into an [Instant] instance.
-<i class="no-highlight">74</i>&nbsp; */
-<i class="no-highlight">75</i>&nbsp;public fun parseTibiaDateTime(input: String): Instant {
-<b class="fc"><i class="no-highlight">76</i>&nbsp;    val timeString = input.clean().let { it.substring(0, it.length - 4).trim() }</b>
-<b class="fc"><i class="no-highlight">77</i>&nbsp;    return try {</b>
-<b class="fc"><i class="no-highlight">78</i>&nbsp;        LocalDateTime.parse(timeString, DateTimeFormatter.ofPattern(&quot;MMM dd yyyy, HH:mm:ss&quot;, Locale.US))</b>
-<b class="fc"><i class="no-highlight">79</i>&nbsp;    } catch (dfe: DateTimeParseException) {</b>
-<b class="fc"><i class="no-highlight">80</i>&nbsp;        LocalDateTime.parse(timeString, DateTimeFormatter.ofPattern(&quot;MMM dd yyyy, HH:mm&quot;, Locale.US))</b>
-<b class="fc"><i class="no-highlight">81</i>&nbsp;    }.atZone(TIBIA_TIMEZONE).toInstant().toKotlinInstant()</b>
-<i class="no-highlight">82</i>&nbsp;}
-<i class="no-highlight">83</i>&nbsp;
-<i class="no-highlight">84</i>&nbsp;/**
-<i class="no-highlight">85</i>&nbsp; * Parses a string containing date from Tibia.com into an [LocalDate] instance.
-<i class="no-highlight">86</i>&nbsp; */
-<i class="no-highlight">87</i>&nbsp;public fun parseTibiaDate(input: String): LocalDate =
-<b class="fc"><i class="no-highlight">88</i>&nbsp;    LocalDate.parse(input.clean(), DateTimeFormatter.ofPattern(&quot;MMM dd yyyy&quot;, Locale.US))</b>
-<i class="no-highlight">89</i>&nbsp;
-<i class="no-highlight">90</i>&nbsp;/**
-<i class="no-highlight">91</i>&nbsp; * Parses a string containing date from Tibia.com into an [LocalDate] instance.
-<i class="no-highlight">92</i>&nbsp; */
-<i class="no-highlight">93</i>&nbsp;public fun parseTibiaFullDate(input: String): LocalDate =
-<b class="fc"><i class="no-highlight">94</i>&nbsp;    LocalDate.parse(input.clean(), DateTimeFormatter.ofPattern(&quot;MMMM d, yyyy&quot;, Locale.US))</b>
-<i class="no-highlight">95</i>&nbsp;
-<i class="no-highlight">96</i>&nbsp;/**
-<i class="no-highlight">97</i>&nbsp; * Parses a string containing a date time from Tibia.com forums into an [Instant] instance.
-<i class="no-highlight">98</i>&nbsp; */
-<i class="no-highlight">99</i>&nbsp;public fun parseTibiaForumDateTime(input: String): Instant {
-<b class="fc"><i class="no-highlight">100</i>&nbsp;    return LocalDateTime.parse(input, DateTimeFormatter.ofPattern(&quot;dd.MM.yyyy HH:mm:ss&quot;, Locale.US))</b>
-<b class="fc"><i class="no-highlight">101</i>&nbsp;        .atZone(TIBIA_TIMEZONE).toInstant().toKotlinInstant()</b>
-<i class="no-highlight">102</i>&nbsp;}
-</div>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.galarzaa.tibiakt.core.utils
+&nbsp;
+&nbsp;import kotlinx.datetime.Instant
+&nbsp;import kotlinx.datetime.toJavaInstant
+&nbsp;import kotlinx.datetime.toKotlinInstant
+&nbsp;import java.time.DayOfWeek
+&nbsp;import java.time.LocalDate
+&nbsp;import java.time.LocalDateTime
+&nbsp;import java.time.LocalTime
+&nbsp;import java.time.ZoneId
+&nbsp;import java.time.ZonedDateTime
+&nbsp;import java.time.format.DateTimeFormatter
+&nbsp;import java.time.format.DateTimeParseException
+&nbsp;import java.util.Locale
+&nbsp;import kotlin.time.Duration.Companion.hours
+&nbsp;import kotlin.time.toJavaDuration
+&nbsp;
+&nbsp;/** The timezone Tibia time is based on. */
+<b class="fc">&nbsp;public val TIBIA_TIMEZONE: ZoneId = ZoneId.of(&quot;Europe/Berlin&quot;)</b>
+&nbsp;
+&nbsp;/** The local time when server save happens. */
+<b class="fc">&nbsp;public val SERVER_SAVE_TIME: LocalTime = LocalTime.of(10, 0)</b>
+&nbsp;
+&nbsp;/** Get the current day of the week in Tibia
+&nbsp; *
+&nbsp; * A new day starts every server save, at 10:00 CET/CEST.
+&nbsp; */
+<b class="nc">&nbsp;public fun getTibiaWeekDay(): DayOfWeek = (getTibiaDateTime() - 10.hours.toJavaDuration()).dayOfWeek</b>
+&nbsp;
+&nbsp;/** Get the local datetime in Tibia&#39;s servers. */
+<b class="nc">&nbsp;public fun getTibiaDateTime(): LocalDateTime = LocalDateTime.now(TIBIA_TIMEZONE)</b>
+&nbsp;
+&nbsp;/** Get the time of the last server save from a [currentTime]. */
+<b class="nc">&nbsp;public fun getLastServerSaveTime(currentTime: ZonedDateTime = ZonedDateTime.now(TIBIA_TIMEZONE)): ZonedDateTime {</b>
+<b class="fc">&nbsp;    val serverSaveTime = ZonedDateTime.of(</b>
+<b class="fc">&nbsp;        currentTime.toLocalDate(), SERVER_SAVE_TIME, TIBIA_TIMEZONE</b>
+&nbsp;    )
+<b class="fc">&nbsp;    return if (currentTime &lt; serverSaveTime) serverSaveTime.minusDays(1) else serverSaveTime</b>
+&nbsp;}
+&nbsp;
+&nbsp;/** Get the time of the last server save from a [currentTime]. */
+&nbsp;public fun getLastServerSaveTime(currentTime: Instant): Instant =
+<b class="nc">&nbsp;    getLastServerSaveTime(ZonedDateTime.ofInstant(currentTime.toJavaInstant(), TIBIA_TIMEZONE)).toInstant()</b>
+<b class="nc">&nbsp;        .toKotlinInstant()</b>
+&nbsp;
+&nbsp;/** Get the time of the next server save from a [currentTime]. */
+<b class="nc">&nbsp;public fun getNextServerSaveTime(currentTime: ZonedDateTime = ZonedDateTime.now(TIBIA_TIMEZONE)): ZonedDateTime =</b>
+<b class="nc">&nbsp;    getLastServerSaveTime(currentTime).plusDays(1)</b>
+&nbsp;
+&nbsp;/** Get the time of the next server save from a [currentTime]. */
+&nbsp;public fun getNextServerSaveTime(currentTime: Instant): Instant =
+<b class="nc">&nbsp;    getNextServerSaveTime(ZonedDateTime.ofInstant(currentTime.toJavaInstant(), TIBIA_TIMEZONE)).toInstant()</b>
+<b class="nc">&nbsp;        .toKotlinInstant()</b>
+&nbsp;
+&nbsp;
+&nbsp;/**
+&nbsp; * Parses a string containing date and time from Tibia.com into an [Instant] instance.
+&nbsp; */
+&nbsp;public fun parseTibiaDateTime(input: String): Instant {
+<b class="fc">&nbsp;    val timeString = input.clean().let { it.substring(0, it.length - 4).trim() }</b>
+<b class="fc">&nbsp;    return try {</b>
+<b class="fc">&nbsp;        LocalDateTime.parse(timeString, DateTimeFormatter.ofPattern(&quot;MMM dd yyyy, HH:mm:ss&quot;, Locale.US))</b>
+<b class="fc">&nbsp;    } catch (dfe: DateTimeParseException) {</b>
+<b class="fc">&nbsp;        LocalDateTime.parse(timeString, DateTimeFormatter.ofPattern(&quot;MMM dd yyyy, HH:mm&quot;, Locale.US))</b>
+<b class="fc">&nbsp;    }.atZone(TIBIA_TIMEZONE).toInstant().toKotlinInstant()</b>
+&nbsp;}
+&nbsp;
+&nbsp;/**
+&nbsp; * Parses a string containing date from Tibia.com into an [LocalDate] instance.
+&nbsp; */
+&nbsp;public fun parseTibiaDate(input: String): LocalDate =
+<b class="fc">&nbsp;    LocalDate.parse(input.clean(), DateTimeFormatter.ofPattern(&quot;MMM dd yyyy&quot;, Locale.US))</b>
+&nbsp;
+&nbsp;/**
+&nbsp; * Parses a string containing date from Tibia.com into an [LocalDate] instance.
+&nbsp; */
+&nbsp;public fun parseTibiaFullDate(input: String): LocalDate =
+<b class="fc">&nbsp;    LocalDate.parse(input.clean(), DateTimeFormatter.ofPattern(&quot;MMMM d, yyyy&quot;, Locale.US))</b>
+&nbsp;
+&nbsp;/**
+&nbsp; * Parses a string containing a date time from Tibia.com forums into an [Instant] instance.
+&nbsp; */
+&nbsp;public fun parseTibiaForumDateTime(input: String): Instant {
+<b class="fc">&nbsp;    return LocalDateTime.parse(input, DateTimeFormatter.ofPattern(&quot;dd.MM.yyyy HH:mm:ss&quot;, Locale.US))</b>
+<b class="fc">&nbsp;        .atZone(TIBIA_TIMEZONE).toInstant().toKotlinInstant()</b>
+&nbsp;}
+</code>
 </pre>
 </div>
 
@@ -214,18 +215,15 @@ Current scope:     <a href="../../index.html">all classes</a>
     @*/
 
     if (!msie || msie && msie9) {
-        var codeBlock = document.getElementById('sourceCode');
-
-        if (codeBlock) {
-            hljs.highlightBlock(codeBlock);
-        }
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
     }
 })();
 </script>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-02-24 23:58</div>
+    <div style="float:right;">generated on 2023-03-15 02:46</div>
 </div>
 </body>
 </html>

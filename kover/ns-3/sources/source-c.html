@@ -7,9 +7,10 @@
   <title>Coverage Report > CharacterBuilderKt</title>
   <style type="text/css">
     @import "../../css/coverage.css";
-    @import "../../css/highlight-idea.css";
+    @import "../../css/idea.min.css";
   </style>
-  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
 </head>
 
 <body>
@@ -90,173 +91,173 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;/*
-<i class="no-highlight">2</i>&nbsp; * Copyright © 2022 Allan Galarza
-<i class="no-highlight">3</i>&nbsp; *
-<i class="no-highlight">4</i>&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
-<i class="no-highlight">5</i>&nbsp; * you may not use this file except in compliance with the License.
-<i class="no-highlight">6</i>&nbsp; * You may obtain a copy of the License at
-<i class="no-highlight">7</i>&nbsp; *
-<i class="no-highlight">8</i>&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
-<i class="no-highlight">9</i>&nbsp; *
-<i class="no-highlight">10</i>&nbsp; * Unless required by applicable law or agreed to in writing, software
-<i class="no-highlight">11</i>&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-<i class="no-highlight">12</i>&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-<i class="no-highlight">13</i>&nbsp; * See the License for the specific language governing permissions and
-<i class="no-highlight">14</i>&nbsp; * limitations under the License.
-<i class="no-highlight">15</i>&nbsp; */
-<i class="no-highlight">16</i>&nbsp;
-<i class="no-highlight">17</i>&nbsp;package com.galarzaa.tibiakt.core.builders
-<i class="no-highlight">18</i>&nbsp;
-<i class="no-highlight">19</i>&nbsp;import com.galarzaa.tibiakt.core.enums.AccountStatus
-<i class="no-highlight">20</i>&nbsp;import com.galarzaa.tibiakt.core.enums.Sex
-<i class="no-highlight">21</i>&nbsp;import com.galarzaa.tibiakt.core.enums.Vocation
-<i class="no-highlight">22</i>&nbsp;import com.galarzaa.tibiakt.core.models.character.AccountBadge
-<i class="no-highlight">23</i>&nbsp;import com.galarzaa.tibiakt.core.models.character.AccountInformation
-<i class="no-highlight">24</i>&nbsp;import com.galarzaa.tibiakt.core.models.character.Character
-<i class="no-highlight">25</i>&nbsp;import com.galarzaa.tibiakt.core.models.character.CharacterHouse
-<i class="no-highlight">26</i>&nbsp;import com.galarzaa.tibiakt.core.models.character.Death
-<i class="no-highlight">27</i>&nbsp;import com.galarzaa.tibiakt.core.models.character.DisplayedAchievement
-<i class="no-highlight">28</i>&nbsp;import com.galarzaa.tibiakt.core.models.character.GuildMembership
-<i class="no-highlight">29</i>&nbsp;import com.galarzaa.tibiakt.core.models.character.Killer
-<i class="no-highlight">30</i>&nbsp;import com.galarzaa.tibiakt.core.models.character.OtherCharacter
-<i class="no-highlight">31</i>&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
-<i class="no-highlight">32</i>&nbsp;import kotlinx.datetime.Instant
-<i class="no-highlight">33</i>&nbsp;import java.time.LocalDate
-<i class="no-highlight">34</i>&nbsp;
-<i class="no-highlight">35</i>&nbsp;@BuilderDsl
-<b class="fc"><i class="no-highlight">36</i>&nbsp;public inline fun character(block: CharacterBuilder.() -&gt; Unit): Character = CharacterBuilder().apply(block).build()</b>
-<i class="no-highlight">37</i>&nbsp;
-<i class="no-highlight">38</i>&nbsp;@BuilderDsl
-<i class="no-highlight">39</i>&nbsp;public inline fun characterBuilder(block: CharacterBuilder.() -&gt; Unit): CharacterBuilder =
-<b class="nc"><i class="no-highlight">40</i>&nbsp;    CharacterBuilder().apply(block)</b>
-<i class="no-highlight">41</i>&nbsp;
-<i class="no-highlight">42</i>&nbsp;/** Builder for [Character] instances. */
-<i class="no-highlight">43</i>&nbsp;@BuilderDsl
-<i class="no-highlight">44</i>&nbsp;public class CharacterBuilder : TibiaKtBuilder&lt;Character&gt; {
-<i class="no-highlight">45</i>&nbsp;    public lateinit var name: String
-<i class="no-highlight">46</i>&nbsp;    public var level: Int = 2
-<i class="no-highlight">47</i>&nbsp;    public var residence: String? = null
-<i class="no-highlight">48</i>&nbsp;    public var vocation: Vocation? = null
-<i class="no-highlight">49</i>&nbsp;    public var sex: Sex? = null
-<i class="no-highlight">50</i>&nbsp;    public var world: String? = null
-<i class="no-highlight">51</i>&nbsp;    public var achievementPoints: Int = 0
-<i class="no-highlight">52</i>&nbsp;    public var lastLogin: Instant? = null
-<i class="no-highlight">53</i>&nbsp;    public var isRecentlyTraded: Boolean = false
-<i class="no-highlight">54</i>&nbsp;    public var formerNames: List&lt;String&gt; = emptyList()
-<i class="no-highlight">55</i>&nbsp;    public var deletionDate: Instant? = null
-<i class="no-highlight">56</i>&nbsp;    public var formerWorld: String? = null
-<i class="no-highlight">57</i>&nbsp;    public var accountStatus: AccountStatus? = null
-<i class="no-highlight">58</i>&nbsp;    public var comment: String? = null
-<i class="no-highlight">59</i>&nbsp;    public var title: String? = null
-<i class="no-highlight">60</i>&nbsp;    public var position: String? = null
-<i class="no-highlight">61</i>&nbsp;    public var unlockedTitles: Int = 0
-<i class="no-highlight">62</i>&nbsp;    public var marriedTo: String? = null
-<i class="no-highlight">63</i>&nbsp;    public val houses: MutableList&lt;CharacterHouse&gt; = mutableListOf()
-<i class="no-highlight">64</i>&nbsp;    public var guildMembership: GuildMembership? = null
-<i class="no-highlight">65</i>&nbsp;    public val accountBadges: MutableList&lt;AccountBadge&gt; = mutableListOf()
-<i class="no-highlight">66</i>&nbsp;    public val achievements: MutableList&lt;DisplayedAchievement&gt; = mutableListOf()
-<i class="no-highlight">67</i>&nbsp;    public var accountInformation: AccountInformation? = null
-<i class="no-highlight">68</i>&nbsp;    public val deaths: MutableList&lt;Death&gt; = mutableListOf()
-<i class="no-highlight">69</i>&nbsp;    public val characters: MutableList&lt;OtherCharacter&gt; = mutableListOf()
-<i class="no-highlight">70</i>&nbsp;
-<i class="no-highlight">71</i>&nbsp;    public fun addHouse(
-<i class="no-highlight">72</i>&nbsp;        name: String,
-<i class="no-highlight">73</i>&nbsp;        houseId: Int,
-<i class="no-highlight">74</i>&nbsp;        town: String,
-<i class="no-highlight">75</i>&nbsp;        paidUntil: LocalDate,
-<i class="no-highlight">76</i>&nbsp;        world: String,
-<i class="no-highlight">77</i>&nbsp;    ): CharacterBuilder = apply {
-<i class="no-highlight">78</i>&nbsp;        houses.add(CharacterHouse(name, houseId, town, paidUntil, world))
-<i class="no-highlight">79</i>&nbsp;    }
-<i class="no-highlight">80</i>&nbsp;
-<i class="no-highlight">81</i>&nbsp;    @BuilderDsl
-<i class="no-highlight">82</i>&nbsp;    public fun house(block: CharacterHouseBuilder.() -&gt; Unit): CharacterBuilder =
-<i class="no-highlight">83</i>&nbsp;        apply { houses.add(CharacterHouseBuilder().apply(block).build()) }
-<i class="no-highlight">84</i>&nbsp;
-<i class="no-highlight">85</i>&nbsp;    public fun addBadge(name: String, descroption: String, iconUrl: String): CharacterBuilder = apply {
-<i class="no-highlight">86</i>&nbsp;        accountBadges.add(AccountBadge(name, descroption, iconUrl))
-<i class="no-highlight">87</i>&nbsp;    }
-<i class="no-highlight">88</i>&nbsp;
-<i class="no-highlight">89</i>&nbsp;    public fun addAchievement(name: String, grade: Int, secret: Boolean): CharacterBuilder = apply {
-<i class="no-highlight">90</i>&nbsp;        achievements.add(DisplayedAchievement(name, grade, secret))
-<i class="no-highlight">91</i>&nbsp;    }
-<i class="no-highlight">92</i>&nbsp;
-<i class="no-highlight">93</i>&nbsp;    public fun accountInformation(
-<i class="no-highlight">94</i>&nbsp;        created: Instant,
-<i class="no-highlight">95</i>&nbsp;        loyaltyTitle: String?,
-<i class="no-highlight">96</i>&nbsp;        position: String?,
-<i class="no-highlight">97</i>&nbsp;        tutorStars: Int?,
-<i class="no-highlight">98</i>&nbsp;    ): CharacterBuilder = apply {
-<i class="no-highlight">99</i>&nbsp;        accountInformation = AccountInformation(created, loyaltyTitle, position, tutorStars)
-<i class="no-highlight">100</i>&nbsp;    }
-<i class="no-highlight">101</i>&nbsp;
-<i class="no-highlight">102</i>&nbsp;    public fun guild(rank: String, guild: String): CharacterBuilder =
-<i class="no-highlight">103</i>&nbsp;        apply { guildMembership = GuildMembership(guild, rank) }
-<i class="no-highlight">104</i>&nbsp;
-<i class="no-highlight">105</i>&nbsp;    public fun addDeath(
-<i class="no-highlight">106</i>&nbsp;        timestamp: Instant,
-<i class="no-highlight">107</i>&nbsp;        level: Int,
-<i class="no-highlight">108</i>&nbsp;        killers: List&lt;Killer&gt;,
-<i class="no-highlight">109</i>&nbsp;        assists: List&lt;Killer&gt;,
-<i class="no-highlight">110</i>&nbsp;    ): CharacterBuilder = apply {
-<i class="no-highlight">111</i>&nbsp;        deaths.add(Death(timestamp, level, killers, assists))
-<i class="no-highlight">112</i>&nbsp;    }
-<i class="no-highlight">113</i>&nbsp;
-<i class="no-highlight">114</i>&nbsp;    public fun addCharacter(
-<i class="no-highlight">115</i>&nbsp;        name: String,
-<i class="no-highlight">116</i>&nbsp;        world: String,
-<i class="no-highlight">117</i>&nbsp;        main: Boolean = false,
-<i class="no-highlight">118</i>&nbsp;        online: Boolean = false,
-<i class="no-highlight">119</i>&nbsp;        deleted: Boolean = false,
-<i class="no-highlight">120</i>&nbsp;        traded: Boolean = false,
-<i class="no-highlight">121</i>&nbsp;        position: String?,
-<i class="no-highlight">122</i>&nbsp;    ): CharacterBuilder = apply { characters.add(OtherCharacter(name, world, main, online, deleted, traded, position)) }
-<i class="no-highlight">123</i>&nbsp;
-<i class="no-highlight">124</i>&nbsp;    override fun build(): Character = Character(
-<i class="no-highlight">125</i>&nbsp;        name = if (::name.isInitialized) name else error(&quot;name is required&quot;),
-<i class="no-highlight">126</i>&nbsp;        title = title,
-<i class="no-highlight">127</i>&nbsp;        formerNames = formerNames,
-<i class="no-highlight">128</i>&nbsp;        unlockedTitles = unlockedTitles,
-<i class="no-highlight">129</i>&nbsp;        sex = sex ?: error(&quot;sex is required&quot;),
-<i class="no-highlight">130</i>&nbsp;        vocation = vocation ?: error(&quot;vocation is required&quot;),
-<i class="no-highlight">131</i>&nbsp;        level = level,
-<i class="no-highlight">132</i>&nbsp;        achievementPoints = achievementPoints,
-<i class="no-highlight">133</i>&nbsp;        world = world ?: error(&quot;world is required&quot;),
-<i class="no-highlight">134</i>&nbsp;        formerWorld = formerWorld,
-<i class="no-highlight">135</i>&nbsp;        residence = residence ?: error(&quot;residence is required&quot;),
-<i class="no-highlight">136</i>&nbsp;        marriedTo = marriedTo,
-<i class="no-highlight">137</i>&nbsp;        houses = houses,
-<i class="no-highlight">138</i>&nbsp;        guildMembership = guildMembership,
-<i class="no-highlight">139</i>&nbsp;        lastLogin = lastLogin,
-<i class="no-highlight">140</i>&nbsp;        position = position,
-<i class="no-highlight">141</i>&nbsp;        comment = comment,
-<i class="no-highlight">142</i>&nbsp;        accountStatus = accountStatus ?: error(&quot;accountStatus is required&quot;),
-<i class="no-highlight">143</i>&nbsp;        isRecentlyTraded = isRecentlyTraded,
-<i class="no-highlight">144</i>&nbsp;        deletionDate = deletionDate,
-<i class="no-highlight">145</i>&nbsp;        badges = accountBadges,
-<i class="no-highlight">146</i>&nbsp;        achievements = achievements,
-<i class="no-highlight">147</i>&nbsp;        deaths = deaths,
-<i class="no-highlight">148</i>&nbsp;        accountInformation = accountInformation,
-<i class="no-highlight">149</i>&nbsp;        characters = characters
-<i class="no-highlight">150</i>&nbsp;    )
-<i class="no-highlight">151</i>&nbsp;
-<i class="no-highlight">152</i>&nbsp;    public class CharacterHouseBuilder : TibiaKtBuilder&lt;CharacterHouse&gt; {
-<i class="no-highlight">153</i>&nbsp;        public lateinit var name: String
-<i class="no-highlight">154</i>&nbsp;        public var houseId: Int = 0
-<i class="no-highlight">155</i>&nbsp;        public lateinit var town: String
-<i class="no-highlight">156</i>&nbsp;        public lateinit var paidUntil: LocalDate
-<i class="no-highlight">157</i>&nbsp;        public lateinit var world: String
-<i class="no-highlight">158</i>&nbsp;        public override fun build(): CharacterHouse = CharacterHouse(
-<i class="no-highlight">159</i>&nbsp;            name = if (::name.isInitialized) name else error(&quot;name is required&quot;),
-<i class="no-highlight">160</i>&nbsp;            houseId = houseId,
-<i class="no-highlight">161</i>&nbsp;            town = if (::town.isInitialized) town else error(&quot;town is required&quot;),
-<i class="no-highlight">162</i>&nbsp;            paidUntil = if (::paidUntil.isInitialized) paidUntil else error(&quot;paidUntil is required&quot;),
-<i class="no-highlight">163</i>&nbsp;            world = if (::world.isInitialized) world else error(&quot;world is required&quot;),
-<i class="no-highlight">164</i>&nbsp;        )
-<i class="no-highlight">165</i>&nbsp;    }
-<i class="no-highlight">166</i>&nbsp;}
-</div>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.galarzaa.tibiakt.core.builders
+&nbsp;
+&nbsp;import com.galarzaa.tibiakt.core.enums.AccountStatus
+&nbsp;import com.galarzaa.tibiakt.core.enums.Sex
+&nbsp;import com.galarzaa.tibiakt.core.enums.Vocation
+&nbsp;import com.galarzaa.tibiakt.core.models.character.AccountBadge
+&nbsp;import com.galarzaa.tibiakt.core.models.character.AccountInformation
+&nbsp;import com.galarzaa.tibiakt.core.models.character.Character
+&nbsp;import com.galarzaa.tibiakt.core.models.character.CharacterHouse
+&nbsp;import com.galarzaa.tibiakt.core.models.character.Death
+&nbsp;import com.galarzaa.tibiakt.core.models.character.DisplayedAchievement
+&nbsp;import com.galarzaa.tibiakt.core.models.character.GuildMembership
+&nbsp;import com.galarzaa.tibiakt.core.models.character.Killer
+&nbsp;import com.galarzaa.tibiakt.core.models.character.OtherCharacter
+&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
+&nbsp;import kotlinx.datetime.Instant
+&nbsp;import java.time.LocalDate
+&nbsp;
+&nbsp;@BuilderDsl
+<b class="fc">&nbsp;public inline fun character(block: CharacterBuilder.() -&gt; Unit): Character = CharacterBuilder().apply(block).build()</b>
+&nbsp;
+&nbsp;@BuilderDsl
+&nbsp;public inline fun characterBuilder(block: CharacterBuilder.() -&gt; Unit): CharacterBuilder =
+<b class="nc">&nbsp;    CharacterBuilder().apply(block)</b>
+&nbsp;
+&nbsp;/** Builder for [Character] instances. */
+&nbsp;@BuilderDsl
+&nbsp;public class CharacterBuilder : TibiaKtBuilder&lt;Character&gt; {
+&nbsp;    public lateinit var name: String
+&nbsp;    public var level: Int = 2
+&nbsp;    public var residence: String? = null
+&nbsp;    public var vocation: Vocation? = null
+&nbsp;    public var sex: Sex? = null
+&nbsp;    public var world: String? = null
+&nbsp;    public var achievementPoints: Int = 0
+&nbsp;    public var lastLogin: Instant? = null
+&nbsp;    public var isRecentlyTraded: Boolean = false
+&nbsp;    public var formerNames: List&lt;String&gt; = emptyList()
+&nbsp;    public var deletionDate: Instant? = null
+&nbsp;    public var formerWorld: String? = null
+&nbsp;    public var accountStatus: AccountStatus? = null
+&nbsp;    public var comment: String? = null
+&nbsp;    public var title: String? = null
+&nbsp;    public var position: String? = null
+&nbsp;    public var unlockedTitles: Int = 0
+&nbsp;    public var marriedTo: String? = null
+&nbsp;    public val houses: MutableList&lt;CharacterHouse&gt; = mutableListOf()
+&nbsp;    public var guildMembership: GuildMembership? = null
+&nbsp;    public val accountBadges: MutableList&lt;AccountBadge&gt; = mutableListOf()
+&nbsp;    public val achievements: MutableList&lt;DisplayedAchievement&gt; = mutableListOf()
+&nbsp;    public var accountInformation: AccountInformation? = null
+&nbsp;    public val deaths: MutableList&lt;Death&gt; = mutableListOf()
+&nbsp;    public val characters: MutableList&lt;OtherCharacter&gt; = mutableListOf()
+&nbsp;
+&nbsp;    public fun addHouse(
+&nbsp;        name: String,
+&nbsp;        houseId: Int,
+&nbsp;        town: String,
+&nbsp;        paidUntil: LocalDate,
+&nbsp;        world: String,
+&nbsp;    ): CharacterBuilder = apply {
+&nbsp;        houses.add(CharacterHouse(name, houseId, town, paidUntil, world))
+&nbsp;    }
+&nbsp;
+&nbsp;    @BuilderDsl
+&nbsp;    public fun house(block: CharacterHouseBuilder.() -&gt; Unit): CharacterBuilder =
+&nbsp;        apply { houses.add(CharacterHouseBuilder().apply(block).build()) }
+&nbsp;
+&nbsp;    public fun addBadge(name: String, descroption: String, iconUrl: String): CharacterBuilder = apply {
+&nbsp;        accountBadges.add(AccountBadge(name, descroption, iconUrl))
+&nbsp;    }
+&nbsp;
+&nbsp;    public fun addAchievement(name: String, grade: Int, secret: Boolean): CharacterBuilder = apply {
+&nbsp;        achievements.add(DisplayedAchievement(name, grade, secret))
+&nbsp;    }
+&nbsp;
+&nbsp;    public fun accountInformation(
+&nbsp;        created: Instant,
+&nbsp;        loyaltyTitle: String?,
+&nbsp;        position: String?,
+&nbsp;        tutorStars: Int?,
+&nbsp;    ): CharacterBuilder = apply {
+&nbsp;        accountInformation = AccountInformation(created, loyaltyTitle, position, tutorStars)
+&nbsp;    }
+&nbsp;
+&nbsp;    public fun guild(rank: String, guild: String): CharacterBuilder =
+&nbsp;        apply { guildMembership = GuildMembership(guild, rank) }
+&nbsp;
+&nbsp;    public fun addDeath(
+&nbsp;        timestamp: Instant,
+&nbsp;        level: Int,
+&nbsp;        killers: List&lt;Killer&gt;,
+&nbsp;        assists: List&lt;Killer&gt;,
+&nbsp;    ): CharacterBuilder = apply {
+&nbsp;        deaths.add(Death(timestamp, level, killers, assists))
+&nbsp;    }
+&nbsp;
+&nbsp;    public fun addCharacter(
+&nbsp;        name: String,
+&nbsp;        world: String,
+&nbsp;        main: Boolean = false,
+&nbsp;        online: Boolean = false,
+&nbsp;        deleted: Boolean = false,
+&nbsp;        traded: Boolean = false,
+&nbsp;        position: String?,
+&nbsp;    ): CharacterBuilder = apply { characters.add(OtherCharacter(name, world, main, online, deleted, traded, position)) }
+&nbsp;
+&nbsp;    override fun build(): Character = Character(
+&nbsp;        name = if (::name.isInitialized) name else error(&quot;name is required&quot;),
+&nbsp;        title = title,
+&nbsp;        formerNames = formerNames,
+&nbsp;        unlockedTitles = unlockedTitles,
+&nbsp;        sex = sex ?: error(&quot;sex is required&quot;),
+&nbsp;        vocation = vocation ?: error(&quot;vocation is required&quot;),
+&nbsp;        level = level,
+&nbsp;        achievementPoints = achievementPoints,
+&nbsp;        world = world ?: error(&quot;world is required&quot;),
+&nbsp;        formerWorld = formerWorld,
+&nbsp;        residence = residence ?: error(&quot;residence is required&quot;),
+&nbsp;        marriedTo = marriedTo,
+&nbsp;        houses = houses,
+&nbsp;        guildMembership = guildMembership,
+&nbsp;        lastLogin = lastLogin,
+&nbsp;        position = position,
+&nbsp;        comment = comment,
+&nbsp;        accountStatus = accountStatus ?: error(&quot;accountStatus is required&quot;),
+&nbsp;        isRecentlyTraded = isRecentlyTraded,
+&nbsp;        deletionDate = deletionDate,
+&nbsp;        badges = accountBadges,
+&nbsp;        achievements = achievements,
+&nbsp;        deaths = deaths,
+&nbsp;        accountInformation = accountInformation,
+&nbsp;        characters = characters
+&nbsp;    )
+&nbsp;
+&nbsp;    public class CharacterHouseBuilder : TibiaKtBuilder&lt;CharacterHouse&gt; {
+&nbsp;        public lateinit var name: String
+&nbsp;        public var houseId: Int = 0
+&nbsp;        public lateinit var town: String
+&nbsp;        public lateinit var paidUntil: LocalDate
+&nbsp;        public lateinit var world: String
+&nbsp;        public override fun build(): CharacterHouse = CharacterHouse(
+&nbsp;            name = if (::name.isInitialized) name else error(&quot;name is required&quot;),
+&nbsp;            houseId = houseId,
+&nbsp;            town = if (::town.isInitialized) town else error(&quot;town is required&quot;),
+&nbsp;            paidUntil = if (::paidUntil.isInitialized) paidUntil else error(&quot;paidUntil is required&quot;),
+&nbsp;            world = if (::world.isInitialized) world else error(&quot;world is required&quot;),
+&nbsp;        )
+&nbsp;    }
+&nbsp;}
+</code>
 </pre>
 </div>
 
@@ -271,18 +272,15 @@ Current scope:     <a href="../../index.html">all classes</a>
     @*/
 
     if (!msie || msie && msie9) {
-        var codeBlock = document.getElementById('sourceCode');
-
-        if (codeBlock) {
-            hljs.highlightBlock(codeBlock);
-        }
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
     }
 })();
 </script>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-02-24 23:58</div>
+    <div style="float:right;">generated on 2023-03-15 02:46</div>
 </div>
 </body>
 </html>

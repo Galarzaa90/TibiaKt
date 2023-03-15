@@ -7,9 +7,10 @@
   <title>Coverage Report > GuildsSectionParser</title>
   <style type="text/css">
     @import "../../css/coverage.css";
-    @import "../../css/highlight-idea.css";
+    @import "../../css/idea.min.css";
   </style>
-  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
 </head>
 
 <body>
@@ -97,63 +98,63 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;/*
-<i class="no-highlight">2</i>&nbsp; * Copyright © 2022 Allan Galarza
-<i class="no-highlight">3</i>&nbsp; *
-<i class="no-highlight">4</i>&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
-<i class="no-highlight">5</i>&nbsp; * you may not use this file except in compliance with the License.
-<i class="no-highlight">6</i>&nbsp; * You may obtain a copy of the License at
-<i class="no-highlight">7</i>&nbsp; *
-<i class="no-highlight">8</i>&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
-<i class="no-highlight">9</i>&nbsp; *
-<i class="no-highlight">10</i>&nbsp; * Unless required by applicable law or agreed to in writing, software
-<i class="no-highlight">11</i>&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-<i class="no-highlight">12</i>&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-<i class="no-highlight">13</i>&nbsp; * See the License for the specific language governing permissions and
-<i class="no-highlight">14</i>&nbsp; * limitations under the License.
-<i class="no-highlight">15</i>&nbsp; */
-<i class="no-highlight">16</i>&nbsp;
-<i class="no-highlight">17</i>&nbsp;package com.galarzaa.tibiakt.core.parsers
-<i class="no-highlight">18</i>&nbsp;
-<i class="no-highlight">19</i>&nbsp;import com.galarzaa.tibiakt.core.builders.guildsSection
-<i class="no-highlight">20</i>&nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
-<i class="no-highlight">21</i>&nbsp;import com.galarzaa.tibiakt.core.models.guild.GuildsSection
-<i class="no-highlight">22</i>&nbsp;import com.galarzaa.tibiakt.core.utils.boxContent
-<i class="no-highlight">23</i>&nbsp;import com.galarzaa.tibiakt.core.utils.cleanText
-<i class="no-highlight">24</i>&nbsp;import com.galarzaa.tibiakt.core.utils.offsetStart
-<i class="no-highlight">25</i>&nbsp;import org.jsoup.Jsoup
-<i class="no-highlight">26</i>&nbsp;import org.jsoup.nodes.Document
-<i class="no-highlight">27</i>&nbsp;
-<i class="no-highlight">28</i>&nbsp;/** Parser for the guild section. */
-<i class="no-highlight">29</i>&nbsp;public object GuildsSectionParser : Parser&lt;GuildsSection?&gt; {
-<i class="no-highlight">30</i>&nbsp;    override fun fromContent(content: String): GuildsSection? {
-<b class="fc"><i class="no-highlight">31</i>&nbsp;        val document: Document = Jsoup.parse(content, &quot;&quot;)</b>
-<b class="fc"><i class="no-highlight">32</i>&nbsp;        val boxContent = document.boxContent()</b>
-<b class="fc"><i class="no-highlight">33</i>&nbsp;        val tables = boxContent.select(&quot;table.TableContent&quot;)</b>
-<b class="fc"><i class="no-highlight">34</i>&nbsp;        return guildsSection {</b>
-<b class="pc"><i class="no-highlight">35</i>&nbsp;            val selectedWorld = boxContent.selectFirst(&quot;select[name=world]&quot;)?.selectFirst(&quot;option[selected]&quot;)</b>
-<b class="nc"><i class="no-highlight">36</i>&nbsp;                ?: throw ParsingException(&quot;Could not find selected world&quot;)</b>
-<b class="fc"><i class="no-highlight">37</i>&nbsp;            if (selectedWorld.attr(&quot;value&quot;).isBlank())</b>
-<b class="fc"><i class="no-highlight">38</i>&nbsp;                return null</b>
-<b class="fc"><i class="no-highlight">39</i>&nbsp;            world = selectedWorld.cleanText()</b>
-<b class="fc"><i class="no-highlight">40</i>&nbsp;            for ((index, table) in tables.withIndex()) {</b>
-<b class="fc"><i class="no-highlight">41</i>&nbsp;                val isActive = index == 0</b>
-<b class="pc"><i class="no-highlight">42</i>&nbsp;                val rows = table?.select(&quot;tr&quot;).orEmpty()</b>
-<b class="fc"><i class="no-highlight">43</i>&nbsp;                for (row in rows.offsetStart(1)) {</b>
-<b class="fc"><i class="no-highlight">44</i>&nbsp;                    val (logoColumn, nameColumn, _) = row.select(&quot;td&quot;)</b>
-<b class="pc"><i class="no-highlight">45</i>&nbsp;                    val nameContainer = nameColumn.selectFirst(&quot;b&quot;) ?: continue</b>
-<b class="fc"><i class="no-highlight">46</i>&nbsp;                    val logoUrl =</b>
-<b class="pc"><i class="no-highlight">47</i>&nbsp;                        logoColumn.selectFirst(&quot;img&quot;)?.attr(&quot;src&quot;) ?: throw ParsingException(&quot;could not find logo URL&quot;)</b>
-<b class="fc"><i class="no-highlight">48</i>&nbsp;                    val name = nameContainer.cleanText()</b>
-<b class="fc"><i class="no-highlight">49</i>&nbsp;                    nameContainer.remove()</b>
-<b class="fc"><i class="no-highlight">50</i>&nbsp;                    val description = nameColumn.cleanText().ifBlank { null }</b>
-<b class="fc"><i class="no-highlight">51</i>&nbsp;                    addGuild(name, logoUrl, description, isActive)</b>
-<i class="no-highlight">52</i>&nbsp;                }
-<i class="no-highlight">53</i>&nbsp;            }
-<b class="fc"><i class="no-highlight">54</i>&nbsp;        }</b>
-<i class="no-highlight">55</i>&nbsp;    }
-<i class="no-highlight">56</i>&nbsp;}
-</div>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.galarzaa.tibiakt.core.parsers
+&nbsp;
+&nbsp;import com.galarzaa.tibiakt.core.builders.guildsSection
+&nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
+&nbsp;import com.galarzaa.tibiakt.core.models.guild.GuildsSection
+&nbsp;import com.galarzaa.tibiakt.core.utils.boxContent
+&nbsp;import com.galarzaa.tibiakt.core.utils.cleanText
+&nbsp;import com.galarzaa.tibiakt.core.utils.offsetStart
+&nbsp;import org.jsoup.Jsoup
+&nbsp;import org.jsoup.nodes.Document
+&nbsp;
+&nbsp;/** Parser for the guild section. */
+&nbsp;public object GuildsSectionParser : Parser&lt;GuildsSection?&gt; {
+&nbsp;    override fun fromContent(content: String): GuildsSection? {
+<b class="fc">&nbsp;        val document: Document = Jsoup.parse(content, &quot;&quot;)</b>
+<b class="fc">&nbsp;        val boxContent = document.boxContent()</b>
+<b class="fc">&nbsp;        val tables = boxContent.select(&quot;table.TableContent&quot;)</b>
+<b class="fc">&nbsp;        return guildsSection {</b>
+<b class="pc">&nbsp;            val selectedWorld = boxContent.selectFirst(&quot;select[name=world]&quot;)?.selectFirst(&quot;option[selected]&quot;)</b>
+<b class="nc">&nbsp;                ?: throw ParsingException(&quot;Could not find selected world&quot;)</b>
+<b class="fc">&nbsp;            if (selectedWorld.attr(&quot;value&quot;).isBlank())</b>
+<b class="fc">&nbsp;                return null</b>
+<b class="fc">&nbsp;            world = selectedWorld.cleanText()</b>
+<b class="fc">&nbsp;            for ((index, table) in tables.withIndex()) {</b>
+<b class="fc">&nbsp;                val isActive = index == 0</b>
+<b class="pc">&nbsp;                val rows = table?.select(&quot;tr&quot;).orEmpty()</b>
+<b class="fc">&nbsp;                for (row in rows.offsetStart(1)) {</b>
+<b class="fc">&nbsp;                    val (logoColumn, nameColumn, _) = row.select(&quot;td&quot;)</b>
+<b class="pc">&nbsp;                    val nameContainer = nameColumn.selectFirst(&quot;b&quot;) ?: continue</b>
+<b class="fc">&nbsp;                    val logoUrl =</b>
+<b class="pc">&nbsp;                        logoColumn.selectFirst(&quot;img&quot;)?.attr(&quot;src&quot;) ?: throw ParsingException(&quot;could not find logo URL&quot;)</b>
+<b class="fc">&nbsp;                    val name = nameContainer.cleanText()</b>
+<b class="fc">&nbsp;                    nameContainer.remove()</b>
+<b class="fc">&nbsp;                    val description = nameColumn.cleanText().ifBlank { null }</b>
+<b class="fc">&nbsp;                    addGuild(name, logoUrl, description, isActive)</b>
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;}
+</code>
 </pre>
 </div>
 
@@ -168,18 +169,15 @@ Current scope:     <a href="../../index.html">all classes</a>
     @*/
 
     if (!msie || msie && msie9) {
-        var codeBlock = document.getElementById('sourceCode');
-
-        if (codeBlock) {
-            hljs.highlightBlock(codeBlock);
-        }
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
     }
 })();
 </script>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-02-24 23:58</div>
+    <div style="float:right;">generated on 2023-03-15 02:46</div>
 </div>
 </body>
 </html>

@@ -7,9 +7,10 @@
   <title>Coverage Report > GuildParser</title>
   <style type="text/css">
     @import "../../css/coverage.css";
-    @import "../../css/highlight-idea.css";
+    @import "../../css/idea.min.css";
   </style>
-  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
 </head>
 
 <body>
@@ -155,130 +156,130 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;/*
-<i class="no-highlight">2</i>&nbsp; * Copyright © 2022 Allan Galarza
-<i class="no-highlight">3</i>&nbsp; *
-<i class="no-highlight">4</i>&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
-<i class="no-highlight">5</i>&nbsp; * you may not use this file except in compliance with the License.
-<i class="no-highlight">6</i>&nbsp; * You may obtain a copy of the License at
-<i class="no-highlight">7</i>&nbsp; *
-<i class="no-highlight">8</i>&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
-<i class="no-highlight">9</i>&nbsp; *
-<i class="no-highlight">10</i>&nbsp; * Unless required by applicable law or agreed to in writing, software
-<i class="no-highlight">11</i>&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-<i class="no-highlight">12</i>&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-<i class="no-highlight">13</i>&nbsp; * See the License for the specific language governing permissions and
-<i class="no-highlight">14</i>&nbsp; * limitations under the License.
-<i class="no-highlight">15</i>&nbsp; */
-<i class="no-highlight">16</i>&nbsp;
-<i class="no-highlight">17</i>&nbsp;package com.galarzaa.tibiakt.core.parsers
-<i class="no-highlight">18</i>&nbsp;
-<i class="no-highlight">19</i>&nbsp;import com.galarzaa.tibiakt.core.builders.GuildBuilder
-<i class="no-highlight">20</i>&nbsp;import com.galarzaa.tibiakt.core.builders.guild
-<i class="no-highlight">21</i>&nbsp;import com.galarzaa.tibiakt.core.enums.StringEnum
-<i class="no-highlight">22</i>&nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
-<i class="no-highlight">23</i>&nbsp;import com.galarzaa.tibiakt.core.models.guild.Guild
-<i class="no-highlight">24</i>&nbsp;import com.galarzaa.tibiakt.core.utils.boxContent
-<i class="no-highlight">25</i>&nbsp;import com.galarzaa.tibiakt.core.utils.clean
-<i class="no-highlight">26</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseTablesMap
-<i class="no-highlight">27</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseTibiaDate
-<i class="no-highlight">28</i>&nbsp;import com.galarzaa.tibiakt.core.utils.remove
-<i class="no-highlight">29</i>&nbsp;import com.galarzaa.tibiakt.core.utils.wholeCleanText
-<i class="no-highlight">30</i>&nbsp;import org.jsoup.Jsoup
-<i class="no-highlight">31</i>&nbsp;import org.jsoup.nodes.Document
-<i class="no-highlight">32</i>&nbsp;import org.jsoup.nodes.Element
-<i class="no-highlight">33</i>&nbsp;import org.jsoup.nodes.TextNode
-<i class="no-highlight">34</i>&nbsp;import org.jsoup.select.Elements
-<i class="no-highlight">35</i>&nbsp;
-<i class="no-highlight">36</i>&nbsp;/** Parser for the guild information page. */
-<i class="no-highlight">37</i>&nbsp;public object GuildParser : Parser&lt;Guild?&gt; {
-<i class="no-highlight">38</i>&nbsp;    private val descriptionRegex =
-<b class="fc"><i class="no-highlight">39</i>&nbsp;        Regex(</b>
-<b class="fc"><i class="no-highlight">40</i>&nbsp;            &quot;&quot;&quot;(?&lt;description&gt;.*)?The guild was founded on (?&lt;world&gt;\w+) on (?&lt;date&gt;[^.]+)\.&quot;&quot;&quot;,</b>
-<b class="fc"><i class="no-highlight">41</i>&nbsp;            setOf(RegexOption.DOT_MATCHES_ALL, RegexOption.MULTILINE)</b>
-<i class="no-highlight">42</i>&nbsp;        )
-<i class="no-highlight">43</i>&nbsp;    private val guildHallRegex =
-<b class="fc"><i class="no-highlight">44</i>&nbsp;        Regex(&quot;&quot;&quot;Their home on (?&lt;world&gt;\w+) is (?&lt;name&gt;[^.]+)\. The rent is paid until (?&lt;paidUntil&gt;[^.]+)&quot;&quot;&quot;)</b>
-<b class="fc"><i class="no-highlight">45</i>&nbsp;    private val disbandingRegex = Regex(&quot;&quot;&quot;It will be disbanded on (\w+\s\d+\s\d+)\s([^.]+).&quot;&quot;&quot;)</b>
-<i class="no-highlight">46</i>&nbsp;
-<i class="no-highlight">47</i>&nbsp;    override fun fromContent(content: String): Guild? {
-<b class="fc"><i class="no-highlight">48</i>&nbsp;        val document: Document = Jsoup.parse(content)</b>
-<b class="fc"><i class="no-highlight">49</i>&nbsp;        val boxContent = document.boxContent()</b>
-<b class="fc"><i class="no-highlight">50</i>&nbsp;        return guild {</b>
-<b class="fc"><i class="no-highlight">51</i>&nbsp;            val tables = boxContent.parseTablesMap(&quot;table.Table1, table.Table3&quot;)</b>
-<b class="fc"><i class="no-highlight">52</i>&nbsp;            if (&quot;Error&quot; in tables) {</b>
-<b class="fc"><i class="no-highlight">53</i>&nbsp;                return null</b>
-<i class="no-highlight">54</i>&nbsp;            }
-<b class="pc"><i class="no-highlight">55</i>&nbsp;            tables[&quot;Guild Information&quot;]?.apply { parseGuildInformation(this) }</b>
-<b class="nc"><i class="no-highlight">56</i>&nbsp;                ?: throw ParsingException(&quot;Guild Information container not found&quot;)</b>
-<i class="no-highlight">57</i>&nbsp;
-<b class="pc"><i class="no-highlight">58</i>&nbsp;            name = boxContent.selectFirst(&quot;h1&quot;)?.text()?.trim() ?: throw ParsingException(&quot;Guild title not found&quot;)</b>
-<b class="fc"><i class="no-highlight">59</i>&nbsp;            val guildImg = boxContent.selectFirst(&quot;img[width=64]&quot;)</b>
-<b class="pc"><i class="no-highlight">60</i>&nbsp;            logoUrl = guildImg?.attr(&quot;src&quot;)</b>
-<b class="pc"><i class="no-highlight">61</i>&nbsp;            tables[&quot;Guild Members&quot;]?.apply { parseGuildMembers(this) }</b>
-<b class="pc"><i class="no-highlight">62</i>&nbsp;            tables[&quot;Invited Characters&quot;]?.apply { parseGuildMembers(this) }</b>
-<b class="fc"><i class="no-highlight">63</i>&nbsp;        }</b>
-<i class="no-highlight">64</i>&nbsp;    }
-<i class="no-highlight">65</i>&nbsp;
-<i class="no-highlight">66</i>&nbsp;    private fun GuildBuilder.parseGuildMembers(parsedContent: Element) {
-<b class="fc"><i class="no-highlight">67</i>&nbsp;        val rows = parsedContent.select(&quot;tr[bgcolor]&quot;)</b>
-<b class="fc"><i class="no-highlight">68</i>&nbsp;        var currentRank = &quot;&quot;</b>
-<b class="fc"><i class="no-highlight">69</i>&nbsp;        for (row in rows) {</b>
-<b class="fc"><i class="no-highlight">70</i>&nbsp;            val columns = row.select(&quot;td&quot;)</b>
-<b class="fc"><i class="no-highlight">71</i>&nbsp;            when (columns.size) {</b>
-<b class="fc"><i class="no-highlight">72</i>&nbsp;                6 -&gt; currentRank = parseMemberRow(columns, currentRank)</b>
-<b class="fc"><i class="no-highlight">73</i>&nbsp;                2 -&gt; parseInviteRow(columns)</b>
-<i class="no-highlight">74</i>&nbsp;            }
-<i class="no-highlight">75</i>&nbsp;        }
-<i class="no-highlight">76</i>&nbsp;    }
-<i class="no-highlight">77</i>&nbsp;
-<i class="no-highlight">78</i>&nbsp;    private fun GuildBuilder.parseInviteRow(columns: Elements) {
-<b class="fc"><i class="no-highlight">79</i>&nbsp;        val (name, date) = columns.map { it.text().clean() }</b>
-<b class="fc"><i class="no-highlight">80</i>&nbsp;        if (date.contains(&quot;Invitation Date&quot;)) return</b>
-<b class="fc"><i class="no-highlight">81</i>&nbsp;        addInvite(name, parseTibiaDate(date))</b>
-<i class="no-highlight">82</i>&nbsp;    }
-<i class="no-highlight">83</i>&nbsp;
-<i class="no-highlight">84</i>&nbsp;    private fun GuildBuilder.parseMemberRow(columns: List&lt;Element&gt;, currentRank: String): String {
-<b class="fc"><i class="no-highlight">85</i>&nbsp;        var rank = columns[0].text().clean()</b>
-<b class="fc"><i class="no-highlight">86</i>&nbsp;        if (rank.isBlank()) {</b>
-<b class="fc"><i class="no-highlight">87</i>&nbsp;            rank = currentRank</b>
-<i class="no-highlight">88</i>&nbsp;        }
-<b class="pc"><i class="no-highlight">89</i>&nbsp;        val nameLink = columns[1].selectFirst(&quot;a&quot;) ?: return currentRank</b>
-<b class="fc"><i class="no-highlight">90</i>&nbsp;        val titleNode = nameLink.nextSibling()</b>
-<b class="fc"><i class="no-highlight">91</i>&nbsp;        addMember {</b>
-<b class="fc"><i class="no-highlight">92</i>&nbsp;            this.rank = rank</b>
-<b class="fc"><i class="no-highlight">93</i>&nbsp;            name = nameLink.text().clean()</b>
-<b class="pc"><i class="no-highlight">94</i>&nbsp;            title = (titleNode as? TextNode)?.text()?.remove(&quot;(&quot;)?.remove(&quot;)&quot;)?.clean()</b>
-<b class="pc"><i class="no-highlight">95</i>&nbsp;            vocation = StringEnum.fromValue(columns[2].text().clean())</b>
-<b class="nc"><i class="no-highlight">96</i>&nbsp;                ?: throw ParsingException(&quot;unknown vocation in member: ${columns[2].text().clean()}&quot;)</b>
-<b class="fc"><i class="no-highlight">97</i>&nbsp;            level = columns[3].text().toInt()</b>
-<b class="fc"><i class="no-highlight">98</i>&nbsp;            joiningDate = parseTibiaDate(columns[4].text().clean())</b>
-<b class="fc"><i class="no-highlight">99</i>&nbsp;            isOnline = columns[5].text().contains(&quot;online&quot;)</b>
-<i class="no-highlight">100</i>&nbsp;        }
-<b class="fc"><i class="no-highlight">101</i>&nbsp;        return rank</b>
-<i class="no-highlight">102</i>&nbsp;    }
-<i class="no-highlight">103</i>&nbsp;
-<i class="no-highlight">104</i>&nbsp;    private fun GuildBuilder.parseGuildInformation(container: Element) {
-<b class="fc"><i class="no-highlight">105</i>&nbsp;        val containerText = container.wholeCleanText()</b>
-<b class="pc"><i class="no-highlight">106</i>&nbsp;        descriptionRegex.find(containerText)?.apply {</b>
-<b class="pc"><i class="no-highlight">107</i>&nbsp;            description = groups[&quot;description&quot;]?.value?.trim()</b>
-<b class="fc"><i class="no-highlight">108</i>&nbsp;            foundingDate = parseTibiaDate(groups[&quot;date&quot;]!!.value)</b>
-<b class="fc"><i class="no-highlight">109</i>&nbsp;            world = groups[&quot;world&quot;]!!.value</b>
-<b class="fc"><i class="no-highlight">110</i>&nbsp;        }</b>
-<b class="fc"><i class="no-highlight">111</i>&nbsp;        hasOpenApplications = containerText.contains(&quot;opened for applications&quot;)</b>
-<b class="fc"><i class="no-highlight">112</i>&nbsp;        isActive = containerText.contains(&quot;it is currently active&quot;, true)</b>
-<b class="fc"><i class="no-highlight">113</i>&nbsp;        container.selectFirst(&quot;a&quot;)?.apply { homepage = text() }</b>
-<b class="fc"><i class="no-highlight">114</i>&nbsp;        guildHallRegex.find(containerText)?.apply {</b>
-<b class="fc"><i class="no-highlight">115</i>&nbsp;            guildHall(groups[&quot;name&quot;]!!.value, parseTibiaDate(groups[&quot;paidUntil&quot;]!!.value))</b>
-<b class="fc"><i class="no-highlight">116</i>&nbsp;        }</b>
-<b class="fc"><i class="no-highlight">117</i>&nbsp;        disbandingRegex.find(containerText)?.apply {</b>
-<b class="fc"><i class="no-highlight">118</i>&nbsp;            val (_, date, reason) = groupValues</b>
-<b class="fc"><i class="no-highlight">119</i>&nbsp;            disbandingDate = parseTibiaDate(date)</b>
-<b class="fc"><i class="no-highlight">120</i>&nbsp;            disbandingReason = reason</b>
-<b class="fc"><i class="no-highlight">121</i>&nbsp;        }</b>
-<i class="no-highlight">122</i>&nbsp;    }
-<i class="no-highlight">123</i>&nbsp;}
-</div>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.galarzaa.tibiakt.core.parsers
+&nbsp;
+&nbsp;import com.galarzaa.tibiakt.core.builders.GuildBuilder
+&nbsp;import com.galarzaa.tibiakt.core.builders.guild
+&nbsp;import com.galarzaa.tibiakt.core.enums.StringEnum
+&nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
+&nbsp;import com.galarzaa.tibiakt.core.models.guild.Guild
+&nbsp;import com.galarzaa.tibiakt.core.utils.boxContent
+&nbsp;import com.galarzaa.tibiakt.core.utils.clean
+&nbsp;import com.galarzaa.tibiakt.core.utils.parseTablesMap
+&nbsp;import com.galarzaa.tibiakt.core.utils.parseTibiaDate
+&nbsp;import com.galarzaa.tibiakt.core.utils.remove
+&nbsp;import com.galarzaa.tibiakt.core.utils.wholeCleanText
+&nbsp;import org.jsoup.Jsoup
+&nbsp;import org.jsoup.nodes.Document
+&nbsp;import org.jsoup.nodes.Element
+&nbsp;import org.jsoup.nodes.TextNode
+&nbsp;import org.jsoup.select.Elements
+&nbsp;
+&nbsp;/** Parser for the guild information page. */
+&nbsp;public object GuildParser : Parser&lt;Guild?&gt; {
+&nbsp;    private val descriptionRegex =
+<b class="fc">&nbsp;        Regex(</b>
+<b class="fc">&nbsp;            &quot;&quot;&quot;(?&lt;description&gt;.*)?The guild was founded on (?&lt;world&gt;\w+) on (?&lt;date&gt;[^.]+)\.&quot;&quot;&quot;,</b>
+<b class="fc">&nbsp;            setOf(RegexOption.DOT_MATCHES_ALL, RegexOption.MULTILINE)</b>
+&nbsp;        )
+&nbsp;    private val guildHallRegex =
+<b class="fc">&nbsp;        Regex(&quot;&quot;&quot;Their home on (?&lt;world&gt;\w+) is (?&lt;name&gt;[^.]+)\. The rent is paid until (?&lt;paidUntil&gt;[^.]+)&quot;&quot;&quot;)</b>
+<b class="fc">&nbsp;    private val disbandingRegex = Regex(&quot;&quot;&quot;It will be disbanded on (\w+\s\d+\s\d+)\s([^.]+).&quot;&quot;&quot;)</b>
+&nbsp;
+&nbsp;    override fun fromContent(content: String): Guild? {
+<b class="fc">&nbsp;        val document: Document = Jsoup.parse(content)</b>
+<b class="fc">&nbsp;        val boxContent = document.boxContent()</b>
+<b class="fc">&nbsp;        return guild {</b>
+<b class="fc">&nbsp;            val tables = boxContent.parseTablesMap(&quot;table.Table1, table.Table3&quot;)</b>
+<b class="fc">&nbsp;            if (&quot;Error&quot; in tables) {</b>
+<b class="fc">&nbsp;                return null</b>
+&nbsp;            }
+<b class="pc">&nbsp;            tables[&quot;Guild Information&quot;]?.apply { parseGuildInformation(this) }</b>
+<b class="nc">&nbsp;                ?: throw ParsingException(&quot;Guild Information container not found&quot;)</b>
+&nbsp;
+<b class="pc">&nbsp;            name = boxContent.selectFirst(&quot;h1&quot;)?.text()?.trim() ?: throw ParsingException(&quot;Guild title not found&quot;)</b>
+<b class="fc">&nbsp;            val guildImg = boxContent.selectFirst(&quot;img[width=64]&quot;)</b>
+<b class="pc">&nbsp;            logoUrl = guildImg?.attr(&quot;src&quot;)</b>
+<b class="pc">&nbsp;            tables[&quot;Guild Members&quot;]?.apply { parseGuildMembers(this) }</b>
+<b class="pc">&nbsp;            tables[&quot;Invited Characters&quot;]?.apply { parseGuildMembers(this) }</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private fun GuildBuilder.parseGuildMembers(parsedContent: Element) {
+<b class="fc">&nbsp;        val rows = parsedContent.select(&quot;tr[bgcolor]&quot;)</b>
+<b class="fc">&nbsp;        var currentRank = &quot;&quot;</b>
+<b class="fc">&nbsp;        for (row in rows) {</b>
+<b class="fc">&nbsp;            val columns = row.select(&quot;td&quot;)</b>
+<b class="fc">&nbsp;            when (columns.size) {</b>
+<b class="fc">&nbsp;                6 -&gt; currentRank = parseMemberRow(columns, currentRank)</b>
+<b class="fc">&nbsp;                2 -&gt; parseInviteRow(columns)</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private fun GuildBuilder.parseInviteRow(columns: Elements) {
+<b class="fc">&nbsp;        val (name, date) = columns.map { it.text().clean() }</b>
+<b class="fc">&nbsp;        if (date.contains(&quot;Invitation Date&quot;)) return</b>
+<b class="fc">&nbsp;        addInvite(name, parseTibiaDate(date))</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private fun GuildBuilder.parseMemberRow(columns: List&lt;Element&gt;, currentRank: String): String {
+<b class="fc">&nbsp;        var rank = columns[0].text().clean()</b>
+<b class="fc">&nbsp;        if (rank.isBlank()) {</b>
+<b class="fc">&nbsp;            rank = currentRank</b>
+&nbsp;        }
+<b class="pc">&nbsp;        val nameLink = columns[1].selectFirst(&quot;a&quot;) ?: return currentRank</b>
+<b class="fc">&nbsp;        val titleNode = nameLink.nextSibling()</b>
+<b class="fc">&nbsp;        addMember {</b>
+<b class="fc">&nbsp;            this.rank = rank</b>
+<b class="fc">&nbsp;            name = nameLink.text().clean()</b>
+<b class="pc">&nbsp;            title = (titleNode as? TextNode)?.text()?.remove(&quot;(&quot;)?.remove(&quot;)&quot;)?.clean()</b>
+<b class="pc">&nbsp;            vocation = StringEnum.fromValue(columns[2].text().clean())</b>
+<b class="nc">&nbsp;                ?: throw ParsingException(&quot;unknown vocation in member: ${columns[2].text().clean()}&quot;)</b>
+<b class="fc">&nbsp;            level = columns[3].text().toInt()</b>
+<b class="fc">&nbsp;            joiningDate = parseTibiaDate(columns[4].text().clean())</b>
+<b class="fc">&nbsp;            isOnline = columns[5].text().contains(&quot;online&quot;)</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return rank</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private fun GuildBuilder.parseGuildInformation(container: Element) {
+<b class="fc">&nbsp;        val containerText = container.wholeCleanText()</b>
+<b class="pc">&nbsp;        descriptionRegex.find(containerText)?.apply {</b>
+<b class="pc">&nbsp;            description = groups[&quot;description&quot;]?.value?.trim()</b>
+<b class="fc">&nbsp;            foundingDate = parseTibiaDate(groups[&quot;date&quot;]!!.value)</b>
+<b class="fc">&nbsp;            world = groups[&quot;world&quot;]!!.value</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        hasOpenApplications = containerText.contains(&quot;opened for applications&quot;)</b>
+<b class="fc">&nbsp;        isActive = containerText.contains(&quot;it is currently active&quot;, true)</b>
+<b class="fc">&nbsp;        container.selectFirst(&quot;a&quot;)?.apply { homepage = text() }</b>
+<b class="fc">&nbsp;        guildHallRegex.find(containerText)?.apply {</b>
+<b class="fc">&nbsp;            guildHall(groups[&quot;name&quot;]!!.value, parseTibiaDate(groups[&quot;paidUntil&quot;]!!.value))</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        disbandingRegex.find(containerText)?.apply {</b>
+<b class="fc">&nbsp;            val (_, date, reason) = groupValues</b>
+<b class="fc">&nbsp;            disbandingDate = parseTibiaDate(date)</b>
+<b class="fc">&nbsp;            disbandingReason = reason</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;}
+</code>
 </pre>
 </div>
 
@@ -293,18 +294,15 @@ Current scope:     <a href="../../index.html">all classes</a>
     @*/
 
     if (!msie || msie && msie9) {
-        var codeBlock = document.getElementById('sourceCode');
-
-        if (codeBlock) {
-            hljs.highlightBlock(codeBlock);
-        }
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
     }
 })();
 </script>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-02-24 23:58</div>
+    <div style="float:right;">generated on 2023-03-15 02:46</div>
 </div>
 </body>
 </html>

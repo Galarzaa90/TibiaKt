@@ -37,6 +37,9 @@
     <div>0.2.0
     </div>
     <div class="pull-right d-flex">
+        <div class="filter-section" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":tibiakt-core:dokkaHtmlPartial/main">jvm</button>
+        </div>
         <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
         <div id="searchBar"></div>
     </div>
@@ -46,149 +49,153 @@
         <div id="sideMenu"></div>
     </div>
     <div id="main">
-<div class="main-content" id="content" pageids="tibiakt-core::com.galarzaa.tibiakt.core.models.character/OtherCharacter///PointingToDeclaration//-185655222">
+<div class="main-content" data-page-type="classlike" id="content" pageids="tibiakt-core::com.galarzaa.tibiakt.core.models.character/OtherCharacter///PointingToDeclaration//-185655222">
   <div class="breadcrumbs"><a href="../../index.html">tibiakt-core</a><span class="delimiter">/</span><a href="../index.html">com.galarzaa.tibiakt.core.models.character</a><span class="delimiter">/</span><span class="current">OtherCharacter</span></div>
   <div class="cover ">
     <h1 class="cover"><span>Other</span><wbr><span><span>Character</span></span></h1>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="kotlinx.serialization/Serializable///PointingToDeclaration/"><span class="token annotation builtin">Serializable</span></span></div></div><span class="token keyword">data </span><span class="token keyword">class </span><a href="index.html">OtherCharacter</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>name<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>world<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>isMain<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>isOnline<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>isDeleted<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>recentlyTraded<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>position<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span> : <a href="../-base-character/index.html">BaseCharacter</a><span class="clearfix"><span class="floating-right">(<a href="https://github.com/Galarzaa90/TibiaKt/blob/main/tibiakt-core/src/main/kotlin/com/galarzaa/tibiakt/core/models/character/OtherCharacter.kt#L21">source</a>)</span></span></div><p class="paragraph">Additional character listed in a <a href="../-character/index.html">Character</a>'s information.</p></div></div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="kotlinx.serialization/Serializable///PointingToDeclaration/"><span class="token annotation builtin">Serializable</span></span></div></div><span class="token keyword">data </span><span class="token keyword">class </span><a href="index.html">OtherCharacter</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>name<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>world<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>isMain<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>isOnline<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>isDeleted<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>recentlyTraded<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>position<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span> : <a href="../-base-character/index.html">BaseCharacter</a><span class="clearfix"><span class="floating-right">(<a href="https://github.com/Galarzaa90/TibiaKt/blob/main/tibiakt-core/src/main/kotlin/com/galarzaa/tibiakt/core/models/character/OtherCharacter.kt#L32">source</a>)</span></span></div><p class="paragraph">Additional character listed in a <a href="../-character/index.html">Character</a>'s information.</p></div></div>
   </div>
   <div class="tabbedcontent">
-    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Constructors">Constructors</button><button class="section-tab" data-togglable="Properties">Properties</button></div>
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,FUNCTION,PROPERTY">Members</button></div>
     <div class="tabs-section-body">
-      <h2 class="tabbedcontent">Constructors</h2>
-      <div class="table" data-togglable="Constructors"><a data-name="-876575096%2FConstructors%2F-185655222" anchor-label="OtherCharacter" id="-876575096%2FConstructors%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
-        <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
-          <div class="main-subrow keyValue TabbedContent">
-            <div class=""><span class="inline-flex">
-                <div><a href="-other-character.html"><span>Other</span><wbr><span><span>Character</span></span></a></div>
+      <div data-togglable="CONSTRUCTOR">
+        <h2 class="">Constructors</h2>
+        <div class="table"><a data-name="-876575096%2FConstructors%2F-185655222" anchor-label="OtherCharacter" id="-876575096%2FConstructors%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-togglable="CONSTRUCTOR" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-other-character.html"><span>Other</span><wbr><span><span>Character</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-876575096%2FConstructors%2F-185655222"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="-other-character.html"><span class="token function">OtherCharacter</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">world<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">isMain<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter ">isOnline<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter ">isDeleted<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter ">recentlyTraded<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter ">position<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">world<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">isMain<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter ">isOnline<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter ">isDeleted<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter ">recentlyTraded<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter ">position<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <h2 class="">Properties</h2>
-      <div class="table" data-togglable="Properties"><a data-name="1065591231%2FProperties%2F-185655222" anchor-label="isDeleted" id="1065591231%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
-        <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="is-deleted.html"><span>is</span><wbr><span><span>Deleted</span></span></a></div>
+      <div data-togglable="PROPERTY">
+        <h2 class="">Properties</h2>
+        <div class="table"><a data-name="1065591231%2FProperties%2F-185655222" anchor-label="isDeleted" id="1065591231%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="is-deleted.html"><span>is</span><wbr><span><span>Deleted</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1065591231%2FProperties%2F-185655222"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><a data-name="1065591231%2FProperties%2F-185655222" anchor-label="isDeleted" id="1065591231%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="is-deleted.html">isDeleted</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><a data-name="1065591231%2FProperties%2F-185655222" anchor-label="isDeleted" id="1065591231%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><p class="paragraph">Whether this character is scheduled for deletion or not.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="is-deleted.html">isDeleted</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Whether this character is scheduled for deletion or not.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-1622296055%2FProperties%2F-185655222" anchor-label="isMain" id="-1622296055%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
-        <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="is-main.html"><span>is</span><wbr><span><span>Main</span></span></a></div>
+          <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="is-main.html"><span>is</span><wbr><span><span>Main</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1622296055%2FProperties%2F-185655222"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><a data-name="-1622296055%2FProperties%2F-185655222" anchor-label="isMain" id="-1622296055%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="is-main.html">isMain</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><a data-name="-1622296055%2FProperties%2F-185655222" anchor-label="isMain" id="-1622296055%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><p class="paragraph">Whether this is the main character of the account or not.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="is-main.html">isMain</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Whether this is the main character of the account or not.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="1881482607%2FProperties%2F-185655222" anchor-label="isOnline" id="1881482607%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
-        <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="is-online.html"><span>is</span><wbr><span><span>Online</span></span></a></div>
+          <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="is-online.html"><span>is</span><wbr><span><span>Online</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1881482607%2FProperties%2F-185655222"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><a data-name="1881482607%2FProperties%2F-185655222" anchor-label="isOnline" id="1881482607%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="is-online.html">isOnline</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><a data-name="1881482607%2FProperties%2F-185655222" anchor-label="isOnline" id="1881482607%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><p class="paragraph">Whether this character is currently online or not.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="is-online.html">isOnline</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Whether this character is currently online or not.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-887080383%2FProperties%2F-185655222" anchor-label="name" id="-887080383%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
-        <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="name.html"><span><span>name</span></span></a></div>
+          <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="name.html"><span><span>name</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-887080383%2FProperties%2F-185655222"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><a data-name="-887080383%2FProperties%2F-185655222" anchor-label="name" id="-887080383%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">val </span><a href="name.html">name</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><a data-name="-887080383%2FProperties%2F-185655222" anchor-label="name" id="-887080383%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><p class="paragraph">The name of the character.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">val </span><a href="name.html">name</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">The name of the character.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="1109080547%2FProperties%2F-185655222" anchor-label="position" id="1109080547%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
-        <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="position.html"><span><span>position</span></span></a></div>
+          <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="position.html"><span><span>position</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1109080547%2FProperties%2F-185655222"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><a data-name="1109080547%2FProperties%2F-185655222" anchor-label="position" id="1109080547%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="position.html">position</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><a data-name="1109080547%2FProperties%2F-185655222" anchor-label="position" id="1109080547%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><p class="paragraph">Any special position the character holds.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="position.html">position</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Any special position the character holds.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="234119652%2FProperties%2F-185655222" anchor-label="recentlyTraded" id="234119652%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
-        <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="recently-traded.html"><span>recently</span><wbr><span><span>Traded</span></span></a></div>
+          <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="recently-traded.html"><span>recently</span><wbr><span><span>Traded</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="234119652%2FProperties%2F-185655222"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><a data-name="234119652%2FProperties%2F-185655222" anchor-label="recentlyTraded" id="234119652%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="recently-traded.html">recentlyTraded</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><a data-name="234119652%2FProperties%2F-185655222" anchor-label="recentlyTraded" id="234119652%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><p class="paragraph">Whether this character was recently traded.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="recently-traded.html">recentlyTraded</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Whether this character was recently traded.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-1925967350%2FProperties%2F-185655222" anchor-label="url" id="-1925967350%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
-        <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="../-base-character/url.html"><span><span>url</span></span></a></div>
+          <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-base-character/url.html"><span><span>url</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1925967350%2FProperties%2F-185655222"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><a data-name="-1925967350%2FProperties%2F-185655222" anchor-label="url" id="-1925967350%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">val </span><a href="../-base-character/url.html">url</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><a data-name="-1925967350%2FProperties%2F-185655222" anchor-label="url" id="-1925967350%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><p class="paragraph">The URL to the character's information page.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">val </span><a href="../-base-character/url.html">url</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">The URL to the character's information page.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="1749251996%2FProperties%2F-185655222" anchor-label="world" id="1749251996%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
-        <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="world.html"><span><span>world</span></span></a></div>
+          <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="world.html"><span><span>world</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1749251996%2FProperties%2F-185655222"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><a data-name="1749251996%2FProperties%2F-185655222" anchor-label="world" id="1749251996%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="world.html">world</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><a data-name="1749251996%2FProperties%2F-185655222" anchor-label="world" id="1749251996%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><p class="paragraph">The world of the character.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="world.html">world</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">The world of the character.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
@@ -202,6 +209,6 @@
       </div>
     </div>
 </div>
-
-</body></html>
+</body>
+</html>
 

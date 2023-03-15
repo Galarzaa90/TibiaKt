@@ -37,6 +37,9 @@
     <div>0.2.0
     </div>
     <div class="pull-right d-flex">
+        <div class="filter-section" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":tibiakt-core:dokkaHtmlPartial/main">jvm</button>
+        </div>
         <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
         <div id="searchBar"></div>
     </div>
@@ -46,181 +49,187 @@
         <div id="sideMenu"></div>
     </div>
     <div id="main">
-<div class="main-content" id="content" pageids="tibiakt-core::com.galarzaa.tibiakt.core.models.forums/CMPostArchive///PointingToDeclaration//-185655222">
+<div class="main-content" data-page-type="classlike" id="content" pageids="tibiakt-core::com.galarzaa.tibiakt.core.models.forums/CMPostArchive///PointingToDeclaration//-185655222">
   <div class="breadcrumbs"><a href="../../index.html">tibiakt-core</a><span class="delimiter">/</span><a href="../index.html">com.galarzaa.tibiakt.core.models.forums</a><span class="delimiter">/</span><span class="current">CMPostArchive</span></div>
   <div class="cover ">
     <h1 class="cover"><span>CMPost</span><wbr><span><span>Archive</span></span></h1>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="kotlinx.serialization/Serializable///PointingToDeclaration/"><span class="token annotation builtin">Serializable</span></span></div></div><span class="token keyword">data </span><span class="token keyword">class </span><a href="index.html">CMPostArchive</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>startDate<span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html">LocalDate</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>endDate<span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html">LocalDate</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>currentPage<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>totalPages<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>resultsCount<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>entries<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../-c-m-post/index.html">CMPost</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span> : <a href="../../com.galarzaa.tibiakt.core.models/-paginated-with-url/index.html">PaginatedWithUrl</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../-c-m-post/index.html">CMPost</a><span class="token operator">&gt; </span><span class="clearfix"><span class="floating-right">(<a href="https://github.com/Galarzaa90/TibiaKt/blob/main/tibiakt-core/src/main/kotlin/com/galarzaa/tibiakt/core/models/forums/CMPostArchive.kt#L28">source</a>)</span></span></div><p class="paragraph">The CM Post Archive, displaying recent posts by Community Managers.</p></div></div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="kotlinx.serialization/Serializable///PointingToDeclaration/"><span class="token annotation builtin">Serializable</span></span></div></div><span class="token keyword">data </span><span class="token keyword">class </span><a href="index.html">CMPostArchive</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>startDate<span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html">LocalDate</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>endDate<span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html">LocalDate</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>currentPage<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>totalPages<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>resultsCount<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>entries<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../-c-m-post/index.html">CMPost</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span> : <a href="../../com.galarzaa.tibiakt.core.models/-paginated-with-url/index.html">PaginatedWithUrl</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../-c-m-post/index.html">CMPost</a><span class="token operator">&gt; </span><span class="clearfix"><span class="floating-right">(<a href="https://github.com/Galarzaa90/TibiaKt/blob/main/tibiakt-core/src/main/kotlin/com/galarzaa/tibiakt/core/models/forums/CMPostArchive.kt#L32">source</a>)</span></span></div><p class="paragraph">The CM Post Archive, displaying recent posts by Community Managers.</p></div></div>
   </div>
   <div class="tabbedcontent">
-    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Constructors">Constructors</button><button class="section-tab" data-togglable="Functions">Functions</button><button class="section-tab" data-togglable="Properties">Properties</button></div>
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,FUNCTION,PROPERTY">Members</button></div>
     <div class="tabs-section-body">
-      <h2 class="tabbedcontent">Constructors</h2>
-      <div class="table" data-togglable="Constructors"><a data-name="1762096798%2FConstructors%2F-185655222" anchor-label="CMPostArchive" id="1762096798%2FConstructors%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
-        <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
-          <div class="main-subrow keyValue TabbedContent">
-            <div class=""><span class="inline-flex">
-                <div><a href="-c-m-post-archive.html"><span>CMPost</span><wbr><span><span>Archive</span></span></a></div>
+      <div data-togglable="CONSTRUCTOR">
+        <h2 class="">Constructors</h2>
+        <div class="table"><a data-name="1762096798%2FConstructors%2F-185655222" anchor-label="CMPostArchive" id="1762096798%2FConstructors%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-togglable="CONSTRUCTOR" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-c-m-post-archive.html"><span>CMPost</span><wbr><span><span>Archive</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1762096798%2FConstructors%2F-185655222"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="-c-m-post-archive.html"><span class="token function">CMPostArchive</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">startDate<span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html">LocalDate</a><span class="token punctuation">, </span></span><span class="parameter ">endDate<span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html">LocalDate</a><span class="token punctuation">, </span></span><span class="parameter ">currentPage<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">totalPages<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">resultsCount<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">entries<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../-c-m-post/index.html">CMPost</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">startDate<span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html">LocalDate</a><span class="token punctuation">, </span></span><span class="parameter ">endDate<span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html">LocalDate</a><span class="token punctuation">, </span></span><span class="parameter ">currentPage<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">totalPages<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">resultsCount<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">entries<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../-c-m-post/index.html">CMPost</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <h2 class="">Functions</h2>
-      <div class="table" data-togglable="Functions"><a data-name="-158651524%2FFunctions%2F-185655222" anchor-label="getPageUrl" id="-158651524%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
-        <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="get-page-url.html"><span>get</span><wbr><span>Page</span><wbr><span><span>Url</span></span></a></div>
+      <div data-togglable="FUNCTION">
+        <h2 class="">Functions</h2>
+        <div class="table"><a data-name="-158651524%2FFunctions%2F-185655222" anchor-label="getPageUrl" id="-158651524%2FFunctions%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="get-page-url.html"><span>get</span><wbr><span>Page</span><wbr><span><span>Url</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-158651524%2FFunctions%2F-185655222"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="get-page-url.html"><span class="token function">getPageUrl</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">page<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Get the URL to a specific page.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="get-page-url.html"><span class="token function">getPageUrl</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">page<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Get the URL to a specific page.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <h2 class="">Properties</h2>
-      <div class="table" data-togglable="Properties"><a data-name="1143800298%2FProperties%2F-185655222" anchor-label="currentPage" id="1143800298%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
-        <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="current-page.html"><span>current</span><wbr><span><span>Page</span></span></a></div>
+      <div data-togglable="PROPERTY">
+        <h2 class="">Properties</h2>
+        <div class="table"><a data-name="1143800298%2FProperties%2F-185655222" anchor-label="currentPage" id="1143800298%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="current-page.html"><span>current</span><wbr><span><span>Page</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1143800298%2FProperties%2F-185655222"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><a data-name="1143800298%2FProperties%2F-185655222" anchor-label="currentPage" id="1143800298%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">val </span><a href="current-page.html">currentPage</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><a data-name="1143800298%2FProperties%2F-185655222" anchor-label="currentPage" id="1143800298%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><p class="paragraph">The currently viewed page.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">val </span><a href="current-page.html">currentPage</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">The currently viewed page.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-293887991%2FProperties%2F-185655222" anchor-label="endDate" id="-293887991%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
-        <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="end-date.html"><span>end</span><wbr><span><span>Date</span></span></a></div>
+          <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="end-date.html"><span>end</span><wbr><span><span>Date</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-293887991%2FProperties%2F-185655222"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><a data-name="-293887991%2FProperties%2F-185655222" anchor-label="endDate" id="-293887991%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="end-date.html">endDate</a><span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html">LocalDate</a></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="end-date.html">endDate</a><span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html">LocalDate</a></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-1437846398%2FProperties%2F-185655222" anchor-label="entries" id="-1437846398%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
-        <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="entries.html"><span><span>entries</span></span></a></div>
+          <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="entries.html"><span><span>entries</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1437846398%2FProperties%2F-185655222"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><a data-name="-1437846398%2FProperties%2F-185655222" anchor-label="entries" id="-1437846398%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">val </span><a href="entries.html">entries</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../-c-m-post/index.html">CMPost</a><span class="token operator">&gt;</span></div><div class="brief "><a data-name="-1437846398%2FProperties%2F-185655222" anchor-label="entries" id="-1437846398%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><p class="paragraph">The entries in this page.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">val </span><a href="entries.html">entries</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../-c-m-post/index.html">CMPost</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">The entries in this page.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-697936637%2FProperties%2F-185655222" anchor-label="nextPageUrl" id="-697936637%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
-        <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="../../com.galarzaa.tibiakt.core.models/-paginated-with-url/next-page-url.html"><span>next</span><wbr><span>Page</span><wbr><span><span>Url</span></span></a></div>
+          <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../com.galarzaa.tibiakt.core.models/-paginated-with-url/next-page-url.html"><span>next</span><wbr><span>Page</span><wbr><span><span>Url</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-697936637%2FProperties%2F-185655222"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><a data-name="-697936637%2FProperties%2F-185655222" anchor-label="nextPageUrl" id="-697936637%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">val </span><a href="../../com.galarzaa.tibiakt.core.models/-paginated-with-url/next-page-url.html">nextPageUrl</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><a data-name="-697936637%2FProperties%2F-185655222" anchor-label="nextPageUrl" id="-697936637%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><p class="paragraph">Get the URL to the next page if there is any.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">val </span><a href="../../com.galarzaa.tibiakt.core.models/-paginated-with-url/next-page-url.html">nextPageUrl</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Get the URL to the next page if there is any.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="645264263%2FProperties%2F-185655222" anchor-label="previousPageUrl" id="645264263%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
-        <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="../../com.galarzaa.tibiakt.core.models/-paginated-with-url/previous-page-url.html"><span>previous</span><wbr><span>Page</span><wbr><span><span>Url</span></span></a></div>
+          <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../com.galarzaa.tibiakt.core.models/-paginated-with-url/previous-page-url.html"><span>previous</span><wbr><span>Page</span><wbr><span><span>Url</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="645264263%2FProperties%2F-185655222"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><a data-name="645264263%2FProperties%2F-185655222" anchor-label="previousPageUrl" id="645264263%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">val </span><a href="../../com.galarzaa.tibiakt.core.models/-paginated-with-url/previous-page-url.html">previousPageUrl</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><a data-name="645264263%2FProperties%2F-185655222" anchor-label="previousPageUrl" id="645264263%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><p class="paragraph">Get the URL to the previous page if there is any.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">val </span><a href="../../com.galarzaa.tibiakt.core.models/-paginated-with-url/previous-page-url.html">previousPageUrl</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Get the URL to the previous page if there is any.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-1748877073%2FProperties%2F-185655222" anchor-label="resultsCount" id="-1748877073%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
-        <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="results-count.html"><span>results</span><wbr><span><span>Count</span></span></a></div>
+          <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="results-count.html"><span>results</span><wbr><span><span>Count</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1748877073%2FProperties%2F-185655222"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><a data-name="-1748877073%2FProperties%2F-185655222" anchor-label="resultsCount" id="-1748877073%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">val </span><a href="results-count.html">resultsCount</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><a data-name="-1748877073%2FProperties%2F-185655222" anchor-label="resultsCount" id="-1748877073%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><p class="paragraph">The total number of <a href="entries.html">entries</a> across all pages.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">val </span><a href="results-count.html">resultsCount</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">The total number of <a href="entries.html">entries</a> across all pages.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="126305442%2FProperties%2F-185655222" anchor-label="startDate" id="126305442%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
-        <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="start-date.html"><span>start</span><wbr><span><span>Date</span></span></a></div>
+          <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="start-date.html"><span>start</span><wbr><span><span>Date</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="126305442%2FProperties%2F-185655222"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><a data-name="126305442%2FProperties%2F-185655222" anchor-label="startDate" id="126305442%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="start-date.html">startDate</a><span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html">LocalDate</a></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="start-date.html">startDate</a><span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html">LocalDate</a></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-302415512%2FProperties%2F-185655222" anchor-label="totalPages" id="-302415512%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
-        <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="total-pages.html"><span>total</span><wbr><span><span>Pages</span></span></a></div>
+          <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="total-pages.html"><span>total</span><wbr><span><span>Pages</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-302415512%2FProperties%2F-185655222"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><a data-name="-302415512%2FProperties%2F-185655222" anchor-label="totalPages" id="-302415512%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">val </span><a href="total-pages.html">totalPages</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><a data-name="-302415512%2FProperties%2F-185655222" anchor-label="totalPages" id="-302415512%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><p class="paragraph">The total number of pages.</p></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">val </span><a href="total-pages.html">totalPages</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">The total number of pages.</p></div></div></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 <a data-name="-1751822589%2FProperties%2F-185655222" anchor-label="url" id="-1751822589%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a>
-        <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="url.html"><span><span>url</span></span></a></div>
+          <div class="table-row" data-filterable-current=":tibiakt-core:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="url.html"><span><span>url</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1751822589%2FProperties%2F-185655222"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><a data-name="-1751822589%2FProperties%2F-185655222" anchor-label="url" id="-1751822589%2FProperties%2F-185655222" data-filterable-set=":tibiakt-core:dokkaHtmlPartial/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="url.html">url</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div></div></div>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="url.html">url</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div></div></div>
+                </div>
               </div>
             </div>
           </div>
@@ -234,6 +243,6 @@
       </div>
     </div>
 </div>
-
-</body></html>
+</body>
+</html>
 

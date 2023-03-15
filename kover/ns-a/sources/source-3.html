@@ -7,9 +7,10 @@
   <title>Coverage Report > BaseForumAuthor</title>
   <style type="text/css">
     @import "../../css/coverage.css";
-    @import "../../css/highlight-idea.css";
+    @import "../../css/idea.min.css";
   </style>
-  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
 </head>
 
 <body>
@@ -162,88 +163,88 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;/*
-<i class="no-highlight">2</i>&nbsp; * Copyright © 2022 Allan Galarza
-<i class="no-highlight">3</i>&nbsp; *
-<i class="no-highlight">4</i>&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
-<i class="no-highlight">5</i>&nbsp; * you may not use this file except in compliance with the License.
-<i class="no-highlight">6</i>&nbsp; * You may obtain a copy of the License at
-<i class="no-highlight">7</i>&nbsp; *
-<i class="no-highlight">8</i>&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
-<i class="no-highlight">9</i>&nbsp; *
-<i class="no-highlight">10</i>&nbsp; * Unless required by applicable law or agreed to in writing, software
-<i class="no-highlight">11</i>&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-<i class="no-highlight">12</i>&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-<i class="no-highlight">13</i>&nbsp; * See the License for the specific language governing permissions and
-<i class="no-highlight">14</i>&nbsp; * limitations under the License.
-<i class="no-highlight">15</i>&nbsp; */
-<i class="no-highlight">16</i>&nbsp;
-<i class="no-highlight">17</i>&nbsp;package com.galarzaa.tibiakt.core.models.forums
-<i class="no-highlight">18</i>&nbsp;
-<i class="no-highlight">19</i>&nbsp;import com.galarzaa.tibiakt.core.enums.Vocation
-<i class="no-highlight">20</i>&nbsp;import com.galarzaa.tibiakt.core.models.character.BaseCharacter
-<i class="no-highlight">21</i>&nbsp;import com.galarzaa.tibiakt.core.models.character.CharacterLevel
-<i class="no-highlight">22</i>&nbsp;import com.galarzaa.tibiakt.core.models.character.GuildMembershipWithTitle
-<i class="no-highlight">23</i>&nbsp;import kotlinx.serialization.SerialName
-<i class="no-highlight">24</i>&nbsp;import kotlinx.serialization.Serializable
-<i class="no-highlight">25</i>&nbsp;
-<i class="no-highlight">26</i>&nbsp;/** Base interface for forum author classes. */
-<b class="pc"><i class="no-highlight">27</i>&nbsp;@Serializable</b>
-<i class="no-highlight">28</i>&nbsp;public sealed class BaseForumAuthor {
-<i class="no-highlight">29</i>&nbsp;    public abstract val name: String
-<i class="no-highlight">30</i>&nbsp;}
-<i class="no-highlight">31</i>&nbsp;
-<i class="no-highlight">32</i>&nbsp;/**
-<i class="no-highlight">33</i>&nbsp; * A forum author that is no longer available due to being deleted or having been traded.
-<i class="no-highlight">34</i>&nbsp; *
-<i class="no-highlight">35</i>&nbsp; * If the author [isTraded], it means that the post was made by the account that owned the character before.
-<i class="no-highlight">36</i>&nbsp; */
-<i class="no-highlight">37</i>&nbsp;@Serializable
-<i class="no-highlight">38</i>&nbsp;@SerialName(&quot;unavailableForumAuthor&quot;)
-<i class="no-highlight">39</i>&nbsp;public data class UnavailableForumAuthor(
-<i class="no-highlight">40</i>&nbsp;    override val name: String,
-<i class="no-highlight">41</i>&nbsp;    val isDeleted: Boolean,
-<i class="no-highlight">42</i>&nbsp;    val isTraded: Boolean,
-<i class="no-highlight">43</i>&nbsp;) : BaseForumAuthor()
-<i class="no-highlight">44</i>&nbsp;
-<i class="no-highlight">45</i>&nbsp;/**
-<i class="no-highlight">46</i>&nbsp; * The author of a forum post or thread.
-<i class="no-highlight">47</i>&nbsp; *
-<i class="no-highlight">48</i>&nbsp; * If the character [isRecentlyTraded], it means that the character was traded in the last 30 days, but the post was made by the new owner.
-<i class="no-highlight">49</i>&nbsp; *
-<i class="no-highlight">50</i>&nbsp; * @property name The name of the author.
-<i class="no-highlight">51</i>&nbsp; * @property level The level of the author.
-<i class="no-highlight">52</i>&nbsp; * @property world The current world of the author.
-<i class="no-highlight">53</i>&nbsp; * @property position The official position of the author, if any.
-<i class="no-highlight">54</i>&nbsp; * @property title The selected title of the character, if any.
-<i class="no-highlight">55</i>&nbsp; * @property guild The guild of the character, if any.
-<i class="no-highlight">56</i>&nbsp; * @property posts The total number of posts by this author.
-<i class="no-highlight">57</i>&nbsp; * @property isRecentlyTraded The character was traded in the last 30 days.
-<i class="no-highlight">58</i>&nbsp; */
-<i class="no-highlight">59</i>&nbsp;@SerialName(&quot;forumAuthor&quot;)
-<i class="no-highlight">60</i>&nbsp;@Serializable
-<i class="no-highlight">61</i>&nbsp;public data class ForumAuthor(
-<i class="no-highlight">62</i>&nbsp;    override val name: String,
-<i class="no-highlight">63</i>&nbsp;    override val level: Int,
-<i class="no-highlight">64</i>&nbsp;    val world: String,
-<i class="no-highlight">65</i>&nbsp;    val position: String?,
-<i class="no-highlight">66</i>&nbsp;    val title: String?,
-<i class="no-highlight">67</i>&nbsp;    val vocation: Vocation,
-<i class="no-highlight">68</i>&nbsp;    val guild: GuildMembershipWithTitle?,
-<i class="no-highlight">69</i>&nbsp;    val posts: Int,
-<i class="no-highlight">70</i>&nbsp;    val isRecentlyTraded: Boolean,
-<i class="no-highlight">71</i>&nbsp;) : BaseForumAuthor(), BaseCharacter, CharacterLevel
-<i class="no-highlight">72</i>&nbsp;
-<i class="no-highlight">73</i>&nbsp;/**
-<i class="no-highlight">74</i>&nbsp; * An author from a tournmanet world.
-<i class="no-highlight">75</i>&nbsp; */
-<i class="no-highlight">76</i>&nbsp;@SerialName(&quot;tournamentForumAuthor&quot;)
-<i class="no-highlight">77</i>&nbsp;@Serializable
-<i class="no-highlight">78</i>&nbsp;public data class TournamentForumAuthor(
-<i class="no-highlight">79</i>&nbsp;    override val name: String,
-<i class="no-highlight">80</i>&nbsp;    val posts: Int,
-<i class="no-highlight">81</i>&nbsp;) : BaseForumAuthor(), BaseCharacter
-</div>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.galarzaa.tibiakt.core.models.forums
+&nbsp;
+&nbsp;import com.galarzaa.tibiakt.core.enums.Vocation
+&nbsp;import com.galarzaa.tibiakt.core.models.character.BaseCharacter
+&nbsp;import com.galarzaa.tibiakt.core.models.character.CharacterLevel
+&nbsp;import com.galarzaa.tibiakt.core.models.character.GuildMembershipWithTitle
+&nbsp;import kotlinx.serialization.SerialName
+&nbsp;import kotlinx.serialization.Serializable
+&nbsp;
+&nbsp;/** Base interface for forum author classes. */
+<b class="pc">&nbsp;@Serializable</b>
+&nbsp;public sealed class BaseForumAuthor {
+&nbsp;    public abstract val name: String
+&nbsp;}
+&nbsp;
+&nbsp;/**
+&nbsp; * A forum author that is no longer available due to being deleted or having been traded.
+&nbsp; *
+&nbsp; * If the author [isTraded], it means that the post was made by the account that owned the character before.
+&nbsp; */
+&nbsp;@Serializable
+&nbsp;@SerialName(&quot;unavailableForumAuthor&quot;)
+&nbsp;public data class UnavailableForumAuthor(
+&nbsp;    override val name: String,
+&nbsp;    val isDeleted: Boolean,
+&nbsp;    val isTraded: Boolean,
+&nbsp;) : BaseForumAuthor()
+&nbsp;
+&nbsp;/**
+&nbsp; * The author of a forum post or thread.
+&nbsp; *
+&nbsp; * If the character [isRecentlyTraded], it means that the character was traded in the last 30 days, but the post was made by the new owner.
+&nbsp; *
+&nbsp; * @property name The name of the author.
+&nbsp; * @property level The level of the author.
+&nbsp; * @property world The current world of the author.
+&nbsp; * @property position The official position of the author, if any.
+&nbsp; * @property title The selected title of the character, if any.
+&nbsp; * @property guild The guild of the character, if any.
+&nbsp; * @property posts The total number of posts by this author.
+&nbsp; * @property isRecentlyTraded The character was traded in the last 30 days.
+&nbsp; */
+&nbsp;@SerialName(&quot;forumAuthor&quot;)
+&nbsp;@Serializable
+&nbsp;public data class ForumAuthor(
+&nbsp;    override val name: String,
+&nbsp;    override val level: Int,
+&nbsp;    val world: String,
+&nbsp;    val position: String?,
+&nbsp;    val title: String?,
+&nbsp;    val vocation: Vocation,
+&nbsp;    val guild: GuildMembershipWithTitle?,
+&nbsp;    val posts: Int,
+&nbsp;    val isRecentlyTraded: Boolean,
+&nbsp;) : BaseForumAuthor(), BaseCharacter, CharacterLevel
+&nbsp;
+&nbsp;/**
+&nbsp; * An author from a tournmanet world.
+&nbsp; */
+&nbsp;@SerialName(&quot;tournamentForumAuthor&quot;)
+&nbsp;@Serializable
+&nbsp;public data class TournamentForumAuthor(
+&nbsp;    override val name: String,
+&nbsp;    val posts: Int,
+&nbsp;) : BaseForumAuthor(), BaseCharacter
+</code>
 </pre>
 </div>
 
@@ -258,18 +259,15 @@ Current scope:     <a href="../../index.html">all classes</a>
     @*/
 
     if (!msie || msie && msie9) {
-        var codeBlock = document.getElementById('sourceCode');
-
-        if (codeBlock) {
-            hljs.highlightBlock(codeBlock);
-        }
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
     }
 })();
 </script>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-02-24 23:58</div>
+    <div style="float:right;">generated on 2023-03-15 02:46</div>
 </div>
 </body>
 </html>

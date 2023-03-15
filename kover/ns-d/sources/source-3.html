@@ -7,9 +7,10 @@
   <title>Coverage Report > HouseEntry</title>
   <style type="text/css">
     @import "../../css/coverage.css";
-    @import "../../css/highlight-idea.css";
+    @import "../../css/idea.min.css";
   </style>
-  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
 </head>
 
 <body>
@@ -183,59 +184,59 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;/*
-<i class="no-highlight">2</i>&nbsp; * Copyright © 2022 Allan Galarza
-<i class="no-highlight">3</i>&nbsp; *
-<i class="no-highlight">4</i>&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
-<i class="no-highlight">5</i>&nbsp; * you may not use this file except in compliance with the License.
-<i class="no-highlight">6</i>&nbsp; * You may obtain a copy of the License at
-<i class="no-highlight">7</i>&nbsp; *
-<i class="no-highlight">8</i>&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
-<i class="no-highlight">9</i>&nbsp; *
-<i class="no-highlight">10</i>&nbsp; * Unless required by applicable law or agreed to in writing, software
-<i class="no-highlight">11</i>&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-<i class="no-highlight">12</i>&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-<i class="no-highlight">13</i>&nbsp; * See the License for the specific language governing permissions and
-<i class="no-highlight">14</i>&nbsp; * limitations under the License.
-<i class="no-highlight">15</i>&nbsp; */
-<i class="no-highlight">16</i>&nbsp;
-<i class="no-highlight">17</i>&nbsp;@file:UseSerializers(DurationSerializer::class)
-<i class="no-highlight">18</i>&nbsp;
-<i class="no-highlight">19</i>&nbsp;package com.galarzaa.tibiakt.core.models.house
-<i class="no-highlight">20</i>&nbsp;
-<i class="no-highlight">21</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HouseStatus
-<i class="no-highlight">22</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HouseType
-<i class="no-highlight">23</i>&nbsp;import com.galarzaa.tibiakt.core.serializers.DurationSerializer
-<i class="no-highlight">24</i>&nbsp;import kotlinx.serialization.Serializable
-<i class="no-highlight">25</i>&nbsp;import kotlinx.serialization.UseSerializers
-<i class="no-highlight">26</i>&nbsp;import kotlin.time.Duration
-<i class="no-highlight">27</i>&nbsp;
-<i class="no-highlight">28</i>&nbsp;/**
-<i class="no-highlight">29</i>&nbsp; * A listed house in the Houses Section of tibia.com.
-<i class="no-highlight">30</i>&nbsp; *
-<i class="no-highlight">31</i>&nbsp; * @property name The name of the house.
-<i class="no-highlight">32</i>&nbsp; * @property size The size of the house in SQM.
-<i class="no-highlight">33</i>&nbsp; * @property rent The monthly rent paid for this house.
-<i class="no-highlight">34</i>&nbsp; * @property town The town where this house is located or closest too.
-<i class="no-highlight">35</i>&nbsp; * @property type The type of the house.
-<i class="no-highlight">36</i>&nbsp; * @property status The current status of the house.
-<i class="no-highlight">37</i>&nbsp; * @property highestBid The current highest bid of this house, if it is being auctioned.
-<i class="no-highlight">38</i>&nbsp; * @property timeLeft The remaining time for the auction to end. Note that the resolution of this is either days or hours.
-<i class="no-highlight">39</i>&nbsp; */
-<b class="pc"><i class="no-highlight">40</i>&nbsp;@Serializable</b>
-<i class="no-highlight">41</i>&nbsp;public data class HouseEntry(
-<b class="fc"><i class="no-highlight">42</i>&nbsp;    override val houseId: Int,</b>
-<b class="fc"><i class="no-highlight">43</i>&nbsp;    val name: String,</b>
-<b class="fc"><i class="no-highlight">44</i>&nbsp;    val size: Int,</b>
-<b class="fc"><i class="no-highlight">45</i>&nbsp;    val rent: Int,</b>
-<b class="fc"><i class="no-highlight">46</i>&nbsp;    val town: String,</b>
-<b class="fc"><i class="no-highlight">47</i>&nbsp;    override val world: String,</b>
-<b class="fc"><i class="no-highlight">48</i>&nbsp;    val type: HouseType,</b>
-<b class="fc"><i class="no-highlight">49</i>&nbsp;    val status: HouseStatus,</b>
-<b class="fc"><i class="no-highlight">50</i>&nbsp;    val highestBid: Int?,</b>
-<b class="fc"><i class="no-highlight">51</i>&nbsp;    val timeLeft: Duration?,</b>
-<i class="no-highlight">52</i>&nbsp;) : BaseHouse
-</div>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;@file:UseSerializers(DurationSerializer::class)
+&nbsp;
+&nbsp;package com.galarzaa.tibiakt.core.models.house
+&nbsp;
+&nbsp;import com.galarzaa.tibiakt.core.enums.HouseStatus
+&nbsp;import com.galarzaa.tibiakt.core.enums.HouseType
+&nbsp;import com.galarzaa.tibiakt.core.serializers.DurationSerializer
+&nbsp;import kotlinx.serialization.Serializable
+&nbsp;import kotlinx.serialization.UseSerializers
+&nbsp;import kotlin.time.Duration
+&nbsp;
+&nbsp;/**
+&nbsp; * A listed house in the Houses Section of tibia.com.
+&nbsp; *
+&nbsp; * @property name The name of the house.
+&nbsp; * @property size The size of the house in SQM.
+&nbsp; * @property rent The monthly rent paid for this house.
+&nbsp; * @property town The town where this house is located or closest too.
+&nbsp; * @property type The type of the house.
+&nbsp; * @property status The current status of the house.
+&nbsp; * @property highestBid The current highest bid of this house, if it is being auctioned.
+&nbsp; * @property timeLeft The remaining time for the auction to end. Note that the resolution of this is either days or hours.
+&nbsp; */
+<b class="pc">&nbsp;@Serializable</b>
+&nbsp;public data class HouseEntry(
+<b class="fc">&nbsp;    override val houseId: Int,</b>
+<b class="fc">&nbsp;    val name: String,</b>
+<b class="fc">&nbsp;    val size: Int,</b>
+<b class="fc">&nbsp;    val rent: Int,</b>
+<b class="fc">&nbsp;    val town: String,</b>
+<b class="fc">&nbsp;    override val world: String,</b>
+<b class="fc">&nbsp;    val type: HouseType,</b>
+<b class="fc">&nbsp;    val status: HouseStatus,</b>
+<b class="fc">&nbsp;    val highestBid: Int?,</b>
+<b class="fc">&nbsp;    val timeLeft: Duration?,</b>
+&nbsp;) : BaseHouse
+</code>
 </pre>
 </div>
 
@@ -250,18 +251,15 @@ Current scope:     <a href="../../index.html">all classes</a>
     @*/
 
     if (!msie || msie && msie9) {
-        var codeBlock = document.getElementById('sourceCode');
-
-        if (codeBlock) {
-            hljs.highlightBlock(codeBlock);
-        }
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
     }
 })();
 </script>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-02-24 23:58</div>
+    <div style="float:right;">generated on 2023-03-15 02:46</div>
 </div>
 </body>
 </html>

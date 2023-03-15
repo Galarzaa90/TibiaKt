@@ -7,9 +7,10 @@
   <title>Coverage Report > Highscores</title>
   <style type="text/css">
     @import "../../css/coverage.css";
-    @import "../../css/highlight-idea.css";
+    @import "../../css/idea.min.css";
   </style>
-  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
 </head>
 
 <body>
@@ -53,28 +54,21 @@ Current scope:     <a href="../../index.html">all classes</a>
     (1/3)
   </span>
 </td>
+    <td class="coverageStat"/>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    83.3%
   </span>
   <span class="absValue">
-    (0/2)
+    (10/12)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    84.6%
+    66.7%
   </span>
   <span class="absValue">
-    (11/13)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    71.3%
-  </span>
-  <span class="absValue">
-    (154/216)
+    (50/75)
   </span>
 </td>
 </tr>
@@ -156,23 +150,23 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/17)
+    (0/15)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    80%
+    78.6%
   </span>
   <span class="absValue">
-    (12/15)
+    (11/14)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    22.3%
+    9.5%
   </span>
   <span class="absValue">
-    (158/707)
+    (54/566)
   </span>
 </td>
 </tr>
@@ -183,66 +177,66 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;/*
-<i class="no-highlight">2</i>&nbsp; * Copyright © 2022 Allan Galarza
-<i class="no-highlight">3</i>&nbsp; *
-<i class="no-highlight">4</i>&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
-<i class="no-highlight">5</i>&nbsp; * you may not use this file except in compliance with the License.
-<i class="no-highlight">6</i>&nbsp; * You may obtain a copy of the License at
-<i class="no-highlight">7</i>&nbsp; *
-<i class="no-highlight">8</i>&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
-<i class="no-highlight">9</i>&nbsp; *
-<i class="no-highlight">10</i>&nbsp; * Unless required by applicable law or agreed to in writing, software
-<i class="no-highlight">11</i>&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-<i class="no-highlight">12</i>&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-<i class="no-highlight">13</i>&nbsp; * See the License for the specific language governing permissions and
-<i class="no-highlight">14</i>&nbsp; * limitations under the License.
-<i class="no-highlight">15</i>&nbsp; */
-<i class="no-highlight">16</i>&nbsp;
-<i class="no-highlight">17</i>&nbsp;@file:UseSerializers(InstantSerializer::class)
-<i class="no-highlight">18</i>&nbsp;
-<i class="no-highlight">19</i>&nbsp;package com.galarzaa.tibiakt.core.models.highscores
-<i class="no-highlight">20</i>&nbsp;
-<i class="no-highlight">21</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HighscoresBattlEyeType
-<i class="no-highlight">22</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HighscoresCategory
-<i class="no-highlight">23</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HighscoresProfession
-<i class="no-highlight">24</i>&nbsp;import com.galarzaa.tibiakt.core.enums.PvpType
-<i class="no-highlight">25</i>&nbsp;import com.galarzaa.tibiakt.core.models.PaginatedWithUrl
-<i class="no-highlight">26</i>&nbsp;import com.galarzaa.tibiakt.core.serializers.InstantSerializer
-<i class="no-highlight">27</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getHighscoresUrl
-<i class="no-highlight">28</i>&nbsp;import kotlinx.datetime.Instant
-<i class="no-highlight">29</i>&nbsp;import kotlinx.serialization.Serializable
-<i class="no-highlight">30</i>&nbsp;import kotlinx.serialization.UseSerializers
-<i class="no-highlight">31</i>&nbsp;
-<i class="no-highlight">32</i>&nbsp;/**
-<i class="no-highlight">33</i>&nbsp; * The Tibia highscores, containing the highest levels of a given [category].
-<i class="no-highlight">34</i>&nbsp; *
-<i class="no-highlight">35</i>&nbsp; * @property world The world the highscores belong to, or null if these are global highscores.
-<i class="no-highlight">36</i>&nbsp; * @property category The displayed highscores category.
-<i class="no-highlight">37</i>&nbsp; * @property vocation The selected vocation filter for the entries.
-<i class="no-highlight">38</i>&nbsp; * @property worldTypes The selected world types to show for global highscores.
-<i class="no-highlight">39</i>&nbsp; * @property battlEyeType The BattlEye type of worlds to show for global highscores.
-<i class="no-highlight">40</i>&nbsp; * @property lastUpdate The time when the currently displayed results were last updated.
-<i class="no-highlight">41</i>&nbsp; */
-<b class="pc"><i class="no-highlight">42</i>&nbsp;@Serializable</b>
-<i class="no-highlight">43</i>&nbsp;public data class Highscores(
-<b class="fc"><i class="no-highlight">44</i>&nbsp;    val world: String?,</b>
-<b class="fc"><i class="no-highlight">45</i>&nbsp;    val category: HighscoresCategory,</b>
-<b class="fc"><i class="no-highlight">46</i>&nbsp;    val vocation: HighscoresProfession,</b>
-<b class="fc"><i class="no-highlight">47</i>&nbsp;    val worldTypes: Set&lt;PvpType&gt;,</b>
-<b class="fc"><i class="no-highlight">48</i>&nbsp;    val battlEyeType: HighscoresBattlEyeType,</b>
-<b class="fc"><i class="no-highlight">49</i>&nbsp;    val lastUpdate: Instant,</b>
-<b class="fc"><i class="no-highlight">50</i>&nbsp;    override val currentPage: Int,</b>
-<b class="fc"><i class="no-highlight">51</i>&nbsp;    override val totalPages: Int,</b>
-<b class="fc"><i class="no-highlight">52</i>&nbsp;    override val resultsCount: Int,</b>
-<b class="fc"><i class="no-highlight">53</i>&nbsp;    override val entries: List&lt;HighscoresEntry&gt;,</b>
-<i class="no-highlight">54</i>&nbsp;) : PaginatedWithUrl&lt;HighscoresEntry&gt; {
-<i class="no-highlight">55</i>&nbsp;
-<b class="nc"><i class="no-highlight">56</i>&nbsp;    val url: String get() = getHighscoresUrl(world, category, vocation, currentPage, battlEyeType, worldTypes)</b>
-<i class="no-highlight">57</i>&nbsp;    override fun getPageUrl(page: Int): String =
-<b class="nc"><i class="no-highlight">58</i>&nbsp;        getHighscoresUrl(world, category, vocation, page, battlEyeType, worldTypes)</b>
-<i class="no-highlight">59</i>&nbsp;}
-</div>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;@file:UseSerializers(InstantSerializer::class)
+&nbsp;
+&nbsp;package com.galarzaa.tibiakt.core.models.highscores
+&nbsp;
+&nbsp;import com.galarzaa.tibiakt.core.enums.HighscoresBattlEyeType
+&nbsp;import com.galarzaa.tibiakt.core.enums.HighscoresCategory
+&nbsp;import com.galarzaa.tibiakt.core.enums.HighscoresProfession
+&nbsp;import com.galarzaa.tibiakt.core.enums.PvpType
+&nbsp;import com.galarzaa.tibiakt.core.models.PaginatedWithUrl
+&nbsp;import com.galarzaa.tibiakt.core.serializers.InstantSerializer
+&nbsp;import com.galarzaa.tibiakt.core.utils.getHighscoresUrl
+&nbsp;import kotlinx.datetime.Instant
+&nbsp;import kotlinx.serialization.Serializable
+&nbsp;import kotlinx.serialization.UseSerializers
+&nbsp;
+&nbsp;/**
+&nbsp; * The Tibia highscores, containing the highest levels of a given [category].
+&nbsp; *
+&nbsp; * @property world The world the highscores belong to, or null if these are global highscores.
+&nbsp; * @property category The displayed highscores category.
+&nbsp; * @property vocation The selected vocation filter for the entries.
+&nbsp; * @property worldTypes The selected world types to show for global highscores.
+&nbsp; * @property battlEyeType The BattlEye type of worlds to show for global highscores.
+&nbsp; * @property lastUpdate The time when the currently displayed results were last updated.
+&nbsp; */
+<b class="pc">&nbsp;@Serializable</b>
+&nbsp;public data class Highscores(
+<b class="fc">&nbsp;    val world: String?,</b>
+<b class="fc">&nbsp;    val category: HighscoresCategory,</b>
+<b class="fc">&nbsp;    val vocation: HighscoresProfession,</b>
+<b class="fc">&nbsp;    val worldTypes: Set&lt;PvpType&gt;,</b>
+<b class="fc">&nbsp;    val battlEyeType: HighscoresBattlEyeType,</b>
+<b class="fc">&nbsp;    val lastUpdate: Instant,</b>
+<b class="fc">&nbsp;    override val currentPage: Int,</b>
+<b class="fc">&nbsp;    override val totalPages: Int,</b>
+<b class="fc">&nbsp;    override val resultsCount: Int,</b>
+<b class="fc">&nbsp;    override val entries: List&lt;HighscoresEntry&gt;,</b>
+&nbsp;) : PaginatedWithUrl&lt;HighscoresEntry&gt; {
+&nbsp;
+<b class="nc">&nbsp;    val url: String get() = getHighscoresUrl(world, category, vocation, currentPage, battlEyeType, worldTypes)</b>
+&nbsp;    override fun getPageUrl(page: Int): String =
+<b class="nc">&nbsp;        getHighscoresUrl(world, category, vocation, page, battlEyeType, worldTypes)</b>
+&nbsp;}
+</code>
 </pre>
 </div>
 
@@ -257,18 +251,15 @@ Current scope:     <a href="../../index.html">all classes</a>
     @*/
 
     if (!msie || msie && msie9) {
-        var codeBlock = document.getElementById('sourceCode');
-
-        if (codeBlock) {
-            hljs.highlightBlock(codeBlock);
-        }
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
     }
 })();
 </script>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-02-24 23:58</div>
+    <div style="float:right;">generated on 2023-03-15 02:46</div>
 </div>
 </body>
 </html>

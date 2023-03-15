@@ -7,9 +7,10 @@
   <title>Coverage Report > BosstableBossesParser</title>
   <style type="text/css">
     @import "../../css/coverage.css";
-    @import "../../css/highlight-idea.css";
+    @import "../../css/idea.min.css";
   </style>
-  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
 </head>
 
 <body>
@@ -183,66 +184,66 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;/*
-<i class="no-highlight">2</i>&nbsp; * Copyright © 2022 Allan Galarza
-<i class="no-highlight">3</i>&nbsp; *
-<i class="no-highlight">4</i>&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
-<i class="no-highlight">5</i>&nbsp; * you may not use this file except in compliance with the License.
-<i class="no-highlight">6</i>&nbsp; * You may obtain a copy of the License at
-<i class="no-highlight">7</i>&nbsp; *
-<i class="no-highlight">8</i>&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
-<i class="no-highlight">9</i>&nbsp; *
-<i class="no-highlight">10</i>&nbsp; * Unless required by applicable law or agreed to in writing, software
-<i class="no-highlight">11</i>&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-<i class="no-highlight">12</i>&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-<i class="no-highlight">13</i>&nbsp; * See the License for the specific language governing permissions and
-<i class="no-highlight">14</i>&nbsp; * limitations under the License.
-<i class="no-highlight">15</i>&nbsp; */
-<i class="no-highlight">16</i>&nbsp;
-<i class="no-highlight">17</i>&nbsp;package com.galarzaa.tibiakt.core.parsers
-<i class="no-highlight">18</i>&nbsp;
-<i class="no-highlight">19</i>&nbsp;import com.galarzaa.tibiakt.core.builders.bosstableBosses
-<i class="no-highlight">20</i>&nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
-<i class="no-highlight">21</i>&nbsp;import com.galarzaa.tibiakt.core.models.creatures.BosstableBosses
-<i class="no-highlight">22</i>&nbsp;import com.galarzaa.tibiakt.core.utils.cleanText
-<i class="no-highlight">23</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseTablesMap
-<i class="no-highlight">24</i>&nbsp;import com.galarzaa.tibiakt.core.utils.remove
-<i class="no-highlight">25</i>&nbsp;import java.io.File
-<i class="no-highlight">26</i>&nbsp;import java.net.URL
-<i class="no-highlight">27</i>&nbsp;
-<i class="no-highlight">28</i>&nbsp;/** Parser for the boostable bosses section. */
-<i class="no-highlight">29</i>&nbsp;public object BosstableBossesParser : Parser&lt;BosstableBosses&gt; {
-<i class="no-highlight">30</i>&nbsp;    override fun fromContent(content: String): BosstableBosses {
-<b class="nc"><i class="no-highlight">31</i>&nbsp;        val boxContent = boxContent(content)</b>
-<b class="nc"><i class="no-highlight">32</i>&nbsp;        val tables = boxContent.parseTablesMap(&quot;table.Table1&quot;)</b>
-<b class="nc"><i class="no-highlight">33</i>&nbsp;        return bosstableBosses {</b>
-<b class="nc"><i class="no-highlight">34</i>&nbsp;            tables[&quot;Boosted Boss&quot;]?.let {</b>
-<b class="nc"><i class="no-highlight">35</i>&nbsp;                val boostedCreatureImageUrl = it.selectFirst(&quot;img&quot;)?.attr(&quot;src&quot;)</b>
-<b class="nc"><i class="no-highlight">36</i>&nbsp;                    ?: throw ParsingException(&quot;boosted boss image not found&quot;)</b>
-<b class="nc"><i class="no-highlight">37</i>&nbsp;                val fileName = File(URL(boostedCreatureImageUrl).path).name.remove(&quot;.gif&quot;)</b>
-<b class="nc"><i class="no-highlight">38</i>&nbsp;                boostedBoss {</b>
-<b class="nc"><i class="no-highlight">39</i>&nbsp;                    name = it.selectFirst(&quot;b&quot;)?.cleanText() ?: throw ParsingException(&quot;Boss title not found&quot;)</b>
-<b class="nc"><i class="no-highlight">40</i>&nbsp;                    identifier = fileName</b>
-<i class="no-highlight">41</i>&nbsp;                }
-<b class="nc"><i class="no-highlight">42</i>&nbsp;            } ?: throw ParsingException(&quot;Boosted boss table not found.&quot;)</b>
-<i class="no-highlight">43</i>&nbsp;
-<b class="nc"><i class="no-highlight">44</i>&nbsp;            val entriesTable = boxContent.selectFirst(&quot;div[style*=display: table]&quot;)</b>
-<b class="nc"><i class="no-highlight">45</i>&nbsp;                ?: throw ParsingException(&quot;could not find creatures list container&quot;)</b>
-<b class="nc"><i class="no-highlight">46</i>&nbsp;            val entryContainers = entriesTable.select(&quot;div[style*=float: left]&quot;)</b>
-<b class="nc"><i class="no-highlight">47</i>&nbsp;            for (entryContainer in entryContainers) {</b>
-<b class="nc"><i class="no-highlight">48</i>&nbsp;                val imageUrl = entryContainer.selectFirst(&quot;img&quot;)?.attr(&quot;src&quot;)</b>
-<b class="nc"><i class="no-highlight">49</i>&nbsp;                    ?: throw ParsingException(&quot;boss image not found&quot;)</b>
-<b class="nc"><i class="no-highlight">50</i>&nbsp;                val fileName = File(URL(imageUrl).path).name.remove(&quot;.gif&quot;)</b>
-<b class="nc"><i class="no-highlight">51</i>&nbsp;                addCreature {</b>
-<b class="nc"><i class="no-highlight">52</i>&nbsp;                    name = entryContainer.cleanText()</b>
-<b class="nc"><i class="no-highlight">53</i>&nbsp;                    identifier = fileName</b>
-<i class="no-highlight">54</i>&nbsp;                }
-<i class="no-highlight">55</i>&nbsp;            }
-<i class="no-highlight">56</i>&nbsp;
-<b class="nc"><i class="no-highlight">57</i>&nbsp;        }</b>
-<i class="no-highlight">58</i>&nbsp;    }
-<i class="no-highlight">59</i>&nbsp;}
-</div>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.galarzaa.tibiakt.core.parsers
+&nbsp;
+&nbsp;import com.galarzaa.tibiakt.core.builders.bosstableBosses
+&nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
+&nbsp;import com.galarzaa.tibiakt.core.models.creatures.BosstableBosses
+&nbsp;import com.galarzaa.tibiakt.core.utils.cleanText
+&nbsp;import com.galarzaa.tibiakt.core.utils.parseTablesMap
+&nbsp;import com.galarzaa.tibiakt.core.utils.remove
+&nbsp;import java.io.File
+&nbsp;import java.net.URL
+&nbsp;
+&nbsp;/** Parser for the boostable bosses section. */
+&nbsp;public object BosstableBossesParser : Parser&lt;BosstableBosses&gt; {
+&nbsp;    override fun fromContent(content: String): BosstableBosses {
+<b class="nc">&nbsp;        val boxContent = boxContent(content)</b>
+<b class="nc">&nbsp;        val tables = boxContent.parseTablesMap(&quot;table.Table1&quot;)</b>
+<b class="nc">&nbsp;        return bosstableBosses {</b>
+<b class="nc">&nbsp;            tables[&quot;Boosted Boss&quot;]?.let {</b>
+<b class="nc">&nbsp;                val boostedCreatureImageUrl = it.selectFirst(&quot;img&quot;)?.attr(&quot;src&quot;)</b>
+<b class="nc">&nbsp;                    ?: throw ParsingException(&quot;boosted boss image not found&quot;)</b>
+<b class="nc">&nbsp;                val fileName = File(URL(boostedCreatureImageUrl).path).name.remove(&quot;.gif&quot;)</b>
+<b class="nc">&nbsp;                boostedBoss {</b>
+<b class="nc">&nbsp;                    name = it.selectFirst(&quot;b&quot;)?.cleanText() ?: throw ParsingException(&quot;Boss title not found&quot;)</b>
+<b class="nc">&nbsp;                    identifier = fileName</b>
+&nbsp;                }
+<b class="nc">&nbsp;            } ?: throw ParsingException(&quot;Boosted boss table not found.&quot;)</b>
+&nbsp;
+<b class="nc">&nbsp;            val entriesTable = boxContent.selectFirst(&quot;div[style*=display: table]&quot;)</b>
+<b class="nc">&nbsp;                ?: throw ParsingException(&quot;could not find creatures list container&quot;)</b>
+<b class="nc">&nbsp;            val entryContainers = entriesTable.select(&quot;div[style*=float: left]&quot;)</b>
+<b class="nc">&nbsp;            for (entryContainer in entryContainers) {</b>
+<b class="nc">&nbsp;                val imageUrl = entryContainer.selectFirst(&quot;img&quot;)?.attr(&quot;src&quot;)</b>
+<b class="nc">&nbsp;                    ?: throw ParsingException(&quot;boss image not found&quot;)</b>
+<b class="nc">&nbsp;                val fileName = File(URL(imageUrl).path).name.remove(&quot;.gif&quot;)</b>
+<b class="nc">&nbsp;                addCreature {</b>
+<b class="nc">&nbsp;                    name = entryContainer.cleanText()</b>
+<b class="nc">&nbsp;                    identifier = fileName</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;}
+</code>
 </pre>
 </div>
 
@@ -257,18 +258,15 @@ Current scope:     <a href="../../index.html">all classes</a>
     @*/
 
     if (!msie || msie && msie9) {
-        var codeBlock = document.getElementById('sourceCode');
-
-        if (codeBlock) {
-            hljs.highlightBlock(codeBlock);
-        }
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
     }
 })();
 </script>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-02-24 23:58</div>
+    <div style="float:right;">generated on 2023-03-15 02:46</div>
 </div>
 </body>
 </html>

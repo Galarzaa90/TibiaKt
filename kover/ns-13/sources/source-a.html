@@ -7,9 +7,10 @@
   <title>Coverage Report > UrlsKt</title>
   <style type="text/css">
     @import "../../css/coverage.css";
-    @import "../../css/highlight-idea.css";
+    @import "../../css/idea.min.css";
   </style>
-  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
 </head>
 
 <body>
@@ -148,353 +149,353 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;/*
-<i class="no-highlight">2</i>&nbsp; * Copyright © 2022 Allan Galarza
-<i class="no-highlight">3</i>&nbsp; *
-<i class="no-highlight">4</i>&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
-<i class="no-highlight">5</i>&nbsp; * you may not use this file except in compliance with the License.
-<i class="no-highlight">6</i>&nbsp; * You may obtain a copy of the License at
-<i class="no-highlight">7</i>&nbsp; *
-<i class="no-highlight">8</i>&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
-<i class="no-highlight">9</i>&nbsp; *
-<i class="no-highlight">10</i>&nbsp; * Unless required by applicable law or agreed to in writing, software
-<i class="no-highlight">11</i>&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-<i class="no-highlight">12</i>&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-<i class="no-highlight">13</i>&nbsp; * See the License for the specific language governing permissions and
-<i class="no-highlight">14</i>&nbsp; * limitations under the License.
-<i class="no-highlight">15</i>&nbsp; */
-<i class="no-highlight">16</i>&nbsp;
-<i class="no-highlight">17</i>&nbsp;package com.galarzaa.tibiakt.core.utils
-<i class="no-highlight">18</i>&nbsp;
-<i class="no-highlight">19</i>&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionBattlEyeFilter
-<i class="no-highlight">20</i>&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionOrderBy
-<i class="no-highlight">21</i>&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionOrderDirection
-<i class="no-highlight">22</i>&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionSearchType
-<i class="no-highlight">23</i>&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionSkillFilter
-<i class="no-highlight">24</i>&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionVocationFilter
-<i class="no-highlight">25</i>&nbsp;import com.galarzaa.tibiakt.core.enums.AvailableForumSection
-<i class="no-highlight">26</i>&nbsp;import com.galarzaa.tibiakt.core.enums.BazaarType
-<i class="no-highlight">27</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HighscoresBattlEyeType
-<i class="no-highlight">28</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HighscoresCategory
-<i class="no-highlight">29</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HighscoresProfession
-<i class="no-highlight">30</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HouseOrder
-<i class="no-highlight">31</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HouseStatus
-<i class="no-highlight">32</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HouseType
-<i class="no-highlight">33</i>&nbsp;import com.galarzaa.tibiakt.core.enums.NewsCategory
-<i class="no-highlight">34</i>&nbsp;import com.galarzaa.tibiakt.core.enums.NewsType
-<i class="no-highlight">35</i>&nbsp;import com.galarzaa.tibiakt.core.enums.PvpType
-<i class="no-highlight">36</i>&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.BazaarFilters
-<i class="no-highlight">37</i>&nbsp;import java.net.URLEncoder
-<i class="no-highlight">38</i>&nbsp;import java.time.LocalDate
-<i class="no-highlight">39</i>&nbsp;import java.time.YearMonth
-<i class="no-highlight">40</i>&nbsp;
-<i class="no-highlight">41</i>&nbsp;/**
-<i class="no-highlight">42</i>&nbsp; * Build a URL to Tibia.com.
-<i class="no-highlight">43</i>&nbsp; *
-<i class="no-highlight">44</i>&nbsp; * @param section The desired section.
-<i class="no-highlight">45</i>&nbsp; * @param params The query arguments to pass.
-<i class="no-highlight">46</i>&nbsp; * @param test Whether to get a URL to the testing version of Tibia.com.
-<i class="no-highlight">47</i>&nbsp; */
-<i class="no-highlight">48</i>&nbsp;public fun buildTibiaUrl(
-<i class="no-highlight">49</i>&nbsp;    section: String,
-<i class="no-highlight">50</i>&nbsp;    vararg params: Pair&lt;String, Any?&gt;,
-<b class="nc"><i class="no-highlight">51</i>&nbsp;    test: Boolean = false,</b>
-<b class="nc"><i class="no-highlight">52</i>&nbsp;    anchor: String? = null,</b>
-<i class="no-highlight">53</i>&nbsp;): String {
-<b class="pc"><i class="no-highlight">54</i>&nbsp;    val baseUrl = if (test) &quot;www.test.tibia.com&quot; else &quot;www.tibia.com&quot;</b>
-<b class="fc"><i class="no-highlight">55</i>&nbsp;    return &quot;https://$baseUrl/$section/?${</b>
-<b class="pc"><i class="no-highlight">56</i>&nbsp;        params.filter { it.second != null }.joinToString(&quot;&amp;&quot;) { (name, value) -&gt;</b>
-<b class="fc"><i class="no-highlight">57</i>&nbsp;            &quot;$name=${URLEncoder.encode(value.toString(), Charsets.ISO_8859_1)}&quot;</b>
-<i class="no-highlight">58</i>&nbsp;        }
-<b class="pc"><i class="no-highlight">59</i>&nbsp;    }${anchor?.let { &quot;#$it&quot; }.orEmpty()}&quot;</b>
-<i class="no-highlight">60</i>&nbsp;}
-<i class="no-highlight">61</i>&nbsp;
-<i class="no-highlight">62</i>&nbsp;/**
-<i class="no-highlight">63</i>&nbsp; * Build a URL to Tibia.com.
-<i class="no-highlight">64</i>&nbsp; *
-<i class="no-highlight">65</i>&nbsp; * @param section The desired section.
-<i class="no-highlight">66</i>&nbsp; * @param subtopic The desired subtopic.
-<i class="no-highlight">67</i>&nbsp; * @param params The query arguments to pass.
-<i class="no-highlight">68</i>&nbsp; * @param test Whether to get a URL to the testing version of Tibia.com.
-<i class="no-highlight">69</i>&nbsp; */
-<i class="no-highlight">70</i>&nbsp;public fun buildTibiaUrl(
-<i class="no-highlight">71</i>&nbsp;    section: String,
-<i class="no-highlight">72</i>&nbsp;    subtopic: String,
-<i class="no-highlight">73</i>&nbsp;    vararg params: Pair&lt;String, Any?&gt;,
-<b class="fc"><i class="no-highlight">74</i>&nbsp;    test: Boolean = false,</b>
-<b class="fc"><i class="no-highlight">75</i>&nbsp;    anchor: String? = null,</b>
-<i class="no-highlight">76</i>&nbsp;): String {
-<b class="fc"><i class="no-highlight">77</i>&nbsp;    val newParams = mutableListOf(*params)</b>
-<b class="fc"><i class="no-highlight">78</i>&nbsp;    newParams.add(0, &quot;subtopic&quot; to subtopic)</b>
-<b class="fc"><i class="no-highlight">79</i>&nbsp;    return buildTibiaUrl(section, params = newParams.toTypedArray(), test = test, anchor = anchor)</b>
-<i class="no-highlight">80</i>&nbsp;}
-<i class="no-highlight">81</i>&nbsp;
-<i class="no-highlight">82</i>&nbsp;/**
-<i class="no-highlight">83</i>&nbsp; * Get the URL of a static asset in Tibia.com.
-<i class="no-highlight">84</i>&nbsp; *
-<i class="no-highlight">85</i>&nbsp; * @param path The path to the asset.
-<i class="no-highlight">86</i>&nbsp; * @param test Whether to use the testing version of Tibia.com or not.
-<i class="no-highlight">87</i>&nbsp; */
-<b class="nc"><i class="no-highlight">88</i>&nbsp;public fun getStaticFileUrl(path: String, test: Boolean = false): String =</b>
-<b class="nc"><i class="no-highlight">89</i>&nbsp;    &quot;https://${if (test) &quot;test.&quot; else &quot;&quot;}static.tibia.com/${path.replace(&quot;//&quot;, &quot;/&quot;)}&quot;</b>
-<i class="no-highlight">90</i>&nbsp;
-<i class="no-highlight">91</i>&nbsp;/**
-<i class="no-highlight">92</i>&nbsp; * Get the URL of a static asset in Tibia.com.
-<i class="no-highlight">93</i>&nbsp; *
-<i class="no-highlight">94</i>&nbsp; * @param path The path to the asset, represented as an array of directories with the filename at the end.
-<i class="no-highlight">95</i>&nbsp; * @param test Whether to use the testing version of Tibia.com or not.
-<i class="no-highlight">96</i>&nbsp; */
-<b class="nc"><i class="no-highlight">97</i>&nbsp;public fun getStaticFileUrl(vararg path: String, test: Boolean = false): String =</b>
-<b class="nc"><i class="no-highlight">98</i>&nbsp;    getStaticFileUrl(path.joinToString(&quot;/&quot;), test)</b>
-<i class="no-highlight">99</i>&nbsp;
-<i class="no-highlight">100</i>&nbsp;/**
-<i class="no-highlight">101</i>&nbsp; * Get the URL to specific character.
-<i class="no-highlight">102</i>&nbsp; */
-<b class="fc"><i class="no-highlight">103</i>&nbsp;public fun getCharacterUrl(name: String): String = buildTibiaUrl(&quot;community&quot;, &quot;characters&quot;, &quot;name&quot; to name)</b>
-<i class="no-highlight">104</i>&nbsp;
-<i class="no-highlight">105</i>&nbsp;/**
-<i class="no-highlight">106</i>&nbsp; * Get the URL to the list of guilds for a specific [world].
-<i class="no-highlight">107</i>&nbsp; */
-<b class="nc"><i class="no-highlight">108</i>&nbsp;public fun getWorldGuildsUrl(world: String): String = buildTibiaUrl(&quot;community&quot;, &quot;guilds&quot;, &quot;world&quot; to world)</b>
-<i class="no-highlight">109</i>&nbsp;
-<i class="no-highlight">110</i>&nbsp;/**
-<i class="no-highlight">111</i>&nbsp; * Get the URL to a specific guild.
-<i class="no-highlight">112</i>&nbsp; */
-<i class="no-highlight">113</i>&nbsp;public fun getGuildUrl(name: String): String =
-<b class="nc"><i class="no-highlight">114</i>&nbsp;    buildTibiaUrl(&quot;community&quot;, &quot;guilds&quot;, &quot;GuildName&quot; to name, &quot;page&quot; to &quot;view&quot;)</b>
-<i class="no-highlight">115</i>&nbsp;
-<i class="no-highlight">116</i>&nbsp;/**
-<i class="no-highlight">117</i>&nbsp; * Get the URL to a house on a specific [world].
-<i class="no-highlight">118</i>&nbsp; */
-<i class="no-highlight">119</i>&nbsp;public fun getHouseUrl(world: String, houseId: Int): String =
-<b class="nc"><i class="no-highlight">120</i>&nbsp;    buildTibiaUrl(&quot;community&quot;, &quot;houses&quot;, &quot;page&quot; to &quot;view&quot;, &quot;world&quot; to world, &quot;houseid&quot; to houseId)</b>
-<i class="no-highlight">121</i>&nbsp;
-<i class="no-highlight">122</i>&nbsp;/**
-<i class="no-highlight">123</i>&nbsp; * Get the URL to the World Overview section.
-<i class="no-highlight">124</i>&nbsp; */
-<b class="nc"><i class="no-highlight">125</i>&nbsp;public fun getWorldOverviewUrl(): String = buildTibiaUrl(&quot;community&quot;, &quot;worlds&quot;)</b>
-<i class="no-highlight">126</i>&nbsp;
-<i class="no-highlight">127</i>&nbsp;/**
-<i class="no-highlight">128</i>&nbsp; * Get the URL to a specific world.
-<i class="no-highlight">129</i>&nbsp; */
-<b class="nc"><i class="no-highlight">130</i>&nbsp;public fun getWorldUrl(name: String): String = buildTibiaUrl(&quot;community&quot;, &quot;worlds&quot;, &quot;world&quot; to name)</b>
-<i class="no-highlight">131</i>&nbsp;
-<i class="no-highlight">132</i>&nbsp;/**
-<i class="no-highlight">133</i>&nbsp; * Get the URL to the News Archive.
-<i class="no-highlight">134</i>&nbsp; */
-<b class="nc"><i class="no-highlight">135</i>&nbsp;public fun getNewsArchiveUrl(): String = buildTibiaUrl(&quot;news&quot;, &quot;newsarchive&quot;)</b>
-<i class="no-highlight">136</i>&nbsp;
-<i class="no-highlight">137</i>&nbsp;/**
-<i class="no-highlight">138</i>&nbsp; * Get the post parameters to filter news in the News Archive.
-<i class="no-highlight">139</i>&nbsp; */
-<i class="no-highlight">140</i>&nbsp;public fun getNewArchiveFormData(
-<i class="no-highlight">141</i>&nbsp;    startDate: LocalDate,
-<i class="no-highlight">142</i>&nbsp;    endDate: LocalDate,
-<b class="nc"><i class="no-highlight">143</i>&nbsp;    categories: Set&lt;NewsCategory&gt;? = null,</b>
-<b class="nc"><i class="no-highlight">144</i>&nbsp;    types: Set&lt;NewsType&gt;? = null,</b>
-<b class="nc"><i class="no-highlight">145</i>&nbsp;): List&lt;Pair&lt;String, String&gt;&gt; = buildList {</b>
-<b class="nc"><i class="no-highlight">146</i>&nbsp;    startDate.apply {</b>
-<b class="nc"><i class="no-highlight">147</i>&nbsp;        add(&quot;filter_begin_day&quot; to dayOfMonth.toString())</b>
-<b class="nc"><i class="no-highlight">148</i>&nbsp;        add(&quot;filter_begin_month&quot; to monthValue.toString())</b>
-<b class="nc"><i class="no-highlight">149</i>&nbsp;        add(&quot;filter_begin_year&quot; to year.toString())</b>
-<b class="nc"><i class="no-highlight">150</i>&nbsp;    }</b>
-<b class="nc"><i class="no-highlight">151</i>&nbsp;    endDate.apply {</b>
-<b class="nc"><i class="no-highlight">152</i>&nbsp;        add(&quot;filter_end_day&quot; to dayOfMonth.toString())</b>
-<b class="nc"><i class="no-highlight">153</i>&nbsp;        add(&quot;filter_end_month&quot; to monthValue.toString())</b>
-<b class="nc"><i class="no-highlight">154</i>&nbsp;        add(&quot;filter_end_year&quot; to year.toString())</b>
-<b class="nc"><i class="no-highlight">155</i>&nbsp;    }</b>
-<b class="nc"><i class="no-highlight">156</i>&nbsp;    for (category: NewsCategory in categories ?: NewsCategory.values().toSet()) {</b>
-<b class="nc"><i class="no-highlight">157</i>&nbsp;        add(category.filterName to category.value)</b>
-<i class="no-highlight">158</i>&nbsp;    }
-<b class="nc"><i class="no-highlight">159</i>&nbsp;    for (type: NewsType in types ?: NewsType.values().toSet()) {</b>
-<b class="nc"><i class="no-highlight">160</i>&nbsp;        add(type.filterName to type.filterValue)</b>
-<i class="no-highlight">161</i>&nbsp;    }
-<b class="nc"><i class="no-highlight">162</i>&nbsp;}</b>
-<i class="no-highlight">163</i>&nbsp;
-<i class="no-highlight">164</i>&nbsp;/**
-<i class="no-highlight">165</i>&nbsp; * Get the URL to a specific news article.
-<i class="no-highlight">166</i>&nbsp; */
-<b class="nc"><i class="no-highlight">167</i>&nbsp;public fun getNewsUrl(newsId: Int): String = buildTibiaUrl(&quot;news&quot;, &quot;newsarchive&quot;, &quot;id&quot; to newsId)</b>
-<i class="no-highlight">168</i>&nbsp;
-<i class="no-highlight">169</i>&nbsp;
-<i class="no-highlight">170</i>&nbsp;/**
-<i class="no-highlight">171</i>&nbsp; * Get the URL to a specific forum section.
-<i class="no-highlight">172</i>&nbsp; */
-<i class="no-highlight">173</i>&nbsp;public fun getForumSectionUrl(sectionId: Int): String =
-<b class="nc"><i class="no-highlight">174</i>&nbsp;    buildTibiaUrl(&quot;forum&quot;, &quot;action&quot; to &quot;main&quot;, &quot;sectionid&quot; to sectionId)</b>
-<i class="no-highlight">175</i>&nbsp;
-<i class="no-highlight">176</i>&nbsp;
-<i class="no-highlight">177</i>&nbsp;/**
-<i class="no-highlight">178</i>&nbsp; * Get the URL to a specific forum section.
-<i class="no-highlight">179</i>&nbsp; */
-<i class="no-highlight">180</i>&nbsp;public fun getForumSectionUrl(section: AvailableForumSection): String =
-<b class="nc"><i class="no-highlight">181</i>&nbsp;    buildTibiaUrl(&quot;forum&quot;, section.subtopic)</b>
-<i class="no-highlight">182</i>&nbsp;
-<i class="no-highlight">183</i>&nbsp;/**
-<i class="no-highlight">184</i>&nbsp; * Get the URL to a specific forum section by its name.
-<i class="no-highlight">185</i>&nbsp; */
-<b class="nc"><i class="no-highlight">186</i>&nbsp;public fun getForumSectionUrl(sectionName: String): String = buildTibiaUrl(&quot;forum&quot;, sectionName)</b>
-<i class="no-highlight">187</i>&nbsp;
-<i class="no-highlight">188</i>&nbsp;/** Get the URL to a forum board. */
-<b class="nc"><i class="no-highlight">189</i>&nbsp;public fun getForumBoardUrl(boardId: Int, page: Int = 1, threadAge: Int? = null): String = buildTibiaUrl(</b>
-<b class="nc"><i class="no-highlight">190</i>&nbsp;    &quot;forum&quot;, &quot;action&quot; to &quot;board&quot;, &quot;boardid&quot; to boardId, &quot;pagenumber&quot; to page, &quot;threadage&quot; to threadAge</b>
-<i class="no-highlight">191</i>&nbsp;)
-<i class="no-highlight">192</i>&nbsp;
-<i class="no-highlight">193</i>&nbsp;/** Get the URL to a forum announcement. */
-<i class="no-highlight">194</i>&nbsp;public fun getForumAnnouncementUrl(announcementId: Int): String =
-<b class="nc"><i class="no-highlight">195</i>&nbsp;    buildTibiaUrl(&quot;forum&quot;, &quot;action&quot; to &quot;announcement&quot;, &quot;announcementid&quot; to announcementId)</b>
-<i class="no-highlight">196</i>&nbsp;
-<i class="no-highlight">197</i>&nbsp;/**
-<i class="no-highlight">198</i>&nbsp; * Get the URL to a specific thread in the forums.
-<i class="no-highlight">199</i>&nbsp; */
-<b class="nc"><i class="no-highlight">200</i>&nbsp;public fun getForumThreadUrl(threadId: Int, page: Int = 1): String =</b>
-<b class="nc"><i class="no-highlight">201</i>&nbsp;    buildTibiaUrl(&quot;forum&quot;, &quot;action&quot; to &quot;thread&quot;, &quot;threadid&quot; to threadId, &quot;pagenumber&quot; to page)</b>
-<i class="no-highlight">202</i>&nbsp;
-<i class="no-highlight">203</i>&nbsp;/**
-<i class="no-highlight">204</i>&nbsp; * Get the URL to the highscores, with the specified parameters.
-<i class="no-highlight">205</i>&nbsp; *
-<i class="no-highlight">206</i>&nbsp; * @param world If null, the highscores for all worlds will be displayed.
-<i class="no-highlight">207</i>&nbsp; */
-<i class="no-highlight">208</i>&nbsp;public fun getHighscoresUrl(
-<i class="no-highlight">209</i>&nbsp;    world: String?,
-<b class="nc"><i class="no-highlight">210</i>&nbsp;    category: HighscoresCategory = HighscoresCategory.EXPERIENCE_POINTS,</b>
-<b class="nc"><i class="no-highlight">211</i>&nbsp;    vocations: HighscoresProfession = HighscoresProfession.ALL,</b>
-<b class="nc"><i class="no-highlight">212</i>&nbsp;    page: Int = 1,</b>
-<b class="nc"><i class="no-highlight">213</i>&nbsp;    battleEye: HighscoresBattlEyeType = HighscoresBattlEyeType.ANY_WORLD,</b>
-<b class="nc"><i class="no-highlight">214</i>&nbsp;    worldTypes: Set&lt;PvpType&gt;? = null,</b>
-<b class="nc"><i class="no-highlight">215</i>&nbsp;): String = buildTibiaUrl(</b>
-<b class="nc"><i class="no-highlight">216</i>&nbsp;    &quot;community&quot;,</b>
-<b class="nc"><i class="no-highlight">217</i>&nbsp;    &quot;subtopic&quot; to &quot;highscores&quot;,</b>
-<b class="nc"><i class="no-highlight">218</i>&nbsp;    &quot;world&quot; to world,</b>
-<b class="nc"><i class="no-highlight">219</i>&nbsp;    &quot;profession&quot; to vocations.value,</b>
-<b class="nc"><i class="no-highlight">220</i>&nbsp;    &quot;currentpage&quot; to page,</b>
-<b class="nc"><i class="no-highlight">221</i>&nbsp;    &quot;category&quot; to category.value,</b>
-<b class="nc"><i class="no-highlight">222</i>&nbsp;    &quot;beprotection&quot; to battleEye.value,</b>
-<b class="nc"><i class="no-highlight">223</i>&nbsp;    *worldTypes.orEmpty().map { &quot;${PvpType.highscoresQueryParam}[]&quot; to it.highscoresFilterValue }.toTypedArray()</b>
-<i class="no-highlight">224</i>&nbsp;)
-<i class="no-highlight">225</i>&nbsp;
-<i class="no-highlight">226</i>&nbsp;/**
-<i class="no-highlight">227</i>&nbsp; * Get the URL to the kill statistics of a specific world.
-<i class="no-highlight">228</i>&nbsp; */
-<i class="no-highlight">229</i>&nbsp;public fun getKillStatisticsUrl(world: String): String =
-<b class="nc"><i class="no-highlight">230</i>&nbsp;    buildTibiaUrl(&quot;community&quot;, &quot;killstatistics&quot;, &quot;world&quot; to world)</b>
-<i class="no-highlight">231</i>&nbsp;
-<i class="no-highlight">232</i>&nbsp;/**
-<i class="no-highlight">233</i>&nbsp; * Get the URL to the events schedule.
-<i class="no-highlight">234</i>&nbsp; *
-<i class="no-highlight">235</i>&nbsp; * @param yearMonth The specific year and month to show the schedule for.
-<i class="no-highlight">236</i>&nbsp; *
-<i class="no-highlight">237</i>&nbsp; * Note that going past the allowed limits, will take you the current month and year.
-<i class="no-highlight">238</i>&nbsp; */
-<b class="nc"><i class="no-highlight">239</i>&nbsp;public fun getEventsScheduleUrl(yearMonth: YearMonth? = null): String {</b>
-<b class="nc"><i class="no-highlight">240</i>&nbsp;    return buildTibiaUrl(</b>
-<b class="nc"><i class="no-highlight">241</i>&nbsp;        &quot;news&quot;,</b>
-<b class="nc"><i class="no-highlight">242</i>&nbsp;        &quot;eventcalendar&quot;,</b>
-<b class="nc"><i class="no-highlight">243</i>&nbsp;        *yearMonth?.let { arrayOf(&quot;calendarmonth&quot; to it.month.value, &quot;calendaryear&quot; to it.year) }.orEmpty()</b>
-<i class="no-highlight">244</i>&nbsp;    )
-<i class="no-highlight">245</i>&nbsp;}
-<i class="no-highlight">246</i>&nbsp;
-<i class="no-highlight">247</i>&nbsp;
-<i class="no-highlight">248</i>&nbsp;/**
-<i class="no-highlight">249</i>&nbsp; * Get the URL to the houses section with the provided parameters.
-<i class="no-highlight">250</i>&nbsp; */
-<i class="no-highlight">251</i>&nbsp;public fun getHousesSectionUrl(
-<i class="no-highlight">252</i>&nbsp;    world: String,
-<i class="no-highlight">253</i>&nbsp;    town: String,
-<b class="nc"><i class="no-highlight">254</i>&nbsp;    type: HouseType? = null,</b>
-<b class="nc"><i class="no-highlight">255</i>&nbsp;    status: HouseStatus? = null,</b>
-<b class="nc"><i class="no-highlight">256</i>&nbsp;    order: HouseOrder? = null,</b>
-<b class="nc"><i class="no-highlight">257</i>&nbsp;): String = buildTibiaUrl(</b>
-<b class="nc"><i class="no-highlight">258</i>&nbsp;    &quot;community&quot;,</b>
-<b class="nc"><i class="no-highlight">259</i>&nbsp;    &quot;houses&quot;,</b>
-<b class="nc"><i class="no-highlight">260</i>&nbsp;    &quot;world&quot; to world,</b>
-<b class="nc"><i class="no-highlight">261</i>&nbsp;    &quot;town&quot; to town,</b>
-<b class="nc"><i class="no-highlight">262</i>&nbsp;    &quot;state&quot; to status?.value,</b>
-<b class="nc"><i class="no-highlight">263</i>&nbsp;    &quot;type&quot; to type?.value,</b>
-<b class="nc"><i class="no-highlight">264</i>&nbsp;    &quot;order&quot; to order?.value,</b>
-<i class="no-highlight">265</i>&nbsp;)
-<i class="no-highlight">266</i>&nbsp;
-<i class="no-highlight">267</i>&nbsp;/**
-<i class="no-highlight">268</i>&nbsp; * Get the URL to a specific auction.
-<i class="no-highlight">269</i>&nbsp; */
-<i class="no-highlight">270</i>&nbsp;public fun getAuctionUrl(auctionId: Int): String =
-<b class="nc"><i class="no-highlight">271</i>&nbsp;    buildTibiaUrl(&quot;charactertrade&quot;, &quot;currentcharactertrades&quot;, &quot;page&quot; to &quot;details&quot;, &quot;auctionid&quot; to auctionId)</b>
-<i class="no-highlight">272</i>&nbsp;
-<i class="no-highlight">273</i>&nbsp;
-<i class="no-highlight">274</i>&nbsp;/**
-<i class="no-highlight">275</i>&nbsp; * Get the URL to the character bazaar.
-<i class="no-highlight">276</i>&nbsp; *
-<i class="no-highlight">277</i>&nbsp; * @param type Whether to show current auctions or the auction history.
-<i class="no-highlight">278</i>&nbsp; */
-<b class="nc"><i class="no-highlight">279</i>&nbsp;public fun getBazaarUrl(type: BazaarType = BazaarType.CURRENT, filters: BazaarFilters? = null, page: Int = 1): String =</b>
-<b class="nc"><i class="no-highlight">280</i>&nbsp;    buildTibiaUrl(&quot;charactertrade&quot;, type.subtopic, &quot;currentpage&quot; to page, *filters.getQueryParams())</b>
-<i class="no-highlight">281</i>&nbsp;
-<i class="no-highlight">282</i>&nbsp;private fun BazaarFilters?.getQueryParams(): Array&lt;Pair&lt;String, Any?&gt;&gt; {
-<b class="nc"><i class="no-highlight">283</i>&nbsp;    return if (this != null) arrayOf(</b>
-<b class="nc"><i class="no-highlight">284</i>&nbsp;        &quot;filter_world&quot; to world,</b>
-<b class="nc"><i class="no-highlight">285</i>&nbsp;        AuctionVocationFilter.queryParam to vocation?.value,</b>
-<b class="nc"><i class="no-highlight">286</i>&nbsp;        &quot;filter_levelrangefrom&quot; to minimumLevel,</b>
-<b class="nc"><i class="no-highlight">287</i>&nbsp;        &quot;filter_levelrangeto&quot; to maximumLevel,</b>
-<b class="nc"><i class="no-highlight">288</i>&nbsp;        PvpType.bazaarQueryParam to pvpType?.bazaarFilterValue,</b>
-<b class="nc"><i class="no-highlight">289</i>&nbsp;        AuctionBattlEyeFilter.queryParam to battlEyeType?.value,</b>
-<b class="nc"><i class="no-highlight">290</i>&nbsp;        AuctionSkillFilter.queryParam to skill?.value,</b>
-<b class="nc"><i class="no-highlight">291</i>&nbsp;        &quot;filter_skillrangefrom&quot; to minimumSkillLevel,</b>
-<b class="nc"><i class="no-highlight">292</i>&nbsp;        &quot;filter_skillrangeto&quot; to maximumSkillLevel,</b>
-<b class="nc"><i class="no-highlight">293</i>&nbsp;        AuctionOrderBy.queryParam to orderBy?.value,</b>
-<b class="nc"><i class="no-highlight">294</i>&nbsp;        AuctionOrderDirection.queryParam to orderDirection?.value,</b>
-<b class="nc"><i class="no-highlight">295</i>&nbsp;        &quot;searchstring&quot; to searchString,</b>
-<b class="nc"><i class="no-highlight">296</i>&nbsp;        AuctionSearchType.queryParam to searchType?.value,</b>
-<b class="nc"><i class="no-highlight">297</i>&nbsp;    ) else emptyArray()</b>
-<i class="no-highlight">298</i>&nbsp;}
-<i class="no-highlight">299</i>&nbsp;
-<i class="no-highlight">300</i>&nbsp;/**
-<i class="no-highlight">301</i>&nbsp; * Get the URL to the CM Post Archive in Tibia.com.
-<i class="no-highlight">302</i>&nbsp; */
-<b class="nc"><i class="no-highlight">303</i>&nbsp;public fun getCMPostArchiveUrl(startDate: LocalDate, endDate: LocalDate, page: Int = 1): String {</b>
-<b class="nc"><i class="no-highlight">304</i>&nbsp;    return buildTibiaUrl(</b>
-<b class="nc"><i class="no-highlight">305</i>&nbsp;        &quot;forum&quot;,</b>
-<b class="nc"><i class="no-highlight">306</i>&nbsp;        &quot;forum&quot;,</b>
-<b class="nc"><i class="no-highlight">307</i>&nbsp;        &quot;action&quot; to &quot;cm_post_archive&quot;,</b>
-<b class="nc"><i class="no-highlight">308</i>&nbsp;        &quot;startyear&quot; to startDate.year,</b>
-<b class="nc"><i class="no-highlight">309</i>&nbsp;        &quot;startmonth&quot; to startDate.monthValue,</b>
-<b class="nc"><i class="no-highlight">310</i>&nbsp;        &quot;startday&quot; to startDate.dayOfMonth,</b>
-<b class="nc"><i class="no-highlight">311</i>&nbsp;        &quot;endyear&quot; to endDate.year,</b>
-<b class="nc"><i class="no-highlight">312</i>&nbsp;        &quot;endmonth&quot; to endDate.monthValue,</b>
-<b class="nc"><i class="no-highlight">313</i>&nbsp;        &quot;endday&quot; to endDate.dayOfMonth,</b>
-<b class="nc"><i class="no-highlight">314</i>&nbsp;        &quot;currentpage&quot; to page</b>
-<i class="no-highlight">315</i>&nbsp;    )
-<i class="no-highlight">316</i>&nbsp;}
-<i class="no-highlight">317</i>&nbsp;
-<i class="no-highlight">318</i>&nbsp;
-<i class="no-highlight">319</i>&nbsp;/**
-<i class="no-highlight">320</i>&nbsp; * Get the URL of a forum post with a specific [postId] in Tibia.com.
-<i class="no-highlight">321</i>&nbsp; */
-<i class="no-highlight">322</i>&nbsp;public fun getForumPostUrl(postId: Int): String =
-<b class="nc"><i class="no-highlight">323</i>&nbsp;    buildTibiaUrl(&quot;forum&quot;, &quot;action&quot; to &quot;thread&quot;, &quot;postid&quot; to postId, anchor = &quot;post$postId&quot;)</b>
-<i class="no-highlight">324</i>&nbsp;
-<i class="no-highlight">325</i>&nbsp;/**
-<i class="no-highlight">326</i>&nbsp; * Get the URL to the Leaderboard of a specific [world] in Tibia.com.
-<i class="no-highlight">327</i>&nbsp; */
-<b class="nc"><i class="no-highlight">328</i>&nbsp;public fun getLeaderboardUrl(world: String, rotation: Int? = null, page: Int = 1): String = buildTibiaUrl(</b>
-<b class="nc"><i class="no-highlight">329</i>&nbsp;    &quot;community&quot;, &quot;leaderboards&quot;, &quot;world&quot; to world, &quot;rotation&quot; to rotation, &quot;currentpage&quot; to page</b>
-<i class="no-highlight">330</i>&nbsp;)
-<i class="no-highlight">331</i>&nbsp;
-<i class="no-highlight">332</i>&nbsp;/**
-<i class="no-highlight">333</i>&nbsp; * Get the URL to the Creatures section in Tibia.com.
-<i class="no-highlight">334</i>&nbsp; */
-<b class="nc"><i class="no-highlight">335</i>&nbsp;public fun getCreaturesSectionUrl(): String = buildTibiaUrl(&quot;library&quot;, &quot;creatures&quot;)</b>
-<i class="no-highlight">336</i>&nbsp;
-<i class="no-highlight">337</i>&nbsp;
-<i class="no-highlight">338</i>&nbsp;/**
-<i class="no-highlight">339</i>&nbsp; * Get the URL to the Creatures section in Tibia.com.
-<i class="no-highlight">340</i>&nbsp; */
-<b class="nc"><i class="no-highlight">341</i>&nbsp;public fun getBoostableBossesUrl(): String = buildTibiaUrl(&quot;library&quot;, &quot;boostablebosses&quot;)</b>
-<i class="no-highlight">342</i>&nbsp;
-<i class="no-highlight">343</i>&nbsp;/**
-<i class="no-highlight">344</i>&nbsp; * Get the URL to a specific creature in Tibia.com.
-<i class="no-highlight">345</i>&nbsp; */
-<b class="nc"><i class="no-highlight">346</i>&nbsp;public fun getCreatureUrl(identifier: String): String = buildTibiaUrl(&quot;library&quot;, &quot;creatures&quot;, &quot;race&quot; to identifier)</b>
-</div>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.galarzaa.tibiakt.core.utils
+&nbsp;
+&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionBattlEyeFilter
+&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionOrderBy
+&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionOrderDirection
+&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionSearchType
+&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionSkillFilter
+&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionVocationFilter
+&nbsp;import com.galarzaa.tibiakt.core.enums.AvailableForumSection
+&nbsp;import com.galarzaa.tibiakt.core.enums.BazaarType
+&nbsp;import com.galarzaa.tibiakt.core.enums.HighscoresBattlEyeType
+&nbsp;import com.galarzaa.tibiakt.core.enums.HighscoresCategory
+&nbsp;import com.galarzaa.tibiakt.core.enums.HighscoresProfession
+&nbsp;import com.galarzaa.tibiakt.core.enums.HouseOrder
+&nbsp;import com.galarzaa.tibiakt.core.enums.HouseStatus
+&nbsp;import com.galarzaa.tibiakt.core.enums.HouseType
+&nbsp;import com.galarzaa.tibiakt.core.enums.NewsCategory
+&nbsp;import com.galarzaa.tibiakt.core.enums.NewsType
+&nbsp;import com.galarzaa.tibiakt.core.enums.PvpType
+&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.BazaarFilters
+&nbsp;import java.net.URLEncoder
+&nbsp;import java.time.LocalDate
+&nbsp;import java.time.YearMonth
+&nbsp;
+&nbsp;/**
+&nbsp; * Build a URL to Tibia.com.
+&nbsp; *
+&nbsp; * @param section The desired section.
+&nbsp; * @param params The query arguments to pass.
+&nbsp; * @param test Whether to get a URL to the testing version of Tibia.com.
+&nbsp; */
+&nbsp;public fun buildTibiaUrl(
+&nbsp;    section: String,
+&nbsp;    vararg params: Pair&lt;String, Any?&gt;,
+<b class="nc">&nbsp;    test: Boolean = false,</b>
+<b class="nc">&nbsp;    anchor: String? = null,</b>
+&nbsp;): String {
+<b class="pc">&nbsp;    val baseUrl = if (test) &quot;www.test.tibia.com&quot; else &quot;www.tibia.com&quot;</b>
+<b class="fc">&nbsp;    return &quot;https://$baseUrl/$section/?${</b>
+<b class="pc">&nbsp;        params.filter { it.second != null }.joinToString(&quot;&amp;&quot;) { (name, value) -&gt;</b>
+<b class="fc">&nbsp;            &quot;$name=${URLEncoder.encode(value.toString(), Charsets.ISO_8859_1)}&quot;</b>
+&nbsp;        }
+<b class="pc">&nbsp;    }${anchor?.let { &quot;#$it&quot; }.orEmpty()}&quot;</b>
+&nbsp;}
+&nbsp;
+&nbsp;/**
+&nbsp; * Build a URL to Tibia.com.
+&nbsp; *
+&nbsp; * @param section The desired section.
+&nbsp; * @param subtopic The desired subtopic.
+&nbsp; * @param params The query arguments to pass.
+&nbsp; * @param test Whether to get a URL to the testing version of Tibia.com.
+&nbsp; */
+&nbsp;public fun buildTibiaUrl(
+&nbsp;    section: String,
+&nbsp;    subtopic: String,
+&nbsp;    vararg params: Pair&lt;String, Any?&gt;,
+<b class="fc">&nbsp;    test: Boolean = false,</b>
+<b class="fc">&nbsp;    anchor: String? = null,</b>
+&nbsp;): String {
+<b class="fc">&nbsp;    val newParams = mutableListOf(*params)</b>
+<b class="fc">&nbsp;    newParams.add(0, &quot;subtopic&quot; to subtopic)</b>
+<b class="fc">&nbsp;    return buildTibiaUrl(section, params = newParams.toTypedArray(), test = test, anchor = anchor)</b>
+&nbsp;}
+&nbsp;
+&nbsp;/**
+&nbsp; * Get the URL of a static asset in Tibia.com.
+&nbsp; *
+&nbsp; * @param path The path to the asset.
+&nbsp; * @param test Whether to use the testing version of Tibia.com or not.
+&nbsp; */
+<b class="nc">&nbsp;public fun getStaticFileUrl(path: String, test: Boolean = false): String =</b>
+<b class="nc">&nbsp;    &quot;https://${if (test) &quot;test.&quot; else &quot;&quot;}static.tibia.com/${path.replace(&quot;//&quot;, &quot;/&quot;)}&quot;</b>
+&nbsp;
+&nbsp;/**
+&nbsp; * Get the URL of a static asset in Tibia.com.
+&nbsp; *
+&nbsp; * @param path The path to the asset, represented as an array of directories with the filename at the end.
+&nbsp; * @param test Whether to use the testing version of Tibia.com or not.
+&nbsp; */
+<b class="nc">&nbsp;public fun getStaticFileUrl(vararg path: String, test: Boolean = false): String =</b>
+<b class="nc">&nbsp;    getStaticFileUrl(path.joinToString(&quot;/&quot;), test)</b>
+&nbsp;
+&nbsp;/**
+&nbsp; * Get the URL to specific character.
+&nbsp; */
+<b class="fc">&nbsp;public fun getCharacterUrl(name: String): String = buildTibiaUrl(&quot;community&quot;, &quot;characters&quot;, &quot;name&quot; to name)</b>
+&nbsp;
+&nbsp;/**
+&nbsp; * Get the URL to the list of guilds for a specific [world].
+&nbsp; */
+<b class="nc">&nbsp;public fun getWorldGuildsUrl(world: String): String = buildTibiaUrl(&quot;community&quot;, &quot;guilds&quot;, &quot;world&quot; to world)</b>
+&nbsp;
+&nbsp;/**
+&nbsp; * Get the URL to a specific guild.
+&nbsp; */
+&nbsp;public fun getGuildUrl(name: String): String =
+<b class="nc">&nbsp;    buildTibiaUrl(&quot;community&quot;, &quot;guilds&quot;, &quot;GuildName&quot; to name, &quot;page&quot; to &quot;view&quot;)</b>
+&nbsp;
+&nbsp;/**
+&nbsp; * Get the URL to a house on a specific [world].
+&nbsp; */
+&nbsp;public fun getHouseUrl(world: String, houseId: Int): String =
+<b class="nc">&nbsp;    buildTibiaUrl(&quot;community&quot;, &quot;houses&quot;, &quot;page&quot; to &quot;view&quot;, &quot;world&quot; to world, &quot;houseid&quot; to houseId)</b>
+&nbsp;
+&nbsp;/**
+&nbsp; * Get the URL to the World Overview section.
+&nbsp; */
+<b class="nc">&nbsp;public fun getWorldOverviewUrl(): String = buildTibiaUrl(&quot;community&quot;, &quot;worlds&quot;)</b>
+&nbsp;
+&nbsp;/**
+&nbsp; * Get the URL to a specific world.
+&nbsp; */
+<b class="nc">&nbsp;public fun getWorldUrl(name: String): String = buildTibiaUrl(&quot;community&quot;, &quot;worlds&quot;, &quot;world&quot; to name)</b>
+&nbsp;
+&nbsp;/**
+&nbsp; * Get the URL to the News Archive.
+&nbsp; */
+<b class="nc">&nbsp;public fun getNewsArchiveUrl(): String = buildTibiaUrl(&quot;news&quot;, &quot;newsarchive&quot;)</b>
+&nbsp;
+&nbsp;/**
+&nbsp; * Get the post parameters to filter news in the News Archive.
+&nbsp; */
+&nbsp;public fun getNewArchiveFormData(
+&nbsp;    startDate: LocalDate,
+&nbsp;    endDate: LocalDate,
+<b class="nc">&nbsp;    categories: Set&lt;NewsCategory&gt;? = null,</b>
+<b class="nc">&nbsp;    types: Set&lt;NewsType&gt;? = null,</b>
+<b class="nc">&nbsp;): List&lt;Pair&lt;String, String&gt;&gt; = buildList {</b>
+<b class="nc">&nbsp;    startDate.apply {</b>
+<b class="nc">&nbsp;        add(&quot;filter_begin_day&quot; to dayOfMonth.toString())</b>
+<b class="nc">&nbsp;        add(&quot;filter_begin_month&quot; to monthValue.toString())</b>
+<b class="nc">&nbsp;        add(&quot;filter_begin_year&quot; to year.toString())</b>
+<b class="nc">&nbsp;    }</b>
+<b class="nc">&nbsp;    endDate.apply {</b>
+<b class="nc">&nbsp;        add(&quot;filter_end_day&quot; to dayOfMonth.toString())</b>
+<b class="nc">&nbsp;        add(&quot;filter_end_month&quot; to monthValue.toString())</b>
+<b class="nc">&nbsp;        add(&quot;filter_end_year&quot; to year.toString())</b>
+<b class="nc">&nbsp;    }</b>
+<b class="nc">&nbsp;    for (category: NewsCategory in categories ?: NewsCategory.values().toSet()) {</b>
+<b class="nc">&nbsp;        add(category.filterName to category.value)</b>
+&nbsp;    }
+<b class="nc">&nbsp;    for (type: NewsType in types ?: NewsType.values().toSet()) {</b>
+<b class="nc">&nbsp;        add(type.filterName to type.filterValue)</b>
+&nbsp;    }
+<b class="nc">&nbsp;}</b>
+&nbsp;
+&nbsp;/**
+&nbsp; * Get the URL to a specific news article.
+&nbsp; */
+<b class="nc">&nbsp;public fun getNewsUrl(newsId: Int): String = buildTibiaUrl(&quot;news&quot;, &quot;newsarchive&quot;, &quot;id&quot; to newsId)</b>
+&nbsp;
+&nbsp;
+&nbsp;/**
+&nbsp; * Get the URL to a specific forum section.
+&nbsp; */
+&nbsp;public fun getForumSectionUrl(sectionId: Int): String =
+<b class="nc">&nbsp;    buildTibiaUrl(&quot;forum&quot;, &quot;action&quot; to &quot;main&quot;, &quot;sectionid&quot; to sectionId)</b>
+&nbsp;
+&nbsp;
+&nbsp;/**
+&nbsp; * Get the URL to a specific forum section.
+&nbsp; */
+&nbsp;public fun getForumSectionUrl(section: AvailableForumSection): String =
+<b class="nc">&nbsp;    buildTibiaUrl(&quot;forum&quot;, section.subtopic)</b>
+&nbsp;
+&nbsp;/**
+&nbsp; * Get the URL to a specific forum section by its name.
+&nbsp; */
+<b class="nc">&nbsp;public fun getForumSectionUrl(sectionName: String): String = buildTibiaUrl(&quot;forum&quot;, sectionName)</b>
+&nbsp;
+&nbsp;/** Get the URL to a forum board. */
+<b class="nc">&nbsp;public fun getForumBoardUrl(boardId: Int, page: Int = 1, threadAge: Int? = null): String = buildTibiaUrl(</b>
+<b class="nc">&nbsp;    &quot;forum&quot;, &quot;action&quot; to &quot;board&quot;, &quot;boardid&quot; to boardId, &quot;pagenumber&quot; to page, &quot;threadage&quot; to threadAge</b>
+&nbsp;)
+&nbsp;
+&nbsp;/** Get the URL to a forum announcement. */
+&nbsp;public fun getForumAnnouncementUrl(announcementId: Int): String =
+<b class="nc">&nbsp;    buildTibiaUrl(&quot;forum&quot;, &quot;action&quot; to &quot;announcement&quot;, &quot;announcementid&quot; to announcementId)</b>
+&nbsp;
+&nbsp;/**
+&nbsp; * Get the URL to a specific thread in the forums.
+&nbsp; */
+<b class="nc">&nbsp;public fun getForumThreadUrl(threadId: Int, page: Int = 1): String =</b>
+<b class="nc">&nbsp;    buildTibiaUrl(&quot;forum&quot;, &quot;action&quot; to &quot;thread&quot;, &quot;threadid&quot; to threadId, &quot;pagenumber&quot; to page)</b>
+&nbsp;
+&nbsp;/**
+&nbsp; * Get the URL to the highscores, with the specified parameters.
+&nbsp; *
+&nbsp; * @param world If null, the highscores for all worlds will be displayed.
+&nbsp; */
+&nbsp;public fun getHighscoresUrl(
+&nbsp;    world: String?,
+<b class="nc">&nbsp;    category: HighscoresCategory = HighscoresCategory.EXPERIENCE_POINTS,</b>
+<b class="nc">&nbsp;    vocations: HighscoresProfession = HighscoresProfession.ALL,</b>
+<b class="nc">&nbsp;    page: Int = 1,</b>
+<b class="nc">&nbsp;    battleEye: HighscoresBattlEyeType = HighscoresBattlEyeType.ANY_WORLD,</b>
+<b class="nc">&nbsp;    worldTypes: Set&lt;PvpType&gt;? = null,</b>
+<b class="nc">&nbsp;): String = buildTibiaUrl(</b>
+<b class="nc">&nbsp;    &quot;community&quot;,</b>
+<b class="nc">&nbsp;    &quot;subtopic&quot; to &quot;highscores&quot;,</b>
+<b class="nc">&nbsp;    &quot;world&quot; to world,</b>
+<b class="nc">&nbsp;    &quot;profession&quot; to vocations.value,</b>
+<b class="nc">&nbsp;    &quot;currentpage&quot; to page,</b>
+<b class="nc">&nbsp;    &quot;category&quot; to category.value,</b>
+<b class="nc">&nbsp;    &quot;beprotection&quot; to battleEye.value,</b>
+<b class="nc">&nbsp;    *worldTypes.orEmpty().map { &quot;${PvpType.highscoresQueryParam}[]&quot; to it.highscoresFilterValue }.toTypedArray()</b>
+&nbsp;)
+&nbsp;
+&nbsp;/**
+&nbsp; * Get the URL to the kill statistics of a specific world.
+&nbsp; */
+&nbsp;public fun getKillStatisticsUrl(world: String): String =
+<b class="nc">&nbsp;    buildTibiaUrl(&quot;community&quot;, &quot;killstatistics&quot;, &quot;world&quot; to world)</b>
+&nbsp;
+&nbsp;/**
+&nbsp; * Get the URL to the events schedule.
+&nbsp; *
+&nbsp; * @param yearMonth The specific year and month to show the schedule for.
+&nbsp; *
+&nbsp; * Note that going past the allowed limits, will take you the current month and year.
+&nbsp; */
+<b class="nc">&nbsp;public fun getEventsScheduleUrl(yearMonth: YearMonth? = null): String {</b>
+<b class="nc">&nbsp;    return buildTibiaUrl(</b>
+<b class="nc">&nbsp;        &quot;news&quot;,</b>
+<b class="nc">&nbsp;        &quot;eventcalendar&quot;,</b>
+<b class="nc">&nbsp;        *yearMonth?.let { arrayOf(&quot;calendarmonth&quot; to it.month.value, &quot;calendaryear&quot; to it.year) }.orEmpty()</b>
+&nbsp;    )
+&nbsp;}
+&nbsp;
+&nbsp;
+&nbsp;/**
+&nbsp; * Get the URL to the houses section with the provided parameters.
+&nbsp; */
+&nbsp;public fun getHousesSectionUrl(
+&nbsp;    world: String,
+&nbsp;    town: String,
+<b class="nc">&nbsp;    type: HouseType? = null,</b>
+<b class="nc">&nbsp;    status: HouseStatus? = null,</b>
+<b class="nc">&nbsp;    order: HouseOrder? = null,</b>
+<b class="nc">&nbsp;): String = buildTibiaUrl(</b>
+<b class="nc">&nbsp;    &quot;community&quot;,</b>
+<b class="nc">&nbsp;    &quot;houses&quot;,</b>
+<b class="nc">&nbsp;    &quot;world&quot; to world,</b>
+<b class="nc">&nbsp;    &quot;town&quot; to town,</b>
+<b class="nc">&nbsp;    &quot;state&quot; to status?.value,</b>
+<b class="nc">&nbsp;    &quot;type&quot; to type?.value,</b>
+<b class="nc">&nbsp;    &quot;order&quot; to order?.value,</b>
+&nbsp;)
+&nbsp;
+&nbsp;/**
+&nbsp; * Get the URL to a specific auction.
+&nbsp; */
+&nbsp;public fun getAuctionUrl(auctionId: Int): String =
+<b class="nc">&nbsp;    buildTibiaUrl(&quot;charactertrade&quot;, &quot;currentcharactertrades&quot;, &quot;page&quot; to &quot;details&quot;, &quot;auctionid&quot; to auctionId)</b>
+&nbsp;
+&nbsp;
+&nbsp;/**
+&nbsp; * Get the URL to the character bazaar.
+&nbsp; *
+&nbsp; * @param type Whether to show current auctions or the auction history.
+&nbsp; */
+<b class="nc">&nbsp;public fun getBazaarUrl(type: BazaarType = BazaarType.CURRENT, filters: BazaarFilters? = null, page: Int = 1): String =</b>
+<b class="nc">&nbsp;    buildTibiaUrl(&quot;charactertrade&quot;, type.subtopic, &quot;currentpage&quot; to page, *filters.getQueryParams())</b>
+&nbsp;
+&nbsp;private fun BazaarFilters?.getQueryParams(): Array&lt;Pair&lt;String, Any?&gt;&gt; {
+<b class="nc">&nbsp;    return if (this != null) arrayOf(</b>
+<b class="nc">&nbsp;        &quot;filter_world&quot; to world,</b>
+<b class="nc">&nbsp;        AuctionVocationFilter.queryParam to vocation?.value,</b>
+<b class="nc">&nbsp;        &quot;filter_levelrangefrom&quot; to minimumLevel,</b>
+<b class="nc">&nbsp;        &quot;filter_levelrangeto&quot; to maximumLevel,</b>
+<b class="nc">&nbsp;        PvpType.bazaarQueryParam to pvpType?.bazaarFilterValue,</b>
+<b class="nc">&nbsp;        AuctionBattlEyeFilter.queryParam to battlEyeType?.value,</b>
+<b class="nc">&nbsp;        AuctionSkillFilter.queryParam to skill?.value,</b>
+<b class="nc">&nbsp;        &quot;filter_skillrangefrom&quot; to minimumSkillLevel,</b>
+<b class="nc">&nbsp;        &quot;filter_skillrangeto&quot; to maximumSkillLevel,</b>
+<b class="nc">&nbsp;        AuctionOrderBy.queryParam to orderBy?.value,</b>
+<b class="nc">&nbsp;        AuctionOrderDirection.queryParam to orderDirection?.value,</b>
+<b class="nc">&nbsp;        &quot;searchstring&quot; to searchString,</b>
+<b class="nc">&nbsp;        AuctionSearchType.queryParam to searchType?.value,</b>
+<b class="nc">&nbsp;    ) else emptyArray()</b>
+&nbsp;}
+&nbsp;
+&nbsp;/**
+&nbsp; * Get the URL to the CM Post Archive in Tibia.com.
+&nbsp; */
+<b class="nc">&nbsp;public fun getCMPostArchiveUrl(startDate: LocalDate, endDate: LocalDate, page: Int = 1): String {</b>
+<b class="nc">&nbsp;    return buildTibiaUrl(</b>
+<b class="nc">&nbsp;        &quot;forum&quot;,</b>
+<b class="nc">&nbsp;        &quot;forum&quot;,</b>
+<b class="nc">&nbsp;        &quot;action&quot; to &quot;cm_post_archive&quot;,</b>
+<b class="nc">&nbsp;        &quot;startyear&quot; to startDate.year,</b>
+<b class="nc">&nbsp;        &quot;startmonth&quot; to startDate.monthValue,</b>
+<b class="nc">&nbsp;        &quot;startday&quot; to startDate.dayOfMonth,</b>
+<b class="nc">&nbsp;        &quot;endyear&quot; to endDate.year,</b>
+<b class="nc">&nbsp;        &quot;endmonth&quot; to endDate.monthValue,</b>
+<b class="nc">&nbsp;        &quot;endday&quot; to endDate.dayOfMonth,</b>
+<b class="nc">&nbsp;        &quot;currentpage&quot; to page</b>
+&nbsp;    )
+&nbsp;}
+&nbsp;
+&nbsp;
+&nbsp;/**
+&nbsp; * Get the URL of a forum post with a specific [postId] in Tibia.com.
+&nbsp; */
+&nbsp;public fun getForumPostUrl(postId: Int): String =
+<b class="nc">&nbsp;    buildTibiaUrl(&quot;forum&quot;, &quot;action&quot; to &quot;thread&quot;, &quot;postid&quot; to postId, anchor = &quot;post$postId&quot;)</b>
+&nbsp;
+&nbsp;/**
+&nbsp; * Get the URL to the Leaderboard of a specific [world] in Tibia.com.
+&nbsp; */
+<b class="nc">&nbsp;public fun getLeaderboardUrl(world: String, rotation: Int? = null, page: Int = 1): String = buildTibiaUrl(</b>
+<b class="nc">&nbsp;    &quot;community&quot;, &quot;leaderboards&quot;, &quot;world&quot; to world, &quot;rotation&quot; to rotation, &quot;currentpage&quot; to page</b>
+&nbsp;)
+&nbsp;
+&nbsp;/**
+&nbsp; * Get the URL to the Creatures section in Tibia.com.
+&nbsp; */
+<b class="nc">&nbsp;public fun getCreaturesSectionUrl(): String = buildTibiaUrl(&quot;library&quot;, &quot;creatures&quot;)</b>
+&nbsp;
+&nbsp;
+&nbsp;/**
+&nbsp; * Get the URL to the Creatures section in Tibia.com.
+&nbsp; */
+<b class="nc">&nbsp;public fun getBoostableBossesUrl(): String = buildTibiaUrl(&quot;library&quot;, &quot;boostablebosses&quot;)</b>
+&nbsp;
+&nbsp;/**
+&nbsp; * Get the URL to a specific creature in Tibia.com.
+&nbsp; */
+<b class="nc">&nbsp;public fun getCreatureUrl(identifier: String): String = buildTibiaUrl(&quot;library&quot;, &quot;creatures&quot;, &quot;race&quot; to identifier)</b>
+</code>
 </pre>
 </div>
 
@@ -509,18 +510,15 @@ Current scope:     <a href="../../index.html">all classes</a>
     @*/
 
     if (!msie || msie && msie9) {
-        var codeBlock = document.getElementById('sourceCode');
-
-        if (codeBlock) {
-            hljs.highlightBlock(codeBlock);
-        }
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
     }
 })();
 </script>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-02-24 23:58</div>
+    <div style="float:right;">generated on 2023-03-15 02:46</div>
 </div>
 </body>
 </html>

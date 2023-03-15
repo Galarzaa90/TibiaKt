@@ -7,9 +7,10 @@
   <title>Coverage Report > NewsArchiveBuilder</title>
   <style type="text/css">
     @import "../../css/coverage.css";
-    @import "../../css/highlight-idea.css";
+    @import "../../css/idea.min.css";
   </style>
-  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
 </head>
 
 <body>
@@ -155,93 +156,93 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;/*
-<i class="no-highlight">2</i>&nbsp; * Copyright © 2022 Allan Galarza
-<i class="no-highlight">3</i>&nbsp; *
-<i class="no-highlight">4</i>&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
-<i class="no-highlight">5</i>&nbsp; * you may not use this file except in compliance with the License.
-<i class="no-highlight">6</i>&nbsp; * You may obtain a copy of the License at
-<i class="no-highlight">7</i>&nbsp; *
-<i class="no-highlight">8</i>&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
-<i class="no-highlight">9</i>&nbsp; *
-<i class="no-highlight">10</i>&nbsp; * Unless required by applicable law or agreed to in writing, software
-<i class="no-highlight">11</i>&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-<i class="no-highlight">12</i>&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-<i class="no-highlight">13</i>&nbsp; * See the License for the specific language governing permissions and
-<i class="no-highlight">14</i>&nbsp; * limitations under the License.
-<i class="no-highlight">15</i>&nbsp; */
-<i class="no-highlight">16</i>&nbsp;
-<i class="no-highlight">17</i>&nbsp;package com.galarzaa.tibiakt.core.builders
-<i class="no-highlight">18</i>&nbsp;
-<i class="no-highlight">19</i>&nbsp;import com.galarzaa.tibiakt.core.enums.NewsCategory
-<i class="no-highlight">20</i>&nbsp;import com.galarzaa.tibiakt.core.enums.NewsType
-<i class="no-highlight">21</i>&nbsp;import com.galarzaa.tibiakt.core.models.news.NewsArchive
-<i class="no-highlight">22</i>&nbsp;import com.galarzaa.tibiakt.core.models.news.NewsEntry
-<i class="no-highlight">23</i>&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
-<i class="no-highlight">24</i>&nbsp;import java.time.LocalDate
-<i class="no-highlight">25</i>&nbsp;
-<i class="no-highlight">26</i>&nbsp;@BuilderDsl
-<i class="no-highlight">27</i>&nbsp;public fun newsArchive(block: NewsArchiveBuilder.() -&gt; Unit): NewsArchive = newsArchiveBuilder(block).build()
-<i class="no-highlight">28</i>&nbsp;
-<i class="no-highlight">29</i>&nbsp;@BuilderDsl
-<i class="no-highlight">30</i>&nbsp;public fun newsArchiveBuilder(block: NewsArchiveBuilder.() -&gt; Unit): NewsArchiveBuilder =
-<i class="no-highlight">31</i>&nbsp;    NewsArchiveBuilder().apply(block)
-<i class="no-highlight">32</i>&nbsp;
-<i class="no-highlight">33</i>&nbsp;/** Builder for [NewsArchive] instances. */
-<b class="fc"><i class="no-highlight">34</i>&nbsp;@BuilderDsl</b>
-<i class="no-highlight">35</i>&nbsp;public class NewsArchiveBuilder : TibiaKtBuilder&lt;NewsArchive&gt; {
-<b class="fc"><i class="no-highlight">36</i>&nbsp;    public var startDate: LocalDate? = null</b>
-<b class="fc"><i class="no-highlight">37</i>&nbsp;    public var endDate: LocalDate? = null</b>
-<b class="fc"><i class="no-highlight">38</i>&nbsp;    public val types: MutableSet&lt;NewsType&gt; = mutableSetOf()</b>
-<b class="fc"><i class="no-highlight">39</i>&nbsp;    public val categories: MutableSet&lt;NewsCategory&gt; = mutableSetOf()</b>
-<b class="fc"><i class="no-highlight">40</i>&nbsp;    public val entries: MutableList&lt;NewsEntry&gt; = mutableListOf()</b>
-<b class="fc"><i class="no-highlight">41</i>&nbsp;    public fun addCategory(category: NewsCategory): NewsArchiveBuilder = apply { categories.add(category) }</b>
-<i class="no-highlight">42</i>&nbsp;
-<b class="fc"><i class="no-highlight">43</i>&nbsp;    public fun addType(type: NewsType): NewsArchiveBuilder = apply { types.add(type) }</b>
-<i class="no-highlight">44</i>&nbsp;
-<i class="no-highlight">45</i>&nbsp;    public fun addEntry(
-<i class="no-highlight">46</i>&nbsp;        id: Int,
-<i class="no-highlight">47</i>&nbsp;        title: String,
-<i class="no-highlight">48</i>&nbsp;        category: NewsCategory,
-<i class="no-highlight">49</i>&nbsp;        categoryIcon: String,
-<i class="no-highlight">50</i>&nbsp;        date: LocalDate,
-<i class="no-highlight">51</i>&nbsp;        type: NewsType,
-<b class="fc"><i class="no-highlight">52</i>&nbsp;    ): NewsArchiveBuilder = apply {</b>
-<b class="fc"><i class="no-highlight">53</i>&nbsp;        entries.add(NewsEntry(id, title, category, categoryIcon, date, type))</b>
-<b class="fc"><i class="no-highlight">54</i>&nbsp;    }</b>
-<i class="no-highlight">55</i>&nbsp;
-<b class="nc"><i class="no-highlight">56</i>&nbsp;    public fun addEntry(builder: NewsEntryBuilder.() -&gt; Unit): NewsArchiveBuilder = apply {</b>
-<b class="nc"><i class="no-highlight">57</i>&nbsp;        entries.add(NewsEntryBuilder().apply(builder).build())</b>
-<b class="nc"><i class="no-highlight">58</i>&nbsp;    }</b>
-<i class="no-highlight">59</i>&nbsp;
-<i class="no-highlight">60</i>&nbsp;
-<b class="fc"><i class="no-highlight">61</i>&nbsp;    override fun build(): NewsArchive = NewsArchive(</b>
-<b class="pc"><i class="no-highlight">62</i>&nbsp;        startDate = startDate ?: error(&quot;startDate is required&quot;),</b>
-<b class="pc"><i class="no-highlight">63</i>&nbsp;        endDate = endDate ?: error(&quot;endDate is required&quot;),</b>
-<b class="fc"><i class="no-highlight">64</i>&nbsp;        types = types,</b>
-<b class="fc"><i class="no-highlight">65</i>&nbsp;        categories = categories,</b>
-<b class="fc"><i class="no-highlight">66</i>&nbsp;        entries = entries,</b>
-<i class="no-highlight">67</i>&nbsp;    )
-<i class="no-highlight">68</i>&nbsp;
-<b class="nc"><i class="no-highlight">69</i>&nbsp;    public class NewsEntryBuilder : TibiaKtBuilder&lt;NewsEntry&gt; {</b>
-<b class="nc"><i class="no-highlight">70</i>&nbsp;        public val id: Int = 0</b>
-<b class="nc"><i class="no-highlight">71</i>&nbsp;        public val title: String? = null</b>
-<b class="nc"><i class="no-highlight">72</i>&nbsp;        public val category: NewsCategory? = null</b>
-<b class="nc"><i class="no-highlight">73</i>&nbsp;        public val categoryIcon: String? = null</b>
-<b class="nc"><i class="no-highlight">74</i>&nbsp;        public val date: LocalDate? = null</b>
-<b class="nc"><i class="no-highlight">75</i>&nbsp;        public val type: NewsType? = null</b>
-<i class="no-highlight">76</i>&nbsp;
-<b class="nc"><i class="no-highlight">77</i>&nbsp;        override fun build(): NewsEntry = NewsEntry(</b>
-<b class="nc"><i class="no-highlight">78</i>&nbsp;            id = id,</b>
-<b class="nc"><i class="no-highlight">79</i>&nbsp;            title = title ?: error(&quot;title is required&quot;),</b>
-<b class="nc"><i class="no-highlight">80</i>&nbsp;            category = category ?: error(&quot;category is required&quot;),</b>
-<b class="nc"><i class="no-highlight">81</i>&nbsp;            categoryIcon = categoryIcon ?: error(&quot;categoryIcon is required&quot;),</b>
-<b class="nc"><i class="no-highlight">82</i>&nbsp;            date = date ?: error(&quot;date is required&quot;),</b>
-<b class="nc"><i class="no-highlight">83</i>&nbsp;            type = type ?: error(&quot;type is required&quot;),</b>
-<i class="no-highlight">84</i>&nbsp;        )
-<i class="no-highlight">85</i>&nbsp;    }
-<i class="no-highlight">86</i>&nbsp;}
-</div>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.galarzaa.tibiakt.core.builders
+&nbsp;
+&nbsp;import com.galarzaa.tibiakt.core.enums.NewsCategory
+&nbsp;import com.galarzaa.tibiakt.core.enums.NewsType
+&nbsp;import com.galarzaa.tibiakt.core.models.news.NewsArchive
+&nbsp;import com.galarzaa.tibiakt.core.models.news.NewsEntry
+&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
+&nbsp;import java.time.LocalDate
+&nbsp;
+&nbsp;@BuilderDsl
+&nbsp;public fun newsArchive(block: NewsArchiveBuilder.() -&gt; Unit): NewsArchive = newsArchiveBuilder(block).build()
+&nbsp;
+&nbsp;@BuilderDsl
+&nbsp;public fun newsArchiveBuilder(block: NewsArchiveBuilder.() -&gt; Unit): NewsArchiveBuilder =
+&nbsp;    NewsArchiveBuilder().apply(block)
+&nbsp;
+&nbsp;/** Builder for [NewsArchive] instances. */
+<b class="fc">&nbsp;@BuilderDsl</b>
+&nbsp;public class NewsArchiveBuilder : TibiaKtBuilder&lt;NewsArchive&gt; {
+<b class="fc">&nbsp;    public var startDate: LocalDate? = null</b>
+<b class="fc">&nbsp;    public var endDate: LocalDate? = null</b>
+<b class="fc">&nbsp;    public val types: MutableSet&lt;NewsType&gt; = mutableSetOf()</b>
+<b class="fc">&nbsp;    public val categories: MutableSet&lt;NewsCategory&gt; = mutableSetOf()</b>
+<b class="fc">&nbsp;    public val entries: MutableList&lt;NewsEntry&gt; = mutableListOf()</b>
+<b class="fc">&nbsp;    public fun addCategory(category: NewsCategory): NewsArchiveBuilder = apply { categories.add(category) }</b>
+&nbsp;
+<b class="fc">&nbsp;    public fun addType(type: NewsType): NewsArchiveBuilder = apply { types.add(type) }</b>
+&nbsp;
+&nbsp;    public fun addEntry(
+&nbsp;        id: Int,
+&nbsp;        title: String,
+&nbsp;        category: NewsCategory,
+&nbsp;        categoryIcon: String,
+&nbsp;        date: LocalDate,
+&nbsp;        type: NewsType,
+<b class="fc">&nbsp;    ): NewsArchiveBuilder = apply {</b>
+<b class="fc">&nbsp;        entries.add(NewsEntry(id, title, category, categoryIcon, date, type))</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+<b class="nc">&nbsp;    public fun addEntry(builder: NewsEntryBuilder.() -&gt; Unit): NewsArchiveBuilder = apply {</b>
+<b class="nc">&nbsp;        entries.add(NewsEntryBuilder().apply(builder).build())</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;    override fun build(): NewsArchive = NewsArchive(</b>
+<b class="pc">&nbsp;        startDate = startDate ?: error(&quot;startDate is required&quot;),</b>
+<b class="pc">&nbsp;        endDate = endDate ?: error(&quot;endDate is required&quot;),</b>
+<b class="fc">&nbsp;        types = types,</b>
+<b class="fc">&nbsp;        categories = categories,</b>
+<b class="fc">&nbsp;        entries = entries,</b>
+&nbsp;    )
+&nbsp;
+<b class="nc">&nbsp;    public class NewsEntryBuilder : TibiaKtBuilder&lt;NewsEntry&gt; {</b>
+<b class="nc">&nbsp;        public val id: Int = 0</b>
+<b class="nc">&nbsp;        public val title: String? = null</b>
+<b class="nc">&nbsp;        public val category: NewsCategory? = null</b>
+<b class="nc">&nbsp;        public val categoryIcon: String? = null</b>
+<b class="nc">&nbsp;        public val date: LocalDate? = null</b>
+<b class="nc">&nbsp;        public val type: NewsType? = null</b>
+&nbsp;
+<b class="nc">&nbsp;        override fun build(): NewsEntry = NewsEntry(</b>
+<b class="nc">&nbsp;            id = id,</b>
+<b class="nc">&nbsp;            title = title ?: error(&quot;title is required&quot;),</b>
+<b class="nc">&nbsp;            category = category ?: error(&quot;category is required&quot;),</b>
+<b class="nc">&nbsp;            categoryIcon = categoryIcon ?: error(&quot;categoryIcon is required&quot;),</b>
+<b class="nc">&nbsp;            date = date ?: error(&quot;date is required&quot;),</b>
+<b class="nc">&nbsp;            type = type ?: error(&quot;type is required&quot;),</b>
+&nbsp;        )
+&nbsp;    }
+&nbsp;}
+</code>
 </pre>
 </div>
 
@@ -256,18 +257,15 @@ Current scope:     <a href="../../index.html">all classes</a>
     @*/
 
     if (!msie || msie && msie9) {
-        var codeBlock = document.getElementById('sourceCode');
-
-        if (codeBlock) {
-            hljs.highlightBlock(codeBlock);
-        }
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
     }
 })();
 </script>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-02-24 23:58</div>
+    <div style="float:right;">generated on 2023-03-15 02:46</div>
 </div>
 </body>
 </html>

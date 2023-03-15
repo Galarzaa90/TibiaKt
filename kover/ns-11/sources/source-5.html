@@ -7,9 +7,10 @@
   <title>Coverage Report > CharacterParser</title>
   <style type="text/css">
     @import "../../css/coverage.css";
-    @import "../../css/highlight-idea.css";
+    @import "../../css/idea.min.css";
   </style>
-  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
 </head>
 
 <body>
@@ -148,254 +149,254 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;/*
-<i class="no-highlight">2</i>&nbsp; * Copyright © 2022 Allan Galarza
-<i class="no-highlight">3</i>&nbsp; *
-<i class="no-highlight">4</i>&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
-<i class="no-highlight">5</i>&nbsp; * you may not use this file except in compliance with the License.
-<i class="no-highlight">6</i>&nbsp; * You may obtain a copy of the License at
-<i class="no-highlight">7</i>&nbsp; *
-<i class="no-highlight">8</i>&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
-<i class="no-highlight">9</i>&nbsp; *
-<i class="no-highlight">10</i>&nbsp; * Unless required by applicable law or agreed to in writing, software
-<i class="no-highlight">11</i>&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-<i class="no-highlight">12</i>&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-<i class="no-highlight">13</i>&nbsp; * See the License for the specific language governing permissions and
-<i class="no-highlight">14</i>&nbsp; * limitations under the License.
-<i class="no-highlight">15</i>&nbsp; */
-<i class="no-highlight">16</i>&nbsp;
-<i class="no-highlight">17</i>&nbsp;package com.galarzaa.tibiakt.core.parsers
-<i class="no-highlight">18</i>&nbsp;
-<i class="no-highlight">19</i>&nbsp;import com.galarzaa.tibiakt.core.builders.CharacterBuilder
-<i class="no-highlight">20</i>&nbsp;import com.galarzaa.tibiakt.core.builders.character
-<i class="no-highlight">21</i>&nbsp;import com.galarzaa.tibiakt.core.enums.StringEnum
-<i class="no-highlight">22</i>&nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
-<i class="no-highlight">23</i>&nbsp;import com.galarzaa.tibiakt.core.models.character.Character
-<i class="no-highlight">24</i>&nbsp;import com.galarzaa.tibiakt.core.models.character.Killer
-<i class="no-highlight">25</i>&nbsp;import com.galarzaa.tibiakt.core.utils.clean
-<i class="no-highlight">26</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getLinkInformation
-<i class="no-highlight">27</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parsePopup
-<i class="no-highlight">28</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseTables
-<i class="no-highlight">29</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseTibiaDate
-<i class="no-highlight">30</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseTibiaDateTime
-<i class="no-highlight">31</i>&nbsp;import com.galarzaa.tibiakt.core.utils.remove
-<i class="no-highlight">32</i>&nbsp;import com.galarzaa.tibiakt.core.utils.splitList
-<i class="no-highlight">33</i>&nbsp;import kotlinx.datetime.Instant
-<i class="no-highlight">34</i>&nbsp;import org.jsoup.Jsoup
-<i class="no-highlight">35</i>&nbsp;import org.jsoup.nodes.Document
-<i class="no-highlight">36</i>&nbsp;import org.jsoup.nodes.Element
-<i class="no-highlight">37</i>&nbsp;import org.jsoup.select.Elements
-<i class="no-highlight">38</i>&nbsp;
-<i class="no-highlight">39</i>&nbsp;/** Parser for character information pages. */
-<i class="no-highlight">40</i>&nbsp;public object CharacterParser : Parser&lt;Character?&gt; {
-<b class="fc"><i class="no-highlight">41</i>&nbsp;    private val deletedRegexp = Regex(&quot;&quot;&quot;([^,]+), will be deleted at (.*)&quot;&quot;&quot;)</b>
-<b class="fc"><i class="no-highlight">42</i>&nbsp;    private val titlesRegexp = Regex(&quot;&quot;&quot;(.*)\((\d+) titles? unlocked\)&quot;&quot;&quot;)</b>
-<b class="fc"><i class="no-highlight">43</i>&nbsp;    private val houseRegexp = Regex(&quot;&quot;&quot;\(([^)]+)\) is paid until (.*)&quot;&quot;&quot;)</b>
-<b class="fc"><i class="no-highlight">44</i>&nbsp;    private val deathsRegex = Regex(&quot;&quot;&quot;Level (\d+) by (.*)\.&lt;/td&gt;&quot;&quot;&quot;)</b>
-<b class="fc"><i class="no-highlight">45</i>&nbsp;    private val deathAssistsRegex = Regex(&quot;&quot;&quot;(?:(?&lt;killers&gt;.+)\.&lt;br\s?/&gt;)?Assisted by (?&lt;assists&gt;.+)&quot;&quot;&quot;)</b>
-<b class="fc"><i class="no-highlight">46</i>&nbsp;    private val linkSearch = Regex(&quot;&quot;&quot;&lt;a[^&gt;]+&gt;[^&lt;]+&lt;/a&gt;&quot;&quot;&quot;)</b>
-<b class="fc"><i class="no-highlight">47</i>&nbsp;    private val linkContent = Regex(&quot;&quot;&quot;&gt;([^&lt;]+)&lt;&quot;&quot;&quot;)</b>
-<b class="fc"><i class="no-highlight">48</i>&nbsp;    private val deathSummon = Regex(&quot;&quot;&quot;(?&lt;summon&gt;an? .+) of (?&lt;name&gt;.*)&quot;&quot;&quot;)</b>
-<i class="no-highlight">49</i>&nbsp;    private const val tradedLabel = &quot;(traded)&quot;
-<i class="no-highlight">50</i>&nbsp;
-<i class="no-highlight">51</i>&nbsp;    override fun fromContent(content: String): Character? {
-<b class="fc"><i class="no-highlight">52</i>&nbsp;        val document: Document = Jsoup.parse(content, &quot;&quot;, org.jsoup.parser.Parser.xmlParser())</b>
-<b class="fc"><i class="no-highlight">53</i>&nbsp;        val boxContent =</b>
-<b class="pc"><i class="no-highlight">54</i>&nbsp;            document.selectFirst(&quot;div.BoxContent&quot;) ?: throw ParsingException(&quot;BoxContent container not found&quot;)</b>
-<b class="fc"><i class="no-highlight">55</i>&nbsp;        val tables = boxContent.parseTables()</b>
-<b class="pc"><i class="no-highlight">56</i>&nbsp;        if (tables.keys.any { it.startsWith(&quot;Could not find character&quot;) }) return null</b>
-<b class="fc"><i class="no-highlight">57</i>&nbsp;        return character {</b>
-<b class="fc"><i class="no-highlight">58</i>&nbsp;            parseCharacterInformation(tables[&quot;Character Information&quot;] ?: return null)</b>
-<b class="fc"><i class="no-highlight">59</i>&nbsp;            tables[&quot;Account Badges&quot;]?.apply { parseAccountBadges(this) }</b>
-<b class="pc"><i class="no-highlight">60</i>&nbsp;            tables[&quot;Account Achievements&quot;]?.apply { parseAccountAchievements(this) }</b>
-<b class="fc"><i class="no-highlight">61</i>&nbsp;            tables[&quot;Account Information&quot;]?.apply { parseAccountInformation(this) }</b>
-<b class="fc"><i class="no-highlight">62</i>&nbsp;            tables[&quot;Character Deaths&quot;]?.apply { parseCharacterDeaths(this) }</b>
-<b class="fc"><i class="no-highlight">63</i>&nbsp;            tables[&quot;Characters&quot;]?.apply { parseCharacters(this) }</b>
-<b class="fc"><i class="no-highlight">64</i>&nbsp;        }</b>
-<i class="no-highlight">65</i>&nbsp;
-<i class="no-highlight">66</i>&nbsp;    }
-<i class="no-highlight">67</i>&nbsp;
-<i class="no-highlight">68</i>&nbsp;    private fun CharacterBuilder.parseCharacterInformation(rows: Elements) {
-<b class="fc"><i class="no-highlight">69</i>&nbsp;        for (row: Element in rows) {</b>
-<b class="fc"><i class="no-highlight">70</i>&nbsp;            val columns = row.select(&quot;td&quot;)</b>
-<b class="fc"><i class="no-highlight">71</i>&nbsp;            var (field, value) = columns.map { it.wholeText().clean() }</b>
-<b class="fc"><i class="no-highlight">72</i>&nbsp;            field = field.replace(&quot; &quot;, &quot;_&quot;).remove(&quot;:&quot;).lowercase()</b>
-<b class="pc"><i class="no-highlight">73</i>&nbsp;            when (field) {</b>
-<b class="fc"><i class="no-highlight">74</i>&nbsp;                &quot;name&quot; -&gt; parseNameField(value)</b>
-<b class="fc"><i class="no-highlight">75</i>&nbsp;                &quot;title&quot; -&gt; parseTitles(value)</b>
-<b class="fc"><i class="no-highlight">76</i>&nbsp;                &quot;former_names&quot; -&gt; formerNames = value.split(&quot;,&quot;).map { it.trim() }</b>
-<b class="fc"><i class="no-highlight">77</i>&nbsp;                &quot;former_world&quot; -&gt; formerWorld = value</b>
-<b class="fc"><i class="no-highlight">78</i>&nbsp;                &quot;sex&quot; -&gt; sex = StringEnum.fromValue(value)!!</b>
-<b class="fc"><i class="no-highlight">79</i>&nbsp;                &quot;vocation&quot; -&gt; vocation =</b>
-<b class="pc"><i class="no-highlight">80</i>&nbsp;                    StringEnum.fromValue(value) ?: throw ParsingException(&quot;Unknown vocation: $value&quot;)</b>
-<i class="no-highlight">81</i>&nbsp;
-<b class="fc"><i class="no-highlight">82</i>&nbsp;                &quot;level&quot; -&gt; level = value.toInt()</b>
-<b class="fc"><i class="no-highlight">83</i>&nbsp;                &quot;achievement_points&quot; -&gt; achievementPoints = value.toInt()</b>
-<b class="fc"><i class="no-highlight">84</i>&nbsp;                &quot;world&quot; -&gt; world = value</b>
-<b class="fc"><i class="no-highlight">85</i>&nbsp;                &quot;residence&quot; -&gt; residence = value</b>
-<b class="pc"><i class="no-highlight">86</i>&nbsp;                &quot;last_login&quot; -&gt; if (!value.contains(&quot;never logged&quot;, true)) {</b>
-<b class="fc"><i class="no-highlight">87</i>&nbsp;                    lastLogin = parseTibiaDateTime(value)</b>
-<i class="no-highlight">88</i>&nbsp;                }
-<i class="no-highlight">89</i>&nbsp;
-<b class="fc"><i class="no-highlight">90</i>&nbsp;                &quot;position&quot; -&gt; position = value</b>
-<b class="fc"><i class="no-highlight">91</i>&nbsp;                &quot;comment&quot; -&gt; comment = value</b>
-<b class="fc"><i class="no-highlight">92</i>&nbsp;                &quot;account_status&quot; -&gt; accountStatus =</b>
-<b class="pc"><i class="no-highlight">93</i>&nbsp;                    StringEnum.fromValue(value) ?: throw ParsingException(&quot;Unknown account status: $value&quot;)</b>
-<i class="no-highlight">94</i>&nbsp;
-<b class="fc"><i class="no-highlight">95</i>&nbsp;                &quot;married_to&quot; -&gt; marriedTo = value</b>
-<b class="fc"><i class="no-highlight">96</i>&nbsp;                &quot;house&quot; -&gt; parseHouseColumn(columns[1])</b>
-<b class="fc"><i class="no-highlight">97</i>&nbsp;                &quot;guild_membership&quot; -&gt; parseGuildColumn(columns[1])</b>
-<i class="no-highlight">98</i>&nbsp;            }
-<i class="no-highlight">99</i>&nbsp;        }
-<i class="no-highlight">100</i>&nbsp;    }
-<i class="no-highlight">101</i>&nbsp;
-<i class="no-highlight">102</i>&nbsp;    private fun CharacterBuilder.parseGuildColumn(valueColumn: Element) {
-<b class="pc"><i class="no-highlight">103</i>&nbsp;        val guildName = valueColumn.selectFirst(&quot;a&quot;)?.text() ?: return</b>
-<b class="fc"><i class="no-highlight">104</i>&nbsp;        val rankName = valueColumn.text().split(&quot;of the&quot;).first().trim()</b>
-<b class="fc"><i class="no-highlight">105</i>&nbsp;        guild(rankName, guildName)</b>
-<i class="no-highlight">106</i>&nbsp;    }
-<i class="no-highlight">107</i>&nbsp;
-<i class="no-highlight">108</i>&nbsp;    private fun CharacterBuilder.parseHouseColumn(valueColumn: Element) {
-<b class="pc"><i class="no-highlight">109</i>&nbsp;        val match = houseRegexp.find(valueColumn.ownText()) ?: return</b>
-<b class="pc"><i class="no-highlight">110</i>&nbsp;        val link = valueColumn.selectFirst(&quot;a&quot;)?.getLinkInformation() ?: return</b>
-<b class="fc"><i class="no-highlight">111</i>&nbsp;        val (_, town, paidUntilStr) = match.groupValues</b>
-<b class="fc"><i class="no-highlight">112</i>&nbsp;        addHouse(name = link.title,</b>
-<b class="pc"><i class="no-highlight">113</i>&nbsp;            houseId = link.queryParams[&quot;houseid&quot;]?.first()?.toInt() ?: return,</b>
-<b class="fc"><i class="no-highlight">114</i>&nbsp;            town = town,</b>
-<b class="fc"><i class="no-highlight">115</i>&nbsp;            paidUntil = parseTibiaDate(paidUntilStr),</b>
-<b class="pc"><i class="no-highlight">116</i>&nbsp;            world = link.queryParams[&quot;world&quot;]?.first() ?: return)</b>
-<i class="no-highlight">117</i>&nbsp;    }
-<i class="no-highlight">118</i>&nbsp;
-<i class="no-highlight">119</i>&nbsp;    private fun CharacterBuilder.parseTitles(value: String) {
-<b class="pc"><i class="no-highlight">120</i>&nbsp;        val match = titlesRegexp.find(value) ?: return</b>
-<b class="fc"><i class="no-highlight">121</i>&nbsp;        val (_, currentTitle, unlockedTitlesStr) = match.groupValues</b>
-<b class="fc"><i class="no-highlight">122</i>&nbsp;        title = if (currentTitle.contains(&quot;none&quot;, true)) null else currentTitle.trim()</b>
-<b class="fc"><i class="no-highlight">123</i>&nbsp;        unlockedTitles = unlockedTitlesStr.toInt()</b>
-<i class="no-highlight">124</i>&nbsp;    }
-<i class="no-highlight">125</i>&nbsp;
-<i class="no-highlight">126</i>&nbsp;    private fun CharacterBuilder.parseNameField(value: String) {
-<b class="fc"><i class="no-highlight">127</i>&nbsp;        val match = deletedRegexp.matchEntire(value)</b>
-<b class="fc"><i class="no-highlight">128</i>&nbsp;        name = if (match != null) {</b>
-<b class="fc"><i class="no-highlight">129</i>&nbsp;            val (_, cleanName, deletionDateStr) = match.groupValues</b>
-<b class="fc"><i class="no-highlight">130</i>&nbsp;            deletionDate = parseTibiaDateTime(deletionDateStr)</b>
-<b class="fc"><i class="no-highlight">131</i>&nbsp;            cleanName</b>
-<i class="no-highlight">132</i>&nbsp;        } else {
-<b class="fc"><i class="no-highlight">133</i>&nbsp;            value</b>
-<i class="no-highlight">134</i>&nbsp;        }
-<b class="pc"><i class="no-highlight">135</i>&nbsp;        if (name.contains(tradedLabel)) {</b>
-<b class="nc"><i class="no-highlight">136</i>&nbsp;            isRecentlyTraded = true</b>
-<b class="nc"><i class="no-highlight">137</i>&nbsp;            name = name.remove(tradedLabel).trim()</b>
-<i class="no-highlight">138</i>&nbsp;        }
-<i class="no-highlight">139</i>&nbsp;    }
-<i class="no-highlight">140</i>&nbsp;
-<i class="no-highlight">141</i>&nbsp;    private fun CharacterBuilder.parseAccountBadges(rows: Elements) {
-<b class="fc"><i class="no-highlight">142</i>&nbsp;        val row = rows[0]</b>
-<b class="fc"><i class="no-highlight">143</i>&nbsp;        for (column: Element in row.select(&quot;td&quot;)) {</b>
-<b class="pc"><i class="no-highlight">144</i>&nbsp;            val popupSpan = column.selectFirst(&quot;span.HelperDivIndicator&quot;) ?: return</b>
-<b class="fc"><i class="no-highlight">145</i>&nbsp;            val (title: String, popupContent: Document) = parsePopup(popupSpan.attr(&quot;onmouseover&quot;))</b>
-<b class="fc"><i class="no-highlight">146</i>&nbsp;            val description = popupContent.text()</b>
-<b class="pc"><i class="no-highlight">147</i>&nbsp;            val imageUrl = column.selectFirst(&quot;img&quot;)?.attr(&quot;src&quot;)</b>
-<b class="pc"><i class="no-highlight">148</i>&nbsp;            addBadge(title, description, imageUrl ?: continue)</b>
-<i class="no-highlight">149</i>&nbsp;        }
-<i class="no-highlight">150</i>&nbsp;    }
-<i class="no-highlight">151</i>&nbsp;
-<i class="no-highlight">152</i>&nbsp;    private fun CharacterBuilder.parseAccountAchievements(rows: Elements) {
-<b class="fc"><i class="no-highlight">153</i>&nbsp;        for (row: Element in rows) {</b>
-<b class="fc"><i class="no-highlight">154</i>&nbsp;            val columns = row.select(&quot;td&quot;)</b>
-<b class="fc"><i class="no-highlight">155</i>&nbsp;            if (columns.size != 2) continue</b>
-<b class="fc"><i class="no-highlight">156</i>&nbsp;            val (gradeColumn, nameColumn) = columns</b>
-<b class="fc"><i class="no-highlight">157</i>&nbsp;            val grade = gradeColumn.select(&quot;img&quot;).size</b>
-<b class="fc"><i class="no-highlight">158</i>&nbsp;            val name = nameColumn.text()</b>
-<b class="fc"><i class="no-highlight">159</i>&nbsp;            val isSecret = nameColumn.selectFirst(&quot;img&quot;) != null</b>
-<b class="fc"><i class="no-highlight">160</i>&nbsp;            addAchievement(name, grade, isSecret)</b>
-<i class="no-highlight">161</i>&nbsp;        }
-<i class="no-highlight">162</i>&nbsp;    }
-<i class="no-highlight">163</i>&nbsp;
-<i class="no-highlight">164</i>&nbsp;    private fun CharacterBuilder.parseAccountInformation(rows: Elements) {
-<b class="fc"><i class="no-highlight">165</i>&nbsp;        val valueMap = mutableMapOf&lt;String, String&gt;()</b>
-<b class="fc"><i class="no-highlight">166</i>&nbsp;        for (row: Element in rows) {</b>
-<b class="fc"><i class="no-highlight">167</i>&nbsp;            val columns = row.select(&quot;td&quot;)</b>
-<b class="fc"><i class="no-highlight">168</i>&nbsp;            var (field, value) = columns.map { it.wholeText().clean() }</b>
-<b class="fc"><i class="no-highlight">169</i>&nbsp;            field = field.replace(&quot; &quot;, &quot;_&quot;).remove(&quot;:&quot;).lowercase()</b>
-<b class="fc"><i class="no-highlight">170</i>&nbsp;            if (field == &quot;position&quot;) {</b>
-<b class="fc"><i class="no-highlight">171</i>&nbsp;                if (value.contains(&quot;tutor&quot;, true)) {</b>
-<b class="fc"><i class="no-highlight">172</i>&nbsp;                    valueMap[&quot;stars&quot;] = columns[1].select(&quot;img&quot;).size.toString()</b>
-<i class="no-highlight">173</i>&nbsp;                }
-<b class="fc"><i class="no-highlight">174</i>&nbsp;                valueMap[field] = value</b>
-<b class="fc"><i class="no-highlight">175</i>&nbsp;            } else valueMap[field] = value</b>
-<i class="no-highlight">176</i>&nbsp;        }
-<b class="pc"><i class="no-highlight">177</i>&nbsp;        accountInformation(created = parseTibiaDateTime(valueMap[&quot;created&quot;] ?: return),</b>
-<b class="fc"><i class="no-highlight">178</i>&nbsp;            loyaltyTitle = valueMap[&quot;loyalty_title&quot;],</b>
-<b class="fc"><i class="no-highlight">179</i>&nbsp;            position = valueMap[&quot;position&quot;],</b>
-<b class="fc"><i class="no-highlight">180</i>&nbsp;            tutorStars = valueMap[&quot;stars&quot;]?.toInt())</b>
-<i class="no-highlight">181</i>&nbsp;    }
-<i class="no-highlight">182</i>&nbsp;
-<i class="no-highlight">183</i>&nbsp;    private fun CharacterBuilder.parseCharacterDeaths(rows: Elements) {
-<b class="fc"><i class="no-highlight">184</i>&nbsp;        for (row: Element in rows) {</b>
-<b class="fc"><i class="no-highlight">185</i>&nbsp;            val columns = row.select(&quot;td&quot;)</b>
-<b class="pc"><i class="no-highlight">186</i>&nbsp;            if (columns.size != 2) continue</b>
-<b class="fc"><i class="no-highlight">187</i>&nbsp;            val (dateColumn, descriptionColumn) = columns</b>
-<b class="fc"><i class="no-highlight">188</i>&nbsp;            val deathDateTime: Instant = parseTibiaDateTime(dateColumn.text())</b>
-<b class="fc"><i class="no-highlight">189</i>&nbsp;            val deathMatch = deathsRegex.find(descriptionColumn.toString())</b>
-<b class="pc"><i class="no-highlight">190</i>&nbsp;            var (_, levelStr, killersDesc) = deathMatch?.groupValues ?: Triple(&quot;&quot;,</b>
-<b class="fc"><i class="no-highlight">191</i>&nbsp;                &quot;0&quot;,</b>
-<b class="fc"><i class="no-highlight">192</i>&nbsp;                descriptionColumn.toString()).toList()</b>
-<b class="fc"><i class="no-highlight">193</i>&nbsp;            var assistNameList: List&lt;String&gt; = mutableListOf()</b>
-<b class="fc"><i class="no-highlight">194</i>&nbsp;            deathAssistsRegex.find(killersDesc)?.apply {</b>
-<b class="fc"><i class="no-highlight">195</i>&nbsp;                killersDesc = this.groups[&quot;killers&quot;]?.value.orEmpty()</b>
-<b class="pc"><i class="no-highlight">196</i>&nbsp;                val assistsDec = this.groups[&quot;assists&quot;]?.value ?: return</b>
-<b class="fc"><i class="no-highlight">197</i>&nbsp;                assistNameList = linkSearch.findAll(assistsDec).map { it.value }.toList()</b>
-<b class="fc"><i class="no-highlight">198</i>&nbsp;            }</b>
-<b class="fc"><i class="no-highlight">199</i>&nbsp;            val killerNameList = killersDesc.splitList()</b>
-<b class="fc"><i class="no-highlight">200</i>&nbsp;            val killerList = killerNameList.mapNotNull { parseKiller(it) }</b>
-<b class="fc"><i class="no-highlight">201</i>&nbsp;            val assistsList = assistNameList.mapNotNull { parseKiller(it) }</b>
-<b class="fc"><i class="no-highlight">202</i>&nbsp;            addDeath(deathDateTime, levelStr.toInt(), killerList, assistsList)</b>
-<i class="no-highlight">203</i>&nbsp;        }
-<i class="no-highlight">204</i>&nbsp;    }
-<i class="no-highlight">205</i>&nbsp;
-<i class="no-highlight">206</i>&nbsp;    private fun parseKiller(killerHtml: String): Killer? {
-<b class="fc"><i class="no-highlight">207</i>&nbsp;        var name: String = killerHtml</b>
-<b class="fc"><i class="no-highlight">208</i>&nbsp;        var isPlayer = false</b>
-<b class="fc"><i class="no-highlight">209</i>&nbsp;        var isTraded = false</b>
-<b class="fc"><i class="no-highlight">210</i>&nbsp;        var summon: String? = null</b>
-<b class="fc"><i class="no-highlight">211</i>&nbsp;        if (killerHtml.contains(tradedLabel)) {</b>
-<b class="fc"><i class="no-highlight">212</i>&nbsp;            name = killerHtml.clean().remove(tradedLabel).trim()</b>
-<b class="fc"><i class="no-highlight">213</i>&nbsp;            isTraded = true</b>
-<b class="fc"><i class="no-highlight">214</i>&nbsp;            isPlayer = true</b>
-<i class="no-highlight">215</i>&nbsp;        }
-<b class="fc"><i class="no-highlight">216</i>&nbsp;        if (killerHtml.contains(&quot;href&quot;)) {</b>
-<b class="pc"><i class="no-highlight">217</i>&nbsp;            name = linkContent.find(killerHtml)?.groups?.get(1)?.value ?: return null</b>
-<b class="fc"><i class="no-highlight">218</i>&nbsp;            isPlayer = true</b>
-<i class="no-highlight">219</i>&nbsp;        }
-<b class="fc"><i class="no-highlight">220</i>&nbsp;        deathSummon.find(name)?.apply {</b>
-<b class="fc"><i class="no-highlight">221</i>&nbsp;            summon = groups[&quot;summon&quot;]!!.value.clean()</b>
-<b class="fc"><i class="no-highlight">222</i>&nbsp;            name = groups[&quot;name&quot;]!!.value.clean()</b>
-<b class="fc"><i class="no-highlight">223</i>&nbsp;        }</b>
-<i class="no-highlight">224</i>&nbsp;
-<b class="fc"><i class="no-highlight">225</i>&nbsp;        return Killer(name.clean(), isPlayer, summon, isTraded)</b>
-<i class="no-highlight">226</i>&nbsp;    }
-<i class="no-highlight">227</i>&nbsp;
-<i class="no-highlight">228</i>&nbsp;    private fun CharacterBuilder.parseCharacters(rows: Elements) {
-<b class="fc"><i class="no-highlight">229</i>&nbsp;        for (row: Element in rows.subList(1, rows.size)) {</b>
-<b class="fc"><i class="no-highlight">230</i>&nbsp;            val columns = row.select(&quot;td&quot;)</b>
-<b class="fc"><i class="no-highlight">231</i>&nbsp;            val (nameColumn, worldColumn, statusColumn, _) = columns</b>
-<b class="fc"><i class="no-highlight">232</i>&nbsp;            var isTraded = false</b>
-<b class="fc"><i class="no-highlight">233</i>&nbsp;            var name = nameColumn.text().splitList(&quot;.&quot;).last().clean()</b>
-<b class="pc"><i class="no-highlight">234</i>&nbsp;            if (name.contains(tradedLabel, true)) {</b>
-<b class="nc"><i class="no-highlight">235</i>&nbsp;                name = name.remove(tradedLabel).trim()</b>
-<b class="nc"><i class="no-highlight">236</i>&nbsp;                isTraded = true</b>
-<i class="no-highlight">237</i>&nbsp;            }
-<b class="fc"><i class="no-highlight">238</i>&nbsp;            val isMain = nameColumn.selectFirst(&quot;img&quot;) != null</b>
-<b class="fc"><i class="no-highlight">239</i>&nbsp;            val world = worldColumn.text().clean()</b>
-<b class="fc"><i class="no-highlight">240</i>&nbsp;            val status = statusColumn.text().clean()</b>
-<b class="fc"><i class="no-highlight">241</i>&nbsp;            val isOnline = status.contains(&quot;online&quot;)</b>
-<b class="fc"><i class="no-highlight">242</i>&nbsp;            val isDeleted = status.contains(&quot;deleted&quot;)</b>
-<b class="fc"><i class="no-highlight">243</i>&nbsp;            val position = if (status.contains(&quot;CipSoft Member&quot;)) &quot;CipSoft Member&quot; else null</b>
-<b class="fc"><i class="no-highlight">244</i>&nbsp;            addCharacter(name, world, isMain, isOnline, isDeleted, isTraded, position)</b>
-<i class="no-highlight">245</i>&nbsp;        }
-<i class="no-highlight">246</i>&nbsp;    }
-<i class="no-highlight">247</i>&nbsp;}
-</div>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.galarzaa.tibiakt.core.parsers
+&nbsp;
+&nbsp;import com.galarzaa.tibiakt.core.builders.CharacterBuilder
+&nbsp;import com.galarzaa.tibiakt.core.builders.character
+&nbsp;import com.galarzaa.tibiakt.core.enums.StringEnum
+&nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
+&nbsp;import com.galarzaa.tibiakt.core.models.character.Character
+&nbsp;import com.galarzaa.tibiakt.core.models.character.Killer
+&nbsp;import com.galarzaa.tibiakt.core.utils.clean
+&nbsp;import com.galarzaa.tibiakt.core.utils.getLinkInformation
+&nbsp;import com.galarzaa.tibiakt.core.utils.parsePopup
+&nbsp;import com.galarzaa.tibiakt.core.utils.parseTables
+&nbsp;import com.galarzaa.tibiakt.core.utils.parseTibiaDate
+&nbsp;import com.galarzaa.tibiakt.core.utils.parseTibiaDateTime
+&nbsp;import com.galarzaa.tibiakt.core.utils.remove
+&nbsp;import com.galarzaa.tibiakt.core.utils.splitList
+&nbsp;import kotlinx.datetime.Instant
+&nbsp;import org.jsoup.Jsoup
+&nbsp;import org.jsoup.nodes.Document
+&nbsp;import org.jsoup.nodes.Element
+&nbsp;import org.jsoup.select.Elements
+&nbsp;
+&nbsp;/** Parser for character information pages. */
+&nbsp;public object CharacterParser : Parser&lt;Character?&gt; {
+<b class="fc">&nbsp;    private val deletedRegexp = Regex(&quot;&quot;&quot;([^,]+), will be deleted at (.*)&quot;&quot;&quot;)</b>
+<b class="fc">&nbsp;    private val titlesRegexp = Regex(&quot;&quot;&quot;(.*)\((\d+) titles? unlocked\)&quot;&quot;&quot;)</b>
+<b class="fc">&nbsp;    private val houseRegexp = Regex(&quot;&quot;&quot;\(([^)]+)\) is paid until (.*)&quot;&quot;&quot;)</b>
+<b class="fc">&nbsp;    private val deathsRegex = Regex(&quot;&quot;&quot;Level (\d+) by (.*)\.&lt;/td&gt;&quot;&quot;&quot;)</b>
+<b class="fc">&nbsp;    private val deathAssistsRegex = Regex(&quot;&quot;&quot;(?:(?&lt;killers&gt;.+)\.&lt;br\s?/&gt;)?Assisted by (?&lt;assists&gt;.+)&quot;&quot;&quot;)</b>
+<b class="fc">&nbsp;    private val linkSearch = Regex(&quot;&quot;&quot;&lt;a[^&gt;]+&gt;[^&lt;]+&lt;/a&gt;&quot;&quot;&quot;)</b>
+<b class="fc">&nbsp;    private val linkContent = Regex(&quot;&quot;&quot;&gt;([^&lt;]+)&lt;&quot;&quot;&quot;)</b>
+<b class="fc">&nbsp;    private val deathSummon = Regex(&quot;&quot;&quot;(?&lt;summon&gt;an? .+) of (?&lt;name&gt;.*)&quot;&quot;&quot;)</b>
+&nbsp;    private const val tradedLabel = &quot;(traded)&quot;
+&nbsp;
+&nbsp;    override fun fromContent(content: String): Character? {
+<b class="fc">&nbsp;        val document: Document = Jsoup.parse(content, &quot;&quot;, org.jsoup.parser.Parser.xmlParser())</b>
+<b class="fc">&nbsp;        val boxContent =</b>
+<b class="pc">&nbsp;            document.selectFirst(&quot;div.BoxContent&quot;) ?: throw ParsingException(&quot;BoxContent container not found&quot;)</b>
+<b class="fc">&nbsp;        val tables = boxContent.parseTables()</b>
+<b class="pc">&nbsp;        if (tables.keys.any { it.startsWith(&quot;Could not find character&quot;) }) return null</b>
+<b class="fc">&nbsp;        return character {</b>
+<b class="fc">&nbsp;            parseCharacterInformation(tables[&quot;Character Information&quot;] ?: return null)</b>
+<b class="fc">&nbsp;            tables[&quot;Account Badges&quot;]?.apply { parseAccountBadges(this) }</b>
+<b class="pc">&nbsp;            tables[&quot;Account Achievements&quot;]?.apply { parseAccountAchievements(this) }</b>
+<b class="fc">&nbsp;            tables[&quot;Account Information&quot;]?.apply { parseAccountInformation(this) }</b>
+<b class="fc">&nbsp;            tables[&quot;Character Deaths&quot;]?.apply { parseCharacterDeaths(this) }</b>
+<b class="fc">&nbsp;            tables[&quot;Characters&quot;]?.apply { parseCharacters(this) }</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    private fun CharacterBuilder.parseCharacterInformation(rows: Elements) {
+<b class="fc">&nbsp;        for (row: Element in rows) {</b>
+<b class="fc">&nbsp;            val columns = row.select(&quot;td&quot;)</b>
+<b class="fc">&nbsp;            var (field, value) = columns.map { it.wholeText().clean() }</b>
+<b class="fc">&nbsp;            field = field.replace(&quot; &quot;, &quot;_&quot;).remove(&quot;:&quot;).lowercase()</b>
+<b class="pc">&nbsp;            when (field) {</b>
+<b class="fc">&nbsp;                &quot;name&quot; -&gt; parseNameField(value)</b>
+<b class="fc">&nbsp;                &quot;title&quot; -&gt; parseTitles(value)</b>
+<b class="fc">&nbsp;                &quot;former_names&quot; -&gt; formerNames = value.split(&quot;,&quot;).map { it.trim() }</b>
+<b class="fc">&nbsp;                &quot;former_world&quot; -&gt; formerWorld = value</b>
+<b class="fc">&nbsp;                &quot;sex&quot; -&gt; sex = StringEnum.fromValue(value)!!</b>
+<b class="fc">&nbsp;                &quot;vocation&quot; -&gt; vocation =</b>
+<b class="pc">&nbsp;                    StringEnum.fromValue(value) ?: throw ParsingException(&quot;Unknown vocation: $value&quot;)</b>
+&nbsp;
+<b class="fc">&nbsp;                &quot;level&quot; -&gt; level = value.toInt()</b>
+<b class="fc">&nbsp;                &quot;achievement_points&quot; -&gt; achievementPoints = value.toInt()</b>
+<b class="fc">&nbsp;                &quot;world&quot; -&gt; world = value</b>
+<b class="fc">&nbsp;                &quot;residence&quot; -&gt; residence = value</b>
+<b class="pc">&nbsp;                &quot;last_login&quot; -&gt; if (!value.contains(&quot;never logged&quot;, true)) {</b>
+<b class="fc">&nbsp;                    lastLogin = parseTibiaDateTime(value)</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                &quot;position&quot; -&gt; position = value</b>
+<b class="fc">&nbsp;                &quot;comment&quot; -&gt; comment = value</b>
+<b class="fc">&nbsp;                &quot;account_status&quot; -&gt; accountStatus =</b>
+<b class="pc">&nbsp;                    StringEnum.fromValue(value) ?: throw ParsingException(&quot;Unknown account status: $value&quot;)</b>
+&nbsp;
+<b class="fc">&nbsp;                &quot;married_to&quot; -&gt; marriedTo = value</b>
+<b class="fc">&nbsp;                &quot;house&quot; -&gt; parseHouseColumn(columns[1])</b>
+<b class="fc">&nbsp;                &quot;guild_membership&quot; -&gt; parseGuildColumn(columns[1])</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private fun CharacterBuilder.parseGuildColumn(valueColumn: Element) {
+<b class="pc">&nbsp;        val guildName = valueColumn.selectFirst(&quot;a&quot;)?.text() ?: return</b>
+<b class="fc">&nbsp;        val rankName = valueColumn.text().split(&quot;of the&quot;).first().trim()</b>
+<b class="fc">&nbsp;        guild(rankName, guildName)</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private fun CharacterBuilder.parseHouseColumn(valueColumn: Element) {
+<b class="pc">&nbsp;        val match = houseRegexp.find(valueColumn.ownText()) ?: return</b>
+<b class="pc">&nbsp;        val link = valueColumn.selectFirst(&quot;a&quot;)?.getLinkInformation() ?: return</b>
+<b class="fc">&nbsp;        val (_, town, paidUntilStr) = match.groupValues</b>
+<b class="fc">&nbsp;        addHouse(name = link.title,</b>
+<b class="pc">&nbsp;            houseId = link.queryParams[&quot;houseid&quot;]?.first()?.toInt() ?: return,</b>
+<b class="fc">&nbsp;            town = town,</b>
+<b class="fc">&nbsp;            paidUntil = parseTibiaDate(paidUntilStr),</b>
+<b class="pc">&nbsp;            world = link.queryParams[&quot;world&quot;]?.first() ?: return)</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private fun CharacterBuilder.parseTitles(value: String) {
+<b class="pc">&nbsp;        val match = titlesRegexp.find(value) ?: return</b>
+<b class="fc">&nbsp;        val (_, currentTitle, unlockedTitlesStr) = match.groupValues</b>
+<b class="fc">&nbsp;        title = if (currentTitle.contains(&quot;none&quot;, true)) null else currentTitle.trim()</b>
+<b class="fc">&nbsp;        unlockedTitles = unlockedTitlesStr.toInt()</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private fun CharacterBuilder.parseNameField(value: String) {
+<b class="fc">&nbsp;        val match = deletedRegexp.matchEntire(value)</b>
+<b class="fc">&nbsp;        name = if (match != null) {</b>
+<b class="fc">&nbsp;            val (_, cleanName, deletionDateStr) = match.groupValues</b>
+<b class="fc">&nbsp;            deletionDate = parseTibiaDateTime(deletionDateStr)</b>
+<b class="fc">&nbsp;            cleanName</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            value</b>
+&nbsp;        }
+<b class="pc">&nbsp;        if (name.contains(tradedLabel)) {</b>
+<b class="nc">&nbsp;            isRecentlyTraded = true</b>
+<b class="nc">&nbsp;            name = name.remove(tradedLabel).trim()</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private fun CharacterBuilder.parseAccountBadges(rows: Elements) {
+<b class="fc">&nbsp;        val row = rows[0]</b>
+<b class="fc">&nbsp;        for (column: Element in row.select(&quot;td&quot;)) {</b>
+<b class="pc">&nbsp;            val popupSpan = column.selectFirst(&quot;span.HelperDivIndicator&quot;) ?: return</b>
+<b class="fc">&nbsp;            val (title: String, popupContent: Document) = parsePopup(popupSpan.attr(&quot;onmouseover&quot;))</b>
+<b class="fc">&nbsp;            val description = popupContent.text()</b>
+<b class="pc">&nbsp;            val imageUrl = column.selectFirst(&quot;img&quot;)?.attr(&quot;src&quot;)</b>
+<b class="pc">&nbsp;            addBadge(title, description, imageUrl ?: continue)</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private fun CharacterBuilder.parseAccountAchievements(rows: Elements) {
+<b class="fc">&nbsp;        for (row: Element in rows) {</b>
+<b class="fc">&nbsp;            val columns = row.select(&quot;td&quot;)</b>
+<b class="fc">&nbsp;            if (columns.size != 2) continue</b>
+<b class="fc">&nbsp;            val (gradeColumn, nameColumn) = columns</b>
+<b class="fc">&nbsp;            val grade = gradeColumn.select(&quot;img&quot;).size</b>
+<b class="fc">&nbsp;            val name = nameColumn.text()</b>
+<b class="fc">&nbsp;            val isSecret = nameColumn.selectFirst(&quot;img&quot;) != null</b>
+<b class="fc">&nbsp;            addAchievement(name, grade, isSecret)</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private fun CharacterBuilder.parseAccountInformation(rows: Elements) {
+<b class="fc">&nbsp;        val valueMap = mutableMapOf&lt;String, String&gt;()</b>
+<b class="fc">&nbsp;        for (row: Element in rows) {</b>
+<b class="fc">&nbsp;            val columns = row.select(&quot;td&quot;)</b>
+<b class="fc">&nbsp;            var (field, value) = columns.map { it.wholeText().clean() }</b>
+<b class="fc">&nbsp;            field = field.replace(&quot; &quot;, &quot;_&quot;).remove(&quot;:&quot;).lowercase()</b>
+<b class="fc">&nbsp;            if (field == &quot;position&quot;) {</b>
+<b class="fc">&nbsp;                if (value.contains(&quot;tutor&quot;, true)) {</b>
+<b class="fc">&nbsp;                    valueMap[&quot;stars&quot;] = columns[1].select(&quot;img&quot;).size.toString()</b>
+&nbsp;                }
+<b class="fc">&nbsp;                valueMap[field] = value</b>
+<b class="fc">&nbsp;            } else valueMap[field] = value</b>
+&nbsp;        }
+<b class="pc">&nbsp;        accountInformation(created = parseTibiaDateTime(valueMap[&quot;created&quot;] ?: return),</b>
+<b class="fc">&nbsp;            loyaltyTitle = valueMap[&quot;loyalty_title&quot;],</b>
+<b class="fc">&nbsp;            position = valueMap[&quot;position&quot;],</b>
+<b class="fc">&nbsp;            tutorStars = valueMap[&quot;stars&quot;]?.toInt())</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private fun CharacterBuilder.parseCharacterDeaths(rows: Elements) {
+<b class="fc">&nbsp;        for (row: Element in rows) {</b>
+<b class="fc">&nbsp;            val columns = row.select(&quot;td&quot;)</b>
+<b class="pc">&nbsp;            if (columns.size != 2) continue</b>
+<b class="fc">&nbsp;            val (dateColumn, descriptionColumn) = columns</b>
+<b class="fc">&nbsp;            val deathDateTime: Instant = parseTibiaDateTime(dateColumn.text())</b>
+<b class="fc">&nbsp;            val deathMatch = deathsRegex.find(descriptionColumn.toString())</b>
+<b class="pc">&nbsp;            var (_, levelStr, killersDesc) = deathMatch?.groupValues ?: Triple(&quot;&quot;,</b>
+<b class="fc">&nbsp;                &quot;0&quot;,</b>
+<b class="fc">&nbsp;                descriptionColumn.toString()).toList()</b>
+<b class="fc">&nbsp;            var assistNameList: List&lt;String&gt; = mutableListOf()</b>
+<b class="fc">&nbsp;            deathAssistsRegex.find(killersDesc)?.apply {</b>
+<b class="fc">&nbsp;                killersDesc = this.groups[&quot;killers&quot;]?.value.orEmpty()</b>
+<b class="pc">&nbsp;                val assistsDec = this.groups[&quot;assists&quot;]?.value ?: return</b>
+<b class="fc">&nbsp;                assistNameList = linkSearch.findAll(assistsDec).map { it.value }.toList()</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;            val killerNameList = killersDesc.splitList()</b>
+<b class="fc">&nbsp;            val killerList = killerNameList.mapNotNull { parseKiller(it) }</b>
+<b class="fc">&nbsp;            val assistsList = assistNameList.mapNotNull { parseKiller(it) }</b>
+<b class="fc">&nbsp;            addDeath(deathDateTime, levelStr.toInt(), killerList, assistsList)</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private fun parseKiller(killerHtml: String): Killer? {
+<b class="fc">&nbsp;        var name: String = killerHtml</b>
+<b class="fc">&nbsp;        var isPlayer = false</b>
+<b class="fc">&nbsp;        var isTraded = false</b>
+<b class="fc">&nbsp;        var summon: String? = null</b>
+<b class="fc">&nbsp;        if (killerHtml.contains(tradedLabel)) {</b>
+<b class="fc">&nbsp;            name = killerHtml.clean().remove(tradedLabel).trim()</b>
+<b class="fc">&nbsp;            isTraded = true</b>
+<b class="fc">&nbsp;            isPlayer = true</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (killerHtml.contains(&quot;href&quot;)) {</b>
+<b class="pc">&nbsp;            name = linkContent.find(killerHtml)?.groups?.get(1)?.value ?: return null</b>
+<b class="fc">&nbsp;            isPlayer = true</b>
+&nbsp;        }
+<b class="fc">&nbsp;        deathSummon.find(name)?.apply {</b>
+<b class="fc">&nbsp;            summon = groups[&quot;summon&quot;]!!.value.clean()</b>
+<b class="fc">&nbsp;            name = groups[&quot;name&quot;]!!.value.clean()</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        return Killer(name.clean(), isPlayer, summon, isTraded)</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private fun CharacterBuilder.parseCharacters(rows: Elements) {
+<b class="fc">&nbsp;        for (row: Element in rows.subList(1, rows.size)) {</b>
+<b class="fc">&nbsp;            val columns = row.select(&quot;td&quot;)</b>
+<b class="fc">&nbsp;            val (nameColumn, worldColumn, statusColumn, _) = columns</b>
+<b class="fc">&nbsp;            var isTraded = false</b>
+<b class="fc">&nbsp;            var name = nameColumn.text().splitList(&quot;.&quot;).last().clean()</b>
+<b class="pc">&nbsp;            if (name.contains(tradedLabel, true)) {</b>
+<b class="nc">&nbsp;                name = name.remove(tradedLabel).trim()</b>
+<b class="nc">&nbsp;                isTraded = true</b>
+&nbsp;            }
+<b class="fc">&nbsp;            val isMain = nameColumn.selectFirst(&quot;img&quot;) != null</b>
+<b class="fc">&nbsp;            val world = worldColumn.text().clean()</b>
+<b class="fc">&nbsp;            val status = statusColumn.text().clean()</b>
+<b class="fc">&nbsp;            val isOnline = status.contains(&quot;online&quot;)</b>
+<b class="fc">&nbsp;            val isDeleted = status.contains(&quot;deleted&quot;)</b>
+<b class="fc">&nbsp;            val position = if (status.contains(&quot;CipSoft Member&quot;)) &quot;CipSoft Member&quot; else null</b>
+<b class="fc">&nbsp;            addCharacter(name, world, isMain, isOnline, isDeleted, isTraded, position)</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
 </pre>
 </div>
 
@@ -410,18 +411,15 @@ Current scope:     <a href="../../index.html">all classes</a>
     @*/
 
     if (!msie || msie && msie9) {
-        var codeBlock = document.getElementById('sourceCode');
-
-        if (codeBlock) {
-            hljs.highlightBlock(codeBlock);
-        }
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
     }
 })();
 </script>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-02-24 23:58</div>
+    <div style="float:right;">generated on 2023-03-15 02:46</div>
 </div>
 </body>
 </html>

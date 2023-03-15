@@ -7,9 +7,10 @@
   <title>Coverage Report > HouseBuilderKt</title>
   <style type="text/css">
     @import "../../css/coverage.css";
-    @import "../../css/highlight-idea.css";
+    @import "../../css/idea.min.css";
   </style>
-  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
 </head>
 
 <body>
@@ -90,93 +91,93 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;/*
-<i class="no-highlight">2</i>&nbsp; * Copyright © 2022 Allan Galarza
-<i class="no-highlight">3</i>&nbsp; *
-<i class="no-highlight">4</i>&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
-<i class="no-highlight">5</i>&nbsp; * you may not use this file except in compliance with the License.
-<i class="no-highlight">6</i>&nbsp; * You may obtain a copy of the License at
-<i class="no-highlight">7</i>&nbsp; *
-<i class="no-highlight">8</i>&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
-<i class="no-highlight">9</i>&nbsp; *
-<i class="no-highlight">10</i>&nbsp; * Unless required by applicable law or agreed to in writing, software
-<i class="no-highlight">11</i>&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-<i class="no-highlight">12</i>&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-<i class="no-highlight">13</i>&nbsp; * See the License for the specific language governing permissions and
-<i class="no-highlight">14</i>&nbsp; * limitations under the License.
-<i class="no-highlight">15</i>&nbsp; */
-<i class="no-highlight">16</i>&nbsp;
-<i class="no-highlight">17</i>&nbsp;package com.galarzaa.tibiakt.core.builders
-<i class="no-highlight">18</i>&nbsp;
-<i class="no-highlight">19</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HouseStatus
-<i class="no-highlight">20</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HouseType
-<i class="no-highlight">21</i>&nbsp;import com.galarzaa.tibiakt.core.models.house.House
-<i class="no-highlight">22</i>&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
-<i class="no-highlight">23</i>&nbsp;import kotlinx.datetime.Instant
-<i class="no-highlight">24</i>&nbsp;
-<i class="no-highlight">25</i>&nbsp;@BuilderDsl
-<b class="fc"><i class="no-highlight">26</i>&nbsp;public inline fun house(block: HouseBuilder.() -&gt; Unit): House = HouseBuilder().apply(block).build()</b>
-<i class="no-highlight">27</i>&nbsp;
-<i class="no-highlight">28</i>&nbsp;@BuilderDsl
-<b class="nc"><i class="no-highlight">29</i>&nbsp;public inline fun houseBuilder(block: HouseBuilder.() -&gt; Unit): HouseBuilder = HouseBuilder().apply(block)</b>
-<i class="no-highlight">30</i>&nbsp;
-<i class="no-highlight">31</i>&nbsp;
-<i class="no-highlight">32</i>&nbsp;/** Builder for [House] instances. */
-<i class="no-highlight">33</i>&nbsp;@BuilderDsl
-<i class="no-highlight">34</i>&nbsp;public class HouseBuilder : TibiaKtBuilder&lt;House&gt; {
-<i class="no-highlight">35</i>&nbsp;    public var houseId: Int? = null
-<i class="no-highlight">36</i>&nbsp;    public var name: String? = null
-<i class="no-highlight">37</i>&nbsp;    public var size: Int? = null
-<i class="no-highlight">38</i>&nbsp;    public var houseType: HouseType? = null
-<i class="no-highlight">39</i>&nbsp;    public var beds: Int? = null
-<i class="no-highlight">40</i>&nbsp;    public var rent: Int? = null
-<i class="no-highlight">41</i>&nbsp;    public var world: String? = null
-<i class="no-highlight">42</i>&nbsp;    public var status: HouseStatus? = null
-<i class="no-highlight">43</i>&nbsp;    public var paidUntil: Instant? = null
-<i class="no-highlight">44</i>&nbsp;    public var owner: String? = null
-<i class="no-highlight">45</i>&nbsp;    public var movingDate: Instant? = null
-<i class="no-highlight">46</i>&nbsp;    public var transferPrice: Int? = null
-<i class="no-highlight">47</i>&nbsp;    public var isTransferAccepted: Boolean? = null
-<i class="no-highlight">48</i>&nbsp;    public var transferRecipient: String? = null
-<i class="no-highlight">49</i>&nbsp;    public var highestBid: Int? = null
-<i class="no-highlight">50</i>&nbsp;    public var highestBidder: String? = null
-<i class="no-highlight">51</i>&nbsp;    public var auctionEnd: Instant? = null
-<i class="no-highlight">52</i>&nbsp;
-<i class="no-highlight">53</i>&nbsp;    @Suppress(&quot;ComplexMethod&quot;)
-<i class="no-highlight">54</i>&nbsp;    override fun build(): House = when (status) {
-<i class="no-highlight">55</i>&nbsp;        HouseStatus.RENTED -&gt; House.Rented(
-<i class="no-highlight">56</i>&nbsp;            houseId = houseId ?: error(&quot;houseId is required&quot;),
-<i class="no-highlight">57</i>&nbsp;            name = name ?: error(&quot;name is required&quot;),
-<i class="no-highlight">58</i>&nbsp;            size = size ?: error(&quot;size is required&quot;),
-<i class="no-highlight">59</i>&nbsp;            houseType = houseType ?: error(&quot;type is required&quot;),
-<i class="no-highlight">60</i>&nbsp;            beds = beds ?: error(&quot;beds is required&quot;),
-<i class="no-highlight">61</i>&nbsp;            rent = rent ?: error(&quot;rent is required&quot;),
-<i class="no-highlight">62</i>&nbsp;            world = world ?: error(&quot;world is required&quot;),
-<i class="no-highlight">63</i>&nbsp;            paidUntil = paidUntil ?: error(&quot;paidUntil is required&quot;),
-<i class="no-highlight">64</i>&nbsp;            owner = owner ?: error(&quot;Owner is required&quot;),
-<i class="no-highlight">65</i>&nbsp;            movingDate = movingDate,
-<i class="no-highlight">66</i>&nbsp;            transferPrice = transferPrice,
-<i class="no-highlight">67</i>&nbsp;            transferAccepted = isTransferAccepted,
-<i class="no-highlight">68</i>&nbsp;            transferRecipient = transferRecipient
-<i class="no-highlight">69</i>&nbsp;        )
-<i class="no-highlight">70</i>&nbsp;
-<i class="no-highlight">71</i>&nbsp;        HouseStatus.AUCTIONED -&gt; House.Auctioned(
-<i class="no-highlight">72</i>&nbsp;            houseId = houseId ?: error(&quot;houseId is required&quot;),
-<i class="no-highlight">73</i>&nbsp;            name = name ?: error(&quot;name is required&quot;),
-<i class="no-highlight">74</i>&nbsp;            size = size ?: error(&quot;size is required&quot;),
-<i class="no-highlight">75</i>&nbsp;            houseType = houseType ?: error(&quot;type is required&quot;),
-<i class="no-highlight">76</i>&nbsp;            beds = beds ?: error(&quot;beds is required&quot;),
-<i class="no-highlight">77</i>&nbsp;            rent = rent ?: error(&quot;rent is required&quot;),
-<i class="no-highlight">78</i>&nbsp;            world = world ?: error(&quot;world is required&quot;),
-<i class="no-highlight">79</i>&nbsp;            highestBid = highestBid,
-<i class="no-highlight">80</i>&nbsp;            highestBidder = highestBidder,
-<i class="no-highlight">81</i>&nbsp;            auctionEnd = auctionEnd,
-<i class="no-highlight">82</i>&nbsp;        )
-<i class="no-highlight">83</i>&nbsp;
-<i class="no-highlight">84</i>&nbsp;        else -&gt; error(&quot;status is required&quot;)
-<i class="no-highlight">85</i>&nbsp;    }
-<i class="no-highlight">86</i>&nbsp;}
-</div>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.galarzaa.tibiakt.core.builders
+&nbsp;
+&nbsp;import com.galarzaa.tibiakt.core.enums.HouseStatus
+&nbsp;import com.galarzaa.tibiakt.core.enums.HouseType
+&nbsp;import com.galarzaa.tibiakt.core.models.house.House
+&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
+&nbsp;import kotlinx.datetime.Instant
+&nbsp;
+&nbsp;@BuilderDsl
+<b class="fc">&nbsp;public inline fun house(block: HouseBuilder.() -&gt; Unit): House = HouseBuilder().apply(block).build()</b>
+&nbsp;
+&nbsp;@BuilderDsl
+<b class="nc">&nbsp;public inline fun houseBuilder(block: HouseBuilder.() -&gt; Unit): HouseBuilder = HouseBuilder().apply(block)</b>
+&nbsp;
+&nbsp;
+&nbsp;/** Builder for [House] instances. */
+&nbsp;@BuilderDsl
+&nbsp;public class HouseBuilder : TibiaKtBuilder&lt;House&gt; {
+&nbsp;    public var houseId: Int? = null
+&nbsp;    public var name: String? = null
+&nbsp;    public var size: Int? = null
+&nbsp;    public var houseType: HouseType? = null
+&nbsp;    public var beds: Int? = null
+&nbsp;    public var rent: Int? = null
+&nbsp;    public var world: String? = null
+&nbsp;    public var status: HouseStatus? = null
+&nbsp;    public var paidUntil: Instant? = null
+&nbsp;    public var owner: String? = null
+&nbsp;    public var movingDate: Instant? = null
+&nbsp;    public var transferPrice: Int? = null
+&nbsp;    public var isTransferAccepted: Boolean? = null
+&nbsp;    public var transferRecipient: String? = null
+&nbsp;    public var highestBid: Int? = null
+&nbsp;    public var highestBidder: String? = null
+&nbsp;    public var auctionEnd: Instant? = null
+&nbsp;
+&nbsp;    @Suppress(&quot;ComplexMethod&quot;)
+&nbsp;    override fun build(): House = when (status) {
+&nbsp;        HouseStatus.RENTED -&gt; House.Rented(
+&nbsp;            houseId = houseId ?: error(&quot;houseId is required&quot;),
+&nbsp;            name = name ?: error(&quot;name is required&quot;),
+&nbsp;            size = size ?: error(&quot;size is required&quot;),
+&nbsp;            houseType = houseType ?: error(&quot;type is required&quot;),
+&nbsp;            beds = beds ?: error(&quot;beds is required&quot;),
+&nbsp;            rent = rent ?: error(&quot;rent is required&quot;),
+&nbsp;            world = world ?: error(&quot;world is required&quot;),
+&nbsp;            paidUntil = paidUntil ?: error(&quot;paidUntil is required&quot;),
+&nbsp;            owner = owner ?: error(&quot;Owner is required&quot;),
+&nbsp;            movingDate = movingDate,
+&nbsp;            transferPrice = transferPrice,
+&nbsp;            transferAccepted = isTransferAccepted,
+&nbsp;            transferRecipient = transferRecipient
+&nbsp;        )
+&nbsp;
+&nbsp;        HouseStatus.AUCTIONED -&gt; House.Auctioned(
+&nbsp;            houseId = houseId ?: error(&quot;houseId is required&quot;),
+&nbsp;            name = name ?: error(&quot;name is required&quot;),
+&nbsp;            size = size ?: error(&quot;size is required&quot;),
+&nbsp;            houseType = houseType ?: error(&quot;type is required&quot;),
+&nbsp;            beds = beds ?: error(&quot;beds is required&quot;),
+&nbsp;            rent = rent ?: error(&quot;rent is required&quot;),
+&nbsp;            world = world ?: error(&quot;world is required&quot;),
+&nbsp;            highestBid = highestBid,
+&nbsp;            highestBidder = highestBidder,
+&nbsp;            auctionEnd = auctionEnd,
+&nbsp;        )
+&nbsp;
+&nbsp;        else -&gt; error(&quot;status is required&quot;)
+&nbsp;    }
+&nbsp;}
+</code>
 </pre>
 </div>
 
@@ -191,18 +192,15 @@ Current scope:     <a href="../../index.html">all classes</a>
     @*/
 
     if (!msie || msie && msie9) {
-        var codeBlock = document.getElementById('sourceCode');
-
-        if (codeBlock) {
-            hljs.highlightBlock(codeBlock);
-        }
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
     }
 })();
 </script>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-02-24 23:58</div>
+    <div style="float:right;">generated on 2023-03-15 02:46</div>
 </div>
 </body>
 </html>

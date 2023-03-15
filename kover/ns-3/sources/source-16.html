@@ -7,9 +7,10 @@
   <title>Coverage Report > ForumThreadBuilderKt</title>
   <style type="text/css">
     @import "../../css/coverage.css";
-    @import "../../css/highlight-idea.css";
+    @import "../../css/idea.min.css";
   </style>
-  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
 </head>
 
 <body>
@@ -78,7 +79,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     100%
   </span>
   <span class="absValue">
-    (13/13)
+    (12/12)
   </span>
 </td>
 </tr>
@@ -90,106 +91,106 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;/*
-<i class="no-highlight">2</i>&nbsp; * Copyright © 2022 Allan Galarza
-<i class="no-highlight">3</i>&nbsp; *
-<i class="no-highlight">4</i>&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
-<i class="no-highlight">5</i>&nbsp; * you may not use this file except in compliance with the License.
-<i class="no-highlight">6</i>&nbsp; * You may obtain a copy of the License at
-<i class="no-highlight">7</i>&nbsp; *
-<i class="no-highlight">8</i>&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
-<i class="no-highlight">9</i>&nbsp; *
-<i class="no-highlight">10</i>&nbsp; * Unless required by applicable law or agreed to in writing, software
-<i class="no-highlight">11</i>&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-<i class="no-highlight">12</i>&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-<i class="no-highlight">13</i>&nbsp; * See the License for the specific language governing permissions and
-<i class="no-highlight">14</i>&nbsp; * limitations under the License.
-<i class="no-highlight">15</i>&nbsp; */
-<i class="no-highlight">16</i>&nbsp;
-<i class="no-highlight">17</i>&nbsp;package com.galarzaa.tibiakt.core.builders
-<i class="no-highlight">18</i>&nbsp;
-<i class="no-highlight">19</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.BaseForumAuthor
-<i class="no-highlight">20</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.ForumEmoticon
-<i class="no-highlight">21</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.ForumPost
-<i class="no-highlight">22</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.ForumThread
-<i class="no-highlight">23</i>&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
-<i class="no-highlight">24</i>&nbsp;import kotlinx.datetime.Clock
-<i class="no-highlight">25</i>&nbsp;import kotlinx.datetime.Instant
-<i class="no-highlight">26</i>&nbsp;
-<i class="no-highlight">27</i>&nbsp;@BuilderDsl
-<i class="no-highlight">28</i>&nbsp;public inline fun forumThreadBuilder(block: ForumThreadBuilder.() -&gt; Unit): ForumThreadBuilder =
-<b class="fc"><i class="no-highlight">29</i>&nbsp;    ForumThreadBuilder().apply(block)</b>
-<i class="no-highlight">30</i>&nbsp;
-<i class="no-highlight">31</i>&nbsp;@BuilderDsl
-<b class="fc"><i class="no-highlight">32</i>&nbsp;public inline fun forumThread(block: ForumThreadBuilder.() -&gt; Unit): ForumThread = forumThreadBuilder(block).build()</b>
-<i class="no-highlight">33</i>&nbsp;
-<i class="no-highlight">34</i>&nbsp;/** Builder for [ForumThread] instances. */
-<i class="no-highlight">35</i>&nbsp;@BuilderDsl
-<i class="no-highlight">36</i>&nbsp;public class ForumThreadBuilder : TibiaKtBuilder&lt;ForumThread&gt; {
-<i class="no-highlight">37</i>&nbsp;    public var title: String? = null
-<i class="no-highlight">38</i>&nbsp;    public var threadId: Int? = null
-<i class="no-highlight">39</i>&nbsp;    public var board: String? = null
-<i class="no-highlight">40</i>&nbsp;    public var boardId: Int? = null
-<i class="no-highlight">41</i>&nbsp;    public var section: String? = null
-<i class="no-highlight">42</i>&nbsp;    public var sectionId: Int? = null
-<i class="no-highlight">43</i>&nbsp;    public var previousTopicNumber: Int? = null
-<i class="no-highlight">44</i>&nbsp;    public var nextTopicNumber: Int? = null
-<i class="no-highlight">45</i>&nbsp;    public var hasGoldenFrame: Boolean = false
-<i class="no-highlight">46</i>&nbsp;    public var anchoredPost: ForumPost? = null
-<i class="no-highlight">47</i>&nbsp;    public var currentPage: Int = 1
-<i class="no-highlight">48</i>&nbsp;    public var totalPages: Int = 1
-<i class="no-highlight">49</i>&nbsp;    public var resultsCount: Int = 1
-<i class="no-highlight">50</i>&nbsp;    public val entries: MutableList&lt;ForumPost&gt; = mutableListOf()
-<i class="no-highlight">51</i>&nbsp;
-<i class="no-highlight">52</i>&nbsp;    public fun addPost(post: ForumPost): ForumThreadBuilder = apply { entries.add(post) }
-<i class="no-highlight">53</i>&nbsp;
-<i class="no-highlight">54</i>&nbsp;    @BuilderDsl
-<i class="no-highlight">55</i>&nbsp;    public fun addPost(block: ForumPostBuilder.() -&gt; Unit): ForumThreadBuilder =
-<i class="no-highlight">56</i>&nbsp;        apply { entries.add(ForumPostBuilder().apply(block).build()) }
-<i class="no-highlight">57</i>&nbsp;
-<i class="no-highlight">58</i>&nbsp;
-<i class="no-highlight">59</i>&nbsp;    override fun build(): ForumThread = ForumThread(
-<i class="no-highlight">60</i>&nbsp;        title = title ?: error(&quot;title is required&quot;),
-<i class="no-highlight">61</i>&nbsp;        threadId = threadId ?: error(&quot;threadId is required&quot;),
-<i class="no-highlight">62</i>&nbsp;        board = board ?: error(&quot;board is required&quot;),
-<i class="no-highlight">63</i>&nbsp;        boardId = boardId ?: error(&quot;boardId is required&quot;),
-<i class="no-highlight">64</i>&nbsp;        section = section ?: error(&quot;section is required&quot;),
-<i class="no-highlight">65</i>&nbsp;        sectionId = sectionId ?: error(&quot;sectionId is required&quot;),
-<i class="no-highlight">66</i>&nbsp;        previousTopicNumber = previousTopicNumber,
-<i class="no-highlight">67</i>&nbsp;        nextTopicNumber = nextTopicNumber,
-<i class="no-highlight">68</i>&nbsp;        goldenFrame = hasGoldenFrame,
-<i class="no-highlight">69</i>&nbsp;        anchoredPost = anchoredPost,
-<i class="no-highlight">70</i>&nbsp;        currentPage = currentPage,
-<i class="no-highlight">71</i>&nbsp;        totalPages = totalPages,
-<i class="no-highlight">72</i>&nbsp;        resultsCount = resultsCount,
-<i class="no-highlight">73</i>&nbsp;        entries = entries
-<i class="no-highlight">74</i>&nbsp;    )
-<i class="no-highlight">75</i>&nbsp;
-<i class="no-highlight">76</i>&nbsp;    public class ForumPostBuilder : TibiaKtBuilder&lt;ForumPost&gt; {
-<i class="no-highlight">77</i>&nbsp;        public var author: BaseForumAuthor? = null
-<i class="no-highlight">78</i>&nbsp;        public var emoticon: ForumEmoticon? = null
-<i class="no-highlight">79</i>&nbsp;        public var title: String? = null
-<i class="no-highlight">80</i>&nbsp;        public var content: String? = null
-<i class="no-highlight">81</i>&nbsp;        public var signature: String? = null
-<i class="no-highlight">82</i>&nbsp;        public var postId: Int? = null
-<i class="no-highlight">83</i>&nbsp;        public var postedDate: Instant? = null
-<i class="no-highlight">84</i>&nbsp;        public var editedDate: Instant? = null
-<i class="no-highlight">85</i>&nbsp;        public var editedBy: String? = null
-<i class="no-highlight">86</i>&nbsp;
-<i class="no-highlight">87</i>&nbsp;        override fun build(): ForumPost = ForumPost(
-<i class="no-highlight">88</i>&nbsp;            author = author ?: error(&quot;author is required&quot;),
-<i class="no-highlight">89</i>&nbsp;            emoticon = emoticon,
-<i class="no-highlight">90</i>&nbsp;            title = title,
-<i class="no-highlight">91</i>&nbsp;            content = content ?: error(&quot;content is required&quot;),
-<i class="no-highlight">92</i>&nbsp;            signature = signature,
-<i class="no-highlight">93</i>&nbsp;            postId = postId ?: error(&quot;postId is required&quot;),
-<i class="no-highlight">94</i>&nbsp;            postedDate = postedDate ?: Clock.System.now(),
-<i class="no-highlight">95</i>&nbsp;            editedDate = editedDate,
-<i class="no-highlight">96</i>&nbsp;            editedBy = editedBy
-<i class="no-highlight">97</i>&nbsp;        )
-<i class="no-highlight">98</i>&nbsp;    }
-<i class="no-highlight">99</i>&nbsp;}
-</div>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.galarzaa.tibiakt.core.builders
+&nbsp;
+&nbsp;import com.galarzaa.tibiakt.core.models.forums.BaseForumAuthor
+&nbsp;import com.galarzaa.tibiakt.core.models.forums.ForumEmoticon
+&nbsp;import com.galarzaa.tibiakt.core.models.forums.ForumPost
+&nbsp;import com.galarzaa.tibiakt.core.models.forums.ForumThread
+&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
+&nbsp;import kotlinx.datetime.Clock
+&nbsp;import kotlinx.datetime.Instant
+&nbsp;
+&nbsp;@BuilderDsl
+&nbsp;public inline fun forumThreadBuilder(block: ForumThreadBuilder.() -&gt; Unit): ForumThreadBuilder =
+<b class="fc">&nbsp;    ForumThreadBuilder().apply(block)</b>
+&nbsp;
+&nbsp;@BuilderDsl
+<b class="fc">&nbsp;public inline fun forumThread(block: ForumThreadBuilder.() -&gt; Unit): ForumThread = forumThreadBuilder(block).build()</b>
+&nbsp;
+&nbsp;/** Builder for [ForumThread] instances. */
+&nbsp;@BuilderDsl
+&nbsp;public class ForumThreadBuilder : TibiaKtBuilder&lt;ForumThread&gt; {
+&nbsp;    public var title: String? = null
+&nbsp;    public var threadId: Int? = null
+&nbsp;    public var board: String? = null
+&nbsp;    public var boardId: Int? = null
+&nbsp;    public var section: String? = null
+&nbsp;    public var sectionId: Int? = null
+&nbsp;    public var previousTopicNumber: Int? = null
+&nbsp;    public var nextTopicNumber: Int? = null
+&nbsp;    public var hasGoldenFrame: Boolean = false
+&nbsp;    public var anchoredPost: ForumPost? = null
+&nbsp;    public var currentPage: Int = 1
+&nbsp;    public var totalPages: Int = 1
+&nbsp;    public var resultsCount: Int = 1
+&nbsp;    public val entries: MutableList&lt;ForumPost&gt; = mutableListOf()
+&nbsp;
+&nbsp;    public fun addPost(post: ForumPost): ForumThreadBuilder = apply { entries.add(post) }
+&nbsp;
+&nbsp;    @BuilderDsl
+&nbsp;    public fun addPost(block: ForumPostBuilder.() -&gt; Unit): ForumThreadBuilder =
+&nbsp;        apply { entries.add(ForumPostBuilder().apply(block).build()) }
+&nbsp;
+&nbsp;
+&nbsp;    override fun build(): ForumThread = ForumThread(
+&nbsp;        title = title ?: error(&quot;title is required&quot;),
+&nbsp;        threadId = threadId ?: error(&quot;threadId is required&quot;),
+&nbsp;        board = board ?: error(&quot;board is required&quot;),
+&nbsp;        boardId = boardId ?: error(&quot;boardId is required&quot;),
+&nbsp;        section = section ?: error(&quot;section is required&quot;),
+&nbsp;        sectionId = sectionId ?: error(&quot;sectionId is required&quot;),
+&nbsp;        previousTopicNumber = previousTopicNumber,
+&nbsp;        nextTopicNumber = nextTopicNumber,
+&nbsp;        goldenFrame = hasGoldenFrame,
+&nbsp;        anchoredPost = anchoredPost,
+&nbsp;        currentPage = currentPage,
+&nbsp;        totalPages = totalPages,
+&nbsp;        resultsCount = resultsCount,
+&nbsp;        entries = entries
+&nbsp;    )
+&nbsp;
+&nbsp;    public class ForumPostBuilder : TibiaKtBuilder&lt;ForumPost&gt; {
+&nbsp;        public var author: BaseForumAuthor? = null
+&nbsp;        public var emoticon: ForumEmoticon? = null
+&nbsp;        public var title: String? = null
+&nbsp;        public var content: String? = null
+&nbsp;        public var signature: String? = null
+&nbsp;        public var postId: Int? = null
+&nbsp;        public var postedDate: Instant? = null
+&nbsp;        public var editedDate: Instant? = null
+&nbsp;        public var editedBy: String? = null
+&nbsp;
+&nbsp;        override fun build(): ForumPost = ForumPost(
+&nbsp;            author = author ?: error(&quot;author is required&quot;),
+&nbsp;            emoticon = emoticon,
+&nbsp;            title = title,
+&nbsp;            content = content ?: error(&quot;content is required&quot;),
+&nbsp;            signature = signature,
+&nbsp;            postId = postId ?: error(&quot;postId is required&quot;),
+&nbsp;            postedDate = postedDate ?: Clock.System.now(),
+&nbsp;            editedDate = editedDate,
+&nbsp;            editedBy = editedBy
+&nbsp;        )
+&nbsp;    }
+&nbsp;}
+</code>
 </pre>
 </div>
 
@@ -204,18 +205,15 @@ Current scope:     <a href="../../index.html">all classes</a>
     @*/
 
     if (!msie || msie && msie9) {
-        var codeBlock = document.getElementById('sourceCode');
-
-        if (codeBlock) {
-            hljs.highlightBlock(codeBlock);
-        }
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
     }
 })();
 </script>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-02-24 23:58</div>
+    <div style="float:right;">generated on 2023-03-15 02:46</div>
 </div>
 </body>
 </html>

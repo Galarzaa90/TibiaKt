@@ -7,9 +7,10 @@
   <title>Coverage Report > TibiaKtClient</title>
   <style type="text/css">
     @import "../../css/coverage.css";
-    @import "../../css/highlight-idea.css";
+    @import "../../css/idea.min.css";
   </style>
-  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
 </head>
 
 <body>
@@ -71,10 +72,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    5.8%
+    5.9%
   </span>
   <span class="absValue">
-    (160/2759)
+    (160/2700)
   </span>
 </td>
 </tr>
@@ -1331,10 +1332,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    7.7%
+    7.9%
   </span>
   <span class="absValue">
-    (245/3174)
+    (245/3115)
   </span>
 </td>
 </tr>
@@ -1345,751 +1346,751 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;/*
-<i class="no-highlight">2</i>&nbsp; * Copyright © 2022 Allan Galarza
-<i class="no-highlight">3</i>&nbsp; *
-<i class="no-highlight">4</i>&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
-<i class="no-highlight">5</i>&nbsp; * you may not use this file except in compliance with the License.
-<i class="no-highlight">6</i>&nbsp; * You may obtain a copy of the License at
-<i class="no-highlight">7</i>&nbsp; *
-<i class="no-highlight">8</i>&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
-<i class="no-highlight">9</i>&nbsp; *
-<i class="no-highlight">10</i>&nbsp; * Unless required by applicable law or agreed to in writing, software
-<i class="no-highlight">11</i>&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-<i class="no-highlight">12</i>&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-<i class="no-highlight">13</i>&nbsp; * See the License for the specific language governing permissions and
-<i class="no-highlight">14</i>&nbsp; * limitations under the License.
-<i class="no-highlight">15</i>&nbsp; */
-<i class="no-highlight">16</i>&nbsp;
-<i class="no-highlight">17</i>&nbsp;package com.galarzaa.tibiakt.client
-<i class="no-highlight">18</i>&nbsp;
-<i class="no-highlight">19</i>&nbsp;import com.galarzaa.tibiakt.client.exceptions.ForbiddenException
-<i class="no-highlight">20</i>&nbsp;import com.galarzaa.tibiakt.client.exceptions.NetworkException
-<i class="no-highlight">21</i>&nbsp;import com.galarzaa.tibiakt.client.exceptions.SiteMaintenanceException
-<i class="no-highlight">22</i>&nbsp;import com.galarzaa.tibiakt.core.builders.BazaarFiltersBuilder
-<i class="no-highlight">23</i>&nbsp;import com.galarzaa.tibiakt.core.enums.AvailableForumSection
-<i class="no-highlight">24</i>&nbsp;import com.galarzaa.tibiakt.core.enums.BazaarType
-<i class="no-highlight">25</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HighscoresBattlEyeType
-<i class="no-highlight">26</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HighscoresCategory
-<i class="no-highlight">27</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HighscoresProfession
-<i class="no-highlight">28</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HouseOrder
-<i class="no-highlight">29</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HouseStatus
-<i class="no-highlight">30</i>&nbsp;import com.galarzaa.tibiakt.core.enums.HouseType
-<i class="no-highlight">31</i>&nbsp;import com.galarzaa.tibiakt.core.enums.NewsCategory
-<i class="no-highlight">32</i>&nbsp;import com.galarzaa.tibiakt.core.enums.NewsType
-<i class="no-highlight">33</i>&nbsp;import com.galarzaa.tibiakt.core.enums.PvpType
-<i class="no-highlight">34</i>&nbsp;import com.galarzaa.tibiakt.core.models.KillStatistics
-<i class="no-highlight">35</i>&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.AjaxPaginator
-<i class="no-highlight">36</i>&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.Auction
-<i class="no-highlight">37</i>&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.BazaarFilters
-<i class="no-highlight">38</i>&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.CharacterBazaar
-<i class="no-highlight">39</i>&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.ItemEntry
-<i class="no-highlight">40</i>&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.MountEntry
-<i class="no-highlight">41</i>&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.OutfitEntry
-<i class="no-highlight">42</i>&nbsp;import com.galarzaa.tibiakt.core.models.character.Character
-<i class="no-highlight">43</i>&nbsp;import com.galarzaa.tibiakt.core.models.creatures.BosstableBosses
-<i class="no-highlight">44</i>&nbsp;import com.galarzaa.tibiakt.core.models.creatures.CreaturesSection
-<i class="no-highlight">45</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.CMPostArchive
-<i class="no-highlight">46</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.ForumAnnouncement
-<i class="no-highlight">47</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.ForumBoard
-<i class="no-highlight">48</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.ForumSection
-<i class="no-highlight">49</i>&nbsp;import com.galarzaa.tibiakt.core.models.forums.ForumThread
-<i class="no-highlight">50</i>&nbsp;import com.galarzaa.tibiakt.core.models.guild.Guild
-<i class="no-highlight">51</i>&nbsp;import com.galarzaa.tibiakt.core.models.guild.GuildsSection
-<i class="no-highlight">52</i>&nbsp;import com.galarzaa.tibiakt.core.models.highscores.Highscores
-<i class="no-highlight">53</i>&nbsp;import com.galarzaa.tibiakt.core.models.highscores.HighscoresEntry
-<i class="no-highlight">54</i>&nbsp;import com.galarzaa.tibiakt.core.models.house.House
-<i class="no-highlight">55</i>&nbsp;import com.galarzaa.tibiakt.core.models.house.HousesSection
-<i class="no-highlight">56</i>&nbsp;import com.galarzaa.tibiakt.core.models.leaderboards.Leaderboards
-<i class="no-highlight">57</i>&nbsp;import com.galarzaa.tibiakt.core.models.news.EventsSchedule
-<i class="no-highlight">58</i>&nbsp;import com.galarzaa.tibiakt.core.models.news.News
-<i class="no-highlight">59</i>&nbsp;import com.galarzaa.tibiakt.core.models.news.NewsArchive
-<i class="no-highlight">60</i>&nbsp;import com.galarzaa.tibiakt.core.models.world.World
-<i class="no-highlight">61</i>&nbsp;import com.galarzaa.tibiakt.core.models.world.WorldOverview
-<i class="no-highlight">62</i>&nbsp;import com.galarzaa.tibiakt.core.parsers.AuctionParser
-<i class="no-highlight">63</i>&nbsp;import com.galarzaa.tibiakt.core.parsers.BosstableBossesParser
-<i class="no-highlight">64</i>&nbsp;import com.galarzaa.tibiakt.core.parsers.CMPostArchiveParser
-<i class="no-highlight">65</i>&nbsp;import com.galarzaa.tibiakt.core.parsers.CharacterBazaarParser
-<i class="no-highlight">66</i>&nbsp;import com.galarzaa.tibiakt.core.parsers.CharacterParser
-<i class="no-highlight">67</i>&nbsp;import com.galarzaa.tibiakt.core.parsers.CreaturesSectionParser
-<i class="no-highlight">68</i>&nbsp;import com.galarzaa.tibiakt.core.parsers.EventsScheduleParser
-<i class="no-highlight">69</i>&nbsp;import com.galarzaa.tibiakt.core.parsers.ForumAnnouncementParser
-<i class="no-highlight">70</i>&nbsp;import com.galarzaa.tibiakt.core.parsers.ForumBoardParser
-<i class="no-highlight">71</i>&nbsp;import com.galarzaa.tibiakt.core.parsers.ForumSectionParser
-<i class="no-highlight">72</i>&nbsp;import com.galarzaa.tibiakt.core.parsers.ForumThreadParser
-<i class="no-highlight">73</i>&nbsp;import com.galarzaa.tibiakt.core.parsers.GuildParser
-<i class="no-highlight">74</i>&nbsp;import com.galarzaa.tibiakt.core.parsers.GuildsSectionParser
-<i class="no-highlight">75</i>&nbsp;import com.galarzaa.tibiakt.core.parsers.HighscoresParser
-<i class="no-highlight">76</i>&nbsp;import com.galarzaa.tibiakt.core.parsers.HouseParser
-<i class="no-highlight">77</i>&nbsp;import com.galarzaa.tibiakt.core.parsers.HousesSectionParser
-<i class="no-highlight">78</i>&nbsp;import com.galarzaa.tibiakt.core.parsers.KillStatisticsParser
-<i class="no-highlight">79</i>&nbsp;import com.galarzaa.tibiakt.core.parsers.LeaderboardsParser
-<i class="no-highlight">80</i>&nbsp;import com.galarzaa.tibiakt.core.parsers.NewsArchiveParser
-<i class="no-highlight">81</i>&nbsp;import com.galarzaa.tibiakt.core.parsers.NewsParser
-<i class="no-highlight">82</i>&nbsp;import com.galarzaa.tibiakt.core.parsers.WorldOverviewParser
-<i class="no-highlight">83</i>&nbsp;import com.galarzaa.tibiakt.core.parsers.WorldParser
-<i class="no-highlight">84</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getAuctionUrl
-<i class="no-highlight">85</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getBazaarUrl
-<i class="no-highlight">86</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getBoostableBossesUrl
-<i class="no-highlight">87</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getCMPostArchiveUrl
-<i class="no-highlight">88</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getCharacterUrl
-<i class="no-highlight">89</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getCreaturesSectionUrl
-<i class="no-highlight">90</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getEventsScheduleUrl
-<i class="no-highlight">91</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getForumAnnouncementUrl
-<i class="no-highlight">92</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getForumBoardUrl
-<i class="no-highlight">93</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getForumPostUrl
-<i class="no-highlight">94</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getForumSectionUrl
-<i class="no-highlight">95</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getForumThreadUrl
-<i class="no-highlight">96</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getGuildUrl
-<i class="no-highlight">97</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getHighscoresUrl
-<i class="no-highlight">98</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getHouseUrl
-<i class="no-highlight">99</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getHousesSectionUrl
-<i class="no-highlight">100</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getKillStatisticsUrl
-<i class="no-highlight">101</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getLeaderboardUrl
-<i class="no-highlight">102</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getNewArchiveFormData
-<i class="no-highlight">103</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getNewsArchiveUrl
-<i class="no-highlight">104</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getNewsUrl
-<i class="no-highlight">105</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getWorldGuildsUrl
-<i class="no-highlight">106</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getWorldOverviewUrl
-<i class="no-highlight">107</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getWorldUrl
-<i class="no-highlight">108</i>&nbsp;import io.ktor.client.HttpClient
-<i class="no-highlight">109</i>&nbsp;import io.ktor.client.HttpClientConfig
-<i class="no-highlight">110</i>&nbsp;import io.ktor.client.call.body
-<i class="no-highlight">111</i>&nbsp;import io.ktor.client.engine.HttpClientEngine
-<i class="no-highlight">112</i>&nbsp;import io.ktor.client.engine.cio.CIO
-<i class="no-highlight">113</i>&nbsp;import io.ktor.client.plugins.Charsets
-<i class="no-highlight">114</i>&nbsp;import io.ktor.client.plugins.HttpTimeout
-<i class="no-highlight">115</i>&nbsp;import io.ktor.client.plugins.ResponseException
-<i class="no-highlight">116</i>&nbsp;import io.ktor.client.plugins.UserAgent
-<i class="no-highlight">117</i>&nbsp;import io.ktor.client.plugins.compression.ContentEncoding
-<i class="no-highlight">118</i>&nbsp;import io.ktor.client.plugins.expectSuccess
-<i class="no-highlight">119</i>&nbsp;import io.ktor.client.request.forms.submitForm
-<i class="no-highlight">120</i>&nbsp;import io.ktor.client.request.get
-<i class="no-highlight">121</i>&nbsp;import io.ktor.client.request.header
-<i class="no-highlight">122</i>&nbsp;import io.ktor.client.request.headers
-<i class="no-highlight">123</i>&nbsp;import io.ktor.client.statement.HttpResponse
-<i class="no-highlight">124</i>&nbsp;import io.ktor.client.statement.request
-<i class="no-highlight">125</i>&nbsp;import io.ktor.http.HttpMethod
-<i class="no-highlight">126</i>&nbsp;import io.ktor.http.HttpStatusCode
-<i class="no-highlight">127</i>&nbsp;import io.ktor.http.Parameters
-<i class="no-highlight">128</i>&nbsp;import kotlinx.datetime.Clock
-<i class="no-highlight">129</i>&nbsp;import kotlinx.datetime.Instant
-<i class="no-highlight">130</i>&nbsp;import kotlinx.serialization.json.Json
-<i class="no-highlight">131</i>&nbsp;import mu.KotlinLogging
-<i class="no-highlight">132</i>&nbsp;import java.time.LocalDate
-<i class="no-highlight">133</i>&nbsp;import java.time.YearMonth
-<i class="no-highlight">134</i>&nbsp;import kotlin.system.measureTimeMillis
-<i class="no-highlight">135</i>&nbsp;import kotlin.time.Duration.Companion.seconds
-<i class="no-highlight">136</i>&nbsp;
-<b class="fc"><i class="no-highlight">137</i>&nbsp;@Suppress(&quot;TooManyFunctions&quot;)</b>
-<i class="no-highlight">138</i>&nbsp;/**
-<i class="no-highlight">139</i>&nbsp; * A coroutine based client to fetch from Tibia.com.
-<i class="no-highlight">140</i>&nbsp; *
-<i class="no-highlight">141</i>&nbsp; * @param engine The ktor client engine to use, by default CIO is used.
-<i class="no-highlight">142</i>&nbsp; * @param additionalConfig Additional configuration for the Ktor Client.
-<i class="no-highlight">143</i>&nbsp; */
-<i class="no-highlight">144</i>&nbsp;public open class TibiaKtClient constructor(
-<i class="no-highlight">145</i>&nbsp;    engine: HttpClientEngine?,
-<b class="fc"><i class="no-highlight">146</i>&nbsp;    private val userAgent: String? = null,</b>
-<b class="fc"><i class="no-highlight">147</i>&nbsp;    private val additionalConfig: (HttpClientConfig&lt;*&gt;.() -&gt; Unit) = {},</b>
-<i class="no-highlight">148</i>&nbsp;) {
-<i class="no-highlight">149</i>&nbsp;
-<b class="pc"><i class="no-highlight">150</i>&nbsp;    private val client = HttpClient(engine ?: CIO.create()) {</b>
-<b class="fc"><i class="no-highlight">151</i>&nbsp;        install(HttpTimeout) {</b>
-<b class="fc"><i class="no-highlight">152</i>&nbsp;            requestTimeoutMillis = HttpTimeout.INFINITE_TIMEOUT_MS</b>
-<b class="fc"><i class="no-highlight">153</i>&nbsp;            connectTimeoutMillis = 30.seconds.inWholeMilliseconds</b>
-<i class="no-highlight">154</i>&nbsp;        }
-<b class="fc"><i class="no-highlight">155</i>&nbsp;        Charsets {</b>
-<b class="fc"><i class="no-highlight">156</i>&nbsp;            register(Charsets.UTF_8)</b>
-<b class="fc"><i class="no-highlight">157</i>&nbsp;            register(Charsets.ISO_8859_1)</b>
-<i class="no-highlight">158</i>&nbsp;        }
-<b class="fc"><i class="no-highlight">159</i>&nbsp;        followRedirects = false</b>
-<b class="fc"><i class="no-highlight">160</i>&nbsp;        install(ContentEncoding) {</b>
-<b class="fc"><i class="no-highlight">161</i>&nbsp;            gzip()</b>
-<b class="fc"><i class="no-highlight">162</i>&nbsp;            deflate()</b>
-<i class="no-highlight">163</i>&nbsp;        }
-<b class="fc"><i class="no-highlight">164</i>&nbsp;        install(UserAgent) {</b>
-<b class="pc"><i class="no-highlight">165</i>&nbsp;            agent = userAgent ?: &quot;TibiaKtClient/? ktor/? Kotlin/${KotlinVersion.CURRENT}&quot;</b>
-<i class="no-highlight">166</i>&nbsp;        }
-<b class="fc"><i class="no-highlight">167</i>&nbsp;        additionalConfig(this)</b>
-<i class="no-highlight">168</i>&nbsp;    }
-<i class="no-highlight">169</i>&nbsp;
-<i class="no-highlight">170</i>&nbsp;    /**
-<i class="no-highlight">171</i>&nbsp;     * Creates an instance of the client, using the default engine (CIO).
-<i class="no-highlight">172</i>&nbsp;     *
-<i class="no-highlight">173</i>&nbsp;     * @param userAgent The value that will be sent in the User-Agent header of every request.
-<i class="no-highlight">174</i>&nbsp;     */
-<b class="nc"><i class="no-highlight">175</i>&nbsp;    public constructor(userAgent: String? = null, additionalConfig: (HttpClientConfig&lt;*&gt;.() -&gt; Unit) = {}) : this(</b>
-<b class="nc"><i class="no-highlight">176</i>&nbsp;        null, userAgent, additionalConfig</b>
-<i class="no-highlight">177</i>&nbsp;    )
-<i class="no-highlight">178</i>&nbsp;
-<i class="no-highlight">179</i>&nbsp;    /**
-<i class="no-highlight">180</i>&nbsp;     * Perform a request using the required headers.
-<i class="no-highlight">181</i>&nbsp;     * @param method The HTTP method to use for the request.
-<i class="no-highlight">182</i>&nbsp;     * @param url The URL to request.
-<i class="no-highlight">183</i>&nbsp;     * @param data The form parameters to add.
-<i class="no-highlight">184</i>&nbsp;     * @param headers Additional headers to add.
-<i class="no-highlight">185</i>&nbsp;     */
-<b class="fc"><i class="no-highlight">186</i>&nbsp;    public open suspend fun request(</b>
-<i class="no-highlight">187</i>&nbsp;        method: HttpMethod,
-<i class="no-highlight">188</i>&nbsp;        url: String,
-<b class="fc"><i class="no-highlight">189</i>&nbsp;        data: List&lt;Pair&lt;String, Any&gt;&gt; = emptyList(),</b>
-<b class="fc"><i class="no-highlight">190</i>&nbsp;        headers: List&lt;Pair&lt;String, Any&gt;&gt; = emptyList(),</b>
-<i class="no-highlight">191</i>&nbsp;    ): HttpResponse {
-<b class="fc"><i class="no-highlight">192</i>&nbsp;        val response: HttpResponse = try {</b>
-<b class="fc"><i class="no-highlight">193</i>&nbsp;            when (method) {</b>
-<b class="pc"><i class="no-highlight">194</i>&nbsp;                HttpMethod.Get -&gt; client.get(url) {</b>
-<b class="fc"><i class="no-highlight">195</i>&nbsp;                    expectSuccess = true</b>
-<b class="pc"><i class="no-highlight">196</i>&nbsp;                    if (headers.isNotEmpty()) {</b>
-<b class="nc"><i class="no-highlight">197</i>&nbsp;                        headers { headers.forEach { header(it.first, it.second) } }</b>
-<i class="no-highlight">198</i>&nbsp;                    }
-<b class="fc"><i class="no-highlight">199</i>&nbsp;                }</b>
-<i class="no-highlight">200</i>&nbsp;
-<b class="nc"><i class="no-highlight">201</i>&nbsp;                HttpMethod.Post -&gt; client.submitForm(url, formParameters = Parameters.build {</b>
-<b class="nc"><i class="no-highlight">202</i>&nbsp;                    data.forEach { append(it.first, it.second.toString()) }</b>
-<b class="nc"><i class="no-highlight">203</i>&nbsp;                }, encodeInQuery = false) {</b>
-<i class="no-highlight">204</i>&nbsp;
-<b class="nc"><i class="no-highlight">205</i>&nbsp;                }</b>
-<i class="no-highlight">206</i>&nbsp;
-<b class="nc"><i class="no-highlight">207</i>&nbsp;                else -&gt; throw IllegalArgumentException(&quot;Unsupported method $method&quot;)</b>
-<i class="no-highlight">208</i>&nbsp;            }
-<b class="fc"><i class="no-highlight">209</i>&nbsp;        } catch (re: ResponseException) {</b>
-<b class="pc"><i class="no-highlight">210</i>&nbsp;            if (re.response.status in listOf(</b>
-<b class="fc"><i class="no-highlight">211</i>&nbsp;                    HttpStatusCode.MovedPermanently,</b>
-<b class="fc"><i class="no-highlight">212</i>&nbsp;                    HttpStatusCode.Found,</b>
-<b class="fc"><i class="no-highlight">213</i>&nbsp;                    HttpStatusCode.TemporaryRedirect,</b>
-<b class="fc"><i class="no-highlight">214</i>&nbsp;                    HttpStatusCode.PermanentRedirect,</b>
-<b class="fc"><i class="no-highlight">215</i>&nbsp;                    HttpStatusCode.SeeOther</b>
-<i class="no-highlight">216</i>&nbsp;                )
-<i class="no-highlight">217</i>&nbsp;            ) {
-<b class="nc"><i class="no-highlight">218</i>&nbsp;                throw SiteMaintenanceException(&quot;Tibia.com is under maintenance.&quot;, re)</b>
-<i class="no-highlight">219</i>&nbsp;            }
-<b class="pc"><i class="no-highlight">220</i>&nbsp;            if (re.response.status == HttpStatusCode.Forbidden) {</b>
-<b class="fc"><i class="no-highlight">221</i>&nbsp;                throw ForbiddenException(&quot;403 Forbidden: Might be getting rate-limited&quot;, re)</b>
-<i class="no-highlight">222</i>&nbsp;            }
-<b class="nc"><i class="no-highlight">223</i>&nbsp;            throw NetworkException(&quot;${re.response.status.value} ${re.response.status.description}&quot;, re)</b>
-<i class="no-highlight">224</i>&nbsp;        }
-<b class="nc"><i class="no-highlight">225</i>&nbsp;        logger.info {</b>
-<b class="nc"><i class="no-highlight">226</i>&nbsp;            listOf(</b>
-<b class="nc"><i class="no-highlight">227</i>&nbsp;                url,</b>
-<b class="nc"><i class="no-highlight">228</i>&nbsp;                method.value.uppercase(),</b>
-<b class="nc"><i class="no-highlight">229</i>&nbsp;                &quot;${response.status.value} ${response.status.description}&quot;,</b>
-<b class="nc"><i class="no-highlight">230</i>&nbsp;                &quot;${response.fetchingTimeMillis}ms&quot;</b>
-<b class="nc"><i class="no-highlight">231</i>&nbsp;            ).joinToString(&quot; | &quot;)</b>
-<i class="no-highlight">232</i>&nbsp;        }
-<b class="nc"><i class="no-highlight">233</i>&nbsp;        return response</b>
-<i class="no-highlight">234</i>&nbsp;    }
-<i class="no-highlight">235</i>&nbsp;
-<i class="no-highlight">236</i>&nbsp;    // region News Section
-<i class="no-highlight">237</i>&nbsp;
-<i class="no-highlight">238</i>&nbsp;    /**
-<i class="no-highlight">239</i>&nbsp;     * Fetch the news for a given interval.
-<i class="no-highlight">240</i>&nbsp;     */
-<b class="nc"><i class="no-highlight">241</i>&nbsp;    public open suspend fun fetchRecentNews(</b>
-<i class="no-highlight">242</i>&nbsp;        startDate: LocalDate,
-<i class="no-highlight">243</i>&nbsp;        endDate: LocalDate,
-<b class="nc"><i class="no-highlight">244</i>&nbsp;        categories: Set&lt;NewsCategory&gt;? = null,</b>
-<b class="nc"><i class="no-highlight">245</i>&nbsp;        types: Set&lt;NewsType&gt;? = null,</b>
-<i class="no-highlight">246</i>&nbsp;    ): TibiaResponse&lt;NewsArchive&gt; {
-<b class="nc"><i class="no-highlight">247</i>&nbsp;        val data = getNewArchiveFormData(startDate, endDate, categories, types)</b>
-<b class="nc"><i class="no-highlight">248</i>&nbsp;        val response = this.request(HttpMethod.Post, getNewsArchiveUrl(), data)</b>
-<b class="nc"><i class="no-highlight">249</i>&nbsp;        return response.parse { NewsArchiveParser.fromContent(it) }</b>
-<i class="no-highlight">250</i>&nbsp;    }
-<i class="no-highlight">251</i>&nbsp;
-<i class="no-highlight">252</i>&nbsp;    /**
-<i class="no-highlight">253</i>&nbsp;     * Fetch the news from today to the last provided days.
-<i class="no-highlight">254</i>&nbsp;     */
-<b class="nc"><i class="no-highlight">255</i>&nbsp;    public open suspend fun fetchRecentNews(</b>
-<b class="nc"><i class="no-highlight">256</i>&nbsp;        days: Int = 30,</b>
-<b class="nc"><i class="no-highlight">257</i>&nbsp;        categories: Set&lt;NewsCategory&gt;? = null,</b>
-<b class="nc"><i class="no-highlight">258</i>&nbsp;        types: Set&lt;NewsType&gt;? = null,</b>
-<i class="no-highlight">259</i>&nbsp;    ): TibiaResponse&lt;NewsArchive&gt; =
-<b class="nc"><i class="no-highlight">260</i>&nbsp;        fetchRecentNews(LocalDate.now().minusDays(days.toLong()), LocalDate.now(), categories, types)</b>
-<i class="no-highlight">261</i>&nbsp;
-<i class="no-highlight">262</i>&nbsp;    /**
-<i class="no-highlight">263</i>&nbsp;     * Fetch a specific news article by its [newsId].
-<i class="no-highlight">264</i>&nbsp;     */
-<b class="nc"><i class="no-highlight">265</i>&nbsp;    public open suspend fun fetchNews(newsId: Int): TibiaResponse&lt;News?&gt; {</b>
-<b class="nc"><i class="no-highlight">266</i>&nbsp;        val response = this.request(HttpMethod.Get, getNewsUrl(newsId))</b>
-<b class="nc"><i class="no-highlight">267</i>&nbsp;        return response.parse { NewsParser.fromContent(it, newsId) }</b>
-<i class="no-highlight">268</i>&nbsp;    }
-<i class="no-highlight">269</i>&nbsp;
-<i class="no-highlight">270</i>&nbsp;    /**
-<i class="no-highlight">271</i>&nbsp;     * Fetch the events schedule for a specific year and month.
-<i class="no-highlight">272</i>&nbsp;     */
-<b class="nc"><i class="no-highlight">273</i>&nbsp;    public open suspend fun fetchEventsSchedule(yearMonth: YearMonth): TibiaResponse&lt;EventsSchedule&gt; {</b>
-<b class="nc"><i class="no-highlight">274</i>&nbsp;        val response = this.request(HttpMethod.Get, getEventsScheduleUrl(yearMonth))</b>
-<b class="nc"><i class="no-highlight">275</i>&nbsp;        return response.parse { EventsScheduleParser.fromContent(it) }</b>
-<i class="no-highlight">276</i>&nbsp;    }
-<i class="no-highlight">277</i>&nbsp;
-<i class="no-highlight">278</i>&nbsp;    /**
-<i class="no-highlight">279</i>&nbsp;     * Fetch the events schedule for a specific year and month.
-<i class="no-highlight">280</i>&nbsp;     */
-<i class="no-highlight">281</i>&nbsp;    public open suspend fun fetchEventsSchedule(year: Int, month: Int): TibiaResponse&lt;EventsSchedule&gt; =
-<b class="nc"><i class="no-highlight">282</i>&nbsp;        fetchEventsSchedule(YearMonth.of(year, month))</b>
-<i class="no-highlight">283</i>&nbsp;
-<i class="no-highlight">284</i>&nbsp;    /**
-<i class="no-highlight">285</i>&nbsp;     * Fetch the events schedule for the current month.
-<i class="no-highlight">286</i>&nbsp;     */
-<b class="nc"><i class="no-highlight">287</i>&nbsp;    public open suspend fun fetchEventsSchedule(): TibiaResponse&lt;EventsSchedule&gt; = fetchEventsSchedule(YearMonth.now())</b>
-<i class="no-highlight">288</i>&nbsp;
-<i class="no-highlight">289</i>&nbsp;    // endregion
-<i class="no-highlight">290</i>&nbsp;
-<i class="no-highlight">291</i>&nbsp;    // region Library Section
-<i class="no-highlight">292</i>&nbsp;    /** Fetch the boosted boss of the day as well as the list of bosstable bosses from Tibia.com. */
-<b class="nc"><i class="no-highlight">293</i>&nbsp;    public open suspend fun fetchBosstableBosses(): TibiaResponse&lt;BosstableBosses&gt; {</b>
-<b class="nc"><i class="no-highlight">294</i>&nbsp;        val response = this.request(HttpMethod.Get, getBoostableBossesUrl())</b>
-<b class="nc"><i class="no-highlight">295</i>&nbsp;        return response.parse { BosstableBossesParser.fromContent(it) }</b>
-<i class="no-highlight">296</i>&nbsp;    }
-<i class="no-highlight">297</i>&nbsp;
-<i class="no-highlight">298</i>&nbsp;    /** Fetch the creatures section, containing the boosted creature. */
-<b class="nc"><i class="no-highlight">299</i>&nbsp;    public open suspend fun fetchCreaturesSection(): TibiaResponse&lt;CreaturesSection&gt; {</b>
-<b class="nc"><i class="no-highlight">300</i>&nbsp;        val response = this.request(HttpMethod.Get, getCreaturesSectionUrl())</b>
-<b class="nc"><i class="no-highlight">301</i>&nbsp;        return response.parse { CreaturesSectionParser.fromContent(it) }</b>
-<i class="no-highlight">302</i>&nbsp;    }
-<i class="no-highlight">303</i>&nbsp;
-<i class="no-highlight">304</i>&nbsp;    // endregion
-<i class="no-highlight">305</i>&nbsp;
-<i class="no-highlight">306</i>&nbsp;    // region Community Section
-<i class="no-highlight">307</i>&nbsp;
-<i class="no-highlight">308</i>&nbsp;    /**
-<i class="no-highlight">309</i>&nbsp;     * Fetch a character.
-<i class="no-highlight">310</i>&nbsp;     *
-<i class="no-highlight">311</i>&nbsp;     * @param name The name of the character.
-<i class="no-highlight">312</i>&nbsp;     */
-<b class="fc"><i class="no-highlight">313</i>&nbsp;    public open suspend fun fetchCharacter(name: String): TibiaResponse&lt;Character?&gt; {</b>
-<b class="pc"><i class="no-highlight">314</i>&nbsp;        val response = this.request(HttpMethod.Get, getCharacterUrl(name))</b>
-<b class="nc"><i class="no-highlight">315</i>&nbsp;        return response.parse { CharacterParser.fromContent(it) }</b>
-<i class="no-highlight">316</i>&nbsp;    }
-<i class="no-highlight">317</i>&nbsp;
-<i class="no-highlight">318</i>&nbsp;    /**
-<i class="no-highlight">319</i>&nbsp;     * Fetch the world overview, containing the list of worlds.
-<i class="no-highlight">320</i>&nbsp;     */
-<b class="nc"><i class="no-highlight">321</i>&nbsp;    public open suspend fun fetchWorldOverview(): TibiaResponse&lt;WorldOverview&gt; {</b>
-<b class="nc"><i class="no-highlight">322</i>&nbsp;        val response = this.request(HttpMethod.Get, getWorldOverviewUrl())</b>
-<b class="nc"><i class="no-highlight">323</i>&nbsp;        return response.parse { WorldOverviewParser.fromContent(it) }</b>
-<i class="no-highlight">324</i>&nbsp;    }
-<i class="no-highlight">325</i>&nbsp;
-<i class="no-highlight">326</i>&nbsp;    /** Fetch a world&#39;s information. */
-<b class="nc"><i class="no-highlight">327</i>&nbsp;    public open suspend fun fetchWorld(name: String): TibiaResponse&lt;World?&gt; {</b>
-<b class="nc"><i class="no-highlight">328</i>&nbsp;        val response = this.request(HttpMethod.Get, getWorldUrl(name))</b>
-<b class="nc"><i class="no-highlight">329</i>&nbsp;        return response.parse { WorldParser.fromContent(it) }</b>
-<i class="no-highlight">330</i>&nbsp;    }
-<i class="no-highlight">331</i>&nbsp;
-<i class="no-highlight">332</i>&nbsp;    /** Fetch a guild by its [name]. */
-<b class="nc"><i class="no-highlight">333</i>&nbsp;    public open suspend fun fetchGuild(name: String): TibiaResponse&lt;Guild?&gt; {</b>
-<b class="nc"><i class="no-highlight">334</i>&nbsp;        val response = this.request(HttpMethod.Get, getGuildUrl(name))</b>
-<b class="nc"><i class="no-highlight">335</i>&nbsp;        return response.parse { GuildParser.fromContent(it) }</b>
-<i class="no-highlight">336</i>&nbsp;    }
-<i class="no-highlight">337</i>&nbsp;
-<i class="no-highlight">338</i>&nbsp;    /** Fetch active and in formation guilds in a [world].
-<i class="no-highlight">339</i>&nbsp;     *
-<i class="no-highlight">340</i>&nbsp;     * If the world does not exist, it will return null.
-<i class="no-highlight">341</i>&nbsp;     */
-<b class="nc"><i class="no-highlight">342</i>&nbsp;    public open suspend fun fetchWorldGuilds(world: String): TibiaResponse&lt;GuildsSection?&gt; {</b>
-<b class="nc"><i class="no-highlight">343</i>&nbsp;        val response = this.request(HttpMethod.Get, getWorldGuildsUrl(world))</b>
-<b class="nc"><i class="no-highlight">344</i>&nbsp;        return response.parse { GuildsSectionParser.fromContent(it) }</b>
-<i class="no-highlight">345</i>&nbsp;    }
-<i class="no-highlight">346</i>&nbsp;
-<i class="no-highlight">347</i>&nbsp;    /**
-<i class="no-highlight">348</i>&nbsp;     * Fetch the kill statistics for a [world].
-<i class="no-highlight">349</i>&nbsp;     */
-<b class="nc"><i class="no-highlight">350</i>&nbsp;    public open suspend fun fetchKillStatistics(world: String): TibiaResponse&lt;KillStatistics?&gt; {</b>
-<b class="nc"><i class="no-highlight">351</i>&nbsp;        val response = this.request(HttpMethod.Get, getKillStatisticsUrl(world))</b>
-<b class="nc"><i class="no-highlight">352</i>&nbsp;        return response.parse { KillStatisticsParser.fromContent(it) }</b>
-<i class="no-highlight">353</i>&nbsp;    }
-<i class="no-highlight">354</i>&nbsp;
-<i class="no-highlight">355</i>&nbsp;    /**
-<i class="no-highlight">356</i>&nbsp;     * Fetch a page of the highscores.
-<i class="no-highlight">357</i>&nbsp;     *
-<i class="no-highlight">358</i>&nbsp;     * @param world The world to get highscores from. If null, the highscores of all worlds are returned.
-<i class="no-highlight">359</i>&nbsp;     * @param category The category to fetch.
-<i class="no-highlight">360</i>&nbsp;     * @param vocation The vocation to filter by. By default all vocations will be returned
-<i class="no-highlight">361</i>&nbsp;     * @param page The page number to fetch
-<i class="no-highlight">362</i>&nbsp;     * @param battlEyeType The BattlEye type of the worlds to fetch. Only applies when [world] is null.
-<i class="no-highlight">363</i>&nbsp;     * @param pvpTypes The PvP type of the worlds to fetch. Only applies when [world] is null.
-<i class="no-highlight">364</i>&nbsp;     */
-<b class="nc"><i class="no-highlight">365</i>&nbsp;    public open suspend fun fetchHighscoresPage(</b>
-<i class="no-highlight">366</i>&nbsp;        world: String?,
-<i class="no-highlight">367</i>&nbsp;        category: HighscoresCategory,
-<b class="nc"><i class="no-highlight">368</i>&nbsp;        vocation: HighscoresProfession = HighscoresProfession.ALL,</b>
-<b class="nc"><i class="no-highlight">369</i>&nbsp;        page: Int = 1,</b>
-<b class="nc"><i class="no-highlight">370</i>&nbsp;        battlEyeType: HighscoresBattlEyeType = HighscoresBattlEyeType.ANY_WORLD,</b>
-<b class="nc"><i class="no-highlight">371</i>&nbsp;        pvpTypes: Set&lt;PvpType&gt;? = null,</b>
-<i class="no-highlight">372</i>&nbsp;    ): TibiaResponse&lt;Highscores?&gt; {
-<b class="nc"><i class="no-highlight">373</i>&nbsp;        val response =</b>
-<b class="nc"><i class="no-highlight">374</i>&nbsp;            this.request(HttpMethod.Get, getHighscoresUrl(world, category, vocation, page, battlEyeType, pvpTypes))</b>
-<b class="nc"><i class="no-highlight">375</i>&nbsp;        return response.parse { HighscoresParser.fromContent(it) }</b>
-<i class="no-highlight">376</i>&nbsp;    }
-<i class="no-highlight">377</i>&nbsp;
-<b class="nc"><i class="no-highlight">378</i>&nbsp;    public open suspend fun fetchHigscores(</b>
-<i class="no-highlight">379</i>&nbsp;        world: String?,
-<i class="no-highlight">380</i>&nbsp;        category: HighscoresCategory,
-<b class="nc"><i class="no-highlight">381</i>&nbsp;        vocation: HighscoresProfession = HighscoresProfession.ALL,</b>
-<b class="nc"><i class="no-highlight">382</i>&nbsp;        battlEyeType: HighscoresBattlEyeType = HighscoresBattlEyeType.ANY_WORLD,</b>
-<b class="nc"><i class="no-highlight">383</i>&nbsp;        pvpTypes: Set&lt;PvpType&gt;? = null,</b>
-<i class="no-highlight">384</i>&nbsp;    ): TibiaResponse&lt;Highscores?&gt; {
-<b class="nc"><i class="no-highlight">385</i>&nbsp;        val now = Clock.System.now()</b>
-<b class="nc"><i class="no-highlight">386</i>&nbsp;        var totalPages = 0</b>
-<b class="nc"><i class="no-highlight">387</i>&nbsp;        var currentPage = 1</b>
-<b class="nc"><i class="no-highlight">388</i>&nbsp;        val entries = mutableListOf&lt;HighscoresEntry&gt;()</b>
-<b class="nc"><i class="no-highlight">389</i>&nbsp;        var fetchingTime = 0.0</b>
-<b class="nc"><i class="no-highlight">390</i>&nbsp;        var parsingTime = 0.0</b>
-<b class="nc"><i class="no-highlight">391</i>&nbsp;        var baseHighscores: Highscores? = null</b>
-<b class="nc"><i class="no-highlight">392</i>&nbsp;        while (totalPages == 0 || currentPage &lt;= totalPages) {</b>
-<b class="nc"><i class="no-highlight">393</i>&nbsp;            val response = fetchHighscoresPage(world, category, vocation, currentPage, battlEyeType, pvpTypes)</b>
-<b class="nc"><i class="no-highlight">394</i>&nbsp;            if (response.data == null) return response</b>
-<b class="nc"><i class="no-highlight">395</i>&nbsp;            entries.addAll(response.data.entries)</b>
-<b class="nc"><i class="no-highlight">396</i>&nbsp;            totalPages = response.data.totalPages</b>
-<b class="nc"><i class="no-highlight">397</i>&nbsp;            fetchingTime += response.fetchingTime</b>
-<b class="nc"><i class="no-highlight">398</i>&nbsp;            parsingTime += response.parsingTime</b>
-<b class="nc"><i class="no-highlight">399</i>&nbsp;            if (currentPage == 1) {</b>
-<b class="nc"><i class="no-highlight">400</i>&nbsp;                baseHighscores = response.data</b>
-<i class="no-highlight">401</i>&nbsp;            }
-<b class="nc"><i class="no-highlight">402</i>&nbsp;            currentPage++</b>
-<i class="no-highlight">403</i>&nbsp;        }
-<b class="nc"><i class="no-highlight">404</i>&nbsp;        return TibiaResponse(</b>
-<b class="nc"><i class="no-highlight">405</i>&nbsp;            timestamp = now,</b>
-<b class="nc"><i class="no-highlight">406</i>&nbsp;            isCached = false,</b>
-<b class="nc"><i class="no-highlight">407</i>&nbsp;            cacheAge = 0,</b>
-<b class="nc"><i class="no-highlight">408</i>&nbsp;            fetchingTime = fetchingTime,</b>
-<b class="nc"><i class="no-highlight">409</i>&nbsp;            parsingTime = parsingTime,</b>
-<b class="nc"><i class="no-highlight">410</i>&nbsp;            data = baseHighscores!!.copy(entries = entries)</b>
-<i class="no-highlight">411</i>&nbsp;        )
-<i class="no-highlight">412</i>&nbsp;    }
-<i class="no-highlight">413</i>&nbsp;
-<i class="no-highlight">414</i>&nbsp;    /**
-<i class="no-highlight">415</i>&nbsp;     * Fetch the houses section for a [world] and [town].
-<i class="no-highlight">416</i>&nbsp;     */
-<b class="nc"><i class="no-highlight">417</i>&nbsp;    public open suspend fun fetchHousesSection(</b>
-<i class="no-highlight">418</i>&nbsp;        world: String,
-<i class="no-highlight">419</i>&nbsp;        town: String,
-<b class="nc"><i class="no-highlight">420</i>&nbsp;        type: HouseType? = null,</b>
-<b class="nc"><i class="no-highlight">421</i>&nbsp;        status: HouseStatus? = null,</b>
-<b class="nc"><i class="no-highlight">422</i>&nbsp;        order: HouseOrder? = null,</b>
-<i class="no-highlight">423</i>&nbsp;    ): TibiaResponse&lt;HousesSection?&gt; {
-<b class="nc"><i class="no-highlight">424</i>&nbsp;        val response = this.request(HttpMethod.Get, getHousesSectionUrl(world, town, type, status, order))</b>
-<b class="nc"><i class="no-highlight">425</i>&nbsp;        return response.parse { HousesSectionParser.fromContent(it) }</b>
-<i class="no-highlight">426</i>&nbsp;    }
-<i class="no-highlight">427</i>&nbsp;
-<i class="no-highlight">428</i>&nbsp;    /** Fetch a house by its [houseId] in a specific world. */
-<b class="nc"><i class="no-highlight">429</i>&nbsp;    public open suspend fun fetchHouse(</b>
-<i class="no-highlight">430</i>&nbsp;        houseId: Int,
-<i class="no-highlight">431</i>&nbsp;        world: String,
-<i class="no-highlight">432</i>&nbsp;    ): TibiaResponse&lt;House?&gt; {
-<b class="nc"><i class="no-highlight">433</i>&nbsp;        val response = this.request(HttpMethod.Get, getHouseUrl(world, houseId))</b>
-<b class="nc"><i class="no-highlight">434</i>&nbsp;        return response.parse { HouseParser.fromContent(it) }</b>
-<i class="no-highlight">435</i>&nbsp;    }
-<i class="no-highlight">436</i>&nbsp;
-<i class="no-highlight">437</i>&nbsp;    /**
-<i class="no-highlight">438</i>&nbsp;     * Fetches the Tibia Drome leaderboards for a [world].
-<i class="no-highlight">439</i>&nbsp;     *
-<i class="no-highlight">440</i>&nbsp;     * If the world does not exist, the leaderboards will be null.
-<i class="no-highlight">441</i>&nbsp;     * @param rotation The rotation number to see. Tibia.com only allows viewing the current and last rotations. Any other value takes you to the current leaderboard.
-<i class="no-highlight">442</i>&nbsp;     */
-<b class="nc"><i class="no-highlight">443</i>&nbsp;    public open suspend fun fetchLeaderboards(</b>
-<i class="no-highlight">444</i>&nbsp;        world: String,
-<b class="nc"><i class="no-highlight">445</i>&nbsp;        rotation: Int? = null,</b>
-<b class="nc"><i class="no-highlight">446</i>&nbsp;        page: Int = 1,</b>
-<i class="no-highlight">447</i>&nbsp;    ): TibiaResponse&lt;Leaderboards?&gt; {
-<b class="nc"><i class="no-highlight">448</i>&nbsp;        val response = this.request(HttpMethod.Get, getLeaderboardUrl(world, rotation, page))</b>
-<b class="nc"><i class="no-highlight">449</i>&nbsp;        return response.parse { LeaderboardsParser.fromContent(it) }</b>
-<i class="no-highlight">450</i>&nbsp;    }
-<i class="no-highlight">451</i>&nbsp;
-<i class="no-highlight">452</i>&nbsp;    // endregion
-<i class="no-highlight">453</i>&nbsp;
-<i class="no-highlight">454</i>&nbsp;    // region Forum Section
-<i class="no-highlight">455</i>&nbsp;
-<i class="no-highlight">456</i>&nbsp;    /**
-<i class="no-highlight">457</i>&nbsp;     * Fetches a forum section by its internal [sectionId].
-<i class="no-highlight">458</i>&nbsp;     */
-<b class="nc"><i class="no-highlight">459</i>&nbsp;    public open suspend fun fetchForumSection(sectionId: Int): TibiaResponse&lt;ForumSection?&gt; {</b>
-<b class="nc"><i class="no-highlight">460</i>&nbsp;        val response = this.request(HttpMethod.Get, getForumSectionUrl(sectionId))</b>
-<b class="nc"><i class="no-highlight">461</i>&nbsp;        return response.parse { ForumSectionParser.fromContent(it) }</b>
-<i class="no-highlight">462</i>&nbsp;    }
-<i class="no-highlight">463</i>&nbsp;
-<i class="no-highlight">464</i>&nbsp;    /** Fetches a specific forum section. */
-<b class="nc"><i class="no-highlight">465</i>&nbsp;    public open suspend fun fetchForumSection(section: AvailableForumSection): TibiaResponse&lt;ForumSection?&gt; {</b>
-<b class="nc"><i class="no-highlight">466</i>&nbsp;        val response = this.request(HttpMethod.Get, getForumSectionUrl(section))</b>
-<b class="nc"><i class="no-highlight">467</i>&nbsp;        return response.parse { ForumSectionParser.fromContent(it) }</b>
-<i class="no-highlight">468</i>&nbsp;    }
-<i class="no-highlight">469</i>&nbsp;
-<i class="no-highlight">470</i>&nbsp;    /** Fetches a board from the Tibia.com forum.
-<i class="no-highlight">471</i>&nbsp;     *
-<i class="no-highlight">472</i>&nbsp;     * @param threadAge The maximum age of displayed threads. A value of -1 means no limit. Null means the server limit will be used.
-<i class="no-highlight">473</i>&nbsp;     */
-<b class="nc"><i class="no-highlight">474</i>&nbsp;    public open suspend fun fetchForumBoard(</b>
-<i class="no-highlight">475</i>&nbsp;        boardId: Int,
-<b class="nc"><i class="no-highlight">476</i>&nbsp;        page: Int = 1,</b>
-<b class="nc"><i class="no-highlight">477</i>&nbsp;        threadAge: Int? = null,</b>
-<i class="no-highlight">478</i>&nbsp;    ): TibiaResponse&lt;ForumBoard?&gt; {
-<b class="nc"><i class="no-highlight">479</i>&nbsp;        val response = this.request(HttpMethod.Get, getForumBoardUrl(boardId, page, threadAge))</b>
-<b class="nc"><i class="no-highlight">480</i>&nbsp;        return response.parse { ForumBoardParser.fromContent(it) }</b>
-<i class="no-highlight">481</i>&nbsp;    }
-<i class="no-highlight">482</i>&nbsp;
-<i class="no-highlight">483</i>&nbsp;    /** Fetches a thread from the Tibia.com forum. */
-<b class="nc"><i class="no-highlight">484</i>&nbsp;    public open suspend fun fetchForumAnnouncement(announcementId: Int): TibiaResponse&lt;ForumAnnouncement?&gt; {</b>
-<b class="nc"><i class="no-highlight">485</i>&nbsp;        val response = this.request(HttpMethod.Get, getForumAnnouncementUrl(announcementId))</b>
-<b class="nc"><i class="no-highlight">486</i>&nbsp;        return response.parse { ForumAnnouncementParser.fromContent(it, announcementId) }</b>
-<i class="no-highlight">487</i>&nbsp;    }
-<i class="no-highlight">488</i>&nbsp;
-<i class="no-highlight">489</i>&nbsp;    /** Fetches a forum thread from Tibia.com. */
-<b class="nc"><i class="no-highlight">490</i>&nbsp;    public open suspend fun fetchForumThread(threadId: Int, page: Int = 1): TibiaResponse&lt;ForumThread?&gt; {</b>
-<b class="nc"><i class="no-highlight">491</i>&nbsp;        val response = this.request(HttpMethod.Get, getForumThreadUrl(threadId, page))</b>
-<b class="nc"><i class="no-highlight">492</i>&nbsp;        return response.parse { ForumThreadParser.fromContent(it) }</b>
-<i class="no-highlight">493</i>&nbsp;    }
-<i class="no-highlight">494</i>&nbsp;
-<i class="no-highlight">495</i>&nbsp;    /** Fetches a forum thread containing the specified post.
-<i class="no-highlight">496</i>&nbsp;     *
-<i class="no-highlight">497</i>&nbsp;     * The thread will be fetched on the page containing the [ForumThread.anchoredPost]
-<i class="no-highlight">498</i>&nbsp;     */
-<b class="nc"><i class="no-highlight">499</i>&nbsp;    public open suspend fun fetchForumPost(postId: Int): TibiaResponse&lt;ForumThread?&gt; {</b>
-<b class="nc"><i class="no-highlight">500</i>&nbsp;        val response = this.request(HttpMethod.Get, getForumPostUrl(postId))</b>
-<b class="nc"><i class="no-highlight">501</i>&nbsp;        return response.parse {</b>
-<b class="nc"><i class="no-highlight">502</i>&nbsp;            ForumThreadParser.fromContent(it)?.let { thread -&gt;</b>
-<b class="nc"><i class="no-highlight">503</i>&nbsp;                thread.copy(anchoredPost = thread.entries.first { post -&gt; post.postId == postId })</b>
-<i class="no-highlight">504</i>&nbsp;            }
-<i class="no-highlight">505</i>&nbsp;        }
-<i class="no-highlight">506</i>&nbsp;    }
-<i class="no-highlight">507</i>&nbsp;
-<i class="no-highlight">508</i>&nbsp;
-<i class="no-highlight">509</i>&nbsp;    /** Fetch CM posts between two dates. */
-<b class="nc"><i class="no-highlight">510</i>&nbsp;    public open suspend fun fetchCMPostArchive(</b>
-<i class="no-highlight">511</i>&nbsp;        startDate: LocalDate,
-<i class="no-highlight">512</i>&nbsp;        endDate: LocalDate,
-<b class="nc"><i class="no-highlight">513</i>&nbsp;        page: Int = 0,</b>
-<i class="no-highlight">514</i>&nbsp;    ): TibiaResponse&lt;CMPostArchive&gt; {
-<b class="nc"><i class="no-highlight">515</i>&nbsp;        val response = this.request(HttpMethod.Get, getCMPostArchiveUrl(startDate, endDate, page))</b>
-<b class="nc"><i class="no-highlight">516</i>&nbsp;        return response.parse { CMPostArchiveParser.fromContent(it) }</b>
-<i class="no-highlight">517</i>&nbsp;    }
-<i class="no-highlight">518</i>&nbsp;
-<i class="no-highlight">519</i>&nbsp;    /** Fetch CM posts from today to the last specified [days]. */
-<b class="nc"><i class="no-highlight">520</i>&nbsp;    public open suspend fun fetchCMPostArchive(days: Int, page: Int = 0): TibiaResponse&lt;CMPostArchive&gt; =</b>
-<b class="nc"><i class="no-highlight">521</i>&nbsp;        fetchCMPostArchive(LocalDate.now().minusDays(days.toLong()), LocalDate.now(), page)</b>
-<i class="no-highlight">522</i>&nbsp;
-<i class="no-highlight">523</i>&nbsp;    // endregion
-<i class="no-highlight">524</i>&nbsp;
-<i class="no-highlight">525</i>&nbsp;    // region Char Bazaar Section
-<i class="no-highlight">526</i>&nbsp;    /**
-<i class="no-highlight">527</i>&nbsp;     * Fetch the character bazaar.
-<i class="no-highlight">528</i>&nbsp;     *
-<i class="no-highlight">529</i>&nbsp;     * @param type Whether to show current auctions or the auction history.
-<i class="no-highlight">530</i>&nbsp;     * @param filters The filtering parameters to use.
-<i class="no-highlight">531</i>&nbsp;     * @param page The page to display.
-<i class="no-highlight">532</i>&nbsp;     */
-<b class="nc"><i class="no-highlight">533</i>&nbsp;    public open suspend fun fetchBazaar(</b>
-<b class="nc"><i class="no-highlight">534</i>&nbsp;        type: BazaarType = BazaarType.CURRENT,</b>
-<b class="nc"><i class="no-highlight">535</i>&nbsp;        filters: BazaarFilters? = null,</b>
-<b class="nc"><i class="no-highlight">536</i>&nbsp;        page: Int = 1,</b>
-<i class="no-highlight">537</i>&nbsp;    ): TibiaResponse&lt;CharacterBazaar&gt; {
-<b class="nc"><i class="no-highlight">538</i>&nbsp;        val response = this.request(HttpMethod.Get, getBazaarUrl(type, filters, page))</b>
-<b class="nc"><i class="no-highlight">539</i>&nbsp;        return response.parse { CharacterBazaarParser.fromContent(it) }</b>
-<i class="no-highlight">540</i>&nbsp;    }
-<i class="no-highlight">541</i>&nbsp;
-<i class="no-highlight">542</i>&nbsp;    /**
-<i class="no-highlight">543</i>&nbsp;     * Fetch the character bazaar from Tibia.com.
-<i class="no-highlight">544</i>&nbsp;     */
-<b class="nc"><i class="no-highlight">545</i>&nbsp;    public open suspend fun fetchBazaar(</b>
-<b class="nc"><i class="no-highlight">546</i>&nbsp;        type: BazaarType = BazaarType.CURRENT,</b>
-<b class="nc"><i class="no-highlight">547</i>&nbsp;        page: Int = 1,</b>
-<b class="nc"><i class="no-highlight">548</i>&nbsp;        filterBuilder: (BazaarFiltersBuilder.() -&gt; Unit)? = null,</b>
-<i class="no-highlight">549</i>&nbsp;    ): TibiaResponse&lt;CharacterBazaar&gt; =
-<b class="nc"><i class="no-highlight">550</i>&nbsp;        fetchBazaar(type, filterBuilder?.let { BazaarFiltersBuilder().apply(it).build() }, page)</b>
-<i class="no-highlight">551</i>&nbsp;
-<i class="no-highlight">552</i>&nbsp;    /**
-<i class="no-highlight">553</i>&nbsp;     * Fetch an auction from Tibia.com.
-<i class="no-highlight">554</i>&nbsp;     *
-<i class="no-highlight">555</i>&nbsp;     * @param auctionId The ID of the auction to fetch.
-<i class="no-highlight">556</i>&nbsp;     * @param skipDetails Whether to only fetch the auction&#39;s header and skip details.
-<i class="no-highlight">557</i>&nbsp;     * @param fetchItems Whether to fetch items from further pages if necessary. Cannot be done if [skipDetails] is true.
-<i class="no-highlight">558</i>&nbsp;     * @param fetchOutfits Whether to fetch outfits from further pages if necessary. Cannot be done if [skipDetails] is true.
-<i class="no-highlight">559</i>&nbsp;     * @param fetchMounts Whether to fetch mounts from further pages if necessary. Cannot be done if [skipDetails] is true.
-<i class="no-highlight">560</i>&nbsp;     */
-<b class="nc"><i class="no-highlight">561</i>&nbsp;    public open suspend fun fetchAuction(</b>
-<i class="no-highlight">562</i>&nbsp;        auctionId: Int,
-<b class="nc"><i class="no-highlight">563</i>&nbsp;        skipDetails: Boolean = false,</b>
-<b class="nc"><i class="no-highlight">564</i>&nbsp;        fetchItems: Boolean = false,</b>
-<b class="nc"><i class="no-highlight">565</i>&nbsp;        fetchOutfits: Boolean = false,</b>
-<b class="nc"><i class="no-highlight">566</i>&nbsp;        fetchMounts: Boolean = false,</b>
-<i class="no-highlight">567</i>&nbsp;    ): TibiaResponse&lt;Auction?&gt; {
-<b class="nc"><i class="no-highlight">568</i>&nbsp;        val response = this.request(HttpMethod.Get, getAuctionUrl(auctionId))</b>
-<b class="nc"><i class="no-highlight">569</i>&nbsp;        val tibiaResponse = response.parse { AuctionParser.fromContent(it, auctionId, !skipDetails) }</b>
-<b class="nc"><i class="no-highlight">570</i>&nbsp;        return if (tibiaResponse.data?.details != null &amp;&amp; (fetchItems || fetchMounts || fetchOutfits)) {</b>
-<b class="nc"><i class="no-highlight">571</i>&nbsp;            fetchAuctionAdditionalPages(tibiaResponse, fetchItems, fetchMounts, fetchOutfits)</b>
-<i class="no-highlight">572</i>&nbsp;        } else {
-<b class="nc"><i class="no-highlight">573</i>&nbsp;            tibiaResponse</b>
-<i class="no-highlight">574</i>&nbsp;        }
-<i class="no-highlight">575</i>&nbsp;    }
-<i class="no-highlight">576</i>&nbsp;
-<b class="nc"><i class="no-highlight">577</i>&nbsp;    private suspend fun fetchAuctionAdditionalPages(</b>
-<i class="no-highlight">578</i>&nbsp;        tibiaResponse: TibiaResponse&lt;Auction?&gt;,
-<b class="nc"><i class="no-highlight">579</i>&nbsp;        fetchItems: Boolean = false,</b>
-<b class="nc"><i class="no-highlight">580</i>&nbsp;        fetchOutfits: Boolean = false,</b>
-<b class="nc"><i class="no-highlight">581</i>&nbsp;        fetchMounts: Boolean = false,</b>
-<i class="no-highlight">582</i>&nbsp;    ): TibiaResponse&lt;Auction?&gt; {
-<b class="nc"><i class="no-highlight">583</i>&nbsp;        if (tibiaResponse.data?.details == null) return tibiaResponse</b>
-<b class="nc"><i class="no-highlight">584</i>&nbsp;        val accumulator = Timing(tibiaResponse.fetchingTime, tibiaResponse.parsingTime)</b>
-<b class="nc"><i class="no-highlight">585</i>&nbsp;        var itemEntries: List&lt;ItemEntry&gt;? = null</b>
-<b class="nc"><i class="no-highlight">586</i>&nbsp;        var storeItemEntries: List&lt;ItemEntry&gt;? = null</b>
-<b class="nc"><i class="no-highlight">587</i>&nbsp;        var outfitEntries: List&lt;OutfitEntry&gt;? = null</b>
-<b class="nc"><i class="no-highlight">588</i>&nbsp;        var storeOutfitEntries: List&lt;OutfitEntry&gt;? = null</b>
-<b class="nc"><i class="no-highlight">589</i>&nbsp;        var mountEntries: List&lt;MountEntry&gt;? = null</b>
-<b class="nc"><i class="no-highlight">590</i>&nbsp;        var storeMountEntries: List&lt;MountEntry&gt;? = null</b>
-<b class="nc"><i class="no-highlight">591</i>&nbsp;        if (fetchItems) {</b>
-<b class="nc"><i class="no-highlight">592</i>&nbsp;            itemEntries = fetchAllPages(</b>
-<b class="nc"><i class="no-highlight">593</i>&nbsp;                tibiaResponse.data.auctionId, AuctionPagesType.ITEMS, tibiaResponse.data.details!!.items</b>
-<b class="nc"><i class="no-highlight">594</i>&nbsp;            ).accumulateTime(accumulator)</b>
-<b class="nc"><i class="no-highlight">595</i>&nbsp;            storeItemEntries = fetchAllPages(</b>
-<b class="nc"><i class="no-highlight">596</i>&nbsp;                tibiaResponse.data.auctionId, AuctionPagesType.ITEMS_STORE, tibiaResponse.data.details!!.storeItems</b>
-<b class="nc"><i class="no-highlight">597</i>&nbsp;            ).accumulateTime(accumulator)</b>
-<i class="no-highlight">598</i>&nbsp;        }
-<b class="nc"><i class="no-highlight">599</i>&nbsp;        if (fetchMounts) {</b>
-<b class="nc"><i class="no-highlight">600</i>&nbsp;            mountEntries = fetchAllPages(</b>
-<b class="nc"><i class="no-highlight">601</i>&nbsp;                tibiaResponse.data.auctionId, AuctionPagesType.MOUNTS, tibiaResponse.data.details!!.mounts</b>
-<b class="nc"><i class="no-highlight">602</i>&nbsp;            ).accumulateTime(accumulator)</b>
-<b class="nc"><i class="no-highlight">603</i>&nbsp;            storeMountEntries = fetchAllPages(</b>
-<b class="nc"><i class="no-highlight">604</i>&nbsp;                tibiaResponse.data.auctionId, AuctionPagesType.MOUNTS_STORE, tibiaResponse.data.details!!.storeMounts</b>
-<b class="nc"><i class="no-highlight">605</i>&nbsp;            ).accumulateTime(accumulator)</b>
-<i class="no-highlight">606</i>&nbsp;        }
-<b class="nc"><i class="no-highlight">607</i>&nbsp;        if (fetchOutfits) {</b>
-<b class="nc"><i class="no-highlight">608</i>&nbsp;            outfitEntries = fetchAllPages(</b>
-<b class="nc"><i class="no-highlight">609</i>&nbsp;                tibiaResponse.data.auctionId, AuctionPagesType.OUTFITS, tibiaResponse.data.details!!.outfits</b>
-<b class="nc"><i class="no-highlight">610</i>&nbsp;            ).accumulateTime(accumulator)</b>
-<b class="nc"><i class="no-highlight">611</i>&nbsp;            storeOutfitEntries = fetchAllPages(</b>
-<b class="nc"><i class="no-highlight">612</i>&nbsp;                tibiaResponse.data.auctionId, AuctionPagesType.OUTFITS_STORE, tibiaResponse.data.details!!.storeOutfits</b>
-<b class="nc"><i class="no-highlight">613</i>&nbsp;            ).accumulateTime(accumulator)</b>
-<i class="no-highlight">614</i>&nbsp;        }
-<b class="nc"><i class="no-highlight">615</i>&nbsp;        return tibiaResponse.copy(</b>
-<b class="nc"><i class="no-highlight">616</i>&nbsp;            fetchingTime = accumulator.fetching, parsingTime = accumulator.parsing, data = tibiaResponse.data.copy(</b>
-<b class="nc"><i class="no-highlight">617</i>&nbsp;                details = tibiaResponse.data.details!!.copy(</b>
-<b class="nc"><i class="no-highlight">618</i>&nbsp;                    items = tibiaResponse.data.details!!.items.copy(</b>
-<b class="nc"><i class="no-highlight">619</i>&nbsp;                        entries = itemEntries ?: tibiaResponse.data.details!!.items.entries,</b>
-<b class="nc"><i class="no-highlight">620</i>&nbsp;                        isFullyFetched = fetchItems,</b>
-<i class="no-highlight">621</i>&nbsp;                    ),
-<b class="nc"><i class="no-highlight">622</i>&nbsp;                    storeItems = tibiaResponse.data.details!!.items.copy(</b>
-<b class="nc"><i class="no-highlight">623</i>&nbsp;                        entries = storeItemEntries ?: tibiaResponse.data.details!!.items.entries,</b>
-<b class="nc"><i class="no-highlight">624</i>&nbsp;                        isFullyFetched = fetchItems,</b>
-<i class="no-highlight">625</i>&nbsp;                    ),
-<b class="nc"><i class="no-highlight">626</i>&nbsp;                    mounts = tibiaResponse.data.details!!.mounts.copy(</b>
-<b class="nc"><i class="no-highlight">627</i>&nbsp;                        entries = mountEntries ?: tibiaResponse.data.details!!.mounts.entries,</b>
-<b class="nc"><i class="no-highlight">628</i>&nbsp;                        isFullyFetched = fetchMounts,</b>
-<i class="no-highlight">629</i>&nbsp;                    ),
-<b class="nc"><i class="no-highlight">630</i>&nbsp;                    storeMounts = tibiaResponse.data.details!!.storeMounts.copy(</b>
-<b class="nc"><i class="no-highlight">631</i>&nbsp;                        entries = storeMountEntries ?: tibiaResponse.data.details!!.storeMounts.entries,</b>
-<b class="nc"><i class="no-highlight">632</i>&nbsp;                        isFullyFetched = fetchMounts</b>
-<i class="no-highlight">633</i>&nbsp;                    ),
-<b class="nc"><i class="no-highlight">634</i>&nbsp;                    outfits = tibiaResponse.data.details!!.outfits.copy(</b>
-<b class="nc"><i class="no-highlight">635</i>&nbsp;                        entries = outfitEntries ?: tibiaResponse.data.details!!.outfits.entries,</b>
-<b class="nc"><i class="no-highlight">636</i>&nbsp;                        isFullyFetched = fetchOutfits,</b>
-<i class="no-highlight">637</i>&nbsp;                    ),
-<b class="nc"><i class="no-highlight">638</i>&nbsp;                    storeOutfits = tibiaResponse.data.details!!.storeOutfits.copy(</b>
-<b class="nc"><i class="no-highlight">639</i>&nbsp;                        entries = storeOutfitEntries ?: tibiaResponse.data.details!!.storeOutfits.entries,</b>
-<b class="nc"><i class="no-highlight">640</i>&nbsp;                        isFullyFetched = fetchOutfits,</b>
-<i class="no-highlight">641</i>&nbsp;                    ),
-<i class="no-highlight">642</i>&nbsp;                )
-<i class="no-highlight">643</i>&nbsp;            )
-<i class="no-highlight">644</i>&nbsp;        )
-<i class="no-highlight">645</i>&nbsp;    }
-<i class="no-highlight">646</i>&nbsp;
-<i class="no-highlight">647</i>&nbsp;    // endregion
-<i class="no-highlight">648</i>&nbsp;
-<i class="no-highlight">649</i>&nbsp;
-<i class="no-highlight">650</i>&nbsp;    /** Convert to a [TibiaResponse]. */
-<b class="nc"><i class="no-highlight">651</i>&nbsp;    private fun &lt;T&gt; HttpResponse.toTibiaResponse(parsingTime: Double, data: T): TibiaResponse&lt;T&gt; = TibiaResponse(</b>
-<b class="nc"><i class="no-highlight">652</i>&nbsp;        timestamp = Instant.fromEpochMilliseconds(responseTime.timestamp),</b>
-<b class="nc"><i class="no-highlight">653</i>&nbsp;        isCached = headers[&quot;CF-Cache-Status&quot;] == &quot;HIT&quot;,</b>
-<b class="nc"><i class="no-highlight">654</i>&nbsp;        cacheAge = headers[&quot;Age&quot;]?.toInt() ?: 0,</b>
-<b class="nc"><i class="no-highlight">655</i>&nbsp;        fetchingTime = fetchingTime,</b>
-<b class="nc"><i class="no-highlight">656</i>&nbsp;        parsingTime = parsingTime,</b>
-<b class="nc"><i class="no-highlight">657</i>&nbsp;        data = data</b>
-<i class="no-highlight">658</i>&nbsp;    )
-<i class="no-highlight">659</i>&nbsp;
-<i class="no-highlight">660</i>&nbsp;    /**
-<i class="no-highlight">661</i>&nbsp;     * Parse the [HttpResponse] into a TibiaResponse.
-<i class="no-highlight">662</i>&nbsp;     */
-<b class="nc"><i class="no-highlight">663</i>&nbsp;    private suspend fun &lt;T&gt; HttpResponse.parse(parser: (content: String) -&gt; T): TibiaResponse&lt;T&gt; {</b>
-<b class="nc"><i class="no-highlight">664</i>&nbsp;        val data: T</b>
-<b class="nc"><i class="no-highlight">665</i>&nbsp;        val parsingTime = measureTimeMillis {</b>
-<b class="nc"><i class="no-highlight">666</i>&nbsp;            val stringBody: String = body()</b>
-<b class="nc"><i class="no-highlight">667</i>&nbsp;            data = parser(stringBody)</b>
-<b class="nc"><i class="no-highlight">668</i>&nbsp;        } / 1000.0</b>
-<b class="nc"><i class="no-highlight">669</i>&nbsp;        logger.info { &quot;${this.request.url} | PARSE | ${(parsingTime * 1000).toInt()}ms&quot; }</b>
-<b class="nc"><i class="no-highlight">670</i>&nbsp;        return toTibiaResponse(parsingTime, data)</b>
-<i class="no-highlight">671</i>&nbsp;    }
-<i class="no-highlight">672</i>&nbsp;
-<i class="no-highlight">673</i>&nbsp;    @Suppress(&quot;MaxLineLength&quot;)
-<i class="no-highlight">674</i>&nbsp;    /**
-<i class="no-highlight">675</i>&nbsp;     * Get the URL to the endpoint to get page items for auctions.
-<i class="no-highlight">676</i>&nbsp;     */
-<i class="no-highlight">677</i>&nbsp;    private fun getAuctionAjaxPaginationUrl(auctionId: Int, type: AuctionPagesType, page: Int): String =
-<b class="nc"><i class="no-highlight">678</i>&nbsp;        &quot;https://www.tibia.com/websiteservices/handle_charactertrades.php?auctionid=$auctionId&amp;type=${type.typeId}&amp;currentpage=$page&quot;</b>
-<i class="no-highlight">679</i>&nbsp;
-<i class="no-highlight">680</i>&nbsp;    /**
-<i class="no-highlight">681</i>&nbsp;     * Fetch a single page from the auction pagination endpoint.
-<i class="no-highlight">682</i>&nbsp;     */
-<b class="nc"><i class="no-highlight">683</i>&nbsp;    private suspend fun fetchAjaxPage(auctionId: Int, type: AuctionPagesType, page: Int): TimedResult&lt;AjaxResponse&gt; {</b>
-<b class="nc"><i class="no-highlight">684</i>&nbsp;        val response = this.request(</b>
-<b class="nc"><i class="no-highlight">685</i>&nbsp;            HttpMethod.Get, getAuctionAjaxPaginationUrl(auctionId, type, page),</b>
-<b class="nc"><i class="no-highlight">686</i>&nbsp;            headers = listOf(&quot;x-requested-with&quot; to &quot;XMLHttpRequest&quot;),</b>
-<i class="no-highlight">687</i>&nbsp;        )
-<b class="nc"><i class="no-highlight">688</i>&nbsp;        return TimedResult(response.fetchingTime, Json.decodeFromString(AjaxResponse.serializer(), response.body()))</b>
-<i class="no-highlight">689</i>&nbsp;    }
-<i class="no-highlight">690</i>&nbsp;
-<i class="no-highlight">691</i>&nbsp;    /**
-<i class="no-highlight">692</i>&nbsp;     * Fetch all the pages, parse and collect the entries.
-<i class="no-highlight">693</i>&nbsp;     * @param auctionId The id of the auction.
-<i class="no-highlight">694</i>&nbsp;     * @param type The type of items.
-<i class="no-highlight">695</i>&nbsp;     * @param paginator The paginator class that holds the collection
-<i class="no-highlight">696</i>&nbsp;     */
-<i class="no-highlight">697</i>&nbsp;    private suspend inline fun &lt;reified E, T : AjaxPaginator&lt;E&gt;&gt; fetchAllPages(
-<i class="no-highlight">698</i>&nbsp;        auctionId: Int,
-<i class="no-highlight">699</i>&nbsp;        type: AuctionPagesType,
-<i class="no-highlight">700</i>&nbsp;        paginator: T,
-<i class="no-highlight">701</i>&nbsp;    ): Pair&lt;Timing, List&lt;E&gt;&gt; {
-<b class="nc"><i class="no-highlight">702</i>&nbsp;        var currentPage = paginator.currentPage + 1</b>
-<b class="nc"><i class="no-highlight">703</i>&nbsp;        val entries: MutableList&lt;E&gt; = paginator.entries.toMutableList()</b>
-<b class="nc"><i class="no-highlight">704</i>&nbsp;        val timing = Timing()</b>
-<b class="nc"><i class="no-highlight">705</i>&nbsp;        while (currentPage &lt;= paginator.totalPages) {</b>
-<b class="nc"><i class="no-highlight">706</i>&nbsp;            val (fetchingTime, ajaxResponse) = fetchAjaxPage(auctionId, type, currentPage)</b>
-<b class="nc"><i class="no-highlight">707</i>&nbsp;            timing.fetching += fetchingTime</b>
-<b class="nc"><i class="no-highlight">708</i>&nbsp;            val parsingTime = measureTimeMillis {</b>
-<b class="nc"><i class="no-highlight">709</i>&nbsp;                entries.addAll(AuctionParser.parsePageItems(ajaxResponse.ajaxObjects.first().data))</b>
-<b class="nc"><i class="no-highlight">710</i>&nbsp;            } / 1000.0</b>
-<b class="nc"><i class="no-highlight">711</i>&nbsp;            timing.parsing += parsingTime</b>
-<b class="nc"><i class="no-highlight">712</i>&nbsp;            logger.info {</b>
-<b class="nc"><i class="no-highlight">713</i>&nbsp;                &quot;${</b>
-<b class="nc"><i class="no-highlight">714</i>&nbsp;                    getAuctionAjaxPaginationUrl(auctionId, type, currentPage)</b>
-<b class="nc"><i class="no-highlight">715</i>&nbsp;                } | PARSE | ${(parsingTime * 1000).toInt()}ms&quot;</b>
-<i class="no-highlight">716</i>&nbsp;            }
-<b class="nc"><i class="no-highlight">717</i>&nbsp;            currentPage++</b>
-<i class="no-highlight">718</i>&nbsp;        }
-<b class="nc"><i class="no-highlight">719</i>&nbsp;        return timing to entries</b>
-<i class="no-highlight">720</i>&nbsp;    }
-<i class="no-highlight">721</i>&nbsp;
-<i class="no-highlight">722</i>&nbsp;    /**
-<i class="no-highlight">723</i>&nbsp;     * A data class to hold fetching and parsing times.
-<i class="no-highlight">724</i>&nbsp;     */
-<b class="nc"><i class="no-highlight">725</i>&nbsp;    private data class Timing(var fetching: Double = 0.0, var parsing: Double = 0.0)</b>
-<i class="no-highlight">726</i>&nbsp;
-<i class="no-highlight">727</i>&nbsp;    /**
-<i class="no-highlight">728</i>&nbsp;     * Extract the results of [fetchAllPages] and sum the timings into the [accumulator].
-<i class="no-highlight">729</i>&nbsp;     */
-<i class="no-highlight">730</i>&nbsp;    private fun &lt;T&gt; Pair&lt;Timing, List&lt;T&gt;&gt;.accumulateTime(accumulator: Timing): List&lt;T&gt; {
-<b class="nc"><i class="no-highlight">731</i>&nbsp;        accumulator.fetching += first.fetching</b>
-<b class="nc"><i class="no-highlight">732</i>&nbsp;        accumulator.parsing += first.parsing</b>
-<b class="nc"><i class="no-highlight">733</i>&nbsp;        return second</b>
-<i class="no-highlight">734</i>&nbsp;    }
-<i class="no-highlight">735</i>&nbsp;
-<b class="nc"><i class="no-highlight">736</i>&nbsp;    private data class TimedResult&lt;T&gt;(val time: Double, val result: T)</b>
-<i class="no-highlight">737</i>&nbsp;
-<i class="no-highlight">738</i>&nbsp;    internal companion object {
-<b class="pc"><i class="no-highlight">739</i>&nbsp;        internal val logger = KotlinLogging.logger { }</b>
-<i class="no-highlight">740</i>&nbsp;
-<b class="nc"><i class="no-highlight">741</i>&nbsp;        private val HttpResponse.fetchingTime get() = (responseTime.timestamp - requestTime.timestamp) / 1000.0</b>
-<b class="nc"><i class="no-highlight">742</i>&nbsp;        private val HttpResponse.fetchingTimeMillis get() = (fetchingTime * 1000).toInt()</b>
-<i class="no-highlight">743</i>&nbsp;    }
-<i class="no-highlight">744</i>&nbsp;}
-</div>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.galarzaa.tibiakt.client
+&nbsp;
+&nbsp;import com.galarzaa.tibiakt.client.exceptions.ForbiddenException
+&nbsp;import com.galarzaa.tibiakt.client.exceptions.NetworkException
+&nbsp;import com.galarzaa.tibiakt.client.exceptions.SiteMaintenanceException
+&nbsp;import com.galarzaa.tibiakt.core.builders.BazaarFiltersBuilder
+&nbsp;import com.galarzaa.tibiakt.core.enums.AvailableForumSection
+&nbsp;import com.galarzaa.tibiakt.core.enums.BazaarType
+&nbsp;import com.galarzaa.tibiakt.core.enums.HighscoresBattlEyeType
+&nbsp;import com.galarzaa.tibiakt.core.enums.HighscoresCategory
+&nbsp;import com.galarzaa.tibiakt.core.enums.HighscoresProfession
+&nbsp;import com.galarzaa.tibiakt.core.enums.HouseOrder
+&nbsp;import com.galarzaa.tibiakt.core.enums.HouseStatus
+&nbsp;import com.galarzaa.tibiakt.core.enums.HouseType
+&nbsp;import com.galarzaa.tibiakt.core.enums.NewsCategory
+&nbsp;import com.galarzaa.tibiakt.core.enums.NewsType
+&nbsp;import com.galarzaa.tibiakt.core.enums.PvpType
+&nbsp;import com.galarzaa.tibiakt.core.models.KillStatistics
+&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.AjaxPaginator
+&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.Auction
+&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.BazaarFilters
+&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.CharacterBazaar
+&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.ItemEntry
+&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.MountEntry
+&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.OutfitEntry
+&nbsp;import com.galarzaa.tibiakt.core.models.character.Character
+&nbsp;import com.galarzaa.tibiakt.core.models.creatures.BosstableBosses
+&nbsp;import com.galarzaa.tibiakt.core.models.creatures.CreaturesSection
+&nbsp;import com.galarzaa.tibiakt.core.models.forums.CMPostArchive
+&nbsp;import com.galarzaa.tibiakt.core.models.forums.ForumAnnouncement
+&nbsp;import com.galarzaa.tibiakt.core.models.forums.ForumBoard
+&nbsp;import com.galarzaa.tibiakt.core.models.forums.ForumSection
+&nbsp;import com.galarzaa.tibiakt.core.models.forums.ForumThread
+&nbsp;import com.galarzaa.tibiakt.core.models.guild.Guild
+&nbsp;import com.galarzaa.tibiakt.core.models.guild.GuildsSection
+&nbsp;import com.galarzaa.tibiakt.core.models.highscores.Highscores
+&nbsp;import com.galarzaa.tibiakt.core.models.highscores.HighscoresEntry
+&nbsp;import com.galarzaa.tibiakt.core.models.house.House
+&nbsp;import com.galarzaa.tibiakt.core.models.house.HousesSection
+&nbsp;import com.galarzaa.tibiakt.core.models.leaderboards.Leaderboards
+&nbsp;import com.galarzaa.tibiakt.core.models.news.EventsSchedule
+&nbsp;import com.galarzaa.tibiakt.core.models.news.News
+&nbsp;import com.galarzaa.tibiakt.core.models.news.NewsArchive
+&nbsp;import com.galarzaa.tibiakt.core.models.world.World
+&nbsp;import com.galarzaa.tibiakt.core.models.world.WorldOverview
+&nbsp;import com.galarzaa.tibiakt.core.parsers.AuctionParser
+&nbsp;import com.galarzaa.tibiakt.core.parsers.BosstableBossesParser
+&nbsp;import com.galarzaa.tibiakt.core.parsers.CMPostArchiveParser
+&nbsp;import com.galarzaa.tibiakt.core.parsers.CharacterBazaarParser
+&nbsp;import com.galarzaa.tibiakt.core.parsers.CharacterParser
+&nbsp;import com.galarzaa.tibiakt.core.parsers.CreaturesSectionParser
+&nbsp;import com.galarzaa.tibiakt.core.parsers.EventsScheduleParser
+&nbsp;import com.galarzaa.tibiakt.core.parsers.ForumAnnouncementParser
+&nbsp;import com.galarzaa.tibiakt.core.parsers.ForumBoardParser
+&nbsp;import com.galarzaa.tibiakt.core.parsers.ForumSectionParser
+&nbsp;import com.galarzaa.tibiakt.core.parsers.ForumThreadParser
+&nbsp;import com.galarzaa.tibiakt.core.parsers.GuildParser
+&nbsp;import com.galarzaa.tibiakt.core.parsers.GuildsSectionParser
+&nbsp;import com.galarzaa.tibiakt.core.parsers.HighscoresParser
+&nbsp;import com.galarzaa.tibiakt.core.parsers.HouseParser
+&nbsp;import com.galarzaa.tibiakt.core.parsers.HousesSectionParser
+&nbsp;import com.galarzaa.tibiakt.core.parsers.KillStatisticsParser
+&nbsp;import com.galarzaa.tibiakt.core.parsers.LeaderboardsParser
+&nbsp;import com.galarzaa.tibiakt.core.parsers.NewsArchiveParser
+&nbsp;import com.galarzaa.tibiakt.core.parsers.NewsParser
+&nbsp;import com.galarzaa.tibiakt.core.parsers.WorldOverviewParser
+&nbsp;import com.galarzaa.tibiakt.core.parsers.WorldParser
+&nbsp;import com.galarzaa.tibiakt.core.utils.getAuctionUrl
+&nbsp;import com.galarzaa.tibiakt.core.utils.getBazaarUrl
+&nbsp;import com.galarzaa.tibiakt.core.utils.getBoostableBossesUrl
+&nbsp;import com.galarzaa.tibiakt.core.utils.getCMPostArchiveUrl
+&nbsp;import com.galarzaa.tibiakt.core.utils.getCharacterUrl
+&nbsp;import com.galarzaa.tibiakt.core.utils.getCreaturesSectionUrl
+&nbsp;import com.galarzaa.tibiakt.core.utils.getEventsScheduleUrl
+&nbsp;import com.galarzaa.tibiakt.core.utils.getForumAnnouncementUrl
+&nbsp;import com.galarzaa.tibiakt.core.utils.getForumBoardUrl
+&nbsp;import com.galarzaa.tibiakt.core.utils.getForumPostUrl
+&nbsp;import com.galarzaa.tibiakt.core.utils.getForumSectionUrl
+&nbsp;import com.galarzaa.tibiakt.core.utils.getForumThreadUrl
+&nbsp;import com.galarzaa.tibiakt.core.utils.getGuildUrl
+&nbsp;import com.galarzaa.tibiakt.core.utils.getHighscoresUrl
+&nbsp;import com.galarzaa.tibiakt.core.utils.getHouseUrl
+&nbsp;import com.galarzaa.tibiakt.core.utils.getHousesSectionUrl
+&nbsp;import com.galarzaa.tibiakt.core.utils.getKillStatisticsUrl
+&nbsp;import com.galarzaa.tibiakt.core.utils.getLeaderboardUrl
+&nbsp;import com.galarzaa.tibiakt.core.utils.getNewArchiveFormData
+&nbsp;import com.galarzaa.tibiakt.core.utils.getNewsArchiveUrl
+&nbsp;import com.galarzaa.tibiakt.core.utils.getNewsUrl
+&nbsp;import com.galarzaa.tibiakt.core.utils.getWorldGuildsUrl
+&nbsp;import com.galarzaa.tibiakt.core.utils.getWorldOverviewUrl
+&nbsp;import com.galarzaa.tibiakt.core.utils.getWorldUrl
+&nbsp;import io.ktor.client.HttpClient
+&nbsp;import io.ktor.client.HttpClientConfig
+&nbsp;import io.ktor.client.call.body
+&nbsp;import io.ktor.client.engine.HttpClientEngine
+&nbsp;import io.ktor.client.engine.cio.CIO
+&nbsp;import io.ktor.client.plugins.Charsets
+&nbsp;import io.ktor.client.plugins.HttpTimeout
+&nbsp;import io.ktor.client.plugins.ResponseException
+&nbsp;import io.ktor.client.plugins.UserAgent
+&nbsp;import io.ktor.client.plugins.compression.ContentEncoding
+&nbsp;import io.ktor.client.plugins.expectSuccess
+&nbsp;import io.ktor.client.request.forms.submitForm
+&nbsp;import io.ktor.client.request.get
+&nbsp;import io.ktor.client.request.header
+&nbsp;import io.ktor.client.request.headers
+&nbsp;import io.ktor.client.statement.HttpResponse
+&nbsp;import io.ktor.client.statement.request
+&nbsp;import io.ktor.http.HttpMethod
+&nbsp;import io.ktor.http.HttpStatusCode
+&nbsp;import io.ktor.http.Parameters
+&nbsp;import kotlinx.datetime.Clock
+&nbsp;import kotlinx.datetime.Instant
+&nbsp;import kotlinx.serialization.json.Json
+&nbsp;import mu.KotlinLogging
+&nbsp;import java.time.LocalDate
+&nbsp;import java.time.YearMonth
+&nbsp;import kotlin.system.measureTimeMillis
+&nbsp;import kotlin.time.Duration.Companion.seconds
+&nbsp;
+<b class="fc">&nbsp;@Suppress(&quot;TooManyFunctions&quot;)</b>
+&nbsp;/**
+&nbsp; * A coroutine based client to fetch from Tibia.com.
+&nbsp; *
+&nbsp; * @param engine The ktor client engine to use, by default CIO is used.
+&nbsp; * @param additionalConfig Additional configuration for the Ktor Client.
+&nbsp; */
+&nbsp;public open class TibiaKtClient constructor(
+&nbsp;    engine: HttpClientEngine?,
+<b class="fc">&nbsp;    private val userAgent: String? = null,</b>
+<b class="fc">&nbsp;    private val additionalConfig: (HttpClientConfig&lt;*&gt;.() -&gt; Unit) = {},</b>
+&nbsp;) {
+&nbsp;
+<b class="pc">&nbsp;    private val client = HttpClient(engine ?: CIO.create()) {</b>
+<b class="fc">&nbsp;        install(HttpTimeout) {</b>
+<b class="fc">&nbsp;            requestTimeoutMillis = HttpTimeout.INFINITE_TIMEOUT_MS</b>
+<b class="fc">&nbsp;            connectTimeoutMillis = 30.seconds.inWholeMilliseconds</b>
+&nbsp;        }
+<b class="fc">&nbsp;        Charsets {</b>
+<b class="fc">&nbsp;            register(Charsets.UTF_8)</b>
+<b class="fc">&nbsp;            register(Charsets.ISO_8859_1)</b>
+&nbsp;        }
+<b class="fc">&nbsp;        followRedirects = false</b>
+<b class="fc">&nbsp;        install(ContentEncoding) {</b>
+<b class="fc">&nbsp;            gzip()</b>
+<b class="fc">&nbsp;            deflate()</b>
+&nbsp;        }
+<b class="fc">&nbsp;        install(UserAgent) {</b>
+<b class="pc">&nbsp;            agent = userAgent ?: &quot;TibiaKtClient/? ktor/? Kotlin/${KotlinVersion.CURRENT}&quot;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        additionalConfig(this)</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates an instance of the client, using the default engine (CIO).
+&nbsp;     *
+&nbsp;     * @param userAgent The value that will be sent in the User-Agent header of every request.
+&nbsp;     */
+<b class="nc">&nbsp;    public constructor(userAgent: String? = null, additionalConfig: (HttpClientConfig&lt;*&gt;.() -&gt; Unit) = {}) : this(</b>
+<b class="nc">&nbsp;        null, userAgent, additionalConfig</b>
+&nbsp;    )
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Perform a request using the required headers.
+&nbsp;     * @param method The HTTP method to use for the request.
+&nbsp;     * @param url The URL to request.
+&nbsp;     * @param data The form parameters to add.
+&nbsp;     * @param headers Additional headers to add.
+&nbsp;     */
+<b class="fc">&nbsp;    public open suspend fun request(</b>
+&nbsp;        method: HttpMethod,
+&nbsp;        url: String,
+<b class="fc">&nbsp;        data: List&lt;Pair&lt;String, Any&gt;&gt; = emptyList(),</b>
+<b class="fc">&nbsp;        headers: List&lt;Pair&lt;String, Any&gt;&gt; = emptyList(),</b>
+&nbsp;    ): HttpResponse {
+<b class="fc">&nbsp;        val response: HttpResponse = try {</b>
+<b class="fc">&nbsp;            when (method) {</b>
+<b class="pc">&nbsp;                HttpMethod.Get -&gt; client.get(url) {</b>
+<b class="fc">&nbsp;                    expectSuccess = true</b>
+<b class="pc">&nbsp;                    if (headers.isNotEmpty()) {</b>
+<b class="nc">&nbsp;                        headers { headers.forEach { header(it.first, it.second) } }</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                }</b>
+&nbsp;
+<b class="nc">&nbsp;                HttpMethod.Post -&gt; client.submitForm(url, formParameters = Parameters.build {</b>
+<b class="nc">&nbsp;                    data.forEach { append(it.first, it.second.toString()) }</b>
+<b class="nc">&nbsp;                }, encodeInQuery = false) {</b>
+&nbsp;
+<b class="nc">&nbsp;                }</b>
+&nbsp;
+<b class="nc">&nbsp;                else -&gt; throw IllegalArgumentException(&quot;Unsupported method $method&quot;)</b>
+&nbsp;            }
+<b class="fc">&nbsp;        } catch (re: ResponseException) {</b>
+<b class="pc">&nbsp;            if (re.response.status in listOf(</b>
+<b class="fc">&nbsp;                    HttpStatusCode.MovedPermanently,</b>
+<b class="fc">&nbsp;                    HttpStatusCode.Found,</b>
+<b class="fc">&nbsp;                    HttpStatusCode.TemporaryRedirect,</b>
+<b class="fc">&nbsp;                    HttpStatusCode.PermanentRedirect,</b>
+<b class="fc">&nbsp;                    HttpStatusCode.SeeOther</b>
+&nbsp;                )
+&nbsp;            ) {
+<b class="nc">&nbsp;                throw SiteMaintenanceException(&quot;Tibia.com is under maintenance.&quot;, re)</b>
+&nbsp;            }
+<b class="pc">&nbsp;            if (re.response.status == HttpStatusCode.Forbidden) {</b>
+<b class="fc">&nbsp;                throw ForbiddenException(&quot;403 Forbidden: Might be getting rate-limited&quot;, re)</b>
+&nbsp;            }
+<b class="nc">&nbsp;            throw NetworkException(&quot;${re.response.status.value} ${re.response.status.description}&quot;, re)</b>
+&nbsp;        }
+<b class="nc">&nbsp;        logger.info {</b>
+<b class="nc">&nbsp;            listOf(</b>
+<b class="nc">&nbsp;                url,</b>
+<b class="nc">&nbsp;                method.value.uppercase(),</b>
+<b class="nc">&nbsp;                &quot;${response.status.value} ${response.status.description}&quot;,</b>
+<b class="nc">&nbsp;                &quot;${response.fetchingTimeMillis}ms&quot;</b>
+<b class="nc">&nbsp;            ).joinToString(&quot; | &quot;)</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return response</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // region News Section
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Fetch the news for a given interval.
+&nbsp;     */
+<b class="nc">&nbsp;    public open suspend fun fetchRecentNews(</b>
+&nbsp;        startDate: LocalDate,
+&nbsp;        endDate: LocalDate,
+<b class="nc">&nbsp;        categories: Set&lt;NewsCategory&gt;? = null,</b>
+<b class="nc">&nbsp;        types: Set&lt;NewsType&gt;? = null,</b>
+&nbsp;    ): TibiaResponse&lt;NewsArchive&gt; {
+<b class="nc">&nbsp;        val data = getNewArchiveFormData(startDate, endDate, categories, types)</b>
+<b class="nc">&nbsp;        val response = this.request(HttpMethod.Post, getNewsArchiveUrl(), data)</b>
+<b class="nc">&nbsp;        return response.parse { NewsArchiveParser.fromContent(it) }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Fetch the news from today to the last provided days.
+&nbsp;     */
+<b class="nc">&nbsp;    public open suspend fun fetchRecentNews(</b>
+<b class="nc">&nbsp;        days: Int = 30,</b>
+<b class="nc">&nbsp;        categories: Set&lt;NewsCategory&gt;? = null,</b>
+<b class="nc">&nbsp;        types: Set&lt;NewsType&gt;? = null,</b>
+&nbsp;    ): TibiaResponse&lt;NewsArchive&gt; =
+<b class="nc">&nbsp;        fetchRecentNews(LocalDate.now().minusDays(days.toLong()), LocalDate.now(), categories, types)</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Fetch a specific news article by its [newsId].
+&nbsp;     */
+<b class="nc">&nbsp;    public open suspend fun fetchNews(newsId: Int): TibiaResponse&lt;News?&gt; {</b>
+<b class="nc">&nbsp;        val response = this.request(HttpMethod.Get, getNewsUrl(newsId))</b>
+<b class="nc">&nbsp;        return response.parse { NewsParser.fromContent(it, newsId) }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Fetch the events schedule for a specific year and month.
+&nbsp;     */
+<b class="nc">&nbsp;    public open suspend fun fetchEventsSchedule(yearMonth: YearMonth): TibiaResponse&lt;EventsSchedule&gt; {</b>
+<b class="nc">&nbsp;        val response = this.request(HttpMethod.Get, getEventsScheduleUrl(yearMonth))</b>
+<b class="nc">&nbsp;        return response.parse { EventsScheduleParser.fromContent(it) }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Fetch the events schedule for a specific year and month.
+&nbsp;     */
+&nbsp;    public open suspend fun fetchEventsSchedule(year: Int, month: Int): TibiaResponse&lt;EventsSchedule&gt; =
+<b class="nc">&nbsp;        fetchEventsSchedule(YearMonth.of(year, month))</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Fetch the events schedule for the current month.
+&nbsp;     */
+<b class="nc">&nbsp;    public open suspend fun fetchEventsSchedule(): TibiaResponse&lt;EventsSchedule&gt; = fetchEventsSchedule(YearMonth.now())</b>
+&nbsp;
+&nbsp;    // endregion
+&nbsp;
+&nbsp;    // region Library Section
+&nbsp;    /** Fetch the boosted boss of the day as well as the list of bosstable bosses from Tibia.com. */
+<b class="nc">&nbsp;    public open suspend fun fetchBosstableBosses(): TibiaResponse&lt;BosstableBosses&gt; {</b>
+<b class="nc">&nbsp;        val response = this.request(HttpMethod.Get, getBoostableBossesUrl())</b>
+<b class="nc">&nbsp;        return response.parse { BosstableBossesParser.fromContent(it) }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /** Fetch the creatures section, containing the boosted creature. */
+<b class="nc">&nbsp;    public open suspend fun fetchCreaturesSection(): TibiaResponse&lt;CreaturesSection&gt; {</b>
+<b class="nc">&nbsp;        val response = this.request(HttpMethod.Get, getCreaturesSectionUrl())</b>
+<b class="nc">&nbsp;        return response.parse { CreaturesSectionParser.fromContent(it) }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // endregion
+&nbsp;
+&nbsp;    // region Community Section
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Fetch a character.
+&nbsp;     *
+&nbsp;     * @param name The name of the character.
+&nbsp;     */
+<b class="fc">&nbsp;    public open suspend fun fetchCharacter(name: String): TibiaResponse&lt;Character?&gt; {</b>
+<b class="pc">&nbsp;        val response = this.request(HttpMethod.Get, getCharacterUrl(name))</b>
+<b class="nc">&nbsp;        return response.parse { CharacterParser.fromContent(it) }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Fetch the world overview, containing the list of worlds.
+&nbsp;     */
+<b class="nc">&nbsp;    public open suspend fun fetchWorldOverview(): TibiaResponse&lt;WorldOverview&gt; {</b>
+<b class="nc">&nbsp;        val response = this.request(HttpMethod.Get, getWorldOverviewUrl())</b>
+<b class="nc">&nbsp;        return response.parse { WorldOverviewParser.fromContent(it) }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /** Fetch a world&#39;s information. */
+<b class="nc">&nbsp;    public open suspend fun fetchWorld(name: String): TibiaResponse&lt;World?&gt; {</b>
+<b class="nc">&nbsp;        val response = this.request(HttpMethod.Get, getWorldUrl(name))</b>
+<b class="nc">&nbsp;        return response.parse { WorldParser.fromContent(it) }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /** Fetch a guild by its [name]. */
+<b class="nc">&nbsp;    public open suspend fun fetchGuild(name: String): TibiaResponse&lt;Guild?&gt; {</b>
+<b class="nc">&nbsp;        val response = this.request(HttpMethod.Get, getGuildUrl(name))</b>
+<b class="nc">&nbsp;        return response.parse { GuildParser.fromContent(it) }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /** Fetch active and in formation guilds in a [world].
+&nbsp;     *
+&nbsp;     * If the world does not exist, it will return null.
+&nbsp;     */
+<b class="nc">&nbsp;    public open suspend fun fetchWorldGuilds(world: String): TibiaResponse&lt;GuildsSection?&gt; {</b>
+<b class="nc">&nbsp;        val response = this.request(HttpMethod.Get, getWorldGuildsUrl(world))</b>
+<b class="nc">&nbsp;        return response.parse { GuildsSectionParser.fromContent(it) }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Fetch the kill statistics for a [world].
+&nbsp;     */
+<b class="nc">&nbsp;    public open suspend fun fetchKillStatistics(world: String): TibiaResponse&lt;KillStatistics?&gt; {</b>
+<b class="nc">&nbsp;        val response = this.request(HttpMethod.Get, getKillStatisticsUrl(world))</b>
+<b class="nc">&nbsp;        return response.parse { KillStatisticsParser.fromContent(it) }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Fetch a page of the highscores.
+&nbsp;     *
+&nbsp;     * @param world The world to get highscores from. If null, the highscores of all worlds are returned.
+&nbsp;     * @param category The category to fetch.
+&nbsp;     * @param vocation The vocation to filter by. By default all vocations will be returned
+&nbsp;     * @param page The page number to fetch
+&nbsp;     * @param battlEyeType The BattlEye type of the worlds to fetch. Only applies when [world] is null.
+&nbsp;     * @param pvpTypes The PvP type of the worlds to fetch. Only applies when [world] is null.
+&nbsp;     */
+<b class="nc">&nbsp;    public open suspend fun fetchHighscoresPage(</b>
+&nbsp;        world: String?,
+&nbsp;        category: HighscoresCategory,
+<b class="nc">&nbsp;        vocation: HighscoresProfession = HighscoresProfession.ALL,</b>
+<b class="nc">&nbsp;        page: Int = 1,</b>
+<b class="nc">&nbsp;        battlEyeType: HighscoresBattlEyeType = HighscoresBattlEyeType.ANY_WORLD,</b>
+<b class="nc">&nbsp;        pvpTypes: Set&lt;PvpType&gt;? = null,</b>
+&nbsp;    ): TibiaResponse&lt;Highscores?&gt; {
+<b class="nc">&nbsp;        val response =</b>
+<b class="nc">&nbsp;            this.request(HttpMethod.Get, getHighscoresUrl(world, category, vocation, page, battlEyeType, pvpTypes))</b>
+<b class="nc">&nbsp;        return response.parse { HighscoresParser.fromContent(it) }</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public open suspend fun fetchHigscores(</b>
+&nbsp;        world: String?,
+&nbsp;        category: HighscoresCategory,
+<b class="nc">&nbsp;        vocation: HighscoresProfession = HighscoresProfession.ALL,</b>
+<b class="nc">&nbsp;        battlEyeType: HighscoresBattlEyeType = HighscoresBattlEyeType.ANY_WORLD,</b>
+<b class="nc">&nbsp;        pvpTypes: Set&lt;PvpType&gt;? = null,</b>
+&nbsp;    ): TibiaResponse&lt;Highscores?&gt; {
+<b class="nc">&nbsp;        val now = Clock.System.now()</b>
+<b class="nc">&nbsp;        var totalPages = 0</b>
+<b class="nc">&nbsp;        var currentPage = 1</b>
+<b class="nc">&nbsp;        val entries = mutableListOf&lt;HighscoresEntry&gt;()</b>
+<b class="nc">&nbsp;        var fetchingTime = 0.0</b>
+<b class="nc">&nbsp;        var parsingTime = 0.0</b>
+<b class="nc">&nbsp;        var baseHighscores: Highscores? = null</b>
+<b class="nc">&nbsp;        while (totalPages == 0 || currentPage &lt;= totalPages) {</b>
+<b class="nc">&nbsp;            val response = fetchHighscoresPage(world, category, vocation, currentPage, battlEyeType, pvpTypes)</b>
+<b class="nc">&nbsp;            if (response.data == null) return response</b>
+<b class="nc">&nbsp;            entries.addAll(response.data.entries)</b>
+<b class="nc">&nbsp;            totalPages = response.data.totalPages</b>
+<b class="nc">&nbsp;            fetchingTime += response.fetchingTime</b>
+<b class="nc">&nbsp;            parsingTime += response.parsingTime</b>
+<b class="nc">&nbsp;            if (currentPage == 1) {</b>
+<b class="nc">&nbsp;                baseHighscores = response.data</b>
+&nbsp;            }
+<b class="nc">&nbsp;            currentPage++</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return TibiaResponse(</b>
+<b class="nc">&nbsp;            timestamp = now,</b>
+<b class="nc">&nbsp;            isCached = false,</b>
+<b class="nc">&nbsp;            cacheAge = 0,</b>
+<b class="nc">&nbsp;            fetchingTime = fetchingTime,</b>
+<b class="nc">&nbsp;            parsingTime = parsingTime,</b>
+<b class="nc">&nbsp;            data = baseHighscores!!.copy(entries = entries)</b>
+&nbsp;        )
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Fetch the houses section for a [world] and [town].
+&nbsp;     */
+<b class="nc">&nbsp;    public open suspend fun fetchHousesSection(</b>
+&nbsp;        world: String,
+&nbsp;        town: String,
+<b class="nc">&nbsp;        type: HouseType? = null,</b>
+<b class="nc">&nbsp;        status: HouseStatus? = null,</b>
+<b class="nc">&nbsp;        order: HouseOrder? = null,</b>
+&nbsp;    ): TibiaResponse&lt;HousesSection?&gt; {
+<b class="nc">&nbsp;        val response = this.request(HttpMethod.Get, getHousesSectionUrl(world, town, type, status, order))</b>
+<b class="nc">&nbsp;        return response.parse { HousesSectionParser.fromContent(it) }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /** Fetch a house by its [houseId] in a specific world. */
+<b class="nc">&nbsp;    public open suspend fun fetchHouse(</b>
+&nbsp;        houseId: Int,
+&nbsp;        world: String,
+&nbsp;    ): TibiaResponse&lt;House?&gt; {
+<b class="nc">&nbsp;        val response = this.request(HttpMethod.Get, getHouseUrl(world, houseId))</b>
+<b class="nc">&nbsp;        return response.parse { HouseParser.fromContent(it) }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Fetches the Tibia Drome leaderboards for a [world].
+&nbsp;     *
+&nbsp;     * If the world does not exist, the leaderboards will be null.
+&nbsp;     * @param rotation The rotation number to see. Tibia.com only allows viewing the current and last rotations. Any other value takes you to the current leaderboard.
+&nbsp;     */
+<b class="nc">&nbsp;    public open suspend fun fetchLeaderboards(</b>
+&nbsp;        world: String,
+<b class="nc">&nbsp;        rotation: Int? = null,</b>
+<b class="nc">&nbsp;        page: Int = 1,</b>
+&nbsp;    ): TibiaResponse&lt;Leaderboards?&gt; {
+<b class="nc">&nbsp;        val response = this.request(HttpMethod.Get, getLeaderboardUrl(world, rotation, page))</b>
+<b class="nc">&nbsp;        return response.parse { LeaderboardsParser.fromContent(it) }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // endregion
+&nbsp;
+&nbsp;    // region Forum Section
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Fetches a forum section by its internal [sectionId].
+&nbsp;     */
+<b class="nc">&nbsp;    public open suspend fun fetchForumSection(sectionId: Int): TibiaResponse&lt;ForumSection?&gt; {</b>
+<b class="nc">&nbsp;        val response = this.request(HttpMethod.Get, getForumSectionUrl(sectionId))</b>
+<b class="nc">&nbsp;        return response.parse { ForumSectionParser.fromContent(it) }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /** Fetches a specific forum section. */
+<b class="nc">&nbsp;    public open suspend fun fetchForumSection(section: AvailableForumSection): TibiaResponse&lt;ForumSection?&gt; {</b>
+<b class="nc">&nbsp;        val response = this.request(HttpMethod.Get, getForumSectionUrl(section))</b>
+<b class="nc">&nbsp;        return response.parse { ForumSectionParser.fromContent(it) }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /** Fetches a board from the Tibia.com forum.
+&nbsp;     *
+&nbsp;     * @param threadAge The maximum age of displayed threads. A value of -1 means no limit. Null means the server limit will be used.
+&nbsp;     */
+<b class="nc">&nbsp;    public open suspend fun fetchForumBoard(</b>
+&nbsp;        boardId: Int,
+<b class="nc">&nbsp;        page: Int = 1,</b>
+<b class="nc">&nbsp;        threadAge: Int? = null,</b>
+&nbsp;    ): TibiaResponse&lt;ForumBoard?&gt; {
+<b class="nc">&nbsp;        val response = this.request(HttpMethod.Get, getForumBoardUrl(boardId, page, threadAge))</b>
+<b class="nc">&nbsp;        return response.parse { ForumBoardParser.fromContent(it) }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /** Fetches a thread from the Tibia.com forum. */
+<b class="nc">&nbsp;    public open suspend fun fetchForumAnnouncement(announcementId: Int): TibiaResponse&lt;ForumAnnouncement?&gt; {</b>
+<b class="nc">&nbsp;        val response = this.request(HttpMethod.Get, getForumAnnouncementUrl(announcementId))</b>
+<b class="nc">&nbsp;        return response.parse { ForumAnnouncementParser.fromContent(it, announcementId) }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /** Fetches a forum thread from Tibia.com. */
+<b class="nc">&nbsp;    public open suspend fun fetchForumThread(threadId: Int, page: Int = 1): TibiaResponse&lt;ForumThread?&gt; {</b>
+<b class="nc">&nbsp;        val response = this.request(HttpMethod.Get, getForumThreadUrl(threadId, page))</b>
+<b class="nc">&nbsp;        return response.parse { ForumThreadParser.fromContent(it) }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /** Fetches a forum thread containing the specified post.
+&nbsp;     *
+&nbsp;     * The thread will be fetched on the page containing the [ForumThread.anchoredPost]
+&nbsp;     */
+<b class="nc">&nbsp;    public open suspend fun fetchForumPost(postId: Int): TibiaResponse&lt;ForumThread?&gt; {</b>
+<b class="nc">&nbsp;        val response = this.request(HttpMethod.Get, getForumPostUrl(postId))</b>
+<b class="nc">&nbsp;        return response.parse {</b>
+<b class="nc">&nbsp;            ForumThreadParser.fromContent(it)?.let { thread -&gt;</b>
+<b class="nc">&nbsp;                thread.copy(anchoredPost = thread.entries.first { post -&gt; post.postId == postId })</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    /** Fetch CM posts between two dates. */
+<b class="nc">&nbsp;    public open suspend fun fetchCMPostArchive(</b>
+&nbsp;        startDate: LocalDate,
+&nbsp;        endDate: LocalDate,
+<b class="nc">&nbsp;        page: Int = 0,</b>
+&nbsp;    ): TibiaResponse&lt;CMPostArchive&gt; {
+<b class="nc">&nbsp;        val response = this.request(HttpMethod.Get, getCMPostArchiveUrl(startDate, endDate, page))</b>
+<b class="nc">&nbsp;        return response.parse { CMPostArchiveParser.fromContent(it) }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /** Fetch CM posts from today to the last specified [days]. */
+<b class="nc">&nbsp;    public open suspend fun fetchCMPostArchive(days: Int, page: Int = 0): TibiaResponse&lt;CMPostArchive&gt; =</b>
+<b class="nc">&nbsp;        fetchCMPostArchive(LocalDate.now().minusDays(days.toLong()), LocalDate.now(), page)</b>
+&nbsp;
+&nbsp;    // endregion
+&nbsp;
+&nbsp;    // region Char Bazaar Section
+&nbsp;    /**
+&nbsp;     * Fetch the character bazaar.
+&nbsp;     *
+&nbsp;     * @param type Whether to show current auctions or the auction history.
+&nbsp;     * @param filters The filtering parameters to use.
+&nbsp;     * @param page The page to display.
+&nbsp;     */
+<b class="nc">&nbsp;    public open suspend fun fetchBazaar(</b>
+<b class="nc">&nbsp;        type: BazaarType = BazaarType.CURRENT,</b>
+<b class="nc">&nbsp;        filters: BazaarFilters? = null,</b>
+<b class="nc">&nbsp;        page: Int = 1,</b>
+&nbsp;    ): TibiaResponse&lt;CharacterBazaar&gt; {
+<b class="nc">&nbsp;        val response = this.request(HttpMethod.Get, getBazaarUrl(type, filters, page))</b>
+<b class="nc">&nbsp;        return response.parse { CharacterBazaarParser.fromContent(it) }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Fetch the character bazaar from Tibia.com.
+&nbsp;     */
+<b class="nc">&nbsp;    public open suspend fun fetchBazaar(</b>
+<b class="nc">&nbsp;        type: BazaarType = BazaarType.CURRENT,</b>
+<b class="nc">&nbsp;        page: Int = 1,</b>
+<b class="nc">&nbsp;        filterBuilder: (BazaarFiltersBuilder.() -&gt; Unit)? = null,</b>
+&nbsp;    ): TibiaResponse&lt;CharacterBazaar&gt; =
+<b class="nc">&nbsp;        fetchBazaar(type, filterBuilder?.let { BazaarFiltersBuilder().apply(it).build() }, page)</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Fetch an auction from Tibia.com.
+&nbsp;     *
+&nbsp;     * @param auctionId The ID of the auction to fetch.
+&nbsp;     * @param skipDetails Whether to only fetch the auction&#39;s header and skip details.
+&nbsp;     * @param fetchItems Whether to fetch items from further pages if necessary. Cannot be done if [skipDetails] is true.
+&nbsp;     * @param fetchOutfits Whether to fetch outfits from further pages if necessary. Cannot be done if [skipDetails] is true.
+&nbsp;     * @param fetchMounts Whether to fetch mounts from further pages if necessary. Cannot be done if [skipDetails] is true.
+&nbsp;     */
+<b class="nc">&nbsp;    public open suspend fun fetchAuction(</b>
+&nbsp;        auctionId: Int,
+<b class="nc">&nbsp;        skipDetails: Boolean = false,</b>
+<b class="nc">&nbsp;        fetchItems: Boolean = false,</b>
+<b class="nc">&nbsp;        fetchOutfits: Boolean = false,</b>
+<b class="nc">&nbsp;        fetchMounts: Boolean = false,</b>
+&nbsp;    ): TibiaResponse&lt;Auction?&gt; {
+<b class="nc">&nbsp;        val response = this.request(HttpMethod.Get, getAuctionUrl(auctionId))</b>
+<b class="nc">&nbsp;        val tibiaResponse = response.parse { AuctionParser.fromContent(it, auctionId, !skipDetails) }</b>
+<b class="nc">&nbsp;        return if (tibiaResponse.data?.details != null &amp;&amp; (fetchItems || fetchMounts || fetchOutfits)) {</b>
+<b class="nc">&nbsp;            fetchAuctionAdditionalPages(tibiaResponse, fetchItems, fetchMounts, fetchOutfits)</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            tibiaResponse</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private suspend fun fetchAuctionAdditionalPages(</b>
+&nbsp;        tibiaResponse: TibiaResponse&lt;Auction?&gt;,
+<b class="nc">&nbsp;        fetchItems: Boolean = false,</b>
+<b class="nc">&nbsp;        fetchOutfits: Boolean = false,</b>
+<b class="nc">&nbsp;        fetchMounts: Boolean = false,</b>
+&nbsp;    ): TibiaResponse&lt;Auction?&gt; {
+<b class="nc">&nbsp;        if (tibiaResponse.data?.details == null) return tibiaResponse</b>
+<b class="nc">&nbsp;        val accumulator = Timing(tibiaResponse.fetchingTime, tibiaResponse.parsingTime)</b>
+<b class="nc">&nbsp;        var itemEntries: List&lt;ItemEntry&gt;? = null</b>
+<b class="nc">&nbsp;        var storeItemEntries: List&lt;ItemEntry&gt;? = null</b>
+<b class="nc">&nbsp;        var outfitEntries: List&lt;OutfitEntry&gt;? = null</b>
+<b class="nc">&nbsp;        var storeOutfitEntries: List&lt;OutfitEntry&gt;? = null</b>
+<b class="nc">&nbsp;        var mountEntries: List&lt;MountEntry&gt;? = null</b>
+<b class="nc">&nbsp;        var storeMountEntries: List&lt;MountEntry&gt;? = null</b>
+<b class="nc">&nbsp;        if (fetchItems) {</b>
+<b class="nc">&nbsp;            itemEntries = fetchAllPages(</b>
+<b class="nc">&nbsp;                tibiaResponse.data.auctionId, AuctionPagesType.ITEMS, tibiaResponse.data.details!!.items</b>
+<b class="nc">&nbsp;            ).accumulateTime(accumulator)</b>
+<b class="nc">&nbsp;            storeItemEntries = fetchAllPages(</b>
+<b class="nc">&nbsp;                tibiaResponse.data.auctionId, AuctionPagesType.ITEMS_STORE, tibiaResponse.data.details!!.storeItems</b>
+<b class="nc">&nbsp;            ).accumulateTime(accumulator)</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (fetchMounts) {</b>
+<b class="nc">&nbsp;            mountEntries = fetchAllPages(</b>
+<b class="nc">&nbsp;                tibiaResponse.data.auctionId, AuctionPagesType.MOUNTS, tibiaResponse.data.details!!.mounts</b>
+<b class="nc">&nbsp;            ).accumulateTime(accumulator)</b>
+<b class="nc">&nbsp;            storeMountEntries = fetchAllPages(</b>
+<b class="nc">&nbsp;                tibiaResponse.data.auctionId, AuctionPagesType.MOUNTS_STORE, tibiaResponse.data.details!!.storeMounts</b>
+<b class="nc">&nbsp;            ).accumulateTime(accumulator)</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (fetchOutfits) {</b>
+<b class="nc">&nbsp;            outfitEntries = fetchAllPages(</b>
+<b class="nc">&nbsp;                tibiaResponse.data.auctionId, AuctionPagesType.OUTFITS, tibiaResponse.data.details!!.outfits</b>
+<b class="nc">&nbsp;            ).accumulateTime(accumulator)</b>
+<b class="nc">&nbsp;            storeOutfitEntries = fetchAllPages(</b>
+<b class="nc">&nbsp;                tibiaResponse.data.auctionId, AuctionPagesType.OUTFITS_STORE, tibiaResponse.data.details!!.storeOutfits</b>
+<b class="nc">&nbsp;            ).accumulateTime(accumulator)</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return tibiaResponse.copy(</b>
+<b class="nc">&nbsp;            fetchingTime = accumulator.fetching, parsingTime = accumulator.parsing, data = tibiaResponse.data.copy(</b>
+<b class="nc">&nbsp;                details = tibiaResponse.data.details!!.copy(</b>
+<b class="nc">&nbsp;                    items = tibiaResponse.data.details!!.items.copy(</b>
+<b class="nc">&nbsp;                        entries = itemEntries ?: tibiaResponse.data.details!!.items.entries,</b>
+<b class="nc">&nbsp;                        isFullyFetched = fetchItems,</b>
+&nbsp;                    ),
+<b class="nc">&nbsp;                    storeItems = tibiaResponse.data.details!!.items.copy(</b>
+<b class="nc">&nbsp;                        entries = storeItemEntries ?: tibiaResponse.data.details!!.items.entries,</b>
+<b class="nc">&nbsp;                        isFullyFetched = fetchItems,</b>
+&nbsp;                    ),
+<b class="nc">&nbsp;                    mounts = tibiaResponse.data.details!!.mounts.copy(</b>
+<b class="nc">&nbsp;                        entries = mountEntries ?: tibiaResponse.data.details!!.mounts.entries,</b>
+<b class="nc">&nbsp;                        isFullyFetched = fetchMounts,</b>
+&nbsp;                    ),
+<b class="nc">&nbsp;                    storeMounts = tibiaResponse.data.details!!.storeMounts.copy(</b>
+<b class="nc">&nbsp;                        entries = storeMountEntries ?: tibiaResponse.data.details!!.storeMounts.entries,</b>
+<b class="nc">&nbsp;                        isFullyFetched = fetchMounts</b>
+&nbsp;                    ),
+<b class="nc">&nbsp;                    outfits = tibiaResponse.data.details!!.outfits.copy(</b>
+<b class="nc">&nbsp;                        entries = outfitEntries ?: tibiaResponse.data.details!!.outfits.entries,</b>
+<b class="nc">&nbsp;                        isFullyFetched = fetchOutfits,</b>
+&nbsp;                    ),
+<b class="nc">&nbsp;                    storeOutfits = tibiaResponse.data.details!!.storeOutfits.copy(</b>
+<b class="nc">&nbsp;                        entries = storeOutfitEntries ?: tibiaResponse.data.details!!.storeOutfits.entries,</b>
+<b class="nc">&nbsp;                        isFullyFetched = fetchOutfits,</b>
+&nbsp;                    ),
+&nbsp;                )
+&nbsp;            )
+&nbsp;        )
+&nbsp;    }
+&nbsp;
+&nbsp;    // endregion
+&nbsp;
+&nbsp;
+&nbsp;    /** Convert to a [TibiaResponse]. */
+<b class="nc">&nbsp;    private fun &lt;T&gt; HttpResponse.toTibiaResponse(parsingTime: Double, data: T): TibiaResponse&lt;T&gt; = TibiaResponse(</b>
+<b class="nc">&nbsp;        timestamp = Instant.fromEpochMilliseconds(responseTime.timestamp),</b>
+<b class="nc">&nbsp;        isCached = headers[&quot;CF-Cache-Status&quot;] == &quot;HIT&quot;,</b>
+<b class="nc">&nbsp;        cacheAge = headers[&quot;Age&quot;]?.toInt() ?: 0,</b>
+<b class="nc">&nbsp;        fetchingTime = fetchingTime,</b>
+<b class="nc">&nbsp;        parsingTime = parsingTime,</b>
+<b class="nc">&nbsp;        data = data</b>
+&nbsp;    )
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Parse the [HttpResponse] into a TibiaResponse.
+&nbsp;     */
+<b class="nc">&nbsp;    private suspend fun &lt;T&gt; HttpResponse.parse(parser: (content: String) -&gt; T): TibiaResponse&lt;T&gt; {</b>
+<b class="nc">&nbsp;        val data: T</b>
+<b class="nc">&nbsp;        val parsingTime = measureTimeMillis {</b>
+<b class="nc">&nbsp;            val stringBody: String = body()</b>
+<b class="nc">&nbsp;            data = parser(stringBody)</b>
+<b class="nc">&nbsp;        } / 1000.0</b>
+<b class="nc">&nbsp;        logger.info { &quot;${this.request.url} | PARSE | ${(parsingTime * 1000).toInt()}ms&quot; }</b>
+<b class="nc">&nbsp;        return toTibiaResponse(parsingTime, data)</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Suppress(&quot;MaxLineLength&quot;)
+&nbsp;    /**
+&nbsp;     * Get the URL to the endpoint to get page items for auctions.
+&nbsp;     */
+&nbsp;    private fun getAuctionAjaxPaginationUrl(auctionId: Int, type: AuctionPagesType, page: Int): String =
+<b class="nc">&nbsp;        &quot;https://www.tibia.com/websiteservices/handle_charactertrades.php?auctionid=$auctionId&amp;type=${type.typeId}&amp;currentpage=$page&quot;</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Fetch a single page from the auction pagination endpoint.
+&nbsp;     */
+<b class="nc">&nbsp;    private suspend fun fetchAjaxPage(auctionId: Int, type: AuctionPagesType, page: Int): TimedResult&lt;AjaxResponse&gt; {</b>
+<b class="nc">&nbsp;        val response = this.request(</b>
+<b class="nc">&nbsp;            HttpMethod.Get, getAuctionAjaxPaginationUrl(auctionId, type, page),</b>
+<b class="nc">&nbsp;            headers = listOf(&quot;x-requested-with&quot; to &quot;XMLHttpRequest&quot;),</b>
+&nbsp;        )
+<b class="nc">&nbsp;        return TimedResult(response.fetchingTime, Json.decodeFromString(AjaxResponse.serializer(), response.body()))</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Fetch all the pages, parse and collect the entries.
+&nbsp;     * @param auctionId The id of the auction.
+&nbsp;     * @param type The type of items.
+&nbsp;     * @param paginator The paginator class that holds the collection
+&nbsp;     */
+&nbsp;    private suspend inline fun &lt;reified E, T : AjaxPaginator&lt;E&gt;&gt; fetchAllPages(
+&nbsp;        auctionId: Int,
+&nbsp;        type: AuctionPagesType,
+&nbsp;        paginator: T,
+&nbsp;    ): Pair&lt;Timing, List&lt;E&gt;&gt; {
+<b class="nc">&nbsp;        var currentPage = paginator.currentPage + 1</b>
+<b class="nc">&nbsp;        val entries: MutableList&lt;E&gt; = paginator.entries.toMutableList()</b>
+<b class="nc">&nbsp;        val timing = Timing()</b>
+<b class="nc">&nbsp;        while (currentPage &lt;= paginator.totalPages) {</b>
+<b class="nc">&nbsp;            val (fetchingTime, ajaxResponse) = fetchAjaxPage(auctionId, type, currentPage)</b>
+<b class="nc">&nbsp;            timing.fetching += fetchingTime</b>
+<b class="nc">&nbsp;            val parsingTime = measureTimeMillis {</b>
+<b class="nc">&nbsp;                entries.addAll(AuctionParser.parsePageItems(ajaxResponse.ajaxObjects.first().data))</b>
+<b class="nc">&nbsp;            } / 1000.0</b>
+<b class="nc">&nbsp;            timing.parsing += parsingTime</b>
+<b class="nc">&nbsp;            logger.info {</b>
+<b class="nc">&nbsp;                &quot;${</b>
+<b class="nc">&nbsp;                    getAuctionAjaxPaginationUrl(auctionId, type, currentPage)</b>
+<b class="nc">&nbsp;                } | PARSE | ${(parsingTime * 1000).toInt()}ms&quot;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            currentPage++</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return timing to entries</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * A data class to hold fetching and parsing times.
+&nbsp;     */
+<b class="nc">&nbsp;    private data class Timing(var fetching: Double = 0.0, var parsing: Double = 0.0)</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Extract the results of [fetchAllPages] and sum the timings into the [accumulator].
+&nbsp;     */
+&nbsp;    private fun &lt;T&gt; Pair&lt;Timing, List&lt;T&gt;&gt;.accumulateTime(accumulator: Timing): List&lt;T&gt; {
+<b class="nc">&nbsp;        accumulator.fetching += first.fetching</b>
+<b class="nc">&nbsp;        accumulator.parsing += first.parsing</b>
+<b class="nc">&nbsp;        return second</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private data class TimedResult&lt;T&gt;(val time: Double, val result: T)</b>
+&nbsp;
+&nbsp;    internal companion object {
+<b class="pc">&nbsp;        internal val logger = KotlinLogging.logger { }</b>
+&nbsp;
+<b class="nc">&nbsp;        private val HttpResponse.fetchingTime get() = (responseTime.timestamp - requestTime.timestamp) / 1000.0</b>
+<b class="nc">&nbsp;        private val HttpResponse.fetchingTimeMillis get() = (fetchingTime * 1000).toInt()</b>
+&nbsp;    }
+&nbsp;}
+</code>
 </pre>
 </div>
 
@@ -2104,18 +2105,15 @@ Current scope:     <a href="../../index.html">all classes</a>
     @*/
 
     if (!msie || msie && msie9) {
-        var codeBlock = document.getElementById('sourceCode');
-
-        if (codeBlock) {
-            hljs.highlightBlock(codeBlock);
-        }
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
     }
 })();
 </script>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-02-24 23:58</div>
+    <div style="float:right;">generated on 2023-03-15 02:46</div>
 </div>
 </body>
 </html>

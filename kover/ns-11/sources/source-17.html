@@ -7,9 +7,10 @@
   <title>Coverage Report > WorldParser</title>
   <style type="text/css">
     @import "../../css/coverage.css";
-    @import "../../css/highlight-idea.css";
+    @import "../../css/idea.min.css";
   </style>
-  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
 </head>
 
 <body>
@@ -97,145 +98,145 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;/*
-<i class="no-highlight">2</i>&nbsp; * Copyright © 2022 Allan Galarza
-<i class="no-highlight">3</i>&nbsp; *
-<i class="no-highlight">4</i>&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
-<i class="no-highlight">5</i>&nbsp; * you may not use this file except in compliance with the License.
-<i class="no-highlight">6</i>&nbsp; * You may obtain a copy of the License at
-<i class="no-highlight">7</i>&nbsp; *
-<i class="no-highlight">8</i>&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
-<i class="no-highlight">9</i>&nbsp; *
-<i class="no-highlight">10</i>&nbsp; * Unless required by applicable law or agreed to in writing, software
-<i class="no-highlight">11</i>&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-<i class="no-highlight">12</i>&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-<i class="no-highlight">13</i>&nbsp; * See the License for the specific language governing permissions and
-<i class="no-highlight">14</i>&nbsp; * limitations under the License.
-<i class="no-highlight">15</i>&nbsp; */
-<i class="no-highlight">16</i>&nbsp;
-<i class="no-highlight">17</i>&nbsp;package com.galarzaa.tibiakt.core.parsers
-<i class="no-highlight">18</i>&nbsp;
-<i class="no-highlight">19</i>&nbsp;import com.galarzaa.tibiakt.core.builders.WorldBuilder
-<i class="no-highlight">20</i>&nbsp;import com.galarzaa.tibiakt.core.builders.worldBuilder
-<i class="no-highlight">21</i>&nbsp;import com.galarzaa.tibiakt.core.enums.BattlEyeType
-<i class="no-highlight">22</i>&nbsp;import com.galarzaa.tibiakt.core.enums.StringEnum
-<i class="no-highlight">23</i>&nbsp;import com.galarzaa.tibiakt.core.enums.TransferType
-<i class="no-highlight">24</i>&nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
-<i class="no-highlight">25</i>&nbsp;import com.galarzaa.tibiakt.core.models.world.World
-<i class="no-highlight">26</i>&nbsp;import com.galarzaa.tibiakt.core.utils.clean
-<i class="no-highlight">27</i>&nbsp;import com.galarzaa.tibiakt.core.utils.getContaining
-<i class="no-highlight">28</i>&nbsp;import com.galarzaa.tibiakt.core.utils.offsetStart
-<i class="no-highlight">29</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseInteger
-<i class="no-highlight">30</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseTablesMap
-<i class="no-highlight">31</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseTibiaDateTime
-<i class="no-highlight">32</i>&nbsp;import com.galarzaa.tibiakt.core.utils.parseTibiaFullDate
-<i class="no-highlight">33</i>&nbsp;import com.galarzaa.tibiakt.core.utils.remove
-<i class="no-highlight">34</i>&nbsp;import com.galarzaa.tibiakt.core.utils.rows
-<i class="no-highlight">35</i>&nbsp;import org.jsoup.Jsoup
-<i class="no-highlight">36</i>&nbsp;import org.jsoup.nodes.Document
-<i class="no-highlight">37</i>&nbsp;import org.jsoup.nodes.Element
-<i class="no-highlight">38</i>&nbsp;import java.time.YearMonth
-<i class="no-highlight">39</i>&nbsp;
-<i class="no-highlight">40</i>&nbsp;/** Parser for world pages. */
-<i class="no-highlight">41</i>&nbsp;public object WorldParser : Parser&lt;World?&gt; {
-<b class="fc"><i class="no-highlight">42</i>&nbsp;    private val recordRegex = Regex(&quot;&quot;&quot;(?&lt;count&gt;[\d.,]+) players \(on (?&lt;date&gt;[^)]+)\)&quot;&quot;&quot;)</b>
-<b class="fc"><i class="no-highlight">43</i>&nbsp;    private val battlEyeRegex = Regex(&quot;&quot;&quot;since ([^.]+).&quot;&quot;&quot;)</b>
-<i class="no-highlight">44</i>&nbsp;
-<i class="no-highlight">45</i>&nbsp;    override fun fromContent(content: String): World? {
-<b class="fc"><i class="no-highlight">46</i>&nbsp;        val document: Document = Jsoup.parse(content, &quot;&quot;, org.jsoup.parser.Parser.xmlParser())</b>
-<b class="fc"><i class="no-highlight">47</i>&nbsp;        val boxContent =</b>
-<b class="pc"><i class="no-highlight">48</i>&nbsp;            document.selectFirst(&quot;div.BoxContent&quot;) ?: throw ParsingException(&quot;BoxContent container not found&quot;)</b>
-<b class="fc"><i class="no-highlight">49</i>&nbsp;        val tables = boxContent.parseTablesMap(&quot;table.Table1, table.Table2&quot;)</b>
-<b class="fc"><i class="no-highlight">50</i>&nbsp;        tables[&quot;Error&quot;]?.apply { return null }</b>
-<b class="pc"><i class="no-highlight">51</i>&nbsp;        val name = tables[&quot;World Selection&quot;]?.selectFirst(&quot;option[selected]&quot;)?.text()?.clean()</b>
-<b class="nc"><i class="no-highlight">52</i>&nbsp;            ?: throw ParsingException(&quot;World Selection table not found&quot;)</b>
-<b class="fc"><i class="no-highlight">53</i>&nbsp;        val builder = worldBuilder {</b>
-<b class="fc"><i class="no-highlight">54</i>&nbsp;            this.name = name</b>
-<b class="fc"><i class="no-highlight">55</i>&nbsp;        }</b>
-<b class="pc"><i class="no-highlight">56</i>&nbsp;        tables[&quot;World Information&quot;]?.let { builder.parseWorldInformation(it) }</b>
-<b class="fc"><i class="no-highlight">57</i>&nbsp;        tables.getContaining(&quot;Players Online&quot;)?.let { builder.parseOnlinePlayersTable(it) }</b>
-<b class="fc"><i class="no-highlight">58</i>&nbsp;        return builder.build()</b>
-<i class="no-highlight">59</i>&nbsp;    }
-<i class="no-highlight">60</i>&nbsp;
-<i class="no-highlight">61</i>&nbsp;    private fun WorldBuilder.parseOnlinePlayersTable(table: Element) {
-<b class="fc"><i class="no-highlight">62</i>&nbsp;        for (row in table.rows().offsetStart(2)) {</b>
-<b class="fc"><i class="no-highlight">63</i>&nbsp;            val columns = row.select(&quot;td&quot;)</b>
-<b class="fc"><i class="no-highlight">64</i>&nbsp;            val (name, level, vocation) = columns.map { it.text().clean() }</b>
-<b class="fc"><i class="no-highlight">65</i>&nbsp;            addOnlinePlayer(name,</b>
-<b class="fc"><i class="no-highlight">66</i>&nbsp;                level.toInt(),</b>
-<b class="pc"><i class="no-highlight">67</i>&nbsp;                StringEnum.fromValue(vocation) ?: throw ParsingException(&quot;unknown vocation: $vocation&quot;))</b>
-<i class="no-highlight">68</i>&nbsp;        }
-<i class="no-highlight">69</i>&nbsp;    }
-<i class="no-highlight">70</i>&nbsp;
-<i class="no-highlight">71</i>&nbsp;    private fun WorldBuilder.parseWorldInformation(table: Element) {
-<b class="fc"><i class="no-highlight">72</i>&nbsp;        for (row in table.rows().offsetStart(1)) {</b>
-<b class="fc"><i class="no-highlight">73</i>&nbsp;            val columns = row.select(&quot;td&quot;)</b>
-<b class="fc"><i class="no-highlight">74</i>&nbsp;            var (field, value) = columns.map { it.text().clean() }</b>
-<b class="fc"><i class="no-highlight">75</i>&nbsp;            field = field.remove(&quot;:&quot;)</b>
-<b class="pc"><i class="no-highlight">76</i>&nbsp;            when (field) {</b>
-<b class="fc"><i class="no-highlight">77</i>&nbsp;                &quot;Status&quot; -&gt; isOnline = value.contains(&quot;online&quot;, true)</b>
-<b class="fc"><i class="no-highlight">78</i>&nbsp;                &quot;Players Online&quot; -&gt; onlineCount = value.parseInteger()</b>
-<b class="fc"><i class="no-highlight">79</i>&nbsp;                &quot;Online Record&quot; -&gt; parseOnlineRecord(value)</b>
-<b class="fc"><i class="no-highlight">80</i>&nbsp;                &quot;Creation Date&quot; -&gt; parseCreationDate(value)</b>
-<b class="fc"><i class="no-highlight">81</i>&nbsp;                &quot;Location&quot; -&gt; location = value</b>
-<b class="fc"><i class="no-highlight">82</i>&nbsp;                &quot;PvP Type&quot; -&gt; pvpType =</b>
-<b class="pc"><i class="no-highlight">83</i>&nbsp;                    StringEnum.fromValue(value) ?: throw ParsingException(&quot;unknown pvp type found: $value&quot;)</b>
-<i class="no-highlight">84</i>&nbsp;
-<b class="fc"><i class="no-highlight">85</i>&nbsp;                &quot;Premium Type&quot; -&gt; isPremiumRestricted = true</b>
-<b class="fc"><i class="no-highlight">86</i>&nbsp;                &quot;Transfer Type&quot; -&gt; parseTransferType(value)</b>
-<b class="fc"><i class="no-highlight">87</i>&nbsp;                &quot;World Quest Titles&quot; -&gt; if (!value.contains(&quot;has no title&quot;, true)) {</b>
-<b class="fc"><i class="no-highlight">88</i>&nbsp;                    value.split(&quot;,&quot;).map { worldQuest(it.clean()) }</b>
-<i class="no-highlight">89</i>&nbsp;                }
-<i class="no-highlight">90</i>&nbsp;
-<b class="fc"><i class="no-highlight">91</i>&nbsp;                &quot;BattlEye Status&quot; -&gt; parseBattlEyeStatus(value)</b>
-<b class="fc"><i class="no-highlight">92</i>&nbsp;                &quot;Game World Type&quot; -&gt; isExperimental = (value.contains(&quot;experimental&quot;, true))</b>
-<i class="no-highlight">93</i>&nbsp;            }
-<i class="no-highlight">94</i>&nbsp;        }
-<i class="no-highlight">95</i>&nbsp;    }
-<i class="no-highlight">96</i>&nbsp;
-<i class="no-highlight">97</i>&nbsp;    private fun WorldBuilder.parseTransferType(value: String) {
-<b class="pc"><i class="no-highlight">98</i>&nbsp;        transferType = if (value.contains(&quot;locked&quot;, true)) {</b>
-<b class="fc"><i class="no-highlight">99</i>&nbsp;            TransferType.LOCKED</b>
-<b class="nc"><i class="no-highlight">100</i>&nbsp;        } else if (value.contains(&quot;blocked&quot;, true)) {</b>
-<b class="nc"><i class="no-highlight">101</i>&nbsp;            TransferType.BLOCKED</b>
-<i class="no-highlight">102</i>&nbsp;        } else {
-<b class="nc"><i class="no-highlight">103</i>&nbsp;            TransferType.REGULAR</b>
-<i class="no-highlight">104</i>&nbsp;        }
-<i class="no-highlight">105</i>&nbsp;
-<i class="no-highlight">106</i>&nbsp;    }
-<i class="no-highlight">107</i>&nbsp;
-<i class="no-highlight">108</i>&nbsp;    private fun WorldBuilder.parseBattlEyeStatus(value: String) {
-<b class="fc"><i class="no-highlight">109</i>&nbsp;        battlEyeRegex.find(value)?.apply {</b>
-<b class="fc"><i class="no-highlight">110</i>&nbsp;            val (_, since) = this.groupValues</b>
-<b class="fc"><i class="no-highlight">111</i>&nbsp;            if (since.contains(&quot;release&quot;)) {</b>
-<b class="fc"><i class="no-highlight">112</i>&nbsp;                battlEyeType = BattlEyeType.GREEN</b>
-<b class="fc"><i class="no-highlight">113</i>&nbsp;                battlEyeStartDate = null</b>
-<i class="no-highlight">114</i>&nbsp;            } else {
-<b class="fc"><i class="no-highlight">115</i>&nbsp;                battlEyeType = BattlEyeType.YELLOW</b>
-<b class="fc"><i class="no-highlight">116</i>&nbsp;                battlEyeStartDate = parseTibiaFullDate(since)</b>
-<i class="no-highlight">117</i>&nbsp;            }
-<i class="no-highlight">118</i>&nbsp;            return
-<i class="no-highlight">119</i>&nbsp;        }
-<b class="fc"><i class="no-highlight">120</i>&nbsp;        battlEyeType = BattlEyeType.UNPROTECTED</b>
-<b class="fc"><i class="no-highlight">121</i>&nbsp;        battlEyeStartDate = null</b>
-<i class="no-highlight">122</i>&nbsp;    }
-<i class="no-highlight">123</i>&nbsp;
-<i class="no-highlight">124</i>&nbsp;    private fun WorldBuilder.parseOnlineRecord(value: String) {
-<b class="pc"><i class="no-highlight">125</i>&nbsp;        recordRegex.find(value)?.apply {</b>
-<b class="fc"><i class="no-highlight">126</i>&nbsp;            val (_, count, date) = this.groupValues</b>
-<b class="fc"><i class="no-highlight">127</i>&nbsp;            onlineRecordCount = count.parseInteger()</b>
-<b class="fc"><i class="no-highlight">128</i>&nbsp;            onlineRecordDateTime = parseTibiaDateTime(date)</b>
-<i class="no-highlight">129</i>&nbsp;
-<b class="fc"><i class="no-highlight">130</i>&nbsp;        }</b>
-<i class="no-highlight">131</i>&nbsp;    }
-<i class="no-highlight">132</i>&nbsp;
-<i class="no-highlight">133</i>&nbsp;    private fun WorldBuilder.parseCreationDate(value: String) {
-<b class="fc"><i class="no-highlight">134</i>&nbsp;        val (month, year) = value.split(&quot;/&quot;).map { it.toInt() }</b>
-<b class="pc"><i class="no-highlight">135</i>&nbsp;        creationDate = YearMonth.of(if (year &gt; 90) year + 1900 else year + 2000, month)</b>
-<i class="no-highlight">136</i>&nbsp;
-<i class="no-highlight">137</i>&nbsp;    }
-<i class="no-highlight">138</i>&nbsp;}
-</div>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.galarzaa.tibiakt.core.parsers
+&nbsp;
+&nbsp;import com.galarzaa.tibiakt.core.builders.WorldBuilder
+&nbsp;import com.galarzaa.tibiakt.core.builders.worldBuilder
+&nbsp;import com.galarzaa.tibiakt.core.enums.BattlEyeType
+&nbsp;import com.galarzaa.tibiakt.core.enums.StringEnum
+&nbsp;import com.galarzaa.tibiakt.core.enums.TransferType
+&nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
+&nbsp;import com.galarzaa.tibiakt.core.models.world.World
+&nbsp;import com.galarzaa.tibiakt.core.utils.clean
+&nbsp;import com.galarzaa.tibiakt.core.utils.getContaining
+&nbsp;import com.galarzaa.tibiakt.core.utils.offsetStart
+&nbsp;import com.galarzaa.tibiakt.core.utils.parseInteger
+&nbsp;import com.galarzaa.tibiakt.core.utils.parseTablesMap
+&nbsp;import com.galarzaa.tibiakt.core.utils.parseTibiaDateTime
+&nbsp;import com.galarzaa.tibiakt.core.utils.parseTibiaFullDate
+&nbsp;import com.galarzaa.tibiakt.core.utils.remove
+&nbsp;import com.galarzaa.tibiakt.core.utils.rows
+&nbsp;import org.jsoup.Jsoup
+&nbsp;import org.jsoup.nodes.Document
+&nbsp;import org.jsoup.nodes.Element
+&nbsp;import java.time.YearMonth
+&nbsp;
+&nbsp;/** Parser for world pages. */
+&nbsp;public object WorldParser : Parser&lt;World?&gt; {
+<b class="fc">&nbsp;    private val recordRegex = Regex(&quot;&quot;&quot;(?&lt;count&gt;[\d.,]+) players \(on (?&lt;date&gt;[^)]+)\)&quot;&quot;&quot;)</b>
+<b class="fc">&nbsp;    private val battlEyeRegex = Regex(&quot;&quot;&quot;since ([^.]+).&quot;&quot;&quot;)</b>
+&nbsp;
+&nbsp;    override fun fromContent(content: String): World? {
+<b class="fc">&nbsp;        val document: Document = Jsoup.parse(content, &quot;&quot;, org.jsoup.parser.Parser.xmlParser())</b>
+<b class="fc">&nbsp;        val boxContent =</b>
+<b class="pc">&nbsp;            document.selectFirst(&quot;div.BoxContent&quot;) ?: throw ParsingException(&quot;BoxContent container not found&quot;)</b>
+<b class="fc">&nbsp;        val tables = boxContent.parseTablesMap(&quot;table.Table1, table.Table2&quot;)</b>
+<b class="fc">&nbsp;        tables[&quot;Error&quot;]?.apply { return null }</b>
+<b class="pc">&nbsp;        val name = tables[&quot;World Selection&quot;]?.selectFirst(&quot;option[selected]&quot;)?.text()?.clean()</b>
+<b class="nc">&nbsp;            ?: throw ParsingException(&quot;World Selection table not found&quot;)</b>
+<b class="fc">&nbsp;        val builder = worldBuilder {</b>
+<b class="fc">&nbsp;            this.name = name</b>
+<b class="fc">&nbsp;        }</b>
+<b class="pc">&nbsp;        tables[&quot;World Information&quot;]?.let { builder.parseWorldInformation(it) }</b>
+<b class="fc">&nbsp;        tables.getContaining(&quot;Players Online&quot;)?.let { builder.parseOnlinePlayersTable(it) }</b>
+<b class="fc">&nbsp;        return builder.build()</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private fun WorldBuilder.parseOnlinePlayersTable(table: Element) {
+<b class="fc">&nbsp;        for (row in table.rows().offsetStart(2)) {</b>
+<b class="fc">&nbsp;            val columns = row.select(&quot;td&quot;)</b>
+<b class="fc">&nbsp;            val (name, level, vocation) = columns.map { it.text().clean() }</b>
+<b class="fc">&nbsp;            addOnlinePlayer(name,</b>
+<b class="fc">&nbsp;                level.toInt(),</b>
+<b class="pc">&nbsp;                StringEnum.fromValue(vocation) ?: throw ParsingException(&quot;unknown vocation: $vocation&quot;))</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private fun WorldBuilder.parseWorldInformation(table: Element) {
+<b class="fc">&nbsp;        for (row in table.rows().offsetStart(1)) {</b>
+<b class="fc">&nbsp;            val columns = row.select(&quot;td&quot;)</b>
+<b class="fc">&nbsp;            var (field, value) = columns.map { it.text().clean() }</b>
+<b class="fc">&nbsp;            field = field.remove(&quot;:&quot;)</b>
+<b class="pc">&nbsp;            when (field) {</b>
+<b class="fc">&nbsp;                &quot;Status&quot; -&gt; isOnline = value.contains(&quot;online&quot;, true)</b>
+<b class="fc">&nbsp;                &quot;Players Online&quot; -&gt; onlineCount = value.parseInteger()</b>
+<b class="fc">&nbsp;                &quot;Online Record&quot; -&gt; parseOnlineRecord(value)</b>
+<b class="fc">&nbsp;                &quot;Creation Date&quot; -&gt; parseCreationDate(value)</b>
+<b class="fc">&nbsp;                &quot;Location&quot; -&gt; location = value</b>
+<b class="fc">&nbsp;                &quot;PvP Type&quot; -&gt; pvpType =</b>
+<b class="pc">&nbsp;                    StringEnum.fromValue(value) ?: throw ParsingException(&quot;unknown pvp type found: $value&quot;)</b>
+&nbsp;
+<b class="fc">&nbsp;                &quot;Premium Type&quot; -&gt; isPremiumRestricted = true</b>
+<b class="fc">&nbsp;                &quot;Transfer Type&quot; -&gt; parseTransferType(value)</b>
+<b class="fc">&nbsp;                &quot;World Quest Titles&quot; -&gt; if (!value.contains(&quot;has no title&quot;, true)) {</b>
+<b class="fc">&nbsp;                    value.split(&quot;,&quot;).map { worldQuest(it.clean()) }</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                &quot;BattlEye Status&quot; -&gt; parseBattlEyeStatus(value)</b>
+<b class="fc">&nbsp;                &quot;Game World Type&quot; -&gt; isExperimental = (value.contains(&quot;experimental&quot;, true))</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private fun WorldBuilder.parseTransferType(value: String) {
+<b class="pc">&nbsp;        transferType = if (value.contains(&quot;locked&quot;, true)) {</b>
+<b class="fc">&nbsp;            TransferType.LOCKED</b>
+<b class="nc">&nbsp;        } else if (value.contains(&quot;blocked&quot;, true)) {</b>
+<b class="nc">&nbsp;            TransferType.BLOCKED</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            TransferType.REGULAR</b>
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    private fun WorldBuilder.parseBattlEyeStatus(value: String) {
+<b class="fc">&nbsp;        battlEyeRegex.find(value)?.apply {</b>
+<b class="fc">&nbsp;            val (_, since) = this.groupValues</b>
+<b class="fc">&nbsp;            if (since.contains(&quot;release&quot;)) {</b>
+<b class="fc">&nbsp;                battlEyeType = BattlEyeType.GREEN</b>
+<b class="fc">&nbsp;                battlEyeStartDate = null</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                battlEyeType = BattlEyeType.YELLOW</b>
+<b class="fc">&nbsp;                battlEyeStartDate = parseTibiaFullDate(since)</b>
+&nbsp;            }
+&nbsp;            return
+&nbsp;        }
+<b class="fc">&nbsp;        battlEyeType = BattlEyeType.UNPROTECTED</b>
+<b class="fc">&nbsp;        battlEyeStartDate = null</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private fun WorldBuilder.parseOnlineRecord(value: String) {
+<b class="pc">&nbsp;        recordRegex.find(value)?.apply {</b>
+<b class="fc">&nbsp;            val (_, count, date) = this.groupValues</b>
+<b class="fc">&nbsp;            onlineRecordCount = count.parseInteger()</b>
+<b class="fc">&nbsp;            onlineRecordDateTime = parseTibiaDateTime(date)</b>
+&nbsp;
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private fun WorldBuilder.parseCreationDate(value: String) {
+<b class="fc">&nbsp;        val (month, year) = value.split(&quot;/&quot;).map { it.toInt() }</b>
+<b class="pc">&nbsp;        creationDate = YearMonth.of(if (year &gt; 90) year + 1900 else year + 2000, month)</b>
+&nbsp;
+&nbsp;    }
+&nbsp;}
+</code>
 </pre>
 </div>
 
@@ -250,18 +251,15 @@ Current scope:     <a href="../../index.html">all classes</a>
     @*/
 
     if (!msie || msie && msie9) {
-        var codeBlock = document.getElementById('sourceCode');
-
-        if (codeBlock) {
-            hljs.highlightBlock(codeBlock);
-        }
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
     }
 })();
 </script>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-02-24 23:58</div>
+    <div style="float:right;">generated on 2023-03-15 02:46</div>
 </div>
 </body>
 </html>
