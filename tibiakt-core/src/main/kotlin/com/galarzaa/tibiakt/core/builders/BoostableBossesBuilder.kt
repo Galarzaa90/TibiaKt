@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2023 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,37 +16,37 @@
 
 package com.galarzaa.tibiakt.core.builders
 
+import com.galarzaa.tibiakt.core.models.creatures.BoostableBosses
 import com.galarzaa.tibiakt.core.models.creatures.BossEntry
-import com.galarzaa.tibiakt.core.models.creatures.BosstableBosses
 import com.galarzaa.tibiakt.core.utils.BuilderDsl
 
 @BuilderDsl
-public inline fun bosstableBosses(block: BosstableBossesBuilder.() -> Unit): BosstableBosses =
-    BosstableBossesBuilder().apply(block).build()
+public inline fun boostableBosses(block: BoostableBossesBuilder.() -> Unit): BoostableBosses =
+    BoostableBossesBuilder().apply(block).build()
 
 @BuilderDsl
-public inline fun bosstableBossesBuilder(block: BosstableBossesBuilder.() -> Unit): BosstableBossesBuilder =
-    BosstableBossesBuilder().apply(block)
+public inline fun boostableBossesBuilder(block: BoostableBossesBuilder.() -> Unit): BoostableBossesBuilder =
+    BoostableBossesBuilder().apply(block)
 
-/** Builder for [BosstableBosses] instances. */
+/** Builder for [BoostableBosses] instances. */
 @BuilderDsl
-public class BosstableBossesBuilder : TibiaKtBuilder<BosstableBosses> {
+public class BoostableBossesBuilder : TibiaKtBuilder<BoostableBosses> {
     public var boostedBoss: BossEntry? = null
     public val bosses: MutableList<BossEntry> = mutableListOf()
 
-    public fun boostedBoss(boostedBoss: BossEntry): BosstableBossesBuilder = apply { this.boostedBoss = boostedBoss }
+    public fun boostedBoss(boostedBoss: BossEntry): BoostableBossesBuilder = apply { this.boostedBoss = boostedBoss }
 
     @BuilderDsl
-    public fun boostedBoss(block: BossEntryBuilder.() -> Unit): BosstableBossesBuilder =
+    public fun boostedBoss(block: BossEntryBuilder.() -> Unit): BoostableBossesBuilder =
         apply { this.boostedBoss = BossEntryBuilder().apply(block).build() }
 
-    public fun addCreature(creature: BossEntry): BosstableBossesBuilder = apply { bosses.add(creature) }
+    public fun addCreature(creature: BossEntry): BoostableBossesBuilder = apply { bosses.add(creature) }
 
     @BuilderDsl
-    public fun addCreature(block: BossEntryBuilder.() -> Unit): BosstableBossesBuilder =
+    public fun addCreature(block: BossEntryBuilder.() -> Unit): BoostableBossesBuilder =
         apply { bosses.add(BossEntryBuilder().apply(block).build()) }
 
-    override fun build(): BosstableBosses = BosstableBosses(
+    override fun build(): BoostableBosses = BoostableBosses(
         boostedBoss = boostedBoss ?: throw IllegalArgumentException("boostedBoss is required"), bosses = bosses
     )
 

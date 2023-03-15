@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2023 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -64,6 +64,6 @@ sonarqube {
         property("sonar.projectKey", "Galarzaa90_TibiaKt")
         property("sonar.organization", "galarzaa90")
         property("sonar.host.url", "https://sonarcloud.io")
-        property("sonar.coverage.jacoco.xmlReportPaths", "tibiakt-core/build/reports/kover/report.xml")
+        property("sonar.coverage.jacoco.xmlReportPaths", "build/reports/kover/report.xml")
     }
 }

@@ -14,18 +14,20 @@
  * limitations under the License.
  */
 
-package com.galarzaa.tibiakt.core.models.creatures
+package com.galarzaa.tibiakt.core.parsers
 
-import kotlinx.serialization.Serializable
+import com.galarzaa.tibiakt.TestResources.getResource
+import io.kotest.core.spec.style.StringSpec
+import io.kotest.matchers.collections.shouldHaveSize
+import io.kotest.matchers.shouldBe
 
-/**
- * A boss in the [BoostableBosses] section of Tibia.com.
- *
- * @property name The name of the boss.
- * @property identifier The internal name of the boss. Used for images.
- */
-@Serializable
-public data class BossEntry(
-    override val name: String,
-    override val identifier: String,
-) : BaseCreatureEntry
+class BoostableBossesTests : StringSpec({
+    "Parsing section" {
+        val boostableBosses = BoostableBossesParser.fromContent(getResource("creatures/boostableBosses.txt"))
+        with(boostableBosses.boostedBoss) {
+            name shouldBe "Utua Stone Sting"
+            identifier shouldBe "utua"
+        }
+        boostableBosses.bosses shouldHaveSize 91
+    }
+})

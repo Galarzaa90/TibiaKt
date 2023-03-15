@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2023 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,9 @@
 
 package com.galarzaa.tibiakt.core.parsers
 
-import com.galarzaa.tibiakt.core.builders.bosstableBosses
+import com.galarzaa.tibiakt.core.builders.boostableBosses
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
-import com.galarzaa.tibiakt.core.models.creatures.BosstableBosses
+import com.galarzaa.tibiakt.core.models.creatures.BoostableBosses
 import com.galarzaa.tibiakt.core.utils.cleanText
 import com.galarzaa.tibiakt.core.utils.parseTablesMap
 import com.galarzaa.tibiakt.core.utils.remove
@@ -26,11 +26,11 @@ import java.io.File
 import java.net.URL
 
 /** Parser for the boostable bosses section. */
-public object BosstableBossesParser : Parser<BosstableBosses> {
-    override fun fromContent(content: String): BosstableBosses {
+public object BoostableBossesParser : Parser<BoostableBosses> {
+    override fun fromContent(content: String): BoostableBosses {
         val boxContent = boxContent(content)
         val tables = boxContent.parseTablesMap("table.Table1")
-        return bosstableBosses {
+        return boostableBosses {
             tables["Boosted Boss"]?.let {
                 val boostedCreatureImageUrl = it.selectFirst("img")?.attr("src")
                     ?: throw ParsingException("boosted boss image not found")

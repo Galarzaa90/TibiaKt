@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2023 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,7 +40,7 @@ import com.galarzaa.tibiakt.core.models.bazaar.ItemEntry
 import com.galarzaa.tibiakt.core.models.bazaar.MountEntry
 import com.galarzaa.tibiakt.core.models.bazaar.OutfitEntry
 import com.galarzaa.tibiakt.core.models.character.Character
-import com.galarzaa.tibiakt.core.models.creatures.BosstableBosses
+import com.galarzaa.tibiakt.core.models.creatures.BoostableBosses
 import com.galarzaa.tibiakt.core.models.creatures.CreaturesSection
 import com.galarzaa.tibiakt.core.models.forums.CMPostArchive
 import com.galarzaa.tibiakt.core.models.forums.ForumAnnouncement
@@ -60,7 +60,7 @@ import com.galarzaa.tibiakt.core.models.news.NewsArchive
 import com.galarzaa.tibiakt.core.models.world.World
 import com.galarzaa.tibiakt.core.models.world.WorldOverview
 import com.galarzaa.tibiakt.core.parsers.AuctionParser
-import com.galarzaa.tibiakt.core.parsers.BosstableBossesParser
+import com.galarzaa.tibiakt.core.parsers.BoostableBossesParser
 import com.galarzaa.tibiakt.core.parsers.CMPostArchiveParser
 import com.galarzaa.tibiakt.core.parsers.CharacterBazaarParser
 import com.galarzaa.tibiakt.core.parsers.CharacterParser
@@ -290,9 +290,9 @@ public open class TibiaKtClient constructor(
 
     // region Library Section
     /** Fetch the boosted boss of the day as well as the list of bosstable bosses from Tibia.com. */
-    public open suspend fun fetchBosstableBosses(): TibiaResponse<BosstableBosses> {
+    public open suspend fun fetchBoostableBosses(): TibiaResponse<BoostableBosses> {
         val response = this.request(HttpMethod.Get, getBoostableBossesUrl())
-        return response.parse { BosstableBossesParser.fromContent(it) }
+        return response.parse { BoostableBossesParser.fromContent(it) }
     }
 
     /** Fetch the creatures section, containing the boosted creature. */
