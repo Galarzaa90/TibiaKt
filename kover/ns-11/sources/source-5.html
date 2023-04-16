@@ -150,7 +150,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;/*
-&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; * Copyright © 2023 Allan Galarza
 &nbsp; *
 &nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 &nbsp; * you may not use this file except in compliance with the License.
@@ -291,7 +291,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;
 &nbsp;    private fun CharacterBuilder.parseAccountBadges(rows: Elements) {
 <b class="fc">&nbsp;        val row = rows[0]</b>
-<b class="fc">&nbsp;        for (column: Element in row.select(&quot;td&quot;)) {</b>
+<b class="fc">&nbsp;        for (column: Element in row.select(&quot;td &gt; span&quot;)) {</b>
 <b class="pc">&nbsp;            val popupSpan = column.selectFirst(&quot;span.HelperDivIndicator&quot;) ?: return</b>
 <b class="fc">&nbsp;            val (title: String, popupContent: Document) = parsePopup(popupSpan.attr(&quot;onmouseover&quot;))</b>
 <b class="fc">&nbsp;            val description = popupContent.text()</b>
@@ -419,7 +419,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-03-15 14:30</div>
+    <div style="float:right;">generated on 2023-04-16 07:06</div>
 </div>
 </body>
 </html>
