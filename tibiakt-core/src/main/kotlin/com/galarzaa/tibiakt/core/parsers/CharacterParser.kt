@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2023 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -140,7 +140,7 @@ public object CharacterParser : Parser<Character?> {
 
     private fun CharacterBuilder.parseAccountBadges(rows: Elements) {
         val row = rows[0]
-        for (column: Element in row.select("td")) {
+        for (column: Element in row.select("td > span")) {
             val popupSpan = column.selectFirst("span.HelperDivIndicator") ?: return
             val (title: String, popupContent: Document) = parsePopup(popupSpan.attr("onmouseover"))
             val description = popupContent.text()
