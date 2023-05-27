@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > InstantSerializer</title>
+  <title>Coverage Report > YearMonthSerializer</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -21,7 +21,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">com.galarzaa.tibiakt.core.serializers</a>
 </div>
 
-<h1>Coverage Summary for Class: InstantSerializer (com.galarzaa.tibiakt.core.serializers)</h1>
+<h1>Coverage Summary for Class: YearMonthSerializer (com.galarzaa.tibiakt.core.serializers)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -48,7 +48,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">InstantSerializer</td>
+  <td class="name">YearMonthSerializer</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -79,7 +79,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/14)
+    (0/20)
   </span>
 </td>
 </tr>
@@ -109,23 +109,24 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;
 &nbsp;package com.galarzaa.tibiakt.core.serializers
 &nbsp;
-&nbsp;import kotlinx.datetime.Instant
 &nbsp;import kotlinx.serialization.KSerializer
 &nbsp;import kotlinx.serialization.descriptors.PrimitiveKind
 &nbsp;import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 &nbsp;import kotlinx.serialization.descriptors.SerialDescriptor
 &nbsp;import kotlinx.serialization.encoding.Decoder
 &nbsp;import kotlinx.serialization.encoding.Encoder
+&nbsp;import java.time.YearMonth
 &nbsp;
 &nbsp;/**
-&nbsp; * Serializer for [Instant] objects, using ISO-8601&#39;s standard for date times.
+&nbsp; * Serializer for [YearMonth] objects, using YYYY-MM format.
 &nbsp; */
-&nbsp;public object InstantSerializer : KSerializer&lt;Instant&gt; {
-<b class="nc">&nbsp;    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(&quot;DateTime&quot;, PrimitiveKind.STRING)</b>
-&nbsp;    override fun serialize(encoder: Encoder, value: Instant): Unit =
+&nbsp;public object YearMonthSerializer : KSerializer&lt;YearMonth&gt; {
+<b class="nc">&nbsp;    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(&quot;YearMonth&quot;, PrimitiveKind.STRING)</b>
+&nbsp;    override fun serialize(encoder: Encoder, value: YearMonth): Unit =
 <b class="nc">&nbsp;        encoder.encodeString(value.toString())</b>
 &nbsp;
-<b class="nc">&nbsp;    override fun deserialize(decoder: Decoder): Instant = Instant.parse(decoder.decodeString())</b>
+&nbsp;    override fun deserialize(decoder: Decoder): YearMonth =
+<b class="nc">&nbsp;        YearMonth.parse(decoder.decodeString())</b>
 &nbsp;}
 </code>
 </pre>
@@ -150,7 +151,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-04-16 07:06</div>
+    <div style="float:right;">generated on 2023-05-27 19:12</div>
 </div>
 </body>
 </html>

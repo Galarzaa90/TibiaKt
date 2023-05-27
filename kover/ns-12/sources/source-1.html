@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > DurationSerializer</title>
+  <title>Coverage Report > LocalDateSerializer</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -21,7 +21,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">com.galarzaa.tibiakt.core.serializers</a>
 </div>
 
-<h1>Coverage Summary for Class: DurationSerializer (com.galarzaa.tibiakt.core.serializers)</h1>
+<h1>Coverage Summary for Class: LocalDateSerializer (com.galarzaa.tibiakt.core.serializers)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -48,7 +48,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">DurationSerializer</td>
+  <td class="name">LocalDateSerializer</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -79,7 +79,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/14)
+    (0/22)
   </span>
 </td>
 </tr>
@@ -115,18 +115,19 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;import kotlinx.serialization.descriptors.SerialDescriptor
 &nbsp;import kotlinx.serialization.encoding.Decoder
 &nbsp;import kotlinx.serialization.encoding.Encoder
-&nbsp;import kotlin.time.Duration
+&nbsp;import java.time.LocalDate
+&nbsp;import java.time.format.DateTimeFormatter
 &nbsp;
 &nbsp;/**
-&nbsp; * Serializer for [Duration] objects, using ISO-8601&#39;s standard for durations.
+&nbsp; * Serializer for [LocalDate] objects, using ISO-8601&#39;s standard for dates.
 &nbsp; */
-&nbsp;public object DurationSerializer : KSerializer&lt;Duration&gt; {
-<b class="nc">&nbsp;    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(&quot;Duration&quot;, PrimitiveKind.STRING)</b>
-&nbsp;    override fun serialize(encoder: Encoder, value: Duration): Unit =
-<b class="nc">&nbsp;        encoder.encodeString(value.toString())</b>
+&nbsp;public object LocalDateSerializer : KSerializer&lt;LocalDate&gt; {
+<b class="nc">&nbsp;    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(&quot;Date&quot;, PrimitiveKind.STRING)</b>
+&nbsp;    override fun serialize(encoder: Encoder, value: LocalDate): Unit =
+<b class="nc">&nbsp;        encoder.encodeString(value.format(DateTimeFormatter.ISO_DATE))</b>
 &nbsp;
-&nbsp;    override fun deserialize(decoder: Decoder): Duration =
-<b class="nc">&nbsp;        Duration.parse(decoder.decodeString())</b>
+&nbsp;    override fun deserialize(decoder: Decoder): LocalDate =
+<b class="nc">&nbsp;        LocalDate.parse(decoder.decodeString(), DateTimeFormatter.ISO_DATE)</b>
 &nbsp;}
 </code>
 </pre>
@@ -151,7 +152,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-04-16 07:06</div>
+    <div style="float:right;">generated on 2023-05-27 19:12</div>
 </div>
 </body>
 </html>
