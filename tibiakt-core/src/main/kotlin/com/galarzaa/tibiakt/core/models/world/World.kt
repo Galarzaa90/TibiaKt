@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2023 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,14 +14,13 @@
  * limitations under the License.
  */
 
-@file:UseSerializers(InstantSerializer::class, LocalDateSerializer::class, YearMonthSerializer::class)
+@file:UseSerializers(LocalDateSerializer::class, YearMonthSerializer::class)
 
 package com.galarzaa.tibiakt.core.models.world
 
 import com.galarzaa.tibiakt.core.enums.BattlEyeType
 import com.galarzaa.tibiakt.core.enums.PvpType
 import com.galarzaa.tibiakt.core.enums.TransferType
-import com.galarzaa.tibiakt.core.serializers.InstantSerializer
 import com.galarzaa.tibiakt.core.serializers.LocalDateSerializer
 import com.galarzaa.tibiakt.core.serializers.YearMonthSerializer
 import kotlinx.datetime.Instant

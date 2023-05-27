@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2023 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,18 +14,15 @@
  * limitations under the License.
  */
 
-@file:UseSerializers(InstantSerializer::class)
 
 package com.galarzaa.tibiakt.core.models.house
 
 import com.galarzaa.tibiakt.core.enums.HouseStatus
 import com.galarzaa.tibiakt.core.enums.HouseType
-import com.galarzaa.tibiakt.core.serializers.InstantSerializer
 import com.galarzaa.tibiakt.core.utils.getCharacterUrl
 import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.UseSerializers
 
 /**
  * A house or guildhall.
