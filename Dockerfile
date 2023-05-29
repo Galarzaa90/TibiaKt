@@ -1,17 +1,17 @@
-FROM adoptopenjdk/openjdk16:debianslim-jre as builder
-COPY *.gradle.kts gradle.* gradlew /home/gradle/app/
-COPY gradle/ /home/gradle/app/gradle/
-COPY buildSrc/ /home/gradle/app/buildSrc/
-WORKDIR /home/gradle/app
+FROM amazoncorretto:19 AS builder
+COPY *.gradle.kts gradle.* gradlew /app/
+COPY gradle/ /app/gradle/
+COPY buildSrc/ /app/buildSrc/
+WORKDIR /app
 
 # This step will fail because source is still not there, but at least dependencies will be downloaded
 RUN ./gradlew build -x check -x detekt --parallel --continue > /dev/null 2>&1 || true
 
-COPY . /home/gradle/app
+COPY . /app
 RUN ./gradlew build -x test -x detekt shadowJar --parallel
 
-FROM adoptopenjdk/openjdk16:debianslim-jre
-COPY --from=builder ./home/gradle/app/tibiakt-server/build/libs/tibiatk-server.jar .
+FROM amazoncorretto:19
+COPY --from=builder ./app/tibiakt-server/build/libs/tibiatk-server.jar .
 
 EXPOSE 8080
 
