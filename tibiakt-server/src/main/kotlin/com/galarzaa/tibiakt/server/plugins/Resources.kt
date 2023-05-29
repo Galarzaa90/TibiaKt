@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2023 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-@file:OptIn(KtorExperimentalLocationsAPI::class)
+ @file:UseSerializers(LocalDateSerializer::class)
 
 package com.galarzaa.tibiakt.server.plugins
 
@@ -33,32 +33,37 @@ import com.galarzaa.tibiakt.core.enums.HouseType
 import com.galarzaa.tibiakt.core.enums.NewsCategory
 import com.galarzaa.tibiakt.core.enums.NewsType
 import com.galarzaa.tibiakt.core.enums.PvpType
+import com.galarzaa.tibiakt.core.serializers.LocalDateSerializer
+import io.ktor.resources.Resource
 import io.ktor.server.application.Application
 import io.ktor.server.application.install
-import io.ktor.server.locations.KtorExperimentalLocationsAPI
-import io.ktor.server.locations.Location
-import io.ktor.server.locations.Locations
+import io.ktor.server.resources.Resources
+import kotlinx.serialization.UseSerializers
 import java.time.LocalDate
 
 internal fun Application.configureLocations() {
-    install(Locations)
+    install(Resources)
 }
 
-@Location("/characters/{name}")
-data class GetCharacter(val name: String)
+@Resource("/characters/{name}")
+data class Characters(val name: String)
 
-@Location("/worlds/{name}")
-data class GetWorld(val name: String) {
-    @Location("/guilds")
-    data class Guilds(val parent: GetWorld)
+@Resource("/worlds")
+class Worlds() {
+
+    @Resource("/{name}")
+    data class ByName(val parent: Worlds, val name: String) {
+        @Resource("/guilds")
+        data class Guilds(val parent: ByName)
+    }
 }
 
-@Location("guilds/{name}")
-data class GetGuild(val name: String)
+@Resource("/guilds/{name}")
+data class Guilds(val name: String)
 
 
-@Location("/news")
-data class GetNewsArchive(
+@Resource("/news")
+data class NewsArchive(
     val start: LocalDate? = null,
     val end: LocalDate? = null,
     val days: Int? = null,
@@ -66,20 +71,20 @@ data class GetNewsArchive(
     val category: List<NewsCategory>? = null,
 )
 
-@Location("/news/{newsId}")
-data class GetNews(val newsId: Int) {
-    @Location("/html")
-    data class Html(val parent: GetNews)
+@Resource("/news/{newsId}")
+data class News(val newsId: Int) {
+    @Resource("/html")
+    data class Html(val parent: News)
 }
 
-@Location("/killStatistics/{world}")
-data class GetKillStatistics(val world: String)
+@Resource("/killStatistics/{world}")
+data class KillStatistics(val world: String)
 
-@Location("/eventsSchedule/{year}/{month}")
-data class GetEventsSchedule(val year: Int, val month: Int)
+@Resource("/eventsSchedule/{year}/{month}")
+data class EventsSchedule(val year: Int, val month: Int)
 
-@Location("/houses/{world}/town/{town}")
-data class GetWorldHouses(
+@Resource("/houses/{world}/town/{town}")
+data class WorldHouses(
     val world: String,
     val town: String,
     val type: HouseType? = null,
@@ -87,30 +92,30 @@ data class GetWorldHouses(
     val order: HouseOrder? = null,
 )
 
-@Location("/houses/{world}/{houseId}")
-data class GetHouse(
+@Resource("/houses/{world}/{houseId}")
+data class Houses(
     val world: String,
     val houseId: Int,
 )
 
-@Location("/highscores/{world}/{category}")
-data class GetHighscoresPage(
+@Resource("/highscores/{world}/{category}")
+data class HighscoresPage(
     val world: String,
     val category: HighscoresCategory,
     val page: Int = 1,
     val profession: HighscoresProfession = HighscoresProfession.ALL,
 )
 
-@Location("/highscores/{world}/{category}/all")
-data class GetHighscoresComplete(
+@Resource("/highscores/{world}/{category}/all")
+data class HighscoresComplete(
     val world: String,
     val category: HighscoresCategory,
     val page: Int = 1,
     val profession: HighscoresProfession = HighscoresProfession.ALL,
 )
 
-@Location("/bazaar")
-data class GetBazaar(
+@Resource("/bazaar")
+data class Bazaar(
     val page: Int = 1,
     val type: BazaarType = BazaarType.CURRENT,
     val world: String? = null,
@@ -128,42 +133,46 @@ data class GetBazaar(
     val searchType: AuctionSearchType? = null,
 )
 
-@Location("/auctions/{auctionId}")
-data class GetAuction(val auctionId: Int, val detailsOnly: Int = 0, val fetchAll: Int = 0)
+@Resource("/auctions/{auctionId}")
+data class Auctions(val auctionId: Int, val detailsOnly: Int = 0, val fetchAll: Int = 0)
 
-@Location("/cmPosts")
-data class GetCMPosts(
+@Resource("/cmPosts")
+data class CMPosts(
     val start: LocalDate? = null,
     val end: LocalDate? = null,
     val days: Int? = null, val page: Int = 1,
 )
 
-@Location("/forum/sections/{sectionId}")
-data class GetForumSection(val sectionId: Int)
+@Resource("/forums")
+class Forums {
 
-@Location("/forum/boards/{boardId}")
-data class GetForumBoard(val boardId: Int, val page: Int = 1, val threadAge: Int? = null)
+    @Resource("/sections/{sectionId}")
+    data class Section(val parent: Forums, val sectionId: Int)
+
+    @Resource("/boards/{boardId}")
+    data class Boards(val parent: Forums, val boardId: Int, val page: Int = 1, val threadAge: Int? = null)
 
 
-@Location("/forum/announcements/{announcementId}")
-data class GetForumAnnouncement(val announcementId: Int)
+    @Resource("/announcements/{announcementId}")
+    data class Announcement(val parent: Forums, val announcementId: Int)
 
-@Location("/forum/threads/{threadId}")
-data class GetForumThread(val threadId: Int, val page: Int = 1)
+    @Resource("/threads/{threadId}")
+    data class Threads(val parent: Forums, val threadId: Int, val page: Int = 1)
 
-@Location("/forum/post/{postId}")
-data class GetForumPost(val postId: Int)
+    @Resource("/post/{postId}")
+    data class Posts(val parent: Forums, val postId: Int)
+}
 
-@Location("/leaderboards/{world}")
-data class GetLeaderboards(
+@Resource("/leaderboards/{world}")
+data class Leaderboards(
     val world: String,
     val rotation: Int? = null,
     val page: Int = 1,
 )
 
-@Location("/library/creatures")
-class GetCreaturesSection
+@Resource("/library/creatures")
+class CreaturesSection
 
 
-@Location("/library/bosses")
-class GetBoostableBosses
+@Resource("/library/bosses")
+class BoostableBosses

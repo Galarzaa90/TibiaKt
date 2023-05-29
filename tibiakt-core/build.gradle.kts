@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2023 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,14 +15,7 @@
  */
 
 import java.net.URL
-val kotlinVersion: String by project
-val ktorVersion: String by project
-val kotestVersion: String by project
-val jsoupVersion: String by project
-val kotlinLoggingVersion: String by project
-val logbackVersion: String by project
-val kotlinxDatetime: String by project
-val kotlinxSerialization: String by project
+
 
 apply("../publish.gradle.kts")
 
@@ -40,17 +33,10 @@ tasks.test {
 
 
 dependencies {
-    implementation("org.jetbrains.kotlinx", "kotlinx-serialization-json", kotlinxSerialization)
-    implementation("org.jsoup", "jsoup", jsoupVersion)
-
-    api("org.jetbrains.kotlinx","kotlinx-datetime", kotlinxDatetime)
-
-    testImplementation("org.jetbrains.kotlin", "kotlin-test", kotlinVersion)
-
-    testImplementation("io.kotest", "kotest-runner-junit5", kotestVersion)
-    testImplementation("io.kotest", "kotest-assertions-core", kotestVersion)
-    testImplementation("io.kotest", "kotest-property", kotestVersion)
-    testImplementation("io.kotest", "kotest-framework-datatest", kotestVersion)
+    implementation(libs.jsoup)
+    implementation(libs.kotlinx.serialization.json)
+    api(libs.kotlinx.datetime)
+    testImplementation(libs.bundles.kotest)
 }
 
 

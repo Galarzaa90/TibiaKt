@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-@file:OptIn(KtorExperimentalLocationsAPI::class)
-
 package com.galarzaa.tibiakt.server.plugins
 
 import com.galarzaa.tibiakt.client.TibiaKtClient
@@ -26,8 +24,7 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.Application
 import io.ktor.server.application.ApplicationCall
 import io.ktor.server.application.call
-import io.ktor.server.locations.KtorExperimentalLocationsAPI
-import io.ktor.server.locations.get
+import io.ktor.server.resources.get
 import io.ktor.server.response.respond
 import io.ktor.server.response.respondText
 import io.ktor.server.routing.get
@@ -35,12 +32,13 @@ import io.ktor.server.routing.routing
 
 internal fun Application.configureRouting(client: TibiaKtClient) {
     routing {
-        get<GetCharacter> { (name) -> call.respondOrNotFound(client.fetchCharacter(name)) }
-        get("/worlds") { call.respond(client.fetchWorldOverview()) }
-        get<GetWorld> { (name) -> call.respondOrNotFound(client.fetchWorld(name)) }
-        get<GetGuild> { (name) -> call.respondOrNotFound(client.fetchGuild(name)) }
-        get<GetWorld.Guilds> { (params) -> call.respondOrNotFound(client.fetchWorldGuilds(params.name)) }
-        get<GetNewsArchive> {
+        get<Characters> { (name) -> call.respondOrNotFound(client.fetchCharacter(name)) }
+
+        get<Worlds> { call.respond(client.fetchWorldOverview()) }
+        get<Worlds.ByName> { (_, name) -> call.respondOrNotFound(client.fetchWorld(name)) }
+        get<Guilds> { (name) -> call.respondOrNotFound(client.fetchGuild(name)) }
+        get<Worlds.ByName.Guilds> { (it) -> call.respondOrNotFound(client.fetchWorldGuilds(it.name)) }
+        get<NewsArchive> {
             if (it.start != null && it.end != null) {
                 call.respond(client.fetchRecentNews(it.start, it.end, it.category?.toSet(), it.type?.toSet()))
             } else if (it.days != null) {
@@ -49,30 +47,30 @@ internal fun Application.configureRouting(client: TibiaKtClient) {
                 call.respond(HttpStatusCode.BadRequest, "Query parameters 'start' and 'end', or 'days' are required")
             }
         }
-        get<GetNews> { (newsId) -> call.respondOrNotFound(client.fetchNews(newsId)) }
-        get<GetNews.Html> { (it) ->
+        get<News> { (newsId) -> call.respondOrNotFound(client.fetchNews(newsId)) }
+        get<News.Html> { (it) ->
             val response = client.fetchNews(it.newsId)
             response.data?.content?.let {
                 call.respondText(it, ContentType.Text.Html)
             } ?: call.respond(HttpStatusCode.NotFound, "")
         }
-        get<GetKillStatistics> { (world) -> call.respondOrNotFound(client.fetchKillStatistics(world)) }
-        get<GetEventsSchedule> { (year, month) -> call.respondOrNotFound(client.fetchEventsSchedule(year, month)) }
+        get<KillStatistics> { (world) -> call.respondOrNotFound(client.fetchKillStatistics(world)) }
+        get<EventsSchedule> { (year, month) -> call.respondOrNotFound(client.fetchEventsSchedule(year, month)) }
         get("/eventsSchedule") { call.respondOrNotFound(client.fetchEventsSchedule()) }
-        get<GetWorldHouses> {
+        get<WorldHouses> {
             call.respondOrNotFound(client.fetchHousesSection(it.world, it.town, it.type, it.status, it.order))
         }
-        get<GetHouse> { (world, houseId) -> call.respondOrNotFound(client.fetchHouse(houseId, world)) }
-        get<GetHighscoresPage> {
+        get<Houses> { (world, houseId) -> call.respondOrNotFound(client.fetchHouse(houseId, world)) }
+        get<HighscoresPage> {
             val world = if (it.world.lowercase() == "all") null else it.world
             call.respondOrNotFound(client.fetchHighscoresPage(world, it.category, it.profession, it.page))
         }
 
-        get<GetHighscoresComplete> { it ->
+        get<HighscoresComplete> { it ->
             val world = if (it.world.lowercase() == "all") null else it.world
             call.respondOrNotFound(client.fetchHigscores(world, it.category, it.profession))
         }
-        get<GetBazaar> {
+        get<Bazaar> {
             val filters = BazaarFilters(
                 world = it.world,
                 pvpType = it.pvpType,
@@ -90,7 +88,7 @@ internal fun Application.configureRouting(client: TibiaKtClient) {
             )
             call.respondOrNotFound(client.fetchBazaar(it.type, filters, it.page))
         }
-        get<GetAuction> { (auctionId, detailsOnly, fetchAll) ->
+        get<Auctions> { (auctionId, detailsOnly, fetchAll) ->
             call.respondOrNotFound(client.fetchAuction(auctionId,
                 detailsOnly != 0 && fetchAll == 0,
                 fetchItems = fetchAll != 0,
@@ -98,7 +96,7 @@ internal fun Application.configureRouting(client: TibiaKtClient) {
                 fetchOutfits = fetchAll != 0))
         }
 
-        get<GetCMPosts> { it ->
+        get<CMPosts> { it ->
             if (it.start != null && it.end != null) {
                 call.respond(client.fetchCMPostArchive(it.start, it.end, it.page))
             } else if (it.days != null) {
@@ -108,16 +106,16 @@ internal fun Application.configureRouting(client: TibiaKtClient) {
             }
         }
 
-        get<GetForumSection> { call.respondOrNotFound(client.fetchForumSection(it.sectionId)) }
-        get<GetForumBoard> { call.respondOrNotFound(client.fetchForumBoard(it.boardId, it.page, it.threadAge)) }
-        get<GetForumAnnouncement> { call.respondOrNotFound(client.fetchForumAnnouncement(it.announcementId)) }
-        get<GetForumThread> { call.respondOrNotFound(client.fetchForumThread(it.threadId, it.page)) }
-        get<GetForumPost> { call.respondOrNotFound(client.fetchForumPost(it.postId)) }
+        get<Forums.Section> { call.respondOrNotFound(client.fetchForumSection(it.sectionId)) }
+        get<Forums.Boards> { call.respondOrNotFound(client.fetchForumBoard(it.boardId, it.page, it.threadAge)) }
+        get<Forums.Announcement> { call.respondOrNotFound(client.fetchForumAnnouncement(it.announcementId)) }
+        get<Forums.Threads> { call.respondOrNotFound(client.fetchForumThread(it.threadId, it.page)) }
+        get<Forums.Posts> { call.respondOrNotFound(client.fetchForumPost(it.postId)) }
 
-        get<GetLeaderboards> { it -> call.respondOrNotFound(client.fetchLeaderboards(it.world, it.rotation, it.page)) }
+        get<Leaderboards> { call.respondOrNotFound(client.fetchLeaderboards(it.world, it.rotation, it.page)) }
 
-        get<GetCreaturesSection> { call.respondOrNotFound(client.fetchCreaturesSection()) }
-        get<GetBoostableBosses> { call.respondOrNotFound(client.fetchBoostableBosses()) }
+        get<CreaturesSection> { call.respondOrNotFound(client.fetchCreaturesSection()) }
+        get<BoostableBosses> { call.respondOrNotFound(client.fetchBoostableBosses()) }
     }
 }
 

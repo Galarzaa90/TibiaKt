@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2023 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,14 +33,13 @@ application {
 
 dependencies {
     implementation(project(":tibiakt-client"))
-    implementation("io.ktor", "ktor-server-cio", ktorVersion)
-    implementation("io.ktor", "ktor-serialization-kotlinx-json", ktorVersion)
-    implementation("io.ktor", "ktor-server-content-negotiation", ktorVersion)
-    implementation("io.ktor", "ktor-server-data-conversion", ktorVersion)
-    implementation("io.ktor", "ktor-server-locations", ktorVersion)
-    implementation("io.ktor", "ktor-server-status-pages", ktorVersion)
 
-    implementation("ch.qos.logback","logback-classic", logbackVersion)
+    implementation(libs.bundles.ktor.server)
+    implementation(libs.ktor.serialization.json)
+    implementation(libs.kotlinx.serialization.json)
+
+
+    implementation(libs.logback)
 }
 
 tasks.withType<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar> {
