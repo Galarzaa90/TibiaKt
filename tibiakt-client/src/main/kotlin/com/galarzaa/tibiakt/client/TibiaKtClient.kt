@@ -201,7 +201,7 @@ public open class TibiaKtClient constructor(
                 HttpMethod.Post -> client.submitForm(url, formParameters = Parameters.build {
                     data.forEach { append(it.first, it.second.toString()) }
                 }, encodeInQuery = false) {
-
+                    expectSuccess = true
                 }
 
                 else -> throw IllegalArgumentException("Unsupported method $method")

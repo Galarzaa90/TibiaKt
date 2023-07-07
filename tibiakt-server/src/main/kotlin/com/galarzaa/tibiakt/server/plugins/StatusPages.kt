@@ -16,6 +16,7 @@
 
 package com.galarzaa.tibiakt.server.plugins
 
+import com.galarzaa.tibiakt.core.exceptions.TibiaKtException
 import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.content.TextContent
@@ -30,9 +31,22 @@ import io.ktor.server.response.respond
 fun Application.configureStatusPages() {
     install(StatusPages) {
         exception<ParameterConversionException> { call, cause ->
-            call.respond(TextContent("Parameter '${cause.parameterName}' could not be converted:\n${cause.cause}",
-                ContentType.Text.Plain.withCharset(Charsets.UTF_8),
-                HttpStatusCode.BadRequest))
+            call.respond(
+                TextContent(
+                    "Parameter '${cause.parameterName}' could not be converted:\n${cause.cause}",
+                    ContentType.Text.Plain.withCharset(Charsets.UTF_8),
+                    HttpStatusCode.BadRequest
+                )
+            )
+        }
+        exception<TibiaKtException> { call, cause ->
+            call.respond(
+                TextContent(
+                    cause.toString(),
+                    ContentType.Text.Plain.withCharset(Charsets.UTF_8),
+                    HttpStatusCode.InternalServerError
+                )
+            )
         }
     }
 }
