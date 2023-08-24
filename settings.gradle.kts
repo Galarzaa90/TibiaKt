@@ -27,12 +27,12 @@ dependencyResolutionManagement {
         create("libs") {
             version("jsoup", "1.14.3")
             version("kotest", "5.6.2")
-            version("kotlin", "1.8.10")
+            version("kotlin", "1.9.0")
             version("kotlinLogging", "3.0.5")
             version("kotlinxDatetime", "0.4.0")
-            version("kotlinxSerialization", "1.5.1")
-            version("ktor", "2.3.0")
-            version("logback", "1.4.5")
+            version("kotlinxSerialization", "1.6.0")
+            version("ktor", "2.3.3")
+            version("logback", "1.4.11")
 
             library("kotlinx-datetime", "org.jetbrains.kotlinx", "kotlinx-datetime").versionRef("kotlinxDatetime")
             library("kotlinx-serialization-json", "org.jetbrains.kotlinx", "kotlinx-serialization-json").versionRef("kotlinxSerialization")
