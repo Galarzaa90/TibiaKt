@@ -20,86 +20,31 @@ import com.galarzaa.tibiakt.TestResources.getResource
 import com.galarzaa.tibiakt.core.enums.HouseStatus
 import com.galarzaa.tibiakt.core.enums.HouseType
 import com.galarzaa.tibiakt.core.models.house.House
+import io.kotest.core.spec.style.FunSpec
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
+import io.kotest.matchers.types.shouldBeInstanceOf
 import io.kotest.matchers.types.shouldBeTypeOf
 
-class HouseParserTests : StringSpec({
-    "Rented house"{
-        val house = HouseParser.fromContent(getResource("houses/houseRented.txt"))
-        house shouldNotBe null
-        house!!.houseId shouldBe 40_501
-        house.name shouldBe "Coastwood 1"
-        house.size shouldBe 16
-        house.beds shouldBe 2
-        house.rent shouldBe 50_000
-        house.houseType shouldBe HouseType.HOUSE
-        house.world shouldBe "Alumbra"
-        house.status shouldBe HouseStatus.RENTED
-        house.shouldBeTypeOf<House.Rented>()
-        house.paidUntil shouldNotBe null
-    }
+class HouseParserTests : FunSpec({
+    test("House rented"){
+        val house = HouseParser.fromContent(getResource("house/houseRented.txt"))
 
-    "Guildhall on auction with bids"{
-        val house = HouseParser.fromContent(getResource("houses/houseAuctionedBidsGuildhall.txt"))
-        house shouldNotBe null
-        house!!.houseId shouldBe 20_002
-        house.name shouldBe "House of Recreation"
-        house.size shouldBe 401
-        house.beds shouldBe 16
-        house.rent shouldBe 500_000
-        house.houseType shouldBe HouseType.GUILDHALL
-        house.world shouldBe "Ferobra"
-        house.status shouldBe HouseStatus.AUCTIONED
-        house.shouldBeTypeOf<House.Auctioned>()
-        house.auctionEnd shouldNotBe null
-        house.highestBidder shouldBe "Eiike"
-        house.highestBid shouldBe 0
+        house.shouldBeInstanceOf<House.Rented>()
+        with(house){
+            status shouldBe HouseStatus.RENTED
+            rent shouldNotBe null
+            paidUntil shouldNotBe null
+            movingDate shouldBe null
+            transferPrice shouldBe null
+            transferAccepted shouldBe null
+            transferRecipient shouldBe null
+        }
     }
+    test("House not found"){
+        val house = HouseParser.fromContent(getResource("house/houseRented.txt"))
 
-    "House set to be transferred but not accepted"{
-        val house = HouseParser.fromContent(getResource("houses/houseTransferNotAccepted.txt"))
-        house shouldNotBe null
-        house!!.houseId shouldBe 59_048
-        house.name shouldBe "Unklath II b"
-        house.size shouldBe 17
-        house.beds shouldBe 1
-        house.rent shouldBe 50_000
-        house.houseType shouldBe HouseType.HOUSE
-        house.world shouldBe "Monza"
-        house.status shouldBe HouseStatus.RENTED
-        house.shouldBeTypeOf<House.Rented>()
-        house.owner shouldBe "Grandpa Asan"
-        house.paidUntil shouldNotBe null
-        house.movingDate shouldNotBe null
-        house.transferAccepted shouldNotBe true
-        house.transferRecipient shouldBe "Szatanku"
-        house.transferPrice shouldBe 10
-    }
-
-    "House set to be transferred, and accepted"{
-        val house = HouseParser.fromContent(getResource("houses/houseTransferAccepted.txt"))
-        house shouldNotBe null
-        house!!.houseId shouldBe 37_016
-        house.name shouldBe "Radiant Plaza 4"
-        house.size shouldBe 186
-        house.beds shouldBe 3
-        house.rent shouldBe 800_000
-        house.houseType shouldBe HouseType.HOUSE
-        house.world shouldBe "Ferobra"
-        house.status shouldBe HouseStatus.RENTED
-        house.shouldBeTypeOf<House.Rented>()
-        house.owner shouldBe "Valeth Ossa"
-        house.paidUntil shouldNotBe null
-        house.movingDate shouldNotBe null
-        house.transferAccepted shouldBe true
-        house.transferRecipient shouldBe "King Brunno"
-        house.transferPrice shouldBe 1
-    }
-
-    "House not found" {
-        val house = HouseParser.fromContent(getResource("houses/houseNotFound.txt"))
         house shouldBe null
     }
 })

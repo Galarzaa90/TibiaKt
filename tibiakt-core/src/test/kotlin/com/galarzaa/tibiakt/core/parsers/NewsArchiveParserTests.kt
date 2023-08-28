@@ -19,19 +19,54 @@ package com.galarzaa.tibiakt.core.parsers
 import com.galarzaa.tibiakt.TestResources.getResource
 import com.galarzaa.tibiakt.core.enums.NewsCategory
 import com.galarzaa.tibiakt.core.enums.NewsType
+import io.kotest.core.spec.style.FunSpec
 import io.kotest.core.spec.style.StringSpec
+import io.kotest.matchers.collections.shouldBeEmpty
 import io.kotest.matchers.collections.shouldHaveSize
+import io.kotest.matchers.collections.shouldNotBeEmpty
 import io.kotest.matchers.collections.shouldNotContain
 import io.kotest.matchers.date.shouldBeBefore
+import io.kotest.matchers.shouldBe
+import java.time.LocalDate
 
-class NewsArchiveParserTests : StringSpec({
-    "Parsing the news archive"{
-        val newsArchive = NewsArchiveParser.fromContent(getResource("news/newsArchive.txt"))
-        newsArchive.entries shouldHaveSize 11
-        newsArchive.types shouldHaveSize 2
-        newsArchive.types shouldNotContain NewsType.FEATURED_ARTICLE
-        newsArchive.categories shouldHaveSize 3
-        newsArchive.categories shouldNotContain NewsCategory.SUPPORT
-        newsArchive.startDate shouldBeBefore newsArchive.endDate
+class NewsArchiveParserTests : FunSpec({
+    test("Initial news archive") {
+        val newsArchive = NewsArchiveParser.fromContent(getResource("news/newsArchiveInitial.txt"))
+
+        newsArchive.categories shouldHaveSize 5
+        newsArchive.types shouldHaveSize 3
+        newsArchive.entries.shouldBeEmpty()
+    }
+
+    test("News archive with filters used") {
+        val newsArchive = NewsArchiveParser.fromContent(getResource("news/newsArchiveWithFilters.txt"))
+
+        with(newsArchive) {
+            startDate shouldBe LocalDate.of(2019, 3, 25)
+            endDate shouldBe LocalDate.of(2019, 5, 25)
+            newsArchive.categories shouldHaveSize 5
+            newsArchive.types shouldHaveSize 3
+            entries.shouldNotBeEmpty()
+        }
+    }
+
+    test("News archive with no results"){
+        val newsArchive = NewsArchiveParser.fromContent(getResource("news/newsArchiveEmpty.txt"))
+
+        with(newsArchive) {
+            startDate shouldBe LocalDate.of(2023, 4, 13)
+            endDate shouldBe LocalDate.of(2023, 4, 15)
+            newsArchive.categories shouldHaveSize 5
+            newsArchive.types shouldHaveSize 1
+            entries.shouldBeEmpty()
+        }
+    }
+
+    test("News archive with an error message"){
+        val newsArchive = NewsArchiveParser.fromContent(getResource("news/newsArchiveError.txt"))
+
+        with(newsArchive) {
+            entries.shouldBeEmpty()
+        }
     }
 })

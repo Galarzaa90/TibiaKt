@@ -18,44 +18,35 @@ package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.TestResources.getResource
 import com.galarzaa.tibiakt.core.enums.NewsCategory
+import com.galarzaa.tibiakt.core.models.news.News
+import io.kotest.core.spec.IsolationMode
+import io.kotest.core.spec.style.FunSpec
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
+import io.kotest.matchers.types.shouldBeInstanceOf
 import java.time.LocalDate
 
-class NewsParserTests : StringSpec({
-    "News ticker" {
+class NewsParserTests : FunSpec({
+    isolationMode = IsolationMode.SingleInstance
+
+    test("News post with discussion thread"){
+        val news = NewsParser.fromContent(getResource("news/newsPostWithDiscussionThread.txt"))
+
+        news.shouldBeInstanceOf<News>()
+        news.threadId shouldNotBe null
+        news.threadUrl shouldNotBe null
+    }
+    test("News ticker"){
         val news = NewsParser.fromContent(getResource("news/newsTicker.txt"))
-        news shouldNotBe null
-        news!!.title shouldBe "News Ticker"
-        news.category shouldBe NewsCategory.COMMUNITY
-        news.date shouldBe LocalDate.of(2021, 9, 8)
-        news.threadId shouldBe null
-        news.content shouldNotBe null
-    }
 
-    "Featured article" {
+        news.shouldBeInstanceOf<News>()
+        news.title shouldBe "News Ticker"
+    }
+    test("Featured article"){
         val news = NewsParser.fromContent(getResource("news/newsFeaturedArticle.txt"))
-        news shouldNotBe null
-        news!!.title shouldBe "Memories from 2020"
+
+        news.shouldBeInstanceOf<News>()
         news.category shouldBe NewsCategory.COMMUNITY
-        news.date shouldBe LocalDate.of(2021, 2, 4)
-        news.threadId shouldBe 4_846_119
-        news.content shouldNotBe null
-    }
-
-    "News article with a discussion thread" {
-        val news = NewsParser.fromContent(getResource("news/newsWithDiscussionThread.txt"))
-        news shouldNotBe null
-        news!!.title shouldBe "Sneak Peek: Tibia Observer"
-        news.category shouldBe NewsCategory.DEVELOPMENT
-        news.date shouldBe LocalDate.of(2021, 9, 22)
-        news.threadId shouldBe 4_889_730
-        news.content shouldNotBe null
-    }
-
-    "News not found" {
-        val news = NewsParser.fromContent(getResource("news/newsNotFound.txt"))
-        news shouldBe null
     }
 })

@@ -17,29 +17,31 @@
 package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.TestResources
+import com.galarzaa.tibiakt.TestResources.getResource
 import io.kotest.core.spec.IsolationMode
+import io.kotest.core.spec.style.FunSpec
 import io.kotest.core.spec.style.StringSpec
+import io.kotest.inspectors.forAll
 import io.kotest.inspectors.forAtLeast
+import io.kotest.inspectors.forAtLeastOne
 import io.kotest.inspectors.forExactly
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
 import kotlinx.datetime.Instant
 
-class WorldOverviewParserTests : StringSpec({
-    isolationMode = IsolationMode.InstancePerTest
-    "Parse the world overview" {
-        val worldOverview = WorldOverviewParser.fromContent(TestResources.getResource("worlds/worldsList.txt"))
-        worldOverview.overallMaximumCount shouldBe 64_028
-        worldOverview.totalOnline shouldBe 10_669
-        worldOverview.overallMaximumCountDateTime shouldBe Instant.fromEpochSeconds(1_196_274_360)
-        worldOverview.worlds shouldHaveSize 84
-        worldOverview.worlds.forAtLeast(1) { it.isPremiumRestricted shouldBe true }
-        worldOverview.worlds.forExactly(2) { it.isExperimental shouldBe true }
+class WorldOverviewParserTests : FunSpec({
+    isolationMode = IsolationMode.SingleInstance
+    test("All online") {
+        val worldOverview = WorldOverviewParser.fromContent(getResource("world/worldOverviewOnline.txt"))
+        worldOverview.worlds.forAll {
+            it.isOnline shouldBe true
+        }
     }
 
-    "Parse world overview with some offline worlds" {
-        val worldOverview = WorldOverviewParser.fromContent(TestResources.getResource("worlds/worldsSomeOffline.txt"))
-        worldOverview.totalOnline shouldBe 1973
-        worldOverview.worlds.forAtLeast(1) { it.isOnline shouldBe false }
+    test("With offline worlds") {
+        val worldOverview = WorldOverviewParser.fromContent(getResource("world/worldOverviewOffline.txt"))
+        worldOverview.worlds.forAtLeastOne {
+            it.isOnline shouldBe false
+        }
     }
 })

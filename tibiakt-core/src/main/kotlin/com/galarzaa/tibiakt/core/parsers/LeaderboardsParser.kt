@@ -93,6 +93,7 @@ public object LeaderboardsParser : Parser<Leaderboards?> {
     private fun LeaderboardsBuilder.parseLeaderboardEntries(entriesTable: Element?) {
         for (row in entriesTable.rows().offsetStart(1)) {
             val cells = row.cells()
+            if (cells.size != 3) continue
             val name = cells[1].selectFirst("a")?.getLinkInformation()?.title?.clean()
             val rank = cells[0].text().remove(".").toInt()
             val dromeLevel = cells[2].text().toInt()
