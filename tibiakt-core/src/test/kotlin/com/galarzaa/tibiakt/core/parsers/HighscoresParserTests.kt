@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2023 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,43 +17,75 @@
 package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.TestResources.getResource
-import com.galarzaa.tibiakt.core.enums.HighscoresBattlEyeType
 import com.galarzaa.tibiakt.core.enums.HighscoresCategory
-import com.galarzaa.tibiakt.core.enums.HighscoresProfession
 import com.galarzaa.tibiakt.core.models.highscores.Highscores
 import io.kotest.core.spec.style.FunSpec
-import io.kotest.core.spec.style.StringSpec
 import io.kotest.inspectors.forAll
 import io.kotest.matchers.collections.shouldHaveAtLeastSize
 import io.kotest.matchers.collections.shouldHaveSize
-import io.kotest.matchers.ints.shouldNotBeGreaterThan
+import io.kotest.matchers.ints.shouldBeGreaterThan
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
 import io.kotest.matchers.types.shouldBeInstanceOf
 
 class HighscoresParserTests : FunSpec({
-    test("Highscores"){
+    test("Highscores") {
         val highscores = HighscoresParser.fromContent(getResource("highscores/highscores.txt"))
         highscores.shouldBeInstanceOf<Highscores>()
 
-        with(highscores){
+        with(highscores) {
             highscores.world shouldBe "Gladera"
             entries shouldHaveAtLeastSize 1
-            resultsCount shouldNotBeGreaterThan 0
+            resultsCount shouldBeGreaterThan 0
             entries.forAll {
                 it.world shouldBe highscores.world
             }
         }
     }
-    test("Highscores empty"){
-        val highscores = HighscoresParser.fromContent(getResource("highscores/highscoresEmpty.txt"))
-        highscores.shouldBeInstanceOf<Highscores>()
+    test("Global highscores") {
+        val highscores = HighscoresParser.fromContent(getResource("highscores/highscoresGlobal.txt"))
 
-        with(highscores){
+        highscores.shouldBeInstanceOf<Highscores>()
+        with(highscores) {
+            world shouldBe null
+            entries shouldHaveAtLeastSize 1
+        }
+    }
+    test("Experience highscores") {
+        val highscores = HighscoresParser.fromContent(getResource("highscores/highscoresExperience.txt"))
+
+        highscores.shouldBeInstanceOf<Highscores>()
+        with(highscores) {
+            world shouldNotBe null
+            category shouldBe HighscoresCategory.EXPERIENCE_POINTS
+        }
+    }
+    test("Loyalty highscores") {
+        val highscores = HighscoresParser.fromContent(getResource("highscores/highscoresLoyalty.txt"))
+
+        highscores.shouldBeInstanceOf<Highscores>()
+        with(highscores) {
+            world shouldNotBe null
+            category shouldBe HighscoresCategory.LOYALTY_POINTS
+            entries.forAll {
+                it.additionalValue shouldNotBe null
+            }
+        }
+    }
+    test("Highscores empty") {
+        val highscores = HighscoresParser.fromContent(getResource("highscores/highscoresNoResults.txt"))
+
+        highscores.shouldBeInstanceOf<Highscores>()
+        with(highscores) {
             entries shouldHaveSize 0
             totalPages shouldBe 1
             resultsCount shouldBe 0
             currentPage shouldBe 0
         }
+    }
+    test("Highscores not found") {
+        val highscores = HighscoresParser.fromContent(getResource("highscores/highscoresNotFound.txt"))
+
+        highscores shouldBe null
     }
 })
