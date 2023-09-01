@@ -23,6 +23,7 @@ import com.galarzaa.tibiakt.core.exceptions.ParsingException
 import com.galarzaa.tibiakt.core.models.guild.Guild
 import com.galarzaa.tibiakt.core.utils.boxContent
 import com.galarzaa.tibiakt.core.utils.clean
+import com.galarzaa.tibiakt.core.utils.nullIfBlank
 import com.galarzaa.tibiakt.core.utils.parseTablesMap
 import com.galarzaa.tibiakt.core.utils.parseTibiaDate
 import com.galarzaa.tibiakt.core.utils.remove
@@ -104,7 +105,7 @@ public object GuildParser : Parser<Guild?> {
     private fun GuildBuilder.parseGuildInformation(container: Element) {
         val containerText = container.wholeCleanText()
         descriptionRegex.find(containerText)?.apply {
-            description = groups["description"]?.value?.trim()
+            description = groups["description"]?.value?.trim().nullIfBlank()
             foundingDate = parseTibiaDate(groups["date"]!!.value)
             world = groups["world"]!!.value
         }

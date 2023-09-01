@@ -17,6 +17,7 @@
 package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.TestResources.getResource
+import com.galarzaa.tibiakt.core.enums.HighscoresBattlEyeType
 import com.galarzaa.tibiakt.core.enums.HighscoresCategory
 import com.galarzaa.tibiakt.core.models.highscores.Highscores
 import io.kotest.core.spec.style.FunSpec
@@ -40,6 +41,16 @@ class HighscoresParserTests : FunSpec({
             entries.forAll {
                 it.world shouldBe highscores.world
             }
+        }
+    }
+    test("Highscores with BattlEye PvP Filters"){
+        val highscores = HighscoresParser.fromContent(getResource("highscores/highscoresBattleEyePvpFilters.txt"))
+
+        highscores.shouldBeInstanceOf<Highscores>()
+        with(highscores){
+            world shouldBe null
+            battlEyeType shouldNotBe HighscoresBattlEyeType.ANY_WORLD
+            worldTypes shouldHaveAtLeastSize 1
         }
     }
     test("Global highscores") {
@@ -80,7 +91,7 @@ class HighscoresParserTests : FunSpec({
             entries shouldHaveSize 0
             totalPages shouldBe 1
             resultsCount shouldBe 0
-            currentPage shouldBe 0
+            currentPage shouldBe 1
         }
     }
     test("Highscores not found") {
