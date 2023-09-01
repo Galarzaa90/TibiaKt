@@ -45,40 +45,57 @@ class WorldParserTests : FunSpec({
     test("World offline") {
         val world = WorldParser.fromContent(getResource("world/worldOffline.txt"))
         world.shouldBeInstanceOf<World>()
-        with(world){
+        with(world) {
             isOnline shouldBe false
             playersOnline shouldHaveSize 0
             onlineCount shouldBe 0
         }
     }
 
-    test("World without any titles" ){
+    test("World without any titles") {
         val world = WorldParser.fromContent(getResource("world/worldNoTitles.txt"))
         world.shouldBeInstanceOf<World>()
-        with(world){
+        with(world) {
             worldQuests shouldHaveSize 0
         }
     }
 
-    test("World unprotected" ){
+    test("World unprotected") {
         val world = WorldParser.fromContent(getResource("world/worldUnprotected.txt"))
         world.shouldBeInstanceOf<World>()
-        with(world){
+        with(world) {
             battlEyeType shouldBe BattlEyeType.UNPROTECTED
             battlEyeStartDate shouldBe null
         }
     }
 
-    test("World with yellow BattlEye" ){
+    test("World with yellow BattlEye") {
         val world = WorldParser.fromContent(getResource("world/worldYellowBattlEye.txt"))
         world.shouldBeInstanceOf<World>()
-        with(world){
+        with(world) {
             battlEyeType shouldBe BattlEyeType.YELLOW
             battlEyeStartDate shouldNotBe null
         }
     }
+    test("World with green BattlEye") {
+        val world = WorldParser.fromContent(getResource("world/worldGreenBattlEye.txt"))
 
-    test("World not found" ){
+        world.shouldBeInstanceOf<World>()
+        with(world) {
+            battlEyeType shouldBe BattlEyeType.GREEN
+            battlEyeStartDate shouldBe null
+        }
+    }
+    test("Experimental world") {
+        val world = WorldParser.fromContent(getResource("world/worldExperimental.txt"))
+
+        world.shouldBeInstanceOf<World>()
+        with(world) {
+            isExperimental shouldBe true
+            battlEyeType shouldBe BattlEyeType.UNPROTECTED
+        }
+    }
+    test("World not found") {
         val world = WorldParser.fromContent(getResource("world/worldNotFound.txt"))
         world shouldBe null
     }
