@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2023 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,32 +21,35 @@ import com.galarzaa.tibiakt.core.enums.NewsCategory
 import com.galarzaa.tibiakt.core.models.news.News
 import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.FunSpec
-import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
 import io.kotest.matchers.types.shouldBeInstanceOf
-import java.time.LocalDate
 
 class NewsParserTests : FunSpec({
     isolationMode = IsolationMode.SingleInstance
 
-    test("News post with discussion thread"){
+    test("News post with discussion thread") {
         val news = NewsParser.fromContent(getResource("news/newsPostWithDiscussionThread.txt"))
 
         news.shouldBeInstanceOf<News>()
         news.threadId shouldNotBe null
         news.threadUrl shouldNotBe null
     }
-    test("News ticker"){
+    test("News ticker") {
         val news = NewsParser.fromContent(getResource("news/newsTicker.txt"))
 
         news.shouldBeInstanceOf<News>()
         news.title shouldBe "News Ticker"
     }
-    test("Featured article"){
+    test("Featured article") {
         val news = NewsParser.fromContent(getResource("news/newsFeaturedArticle.txt"))
 
         news.shouldBeInstanceOf<News>()
         news.category shouldBe NewsCategory.COMMUNITY
+    }
+    test("News not found") {
+        val news = NewsParser.fromContent(getResource("news/newsNotFound.txt"))
+
+        news shouldBe null
     }
 })

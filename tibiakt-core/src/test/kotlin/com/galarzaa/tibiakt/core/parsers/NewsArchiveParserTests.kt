@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2023 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,21 +17,16 @@
 package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.TestResources.getResource
-import com.galarzaa.tibiakt.core.enums.NewsCategory
-import com.galarzaa.tibiakt.core.enums.NewsType
 import io.kotest.core.spec.style.FunSpec
-import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.collections.shouldBeEmpty
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.collections.shouldNotBeEmpty
-import io.kotest.matchers.collections.shouldNotContain
-import io.kotest.matchers.date.shouldBeBefore
 import io.kotest.matchers.shouldBe
 import java.time.LocalDate
 
 class NewsArchiveParserTests : FunSpec({
     test("Initial news archive") {
-        val newsArchive = NewsArchiveParser.fromContent(getResource("news/newsArchiveInitial.txt"))
+        val newsArchive = NewsArchiveParser.fromContent(getResource("newsArchive/newsArchiveInitial.txt"))
 
         newsArchive.categories shouldHaveSize 5
         newsArchive.types shouldHaveSize 3
@@ -39,7 +34,7 @@ class NewsArchiveParserTests : FunSpec({
     }
 
     test("News archive with filters used") {
-        val newsArchive = NewsArchiveParser.fromContent(getResource("news/newsArchiveWithFilters.txt"))
+        val newsArchive = NewsArchiveParser.fromContent(getResource("newsArchive/newsArchiveWithFilters.txt"))
 
         with(newsArchive) {
             startDate shouldBe LocalDate.of(2019, 3, 25)
@@ -51,7 +46,7 @@ class NewsArchiveParserTests : FunSpec({
     }
 
     test("News archive with no results"){
-        val newsArchive = NewsArchiveParser.fromContent(getResource("news/newsArchiveEmpty.txt"))
+        val newsArchive = NewsArchiveParser.fromContent(getResource("newsArchive/newsArchiveEmpty.txt"))
 
         with(newsArchive) {
             startDate shouldBe LocalDate.of(2023, 4, 13)
@@ -63,7 +58,7 @@ class NewsArchiveParserTests : FunSpec({
     }
 
     test("News archive with an error message"){
-        val newsArchive = NewsArchiveParser.fromContent(getResource("news/newsArchiveError.txt"))
+        val newsArchive = NewsArchiveParser.fromContent(getResource("newsArchive/newsArchiveError.txt"))
 
         with(newsArchive) {
             entries.shouldBeEmpty()
