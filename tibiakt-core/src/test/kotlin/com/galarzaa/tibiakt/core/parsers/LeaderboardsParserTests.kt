@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2023 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,10 +20,8 @@ import com.galarzaa.tibiakt.TestResources.getResource
 import com.galarzaa.tibiakt.core.models.leaderboards.DeletedLeaderboardsEntry
 import com.galarzaa.tibiakt.core.models.leaderboards.Leaderboards
 import io.kotest.core.spec.style.FunSpec
-import io.kotest.core.spec.style.StringSpec
 import io.kotest.inspectors.forAtLeastOne
 import io.kotest.matchers.collections.shouldBeEmpty
-import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.collections.shouldNotBeEmpty
 import io.kotest.matchers.nulls.shouldBeNull
 import io.kotest.matchers.shouldBe
@@ -32,7 +30,7 @@ import io.kotest.matchers.types.shouldBeInstanceOf
 
 class LeaderboardsParserTests : FunSpec({
     test("Leaderboard of current rotation") {
-        val leaderboard = LeaderboardsParser.fromContent(getResource("leaderboards/leaderboardCurrentRotation.txt"))
+        val leaderboard = LeaderboardsParser.fromContent(getResource("leaderboard/leaderboardCurrentRotation.txt"))
 
         leaderboard.shouldBeInstanceOf<Leaderboards>()
         with(leaderboard) {
@@ -43,7 +41,7 @@ class LeaderboardsParserTests : FunSpec({
     }
 
     test("Leaderboard with a deleted character") {
-        val leaderboard = LeaderboardsParser.fromContent(getResource("leaderboards/leaderboardDeletedCharacter.txt"))
+        val leaderboard = LeaderboardsParser.fromContent(getResource("leaderboard/leaderboardDeletedCharacter.txt"))
 
         leaderboard.shouldBeInstanceOf<Leaderboards>()
         with(leaderboard) {
@@ -54,7 +52,7 @@ class LeaderboardsParserTests : FunSpec({
     }
 
     test("Leaderboard with no entries") {
-        val leaderboard = LeaderboardsParser.fromContent(getResource("leaderboards/leaderboardEmpty.txt"))
+        val leaderboard = LeaderboardsParser.fromContent(getResource("leaderboard/leaderboardEmpty.txt"))
 
         leaderboard.shouldBeInstanceOf<Leaderboards>()
         with(leaderboard) {
@@ -64,7 +62,7 @@ class LeaderboardsParserTests : FunSpec({
         }
     }
     test("Leaderboard not found") {
-        val leaderboard = LeaderboardsParser.fromContent(getResource("leaderboards/leaderboardNotFound.txt"))
+        val leaderboard = LeaderboardsParser.fromContent(getResource("leaderboard/leaderboardNotFound.txt"))
 
         leaderboard.shouldBeNull()
     }

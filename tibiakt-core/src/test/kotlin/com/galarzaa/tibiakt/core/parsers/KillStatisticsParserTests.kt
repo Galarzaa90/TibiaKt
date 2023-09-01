@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2023 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,11 +17,11 @@
 package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.TestResources.getResource
+import com.galarzaa.tibiakt.core.models.KillStatistics
 import io.kotest.core.spec.style.FunSpec
-import io.kotest.core.spec.style.StringSpec
-import io.kotest.matchers.maps.shouldHaveSize
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
+import io.kotest.matchers.types.shouldBeInstanceOf
 
 class KillStatisticsParserTests : FunSpec({
     test("Kill statistics with results") {
@@ -36,7 +36,13 @@ class KillStatisticsParserTests : FunSpec({
             lastWeekKilled shouldBe 0
         } shouldNotBe null
     }
-    test("Kill statistics for a world that doesn't exist") {
+    test("Kill statistics empty") {
+        val killStatistics = KillStatisticsParser.fromContent(getResource("killStatistics/killStatisticsEmpty.txt"))
+
+        killStatistics.shouldBeInstanceOf<KillStatistics>()
+        killStatistics.entries shouldBe emptyMap()
+    }
+    test("Kill statistics not found") {
         val killStatistics =
             KillStatisticsParser.fromContent(getResource("killStatistics/killStatisticsNotFound.txt"))
         killStatistics shouldBe null
