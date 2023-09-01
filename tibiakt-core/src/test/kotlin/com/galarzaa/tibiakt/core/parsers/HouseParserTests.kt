@@ -18,14 +18,11 @@ package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.TestResources.getResource
 import com.galarzaa.tibiakt.core.enums.HouseStatus
-import com.galarzaa.tibiakt.core.enums.HouseType
 import com.galarzaa.tibiakt.core.models.house.House
 import io.kotest.core.spec.style.FunSpec
-import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
 import io.kotest.matchers.types.shouldBeInstanceOf
-import io.kotest.matchers.types.shouldBeTypeOf
 
 class HouseParserTests : FunSpec({
     test("House rented"){
@@ -42,8 +39,48 @@ class HouseParserTests : FunSpec({
             transferRecipient shouldBe null
         }
     }
+    test("House rented, being transferred, accepted") {
+        val house = HouseParser.fromContent(getResource("house/houseRentedAcceptedTransfer.txt"))
+
+        house.shouldBeInstanceOf<House.Rented>()
+        with(house) {
+            status shouldBe HouseStatus.RENTED
+            rent shouldNotBe null
+            paidUntil shouldNotBe null
+            movingDate shouldNotBe null
+            transferPrice shouldNotBe null
+            transferAccepted shouldBe true
+            transferRecipient shouldNotBe null
+        }
+    }
+    test("House auctioned with bids") {
+        val house = HouseParser.fromContent(getResource("house/houseAuctionedWithBids.txt"))
+
+        house.shouldBeInstanceOf<House.Auctioned>()
+
+        with(house) {
+            status shouldBe HouseStatus.AUCTIONED
+            highestBidder shouldNotBe null
+            highestBid shouldNotBe null
+            highestBidderUrl shouldNotBe null
+            auctionEnd shouldNotBe null
+        }
+    }
+    test("House auctioned without bids") {
+        val house = HouseParser.fromContent(getResource("house/houseAuctionedWithoutBids.txt"))
+
+        house.shouldBeInstanceOf<House.Auctioned>()
+
+        with(house) {
+            status shouldBe HouseStatus.AUCTIONED
+            highestBidder shouldBe null
+            highestBid shouldBe null
+            highestBidderUrl shouldBe null
+            auctionEnd shouldBe null
+        }
+    }
     test("House not found"){
-        val house = HouseParser.fromContent(getResource("house/houseRented.txt"))
+        val house = HouseParser.fromContent(getResource("house/houseNotFound.txt"))
 
         house shouldBe null
     }

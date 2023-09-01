@@ -17,13 +17,9 @@
 package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.TestResources.getResource
-import com.galarzaa.tibiakt.core.enums.HouseOrder
 import com.galarzaa.tibiakt.core.enums.HouseStatus
-import com.galarzaa.tibiakt.core.enums.HouseType
 import com.galarzaa.tibiakt.core.models.house.HousesSection
 import io.kotest.core.spec.style.FunSpec
-import io.kotest.core.spec.style.StringSpec
-import io.kotest.inspectors.forAll
 import io.kotest.inspectors.forAtLeastOne
 import io.kotest.matchers.collections.shouldHaveAtLeastSize
 import io.kotest.matchers.collections.shouldHaveSize
@@ -34,7 +30,7 @@ import io.kotest.matchers.types.shouldBeInstanceOf
 
 class HousesSectionParserTests : FunSpec({
     test("Houses section"){
-        val housesSection = HousesSectionParser.fromContent(getResource("house/housesSection.txt"))
+        val housesSection = HousesSectionParser.fromContent(getResource("housesSection/housesSection.txt"))
 
         housesSection.shouldBeInstanceOf<HousesSection>()
 
@@ -45,7 +41,7 @@ class HousesSectionParserTests : FunSpec({
         }
     }
     test("Houses section empty"){
-        val housesSection = HousesSectionParser.fromContent(getResource("house/housesSectionEmpty.txt"))
+        val housesSection = HousesSectionParser.fromContent(getResource("housesSection/housesSectionEmpty.txt"))
 
         housesSection.shouldBeInstanceOf<HousesSection>()
 
@@ -53,8 +49,28 @@ class HousesSectionParserTests : FunSpec({
             entries shouldHaveSize 0
         }
     }
+    test("Houses section with auctioned houses") {
+        val housesSection =
+            HousesSectionParser.fromContent(getResource("housesSection/housesSectionWithAuctionedHouses.txt"))
+
+        housesSection.shouldBeInstanceOf<HousesSection>()
+
+        with(housesSection) {
+            entries shouldHaveAtLeastSize 1
+            entries.forAtLeastOne {
+                it.status shouldBe HouseStatus.AUCTIONED
+                it.highestBid shouldNotBe null
+                it.timeLeft shouldNotBe null
+            }
+            entries.forAtLeastOne {
+                it.status shouldBe HouseStatus.AUCTIONED
+                it.highestBid shouldBe null
+                it.timeLeft shouldBe null
+            }
+        }
+    }
     test("Houses section not found"){
-        val housesSection = HousesSectionParser.fromContent(getResource("house/housesSectionNotFound.txt"))
+        val housesSection = HousesSectionParser.fromContent(getResource("housesSection/housesSectionNotFound.txt"))
 
         housesSection.shouldBeNull()
     }
