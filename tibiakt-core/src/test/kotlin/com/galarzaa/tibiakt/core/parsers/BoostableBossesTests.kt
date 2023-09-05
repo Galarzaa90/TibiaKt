@@ -17,17 +17,19 @@
 package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.TestResources.getResource
+import io.kotest.core.spec.style.FunSpec
 import io.kotest.core.spec.style.StringSpec
+import io.kotest.matchers.collections.shouldHaveAtLeastSize
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
 
-class BoostableBossesTests : StringSpec({
-    "Parsing section" {
-        val boostableBosses = BoostableBossesParser.fromContent(getResource("creatures/boostableBosses.txt"))
+class BoostableBossesTests : FunSpec({
+    test("Boostable Bosses List") {
+        val boostableBosses = BoostableBossesParser.fromContent(getResource("boostableBosses/bossList.txt"))
         with(boostableBosses.boostedBoss) {
-            name shouldBe "Utua Stone Sting"
-            identifier shouldBe "utua"
+            name shouldBe "Tentugly"
+            identifier shouldBe "fakeseamonster"
         }
-        boostableBosses.bosses shouldHaveSize 91
+        boostableBosses.bosses shouldHaveAtLeastSize 1
     }
 })

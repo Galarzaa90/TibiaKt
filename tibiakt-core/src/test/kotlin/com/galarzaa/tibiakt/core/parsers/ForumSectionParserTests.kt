@@ -26,6 +26,7 @@ import io.kotest.matchers.shouldBe
 class ForumSectionParserTests : StringSpec({
     "Forum section" {
         val boards = ForumSectionParser.fromContent(getResource("forumSection/forumSection.txt"))
+
         boards.sectionId shouldBe 2
         boards.entries shouldHaveAtLeastSize 1
     }

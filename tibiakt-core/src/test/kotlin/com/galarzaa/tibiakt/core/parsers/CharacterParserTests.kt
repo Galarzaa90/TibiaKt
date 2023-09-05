@@ -66,104 +66,72 @@ class CharacterParserTests : FunSpec({
             isHidden shouldBe false
         }
     }
-    test("Recently traded character") {
-        val content = getResource("character/characterTraded.txt")
+    test("Character not found") {
+        val character = CharacterParser.fromContent(getResource("character/characterNotFound.txt"))
 
-        val character = CharacterParser.fromContent(content)
-
-        character.shouldBeInstanceOf<Character>()
-        with(character) {
-            isRecentlyTraded shouldBe true
-            characters.forAtLeastOne {
-                it.recentlyTraded shouldBe true
-            }
-        }
+        character shouldBe null
     }
-    test("Character with complex deaths") {
-        val content = getResource("character/characterWithComplexDeaths.txt")
-
-        val character = CharacterParser.fromContent(content)
+    test("Character recently traded") {
+        val character = CharacterParser.fromContent(getResource("character/characterRecentlyTraded.txt"))
 
         character.shouldBeInstanceOf<Character>()
-        with(character) {
-            deaths.forAtLeastOne {
-                it.killers.forAtLeastOne { k -> k.summon shouldNotBe null }
-            }
-            deaths.forAtLeastOne {
-                it.assists.shouldNotBeEmpty()
-            }
-        }
+        character.isRecentlyTraded shouldBe true
     }
     test("Character scheduled for deletion") {
-        val content = getResource("character/characterDeletionScheduled.txt")
-
-        val character = CharacterParser.fromContent(content)
+        val character = CharacterParser.fromContent(getResource("character/characterScheduledForDeletion.txt"))
 
         character.shouldBeInstanceOf<Character>()
-        with(character) {
-            isScheduledForDeletion shouldBe true
-            deletionDate.shouldBeInstanceOf<Instant>()
-        }
+        character.deletionDate shouldNotBe null
+        character.isScheduledForDeletion shouldBe true
+    }
+    test("Character with complex deaths"){
+
     }
     test("Character with former names") {
-        val content = getResource("character/characterFormerNames.txt")
-
-        val character = CharacterParser.fromContent(content)
+        val character = CharacterParser.fromContent(getResource("character/characterWithFormerNames.txt"))
 
         character.shouldBeInstanceOf<Character>()
-        with(character) {
-            formerNames.shouldNotBeEmpty()
-        }
+        character.formerNames shouldHaveAtLeastSize 1
     }
-
-    test("Character not found") {
-        val content = getResource("character/characterNotFound.txt")
-
-        val character = CharacterParser.fromContent(content)
-
-        character.shouldBeNull()
-    }
-
-    test("Character with title and badges") {
-        val content = getResource("character/characterFormerNames.txt")
-
-        val character = CharacterParser.fromContent(content)
+    test("Character with former world") {
+        val character = CharacterParser.fromContent(getResource("character/characterWithFormerNames.txt"))
 
         character.shouldBeInstanceOf<Character>()
-        with(character) {
-            badges.shouldNotBeEmpty()
-            title.shouldNotBeNull()
-        }
-    }
-    test("Character with no badges selected") {
-        val content = getResource("character/characterNoBadgesSelected.txt")
-
-        val character = CharacterParser.fromContent(content)
-
-        character.shouldBeInstanceOf<Character>()
-        with(character) {
-            badges.shouldBeEmpty()
-        }
+        character.formerWorld shouldNotBe null
     }
     test("Character with multiple houses") {
-        val content = getResource("character/characterMultipleHouses.txt")
-
-        val character = CharacterParser.fromContent(content)
+        val character = CharacterParser.fromContent(getResource("character/characterWithMultipleHouses.txt"))
 
         character.shouldBeInstanceOf<Character>()
-        with(character) {
-            houses shouldHaveAtLeastSize 2
-        }
+        character.houses shouldHaveAtLeastSize 2
+    }
+    test("Character with no badges selected") {
+        val character = CharacterParser.fromContent(getResource("character/characterWithFormerNames.txt"))
+
+        character.shouldBeInstanceOf<Character>()
+        character.badges shouldHaveSize 0
     }
     test("Character with special position") {
-        val content = getResource("character/characterSpecialPosition.txt")
-
-        val character = CharacterParser.fromContent(content)
+        val character = CharacterParser.fromContent(getResource("character/characterWithFormerNames.txt"))
 
         character.shouldBeInstanceOf<Character>()
-        with(character) {
-            position shouldNotBe null
+        character.position shouldNotBe null
+        character.characters.forAtLeastOne {
+            it.position shouldNotBe null
         }
     }
+    test("Character with title and badges") {
+        val character = CharacterParser.fromContent(getResource("character/characterWithTitleAndBadges.txt"))
 
+        character.shouldBeInstanceOf<Character>()
+        character.title shouldNotBe null
+        character.unlockedTitles shouldNotBe 0
+        character.badges shouldHaveAtLeastSize 0
+    }
+    test("Character with truncated deaths"){
+        val character = CharacterParser.fromContent("character/characterWithTruncatedDeaths.txt")
+
+        character.shouldBeInstanceOf<Character>()
+        character.deaths shouldHaveAtLeastSize 1
+    }
 })

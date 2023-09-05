@@ -34,8 +34,8 @@ public object ForumAnnouncementParser : Parser<ForumAnnouncement?> {
         return forumAnnouncement {
             val breadCrumbs = boxContent.select("div.ForumBreadCrumbs > a")
             if (breadCrumbs.isEmpty()) {
-                val messageBox = boxContent.selectFirst("div.InnerTableContainer")
-                if (messageBox == null || "not found" !in messageBox.text()) {
+                val messageBox = boxContent.selectFirst("div.TableContainer")
+                if (messageBox == null || "error" !in messageBox.text().lowercase()) {
                     throw ParsingException("Could not find Forum Breadcrumbs")
                 }
                 return null
