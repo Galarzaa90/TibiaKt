@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2023 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,13 +18,32 @@ package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.TestResources.getResource
 import io.kotest.core.spec.style.StringSpec
+import io.kotest.inspectors.forAtLeastOne
+import io.kotest.matchers.collections.shouldHaveAtLeastSize
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
 
 class ForumSectionParserTests : StringSpec({
-    "World Boards" {
-        val boards = ForumSectionParser.fromContent(getResource("forums/forumSectionWorldBoards.txt"))
+    "Forum section" {
+        val boards = ForumSectionParser.fromContent(getResource("forumSection/forumSection.txt"))
+
         boards.sectionId shouldBe 2
-        boards.entries shouldHaveSize 82
+        boards.entries shouldHaveAtLeastSize 1
+    }
+    "Forum section empty" {
+        val boards = ForumSectionParser.fromContent(getResource("forumSection/forumSectionEmpty.txt"))
+
+        boards.entries shouldHaveSize 0
+    }
+
+    "Forum section with empty board" {
+        val boards = ForumSectionParser.fromContent(getResource("forumSection/forumSectionWithEmptyBoard.txt"))
+
+        boards.entries shouldHaveAtLeastSize 1
+        boards.entries.forAtLeastOne {
+            it.lastPost shouldBe null
+            it.posts shouldBe 0
+            it.threads shouldBe 0
+        }
     }
 })

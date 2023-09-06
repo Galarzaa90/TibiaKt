@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2023 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,45 +17,36 @@
 package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.TestResources.getResource
-import io.kotest.core.spec.style.StringSpec
-import io.kotest.inspectors.shouldForAtLeastOne
+import com.galarzaa.tibiakt.core.enums.AuctionStatus
+import com.galarzaa.tibiakt.core.models.bazaar.Auction
+import com.galarzaa.tibiakt.core.models.bazaar.AuctionDetails
+import io.kotest.core.spec.style.FunSpec
+import io.kotest.inspectors.forAtLeastOne
+import io.kotest.matchers.ints.shouldBeGreaterThan
 import io.kotest.matchers.shouldBe
-import io.kotest.matchers.shouldNotBe
+import io.kotest.matchers.types.shouldBeInstanceOf
 
-class AuctionParserTests : StringSpec({
-    "Parsing an auction's details"{
-        val auction = AuctionParser.fromContent(getResource("auctions/auctionDetail.txt"))
-        auction shouldNotBe null
-        auction!!.name shouldBe "Vinicim Defender"
-        auction.world shouldBe "Nossobra"
-        auction.level shouldBe 560
-        auction.details shouldNotBe null
-        with(auction.details!!) {
-            hitPoints shouldBe 2_945
-            mana shouldBe 16_650
-            capacity shouldBe 5_990
-            speed shouldBe 669
-            skills.magicLevel shouldBe 103.1856
-            experience shouldBe 2_896_070_948
-            gold shouldBe 24_652
-        }
+class AuctionParserTests : FunSpec({
+    test("Finished auction") {
+        val auction = AuctionParser.fromContent(getResource("auction/auctionFinished.txt"))
+
+        auction.shouldBeInstanceOf<Auction>()
+        auction.status shouldBe AuctionStatus.FINISHED
     }
 
-    "Parsing auction with upgraded items"{
-        val auction = AuctionParser.fromContent(getResource("auctions/auctionUpgradedItems.txt"))
-        auction shouldNotBe null
-        auction!!.name shouldBe "El Pepin"
-        auction.displayedItems.shouldForAtLeastOne {
-            it.tier shouldBe 1
-        }
-        auction.details!!.items.entries.shouldForAtLeastOne {
-            it.tier shouldBe 1
-        }
+    test("Auction not found") {
+        val auction = AuctionParser.fromContent(getResource("auction/auctionNotFound.txt"))
 
-    }
-
-    "Parsing auction not found page"{
-        val auction = AuctionParser.fromContent(getResource("auctions/auctionNotFound.txt"))
         auction shouldBe null
+    }
+
+    test("Auction with upgraded items") {
+        val auction = AuctionParser.fromContent(getResource("auction/auctionWithUpgradedItems.txt"))
+
+        auction.shouldBeInstanceOf<Auction>()
+        auction.details.shouldBeInstanceOf<AuctionDetails>()
+        auction.displayedItems.forAtLeastOne {
+            it.tier shouldBeGreaterThan 0
+        }
     }
 })

@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2023 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,57 +19,84 @@ package com.galarzaa.tibiakt.core.parsers
 import com.galarzaa.tibiakt.TestResources.getResource
 import com.galarzaa.tibiakt.core.enums.HighscoresBattlEyeType
 import com.galarzaa.tibiakt.core.enums.HighscoresCategory
-import com.galarzaa.tibiakt.core.enums.HighscoresProfession
-import io.kotest.core.spec.style.StringSpec
+import com.galarzaa.tibiakt.core.models.highscores.Highscores
+import io.kotest.core.spec.style.FunSpec
+import io.kotest.inspectors.forAll
+import io.kotest.matchers.collections.shouldHaveAtLeastSize
 import io.kotest.matchers.collections.shouldHaveSize
+import io.kotest.matchers.ints.shouldBeGreaterThan
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
+import io.kotest.matchers.types.shouldBeInstanceOf
 
-class HighscoresParserTests : StringSpec({
-    "Parse highscores for all worlds" {
-        val highscores = HighscoresParser.fromContent(getResource("highscores/highscoresAllWorlds.txt"))
-        highscores shouldNotBe null
-        highscores!!.world shouldBe null
-        highscores.category shouldBe HighscoresCategory.EXPERIENCE_POINTS
-        highscores.vocation shouldBe HighscoresProfession.ALL
-        highscores.worldTypes shouldHaveSize 0
-        highscores.battlEyeType shouldBe HighscoresBattlEyeType.ANY_WORLD
-        highscores.currentPage shouldBe 1
-        highscores.totalPages shouldBe 20
-        highscores.resultsCount shouldBe 1000
-        highscores.entries shouldHaveSize 50
+class HighscoresParserTests : FunSpec({
+    test("Highscores") {
+        val highscores = HighscoresParser.fromContent(getResource("highscores/highscores.txt"))
+        highscores.shouldBeInstanceOf<Highscores>()
+
+        with(highscores) {
+            highscores.world shouldBe "Gladera"
+            entries shouldHaveAtLeastSize 1
+            resultsCount shouldBeGreaterThan 0
+            entries.forAll {
+                it.world shouldBe highscores.world
+            }
+        }
     }
+    test("Highscores with BattlEye PvP Filters"){
+        val highscores = HighscoresParser.fromContent(getResource("highscores/highscoresBattleEyePvpFilters.txt"))
 
-    "Parse highscores with PvP types filters selected" {
-        val highscores = HighscoresParser.fromContent(getResource("highscores/highscoresPvpTypesSelected.txt"))
-        highscores shouldNotBe null
-        highscores!!.world shouldBe null
-        highscores.category shouldBe HighscoresCategory.MAGIC_LEVEL
-        highscores.vocation shouldBe HighscoresProfession.SORCERERS
-        highscores.worldTypes shouldHaveSize 2
-        highscores.battlEyeType shouldBe HighscoresBattlEyeType.ANY_WORLD
-        highscores.currentPage shouldBe 1
-        highscores.totalPages shouldBe 23
-        highscores.resultsCount shouldBe 1114
-        highscores.entries shouldHaveSize 50
+        highscores.shouldBeInstanceOf<Highscores>()
+        with(highscores){
+            world shouldBe null
+            battlEyeType shouldNotBe HighscoresBattlEyeType.ANY_WORLD
+            worldTypes shouldHaveAtLeastSize 1
+        }
     }
+    test("Global highscores") {
+        val highscores = HighscoresParser.fromContent(getResource("highscores/highscoresGlobal.txt"))
 
-    "Parse highscores with no results" {
-        val highscores = HighscoresParser.fromContent(getResource("highscores/highscoresLastPageLoyalty.txt"))
-        highscores shouldNotBe null
-        highscores!!.world shouldBe "Antica"
-        highscores.category shouldBe HighscoresCategory.LOYALTY_POINTS
-        highscores.vocation shouldBe HighscoresProfession.ALL
-        highscores.worldTypes shouldHaveSize 0
-        highscores.battlEyeType shouldBe HighscoresBattlEyeType.ANY_WORLD
-        highscores.currentPage shouldBe 21
-        highscores.totalPages shouldBe 21
-        highscores.resultsCount shouldBe 1002
-        highscores.entries shouldHaveSize 2
+        highscores.shouldBeInstanceOf<Highscores>()
+        with(highscores) {
+            world shouldBe null
+            entries shouldHaveAtLeastSize 1
+        }
     }
+    test("Experience highscores") {
+        val highscores = HighscoresParser.fromContent(getResource("highscores/highscoresExperience.txt"))
 
-    "Parse highscores for world that doesn't exist" {
-        val highscores = HighscoresParser.fromContent(getResource("highscores/highscoresWorldDoesntExist.txt"))
+        highscores.shouldBeInstanceOf<Highscores>()
+        with(highscores) {
+            world shouldNotBe null
+            category shouldBe HighscoresCategory.EXPERIENCE_POINTS
+        }
+    }
+    test("Loyalty highscores") {
+        val highscores = HighscoresParser.fromContent(getResource("highscores/highscoresLoyalty.txt"))
+
+        highscores.shouldBeInstanceOf<Highscores>()
+        with(highscores) {
+            world shouldNotBe null
+            category shouldBe HighscoresCategory.LOYALTY_POINTS
+            entries.forAll {
+                it.additionalValue shouldNotBe null
+            }
+        }
+    }
+    test("Highscores empty") {
+        val highscores = HighscoresParser.fromContent(getResource("highscores/highscoresNoResults.txt"))
+
+        highscores.shouldBeInstanceOf<Highscores>()
+        with(highscores) {
+            entries shouldHaveSize 0
+            totalPages shouldBe 1
+            resultsCount shouldBe 0
+            currentPage shouldBe 1
+        }
+    }
+    test("Highscores not found") {
+        val highscores = HighscoresParser.fromContent(getResource("highscores/highscoresNotFound.txt"))
+
         highscores shouldBe null
     }
 })

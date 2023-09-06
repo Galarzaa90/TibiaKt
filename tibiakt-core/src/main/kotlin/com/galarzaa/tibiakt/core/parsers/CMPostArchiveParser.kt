@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2023 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,9 +41,8 @@ public object CMPostArchiveParser : Parser<CMPostArchive> {
         val boxContent = HouseParser.boxContent(content)
         val tables = boxContent.parseTablesMap()
         return cmPostArchive {
-            tables["CM Post List"]?.let { parsePostList(it) }
-                ?: throw ParsingException("Could not find CM Post List table.")
             val form = boxContent.selectFirst("form") ?: throw ParsingException("Could not find search form.")
+            tables["CM Post List"]?.let { parsePostList(it) }
 
             parseSearchTable(form)
 

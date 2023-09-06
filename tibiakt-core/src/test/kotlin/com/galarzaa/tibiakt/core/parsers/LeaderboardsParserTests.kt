@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2023 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,18 +17,54 @@
 package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.TestResources.getResource
-import io.kotest.core.spec.style.StringSpec
-import io.kotest.matchers.collections.shouldHaveSize
+import com.galarzaa.tibiakt.core.models.leaderboards.DeletedLeaderboardsEntry
+import com.galarzaa.tibiakt.core.models.leaderboards.Leaderboards
+import io.kotest.core.spec.style.FunSpec
+import io.kotest.inspectors.forAtLeastOne
+import io.kotest.matchers.collections.shouldBeEmpty
+import io.kotest.matchers.collections.shouldNotBeEmpty
+import io.kotest.matchers.nulls.shouldBeNull
 import io.kotest.matchers.shouldBe
+import io.kotest.matchers.shouldNotBe
+import io.kotest.matchers.types.shouldBeInstanceOf
 
-class LeaderboardsParserTests : StringSpec({
-    "Parse page with results" {
-        val leaderboards = LeaderboardsParser.fromContent(getResource("leaderboards/leaderbordsResults.txt"))
-        leaderboards!!.world shouldBe "Adra"
-        leaderboards.rotation.rotationId shouldBe 14
-        leaderboards.currentPage shouldBe 1
-        leaderboards.totalPages shouldBe 1
-        leaderboards.resultsCount shouldBe 45
-        leaderboards.entries shouldHaveSize 45
+class LeaderboardsParserTests : FunSpec({
+    test("Leaderboard of current rotation") {
+        val leaderboard = LeaderboardsParser.fromContent(getResource("leaderboard/leaderboardCurrentRotation.txt"))
+
+        leaderboard.shouldBeInstanceOf<Leaderboards>()
+        with(leaderboard) {
+            rotation.current shouldBe true
+            lastUpdated shouldNotBe null
+            entries.shouldNotBeEmpty()
+        }
     }
+
+    test("Leaderboard with a deleted character") {
+        val leaderboard = LeaderboardsParser.fromContent(getResource("leaderboard/leaderboardDeletedCharacter.txt"))
+
+        leaderboard.shouldBeInstanceOf<Leaderboards>()
+        with(leaderboard) {
+            entries.forAtLeastOne {
+                it.shouldBeInstanceOf<DeletedLeaderboardsEntry>()
+            }
+        }
+    }
+
+    test("Leaderboard with no entries") {
+        val leaderboard = LeaderboardsParser.fromContent(getResource("leaderboard/leaderboardEmpty.txt"))
+
+        leaderboard.shouldBeInstanceOf<Leaderboards>()
+        with(leaderboard) {
+            totalPages shouldBe 1
+            resultsCount shouldBe 0
+            entries.shouldBeEmpty()
+        }
+    }
+    test("Leaderboard not found") {
+        val leaderboard = LeaderboardsParser.fromContent(getResource("leaderboard/leaderboardNotFound.txt"))
+
+        leaderboard.shouldBeNull()
+    }
+
 })

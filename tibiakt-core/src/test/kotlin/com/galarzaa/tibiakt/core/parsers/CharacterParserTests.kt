@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2023 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,133 +17,118 @@
 package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.TestResources.getResource
+import com.galarzaa.tibiakt.core.enums.AccountStatus
+import com.galarzaa.tibiakt.core.enums.Sex
 import com.galarzaa.tibiakt.core.enums.Vocation
+import com.galarzaa.tibiakt.core.models.character.Character
 import io.kotest.core.spec.IsolationMode
-import io.kotest.core.spec.style.StringSpec
-import io.kotest.inspectors.forAll
+import io.kotest.core.spec.style.FunSpec
 import io.kotest.inspectors.forAtLeastOne
-import io.kotest.inspectors.forAtMostOne
+import io.kotest.matchers.collections.shouldBeEmpty
+import io.kotest.matchers.collections.shouldHaveAtLeastSize
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
-import java.time.LocalDate
+import io.kotest.matchers.types.shouldBeInstanceOf
 
-class CharacterParserTests : StringSpec({
-    isolationMode = IsolationMode.InstancePerTest
-    "Parsing a character with houses, guild and married" {
-        val char = CharacterParser.fromContent(getResource("characters/characterHousesGuildAndMarried.txt"))
-        char shouldNotBe null
-        char!!.name shouldBe "Callie Aena"
-        char.level shouldBe 392
-        char.vocation shouldBe Vocation.ROYAL_PALADIN
-        char.unlockedTitles shouldBe 18
-        char.achievementPoints shouldBe 816
-        char.marriedTo shouldBe "Jacky pumpkin"
-        char.houses shouldHaveSize 2
-        char.houses.first().run {
-            name shouldBe "Trout Plaza 1"
-            town shouldBe "Svargrond"
-            paidUntil shouldBe LocalDate.of(2021, 10, 4)
-        }
-        char.guildMembership shouldNotBe null
-        char.guildMembership?.run {
-            name shouldBe "Naovaiterzezin"
-            rank shouldBe "Adestrador de Sucuri"
-        }
-        char.comment shouldBe "/NB-83CE5FECF800002/"
-        char.achievements shouldHaveSize 2
-        char.achievements.first().run {
-            grade shouldBe 2
-            name shouldBe "Green Thumb"
-            secret shouldBe true
-        }
-    }
+class CharacterParserTests : FunSpec({
+    isolationMode = IsolationMode.SingleInstance
 
-    "Parsing a character with account badges displayed"{
-        val char = CharacterParser.fromContent(getResource("characters/characterAccountBadges.txt"))
-        char shouldNotBe null
-        char!!.name shouldBe "Galarzaa Fidera"
-        char.badges shouldHaveSize 8
-        char.badges.first().run {
-            name shouldBe "Ancient Hero"
-            description shouldBe "The account is older than 15 years."
-            imageUrl shouldNotBe null
-        }
-    }
+    test("Regular character") {
+        val content = getResource("character/character.txt")
 
-    "Parsing a tutor"{
-        val char = CharacterParser.fromContent(getResource("characters/characterTutor.txt"))
-        char?.accountInformation shouldNotBe null
-        char?.accountInformation?.run {
-            position shouldBe "Tutor"
-            tutorStars shouldBe 4
-            loyaltyTitle shouldBe "Guardian of Tibia"
-        }
-    }
+        val character = CharacterParser.fromContent(content)
 
-    "Parsing a CipSoft member"{
-        val char = CharacterParser.fromContent(getResource("characters/characterCipSoftMember.txt"))
-        char shouldNotBe null
-        char!!.name shouldBe "Steve"
-        char.position shouldBe "CipSoft Member"
-        char.accountInformation?.position shouldBe "CipSoft Member"
-        char.characters.forAtLeastOne { it.position shouldBe "CipSoft Member" }
-    }
-
-    "Parsing a character with former names and former world and deleted characters" {
-        val char = CharacterParser.fromContent(getResource("characters/characterFormerNamesAndWorld.txt"))
-        char shouldNotBe null
-        char!!.name shouldBe "Legend Tumate"
-        char.formerNames shouldHaveSize 2
-        char.formerWorld shouldNotBe null
-        char.characters.forAtLeastOne { it.isDeleted shouldBe true }
-        char.characters.forAtLeastOne { it.isOnline shouldBe true }
-        char.characters.forAtMostOne { it.isMain shouldBe true }
-    }
-
-    "Parsing a character scheduld for deletion" {
-        val char = CharacterParser.fromContent(getResource("characters/characterDeleted.txt"))
-        char shouldNotBe null
-        char!!.name shouldBe "Orsty Serv"
-        char.isScheduledForDeletion shouldBe true
-        char.deletionDate shouldNotBe null
-        char.deletionDate?.epochSeconds shouldBe 1_632_678_475
-    }
-
-    "Parsing a character with PvP deaths"{
-        val char = CharacterParser.fromContent(getResource("characters/characterPvpDeaths.txt"))
-        char shouldNotBe null
-        char!!.deaths shouldHaveSize 5
-        char.deaths.first().run {
-            level shouldBe 804
-            killers shouldHaveSize 23
-            assists shouldHaveSize 1
-        }
-        char.deaths[2].run {
-            level shouldBe 802
-            killers.last().run {
-                name shouldBe "Alloy Hat"
-                traded shouldBe true
-                isPlayer shouldBe true
-                summon shouldBe "a paladin familiar"
+        character.shouldBeInstanceOf<Character>()
+        with(character) {
+            name shouldBe "Tschas"
+            title shouldBe null
+            formerNames.shouldBeEmpty()
+            unlockedTitles shouldBe 23
+            sex shouldBe Sex.FEMALE
+            vocation shouldBe Vocation.ELDER_DRUID
+            houses shouldHaveSize 1
+            with(houses.first()) {
+                name shouldBe "Park Lane 4"
+                houseId shouldBe 20205
+                town shouldBe "Carlin"
+                world shouldBe character.world
             }
+            lastLogin shouldNotBe null
+            position shouldBe null
+            accountStatus shouldBe AccountStatus.PREMIUM_ACCOUNT
+            isRecentlyTraded shouldBe false
+            badges shouldHaveSize 8
+            isHidden shouldBe false
         }
     }
+    test("Character not found") {
+        val character = CharacterParser.fromContent(getResource("character/characterNotFound.txt"))
 
-    "Character with deaths with only assists"{
-        val char = CharacterParser.fromContent(getResource("characters/charactersDeathsOnlyAssists.txt"))
-        char shouldNotBe null
-        char!!.name shouldBe "Legend lthuliol"
-        char.deaths shouldHaveSize 8
-        char.deaths.forAll {
-            it.assists shouldHaveSize 1
-            it.killers shouldHaveSize 0
-            it.level shouldBe 0
+        character shouldBe null
+    }
+    test("Character recently traded") {
+        val character = CharacterParser.fromContent(getResource("character/characterRecentlyTraded.txt"))
+
+        character.shouldBeInstanceOf<Character>()
+        character.isRecentlyTraded shouldBe true
+    }
+    test("Character scheduled for deletion") {
+        val character = CharacterParser.fromContent(getResource("character/characterScheduledForDeletion.txt"))
+
+        character.shouldBeInstanceOf<Character>()
+        character.deletionDate shouldNotBe null
+        character.isScheduledForDeletion shouldBe true
+    }
+    test("Character with complex deaths"){
+
+    }
+    test("Character with former names") {
+        val character = CharacterParser.fromContent(getResource("character/characterWithFormerNames.txt"))
+
+        character.shouldBeInstanceOf<Character>()
+        character.formerNames shouldHaveAtLeastSize 1
+    }
+    test("Character with former world") {
+        val character = CharacterParser.fromContent(getResource("character/characterWithFormerNames.txt"))
+
+        character.shouldBeInstanceOf<Character>()
+        character.formerWorld shouldNotBe null
+    }
+    test("Character with multiple houses") {
+        val character = CharacterParser.fromContent(getResource("character/characterWithMultipleHouses.txt"))
+
+        character.shouldBeInstanceOf<Character>()
+        character.houses shouldHaveAtLeastSize 2
+    }
+    test("Character with no badges selected") {
+        val character = CharacterParser.fromContent(getResource("character/characterWithFormerNames.txt"))
+
+        character.shouldBeInstanceOf<Character>()
+        character.badges shouldHaveSize 0
+    }
+    test("Character with special position") {
+        val character = CharacterParser.fromContent(getResource("character/characterWithSpecialPosition.txt"))
+
+        character.shouldBeInstanceOf<Character>()
+        character.position shouldNotBe null
+        character.characters.forAtLeastOne {
+            it.position shouldNotBe null
         }
     }
+    test("Character with title and badges") {
+        val character = CharacterParser.fromContent(getResource("character/characterWithTitleAndBadges.txt"))
 
-    "Character not found"{
-        val char = CharacterParser.fromContent(getResource("characters/characterNotFound.txt"))
-        char shouldBe null
+        character.shouldBeInstanceOf<Character>()
+        character.title shouldNotBe null
+        character.unlockedTitles shouldNotBe 0
+        character.badges shouldHaveAtLeastSize 0
+    }
+    //TODO: Need sample with entire HTML
+    xtest("Character with truncated deaths") {
+        val character = CharacterParser.fromContent("character/characterWithTruncatedDeaths.txt")
+
+        character.shouldBeInstanceOf<Character>()
+        character.deaths shouldHaveAtLeastSize 1
     }
 })

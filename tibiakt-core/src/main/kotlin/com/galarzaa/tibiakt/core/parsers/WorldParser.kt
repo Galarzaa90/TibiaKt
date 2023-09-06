@@ -36,6 +36,8 @@ import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 import java.time.YearMonth
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 /** Parser for world pages. */
 public object WorldParser : Parser<World?> {
@@ -131,8 +133,7 @@ public object WorldParser : Parser<World?> {
     }
 
     private fun WorldBuilder.parseCreationDate(value: String) {
-        val (month, year) = value.split("/").map { it.toInt() }
-        creationDate = YearMonth.of(if (year > 90) year + 1900 else year + 2000, month)
+        creationDate = YearMonth.parse(value, DateTimeFormatter.ofPattern("MMMM yyyy", Locale.ENGLISH))
 
     }
 }

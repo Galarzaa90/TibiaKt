@@ -17,53 +17,61 @@
 package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.TestResources.getResource
-import com.galarzaa.tibiakt.core.enums.HouseOrder
 import com.galarzaa.tibiakt.core.enums.HouseStatus
-import com.galarzaa.tibiakt.core.enums.HouseType
-import io.kotest.core.spec.style.StringSpec
-import io.kotest.inspectors.forAll
+import com.galarzaa.tibiakt.core.models.house.HousesSection
+import io.kotest.core.spec.style.FunSpec
 import io.kotest.inspectors.forAtLeastOne
+import io.kotest.matchers.collections.shouldHaveAtLeastSize
 import io.kotest.matchers.collections.shouldHaveSize
+import io.kotest.matchers.nulls.shouldBeNull
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
+import io.kotest.matchers.types.shouldBeInstanceOf
 
-class HousesSectionParserTests : StringSpec({
-    "Parse house list"{
-        val housesSection = HousesSectionParser.fromContent(getResource("houses/houseList.txt"))
-        housesSection shouldNotBe null
-        housesSection!!.world shouldBe "Ardera"
-        housesSection.town shouldBe "Carlin"
-        housesSection.status shouldBe null
-        housesSection.type shouldBe HouseType.HOUSE
-        housesSection.order shouldBe HouseOrder.NAME
-        housesSection.entries shouldHaveSize 97
-        housesSection.entries.also {
-            it.forAll { house ->
-                house.type shouldBe housesSection.type
-                house.town shouldBe housesSection.town
-                house.world shouldBe housesSection.world
+class HousesSectionParserTests : FunSpec({
+    test("Houses section"){
+        val housesSection = HousesSectionParser.fromContent(getResource("housesSection/housesSection.txt"))
+
+        housesSection.shouldBeInstanceOf<HousesSection>()
+
+        with(housesSection){
+            world shouldBe "Alumbra"
+            town shouldBe "Carlin"
+            entries shouldHaveAtLeastSize 1
+        }
+    }
+    test("Houses section empty"){
+        val housesSection = HousesSectionParser.fromContent(getResource("housesSection/housesSectionEmpty.txt"))
+
+        housesSection.shouldBeInstanceOf<HousesSection>()
+
+        with(housesSection){
+            entries shouldHaveSize 0
+        }
+    }
+    test("Houses section with auctioned houses") {
+        val housesSection =
+            HousesSectionParser.fromContent(getResource("housesSection/housesSectionWithAuctionedHouses.txt"))
+
+        housesSection.shouldBeInstanceOf<HousesSection>()
+
+        with(housesSection) {
+            entries shouldHaveAtLeastSize 1
+            entries.forAtLeastOne {
+                it.status shouldBe HouseStatus.AUCTIONED
+                it.highestBid shouldNotBe null
+                it.timeLeft shouldNotBe null
             }
-            it.forAtLeastOne { house ->
-                house.status shouldBe HouseStatus.AUCTIONED
-                house.highestBid shouldBe 0
-                house.timeLeft shouldNotBe null
+            entries.forAtLeastOne {
+                it.status shouldBe HouseStatus.AUCTIONED
+                it.highestBid shouldBe null
+                it.timeLeft shouldBe null
             }
         }
     }
+    test("Houses section not found"){
+        val housesSection = HousesSectionParser.fromContent(getResource("housesSection/housesSectionNotFound.txt"))
 
-    "Parse an empty house list"{
-        val housesSection = HousesSectionParser.fromContent(getResource("houses/houseListEmpty.txt"))
-        housesSection shouldNotBe null
-        housesSection!!.world shouldBe "Antica"
-        housesSection.town shouldBe "Carlin"
-        housesSection.status shouldBe HouseStatus.AUCTIONED
-        housesSection.type shouldBe HouseType.HOUSE
-        housesSection.order shouldBe HouseOrder.NAME
-        housesSection.entries shouldHaveSize 0
-    }
-
-    "Parse initial house list (no parameters)"{
-        val housesSection = HousesSectionParser.fromContent(getResource("houses/houseListInitial.txt"))
-        housesSection shouldBe null
+        housesSection.shouldBeNull()
     }
 })

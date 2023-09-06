@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2023 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,69 +17,73 @@
 package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.TestResources.getResource
-import com.galarzaa.tibiakt.core.enums.Vocation
-import com.galarzaa.tibiakt.core.models.forums.ForumAuthor
-import io.kotest.core.spec.style.StringSpec
+import com.galarzaa.tibiakt.core.models.forums.ForumThread
+import com.galarzaa.tibiakt.core.models.forums.UnavailableForumAuthor
+import io.kotest.core.spec.style.FunSpec
 import io.kotest.inspectors.forAtLeastOne
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
+import io.kotest.matchers.string.shouldNotContainIgnoringCase
 import io.kotest.matchers.types.shouldBeInstanceOf
 
-class ForumThreadParserTests : StringSpec({
-    "Parse thread with traded poster" {
-        val thread = ForumThreadParser.fromContent(getResource("forums/forumThreadTradedPoster.txt"))
-        thread shouldNotBe null
-        with(thread!!) {
-            title shouldBe "*ASAP* New Balancing Changes - Buff OLD Areas and Creatures!"
-            threadId shouldBe 4_807_028
-            boardId shouldBe 10
-            currentPage shouldBe 1
-            totalPages shouldBe 16
-            resultsCount shouldBe 317
-            entries shouldHaveSize 20
+class ForumThreadParserTests : FunSpec({
+    test("Forum thread with edited post") {
+        val thread = ForumThreadParser.fromContent(getResource("forumThread/forumThreadWithEditedPost.txt"))
+
+        thread.shouldBeInstanceOf<ForumThread>()
+        thread.entries.forAtLeastOne {
+            it.editedBy shouldNotBe null
+            it.editedDate shouldNotBe null
         }
     }
 
-    "Parse thread with a poster that was traded recently" {
-        val thread =
-            ForumThreadParser.fromContent(getResource("forums/forumThreadPostAuthorRecentlyTraded.txt"))
-        thread shouldNotBe null
-        with(thread!!) {
-            title shouldBe "heffaklumparna!!"
-            threadId shouldBe 4_927_392
-            boardId shouldBe 25
-            currentPage shouldBe 1
-            totalPages shouldBe 1
-            resultsCount shouldBe 6
-            entries shouldHaveSize 6
-            entries.forAtLeastOne {
-                it.author.shouldBeInstanceOf<ForumAuthor>()
-                with(it.author as ForumAuthor) {
-                    name shouldBe "Wideswing"
-                    world shouldBe "Vunira"
-                    vocation shouldBe Vocation.ELITE_KNIGHT
-                    level shouldBe 159
-                    posts shouldBe 1
-                }
-            }
+    test("Forum thread with golden frame") {
+        val thread = ForumThreadParser.fromContent(getResource("forumThread/forumThreadWithGoldenFrame.txt"))
+
+        thread.shouldBeInstanceOf<ForumThread>()
+        thread.goldenFrame shouldBe true
+    }
+
+    test("Forum thread with post by deleted char") {
+        val thread = ForumThreadParser.fromContent(getResource("forumThread/forumThreadWithPostByDeletedChar.txt"))
+
+        thread.shouldBeInstanceOf<ForumThread>()
+        thread.entries.forAtLeastOne {
+            it.author.shouldBeInstanceOf<UnavailableForumAuthor>()
+            it.author.name shouldNotContainIgnoringCase "traded"
+            (it.author as UnavailableForumAuthor).isDeleted shouldBe true
+        }
+    }
+    test("Forum thread with post by traded char") {
+        val thread = ForumThreadParser.fromContent(getResource("forumThread/forumThreadWithPostByTradedChar.txt"))
+
+        thread.shouldBeInstanceOf<ForumThread>()
+        thread.entries.forAtLeastOne {
+            it.author.shouldBeInstanceOf<UnavailableForumAuthor>()
+            it.author.name shouldNotContainIgnoringCase "traded"
+            (it.author as UnavailableForumAuthor).isTraded shouldBe true
+        }
+    }
+    test("Forum thread with post with golden frame") {
+        val thread = ForumThreadParser.fromContent(getResource("forumThread/forumThreadWithPostWithGoldenFrame.txt"))
+
+        thread.shouldBeInstanceOf<ForumThread>()
+        thread.entries.forAtLeastOne {
+            //TODO: No golden frame attribute.
         }
     }
 
-    "Parse the content of a thread going to an invalid page" {
-        val thread = ForumThreadParser.fromContent(getResource("forums/forumThreadInvalidPage.txt"))
-        thread shouldNotBe null
-        with(thread!!) {
-            title shouldBe "Bald Dwarfs Rec..."
-            board shouldBe "Gladera"
-            boardId shouldBe 143_609
-            section shouldBe "World Boards"
-            sectionId shouldBe 2
-        }
+    test("Forum thread invalid page") {
+        val thread = ForumThreadParser.fromContent(getResource("forumThread/forumThreadInvalidPage.txt"))
+
+        thread.shouldBeInstanceOf<ForumThread>()
+        thread.entries shouldHaveSize 0
     }
 
-    "Parse the content of a thread that doesn't exist" {
-        val thread = ForumThreadParser.fromContent(getResource("forums/forumThreadNotFound.txt"))
+    test("Forum thread not found") {
+        val thread = ForumThreadParser.fromContent(getResource("forumThread/forumThreadNotFound.txt"))
+
         thread shouldBe null
     }
 })

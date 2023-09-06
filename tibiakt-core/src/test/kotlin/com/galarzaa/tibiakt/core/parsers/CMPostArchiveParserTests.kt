@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2023 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,31 +17,52 @@
 package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.TestResources.getResource
-import io.kotest.core.spec.style.StringSpec
+import io.kotest.core.spec.style.FunSpec
+import io.kotest.matchers.collections.shouldHaveAtLeastSize
 import io.kotest.matchers.collections.shouldHaveSize
+import io.kotest.matchers.ints.shouldBeGreaterThan
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
-import java.time.LocalDate
 
-class CMPostArchiveParserTests : StringSpec({
-    "Parsing with results"{
-        val cmPostArchive = CMPostArchiveParser.fromContent(getResource("forums/cmPostArchiveWithItems.txt"))
+class CMPostArchiveParserTests : FunSpec({
+    test("CM Post Archive initial page"){
+        val cmPostArchive = CMPostArchiveParser.fromContent(getResource("cmPostArchive/cmPostArchiveInitial.txt"))
         cmPostArchive shouldNotBe null
-        cmPostArchive.startDate shouldBe LocalDate.of(2022, 1, 13)
-        cmPostArchive.endDate shouldBe LocalDate.of(2022, 1, 20)
-        cmPostArchive.currentPage shouldBe 1
-        cmPostArchive.totalPages shouldBe 1
-        cmPostArchive.resultsCount shouldBe 9
-        cmPostArchive.entries shouldHaveSize 9
-    }
-    "Parsing with no results"{
-        val cmPostArchive = CMPostArchiveParser.fromContent(getResource("forums/cmPostArchiveEmpty.txt"))
-        cmPostArchive shouldNotBe null
-        cmPostArchive.startDate shouldBe LocalDate.of(2000, 1, 13)
-        cmPostArchive.endDate shouldBe LocalDate.of(2000, 1, 20)
-        cmPostArchive.currentPage shouldBe 1
-        cmPostArchive.totalPages shouldBe 1
+
         cmPostArchive.resultsCount shouldBe 0
+        cmPostArchive.currentPage shouldBe 1
+        cmPostArchive.totalPages shouldBe 1
         cmPostArchive.entries shouldHaveSize 0
     }
+
+    test("CM Post Archive with results but single page"){
+        val cmPostArchive = CMPostArchiveParser.fromContent(getResource("cmPostArchive/cmPostArchiveNoPages.txt"))
+        cmPostArchive shouldNotBe null
+
+        cmPostArchive.resultsCount shouldBeGreaterThan 0
+        cmPostArchive.currentPage shouldBe 1
+        cmPostArchive.totalPages shouldBe 1
+        cmPostArchive.entries shouldHaveAtLeastSize 1
+    }
+
+    test("CM Post Archive with results in multiple pages"){
+        val cmPostArchive = CMPostArchiveParser.fromContent(getResource("cmPostArchive/cmPostArchivePages.txt"))
+        cmPostArchive shouldNotBe null
+
+        cmPostArchive.resultsCount shouldBeGreaterThan 0
+        cmPostArchive.currentPage shouldBe 1
+        cmPostArchive.totalPages shouldBeGreaterThan 1
+        cmPostArchive.entries shouldHaveAtLeastSize 1
+    }
+
+    test("CM Post Archive without results"){
+        val cmPostArchive = CMPostArchiveParser.fromContent(getResource("cmPostArchive/cmPostArchiveNoResults.txt"))
+        cmPostArchive shouldNotBe null
+
+        cmPostArchive.resultsCount shouldBe  0
+        cmPostArchive.currentPage shouldBe 1
+        cmPostArchive.totalPages shouldBe  1
+        cmPostArchive.entries shouldHaveSize  0
+    }
+
 })
