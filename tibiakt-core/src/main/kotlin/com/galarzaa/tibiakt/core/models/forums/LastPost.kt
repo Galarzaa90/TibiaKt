@@ -27,7 +27,6 @@ import kotlinx.serialization.Serializable
  * @property author The name of the character that made the last post.
  * @property postId The internal ID of the last post.
  * @property date The date and time when the post was published.
- * 2478
  * @property deleted Whether the author of the post is currently deleted.
  * @property traded Whether the post was made by a character that was traded afterwards.
  */
