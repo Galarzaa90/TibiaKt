@@ -50,7 +50,7 @@ class CharacterParserTests : FunSpec({
             houses shouldHaveSize 1
             with(houses.first()) {
                 name shouldBe "Park Lane 4"
-                houseId shouldBe 20205
+                houseId shouldBe 20_205
                 town shouldBe "Carlin"
                 world shouldBe character.world
             }

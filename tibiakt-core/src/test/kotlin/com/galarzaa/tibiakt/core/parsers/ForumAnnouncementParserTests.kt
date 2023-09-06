@@ -23,12 +23,12 @@ import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeInstanceOf
 
-class ForumAnnouncementParserTests: StringSpec({
-    "Parse announcement"{
+class ForumAnnouncementParserTests : StringSpec({
+    "Parse announcement" {
         val announcement = ForumAnnouncementParser.fromContent(getResource("forumAnnouncement/forumAnnouncement.txt"))
 
         announcement.shouldBeInstanceOf<ForumAnnouncement>()
-        with(announcement){
+        with(announcement) {
 
             author.shouldBeInstanceOf<ForumAuthor>()
             with(author as ForumAuthor) {
@@ -38,7 +38,8 @@ class ForumAnnouncementParserTests: StringSpec({
     }
 
     "Parse announcement not found" {
-        val announcement = ForumAnnouncementParser.fromContent(getResource("forumAnnouncement/forumAnnouncementNotFound.txt"))
+        val announcement =
+            ForumAnnouncementParser.fromContent(getResource("forumAnnouncement/forumAnnouncementNotFound.txt"))
 
         announcement shouldBe null
     }
