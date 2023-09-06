@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2023 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,13 +27,9 @@ import io.kotest.inspectors.forAtLeastOne
 import io.kotest.matchers.collections.shouldBeEmpty
 import io.kotest.matchers.collections.shouldHaveAtLeastSize
 import io.kotest.matchers.collections.shouldHaveSize
-import io.kotest.matchers.collections.shouldNotBeEmpty
-import io.kotest.matchers.nulls.shouldBeNull
-import io.kotest.matchers.nulls.shouldNotBeNull
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
 import io.kotest.matchers.types.shouldBeInstanceOf
-import kotlinx.datetime.Instant
 
 class CharacterParserTests : FunSpec({
     isolationMode = IsolationMode.SingleInstance
@@ -112,7 +108,7 @@ class CharacterParserTests : FunSpec({
         character.badges shouldHaveSize 0
     }
     test("Character with special position") {
-        val character = CharacterParser.fromContent(getResource("character/characterWithFormerNames.txt"))
+        val character = CharacterParser.fromContent(getResource("character/characterWithSpecialPosition.txt"))
 
         character.shouldBeInstanceOf<Character>()
         character.position shouldNotBe null
@@ -128,7 +124,8 @@ class CharacterParserTests : FunSpec({
         character.unlockedTitles shouldNotBe 0
         character.badges shouldHaveAtLeastSize 0
     }
-    test("Character with truncated deaths"){
+    //TODO: Need sample with entire HTML
+    xtest("Character with truncated deaths") {
         val character = CharacterParser.fromContent("character/characterWithTruncatedDeaths.txt")
 
         character.shouldBeInstanceOf<Character>()
