@@ -43,7 +43,7 @@ dependencies {
 }
 
 tasks.withType<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar> {
-    archiveFileName.set("tibiatk-server.jar")
+    archiveFileName.set("tibiatk-server-shadow.jar")
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {

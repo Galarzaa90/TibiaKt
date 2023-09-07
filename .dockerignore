@@ -1,5 +1,7 @@
 *
-!tibiakt-*/
+!tibiakt-core/
+!tibiakt-client/
+!tibiakt-server/
 !build.gradle.kts
 !publish.gradle.kts
 !gradle.properties

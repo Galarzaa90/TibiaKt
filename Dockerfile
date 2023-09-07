@@ -7,11 +7,13 @@ WORKDIR /app
 # This step will fail because source is still not there, but at least dependencies will be downloaded
 RUN ./gradlew build -x check -x detekt --parallel --continue > /dev/null 2>&1 || true
 
-COPY . /app
-RUN ./gradlew build -x test -x detekt shadowJar --parallel
+COPY tibiakt-core/ /app/tibiakt-core
+COPY tibiakt-client/ /app/tibiakt-client
+COPY tibiakt-server/ /app/tibiakt-server
+RUN ./gradlew build -x test -x detekt tibiakt-server:shadowJar --parallel
 
 FROM amazoncorretto:19
-COPY --from=builder ./app/tibiakt-server/build/libs/tibiatk-server.jar .
+COPY --from=builder ./app/tibiakt-server/build/libs/tibiatk-server-shadow.jar .
 
 EXPOSE 8080
 
@@ -22,6 +24,6 @@ LABEL org.opencontainers.image.url="https://github.com/Galarzaa90/tibiakt"
 LABEL org.opencontainers.image.source="https://github.com/Galarzaa90/tibiakt"
 LABEL org.opencontainers.image.vendor="Allan Galarza <allan.galarza@gmail.com>"
 LABEL org.opencontainers.image.title="TibiaKT"
-LABEL org.opencontainers.image.description="API that parses website content into Kotlin data."
+LABEL org.opencontainers.image.description="HTTP API that parses content from Tibia.com into JSON data."
 
-CMD [ "java", "-jar",  "./tibiatk-server.jar" ]
+ENTRYPOINT [ "java", "-jar",  "./tibiatk-server-shadow.jar" ]
