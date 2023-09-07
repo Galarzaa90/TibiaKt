@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2023 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,13 +16,13 @@
 
 package com.galarzaa.tibiakt.core.parsers
 
-import com.galarzaa.tibiakt.core.builders.LeaderboardsBuilder
-import com.galarzaa.tibiakt.core.builders.leaderboards
+import com.galarzaa.tibiakt.core.builders.LeaderboardBuilder
+import com.galarzaa.tibiakt.core.builders.leaderboard
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
-import com.galarzaa.tibiakt.core.models.leaderboards.DeletedLeaderboardsEntry
-import com.galarzaa.tibiakt.core.models.leaderboards.Leaderboards
-import com.galarzaa.tibiakt.core.models.leaderboards.LeaderboardsEntry
-import com.galarzaa.tibiakt.core.models.leaderboards.LeaderboardsRotation
+import com.galarzaa.tibiakt.core.models.leaderboards.DeletedLeaderboardEntry
+import com.galarzaa.tibiakt.core.models.leaderboards.Leaderboard
+import com.galarzaa.tibiakt.core.models.leaderboards.LeaderboardEntry
+import com.galarzaa.tibiakt.core.models.leaderboards.LeaderboardRotation
 import com.galarzaa.tibiakt.core.utils.PaginationData
 import com.galarzaa.tibiakt.core.utils.cells
 import com.galarzaa.tibiakt.core.utils.clean
@@ -39,14 +39,14 @@ import org.jsoup.nodes.Element
 import kotlin.time.Duration.Companion.minutes
 
 /** Parses content from the leaderboards. */
-public object LeaderboardsParser : Parser<Leaderboards?> {
+public object LeaderboardParser : Parser<Leaderboard?> {
     private val rotationEndPattern = Regex("""ends on ([^)]+)""")
 
-    override fun fromContent(content: String): Leaderboards? {
+    override fun fromContent(content: String): Leaderboard? {
         val boxContent = boxContent(content)
         val tables = boxContent.select("table.TableContent")
 
-        return leaderboards {
+        return leaderboard {
             val formData = tables[1].selectFirst("form")?.formData() ?: throw ParsingException("form not found")
             val rotationOptions = tables[1].select("select[name=rotation] > option")
                 .associate { it.attr("value").toInt() to it.cleanText() }
@@ -59,7 +59,7 @@ public object LeaderboardsParser : Parser<Leaderboards?> {
                     isCurrent = true
                 }
                 val rotationEnd = parseTibiaDateTime(cleanLabel)
-                val rotation = LeaderboardsRotation(
+                val rotation = LeaderboardRotation(
                     rotationId = rotationId, current = isCurrent, endDate = rotationEnd
                 )
                 if (isCurrent) {
@@ -90,7 +90,7 @@ public object LeaderboardsParser : Parser<Leaderboards?> {
 
     }
 
-    private fun LeaderboardsBuilder.parseLeaderboardEntries(entriesTable: Element?) {
+    private fun LeaderboardBuilder.parseLeaderboardEntries(entriesTable: Element?) {
         for (row in entriesTable.rows().offsetStart(1)) {
             val cells = row.cells()
             if (cells.size != 3) continue
@@ -98,7 +98,7 @@ public object LeaderboardsParser : Parser<Leaderboards?> {
             val rank = cells[0].text().remove(".").toInt()
             val dromeLevel = cells[2].text().toInt()
             addEntry(
-                if (name != null) LeaderboardsEntry(rank, name, dromeLevel) else DeletedLeaderboardsEntry(
+                if (name != null) LeaderboardEntry(rank, name, dromeLevel) else DeletedLeaderboardEntry(
                     rank, dromeLevel
                 )
             )
@@ -106,3 +106,6 @@ public object LeaderboardsParser : Parser<Leaderboards?> {
     }
 
 }
+
+@Deprecated("Renamed to LeaderboardParser", ReplaceWith("LeaderboardParser"))
+public typealias LeaderboardsParser = LeaderboardParser

@@ -17,8 +17,8 @@
 package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.TestResources.getResource
-import com.galarzaa.tibiakt.core.models.leaderboards.DeletedLeaderboardsEntry
-import com.galarzaa.tibiakt.core.models.leaderboards.Leaderboards
+import com.galarzaa.tibiakt.core.models.leaderboards.DeletedLeaderboardEntry
+import com.galarzaa.tibiakt.core.models.leaderboards.Leaderboard
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.inspectors.forAtLeastOne
 import io.kotest.matchers.collections.shouldBeEmpty
@@ -28,11 +28,11 @@ import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
 import io.kotest.matchers.types.shouldBeInstanceOf
 
-class LeaderboardsParserTests : FunSpec({
+class LeaderboardParserTests : FunSpec({
     test("Leaderboard of current rotation") {
-        val leaderboard = LeaderboardsParser.fromContent(getResource("leaderboard/leaderboardCurrentRotation.txt"))
+        val leaderboard = LeaderboardParser.fromContent(getResource("leaderboard/leaderboardCurrentRotation.txt"))
 
-        leaderboard.shouldBeInstanceOf<Leaderboards>()
+        leaderboard.shouldBeInstanceOf<Leaderboard>()
         with(leaderboard) {
             rotation.current shouldBe true
             lastUpdated shouldNotBe null
@@ -41,20 +41,20 @@ class LeaderboardsParserTests : FunSpec({
     }
 
     test("Leaderboard with a deleted character") {
-        val leaderboard = LeaderboardsParser.fromContent(getResource("leaderboard/leaderboardDeletedCharacter.txt"))
+        val leaderboard = LeaderboardParser.fromContent(getResource("leaderboard/leaderboardDeletedCharacter.txt"))
 
-        leaderboard.shouldBeInstanceOf<Leaderboards>()
+        leaderboard.shouldBeInstanceOf<Leaderboard>()
         with(leaderboard) {
             entries.forAtLeastOne {
-                it.shouldBeInstanceOf<DeletedLeaderboardsEntry>()
+                it.shouldBeInstanceOf<DeletedLeaderboardEntry>()
             }
         }
     }
 
     test("Leaderboard with no entries") {
-        val leaderboard = LeaderboardsParser.fromContent(getResource("leaderboard/leaderboardEmpty.txt"))
+        val leaderboard = LeaderboardParser.fromContent(getResource("leaderboard/leaderboardEmpty.txt"))
 
-        leaderboard.shouldBeInstanceOf<Leaderboards>()
+        leaderboard.shouldBeInstanceOf<Leaderboard>()
         with(leaderboard) {
             totalPages shouldBe 1
             resultsCount shouldBe 0
@@ -62,7 +62,7 @@ class LeaderboardsParserTests : FunSpec({
         }
     }
     test("Leaderboard not found") {
-        val leaderboard = LeaderboardsParser.fromContent(getResource("leaderboard/leaderboardNotFound.txt"))
+        val leaderboard = LeaderboardParser.fromContent(getResource("leaderboard/leaderboardNotFound.txt"))
 
         leaderboard.shouldBeNull()
     }

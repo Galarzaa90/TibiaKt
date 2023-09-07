@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2023 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,8 +27,12 @@ import kotlinx.serialization.Serializable
  * @property endDate The date when the rotation ends.
  */
 @Serializable
-public data class LeaderboardsRotation(
+public data class LeaderboardRotation(
     val rotationId: Int,
     val current: Boolean,
     val endDate: Instant,
 )
+
+
+@Deprecated("Renamed to LeaderboardRotation", replaceWith = ReplaceWith("LeaderboardRotation"))
+public typealias LeaderboardsRotation = LeaderboardRotation

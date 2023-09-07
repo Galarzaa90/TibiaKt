@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2023 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,26 +27,38 @@ import kotlinx.serialization.Serializable
  * @property dromeLevel The drome level of the character.
  */
 @Serializable
-public sealed class BaseLeaderboardsEntry {
+public sealed class BaseLeaderboardEntry {
     public abstract val rank: Int
     public abstract val dromeLevel: Int
 }
 
+@Deprecated("Renamed to BaseLeaderboardEntry", replaceWith = ReplaceWith("BaseLeaderboardEntry"))
+public typealias BaseLeaderboardsEntry = BaseLeaderboardEntry
+
+
 /**
- * An entry in the [LeaderboardsEntry].
+ * An entry in the [LeaderboardEntry].
  */
 @Serializable
 @SerialName("leaderboardsEntry")
-public data class LeaderboardsEntry(
+public data class LeaderboardEntry(
     override val rank: Int,
     override val name: String,
     override val dromeLevel: Int,
-) : BaseLeaderboardsEntry(), BaseCharacter
+) : BaseLeaderboardEntry(), BaseCharacter
 
 /** A leaderboard entry belonging to a deleted character. */
 @Serializable
 @SerialName("deletedLeaderboardsEntry")
-public data class DeletedLeaderboardsEntry(
+public data class DeletedLeaderboardEntry(
     override val rank: Int,
     override val dromeLevel: Int,
-) : BaseLeaderboardsEntry()
+) : BaseLeaderboardEntry()
+
+
+@Deprecated("Renamed to LeaderboardEntry", replaceWith = ReplaceWith("LeaderboardEntry"))
+public typealias LeaderboardsEntry = LeaderboardEntry
+
+@Deprecated("Renamed to DeletedLeaderboardEntry", replaceWith = ReplaceWith("DeletedLeaderboardEntry"))
+public typealias DeletedLeaderboardsEntry = DeletedLeaderboardEntry
+

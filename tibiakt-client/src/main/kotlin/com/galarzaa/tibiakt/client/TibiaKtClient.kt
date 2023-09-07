@@ -53,7 +53,7 @@ import com.galarzaa.tibiakt.core.models.highscores.Highscores
 import com.galarzaa.tibiakt.core.models.highscores.HighscoresEntry
 import com.galarzaa.tibiakt.core.models.house.House
 import com.galarzaa.tibiakt.core.models.house.HousesSection
-import com.galarzaa.tibiakt.core.models.leaderboards.Leaderboards
+import com.galarzaa.tibiakt.core.models.leaderboards.Leaderboard
 import com.galarzaa.tibiakt.core.models.news.EventsSchedule
 import com.galarzaa.tibiakt.core.models.news.News
 import com.galarzaa.tibiakt.core.models.news.NewsArchive
@@ -76,7 +76,7 @@ import com.galarzaa.tibiakt.core.parsers.HighscoresParser
 import com.galarzaa.tibiakt.core.parsers.HouseParser
 import com.galarzaa.tibiakt.core.parsers.HousesSectionParser
 import com.galarzaa.tibiakt.core.parsers.KillStatisticsParser
-import com.galarzaa.tibiakt.core.parsers.LeaderboardsParser
+import com.galarzaa.tibiakt.core.parsers.LeaderboardParser
 import com.galarzaa.tibiakt.core.parsers.NewsArchiveParser
 import com.galarzaa.tibiakt.core.parsers.NewsParser
 import com.galarzaa.tibiakt.core.parsers.WorldOverviewParser
@@ -440,14 +440,21 @@ public open class TibiaKtClient constructor(
      * If the world does not exist, the leaderboards will be null.
      * @param rotation The rotation number to see. Tibia.com only allows viewing the current and last rotations. Any other value takes you to the current leaderboard.
      */
+    public open suspend fun fetchLeaderboard(
+        world: String,
+        rotation: Int? = null,
+        page: Int = 1,
+    ): TibiaResponse<Leaderboard?> {
+        val response = this.request(HttpMethod.Get, getLeaderboardUrl(world, rotation, page))
+        return response.parse { LeaderboardParser.fromContent(it) }
+    }
+
+    @Deprecated("Renamed to fetchLeaderboard", ReplaceWith("fetchLeaderboards"))
     public open suspend fun fetchLeaderboards(
         world: String,
         rotation: Int? = null,
         page: Int = 1,
-    ): TibiaResponse<Leaderboards?> {
-        val response = this.request(HttpMethod.Get, getLeaderboardUrl(world, rotation, page))
-        return response.parse { LeaderboardsParser.fromContent(it) }
-    }
+    ): TibiaResponse<Leaderboard?> = fetchLeaderboard(world, rotation, page)
 
     // endregion
 

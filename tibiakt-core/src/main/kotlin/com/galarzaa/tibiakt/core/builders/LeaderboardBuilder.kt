@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2023 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,44 +16,44 @@
 
 package com.galarzaa.tibiakt.core.builders
 
-import com.galarzaa.tibiakt.core.models.leaderboards.BaseLeaderboardsEntry
-import com.galarzaa.tibiakt.core.models.leaderboards.Leaderboards
-import com.galarzaa.tibiakt.core.models.leaderboards.LeaderboardsRotation
+import com.galarzaa.tibiakt.core.models.leaderboards.BaseLeaderboardEntry
+import com.galarzaa.tibiakt.core.models.leaderboards.Leaderboard
+import com.galarzaa.tibiakt.core.models.leaderboards.LeaderboardRotation
 import com.galarzaa.tibiakt.core.utils.BuilderDsl
 import kotlinx.datetime.Instant
 
 @BuilderDsl
-public inline fun leaderboards(block: LeaderboardsBuilder.() -> Unit): Leaderboards =
-    LeaderboardsBuilder().apply(block).build()
+public inline fun leaderboard(block: LeaderboardBuilder.() -> Unit): Leaderboard =
+    LeaderboardBuilder().apply(block).build()
 
 @BuilderDsl
-public inline fun leaderboardsBuilder(block: LeaderboardsBuilder.() -> Unit): LeaderboardsBuilder =
-    LeaderboardsBuilder().apply(block)
+public inline fun leaderboardBuilder(block: LeaderboardBuilder.() -> Unit): LeaderboardBuilder =
+    LeaderboardBuilder().apply(block)
 
-/** Builder for [Leaderboards] instances. */
+/** Builder for [Leaderboard] instances. */
 @BuilderDsl
-public class LeaderboardsBuilder : TibiaKtBuilder<Leaderboards> {
+public class LeaderboardBuilder : TibiaKtBuilder<Leaderboard> {
     public var world: String? = null
-    public var rotation: LeaderboardsRotation? = null
-    public val availableRotations: MutableList<LeaderboardsRotation> = mutableListOf()
+    public var rotation: LeaderboardRotation? = null
+    public val availableRotations: MutableList<LeaderboardRotation> = mutableListOf()
     public var lastUpdated: Instant? = null
     public var currentPage: Int? = null
     public var totalPages: Int? = null
     public var resultsCount: Int? = null
-    public val entries: MutableList<BaseLeaderboardsEntry> = mutableListOf()
+    public val entries: MutableList<BaseLeaderboardEntry> = mutableListOf()
 
     @BuilderDsl
-    public fun rotation(body: LeaderboardsRotationBuilder.() -> Unit): LeaderboardsBuilder =
-        apply { rotation = LeaderboardsRotationBuilder().apply(body).build() }
+    public fun rotation(body: LeaderboardRotationBuilder.() -> Unit): LeaderboardBuilder =
+        apply { rotation = LeaderboardRotationBuilder().apply(body).build() }
 
     @BuilderDsl
-    public fun addAvailableRotation(rotation: LeaderboardsRotation): LeaderboardsBuilder =
+    public fun addAvailableRotation(rotation: LeaderboardRotation): LeaderboardBuilder =
         apply { availableRotations.add(rotation) }
 
-    public fun addEntry(entry: BaseLeaderboardsEntry): LeaderboardsBuilder = apply { entries.add(entry) }
+    public fun addEntry(entry: BaseLeaderboardEntry): LeaderboardBuilder = apply { entries.add(entry) }
 
 
-    override fun build(): Leaderboards = Leaderboards(
+    override fun build(): Leaderboard = Leaderboard(
         world = world ?: error("world is required"),
         rotation = rotation ?: error("rotation is required"),
         availableRotations = availableRotations,
@@ -64,11 +64,11 @@ public class LeaderboardsBuilder : TibiaKtBuilder<Leaderboards> {
         entries = entries
     )
 
-    public class LeaderboardsRotationBuilder : TibiaKtBuilder<LeaderboardsRotation> {
+    public class LeaderboardRotationBuilder : TibiaKtBuilder<LeaderboardRotation> {
         public var rotationId: Int? = null
         public var isCurrent: Boolean = false
         public var endDate: Instant? = null
-        override fun build(): LeaderboardsRotation = LeaderboardsRotation(
+        override fun build(): LeaderboardRotation = LeaderboardRotation(
             rotationId = rotationId ?: error("rotationId is required"),
             current = isCurrent,
             endDate = endDate ?: error("endDate is required"),
@@ -77,3 +77,6 @@ public class LeaderboardsBuilder : TibiaKtBuilder<Leaderboards> {
     }
 
 }
+
+@Deprecated("Renamed to LeaderboardBuilder", ReplaceWith("LeaderboardBuilder"))
+public typealias LeaderboardsBuilder = LeaderboardBuilder
