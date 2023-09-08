@@ -4,7 +4,8 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > CharacterHouse</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>tibiakt-core Coverage Report > BaseForumPost</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -16,12 +17,12 @@
 <body>
 <div class="content">
 <div class="breadCrumbs">
-Current scope:     <a href="../../index.html">all classes</a>
+Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">com.galarzaa.tibiakt.core.models.character</a>
+    <a href="../index.html">com.galarzaa.tibiakt.core.models.forums</a>
 </div>
 
-<h1>Coverage Summary for Class: CharacterHouse (com.galarzaa.tibiakt.core.models.character)</h1>
+<h1>Coverage Summary for Class: BaseForumPost (com.galarzaa.tibiakt.core.models.forums)</h1>
 
 <table class="coverageStats">
 
@@ -44,36 +45,17 @@ Current scope:     <a href="../../index.html">all classes</a>
   Instruction, %
 </th>
 </tr>
-<tr>
-  <td class="name">CharacterHouse</td>
+  <tr>
+    <td class="name">BaseForumPost$DefaultImpls</td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    0%
   </span>
   <span class="absValue">
-    (1/1)
+    (0/1)
   </span>
 </td>
     <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    100%
-  </span>
-  <span class="absValue">
-    (5/5)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    100%
-  </span>
-  <span class="absValue">
-    (25/25)
-  </span>
-</td>
-</tr>
-  <tr>
-    <td class="name">CharacterHouse$$serializer</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -87,51 +69,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/10)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/1)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/235)
-  </span>
-</td>
-  </tr>
-  <tr>
-    <td class="name">CharacterHouse$Companion</td>
-<td class="coverageStat">
-  <span class="percent">
-    100%
-  </span>
-  <span class="absValue">
-    (1/1)
-  </span>
-</td>
-    <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    100%
-  </span>
-  <span class="absValue">
-    (1/1)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    100%
-  </span>
-  <span class="absValue">
-    (4/4)
+    (0/3)
   </span>
 </td>
   </tr>
@@ -139,10 +77,19 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    66.7%
+    0%
   </span>
   <span class="absValue">
-    (2/3)
+    (0/1)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
   </span>
 </td>
 <td class="coverageStat">
@@ -150,23 +97,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/10)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    85.7%
-  </span>
-  <span class="absValue">
-    (6/7)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    11%
-  </span>
-  <span class="absValue">
-    (29/264)
+    (0/3)
   </span>
 </td>
 </tr>
@@ -193,31 +124,21 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp; * limitations under the License.
 &nbsp; */
 &nbsp;
-&nbsp;@file:UseSerializers(LocalDateSerializer::class)
+&nbsp;package com.galarzaa.tibiakt.core.models.forums
 &nbsp;
-&nbsp;package com.galarzaa.tibiakt.core.models.character
-&nbsp;
-&nbsp;import com.galarzaa.tibiakt.core.models.house.BaseHouse
-&nbsp;import com.galarzaa.tibiakt.core.serializers.LocalDateSerializer
-&nbsp;import kotlinx.serialization.Serializable
-&nbsp;import kotlinx.serialization.UseSerializers
-&nbsp;import java.time.LocalDate
+&nbsp;import com.galarzaa.tibiakt.core.utils.getForumPostUrl
 &nbsp;
 &nbsp;/**
-&nbsp; * A house owned by a [Character].
+&nbsp; * Base interface for forum post related classes.
 &nbsp; *
-&nbsp; * @property name The name of the house.
-&nbsp; * @property town The town where the city is or is closest to.
-&nbsp; * @property paidUntil The date when the last paid rent is due.
+&nbsp; * @property postId The internal ID of the post.
 &nbsp; */
-<b class="pc">&nbsp;@Serializable</b>
-&nbsp;public data class CharacterHouse(
-<b class="fc">&nbsp;    val name: String,</b>
-<b class="fc">&nbsp;    override val houseId: Int,</b>
-<b class="fc">&nbsp;    val town: String,</b>
-<b class="fc">&nbsp;    val paidUntil: LocalDate,</b>
-<b class="fc">&nbsp;    override val world: String,</b>
-&nbsp;) : BaseHouse
+&nbsp;public interface BaseForumPost {
+&nbsp;    public val postId: Int
+&nbsp;
+&nbsp;    /** The URL to this post. */
+<b class="nc">&nbsp;    public val url: String get() = getForumPostUrl(postId)</b>
+&nbsp;}
 </code>
 </pre>
 </div>
@@ -241,7 +162,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-07-07 21:00</div>
+    <div style="float:right;">generated on 2023-09-08 02:48</div>
 </div>
 </body>
 </html>

@@ -4,7 +4,8 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > DeletedLeaderboardsEntry</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>tibiakt-core Coverage Report > OnlineCharacter</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -16,12 +17,12 @@
 <body>
 <div class="content">
 <div class="breadCrumbs">
-Current scope:     <a href="../../index.html">all classes</a>
+Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">com.galarzaa.tibiakt.core.models.leaderboards</a>
+    <a href="../index.html">com.galarzaa.tibiakt.core.models.world</a>
 </div>
 
-<h1>Coverage Summary for Class: DeletedLeaderboardsEntry (com.galarzaa.tibiakt.core.models.leaderboards)</h1>
+<h1>Coverage Summary for Class: OnlineCharacter (com.galarzaa.tibiakt.core.models.world)</h1>
 
 <table class="coverageStats">
 
@@ -45,22 +46,13 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">DeletedLeaderboardsEntry</td>
+  <td class="name">OnlineCharacter</td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/1)
-  </span>
-</td>
-    <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/3)
+    (1/1)
   </span>
 </td>
 <td class="coverageStat">
@@ -68,18 +60,34 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/13)
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    81.4%
+  </span>
+  <span class="absValue">
+    (70/86)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">DeletedLeaderboardsEntry$$serializer</td>
+    <td class="name">OnlineCharacter$$serializer</td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/1)
+    (1/1)
   </span>
 </td>
 <td class="coverageStat">
@@ -87,51 +95,51 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/7)
+    (0/8)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/1)
+    (1/1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    46.4%
   </span>
   <span class="absValue">
-    (0/135)
+    (84/181)
   </span>
 </td>
   </tr>
   <tr>
-    <td class="name">DeletedLeaderboardsEntry$Companion</td>
+    <td class="name">OnlineCharacter$Companion</td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/1)
+    (1/1)
   </span>
 </td>
     <td class="coverageStat"/>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/1)
+    (1/1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/4)
+    (4/4)
   </span>
 </td>
   </tr>
@@ -139,10 +147,10 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/3)
+    (3/3)
   </span>
 </td>
 <td class="coverageStat">
@@ -150,23 +158,23 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/7)
+    (0/10)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/5)
+    (6/6)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    58.3%
   </span>
   <span class="absValue">
-    (0/152)
+    (158/271)
   </span>
 </td>
 </tr>
@@ -193,42 +201,25 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp; * limitations under the License.
 &nbsp; */
 &nbsp;
-&nbsp;package com.galarzaa.tibiakt.core.models.leaderboards
+&nbsp;package com.galarzaa.tibiakt.core.models.world
 &nbsp;
+&nbsp;import com.galarzaa.tibiakt.core.enums.Vocation
 &nbsp;import com.galarzaa.tibiakt.core.models.character.BaseCharacter
-&nbsp;import kotlinx.serialization.SerialName
+&nbsp;import com.galarzaa.tibiakt.core.models.character.CharacterLevel
 &nbsp;import kotlinx.serialization.Serializable
 &nbsp;
 &nbsp;/**
-&nbsp; * Base class for Leaderboards entries.
+&nbsp; * An online character.
 &nbsp; *
-&nbsp; * @property rank The rank of the character.
-&nbsp; * @property dromeLevel The drome level of the character.
+&nbsp; * @property level The level of the character
+&nbsp; * @property vocation The vocation of the character
 &nbsp; */
-&nbsp;@Serializable
-&nbsp;public sealed class BaseLeaderboardsEntry {
-&nbsp;    public abstract val rank: Int
-&nbsp;    public abstract val dromeLevel: Int
-&nbsp;}
-&nbsp;
-&nbsp;/**
-&nbsp; * An entry in the [LeaderboardsEntry].
-&nbsp; */
-&nbsp;@Serializable
-&nbsp;@SerialName(&quot;leaderboardsEntry&quot;)
-&nbsp;public data class LeaderboardsEntry(
-&nbsp;    override val rank: Int,
-&nbsp;    override val name: String,
-&nbsp;    override val dromeLevel: Int,
-&nbsp;) : BaseLeaderboardsEntry(), BaseCharacter
-&nbsp;
-&nbsp;/** A leaderboard entry belonging to a deleted character. */
-<b class="nc">&nbsp;@Serializable</b>
-&nbsp;@SerialName(&quot;deletedLeaderboardsEntry&quot;)
-&nbsp;public data class DeletedLeaderboardsEntry(
-<b class="nc">&nbsp;    override val rank: Int,</b>
-<b class="nc">&nbsp;    override val dromeLevel: Int,</b>
-<b class="nc">&nbsp;) : BaseLeaderboardsEntry()</b>
+<b class="pc">&nbsp;@Serializable</b>
+&nbsp;public data class OnlineCharacter(
+<b class="fc">&nbsp;    override val name: String,</b>
+<b class="fc">&nbsp;    override val level: Int,</b>
+<b class="fc">&nbsp;    val vocation: Vocation,</b>
+&nbsp;) : BaseCharacter, CharacterLevel
 </code>
 </pre>
 </div>
@@ -252,7 +243,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-07-07 21:00</div>
+    <div style="float:right;">generated on 2023-09-08 02:48</div>
 </div>
 </body>
 </html>

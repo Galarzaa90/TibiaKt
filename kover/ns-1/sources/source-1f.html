@@ -1,0 +1,241 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>tibiakt-core Coverage Report > HouseBuilder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.galarzaa.tibiakt.core.builders</a>
+</div>
+
+<h1>Coverage Summary for Class: HouseBuilder (com.galarzaa.tibiakt.core.builders)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+<th class="coverageStat 
+">
+  Instruction, %
+</th>
+</tr>
+<tr>
+  <td class="name">HouseBuilder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (19/19)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    52.8%
+  </span>
+  <span class="absValue">
+    (19/36)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    97.8%
+  </span>
+  <span class="absValue">
+    (44/45)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    62.9%
+  </span>
+  <span class="absValue">
+    (202/321)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">HouseBuilder$WhenMappings</td>
+    <td class="coverageStat"/>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (19/19)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    52.8%
+  </span>
+  <span class="absValue">
+    (19/36)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    97.8%
+  </span>
+  <span class="absValue">
+    (44/45)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    62.9%
+  </span>
+  <span class="absValue">
+    (202/321)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.galarzaa.tibiakt.core.builders
+&nbsp;
+&nbsp;import com.galarzaa.tibiakt.core.enums.HouseStatus
+&nbsp;import com.galarzaa.tibiakt.core.enums.HouseType
+&nbsp;import com.galarzaa.tibiakt.core.models.house.House
+&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
+&nbsp;import kotlinx.datetime.Instant
+&nbsp;
+&nbsp;@BuilderDsl
+&nbsp;public inline fun house(block: HouseBuilder.() -&gt; Unit): House = HouseBuilder().apply(block).build()
+&nbsp;
+&nbsp;@BuilderDsl
+&nbsp;public inline fun houseBuilder(block: HouseBuilder.() -&gt; Unit): HouseBuilder = HouseBuilder().apply(block)
+&nbsp;
+&nbsp;
+&nbsp;/** Builder for [House] instances. */
+<b class="fc">&nbsp;@BuilderDsl</b>
+&nbsp;public class HouseBuilder : TibiaKtBuilder&lt;House&gt; {
+<b class="fc">&nbsp;    public var houseId: Int? = null</b>
+<b class="fc">&nbsp;    public var name: String? = null</b>
+<b class="fc">&nbsp;    public var size: Int? = null</b>
+<b class="fc">&nbsp;    public var houseType: HouseType? = null</b>
+<b class="fc">&nbsp;    public var beds: Int? = null</b>
+<b class="fc">&nbsp;    public var rent: Int? = null</b>
+<b class="fc">&nbsp;    public var world: String? = null</b>
+<b class="fc">&nbsp;    public var status: HouseStatus? = null</b>
+<b class="fc">&nbsp;    public var paidUntil: Instant? = null</b>
+<b class="fc">&nbsp;    public var owner: String? = null</b>
+<b class="fc">&nbsp;    public var movingDate: Instant? = null</b>
+<b class="fc">&nbsp;    public var transferPrice: Int? = null</b>
+<b class="fc">&nbsp;    public var isTransferAccepted: Boolean? = null</b>
+<b class="fc">&nbsp;    public var transferRecipient: String? = null</b>
+<b class="fc">&nbsp;    public var highestBid: Int? = null</b>
+<b class="fc">&nbsp;    public var highestBidder: String? = null</b>
+<b class="fc">&nbsp;    public var auctionEnd: Instant? = null</b>
+&nbsp;
+&nbsp;    @Suppress(&quot;ComplexMethod&quot;)
+<b class="pc">&nbsp;    override fun build(): House = when (status) {</b>
+<b class="fc">&nbsp;        HouseStatus.RENTED -&gt; House.Rented(</b>
+<b class="pc">&nbsp;            houseId = houseId ?: error(&quot;houseId is required&quot;),</b>
+<b class="pc">&nbsp;            name = name ?: error(&quot;name is required&quot;),</b>
+<b class="pc">&nbsp;            size = size ?: error(&quot;size is required&quot;),</b>
+<b class="pc">&nbsp;            houseType = houseType ?: error(&quot;type is required&quot;),</b>
+<b class="pc">&nbsp;            beds = beds ?: error(&quot;beds is required&quot;),</b>
+<b class="pc">&nbsp;            rent = rent ?: error(&quot;rent is required&quot;),</b>
+<b class="pc">&nbsp;            world = world ?: error(&quot;world is required&quot;),</b>
+<b class="pc">&nbsp;            paidUntil = paidUntil ?: error(&quot;paidUntil is required&quot;),</b>
+<b class="pc">&nbsp;            owner = owner ?: error(&quot;Owner is required&quot;),</b>
+<b class="fc">&nbsp;            movingDate = movingDate,</b>
+<b class="fc">&nbsp;            transferPrice = transferPrice,</b>
+<b class="fc">&nbsp;            transferAccepted = isTransferAccepted,</b>
+<b class="fc">&nbsp;            transferRecipient = transferRecipient</b>
+&nbsp;        )
+&nbsp;
+<b class="fc">&nbsp;        HouseStatus.AUCTIONED -&gt; House.Auctioned(</b>
+<b class="pc">&nbsp;            houseId = houseId ?: error(&quot;houseId is required&quot;),</b>
+<b class="pc">&nbsp;            name = name ?: error(&quot;name is required&quot;),</b>
+<b class="pc">&nbsp;            size = size ?: error(&quot;size is required&quot;),</b>
+<b class="pc">&nbsp;            houseType = houseType ?: error(&quot;type is required&quot;),</b>
+<b class="pc">&nbsp;            beds = beds ?: error(&quot;beds is required&quot;),</b>
+<b class="pc">&nbsp;            rent = rent ?: error(&quot;rent is required&quot;),</b>
+<b class="pc">&nbsp;            world = world ?: error(&quot;world is required&quot;),</b>
+<b class="fc">&nbsp;            highestBid = highestBid,</b>
+<b class="fc">&nbsp;            highestBidder = highestBidder,</b>
+<b class="fc">&nbsp;            auctionEnd = auctionEnd,</b>
+&nbsp;        )
+&nbsp;
+<b class="nc">&nbsp;        else -&gt; error(&quot;status is required&quot;)</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-09-08 02:48</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,351 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>tibiakt-core Coverage Report > CharacterBuilder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.galarzaa.tibiakt.core.builders</a>
+</div>
+
+<h1>Coverage Summary for Class: CharacterBuilder (com.galarzaa.tibiakt.core.builders)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+<th class="coverageStat 
+">
+  Instruction, %
+</th>
+</tr>
+<tr>
+  <td class="name">CharacterBuilder</td>
+<td class="coverageStat">
+  <span class="percent">
+    86.2%
+  </span>
+  <span class="absValue">
+    (25/29)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (5/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90.5%
+  </span>
+  <span class="absValue">
+    (67/74)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    82.5%
+  </span>
+  <span class="absValue">
+    (345/418)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">CharacterBuilder$CharacterHouseBuilder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/104)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    69.4%
+  </span>
+  <span class="absValue">
+    (25/36)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    27.8%
+  </span>
+  <span class="absValue">
+    (5/18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    77.9%
+  </span>
+  <span class="absValue">
+    (67/86)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.1%
+  </span>
+  <span class="absValue">
+    (345/522)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright © 2023 Allan Galarza
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.galarzaa.tibiakt.core.builders
+&nbsp;
+&nbsp;import com.galarzaa.tibiakt.core.enums.Sex
+&nbsp;import com.galarzaa.tibiakt.core.enums.Vocation
+&nbsp;import com.galarzaa.tibiakt.core.models.character.AccountBadge
+&nbsp;import com.galarzaa.tibiakt.core.models.character.AccountInformation
+&nbsp;import com.galarzaa.tibiakt.core.models.character.Character
+&nbsp;import com.galarzaa.tibiakt.core.models.character.CharacterHouse
+&nbsp;import com.galarzaa.tibiakt.core.models.character.Death
+&nbsp;import com.galarzaa.tibiakt.core.models.character.DisplayedAchievement
+&nbsp;import com.galarzaa.tibiakt.core.models.character.GuildMembership
+&nbsp;import com.galarzaa.tibiakt.core.models.character.Killer
+&nbsp;import com.galarzaa.tibiakt.core.models.character.OtherCharacter
+&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
+&nbsp;import kotlinx.datetime.Instant
+&nbsp;import java.time.LocalDate
+&nbsp;
+&nbsp;@BuilderDsl
+&nbsp;public inline fun character(block: CharacterBuilder.() -&gt; Unit): Character = CharacterBuilder().apply(block).build()
+&nbsp;
+&nbsp;@BuilderDsl
+&nbsp;public inline fun characterBuilder(block: CharacterBuilder.() -&gt; Unit): CharacterBuilder =
+&nbsp;    CharacterBuilder().apply(block)
+&nbsp;
+&nbsp;/** Builder for [Character] instances. */
+<b class="fc">&nbsp;@BuilderDsl</b>
+&nbsp;public class CharacterBuilder : TibiaKtBuilder&lt;Character&gt; {
+<b class="fc">&nbsp;    public lateinit var name: String</b>
+<b class="fc">&nbsp;    public var level: Int = 2</b>
+<b class="fc">&nbsp;    public var residence: String? = null</b>
+<b class="fc">&nbsp;    public var vocation: Vocation? = null</b>
+<b class="fc">&nbsp;    public var sex: Sex? = null</b>
+<b class="fc">&nbsp;    public var world: String? = null</b>
+<b class="fc">&nbsp;    public var achievementPoints: Int = 0</b>
+<b class="fc">&nbsp;    public var lastLogin: Instant? = null</b>
+<b class="fc">&nbsp;    public var isRecentlyTraded: Boolean = false</b>
+<b class="fc">&nbsp;    public var formerNames: List&lt;String&gt; = emptyList()</b>
+<b class="fc">&nbsp;    public var deletionDate: Instant? = null</b>
+<b class="fc">&nbsp;    public var formerWorld: String? = null</b>
+<b class="fc">&nbsp;    public var isPremium: Boolean = false</b>
+<b class="fc">&nbsp;    public var comment: String? = null</b>
+<b class="fc">&nbsp;    public var title: String? = null</b>
+<b class="fc">&nbsp;    public var position: String? = null</b>
+<b class="fc">&nbsp;    public var unlockedTitles: Int = 0</b>
+<b class="fc">&nbsp;    public var marriedTo: String? = null</b>
+<b class="fc">&nbsp;    public val houses: MutableList&lt;CharacterHouse&gt; = mutableListOf()</b>
+<b class="nc">&nbsp;    public var guildMembership: GuildMembership? = null</b>
+<b class="fc">&nbsp;    public val accountBadges: MutableList&lt;AccountBadge&gt; = mutableListOf()</b>
+<b class="fc">&nbsp;    public val achievements: MutableList&lt;DisplayedAchievement&gt; = mutableListOf()</b>
+<b class="nc">&nbsp;    public var accountInformation: AccountInformation? = null</b>
+<b class="fc">&nbsp;    public val deaths: MutableList&lt;Death&gt; = mutableListOf()</b>
+<b class="fc">&nbsp;    public val otherCharacters: MutableList&lt;OtherCharacter&gt; = mutableListOf()</b>
+&nbsp;
+&nbsp;    public fun addHouse(
+&nbsp;        name: String,
+&nbsp;        houseId: Int,
+&nbsp;        town: String,
+&nbsp;        paidUntil: LocalDate,
+&nbsp;        world: String,
+<b class="fc">&nbsp;    ): CharacterBuilder = apply {</b>
+<b class="fc">&nbsp;        houses.add(CharacterHouse(name, houseId, town, paidUntil, world))</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    @BuilderDsl
+&nbsp;    public fun house(block: CharacterHouseBuilder.() -&gt; Unit): CharacterBuilder =
+<b class="nc">&nbsp;        apply { houses.add(CharacterHouseBuilder().apply(block).build()) }</b>
+&nbsp;
+<b class="fc">&nbsp;    public fun addBadge(name: String, descroption: String, iconUrl: String): CharacterBuilder = apply {</b>
+<b class="fc">&nbsp;        accountBadges.add(AccountBadge(name, descroption, iconUrl))</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+<b class="fc">&nbsp;    public fun addAchievement(name: String, grade: Int, secret: Boolean): CharacterBuilder = apply {</b>
+<b class="fc">&nbsp;        achievements.add(DisplayedAchievement(name, grade, secret))</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public fun accountInformation(
+&nbsp;        created: Instant,
+&nbsp;        loyaltyTitle: String?,
+&nbsp;        position: String?,
+<b class="fc">&nbsp;    ): CharacterBuilder = apply {</b>
+<b class="fc">&nbsp;        accountInformation = AccountInformation(created, loyaltyTitle, position)</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public fun guild(rank: String, guild: String): CharacterBuilder =
+<b class="fc">&nbsp;        apply { guildMembership = GuildMembership(guild, rank) }</b>
+&nbsp;
+&nbsp;    public fun addDeath(
+&nbsp;        timestamp: Instant,
+&nbsp;        level: Int,
+&nbsp;        killers: List&lt;Killer&gt;,
+&nbsp;        assists: List&lt;Killer&gt;,
+<b class="fc">&nbsp;    ): CharacterBuilder = apply {</b>
+<b class="fc">&nbsp;        deaths.add(Death(timestamp, level, killers, assists))</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public fun addOtherCharacter(
+&nbsp;        name: String,
+&nbsp;        world: String,
+<b class="nc">&nbsp;        main: Boolean = false,</b>
+<b class="nc">&nbsp;        online: Boolean = false,</b>
+<b class="nc">&nbsp;        deleted: Boolean = false,</b>
+<b class="nc">&nbsp;        traded: Boolean = false,</b>
+&nbsp;        position: String?,
+&nbsp;    ): CharacterBuilder =
+<b class="fc">&nbsp;        apply { otherCharacters.add(OtherCharacter(name, world, main, online, deleted, traded, position)) }</b>
+&nbsp;
+<b class="fc">&nbsp;    override fun build(): Character = Character(</b>
+<b class="pc">&nbsp;        name = if (::name.isInitialized) name else error(&quot;name is required&quot;),</b>
+<b class="fc">&nbsp;        title = title,</b>
+<b class="fc">&nbsp;        formerNames = formerNames,</b>
+<b class="fc">&nbsp;        unlockedTitles = unlockedTitles,</b>
+<b class="pc">&nbsp;        sex = sex ?: error(&quot;sex is required&quot;),</b>
+<b class="pc">&nbsp;        vocation = vocation ?: error(&quot;vocation is required&quot;),</b>
+<b class="fc">&nbsp;        level = level,</b>
+<b class="fc">&nbsp;        achievementPoints = achievementPoints,</b>
+<b class="pc">&nbsp;        world = world ?: error(&quot;world is required&quot;),</b>
+<b class="fc">&nbsp;        formerWorld = formerWorld,</b>
+<b class="pc">&nbsp;        residence = residence ?: error(&quot;residence is required&quot;),</b>
+<b class="fc">&nbsp;        marriedTo = marriedTo,</b>
+<b class="fc">&nbsp;        houses = houses,</b>
+<b class="fc">&nbsp;        guildMembership = guildMembership,</b>
+<b class="fc">&nbsp;        lastLogin = lastLogin,</b>
+<b class="fc">&nbsp;        position = position,</b>
+<b class="fc">&nbsp;        comment = comment,</b>
+<b class="fc">&nbsp;        isPremium = isPremium,</b>
+<b class="fc">&nbsp;        isRecentlyTraded = isRecentlyTraded,</b>
+<b class="fc">&nbsp;        deletionDate = deletionDate,</b>
+<b class="fc">&nbsp;        badges = accountBadges,</b>
+<b class="fc">&nbsp;        achievements = achievements,</b>
+<b class="fc">&nbsp;        deaths = deaths,</b>
+<b class="fc">&nbsp;        accountInformation = accountInformation,</b>
+<b class="fc">&nbsp;        otherCharacters = otherCharacters</b>
+&nbsp;    )
+&nbsp;
+<b class="nc">&nbsp;    public class CharacterHouseBuilder : TibiaKtBuilder&lt;CharacterHouse&gt; {</b>
+<b class="nc">&nbsp;        public lateinit var name: String</b>
+<b class="nc">&nbsp;        public var houseId: Int = 0</b>
+<b class="nc">&nbsp;        public lateinit var town: String</b>
+<b class="nc">&nbsp;        public lateinit var paidUntil: LocalDate</b>
+<b class="nc">&nbsp;        public lateinit var world: String</b>
+<b class="nc">&nbsp;        public override fun build(): CharacterHouse = CharacterHouse(</b>
+<b class="nc">&nbsp;            name = if (::name.isInitialized) name else error(&quot;name is required&quot;),</b>
+<b class="nc">&nbsp;            houseId = houseId,</b>
+<b class="nc">&nbsp;            town = if (::town.isInitialized) town else error(&quot;town is required&quot;),</b>
+<b class="nc">&nbsp;            paidUntil = if (::paidUntil.isInitialized) paidUntil else error(&quot;paidUntil is required&quot;),</b>
+<b class="nc">&nbsp;            world = if (::world.isInitialized) world else error(&quot;world is required&quot;),</b>
+&nbsp;        )
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-09-08 02:48</div>
+</div>
+</body>
+</html>

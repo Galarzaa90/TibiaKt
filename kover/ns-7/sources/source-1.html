@@ -4,7 +4,8 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > AchievementEntry</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>tibiakt-core Coverage Report > BaseCreatureEntry</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -16,12 +17,12 @@
 <body>
 <div class="content">
 <div class="breadCrumbs">
-Current scope:     <a href="../../index.html">all classes</a>
+Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">com.galarzaa.tibiakt.core.models.bazaar</a>
+    <a href="../index.html">com.galarzaa.tibiakt.core.models.creatures</a>
 </div>
 
-<h1>Coverage Summary for Class: AchievementEntry (com.galarzaa.tibiakt.core.models.bazaar)</h1>
+<h1>Coverage Summary for Class: BaseCreatureEntry (com.galarzaa.tibiakt.core.models.creatures)</h1>
 
 <table class="coverageStats">
 
@@ -44,36 +45,17 @@ Current scope:     <a href="../../index.html">all classes</a>
   Instruction, %
 </th>
 </tr>
-<tr>
-  <td class="name">AchievementEntry</td>
+  <tr>
+    <td class="name">BaseCreatureEntry$DefaultImpls</td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    0%
   </span>
   <span class="absValue">
-    (1/1)
+    (0/1)
   </span>
 </td>
     <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    100%
-  </span>
-  <span class="absValue">
-    (2/2)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    100%
-  </span>
-  <span class="absValue">
-    (10/10)
-  </span>
-</td>
-</tr>
-  <tr>
-    <td class="name">AchievementEntry$$serializer</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -87,51 +69,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/7)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/1)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/135)
-  </span>
-</td>
-  </tr>
-  <tr>
-    <td class="name">AchievementEntry$Companion</td>
-<td class="coverageStat">
-  <span class="percent">
-    100%
-  </span>
-  <span class="absValue">
-    (1/1)
-  </span>
-</td>
-    <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    100%
-  </span>
-  <span class="absValue">
-    (1/1)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    100%
-  </span>
-  <span class="absValue">
-    (4/4)
+    (0/28)
   </span>
 </td>
   </tr>
@@ -139,10 +77,19 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    66.7%
+    0%
   </span>
   <span class="absValue">
-    (2/3)
+    (0/1)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
   </span>
 </td>
 <td class="coverageStat">
@@ -150,23 +97,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/7)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    75%
-  </span>
-  <span class="absValue">
-    (3/4)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    9.4%
-  </span>
-  <span class="absValue">
-    (14/149)
+    (0/28)
   </span>
 </td>
 </tr>
@@ -193,21 +124,25 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp; * limitations under the License.
 &nbsp; */
 &nbsp;
-&nbsp;package com.galarzaa.tibiakt.core.models.bazaar
+&nbsp;package com.galarzaa.tibiakt.core.models.creatures
 &nbsp;
-&nbsp;import kotlinx.serialization.Serializable
+&nbsp;import com.galarzaa.tibiakt.core.utils.getStaticFileUrl
 &nbsp;
 &nbsp;/**
-&nbsp; * An achievement in an [Auction].
+&nbsp; * Base interface for creatures in the library.
 &nbsp; *
-&nbsp; * @property name The name of the achievement.
-&nbsp; * @property secret Whether the achievement is secret or not.
+&nbsp; * @property name The name of the creature.
+&nbsp; * @property identifier The internal name of the creature, used for images and links (where applicable).
 &nbsp; */
-<b class="pc">&nbsp;@Serializable</b>
-&nbsp;public data class AchievementEntry(
-<b class="fc">&nbsp;    val name: String,</b>
-<b class="fc">&nbsp;    val secret: Boolean,</b>
-&nbsp;)
+&nbsp;public interface BaseCreatureEntry {
+&nbsp;    public val name: String
+&nbsp;    public val identifier: String
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The URL to the creature&#39;s image.
+&nbsp;     */
+<b class="nc">&nbsp;    public val imageUrl: String get() = getStaticFileUrl(&quot;images&quot;, &quot;library&quot;, &quot;$identifier.gif&quot;)</b>
+&nbsp;}
 </code>
 </pre>
 </div>
@@ -231,7 +166,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-07-07 21:00</div>
+    <div style="float:right;">generated on 2023-09-08 02:48</div>
 </div>
 </body>
 </html>

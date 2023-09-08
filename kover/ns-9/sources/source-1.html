@@ -4,7 +4,8 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > BaseCreatureEntry</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>tibiakt-core Coverage Report > BaseGuild</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -16,12 +17,12 @@
 <body>
 <div class="content">
 <div class="breadCrumbs">
-Current scope:     <a href="../../index.html">all classes</a>
+Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">com.galarzaa.tibiakt.core.models.creatures</a>
+    <a href="../index.html">com.galarzaa.tibiakt.core.models.guild</a>
 </div>
 
-<h1>Coverage Summary for Class: BaseCreatureEntry (com.galarzaa.tibiakt.core.models.creatures)</h1>
+<h1>Coverage Summary for Class: BaseGuild (com.galarzaa.tibiakt.core.models.guild)</h1>
 
 <table class="coverageStats">
 
@@ -45,7 +46,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
   <tr>
-    <td class="name">BaseCreatureEntry$DefaultImpls</td>
+    <td class="name">BaseGuild$DefaultImpls</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -68,7 +69,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/28)
+    (0/3)
   </span>
 </td>
   </tr>
@@ -96,7 +97,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/28)
+    (0/3)
   </span>
 </td>
 </tr>
@@ -123,24 +124,20 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp; * limitations under the License.
 &nbsp; */
 &nbsp;
-&nbsp;package com.galarzaa.tibiakt.core.models.creatures
+&nbsp;package com.galarzaa.tibiakt.core.models.guild
 &nbsp;
-&nbsp;import com.galarzaa.tibiakt.core.utils.getStaticFileUrl
+&nbsp;import com.galarzaa.tibiakt.core.utils.getGuildUrl
 &nbsp;
 &nbsp;/**
-&nbsp; * Base interface for creatures in the library.
+&nbsp; * Base interface for guild related classes.
 &nbsp; *
-&nbsp; * @property name The name of the creature.
-&nbsp; * @property identifier The internal name of the creature, used for images and links (where applicable).
+&nbsp; * @property name The name of the guild.
+&nbsp; * @property url The URL to the guild&#39;s page on Tibia.com
 &nbsp; */
-&nbsp;public interface BaseCreatureEntry {
+&nbsp;public interface BaseGuild {
 &nbsp;    public val name: String
-&nbsp;    public val identifier: String
 &nbsp;
-&nbsp;    /**
-&nbsp;     * The URL to the creature&#39;s image.
-&nbsp;     */
-<b class="nc">&nbsp;    public val imageUrl: String get() = getStaticFileUrl(&quot;images&quot;, &quot;library&quot;, &quot;$identifier.gif&quot;)</b>
+<b class="nc">&nbsp;    public val url: String get() = getGuildUrl(name)</b>
 &nbsp;}
 </code>
 </pre>
@@ -165,7 +162,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-07-07 21:00</div>
+    <div style="float:right;">generated on 2023-09-08 02:48</div>
 </div>
 </body>
 </html>

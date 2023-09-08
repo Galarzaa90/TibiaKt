@@ -4,7 +4,8 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > SiteMaintenanceException</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>tibiakt-core Coverage Report > AuctionOrderBy</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -16,20 +17,17 @@
 <body>
 <div class="content">
 <div class="breadCrumbs">
-Current scope:     <a href="../../index.html">all classes</a>
+Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">com.galarzaa.tibiakt.client.exceptions</a>
+    <a href="../index.html">com.galarzaa.tibiakt.core.enums</a>
 </div>
 
-<h1>Coverage Summary for Class: SiteMaintenanceException (com.galarzaa.tibiakt.client.exceptions)</h1>
+<h1>Coverage Summary for Class: AuctionOrderBy (com.galarzaa.tibiakt.core.enums)</h1>
 
 <table class="coverageStats">
+
 <tr>
   <th class="name">Class</th>
-<th class="coverageStat 
-">
-  Class, %
-</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -48,42 +46,89 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">SiteMaintenanceException</td>
+  <td class="name">AuctionOrderBy</td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/1)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/1)
+    (2/2)
   </span>
 </td>
     <td class="coverageStat"/>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/1)
+    (13/13)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/4)
+    (104/104)
   </span>
 </td>
 </tr>
-
+  <tr>
+    <td class="name">AuctionOrderBy$Companion</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (14/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (106/106)
+  </span>
+</td>
+</tr>
 </table>
 
 <br/>
@@ -107,14 +152,29 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp; * limitations under the License.
 &nbsp; */
 &nbsp;
-&nbsp;package com.galarzaa.tibiakt.client.exceptions
+&nbsp;package com.galarzaa.tibiakt.core.enums
 &nbsp;
 &nbsp;/**
-&nbsp; * Exception thrown when Tibia.com is under maintenance.
-&nbsp; *
-&nbsp; * When Tibia.com is under maintenance, all sections of the website redirect to maintenance.tibia.com.
+&nbsp; * The possible fields you can order auctions by.
 &nbsp; */
-<b class="nc">&nbsp;public open class SiteMaintenanceException(message: String?, cause: Throwable?) : NetworkException(message, cause)</b>
+<b class="fc">&nbsp;public enum class AuctionOrderBy(override val value: Int) : IntEnum {</b>
+<b class="fc">&nbsp;    BID(100),</b>
+<b class="fc">&nbsp;    END_DATE(101),</b>
+<b class="fc">&nbsp;    LEVEL(102),</b>
+<b class="fc">&nbsp;    START_DATE(103),</b>
+<b class="fc">&nbsp;    AXE_FIGHTING(10),</b>
+<b class="fc">&nbsp;    CLUB_FIGHTING(9),</b>
+<b class="fc">&nbsp;    DISTANCE_FIGHTING(7),</b>
+<b class="fc">&nbsp;    FISHING(13),</b>
+<b class="fc">&nbsp;    FIST_FIGHTING(11),</b>
+<b class="fc">&nbsp;    MAGIC_LEVEL(1),</b>
+<b class="fc">&nbsp;    SHIELDING(6),</b>
+<b class="fc">&nbsp;    SWORD_FIGHTING(8);</b>
+&nbsp;
+<b class="fc">&nbsp;    public companion object {</b>
+&nbsp;        public const val queryParam: String = &quot;order_column&quot;
+&nbsp;    }
+&nbsp;}
 </code>
 </pre>
 </div>
@@ -138,7 +198,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-07-07 21:00</div>
+    <div style="float:right;">generated on 2023-09-08 02:48</div>
 </div>
 </body>
 </html>

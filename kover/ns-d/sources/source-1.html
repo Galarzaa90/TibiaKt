@@ -4,7 +4,8 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > BaseHouse</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>tibiakt-core Coverage Report > BaseNews</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -16,12 +17,12 @@
 <body>
 <div class="content">
 <div class="breadCrumbs">
-Current scope:     <a href="../../index.html">all classes</a>
+Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">com.galarzaa.tibiakt.core.models.house</a>
+    <a href="../index.html">com.galarzaa.tibiakt.core.models.news</a>
 </div>
 
-<h1>Coverage Summary for Class: BaseHouse (com.galarzaa.tibiakt.core.models.house)</h1>
+<h1>Coverage Summary for Class: BaseNews (com.galarzaa.tibiakt.core.models.news)</h1>
 
 <table class="coverageStats">
 
@@ -45,13 +46,13 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
   <tr>
-    <td class="name">BaseHouse$DefaultImpls</td>
+    <td class="name">BaseNews$DefaultImpls</td>
 <td class="coverageStat">
   <span class="percent">
     0%
   </span>
   <span class="absValue">
-    (0/2)
+    (0/1)
   </span>
 </td>
     <td class="coverageStat"/>
@@ -60,7 +61,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/2)
+    (0/1)
   </span>
 </td>
 <td class="coverageStat">
@@ -68,7 +69,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/35)
+    (0/3)
   </span>
 </td>
   </tr>
@@ -79,7 +80,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/2)
+    (0/1)
   </span>
 </td>
     <td class="coverageStat"/>
@@ -88,7 +89,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/2)
+    (0/1)
   </span>
 </td>
 <td class="coverageStat">
@@ -96,7 +97,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/35)
+    (0/3)
   </span>
 </td>
 </tr>
@@ -123,30 +124,25 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp; * limitations under the License.
 &nbsp; */
 &nbsp;
-&nbsp;package com.galarzaa.tibiakt.core.models.house
+&nbsp;package com.galarzaa.tibiakt.core.models.news
 &nbsp;
-&nbsp;import com.galarzaa.tibiakt.core.utils.getHouseUrl
-&nbsp;import com.galarzaa.tibiakt.core.utils.getStaticFileUrl
+&nbsp;import com.galarzaa.tibiakt.core.enums.NewsCategory
+&nbsp;import com.galarzaa.tibiakt.core.utils.getNewsUrl
 &nbsp;
 &nbsp;/**
-&nbsp; * Base interface for house related classes.
+&nbsp; * Base interface for news related objects.
 &nbsp; *
-&nbsp; * @property houseId The internal ID of the house.
-&nbsp; * @property world The world where this house is located.
+&nbsp; * @property id The internal ID of the news entry.
+&nbsp; * @property category The category of the entry.
 &nbsp; */
-&nbsp;public interface BaseHouse {
-&nbsp;    public val houseId: Int
-&nbsp;    public val world: String
+&nbsp;public interface BaseNews {
+&nbsp;    public val id: Int
+&nbsp;    public val category: NewsCategory
 &nbsp;
 &nbsp;    /**
-&nbsp;     * The URL to the house&#39;s information page.
+&nbsp;     * The URL to this article.
 &nbsp;     */
-<b class="nc">&nbsp;    public val url: String get() = getHouseUrl(world, houseId)</b>
-&nbsp;
-&nbsp;    /**
-&nbsp;     * URL to the house&#39;s image.
-&nbsp;     */
-<b class="nc">&nbsp;    public val imageUrl: String get() = getStaticFileUrl(&quot;images&quot;, &quot;houses&quot;, &quot;house_$houseId.png&quot;)</b>
+<b class="nc">&nbsp;    public val url: String get() = getNewsUrl(id)</b>
 &nbsp;}
 </code>
 </pre>
@@ -171,7 +167,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-07-07 21:00</div>
+    <div style="float:right;">generated on 2023-09-08 02:48</div>
 </div>
 </body>
 </html>

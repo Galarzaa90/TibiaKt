@@ -4,7 +4,8 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > Paginated</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>tibiakt-core Coverage Report > Character</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -16,26 +17,167 @@
 <body>
 <div class="content">
 <div class="breadCrumbs">
-Current scope:     <a href="../../index.html">all classes</a>
+Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">com.galarzaa.tibiakt.core.models</a>
+    <a href="../index.html">com.galarzaa.tibiakt.core.models.character</a>
 </div>
 
-<h1>Coverage Summary for Class: Paginated (com.galarzaa.tibiakt.core.models)</h1>
+<h1>Coverage Summary for Class: Character (com.galarzaa.tibiakt.core.models.character)</h1>
 
 <table class="coverageStats">
+
 <tr>
   <th class="name">Class</th>
 <th class="coverageStat 
 ">
+  Method, %
+</th>
+<th class="coverageStat 
+">
   Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+<th class="coverageStat 
+">
+  Instruction, %
 </th>
 </tr>
 <tr>
-  <td class="name">Paginated</td>
-    <td class="coverageStat"/>
+  <td class="name">Character</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (4/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    25%
+  </span>
+  <span class="absValue">
+    (2/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    93.5%
+  </span>
+  <span class="absValue">
+    (29/31)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    83.5%
+  </span>
+  <span class="absValue">
+    (486/582)
+  </span>
+</td>
 </tr>
-
+  <tr>
+    <td class="name">Character$$serializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/30)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1029)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Character$Companion</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    62.5%
+  </span>
+  <span class="absValue">
+    (5/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    5.3%
+  </span>
+  <span class="absValue">
+    (2/38)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90.9%
+  </span>
+  <span class="absValue">
+    (30/33)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    30.3%
+  </span>
+  <span class="absValue">
+    (490/1615)
+  </span>
+</td>
+</tr>
 </table>
 
 <br/>
@@ -44,7 +186,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;/*
-&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; * Copyright © 2023 Allan Galarza
 &nbsp; *
 &nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 &nbsp; * you may not use this file except in compliance with the License.
@@ -59,21 +201,92 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp; * limitations under the License.
 &nbsp; */
 &nbsp;
-&nbsp;package com.galarzaa.tibiakt.core.models
+&nbsp;
+&nbsp;package com.galarzaa.tibiakt.core.models.character
+&nbsp;
+&nbsp;import com.galarzaa.tibiakt.core.enums.AccountStatus
+&nbsp;import com.galarzaa.tibiakt.core.enums.Sex
+&nbsp;import com.galarzaa.tibiakt.core.enums.Vocation
+&nbsp;import com.galarzaa.tibiakt.core.utils.getCharacterUrl
+&nbsp;import kotlinx.datetime.Instant
+&nbsp;import kotlinx.serialization.Serializable
 &nbsp;
 &nbsp;/**
-&nbsp; * An object made of multiple pages.
+&nbsp; * Represents the character information available on Tibia.com.
 &nbsp; *
-&nbsp; * @property currentPage The currently viewed page.
-&nbsp; * @property totalPages The total number of pages.
-&nbsp; * @property resultsCount The total number of [entries] across all pages.
-&nbsp; * @property entries The entries in this page.
+&nbsp; * @property title The title selected to be displayed.
+&nbsp; * @property formerNames A list of former names the player had in the last 6 months.
+&nbsp; * @property unlockedTitles The amount of titles the player has unlocked in total.
+&nbsp; * @property sex The sex of the character.
+&nbsp; * @property vocation The vocation of the character.
+&nbsp; * @property level The level of the character.
+&nbsp; * @property achievementPoints The total achievement points.
+&nbsp; * @property world The current world of the character.
+&nbsp; * @property formerWorld The former world of the character. Only visible for 6 months.
+&nbsp; * @property residence The current city where the character will respawn on death.
+&nbsp; * @property marriedTo The name of the character this character is married to, if any.
+&nbsp; * @property houses The list of houses currently owned by the character.
+&nbsp; * @property guildMembership The guild the character belongs to.
+&nbsp; * @property position The special position the character holds.
+&nbsp; * @property comment The character&#39;s comment.
+&nbsp; * @property isPremium Whether the character has a premium account.
+&nbsp; * @property isRecentlyTraded Whether the character was recently traded. If its name was changed afterward, this flag is removed.
+&nbsp; * @property deletionDate The date when this character is scheduled to be deleted.
+&nbsp; * @property badges The visible badges of the character.
+&nbsp; * @property achievements The visible achievements for the character.
+&nbsp; * @property deaths The recent deaths of the character.
+&nbsp; * @property accountInformation The character&#39;s account information. Might be [isHidden].
+&nbsp; * @property otherCharacters The list of visible characters in the same account. Might be [isHidden].
 &nbsp; */
-&nbsp;public interface Paginated&lt;T&gt; {
-&nbsp;    public val currentPage: Int
-&nbsp;    public val totalPages: Int
-&nbsp;    public val resultsCount: Int
-&nbsp;    public val entries: List&lt;T&gt;
+<b class="pc">&nbsp;@Serializable</b>
+&nbsp;public data class Character(
+<b class="fc">&nbsp;    override val name: String,</b>
+<b class="fc">&nbsp;    val title: String?,</b>
+<b class="fc">&nbsp;    val formerNames: List&lt;String&gt;,</b>
+<b class="fc">&nbsp;    val unlockedTitles: Int,</b>
+<b class="fc">&nbsp;    val sex: Sex,</b>
+<b class="fc">&nbsp;    val vocation: Vocation,</b>
+<b class="fc">&nbsp;    override val level: Int,</b>
+<b class="fc">&nbsp;    val achievementPoints: Int,</b>
+<b class="fc">&nbsp;    val world: String,</b>
+<b class="fc">&nbsp;    val formerWorld: String?,</b>
+<b class="fc">&nbsp;    val residence: String,</b>
+<b class="fc">&nbsp;    val marriedTo: String?,</b>
+<b class="fc">&nbsp;    val houses: List&lt;CharacterHouse&gt;,</b>
+<b class="fc">&nbsp;    val guildMembership: GuildMembership?,</b>
+<b class="fc">&nbsp;    val lastLogin: Instant?,</b>
+<b class="fc">&nbsp;    val position: String?,</b>
+<b class="fc">&nbsp;    val comment: String?,</b>
+<b class="fc">&nbsp;    val isPremium: Boolean,</b>
+<b class="fc">&nbsp;    val isRecentlyTraded: Boolean,</b>
+<b class="fc">&nbsp;    val deletionDate: Instant?,</b>
+<b class="fc">&nbsp;    val badges: List&lt;AccountBadge&gt;,</b>
+<b class="fc">&nbsp;    val achievements: List&lt;DisplayedAchievement&gt;,</b>
+<b class="fc">&nbsp;    val deaths: List&lt;Death&gt;,</b>
+<b class="fc">&nbsp;    val accountInformation: AccountInformation?,</b>
+<b class="fc">&nbsp;    val otherCharacters: List&lt;OtherCharacter&gt;,</b>
+&nbsp;) : BaseCharacter, CharacterLevel {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Whether this character is scheduled for deletion or nto.
+&nbsp;     */
+<b class="pc">&nbsp;    val isScheduledForDeletion: Boolean get() = deletionDate != null</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Whether this character is hidden or not.
+&nbsp;     */
+<b class="fc">&nbsp;    val isHidden: Boolean get() = otherCharacters.isEmpty()</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * URL to the character this character is married to, if any.
+&nbsp;     */
+<b class="nc">&nbsp;    val marriedToUrl: String? get() = marriedTo?.let { getCharacterUrl(it) }</b>
+&nbsp;
+&nbsp;    @Deprecated(&quot;Replaced with boolean property isPremium&quot;, ReplaceWith(&quot;isPremium&quot;))
+<b class="pc">&nbsp;    val accountStatus: AccountStatus get() = if (isPremium) AccountStatus.PREMIUM_ACCOUNT else AccountStatus.FREE_ACCOUNT</b>
+&nbsp;
+&nbsp;    @Deprecated(&quot;Renamed to otherCharacters&quot;, ReplaceWith(&quot;otherCharacters&quot;))
+<b class="nc">&nbsp;    val characters: List&lt;OtherCharacter&gt; get() = otherCharacters</b>
 &nbsp;}
 </code>
 </pre>
@@ -98,7 +311,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-07-07 21:00</div>
+    <div style="float:right;">generated on 2023-09-08 02:48</div>
 </div>
 </body>
 </html>

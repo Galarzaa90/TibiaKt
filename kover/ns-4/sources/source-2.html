@@ -4,7 +4,8 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > AuctionBattlEyeFilter</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>tibiakt-core Coverage Report > KillsStatisticEntry</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -16,12 +17,12 @@
 <body>
 <div class="content">
 <div class="breadCrumbs">
-Current scope:     <a href="../../index.html">all classes</a>
+Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">com.galarzaa.tibiakt.core.enums</a>
+    <a href="../index.html">com.galarzaa.tibiakt.core.models</a>
 </div>
 
-<h1>Coverage Summary for Class: AuctionBattlEyeFilter (com.galarzaa.tibiakt.core.enums)</h1>
+<h1>Coverage Summary for Class: KillsStatisticEntry (com.galarzaa.tibiakt.core.models)</h1>
 
 <table class="coverageStats">
 
@@ -45,13 +46,13 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">AuctionBattlEyeFilter</td>
+  <td class="name">KillsStatisticEntry</td>
 <td class="coverageStat">
   <span class="percent">
     100%
   </span>
   <span class="absValue">
-    (2/2)
+    (1/1)
   </span>
 </td>
     <td class="coverageStat"/>
@@ -68,12 +69,47 @@ Current scope:     <a href="../../index.html">all classes</a>
     100%
   </span>
   <span class="absValue">
-    (37/37)
+    (20/20)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">AuctionBattlEyeFilter$Companion</td>
+    <td class="name">KillsStatisticEntry$$serializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    45.6%
+  </span>
+  <span class="absValue">
+    (88/193)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">KillsStatisticEntry$Companion</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -96,7 +132,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     100%
   </span>
   <span class="absValue">
-    (2/2)
+    (4/4)
   </span>
 </td>
   </tr>
@@ -110,13 +146,12 @@ Current scope:     <a href="../../index.html">all classes</a>
     (3/3)
   </span>
 </td>
-    <td class="coverageStat"/>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    0%
   </span>
   <span class="absValue">
-    (5/5)
+    (0/9)
   </span>
 </td>
 <td class="coverageStat">
@@ -124,7 +159,15 @@ Current scope:     <a href="../../index.html">all classes</a>
     100%
   </span>
   <span class="absValue">
-    (39/39)
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    51.6%
+  </span>
+  <span class="absValue">
+    (112/217)
   </span>
 </td>
 </tr>
@@ -151,31 +194,25 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp; * limitations under the License.
 &nbsp; */
 &nbsp;
-&nbsp;package com.galarzaa.tibiakt.core.enums
+&nbsp;package com.galarzaa.tibiakt.core.models
+&nbsp;
+&nbsp;import kotlinx.serialization.Serializable
 &nbsp;
 &nbsp;/**
-&nbsp; * The possible BattlEye protection type filters for auctions.
+&nbsp; * The kill statistics for a given entry.
+&nbsp; *
+&nbsp; * @property lastDayKilledPlayers The number of players killed by this race in the last day.
+&nbsp; * @property lastDayKilled The number of this race killed in the last day.
+&nbsp; * @property lastWeekKilledPlayers The number of players killed by this race in the last week.
+&nbsp; * @property lastWeekKilled The number of this race killed in the last week.
 &nbsp; */
-<b class="fc">&nbsp;public enum class AuctionBattlEyeFilter(override val value: Int) : IntEnum {</b>
-&nbsp;    /**
-&nbsp;     * Worlds that have been protected from the beginning, these have a green icon.
-&nbsp;     */
-<b class="fc">&nbsp;    INITIALLY_PROTECTED(1),</b>
-&nbsp;
-&nbsp;    /**
-&nbsp;     * Worlds that had BattlEye implemented at a later date, these have a yellow icon.
-&nbsp;     */
-<b class="fc">&nbsp;    PROTECTED(2),</b>
-&nbsp;
-&nbsp;    /**
-&nbsp;     * Worlds that have no BattlEye protection at all.
-&nbsp;     */
-<b class="fc">&nbsp;    NOT_PROTECTED(3);</b>
-&nbsp;
-<b class="fc">&nbsp;    public companion object {</b>
-&nbsp;        public const val queryParam: String = &quot;filter_worldbattleyestate&quot;
-&nbsp;    }
-&nbsp;}
+<b class="pc">&nbsp;@Serializable</b>
+&nbsp;public data class KillsStatisticEntry(
+<b class="fc">&nbsp;    val lastDayKilledPlayers: Int,</b>
+<b class="fc">&nbsp;    val lastDayKilled: Int,</b>
+<b class="fc">&nbsp;    val lastWeekKilledPlayers: Int,</b>
+<b class="fc">&nbsp;    val lastWeekKilled: Int,</b>
+&nbsp;)
 </code>
 </pre>
 </div>
@@ -199,7 +236,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-07-07 21:00</div>
+    <div style="float:right;">generated on 2023-09-08 02:48</div>
 </div>
 </body>
 </html>

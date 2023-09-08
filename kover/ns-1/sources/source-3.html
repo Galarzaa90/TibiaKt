@@ -4,7 +4,8 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > AuctionPagesType</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>tibiakt-core Coverage Report > BazaarFiltersBuilder</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -16,12 +17,12 @@
 <body>
 <div class="content">
 <div class="breadCrumbs">
-Current scope:     <a href="../../index.html">all classes</a>
+Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">com.galarzaa.tibiakt.client</a>
+    <a href="../index.html">com.galarzaa.tibiakt.core.builders</a>
 </div>
 
-<h1>Coverage Summary for Class: AuctionPagesType (com.galarzaa.tibiakt.client)</h1>
+<h1>Coverage Summary for Class: BazaarFiltersBuilder (com.galarzaa.tibiakt.core.builders)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -48,38 +49,38 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">AuctionPagesType</td>
+  <td class="name">BazaarFiltersBuilder</td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/1)
+    (1/1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/2)
+    (15/15)
   </span>
 </td>
     <td class="coverageStat"/>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/7)
+    (28/28)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/53)
+    (122/122)
   </span>
 </td>
 </tr>
@@ -107,15 +108,57 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp; * limitations under the License.
 &nbsp; */
 &nbsp;
-&nbsp;package com.galarzaa.tibiakt.client
+&nbsp;package com.galarzaa.tibiakt.core.builders
 &nbsp;
-<b class="nc">&nbsp;internal enum class AuctionPagesType(val typeId: Int) {</b>
-<b class="nc">&nbsp;    ITEMS(0),</b>
-<b class="nc">&nbsp;    ITEMS_STORE(1),</b>
-<b class="nc">&nbsp;    MOUNTS(2),</b>
-<b class="nc">&nbsp;    MOUNTS_STORE(3),</b>
-<b class="nc">&nbsp;    OUTFITS(4),</b>
-<b class="nc">&nbsp;    OUTFITS_STORE(5)</b>
+&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionBattlEyeFilter
+&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionOrderBy
+&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionOrderDirection
+&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionSearchType
+&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionSkillFilter
+&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionVocationFilter
+&nbsp;import com.galarzaa.tibiakt.core.enums.PvpType
+&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.BazaarFilters
+&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
+&nbsp;
+&nbsp;@BuilderDsl
+&nbsp;public inline fun bazaarFilters(block: BazaarFiltersBuilder.() -&gt; Unit): BazaarFilters =
+&nbsp;    bazaarFiltersBuilder(block).build()
+&nbsp;
+&nbsp;@BuilderDsl
+&nbsp;public inline fun bazaarFiltersBuilder(block: BazaarFiltersBuilder.() -&gt; Unit): BazaarFiltersBuilder =
+&nbsp;    BazaarFiltersBuilder().apply(block)
+&nbsp;
+&nbsp;/** Builder for [BazaarFilters] instances. */
+<b class="fc">&nbsp;@BuilderDsl</b>
+&nbsp;public class BazaarFiltersBuilder : TibiaKtBuilder&lt;BazaarFilters&gt; {
+<b class="fc">&nbsp;    public var world: String? = null</b>
+<b class="fc">&nbsp;    public var pvpType: PvpType? = null</b>
+<b class="fc">&nbsp;    public var battlEyeType: AuctionBattlEyeFilter? = null</b>
+<b class="fc">&nbsp;    public var vocation: AuctionVocationFilter? = null</b>
+<b class="fc">&nbsp;    public var minimumLevel: Int? = null</b>
+<b class="fc">&nbsp;    public var maximumLevel: Int? = null</b>
+<b class="fc">&nbsp;    public var skill: AuctionSkillFilter? = null</b>
+<b class="fc">&nbsp;    public var minimumSkillLevel: Int? = null</b>
+<b class="fc">&nbsp;    public var maximumSkillLevel: Int? = null</b>
+<b class="fc">&nbsp;    public var orderDirection: AuctionOrderDirection? = null</b>
+<b class="fc">&nbsp;    public var orderBy: AuctionOrderBy? = null</b>
+<b class="fc">&nbsp;    public var searchString: String? = null</b>
+<b class="fc">&nbsp;    public var searchType: AuctionSearchType? = null</b>
+&nbsp;
+<b class="fc">&nbsp;    public override fun build(): BazaarFilters = BazaarFilters(</b>
+<b class="fc">&nbsp;        world = world,</b>
+<b class="fc">&nbsp;        pvpType = pvpType,</b>
+<b class="fc">&nbsp;        battlEyeType = battlEyeType,</b>
+<b class="fc">&nbsp;        vocation = vocation,</b>
+<b class="fc">&nbsp;        minimumLevel = minimumLevel,</b>
+<b class="fc">&nbsp;        maximumLevel = maximumLevel,</b>
+<b class="fc">&nbsp;        skill = skill,</b>
+<b class="fc">&nbsp;        minimumSkillLevel = minimumSkillLevel,</b>
+<b class="fc">&nbsp;        maximumSkillLevel = maximumSkillLevel,</b>
+<b class="fc">&nbsp;        searchString = searchString,</b>
+<b class="fc">&nbsp;        searchType = searchType,</b>
+<b class="fc">&nbsp;        orderDirection = orderDirection,</b>
+<b class="fc">&nbsp;        orderBy = orderBy)</b>
 &nbsp;}
 </code>
 </pre>
@@ -140,7 +183,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-07-07 21:00</div>
+    <div style="float:right;">generated on 2023-09-08 02:48</div>
 </div>
 </body>
 </html>

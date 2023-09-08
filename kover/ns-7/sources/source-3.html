@@ -4,7 +4,8 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > AuctionDetails</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>tibiakt-core Coverage Report > BossEntry</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -16,12 +17,12 @@
 <body>
 <div class="content">
 <div class="breadCrumbs">
-Current scope:     <a href="../../index.html">all classes</a>
+Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">com.galarzaa.tibiakt.core.models.bazaar</a>
+    <a href="../index.html">com.galarzaa.tibiakt.core.models.creatures</a>
 </div>
 
-<h1>Coverage Summary for Class: AuctionDetails (com.galarzaa.tibiakt.core.models.bazaar)</h1>
+<h1>Coverage Summary for Class: BossEntry (com.galarzaa.tibiakt.core.models.creatures)</h1>
 
 <table class="coverageStats">
 
@@ -45,7 +46,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">AuctionDetails</td>
+  <td class="name">BossEntry</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -60,7 +61,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     100%
   </span>
   <span class="absValue">
-    (44/44)
+    (2/2)
   </span>
 </td>
 <td class="coverageStat">
@@ -68,18 +69,18 @@ Current scope:     <a href="../../index.html">all classes</a>
     100%
   </span>
   <span class="absValue">
-    (220/220)
+    (10/10)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">AuctionDetails$$serializer</td>
+    <td class="name">BossEntry$$serializer</td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/1)
+    (1/1)
   </span>
 </td>
 <td class="coverageStat">
@@ -87,28 +88,28 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/49)
+    (0/7)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/1)
+    (1/1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    51.1%
   </span>
   <span class="absValue">
-    (0/1729)
+    (68/133)
   </span>
 </td>
   </tr>
   <tr>
-    <td class="name">AuctionDetails$Companion</td>
+    <td class="name">BossEntry$Companion</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -139,10 +140,10 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    66.7%
+    100%
   </span>
   <span class="absValue">
-    (2/3)
+    (3/3)
   </span>
 </td>
 <td class="coverageStat">
@@ -150,23 +151,23 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/49)
+    (0/7)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    97.8%
+    100%
   </span>
   <span class="absValue">
-    (45/46)
+    (4/4)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    11.5%
+    55.8%
   </span>
   <span class="absValue">
-    (224/1953)
+    (82/147)
   </span>
 </td>
 </tr>
@@ -193,107 +194,21 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp; * limitations under the License.
 &nbsp; */
 &nbsp;
+&nbsp;package com.galarzaa.tibiakt.core.models.creatures
 &nbsp;
-&nbsp;package com.galarzaa.tibiakt.core.models.bazaar
-&nbsp;
-&nbsp;import kotlinx.datetime.Instant
 &nbsp;import kotlinx.serialization.Serializable
 &nbsp;
 &nbsp;/**
-&nbsp; * An auction&#39;s details.
+&nbsp; * A boss in the [BoostableBosses] section of Tibia.com.
 &nbsp; *
-&nbsp; * @property hitPoints The maximum hitpoint of the character.
-&nbsp; * @property mana The maximum mana of the character.
-&nbsp; * @property capacity The maximum capacity of the character.
-&nbsp; * @property speed The speed of the character.
-&nbsp; * @property blessingsCount The number of blessings the character has.
-&nbsp; * @property mountsCount The number of mounts the character has.
-&nbsp; * @property outfitsCount the total number of outfits the character has.
-&nbsp; * @property titlesCount The total number of unlocked titles.
-&nbsp; * @property skills The current skill levels of the character.
-&nbsp; * @property creationDate The date and time when the character was created.
-&nbsp; * @property experience The total experience of the character.
-&nbsp; * @property gold The total gold the character has.
-&nbsp; * @property achievementPoints The achievement points of the character.
-&nbsp; * @property regularWorldTransfersAvailable The date when regular world transfers will be available again for this user.
-&nbsp; * @property charmExpansion Whether this character has a charm expansion or not.
-&nbsp; * @property availableCharmPoints The total charm points the character has for spending.
-&nbsp; * @property spentCharmPoints The total charm points that have been spent.
-&nbsp; * @property dailyRewardStreak The current daily rewards streak.
-&nbsp; * @property huntingTaskPoints The total hunting task points.
-&nbsp; * @property permanentHuntingTaskSlots The total number of permanent hunting task slots the character has.
-&nbsp; * @property permanentPreySlots The total number of permanent prey slots.
-&nbsp; * @property preyWildcards The number of prey wildcards.
-&nbsp; * @property hirelings The total hirelings this character has.
-&nbsp; * @property hirelingJobs The total hireling jobs the character has available.
-&nbsp; * @property hirelingOutfits The total hireling outfits the character has available.
-&nbsp; * @property exaltedDust The amount of exalted dust the character has.
-&nbsp; * @property exaltedDustLimit The exalted dust limit of the character.
-&nbsp; * @property bossPoints The boss points of the character.
-&nbsp; * @property items The summary of items of the character.
-&nbsp; * @property storeItems The summary of store items of the character.
-&nbsp; * @property mounts The mounts the character has unlocked.
-&nbsp; * @property storeMounts The store mounts the character has purchased.
-&nbsp; * @property outfits The outfits the character has unlocked.
-&nbsp; * @property storeOutfits The store outfits the character has purchased.
-&nbsp; * @property familiars The familiars the character has unlocked.
-&nbsp; * @property blessings The blessings the character has.
-&nbsp; * @property imbuements The list of imbuements the character has unlocked.
-&nbsp; * @property charms The list of charms the character has unlocked.
-&nbsp; * @property completedCyclopediaMapAreas The map areas the character has fully discovered.
-&nbsp; * @property completedQuestLines The quest lines the character has unlocked.
-&nbsp; * @property titles The list of titles the character has unlocked.
-&nbsp; * @property achievements The list of achievements the character has unlocked.
-&nbsp; * @property bestiaryProgress The list of bestiary creatures and their progress.
-&nbsp; * @property bosstiaryProgress The list of bosstiary bosses and their progress.
+&nbsp; * @property name The name of the boss.
+&nbsp; * @property identifier The internal name of the boss. Used for images.
 &nbsp; */
 <b class="pc">&nbsp;@Serializable</b>
-&nbsp;public data class AuctionDetails(
-<b class="fc">&nbsp;    val hitPoints: Int,</b>
-<b class="fc">&nbsp;    val mana: Int,</b>
-<b class="fc">&nbsp;    val capacity: Int,</b>
-<b class="fc">&nbsp;    val speed: Int,</b>
-<b class="fc">&nbsp;    val blessingsCount: Int,</b>
-<b class="fc">&nbsp;    val mountsCount: Int,</b>
-<b class="fc">&nbsp;    val outfitsCount: Int,</b>
-<b class="fc">&nbsp;    val titlesCount: Int,</b>
-<b class="fc">&nbsp;    val skills: AuctionSkills,</b>
-<b class="fc">&nbsp;    val creationDate: Instant,</b>
-<b class="fc">&nbsp;    val experience: Long,</b>
-<b class="fc">&nbsp;    val gold: Long,</b>
-<b class="fc">&nbsp;    val achievementPoints: Int,</b>
-<b class="fc">&nbsp;    val regularWorldTransfersAvailable: Instant?,</b>
-<b class="fc">&nbsp;    val charmExpansion: Boolean,</b>
-<b class="fc">&nbsp;    val availableCharmPoints: Int,</b>
-<b class="fc">&nbsp;    val spentCharmPoints: Int,</b>
-<b class="fc">&nbsp;    val dailyRewardStreak: Int,</b>
-<b class="fc">&nbsp;    val huntingTaskPoints: Int,</b>
-<b class="fc">&nbsp;    val permanentHuntingTaskSlots: Int,</b>
-<b class="fc">&nbsp;    val permanentPreySlots: Int,</b>
-<b class="fc">&nbsp;    val preyWildcards: Int,</b>
-<b class="fc">&nbsp;    val hirelings: Int,</b>
-<b class="fc">&nbsp;    val hirelingJobs: Int,</b>
-<b class="fc">&nbsp;    val hirelingOutfits: Int,</b>
-<b class="fc">&nbsp;    val exaltedDust: Int,</b>
-<b class="fc">&nbsp;    val exaltedDustLimit: Int,</b>
-<b class="fc">&nbsp;    val bossPoints: Int,</b>
-<b class="fc">&nbsp;    val items: ItemSummary,</b>
-<b class="fc">&nbsp;    val storeItems: ItemSummary,</b>
-<b class="fc">&nbsp;    val mounts: Mounts,</b>
-<b class="fc">&nbsp;    val storeMounts: Mounts,</b>
-<b class="fc">&nbsp;    val outfits: Outfits,</b>
-<b class="fc">&nbsp;    val storeOutfits: Outfits,</b>
-<b class="fc">&nbsp;    val familiars: Familiars,</b>
-<b class="fc">&nbsp;    val blessings: List&lt;BlessingEntry&gt;,</b>
-<b class="fc">&nbsp;    val imbuements: List&lt;String&gt;,</b>
-<b class="fc">&nbsp;    val charms: List&lt;CharmEntry&gt;,</b>
-<b class="fc">&nbsp;    val completedCyclopediaMapAreas: List&lt;String&gt;,</b>
-<b class="fc">&nbsp;    val completedQuestLines: List&lt;String&gt;,</b>
-<b class="fc">&nbsp;    val titles: List&lt;String&gt;,</b>
-<b class="fc">&nbsp;    val achievements: List&lt;AchievementEntry&gt;,</b>
-<b class="fc">&nbsp;    val bestiaryProgress: List&lt;CreatureEntry&gt;,</b>
-<b class="fc">&nbsp;    val bosstiaryProgress: List&lt;CreatureEntry&gt;,</b>
-&nbsp;)
+&nbsp;public data class BossEntry(
+<b class="fc">&nbsp;    override val name: String,</b>
+<b class="fc">&nbsp;    override val identifier: String,</b>
+&nbsp;) : BaseCreatureEntry
 </code>
 </pre>
 </div>
@@ -317,7 +232,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-07-07 21:00</div>
+    <div style="float:right;">generated on 2023-09-08 02:48</div>
 </div>
 </body>
 </html>

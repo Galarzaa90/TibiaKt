@@ -4,7 +4,8 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > AjaxResponse</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>tibiakt-core Coverage Report > AuctionBuilderKt</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -16,17 +17,20 @@
 <body>
 <div class="content">
 <div class="breadCrumbs">
-Current scope:     <a href="../../index.html">all classes</a>
+Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">com.galarzaa.tibiakt.client</a>
+    <a href="../index.html">com.galarzaa.tibiakt.core.builders</a>
 </div>
 
-<h1>Coverage Summary for Class: AjaxResponse (com.galarzaa.tibiakt.client)</h1>
+<h1>Coverage Summary for Class: AuctionBuilderKt (com.galarzaa.tibiakt.core.builders)</h1>
 
 <table class="coverageStats">
-
 <tr>
   <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -45,131 +49,42 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">AjaxResponse</td>
+  <td class="name">AuctionBuilderKt</td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/2)
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/2)
   </span>
 </td>
     <td class="coverageStat"/>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    50%
   </span>
   <span class="absValue">
-    (0/2)
+    (1/2)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    52.6%
   </span>
   <span class="absValue">
-    (0/5)
+    (10/19)
   </span>
 </td>
 </tr>
-  <tr>
-    <td class="name">AjaxResponse$$serializer</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/1)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/6)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/1)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/123)
-  </span>
-</td>
-  </tr>
-  <tr>
-    <td class="name">AjaxResponse$Companion</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/1)
-  </span>
-</td>
-    <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/1)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/4)
-  </span>
-</td>
-  </tr>
-<tr>
-  <td class="name"><strong>Total</strong></td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/4)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/6)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/4)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/132)
-  </span>
-</td>
-</tr>
+
 </table>
 
 <br/>
@@ -193,26 +108,239 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp; * limitations under the License.
 &nbsp; */
 &nbsp;
-&nbsp;package com.galarzaa.tibiakt.client
+&nbsp;package com.galarzaa.tibiakt.core.builders
 &nbsp;
-&nbsp;import kotlinx.serialization.SerialName
-&nbsp;import kotlinx.serialization.Serializable
+&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionStatus
+&nbsp;import com.galarzaa.tibiakt.core.enums.BidType
+&nbsp;import com.galarzaa.tibiakt.core.enums.Sex
+&nbsp;import com.galarzaa.tibiakt.core.enums.Vocation
+&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.AchievementEntry
+&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.Auction
+&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.AuctionDetails
+&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.AuctionSkills
+&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.BlessingEntry
+&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.CharmEntry
+&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.CreatureEntry
+&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.Familiars
+&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.ItemEntry
+&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.ItemSummary
+&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.Mounts
+&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.OutfitImage
+&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.Outfits
+&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.SalesArgument
+&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
+&nbsp;import kotlinx.datetime.Instant
 &nbsp;
-<b class="nc">&nbsp;@Serializable</b>
-&nbsp;internal data class AjaxResponse(
-<b class="nc">&nbsp;    @SerialName(&quot;AjaxObjects&quot;)</b>
-<b class="nc">&nbsp;    val ajaxObjects: List&lt;AjaxObject&gt;,</b>
-&nbsp;)
+&nbsp;@BuilderDsl
+<b class="fc">&nbsp;public inline fun auction(block: AuctionBuilder.() -&gt; Unit): Auction = AuctionBuilder().apply(block).build()</b>
 &nbsp;
-&nbsp;@Serializable
-&nbsp;internal data class AjaxObject(
-&nbsp;    @SerialName(&quot;Data&quot;)
-&nbsp;    val data: String,
-&nbsp;    @SerialName(&quot;DataType&quot;)
-&nbsp;    val dataType: String,
-&nbsp;    @SerialName(&quot;Target&quot;)
-&nbsp;    val target: String,
-&nbsp;)
+&nbsp;@BuilderDsl
+<b class="nc">&nbsp;public inline fun auctionBuilder(block: AuctionBuilder.() -&gt; Unit): AuctionBuilder = AuctionBuilder().apply(block)</b>
+&nbsp;
+&nbsp;/** Builder for [AuctionBuilder] instances. */
+&nbsp;@BuilderDsl
+&nbsp;public class AuctionBuilder : TibiaKtBuilder&lt;Auction&gt; {
+&nbsp;    public lateinit var name: String
+&nbsp;    public var auctionId: Int? = null
+&nbsp;    public var level: Int? = null
+&nbsp;    public lateinit var world: String
+&nbsp;    public lateinit var vocation: Vocation
+&nbsp;    public lateinit var sex: Sex
+&nbsp;    public lateinit var outfit: OutfitImage
+&nbsp;    private val displayedItems: MutableList&lt;ItemEntry&gt; = mutableListOf()
+&nbsp;    private val salesArguments: MutableList&lt;SalesArgument&gt; = mutableListOf()
+&nbsp;    public lateinit var auctionStart: Instant
+&nbsp;    public lateinit var auctionEnd: Instant
+&nbsp;    public var bid: Int = 0
+&nbsp;    public lateinit var bidType: BidType
+&nbsp;    public lateinit var status: AuctionStatus
+&nbsp;    public var details: AuctionDetails? = null
+&nbsp;
+&nbsp;    public fun addDisplayedItem(displayedItem: ItemEntry): AuctionBuilder = apply { displayedItems.add(displayedItem) }
+&nbsp;
+&nbsp;    @BuilderDsl
+&nbsp;    public fun displayedItem(block: ItemEntryBuilder.() -&gt; Unit): AuctionBuilder =
+&nbsp;        apply { displayedItems.add(ItemEntryBuilder().apply(block).build()) }
+&nbsp;
+&nbsp;    public fun addSalesArgument(salesArgument: SalesArgument): AuctionBuilder =
+&nbsp;        apply { salesArguments.add(salesArgument) }
+&nbsp;
+&nbsp;    @BuilderDsl
+&nbsp;    public fun salesArgument(block: SalesArgumentBuilder.() -&gt; Unit): AuctionBuilder =
+&nbsp;        apply { salesArguments.add(SalesArgumentBuilder().apply(block).build()) }
+&nbsp;
+&nbsp;    @BuilderDsl
+&nbsp;    public fun details(block: AuctionDetailsBuilder.() -&gt; Unit): AuctionBuilder =
+&nbsp;        apply { details = AuctionDetailsBuilder().apply(block).build() }
+&nbsp;
+&nbsp;    public override fun build(): Auction = Auction(
+&nbsp;        name = if (::name.isInitialized) name else error(&quot;name is required&quot;),
+&nbsp;        auctionId = auctionId ?: error(&quot;auctionId is required&quot;),
+&nbsp;        level = level ?: error(&quot;level is required&quot;),
+&nbsp;        world = if (::world.isInitialized) world else error(&quot;world is required&quot;),
+&nbsp;        vocation = if (::vocation.isInitialized) vocation else error(&quot;vocation is required&quot;),
+&nbsp;        sex = if (::sex.isInitialized) sex else error(&quot;sex is required&quot;),
+&nbsp;        outfit = if (::outfit.isInitialized) outfit else error(&quot;outfit is required&quot;),
+&nbsp;        displayedItems = displayedItems,
+&nbsp;        salesArguments = salesArguments,
+&nbsp;        auctionStart = if (::auctionStart.isInitialized) auctionStart else error(&quot;auctionStart is required&quot;),
+&nbsp;        auctionEnd = if (::auctionEnd.isInitialized) auctionEnd else error(&quot;auctionEnd is required&quot;),
+&nbsp;        bid = bid,
+&nbsp;        bidType = if (::bidType.isInitialized) bidType else error(&quot;bidType is required&quot;),
+&nbsp;        status = if (::status.isInitialized) status else error(&quot;status is required&quot;),
+&nbsp;        details = details,
+&nbsp;    )
+&nbsp;
+&nbsp;    @BuilderDsl
+&nbsp;    public class ItemEntryBuilder : TibiaKtBuilder&lt;ItemEntry&gt; {
+&nbsp;        public var itemId: Int? = null
+&nbsp;        public lateinit var name: String
+&nbsp;        public lateinit var description: String
+&nbsp;        public var count: Int = 1
+&nbsp;        public var tier: Int = 0
+&nbsp;
+&nbsp;        override fun build(): ItemEntry = ItemEntry(
+&nbsp;            itemId = itemId ?: error(&quot;itemId is required&quot;),
+&nbsp;            name = if (::name.isInitialized) name else error(&quot;name is required&quot;),
+&nbsp;            description = if (::description.isInitialized) description else error(&quot;description is required&quot;),
+&nbsp;            count = count,
+&nbsp;            tier = tier
+&nbsp;        )
+&nbsp;    }
+&nbsp;
+&nbsp;    @BuilderDsl
+&nbsp;    public class SalesArgumentBuilder : TibiaKtBuilder&lt;SalesArgument&gt; {
+&nbsp;        public var categoryId: Int? = null
+&nbsp;        public lateinit var content: String
+&nbsp;
+&nbsp;        override fun build(): SalesArgument = SalesArgument(
+&nbsp;            categoryId = categoryId ?: error(&quot;categoryId is required&quot;),
+&nbsp;            content = if (::content.isInitialized) content else error(&quot;content is required&quot;),
+&nbsp;        )
+&nbsp;    }
+&nbsp;
+&nbsp;    @BuilderDsl
+&nbsp;    public class AuctionDetailsBuilder : TibiaKtBuilder&lt;AuctionDetails&gt; {
+&nbsp;        public var hitPoints: Int? = null
+&nbsp;        public var mana: Int? = null
+&nbsp;        public var capacity: Int? = null
+&nbsp;        public var speed: Int? = null
+&nbsp;        public var blessingsCount: Int? = null
+&nbsp;        public var mountsCount: Int? = null
+&nbsp;        public var outfitsCount: Int? = null
+&nbsp;        public var titlesCount: Int? = null
+&nbsp;        public var skills: AuctionSkills? = null
+&nbsp;        public var creationDate: Instant? = null
+&nbsp;        public var experience: Long? = null
+&nbsp;        public var gold: Long? = null
+&nbsp;        public var achievementPoints: Int? = null
+&nbsp;        public var regularWorldTransfersAvailable: Instant? = null
+&nbsp;        public var hasCharmExpansion: Boolean? = null
+&nbsp;        public var availableCharmPoints: Int? = null
+&nbsp;        public var spentCharmPoints: Int? = null
+&nbsp;        public var dailyRewardStreak: Int? = null
+&nbsp;        public var huntingTaskPoints: Int? = null
+&nbsp;        public var permanentHuntingTaskSlots: Int? = null
+&nbsp;        public var permanentPreySlots: Int? = null
+&nbsp;        public var preyWildcards: Int? = null
+&nbsp;        public var hirelings: Int? = null
+&nbsp;        public var hirelingJobs: Int? = null
+&nbsp;        public var hirelingOutfits: Int? = null
+&nbsp;        public var exaltedDust: Int? = null
+&nbsp;        public var exaltedDustLimit: Int? = null
+&nbsp;        public var bossPoints: Int? = null
+&nbsp;        public var items: ItemSummary? = null
+&nbsp;        public var storeItems: ItemSummary? = null
+&nbsp;        public var mounts: Mounts? = null
+&nbsp;        public var storeMounts: Mounts? = null
+&nbsp;        public var outfits: Outfits? = null
+&nbsp;        public var storeOutfits: Outfits? = null
+&nbsp;        public var familiars: Familiars? = null
+&nbsp;        public val blessings: MutableList&lt;BlessingEntry&gt; = mutableListOf()
+&nbsp;        public val imbuements: MutableList&lt;String&gt; = mutableListOf()
+&nbsp;        public val charms: MutableList&lt;CharmEntry&gt; = mutableListOf()
+&nbsp;        public val completedCyclopediaMapAreas: MutableList&lt;String&gt; = mutableListOf()
+&nbsp;        public val completedQuestLines: MutableList&lt;String&gt; = mutableListOf()
+&nbsp;        public val titles: MutableList&lt;String&gt; = mutableListOf()
+&nbsp;        public val achievements: MutableList&lt;AchievementEntry&gt; = mutableListOf()
+&nbsp;        public val bestiaryProgress: MutableList&lt;CreatureEntry&gt; = mutableListOf()
+&nbsp;        public val bosstiaryProgress: MutableList&lt;CreatureEntry&gt; = mutableListOf()
+&nbsp;
+&nbsp;
+&nbsp;        public fun addBlessing(blessingEntry: BlessingEntry): AuctionDetailsBuilder =
+&nbsp;            apply { blessings.add(blessingEntry) }
+&nbsp;
+&nbsp;        public fun addImbuement(imbuement: String): AuctionDetailsBuilder = apply { imbuements.add(imbuement) }
+&nbsp;        public fun addCharm(charm: CharmEntry): AuctionDetailsBuilder = apply { charms.add(charm) }
+&nbsp;
+&nbsp;        public fun addCompletedQuestLine(completedQuestLine: String): AuctionDetailsBuilder =
+&nbsp;            apply { completedQuestLines.add(completedQuestLine) }
+&nbsp;
+&nbsp;        public fun addCompletedCyclopediaMapArea(completedCyclopediaMapArea: String): AuctionDetailsBuilder =
+&nbsp;            apply { completedCyclopediaMapAreas.add(completedCyclopediaMapArea) }
+&nbsp;
+&nbsp;        public fun addTitle(title: String): AuctionDetailsBuilder = apply { titles.add(title) }
+&nbsp;        public fun addAchievement(achievement: AchievementEntry): AuctionDetailsBuilder =
+&nbsp;            apply { achievements.add(achievement) }
+&nbsp;
+&nbsp;        public fun addBestiaryEntry(bestiaryEntry: CreatureEntry): AuctionDetailsBuilder =
+&nbsp;            apply { bestiaryProgress.add(bestiaryEntry) }
+&nbsp;
+&nbsp;        public fun addBosstiaryEntry(bosstiaryEntry: CreatureEntry): AuctionDetailsBuilder =
+&nbsp;            apply { bosstiaryProgress.add(bosstiaryEntry) }
+&nbsp;
+&nbsp;        public override fun build(): AuctionDetails =
+&nbsp;            AuctionDetails(
+&nbsp;                hitPoints = hitPoints ?: error(&quot;hitPoints is required&quot;),
+&nbsp;                mana = mana ?: error(&quot;mana is required&quot;),
+&nbsp;                capacity = capacity ?: error(&quot;capacity is required&quot;),
+&nbsp;                speed = speed ?: error(&quot;speed is required&quot;),
+&nbsp;                blessingsCount = blessingsCount ?: error(&quot;blessingsCount is required&quot;),
+&nbsp;                mountsCount = mountsCount ?: error(&quot;mountsCount is required&quot;),
+&nbsp;                outfitsCount = outfitsCount ?: error(&quot;outfitsCount is required&quot;),
+&nbsp;                titlesCount = titlesCount ?: error(&quot;titlesCount is required&quot;),
+&nbsp;                skills = skills ?: error(&quot;skills is required&quot;),
+&nbsp;                creationDate = creationDate ?: error(&quot;creationDate is required&quot;),
+&nbsp;                experience = experience ?: error(&quot;experience is required&quot;),
+&nbsp;                gold = gold ?: error(&quot;gold is required&quot;),
+&nbsp;                achievementPoints = achievementPoints ?: error(&quot;achievementPoints is required&quot;),
+&nbsp;                regularWorldTransfersAvailable = regularWorldTransfersAvailable,
+&nbsp;                charmExpansion = hasCharmExpansion ?: error(&quot;charmExpansion is required&quot;),
+&nbsp;                availableCharmPoints = availableCharmPoints
+&nbsp;                    ?: error(&quot;availableCharmPoints is required&quot;),
+&nbsp;                spentCharmPoints = spentCharmPoints ?: error(&quot;spentCharmPoints is required&quot;),
+&nbsp;                dailyRewardStreak = dailyRewardStreak ?: error(&quot;dailyRewardStreak is required&quot;),
+&nbsp;                permanentHuntingTaskSlots = permanentHuntingTaskSlots
+&nbsp;                    ?: error(&quot;permanentHuntingTaskSlots is required&quot;),
+&nbsp;                permanentPreySlots = permanentPreySlots
+&nbsp;                    ?: error(&quot;permanentPreySlots is required&quot;),
+&nbsp;                huntingTaskPoints = huntingTaskPoints ?: error(&quot;huntingTaskPoints is required&quot;),
+&nbsp;                preyWildcards = preyWildcards ?: error(&quot;preyWildcards is required&quot;),
+&nbsp;                hirelings = hirelings ?: error(&quot;hirelings is required&quot;),
+&nbsp;                hirelingJobs = hirelingJobs ?: error(&quot;hirelingJobs is required&quot;),
+&nbsp;                hirelingOutfits = hirelingOutfits ?: error(&quot;hirelingOutfits is required&quot;),
+&nbsp;                exaltedDust = exaltedDust ?: error(&quot;exaltedDust is required&quot;),
+&nbsp;                exaltedDustLimit = exaltedDustLimit ?: error(&quot;exaltedDustLimit is required&quot;),
+&nbsp;                bossPoints = bossPoints ?: error(&quot;bossPoints is required&quot;),
+&nbsp;                items = items ?: error(&quot;items is required&quot;),
+&nbsp;                storeItems = storeItems ?: error(&quot;storeItems is required&quot;),
+&nbsp;                mounts = mounts ?: error(&quot;mounts is required&quot;),
+&nbsp;                storeMounts = storeMounts ?: error(&quot;storeMounts is required&quot;),
+&nbsp;                outfits = outfits ?: error(&quot;outfits is required&quot;),
+&nbsp;                storeOutfits = storeOutfits ?: error(&quot;storeOutfits is required&quot;),
+&nbsp;                familiars = familiars ?: error(&quot;familiars is required&quot;),
+&nbsp;                blessings = blessings,
+&nbsp;                imbuements = imbuements,
+&nbsp;                charms = charms,
+&nbsp;                completedCyclopediaMapAreas = completedCyclopediaMapAreas,
+&nbsp;                completedQuestLines = completedQuestLines,
+&nbsp;                titles = titles,
+&nbsp;                achievements = achievements,
+&nbsp;                bestiaryProgress = bestiaryProgress,
+&nbsp;                bosstiaryProgress = bosstiaryProgress,
+&nbsp;            )
+&nbsp;    }
+&nbsp;}
 </code>
 </pre>
 </div>
@@ -236,7 +364,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-07-07 21:00</div>
+    <div style="float:right;">generated on 2023-09-08 02:48</div>
 </div>
 </body>
 </html>

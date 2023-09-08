@@ -1,0 +1,227 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>tibiakt-core Coverage Report > HouseParser</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.galarzaa.tibiakt.core.parsers</a>
+</div>
+
+<h1>Coverage Summary for Class: HouseParser (com.galarzaa.tibiakt.core.parsers)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+<th class="coverageStat 
+">
+  Instruction, %
+</th>
+</tr>
+<tr>
+  <td class="name">HouseParser</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (16/20)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    95.8%
+  </span>
+  <span class="absValue">
+    (46/48)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    88.4%
+  </span>
+  <span class="absValue">
+    (421/476)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.galarzaa.tibiakt.core.parsers
+&nbsp;
+&nbsp;import com.galarzaa.tibiakt.core.builders.HouseBuilder
+&nbsp;import com.galarzaa.tibiakt.core.builders.house
+&nbsp;import com.galarzaa.tibiakt.core.enums.HouseStatus
+&nbsp;import com.galarzaa.tibiakt.core.enums.StringEnum
+&nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
+&nbsp;import com.galarzaa.tibiakt.core.models.house.House
+&nbsp;import com.galarzaa.tibiakt.core.utils.cells
+&nbsp;import com.galarzaa.tibiakt.core.utils.clean
+&nbsp;import com.galarzaa.tibiakt.core.utils.cleanText
+&nbsp;import com.galarzaa.tibiakt.core.utils.findInteger
+&nbsp;import com.galarzaa.tibiakt.core.utils.parseInteger
+&nbsp;import com.galarzaa.tibiakt.core.utils.parseThousandSuffix
+&nbsp;import com.galarzaa.tibiakt.core.utils.parseTibiaDateTime
+&nbsp;import com.galarzaa.tibiakt.core.utils.remove
+&nbsp;import com.galarzaa.tibiakt.core.utils.replaceBrs
+&nbsp;
+&nbsp;/** Parser for House information pages. */
+&nbsp;public object HouseParser : Parser&lt;House?&gt; {
+&nbsp;    @Suppress(&quot;MaxLineLength&quot;)
+&nbsp;    private val rentedPattern =
+<b class="fc">&nbsp;        Regex(&quot;&quot;&quot;The (?&lt;type&gt;\w+) has been rented by (?&lt;owner&gt;[^.]+)\. (?&lt;pronoun&gt;\w+) has paid the rent until (?&lt;paidUntil&gt;[^.]+)\.&quot;&quot;&quot;)</b>
+<b class="fc">&nbsp;    private val auctionedPattern = Regex(&quot;&quot;&quot;The (?&lt;type&gt;\w+) is currently being auctioned.&quot;&quot;&quot;)</b>
+&nbsp;
+&nbsp;    @Suppress(&quot;MaxLineLength&quot;)
+&nbsp;    private val bidPattern =
+<b class="fc">&nbsp;        Regex(&quot;&quot;&quot;The auction will end at (?&lt;auctionEnd&gt;[^.]+)\. The highest bid so far is (?&lt;highestBid&gt;\d+) gold and has been submitted by (?&lt;bidder&gt;[^.]+)&quot;&quot;&quot;)</b>
+<b class="fc">&nbsp;    private val moveOutPattern = Regex(&quot;&quot;&quot;S?[Hh]e will move out on (?&lt;moveDate&gt;[^.]+) \(time of daily&quot;&quot;&quot;)</b>
+&nbsp;
+&nbsp;    @Suppress(&quot;MaxLineLength&quot;)
+&nbsp;    private val transferPattern =
+<b class="fc">&nbsp;        Regex(&quot;&quot;&quot;and (?&lt;action&gt;wants to|will) pass the house to (?&lt;transferee&gt;[\w\s]+) for (?&lt;transferPrice&gt;\d+) gold coin&quot;&quot;&quot;)</b>
+&nbsp;
+&nbsp;    override fun fromContent(content: String): House? {
+<b class="fc">&nbsp;        val boxContent = boxContent(content)</b>
+<b class="fc">&nbsp;        val infoTable = boxContent.selectFirst(&quot;table&quot;)</b>
+<b class="fc">&nbsp;        return house {</b>
+<b class="fc">&nbsp;            val (imageRow, descriptionRow) = infoTable.cells()</b>
+<b class="fc">&nbsp;            if (imageRow.text().contains(&quot;No information about this house found&quot;)) return null</b>
+<b class="pc">&nbsp;            val imageUrl = imageRow.selectFirst(&quot;img&quot;)?.attr(&quot;src&quot;)</b>
+<b class="pc">&nbsp;            houseId = imageUrl?.findInteger() ?: throw ParsingException(&quot;House image not found&quot;)</b>
+<b class="fc">&nbsp;            val (title, sizeStr, rentStr, worldStr) = descriptionRow.select(&quot;b&quot;).map { it.cleanText() }</b>
+<b class="fc">&nbsp;            name = title</b>
+<b class="fc">&nbsp;            size = sizeStr.remove(&quot;square meters&quot;).clean().toInt()</b>
+<b class="fc">&nbsp;            rent = rentStr.remove(&quot;gold&quot;).parseThousandSuffix()</b>
+<b class="fc">&nbsp;            world = worldStr</b>
+<b class="fc">&nbsp;            val descriptionLines = descriptionRow.replaceBrs().wholeText().lines()</b>
+<b class="fc">&nbsp;            beds = descriptionLines[1].findInteger()</b>
+<b class="fc">&nbsp;            val statusLine = descriptionLines.last().clean()</b>
+<b class="fc">&nbsp;            parseStatusDescription(statusLine)</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private fun HouseBuilder.parseStatusDescription(stateLine: String) {
+<b class="fc">&nbsp;        rentedPattern.find(stateLine)?.apply {</b>
+<b class="fc">&nbsp;            status = HouseStatus.RENTED</b>
+<b class="fc">&nbsp;            owner = groups[&quot;owner&quot;]!!.value.clean()</b>
+<b class="fc">&nbsp;            paidUntil = parseTibiaDateTime(groups[&quot;paidUntil&quot;]!!.value)</b>
+<b class="pc">&nbsp;            houseType = StringEnum.fromValue(&quot;${groups[&quot;type&quot;]!!.value}s&quot;)</b>
+<b class="nc">&nbsp;                ?: throw ParsingException(&quot;Unknown house type found: ${groups[&quot;type&quot;]!!.value}&quot;)</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        auctionedPattern.find(stateLine)?.apply {</b>
+<b class="fc">&nbsp;            status = HouseStatus.AUCTIONED</b>
+<b class="pc">&nbsp;            houseType = StringEnum.fromValue(&quot;${groups[&quot;type&quot;]!!.value}s&quot;)</b>
+<b class="nc">&nbsp;                ?: throw ParsingException(&quot;Unknown house type found: ${groups[&quot;type&quot;]!!.value}&quot;)</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        bidPattern.find(stateLine)?.apply {</b>
+<b class="fc">&nbsp;            status = HouseStatus.AUCTIONED</b>
+<b class="fc">&nbsp;            auctionEnd = parseTibiaDateTime(groups[&quot;auctionEnd&quot;]!!.value)</b>
+<b class="fc">&nbsp;            highestBid = groups[&quot;highestBid&quot;]!!.value.parseInteger()</b>
+<b class="fc">&nbsp;            highestBidder = groups[&quot;bidder&quot;]!!.value.clean()</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        moveOutPattern.find(stateLine)?.apply {</b>
+<b class="fc">&nbsp;            movingDate = parseTibiaDateTime(groups[&quot;moveDate&quot;]!!.value)</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        transferPattern.find(stateLine)?.apply {</b>
+<b class="fc">&nbsp;            isTransferAccepted = groups[&quot;action&quot;]!!.value == &quot;will&quot;</b>
+<b class="fc">&nbsp;            transferRecipient = groups[&quot;transferee&quot;]!!.value.clean()</b>
+<b class="fc">&nbsp;            transferPrice = groups[&quot;transferPrice&quot;]!!.value.toInt()</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-09-08 02:48</div>
+</div>
+</body>
+</html>
