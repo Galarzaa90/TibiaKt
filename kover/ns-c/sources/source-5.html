@@ -49,27 +49,27 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
   <td class="name">LeaderboardRotation</td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    50%
   </span>
   <span class="absValue">
-    (1/1)
+    (1/2)
   </span>
 </td>
     <td class="coverageStat"/>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    75%
   </span>
   <span class="absValue">
-    (3/3)
+    (3/4)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    88.2%
   </span>
   <span class="absValue">
-    (15/15)
+    (15/17)
   </span>
 </td>
 </tr>
@@ -140,10 +140,10 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    75%
   </span>
   <span class="absValue">
-    (3/3)
+    (3/4)
   </span>
 </td>
 <td class="coverageStat">
@@ -156,18 +156,18 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    83.3%
   </span>
   <span class="absValue">
-    (5/5)
+    (5/6)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    51.1%
+    50.5%
   </span>
   <span class="absValue">
-    (97/190)
+    (97/192)
   </span>
 </td>
 </tr>
@@ -203,15 +203,18 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp; * A rotation of the Tibia Drome leaderboards.
 &nbsp; *
 &nbsp; * @property rotationId The internal ID of the rotation.
-&nbsp; * @property current Whether this is the current rotation or not.
+&nbsp; * @property isCurrent Whether this is the current rotation or not.
 &nbsp; * @property endDate The date when the rotation ends.
 &nbsp; */
 <b class="pc">&nbsp;@Serializable</b>
 &nbsp;public data class LeaderboardRotation(
 <b class="fc">&nbsp;    val rotationId: Int,</b>
-<b class="fc">&nbsp;    val current: Boolean,</b>
+<b class="fc">&nbsp;    val isCurrent: Boolean,</b>
 <b class="fc">&nbsp;    val endDate: Instant,</b>
-&nbsp;)
+&nbsp;) {
+&nbsp;    @Deprecated(&quot;Renamed to isCurrent&quot;, replaceWith = ReplaceWith(&quot;isCurrent&quot;))
+<b class="nc">&nbsp;    public val current: Boolean get() = isCurrent</b>
+&nbsp;}
 &nbsp;
 &nbsp;
 &nbsp;@Deprecated(&quot;Renamed to LeaderboardRotation&quot;, replaceWith = ReplaceWith(&quot;LeaderboardRotation&quot;))
@@ -239,7 +242,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-09-08 13:21</div>
+    <div style="float:right;">generated on 2023-09-08 15:07</div>
 </div>
 </body>
 </html>

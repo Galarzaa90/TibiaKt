@@ -93,7 +93,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;/*
-&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; * Copyright © 2023 Allan Galarza
 &nbsp; *
 &nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 &nbsp; * you may not use this file except in compliance with the License.
@@ -135,7 +135,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;    public var vocation: HighscoresProfession? = null
 &nbsp;    public val worldTypes: MutableSet&lt;PvpType&gt; = mutableSetOf()
 &nbsp;    public var battlEyeType: HighscoresBattlEyeType? = null
-&nbsp;    public var lastUpdate: Instant? = null
+&nbsp;    public var lastUpdated: Instant? = null
 &nbsp;    public var currentPage: Int = 1
 &nbsp;    public var totalPages: Int = 1
 &nbsp;    public var resultsCount: Int = 0
@@ -163,7 +163,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;        vocation = vocation ?: HighscoresProfession.ALL,
 &nbsp;        worldTypes = worldTypes,
 &nbsp;        battlEyeType = battlEyeType ?: HighscoresBattlEyeType.ANY_WORLD,
-&nbsp;        lastUpdate = lastUpdate ?: error(&quot;lastUpdate is required&quot;),
+&nbsp;        lastUpdated = lastUpdated ?: error(&quot;lastUpdated is required&quot;),
 &nbsp;        currentPage = currentPage,
 &nbsp;        totalPages = totalPages,
 &nbsp;        resultsCount = resultsCount,
@@ -214,7 +214,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-09-08 13:21</div>
+    <div style="float:right;">generated on 2023-09-08 15:07</div>
 </div>
 </body>
 </html>

@@ -158,7 +158,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;/*
-&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; * Copyright © 2023 Allan Galarza
 &nbsp; *
 &nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 &nbsp; * you may not use this file except in compliance with the License.
@@ -200,7 +200,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;    public var vocation: HighscoresProfession? = null</b>
 <b class="fc">&nbsp;    public val worldTypes: MutableSet&lt;PvpType&gt; = mutableSetOf()</b>
 <b class="fc">&nbsp;    public var battlEyeType: HighscoresBattlEyeType? = null</b>
-<b class="fc">&nbsp;    public var lastUpdate: Instant? = null</b>
+<b class="fc">&nbsp;    public var lastUpdated: Instant? = null</b>
 <b class="fc">&nbsp;    public var currentPage: Int = 1</b>
 <b class="fc">&nbsp;    public var totalPages: Int = 1</b>
 <b class="fc">&nbsp;    public var resultsCount: Int = 0</b>
@@ -228,7 +228,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;        vocation = vocation ?: HighscoresProfession.ALL,</b>
 <b class="fc">&nbsp;        worldTypes = worldTypes,</b>
 <b class="pc">&nbsp;        battlEyeType = battlEyeType ?: HighscoresBattlEyeType.ANY_WORLD,</b>
-<b class="pc">&nbsp;        lastUpdate = lastUpdate ?: error(&quot;lastUpdate is required&quot;),</b>
+<b class="pc">&nbsp;        lastUpdated = lastUpdated ?: error(&quot;lastUpdated is required&quot;),</b>
 <b class="fc">&nbsp;        currentPage = currentPage,</b>
 <b class="fc">&nbsp;        totalPages = totalPages,</b>
 <b class="fc">&nbsp;        resultsCount = resultsCount,</b>
@@ -279,7 +279,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-09-08 13:21</div>
+    <div style="float:right;">generated on 2023-09-08 15:07</div>
 </div>
 </body>
 </html>
