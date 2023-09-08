@@ -26,7 +26,7 @@ jobs:
           restore-keys: ${{ runner.os }}-gradle
       - name: Generate Coverage Report 📊
         if: ${{github.event_name == 'push'}}
-        run: ./gradlew koverMergedHtmlReport
+        run: ./gradlew tibiakt-core:koverHtmlReport
 
       - name: Generate API documentation 📃
         if: ${{github.event_name == 'push'}}
@@ -35,7 +35,7 @@ jobs:
       - name: Organize files 📁
         run: |
           mv build/dokka public
-          mv build/reports/kover/merged/html public/kover
+          mv tibiakt-core/build/reports/kover/html public/kover
 
       - name: Deploy to GitHub Pages🚀
         if: ${{github.event_name == 'push'}}
