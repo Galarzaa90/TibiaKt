@@ -9,6 +9,8 @@
 - `Character.accountStatus` is now a boolean instead of an enum, named `isPremium`
 - `AccountStatus` enum is now deprecated.
 - `AccountInformation.tutorStars` removed.
+- Renamed `Killer` to `DeathParticipant`.
+- Renamed `DeathParticipant.traded` to `isTraded`.
 
 ## v0.5.0 (2022-03-15)
 

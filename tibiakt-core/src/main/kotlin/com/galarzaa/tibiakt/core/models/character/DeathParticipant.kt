@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2023 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,17 +19,23 @@ package com.galarzaa.tibiakt.core.models.character
 import kotlinx.serialization.Serializable
 
 /**
- * Represents a killer listed in a death.
+ * Represents a participant listed in a death.
  *
- * @property name The name of the killer. If the killer is a summoned creature, this is the summoner's name.
- * @property isPlayer Whether the killer is a player.
- * @property traded Whether the character was traded after this death occurred.
+ * @property name The name of the participant. If the participant is a summoned creature, this is the summoner's name.
+ * @property isPlayer Whether the participant is a player.
+ * @property isTraded Whether the character was traded after this death occurred.
  * @property summon The summoned creature that caused this death, if applicable.
  */
 @Serializable
-public data class Killer(
+public data class DeathParticipant(
     val name: String,
     val isPlayer: Boolean,
     val summon: String?,
-    val traded: Boolean,
-)
+    val isTraded: Boolean,
+) {
+    @Deprecated("Renamed to isTraded", ReplaceWith("isTraded"))
+    val traded: Boolean get() = isTraded
+}
+
+@Deprecated("Renamed to DeathParticipant", ReplaceWith("DeathParticipant"))
+public typealias Killer = DeathParticipant

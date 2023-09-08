@@ -29,7 +29,12 @@ import kotlinx.serialization.Serializable
  * @property assists The list of characters that assisted in the death without dealing damage.
  */
 @Serializable
-public data class Death(val timestamp: Instant, val level: Int, val killers: List<Killer>, val assists: List<Killer>) {
+public data class Death(
+    val timestamp: Instant,
+    val level: Int,
+    val killers: List<DeathParticipant>,
+    val assists: List<DeathParticipant>,
+) {
     /**
      * Whether this death was caused by players.
      */

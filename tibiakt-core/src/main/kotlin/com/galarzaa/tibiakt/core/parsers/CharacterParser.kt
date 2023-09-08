@@ -21,7 +21,7 @@ import com.galarzaa.tibiakt.core.builders.character
 import com.galarzaa.tibiakt.core.enums.StringEnum
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
 import com.galarzaa.tibiakt.core.models.character.Character
-import com.galarzaa.tibiakt.core.models.character.Killer
+import com.galarzaa.tibiakt.core.models.character.DeathParticipant
 import com.galarzaa.tibiakt.core.utils.clean
 import com.galarzaa.tibiakt.core.utils.getLinkInformation
 import com.galarzaa.tibiakt.core.utils.parsePopup
@@ -197,7 +197,7 @@ public object CharacterParser : Parser<Character?> {
         }
     }
 
-    private fun parseKiller(killerHtml: String): Killer? {
+    private fun parseKiller(killerHtml: String): DeathParticipant? {
         var name: String = killerHtml
         var isPlayer = false
         var isTraded = false
@@ -216,7 +216,7 @@ public object CharacterParser : Parser<Character?> {
             name = groups["name"]!!.value.clean()
         }
 
-        return Killer(name.clean(), isPlayer, summon, isTraded)
+        return DeathParticipant(name.clean(), isPlayer, summon, isTraded)
     }
 
     private fun CharacterBuilder.parseCharacters(rows: Elements) {

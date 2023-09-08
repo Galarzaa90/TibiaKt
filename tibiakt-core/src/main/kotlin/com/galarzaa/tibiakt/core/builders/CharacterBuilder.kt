@@ -23,9 +23,9 @@ import com.galarzaa.tibiakt.core.models.character.AccountInformation
 import com.galarzaa.tibiakt.core.models.character.Character
 import com.galarzaa.tibiakt.core.models.character.CharacterHouse
 import com.galarzaa.tibiakt.core.models.character.Death
+import com.galarzaa.tibiakt.core.models.character.DeathParticipant
 import com.galarzaa.tibiakt.core.models.character.DisplayedAchievement
 import com.galarzaa.tibiakt.core.models.character.GuildMembership
-import com.galarzaa.tibiakt.core.models.character.Killer
 import com.galarzaa.tibiakt.core.models.character.OtherCharacter
 import com.galarzaa.tibiakt.core.utils.BuilderDsl
 import kotlinx.datetime.Instant
@@ -103,8 +103,8 @@ public class CharacterBuilder : TibiaKtBuilder<Character> {
     public fun addDeath(
         timestamp: Instant,
         level: Int,
-        killers: List<Killer>,
-        assists: List<Killer>,
+        killers: List<DeathParticipant>,
+        assists: List<DeathParticipant>,
     ): CharacterBuilder = apply {
         deaths.add(Death(timestamp, level, killers, assists))
     }
