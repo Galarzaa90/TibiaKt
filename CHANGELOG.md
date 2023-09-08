@@ -11,6 +11,7 @@
 - `AccountInformation.tutorStars` removed.
 - Renamed `Killer` to `DeathParticipant`.
 - Renamed `DeathParticipant.traded` to `isTraded`.
+- Remove `WorldOverview.tournamentWorlds`.
 
 ## v0.5.0 (2022-03-15)
 

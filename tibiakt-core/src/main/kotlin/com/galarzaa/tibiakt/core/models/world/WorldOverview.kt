@@ -32,7 +32,6 @@ public data class WorldOverview(
     val overallMaximumCount: Int,
     val overallMaximumCountDateTime: Instant,
     val worlds: List<WorldEntry>,
-    val tournamentWorlds: List<WorldEntry>,
 ) {
     /**
      * The total of currently online players across worlds.

@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2023 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,8 +40,6 @@ public class WorldOverviewBuilder : TibiaKtBuilder<WorldOverview> {
     public var overallMaximumCount: Int? = null
     public var overallMaximumCountDateTime: Instant? = null
     public val worlds: MutableList<WorldEntry> = mutableListOf()
-    public val tournamentWorlds: MutableList<WorldEntry> = mutableListOf()
-
 
     public fun addWorld(world: WorldEntry): Boolean = worlds.add(world)
 
@@ -56,7 +54,6 @@ public class WorldOverviewBuilder : TibiaKtBuilder<WorldOverview> {
             overallMaximumCountDateTime = overallMaximumCountDateTime
                 ?: error("overallMaximumCountDateTime is required"),
             worlds = worlds,
-            tournamentWorlds = tournamentWorlds
         )
     }
 
