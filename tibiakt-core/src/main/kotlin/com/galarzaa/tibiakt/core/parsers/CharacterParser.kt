@@ -165,9 +165,7 @@ public object CharacterParser : Parser<Character?> {
             val columns = row.select("td")
             var (field, value) = columns.map { it.wholeText().clean() }
             field = field.replace(" ", "_").remove(":").lowercase()
-            if (field == "position") {
-                valueMap[field] = value
-            } else valueMap[field] = value
+            valueMap[field] = value
         }
         accountInformation(
             created = parseTibiaDateTime(valueMap["created"] ?: return),

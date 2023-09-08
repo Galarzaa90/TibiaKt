@@ -193,9 +193,9 @@ public open class TibiaKtClient constructor(
             when (method) {
                 HttpMethod.Get -> client.get(url) {
                     expectSuccess = true
-                    if (headers.isNotEmpty()) {
+                    if (headers.isNotEmpty())
                         headers { headers.forEach { header(it.first, it.second) } }
-                    }
+
                 }
 
                 HttpMethod.Post -> client.submitForm(url, formParameters = Parameters.build {
@@ -214,12 +214,11 @@ public open class TibiaKtClient constructor(
                     HttpStatusCode.PermanentRedirect,
                     HttpStatusCode.SeeOther
                 )
-            ) {
+            )
                 throw SiteMaintenanceException("Tibia.com is under maintenance.", re)
-            }
-            if (re.response.status == HttpStatusCode.Forbidden) {
+            if (re.response.status == HttpStatusCode.Forbidden)
                 throw ForbiddenException("403 Forbidden: Might be getting rate-limited", re)
-            }
+
             throw NetworkException("${re.response.status.value} ${re.response.status.description}", re)
         }
         logger.info {
@@ -396,9 +395,9 @@ public open class TibiaKtClient constructor(
             totalPages = response.data.totalPages
             fetchingTime += response.fetchingTime
             parsingTime += response.parsingTime
-            if (currentPage == 1) {
+            if (currentPage == 1)
                 baseHighscores = response.data
-            }
+
             currentPage++
         }
         return TibiaResponse(
@@ -574,11 +573,9 @@ public open class TibiaKtClient constructor(
     ): TibiaResponse<Auction?> {
         val response = this.request(HttpMethod.Get, getAuctionUrl(auctionId))
         val tibiaResponse = response.parse { AuctionParser.fromContent(it, auctionId, !skipDetails) }
-        return if (tibiaResponse.data?.details != null && (fetchItems || fetchMounts || fetchOutfits)) {
+        return if (tibiaResponse.data?.details != null && (fetchItems || fetchMounts || fetchOutfits))
             fetchAuctionAdditionalPages(tibiaResponse, fetchItems, fetchMounts, fetchOutfits)
-        } else {
-            tibiaResponse
-        }
+        else tibiaResponse
     }
 
     private suspend fun fetchAuctionAdditionalPages(

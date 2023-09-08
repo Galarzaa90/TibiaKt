@@ -95,22 +95,21 @@ complexity:
     threshold: 10
     includeStaticDeclarations: false
     includePrivateDeclarations: false
-  ComplexMethod:
-    active: false
+  CyclomaticComplexMethod:
     threshold: 15
     ignoreSingleWhenExpression: false
     ignoreSimpleWhenEntries: false
-    ignoreNestingFunctions: false
+    ignoreNestingFunctions: true
     nestingFunctions:
-      - 'also'
-      - 'apply'
-      - 'forEach'
-      - 'isNotNull'
-      - 'ifNull'
-      - 'let'
-      - 'run'
-      - 'use'
-      - 'with'
+      - also
+      - apply
+      - forEach
+      - isNotNull
+      - ifNull
+      - let
+      - run
+      - use
+      - with
   LabeledExpression:
     active: false
     ignoredLabels: [ ]
@@ -292,12 +291,12 @@ exceptions:
       - 'RuntimeException'
       - 'Throwable'
 
+
 naming:
   active: true
   BooleanPropertyNaming:
     active: true
     allowedPattern: '^(is|has|are)'
-    ignoreOverridden: true
   ClassNaming:
     active: true
     classPattern: '[A-Z][a-zA-Z0-9]*'
@@ -306,7 +305,6 @@ naming:
     parameterPattern: '[a-z][A-Za-z0-9]*'
     privateParameterPattern: '[a-z][A-Za-z0-9]*'
     excludeClassPattern: '$^'
-    ignoreOverridden: true
   EnumNaming:
     active: true
     enumEntryPattern: '[A-Z][_a-zA-Z0-9]*'
@@ -324,12 +322,10 @@ naming:
     excludes: [ '**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**' ]
     functionPattern: '[a-z][a-zA-Z0-9]*'
     excludeClassPattern: '$^'
-    ignoreOverridden: true
   FunctionParameterNaming:
     active: true
     parameterPattern: '[a-z][A-Za-z0-9]*'
     excludeClassPattern: '$^'
-    ignoreOverridden: true
   InvalidPackageDeclaration:
     active: true
     rootPackage: ''
@@ -371,7 +367,6 @@ naming:
     variablePattern: '[a-z][A-Za-z0-9]*'
     privateVariablePattern: '(_)?[a-z][A-Za-z0-9]*'
     excludeClassPattern: '$^'
-    ignoreOverridden: true
 
 performance:
   active: true
@@ -412,8 +407,6 @@ potential-bugs:
       - 'java.util.HashSet'
       - 'java.util.LinkedHashMap'
       - 'java.util.HashMap'
-  DuplicateCaseInWhenExpression:
-    active: true
   ElseCaseInsteadOfExhaustiveWhen:
     active: false
   EqualsAlwaysReturnsTrueOrFalse:
@@ -428,7 +421,7 @@ potential-bugs:
     active: true
   IgnoredReturnValue:
     active: true
-    restrictToAnnotatedMethods: true
+    restrictToConfig: true
     returnValueAnnotations:
       - '*.CheckResult'
       - '*.CheckReturnValue'
@@ -455,15 +448,10 @@ potential-bugs:
   MissingPackageDeclaration:
     active: false
     excludes: [ '**/*.kts' ]
-  MissingWhenCase:
-    active: true
-    allowElseExpression: true
   NullCheckOnMutableProperty:
     active: false
   NullableToStringCall:
     active: false
-  RedundantElseInWhen:
-    active: true
   UnconditionalJumpStatementInLoop:
     active: true
   UnnecessaryNotNullOperator:
@@ -488,6 +476,14 @@ potential-bugs:
 
 style:
   active: true
+  BracesOnIfStatements:
+    active: true
+    singleLine: never
+    multiLine: consistent
+  BracesOnWhenStatements:
+    active: true
+    singleLine: necessary
+    multiLine: consistent
   CanBeNonNullable:
     active: true
   CascadingCallWrapping:
@@ -499,7 +495,8 @@ style:
     active: true
   DataClassContainsFunctions:
     active: false
-    conversionFunctionPrefix: 'to'
+    conversionFunctionPrefix:
+      - 'to'
   DataClassShouldBeImmutable:
     active: false
   DestructuringDeclarationWithTooManyEntries:
@@ -518,12 +515,7 @@ style:
     includeLineWrapping: false
   ForbiddenComment:
     active: false
-    values:
-      - 'FIXME:'
-      - 'STOPSHIP:'
-      - 'TODO:'
-    allowedPatterns: ''
-    customMessage: ''
+
   ForbiddenImport:
     active: false
     imports: [ ]
@@ -533,12 +525,6 @@ style:
     methods:
       - 'kotlin.io.print'
       - 'kotlin.io.println'
-  ForbiddenPublicDataClass:
-    active: true
-    excludes: [ '**' ]
-    ignorePackages:
-      - '*.internal'
-      - '*.internal.*'
   ForbiddenSuppress:
     active: false
     rules: [ ]
@@ -550,13 +536,7 @@ style:
     active: true
     ignoreOverridableFunction: true
     ignoreActualFunction: true
-    excludedFunctions: ''
-  LibraryCodeMustSpecifyReturnType:
-    active: true
-    excludes: [ '**' ]
-  LibraryEntitiesShouldNotBePublic:
-    active: true
-    excludes: [ '**' ]
+    excludedFunctions: [ ]
   LoopWithTooManyJumpStatements:
     active: true
     maxJumpCount: 1
@@ -580,8 +560,6 @@ style:
     ignoreEnums: true
     ignoreRanges: false
     ignoreExtensionFunctions: true
-  MandatoryBracesIfStatements:
-    active: false
   MandatoryBracesLoops:
     active: false
   MaxChainedCallsOnSameLine:
@@ -613,8 +591,6 @@ style:
     active: true
   OptionalUnit:
     active: false
-  OptionalWhenBraces:
-    active: true
   PreferToOverPairSyntax:
     active: true
   ProtectedMemberInFinalClass:
@@ -628,7 +604,9 @@ style:
   ReturnCount:
     active: true
     max: 5
-    excludedFunctions: 'equals,fromContent'
+    excludedFunctions:
+      - equals
+      - fromContent
     excludeLabeled: false
     excludeReturnFromLambda: true
     excludeGuardClauses: true

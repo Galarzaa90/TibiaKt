@@ -85,8 +85,8 @@ public class CharacterBuilder : TibiaKtBuilder<Character> {
         accountBadges.add(AccountBadge(name, descroption, iconUrl))
     }
 
-    public fun addAchievement(name: String, grade: Int, secret: Boolean): CharacterBuilder = apply {
-        achievements.add(DisplayedAchievement(name, grade, secret))
+    public fun addAchievement(name: String, grade: Int, isSecret: Boolean): CharacterBuilder = apply {
+        achievements.add(DisplayedAchievement(name, grade, isSecret))
     }
 
     public fun accountInformation(

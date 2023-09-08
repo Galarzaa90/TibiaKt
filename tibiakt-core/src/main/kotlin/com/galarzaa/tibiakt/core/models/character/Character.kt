@@ -96,7 +96,9 @@ public data class Character(
     val marriedToUrl: String? get() = marriedTo?.let { getCharacterUrl(it) }
 
     @Deprecated("Replaced with boolean property isPremium", ReplaceWith("isPremium"))
-    val accountStatus: AccountStatus get() = if (isPremium) AccountStatus.PREMIUM_ACCOUNT else AccountStatus.FREE_ACCOUNT
+    val accountStatus: AccountStatus
+        get() =
+            if (isPremium) AccountStatus.PREMIUM_ACCOUNT else AccountStatus.FREE_ACCOUNT
 
     @Deprecated("Renamed to otherCharacters", ReplaceWith("otherCharacters"))
     val characters: List<OtherCharacter> get() = otherCharacters
