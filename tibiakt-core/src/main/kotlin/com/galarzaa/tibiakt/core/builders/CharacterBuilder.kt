@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2023 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@
 
 package com.galarzaa.tibiakt.core.builders
 
-import com.galarzaa.tibiakt.core.enums.AccountStatus
 import com.galarzaa.tibiakt.core.enums.Sex
 import com.galarzaa.tibiakt.core.enums.Vocation
 import com.galarzaa.tibiakt.core.models.character.AccountBadge
@@ -54,7 +53,7 @@ public class CharacterBuilder : TibiaKtBuilder<Character> {
     public var formerNames: List<String> = emptyList()
     public var deletionDate: Instant? = null
     public var formerWorld: String? = null
-    public var accountStatus: AccountStatus? = null
+    public var isPremium: Boolean = false
     public var comment: String? = null
     public var title: String? = null
     public var position: String? = null
@@ -66,7 +65,7 @@ public class CharacterBuilder : TibiaKtBuilder<Character> {
     public val achievements: MutableList<DisplayedAchievement> = mutableListOf()
     public var accountInformation: AccountInformation? = null
     public val deaths: MutableList<Death> = mutableListOf()
-    public val characters: MutableList<OtherCharacter> = mutableListOf()
+    public val otherCharacters: MutableList<OtherCharacter> = mutableListOf()
 
     public fun addHouse(
         name: String,
@@ -94,9 +93,8 @@ public class CharacterBuilder : TibiaKtBuilder<Character> {
         created: Instant,
         loyaltyTitle: String?,
         position: String?,
-        tutorStars: Int?,
     ): CharacterBuilder = apply {
-        accountInformation = AccountInformation(created, loyaltyTitle, position, tutorStars)
+        accountInformation = AccountInformation(created, loyaltyTitle, position)
     }
 
     public fun guild(rank: String, guild: String): CharacterBuilder =
@@ -111,7 +109,7 @@ public class CharacterBuilder : TibiaKtBuilder<Character> {
         deaths.add(Death(timestamp, level, killers, assists))
     }
 
-    public fun addCharacter(
+    public fun addOtherCharacter(
         name: String,
         world: String,
         main: Boolean = false,
@@ -119,7 +117,8 @@ public class CharacterBuilder : TibiaKtBuilder<Character> {
         deleted: Boolean = false,
         traded: Boolean = false,
         position: String?,
-    ): CharacterBuilder = apply { characters.add(OtherCharacter(name, world, main, online, deleted, traded, position)) }
+    ): CharacterBuilder =
+        apply { otherCharacters.add(OtherCharacter(name, world, main, online, deleted, traded, position)) }
 
     override fun build(): Character = Character(
         name = if (::name.isInitialized) name else error("name is required"),
@@ -139,14 +138,14 @@ public class CharacterBuilder : TibiaKtBuilder<Character> {
         lastLogin = lastLogin,
         position = position,
         comment = comment,
-        accountStatus = accountStatus ?: error("accountStatus is required"),
+        isPremium = isPremium,
         isRecentlyTraded = isRecentlyTraded,
         deletionDate = deletionDate,
         badges = accountBadges,
         achievements = achievements,
         deaths = deaths,
         accountInformation = accountInformation,
-        characters = characters
+        otherCharacters = otherCharacters
     )
 
     public class CharacterHouseBuilder : TibiaKtBuilder<CharacterHouse> {

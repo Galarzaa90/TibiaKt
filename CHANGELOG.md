@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.6.0 (Unreleased)
+
+- Renamed `Leaderboards` to `Leaderboard`
+- Renamed `LeaderboardsEntry` to `LeaderboardEntry`
+- Renamed `LeaderboardsRotation` to `LeaderboardRotation`
+- Renamed `Character.characters` to `otherCharacters`
+- `Character.accountStatus` is now a boolean instead of an enum, named `isPremium`
+- `AccountStatus` enum is now deprecated.
+- `AccountInformation.tutorStars` removed.
+
 ## v0.5.0 (2022-03-15)
 
 - Added upgrade tier to item in auctions.

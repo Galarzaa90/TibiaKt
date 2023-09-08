@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2023 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 package com.galarzaa.tibiakt.core.enums
 
 /** The possible status for a Tibia account. */
+@Deprecated("No longer used, replaced by boolean property in Character class.")
 public enum class AccountStatus(override val value: String) : StringEnum {
     FREE_ACCOUNT("Free Account"),
     PREMIUM_ACCOUNT("Premium Account")

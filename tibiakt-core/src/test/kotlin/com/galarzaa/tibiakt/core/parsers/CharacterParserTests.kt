@@ -112,7 +112,7 @@ class CharacterParserTests : FunSpec({
 
         character.shouldBeInstanceOf<Character>()
         character.position shouldNotBe null
-        character.characters.forAtLeastOne {
+        character.otherCharacters.forAtLeastOne {
             it.position shouldNotBe null
         }
     }

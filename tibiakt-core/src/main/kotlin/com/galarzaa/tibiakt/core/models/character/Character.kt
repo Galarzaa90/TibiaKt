@@ -42,14 +42,14 @@ import kotlinx.serialization.Serializable
  * @property guildMembership The guild the character belongs to.
  * @property position The special position the character holds.
  * @property comment The character's comment.
- * @property accountStatus The current status of the account.
- * @property isRecentlyTraded Whether the character was recently traded. If its name was changed afterwards, this flag is removed.
+ * @property isPremium Whether the character has a premium account.
+ * @property isRecentlyTraded Whether the character was recently traded. If its name was changed afterward, this flag is removed.
  * @property deletionDate The date when this character is scheduled to be deleted.
  * @property badges The visible badges of the character.
  * @property achievements The visible achievements for the character.
  * @property deaths The recent deaths of the character.
  * @property accountInformation The character's account information. Might be [isHidden].
- * @property characters The list of visible characters in the same account. Might be [isHidden].
+ * @property otherCharacters The list of visible characters in the same account. Might be [isHidden].
  */
 @Serializable
 public data class Character(
@@ -70,14 +70,14 @@ public data class Character(
     val lastLogin: Instant?,
     val position: String?,
     val comment: String?,
-    val accountStatus: AccountStatus,
+    val isPremium: Boolean,
     val isRecentlyTraded: Boolean,
     val deletionDate: Instant?,
     val badges: List<AccountBadge>,
     val achievements: List<DisplayedAchievement>,
     val deaths: List<Death>,
     val accountInformation: AccountInformation?,
-    val characters: List<OtherCharacter>,
+    val otherCharacters: List<OtherCharacter>,
 ) : BaseCharacter, CharacterLevel {
 
     /**
@@ -88,10 +88,16 @@ public data class Character(
     /**
      * Whether this character is hidden or not.
      */
-    val isHidden: Boolean get() = characters.isEmpty()
+    val isHidden: Boolean get() = otherCharacters.isEmpty()
 
     /**
      * URL to the character this character is married to, if any.
      */
     val marriedToUrl: String? get() = marriedTo?.let { getCharacterUrl(it) }
+
+    @Deprecated("Replaced with boolean property isPremium", ReplaceWith("isPremium"))
+    val accountStatus: AccountStatus get() = if (isPremium) AccountStatus.PREMIUM_ACCOUNT else AccountStatus.FREE_ACCOUNT
+
+    @Deprecated("Renamed to otherCharacters", ReplaceWith("otherCharacters"))
+    val characters: List<OtherCharacter> get() = otherCharacters
 }

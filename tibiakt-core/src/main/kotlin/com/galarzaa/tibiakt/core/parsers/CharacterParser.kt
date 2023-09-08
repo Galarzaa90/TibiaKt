@@ -89,9 +89,7 @@ public object CharacterParser : Parser<Character?> {
 
                 "position" -> position = value
                 "comment" -> comment = value
-                "account_status" -> accountStatus =
-                    StringEnum.fromValue(value) ?: throw ParsingException("Unknown account status: $value")
-
+                "account_status" -> isPremium = "premium" in value.lowercase()
                 "married_to" -> marriedTo = value
                 "house" -> parseHouseColumn(columns[1])
                 "guild_membership" -> parseGuildColumn(columns[1])
@@ -168,16 +166,14 @@ public object CharacterParser : Parser<Character?> {
             var (field, value) = columns.map { it.wholeText().clean() }
             field = field.replace(" ", "_").remove(":").lowercase()
             if (field == "position") {
-                if (value.contains("tutor", true)) {
-                    valueMap["stars"] = columns[1].select("img").size.toString()
-                }
                 valueMap[field] = value
             } else valueMap[field] = value
         }
-        accountInformation(created = parseTibiaDateTime(valueMap["created"] ?: return),
+        accountInformation(
+            created = parseTibiaDateTime(valueMap["created"] ?: return),
             loyaltyTitle = valueMap["loyalty_title"],
             position = valueMap["position"],
-            tutorStars = valueMap["stars"]?.toInt())
+        )
     }
 
     private fun CharacterBuilder.parseCharacterDeaths(rows: Elements) {
@@ -241,7 +237,7 @@ public object CharacterParser : Parser<Character?> {
             val isOnline = status.contains("online")
             val isDeleted = status.contains("deleted")
             val position = if (status.contains("CipSoft Member")) "CipSoft Member" else null
-            addCharacter(name, world, isMain, isOnline, isDeleted, isTraded, position)
+            addOtherCharacter(name, world, isMain, isOnline, isDeleted, isTraded, position)
         }
     }
 }
