@@ -179,8 +179,8 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;        accountBadges.add(AccountBadge(name, descroption, iconUrl))
 &nbsp;    }
 &nbsp;
-&nbsp;    public fun addAchievement(name: String, grade: Int, secret: Boolean): CharacterBuilder = apply {
-&nbsp;        achievements.add(DisplayedAchievement(name, grade, secret))
+&nbsp;    public fun addAchievement(name: String, grade: Int, isSecret: Boolean): CharacterBuilder = apply {
+&nbsp;        achievements.add(DisplayedAchievement(name, grade, isSecret))
 &nbsp;    }
 &nbsp;
 &nbsp;    public fun accountInformation(
@@ -280,7 +280,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-09-08 02:48</div>
+    <div style="float:right;">generated on 2023-09-08 03:14</div>
 </div>
 </body>
 </html>

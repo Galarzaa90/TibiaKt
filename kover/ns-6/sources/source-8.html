@@ -179,7 +179,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;/*
-&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; * Copyright © 2023 Allan Galarza
 &nbsp; *
 &nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 &nbsp; * you may not use this file except in compliance with the License.
@@ -199,14 +199,14 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;import kotlinx.serialization.Serializable
 &nbsp;
 &nbsp;/**
-&nbsp; * The achievements choosen to be displayed for a [Character].
+&nbsp; * The achievements chosen to be displayed for a [Character].
 &nbsp; *
 &nbsp; * @property name The name of the achievement.
 &nbsp; * @property grade The grade of the achievement, also known as the number of stars.
-&nbsp; * @property secret Whether this is a secret achievement or not.
+&nbsp; * @property isSecret Whether this is a secret achievement or not.
 &nbsp; */
 <b class="pc">&nbsp;@Serializable</b>
-<b class="fc">&nbsp;public data class DisplayedAchievement(val name: String, val grade: Int, val secret: Boolean)</b>
+<b class="fc">&nbsp;public data class DisplayedAchievement(val name: String, val grade: Int, val isSecret: Boolean)</b>
 </code>
 </pre>
 </div>
@@ -230,7 +230,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-09-08 02:48</div>
+    <div style="float:right;">generated on 2023-09-08 03:14</div>
 </div>
 </body>
 </html>

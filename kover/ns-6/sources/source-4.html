@@ -283,7 +283,9 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="nc">&nbsp;    val marriedToUrl: String? get() = marriedTo?.let { getCharacterUrl(it) }</b>
 &nbsp;
 &nbsp;    @Deprecated(&quot;Replaced with boolean property isPremium&quot;, ReplaceWith(&quot;isPremium&quot;))
-<b class="pc">&nbsp;    val accountStatus: AccountStatus get() = if (isPremium) AccountStatus.PREMIUM_ACCOUNT else AccountStatus.FREE_ACCOUNT</b>
+&nbsp;    val accountStatus: AccountStatus
+&nbsp;        get() =
+<b class="pc">&nbsp;            if (isPremium) AccountStatus.PREMIUM_ACCOUNT else AccountStatus.FREE_ACCOUNT</b>
 &nbsp;
 &nbsp;    @Deprecated(&quot;Renamed to otherCharacters&quot;, ReplaceWith(&quot;otherCharacters&quot;))
 <b class="nc">&nbsp;    val characters: List&lt;OtherCharacter&gt; get() = otherCharacters</b>
@@ -311,7 +313,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-09-08 02:48</div>
+    <div style="float:right;">generated on 2023-09-08 03:14</div>
 </div>
 </body>
 </html>
