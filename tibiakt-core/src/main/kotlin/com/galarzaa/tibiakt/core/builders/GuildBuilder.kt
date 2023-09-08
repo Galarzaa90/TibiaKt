@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2023 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -102,7 +102,7 @@ public class GuildBuilder : TibiaKtBuilder<Guild> {
             title = title,
             vocation = if (::vocation.isInitialized) vocation else error("vocation is required"),
             level = level,
-            joiningDate = if (::joiningDate.isInitialized) joiningDate else error("joiningDate is required"),
+            joinedOn = if (::joiningDate.isInitialized) joiningDate else error("joiningDate is required"),
             isOnline = isOnline,
         )
     }

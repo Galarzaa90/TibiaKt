@@ -23,15 +23,18 @@ import kotlinx.serialization.Serializable
  * A rotation of the Tibia Drome leaderboards.
  *
  * @property rotationId The internal ID of the rotation.
- * @property current Whether this is the current rotation or not.
+ * @property isCurrent Whether this is the current rotation or not.
  * @property endDate The date when the rotation ends.
  */
 @Serializable
 public data class LeaderboardRotation(
     val rotationId: Int,
-    val current: Boolean,
+    val isCurrent: Boolean,
     val endDate: Instant,
-)
+) {
+    @Deprecated("Renamed to isCurrent", replaceWith = ReplaceWith("isCurrent"))
+    public val current: Boolean get() = isCurrent
+}
 
 
 @Deprecated("Renamed to LeaderboardRotation", replaceWith = ReplaceWith("LeaderboardRotation"))

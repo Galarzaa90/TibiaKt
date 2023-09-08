@@ -12,6 +12,11 @@
 - Renamed `Killer` to `DeathParticipant`.
 - Renamed `DeathParticipant.traded` to `isTraded`.
 - Remove `WorldOverview.tournamentWorlds`.
+- Renamed `GuildMember.joiningDate` to `joinedOn`
+- Renamed `GuildInvite.inviteDate` to `invitedOn`
+- Renamed `Highscores.lastUpdate` to `lastUpdated`
+- Renamed `House.Rented.movingDate` to `transferDate`
+- Renamed `LeaderboardRotation.current` to `isCurrent`
 
 ## v0.5.0 (2022-03-15)
 

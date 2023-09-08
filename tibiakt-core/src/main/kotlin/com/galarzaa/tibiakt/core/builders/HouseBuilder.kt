@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2023 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -62,7 +62,7 @@ public class HouseBuilder : TibiaKtBuilder<House> {
             world = world ?: error("world is required"),
             paidUntil = paidUntil ?: error("paidUntil is required"),
             owner = owner ?: error("Owner is required"),
-            movingDate = movingDate,
+            transferDate = movingDate,
             transferPrice = transferPrice,
             transferAccepted = isTransferAccepted,
             transferRecipient = transferRecipient

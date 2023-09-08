@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2023 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,7 +41,7 @@ public class HighscoresBuilder : TibiaKtBuilder<Highscores> {
     public var vocation: HighscoresProfession? = null
     public val worldTypes: MutableSet<PvpType> = mutableSetOf()
     public var battlEyeType: HighscoresBattlEyeType? = null
-    public var lastUpdate: Instant? = null
+    public var lastUpdated: Instant? = null
     public var currentPage: Int = 1
     public var totalPages: Int = 1
     public var resultsCount: Int = 0
@@ -69,7 +69,7 @@ public class HighscoresBuilder : TibiaKtBuilder<Highscores> {
         vocation = vocation ?: HighscoresProfession.ALL,
         worldTypes = worldTypes,
         battlEyeType = battlEyeType ?: HighscoresBattlEyeType.ANY_WORLD,
-        lastUpdate = lastUpdate ?: error("lastUpdate is required"),
+        lastUpdated = lastUpdated ?: error("lastUpdated is required"),
         currentPage = currentPage,
         totalPages = totalPages,
         resultsCount = resultsCount,

@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2023 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ class HouseParserTests : FunSpec({
             status shouldBe HouseStatus.RENTED
             rent shouldNotBe null
             paidUntil shouldNotBe null
-            movingDate shouldBe null
+            transferDate shouldBe null
             transferPrice shouldBe null
             transferAccepted shouldBe null
             transferRecipient shouldBe null
@@ -47,7 +47,7 @@ class HouseParserTests : FunSpec({
             status shouldBe HouseStatus.RENTED
             rent shouldNotBe null
             paidUntil shouldNotBe null
-            movingDate shouldNotBe null
+            transferDate shouldNotBe null
             transferPrice shouldNotBe null
             transferAccepted shouldBe true
             transferRecipient shouldNotBe null

@@ -50,7 +50,7 @@ public sealed class House : BaseHouse {
      *
      * @property paidUntil The date when the last paid rent is due.
      * @property owner The character that currently owns the house.
-     * @property movingDate The date when the current owner will move out of the house.
+     * @property transferDate The date when the current owner will move out of the house.
      * @property transferPrice The amount of gold coins to be paid for transferring the house.
      * @property transferAccepted Whether the transfer has been accepted by the recipient or not.
      * @property transferRecipient The character that will receive the house.
@@ -67,7 +67,7 @@ public sealed class House : BaseHouse {
         override val world: String,
         val paidUntil: Instant,
         val owner: String,
-        val movingDate: Instant?,
+        val transferDate: Instant?,
         val transferPrice: Int?,
         val transferAccepted: Boolean?,
         val transferRecipient: String?,
@@ -81,6 +81,9 @@ public sealed class House : BaseHouse {
 
         /** URL to the transfer recipient's information page, if any. */
         val transferRecipientUrl: String? get() = transferRecipient?.let { getCharacterUrl(it) }
+
+        @Deprecated("Renamed to transferDate", ReplaceWith("transferDate"))
+        val movingDate: Instant? get() = transferDate
     }
 
     /**

@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2023 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,10 +27,14 @@ import java.time.LocalDate
 /**
  * A character invited to a [Guild].
  *
- * @property inviteDate The date when the character was invited.
+ * @property invitedOn The date when the character was invited.
  */
 @Serializable
 public data class GuildInvite(
     override val name: String,
-    val inviteDate: LocalDate,
-) : BaseCharacter
+    val invitedOn: LocalDate,
+) : BaseCharacter {
+
+    @Deprecated("Renamed to invitedOn", ReplaceWith("invitedOn"))
+    val inviteDate: LocalDate get() = invitedOn
+}

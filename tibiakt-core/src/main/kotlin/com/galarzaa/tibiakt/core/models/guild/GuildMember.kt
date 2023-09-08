@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2023 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ import java.time.LocalDate
  * @property title The title of the character in the guild.
  * @property level The current level of the character.
  * @property vocation The vocation of the character.
- * @property joiningDate The date when the character joined the guild.
+ * @property joinedOn The date when the character joined the guild.
  * @property isOnline Whether the character is currently online or not.
  */
 @Serializable
@@ -43,6 +43,10 @@ public data class GuildMember(
     val title: String?,
     override val level: Int,
     val vocation: Vocation,
-    val joiningDate: LocalDate,
+    val joinedOn: LocalDate,
     val isOnline: Boolean,
-) : BaseCharacter, CharacterLevel
+) : BaseCharacter, CharacterLevel {
+
+    @Deprecated("Renamed to joined on", ReplaceWith("joinedOn"))
+    val joiningDate: LocalDate get() = joinedOn
+}

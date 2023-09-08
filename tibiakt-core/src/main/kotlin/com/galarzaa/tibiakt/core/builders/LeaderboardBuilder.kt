@@ -70,7 +70,7 @@ public class LeaderboardBuilder : TibiaKtBuilder<Leaderboard> {
         public var endDate: Instant? = null
         override fun build(): LeaderboardRotation = LeaderboardRotation(
             rotationId = rotationId ?: error("rotationId is required"),
-            current = isCurrent,
+            isCurrent = isCurrent,
             endDate = endDate ?: error("endDate is required"),
         )
 
