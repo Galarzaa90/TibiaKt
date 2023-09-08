@@ -173,7 +173,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;import com.galarzaa.tibiakt.core.enums.StringEnum
 &nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
 &nbsp;import com.galarzaa.tibiakt.core.models.character.Character
-&nbsp;import com.galarzaa.tibiakt.core.models.character.Killer
+&nbsp;import com.galarzaa.tibiakt.core.models.character.DeathParticipant
 &nbsp;import com.galarzaa.tibiakt.core.utils.clean
 &nbsp;import com.galarzaa.tibiakt.core.utils.getLinkInformation
 &nbsp;import com.galarzaa.tibiakt.core.utils.parsePopup
@@ -349,7 +349,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;        }
 &nbsp;    }
 &nbsp;
-&nbsp;    private fun parseKiller(killerHtml: String): Killer? {
+&nbsp;    private fun parseKiller(killerHtml: String): DeathParticipant? {
 <b class="fc">&nbsp;        var name: String = killerHtml</b>
 <b class="fc">&nbsp;        var isPlayer = false</b>
 <b class="fc">&nbsp;        var isTraded = false</b>
@@ -368,7 +368,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="nc">&nbsp;            name = groups[&quot;name&quot;]!!.value.clean()</b>
 <b class="nc">&nbsp;        }</b>
 &nbsp;
-<b class="fc">&nbsp;        return Killer(name.clean(), isPlayer, summon, isTraded)</b>
+<b class="fc">&nbsp;        return DeathParticipant(name.clean(), isPlayer, summon, isTraded)</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    private fun CharacterBuilder.parseCharacters(rows: Elements) {
@@ -414,7 +414,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-09-08 03:14</div>
+    <div style="float:right;">generated on 2023-09-08 13:17</div>
 </div>
 </body>
 </html>

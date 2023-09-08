@@ -182,9 +182,9 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;import com.galarzaa.tibiakt.core.models.character.Character
 &nbsp;import com.galarzaa.tibiakt.core.models.character.CharacterHouse
 &nbsp;import com.galarzaa.tibiakt.core.models.character.Death
+&nbsp;import com.galarzaa.tibiakt.core.models.character.DeathParticipant
 &nbsp;import com.galarzaa.tibiakt.core.models.character.DisplayedAchievement
 &nbsp;import com.galarzaa.tibiakt.core.models.character.GuildMembership
-&nbsp;import com.galarzaa.tibiakt.core.models.character.Killer
 &nbsp;import com.galarzaa.tibiakt.core.models.character.OtherCharacter
 &nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
 &nbsp;import kotlinx.datetime.Instant
@@ -262,8 +262,8 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;    public fun addDeath(
 &nbsp;        timestamp: Instant,
 &nbsp;        level: Int,
-&nbsp;        killers: List&lt;Killer&gt;,
-&nbsp;        assists: List&lt;Killer&gt;,
+&nbsp;        killers: List&lt;DeathParticipant&gt;,
+&nbsp;        assists: List&lt;DeathParticipant&gt;,
 <b class="fc">&nbsp;    ): CharacterBuilder = apply {</b>
 <b class="fc">&nbsp;        deaths.add(Death(timestamp, level, killers, assists))</b>
 <b class="fc">&nbsp;    }</b>
@@ -345,7 +345,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-09-08 03:14</div>
+    <div style="float:right;">generated on 2023-09-08 13:17</div>
 </div>
 </body>
 </html>
