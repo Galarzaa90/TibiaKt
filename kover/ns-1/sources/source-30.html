@@ -93,7 +93,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;/*
-&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; * Copyright © 2023 Allan Galarza
 &nbsp; *
 &nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 &nbsp; * you may not use this file except in compliance with the License.
@@ -134,8 +134,6 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;    public var overallMaximumCount: Int? = null
 &nbsp;    public var overallMaximumCountDateTime: Instant? = null
 &nbsp;    public val worlds: MutableList&lt;WorldEntry&gt; = mutableListOf()
-&nbsp;    public val tournamentWorlds: MutableList&lt;WorldEntry&gt; = mutableListOf()
-&nbsp;
 &nbsp;
 &nbsp;    public fun addWorld(world: WorldEntry): Boolean = worlds.add(world)
 &nbsp;
@@ -150,7 +148,6 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;            overallMaximumCountDateTime = overallMaximumCountDateTime
 &nbsp;                ?: error(&quot;overallMaximumCountDateTime is required&quot;),
 &nbsp;            worlds = worlds,
-&nbsp;            tournamentWorlds = tournamentWorlds
 &nbsp;        )
 &nbsp;    }
 &nbsp;
@@ -209,7 +206,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-09-08 13:17</div>
+    <div style="float:right;">generated on 2023-09-08 13:21</div>
 </div>
 </body>
 </html>

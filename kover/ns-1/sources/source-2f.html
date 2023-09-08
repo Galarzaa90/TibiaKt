@@ -65,18 +65,18 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </td>
 <td class="coverageStat">
   <span class="percent">
-    78.6%
+    75%
   </span>
   <span class="absValue">
-    (11/14)
+    (9/12)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    76.3%
+    72.7%
   </span>
   <span class="absValue">
-    (58/76)
+    (48/66)
   </span>
 </td>
 </tr>
@@ -135,18 +135,18 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </td>
 <td class="coverageStat">
   <span class="percent">
-    89.2%
+    88.6%
   </span>
   <span class="absValue">
-    (33/37)
+    (31/35)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    76.7%
+    75.4%
   </span>
   <span class="absValue">
-    (145/189)
+    (135/179)
   </span>
 </td>
 </tr>
@@ -158,7 +158,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;/*
-&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; * Copyright © 2023 Allan Galarza
 &nbsp; *
 &nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 &nbsp; * you may not use this file except in compliance with the License.
@@ -199,8 +199,6 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;    public var overallMaximumCount: Int? = null</b>
 <b class="fc">&nbsp;    public var overallMaximumCountDateTime: Instant? = null</b>
 <b class="fc">&nbsp;    public val worlds: MutableList&lt;WorldEntry&gt; = mutableListOf()</b>
-<b class="fc">&nbsp;    public val tournamentWorlds: MutableList&lt;WorldEntry&gt; = mutableListOf()</b>
-&nbsp;
 &nbsp;
 <b class="nc">&nbsp;    public fun addWorld(world: WorldEntry): Boolean = worlds.add(world)</b>
 &nbsp;
@@ -215,7 +213,6 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="pc">&nbsp;            overallMaximumCountDateTime = overallMaximumCountDateTime</b>
 <b class="nc">&nbsp;                ?: error(&quot;overallMaximumCountDateTime is required&quot;),</b>
 <b class="fc">&nbsp;            worlds = worlds,</b>
-<b class="fc">&nbsp;            tournamentWorlds = tournamentWorlds</b>
 &nbsp;        )
 &nbsp;    }
 &nbsp;
@@ -274,7 +271,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-09-08 13:17</div>
+    <div style="float:right;">generated on 2023-09-08 13:21</div>
 </div>
 </body>
 </html>
