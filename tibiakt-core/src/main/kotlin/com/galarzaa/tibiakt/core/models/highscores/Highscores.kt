@@ -51,9 +51,11 @@ public data class Highscores(
 ) : PaginatedWithUrl<HighscoresEntry> {
 
     val url: String get() = getHighscoresUrl(world, category, vocation, currentPage, battlEyeType, worldTypes)
-    override fun getPageUrl(page: Int): String =
-        getHighscoresUrl(world, category, vocation, page, battlEyeType, worldTypes)
 
     @Deprecated("Renamed to lastUpdated", ReplaceWith("lastUpdated"))
     val lastUpdate: Instant get() = lastUpdated
+
+    override fun getPageUrl(page: Int): String =
+        getHighscoresUrl(world, category, vocation, page, battlEyeType, worldTypes)
+
 }

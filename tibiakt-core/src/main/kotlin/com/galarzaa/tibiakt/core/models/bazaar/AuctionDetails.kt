@@ -98,6 +98,7 @@ public data class AuctionDetails(
     val exaltedDust: Int,
     val exaltedDustLimit: Int,
     val bossPoints: Int,
+    val bonusPromotionPoints: Int,
     val items: ItemSummary,
     val storeItems: ItemSummary,
     val mounts: Mounts,

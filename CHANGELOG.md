@@ -2,6 +2,7 @@
 
 ## 0.6.0 (Unreleased)
 
+- Added support for bonus promotion points for auctions.
 - Renamed `Leaderboards` to `Leaderboard`
 - Renamed `LeaderboardsEntry` to `LeaderboardEntry`
 - Renamed `LeaderboardsRotation` to `LeaderboardRotation`

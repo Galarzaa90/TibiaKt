@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2023 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -308,6 +308,12 @@ public object AuctionParser : Parser<Auction?> {
             val (field, value) = getAuctionTableFieldValue(row)
             when (field) {
                 "Boss Points" -> bossPoints = value.parseInteger()
+            }
+        }
+        for (row in contentContainers.getOrNull(10)?.rows().orEmpty()) {
+            val (field, value) = getAuctionTableFieldValue(row)
+            when (field) {
+                "Bonus Promotion Points" -> bonusPromotionPoints = value.parseInteger()
             }
         }
     }

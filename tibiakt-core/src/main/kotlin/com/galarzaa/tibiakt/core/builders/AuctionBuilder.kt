@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2023 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -155,6 +155,7 @@ public class AuctionBuilder : TibiaKtBuilder<Auction> {
         public var exaltedDust: Int? = null
         public var exaltedDustLimit: Int? = null
         public var bossPoints: Int? = null
+        public var bonusPromotionPoints: Int? = null
         public var items: ItemSummary? = null
         public var storeItems: ItemSummary? = null
         public var mounts: Mounts? = null
@@ -228,6 +229,7 @@ public class AuctionBuilder : TibiaKtBuilder<Auction> {
                 exaltedDust = exaltedDust ?: error("exaltedDust is required"),
                 exaltedDustLimit = exaltedDustLimit ?: error("exaltedDustLimit is required"),
                 bossPoints = bossPoints ?: error("bossPoints is required"),
+                bonusPromotionPoints = bonusPromotionPoints ?: error("bonusPromotionPoints is required"),
                 items = items ?: error("items is required"),
                 storeItems = storeItems ?: error("storeItems is required"),
                 mounts = mounts ?: error("mounts is required"),
