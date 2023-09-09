@@ -238,11 +238,13 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;) : PaginatedWithUrl&lt;HighscoresEntry&gt; {
 &nbsp;
 <b class="nc">&nbsp;    val url: String get() = getHighscoresUrl(world, category, vocation, currentPage, battlEyeType, worldTypes)</b>
-&nbsp;    override fun getPageUrl(page: Int): String =
-<b class="nc">&nbsp;        getHighscoresUrl(world, category, vocation, page, battlEyeType, worldTypes)</b>
 &nbsp;
 &nbsp;    @Deprecated(&quot;Renamed to lastUpdated&quot;, ReplaceWith(&quot;lastUpdated&quot;))
 <b class="nc">&nbsp;    val lastUpdate: Instant get() = lastUpdated</b>
+&nbsp;
+&nbsp;    override fun getPageUrl(page: Int): String =
+<b class="nc">&nbsp;        getHighscoresUrl(world, category, vocation, page, battlEyeType, worldTypes)</b>
+&nbsp;
 &nbsp;}
 </code>
 </pre>
@@ -267,7 +269,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-09-08 15:07</div>
+    <div style="float:right;">generated on 2023-09-09 05:24</div>
 </div>
 </body>
 </html>

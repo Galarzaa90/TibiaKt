@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>tibiakt-core Coverage Report > LeaderboardKt</title>
+  <title>tibiakt-core Coverage Report > LeaderboardRotationKt</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     <a href="../index.html">com.galarzaa.tibiakt.core.models.leaderboards</a>
 </div>
 
-<h1>Coverage Summary for Class: LeaderboardKt (com.galarzaa.tibiakt.core.models.leaderboards)</h1>
+<h1>Coverage Summary for Class: LeaderboardRotationKt (com.galarzaa.tibiakt.core.models.leaderboards)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -33,7 +33,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </th>
 </tr>
 <tr>
-  <td class="name">LeaderboardKt</td>
+  <td class="name">LeaderboardRotationKt</td>
     <td class="coverageStat"/>
 </tr>
 
@@ -60,44 +60,31 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp; * limitations under the License.
 &nbsp; */
 &nbsp;
-&nbsp;
 &nbsp;package com.galarzaa.tibiakt.core.models.leaderboards
 &nbsp;
-&nbsp;import com.galarzaa.tibiakt.core.models.PaginatedWithUrl
-&nbsp;import com.galarzaa.tibiakt.core.utils.getLeaderboardUrl
 &nbsp;import kotlinx.datetime.Instant
 &nbsp;import kotlinx.serialization.Serializable
 &nbsp;
 &nbsp;/**
-&nbsp; * The Tibia Drome leaderboards of a world.
+&nbsp; * A rotation of the Tibia Drome leaderboards.
 &nbsp; *
-&nbsp; * @property world The name of the world.
-&nbsp; * @property rotation The rotation of these leaderboards.
-&nbsp; * @property availableRotations The rotations that are available to view.
-&nbsp; * @property lastUpdated The time when the leaderboard was last updated. Only available for the current rotation.
+&nbsp; * @property rotationId The internal ID of the rotation.
+&nbsp; * @property isCurrent Whether this is the current rotation or not.
+&nbsp; * @property endDate The date when the rotation ends.
 &nbsp; */
 &nbsp;@Serializable
-&nbsp;public data class Leaderboard(
-&nbsp;    val world: String,
-&nbsp;    val rotation: LeaderboardRotation,
-&nbsp;    val availableRotations: List&lt;LeaderboardRotation&gt;,
-&nbsp;    val lastUpdated: Instant?,
-&nbsp;    override val currentPage: Int,
-&nbsp;    override val totalPages: Int,
-&nbsp;    override val resultsCount: Int,
-&nbsp;    override val entries: List&lt;BaseLeaderboardEntry&gt;,
-&nbsp;) : PaginatedWithUrl&lt;BaseLeaderboardEntry&gt; {
-&nbsp;
-&nbsp;    /**
-&nbsp;     * The URL to these leaderboards.
-&nbsp;     */
-&nbsp;    val url: String get() = getLeaderboardUrl(world, rotation.rotationId, currentPage)
-&nbsp;
-&nbsp;    override fun getPageUrl(page: Int): String = getLeaderboardUrl(world, rotation.rotationId, page)
+&nbsp;public data class LeaderboardRotation(
+&nbsp;    val rotationId: Int,
+&nbsp;    val isCurrent: Boolean,
+&nbsp;    val endDate: Instant,
+&nbsp;) {
+&nbsp;    @Deprecated(&quot;Renamed to isCurrent&quot;, replaceWith = ReplaceWith(&quot;isCurrent&quot;))
+&nbsp;    public val current: Boolean get() = isCurrent
 &nbsp;}
 &nbsp;
-&nbsp;@Deprecated(&quot;Renamed to Leaderboard&quot;, replaceWith = ReplaceWith(&quot;Leaderboard&quot;))
-&nbsp;public typealias Leaderboards = Leaderboard
+&nbsp;
+&nbsp;@Deprecated(&quot;Renamed to LeaderboardRotation&quot;, replaceWith = ReplaceWith(&quot;LeaderboardRotation&quot;))
+&nbsp;public typealias LeaderboardsRotation = LeaderboardRotation
 </code>
 </pre>
 </div>
@@ -121,7 +108,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-09-08 15:07</div>
+    <div style="float:right;">generated on 2023-09-09 05:24</div>
 </div>
 </body>
 </html>

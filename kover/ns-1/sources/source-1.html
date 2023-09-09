@@ -87,7 +87,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     100%
   </span>
   <span class="absValue">
-    (46/46)
+    (47/47)
   </span>
 </td>
 <td class="coverageStat">
@@ -95,7 +95,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     50%
   </span>
   <span class="absValue">
-    (34/68)
+    (35/70)
   </span>
 </td>
 <td class="coverageStat">
@@ -103,15 +103,15 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     97.1%
   </span>
   <span class="absValue">
-    (99/102)
+    (101/104)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    73.3%
+    73.1%
   </span>
   <span class="absValue">
-    (654/892)
+    (667/912)
   </span>
 </td>
   </tr>
@@ -189,34 +189,34 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    88.2%
+    88.3%
   </span>
   <span class="absValue">
-    (67/76)
+    (68/77)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    47%
+    47.1%
   </span>
   <span class="absValue">
-    (47/100)
+    (48/102)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    88.5%
+    88.7%
   </span>
   <span class="absValue">
-    (139/157)
+    (141/159)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    68.1%
+    68%
   </span>
   <span class="absValue">
-    (944/1387)
+    (957/1407)
   </span>
 </td>
 </tr>
@@ -228,7 +228,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;/*
-&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; * Copyright © 2023 Allan Galarza
 &nbsp; *
 &nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 &nbsp; * you may not use this file except in compliance with the License.
@@ -384,6 +384,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;        public var exaltedDust: Int? = null</b>
 <b class="fc">&nbsp;        public var exaltedDustLimit: Int? = null</b>
 <b class="fc">&nbsp;        public var bossPoints: Int? = null</b>
+<b class="fc">&nbsp;        public var bonusPromotionPoints: Int? = null</b>
 <b class="fc">&nbsp;        public var items: ItemSummary? = null</b>
 <b class="fc">&nbsp;        public var storeItems: ItemSummary? = null</b>
 <b class="fc">&nbsp;        public var mounts: Mounts? = null</b>
@@ -457,6 +458,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="pc">&nbsp;                exaltedDust = exaltedDust ?: error(&quot;exaltedDust is required&quot;),</b>
 <b class="pc">&nbsp;                exaltedDustLimit = exaltedDustLimit ?: error(&quot;exaltedDustLimit is required&quot;),</b>
 <b class="pc">&nbsp;                bossPoints = bossPoints ?: error(&quot;bossPoints is required&quot;),</b>
+<b class="pc">&nbsp;                bonusPromotionPoints = bonusPromotionPoints ?: error(&quot;bonusPromotionPoints is required&quot;),</b>
 <b class="pc">&nbsp;                items = items ?: error(&quot;items is required&quot;),</b>
 <b class="pc">&nbsp;                storeItems = storeItems ?: error(&quot;storeItems is required&quot;),</b>
 <b class="pc">&nbsp;                mounts = mounts ?: error(&quot;mounts is required&quot;),</b>
@@ -499,7 +501,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-09-08 15:07</div>
+    <div style="float:right;">generated on 2023-09-09 05:24</div>
 </div>
 </body>
 </html>
