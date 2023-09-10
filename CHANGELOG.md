@@ -2,6 +2,7 @@
 
 ## 0.6.0 (2023-09-10)
 
+- Fix character badges not being parsed correctly
 - Added support for bonus promotion points for auctions.
 - Renamed `Leaderboards` to `Leaderboard`
 - Renamed `LeaderboardsEntry` to `LeaderboardEntry`
