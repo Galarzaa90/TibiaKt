@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.6.0 (Unreleased)
+## 0.6.0 (2023-09-10)
 
 - Added support for bonus promotion points for auctions.
 - Renamed `Leaderboards` to `Leaderboard`
