@@ -31,7 +31,7 @@ dependencyResolutionManagement {
             plugin("sonarqube", "org.sonarqube").version("4.4.1.3373")
             plugin("kover", "org.jetbrains.kotlinx.kover").version("0.7.5")
 
-            version("jsoup", "1.14.3")
+            version("jsoup", "1.17.2")
             version("kotest", "5.8.0")
             version("kotlin", "1.9.22")
             version("kotlinLogging", "3.0.5")
