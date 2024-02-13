@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>tibiakt-core Coverage Report > LeaderboardKt</title>
+  <title>tibiakt-core Coverage Report > LeaderboardEntryKt</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     <a href="../index.html">com.galarzaa.tibiakt.core.models.leaderboards</a>
 </div>
 
-<h1>Coverage Summary for Class: LeaderboardKt (com.galarzaa.tibiakt.core.models.leaderboards)</h1>
+<h1>Coverage Summary for Class: LeaderboardEntryKt (com.galarzaa.tibiakt.core.models.leaderboards)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -33,7 +33,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </th>
 </tr>
 <tr>
-  <td class="name">LeaderboardKt</td>
+  <td class="name">LeaderboardEntryKt</td>
     <td class="coverageStat"/>
 </tr>
 
@@ -60,44 +60,54 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp; * limitations under the License.
 &nbsp; */
 &nbsp;
-&nbsp;
 &nbsp;package com.galarzaa.tibiakt.core.models.leaderboards
 &nbsp;
-&nbsp;import com.galarzaa.tibiakt.core.models.PaginatedWithUrl
-&nbsp;import com.galarzaa.tibiakt.core.utils.getLeaderboardUrl
-&nbsp;import kotlinx.datetime.Instant
+&nbsp;import com.galarzaa.tibiakt.core.models.character.BaseCharacter
+&nbsp;import kotlinx.serialization.SerialName
 &nbsp;import kotlinx.serialization.Serializable
 &nbsp;
 &nbsp;/**
-&nbsp; * The Tibia Drome leaderboards of a world.
+&nbsp; * Base class for Leaderboards entries.
 &nbsp; *
-&nbsp; * @property world The name of the world.
-&nbsp; * @property rotation The rotation of these leaderboards.
-&nbsp; * @property availableRotations The rotations that are available to view.
-&nbsp; * @property lastUpdated The time when the leaderboard was last updated. Only available for the current rotation.
+&nbsp; * @property rank The rank of the character.
+&nbsp; * @property dromeLevel The drome level of the character.
 &nbsp; */
 &nbsp;@Serializable
-&nbsp;public data class Leaderboard(
-&nbsp;    val world: String,
-&nbsp;    val rotation: LeaderboardRotation,
-&nbsp;    val availableRotations: List&lt;LeaderboardRotation&gt;,
-&nbsp;    val lastUpdated: Instant?,
-&nbsp;    override val currentPage: Int,
-&nbsp;    override val totalPages: Int,
-&nbsp;    override val resultsCount: Int,
-&nbsp;    override val entries: List&lt;BaseLeaderboardEntry&gt;,
-&nbsp;) : PaginatedWithUrl&lt;BaseLeaderboardEntry&gt; {
-&nbsp;
-&nbsp;    /**
-&nbsp;     * The URL to these leaderboards.
-&nbsp;     */
-&nbsp;    val url: String get() = getLeaderboardUrl(world, rotation.rotationId, currentPage)
-&nbsp;
-&nbsp;    override fun getPageUrl(page: Int): String = getLeaderboardUrl(world, rotation.rotationId, page)
+&nbsp;public sealed class BaseLeaderboardEntry {
+&nbsp;    public abstract val rank: Int
+&nbsp;    public abstract val dromeLevel: Int
 &nbsp;}
 &nbsp;
-&nbsp;@Deprecated(&quot;Renamed to Leaderboard&quot;, replaceWith = ReplaceWith(&quot;Leaderboard&quot;))
-&nbsp;public typealias Leaderboards = Leaderboard
+&nbsp;@Deprecated(&quot;Renamed to BaseLeaderboardEntry&quot;, replaceWith = ReplaceWith(&quot;BaseLeaderboardEntry&quot;))
+&nbsp;public typealias BaseLeaderboardsEntry = BaseLeaderboardEntry
+&nbsp;
+&nbsp;
+&nbsp;/**
+&nbsp; * An entry in the [LeaderboardEntry].
+&nbsp; */
+&nbsp;@Serializable
+&nbsp;@SerialName(&quot;leaderboardsEntry&quot;)
+&nbsp;public data class LeaderboardEntry(
+&nbsp;    override val rank: Int,
+&nbsp;    override val name: String,
+&nbsp;    override val dromeLevel: Int,
+&nbsp;) : BaseLeaderboardEntry(), BaseCharacter
+&nbsp;
+&nbsp;/** A leaderboard entry belonging to a deleted character. */
+&nbsp;@Serializable
+&nbsp;@SerialName(&quot;deletedLeaderboardsEntry&quot;)
+&nbsp;public data class DeletedLeaderboardEntry(
+&nbsp;    override val rank: Int,
+&nbsp;    override val dromeLevel: Int,
+&nbsp;) : BaseLeaderboardEntry()
+&nbsp;
+&nbsp;
+&nbsp;@Deprecated(&quot;Renamed to LeaderboardEntry&quot;, replaceWith = ReplaceWith(&quot;LeaderboardEntry&quot;))
+&nbsp;public typealias LeaderboardsEntry = LeaderboardEntry
+&nbsp;
+&nbsp;@Deprecated(&quot;Renamed to DeletedLeaderboardEntry&quot;, replaceWith = ReplaceWith(&quot;DeletedLeaderboardEntry&quot;))
+&nbsp;public typealias DeletedLeaderboardsEntry = DeletedLeaderboardEntry
+&nbsp;
 </code>
 </pre>
 </div>
@@ -121,7 +131,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-09-10 19:51</div>
+    <div style="float:right;">generated on 2024-02-13 03:16</div>
 </div>
 </body>
 </html>
