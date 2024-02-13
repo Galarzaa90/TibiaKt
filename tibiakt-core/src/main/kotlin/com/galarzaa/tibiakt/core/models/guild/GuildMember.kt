@@ -1,5 +1,5 @@
 /*
- * Copyright © 2023 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,8 +45,4 @@ public data class GuildMember(
     val vocation: Vocation,
     val joinedOn: LocalDate,
     val isOnline: Boolean,
-) : BaseCharacter, CharacterLevel {
-
-    @Deprecated("Renamed to joined on", ReplaceWith("joinedOn"))
-    val joiningDate: LocalDate get() = joinedOn
-}
+) : BaseCharacter, CharacterLevel

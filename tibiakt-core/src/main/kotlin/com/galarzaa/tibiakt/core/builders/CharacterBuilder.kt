@@ -1,5 +1,5 @@
 /*
- * Copyright © 2023 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -112,13 +112,25 @@ public class CharacterBuilder : TibiaKtBuilder<Character> {
     public fun addOtherCharacter(
         name: String,
         world: String,
-        main: Boolean = false,
-        online: Boolean = false,
-        deleted: Boolean = false,
-        traded: Boolean = false,
+        isMain: Boolean = false,
+        isOnline: Boolean = false,
+        isDeleted: Boolean = false,
+        isRecentlyTraded: Boolean = false,
         position: String?,
     ): CharacterBuilder =
-        apply { otherCharacters.add(OtherCharacter(name, world, main, online, deleted, traded, position)) }
+        apply {
+            otherCharacters.add(
+                OtherCharacter(
+                    name,
+                    world,
+                    isMain,
+                    isOnline,
+                    isDeleted,
+                    isRecentlyTraded,
+                    position
+                )
+            )
+        }
 
     override fun build(): Character = Character(
         name = if (::name.isInitialized) name else error("name is required"),

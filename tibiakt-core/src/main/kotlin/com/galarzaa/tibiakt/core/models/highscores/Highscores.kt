@@ -1,5 +1,5 @@
 /*
- * Copyright © 2023 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,9 +51,6 @@ public data class Highscores(
 ) : PaginatedWithUrl<HighscoresEntry> {
 
     val url: String get() = getHighscoresUrl(world, category, vocation, currentPage, battlEyeType, worldTypes)
-
-    @Deprecated("Renamed to lastUpdated", ReplaceWith("lastUpdated"))
-    val lastUpdate: Instant get() = lastUpdated
 
     override fun getPageUrl(page: Int): String =
         getHighscoresUrl(world, category, vocation, page, battlEyeType, worldTypes)

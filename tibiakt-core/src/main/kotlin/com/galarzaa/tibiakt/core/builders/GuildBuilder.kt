@@ -1,5 +1,5 @@
 /*
- * Copyright © 2023 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -76,7 +76,7 @@ public class GuildBuilder : TibiaKtBuilder<Guild> {
         name = name ?: error("name is required"),
         logoUrl = logoUrl ?: error("logoUrl is required"),
         description = description,
-        foundingDate = foundingDate ?: error("name is required"),
+        foundingDate = foundingDate ?: error("foundingDate is required"),
         isActive = isActive,
         applicationsOpen = hasOpenApplications,
         homepage = homepage,

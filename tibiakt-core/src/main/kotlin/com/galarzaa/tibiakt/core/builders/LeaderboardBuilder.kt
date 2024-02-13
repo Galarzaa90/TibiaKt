@@ -1,5 +1,5 @@
 /*
- * Copyright © 2023 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -77,6 +77,3 @@ public class LeaderboardBuilder : TibiaKtBuilder<Leaderboard> {
     }
 
 }
-
-@Deprecated("Renamed to LeaderboardBuilder", ReplaceWith("LeaderboardBuilder"))
-public typealias LeaderboardsBuilder = LeaderboardBuilder

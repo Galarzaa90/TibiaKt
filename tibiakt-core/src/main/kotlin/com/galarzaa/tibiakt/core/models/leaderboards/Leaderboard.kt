@@ -1,5 +1,5 @@
 /*
- * Copyright © 2023 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,6 +49,3 @@ public data class Leaderboard(
 
     override fun getPageUrl(page: Int): String = getLeaderboardUrl(world, rotation.rotationId, page)
 }
-
-@Deprecated("Renamed to Leaderboard", replaceWith = ReplaceWith("Leaderboard"))
-public typealias Leaderboards = Leaderboard

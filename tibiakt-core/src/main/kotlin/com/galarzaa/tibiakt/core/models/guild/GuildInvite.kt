@@ -1,5 +1,5 @@
 /*
- * Copyright © 2023 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,8 +33,4 @@ import java.time.LocalDate
 public data class GuildInvite(
     override val name: String,
     val invitedOn: LocalDate,
-) : BaseCharacter {
-
-    @Deprecated("Renamed to invitedOn", ReplaceWith("invitedOn"))
-    val inviteDate: LocalDate get() = invitedOn
-}
+) : BaseCharacter

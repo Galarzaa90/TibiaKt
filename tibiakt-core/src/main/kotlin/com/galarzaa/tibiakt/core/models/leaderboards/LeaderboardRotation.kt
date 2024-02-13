@@ -1,5 +1,5 @@
 /*
- * Copyright © 2023 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,11 +31,4 @@ public data class LeaderboardRotation(
     val rotationId: Int,
     val isCurrent: Boolean,
     val endDate: Instant,
-) {
-    @Deprecated("Renamed to isCurrent", replaceWith = ReplaceWith("isCurrent"))
-    public val current: Boolean get() = isCurrent
-}
-
-
-@Deprecated("Renamed to LeaderboardRotation", replaceWith = ReplaceWith("LeaderboardRotation"))
-public typealias LeaderboardsRotation = LeaderboardRotation
+)

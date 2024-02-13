@@ -1,5 +1,5 @@
 /*
- * Copyright © 2023 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -66,7 +66,7 @@ internal fun Application.configureRouting(client: TibiaKtClient) {
             call.respondOrNotFound(client.fetchHighscoresPage(world, it.category, it.profession, it.page))
         }
 
-        get<HighscoresComplete> { it ->
+        get<HighscoresComplete> {
             val world = if (it.world.lowercase() == "all") null else it.world
             call.respondOrNotFound(client.fetchHigscores(world, it.category, it.profession))
         }
@@ -89,14 +89,18 @@ internal fun Application.configureRouting(client: TibiaKtClient) {
             call.respondOrNotFound(client.fetchBazaar(it.type, filters, it.page))
         }
         get<Auctions> { (auctionId, detailsOnly, fetchAll) ->
-            call.respondOrNotFound(client.fetchAuction(auctionId,
-                detailsOnly != 0 && fetchAll == 0,
-                fetchItems = fetchAll != 0,
-                fetchMounts = fetchAll != 0,
-                fetchOutfits = fetchAll != 0))
+            call.respondOrNotFound(
+                client.fetchAuction(
+                    auctionId,
+                    detailsOnly != 0 && fetchAll == 0,
+                    fetchItems = fetchAll != 0,
+                    fetchMounts = fetchAll != 0,
+                    fetchOutfits = fetchAll != 0
+                )
+            )
         }
 
-        get<CMPosts> { it ->
+        get<CMPosts> {
             if (it.start != null && it.end != null) {
                 call.respond(client.fetchCMPostArchive(it.start, it.end, it.page))
             } else if (it.days != null) {

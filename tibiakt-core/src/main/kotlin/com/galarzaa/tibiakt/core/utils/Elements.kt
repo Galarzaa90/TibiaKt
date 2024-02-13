@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -143,7 +143,7 @@ internal fun Element.parsePagination(): PaginationData {
     val currentPageLink = pagesDiv.selectFirst(".CurrentPageLink")
     val pageLinks = pagesDiv.select(".PageLink")
     val firstOrLastPages = pagesDiv.select(".FirstOrLastElement")
-    val totalPages = if (!firstOrLastPages.isEmpty()) {
+    val totalPages = if (firstOrLastPages.isNotEmpty()) {
         val lastPageLink = firstOrLastPages.last()?.selectFirst("a")
         if (lastPageLink != null) {
             pageRegex.find(lastPageLink.attr("href"))?.let {

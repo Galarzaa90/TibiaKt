@@ -1,5 +1,5 @@
 /*
- * Copyright © 2023 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -447,13 +447,6 @@ public open class TibiaKtClient constructor(
         val response = this.request(HttpMethod.Get, getLeaderboardUrl(world, rotation, page))
         return response.parse { LeaderboardParser.fromContent(it) }
     }
-
-    @Deprecated("Renamed to fetchLeaderboard", ReplaceWith("fetchLeaderboards"))
-    public open suspend fun fetchLeaderboards(
-        world: String,
-        rotation: Int? = null,
-        page: Int = 1,
-    ): TibiaResponse<Leaderboard?> = fetchLeaderboard(world, rotation, page)
 
     // endregion
 

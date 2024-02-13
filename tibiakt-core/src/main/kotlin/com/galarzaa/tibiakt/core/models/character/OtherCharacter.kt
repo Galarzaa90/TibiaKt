@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ import kotlinx.serialization.Serializable
  * @property isMain Whether this is the main character of the account or not.
  * @property isOnline Whether this character is currently online or not.
  * @property isDeleted Whether this character is scheduled for deletion or not.
- * @property recentlyTraded Whether this character was recently traded.
+ * @property isRecentlyTraded Whether this character was recently traded.
  * @property position Any special position the character holds.
  */
 @Serializable
@@ -35,6 +35,6 @@ public data class OtherCharacter(
     val isMain: Boolean,
     val isOnline: Boolean,
     val isDeleted: Boolean,
-    val recentlyTraded: Boolean,
+    val isRecentlyTraded: Boolean,
     val position: String?,
 ) : BaseCharacter

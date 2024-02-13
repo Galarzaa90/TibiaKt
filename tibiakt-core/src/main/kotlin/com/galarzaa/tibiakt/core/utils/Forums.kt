@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,6 +27,9 @@ import com.galarzaa.tibiakt.core.models.forums.TournamentForumAuthor
 import com.galarzaa.tibiakt.core.models.forums.UnavailableForumAuthor
 import org.jsoup.nodes.Element
 
+
+internal const val TRADED_TAG = "(traded)"
+
 internal fun parseLastPostFromCell(cell: Element): LastPost? {
     val postDate = cell.selectFirst("span.LastPostInfo") ?: return null
     val permalink = cell.selectFirst("a")?.getLinkInformation() ?: return null
@@ -34,8 +37,8 @@ internal fun parseLastPostFromCell(cell: Element): LastPost? {
     val authorLink = authorTag.selectFirst("a")?.getLinkInformation()
     var authorName = authorTag.cleanText().removePrefix("by ")
     var isTraded = false
-    if ("(traded)" in authorName) {
-        authorName = authorName.remove("(traded)")
+    if (TRADED_TAG in authorName) {
+        authorName = authorName.remove(TRADED_TAG)
         isTraded = true
     }
     return lastPost {
@@ -58,8 +61,8 @@ internal fun parseAuthorTable(table: Element): BaseForumAuthor {
     val charLink = table.selectFirst("a")?.getLinkInformation()
     if (charLink == null) {
         val name = table.cleanText()
-        val isTraded: Boolean = name.contains("(traded)")
-        return UnavailableForumAuthor(name.remove("(traded)").trim(), !isTraded, isTraded)
+        val isTraded: Boolean = name.contains(TRADED_TAG)
+        return UnavailableForumAuthor(name.remove(TRADED_TAG).trim(), !isTraded, isTraded)
     }
     val charInfo = table.selectFirst("font.ff_infotext")
     val positionInfo = table.selectFirst("font.ff_smallinfo")

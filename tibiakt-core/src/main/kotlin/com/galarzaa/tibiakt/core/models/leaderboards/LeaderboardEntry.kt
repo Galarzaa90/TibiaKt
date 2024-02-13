@@ -1,5 +1,5 @@
 /*
- * Copyright © 2023 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,9 +32,6 @@ public sealed class BaseLeaderboardEntry {
     public abstract val dromeLevel: Int
 }
 
-@Deprecated("Renamed to BaseLeaderboardEntry", replaceWith = ReplaceWith("BaseLeaderboardEntry"))
-public typealias BaseLeaderboardsEntry = BaseLeaderboardEntry
-
 
 /**
  * An entry in the [LeaderboardEntry].
@@ -54,11 +51,3 @@ public data class DeletedLeaderboardEntry(
     override val rank: Int,
     override val dromeLevel: Int,
 ) : BaseLeaderboardEntry()
-
-
-@Deprecated("Renamed to LeaderboardEntry", replaceWith = ReplaceWith("LeaderboardEntry"))
-public typealias LeaderboardsEntry = LeaderboardEntry
-
-@Deprecated("Renamed to DeletedLeaderboardEntry", replaceWith = ReplaceWith("DeletedLeaderboardEntry"))
-public typealias DeletedLeaderboardsEntry = DeletedLeaderboardEntry
-

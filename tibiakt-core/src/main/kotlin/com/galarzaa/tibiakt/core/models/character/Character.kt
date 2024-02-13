@@ -1,5 +1,5 @@
 /*
- * Copyright © 2023 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@
 
 package com.galarzaa.tibiakt.core.models.character
 
-import com.galarzaa.tibiakt.core.enums.AccountStatus
 import com.galarzaa.tibiakt.core.enums.Sex
 import com.galarzaa.tibiakt.core.enums.Vocation
 import com.galarzaa.tibiakt.core.utils.getCharacterUrl
@@ -94,12 +93,4 @@ public data class Character(
      * URL to the character this character is married to, if any.
      */
     val marriedToUrl: String? get() = marriedTo?.let { getCharacterUrl(it) }
-
-    @Deprecated("Replaced with boolean property isPremium", ReplaceWith("isPremium"))
-    val accountStatus: AccountStatus
-        get() =
-            if (isPremium) AccountStatus.PREMIUM_ACCOUNT else AccountStatus.FREE_ACCOUNT
-
-    @Deprecated("Renamed to otherCharacters", ReplaceWith("otherCharacters"))
-    val characters: List<OtherCharacter> get() = otherCharacters
 }
