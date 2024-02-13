@@ -1,5 +1,5 @@
 /*
- * Copyright © 2023 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,14 +22,14 @@ plugins {
     `java-library`
     `maven-publish`
     signing
-    kotlin("jvm") version "1.9.10"
-    kotlin("plugin.serialization") version "1.9.10"
-    id("org.jetbrains.dokka") version "1.8.20"
+    kotlin("jvm") version "1.9.22"
+    kotlin("plugin.serialization") version "1.9.22"
     id("io.github.gradle-nexus.publish-plugin") version "1.3.0"
-    id("org.jetbrains.kotlinx.kover") version "0.7.3"
-    id("org.sonarqube") version "4.3.0.3225"
-    id("com.github.ben-manes.versions") version "0.47.0"
-    id("io.gitlab.arturbosch.detekt") version "1.23.1"
+    alias(libs.plugins.gradle.versions)
+    alias(libs.plugins.detekt)
+    alias(libs.plugins.dokka)
+    alias(libs.plugins.sonarqube)
+    alias(libs.plugins.kover)
 }
 
 group = "com.galarzaa"
@@ -64,8 +64,9 @@ fun String.isStable(): Boolean {
 
 tasks.withType<com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask> {
     rejectVersionIf {
-        // If current version is stable, reject all non-stable candidates
+        // If the current version is stable, reject all non-stable candidates
         currentVersion.isStable() && !candidate.version.isStable()
     }
     gradleReleaseChannel = "current"
+    outputFormatter = "html"
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright © 2023 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,14 +25,20 @@ include("tibiakt-server")
 dependencyResolutionManagement {
     versionCatalogs {
         create("libs") {
+            plugin("gradle-versions", "com.github.ben-manes.versions").version("0.51.0")
+            plugin("detekt", "io.gitlab.arturbosch.detekt").version("1.23.5")
+            plugin("dokka", "org.jetbrains.dokka").version("1.9.10")
+            plugin("sonarqube", "org.sonarqube").version("4.4.1.3373")
+            plugin("kover", "org.jetbrains.kotlinx.kover").version("0.7.5")
+
             version("jsoup", "1.14.3")
-            version("kotest", "5.6.2")
-            version("kotlin", "1.9.0")
+            version("kotest", "5.8.0")
+            version("kotlin", "1.9.22")
             version("kotlinLogging", "3.0.5")
-            version("kotlinxDatetime", "0.4.0")
-            version("kotlinxSerialization", "1.6.0")
-            version("ktor", "2.3.3")
-            version("logback", "1.4.11")
+            version("kotlinxDatetime", "0.5.0")
+            version("kotlinxSerialization", "1.6.2")
+            version("ktor", "2.3.8")
+            version("logback", "1.4.14")
 
             library("kotlinx-datetime", "org.jetbrains.kotlinx", "kotlinx-datetime").versionRef("kotlinxDatetime")
             library("kotlinx-serialization-json", "org.jetbrains.kotlinx", "kotlinx-serialization-json").versionRef("kotlinxSerialization")
