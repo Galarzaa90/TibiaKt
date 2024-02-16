@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -67,12 +67,12 @@ public class NewsArchiveBuilder : TibiaKtBuilder<NewsArchive> {
     )
 
     public class NewsEntryBuilder : TibiaKtBuilder<NewsEntry> {
-        public val id: Int = 0
-        public val title: String? = null
-        public val category: NewsCategory? = null
-        public val categoryIcon: String? = null
-        public val date: LocalDate? = null
-        public val type: NewsType? = null
+        public var id: Int = 0
+        public var title: String? = null
+        public var category: NewsCategory? = null
+        public var categoryIcon: String? = null
+        public var date: LocalDate? = null
+        public var type: NewsType? = null
 
         override fun build(): NewsEntry = NewsEntry(
             id = id,

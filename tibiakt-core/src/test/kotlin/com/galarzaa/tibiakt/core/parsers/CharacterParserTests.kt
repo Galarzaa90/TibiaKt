@@ -1,5 +1,5 @@
 /*
- * Copyright © 2023 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@
 package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.TestResources.getResource
-import com.galarzaa.tibiakt.core.enums.AccountStatus
 import com.galarzaa.tibiakt.core.enums.Sex
 import com.galarzaa.tibiakt.core.enums.Vocation
 import com.galarzaa.tibiakt.core.models.character.Character
@@ -56,7 +55,7 @@ class CharacterParserTests : FunSpec({
             }
             lastLogin shouldNotBe null
             position shouldBe null
-            accountStatus shouldBe AccountStatus.PREMIUM_ACCOUNT
+            isPremium shouldBe true
             isRecentlyTraded shouldBe false
             badges shouldHaveSize 8
             isHidden shouldBe false

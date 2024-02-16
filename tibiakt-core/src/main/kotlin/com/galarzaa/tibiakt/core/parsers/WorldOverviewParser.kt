@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,6 +30,7 @@ import com.galarzaa.tibiakt.core.utils.parseTibiaFullDate
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
+import org.jsoup.select.Elements
 import java.time.format.DateTimeParseException
 
 /** Parses content from the world overview section. */
@@ -63,29 +64,12 @@ public object WorldOverviewParser : Parser<WorldOverview> {
             addWorld {
                 val columns = row.select("td")
                 name = columns.first()?.text() ?: throw ParsingException("No columns in world row.")
-                try {
-                    onlineCount = columns[1].text().parseInteger()
-                    isOnline = true
-                } catch (nfe: NumberFormatException) {
-                    onlineCount = 0
-                    isOnline = false
-                }
+                parseOnlineStatus(columns)
                 location = columns[2].text()
                 pvpType = StringEnum.fromValue(columns[3].text())
                     ?: throw ParsingException("Unknown PvP type found: ${columns[3].text()}")
 
-                battlEyeType = BattlEyeType.UNPROTECTED
-                columns[4].selectFirst("span.HelperDivIndicator")?.apply {
-                    val (_, popUp) = parsePopup(attr("onmouseover"))
-                    battlEyeRegex.find(popUp.text())?.apply {
-                        try {
-                            battlEyeStartDate = parseTibiaFullDate(groups[1]!!.value)
-                        } catch (e: DateTimeParseException) {
-                            // Leave value as none
-                        }
-                    }
-                    battlEyeType = if (battlEyeStartDate == null) BattlEyeType.GREEN else BattlEyeType.YELLOW
-                }
+                parseBattlEyeStatus(columns)
                 val additionalProperties = columns[5].text()
                 transferType = if (additionalProperties.contains("blocked")) {
                     TransferType.BLOCKED
@@ -97,6 +81,31 @@ public object WorldOverviewParser : Parser<WorldOverview> {
                 isPremiumRestricted = additionalProperties.contains("premium")
                 isExperimental = additionalProperties.contains("experimental")
             }
+        }
+    }
+
+    private fun WorldOverviewBuilder.WorldEntryBuilder.parseBattlEyeStatus(columns: Elements) {
+        battlEyeType = BattlEyeType.UNPROTECTED
+        columns[4].selectFirst("span.HelperDivIndicator")?.apply {
+            val (_, popUp) = parsePopup(attr("onmouseover"))
+            battlEyeRegex.find(popUp.text())?.apply {
+                try {
+                    battlEyeStartDate = parseTibiaFullDate(groups[1]!!.value)
+                } catch (e: DateTimeParseException) {
+                    // Leave value as none
+                }
+            }
+            battlEyeType = if (battlEyeStartDate == null) BattlEyeType.GREEN else BattlEyeType.YELLOW
+        }
+    }
+
+    private fun WorldOverviewBuilder.WorldEntryBuilder.parseOnlineStatus(columns: Elements) {
+        try {
+            onlineCount = columns[1].text().parseInteger()
+            isOnline = true
+        } catch (nfe: NumberFormatException) {
+            onlineCount = 0
+            isOnline = false
         }
     }
 }
