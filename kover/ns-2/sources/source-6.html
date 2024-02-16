@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>tibiakt-core Coverage Report > AuctionSkillFilter</title>
+  <title>tibiakt-core Coverage Report > AuctionStatus</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,12 +22,15 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     <a href="../index.html">com.galarzaa.tibiakt.core.enums</a>
 </div>
 
-<h1>Coverage Summary for Class: AuctionSkillFilter (com.galarzaa.tibiakt.core.enums)</h1>
+<h1>Coverage Summary for Class: AuctionStatus (com.galarzaa.tibiakt.core.enums)</h1>
 
 <table class="coverageStats">
-
 <tr>
   <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -46,44 +49,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </th>
 </tr>
 <tr>
-  <td class="name">AuctionSkillFilter</td>
-<td class="coverageStat">
-  <span class="percent">
-    100%
-  </span>
-  <span class="absValue">
-    (2/2)
-  </span>
-</td>
-    <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    100%
-  </span>
-  <span class="absValue">
-    (9/9)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    100%
-  </span>
-  <span class="absValue">
-    (76/76)
-  </span>
-</td>
-</tr>
-  <tr>
-    <td class="name">AuctionSkillFilter$Companion</td>
-<td class="coverageStat">
-  <span class="percent">
-    100%
-  </span>
-  <span class="absValue">
-    (1/1)
-  </span>
-</td>
-    <td class="coverageStat"/>
+  <td class="name">AuctionStatus</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -100,24 +66,13 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     (2/2)
   </span>
 </td>
-  </tr>
-<tr>
-  <td class="name"><strong>Total</strong></td>
-<td class="coverageStat">
-  <span class="percent">
-    100%
-  </span>
-  <span class="absValue">
-    (3/3)
-  </span>
-</td>
     <td class="coverageStat"/>
 <td class="coverageStat">
   <span class="percent">
     100%
   </span>
   <span class="absValue">
-    (10/10)
+    (6/6)
   </span>
 </td>
 <td class="coverageStat">
@@ -125,10 +80,11 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     100%
   </span>
   <span class="absValue">
-    (78/78)
+    (50/50)
   </span>
 </td>
 </tr>
+
 </table>
 
 <br/>
@@ -155,21 +111,27 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;package com.galarzaa.tibiakt.core.enums
 &nbsp;
 &nbsp;/**
-&nbsp; * The possible skills to filter auctions by.
+&nbsp; * The possible values an auction might have.
 &nbsp; */
-<b class="fc">&nbsp;public enum class AuctionSkillFilter(override val value: Int) : IntEnum {</b>
-<b class="fc">&nbsp;    AXE_FIGHTING(10),</b>
-<b class="fc">&nbsp;    CLUB_FIGHTING(9),</b>
-<b class="fc">&nbsp;    DISTANCE_FIGHTING(7),</b>
-<b class="fc">&nbsp;    FISHING(13),</b>
-<b class="fc">&nbsp;    FIST_FIGHTING(11),</b>
-<b class="fc">&nbsp;    MAGIC_LEVEL(1),</b>
-<b class="fc">&nbsp;    SHIELDING(6),</b>
-<b class="fc">&nbsp;    SWORD_FIGHTING(8);</b>
+<b class="fc">&nbsp;public enum class AuctionStatus(override val value: String) : StringEnum {</b>
+&nbsp;    /**
+&nbsp;     * The auction is currently active.
+&nbsp;     *
+&nbsp;     * Note: This status doesn&#39;t exist in Tibia.com explicitly. It is given to all ongoing auctions.
+&nbsp;     */
+<b class="fc">&nbsp;    IN_PROGRESS(&quot;in progress&quot;),</b>
 &nbsp;
-<b class="fc">&nbsp;    public companion object {</b>
-&nbsp;        public const val queryParam: String = &quot;filter_skillid&quot;
-&nbsp;    }
+&nbsp;    /** The auction ended with a winner, but payment hasn’t been received yet. */
+<b class="fc">&nbsp;    CURRENTLY_PROCESSED(&quot;currently processed&quot;),</b>
+&nbsp;
+&nbsp;    /** The auction was finished and was paid, but the character hasn’t been transferred to the new owner yet. */
+<b class="fc">&nbsp;    PENDING_TRANSFER(&quot;will be transferred at the next server save&quot;),</b>
+&nbsp;
+&nbsp;    /** The auction was cancelled as no payment was received in time. */
+<b class="fc">&nbsp;    CANCELLED(&quot;cancelled&quot;),</b>
+&nbsp;
+&nbsp;    /** The auction either finished with no bids or the character was transferred to the new owner already. */
+<b class="fc">&nbsp;    FINISHED(&quot;finished&quot;),</b>
 &nbsp;}
 </code>
 </pre>
@@ -194,7 +156,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-02-13 04:34</div>
+    <div style="float:right;">generated on 2024-02-16 05:50</div>
 </div>
 </body>
 </html>

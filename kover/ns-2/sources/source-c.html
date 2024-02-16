@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>tibiakt-core Coverage Report > BidType</title>
+  <title>tibiakt-core Coverage Report > HighscoresBattlEyeType</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     <a href="../index.html">com.galarzaa.tibiakt.core.enums</a>
 </div>
 
-<h1>Coverage Summary for Class: BidType (com.galarzaa.tibiakt.core.enums)</h1>
+<h1>Coverage Summary for Class: HighscoresBattlEyeType (com.galarzaa.tibiakt.core.enums)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -49,7 +49,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </th>
 </tr>
 <tr>
-  <td class="name">BidType</td>
+  <td class="name">HighscoresBattlEyeType</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -72,7 +72,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     100%
   </span>
   <span class="absValue">
-    (4/4)
+    (5/5)
   </span>
 </td>
 <td class="coverageStat">
@@ -80,7 +80,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     100%
   </span>
   <span class="absValue">
-    (36/36)
+    (43/43)
   </span>
 </td>
 </tr>
@@ -110,22 +110,19 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;
 &nbsp;package com.galarzaa.tibiakt.core.enums
 &nbsp;
-&nbsp;/**
-&nbsp; * The possible bid types an auction might have.
-&nbsp; */
-<b class="fc">&nbsp;public enum class BidType(override val value: String) : StringEnum {</b>
-&nbsp;    /**
-&nbsp;     * The current highest bid, meaning the auction has received at least one bid.
-&nbsp;     */
-<b class="fc">&nbsp;    CURRENT(&quot;Current Bid&quot;),</b>
+&nbsp;/** Available BattlEye type filters for Highscores. */
+<b class="fc">&nbsp;public enum class HighscoresBattlEyeType(override val value: Int) : IntEnum {</b>
+&nbsp;    /** Show entries from any world. */
+<b class="fc">&nbsp;    ANY_WORLD(-1),</b>
 &nbsp;
-&nbsp;    /**
-&nbsp;     * The minimum bid set by the auction author, meaning the auction didn&#39;t receive any bids.
-&nbsp;     */
-<b class="fc">&nbsp;    MINIMUM(&quot;Minimum Bid&quot;),</b>
+&nbsp;    /** Show entries from worlds with no BattlEye protection. */
+<b class="fc">&nbsp;    UNPROTECTED(0),</b>
 &nbsp;
-&nbsp;    /** The bid that won the auction. */
-<b class="fc">&nbsp;    WINNING(&quot;Winning Bid&quot;),</b>
+&nbsp;    /** Show entries from worlds that are protected by BattlEye but not initially. */
+<b class="fc">&nbsp;    PROTECTED(1),</b>
+&nbsp;
+&nbsp;    /** Show entries from worlds that are protected by BattlEye since the beginning. */
+<b class="fc">&nbsp;    INITIALLY_PROTECTED(2),</b>
 &nbsp;}
 </code>
 </pre>
@@ -150,7 +147,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-02-13 04:34</div>
+    <div style="float:right;">generated on 2024-02-16 05:50</div>
 </div>
 </body>
 </html>

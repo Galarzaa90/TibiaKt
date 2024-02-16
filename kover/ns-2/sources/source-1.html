@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>tibiakt-core Coverage Report > AccountStatus</title>
+  <title>tibiakt-core Coverage Report > AuctionBattlEyeFilter</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,15 +22,12 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     <a href="../index.html">com.galarzaa.tibiakt.core.enums</a>
 </div>
 
-<h1>Coverage Summary for Class: AccountStatus (com.galarzaa.tibiakt.core.enums)</h1>
+<h1>Coverage Summary for Class: AuctionBattlEyeFilter (com.galarzaa.tibiakt.core.enums)</h1>
 
 <table class="coverageStats">
+
 <tr>
   <th class="name">Class</th>
-<th class="coverageStat 
-">
-  Class, %
-</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -49,15 +46,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </th>
 </tr>
 <tr>
-  <td class="name">AccountStatus</td>
-<td class="coverageStat">
-  <span class="percent">
-    100%
-  </span>
-  <span class="absValue">
-    (1/1)
-  </span>
-</td>
+  <td class="name">AuctionBattlEyeFilter</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -80,11 +69,66 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     100%
   </span>
   <span class="absValue">
-    (29/29)
+    (41/41)
   </span>
 </td>
 </tr>
-
+  <tr>
+    <td class="name">AuctionBattlEyeFilter$Companion</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (43/43)
+  </span>
+</td>
+</tr>
 </table>
 
 <br/>
@@ -93,7 +137,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;/*
-&nbsp; * Copyright © 2023 Allan Galarza
+&nbsp; * Copyright © 2022 Allan Galarza
 &nbsp; *
 &nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 &nbsp; * you may not use this file except in compliance with the License.
@@ -110,11 +154,28 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;
 &nbsp;package com.galarzaa.tibiakt.core.enums
 &nbsp;
-&nbsp;/** The possible status for a Tibia account. */
-<b class="fc">&nbsp;@Deprecated(&quot;No longer used, replaced by boolean property in Character class.&quot;)</b>
-<b class="fc">&nbsp;public enum class AccountStatus(override val value: String) : StringEnum {</b>
-<b class="fc">&nbsp;    FREE_ACCOUNT(&quot;Free Account&quot;),</b>
-<b class="fc">&nbsp;    PREMIUM_ACCOUNT(&quot;Premium Account&quot;)</b>
+&nbsp;/**
+&nbsp; * The possible BattlEye protection type filters for auctions.
+&nbsp; */
+<b class="fc">&nbsp;public enum class AuctionBattlEyeFilter(override val value: Int) : IntEnum {</b>
+&nbsp;    /**
+&nbsp;     * Worlds that have been protected from the beginning, these have a green icon.
+&nbsp;     */
+<b class="fc">&nbsp;    INITIALLY_PROTECTED(1),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Worlds that had BattlEye implemented at a later date, these have a yellow icon.
+&nbsp;     */
+<b class="fc">&nbsp;    PROTECTED(2),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Worlds that have no BattlEye protection at all.
+&nbsp;     */
+<b class="fc">&nbsp;    NOT_PROTECTED(3);</b>
+&nbsp;
+<b class="fc">&nbsp;    public companion object {</b>
+&nbsp;        public const val queryParam: String = &quot;filter_worldbattleyestate&quot;
+&nbsp;    }
 &nbsp;}
 </code>
 </pre>
@@ -139,7 +200,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-02-13 04:34</div>
+    <div style="float:right;">generated on 2024-02-16 05:50</div>
 </div>
 </body>
 </html>

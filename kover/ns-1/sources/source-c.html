@@ -93,7 +93,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;/*
-&nbsp; * Copyright © 2023 Allan Galarza
+&nbsp; * Copyright © 2024 Allan Galarza
 &nbsp; *
 &nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 &nbsp; * you may not use this file except in compliance with the License.
@@ -206,13 +206,25 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;    public fun addOtherCharacter(
 &nbsp;        name: String,
 &nbsp;        world: String,
-&nbsp;        main: Boolean = false,
-&nbsp;        online: Boolean = false,
-&nbsp;        deleted: Boolean = false,
-&nbsp;        traded: Boolean = false,
+&nbsp;        isMain: Boolean = false,
+&nbsp;        isOnline: Boolean = false,
+&nbsp;        isDeleted: Boolean = false,
+&nbsp;        isRecentlyTraded: Boolean = false,
 &nbsp;        position: String?,
 &nbsp;    ): CharacterBuilder =
-&nbsp;        apply { otherCharacters.add(OtherCharacter(name, world, main, online, deleted, traded, position)) }
+&nbsp;        apply {
+&nbsp;            otherCharacters.add(
+&nbsp;                OtherCharacter(
+&nbsp;                    name,
+&nbsp;                    world,
+&nbsp;                    isMain,
+&nbsp;                    isOnline,
+&nbsp;                    isDeleted,
+&nbsp;                    isRecentlyTraded,
+&nbsp;                    position
+&nbsp;                )
+&nbsp;            )
+&nbsp;        }
 &nbsp;
 &nbsp;    override fun build(): Character = Character(
 &nbsp;        name = if (::name.isInitialized) name else error(&quot;name is required&quot;),
@@ -280,7 +292,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-02-13 04:34</div>
+    <div style="float:right;">generated on 2024-02-16 05:50</div>
 </div>
 </body>
 </html>

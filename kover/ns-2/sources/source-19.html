@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>tibiakt-core Coverage Report > ThreadStatus</title>
+  <title>tibiakt-core Coverage Report > TransferType</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     <a href="../index.html">com.galarzaa.tibiakt.core.enums</a>
 </div>
 
-<h1>Coverage Summary for Class: ThreadStatus (com.galarzaa.tibiakt.core.enums)</h1>
+<h1>Coverage Summary for Class: TransferType (com.galarzaa.tibiakt.core.enums)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -49,7 +49,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </th>
 </tr>
 <tr>
-  <td class="name">ThreadStatus</td>
+  <td class="name">TransferType</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -72,7 +72,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     100%
   </span>
   <span class="absValue">
-    (4/4)
+    (3/3)
   </span>
 </td>
 <td class="coverageStat">
@@ -80,7 +80,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     100%
   </span>
   <span class="absValue">
-    (30/30)
+    (24/24)
   </span>
 </td>
 </tr>
@@ -111,22 +111,23 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;package com.galarzaa.tibiakt.core.enums
 &nbsp;
 &nbsp;/**
-&nbsp; * The possible status a thread can have.
-&nbsp; *
-&nbsp; * Threads can have a combination of multiple status.
+&nbsp; * The type of transfer rules applied to this server.
 &nbsp; */
-&nbsp;public enum class ThreadStatus {
-&nbsp;    /** Thread has more than 16 replies. */
-<b class="fc">&nbsp;    HOT,</b>
+&nbsp;public enum class TransferType {
+&nbsp;    /**
+&nbsp;     * No special rules besides the regular PvP and BattlEye restrictions.
+&nbsp;     */
+<b class="fc">&nbsp;    REGULAR,</b>
 &nbsp;
-&nbsp;    /** Thread has new posts since last visit. */
-<b class="fc">&nbsp;    NEW,</b>
+&nbsp;    /**
+&nbsp;     * Character cannot transfer to this world but can transfer from this world to another.
+&nbsp;     */
+<b class="fc">&nbsp;    BLOCKED,</b>
 &nbsp;
-&nbsp;    /** Thread is closed. */
-<b class="fc">&nbsp;    CLOSED,</b>
-&nbsp;
-&nbsp;    /** Thread is stickied to the top. */
-<b class="fc">&nbsp;    STICKY,</b>
+&nbsp;    /**
+&nbsp;     * Character can transfer to this world, but can only transfer to other locked worlds from these.
+&nbsp;     */
+<b class="fc">&nbsp;    LOCKED</b>
 &nbsp;}
 </code>
 </pre>
@@ -151,7 +152,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-02-13 04:34</div>
+    <div style="float:right;">generated on 2024-02-16 05:50</div>
 </div>
 </body>
 </html>

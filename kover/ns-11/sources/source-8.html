@@ -137,7 +137,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;/*
-&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; * Copyright © 2024 Allan Galarza
 &nbsp; *
 &nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 &nbsp; * you may not use this file except in compliance with the License.
@@ -281,7 +281,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;    val currentPageLink = pagesDiv.selectFirst(&quot;.CurrentPageLink&quot;)
 &nbsp;    val pageLinks = pagesDiv.select(&quot;.PageLink&quot;)
 &nbsp;    val firstOrLastPages = pagesDiv.select(&quot;.FirstOrLastElement&quot;)
-&nbsp;    val totalPages = if (!firstOrLastPages.isEmpty()) {
+&nbsp;    val totalPages = if (firstOrLastPages.isNotEmpty()) {
 &nbsp;        val lastPageLink = firstOrLastPages.last()?.selectFirst(&quot;a&quot;)
 &nbsp;        if (lastPageLink != null) {
 &nbsp;            pageRegex.find(lastPageLink.attr(&quot;href&quot;))?.let {
@@ -368,7 +368,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-02-13 04:34</div>
+    <div style="float:right;">generated on 2024-02-16 05:50</div>
 </div>
 </body>
 </html>

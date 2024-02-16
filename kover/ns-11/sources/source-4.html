@@ -100,7 +100,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;/*
-&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; * Copyright © 2024 Allan Galarza
 &nbsp; *
 &nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 &nbsp; * you may not use this file except in compliance with the License.
@@ -128,6 +128,9 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;import com.galarzaa.tibiakt.core.models.forums.UnavailableForumAuthor
 &nbsp;import org.jsoup.nodes.Element
 &nbsp;
+&nbsp;
+&nbsp;internal const val TRADED_TAG = &quot;(traded)&quot;
+&nbsp;
 &nbsp;internal fun parseLastPostFromCell(cell: Element): LastPost? {
 <b class="fc">&nbsp;    val postDate = cell.selectFirst(&quot;span.LastPostInfo&quot;) ?: return null</b>
 <b class="pc">&nbsp;    val permalink = cell.selectFirst(&quot;a&quot;)?.getLinkInformation() ?: return null</b>
@@ -135,8 +138,8 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;    val authorLink = authorTag.selectFirst(&quot;a&quot;)?.getLinkInformation()</b>
 <b class="fc">&nbsp;    var authorName = authorTag.cleanText().removePrefix(&quot;by &quot;)</b>
 <b class="fc">&nbsp;    var isTraded = false</b>
-<b class="fc">&nbsp;    if (&quot;(traded)&quot; in authorName) {</b>
-<b class="fc">&nbsp;        authorName = authorName.remove(&quot;(traded)&quot;)</b>
+<b class="fc">&nbsp;    if (TRADED_TAG in authorName) {</b>
+<b class="fc">&nbsp;        authorName = authorName.remove(TRADED_TAG)</b>
 <b class="fc">&nbsp;        isTraded = true</b>
 &nbsp;    }
 <b class="fc">&nbsp;    return lastPost {</b>
@@ -159,8 +162,8 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;    val charLink = table.selectFirst(&quot;a&quot;)?.getLinkInformation()</b>
 <b class="fc">&nbsp;    if (charLink == null) {</b>
 <b class="fc">&nbsp;        val name = table.cleanText()</b>
-<b class="fc">&nbsp;        val isTraded: Boolean = name.contains(&quot;(traded)&quot;)</b>
-<b class="fc">&nbsp;        return UnavailableForumAuthor(name.remove(&quot;(traded)&quot;).trim(), !isTraded, isTraded)</b>
+<b class="fc">&nbsp;        val isTraded: Boolean = name.contains(TRADED_TAG)</b>
+<b class="fc">&nbsp;        return UnavailableForumAuthor(name.remove(TRADED_TAG).trim(), !isTraded, isTraded)</b>
 &nbsp;    }
 <b class="fc">&nbsp;    val charInfo = table.selectFirst(&quot;font.ff_infotext&quot;)</b>
 <b class="fc">&nbsp;    val positionInfo = table.selectFirst(&quot;font.ff_smallinfo&quot;)</b>
@@ -230,7 +233,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-02-13 04:34</div>
+    <div style="float:right;">generated on 2024-02-16 05:50</div>
 </div>
 </body>
 </html>

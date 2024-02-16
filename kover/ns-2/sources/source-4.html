@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>tibiakt-core Coverage Report > AuctionOrderDirection</title>
+  <title>tibiakt-core Coverage Report > AuctionSearchType</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     <a href="../index.html">com.galarzaa.tibiakt.core.enums</a>
 </div>
 
-<h1>Coverage Summary for Class: AuctionOrderDirection (com.galarzaa.tibiakt.core.enums)</h1>
+<h1>Coverage Summary for Class: AuctionSearchType (com.galarzaa.tibiakt.core.enums)</h1>
 
 <table class="coverageStats">
 
@@ -46,7 +46,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </th>
 </tr>
 <tr>
-  <td class="name">AuctionOrderDirection</td>
+  <td class="name">AuctionSearchType</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -61,7 +61,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     100%
   </span>
   <span class="absValue">
-    (3/3)
+    (4/4)
   </span>
 </td>
 <td class="coverageStat">
@@ -69,12 +69,12 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     100%
   </span>
   <span class="absValue">
-    (34/34)
+    (41/41)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">AuctionOrderDirection$Companion</td>
+    <td class="name">AuctionSearchType$Companion</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -117,7 +117,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     100%
   </span>
   <span class="absValue">
-    (4/4)
+    (5/5)
   </span>
 </td>
 <td class="coverageStat">
@@ -125,7 +125,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     100%
   </span>
   <span class="absValue">
-    (36/36)
+    (43/43)
   </span>
 </td>
 </tr>
@@ -155,21 +155,26 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;package com.galarzaa.tibiakt.core.enums
 &nbsp;
 &nbsp;/**
-&nbsp; * The possible ordering directions for auctions.
+&nbsp; * The types of search for the input field in the character bazaar.
 &nbsp; */
-<b class="fc">&nbsp;public enum class AuctionOrderDirection(override val value: Int) : IntEnum {</b>
+<b class="fc">&nbsp;public enum class AuctionSearchType(override val value: Int) : IntEnum {</b>
 &nbsp;    /**
-&nbsp;     * Descending order.
+&nbsp;     * Searches everything that includes the words on the search string.
 &nbsp;     */
-<b class="fc">&nbsp;    HIGHEST_LATEST(0),</b>
+<b class="fc">&nbsp;    ITEM_DEFAULT(0),</b>
 &nbsp;
 &nbsp;    /**
-&nbsp;     * Ascending order.
+&nbsp;     * Searches everything that includes the search string.
 &nbsp;     */
-<b class="fc">&nbsp;    LOWEST_EARLIEST(1);</b>
+<b class="fc">&nbsp;    ITEM_WILDCARD(1),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Searches a character’s name.
+&nbsp;     */
+<b class="fc">&nbsp;    CHARACTER_NAME(2);</b>
 &nbsp;
 <b class="fc">&nbsp;    public companion object {</b>
-&nbsp;        public const val queryParam: String = &quot;order_direction&quot;
+&nbsp;        public const val queryParam: String = &quot;searchtype&quot;
 &nbsp;    }
 &nbsp;}
 </code>
@@ -195,7 +200,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-02-13 04:34</div>
+    <div style="float:right;">generated on 2024-02-16 05:50</div>
 </div>
 </body>
 </html>

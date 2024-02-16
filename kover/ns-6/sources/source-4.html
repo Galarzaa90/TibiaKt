@@ -49,34 +49,34 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
   <td class="name">Character</td>
 <td class="coverageStat">
   <span class="percent">
-    66.7%
+    75%
   </span>
   <span class="absValue">
-    (4/6)
+    (3/4)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    25%
+    16.7%
   </span>
   <span class="absValue">
-    (2/8)
+    (1/6)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    93.5%
+    96.6%
   </span>
   <span class="absValue">
-    (29/31)
+    (28/29)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    83.5%
+    83.8%
   </span>
   <span class="absValue">
-    (486/582)
+    (481/574)
   </span>
 </td>
 </tr>
@@ -112,34 +112,34 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    71.4%
+    80%
   </span>
   <span class="absValue">
-    (5/7)
+    (4/5)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    25%
+    16.7%
   </span>
   <span class="absValue">
-    (2/8)
+    (1/6)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    93.8%
+    96.7%
   </span>
   <span class="absValue">
-    (30/32)
+    (29/30)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    83.6%
+    83.9%
   </span>
   <span class="absValue">
-    (490/586)
+    (485/578)
   </span>
 </td>
 </tr>
@@ -151,7 +151,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;/*
-&nbsp; * Copyright © 2023 Allan Galarza
+&nbsp; * Copyright © 2024 Allan Galarza
 &nbsp; *
 &nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 &nbsp; * you may not use this file except in compliance with the License.
@@ -169,7 +169,6 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;
 &nbsp;package com.galarzaa.tibiakt.core.models.character
 &nbsp;
-&nbsp;import com.galarzaa.tibiakt.core.enums.AccountStatus
 &nbsp;import com.galarzaa.tibiakt.core.enums.Sex
 &nbsp;import com.galarzaa.tibiakt.core.enums.Vocation
 &nbsp;import com.galarzaa.tibiakt.core.utils.getCharacterUrl
@@ -246,14 +245,6 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;     * URL to the character this character is married to, if any.
 &nbsp;     */
 <b class="nc">&nbsp;    val marriedToUrl: String? get() = marriedTo?.let { getCharacterUrl(it) }</b>
-&nbsp;
-&nbsp;    @Deprecated(&quot;Replaced with boolean property isPremium&quot;, ReplaceWith(&quot;isPremium&quot;))
-&nbsp;    val accountStatus: AccountStatus
-&nbsp;        get() =
-<b class="pc">&nbsp;            if (isPremium) AccountStatus.PREMIUM_ACCOUNT else AccountStatus.FREE_ACCOUNT</b>
-&nbsp;
-&nbsp;    @Deprecated(&quot;Renamed to otherCharacters&quot;, ReplaceWith(&quot;otherCharacters&quot;))
-<b class="nc">&nbsp;    val characters: List&lt;OtherCharacter&gt; get() = otherCharacters</b>
 &nbsp;}
 </code>
 </pre>
@@ -278,7 +269,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-02-13 04:34</div>
+    <div style="float:right;">generated on 2024-02-16 05:50</div>
 </div>
 </body>
 </html>

@@ -52,15 +52,15 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     100%
   </span>
   <span class="absValue">
-    (3/3)
+    (5/5)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    68.8%
+    72.7%
   </span>
   <span class="absValue">
-    (11/16)
+    (16/22)
   </span>
 </td>
 <td class="coverageStat">
@@ -68,15 +68,15 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     100%
   </span>
   <span class="absValue">
-    (21/21)
+    (37/37)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    88%
+    91.4%
   </span>
   <span class="absValue">
-    (162/184)
+    (256/280)
   </span>
 </td>
 </tr>
@@ -92,26 +92,26 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </td>
 <td class="coverageStat">
   <span class="percent">
-    75%
+    70%
   </span>
   <span class="absValue">
-    (12/16)
+    (7/10)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    96.6%
+    93.3%
   </span>
   <span class="absValue">
-    (28/29)
+    (14/15)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    85.6%
+    77.5%
   </span>
   <span class="absValue">
-    (184/215)
+    (100/129)
   </span>
 </td>
   </tr>
@@ -122,7 +122,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     100%
   </span>
   <span class="absValue">
-    (4/4)
+    (6/6)
   </span>
 </td>
 <td class="coverageStat">
@@ -135,18 +135,18 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </td>
 <td class="coverageStat">
   <span class="percent">
-    98%
+    98.1%
   </span>
   <span class="absValue">
-    (49/50)
+    (51/52)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    86.7%
+    87%
   </span>
   <span class="absValue">
-    (346/399)
+    (356/409)
   </span>
 </td>
 </tr>
@@ -158,7 +158,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;/*
-&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; * Copyright © 2024 Allan Galarza
 &nbsp; *
 &nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 &nbsp; * you may not use this file except in compliance with the License.
@@ -189,6 +189,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;import org.jsoup.Jsoup
 &nbsp;import org.jsoup.nodes.Document
 &nbsp;import org.jsoup.nodes.Element
+&nbsp;import org.jsoup.select.Elements
 &nbsp;import java.time.format.DateTimeParseException
 &nbsp;
 &nbsp;/** Parses content from the world overview section. */
@@ -222,29 +223,12 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;            addWorld {</b>
 <b class="fc">&nbsp;                val columns = row.select(&quot;td&quot;)</b>
 <b class="pc">&nbsp;                name = columns.first()?.text() ?: throw ParsingException(&quot;No columns in world row.&quot;)</b>
-<b class="fc">&nbsp;                try {</b>
-<b class="fc">&nbsp;                    onlineCount = columns[1].text().parseInteger()</b>
-<b class="fc">&nbsp;                    isOnline = true</b>
-<b class="fc">&nbsp;                } catch (nfe: NumberFormatException) {</b>
-<b class="fc">&nbsp;                    onlineCount = 0</b>
-<b class="fc">&nbsp;                    isOnline = false</b>
-&nbsp;                }
+<b class="fc">&nbsp;                parseOnlineStatus(columns)</b>
 <b class="fc">&nbsp;                location = columns[2].text()</b>
 <b class="pc">&nbsp;                pvpType = StringEnum.fromValue(columns[3].text())</b>
 <b class="nc">&nbsp;                    ?: throw ParsingException(&quot;Unknown PvP type found: ${columns[3].text()}&quot;)</b>
 &nbsp;
-<b class="fc">&nbsp;                battlEyeType = BattlEyeType.UNPROTECTED</b>
-<b class="fc">&nbsp;                columns[4].selectFirst(&quot;span.HelperDivIndicator&quot;)?.apply {</b>
-<b class="fc">&nbsp;                    val (_, popUp) = parsePopup(attr(&quot;onmouseover&quot;))</b>
-<b class="pc">&nbsp;                    battlEyeRegex.find(popUp.text())?.apply {</b>
-<b class="fc">&nbsp;                        try {</b>
-<b class="fc">&nbsp;                            battlEyeStartDate = parseTibiaFullDate(groups[1]!!.value)</b>
-<b class="fc">&nbsp;                        } catch (e: DateTimeParseException) {</b>
-&nbsp;                            // Leave value as none
-&nbsp;                        }
-<b class="fc">&nbsp;                    }</b>
-<b class="fc">&nbsp;                    battlEyeType = if (battlEyeStartDate == null) BattlEyeType.GREEN else BattlEyeType.YELLOW</b>
-<b class="fc">&nbsp;                }</b>
+<b class="fc">&nbsp;                parseBattlEyeStatus(columns)</b>
 <b class="fc">&nbsp;                val additionalProperties = columns[5].text()</b>
 <b class="fc">&nbsp;                transferType = if (additionalProperties.contains(&quot;blocked&quot;)) {</b>
 <b class="fc">&nbsp;                    TransferType.BLOCKED</b>
@@ -256,6 +240,31 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;                isPremiumRestricted = additionalProperties.contains(&quot;premium&quot;)</b>
 <b class="fc">&nbsp;                isExperimental = additionalProperties.contains(&quot;experimental&quot;)</b>
 &nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private fun WorldOverviewBuilder.WorldEntryBuilder.parseBattlEyeStatus(columns: Elements) {
+<b class="fc">&nbsp;        battlEyeType = BattlEyeType.UNPROTECTED</b>
+<b class="fc">&nbsp;        columns[4].selectFirst(&quot;span.HelperDivIndicator&quot;)?.apply {</b>
+<b class="fc">&nbsp;            val (_, popUp) = parsePopup(attr(&quot;onmouseover&quot;))</b>
+<b class="pc">&nbsp;            battlEyeRegex.find(popUp.text())?.apply {</b>
+<b class="fc">&nbsp;                try {</b>
+<b class="fc">&nbsp;                    battlEyeStartDate = parseTibiaFullDate(groups[1]!!.value)</b>
+<b class="fc">&nbsp;                } catch (e: DateTimeParseException) {</b>
+&nbsp;                    // Leave value as none
+&nbsp;                }
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;            battlEyeType = if (battlEyeStartDate == null) BattlEyeType.GREEN else BattlEyeType.YELLOW</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private fun WorldOverviewBuilder.WorldEntryBuilder.parseOnlineStatus(columns: Elements) {
+<b class="fc">&nbsp;        try {</b>
+<b class="fc">&nbsp;            onlineCount = columns[1].text().parseInteger()</b>
+<b class="fc">&nbsp;            isOnline = true</b>
+<b class="fc">&nbsp;        } catch (nfe: NumberFormatException) {</b>
+<b class="fc">&nbsp;            onlineCount = 0</b>
+<b class="fc">&nbsp;            isOnline = false</b>
 &nbsp;        }
 &nbsp;    }
 &nbsp;}
@@ -282,7 +291,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-02-13 04:34</div>
+    <div style="float:right;">generated on 2024-02-16 05:50</div>
 </div>
 </body>
 </html>

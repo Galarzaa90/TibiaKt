@@ -111,7 +111,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     0%
   </span>
   <span class="absValue">
-    (0/74)
+    (0/92)
   </span>
 </td>
   </tr>
@@ -143,10 +143,10 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </td>
 <td class="coverageStat">
   <span class="percent">
-    47.2%
+    43.5%
   </span>
   <span class="absValue">
-    (100/212)
+    (100/230)
   </span>
 </td>
 </tr>
@@ -158,7 +158,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;/*
-&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; * Copyright © 2024 Allan Galarza
 &nbsp; *
 &nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 &nbsp; * you may not use this file except in compliance with the License.
@@ -226,12 +226,12 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;    )
 &nbsp;
 <b class="nc">&nbsp;    public class NewsEntryBuilder : TibiaKtBuilder&lt;NewsEntry&gt; {</b>
-<b class="nc">&nbsp;        public val id: Int = 0</b>
-<b class="nc">&nbsp;        public val title: String? = null</b>
-<b class="nc">&nbsp;        public val category: NewsCategory? = null</b>
-<b class="nc">&nbsp;        public val categoryIcon: String? = null</b>
-<b class="nc">&nbsp;        public val date: LocalDate? = null</b>
-<b class="nc">&nbsp;        public val type: NewsType? = null</b>
+<b class="nc">&nbsp;        public var id: Int = 0</b>
+<b class="nc">&nbsp;        public var title: String? = null</b>
+<b class="nc">&nbsp;        public var category: NewsCategory? = null</b>
+<b class="nc">&nbsp;        public var categoryIcon: String? = null</b>
+<b class="nc">&nbsp;        public var date: LocalDate? = null</b>
+<b class="nc">&nbsp;        public var type: NewsType? = null</b>
 &nbsp;
 <b class="nc">&nbsp;        override fun build(): NewsEntry = NewsEntry(</b>
 <b class="nc">&nbsp;            id = id,</b>
@@ -266,7 +266,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-02-13 04:34</div>
+    <div style="float:right;">generated on 2024-02-16 05:50</div>
 </div>
 </body>
 </html>

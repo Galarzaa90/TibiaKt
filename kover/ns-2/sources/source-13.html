@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>tibiakt-core Coverage Report > IntEnum</title>
+  <title>tibiakt-core Coverage Report > NewsCategory</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     <a href="../index.html">com.galarzaa.tibiakt.core.enums</a>
 </div>
 
-<h1>Coverage Summary for Class: IntEnum (com.galarzaa.tibiakt.core.enums)</h1>
+<h1>Coverage Summary for Class: NewsCategory (com.galarzaa.tibiakt.core.enums)</h1>
 
 <table class="coverageStats">
 
@@ -45,38 +45,66 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
   Instruction, %
 </th>
 </tr>
+<tr>
+  <td class="name">NewsCategory</td>
+<td class="coverageStat">
+  <span class="percent">
+    60%
+  </span>
+  <span class="absValue">
+    (3/5)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    57.1%
+  </span>
+  <span class="absValue">
+    (8/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50.4%
+  </span>
+  <span class="absValue">
+    (69/137)
+  </span>
+</td>
+</tr>
   <tr>
-    <td class="name">IntEnum$Companion</td>
+    <td class="name">NewsCategory$Companion</td>
 <td class="coverageStat">
   <span class="percent">
     100%
   </span>
   <span class="absValue">
-    (2/2)
+    (1/1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    71.4%
+    50%
   </span>
   <span class="absValue">
-    (10/14)
+    (1/2)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    66.7%
   </span>
   <span class="absValue">
-    (2/2)
+    (2/3)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    95.7%
+    94.1%
   </span>
   <span class="absValue">
-    (66/69)
+    (32/34)
   </span>
 </td>
   </tr>
@@ -84,34 +112,34 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    66.7%
   </span>
   <span class="absValue">
-    (2/2)
+    (4/6)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    71.4%
+    50%
   </span>
   <span class="absValue">
-    (10/14)
+    (1/2)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    58.8%
   </span>
   <span class="absValue">
-    (2/2)
+    (10/17)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    95.7%
+    59.1%
   </span>
   <span class="absValue">
-    (66/69)
+    (101/171)
   </span>
 </td>
 </tr>
@@ -140,18 +168,38 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;
 &nbsp;package com.galarzaa.tibiakt.core.enums
 &nbsp;
+&nbsp;import com.galarzaa.tibiakt.core.utils.getStaticFileUrl
+&nbsp;
 &nbsp;/**
-&nbsp; * An enum with a numeric value.
+&nbsp; * The available news categories.
 &nbsp; */
-&nbsp;public interface IntEnum {
-&nbsp;    public val value: Int
+<b class="fc">&nbsp;public enum class NewsCategory(override val value: String) : StringEnum {</b>
+<b class="fc">&nbsp;    CIPSOFT(&quot;cipsoft&quot;),</b>
+<b class="fc">&nbsp;    COMMUNITY(&quot;community&quot;),</b>
+<b class="fc">&nbsp;    DEVELOPMENT(&quot;development&quot;),</b>
+<b class="fc">&nbsp;    SUPPORT(&quot;support&quot;),</b>
+<b class="fc">&nbsp;    TECHNICAL_ISSUES(&quot;technical&quot;);</b>
+&nbsp;
+&nbsp;    public val filterName: String
+<b class="fc">&nbsp;        get() = &quot;filter_$value&quot;</b>
+&nbsp;
+<b class="nc">&nbsp;    public val bigIconUrl: String get() = getStaticFileUrl(&quot;images&quot;, &quot;global&quot;, &quot;content&quot;, &quot;newsicon_${value}_big.gif&quot;)</b>
+&nbsp;    public val smallIconUrl: String
+<b class="nc">&nbsp;        get() = getStaticFileUrl(</b>
+<b class="nc">&nbsp;            &quot;images&quot;,</b>
+<b class="nc">&nbsp;            &quot;global&quot;,</b>
+<b class="nc">&nbsp;            &quot;content&quot;,</b>
+<b class="nc">&nbsp;            &quot;newsicon_${value}_small.gif&quot;</b>
+&nbsp;        )
 &nbsp;
 &nbsp;    public companion object {
-&nbsp;        public inline fun &lt;reified T&gt; fromValue(value: String?): T? where T : Enum&lt;T&gt;, T : IntEnum =
-<b class="pc">&nbsp;            T::class.java.takeIf { it.isEnum }?.enumConstants?.find { it.value.toString() == value || it.name == value }</b>
-&nbsp;
-&nbsp;        public inline fun &lt;reified T&gt; fromValue(value: Int?): T? where T : Enum&lt;T&gt;, T : IntEnum =
-<b class="fc">&nbsp;            fromValue(value.toString())</b>
+<b class="fc">&nbsp;        private val iconRegex = Regex(&quot;&quot;&quot;newsicon_([^_]+)_(?:small|big)&quot;&quot;&quot;)</b>
+&nbsp;        public fun fromIcon(iconUrl: String): NewsCategory? {
+<b class="pc">&nbsp;            iconRegex.find(iconUrl)?.apply {</b>
+<b class="fc">&nbsp;                return StringEnum.fromValue(this.groups[1]!!.value.lowercase())</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return null</b>
+&nbsp;        }
 &nbsp;    }
 &nbsp;}
 </code>
@@ -177,7 +225,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-02-13 04:34</div>
+    <div style="float:right;">generated on 2024-02-16 05:50</div>
 </div>
 </body>
 </html>

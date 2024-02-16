@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>tibiakt-core Coverage Report > HouseOrder</title>
+  <title>tibiakt-core Coverage Report > HouseStatus</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     <a href="../index.html">com.galarzaa.tibiakt.core.enums</a>
 </div>
 
-<h1>Coverage Summary for Class: HouseOrder (com.galarzaa.tibiakt.core.enums)</h1>
+<h1>Coverage Summary for Class: HouseStatus (com.galarzaa.tibiakt.core.enums)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -49,7 +49,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </th>
 </tr>
 <tr>
-  <td class="name">HouseOrder</td>
+  <td class="name">HouseStatus</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -72,7 +72,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     100%
   </span>
   <span class="absValue">
-    (6/6)
+    (3/3)
   </span>
 </td>
 <td class="coverageStat">
@@ -80,7 +80,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     100%
   </span>
   <span class="absValue">
-    (50/50)
+    (29/29)
   </span>
 </td>
 </tr>
@@ -110,24 +110,10 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;
 &nbsp;package com.galarzaa.tibiakt.core.enums
 &nbsp;
-&nbsp;/**
-&nbsp; * Possible fields to order houses or guildhalls by.
-&nbsp; */
-<b class="fc">&nbsp;public enum class HouseOrder(override val value: String) : StringEnum {</b>
-&nbsp;    /** Order by name, alphabetically. */
-<b class="fc">&nbsp;    NAME(&quot;name&quot;),</b>
-&nbsp;
-&nbsp;    /** Order by size. */
-<b class="fc">&nbsp;    SIZE(&quot;size&quot;),</b>
-&nbsp;
-&nbsp;    /** Order by rent. */
-<b class="fc">&nbsp;    RENT(&quot;rent&quot;),</b>
-&nbsp;
-&nbsp;    /** Order by bid. */
-<b class="fc">&nbsp;    BID(&quot;bid&quot;),</b>
-&nbsp;
-&nbsp;    /** Order by auction&#39;s end date. */
-<b class="fc">&nbsp;    AUCTION_END(&quot;end&quot;),</b>
+&nbsp;/** Available house status. */
+<b class="fc">&nbsp;public enum class HouseStatus(override val value: String) : StringEnum {</b>
+<b class="fc">&nbsp;    RENTED(&quot;rented&quot;),</b>
+<b class="fc">&nbsp;    AUCTIONED(&quot;auctioned&quot;)</b>
 &nbsp;}
 </code>
 </pre>
@@ -152,7 +138,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-02-13 04:34</div>
+    <div style="float:right;">generated on 2024-02-16 05:50</div>
 </div>
 </body>
 </html>

@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>tibiakt-core Coverage Report > HighscoresCategory</title>
+  <title>tibiakt-core Coverage Report > HighscoresProfession</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     <a href="../index.html">com.galarzaa.tibiakt.core.enums</a>
 </div>
 
-<h1>Coverage Summary for Class: HighscoresCategory (com.galarzaa.tibiakt.core.enums)</h1>
+<h1>Coverage Summary for Class: HighscoresProfession (com.galarzaa.tibiakt.core.enums)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -49,7 +49,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </th>
 </tr>
 <tr>
-  <td class="name">HighscoresCategory</td>
+  <td class="name">HighscoresProfession</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -72,7 +72,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     100%
   </span>
   <span class="absValue">
-    (16/16)
+    (7/7)
   </span>
 </td>
 <td class="coverageStat">
@@ -80,7 +80,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     100%
   </span>
   <span class="absValue">
-    (120/120)
+    (57/57)
   </span>
 </td>
 </tr>
@@ -110,23 +110,16 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;
 &nbsp;package com.galarzaa.tibiakt.core.enums
 &nbsp;
-&nbsp;/** Available highscores categories. */
-<b class="fc">&nbsp;public enum class HighscoresCategory(override val value: Int) : IntEnum {</b>
-<b class="fc">&nbsp;    ACHIEVEMENTS(1),</b>
-<b class="fc">&nbsp;    AXE_FIGHTING(2),</b>
-<b class="fc">&nbsp;    BOSS_POINTS(15),</b>
-<b class="fc">&nbsp;    CHARM_POINTS(3),</b>
-<b class="fc">&nbsp;    CLUB_FIGHTING(4),</b>
-<b class="fc">&nbsp;    DISTANCE_FIGHTING(5),</b>
-<b class="fc">&nbsp;    DROME_SCORE(14),</b>
-<b class="fc">&nbsp;    EXPERIENCE_POINTS(6),</b>
-<b class="fc">&nbsp;    FISHING(7),</b>
-<b class="fc">&nbsp;    FIST_FIGHTING(8),</b>
-<b class="fc">&nbsp;    GOSHNARS_TAINT(9),</b>
-<b class="fc">&nbsp;    LOYALTY_POINTS(10),</b>
-<b class="fc">&nbsp;    MAGIC_LEVEL(11),</b>
-<b class="fc">&nbsp;    SHIELDING(12),</b>
-<b class="fc">&nbsp;    SWORD_FIGHTING(13),</b>
+&nbsp;/**
+&nbsp; * The available vocation filters in Highscores.
+&nbsp; */
+<b class="fc">&nbsp;public enum class HighscoresProfession(override val value: Int) : IntEnum {</b>
+<b class="fc">&nbsp;    ALL(0),</b>
+<b class="fc">&nbsp;    NONE(1),</b>
+<b class="fc">&nbsp;    KNIGHTS(2),</b>
+<b class="fc">&nbsp;    PALADINS(3),</b>
+<b class="fc">&nbsp;    SORCERERS(4),</b>
+<b class="fc">&nbsp;    DRUIDS(5),</b>
 &nbsp;}
 </code>
 </pre>
@@ -151,7 +144,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-02-13 04:34</div>
+    <div style="float:right;">generated on 2024-02-16 05:50</div>
 </div>
 </body>
 </html>

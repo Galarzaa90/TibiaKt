@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>tibiakt-core Coverage Report > AvailableForumSection</title>
+  <title>tibiakt-core Coverage Report > BattlEyeType</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     <a href="../index.html">com.galarzaa.tibiakt.core.enums</a>
 </div>
 
-<h1>Coverage Summary for Class: AvailableForumSection (com.galarzaa.tibiakt.core.enums)</h1>
+<h1>Coverage Summary for Class: BattlEyeType (com.galarzaa.tibiakt.core.enums)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -49,38 +49,38 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </th>
 </tr>
 <tr>
-  <td class="name">AvailableForumSection</td>
+  <td class="name">BattlEyeType</td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/1)
+    (1/1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/2)
+    (2/2)
   </span>
 </td>
     <td class="coverageStat"/>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/6)
+    (4/4)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/50)
+    (36/36)
   </span>
 </td>
 </tr>
@@ -111,14 +111,23 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;package com.galarzaa.tibiakt.core.enums
 &nbsp;
 &nbsp;/**
-&nbsp; * The available forum sections.
+&nbsp; * The type of BattlEye protection a world might have.
 &nbsp; */
-<b class="nc">&nbsp;public enum class AvailableForumSection(public val subtopic: String) {</b>
-<b class="nc">&nbsp;    WORLD_BOARDS(&quot;worldboards&quot;),</b>
-<b class="nc">&nbsp;    TRADE_BOARDS(&quot;tradeboards&quot;),</b>
-<b class="nc">&nbsp;    COMMUNITY_BOARDS(&quot;communityboards&quot;),</b>
-<b class="nc">&nbsp;    SUPPORT_BOARDS(&quot;supportboards&quot;),</b>
-<b class="nc">&nbsp;    GUILD_BOARDS(&quot;guildboards&quot;),</b>
+<b class="fc">&nbsp;public enum class BattlEyeType(public val weight: Int) {</b>
+&nbsp;    /**
+&nbsp;     * Protected by BattlEye since the beginning.
+&nbsp;     */
+<b class="fc">&nbsp;    GREEN(2),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Protected by BattlEye at a later date.
+&nbsp;     */
+<b class="fc">&nbsp;    YELLOW(1),</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Not protected by BattlEye.
+&nbsp;     */
+<b class="fc">&nbsp;    UNPROTECTED(0),</b>
 &nbsp;}
 </code>
 </pre>
@@ -143,7 +152,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-02-13 04:34</div>
+    <div style="float:right;">generated on 2024-02-16 05:50</div>
 </div>
 </body>
 </html>
