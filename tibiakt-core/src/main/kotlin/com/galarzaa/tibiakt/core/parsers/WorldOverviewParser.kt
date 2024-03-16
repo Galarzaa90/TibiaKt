@@ -23,6 +23,7 @@ import com.galarzaa.tibiakt.core.enums.StringEnum
 import com.galarzaa.tibiakt.core.enums.TransferType
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
 import com.galarzaa.tibiakt.core.models.world.WorldOverview
+import com.galarzaa.tibiakt.core.utils.TABLE_SELECTOR
 import com.galarzaa.tibiakt.core.utils.parseInteger
 import com.galarzaa.tibiakt.core.utils.parsePopup
 import com.galarzaa.tibiakt.core.utils.parseTibiaDateTime
@@ -42,7 +43,7 @@ public object WorldOverviewParser : Parser<WorldOverview> {
         val document: Document = Jsoup.parse(content, "", org.jsoup.parser.Parser.xmlParser())
         val boxContent =
             document.selectFirst("div.BoxContent") ?: throw ParsingException("BoxContent container not found")
-        val tables = boxContent.select("table.TableContent")
+        val tables = boxContent.select(TABLE_SELECTOR)
         val builder = worldOverviewBuilder {
             recordRegex.find(tables.first()?.text() ?: throw ParsingException("No content tables found."))?.apply {
                 val (_, recordCount, recordDate) = groupValues

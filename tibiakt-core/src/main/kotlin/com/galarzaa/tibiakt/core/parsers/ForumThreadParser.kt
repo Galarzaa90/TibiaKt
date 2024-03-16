@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import com.galarzaa.tibiakt.core.builders.forumThread
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
 import com.galarzaa.tibiakt.core.models.forums.ForumEmoticon
 import com.galarzaa.tibiakt.core.models.forums.ForumThread
+import com.galarzaa.tibiakt.core.utils.TABLE_SELECTOR
 import com.galarzaa.tibiakt.core.utils.cleanText
 import com.galarzaa.tibiakt.core.utils.getLinkInformation
 import com.galarzaa.tibiakt.core.utils.parseAuthorTable
@@ -67,7 +68,7 @@ public object ForumThreadParser : Parser<ForumThread?> {
             hasGoldenFrame = "gold" in border.attr("style")
             title = forumTitleContainer.cleanText()
 
-            val postTable = boxContent.selectFirst("table.TableContent")!!
+            val postTable = boxContent.selectFirst(TABLE_SELECTOR)!!
             val threadInfoContainer = postTable.selectFirst("div.ForumPostHeaderText")!!
             val (threadNumber, navigationContainer) = threadInfoContainer.childNodes()
 
@@ -108,12 +109,11 @@ public object ForumThreadParser : Parser<ForumThread?> {
             while (true) {
                 val child = contentContainer.child(0)
                 child.remove()
-                if (child.tagName() == "img")
-                    emoticonTag = child
-                if (child.tagName() == "b")
-                    titleTag = child
-                if (child.tagName() == "div")
-                    break
+                when (child.tagName()) {
+                    "img" -> emoticonTag = child
+                    "b" -> titleTag = child
+                    "div" -> break
+                }
             }
             contentContainer.selectFirst("br")?.remove()
 

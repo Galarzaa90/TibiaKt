@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ package com.galarzaa.tibiakt.core.parsers
 import com.galarzaa.tibiakt.core.builders.forumsSection
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
 import com.galarzaa.tibiakt.core.models.forums.ForumSection
+import com.galarzaa.tibiakt.core.utils.TABLE_SELECTOR
 import com.galarzaa.tibiakt.core.utils.cells
 import com.galarzaa.tibiakt.core.utils.cleanText
 import com.galarzaa.tibiakt.core.utils.getLinkInformation
@@ -38,7 +39,7 @@ public object ForumSectionParser : Parser<ForumSection> {
         if ("Boards" !in tables) throw ParsingException("Boards table not found")
 
         return forumsSection {
-            val boardRows = tables["Boards"]!!.selectFirst("table.TableContent")?.select("tr:not(.LabelH)")!!
+            val boardRows = tables["Boards"]!!.selectFirst(TABLE_SELECTOR)?.select("tr:not(.LabelH)")!!
             for (row in boardRows) {
                 val columns = row.cells()
                 if (columns.size != 6) continue

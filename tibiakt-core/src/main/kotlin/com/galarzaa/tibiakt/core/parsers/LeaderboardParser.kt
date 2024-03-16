@@ -24,6 +24,7 @@ import com.galarzaa.tibiakt.core.models.leaderboards.Leaderboard
 import com.galarzaa.tibiakt.core.models.leaderboards.LeaderboardEntry
 import com.galarzaa.tibiakt.core.models.leaderboards.LeaderboardRotation
 import com.galarzaa.tibiakt.core.utils.PaginationData
+import com.galarzaa.tibiakt.core.utils.TABLE_SELECTOR
 import com.galarzaa.tibiakt.core.utils.cells
 import com.galarzaa.tibiakt.core.utils.clean
 import com.galarzaa.tibiakt.core.utils.cleanText
@@ -44,7 +45,7 @@ public object LeaderboardParser : Parser<Leaderboard?> {
 
     override fun fromContent(content: String): Leaderboard? {
         val boxContent = boxContent(content)
-        val tables = boxContent.select("table.TableContent")
+        val tables = boxContent.select(TABLE_SELECTOR)
 
         return leaderboard {
             val formData = tables[1].selectFirst("form")?.formData() ?: throw ParsingException("form not found")

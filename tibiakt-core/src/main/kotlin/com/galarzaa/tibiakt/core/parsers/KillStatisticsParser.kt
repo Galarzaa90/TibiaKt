@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ import com.galarzaa.tibiakt.core.builders.KillStatisticsBuilder
 import com.galarzaa.tibiakt.core.builders.killStatistics
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
 import com.galarzaa.tibiakt.core.models.KillStatistics
+import com.galarzaa.tibiakt.core.utils.TABLE_SELECTOR
 import com.galarzaa.tibiakt.core.utils.cellsText
 import com.galarzaa.tibiakt.core.utils.formData
 import com.galarzaa.tibiakt.core.utils.offsetStart
@@ -46,7 +47,7 @@ public object KillStatisticsParser : Parser<KillStatistics?> {
     }
 
     private fun KillStatisticsBuilder.parseKillStatisticsTable(table: Element) {
-        val innerTable = table.selectFirst("table.TableContent")
+        val innerTable = table.selectFirst(TABLE_SELECTOR)
         for (row in innerTable.rows().offsetStart(2)) {
             val columnns = row.cellsText()
             if (columnns[0] == "Total") {

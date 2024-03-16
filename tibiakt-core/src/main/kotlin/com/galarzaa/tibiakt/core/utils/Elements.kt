@@ -25,11 +25,13 @@ import org.jsoup.parser.Parser
 import org.jsoup.select.Elements
 import java.net.URL
 
+internal const val TABLE_SELECTOR = "table.TableContent"
+
 internal fun Element.boxContent(): Element =
     selectFirst("div.BoxContent") ?: throw ParsingException("BoxContent container not found")
 
 
-internal fun Element.parseTables(contentTableSelector: String = "table.TableContent"): Map<String, Elements> {
+internal fun Element.parseTables(contentTableSelector: String = TABLE_SELECTOR): Map<String, Elements> {
     val tables = select("div.TableContainer")
     val output = mutableMapOf<String, Elements>()
     for (table: Element in tables) {

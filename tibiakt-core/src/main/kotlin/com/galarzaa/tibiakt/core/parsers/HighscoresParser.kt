@@ -1,5 +1,5 @@
 /*
- * Copyright © 2023 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ import com.galarzaa.tibiakt.core.enums.StringEnum
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
 import com.galarzaa.tibiakt.core.models.highscores.Highscores
 import com.galarzaa.tibiakt.core.utils.FormData
+import com.galarzaa.tibiakt.core.utils.TABLE_SELECTOR
 import com.galarzaa.tibiakt.core.utils.cellsText
 import com.galarzaa.tibiakt.core.utils.cleanText
 import com.galarzaa.tibiakt.core.utils.formData
@@ -91,7 +92,7 @@ public object HighscoresParser : Parser<Highscores?> {
     }
 
     private fun HighscoresBuilder.parseHighscoresTable(element: Element) {
-        val entriesTable = element.selectFirst("table.TableContent")
+        val entriesTable = element.selectFirst(TABLE_SELECTOR)
         for (row in entriesTable.rows().offsetStart(1)) {
             val columns = row.cellsText()
             if (columns.size < 6) {

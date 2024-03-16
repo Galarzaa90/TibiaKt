@@ -1,5 +1,5 @@
 /*
- * Copyright © 2023 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,6 +36,7 @@ import com.galarzaa.tibiakt.core.models.bazaar.Mounts
 import com.galarzaa.tibiakt.core.models.bazaar.OutfitEntry
 import com.galarzaa.tibiakt.core.models.bazaar.OutfitImage
 import com.galarzaa.tibiakt.core.models.bazaar.Outfits
+import com.galarzaa.tibiakt.core.utils.TABLE_SELECTOR
 import com.galarzaa.tibiakt.core.utils.cellsText
 import com.galarzaa.tibiakt.core.utils.clean
 import com.galarzaa.tibiakt.core.utils.cleanText
@@ -56,6 +57,10 @@ import java.net.URL
 /** Parser for auction pages. */
 public object AuctionParser : Parser<Auction?> {
     private const val PERCENTAGE = 100f
+
+    @PublishedApi
+    internal const val ICON_CSS_SELECTOR: String = "div.CVIcon"
+    internal const val PAGINATOR_SELECTOR: String = "div.BlockPageNavigationRow"
 
     private val charInfoRegex = Regex("""Level: (\d+) \| Vocation: ([\w\s]+)\| (\w+) \| World: (\w+)""")
     private val idAddonsRegex = Regex("""/(\d+)_(\d+)""")
@@ -99,7 +104,7 @@ public object AuctionParser : Parser<Auction?> {
     }
 
     private fun AuctionBuilder.AuctionDetailsBuilder.parseCharmsTable(table: Element) {
-        for (row in table.selectFirst("table.TableContent").rows().offsetStart(1)) {
+        for (row in table.selectFirst(TABLE_SELECTOR).rows().offsetStart(1)) {
             val colsText = row.cellsText()
             if (colsText.size != 2) continue
             val (cost, name) = colsText
@@ -108,7 +113,7 @@ public object AuctionParser : Parser<Auction?> {
     }
 
     private fun AuctionBuilder.AuctionDetailsBuilder.parseAchievementsTable(table: Element) {
-        for (row in table.selectFirst("table.TableContent").rows().offsetStart(1)) {
+        for (row in table.selectFirst(TABLE_SELECTOR).rows().offsetStart(1)) {
             val text = row.cleanText()
             if (text.contains("more entries")) continue
             val isSecret = row.selectFirst("img") != null
@@ -117,7 +122,7 @@ public object AuctionParser : Parser<Auction?> {
     }
 
     private fun AuctionBuilder.AuctionDetailsBuilder.parseBestiaryTable(table: Element, bosstiary: Boolean = false) {
-        for (row in table.selectFirst("table.TableContent").rows().offsetStart(1)) {
+        for (row in table.selectFirst(TABLE_SELECTOR).rows().offsetStart(1)) {
             val columnsText = row.cellsText()
             if (columnsText.size != 3) continue
             val (step, kills, name) = columnsText
@@ -127,7 +132,7 @@ public object AuctionParser : Parser<Auction?> {
     }
 
     private fun AuctionBuilder.AuctionDetailsBuilder.parseBlessingsTable(table: Element) {
-        for (row in table.selectFirst("table.TableContent").rows().offsetStart(1)) {
+        for (row in table.selectFirst(TABLE_SELECTOR).rows().offsetStart(1)) {
             val colsText = row.cellsText()
             if (colsText.size != 2) continue
             val (amount, name) = colsText
@@ -136,7 +141,7 @@ public object AuctionParser : Parser<Auction?> {
     }
 
     private fun parseSingleColumnTable(table: Element): List<String> {
-        val innerTable = table.select("table.TableContent").last()
+        val innerTable = table.select(TABLE_SELECTOR).last()
         val values = mutableListOf<String>()
         for (row in innerTable.rows().offsetStart(1)) {
             val text = row.selectFirst("td")?.cleanText().orEmpty()
@@ -147,12 +152,13 @@ public object AuctionParser : Parser<Auction?> {
     }
 
     private fun parseFamiliarsTable(table: Element): Familiars {
-        val paginationData = table.selectFirst("div.BlockPageNavigationRow")?.parsePagination() ?: return Familiars(1,
+        val paginationData = table.selectFirst(PAGINATOR_SELECTOR)?.parsePagination() ?: return Familiars(
+            1,
             0,
             0,
             emptyList(),
             false)
-        val familiarBoxes = table.select("div.CVIcon")
+        val familiarBoxes = table.select(ICON_CSS_SELECTOR)
         val familiars = mutableListOf<FamiliarEntry>()
         for (mountBox in familiarBoxes) {
             val name = mountBox.attr("title").split("(").first().clean()
@@ -168,12 +174,13 @@ public object AuctionParser : Parser<Auction?> {
     }
 
     private fun parseOutfitsTable(table: Element): Outfits {
-        val paginationData = table.selectFirst("div.BlockPageNavigationRow")?.parsePagination() ?: return Outfits(1,
+        val paginationData = table.selectFirst(PAGINATOR_SELECTOR)?.parsePagination() ?: return Outfits(
+            1,
             0,
             0,
             emptyList(),
             false)
-        val outfitBoxes = table.select("div.CVIcon")
+        val outfitBoxes = table.select(ICON_CSS_SELECTOR)
         val outfits = outfitBoxes.map { parseDisplayedOutfit(it) }
         return Outfits(paginationData.currentPage,
             paginationData.totalPages,
@@ -184,24 +191,26 @@ public object AuctionParser : Parser<Auction?> {
 
     private fun parseMountsTable(mountsTable: Element): Mounts {
         val paginationData =
-            mountsTable.selectFirst("div.BlockPageNavigationRow")?.parsePagination() ?: return Mounts(1,
+            mountsTable.selectFirst(PAGINATOR_SELECTOR)?.parsePagination() ?: return Mounts(
+                1,
                 0,
                 0,
                 emptyList(),
                 false)
-        val mountsBoxes = mountsTable.select("div.CVIcon")
+        val mountsBoxes = mountsTable.select(ICON_CSS_SELECTOR)
         val mounts = mountsBoxes.map { parseDisplayedMount(it) }
         return Mounts(paginationData.currentPage, paginationData.totalPages, paginationData.resultsCount, mounts, false)
     }
 
     private fun parseItemsTable(itemsTable: Element): ItemSummary {
         val paginationData =
-            itemsTable.selectFirst("div.BlockPageNavigationRow")?.parsePagination() ?: return ItemSummary(1,
+            itemsTable.selectFirst(PAGINATOR_SELECTOR)?.parsePagination() ?: return ItemSummary(
+                1,
                 0,
                 0,
                 emptyList(),
                 false)
-        val itemBoxes = itemsTable.select("div.CVIcon")
+        val itemBoxes = itemsTable.select(ICON_CSS_SELECTOR)
         val items = mutableListOf<ItemEntry>()
         for (itemBox in itemBoxes) {
             parseDisplayedItem(itemBox)?.run { items.add(this) }
@@ -221,8 +230,8 @@ public object AuctionParser : Parser<Auction?> {
     }
 
     private fun AuctionBuilder.AuctionDetailsBuilder.parseGeneralTable(table: Element) {
-        val contentContainers = table.select("table.TableContent")
-        for (row in contentContainers[0].rows()) {
+        val contentContainers = table.select(TABLE_SELECTOR)
+        contentContainers[0].rows().forEach { row ->
             val (field, value) = getAuctionTableFieldValue(row)
             when (field) {
                 "Hit Points" -> hitPoints = value.parseInteger()
@@ -236,7 +245,7 @@ public object AuctionParser : Parser<Auction?> {
             }
         }
         val skillsMap = mutableMapOf<String, Double>().withDefault { 0.0 }
-        for (row in contentContainers[1].rows()) {
+        contentContainers[1].rows().forEach { row ->
             val (name, level, progress) = row.cellsText()
             skillsMap[name] = level.parseInteger() + (progress.remove("%").toDouble() / PERCENTAGE)
         }
@@ -250,7 +259,7 @@ public object AuctionParser : Parser<Auction?> {
             fistFighting = skillsMap.getValue("Fist Fighting"),
             shielding = skillsMap.getValue("Shielding"),
         )
-        for (row in contentContainers[2].rows()) {
+        contentContainers[2].rows().forEach { row ->
             val (field, value) = getAuctionTableFieldValue(row)
             when (field) {
                 "Creation Date" -> creationDate = parseTibiaDateTime(value)
@@ -265,7 +274,7 @@ public object AuctionParser : Parser<Auction?> {
             }
         }
 
-        for (row in contentContainers[4].rows()) {
+        contentContainers[4].rows().forEach { row ->
             val (field, value) = getAuctionTableFieldValue(row)
             when (field) {
                 "Charm Expansion" -> hasCharmExpansion = value.contains("yes")
@@ -274,7 +283,7 @@ public object AuctionParser : Parser<Auction?> {
             }
         }
         dailyRewardStreak = contentContainers[5].selectFirst("div")?.cleanText()?.parseInteger() ?: 0
-        for (row in contentContainers[6].rows()) {
+        contentContainers[6].rows().forEach { row ->
             val (field, value) = getAuctionTableFieldValue(row)
             when (field) {
                 "Hunting Task Points" -> huntingTaskPoints = value.parseInteger()
@@ -284,7 +293,7 @@ public object AuctionParser : Parser<Auction?> {
             }
         }
 
-        for (row in contentContainers[7].rows()) {
+        contentContainers[7].rows().forEach { row ->
             val (field, value) = getAuctionTableFieldValue(row)
             when (field) {
                 "Hirelings" -> hirelings = value.parseInteger()
@@ -293,7 +302,7 @@ public object AuctionParser : Parser<Auction?> {
             }
         }
 
-        for (row in contentContainers.getOrNull(8)?.rows().orEmpty()) {
+        contentContainers.getOrNull(8)?.rows().orEmpty().forEach { row ->
             val (field, value) = getAuctionTableFieldValue(row)
             when (field) {
                 "Exalted Dust" -> {
@@ -304,13 +313,13 @@ public object AuctionParser : Parser<Auction?> {
             }
         }
 
-        for (row in contentContainers.getOrNull(9)?.rows().orEmpty()) {
+        contentContainers.getOrNull(9)?.rows().orEmpty().forEach { row ->
             val (field, value) = getAuctionTableFieldValue(row)
             when (field) {
                 "Boss Points" -> bossPoints = value.parseInteger()
             }
         }
-        for (row in contentContainers.getOrNull(10)?.rows().orEmpty()) {
+        contentContainers.getOrNull(10)?.rows().orEmpty().forEach { row ->
             val (field, value) = getAuctionTableFieldValue(row)
             when (field) {
                 "Bonus Promotion Points" -> bonusPromotionPoints = value.parseInteger()
@@ -422,7 +431,7 @@ public object AuctionParser : Parser<Auction?> {
 
     public inline fun <reified T> parsePageItems(content: String): List<T> {
         val document = Jsoup.parse(content)
-        val cvIcon = document.select("div.CVIcon")
+        val cvIcon = document.select(ICON_CSS_SELECTOR)
         return when (T::class) {
             ItemEntry::class -> cvIcon.mapNotNull { parseDisplayedItem(it) as T }
             OutfitEntry::class -> cvIcon.mapNotNull { parseDisplayedOutfit(it) as T }

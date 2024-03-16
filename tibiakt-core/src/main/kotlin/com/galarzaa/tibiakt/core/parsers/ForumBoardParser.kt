@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ import com.galarzaa.tibiakt.core.enums.ThreadStatus
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
 import com.galarzaa.tibiakt.core.models.forums.ForumBoard
 import com.galarzaa.tibiakt.core.models.forums.ForumEmoticon
+import com.galarzaa.tibiakt.core.utils.TABLE_SELECTOR
 import com.galarzaa.tibiakt.core.utils.cells
 import com.galarzaa.tibiakt.core.utils.cleanText
 import com.galarzaa.tibiakt.core.utils.formData
@@ -35,7 +36,7 @@ import org.jsoup.nodes.Element
 
 /** Parser for forum boards. */
 public object ForumBoardParser : Parser<ForumBoard?> {
-    private val fileNameRegex = Regex("""([\w_]+.gif)""")
+    private val fileNameRegex = Regex("""(\w+.gif)""")
     override fun fromContent(content: String): ForumBoard? {
         val boxContent = boxContent(content, org.jsoup.parser.Parser.xmlParser())
         val forumBreadcrumbs = boxContent.selectFirst("div.ForumBreadCrumbs")
@@ -58,7 +59,7 @@ public object ForumBoardParser : Parser<ForumBoard?> {
             threadAge = form.values["threadage"]?.toInt() ?: return@forumBoard
 
             val table = boxContent.selectFirst("table.Table3") ?: throw ParsingException("No board tables found.")
-            val contentTables = table.select("table.TableContent")
+            val contentTables = table.select(TABLE_SELECTOR)
             if (contentTables.size >= 2) parseAnnouncements(contentTables.first()!!)
             parseThreadsTable(contentTables.last()!!)
             val paginationData = boxContent.selectFirst("td > small")!!.parsePagination()
