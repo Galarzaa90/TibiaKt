@@ -68,10 +68,10 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </td>
 <td class="coverageStat">
   <span class="percent">
-    68.2%
+    70%
   </span>
   <span class="absValue">
-    (15/22)
+    (14/20)
   </span>
 </td>
 <td class="coverageStat">
@@ -84,10 +84,10 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </td>
 <td class="coverageStat">
   <span class="percent">
-    85.4%
+    86.1%
   </span>
   <span class="absValue">
-    (158/185)
+    (155/180)
   </span>
 </td>
 </tr>
@@ -100,7 +100,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;/*
-&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; * Copyright © 2024 Allan Galarza
 &nbsp; *
 &nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 &nbsp; * you may not use this file except in compliance with the License.
@@ -140,7 +140,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;            world = selectedWorld.cleanText()</b>
 <b class="fc">&nbsp;            for ((index, table) in tables.withIndex()) {</b>
 <b class="fc">&nbsp;                val isActive = index == 0</b>
-<b class="pc">&nbsp;                val rows = table?.select(&quot;tr&quot;).orEmpty()</b>
+<b class="pc">&nbsp;                val rows = table.select(&quot;tr&quot;).orEmpty()</b>
 <b class="fc">&nbsp;                for (row in rows.offsetStart(1)) {</b>
 <b class="fc">&nbsp;                    val (logoColumn, nameColumn, _) = row.select(&quot;td&quot;)</b>
 <b class="pc">&nbsp;                    val nameContainer = nameColumn.selectFirst(&quot;b&quot;) ?: continue</b>
@@ -178,7 +178,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-03-16 00:23</div>
+    <div style="float:right;">generated on 2024-03-16 01:18</div>
 </div>
 </body>
 </html>

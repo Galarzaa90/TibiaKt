@@ -57,26 +57,26 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </td>
 <td class="coverageStat">
   <span class="percent">
-    60.7%
+    61.5%
   </span>
   <span class="absValue">
-    (34/56)
+    (32/52)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    84.4%
+    84.1%
   </span>
   <span class="absValue">
-    (38/45)
+    (37/44)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    67.6%
+    67.4%
   </span>
   <span class="absValue">
-    (280/414)
+    (277/411)
   </span>
 </td>
 </tr>
@@ -127,26 +127,26 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </td>
 <td class="coverageStat">
   <span class="percent">
-    61.7%
+    62.5%
   </span>
   <span class="absValue">
-    (37/60)
+    (35/56)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    85.7%
+    85.4%
   </span>
   <span class="absValue">
-    (42/49)
+    (41/48)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    69.6%
+    69.4%
   </span>
   <span class="absValue">
-    (312/448)
+    (309/445)
   </span>
 </td>
 </tr>
@@ -214,7 +214,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;        for (row in table.rows()) {</b>
 <b class="fc">&nbsp;            val rows = row.cells()</b>
 <b class="fc">&nbsp;            if(rows.size != 3)</b>
-<b class="fc">&nbsp;                continue</b>
+&nbsp;                continue
 <b class="fc">&nbsp;            val (iconColumn, dateColumn, titleColumn) = rows</b>
 <b class="fc">&nbsp;            val iconUrl =</b>
 <b class="pc">&nbsp;                iconColumn.selectFirst(&quot;img&quot;)?.attr(&quot;src&quot;) ?: throw ParsingException(&quot;category icon not found&quot;)</b>
@@ -258,7 +258,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="pc">&nbsp;            if (!formData.valuesMultiple[value.filterName].isNullOrEmpty()) addCategory(value)</b>
 &nbsp;        }
 <b class="fc">&nbsp;        for (value in NewsType.values()) {</b>
-<b class="pc">&nbsp;            if (!formData.valuesMultiple[value.filterName].isNullOrEmpty()) addType(value)</b>
+<b class="fc">&nbsp;            if (!formData.valuesMultiple[value.filterName].isNullOrEmpty()) addType(value)</b>
 &nbsp;        }
 &nbsp;    }
 &nbsp;}
@@ -285,7 +285,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-03-16 00:23</div>
+    <div style="float:right;">generated on 2024-03-16 01:18</div>
 </div>
 </body>
 </html>
