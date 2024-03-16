@@ -1,5 +1,5 @@
 /*
- * Copyright © 2023 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
 import kotlinx.serialization.json.Json
 
 fun main() {
-    embeddedServer(CIO, port = 8090, module = Application::tibiaKtModule).start(wait = true)
+    embeddedServer(CIO, port = 8080, module = Application::tibiaKtModule).start(wait = true)
 }
 
 fun Application.tibiaKtModule() {

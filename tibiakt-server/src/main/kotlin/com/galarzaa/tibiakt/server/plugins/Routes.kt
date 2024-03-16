@@ -32,6 +32,10 @@ import io.ktor.server.routing.routing
 
 internal fun Application.configureRouting(client: TibiaKtClient) {
     routing {
+        get("/healthcheck") {
+            call.respond("true")
+        }
+
         get<Characters> { (name) -> call.respondOrNotFound(client.fetchCharacter(name)) }
 
         get<Worlds> { call.respond(client.fetchWorldOverview()) }

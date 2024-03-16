@@ -149,7 +149,7 @@ public open class TibiaKtClient constructor(
 
     private val client = HttpClient(engine ?: CIO.create()) {
         install(HttpTimeout) {
-            requestTimeoutMillis = HttpTimeout.INFINITE_TIMEOUT_MS
+            requestTimeoutMillis = 30.seconds.inWholeMilliseconds
             connectTimeoutMillis = 30.seconds.inWholeMilliseconds
         }
         Charsets {
