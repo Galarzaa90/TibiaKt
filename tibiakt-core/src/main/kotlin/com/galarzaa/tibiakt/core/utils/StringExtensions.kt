@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,8 @@
  */
 
 package com.galarzaa.tibiakt.core.utils
+
+import kotlin.math.pow
 
 /**
  * Split a string enumerating elements, using a different separator for the last item.
@@ -62,7 +64,7 @@ public fun String.findInteger(): Int = filter { it.isDigit() }.toInt()
 public fun String?.nullIfBlank(): String? = takeIf { !it.isNullOrBlank() }
 
 /**
- *  Parses strings with numbers using "k" as a thousand suffix.
+ *  Parses strings with numbers using "k" as suffix to represent thousands.
  */
 public fun String.parseThousandSuffix(): Int =
-    remove("k", true).parseInteger() * (count { it == 'k' || it == 'K' } * 1000)
+    remove("k", true).parseInteger() * (1000.0.pow(count { it == 'k' || it == 'K' }).toInt())
