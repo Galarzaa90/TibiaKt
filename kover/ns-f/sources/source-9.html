@@ -193,7 +193,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;/*
-&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; * Copyright © 2024 Allan Galarza
 &nbsp; *
 &nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 &nbsp; * you may not use this file except in compliance with the License.
@@ -216,6 +216,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
 &nbsp;import com.galarzaa.tibiakt.core.models.forums.ForumBoard
 &nbsp;import com.galarzaa.tibiakt.core.models.forums.ForumEmoticon
+&nbsp;import com.galarzaa.tibiakt.core.utils.TABLE_SELECTOR
 &nbsp;import com.galarzaa.tibiakt.core.utils.cells
 &nbsp;import com.galarzaa.tibiakt.core.utils.cleanText
 &nbsp;import com.galarzaa.tibiakt.core.utils.formData
@@ -229,7 +230,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;
 &nbsp;/** Parser for forum boards. */
 &nbsp;public object ForumBoardParser : Parser&lt;ForumBoard?&gt; {
-<b class="fc">&nbsp;    private val fileNameRegex = Regex(&quot;&quot;&quot;([\w_]+.gif)&quot;&quot;&quot;)</b>
+<b class="fc">&nbsp;    private val fileNameRegex = Regex(&quot;&quot;&quot;(\w+.gif)&quot;&quot;&quot;)</b>
 &nbsp;    override fun fromContent(content: String): ForumBoard? {
 <b class="fc">&nbsp;        val boxContent = boxContent(content, org.jsoup.parser.Parser.xmlParser())</b>
 <b class="fc">&nbsp;        val forumBreadcrumbs = boxContent.selectFirst(&quot;div.ForumBreadCrumbs&quot;)</b>
@@ -252,7 +253,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;            threadAge = form.values[&quot;threadage&quot;]?.toInt() ?: return@forumBoard</b>
 &nbsp;
 <b class="pc">&nbsp;            val table = boxContent.selectFirst(&quot;table.Table3&quot;) ?: throw ParsingException(&quot;No board tables found.&quot;)</b>
-<b class="fc">&nbsp;            val contentTables = table.select(&quot;table.TableContent&quot;)</b>
+<b class="fc">&nbsp;            val contentTables = table.select(TABLE_SELECTOR)</b>
 <b class="fc">&nbsp;            if (contentTables.size &gt;= 2) parseAnnouncements(contentTables.first()!!)</b>
 <b class="fc">&nbsp;            parseThreadsTable(contentTables.last()!!)</b>
 <b class="fc">&nbsp;            val paginationData = boxContent.selectFirst(&quot;td &gt; small&quot;)!!.parsePagination()</b>
@@ -335,7 +336,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-03-16 01:18</div>
+    <div style="float:right;">generated on 2024-03-16 05:36</div>
 </div>
 </body>
 </html>

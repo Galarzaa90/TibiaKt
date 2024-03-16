@@ -57,26 +57,26 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </td>
 <td class="coverageStat">
   <span class="percent">
-    65.5%
+    65.8%
   </span>
   <span class="absValue">
-    (173/264)
+    (133/202)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    89.8%
+    89.6%
   </span>
   <span class="absValue">
-    (229/255)
+    (240/268)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    85.5%
+    86%
   </span>
   <span class="absValue">
-    (2021/2363)
+    (1979/2300)
   </span>
 </td>
 </tr>
@@ -183,26 +183,26 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </td>
 <td class="coverageStat">
   <span class="percent">
-    63.8%
+    63.6%
   </span>
   <span class="absValue">
-    (190/298)
+    (150/236)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    90.3%
+    90.1%
   </span>
   <span class="absValue">
-    (252/279)
+    (263/292)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    86%
+    86.5%
   </span>
   <span class="absValue">
-    (2327/2705)
+    (2285/2642)
   </span>
 </td>
 </tr>
@@ -214,7 +214,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;/*
-&nbsp; * Copyright © 2023 Allan Galarza
+&nbsp; * Copyright © 2024 Allan Galarza
 &nbsp; *
 &nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 &nbsp; * you may not use this file except in compliance with the License.
@@ -251,6 +251,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;import com.galarzaa.tibiakt.core.models.bazaar.OutfitEntry
 &nbsp;import com.galarzaa.tibiakt.core.models.bazaar.OutfitImage
 &nbsp;import com.galarzaa.tibiakt.core.models.bazaar.Outfits
+&nbsp;import com.galarzaa.tibiakt.core.utils.TABLE_SELECTOR
 &nbsp;import com.galarzaa.tibiakt.core.utils.cellsText
 &nbsp;import com.galarzaa.tibiakt.core.utils.clean
 &nbsp;import com.galarzaa.tibiakt.core.utils.cleanText
@@ -271,6 +272,10 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;/** Parser for auction pages. */
 &nbsp;public object AuctionParser : Parser&lt;Auction?&gt; {
 &nbsp;    private const val PERCENTAGE = 100f
+&nbsp;
+&nbsp;    @PublishedApi
+&nbsp;    internal const val ICON_CSS_SELECTOR: String = &quot;div.CVIcon&quot;
+&nbsp;    internal const val PAGINATOR_SELECTOR: String = &quot;div.BlockPageNavigationRow&quot;
 &nbsp;
 <b class="fc">&nbsp;    private val charInfoRegex = Regex(&quot;&quot;&quot;Level: (\d+) \| Vocation: ([\w\s]+)\| (\w+) \| World: (\w+)&quot;&quot;&quot;)</b>
 <b class="fc">&nbsp;    private val idAddonsRegex = Regex(&quot;&quot;&quot;/(\d+)_(\d+)&quot;&quot;&quot;)</b>
@@ -314,7 +319,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;    }
 &nbsp;
 &nbsp;    private fun AuctionBuilder.AuctionDetailsBuilder.parseCharmsTable(table: Element) {
-<b class="fc">&nbsp;        for (row in table.selectFirst(&quot;table.TableContent&quot;).rows().offsetStart(1)) {</b>
+<b class="fc">&nbsp;        for (row in table.selectFirst(TABLE_SELECTOR).rows().offsetStart(1)) {</b>
 <b class="fc">&nbsp;            val colsText = row.cellsText()</b>
 <b class="pc">&nbsp;            if (colsText.size != 2) continue</b>
 <b class="fc">&nbsp;            val (cost, name) = colsText</b>
@@ -323,7 +328,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;    }
 &nbsp;
 &nbsp;    private fun AuctionBuilder.AuctionDetailsBuilder.parseAchievementsTable(table: Element) {
-<b class="fc">&nbsp;        for (row in table.selectFirst(&quot;table.TableContent&quot;).rows().offsetStart(1)) {</b>
+<b class="fc">&nbsp;        for (row in table.selectFirst(TABLE_SELECTOR).rows().offsetStart(1)) {</b>
 <b class="fc">&nbsp;            val text = row.cleanText()</b>
 <b class="fc">&nbsp;            if (text.contains(&quot;more entries&quot;)) continue</b>
 <b class="fc">&nbsp;            val isSecret = row.selectFirst(&quot;img&quot;) != null</b>
@@ -332,7 +337,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;    }
 &nbsp;
 <b class="nc">&nbsp;    private fun AuctionBuilder.AuctionDetailsBuilder.parseBestiaryTable(table: Element, bosstiary: Boolean = false) {</b>
-<b class="fc">&nbsp;        for (row in table.selectFirst(&quot;table.TableContent&quot;).rows().offsetStart(1)) {</b>
+<b class="fc">&nbsp;        for (row in table.selectFirst(TABLE_SELECTOR).rows().offsetStart(1)) {</b>
 <b class="fc">&nbsp;            val columnsText = row.cellsText()</b>
 <b class="fc">&nbsp;            if (columnsText.size != 3) continue</b>
 <b class="fc">&nbsp;            val (step, kills, name) = columnsText</b>
@@ -342,7 +347,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;    }
 &nbsp;
 &nbsp;    private fun AuctionBuilder.AuctionDetailsBuilder.parseBlessingsTable(table: Element) {
-<b class="fc">&nbsp;        for (row in table.selectFirst(&quot;table.TableContent&quot;).rows().offsetStart(1)) {</b>
+<b class="fc">&nbsp;        for (row in table.selectFirst(TABLE_SELECTOR).rows().offsetStart(1)) {</b>
 <b class="fc">&nbsp;            val colsText = row.cellsText()</b>
 <b class="pc">&nbsp;            if (colsText.size != 2) continue</b>
 <b class="fc">&nbsp;            val (amount, name) = colsText</b>
@@ -351,7 +356,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;    }
 &nbsp;
 &nbsp;    private fun parseSingleColumnTable(table: Element): List&lt;String&gt; {
-<b class="fc">&nbsp;        val innerTable = table.select(&quot;table.TableContent&quot;).last()</b>
+<b class="fc">&nbsp;        val innerTable = table.select(TABLE_SELECTOR).last()</b>
 <b class="fc">&nbsp;        val values = mutableListOf&lt;String&gt;()</b>
 <b class="fc">&nbsp;        for (row in innerTable.rows().offsetStart(1)) {</b>
 <b class="pc">&nbsp;            val text = row.selectFirst(&quot;td&quot;)?.cleanText().orEmpty()</b>
@@ -362,12 +367,13 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;    }
 &nbsp;
 &nbsp;    private fun parseFamiliarsTable(table: Element): Familiars {
-<b class="pc">&nbsp;        val paginationData = table.selectFirst(&quot;div.BlockPageNavigationRow&quot;)?.parsePagination() ?: return Familiars(1,</b>
+<b class="pc">&nbsp;        val paginationData = table.selectFirst(PAGINATOR_SELECTOR)?.parsePagination() ?: return Familiars(</b>
+<b class="nc">&nbsp;            1,</b>
 <b class="nc">&nbsp;            0,</b>
 <b class="nc">&nbsp;            0,</b>
 <b class="nc">&nbsp;            emptyList(),</b>
 <b class="nc">&nbsp;            false)</b>
-<b class="fc">&nbsp;        val familiarBoxes = table.select(&quot;div.CVIcon&quot;)</b>
+<b class="fc">&nbsp;        val familiarBoxes = table.select(ICON_CSS_SELECTOR)</b>
 <b class="fc">&nbsp;        val familiars = mutableListOf&lt;FamiliarEntry&gt;()</b>
 <b class="fc">&nbsp;        for (mountBox in familiarBoxes) {</b>
 <b class="fc">&nbsp;            val name = mountBox.attr(&quot;title&quot;).split(&quot;(&quot;).first().clean()</b>
@@ -383,12 +389,13 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;    }
 &nbsp;
 &nbsp;    private fun parseOutfitsTable(table: Element): Outfits {
-<b class="pc">&nbsp;        val paginationData = table.selectFirst(&quot;div.BlockPageNavigationRow&quot;)?.parsePagination() ?: return Outfits(1,</b>
+<b class="pc">&nbsp;        val paginationData = table.selectFirst(PAGINATOR_SELECTOR)?.parsePagination() ?: return Outfits(</b>
+<b class="fc">&nbsp;            1,</b>
 <b class="fc">&nbsp;            0,</b>
 <b class="fc">&nbsp;            0,</b>
 <b class="fc">&nbsp;            emptyList(),</b>
 <b class="fc">&nbsp;            false)</b>
-<b class="fc">&nbsp;        val outfitBoxes = table.select(&quot;div.CVIcon&quot;)</b>
+<b class="fc">&nbsp;        val outfitBoxes = table.select(ICON_CSS_SELECTOR)</b>
 <b class="fc">&nbsp;        val outfits = outfitBoxes.map { parseDisplayedOutfit(it) }</b>
 <b class="fc">&nbsp;        return Outfits(paginationData.currentPage,</b>
 <b class="fc">&nbsp;            paginationData.totalPages,</b>
@@ -399,24 +406,26 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;
 &nbsp;    private fun parseMountsTable(mountsTable: Element): Mounts {
 <b class="fc">&nbsp;        val paginationData =</b>
-<b class="pc">&nbsp;            mountsTable.selectFirst(&quot;div.BlockPageNavigationRow&quot;)?.parsePagination() ?: return Mounts(1,</b>
+<b class="pc">&nbsp;            mountsTable.selectFirst(PAGINATOR_SELECTOR)?.parsePagination() ?: return Mounts(</b>
+<b class="fc">&nbsp;                1,</b>
 <b class="fc">&nbsp;                0,</b>
 <b class="fc">&nbsp;                0,</b>
 <b class="fc">&nbsp;                emptyList(),</b>
 <b class="fc">&nbsp;                false)</b>
-<b class="fc">&nbsp;        val mountsBoxes = mountsTable.select(&quot;div.CVIcon&quot;)</b>
+<b class="fc">&nbsp;        val mountsBoxes = mountsTable.select(ICON_CSS_SELECTOR)</b>
 <b class="fc">&nbsp;        val mounts = mountsBoxes.map { parseDisplayedMount(it) }</b>
 <b class="fc">&nbsp;        return Mounts(paginationData.currentPage, paginationData.totalPages, paginationData.resultsCount, mounts, false)</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    private fun parseItemsTable(itemsTable: Element): ItemSummary {
 <b class="fc">&nbsp;        val paginationData =</b>
-<b class="pc">&nbsp;            itemsTable.selectFirst(&quot;div.BlockPageNavigationRow&quot;)?.parsePagination() ?: return ItemSummary(1,</b>
+<b class="pc">&nbsp;            itemsTable.selectFirst(PAGINATOR_SELECTOR)?.parsePagination() ?: return ItemSummary(</b>
+<b class="nc">&nbsp;                1,</b>
 <b class="nc">&nbsp;                0,</b>
 <b class="nc">&nbsp;                0,</b>
 <b class="nc">&nbsp;                emptyList(),</b>
 <b class="nc">&nbsp;                false)</b>
-<b class="fc">&nbsp;        val itemBoxes = itemsTable.select(&quot;div.CVIcon&quot;)</b>
+<b class="fc">&nbsp;        val itemBoxes = itemsTable.select(ICON_CSS_SELECTOR)</b>
 <b class="fc">&nbsp;        val items = mutableListOf&lt;ItemEntry&gt;()</b>
 <b class="fc">&nbsp;        for (itemBox in itemBoxes) {</b>
 <b class="pc">&nbsp;            parseDisplayedItem(itemBox)?.run { items.add(this) }</b>
@@ -436,8 +445,8 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;    }
 &nbsp;
 &nbsp;    private fun AuctionBuilder.AuctionDetailsBuilder.parseGeneralTable(table: Element) {
-<b class="fc">&nbsp;        val contentContainers = table.select(&quot;table.TableContent&quot;)</b>
-<b class="fc">&nbsp;        for (row in contentContainers[0].rows()) {</b>
+<b class="fc">&nbsp;        val contentContainers = table.select(TABLE_SELECTOR)</b>
+<b class="fc">&nbsp;        contentContainers[0].rows().forEach { row -&gt;</b>
 <b class="fc">&nbsp;            val (field, value) = getAuctionTableFieldValue(row)</b>
 <b class="pc">&nbsp;            when (field) {</b>
 <b class="fc">&nbsp;                &quot;Hit Points&quot; -&gt; hitPoints = value.parseInteger()</b>
@@ -449,12 +458,12 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;                &quot;Outfits&quot; -&gt; outfitsCount = value.parseInteger()</b>
 <b class="fc">&nbsp;                &quot;Titles&quot; -&gt; titlesCount = value.parseInteger()</b>
 &nbsp;            }
-&nbsp;        }
+<b class="fc">&nbsp;        }</b>
 <b class="pc">&nbsp;        val skillsMap = mutableMapOf&lt;String, Double&gt;().withDefault { 0.0 }</b>
-<b class="fc">&nbsp;        for (row in contentContainers[1].rows()) {</b>
+<b class="fc">&nbsp;        contentContainers[1].rows().forEach { row -&gt;</b>
 <b class="fc">&nbsp;            val (name, level, progress) = row.cellsText()</b>
 <b class="fc">&nbsp;            skillsMap[name] = level.parseInteger() + (progress.remove(&quot;%&quot;).toDouble() / PERCENTAGE)</b>
-&nbsp;        }
+<b class="fc">&nbsp;        }</b>
 <b class="fc">&nbsp;        skills = AuctionSkills(</b>
 <b class="fc">&nbsp;            axeFighting = skillsMap.getValue(&quot;Axe Fighting&quot;),</b>
 <b class="fc">&nbsp;            clubFighting = skillsMap.getValue(&quot;Club Fighting&quot;),</b>
@@ -465,7 +474,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;            fistFighting = skillsMap.getValue(&quot;Fist Fighting&quot;),</b>
 <b class="fc">&nbsp;            shielding = skillsMap.getValue(&quot;Shielding&quot;),</b>
 &nbsp;        )
-<b class="fc">&nbsp;        for (row in contentContainers[2].rows()) {</b>
+<b class="fc">&nbsp;        contentContainers[2].rows().forEach { row -&gt;</b>
 <b class="fc">&nbsp;            val (field, value) = getAuctionTableFieldValue(row)</b>
 <b class="pc">&nbsp;            when (field) {</b>
 <b class="fc">&nbsp;                &quot;Creation Date&quot; -&gt; creationDate = parseTibiaDateTime(value)</b>
@@ -473,23 +482,23 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;                &quot;Gold&quot; -&gt; gold = value.parseLong()</b>
 <b class="fc">&nbsp;                &quot;Achievement Points&quot; -&gt; achievementPoints = value.parseInteger()</b>
 &nbsp;            }
-&nbsp;        }
+<b class="fc">&nbsp;        }</b>
 <b class="pc">&nbsp;        contentContainers[3].selectFirst(&quot;div&quot;)?.cleanText()?.run {</b>
 <b class="pc">&nbsp;            if (contains(&quot;after&quot;)) {</b>
 <b class="fc">&nbsp;                regularWorldTransfersAvailable = parseTibiaDateTime(split(&quot;after&quot;)[1])</b>
 &nbsp;            }
 <b class="fc">&nbsp;        }</b>
 &nbsp;
-<b class="fc">&nbsp;        for (row in contentContainers[4].rows()) {</b>
+<b class="fc">&nbsp;        contentContainers[4].rows().forEach { row -&gt;</b>
 <b class="fc">&nbsp;            val (field, value) = getAuctionTableFieldValue(row)</b>
 <b class="pc">&nbsp;            when (field) {</b>
 <b class="fc">&nbsp;                &quot;Charm Expansion&quot; -&gt; hasCharmExpansion = value.contains(&quot;yes&quot;)</b>
 <b class="fc">&nbsp;                &quot;Available Charm Points&quot; -&gt; availableCharmPoints = value.parseInteger()</b>
 <b class="fc">&nbsp;                &quot;Spent Charm Points&quot; -&gt; spentCharmPoints = value.parseInteger()</b>
 &nbsp;            }
-&nbsp;        }
+<b class="fc">&nbsp;        }</b>
 <b class="pc">&nbsp;        dailyRewardStreak = contentContainers[5].selectFirst(&quot;div&quot;)?.cleanText()?.parseInteger() ?: 0</b>
-<b class="fc">&nbsp;        for (row in contentContainers[6].rows()) {</b>
+<b class="fc">&nbsp;        contentContainers[6].rows().forEach { row -&gt;</b>
 <b class="fc">&nbsp;            val (field, value) = getAuctionTableFieldValue(row)</b>
 <b class="pc">&nbsp;            when (field) {</b>
 <b class="fc">&nbsp;                &quot;Hunting Task Points&quot; -&gt; huntingTaskPoints = value.parseInteger()</b>
@@ -497,18 +506,18 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;                &quot;Permanent Prey Slots&quot; -&gt; permanentPreySlots = value.parseInteger()</b>
 <b class="fc">&nbsp;                &quot;Prey Wildcards&quot; -&gt; preyWildcards = value.parseInteger()</b>
 &nbsp;            }
-&nbsp;        }
+<b class="fc">&nbsp;        }</b>
 &nbsp;
-<b class="fc">&nbsp;        for (row in contentContainers[7].rows()) {</b>
+<b class="fc">&nbsp;        contentContainers[7].rows().forEach { row -&gt;</b>
 <b class="fc">&nbsp;            val (field, value) = getAuctionTableFieldValue(row)</b>
 <b class="pc">&nbsp;            when (field) {</b>
 <b class="fc">&nbsp;                &quot;Hirelings&quot; -&gt; hirelings = value.parseInteger()</b>
 <b class="fc">&nbsp;                &quot;Hireling Jobs&quot; -&gt; hirelingJobs = value.parseInteger()</b>
 <b class="fc">&nbsp;                &quot;Hireling Outfits&quot; -&gt; hirelingOutfits = value.parseInteger()</b>
 &nbsp;            }
-&nbsp;        }
+<b class="fc">&nbsp;        }</b>
 &nbsp;
-<b class="pc">&nbsp;        for (row in contentContainers.getOrNull(8)?.rows().orEmpty()) {</b>
+<b class="pc">&nbsp;        contentContainers.getOrNull(8)?.rows().orEmpty().forEach { row -&gt;</b>
 <b class="fc">&nbsp;            val (field, value) = getAuctionTableFieldValue(row)</b>
 <b class="fc">&nbsp;            when (field) {</b>
 <b class="pc">&nbsp;                &quot;Exalted Dust&quot; -&gt; {</b>
@@ -517,20 +526,20 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;                    exaltedDustLimit = limit</b>
 &nbsp;                }
 &nbsp;            }
-&nbsp;        }
+<b class="fc">&nbsp;        }</b>
 &nbsp;
-<b class="pc">&nbsp;        for (row in contentContainers.getOrNull(9)?.rows().orEmpty()) {</b>
+<b class="pc">&nbsp;        contentContainers.getOrNull(9)?.rows().orEmpty().forEach { row -&gt;</b>
 <b class="fc">&nbsp;            val (field, value) = getAuctionTableFieldValue(row)</b>
 <b class="fc">&nbsp;            when (field) {</b>
 <b class="pc">&nbsp;                &quot;Boss Points&quot; -&gt; bossPoints = value.parseInteger()</b>
 &nbsp;            }
-&nbsp;        }
-<b class="pc">&nbsp;        for (row in contentContainers.getOrNull(10)?.rows().orEmpty()) {</b>
+<b class="fc">&nbsp;        }</b>
+<b class="pc">&nbsp;        contentContainers.getOrNull(10)?.rows().orEmpty().forEach { row -&gt;</b>
 <b class="fc">&nbsp;            val (field, value) = getAuctionTableFieldValue(row)</b>
 <b class="fc">&nbsp;            when (field) {</b>
 <b class="pc">&nbsp;                &quot;Bonus Promotion Points&quot; -&gt; bonusPromotionPoints = value.parseInteger()</b>
 &nbsp;            }
-&nbsp;        }
+<b class="fc">&nbsp;        }</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    internal fun AuctionBuilder.parseAuctionContainer(auctionContainer: Element) {
@@ -637,7 +646,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;
 &nbsp;    public inline fun &lt;reified T&gt; parsePageItems(content: String): List&lt;T&gt; {
 <b class="nc">&nbsp;        val document = Jsoup.parse(content)</b>
-<b class="nc">&nbsp;        val cvIcon = document.select(&quot;div.CVIcon&quot;)</b>
+<b class="nc">&nbsp;        val cvIcon = document.select(ICON_CSS_SELECTOR)</b>
 <b class="nc">&nbsp;        return when (T::class) {</b>
 <b class="nc">&nbsp;            ItemEntry::class -&gt; cvIcon.mapNotNull { parseDisplayedItem(it) as T }</b>
 <b class="nc">&nbsp;            OutfitEntry::class -&gt; cvIcon.mapNotNull { parseDisplayedOutfit(it) as T }</b>
@@ -669,7 +678,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-03-16 01:18</div>
+    <div style="float:right;">generated on 2024-03-16 05:36</div>
 </div>
 </body>
 </html>

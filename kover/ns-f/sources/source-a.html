@@ -158,7 +158,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;/*
-&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; * Copyright © 2024 Allan Galarza
 &nbsp; *
 &nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 &nbsp; * you may not use this file except in compliance with the License.
@@ -178,6 +178,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;import com.galarzaa.tibiakt.core.builders.forumsSection
 &nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
 &nbsp;import com.galarzaa.tibiakt.core.models.forums.ForumSection
+&nbsp;import com.galarzaa.tibiakt.core.utils.TABLE_SELECTOR
 &nbsp;import com.galarzaa.tibiakt.core.utils.cells
 &nbsp;import com.galarzaa.tibiakt.core.utils.cleanText
 &nbsp;import com.galarzaa.tibiakt.core.utils.getLinkInformation
@@ -197,7 +198,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="pc">&nbsp;        if (&quot;Boards&quot; !in tables) throw ParsingException(&quot;Boards table not found&quot;)</b>
 &nbsp;
 <b class="fc">&nbsp;        return forumsSection {</b>
-<b class="pc">&nbsp;            val boardRows = tables[&quot;Boards&quot;]!!.selectFirst(&quot;table.TableContent&quot;)?.select(&quot;tr:not(.LabelH)&quot;)!!</b>
+<b class="pc">&nbsp;            val boardRows = tables[&quot;Boards&quot;]!!.selectFirst(TABLE_SELECTOR)?.select(&quot;tr:not(.LabelH)&quot;)!!</b>
 <b class="fc">&nbsp;            for (row in boardRows) {</b>
 <b class="fc">&nbsp;                val columns = row.cells()</b>
 <b class="fc">&nbsp;                if (columns.size != 6) continue</b>
@@ -246,7 +247,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-03-16 01:18</div>
+    <div style="float:right;">generated on 2024-03-16 05:36</div>
 </div>
 </body>
 </html>

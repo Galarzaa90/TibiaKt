@@ -158,7 +158,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;/*
-&nbsp; * Copyright © 2023 Allan Galarza
+&nbsp; * Copyright © 2024 Allan Galarza
 &nbsp; *
 &nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 &nbsp; * you may not use this file except in compliance with the License.
@@ -183,6 +183,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
 &nbsp;import com.galarzaa.tibiakt.core.models.highscores.Highscores
 &nbsp;import com.galarzaa.tibiakt.core.utils.FormData
+&nbsp;import com.galarzaa.tibiakt.core.utils.TABLE_SELECTOR
 &nbsp;import com.galarzaa.tibiakt.core.utils.cellsText
 &nbsp;import com.galarzaa.tibiakt.core.utils.cleanText
 &nbsp;import com.galarzaa.tibiakt.core.utils.formData
@@ -250,7 +251,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;    }
 &nbsp;
 &nbsp;    private fun HighscoresBuilder.parseHighscoresTable(element: Element) {
-<b class="fc">&nbsp;        val entriesTable = element.selectFirst(&quot;table.TableContent&quot;)</b>
+<b class="fc">&nbsp;        val entriesTable = element.selectFirst(TABLE_SELECTOR)</b>
 <b class="fc">&nbsp;        for (row in entriesTable.rows().offsetStart(1)) {</b>
 <b class="fc">&nbsp;            val columns = row.cellsText()</b>
 <b class="fc">&nbsp;            if (columns.size &lt; 6) {</b>
@@ -294,7 +295,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-03-16 01:18</div>
+    <div style="float:right;">generated on 2024-03-16 05:36</div>
 </div>
 </body>
 </html>

@@ -125,6 +125,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;import com.galarzaa.tibiakt.core.models.leaderboards.LeaderboardEntry
 &nbsp;import com.galarzaa.tibiakt.core.models.leaderboards.LeaderboardRotation
 &nbsp;import com.galarzaa.tibiakt.core.utils.PaginationData
+&nbsp;import com.galarzaa.tibiakt.core.utils.TABLE_SELECTOR
 &nbsp;import com.galarzaa.tibiakt.core.utils.cells
 &nbsp;import com.galarzaa.tibiakt.core.utils.clean
 &nbsp;import com.galarzaa.tibiakt.core.utils.cleanText
@@ -145,7 +146,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;
 &nbsp;    override fun fromContent(content: String): Leaderboard? {
 <b class="fc">&nbsp;        val boxContent = boxContent(content)</b>
-<b class="fc">&nbsp;        val tables = boxContent.select(&quot;table.TableContent&quot;)</b>
+<b class="fc">&nbsp;        val tables = boxContent.select(TABLE_SELECTOR)</b>
 &nbsp;
 <b class="fc">&nbsp;        return leaderboard {</b>
 <b class="pc">&nbsp;            val formData = tables[1].selectFirst(&quot;form&quot;)?.formData() ?: throw ParsingException(&quot;form not found&quot;)</b>
@@ -230,7 +231,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-03-16 01:18</div>
+    <div style="float:right;">generated on 2024-03-16 05:36</div>
 </div>
 </body>
 </html>

@@ -120,6 +120,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;import com.galarzaa.tibiakt.core.builders.guildsSection
 &nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
 &nbsp;import com.galarzaa.tibiakt.core.models.guild.GuildsSection
+&nbsp;import com.galarzaa.tibiakt.core.utils.TABLE_SELECTOR
 &nbsp;import com.galarzaa.tibiakt.core.utils.boxContent
 &nbsp;import com.galarzaa.tibiakt.core.utils.cleanText
 &nbsp;import com.galarzaa.tibiakt.core.utils.offsetStart
@@ -131,7 +132,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;    override fun fromContent(content: String): GuildsSection? {
 <b class="fc">&nbsp;        val document: Document = Jsoup.parse(content, &quot;&quot;)</b>
 <b class="fc">&nbsp;        val boxContent = document.boxContent()</b>
-<b class="fc">&nbsp;        val tables = boxContent.select(&quot;table.TableContent&quot;)</b>
+<b class="fc">&nbsp;        val tables = boxContent.select(TABLE_SELECTOR)</b>
 <b class="fc">&nbsp;        return guildsSection {</b>
 <b class="pc">&nbsp;            val selectedWorld = boxContent.selectFirst(&quot;select[name=world]&quot;)?.selectFirst(&quot;option[selected]&quot;)</b>
 <b class="nc">&nbsp;                ?: throw ParsingException(&quot;Could not find selected world&quot;)</b>
@@ -178,7 +179,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-03-16 01:18</div>
+    <div style="float:right;">generated on 2024-03-16 05:36</div>
 </div>
 </body>
 </html>

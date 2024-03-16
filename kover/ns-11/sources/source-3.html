@@ -119,11 +119,13 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;import org.jsoup.select.Elements
 &nbsp;import java.net.URL
 &nbsp;
+&nbsp;internal const val TABLE_SELECTOR = &quot;table.TableContent&quot;
+&nbsp;
 &nbsp;internal fun Element.boxContent(): Element =
 &nbsp;    selectFirst(&quot;div.BoxContent&quot;) ?: throw ParsingException(&quot;BoxContent container not found&quot;)
 &nbsp;
 &nbsp;
-&nbsp;internal fun Element.parseTables(contentTableSelector: String = &quot;table.TableContent&quot;): Map&lt;String, Elements&gt; {
+&nbsp;internal fun Element.parseTables(contentTableSelector: String = TABLE_SELECTOR): Map&lt;String, Elements&gt; {
 &nbsp;    val tables = select(&quot;div.TableContainer&quot;)
 &nbsp;    val output = mutableMapOf&lt;String, Elements&gt;()
 &nbsp;    for (table: Element in tables) {
@@ -324,7 +326,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-03-16 01:18</div>
+    <div style="float:right;">generated on 2024-03-16 05:36</div>
 </div>
 </body>
 </html>
