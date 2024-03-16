@@ -1,5 +1,5 @@
 /*
- * Copyright © 2023 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -72,7 +72,7 @@ public object CMPostArchiveParser : Parser<CMPostArchive> {
             val date = parseTibiaDateTime(dateText)
             val (forum, thread) = columns[1].replaceBrs().wholeCleanText().split("\n")
             val postLink =
-                columns[2]?.selectFirst("a")?.getLinkInformation() ?: throw ParsingException("could not find post link")
+                columns[2].selectFirst("a")?.getLinkInformation() ?: throw ParsingException("could not find post link")
             val postId = postLink.queryParams["postid"]?.get(0)?.toInt()
                 ?: throw ParsingException("could not find postid in link")
             addEntry(CMPost(postId, date, forum, thread))

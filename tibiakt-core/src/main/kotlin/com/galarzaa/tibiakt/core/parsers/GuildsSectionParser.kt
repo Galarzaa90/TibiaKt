@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,7 +39,7 @@ public object GuildsSectionParser : Parser<GuildsSection?> {
             world = selectedWorld.cleanText()
             for ((index, table) in tables.withIndex()) {
                 val isActive = index == 0
-                val rows = table?.select("tr").orEmpty()
+                val rows = table.select("tr").orEmpty()
                 for (row in rows.offsetStart(1)) {
                     val (logoColumn, nameColumn, _) = row.select("td")
                     val nameContainer = nameColumn.selectFirst("b") ?: continue

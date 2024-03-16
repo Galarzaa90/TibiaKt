@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,6 @@ object Library {
                     branch.substringAfter("refs/heads/").replace("/", "-") + "-SNAPSHOT"
                 else -> "undefined"
             }
-            println("Version: ${out}")
             return out
         }
     val isSnapshot: Boolean get() = version.endsWith("-SNAPSHOT")

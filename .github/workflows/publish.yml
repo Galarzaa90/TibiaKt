@@ -15,21 +15,19 @@ jobs:
       GITHUB_BRANCH_NAME: ${{ github.ref }}
       GITHUB_TAG_NAME: ${{ github.event.release.tag_name }}
     steps:
-      - name: 📦 Checkout
+      - name: Checkout 📦
         uses: actions/checkout@v4
-      - name: ☕️ Set up JDK
+      - name: Set up JDK ️☕
         uses: actions/setup-java@v3
         with:
           java-version: '13'
           distribution: 'adopt'
-      - name: ⚙️ Build with Gradle
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: build
-      - name: 🚀 Publish
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: -x test publishReleasePublicationToMavenRepository closeAndReleaseStagingRepository
+      - name: Setup Gradle 🐘
+        uses: gradle/actions/setup-gradle@v3
+      - name: Build ⚙️
+        run: ./gradlew build -x test
+      - name: Publish 🚀
+        run: ./gradlew -x test publishReleasePublicationToMavenRepository closeAndReleaseStagingRepository
         env:
           SONATYPE_USER: ${{secrets.SONATYPE_USER}}
           SONATYPE_PASSWORD: ${{secrets.SONATYPE_PASSWORD}}
