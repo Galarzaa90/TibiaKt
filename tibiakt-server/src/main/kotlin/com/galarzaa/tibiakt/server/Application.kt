@@ -30,7 +30,7 @@ import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
 import kotlinx.serialization.json.Json
 
 fun main() {
-    embeddedServer(CIO, port = 8090, module = Application::tibiaKtModule).start(wait = true)
+    embeddedServer(CIO, port = 8080, module = Application::tibiaKtModule).start(wait = true)
 }
 
 fun Application.tibiaKtModule() {

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.6.1 (2024-03-17)
+
+- Fixed house and guildhall rents not being parsed correctly.
+
 ## 0.6.0 (2023-09-10)
 
 - Fix character badges not being parsed correctly
