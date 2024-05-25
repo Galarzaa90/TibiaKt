@@ -1,5 +1,5 @@
 /*
- * Copyright © 2023 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,6 +33,7 @@ import com.galarzaa.tibiakt.core.models.bazaar.ItemSummary
 import com.galarzaa.tibiakt.core.models.bazaar.Mounts
 import com.galarzaa.tibiakt.core.models.bazaar.OutfitImage
 import com.galarzaa.tibiakt.core.models.bazaar.Outfits
+import com.galarzaa.tibiakt.core.models.bazaar.RevealedGem
 import com.galarzaa.tibiakt.core.models.bazaar.SalesArgument
 import com.galarzaa.tibiakt.core.utils.BuilderDsl
 import kotlinx.datetime.Instant
@@ -172,6 +173,7 @@ public class AuctionBuilder : TibiaKtBuilder<Auction> {
         public val achievements: MutableList<AchievementEntry> = mutableListOf()
         public val bestiaryProgress: MutableList<CreatureEntry> = mutableListOf()
         public val bosstiaryProgress: MutableList<CreatureEntry> = mutableListOf()
+        public val revealedGems: MutableList<RevealedGem> = mutableListOf()
 
 
         public fun addBlessing(blessingEntry: BlessingEntry): AuctionDetailsBuilder =
@@ -195,6 +197,9 @@ public class AuctionBuilder : TibiaKtBuilder<Auction> {
 
         public fun addBosstiaryEntry(bosstiaryEntry: CreatureEntry): AuctionDetailsBuilder =
             apply { bosstiaryProgress.add(bosstiaryEntry) }
+
+        public fun addRevealedGem(revealedGem: RevealedGem): AuctionDetailsBuilder =
+            apply { revealedGems.add(revealedGem) }
 
         public override fun build(): AuctionDetails =
             AuctionDetails(
@@ -246,6 +251,7 @@ public class AuctionBuilder : TibiaKtBuilder<Auction> {
                 achievements = achievements,
                 bestiaryProgress = bestiaryProgress,
                 bosstiaryProgress = bosstiaryProgress,
+                revealedGems = revealedGems,
             )
     }
 }

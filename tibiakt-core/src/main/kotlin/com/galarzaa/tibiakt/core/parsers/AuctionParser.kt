@@ -36,6 +36,7 @@ import com.galarzaa.tibiakt.core.models.bazaar.Mounts
 import com.galarzaa.tibiakt.core.models.bazaar.OutfitEntry
 import com.galarzaa.tibiakt.core.models.bazaar.OutfitImage
 import com.galarzaa.tibiakt.core.models.bazaar.Outfits
+import com.galarzaa.tibiakt.core.models.bazaar.RevealedGem
 import com.galarzaa.tibiakt.core.utils.TABLE_SELECTOR
 import com.galarzaa.tibiakt.core.utils.cellsText
 import com.galarzaa.tibiakt.core.utils.clean
@@ -99,6 +100,7 @@ public object AuctionParser : Parser<Auction?> {
                 detailsTables["Achievements"]?.run { parseAchievementsTable(this) }
                 detailsTables["Bestiary Progress"]?.run { parseBestiaryTable(this, false) }
                 detailsTables["Bosstiary Progress"]?.run { parseBestiaryTable(this, true) }
+                detailsTables["Revealed Gems"]?.run { parseRevealedGemsTable(this) }
             }
         }
     }
@@ -131,6 +133,15 @@ public object AuctionParser : Parser<Auction?> {
         }
     }
 
+    private fun AuctionBuilder.AuctionDetailsBuilder.parseRevealedGemsTable(table: Element) {
+        for (row in table.selectFirst(TABLE_SELECTOR).rows().offsetStart(1)) {
+            val gemTag = row.selectFirst("div.Gem") ?: continue
+            val gemTYpe = gemTag.attr("title")
+            val effects = row.select("span").map { it.cleanText() }
+            addRevealedGem(RevealedGem(gemTYpe, effects))
+        }
+    }
+
     private fun AuctionBuilder.AuctionDetailsBuilder.parseBlessingsTable(table: Element) {
         for (row in table.selectFirst(TABLE_SELECTOR).rows().offsetStart(1)) {
             val colsText = row.cellsText()
@@ -157,7 +168,8 @@ public object AuctionParser : Parser<Auction?> {
             0,
             0,
             emptyList(),
-            false)
+            false
+        )
         val familiarBoxes = table.select(ICON_CSS_SELECTOR)
         val familiars = mutableListOf<FamiliarEntry>()
         for (mountBox in familiarBoxes) {
@@ -166,11 +178,13 @@ public object AuctionParser : Parser<Auction?> {
                 ?: throw ParsingException("familiar image did not match expected pattern")
             familiars.add(FamiliarEntry(name, id.toInt()))
         }
-        return Familiars(paginationData.currentPage,
+        return Familiars(
+            paginationData.currentPage,
             paginationData.totalPages,
             paginationData.resultsCount,
             familiars,
-            false)
+            false
+        )
     }
 
     private fun parseOutfitsTable(table: Element): Outfits {
@@ -179,14 +193,17 @@ public object AuctionParser : Parser<Auction?> {
             0,
             0,
             emptyList(),
-            false)
+            false
+        )
         val outfitBoxes = table.select(ICON_CSS_SELECTOR)
         val outfits = outfitBoxes.map { parseDisplayedOutfit(it) }
-        return Outfits(paginationData.currentPage,
+        return Outfits(
+            paginationData.currentPage,
             paginationData.totalPages,
             paginationData.resultsCount,
             outfits,
-            false)
+            false
+        )
     }
 
     private fun parseMountsTable(mountsTable: Element): Mounts {
@@ -196,7 +213,8 @@ public object AuctionParser : Parser<Auction?> {
                 0,
                 0,
                 emptyList(),
-                false)
+                false
+            )
         val mountsBoxes = mountsTable.select(ICON_CSS_SELECTOR)
         val mounts = mountsBoxes.map { parseDisplayedMount(it) }
         return Mounts(paginationData.currentPage, paginationData.totalPages, paginationData.resultsCount, mounts, false)
@@ -209,17 +227,20 @@ public object AuctionParser : Parser<Auction?> {
                 0,
                 0,
                 emptyList(),
-                false)
+                false
+            )
         val itemBoxes = itemsTable.select(ICON_CSS_SELECTOR)
         val items = mutableListOf<ItemEntry>()
         for (itemBox in itemBoxes) {
             parseDisplayedItem(itemBox)?.run { items.add(this) }
         }
-        return ItemSummary(paginationData.currentPage,
+        return ItemSummary(
+            paginationData.currentPage,
             paginationData.totalPages,
             paginationData.resultsCount,
             items,
-            false)
+            false
+        )
     }
 
     private fun getAuctionTableFieldValue(row: Element): Pair<String, String> {
