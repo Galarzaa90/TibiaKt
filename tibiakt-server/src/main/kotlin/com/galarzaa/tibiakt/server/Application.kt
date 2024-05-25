@@ -17,7 +17,6 @@
 package com.galarzaa.tibiakt.server
 
 import com.galarzaa.tibiakt.client.TibiaKtClient
-import com.galarzaa.tibiakt.server.plugins.configureDataConversion
 import com.galarzaa.tibiakt.server.plugins.configureLocations
 import com.galarzaa.tibiakt.server.plugins.configureRouting
 import com.galarzaa.tibiakt.server.plugins.configureStatusPages
@@ -41,7 +40,6 @@ fun Application.tibiaKtModule() {
             ignoreUnknownKeys = true
         })
     }
-    configureDataConversion()
     configureLocations()
     configureRouting(client)
     configureStatusPages()

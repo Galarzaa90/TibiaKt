@@ -1,5 +1,5 @@
 /*
- * Copyright © 2023 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,8 +21,10 @@ import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.content.TextContent
 import io.ktor.http.withCharset
+import io.ktor.resources.ResourceSerializationException
 import io.ktor.server.application.Application
 import io.ktor.server.application.install
+import io.ktor.server.plugins.BadRequestException
 import io.ktor.server.plugins.ParameterConversionException
 import io.ktor.server.plugins.statuspages.StatusPages
 import io.ktor.server.response.respond
@@ -47,6 +49,21 @@ fun Application.configureStatusPages() {
                     HttpStatusCode.InternalServerError
                 )
             )
+        }
+        exception<BadRequestException> { call, cause ->
+            when (cause.cause) {
+                is ResourceSerializationException -> call.respond(
+                    TextContent(
+                        "$cause: ${cause.cause}", ContentType.Text.Plain.withCharset(Charsets.UTF_8),
+                        HttpStatusCode.BadRequest
+                    )
+                )
+            }
+        }
+        exception<Exception> { call, cause ->
+            println(call)
+            println(cause)
+
         }
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright © 2023 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,7 +49,7 @@ internal fun Application.configureLocations() {
 data class Characters(val name: String)
 
 @Resource("/worlds")
-class Worlds() {
+class Worlds {
 
     @Resource("/{name}")
     data class ByName(val parent: Worlds, val name: String) {
