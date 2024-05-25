@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.6.2 (2024-05-25)
+
+- Add parsing for revealed gems to auctions.
+
 ## 0.6.1 (2024-03-17)
 
 - Fixed house and guildhall rents not being parsed correctly.
