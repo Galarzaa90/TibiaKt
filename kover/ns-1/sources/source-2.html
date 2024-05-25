@@ -93,7 +93,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;/*
-&nbsp; * Copyright © 2023 Allan Galarza
+&nbsp; * Copyright © 2024 Allan Galarza
 &nbsp; *
 &nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 &nbsp; * you may not use this file except in compliance with the License.
@@ -127,6 +127,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;import com.galarzaa.tibiakt.core.models.bazaar.Mounts
 &nbsp;import com.galarzaa.tibiakt.core.models.bazaar.OutfitImage
 &nbsp;import com.galarzaa.tibiakt.core.models.bazaar.Outfits
+&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.RevealedGem
 &nbsp;import com.galarzaa.tibiakt.core.models.bazaar.SalesArgument
 &nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
 &nbsp;import kotlinx.datetime.Instant
@@ -266,6 +267,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;        public val achievements: MutableList&lt;AchievementEntry&gt; = mutableListOf()
 &nbsp;        public val bestiaryProgress: MutableList&lt;CreatureEntry&gt; = mutableListOf()
 &nbsp;        public val bosstiaryProgress: MutableList&lt;CreatureEntry&gt; = mutableListOf()
+&nbsp;        public val revealedGems: MutableList&lt;RevealedGem&gt; = mutableListOf()
 &nbsp;
 &nbsp;
 &nbsp;        public fun addBlessing(blessingEntry: BlessingEntry): AuctionDetailsBuilder =
@@ -289,6 +291,9 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;
 &nbsp;        public fun addBosstiaryEntry(bosstiaryEntry: CreatureEntry): AuctionDetailsBuilder =
 &nbsp;            apply { bosstiaryProgress.add(bosstiaryEntry) }
+&nbsp;
+&nbsp;        public fun addRevealedGem(revealedGem: RevealedGem): AuctionDetailsBuilder =
+&nbsp;            apply { revealedGems.add(revealedGem) }
 &nbsp;
 &nbsp;        public override fun build(): AuctionDetails =
 &nbsp;            AuctionDetails(
@@ -340,6 +345,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;                achievements = achievements,
 &nbsp;                bestiaryProgress = bestiaryProgress,
 &nbsp;                bosstiaryProgress = bosstiaryProgress,
+&nbsp;                revealedGems = revealedGems,
 &nbsp;            )
 &nbsp;    }
 &nbsp;}
@@ -366,7 +372,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-05-25 16:12</div>
+    <div style="float:right;">generated on 2024-05-25 16:13</div>
 </div>
 </body>
 </html>
