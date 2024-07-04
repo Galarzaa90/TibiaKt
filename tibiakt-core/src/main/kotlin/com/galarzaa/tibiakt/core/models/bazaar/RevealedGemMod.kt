@@ -19,14 +19,11 @@ package com.galarzaa.tibiakt.core.models.bazaar
 import kotlinx.serialization.Serializable
 
 /**
- * A gem that has been revealed for the character.
+ * A mod for a revealed gem.
  *
- * @property gemType The type of the gem.
- * @property mods The mods the gem has.
+ * @property effects The effects the mod has.
  */
 @Serializable
-public data class RevealedGem(
-    val gemType: String,
-    val mods: List<RevealedGemMod>,
+public data class RevealedGemMod(
+    val effects: List<String>,
 )
-

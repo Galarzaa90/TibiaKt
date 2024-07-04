@@ -37,6 +37,7 @@ import com.galarzaa.tibiakt.core.models.bazaar.OutfitEntry
 import com.galarzaa.tibiakt.core.models.bazaar.OutfitImage
 import com.galarzaa.tibiakt.core.models.bazaar.Outfits
 import com.galarzaa.tibiakt.core.models.bazaar.RevealedGem
+import com.galarzaa.tibiakt.core.models.bazaar.RevealedGemMod
 import com.galarzaa.tibiakt.core.utils.TABLE_SELECTOR
 import com.galarzaa.tibiakt.core.utils.cellsText
 import com.galarzaa.tibiakt.core.utils.clean
@@ -49,7 +50,9 @@ import com.galarzaa.tibiakt.core.utils.parsePagination
 import com.galarzaa.tibiakt.core.utils.parseTablesMap
 import com.galarzaa.tibiakt.core.utils.parseTibiaDateTime
 import com.galarzaa.tibiakt.core.utils.remove
+import com.galarzaa.tibiakt.core.utils.replaceBrs
 import com.galarzaa.tibiakt.core.utils.rows
+import com.galarzaa.tibiakt.core.utils.wholeCleanText
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 import java.io.File
@@ -136,9 +139,12 @@ public object AuctionParser : Parser<Auction?> {
     private fun AuctionBuilder.AuctionDetailsBuilder.parseRevealedGemsTable(table: Element) {
         for (row in table.selectFirst(TABLE_SELECTOR).rows().offsetStart(1)) {
             val gemTag = row.selectFirst("div.Gem") ?: continue
-            val gemTYpe = gemTag.attr("title")
-            val effects = row.select("span").map { it.cleanText() }
-            addRevealedGem(RevealedGem(gemTYpe, effects))
+            val gemType = gemTag.attr("title")
+            val modSpans = row.select("span")
+            val mods = modSpans.map {
+                RevealedGemMod(it.replaceBrs().wholeCleanText().split("\n"))
+            }
+            addRevealedGem(RevealedGem(gemType, mods))
         }
     }
 
@@ -245,14 +251,21 @@ public object AuctionParser : Parser<Auction?> {
 
     private fun getAuctionTableFieldValue(row: Element): Pair<String, String> {
         val field =
-            row.selectFirst("span")?.cleanText()?.remove(":") ?: throw ParsingException("could not find field's span")
+            row.selectFirst(".LabelV, .LabelColumn")?.cleanText()?.remove(":")
+                ?: throw ParsingException("could not find field's label")
         val value = row.selectFirst("div")?.cleanText() ?: throw ParsingException("could not find value's div")
         return field to value
     }
 
+    private fun parseSkillValue(row: Element): Double {
+        val (_, level, progress) = row.cellsText()
+        return level.parseInteger() + (progress.remove("%").toDouble() / PERCENTAGE)
+    }
+
     private fun AuctionBuilder.AuctionDetailsBuilder.parseGeneralTable(table: Element) {
+        val skillsMap = mutableMapOf<String, Double>().withDefault { 0.0 }
         val contentContainers = table.select(TABLE_SELECTOR)
-        contentContainers[0].rows().forEach { row ->
+        contentContainers.rows().forEach { row ->
             val (field, value) = getAuctionTableFieldValue(row)
             when (field) {
                 "Hit Points" -> hitPoints = value.parseInteger()
@@ -263,13 +276,54 @@ public object AuctionParser : Parser<Auction?> {
                 "Mounts" -> mountsCount = value.parseInteger()
                 "Outfits" -> outfitsCount = value.parseInteger()
                 "Titles" -> titlesCount = value.parseInteger()
+
+                "Axe Fighting" -> skillsMap[field] = parseSkillValue(row)
+                "Club Fighting" -> skillsMap[field] = parseSkillValue(row)
+                "Sword Fighting" -> skillsMap[field] = parseSkillValue(row)
+                "Distance Fighting" -> skillsMap[field] = parseSkillValue(row)
+                "Fishing" -> skillsMap[field] = parseSkillValue(row)
+                "Magic Level" -> skillsMap[field] = parseSkillValue(row)
+                "Fist Fighting" -> skillsMap[field] = parseSkillValue(row)
+                "Shielding" -> skillsMap[field] = parseSkillValue(row)
+
+                "Creation Date" -> creationDate = parseTibiaDateTime(value)
+                "Experience" -> experience = value.parseLong()
+                "Gold" -> gold = value.parseLong()
+                "Achievement Points" -> achievementPoints = value.parseInteger()
+
+                "Regular World Transfer" -> if (value.contains("after")) {
+                    regularWorldTransfersAvailable = parseTibiaDateTime(value.split("after")[1])
+                }
+
+                "Charm Expansion" -> hasCharmExpansion = value.contains("yes")
+                "Available Charm Points" -> availableCharmPoints = value.parseInteger()
+                "Spent Charm Points" -> spentCharmPoints = value.parseInteger()
+
+                "Daily Reward Streak" -> dailyRewardStreak = value.parseInteger()
+
+                "Hunting Task Points" -> huntingTaskPoints = value.parseInteger()
+                "Permanent Hunting Task Slots" -> permanentHuntingTaskSlots = value.parseInteger()
+                "Permanent Prey Slots" -> permanentPreySlots = value.parseInteger()
+                "Prey Wildcards" -> preyWildcards = value.parseInteger()
+
+                "Hirelings" -> hirelings = value.parseInteger()
+                "Hireling Jobs" -> hirelingJobs = value.parseInteger()
+                "Hireling Outfits" -> hirelingOutfits = value.parseInteger()
+
+                "Exalted Dust" -> {
+                    val (current, limit) = value.split("/").map { it.parseInteger() }
+                    exaltedDust = current
+                    exaltedDustLimit = limit
+                }
+
+                "Animus Masteries unlocked" -> animusMasteriesUnlocked = value.parseInteger()
+
+                "Boss Points" -> bossPoints = value.parseInteger()
+
+                "Bonus Promotion Points" -> bonusPromotionPoints = value.parseInteger()
             }
         }
-        val skillsMap = mutableMapOf<String, Double>().withDefault { 0.0 }
-        contentContainers[1].rows().forEach { row ->
-            val (name, level, progress) = row.cellsText()
-            skillsMap[name] = level.parseInteger() + (progress.remove("%").toDouble() / PERCENTAGE)
-        }
+
         skills = AuctionSkills(
             axeFighting = skillsMap.getValue("Axe Fighting"),
             clubFighting = skillsMap.getValue("Club Fighting"),
@@ -280,72 +334,6 @@ public object AuctionParser : Parser<Auction?> {
             fistFighting = skillsMap.getValue("Fist Fighting"),
             shielding = skillsMap.getValue("Shielding"),
         )
-        contentContainers[2].rows().forEach { row ->
-            val (field, value) = getAuctionTableFieldValue(row)
-            when (field) {
-                "Creation Date" -> creationDate = parseTibiaDateTime(value)
-                "Experience" -> experience = value.parseLong()
-                "Gold" -> gold = value.parseLong()
-                "Achievement Points" -> achievementPoints = value.parseInteger()
-            }
-        }
-        contentContainers[3].selectFirst("div")?.cleanText()?.run {
-            if (contains("after")) {
-                regularWorldTransfersAvailable = parseTibiaDateTime(split("after")[1])
-            }
-        }
-
-        contentContainers[4].rows().forEach { row ->
-            val (field, value) = getAuctionTableFieldValue(row)
-            when (field) {
-                "Charm Expansion" -> hasCharmExpansion = value.contains("yes")
-                "Available Charm Points" -> availableCharmPoints = value.parseInteger()
-                "Spent Charm Points" -> spentCharmPoints = value.parseInteger()
-            }
-        }
-        dailyRewardStreak = contentContainers[5].selectFirst("div")?.cleanText()?.parseInteger() ?: 0
-        contentContainers[6].rows().forEach { row ->
-            val (field, value) = getAuctionTableFieldValue(row)
-            when (field) {
-                "Hunting Task Points" -> huntingTaskPoints = value.parseInteger()
-                "Permanent Hunting Task Slots" -> permanentHuntingTaskSlots = value.parseInteger()
-                "Permanent Prey Slots" -> permanentPreySlots = value.parseInteger()
-                "Prey Wildcards" -> preyWildcards = value.parseInteger()
-            }
-        }
-
-        contentContainers[7].rows().forEach { row ->
-            val (field, value) = getAuctionTableFieldValue(row)
-            when (field) {
-                "Hirelings" -> hirelings = value.parseInteger()
-                "Hireling Jobs" -> hirelingJobs = value.parseInteger()
-                "Hireling Outfits" -> hirelingOutfits = value.parseInteger()
-            }
-        }
-
-        contentContainers.getOrNull(8)?.rows().orEmpty().forEach { row ->
-            val (field, value) = getAuctionTableFieldValue(row)
-            when (field) {
-                "Exalted Dust" -> {
-                    val (current, limit) = value.split("/").map { it.parseInteger() }
-                    exaltedDust = current
-                    exaltedDustLimit = limit
-                }
-            }
-        }
-
-        contentContainers.getOrNull(9)?.rows().orEmpty().forEach { row ->
-            val (field, value) = getAuctionTableFieldValue(row)
-            when (field) {
-                "Boss Points" -> bossPoints = value.parseInteger()
-            }
-        }
-        contentContainers.getOrNull(10)?.rows().orEmpty().forEach { row ->
-            val (field, value) = getAuctionTableFieldValue(row)
-            when (field) {
-                "Bonus Promotion Points" -> bonusPromotionPoints = value.parseInteger()
-            }
-        }
     }
 
     internal fun AuctionBuilder.parseAuctionContainer(auctionContainer: Element) {

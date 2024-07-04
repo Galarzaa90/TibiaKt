@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.7.0 (2024-07-04)
+
+- Fix auction parsing breaking due to new Animus Masteries unlocked field.
+- Added `animusMasteriesUnlocked` field to `AuctionDetails`
+- (**Breaking Change**) Revealed gems now properly parse multiple effects per mod.
+
 ## 0.6.2 (2024-05-25)
 
 - Add parsing for revealed gems to auctions.

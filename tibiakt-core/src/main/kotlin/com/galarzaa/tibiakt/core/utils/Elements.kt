@@ -59,6 +59,7 @@ internal fun Element.parseTablesMap(contentSelector: String = "div.TableContentC
 
 /** Get a list of rows in the element. */
 internal fun Element?.rows(): Elements = this?.select("tr") ?: Elements()
+internal fun Elements?.rows(): Elements = this?.select("tr") ?: Elements()
 
 /** Get a list of cells found in the elmenet. */
 internal fun Element?.cells(): Elements = this?.select("td") ?: Elements()

@@ -164,6 +164,7 @@ public class AuctionBuilder : TibiaKtBuilder<Auction> {
         public var outfits: Outfits? = null
         public var storeOutfits: Outfits? = null
         public var familiars: Familiars? = null
+        public var animusMasteriesUnlocked: Int = 0
         public val blessings: MutableList<BlessingEntry> = mutableListOf()
         public val imbuements: MutableList<String> = mutableListOf()
         public val charms: MutableList<CharmEntry> = mutableListOf()
@@ -235,6 +236,7 @@ public class AuctionBuilder : TibiaKtBuilder<Auction> {
                 exaltedDustLimit = exaltedDustLimit ?: error("exaltedDustLimit is required"),
                 bossPoints = bossPoints ?: error("bossPoints is required"),
                 bonusPromotionPoints = bonusPromotionPoints ?: error("bonusPromotionPoints is required"),
+                animusMasteriesUnlocked = animusMasteriesUnlocked ?: error("animusMasteriesUnlocked is required"),
                 items = items ?: error("items is required"),
                 storeItems = storeItems ?: error("storeItems is required"),
                 mounts = mounts ?: error("mounts is required"),
