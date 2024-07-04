@@ -160,13 +160,14 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp; * A gem that has been revealed for the character.
 &nbsp; *
 &nbsp; * @property gemType The type of the gem.
-&nbsp; * @property mods The mods or effects the gem has.
+&nbsp; * @property mods The mods the gem has.
 &nbsp; */
 <b class="nc">&nbsp;@Serializable</b>
 &nbsp;public data class RevealedGem(
 <b class="nc">&nbsp;    val gemType: String,</b>
-<b class="nc">&nbsp;    val mods: List&lt;String&gt;,</b>
+<b class="nc">&nbsp;    val mods: List&lt;RevealedGemMod&gt;,</b>
 &nbsp;)
+&nbsp;
 </code>
 </pre>
 </div>
@@ -190,7 +191,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-05-25 16:23</div>
+    <div style="float:right;">generated on 2024-07-04 16:19</div>
 </div>
 </body>
 </html>

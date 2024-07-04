@@ -153,6 +153,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;
 &nbsp;/** Get a list of rows in the element. */
 &nbsp;internal fun Element?.rows(): Elements = this?.select(&quot;tr&quot;) ?: Elements()
+&nbsp;internal fun Elements?.rows(): Elements = this?.select(&quot;tr&quot;) ?: Elements()
 &nbsp;
 &nbsp;/** Get a list of cells found in the elmenet. */
 &nbsp;internal fun Element?.cells(): Elements = this?.select(&quot;td&quot;) ?: Elements()
@@ -326,7 +327,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-05-25 16:23</div>
+    <div style="float:right;">generated on 2024-07-04 16:19</div>
 </div>
 </body>
 </html>

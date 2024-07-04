@@ -49,34 +49,34 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
   <td class="name">AuctionParser</td>
 <td class="coverageStat">
   <span class="percent">
-    81.8%
+    82.6%
   </span>
   <span class="absValue">
-    (18/22)
+    (19/23)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    64.6%
+    68.6%
   </span>
   <span class="absValue">
-    (133/206)
+    (133/194)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    88%
+    85.5%
   </span>
   <span class="absValue">
-    (243/276)
+    (218/255)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    84%
+    82.5%
   </span>
   <span class="absValue">
-    (1979/2356)
+    (1834/2222)
   </span>
 </td>
 </tr>
@@ -175,34 +175,34 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    80%
+    80.8%
   </span>
   <span class="absValue">
-    (20/25)
+    (21/26)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    62.4%
+    65.7%
   </span>
   <span class="absValue">
-    (151/242)
+    (151/230)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    88.7%
+    86.4%
   </span>
   <span class="absValue">
-    (267/301)
+    (242/280)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    84.7%
+    83.5%
   </span>
   <span class="absValue">
-    (2299/2713)
+    (2154/2579)
   </span>
 </td>
 </tr>
@@ -252,6 +252,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;import com.galarzaa.tibiakt.core.models.bazaar.OutfitImage
 &nbsp;import com.galarzaa.tibiakt.core.models.bazaar.Outfits
 &nbsp;import com.galarzaa.tibiakt.core.models.bazaar.RevealedGem
+&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.RevealedGemMod
 &nbsp;import com.galarzaa.tibiakt.core.utils.TABLE_SELECTOR
 &nbsp;import com.galarzaa.tibiakt.core.utils.cellsText
 &nbsp;import com.galarzaa.tibiakt.core.utils.clean
@@ -264,7 +265,9 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;import com.galarzaa.tibiakt.core.utils.parseTablesMap
 &nbsp;import com.galarzaa.tibiakt.core.utils.parseTibiaDateTime
 &nbsp;import com.galarzaa.tibiakt.core.utils.remove
+&nbsp;import com.galarzaa.tibiakt.core.utils.replaceBrs
 &nbsp;import com.galarzaa.tibiakt.core.utils.rows
+&nbsp;import com.galarzaa.tibiakt.core.utils.wholeCleanText
 &nbsp;import org.jsoup.Jsoup
 &nbsp;import org.jsoup.nodes.Element
 &nbsp;import java.io.File
@@ -351,9 +354,12 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;    private fun AuctionBuilder.AuctionDetailsBuilder.parseRevealedGemsTable(table: Element) {
 <b class="nc">&nbsp;        for (row in table.selectFirst(TABLE_SELECTOR).rows().offsetStart(1)) {</b>
 <b class="nc">&nbsp;            val gemTag = row.selectFirst(&quot;div.Gem&quot;) ?: continue</b>
-<b class="nc">&nbsp;            val gemTYpe = gemTag.attr(&quot;title&quot;)</b>
-<b class="nc">&nbsp;            val effects = row.select(&quot;span&quot;).map { it.cleanText() }</b>
-<b class="nc">&nbsp;            addRevealedGem(RevealedGem(gemTYpe, effects))</b>
+<b class="nc">&nbsp;            val gemType = gemTag.attr(&quot;title&quot;)</b>
+<b class="nc">&nbsp;            val modSpans = row.select(&quot;span&quot;)</b>
+<b class="nc">&nbsp;            val mods = modSpans.map {</b>
+<b class="nc">&nbsp;                RevealedGemMod(it.replaceBrs().wholeCleanText().split(&quot;\n&quot;))</b>
+&nbsp;            }
+<b class="nc">&nbsp;            addRevealedGem(RevealedGem(gemType, mods))</b>
 &nbsp;        }
 &nbsp;    }
 &nbsp;
@@ -460,14 +466,21 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;
 &nbsp;    private fun getAuctionTableFieldValue(row: Element): Pair&lt;String, String&gt; {
 <b class="fc">&nbsp;        val field =</b>
-<b class="pc">&nbsp;            row.selectFirst(&quot;span&quot;)?.cleanText()?.remove(&quot;:&quot;) ?: throw ParsingException(&quot;could not find field&#39;s span&quot;)</b>
+<b class="pc">&nbsp;            row.selectFirst(&quot;.LabelV, .LabelColumn&quot;)?.cleanText()?.remove(&quot;:&quot;)</b>
+<b class="nc">&nbsp;                ?: throw ParsingException(&quot;could not find field&#39;s label&quot;)</b>
 <b class="pc">&nbsp;        val value = row.selectFirst(&quot;div&quot;)?.cleanText() ?: throw ParsingException(&quot;could not find value&#39;s div&quot;)</b>
 <b class="fc">&nbsp;        return field to value</b>
 &nbsp;    }
 &nbsp;
+&nbsp;    private fun parseSkillValue(row: Element): Double {
+<b class="fc">&nbsp;        val (_, level, progress) = row.cellsText()</b>
+<b class="fc">&nbsp;        return level.parseInteger() + (progress.remove(&quot;%&quot;).toDouble() / PERCENTAGE)</b>
+&nbsp;    }
+&nbsp;
 &nbsp;    private fun AuctionBuilder.AuctionDetailsBuilder.parseGeneralTable(table: Element) {
+<b class="pc">&nbsp;        val skillsMap = mutableMapOf&lt;String, Double&gt;().withDefault { 0.0 }</b>
 <b class="fc">&nbsp;        val contentContainers = table.select(TABLE_SELECTOR)</b>
-<b class="fc">&nbsp;        contentContainers[0].rows().forEach { row -&gt;</b>
+<b class="fc">&nbsp;        contentContainers.rows().forEach { row -&gt;</b>
 <b class="fc">&nbsp;            val (field, value) = getAuctionTableFieldValue(row)</b>
 <b class="pc">&nbsp;            when (field) {</b>
 <b class="fc">&nbsp;                &quot;Hit Points&quot; -&gt; hitPoints = value.parseInteger()</b>
@@ -478,13 +491,54 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;                &quot;Mounts&quot; -&gt; mountsCount = value.parseInteger()</b>
 <b class="fc">&nbsp;                &quot;Outfits&quot; -&gt; outfitsCount = value.parseInteger()</b>
 <b class="fc">&nbsp;                &quot;Titles&quot; -&gt; titlesCount = value.parseInteger()</b>
+&nbsp;
+<b class="fc">&nbsp;                &quot;Axe Fighting&quot; -&gt; skillsMap[field] = parseSkillValue(row)</b>
+<b class="fc">&nbsp;                &quot;Club Fighting&quot; -&gt; skillsMap[field] = parseSkillValue(row)</b>
+<b class="fc">&nbsp;                &quot;Sword Fighting&quot; -&gt; skillsMap[field] = parseSkillValue(row)</b>
+<b class="fc">&nbsp;                &quot;Distance Fighting&quot; -&gt; skillsMap[field] = parseSkillValue(row)</b>
+<b class="fc">&nbsp;                &quot;Fishing&quot; -&gt; skillsMap[field] = parseSkillValue(row)</b>
+<b class="fc">&nbsp;                &quot;Magic Level&quot; -&gt; skillsMap[field] = parseSkillValue(row)</b>
+<b class="fc">&nbsp;                &quot;Fist Fighting&quot; -&gt; skillsMap[field] = parseSkillValue(row)</b>
+<b class="fc">&nbsp;                &quot;Shielding&quot; -&gt; skillsMap[field] = parseSkillValue(row)</b>
+&nbsp;
+<b class="fc">&nbsp;                &quot;Creation Date&quot; -&gt; creationDate = parseTibiaDateTime(value)</b>
+<b class="fc">&nbsp;                &quot;Experience&quot; -&gt; experience = value.parseLong()</b>
+<b class="fc">&nbsp;                &quot;Gold&quot; -&gt; gold = value.parseLong()</b>
+<b class="fc">&nbsp;                &quot;Achievement Points&quot; -&gt; achievementPoints = value.parseInteger()</b>
+&nbsp;
+<b class="pc">&nbsp;                &quot;Regular World Transfer&quot; -&gt; if (value.contains(&quot;after&quot;)) {</b>
+<b class="fc">&nbsp;                    regularWorldTransfersAvailable = parseTibiaDateTime(value.split(&quot;after&quot;)[1])</b>
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                &quot;Charm Expansion&quot; -&gt; hasCharmExpansion = value.contains(&quot;yes&quot;)</b>
+<b class="fc">&nbsp;                &quot;Available Charm Points&quot; -&gt; availableCharmPoints = value.parseInteger()</b>
+<b class="fc">&nbsp;                &quot;Spent Charm Points&quot; -&gt; spentCharmPoints = value.parseInteger()</b>
+&nbsp;
+<b class="fc">&nbsp;                &quot;Daily Reward Streak&quot; -&gt; dailyRewardStreak = value.parseInteger()</b>
+&nbsp;
+<b class="fc">&nbsp;                &quot;Hunting Task Points&quot; -&gt; huntingTaskPoints = value.parseInteger()</b>
+<b class="fc">&nbsp;                &quot;Permanent Hunting Task Slots&quot; -&gt; permanentHuntingTaskSlots = value.parseInteger()</b>
+<b class="fc">&nbsp;                &quot;Permanent Prey Slots&quot; -&gt; permanentPreySlots = value.parseInteger()</b>
+<b class="fc">&nbsp;                &quot;Prey Wildcards&quot; -&gt; preyWildcards = value.parseInteger()</b>
+&nbsp;
+<b class="fc">&nbsp;                &quot;Hirelings&quot; -&gt; hirelings = value.parseInteger()</b>
+<b class="fc">&nbsp;                &quot;Hireling Jobs&quot; -&gt; hirelingJobs = value.parseInteger()</b>
+<b class="fc">&nbsp;                &quot;Hireling Outfits&quot; -&gt; hirelingOutfits = value.parseInteger()</b>
+&nbsp;
+&nbsp;                &quot;Exalted Dust&quot; -&gt; {
+<b class="fc">&nbsp;                    val (current, limit) = value.split(&quot;/&quot;).map { it.parseInteger() }</b>
+<b class="fc">&nbsp;                    exaltedDust = current</b>
+<b class="fc">&nbsp;                    exaltedDustLimit = limit</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                &quot;Animus Masteries unlocked&quot; -&gt; animusMasteriesUnlocked = value.parseInteger()</b>
+&nbsp;
+<b class="fc">&nbsp;                &quot;Boss Points&quot; -&gt; bossPoints = value.parseInteger()</b>
+&nbsp;
+<b class="fc">&nbsp;                &quot;Bonus Promotion Points&quot; -&gt; bonusPromotionPoints = value.parseInteger()</b>
 &nbsp;            }
 <b class="fc">&nbsp;        }</b>
-<b class="pc">&nbsp;        val skillsMap = mutableMapOf&lt;String, Double&gt;().withDefault { 0.0 }</b>
-<b class="fc">&nbsp;        contentContainers[1].rows().forEach { row -&gt;</b>
-<b class="fc">&nbsp;            val (name, level, progress) = row.cellsText()</b>
-<b class="fc">&nbsp;            skillsMap[name] = level.parseInteger() + (progress.remove(&quot;%&quot;).toDouble() / PERCENTAGE)</b>
-<b class="fc">&nbsp;        }</b>
+&nbsp;
 <b class="fc">&nbsp;        skills = AuctionSkills(</b>
 <b class="fc">&nbsp;            axeFighting = skillsMap.getValue(&quot;Axe Fighting&quot;),</b>
 <b class="fc">&nbsp;            clubFighting = skillsMap.getValue(&quot;Club Fighting&quot;),</b>
@@ -495,72 +549,6 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;            fistFighting = skillsMap.getValue(&quot;Fist Fighting&quot;),</b>
 <b class="fc">&nbsp;            shielding = skillsMap.getValue(&quot;Shielding&quot;),</b>
 &nbsp;        )
-<b class="fc">&nbsp;        contentContainers[2].rows().forEach { row -&gt;</b>
-<b class="fc">&nbsp;            val (field, value) = getAuctionTableFieldValue(row)</b>
-<b class="pc">&nbsp;            when (field) {</b>
-<b class="fc">&nbsp;                &quot;Creation Date&quot; -&gt; creationDate = parseTibiaDateTime(value)</b>
-<b class="fc">&nbsp;                &quot;Experience&quot; -&gt; experience = value.parseLong()</b>
-<b class="fc">&nbsp;                &quot;Gold&quot; -&gt; gold = value.parseLong()</b>
-<b class="fc">&nbsp;                &quot;Achievement Points&quot; -&gt; achievementPoints = value.parseInteger()</b>
-&nbsp;            }
-<b class="fc">&nbsp;        }</b>
-<b class="pc">&nbsp;        contentContainers[3].selectFirst(&quot;div&quot;)?.cleanText()?.run {</b>
-<b class="pc">&nbsp;            if (contains(&quot;after&quot;)) {</b>
-<b class="fc">&nbsp;                regularWorldTransfersAvailable = parseTibiaDateTime(split(&quot;after&quot;)[1])</b>
-&nbsp;            }
-<b class="fc">&nbsp;        }</b>
-&nbsp;
-<b class="fc">&nbsp;        contentContainers[4].rows().forEach { row -&gt;</b>
-<b class="fc">&nbsp;            val (field, value) = getAuctionTableFieldValue(row)</b>
-<b class="pc">&nbsp;            when (field) {</b>
-<b class="fc">&nbsp;                &quot;Charm Expansion&quot; -&gt; hasCharmExpansion = value.contains(&quot;yes&quot;)</b>
-<b class="fc">&nbsp;                &quot;Available Charm Points&quot; -&gt; availableCharmPoints = value.parseInteger()</b>
-<b class="fc">&nbsp;                &quot;Spent Charm Points&quot; -&gt; spentCharmPoints = value.parseInteger()</b>
-&nbsp;            }
-<b class="fc">&nbsp;        }</b>
-<b class="pc">&nbsp;        dailyRewardStreak = contentContainers[5].selectFirst(&quot;div&quot;)?.cleanText()?.parseInteger() ?: 0</b>
-<b class="fc">&nbsp;        contentContainers[6].rows().forEach { row -&gt;</b>
-<b class="fc">&nbsp;            val (field, value) = getAuctionTableFieldValue(row)</b>
-<b class="pc">&nbsp;            when (field) {</b>
-<b class="fc">&nbsp;                &quot;Hunting Task Points&quot; -&gt; huntingTaskPoints = value.parseInteger()</b>
-<b class="fc">&nbsp;                &quot;Permanent Hunting Task Slots&quot; -&gt; permanentHuntingTaskSlots = value.parseInteger()</b>
-<b class="fc">&nbsp;                &quot;Permanent Prey Slots&quot; -&gt; permanentPreySlots = value.parseInteger()</b>
-<b class="fc">&nbsp;                &quot;Prey Wildcards&quot; -&gt; preyWildcards = value.parseInteger()</b>
-&nbsp;            }
-<b class="fc">&nbsp;        }</b>
-&nbsp;
-<b class="fc">&nbsp;        contentContainers[7].rows().forEach { row -&gt;</b>
-<b class="fc">&nbsp;            val (field, value) = getAuctionTableFieldValue(row)</b>
-<b class="pc">&nbsp;            when (field) {</b>
-<b class="fc">&nbsp;                &quot;Hirelings&quot; -&gt; hirelings = value.parseInteger()</b>
-<b class="fc">&nbsp;                &quot;Hireling Jobs&quot; -&gt; hirelingJobs = value.parseInteger()</b>
-<b class="fc">&nbsp;                &quot;Hireling Outfits&quot; -&gt; hirelingOutfits = value.parseInteger()</b>
-&nbsp;            }
-<b class="fc">&nbsp;        }</b>
-&nbsp;
-<b class="pc">&nbsp;        contentContainers.getOrNull(8)?.rows().orEmpty().forEach { row -&gt;</b>
-<b class="fc">&nbsp;            val (field, value) = getAuctionTableFieldValue(row)</b>
-<b class="fc">&nbsp;            when (field) {</b>
-<b class="pc">&nbsp;                &quot;Exalted Dust&quot; -&gt; {</b>
-<b class="fc">&nbsp;                    val (current, limit) = value.split(&quot;/&quot;).map { it.parseInteger() }</b>
-<b class="fc">&nbsp;                    exaltedDust = current</b>
-<b class="fc">&nbsp;                    exaltedDustLimit = limit</b>
-&nbsp;                }
-&nbsp;            }
-<b class="fc">&nbsp;        }</b>
-&nbsp;
-<b class="pc">&nbsp;        contentContainers.getOrNull(9)?.rows().orEmpty().forEach { row -&gt;</b>
-<b class="fc">&nbsp;            val (field, value) = getAuctionTableFieldValue(row)</b>
-<b class="fc">&nbsp;            when (field) {</b>
-<b class="pc">&nbsp;                &quot;Boss Points&quot; -&gt; bossPoints = value.parseInteger()</b>
-&nbsp;            }
-<b class="fc">&nbsp;        }</b>
-<b class="pc">&nbsp;        contentContainers.getOrNull(10)?.rows().orEmpty().forEach { row -&gt;</b>
-<b class="fc">&nbsp;            val (field, value) = getAuctionTableFieldValue(row)</b>
-<b class="fc">&nbsp;            when (field) {</b>
-<b class="pc">&nbsp;                &quot;Bonus Promotion Points&quot; -&gt; bonusPromotionPoints = value.parseInteger()</b>
-&nbsp;            }
-<b class="fc">&nbsp;        }</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    internal fun AuctionBuilder.parseAuctionContainer(auctionContainer: Element) {
@@ -699,7 +687,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-05-25 16:23</div>
+    <div style="float:right;">generated on 2024-07-04 16:19</div>
 </div>
 </body>
 </html>

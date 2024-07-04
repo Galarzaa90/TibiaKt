@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>tibiakt-core Coverage Report > AjaxPaginator</title>
+  <title>tibiakt-core Coverage Report > SalesArgument</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,21 +22,113 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     <a href="../index.html">com.galarzaa.tibiakt.core.models.bazaar</a>
 </div>
 
-<h1>Coverage Summary for Class: AjaxPaginator (com.galarzaa.tibiakt.core.models.bazaar)</h1>
+<h1>Coverage Summary for Class: SalesArgument (com.galarzaa.tibiakt.core.models.bazaar)</h1>
 
 <table class="coverageStats">
+
 <tr>
   <th class="name">Class</th>
 <th class="coverageStat 
 ">
+  Method, %
+</th>
+<th class="coverageStat 
+">
   Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+<th class="coverageStat 
+">
+  Instruction, %
 </th>
 </tr>
 <tr>
-  <td class="name">AjaxPaginator</td>
+  <td class="name">SalesArgument</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/2)
+  </span>
+</td>
     <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (2/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    25%
+  </span>
+  <span class="absValue">
+    (10/40)
+  </span>
+</td>
 </tr>
-
+  <tr>
+    <td class="name">SalesArgument$Companion</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (2/3)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (3/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    31.8%
+  </span>
+  <span class="absValue">
+    (14/44)
+  </span>
+</td>
+</tr>
 </table>
 
 <br/>
@@ -62,16 +154,24 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;
 &nbsp;package com.galarzaa.tibiakt.core.models.bazaar
 &nbsp;
-&nbsp;import com.galarzaa.tibiakt.core.models.Paginated
+&nbsp;import com.galarzaa.tibiakt.core.utils.getStaticFileUrl
+&nbsp;import kotlinx.serialization.Serializable
 &nbsp;
 &nbsp;/**
-&nbsp; * A paginator that can be fetched via AJAX requests.
+&nbsp; * A special highlight or description of the auction, selected by the author.
+&nbsp; *
+&nbsp; * @property content The content of the argument.
+&nbsp; * @property categoryId The id of the category of the argument.
 &nbsp; */
-&nbsp;public interface AjaxPaginator&lt;T&gt; : Paginated&lt;T&gt; {
+<b class="fc">&nbsp;@Serializable</b>
+&nbsp;public data class SalesArgument(
+<b class="fc">&nbsp;    val categoryId: Int,</b>
+<b class="fc">&nbsp;    val content: String,</b>
+&nbsp;) {
 &nbsp;    /**
-&nbsp;     * Whether this result set was fully fetched or not.
+&nbsp;     * The URL to the image corresponding to the category.
 &nbsp;     */
-&nbsp;    public val isFullyFetched: Boolean
+<b class="nc">&nbsp;    val categoryImageUrl: String get() = getStaticFileUrl(&quot;images&quot;, &quot;charactertrade&quot;, &quot;usp-category-$categoryId.png&quot;)</b>
 &nbsp;}
 </code>
 </pre>
@@ -96,7 +196,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-05-25 16:23</div>
+    <div style="float:right;">generated on 2024-07-04 16:19</div>
 </div>
 </body>
 </html>
