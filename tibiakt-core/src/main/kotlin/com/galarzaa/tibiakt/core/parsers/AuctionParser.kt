@@ -310,7 +310,7 @@ public object AuctionParser : Parser<Auction?> {
                 "Hireling Jobs" -> hirelingJobs = value.parseInteger()
                 "Hireling Outfits" -> hirelingOutfits = value.parseInteger()
 
-                "Exalted Dust" -> {
+                "Exalted Dust" -> run {
                     val (current, limit) = value.split("/").map { it.parseInteger() }
                     exaltedDust = current
                     exaltedDustLimit = limit

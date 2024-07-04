@@ -1,4 +1,4 @@
-FROM amazoncorretto:19-alpine AS builder
+FROM eclipse-temurin:19-alpine AS builder
 COPY *.gradle.kts gradle.* gradlew /app/
 COPY gradle/ /app/gradle/
 COPY buildSrc/ /app/buildSrc/
@@ -12,7 +12,7 @@ COPY tibiakt-client/ /app/tibiakt-client
 COPY tibiakt-server/ /app/tibiakt-server
 RUN ./gradlew build -x test -x detekt tibiakt-server:shadowJar --parallel
 
-FROM amazoncorretto:19-alpine
+FROM eclipse-temurin:19-jre-alpine
 COPY --from=builder ./app/tibiakt-server/build/libs/tibiatk-server-shadow.jar .
 
 EXPOSE 8080
