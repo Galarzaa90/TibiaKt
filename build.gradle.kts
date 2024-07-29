@@ -24,7 +24,7 @@ plugins {
     signing
     kotlin("jvm") version "1.9.23"
     kotlin("plugin.serialization") version "1.9.23"
-    id("io.github.gradle-nexus.publish-plugin") version "1.3.0"
+    id("io.github.gradle-nexus.publish-plugin") version "2.0.0"
     alias(libs.plugins.gradle.versions)
     alias(libs.plugins.detekt)
     alias(libs.plugins.dokka)

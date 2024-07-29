@@ -10,6 +10,7 @@ on:
     types: [ published ]
 jobs:
   publish:
+    name: 🚀 Publish to Sonatype Nexus
     runs-on: ubuntu-latest
     env:
       GITHUB_BRANCH_NAME: ${{ github.ref }}
