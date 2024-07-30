@@ -93,7 +93,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;/*
-&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; * Copyright © 2024 Allan Galarza
 &nbsp; *
 &nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 &nbsp; * you may not use this file except in compliance with the License.
@@ -111,7 +111,9 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;package com.galarzaa.tibiakt.core.enums
 &nbsp;
 &nbsp;/**
-&nbsp; * The type of BattlEye protection a world might have.
+&nbsp; * The type of BattlEye protection a game world might have.
+&nbsp; *
+&nbsp; * @property weight The restriction weight of this type, used to check transferability between worlds.
 &nbsp; */
 <b class="fc">&nbsp;public enum class BattlEyeType(public val weight: Int) {</b>
 &nbsp;    /**
@@ -152,7 +154,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-07-29 23:59</div>
+    <div style="float:right;">generated on 2024-07-30 03:38</div>
 </div>
 </body>
 </html>

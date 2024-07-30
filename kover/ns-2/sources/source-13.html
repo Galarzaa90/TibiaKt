@@ -151,7 +151,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;/*
-&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; * Copyright © 2024 Allan Galarza
 &nbsp; *
 &nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 &nbsp; * you may not use this file except in compliance with the License.
@@ -180,10 +180,20 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;    SUPPORT(&quot;support&quot;),</b>
 <b class="fc">&nbsp;    TECHNICAL_ISSUES(&quot;technical&quot;);</b>
 &nbsp;
+&nbsp;    /**
+&nbsp;     * The name of query parameter used to set this filter.
+&nbsp;     */
 &nbsp;    public val filterName: String
 <b class="fc">&nbsp;        get() = &quot;filter_$value&quot;</b>
 &nbsp;
+&nbsp;    /**
+&nbsp;     * A URL to the big icon version of this category.
+&nbsp;     */
 <b class="nc">&nbsp;    public val bigIconUrl: String get() = getStaticFileUrl(&quot;images&quot;, &quot;global&quot;, &quot;content&quot;, &quot;newsicon_${value}_big.gif&quot;)</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * An URL to the small icon version of this category.
+&nbsp;     */
 &nbsp;    public val smallIconUrl: String
 <b class="nc">&nbsp;        get() = getStaticFileUrl(</b>
 <b class="nc">&nbsp;            &quot;images&quot;,</b>
@@ -194,6 +204,10 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;
 &nbsp;    public companion object {
 <b class="fc">&nbsp;        private val iconRegex = Regex(&quot;&quot;&quot;newsicon_([^_]+)_(?:small|big)&quot;&quot;&quot;)</b>
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Get the category value from an icon&#39;s URL.
+&nbsp;         */
 &nbsp;        public fun fromIcon(iconUrl: String): NewsCategory? {
 <b class="pc">&nbsp;            iconRegex.find(iconUrl)?.apply {</b>
 <b class="fc">&nbsp;                return StringEnum.fromValue(this.groups[1]!!.value.lowercase())</b>
@@ -225,7 +239,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-07-29 23:59</div>
+    <div style="float:right;">generated on 2024-07-30 03:38</div>
 </div>
 </body>
 </html>

@@ -288,6 +288,14 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;    private val idRegex = Regex(&quot;&quot;&quot;(\d+).(?:gif|png)&quot;&quot;&quot;)</b>
 &nbsp;
 <b class="fc">&nbsp;    override fun fromContent(content: String): Auction? = fromContent(content, 0, true)</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Parse the content of an auction.
+&nbsp;     *
+&nbsp;     * @param content The HTML content of the auction&#39;s page.
+&nbsp;     * @param auctionId The auction ID to set to the results, since it is not possible to know from the content only.
+&nbsp;     * @param parseDetails Whether to parse the auction&#39;s detail or just the general information.
+&nbsp;     */
 <b class="nc">&nbsp;    public fun fromContent(content: String, auctionId: Int, parseDetails: Boolean = true): Auction? {</b>
 <b class="fc">&nbsp;        val document = Jsoup.parse(content)</b>
 <b class="fc">&nbsp;        return auction {</b>
@@ -653,6 +661,9 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;        return MountEntry(name, id.toInt())</b>
 &nbsp;    }
 &nbsp;
+&nbsp;    /**
+&nbsp;     * Parses the items from the dynamic paginator in an auction&#39;s details page.
+&nbsp;     */
 &nbsp;    public inline fun &lt;reified T&gt; parsePageItems(content: String): List&lt;T&gt; {
 <b class="nc">&nbsp;        val document = Jsoup.parse(content)</b>
 <b class="nc">&nbsp;        val cvIcon = document.select(ICON_CSS_SELECTOR)</b>
@@ -687,7 +698,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-07-29 23:59</div>
+    <div style="float:right;">generated on 2024-07-30 03:38</div>
 </div>
 </body>
 </html>

@@ -151,7 +151,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;/*
-&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; * Copyright © 2024 Allan Galarza
 &nbsp; *
 &nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 &nbsp; * you may not use this file except in compliance with the License.
@@ -181,8 +181,8 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp; *
 &nbsp; * @property title The title or name of the event.
 &nbsp; * @property description A brief description of the event.
-&nbsp; * @property startDate The date when the event starts. If null, it means the event started in a previous month and the date is unavailable.
-&nbsp; * @property endDate The date when the event ends. If null, it means the event ends in a following month and the date is unavailable.
+&nbsp; * @property startDate The date when the event starts. If null, it means the event started in the previous month and the date is unavailable.
+&nbsp; * @property endDate The date when the event ends. If null, it means the event ends in the following month and the date is unavailable.
 &nbsp; */
 <b class="fc">&nbsp;@Serializable</b>
 &nbsp;public data class EventEntry(
@@ -191,6 +191,9 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;    val startDate: LocalDate?,</b>
 <b class="fc">&nbsp;    val endDate: LocalDate?,</b>
 &nbsp;) {
+&nbsp;    /**
+&nbsp;     * The duration of the event, if both [startDate] and [endDate] are known.
+&nbsp;     */
 &nbsp;    val duration: Period?
 <b class="nc">&nbsp;        get() = if (startDate != null &amp;&amp; endDate != null) Period.between(startDate, endDate) else null</b>
 &nbsp;}
@@ -217,7 +220,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-07-29 23:59</div>
+    <div style="float:right;">generated on 2024-07-30 03:38</div>
 </div>
 </body>
 </html>

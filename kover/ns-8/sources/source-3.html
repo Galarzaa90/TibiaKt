@@ -165,7 +165,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;/*
-&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; * Copyright © 2024 Allan Galarza
 &nbsp; *
 &nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 &nbsp; * you may not use this file except in compliance with the License.
@@ -192,6 +192,9 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;/** Base interface for forum author classes. */
 <b class="fc">&nbsp;@Serializable</b>
 &nbsp;public sealed class BaseForumAuthor {
+&nbsp;    /**
+&nbsp;     * The name of the character that created the forum entry.
+&nbsp;     */
 &nbsp;    public abstract val name: String
 &nbsp;}
 &nbsp;
@@ -199,6 +202,9 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp; * A forum author that is no longer available due to being deleted or having been traded.
 &nbsp; *
 &nbsp; * If the author [isTraded], it means that the post was made by the account that owned the character before.
+&nbsp; *
+&nbsp; * @property isDeleted The character is deleted.
+&nbsp; * @property isTraded The author character was traded after this post was made.
 &nbsp; */
 &nbsp;@Serializable
 &nbsp;@SerialName(&quot;unavailableForumAuthor&quot;)
@@ -218,6 +224,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp; * @property world The current world of the author.
 &nbsp; * @property position The official position of the author, if any.
 &nbsp; * @property title The selected title of the character, if any.
+&nbsp; * @property vocation The vocation of the character.
 &nbsp; * @property guild The guild of the character, if any.
 &nbsp; * @property posts The total number of posts by this author.
 &nbsp; * @property isRecentlyTraded The character was traded in the last 30 days.
@@ -237,7 +244,9 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;) : BaseForumAuthor(), BaseCharacter, CharacterLevel
 &nbsp;
 &nbsp;/**
-&nbsp; * An author from a tournmanet world.
+&nbsp; * An author from a tournament world.
+&nbsp; *
+&nbsp; * @property posts The total number of posts by this author.
 &nbsp; */
 &nbsp;@SerialName(&quot;tournamentForumAuthor&quot;)
 &nbsp;@Serializable
@@ -268,7 +277,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-07-29 23:59</div>
+    <div style="float:right;">generated on 2024-07-30 03:38</div>
 </div>
 </body>
 </html>

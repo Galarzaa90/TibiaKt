@@ -73,15 +73,23 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </td>
 <td class="coverageStat">
   <span class="percent">
-    72.5%
+    72.3%
   </span>
   <span class="absValue">
-    (100/138)
+    (99/137)
   </span>
 </td>
 </tr>
   <tr>
     <td class="name">NewsArchiveBuilder$NewsEntryBuilder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -95,7 +103,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     0%
   </span>
   <span class="absValue">
-    (0/10)
+    (0/12)
   </span>
 </td>
 <td class="coverageStat">
@@ -103,15 +111,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     0%
   </span>
   <span class="absValue">
-    (0/14)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/92)
+    (0/76)
   </span>
 </td>
   </tr>
@@ -119,34 +119,34 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    43.8%
+    46.7%
   </span>
   <span class="absValue">
-    (7/16)
+    (7/15)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    14.3%
+    16.7%
   </span>
   <span class="absValue">
-    (2/14)
+    (2/12)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    50%
+    53.1%
   </span>
   <span class="absValue">
-    (17/34)
+    (17/32)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    43.5%
+    46.5%
   </span>
   <span class="absValue">
-    (100/230)
+    (99/213)
   </span>
 </td>
 </tr>
@@ -205,11 +205,10 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;        id: Int,
 &nbsp;        title: String,
 &nbsp;        category: NewsCategory,
-&nbsp;        categoryIcon: String,
 &nbsp;        date: LocalDate,
 &nbsp;        type: NewsType,
 <b class="fc">&nbsp;    ): NewsArchiveBuilder = apply {</b>
-<b class="fc">&nbsp;        entries.add(NewsEntry(id, title, category, categoryIcon, date, type))</b>
+<b class="fc">&nbsp;        entries.add(NewsEntry(id, title, category, date, type))</b>
 <b class="fc">&nbsp;    }</b>
 &nbsp;
 <b class="nc">&nbsp;    public fun addEntry(builder: NewsEntryBuilder.() -&gt; Unit): NewsArchiveBuilder = apply {</b>
@@ -229,7 +228,6 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="nc">&nbsp;        public var id: Int = 0</b>
 <b class="nc">&nbsp;        public var title: String? = null</b>
 <b class="nc">&nbsp;        public var category: NewsCategory? = null</b>
-<b class="nc">&nbsp;        public var categoryIcon: String? = null</b>
 <b class="nc">&nbsp;        public var date: LocalDate? = null</b>
 <b class="nc">&nbsp;        public var type: NewsType? = null</b>
 &nbsp;
@@ -237,7 +235,6 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="nc">&nbsp;            id = id,</b>
 <b class="nc">&nbsp;            title = title ?: error(&quot;title is required&quot;),</b>
 <b class="nc">&nbsp;            category = category ?: error(&quot;category is required&quot;),</b>
-<b class="nc">&nbsp;            categoryIcon = categoryIcon ?: error(&quot;categoryIcon is required&quot;),</b>
 <b class="nc">&nbsp;            date = date ?: error(&quot;date is required&quot;),</b>
 <b class="nc">&nbsp;            type = type ?: error(&quot;type is required&quot;),</b>
 &nbsp;        )
@@ -266,7 +263,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-07-29 23:59</div>
+    <div style="float:right;">generated on 2024-07-30 03:38</div>
 </div>
 </body>
 </html>

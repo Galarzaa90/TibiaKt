@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>tibiakt-core Coverage Report > LastPost</title>
+  <title>tibiakt-core Coverage Report > ForumThread</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     <a href="../index.html">com.galarzaa.tibiakt.core.models.forums</a>
 </div>
 
-<h1>Coverage Summary for Class: LastPost (com.galarzaa.tibiakt.core.models.forums)</h1>
+<h1>Coverage Summary for Class: ForumThread (com.galarzaa.tibiakt.core.models.forums)</h1>
 
 <table class="coverageStats">
 
@@ -46,13 +46,13 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </th>
 </tr>
 <tr>
-  <td class="name">LastPost</td>
+  <td class="name">ForumThread</td>
 <td class="coverageStat">
   <span class="percent">
-    50%
+    33.3%
   </span>
   <span class="absValue">
-    (1/2)
+    (1/3)
   </span>
 </td>
 <td class="coverageStat">
@@ -60,28 +60,28 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     0%
   </span>
   <span class="absValue">
-    (0/2)
+    (0/6)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    83.3%
+    87.5%
   </span>
   <span class="absValue">
-    (5/6)
+    (14/16)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    75.8%
+    83.2%
   </span>
   <span class="absValue">
-    (25/33)
+    (263/316)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">LastPost$Companion</td>
+    <td class="name">ForumThread$Companion</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -112,10 +112,10 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    66.7%
+    50%
   </span>
   <span class="absValue">
-    (2/3)
+    (2/4)
   </span>
 </td>
 <td class="coverageStat">
@@ -123,23 +123,23 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     0%
   </span>
   <span class="absValue">
-    (0/2)
+    (0/6)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    85.7%
+    88.2%
   </span>
   <span class="absValue">
-    (6/7)
+    (15/17)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    78.4%
+    83.4%
   </span>
   <span class="absValue">
-    (29/37)
+    (267/320)
   </span>
 </td>
 </tr>
@@ -151,7 +151,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;/*
-&nbsp; * Copyright © 2023 Allan Galarza
+&nbsp; * Copyright © 2024 Allan Galarza
 &nbsp; *
 &nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 &nbsp; * you may not use this file except in compliance with the License.
@@ -166,33 +166,51 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp; * limitations under the License.
 &nbsp; */
 &nbsp;
-&nbsp;
 &nbsp;package com.galarzaa.tibiakt.core.models.forums
 &nbsp;
-&nbsp;import com.galarzaa.tibiakt.core.utils.getCharacterUrl
-&nbsp;import kotlinx.datetime.Instant
+&nbsp;import com.galarzaa.tibiakt.core.models.PaginatedWithUrl
+&nbsp;import com.galarzaa.tibiakt.core.utils.getForumThreadUrl
 &nbsp;import kotlinx.serialization.Serializable
 &nbsp;
 &nbsp;/**
-&nbsp; * Information about the last post in a board or thread.
+&nbsp; * A thread in the Tibia forums.
 &nbsp; *
-&nbsp; * @property author The name of the character that made the last post.
-&nbsp; * @property postId The internal ID of the last post.
-&nbsp; * @property date The date and time when the post was published.
-&nbsp; * @property deleted Whether the author of the post is currently deleted.
-&nbsp; * @property traded Whether the post was made by a character that was traded afterwards.
+&nbsp; * @property board The name of the board the thread is in.
+&nbsp; * @property boardId The internal ID of the board the thread is in.
+&nbsp; * @property section The name of the section the board is in.
+&nbsp; * @property sectionId The internal ID of the section the board is in.
+&nbsp; * @property previousTopicNumber The ID of the thread before this one.
+&nbsp; * @property nextTopicNumber The ID of the thread after this one.
+&nbsp; * @property goldenFrame Whether the post has a golden frame or not.
+&nbsp; * @property anchoredPost The post that corresponds to the anchor in the URL if any.
 &nbsp; */
-<b class="fc">&nbsp;@Serializable</b>
-&nbsp;public data class LastPost(
-<b class="fc">&nbsp;    val author: String,</b>
-<b class="fc">&nbsp;    override val postId: Int,</b>
-<b class="fc">&nbsp;    val date: Instant,</b>
-<b class="fc">&nbsp;    val deleted: Boolean,</b>
-<b class="fc">&nbsp;    val traded: Boolean,</b>
-&nbsp;) : BaseForumPost {
-&nbsp;    /** The URL to the author&#39;s character page. If the author is deleted, there is no URL. */
-<b class="nc">&nbsp;    val authorUrl: String? get() = if (!deleted) getCharacterUrl(author) else null</b>
+<b class="pc">&nbsp;@Serializable</b>
+&nbsp;public data class ForumThread(
+<b class="fc">&nbsp;    override val title: String,</b>
+<b class="fc">&nbsp;    override val threadId: Int,</b>
+<b class="fc">&nbsp;    val board: String,</b>
+<b class="fc">&nbsp;    val boardId: Int,</b>
+<b class="fc">&nbsp;    val section: String,</b>
+<b class="fc">&nbsp;    val sectionId: Int,</b>
+<b class="fc">&nbsp;    val previousTopicNumber: Int?,</b>
+<b class="fc">&nbsp;    val nextTopicNumber: Int?,</b>
+<b class="fc">&nbsp;    val goldenFrame: Boolean,</b>
+&nbsp;    val anchoredPost: ForumPost? = null,
+<b class="fc">&nbsp;    override val currentPage: Int,</b>
+<b class="fc">&nbsp;    override val totalPages: Int,</b>
+<b class="fc">&nbsp;    override val resultsCount: Int,</b>
+<b class="fc">&nbsp;    override val entries: List&lt;ForumPost&gt;,</b>
+&nbsp;) : BaseForumThread, PaginatedWithUrl&lt;ForumPost&gt; {
+&nbsp;
+<b class="nc">&nbsp;    override val url: String get() = getForumThreadUrl(threadId, currentPage)</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Get the URL to a specific page in the thread.
+&nbsp;     */
+<b class="nc">&nbsp;    public override fun getPageUrl(page: Int): String = getForumThreadUrl(threadId, page)</b>
 &nbsp;}
+&nbsp;
+&nbsp;
 </code>
 </pre>
 </div>
@@ -216,7 +234,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-07-29 23:59</div>
+    <div style="float:right;">generated on 2024-07-30 03:38</div>
 </div>
 </body>
 </html>

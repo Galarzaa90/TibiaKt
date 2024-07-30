@@ -140,11 +140,10 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;        id: Int,
 &nbsp;        title: String,
 &nbsp;        category: NewsCategory,
-&nbsp;        categoryIcon: String,
 &nbsp;        date: LocalDate,
 &nbsp;        type: NewsType,
 &nbsp;    ): NewsArchiveBuilder = apply {
-&nbsp;        entries.add(NewsEntry(id, title, category, categoryIcon, date, type))
+&nbsp;        entries.add(NewsEntry(id, title, category, date, type))
 &nbsp;    }
 &nbsp;
 &nbsp;    public fun addEntry(builder: NewsEntryBuilder.() -&gt; Unit): NewsArchiveBuilder = apply {
@@ -164,7 +163,6 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;        public var id: Int = 0
 &nbsp;        public var title: String? = null
 &nbsp;        public var category: NewsCategory? = null
-&nbsp;        public var categoryIcon: String? = null
 &nbsp;        public var date: LocalDate? = null
 &nbsp;        public var type: NewsType? = null
 &nbsp;
@@ -172,7 +170,6 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;            id = id,
 &nbsp;            title = title ?: error(&quot;title is required&quot;),
 &nbsp;            category = category ?: error(&quot;category is required&quot;),
-&nbsp;            categoryIcon = categoryIcon ?: error(&quot;categoryIcon is required&quot;),
 &nbsp;            date = date ?: error(&quot;date is required&quot;),
 &nbsp;            type = type ?: error(&quot;type is required&quot;),
 &nbsp;        )
@@ -201,7 +198,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-07-29 23:59</div>
+    <div style="float:right;">generated on 2024-07-30 03:38</div>
 </div>
 </body>
 </html>

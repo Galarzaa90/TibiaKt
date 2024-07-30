@@ -291,7 +291,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;/*
-&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; * Copyright © 2024 Allan Galarza
 &nbsp; *
 &nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 &nbsp; * you may not use this file except in compliance with the License.
@@ -354,12 +354,25 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;    public abstract val bazaarFilterValue: Int
 &nbsp;
 &nbsp;    public companion object {
-&nbsp;        public const val highscoresQueryParam: String = &quot;worldtypes&quot;
-&nbsp;        public const val bazaarQueryParam: String = &quot;filter_worldpvptype&quot;
+&nbsp;        /**
+&nbsp;         * The name of the query parameter used to set this value in the highscores section.
+&nbsp;         */
+&nbsp;        public const val QUERY_PARAM_HIGHSCORES: String = &quot;worldtypes&quot;
 &nbsp;
+&nbsp;        /**
+&nbsp;         * The name of the query parameter used to set this value in the bazaar section.
+&nbsp;         */
+&nbsp;        public const val QUERY_PARAM_BAZAAR: String = &quot;filter_worldpvptype&quot;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Get the entry corresponding to the matching highscores query parameter value.
+&nbsp;         */
 &nbsp;        public fun fromHighscoresFilterValue(value: Int?): PvpType? =
 <b class="fc">&nbsp;            enumValues&lt;PvpType&gt;().firstOrNull { it.highscoresFilterValue == value }</b>
 &nbsp;
+&nbsp;        /**
+&nbsp;         * Get the entry corresponding to the matching bazaar query parameter value.
+&nbsp;         */
 &nbsp;        public fun fromBazaarFilterValue(value: Int?): PvpType? =
 <b class="nc">&nbsp;            enumValues&lt;PvpType&gt;().firstOrNull { it.bazaarFilterValue == value }</b>
 &nbsp;    }
@@ -387,7 +400,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-07-29 23:59</div>
+    <div style="float:right;">generated on 2024-07-30 03:38</div>
 </div>
 </body>
 </html>

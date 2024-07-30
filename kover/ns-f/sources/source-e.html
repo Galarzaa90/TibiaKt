@@ -243,7 +243,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="pc">&nbsp;        battlEyeType = IntEnum.fromValue(formData.values[&quot;beprotection&quot;]?.toInt()</b>
 <b class="fc">&nbsp;            ?: throw ParsingException(&quot;could not find beprotection form value&quot;))</b>
 <b class="fc">&nbsp;        vocation = IntEnum.fromValue(formData.values[&quot;profession&quot;]?.toInt())</b>
-<b class="fc">&nbsp;        for (pvpType in formData.valuesMultiple[&quot;${PvpType.highscoresQueryParam}[]&quot;].orEmpty()) {</b>
+<b class="fc">&nbsp;        for (pvpType in formData.valuesMultiple[&quot;${PvpType.QUERY_PARAM_HIGHSCORES}[]&quot;].orEmpty()) {</b>
 <b class="pc">&nbsp;            PvpType.fromHighscoresFilterValue(pvpType.toInt())?.apply {</b>
 <b class="fc">&nbsp;                worldTypes.add(this)</b>
 <b class="fc">&nbsp;            }</b>
@@ -295,7 +295,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-07-29 23:59</div>
+    <div style="float:right;">generated on 2024-07-30 03:38</div>
 </div>
 </body>
 </html>

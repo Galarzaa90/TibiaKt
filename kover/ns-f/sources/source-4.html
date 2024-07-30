@@ -179,7 +179,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;/*
-&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; * Copyright © 2024 Allan Galarza
 &nbsp; *
 &nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 &nbsp; * you may not use this file except in compliance with the License.
@@ -255,12 +255,12 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;
 <b class="fc">&nbsp;        filters = bazaarFilters {</b>
 <b class="fc">&nbsp;            world = searchData.values[&quot;filter_world&quot;]</b>
-<b class="fc">&nbsp;            pvpType = PvpType.fromHighscoresFilterValue(searchData.values[PvpType.bazaarQueryParam]?.toInt())</b>
-<b class="fc">&nbsp;            battlEyeType = IntEnum.fromValue(searchData.values[AuctionBattlEyeFilter.queryParam])</b>
-<b class="fc">&nbsp;            vocation = IntEnum.fromValue(searchData.values[AuctionVocationFilter.queryParam])</b>
-<b class="fc">&nbsp;            skill = IntEnum.fromValue(searchData.values[AuctionSkillFilter.queryParam])</b>
-<b class="fc">&nbsp;            orderBy = IntEnum.fromValue(searchData.values[AuctionOrderBy.queryParam])</b>
-<b class="fc">&nbsp;            orderDirection = IntEnum.fromValue(searchData.values[AuctionOrderDirection.queryParam])</b>
+<b class="fc">&nbsp;            pvpType = PvpType.fromHighscoresFilterValue(searchData.values[PvpType.QUERY_PARAM_BAZAAR]?.toInt())</b>
+<b class="fc">&nbsp;            battlEyeType = IntEnum.fromValue(searchData.values[AuctionBattlEyeFilter.QUERY_PARAM])</b>
+<b class="fc">&nbsp;            vocation = IntEnum.fromValue(searchData.values[AuctionVocationFilter.QUERY_PARAM])</b>
+<b class="fc">&nbsp;            skill = IntEnum.fromValue(searchData.values[AuctionSkillFilter.QUERY_PARAM])</b>
+<b class="fc">&nbsp;            orderBy = IntEnum.fromValue(searchData.values[AuctionOrderBy.QUERY_PARAM])</b>
+<b class="fc">&nbsp;            orderDirection = IntEnum.fromValue(searchData.values[AuctionOrderDirection.QUERY_PARAM])</b>
 <b class="pc">&nbsp;            minimumLevel = searchData.values[&quot;filter_levelrangefrom&quot;]?.nullIfBlank()?.parseInteger()</b>
 <b class="pc">&nbsp;            maximumLevel = searchData.values[&quot;filter_levelrangeto&quot;]?.nullIfBlank()?.parseInteger()</b>
 <b class="pc">&nbsp;            minimumSkillLevel = searchData.values[&quot;filter_skillrangefrom&quot;]?.nullIfBlank()?.parseInteger()</b>
@@ -297,7 +297,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-07-29 23:59</div>
+    <div style="float:right;">generated on 2024-07-30 03:38</div>
 </div>
 </body>
 </html>

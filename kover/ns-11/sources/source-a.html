@@ -151,7 +151,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;/*
-&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; * Copyright © 2024 Allan Galarza
 &nbsp; *
 &nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 &nbsp; * you may not use this file except in compliance with the License.
@@ -372,7 +372,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="nc">&nbsp;    &quot;currentpage&quot; to page,</b>
 <b class="nc">&nbsp;    &quot;category&quot; to category.value,</b>
 <b class="nc">&nbsp;    &quot;beprotection&quot; to battleEye.value,</b>
-<b class="nc">&nbsp;    *worldTypes.orEmpty().map { &quot;${PvpType.highscoresQueryParam}[]&quot; to it.highscoresFilterValue }.toTypedArray()</b>
+<b class="nc">&nbsp;    *worldTypes.orEmpty().map { &quot;${PvpType.QUERY_PARAM_HIGHSCORES}[]&quot; to it.highscoresFilterValue }.toTypedArray()</b>
 &nbsp;)
 &nbsp;
 &nbsp;/**
@@ -434,16 +434,16 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;private fun BazaarFilters?.getQueryParams(): Array&lt;Pair&lt;String, Any?&gt;&gt; {
 <b class="nc">&nbsp;    return if (this != null) arrayOf(</b>
 <b class="nc">&nbsp;        &quot;filter_world&quot; to world,</b>
-<b class="nc">&nbsp;        AuctionVocationFilter.queryParam to vocation?.value,</b>
+<b class="nc">&nbsp;        AuctionVocationFilter.QUERY_PARAM to vocation?.value,</b>
 <b class="nc">&nbsp;        &quot;filter_levelrangefrom&quot; to minimumLevel,</b>
 <b class="nc">&nbsp;        &quot;filter_levelrangeto&quot; to maximumLevel,</b>
-<b class="nc">&nbsp;        PvpType.bazaarQueryParam to pvpType?.bazaarFilterValue,</b>
-<b class="nc">&nbsp;        AuctionBattlEyeFilter.queryParam to battlEyeType?.value,</b>
-<b class="nc">&nbsp;        AuctionSkillFilter.queryParam to skill?.value,</b>
+<b class="nc">&nbsp;        PvpType.QUERY_PARAM_BAZAAR to pvpType?.bazaarFilterValue,</b>
+<b class="nc">&nbsp;        AuctionBattlEyeFilter.QUERY_PARAM to battlEyeType?.value,</b>
+<b class="nc">&nbsp;        AuctionSkillFilter.QUERY_PARAM to skill?.value,</b>
 <b class="nc">&nbsp;        &quot;filter_skillrangefrom&quot; to minimumSkillLevel,</b>
 <b class="nc">&nbsp;        &quot;filter_skillrangeto&quot; to maximumSkillLevel,</b>
-<b class="nc">&nbsp;        AuctionOrderBy.queryParam to orderBy?.value,</b>
-<b class="nc">&nbsp;        AuctionOrderDirection.queryParam to orderDirection?.value,</b>
+<b class="nc">&nbsp;        AuctionOrderBy.QUERY_PARAM to orderBy?.value,</b>
+<b class="nc">&nbsp;        AuctionOrderDirection.QUERY_PARAM to orderDirection?.value,</b>
 <b class="nc">&nbsp;        &quot;searchstring&quot; to searchString,</b>
 <b class="nc">&nbsp;        AuctionSearchType.queryParam to searchType?.value,</b>
 <b class="nc">&nbsp;    ) else emptyArray()</b>
@@ -519,7 +519,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-07-29 23:59</div>
+    <div style="float:right;">generated on 2024-07-30 03:38</div>
 </div>
 </body>
 </html>

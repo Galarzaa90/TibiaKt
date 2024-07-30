@@ -100,7 +100,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;/*
-&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; * Copyright © 2024 Allan Galarza
 &nbsp; *
 &nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 &nbsp; * you may not use this file except in compliance with the License.
@@ -189,7 +189,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;            // Check which of the ongoing events did not show up today, meaning it has ended now
 <b class="fc">&nbsp;            for (pendingEvent in onGoingEvents.toList()) {</b>
 <b class="fc">&nbsp;                if (!todayEvents.contains(pendingEvent)) {</b>
-&nbsp;                    //If it didn&#39;t show up today, it means it ended yesterday.
+&nbsp;                    // If it didn&#39;t show up today, it means it ended yesterday.
 <b class="fc">&nbsp;                    pendingEvent.endDate = LocalDate.of(currentMonth.year, currentMonth.month, day).minusDays(1)</b>
 <b class="fc">&nbsp;                    addEntry(pendingEvent.build())</b>
 <b class="fc">&nbsp;                    onGoingEvents.remove(pendingEvent)</b>
@@ -225,7 +225,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-07-29 23:59</div>
+    <div style="float:right;">generated on 2024-07-30 03:38</div>
 </div>
 </body>
 </html>

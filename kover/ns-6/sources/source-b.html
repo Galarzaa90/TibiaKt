@@ -137,7 +137,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;/*
-&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; * Copyright © 2024 Allan Galarza
 &nbsp; *
 &nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 &nbsp; * you may not use this file except in compliance with the License.
@@ -159,6 +159,9 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;
 &nbsp;/**
 &nbsp; * The guild a [Character] belongs to.
+&nbsp; *
+&nbsp; * @property rank The name of the guild rank.
+&nbsp; * @property title A customizable title the character might have received in the guild.
 &nbsp; */
 <b class="fc">&nbsp;@Serializable</b>
 <b class="fc">&nbsp;public data class GuildMembershipWithTitle(override val name: String, val rank: String, val title: String?) : BaseGuild</b>
@@ -185,7 +188,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-07-29 23:59</div>
+    <div style="float:right;">generated on 2024-07-30 03:38</div>
 </div>
 </body>
 </html>

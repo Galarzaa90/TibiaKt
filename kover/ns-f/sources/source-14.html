@@ -100,7 +100,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;/*
-&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; * Copyright © 2024 Allan Galarza
 &nbsp; *
 &nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 &nbsp; * you may not use this file except in compliance with the License.
@@ -130,6 +130,11 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;public object NewsParser : Parser&lt;News?&gt; {
 <b class="fc">&nbsp;    override fun fromContent(content: String): News? = fromContent(content, 0)</b>
 &nbsp;
+&nbsp;    /**
+&nbsp;     * Parse the content from Tibia.com into a news article.
+&nbsp;     *
+&nbsp;     * @param newsId The news ID to assign to the article, since it is not possible to know this only from the HTML content.
+&nbsp;     */
 <b class="nc">&nbsp;    public fun fromContent(content: String, newsId: Int = 0): News? {</b>
 <b class="fc">&nbsp;        val boxContent = boxContent(content)</b>
 &nbsp;
@@ -178,7 +183,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-07-29 23:59</div>
+    <div style="float:right;">generated on 2024-07-30 03:38</div>
 </div>
 </body>
 </html>

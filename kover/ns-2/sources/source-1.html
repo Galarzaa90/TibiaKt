@@ -113,7 +113,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;/*
-&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; * Copyright © 2024 Allan Galarza
 &nbsp; *
 &nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 &nbsp; * you may not use this file except in compliance with the License.
@@ -140,7 +140,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;    INITIALLY_PROTECTED(1),</b>
 &nbsp;
 &nbsp;    /**
-&nbsp;     * Worlds that had BattlEye implemented at a later date, these have a yellow icon.
+&nbsp;     * Worlds that had BattlEye implemented at a later date. These have a yellow icon.
 &nbsp;     */
 <b class="fc">&nbsp;    PROTECTED(2),</b>
 &nbsp;
@@ -150,7 +150,10 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;    NOT_PROTECTED(3);</b>
 &nbsp;
 &nbsp;    public companion object {
-&nbsp;        public const val queryParam: String = &quot;filter_worldbattleyestate&quot;
+&nbsp;        /**
+&nbsp;         * The query parameter name used to set this value.
+&nbsp;         */
+&nbsp;        public const val QUERY_PARAM: String = &quot;filter_worldbattleyestate&quot;
 &nbsp;    }
 &nbsp;}
 </code>
@@ -176,7 +179,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-07-29 23:59</div>
+    <div style="float:right;">generated on 2024-07-30 03:38</div>
 </div>
 </body>
 </html>
