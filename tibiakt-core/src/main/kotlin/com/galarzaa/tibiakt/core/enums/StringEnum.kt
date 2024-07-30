@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +26,9 @@ public interface StringEnum {
     public val value: String
 
     public companion object {
+        /**
+         * Get an instance of this that matches either the name or value of the entry.
+         */
         public inline fun <reified T> fromValue(value: String?): T? where T : Enum<T>, T : StringEnum =
             T::class.java.takeIf { it.isEnum }?.enumConstants?.find { it.value == value || it.name == value }
     }

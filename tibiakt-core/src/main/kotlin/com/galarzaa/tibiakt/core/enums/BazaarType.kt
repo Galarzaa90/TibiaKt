@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,8 @@ package com.galarzaa.tibiakt.core.enums
 
 /**
  * The types of bazaar views.
+ *
+ * @property subtopic The value for the "subtopic" query parameter used to access it.
  */
 public enum class BazaarType(override val value: String, public val subtopic: String) : StringEnum {
     CURRENT("current", "currentcharactertrades"),

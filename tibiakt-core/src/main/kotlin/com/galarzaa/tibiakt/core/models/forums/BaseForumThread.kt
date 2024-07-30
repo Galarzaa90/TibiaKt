@@ -16,19 +16,26 @@
 
 package com.galarzaa.tibiakt.core.models.forums
 
-import com.galarzaa.tibiakt.core.utils.getForumAnnouncementUrl
+import com.galarzaa.tibiakt.core.utils.getForumThreadUrl
 
-/** Base interface for forum announcements.
- *
- * @property title The title of the announcement.
- * @property announcementId The internal ID of the announcement, used for linking.
+/**
+ * Base interface for forum related classes.
  */
-public interface BaseForumAnnouncement {
+public interface BaseForumThread {
+    /**
+     * The title of the thread.
+     */
     public val title: String
-    public val announcementId: Int
 
     /**
-     * The URL to go to the specific announcement.
+     * The internal ID of the thread.
      */
-    public val url: String get() = getForumAnnouncementUrl(announcementId)
+    public val threadId: Int
+
+    /**
+     * The URL to the forum thread.
+     */
+    public val url: String get() = getForumThreadUrl(threadId)
+
+
 }

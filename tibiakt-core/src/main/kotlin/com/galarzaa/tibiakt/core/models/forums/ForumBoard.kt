@@ -1,5 +1,5 @@
 /*
- * Copyright © 2023 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,9 +21,20 @@ import com.galarzaa.tibiakt.core.models.PaginatedWithUrl
 import com.galarzaa.tibiakt.core.utils.getForumBoardUrl
 import kotlinx.serialization.Serializable
 
+/**
+ * The default thread age used in forums.
+ */
 public const val DEFAULT_THREAD_AGE: Int = 30
 
-/** A board in the Tibia forums. */
+/**
+ * A board in the Tibia forums.
+ *
+ * @property name The name of the board.
+ * @property sectionId The internal ID of the section the board is in.
+ * @property section The name of the section the board is in.
+ * @property threadAge The age in days of the displayed posts.
+ * @property announcements The announcements in the board.
+ */
 @Serializable
 public data class ForumBoard(
     val name: String,

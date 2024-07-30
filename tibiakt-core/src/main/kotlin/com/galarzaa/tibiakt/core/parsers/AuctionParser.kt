@@ -73,6 +73,14 @@ public object AuctionParser : Parser<Auction?> {
     private val idRegex = Regex("""(\d+).(?:gif|png)""")
 
     override fun fromContent(content: String): Auction? = fromContent(content, 0, true)
+
+    /**
+     * Parse the content of an auction.
+     *
+     * @param content The HTML content of the auction's page.
+     * @param auctionId The auction ID to set to the results, since it is not possible to know from the content only.
+     * @param parseDetails Whether to parse the auction's detail or just the general information.
+     */
     public fun fromContent(content: String, auctionId: Int, parseDetails: Boolean = true): Auction? {
         val document = Jsoup.parse(content)
         return auction {
@@ -438,6 +446,9 @@ public object AuctionParser : Parser<Auction?> {
         return MountEntry(name, id.toInt())
     }
 
+    /**
+     * Parses the items from the dynamic paginator in an auction's details page.
+     */
     public inline fun <reified T> parsePageItems(content: String): List<T> {
         val document = Jsoup.parse(content)
         val cvIcon = document.select(ICON_CSS_SELECTOR)

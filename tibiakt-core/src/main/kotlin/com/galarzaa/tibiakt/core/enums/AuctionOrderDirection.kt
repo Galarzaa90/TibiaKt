@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,6 +31,9 @@ public enum class AuctionOrderDirection(override val value: Int) : IntEnum {
     LOWEST_EARLIEST(1);
 
     public companion object {
-        public const val queryParam: String = "order_direction"
+        /**
+         * The query parameter name used to set this value.
+         */
+        public const val QUERY_PARAM: String = "order_direction"
     }
 }

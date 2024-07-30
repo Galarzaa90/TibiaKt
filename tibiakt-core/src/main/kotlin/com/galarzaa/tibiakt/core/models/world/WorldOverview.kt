@@ -1,5 +1,5 @@
 /*
- * Copyright © 2023 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +26,7 @@ import kotlinx.serialization.Serializable
  *
  * @property overallMaximumCount The record for simultaneous online players.
  * @property overallMaximumCountDateTime The date and time when the record for online players was set.
+ * @property worlds The list of available worlds.
  */
 @Serializable
 public data class WorldOverview(

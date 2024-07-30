@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,10 +28,20 @@ public enum class NewsCategory(override val value: String) : StringEnum {
     SUPPORT("support"),
     TECHNICAL_ISSUES("technical");
 
+    /**
+     * The name of query parameter used to set this filter.
+     */
     public val filterName: String
         get() = "filter_$value"
 
+    /**
+     * A URL to the big icon version of this category.
+     */
     public val bigIconUrl: String get() = getStaticFileUrl("images", "global", "content", "newsicon_${value}_big.gif")
+
+    /**
+     * An URL to the small icon version of this category.
+     */
     public val smallIconUrl: String
         get() = getStaticFileUrl(
             "images",
@@ -42,6 +52,10 @@ public enum class NewsCategory(override val value: String) : StringEnum {
 
     public companion object {
         private val iconRegex = Regex("""newsicon_([^_]+)_(?:small|big)""")
+
+        /**
+         * Get the category value from an icon's URL.
+         */
         public fun fromIcon(iconUrl: String): NewsCategory? {
             iconRegex.find(iconUrl)?.apply {
                 return StringEnum.fromValue(this.groups[1]!!.value.lowercase())

@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,9 +22,15 @@ public enum class NewsType(override val value: String) : StringEnum {
     NEWS_TICKER("News Ticker"),
     FEATURED_ARTICLE("Featured Article");
 
+    /**
+     * The name of query parameter used to set this filter.
+     */
     public val filterName: String
         get() = "filter_$filterValue"
 
+    /**
+     * The value of query parameter used to set this filter.
+     */
     public val filterValue: String
         get() = value.split(" ").last().lowercase()
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -75,12 +75,12 @@ public object CharacterBazaarParser : Parser<CharacterBazaar> {
 
         filters = bazaarFilters {
             world = searchData.values["filter_world"]
-            pvpType = PvpType.fromHighscoresFilterValue(searchData.values[PvpType.bazaarQueryParam]?.toInt())
-            battlEyeType = IntEnum.fromValue(searchData.values[AuctionBattlEyeFilter.queryParam])
-            vocation = IntEnum.fromValue(searchData.values[AuctionVocationFilter.queryParam])
-            skill = IntEnum.fromValue(searchData.values[AuctionSkillFilter.queryParam])
-            orderBy = IntEnum.fromValue(searchData.values[AuctionOrderBy.queryParam])
-            orderDirection = IntEnum.fromValue(searchData.values[AuctionOrderDirection.queryParam])
+            pvpType = PvpType.fromHighscoresFilterValue(searchData.values[PvpType.QUERY_PARAM_BAZAAR]?.toInt())
+            battlEyeType = IntEnum.fromValue(searchData.values[AuctionBattlEyeFilter.QUERY_PARAM])
+            vocation = IntEnum.fromValue(searchData.values[AuctionVocationFilter.QUERY_PARAM])
+            skill = IntEnum.fromValue(searchData.values[AuctionSkillFilter.QUERY_PARAM])
+            orderBy = IntEnum.fromValue(searchData.values[AuctionOrderBy.QUERY_PARAM])
+            orderDirection = IntEnum.fromValue(searchData.values[AuctionOrderDirection.QUERY_PARAM])
             minimumLevel = searchData.values["filter_levelrangefrom"]?.nullIfBlank()?.parseInteger()
             maximumLevel = searchData.values["filter_levelrangeto"]?.nullIfBlank()?.parseInteger()
             minimumSkillLevel = searchData.values["filter_skillrangefrom"]?.nullIfBlank()?.parseInteger()

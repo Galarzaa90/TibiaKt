@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,9 @@
 package com.galarzaa.tibiakt.core.enums
 
 /**
- * The type of BattlEye protection a world might have.
+ * The type of BattlEye protection a game world might have.
+ *
+ * @property weight The restriction weight of this type, used to check transferability between worlds.
  */
 public enum class BattlEyeType(public val weight: Int) {
     /**

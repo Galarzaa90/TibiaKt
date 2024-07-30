@@ -51,6 +51,8 @@ import kotlinx.serialization.Serializable
  * @property exaltedDust The amount of exalted dust the character has.
  * @property exaltedDustLimit The exalted dust limit of the character.
  * @property bossPoints The boss points of the character.
+ * @property bonusPromotionPoints The bonus promotion points of the character.
+ * @property animusMasteriesUnlocked The number of animus masteries the character has unlocked.
  * @property items The summary of items of the character.
  * @property storeItems The summary of store items of the character.
  * @property mounts The mounts the character has unlocked.
@@ -67,6 +69,7 @@ import kotlinx.serialization.Serializable
  * @property achievements The list of achievements the character has unlocked.
  * @property bestiaryProgress The list of bestiary creatures and their progress.
  * @property bosstiaryProgress The list of bosstiary bosses and their progress.
+ * @property revealedGems The gems revealed by the character, with their effects.
  */
 @Serializable
 public data class AuctionDetails(

@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,6 +29,11 @@ import com.galarzaa.tibiakt.core.utils.remove
 public object NewsParser : Parser<News?> {
     override fun fromContent(content: String): News? = fromContent(content, 0)
 
+    /**
+     * Parse the content from Tibia.com into a news article.
+     *
+     * @param newsId The news ID to assign to the article, since it is not possible to know this only from the HTML content.
+     */
     public fun fromContent(content: String, newsId: Int = 0): News? {
         val boxContent = boxContent(content)
 

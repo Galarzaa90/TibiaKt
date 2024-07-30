@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,6 +29,11 @@ import com.galarzaa.tibiakt.core.utils.remove
 public object ForumAnnouncementParser : Parser<ForumAnnouncement?> {
     override fun fromContent(content: String): ForumAnnouncement? = fromContent(content, 0)
 
+    /**
+     * Parse the content from Tibia.com into a forum announcement.
+     *
+     * @param announcementId The announcement ID to assign to the article, since it is not possible to know this only from the HTML content.
+     */
     public fun fromContent(content: String, announcementId: Int): ForumAnnouncement? {
         val boxContent = boxContent(content)
         return forumAnnouncement {

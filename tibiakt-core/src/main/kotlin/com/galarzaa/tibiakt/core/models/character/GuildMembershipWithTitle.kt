@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,9 @@ import kotlinx.serialization.Serializable
 
 /**
  * The guild a [Character] belongs to.
+ *
+ * @property rank The name of the guild rank.
+ * @property title A customizable title the character might have received in the guild.
  */
 @Serializable
 public data class GuildMembershipWithTitle(override val name: String, val rank: String, val title: String?) : BaseGuild

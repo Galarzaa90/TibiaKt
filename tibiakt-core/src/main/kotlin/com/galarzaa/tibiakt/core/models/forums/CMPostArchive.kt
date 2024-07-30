@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,6 +27,9 @@ import java.time.LocalDate
 
 /**
  * The CM Post Archive, displaying recent posts by Community Managers.
+ *
+ * @property startDate The start date for the results.
+ * @property endDate The end date for the results.
  */
 @Serializable
 public data class CMPostArchive(
@@ -37,6 +40,10 @@ public data class CMPostArchive(
     override val resultsCount: Int,
     override val entries: List<CMPost>,
 ) : PaginatedWithUrl<CMPost> {
+
+    /**
+     * The URL to the CM Post archive with the current filters.
+     */
     val url: String get() = getCMPostArchiveUrl(startDate, endDate, currentPage)
 
     override fun getPageUrl(page: Int): String = getCMPostArchiveUrl(startDate, endDate, page)

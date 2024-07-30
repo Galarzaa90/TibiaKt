@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,9 @@ import kotlin.math.floor
 
 /** A character with a level attribute. */
 public interface CharacterLevel {
+    /**
+     * The character's level up.
+     */
     public val level: Int
 
     /**

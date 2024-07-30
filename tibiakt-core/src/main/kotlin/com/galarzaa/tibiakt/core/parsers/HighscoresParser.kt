@@ -84,7 +84,7 @@ public object HighscoresParser : Parser<Highscores?> {
         battlEyeType = IntEnum.fromValue(formData.values["beprotection"]?.toInt()
             ?: throw ParsingException("could not find beprotection form value"))
         vocation = IntEnum.fromValue(formData.values["profession"]?.toInt())
-        for (pvpType in formData.valuesMultiple["${PvpType.highscoresQueryParam}[]"].orEmpty()) {
+        for (pvpType in formData.valuesMultiple["${PvpType.QUERY_PARAM_HIGHSCORES}[]"].orEmpty()) {
             PvpType.fromHighscoresFilterValue(pvpType.toInt())?.apply {
                 worldTypes.add(this)
             }

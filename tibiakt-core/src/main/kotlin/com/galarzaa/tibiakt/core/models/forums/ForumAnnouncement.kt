@@ -1,5 +1,5 @@
 /*
- * Copyright © 2023 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,18 @@ package com.galarzaa.tibiakt.core.models.forums
 import kotlinx.datetime.Instant
 import kotlinx.serialization.Serializable
 
-/** An announcement in the Tibia forums. */
+/**
+ * An announcement in the Tibia forums.
+ *
+ * @property board The name of the board the announcement is posted in.
+ * @property boardId The internal ID of the board the announcement is in.
+ * @property section The name of the section the announcement is posted in.
+ * @property sectionId The internal ID of the section the announcement is in.
+ * @property author The author that created the announcement.
+ * @property content The content of the announcement.
+ * @property startDate The start date of the announcement.
+ * @property endDate The end date of the announcement.
+ */
 @Serializable
 public data class ForumAnnouncement(
     override val announcementId: Int,

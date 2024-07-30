@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -88,7 +88,7 @@ public object EventsScheduleParser : Parser<EventsSchedule> {
             // Check which of the ongoing events did not show up today, meaning it has ended now
             for (pendingEvent in onGoingEvents.toList()) {
                 if (!todayEvents.contains(pendingEvent)) {
-                    //If it didn't show up today, it means it ended yesterday.
+                    // If it didn't show up today, it means it ended yesterday.
                     pendingEvent.endDate = LocalDate.of(currentMonth.year, currentMonth.month, day).minusDays(1)
                     addEntry(pendingEvent.build())
                     onGoingEvents.remove(pendingEvent)

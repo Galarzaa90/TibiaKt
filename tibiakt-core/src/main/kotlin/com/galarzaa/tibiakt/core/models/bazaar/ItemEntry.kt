@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +26,7 @@ import kotlinx.serialization.Serializable
  * @property name The name of the item.
  * @property description The description or flavor text of the item, if any.
  * @property count The amount of this item the character has.
+ * @property tier The upgrade tier of the item.
  */
 @Serializable
 public data class ItemEntry(

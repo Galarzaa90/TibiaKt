@@ -50,6 +50,9 @@ public data class Highscores(
     override val entries: List<HighscoresEntry>,
 ) : PaginatedWithUrl<HighscoresEntry> {
 
+    /**
+     * The URL to these highscores.
+     */
     val url: String get() = getHighscoresUrl(world, category, vocation, currentPage, battlEyeType, worldTypes)
 
     override fun getPageUrl(page: Int): String =

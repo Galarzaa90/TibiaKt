@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -220,7 +220,7 @@ public fun getHighscoresUrl(
     "currentpage" to page,
     "category" to category.value,
     "beprotection" to battleEye.value,
-    *worldTypes.orEmpty().map { "${PvpType.highscoresQueryParam}[]" to it.highscoresFilterValue }.toTypedArray()
+    *worldTypes.orEmpty().map { "${PvpType.QUERY_PARAM_HIGHSCORES}[]" to it.highscoresFilterValue }.toTypedArray()
 )
 
 /**
@@ -282,16 +282,16 @@ public fun getBazaarUrl(type: BazaarType = BazaarType.CURRENT, filters: BazaarFi
 private fun BazaarFilters?.getQueryParams(): Array<Pair<String, Any?>> {
     return if (this != null) arrayOf(
         "filter_world" to world,
-        AuctionVocationFilter.queryParam to vocation?.value,
+        AuctionVocationFilter.QUERY_PARAM to vocation?.value,
         "filter_levelrangefrom" to minimumLevel,
         "filter_levelrangeto" to maximumLevel,
-        PvpType.bazaarQueryParam to pvpType?.bazaarFilterValue,
-        AuctionBattlEyeFilter.queryParam to battlEyeType?.value,
-        AuctionSkillFilter.queryParam to skill?.value,
+        PvpType.QUERY_PARAM_BAZAAR to pvpType?.bazaarFilterValue,
+        AuctionBattlEyeFilter.QUERY_PARAM to battlEyeType?.value,
+        AuctionSkillFilter.QUERY_PARAM to skill?.value,
         "filter_skillrangefrom" to minimumSkillLevel,
         "filter_skillrangeto" to maximumSkillLevel,
-        AuctionOrderBy.queryParam to orderBy?.value,
-        AuctionOrderDirection.queryParam to orderDirection?.value,
+        AuctionOrderBy.QUERY_PARAM to orderBy?.value,
+        AuctionOrderDirection.QUERY_PARAM to orderDirection?.value,
         "searchstring" to searchString,
         AuctionSearchType.queryParam to searchType?.value,
     ) else emptyArray()

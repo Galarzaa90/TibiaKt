@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -62,12 +62,25 @@ public enum class PvpType(override val value: String) : StringEnum {
     public abstract val bazaarFilterValue: Int
 
     public companion object {
-        public const val highscoresQueryParam: String = "worldtypes"
-        public const val bazaarQueryParam: String = "filter_worldpvptype"
+        /**
+         * The name of the query parameter used to set this value in the highscores section.
+         */
+        public const val QUERY_PARAM_HIGHSCORES: String = "worldtypes"
 
+        /**
+         * The name of the query parameter used to set this value in the bazaar section.
+         */
+        public const val QUERY_PARAM_BAZAAR: String = "filter_worldpvptype"
+
+        /**
+         * Get the entry corresponding to the matching highscores query parameter value.
+         */
         public fun fromHighscoresFilterValue(value: Int?): PvpType? =
             enumValues<PvpType>().firstOrNull { it.highscoresFilterValue == value }
 
+        /**
+         * Get the entry corresponding to the matching bazaar query parameter value.
+         */
         public fun fromBazaarFilterValue(value: Int?): PvpType? =
             enumValues<PvpType>().firstOrNull { it.bazaarFilterValue == value }
     }

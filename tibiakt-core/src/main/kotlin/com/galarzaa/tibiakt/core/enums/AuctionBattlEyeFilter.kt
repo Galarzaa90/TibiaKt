@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ public enum class AuctionBattlEyeFilter(override val value: Int) : IntEnum {
     INITIALLY_PROTECTED(1),
 
     /**
-     * Worlds that had BattlEye implemented at a later date, these have a yellow icon.
+     * Worlds that had BattlEye implemented at a later date. These have a yellow icon.
      */
     PROTECTED(2),
 
@@ -36,6 +36,9 @@ public enum class AuctionBattlEyeFilter(override val value: Int) : IntEnum {
     NOT_PROTECTED(3);
 
     public companion object {
-        public const val queryParam: String = "filter_worldbattleyestate"
+        /**
+         * The query parameter name used to set this value.
+         */
+        public const val QUERY_PARAM: String = "filter_worldbattleyestate"
     }
 }

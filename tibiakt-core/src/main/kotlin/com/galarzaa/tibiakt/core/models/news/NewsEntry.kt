@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@ import java.time.LocalDate
 /**
  * A news entry listed in the [NewsArchive].
  *
- * @property title The title of the entry.
+ * @property title The title of the entry
  * @property date The date when the entry was published.
  * @property type The type of the entry.
  */
@@ -37,7 +37,6 @@ public data class NewsEntry(
     override val id: Int,
     val title: String,
     override val category: NewsCategory,
-    val categoryIcon: String,
     val date: LocalDate,
     val type: NewsType,
 ) : BaseNews

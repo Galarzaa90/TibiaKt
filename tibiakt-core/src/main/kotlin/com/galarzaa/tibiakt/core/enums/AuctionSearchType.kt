@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,6 +36,9 @@ public enum class AuctionSearchType(override val value: Int) : IntEnum {
     CHARACTER_NAME(2);
 
     public companion object {
+        /**
+         * The query parameter name used to set this value.
+         */
         public const val queryParam: String = "searchtype"
     }
 }

@@ -171,6 +171,7 @@ public open class TibiaKtClient constructor(
      * Creates an instance of the client, using the default engine (CIO).
      *
      * @param userAgent The value that will be sent in the User-Agent header of every request.
+     * @param additionalConfig Additional configuratin for the HTTP client.
      */
     public constructor(userAgent: String? = null, additionalConfig: (HttpClientConfig<*>.() -> Unit) = {}) : this(
         null, userAgent, additionalConfig
@@ -356,7 +357,7 @@ public open class TibiaKtClient constructor(
      *
      * @param world The world to get highscores from. If null, the highscores of all worlds are returned.
      * @param category The category to fetch.
-     * @param vocation The vocation to filter by. By default all vocations will be returned
+     * @param vocation The vocation to filter by. By default, all vocations will be returned
      * @param page The page number to fetch
      * @param battlEyeType The BattlEye type of the worlds to fetch. Only applies when [world] is null.
      * @param pvpTypes The PvP type of the worlds to fetch. Only applies when [world] is null.
@@ -374,6 +375,15 @@ public open class TibiaKtClient constructor(
         return response.parse { HighscoresParser.fromContent(it) }
     }
 
+    /**
+     * Fetch the entire highscores.
+     *
+     * @param world The world to get highscores from. If null, the highscores of all worlds are returned.
+     * @param category The category to fetch.
+     * @param vocation The vocation to filter by. By default, all vocations will be returned
+     * @param battlEyeType The BattlEye type of the worlds to fetch. Only applies when [world] is null.
+     * @param pvpTypes The PvP type of the worlds to fetch. Only applies when [world] is null.
+     */
     public open suspend fun fetchHigscores(
         world: String?,
         category: HighscoresCategory,

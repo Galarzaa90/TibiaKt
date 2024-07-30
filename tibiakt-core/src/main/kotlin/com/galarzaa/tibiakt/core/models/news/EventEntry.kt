@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,8 +29,8 @@ import java.time.Period
  *
  * @property title The title or name of the event.
  * @property description A brief description of the event.
- * @property startDate The date when the event starts. If null, it means the event started in a previous month and the date is unavailable.
- * @property endDate The date when the event ends. If null, it means the event ends in a following month and the date is unavailable.
+ * @property startDate The date when the event starts. If null, it means the event started in the previous month and the date is unavailable.
+ * @property endDate The date when the event ends. If null, it means the event ends in the following month and the date is unavailable.
  */
 @Serializable
 public data class EventEntry(
@@ -39,6 +39,9 @@ public data class EventEntry(
     val startDate: LocalDate?,
     val endDate: LocalDate?,
 ) {
+    /**
+     * The duration of the event, if both [startDate] and [endDate] are known.
+     */
     val duration: Period?
         get() = if (startDate != null && endDate != null) Period.between(startDate, endDate) else null
 }

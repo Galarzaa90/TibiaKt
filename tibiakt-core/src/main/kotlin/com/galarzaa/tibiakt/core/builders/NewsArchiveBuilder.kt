@@ -46,11 +46,10 @@ public class NewsArchiveBuilder : TibiaKtBuilder<NewsArchive> {
         id: Int,
         title: String,
         category: NewsCategory,
-        categoryIcon: String,
         date: LocalDate,
         type: NewsType,
     ): NewsArchiveBuilder = apply {
-        entries.add(NewsEntry(id, title, category, categoryIcon, date, type))
+        entries.add(NewsEntry(id, title, category, date, type))
     }
 
     public fun addEntry(builder: NewsEntryBuilder.() -> Unit): NewsArchiveBuilder = apply {
@@ -70,7 +69,6 @@ public class NewsArchiveBuilder : TibiaKtBuilder<NewsArchive> {
         public var id: Int = 0
         public var title: String? = null
         public var category: NewsCategory? = null
-        public var categoryIcon: String? = null
         public var date: LocalDate? = null
         public var type: NewsType? = null
 
@@ -78,7 +76,6 @@ public class NewsArchiveBuilder : TibiaKtBuilder<NewsArchive> {
             id = id,
             title = title ?: error("title is required"),
             category = category ?: error("category is required"),
-            categoryIcon = categoryIcon ?: error("categoryIcon is required"),
             date = date ?: error("date is required"),
             type = type ?: error("type is required"),
         )

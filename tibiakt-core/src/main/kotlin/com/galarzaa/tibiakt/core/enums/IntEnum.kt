@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,12 +20,21 @@ package com.galarzaa.tibiakt.core.enums
  * An enum with a numeric value.
  */
 public interface IntEnum {
+    /**
+     * The numeric value that represents the enum.
+     */
     public val value: Int
 
     public companion object {
+        /**
+         * Get an instance of this that matches either the name or value of the entry.
+         */
         public inline fun <reified T> fromValue(value: String?): T? where T : Enum<T>, T : IntEnum =
             T::class.java.takeIf { it.isEnum }?.enumConstants?.find { it.value.toString() == value || it.name == value }
 
+        /**
+         * Get an instance of this that matches the value of the entry.
+         */
         public inline fun <reified T> fromValue(value: Int?): T? where T : Enum<T>, T : IntEnum =
             fromValue(value.toString())
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,9 @@ import kotlinx.serialization.Serializable
 
 /**
  * An emoticon in the forums.
+ *
+ * @property name The name of the emoticon.
+ * @property url The URL of the emoticon.
  */
 @Serializable
 public data class ForumEmoticon(

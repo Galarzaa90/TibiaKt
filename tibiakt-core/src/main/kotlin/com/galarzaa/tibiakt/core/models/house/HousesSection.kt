@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,6 +42,9 @@ public data class HousesSection(
     val entries: List<HouseEntry>,
 ) {
 
+    /**
+     * The URL to the Houses section, with the selected filters.
+     */
     val url: String
         get() = getHousesSectionUrl(world, town, type, status, order)
 }

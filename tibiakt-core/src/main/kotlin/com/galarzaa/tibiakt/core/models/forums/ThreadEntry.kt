@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,11 +19,24 @@ package com.galarzaa.tibiakt.core.models.forums
 import com.galarzaa.tibiakt.core.enums.ThreadStatus
 import kotlinx.serialization.Serializable
 
-/** A thread entry in the forums. */
+/**
+ * A thread entry in the forums.
+ *
+ * @property author The name of the author that created the thread.
+ * @property isAuthorTraded Whether the author's character was traded after the thread was created.
+ * @property isAuthorDeleted Whether the thread author is now deleted.
+ * @property emoticon The selected emoticon for the thread.
+ * @property replies The total number of replies the thread has.
+ * @property views The total number of views the thread has.
+ * @property lastPost Brief details of the last post.
+ * @property status The status the thread has.
+ * @property pages The total number of pages the thread has.
+ * @property goldenFrame Whether the thread has a golden frame around it.
+ */
 @Serializable
 public data class ThreadEntry(
-    val title: String,
-    val threadId: Int,
+    override val title: String,
+    override val threadId: Int,
     val author: String,
     val isAuthorTraded: Boolean,
     val isAuthorDeleted: Boolean,
@@ -34,4 +47,4 @@ public data class ThreadEntry(
     val status: Set<ThreadStatus>,
     val pages: Int,
     val goldenFrame: Boolean,
-)
+) : BaseForumThread

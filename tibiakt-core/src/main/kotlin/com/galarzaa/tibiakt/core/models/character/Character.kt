@@ -39,6 +39,7 @@ import kotlinx.serialization.Serializable
  * @property marriedTo The name of the character this character is married to, if any.
  * @property houses The list of houses currently owned by the character.
  * @property guildMembership The guild the character belongs to.
+ * @property lastLogin The date when the character logged in the last time. If null, the character has never logged in.
  * @property position The special position the character holds.
  * @property comment The character's comment.
  * @property isPremium Whether the character has a premium account.

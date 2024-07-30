@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -70,7 +70,6 @@ public object NewsArchiveParser : Parser<NewsArchive> {
             addEntry(newsId,
                 titleColumn.cleanText(),
                 category,
-                iconUrl,
                 parseTibiaDate(dateColumn.cleanText()),
                 StringEnum.fromValue(newsType) ?: throw ParsingException("unexpected news type found: $newsType"))
         }

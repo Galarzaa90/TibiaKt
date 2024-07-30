@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,11 +20,22 @@ import com.galarzaa.tibiakt.core.models.PaginatedWithUrl
 import com.galarzaa.tibiakt.core.utils.getForumThreadUrl
 import kotlinx.serialization.Serializable
 
-/** A thread in the Tibia forums. */
+/**
+ * A thread in the Tibia forums.
+ *
+ * @property board The name of the board the thread is in.
+ * @property boardId The internal ID of the board the thread is in.
+ * @property section The name of the section the board is in.
+ * @property sectionId The internal ID of the section the board is in.
+ * @property previousTopicNumber The ID of the thread before this one.
+ * @property nextTopicNumber The ID of the thread after this one.
+ * @property goldenFrame Whether the post has a golden frame or not.
+ * @property anchoredPost The post that corresponds to the anchor in the URL if any.
+ */
 @Serializable
 public data class ForumThread(
-    val title: String,
-    val threadId: Int,
+    override val title: String,
+    override val threadId: Int,
     val board: String,
     val boardId: Int,
     val section: String,
@@ -37,8 +48,14 @@ public data class ForumThread(
     override val totalPages: Int,
     override val resultsCount: Int,
     override val entries: List<ForumPost>,
-) : PaginatedWithUrl<ForumPost> {
+) : BaseForumThread, PaginatedWithUrl<ForumPost> {
 
-    val url: String get() = getForumThreadUrl(threadId, currentPage)
-    override fun getPageUrl(page: Int): String = getForumThreadUrl(threadId, page)
+    override val url: String get() = getForumThreadUrl(threadId, currentPage)
+
+    /**
+     * Get the URL to a specific page in the thread.
+     */
+    public override fun getPageUrl(page: Int): String = getForumThreadUrl(threadId, page)
 }
+
+

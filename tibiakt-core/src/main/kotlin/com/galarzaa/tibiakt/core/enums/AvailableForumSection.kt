@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,8 @@ package com.galarzaa.tibiakt.core.enums
 
 /**
  * The available forum sections.
+ *
+ * @property subtopic The query parameter value for "subtopic" used to access this board.
  */
 public enum class AvailableForumSection(public val subtopic: String) {
     WORLD_BOARDS("worldboards"),

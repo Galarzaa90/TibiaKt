@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,6 +30,9 @@ public enum class AuctionSkillFilter(override val value: Int) : IntEnum {
     SWORD_FIGHTING(8);
 
     public companion object {
-        public const val queryParam: String = "filter_skillid"
+        /**
+         * The query parameter name used to set this value.
+         */
+        public const val QUERY_PARAM: String = "filter_skillid"
     }
 }

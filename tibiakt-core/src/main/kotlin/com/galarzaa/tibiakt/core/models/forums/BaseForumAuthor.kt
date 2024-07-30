@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +26,9 @@ import kotlinx.serialization.Serializable
 /** Base interface for forum author classes. */
 @Serializable
 public sealed class BaseForumAuthor {
+    /**
+     * The name of the character that created the forum entry.
+     */
     public abstract val name: String
 }
 
@@ -33,6 +36,9 @@ public sealed class BaseForumAuthor {
  * A forum author that is no longer available due to being deleted or having been traded.
  *
  * If the author [isTraded], it means that the post was made by the account that owned the character before.
+ *
+ * @property isDeleted The character is deleted.
+ * @property isTraded The author character was traded after this post was made.
  */
 @Serializable
 @SerialName("unavailableForumAuthor")
@@ -52,6 +58,7 @@ public data class UnavailableForumAuthor(
  * @property world The current world of the author.
  * @property position The official position of the author, if any.
  * @property title The selected title of the character, if any.
+ * @property vocation The vocation of the character.
  * @property guild The guild of the character, if any.
  * @property posts The total number of posts by this author.
  * @property isRecentlyTraded The character was traded in the last 30 days.
@@ -71,7 +78,9 @@ public data class ForumAuthor(
 ) : BaseForumAuthor(), BaseCharacter, CharacterLevel
 
 /**
- * An author from a tournmanet world.
+ * An author from a tournament world.
+ *
+ * @property posts The total number of posts by this author.
  */
 @SerialName("tournamentForumAuthor")
 @Serializable

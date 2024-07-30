@@ -123,7 +123,7 @@ class CharacterParserTests : FunSpec({
         character.unlockedTitles shouldNotBe 0
         character.badges shouldHaveAtLeastSize 0
     }
-    //TODO: Need sample with entire HTML
+    // TODO: Need sample with entire HTML
     xtest("Character with truncated deaths") {
         val character = CharacterParser.fromContent("character/characterWithTruncatedDeaths.txt")
 
