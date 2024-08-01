@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.8.0 (2024-07-31)
+
+- Added `isCachingEnabled` property to `TibiaResponse`
+  - `isCached` tells us if the obtained content is fresh or cached.
+  - `isCachingEnabled` tells us if the content's origin uses caching at all or not.
+- Added `BaseForumThread` interface, extracting common properties from `ForumThread` and `ThreadEntry`.
+- (**Breaking Change**) Removed `categoryIcon` property from
+- (**Breaking Change**) The `queryParam` constant various enum used for filtering had has been renamed to `QUERY_PARAM`.
+  - The same has been done to variations of this name, to an all uppercase name.
+
 ## 0.7.0 (2024-07-04)
 
 - Fix auction parsing breaking due to new Animus Masteries unlocked field.
