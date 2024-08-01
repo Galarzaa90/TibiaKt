@@ -37,7 +37,7 @@ dependencies {
 
 ```
 
-### Gradle Kotlin
+### Kotlin DSL
 
 ```kotlin
 repositories {
@@ -55,7 +55,7 @@ dependencies {
 
 ## Usage
 
-TibiaKt comes in 3 different packages to be used according to your needs.
+TibiaKt comes in two different packages, and a runnable application, to be used according to your needs.
 
 ### tibiakt-core
 
@@ -87,19 +87,16 @@ and whether the data is fresh or cached.
 
 ### tibiakt-server
 
-This is not actually a package you can add to your dependencies, but rather a standalone application.
-
-Running this will create a server exposing endpoints to serve Tibia data in JSON.
+A standalone application that deploys an HTTP server to provide endpoints to serve Tibia data in JSON format.
 
 #### Docker
 
 A [Dockerfile](Dockerfile) is also available, or it can be pulled
 from [Docker Hub](https://hub.docker.com/repository/docker/galarzaa90/tibiakt)   
-[
-![Docker Image Version (latest semver)](https://img.shields.io/docker/v/galarzaa90/tibiakt?sort=semver)
-![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/galarzaa90/tibiakt?sort=semver)
-![Docker Pulls](https://img.shields.io/docker/pulls/galarzaa90/tibiakt)
-](https://hub.docker.com/repository/docker/galarzaa90/tibiakt)
+
+[![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/galarzaa90/tibiakt?sort=semver)](https://hub.docker.com/repository/docker/galarzaa90/tibiakt)
+[![Docker Image Version (latest semver)](https://img.shields.io/docker/v/galarzaa90/tibiakt?sort=semver)](https://hub.docker.com/repository/docker/galarzaa90/tibiakt)
+[![Docker Pulls](https://img.shields.io/docker/pulls/galarzaa90/tibiakt)](https://hub.docker.com/repository/docker/galarzaa90/tibiakt)
 
 ```shell
 docker pull galarzaa90/tibiakt
@@ -108,13 +105,14 @@ docker run --rm -ti -p 8080:8080 galarzaa90/tibiakt
 
 #### Example
 
-**GET** `/characters/Galarzaa+Fidera`
+**GET** `<baseUrl>/characters/Galarzaa+Fidera`
 
 ```json
 {
   "timestamp": "2022-01-23T16:57:26.275Z",
   "isCached": false,
   "cacheAge": 0,
+  "isCachingEnabled": true,
   "fetchingTime": 0.271,
   "parsingTime": 0.016,
   "data": {
