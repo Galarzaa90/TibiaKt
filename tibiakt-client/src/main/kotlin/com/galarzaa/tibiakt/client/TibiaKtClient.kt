@@ -416,7 +416,8 @@ public open class TibiaKtClient constructor(
             cacheAge = 0,
             fetchingTime = fetchingTime,
             parsingTime = parsingTime,
-            data = baseHighscores!!.copy(entries = entries)
+            data = baseHighscores!!.copy(entries = entries),
+            isCachingEnabled = false,
         )
     }
 
@@ -661,7 +662,8 @@ public open class TibiaKtClient constructor(
         cacheAge = headers["Age"]?.toInt() ?: 0,
         fetchingTime = fetchingTime,
         parsingTime = parsingTime,
-        data = data
+        data = data,
+        isCachingEnabled = headers["CF-Cache-Status"] != "DYNAMIC"
     )
 
     /**
