@@ -45,7 +45,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;/*
-&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; * Copyright © 2024 Allan Galarza
 &nbsp; *
 &nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 &nbsp; * you may not use this file except in compliance with the License.
@@ -63,12 +63,12 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;package com.galarzaa.tibiakt.core.builders
 &nbsp;
 &nbsp;/** Interface for builders of TibiaKt models. */
-&nbsp;public interface TibiaKtBuilder&lt;T&gt; {
+&nbsp;internal fun interface TibiaKtBuilder&lt;T&gt; {
 &nbsp;    /** Builds an instance with the current data in the builder.
 &nbsp;     *
 &nbsp;     * @throws IllegalStateException if the builder is missing required properties
 &nbsp;     */
-&nbsp;    public fun build(): T
+&nbsp;    fun build(): T
 &nbsp;}
 </code>
 </pre>
@@ -93,7 +93,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-08-01 01:26</div>
+    <div style="float:right;">generated on 2024-08-02 20:26</div>
 </div>
 </body>
 </html>
