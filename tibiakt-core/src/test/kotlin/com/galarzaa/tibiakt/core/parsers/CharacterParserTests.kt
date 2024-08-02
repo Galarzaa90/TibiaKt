@@ -89,7 +89,7 @@ class CharacterParserTests : FunSpec({
         character.formerNames shouldHaveAtLeastSize 1
     }
     test("Character with former world") {
-        val character = CharacterParser.fromContent(getResource("character/characterWithFormerNames.txt"))
+        val character = CharacterParser.fromContent(getResource("character/characterWithFormerWorld.txt"))
 
         character.shouldBeInstanceOf<Character>()
         character.formerWorld shouldNotBe null
@@ -101,7 +101,7 @@ class CharacterParserTests : FunSpec({
         character.houses shouldHaveAtLeastSize 2
     }
     test("Character with no badges selected") {
-        val character = CharacterParser.fromContent(getResource("character/characterWithFormerNames.txt"))
+        val character = CharacterParser.fromContent(getResource("character/characterWithNoBadgesSelected.txt"))
 
         character.shouldBeInstanceOf<Character>()
         character.badges shouldHaveSize 0

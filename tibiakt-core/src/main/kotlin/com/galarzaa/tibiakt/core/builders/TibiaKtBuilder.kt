@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2024 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,10 +17,10 @@
 package com.galarzaa.tibiakt.core.builders
 
 /** Interface for builders of TibiaKt models. */
-public interface TibiaKtBuilder<T> {
+internal fun interface TibiaKtBuilder<T> {
     /** Builds an instance with the current data in the builder.
      *
      * @throws IllegalStateException if the builder is missing required properties
      */
-    public fun build(): T
+    fun build(): T
 }
