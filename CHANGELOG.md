@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.8.1 (2024-08-11)
+
+- The icons used for news categories are now PNG images instead of GIF.
+
 ## 0.8.0 (2024-07-31)
 
 - Added `isCachingEnabled` property to `TibiaResponse`

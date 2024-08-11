@@ -37,7 +37,7 @@ public enum class NewsCategory(override val value: String) : StringEnum {
     /**
      * A URL to the big icon version of this category.
      */
-    public val bigIconUrl: String get() = getStaticFileUrl("images", "global", "content", "newsicon_${value}_big.gif")
+    public val bigIconUrl: String get() = getStaticFileUrl("images", "global", "content", "newsicon_${value}_big.png")
 
     /**
      * An URL to the small icon version of this category.
@@ -47,7 +47,7 @@ public enum class NewsCategory(override val value: String) : StringEnum {
             "images",
             "global",
             "content",
-            "newsicon_${value}_small.gif"
+            "newsicon_${value}_small.png"
         )
 
     public companion object {
