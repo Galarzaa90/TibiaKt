@@ -49,10 +49,10 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
   <td class="name">LastPost</td>
 <td class="coverageStat">
   <span class="percent">
-    50%
+    33.3%
   </span>
   <span class="absValue">
-    (1/2)
+    (1/3)
   </span>
 </td>
 <td class="coverageStat">
@@ -60,23 +60,23 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     0%
   </span>
   <span class="absValue">
-    (0/2)
+    (0/4)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    83.3%
+    75%
   </span>
   <span class="absValue">
-    (5/6)
+    (6/8)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    75.8%
+    28.1%
   </span>
   <span class="absValue">
-    (25/33)
+    (27/96)
   </span>
 </td>
 </tr>
@@ -84,38 +84,19 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     <td class="name">LastPost$Companion</td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    0%
   </span>
   <span class="absValue">
-    (1/1)
+    (0/1)
   </span>
 </td>
     <td class="coverageStat"/>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    0%
   </span>
   <span class="absValue">
-    (1/1)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    100%
-  </span>
-  <span class="absValue">
-    (4/4)
-  </span>
-</td>
-  </tr>
-<tr>
-  <td class="name"><strong>Total</strong></td>
-<td class="coverageStat">
-  <span class="percent">
-    66.7%
-  </span>
-  <span class="absValue">
-    (2/3)
+    (0/1)
   </span>
 </td>
 <td class="coverageStat">
@@ -126,20 +107,39 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     (0/2)
   </span>
 </td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    85.7%
+    25%
   </span>
   <span class="absValue">
-    (6/7)
+    (1/4)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    78.4%
+    0%
   </span>
   <span class="absValue">
-    (29/37)
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (6/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    27.6%
+  </span>
+  <span class="absValue">
+    (27/98)
   </span>
 </td>
 </tr>
@@ -182,8 +182,8 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp; * @property deleted Whether the author of the post is currently deleted.
 &nbsp; * @property traded Whether the post was made by a character that was traded afterwards.
 &nbsp; */
-<b class="fc">&nbsp;@Serializable</b>
-&nbsp;public data class LastPost(
+<b class="nc">&nbsp;@Serializable</b>
+<b class="fc">&nbsp;public data class LastPost(</b>
 <b class="fc">&nbsp;    val author: String,</b>
 <b class="fc">&nbsp;    override val postId: Int,</b>
 <b class="fc">&nbsp;    val date: Instant,</b>
@@ -216,7 +216,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-08-11 17:47</div>
+    <div style="float:right;">generated on 2024-08-31 19:57</div>
 </div>
 </body>
 </html>

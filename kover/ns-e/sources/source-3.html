@@ -49,69 +49,6 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
   <td class="name">World</td>
 <td class="coverageStat">
   <span class="percent">
-    33.3%
-  </span>
-  <span class="absValue">
-    (1/3)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/10)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    72.7%
-  </span>
-  <span class="absValue">
-    (16/22)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    91.1%
-  </span>
-  <span class="absValue">
-    (336/369)
-  </span>
-</td>
-</tr>
-  <tr>
-    <td class="name">World$Companion</td>
-<td class="coverageStat">
-  <span class="percent">
-    100%
-  </span>
-  <span class="absValue">
-    (1/1)
-  </span>
-</td>
-    <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    100%
-  </span>
-  <span class="absValue">
-    (1/1)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    100%
-  </span>
-  <span class="absValue">
-    (4/4)
-  </span>
-</td>
-  </tr>
-<tr>
-  <td class="name"><strong>Total</strong></td>
-<td class="coverageStat">
-  <span class="percent">
     50%
   </span>
   <span class="absValue">
@@ -123,7 +60,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     0%
   </span>
   <span class="absValue">
-    (0/10)
+    (0/12)
   </span>
 </td>
 <td class="coverageStat">
@@ -136,10 +73,73 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </td>
 <td class="coverageStat">
   <span class="percent">
-    91.2%
+    77%
   </span>
   <span class="absValue">
-    (340/373)
+    (284/369)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">World$Companion</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    40%
+  </span>
+  <span class="absValue">
+    (2/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    70.8%
+  </span>
+  <span class="absValue">
+    (17/24)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    76.5%
+  </span>
+  <span class="absValue">
+    (284/371)
   </span>
 </td>
 </tr>
@@ -199,8 +199,8 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp; * @property worldQuests The list of world quests completed.
 &nbsp; * @property playersOnline The list of online players in this world.
 &nbsp; */
-<b class="fc">&nbsp;@Serializable</b>
-&nbsp;public data class World(
+<b class="pc">&nbsp;@Serializable</b>
+<b class="fc">&nbsp;public data class World(</b>
 <b class="fc">&nbsp;    override val name: String,</b>
 <b class="fc">&nbsp;    val isOnline: Boolean,</b>
 <b class="fc">&nbsp;    val onlineCount: Int,</b>
@@ -253,7 +253,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-08-11 17:47</div>
+    <div style="float:right;">generated on 2024-08-31 19:57</div>
 </div>
 </body>
 </html>

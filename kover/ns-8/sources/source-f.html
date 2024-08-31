@@ -49,69 +49,20 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
   <td class="name">ForumSection</td>
 <td class="coverageStat">
   <span class="percent">
-    50%
-  </span>
-  <span class="absValue">
-    (1/2)
-  </span>
-</td>
-    <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    75%
-  </span>
-  <span class="absValue">
-    (3/4)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    95.6%
-  </span>
-  <span class="absValue">
-    (65/68)
-  </span>
-</td>
-</tr>
-  <tr>
-    <td class="name">ForumSection$Companion</td>
-<td class="coverageStat">
-  <span class="percent">
-    100%
-  </span>
-  <span class="absValue">
-    (1/1)
-  </span>
-</td>
-    <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    100%
-  </span>
-  <span class="absValue">
-    (1/1)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    100%
-  </span>
-  <span class="absValue">
-    (4/4)
-  </span>
-</td>
-  </tr>
-<tr>
-  <td class="name"><strong>Total</strong></td>
-<td class="coverageStat">
-  <span class="percent">
     66.7%
   </span>
   <span class="absValue">
     (2/3)
   </span>
 </td>
-    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
 <td class="coverageStat">
   <span class="percent">
     80%
@@ -122,10 +73,73 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </td>
 <td class="coverageStat">
   <span class="percent">
-    95.8%
+    76.5%
   </span>
   <span class="absValue">
-    (69/72)
+    (52/68)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ForumSection$Companion</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (2/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (4/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    74.3%
+  </span>
+  <span class="absValue">
+    (52/70)
   </span>
 </td>
 </tr>
@@ -163,8 +177,8 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp; * @property sectionId The internal ID of the section.
 &nbsp; * @property entries The boards in the forum section.
 &nbsp; */
-<b class="fc">&nbsp;@Serializable</b>
-&nbsp;public data class ForumSection(
+<b class="pc">&nbsp;@Serializable</b>
+<b class="fc">&nbsp;public data class ForumSection(</b>
 <b class="fc">&nbsp;    val sectionId: Int,</b>
 <b class="fc">&nbsp;    val entries: List&lt;BoardEntry&gt;,</b>
 &nbsp;) {
@@ -194,7 +208,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-08-11 17:47</div>
+    <div style="float:right;">generated on 2024-08-31 19:57</div>
 </div>
 </body>
 </html>
