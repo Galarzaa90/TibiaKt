@@ -28,8 +28,15 @@ import io.ktor.server.engine.embeddedServer
 import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
 import kotlinx.serialization.json.Json
 
+/**
+ * The default HTTP port to use, read from environment variable `TIBIAKT_PORT` or `8080` by default.
+ *
+ * For Docker deployments, it is recommended to change the mapped port instead.
+ */
+val applicationPort = System.getenv("TIBIAKT_PORT")?.toIntOrNull() ?: 8080
+
 fun main() {
-    embeddedServer(CIO, port = 8080, module = Application::tibiaKtModule).start(wait = true)
+    embeddedServer(CIO, port = applicationPort, module = Application::tibiaKtModule).start(wait = true)
 }
 
 fun Application.tibiaKtModule() {

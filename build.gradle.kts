@@ -22,8 +22,8 @@ plugins {
     `java-library`
     `maven-publish`
     signing
-    kotlin("jvm") version "1.9.23"
-    kotlin("plugin.serialization") version "1.9.23"
+    kotlin("jvm") version libs.versions.kotlin.get()
+    kotlin("plugin.serialization") version libs.versions.kotlin.get()
     id("io.github.gradle-nexus.publish-plugin") version "1.3.0"
     alias(libs.plugins.gradle.versions)
     alias(libs.plugins.detekt)
