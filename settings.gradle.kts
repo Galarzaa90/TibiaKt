@@ -26,19 +26,19 @@ dependencyResolutionManagement {
     versionCatalogs {
         create("libs") {
             plugin("gradle-versions", "com.github.ben-manes.versions").version("0.51.0")
-            plugin("detekt", "io.gitlab.arturbosch.detekt").version("1.23.6")
+            plugin("detekt", "io.gitlab.arturbosch.detekt").version("1.23.7")
             plugin("dokka", "org.jetbrains.dokka").version("1.9.20")
             plugin("sonarqube", "org.sonarqube").version("5.1.0.4882")
             plugin("kover", "org.jetbrains.kotlinx.kover").version("0.8.3")
 
             version("jsoup", "1.18.1")
             version("kotest", "5.9.1")
-            version("kotlin", "2.0.20")
+            version("kotlin", "2.0.21")
             version("kotlinLogging", "3.0.5")
             version("kotlinxDatetime", "0.6.1")
-            version("kotlinxSerialization", "1.7.2")
-            version("ktor", "2.3.12")
-            version("logback", "1.5.7")
+            version("kotlinxSerialization", "1.7.3")
+            version("ktor", "3.0.1")
+            version("logback", "1.5.12")
 
             library("kotlinx-datetime", "org.jetbrains.kotlinx", "kotlinx-datetime").versionRef("kotlinxDatetime")
             library("kotlinx-serialization-json", "org.jetbrains.kotlinx", "kotlinx-serialization-json").versionRef("kotlinxSerialization")

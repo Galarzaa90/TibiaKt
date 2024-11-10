@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.9.0 (2024-11-10)
+
+- Upgrade to Ktor 3.
+
 ## 0.8.1 (2024-08-11)
 
 - The icons used for news categories are now PNG images instead of GIF.
