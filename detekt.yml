@@ -83,7 +83,7 @@ comments:
     excludes: [ '**/test/**', '**/builders/**' ]
   UndocumentedPublicProperty:
     active: true
-    excludes: [ '**/test/**', '**/builders/**' ]
+    excludes: [ '**/test/**', '**/builders/**', '**/enums/**' ]
 
 complexity:
   active: true

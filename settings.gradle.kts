@@ -26,7 +26,7 @@ dependencyResolutionManagement {
     versionCatalogs {
         create("libs") {
             plugin("gradle-versions", "com.github.ben-manes.versions").version("0.51.0")
-            plugin("detekt", "io.gitlab.arturbosch.detekt").version("1.23.7")
+            plugin("detekt", "io.gitlab.arturbosch.detekt").version("1.23.6")
             plugin("dokka", "org.jetbrains.dokka").version("1.9.20")
             plugin("sonarqube", "org.sonarqube").version("5.1.0.4882")
             plugin("kover", "org.jetbrains.kotlinx.kover").version("0.8.3")
