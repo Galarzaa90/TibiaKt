@@ -1,5 +1,5 @@
 /*
- * Copyright © 2024 Allan Galarza
+ * Copyright © 2025 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import java.net.URL
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 
 apply("../publish.gradle.kts")
@@ -22,7 +22,7 @@ apply("../publish.gradle.kts")
 plugins {
     kotlin("jvm")
     kotlin("plugin.serialization")
-    id("org.jetbrains.dokka")
+    alias(libs.plugins.dokka)
     id("io.gitlab.arturbosch.detekt")
     id("org.jetbrains.kotlinx.kover")
 }
@@ -40,33 +40,33 @@ dependencies {
 }
 
 
-tasks.withType<org.jetbrains.dokka.gradle.DokkaTaskPartial>().configureEach {
-    dokkaSourceSets {
-        configureEach {
-            includes.from("Module.md")
-            sourceLink {
-                localDirectory.set(file("src/main/kotlin"))
-                remoteUrl.set(URL("https://github.com/Galarzaa90/TibiaKt/blob/main/tibiakt-core/src/main/kotlin"))
-                remoteLineSuffix.set("#L")
-            }
-            externalDocumentationLink {
-                url.set(URL("https://api.ktor.io/"))
-            }
+dokka {
+    dokkaSourceSets.main {
+        includes.from("Module.md")
+        sourceLink {
+            localDirectory.set(file("src/main/kotlin"))
+            remoteUrl("https://github.com/Galarzaa90/TibiaKt/blob/main/tibiakt-core/src/main/kotlin")
+            remoteLineSuffix.set("#L")
+        }
+        externalDocumentationLinks {
+            uri("https://api.ktor.io/")
         }
     }
 }
 
+
+
 kotlin {
     explicitApi()
+    compilerOptions {
+        jvmTarget = JvmTarget.JVM_1_8
+    }
 }
 
 detekt {
     config.setFrom(file(rootProject.file("detekt.yml")))
 }
 
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-    kotlinOptions.jvmTarget = JavaVersion.VERSION_1_8.toString()
-}
 
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8

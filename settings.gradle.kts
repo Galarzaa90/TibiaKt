@@ -1,5 +1,5 @@
 /*
- * Copyright © 2024 Allan Galarza
+ * Copyright © 2025 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,20 +25,21 @@ include("tibiakt-server")
 dependencyResolutionManagement {
     versionCatalogs {
         create("libs") {
-            plugin("gradle-versions", "com.github.ben-manes.versions").version("0.51.0")
-            plugin("detekt", "io.gitlab.arturbosch.detekt").version("1.23.6")
-            plugin("dokka", "org.jetbrains.dokka").version("1.9.20")
-            plugin("sonarqube", "org.sonarqube").version("5.1.0.4882")
-            plugin("kover", "org.jetbrains.kotlinx.kover").version("0.8.3")
+            plugin("gradle-versions", "com.github.ben-manes.versions").version("0.52.0")
+            plugin("detekt", "io.gitlab.arturbosch.detekt").version("1.23.8")
+            plugin("dokka", "org.jetbrains.dokka").version("2.0.0")
+            plugin("sonarqube", "org.sonarqube").version("6.0.1.5171")
+            plugin("kover", "org.jetbrains.kotlinx.kover").version("0.9.1")
 
-            version("jsoup", "1.18.1")
+            version("kotlin", "2.1.10")
+
+            version("jsoup", "1.18.3")
             version("kotest", "5.9.1")
-            version("kotlin", "2.0.21")
             version("kotlinLogging", "3.0.5")
-            version("kotlinxDatetime", "0.6.1")
-            version("kotlinxSerialization", "1.7.3")
-            version("ktor", "3.0.1")
-            version("logback", "1.5.12")
+            version("kotlinxDatetime", "0.6.2")
+            version("kotlinxSerialization", "1.8.0")
+            version("ktor", "3.1.4")
+            version("logback", "1.5.16")
 
             library("kotlinx-datetime", "org.jetbrains.kotlinx", "kotlinx-datetime").versionRef("kotlinxDatetime")
             library("kotlinx-serialization-json", "org.jetbrains.kotlinx", "kotlinx-serialization-json").versionRef("kotlinxSerialization")

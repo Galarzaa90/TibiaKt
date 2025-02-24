@@ -78,6 +78,7 @@ comments:
     searchInInnerClass: false
     searchInInnerObject: true
     searchInInnerInterface: true
+    ignoreDefaultCompanionObject: true
   UndocumentedPublicFunction:
     active: true
     excludes: [ '**/test/**', '**/builders/**' ]
