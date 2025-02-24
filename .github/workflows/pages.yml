@@ -2,33 +2,36 @@ name: 🐙 GitHub Pages
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   build:
+    name: Build Docs and Coverage 📃
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🚚
         uses: actions/checkout@v4
 
-      - name: Set up JDK 13 ☕
+      - name: Set up JDK ☕
         uses: actions/setup-java@v4
         with:
-          java-version: 13
-          distribution: 'adopt'
+          java-version: 19
+          distribution: 'temurin'
       - name: Setup Gradle 🐘
-        uses: gradle/actions/setup-gradle@v3
+        uses: gradle/actions/setup-gradle@v4
+
       - name: Generate Coverage Report 📊
         if: ${{github.event_name == 'push'}}
         run: ./gradlew tibiakt-core:koverHtmlReport
 
       - name: Generate API documentation 📃
         if: ${{github.event_name == 'push'}}
-        run: ./gradlew dokkaHtmlMultiModule
+        run: ./gradlew dokkaGenerate
 
       - name: Organize files 📁
         run: |
-          mv build/dokka public
+          mv build/dokka/html public
           mv tibiakt-core/build/reports/kover/html public/kover
 
       - name: Deploy to GitHub Pages🚀
