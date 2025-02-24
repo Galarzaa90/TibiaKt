@@ -1,6 +1,3 @@
-# This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
-# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
-
 name: ⚙️ Build and Test
 
 on:
@@ -9,20 +6,25 @@ on:
   pull_request:
     branches: [ main ]
 
+env:
+  JAVA_VERSION: 19
+  JAVA_DISTRIBUTION: temurin
+
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout 🚚
         uses: actions/checkout@v4
+
       - name: Set up JDK ☕
         uses: actions/setup-java@v4
         with:
-          java-version: 19
-          distribution: temurin
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
           cache: gradle
+
       - name: Setup Gradle 🐘
         uses: gradle/actions/setup-gradle@v3
         with:
@@ -30,7 +32,76 @@ jobs:
           build-scan-publish: true
           build-scan-terms-of-use-url: "https://gradle.com/terms-of-service"
           build-scan-terms-of-use-agree: "yes"
+
       - name: Build ⚙️
         run: ./gradlew build -x test
-      - name: Unit Test 🧪
+
+      - name: Cache Build Artifacts 🏗️
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+            build/
+          key: ${{ runner.os }}-gradle-${{ github.run_id }}
+
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Checkout 🚚
+        uses: actions/checkout@v4
+
+      - name: Restore Build Cache 🏗️
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+            build/
+          key: ${{ runner.os }}-gradle-${{ github.run_id }}
+
+      - name: Set up JDK ☕
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          cache: gradle
+
+      - name: Run Unit Tests 🧪
         run: ./gradlew test
+
+  dependency-check:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Checkout 🚚
+        uses: actions/checkout@v4
+
+      - name: Restore Build Cache 🏗️
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+            build/
+          key: ${{ runner.os }}-gradle-${{ github.run_id }}
+
+      - name: Set up JDK ☕
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          cache: gradle
+
+      - name: Check Dependency Updates 📦
+        run: ./gradlew dependencyUpdates -DoutputFormatter=plain
+
+      - name: Add Dependency Report to GitHub Summary 📜
+        run: |
+          echo "### Dependency Updates Report" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          cat build/dependencyUpdates/report.txt >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
