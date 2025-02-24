@@ -25,61 +25,93 @@
 <link href="../../../styles/prism.css" rel="Stylesheet">
 <link href="../../../styles/logo-styles.css" rel="Stylesheet">
 <link href="../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
+<link href="../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
 <script type="text/javascript" src="../../../scripts/clipboard.js" async></script>
 <script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script>
 <script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script>
 <script type="text/javascript" src="../../../scripts/main.js" defer></script>
 <script type="text/javascript" src="../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer></script>
 <script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
 <body>
     <div class="root">
-<nav class="navigation" id="navigation-wrapper">
-    <div class="navigation--inner">
-        <div class="navigation-title">
-            <button class="menu-toggle" id="menu-toggle" type="button">toggle menu</button>
-            <div class="library-name">
+    <nav class="navigation theme-dark" id="navigation-wrapper">
 <a class="library-name--link" href="../../../index.html">
-                            TibiaKt
-                    </a>            </div>
-            <div class="library-version">0.9.0
+                    TibiaKt
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">0.9.0
+        </div>
+        <div class="navigation-controls">
+        <div class="filter-section filter-section_loading" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":tibiakt-client/main">jvm</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox">
+                    <div class="dropdown--header"><span>Platform filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close platform filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":tibiakt-client/main" data-filter=":tibiakt-client/main">
+                                <span class="checkbox--icon"></span>
+                                jvm
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
             </div>
         </div>
-        <div class="filter-section" id="filter-section">
-                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":tibiakt-client:dokkaHtmlPartial/main">jvm</button>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
         </div>
-    </div>
-    <div class="navigation-controls">
-        <button class="navigation-controls--btn navigation-controls--theme" id="theme-toggle-button" type="button">switch theme</button>
-        <div class="navigation-controls--btn navigation-controls--search" id="searchBar" role="button">search in API</div>
-    </div>
-</nav>
+    </nav>
         <div id="container">
             <div class="sidebar" id="leftColumn">
-                <div class="sidebar--inner" id="sideMenu"></div>
+                <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                    <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox">
+                        <div class="dropdown--header">
+                            <span>
+                                    TibiaKt
+                            </span>
+                            <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                                <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                            </button>
+                        </div>
+                        <div class="sidebar--inner" id="sideMenu"></div>
+                    </ul>
+                    <div class="dropdown--overlay"></div>
+                </div>
             </div>
             <div id="main">
-<div class="main-content" data-page-type="classlike" id="content" pageids="tibiakt-client::com.galarzaa.tibiakt.client/TibiaResponse///PointingToDeclaration//-899881058">
+<div class="main-content" data-page-type="classlike" id="content" pageids="tibiakt-client::com.galarzaa.tibiakt.client/TibiaResponse///PointingToDeclaration//-45736278">
   <div class="breadcrumbs"><a href="../../index.html">tibiakt-client</a><span class="delimiter">/</span><a href="../index.html">com.galarzaa.tibiakt.client</a><span class="delimiter">/</span><span class="current">TibiaResponse</span></div>
   <div class="cover ">
     <h1 class="cover"><span>Tibia</span><wbr><span><span>Response</span></span></h1>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-client:dokkaHtmlPartial/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="kotlinx.serialization/Serializable///PointingToDeclaration/"><span class="token annotation builtin">Serializable</span></span></div></div><span class="token keyword">data </span><span class="token keyword">class </span><a href="index.html">TibiaResponse</a><span class="token operator">&lt;</span><a href="index.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>timestamp<span class="token operator">: </span><span data-unresolved-link="kotlinx.datetime/Instant///PointingToDeclaration/">Instant</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>isCached<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>cacheAge<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>isCachingEnabled<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>fetchingTime<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>parsingTime<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>data<span class="token operator">: </span><a href="index.html">T</a></span></span><span class="token punctuation">)</span><span class="clearfix"><span class="floating-right">(<a href="https://github.com/Galarzaa90/TibiaKt/blob/main/tibiakt-client/src/main/kotlin/com/galarzaa/tibiakt/client/TibiaResponse.kt#L37">source</a>)</span></span></div><p class="paragraph">A response from Tibia.com.</p><h4 class="">Parameters</h4><div class="table"><div class="table-row" data-filterable-current=":tibiakt-client:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>T</span></span></u></div></span></div><div><div class="title"><p class="paragraph">The type of the data returned.</p></div></div></div></div></div></div></div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-client/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="kotlinx.serialization/Serializable///PointingToDeclaration/"><span class="token annotation builtin">Serializable</span></span></div></div><span class="token keyword">data </span><span class="token keyword">class </span><a href="index.html">TibiaResponse</a><span class="token operator">&lt;</span><a href="index.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>timestamp<span class="token operator">: </span><span data-unresolved-link="kotlinx.datetime/Instant///PointingToDeclaration/">Instant</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>isCached<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>cacheAge<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>isCachingEnabled<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>fetchingTime<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>parsingTime<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>data<span class="token operator">: </span><a href="index.html">T</a></span></span><span class="token punctuation">)</span><span class="clearfix"><span class="floating-right">(<a href="https://github.com/Galarzaa90/TibiaKt/blob/main/tibiakt-client/src/main/kotlin/com/galarzaa/tibiakt/client/TibiaResponse.kt#L37">source</a>)</span></span></div><p class="paragraph">A response from Tibia.com.</p><h4 class="">Parameters</h4><div class="table"><div class="table-row" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>T</span></span></u></div></span></div><div><div class="title"><p class="paragraph">The type of the data returned.</p></div></div></div></div></div></div></div>
   </div>
   <div class="tabbedcontent">
     <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
     <div class="tabs-section-body">
       <div data-togglable="CONSTRUCTOR">
         <h2 class="">Constructors</h2>
-        <div class="table"><a data-name="961868767%2FConstructors%2F-899881058" anchor-label="TibiaResponse" id="961868767%2FConstructors%2F-899881058" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main"></a>
-          <div class="table-row" data-togglable="CONSTRUCTOR" data-filterable-current=":tibiakt-client:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main">
+        <div class="table"><a data-name="961868767%2FConstructors%2F-45736278" anchor-label="TibiaResponse" id="961868767%2FConstructors%2F-45736278" data-filterable-set=":tibiakt-client/main"></a>
+          <div class="table-row" data-togglable="CONSTRUCTOR" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-tibia-response.html"><span>Tibia</span><wbr><span><span>Response</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="961868767%2FConstructors%2F-899881058"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="961868767%2FConstructors%2F-45736278"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-client:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">timestamp<span class="token operator">: </span><span data-unresolved-link="kotlinx.datetime/Instant///PointingToDeclaration/">Instant</span><span class="token punctuation">, </span></span><span class="parameter ">isCached<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter ">cacheAge<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">isCachingEnabled<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter ">fetchingTime<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">parsingTime<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="index.html">T</a></span></span><span class="token punctuation">)</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-client/main"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">timestamp<span class="token operator">: </span><span data-unresolved-link="kotlinx.datetime/Instant///PointingToDeclaration/">Instant</span><span class="token punctuation">, </span></span><span class="parameter ">isCached<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter ">cacheAge<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">isCachingEnabled<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter ">fetchingTime<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">parsingTime<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="index.html">T</a></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
@@ -88,107 +120,107 @@
       </div>
       <div data-togglable="PROPERTY">
         <h2 class="">Properties</h2>
-        <div class="table"><a data-name="-297396259%2FProperties%2F-899881058" anchor-label="cacheAge" id="-297396259%2FProperties%2F-899881058" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main"></a>
-          <div class="table-row" data-filterable-current=":tibiakt-client:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main">
+        <div class="table"><a data-name="-297396259%2FProperties%2F-45736278" anchor-label="cacheAge" id="-297396259%2FProperties%2F-45736278" data-filterable-set=":tibiakt-client/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="cache-age.html"><span>cache</span><wbr><span><span>Age</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-297396259%2FProperties%2F-899881058"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-297396259%2FProperties%2F-45736278"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-client:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="cache-age.html">cacheAge</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">How old is the cached response, in seconds.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-client/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="cache-age.html">cacheAge</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">How old is the cached response, in seconds.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-780471952%2FProperties%2F-899881058" anchor-label="data" id="-780471952%2FProperties%2F-899881058" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main"></a>
-          <div class="table-row" data-filterable-current=":tibiakt-client:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main">
+<a data-name="-780471952%2FProperties%2F-45736278" anchor-label="data" id="-780471952%2FProperties%2F-45736278" data-filterable-set=":tibiakt-client/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="data.html"><span><span>data</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-780471952%2FProperties%2F-899881058"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-780471952%2FProperties%2F-45736278"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-client:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="data.html">data</a><span class="token operator">: </span><a href="index.html">T</a></div><div class="brief "><p class="paragraph">The data parsed from Tibia.com.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-client/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="data.html">data</a><span class="token operator">: </span><a href="index.html">T</a></div><div class="brief "><p class="paragraph">The data parsed from Tibia.com.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-446285659%2FProperties%2F-899881058" anchor-label="fetchingTime" id="-446285659%2FProperties%2F-899881058" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main"></a>
-          <div class="table-row" data-filterable-current=":tibiakt-client:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main">
+<a data-name="-446285659%2FProperties%2F-45736278" anchor-label="fetchingTime" id="-446285659%2FProperties%2F-45736278" data-filterable-set=":tibiakt-client/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="fetching-time.html"><span>fetching</span><wbr><span><span>Time</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-446285659%2FProperties%2F-899881058"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-446285659%2FProperties%2F-45736278"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-client:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="fetching-time.html">fetchingTime</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></div><div class="brief "><p class="paragraph">The time it took to fetch the content from Tibia.com in seconds.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-client/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="fetching-time.html">fetchingTime</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></div><div class="brief "><p class="paragraph">The time it took to fetch the content from Tibia.com in seconds.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1146870290%2FProperties%2F-899881058" anchor-label="isCached" id="-1146870290%2FProperties%2F-899881058" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main"></a>
-          <div class="table-row" data-filterable-current=":tibiakt-client:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main">
+<a data-name="-1146870290%2FProperties%2F-45736278" anchor-label="isCached" id="-1146870290%2FProperties%2F-45736278" data-filterable-set=":tibiakt-client/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="is-cached.html"><span>is</span><wbr><span><span>Cached</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1146870290%2FProperties%2F-899881058"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1146870290%2FProperties%2F-45736278"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-client:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="is-cached.html">isCached</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Whether the current data is cached or not.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-client/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="is-cached.html">isCached</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Whether the current data is cached or not.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1566464626%2FProperties%2F-899881058" anchor-label="isCachingEnabled" id="-1566464626%2FProperties%2F-899881058" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main"></a>
-          <div class="table-row" data-filterable-current=":tibiakt-client:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main">
+<a data-name="-1566464626%2FProperties%2F-45736278" anchor-label="isCachingEnabled" id="-1566464626%2FProperties%2F-45736278" data-filterable-set=":tibiakt-client/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="is-caching-enabled.html"><span>is</span><wbr><span>Caching</span><wbr><span><span>Enabled</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1566464626%2FProperties%2F-899881058"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1566464626%2FProperties%2F-45736278"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-client:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="is-caching-enabled.html">isCachingEnabled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Whether the response has caching enabled or not.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-client/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="is-caching-enabled.html">isCachingEnabled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Whether the response has caching enabled or not.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1730585603%2FProperties%2F-899881058" anchor-label="parsingTime" id="1730585603%2FProperties%2F-899881058" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main"></a>
-          <div class="table-row" data-filterable-current=":tibiakt-client:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main">
+<a data-name="1730585603%2FProperties%2F-45736278" anchor-label="parsingTime" id="1730585603%2FProperties%2F-45736278" data-filterable-set=":tibiakt-client/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="parsing-time.html"><span>parsing</span><wbr><span><span>Time</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1730585603%2FProperties%2F-899881058"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1730585603%2FProperties%2F-45736278"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-client:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="parsing-time.html">parsingTime</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></div><div class="brief "><p class="paragraph">The time it took to parse the content into data in seconds.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-client/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="parsing-time.html">parsingTime</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></div><div class="brief "><p class="paragraph">The time it took to parse the content into data in seconds.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1387503766%2FProperties%2F-899881058" anchor-label="timestamp" id="-1387503766%2FProperties%2F-899881058" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main"></a>
-          <div class="table-row" data-filterable-current=":tibiakt-client:dokkaHtmlPartial/main" data-filterable-set=":tibiakt-client:dokkaHtmlPartial/main">
+<a data-name="-1387503766%2FProperties%2F-45736278" anchor-label="timestamp" id="-1387503766%2FProperties%2F-45736278" data-filterable-set=":tibiakt-client/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="timestamp.html"><span><span>timestamp</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1387503766%2FProperties%2F-899881058"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1387503766%2FProperties%2F-45736278"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-client:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="timestamp.html">timestamp</a><span class="token operator">: </span><span data-unresolved-link="kotlinx.datetime/Instant///PointingToDeclaration/">Instant</span></div><div class="brief "><p class="paragraph">the time when the request was done.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-client/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="timestamp.html">timestamp</a><span class="token operator">: </span><span data-unresolved-link="kotlinx.datetime/Instant///PointingToDeclaration/">Instant</span></div><div class="brief "><p class="paragraph">the time when the request was done.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -198,12 +230,18 @@
     </div>
   </div>
 </div>
-      <div class="footer">
-        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2024 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
-      </div>
+    <div class="footer">
+        <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+        <span>© 2025 Copyright</span>
+        <span class="pull-right">
+            <span>Generated by </span>
+            <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                <span>dokka</span>
+            </a>
+        </span>
+    </div>
             </div>
         </div>
     </div>
 </body>
 </html>
-

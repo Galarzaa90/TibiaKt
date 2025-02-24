@@ -1,1 +1,1 @@
-sourceset_dependencies = '{":tibiakt-client:dokkaHtmlPartial/main":[],":tibiakt-core:dokkaHtmlPartial/main":[]}'
+sourceset_dependencies = '{":tibiakt-client/main":[],":tibiakt-core/main":[]}'
