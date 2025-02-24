@@ -38,7 +38,7 @@ dependencyResolutionManagement {
             version("kotlinLogging", "3.0.5")
             version("kotlinxDatetime", "0.6.2")
             version("kotlinxSerialization", "1.8.0")
-            version("ktor", "3.1.4")
+            version("ktor", "3.1.1")
             version("logback", "1.5.16")
 
             library("kotlinx-datetime", "org.jetbrains.kotlinx", "kotlinx-datetime").versionRef("kotlinxDatetime")
