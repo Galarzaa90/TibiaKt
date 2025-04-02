@@ -59,7 +59,7 @@ public object CharacterParser : Parser<Character?> {
             tables["Account Badges"]?.apply { parseAccountBadges(this) }
             tables["Account Achievements"]?.apply { parseAccountAchievements(this) }
             tables["Account Information"]?.apply { parseAccountInformation(this) }
-            tables["Character Deaths"]?.apply { parseCharacterDeaths(this) }
+            tables["Character Deaths (Last 30 Days)"]?.apply { parseCharacterDeaths(this) }
             tables["Characters"]?.apply { parseCharacters(this) }
         }
 
