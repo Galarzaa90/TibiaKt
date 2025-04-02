@@ -60,34 +60,34 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    84.6%
   </span>
   <span class="absValue">
-    (13/13)
+    (11/13)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    65%
+    54.8%
   </span>
   <span class="absValue">
-    (102/157)
+    (86/157)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    93.8%
+    75.7%
   </span>
   <span class="absValue">
-    (135/144)
+    (109/144)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    90%
+    73.6%
   </span>
   <span class="absValue">
-    (1255/1394)
+    (1026/1394)
   </span>
 </td>
 </tr>
@@ -160,7 +160,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;            tables[&quot;Account Badges&quot;]?.apply { parseAccountBadges(this) }</b>
 <b class="pc">&nbsp;            tables[&quot;Account Achievements&quot;]?.apply { parseAccountAchievements(this) }</b>
 <b class="pc">&nbsp;            tables[&quot;Account Information&quot;]?.apply { parseAccountInformation(this) }</b>
-<b class="fc">&nbsp;            tables[&quot;Character Deaths&quot;]?.apply { parseCharacterDeaths(this) }</b>
+<b class="pc">&nbsp;            tables[&quot;Character Deaths (Last 30 Days)&quot;]?.apply { parseCharacterDeaths(this) }</b>
 <b class="pc">&nbsp;            tables[&quot;Characters&quot;]?.apply { parseCharacters(this) }</b>
 <b class="fc">&nbsp;        }</b>
 &nbsp;
@@ -276,48 +276,48 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;    }
 &nbsp;
 &nbsp;    private fun CharacterBuilder.parseCharacterDeaths(rows: Elements) {
-<b class="fc">&nbsp;        for (row: Element in rows) {</b>
-<b class="fc">&nbsp;            val columns = row.select(&quot;td&quot;)</b>
-<b class="pc">&nbsp;            if (columns.size != 2) continue</b>
-<b class="fc">&nbsp;            val (dateColumn, descriptionColumn) = columns</b>
-<b class="fc">&nbsp;            val deathDateTime: Instant = parseTibiaDateTime(dateColumn.text())</b>
-<b class="fc">&nbsp;            val deathMatch = deathsRegex.find(descriptionColumn.toString())</b>
-<b class="pc">&nbsp;            var (_, levelStr, killersDesc) = deathMatch?.groupValues ?: Triple(&quot;&quot;,</b>
+<b class="nc">&nbsp;        for (row: Element in rows) {</b>
+<b class="nc">&nbsp;            val columns = row.select(&quot;td&quot;)</b>
+<b class="nc">&nbsp;            if (columns.size != 2) continue</b>
+<b class="nc">&nbsp;            val (dateColumn, descriptionColumn) = columns</b>
+<b class="nc">&nbsp;            val deathDateTime: Instant = parseTibiaDateTime(dateColumn.text())</b>
+<b class="nc">&nbsp;            val deathMatch = deathsRegex.find(descriptionColumn.toString())</b>
+<b class="nc">&nbsp;            var (_, levelStr, killersDesc) = deathMatch?.groupValues ?: Triple(&quot;&quot;,</b>
 <b class="nc">&nbsp;                &quot;0&quot;,</b>
 <b class="nc">&nbsp;                descriptionColumn.toString()).toList()</b>
-<b class="fc">&nbsp;            var assistNameList: List&lt;String&gt; = mutableListOf()</b>
-<b class="pc">&nbsp;            deathAssistsRegex.find(killersDesc)?.apply {</b>
+<b class="nc">&nbsp;            var assistNameList: List&lt;String&gt; = mutableListOf()</b>
+<b class="nc">&nbsp;            deathAssistsRegex.find(killersDesc)?.apply {</b>
 <b class="nc">&nbsp;                killersDesc = this.groups[&quot;killers&quot;]?.value.orEmpty()</b>
 <b class="nc">&nbsp;                val assistsDec = this.groups[&quot;assists&quot;]?.value ?: return</b>
 <b class="nc">&nbsp;                assistNameList = linkSearch.findAll(assistsDec).map { it.value }.toList()</b>
 <b class="nc">&nbsp;            }</b>
-<b class="fc">&nbsp;            val killerNameList = killersDesc.splitList()</b>
-<b class="fc">&nbsp;            val killerList = killerNameList.mapNotNull { parseKiller(it) }</b>
-<b class="fc">&nbsp;            val assistsList = assistNameList.mapNotNull { parseKiller(it) }</b>
-<b class="fc">&nbsp;            addDeath(deathDateTime, levelStr.toInt(), killerList, assistsList)</b>
+<b class="nc">&nbsp;            val killerNameList = killersDesc.splitList()</b>
+<b class="nc">&nbsp;            val killerList = killerNameList.mapNotNull { parseKiller(it) }</b>
+<b class="nc">&nbsp;            val assistsList = assistNameList.mapNotNull { parseKiller(it) }</b>
+<b class="nc">&nbsp;            addDeath(deathDateTime, levelStr.toInt(), killerList, assistsList)</b>
 &nbsp;        }
 &nbsp;    }
 &nbsp;
 &nbsp;    private fun parseKiller(killerHtml: String): DeathParticipant? {
-<b class="fc">&nbsp;        var name: String = killerHtml</b>
-<b class="fc">&nbsp;        var isPlayer = false</b>
-<b class="fc">&nbsp;        var isTraded = false</b>
-<b class="fc">&nbsp;        var summon: String? = null</b>
-<b class="fc">&nbsp;        if (killerHtml.contains(tradedLabel)) {</b>
-<b class="fc">&nbsp;            name = killerHtml.clean().remove(tradedLabel).trim()</b>
-<b class="fc">&nbsp;            isTraded = true</b>
-<b class="fc">&nbsp;            isPlayer = true</b>
+<b class="nc">&nbsp;        var name: String = killerHtml</b>
+<b class="nc">&nbsp;        var isPlayer = false</b>
+<b class="nc">&nbsp;        var isTraded = false</b>
+<b class="nc">&nbsp;        var summon: String? = null</b>
+<b class="nc">&nbsp;        if (killerHtml.contains(tradedLabel)) {</b>
+<b class="nc">&nbsp;            name = killerHtml.clean().remove(tradedLabel).trim()</b>
+<b class="nc">&nbsp;            isTraded = true</b>
+<b class="nc">&nbsp;            isPlayer = true</b>
 &nbsp;        }
-<b class="fc">&nbsp;        if (killerHtml.contains(&quot;href&quot;)) {</b>
-<b class="pc">&nbsp;            name = linkContent.find(killerHtml)?.groups?.get(1)?.value ?: return null</b>
-<b class="fc">&nbsp;            isPlayer = true</b>
+<b class="nc">&nbsp;        if (killerHtml.contains(&quot;href&quot;)) {</b>
+<b class="nc">&nbsp;            name = linkContent.find(killerHtml)?.groups?.get(1)?.value ?: return null</b>
+<b class="nc">&nbsp;            isPlayer = true</b>
 &nbsp;        }
-<b class="pc">&nbsp;        deathSummon.find(name)?.apply {</b>
+<b class="nc">&nbsp;        deathSummon.find(name)?.apply {</b>
 <b class="nc">&nbsp;            summon = groups[&quot;summon&quot;]!!.value.clean()</b>
 <b class="nc">&nbsp;            name = groups[&quot;name&quot;]!!.value.clean()</b>
 <b class="nc">&nbsp;        }</b>
 &nbsp;
-<b class="fc">&nbsp;        return DeathParticipant(name.clean(), isPlayer, summon, isTraded)</b>
+<b class="nc">&nbsp;        return DeathParticipant(name.clean(), isPlayer, summon, isTraded)</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    private fun CharacterBuilder.parseCharacters(rows: Elements) {
@@ -363,7 +363,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-02-24 21:26</div>
+    <div style="float:right;">generated on 2025-04-02 18:01</div>
 </div>
 </body>
 </html>
