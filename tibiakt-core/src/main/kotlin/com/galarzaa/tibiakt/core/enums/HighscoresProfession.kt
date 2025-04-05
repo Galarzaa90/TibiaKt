@@ -26,4 +26,5 @@ public enum class HighscoresProfession(override val value: Int) : IntEnum {
     PALADINS(3),
     SORCERERS(4),
     DRUIDS(5),
+    MONKS(6),
 }
