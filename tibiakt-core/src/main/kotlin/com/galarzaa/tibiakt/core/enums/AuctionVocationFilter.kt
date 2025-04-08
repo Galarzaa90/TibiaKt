@@ -24,7 +24,8 @@ public enum class AuctionVocationFilter(override val value: Int) : IntEnum {
     DRUID(2),
     KNIGHT(3),
     PALADIN(4),
-    SORCERER(5);
+    SORCERER(5),
+    MONK(6);
 
     public companion object {
         /**

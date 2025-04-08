@@ -25,10 +25,12 @@ public enum class Vocation(override val value: String) : StringEnum {
     SORCERER("Sorcerer"),
     PALADIN("Paladin"),
     KNIGHT("Knight"),
+    MONK("Monk"),
     ELDER_DRUID("Elder Druid"),
     MASTER_SORCERER("Master Sorcerer"),
     ROYAL_PALADIN("Royal Paladin"),
-    ELITE_KNIGHT("Elite Knight");
+    ELITE_KNIGHT("Elite Knight"),
+    EXALTED_MONK("Exalted Monk");
 
     /**
      * Gets the base form of a vocation.
@@ -39,6 +41,7 @@ public enum class Vocation(override val value: String) : StringEnum {
             MASTER_SORCERER -> SORCERER
             ROYAL_PALADIN -> PALADIN
             ELITE_KNIGHT -> KNIGHT
+            EXALTED_MONK -> MONK
             else -> this
         }
 }
