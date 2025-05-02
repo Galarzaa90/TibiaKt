@@ -36,7 +36,8 @@ public object BoostableBossesParser : Parser<BoostableBosses> {
                     ?: throw ParsingException("boosted boss image not found")
                 val fileName = File(URL(boostedCreatureImageUrl).path).name.remove(".gif")
                 boostedBoss {
-                    name = it.selectFirst("b")?.cleanText() ?: throw ParsingException("Boss title not found")
+                    name = it.selectFirst("p")?.cleanText()?.substringAfter("Today's boosted boss: ")
+                        ?: throw ParsingException("Boss title not found")
                     identifier = fileName
                 }
             } ?: throw ParsingException("Boosted boss table not found.")

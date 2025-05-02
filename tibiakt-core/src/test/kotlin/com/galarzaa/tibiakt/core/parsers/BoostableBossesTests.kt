@@ -25,8 +25,8 @@ class BoostableBossesTests : FunSpec({
     test("Boostable Bosses List") {
         val boostableBosses = BoostableBossesParser.fromContent(getResource("boostableBosses/bossList.txt"))
         with(boostableBosses.boostedBoss) {
-            name shouldBe "Tentugly"
-            identifier shouldBe "fakeseamonster"
+            name shouldBe "Abyssador"
+            identifier shouldBe "abyssador"
         }
         boostableBosses.bosses shouldHaveAtLeastSize 1
     }
