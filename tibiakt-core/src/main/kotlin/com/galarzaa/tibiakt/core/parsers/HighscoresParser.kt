@@ -102,7 +102,7 @@ public object HighscoresParser : Parser<Highscores?> {
             val loyaltyTitle = if (columns.size == 7) columns[2] else null
             addEntry {
                 rank = columns[0].toInt()
-                name = columns[1 + columnOffset]
+                name = columns[1]
                 vocation = StringEnum.fromValue(columns[2 + columnOffset])
                     ?: throw ParsingException("invalid vocation found: ${columns[2 + columnOffset]}")
                 world = columns[3 + columnOffset]

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.9.1 (2025-07-08)
+
+- Fix parsing loyalty points highscores not parsing character names correctly.
+
 ## 0.9.0 (2024-11-10)
 
 - Upgrade to Ktor 3.
