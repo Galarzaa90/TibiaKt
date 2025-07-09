@@ -1,8 +1,21 @@
 # Changelog
 
-## 0.9.1 (2025-07-08)
+## 0.12.1 (2025-07-08)
 
 - Fix parsing loyalty points highscores not parsing character names correctly.
+
+## 0.12.0 (2025-05-02)
+
+- Fix Boosted Boss page structure on tibia.com and its parsing.
+
+## 0.11.0 (2025-04-08)
+
+- Added Monk to Vocation enums, including Highscores and Auction filters.
+
+# 0.10.0 (2025-04-02)
+
+- Fix parsing for character deaths due to changes released by CipSoft on April 1st 2025
+- Upgrade from Kotlin 2.0.21 to 2.1.10
 
 ## 0.9.0 (2024-11-10)
 
