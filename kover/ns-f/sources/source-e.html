@@ -87,7 +87,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     82.7%
   </span>
   <span class="absValue">
-    (369/446)
+    (367/444)
   </span>
 </td>
 </tr>
@@ -203,7 +203,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;            val loyaltyTitle = if (columns.size == 7) columns[2] else null</b>
 <b class="fc">&nbsp;            addEntry {</b>
 <b class="fc">&nbsp;                rank = columns[0].toInt()</b>
-<b class="fc">&nbsp;                name = columns[1 + columnOffset]</b>
+<b class="fc">&nbsp;                name = columns[1]</b>
 <b class="pc">&nbsp;                vocation = StringEnum.fromValue(columns[2 + columnOffset])</b>
 <b class="nc">&nbsp;                    ?: throw ParsingException(&quot;invalid vocation found: ${columns[2 + columnOffset]}&quot;)</b>
 <b class="fc">&nbsp;                world = columns[3 + columnOffset]</b>
@@ -237,7 +237,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-05-02 14:42</div>
+    <div style="float:right;">generated on 2025-07-09 05:09</div>
 </div>
 </body>
 </html>
