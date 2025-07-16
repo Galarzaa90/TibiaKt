@@ -19,7 +19,7 @@ object Library {
     val version: String
         get() {
         val envVersion = System.getenv("VERSION")
-        if (!envVersion.isNullOrBlank()) return envVersion
+        if (!envVersion.isNullOrBlank()) return envVersion.removePrefix("v")
 
         val tag = System.getenv("GITHUB_TAG_NAME")
         val branch = System.getenv("GITHUB_BRANCH_NAME")
