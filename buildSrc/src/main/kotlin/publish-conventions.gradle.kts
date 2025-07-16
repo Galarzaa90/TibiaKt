@@ -60,30 +60,13 @@ jreleaser {
                 create("release") {
                     active = Active.ALWAYS
                     applyMavenCentralRules = true
+                    snapshotSupported = true
                     url = "https://central.sonatype.com/api/v1/publisher"
                     stagingRepository(stagingDir.get().asFile.absolutePath)
                     retryDelay = 60
                     maxRetries = 120
                 }
-//                create("release") {
-//                    active = Active.RELEASE
-//                    applyMavenCentralRules = true
-//                    url = "https://central.sonatype.com/api/v1/publisher"
-//                    stagingRepository(stagingDir.get().asFile.absolutePath)
-//
-//                    retryDelay = 60
-//                    maxRetries = 120
-//                }
             }
-//            nexus2 {
-//                create("snapshot") {
-//                    active = Active.SNAPSHOT
-//                    snapshotUrl.set("https://central.sonatype.com/repository/maven-snapshots/")
-//                    url.set("https://central.sonatype.com/repository/maven-snapshots/")
-//                    applyMavenCentralRules = true
-//                    snapshotSupported = true
-//                }
-//            }
         }
     }
 }
