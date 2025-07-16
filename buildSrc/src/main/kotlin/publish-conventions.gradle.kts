@@ -74,9 +74,6 @@ jreleaser {
                     url.set("https://central.sonatype.com/repository/maven-snapshots/")
                     applyMavenCentralRules = true
                     snapshotSupported = true
-                    closeRepository = true
-                    releaseRepository = true
-                    stagingRepository(stagingDir.get().asFile.absolutePath)
                 }
             }
         }
