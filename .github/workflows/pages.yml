@@ -30,7 +30,7 @@ jobs:
             GITHUB_TAG_NAME="${{ github.event.release.tag_name }}"
           else
             BASE_TAG=$(git describe --tags --abbrev=0)
-            VERSION="${BASE_TAG}-SNAPSHOT""
+            VERSION="${BASE_TAG}-SNAPSHOT"
           fi
           echo "VERSION=$VERSION" >> $GITHUB_ENV
           {
