@@ -20,6 +20,10 @@ include("tibiakt-core")
 include("tibiakt-client")
 include("tibiakt-server")
 
+plugins {
+    id("com.gradle.develocity") version("3.17.5")
+}
+
 
 dependencyResolutionManagement {
     versionCatalogs {
@@ -97,5 +101,16 @@ dependencyResolutionManagement {
                 "kotest-framework-datatest",
             ))
         }
+    }
+}
+
+
+val isCI = (System.getenv("CI") ?: "false").toBoolean()
+
+develocity {
+    buildScan {
+        termsOfUseUrl = "https://gradle.com/help/legal-terms-of-use"
+        termsOfUseAgree = "yes"
+        publishing.onlyIf { isCI }
     }
 }
