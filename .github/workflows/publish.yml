@@ -28,13 +28,17 @@ jobs:
           else
             VERSION=$(git describe --tags --abbrev=0)-SNAPSHOT
           fi
-          cho "VERSION=$VERSION"
-          echo "GITHUB_TAG_NAME=${GITHUB_REF##refs/tags/}"
-          echo "GITHUB_BRANCH_NAME=${GITHUB_REF}"
           
           echo "VERSION=$VERSION" >> $GITHUB_ENV
           echo "GITHUB_TAG_NAME=${GITHUB_REF##refs/tags/}" >> $GITHUB_ENV
           echo "GITHUB_BRANCH_NAME=${GITHUB_REF}" >> $GITHUB_ENV
+          
+          {
+            echo "### 🔖 Version Info"
+            echo "- VERSION: \`$VERSION\`"
+            echo "- GITHUB_TAG_NAME: \`${GITHUB_REF##refs/tags/}\`"
+            echo "- GITHUB_BRANCH_NAME: \`${GITHUB_REF}\`"
+          } >> $GITHUB_STEP_SUMMARY
         
 
       - name: Set up JDK ☕
