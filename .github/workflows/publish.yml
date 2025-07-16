@@ -58,7 +58,10 @@ jobs:
       - name: Build ⚙️
         run: ./gradlew build
 
-      - name: Publish 🚀
+      - name: Publish 📦
+        run: ./gradlew -x publish
+
+      - name: Deploy 🚀
         run: ./gradlew -x test jreleaserDeploy
         env:
           JRELEASER_DEPLOY_MAVEN_MAVENCENTRAL_USERNAME: ${{ secrets.SONATYPE_USER }}
