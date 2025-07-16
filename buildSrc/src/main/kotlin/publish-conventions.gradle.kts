@@ -55,7 +55,6 @@ publishing {
 
 
 jreleaser {
-    gitRootSearch = true
     signing {
         active = Active.ALWAYS
         armored = true
@@ -65,13 +64,20 @@ jreleaser {
         maven {
             mavenCentral {
                 create("release") {
-                    active = Active.ALWAYS
-                    applyMavenCentralRules = true
-                    snapshotSupported = true
+                    active = Active.RELEASE
                     url = "https://central.sonatype.com/api/v1/publisher"
                     stagingRepository(stagingDir.get().asFile.absolutePath)
-                    retryDelay = 60
-                    maxRetries = 120
+                }
+            }
+            nexus2 {
+                create("snapshot-deploy") {
+                    active = Active.SNAPSHOT
+                    snapshotUrl = "https://central.sonatype.com/repository/maven-snapshots/"
+                    applyMavenCentralRules = true
+                    snapshotSupported = true
+                    closeRepository = true
+                    releaseRepository = true
+                    stagingRepository(stagingDir.get().asFile.absolutePath)
                 }
             }
         }
