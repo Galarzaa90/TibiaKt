@@ -30,14 +30,5 @@ object Library {
             else -> "undefined"
         }
     }
-    val isSnapshot: Boolean get() = version.endsWith("-SNAPSHOT")
-    val isRelease: Boolean get() = !isSnapshot && !isUndefined
-    val isUndefined get() = version == "undefined"
-
     const val description = "Tibia.com parser and client."
-}
-
-object Repo {
-    const val releasesUrl = "https://s01.oss.sonatype.org/content/repositories/releases/"
-    const val snapshotsUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
 }

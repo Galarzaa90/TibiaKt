@@ -13,10 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-val sonatypeUsername: String? by project
-val sonatypePassword: String? by project
-
 plugins {
     java
     `java-library`
@@ -35,6 +31,25 @@ allprojects {
 
     repositories {
         mavenCentral()
+    }
+}
+
+subprojects {
+    plugins.withId("java") {
+        extensions.configure<JavaPluginExtension>("java") {
+            sourceCompatibility = JavaVersion.VERSION_17
+            targetCompatibility = JavaVersion.VERSION_17
+            withJavadocJar()
+            withSourcesJar()
+        }
+    }
+
+    plugins.withId("org.jetbrains.kotlin.jvm") {
+        extensions.configure<org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension>("kotlin") {
+            compilerOptions {
+                jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
+            }
+        }
     }
 }
 

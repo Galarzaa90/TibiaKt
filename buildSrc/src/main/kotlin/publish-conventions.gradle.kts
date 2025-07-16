@@ -2,7 +2,6 @@ import org.jreleaser.model.Active
 
 plugins {
     `maven-publish`
-
     id("org.jreleaser")
 }
 
