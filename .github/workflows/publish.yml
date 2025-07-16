@@ -23,21 +23,26 @@ jobs:
 
       - name: Set version 🏷️
         run: |
-          if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
-            VERSION="${GITHUB_REF##refs/tags/}"
+          if [[ "${{ github.event_name }}" == "release" ]]; then
+            VERSION="${{ github.event.release.tag_name }}"
+            GITHUB_TAG_NAME="${{ github.event.release.tag_name }}"
           else
-            VERSION=$(git describe --tags --abbrev=0)-SNAPSHOT
+            BASE_TAG=$(git describe --tags --abbrev=0)
+            VERSION="${BASE_TAG}-SNAPSHOT"
+            GITHUB_TAG_NAME=""
           fi
-          
+
+          GITHUB_BRANCH_NAME="${{ github.ref }}"
+
           echo "VERSION=$VERSION" >> $GITHUB_ENV
-          echo "GITHUB_TAG_NAME=${GITHUB_REF##refs/tags/}" >> $GITHUB_ENV
-          echo "GITHUB_BRANCH_NAME=${GITHUB_REF}" >> $GITHUB_ENV
-          
+          echo "GITHUB_TAG_NAME=$GITHUB_TAG_NAME" >> $GITHUB_ENV
+          echo "GITHUB_BRANCH_NAME=$GITHUB_BRANCH_NAME" >> $GITHUB_ENV
+
           {
             echo "### 🔖 Version Info"
             echo "- VERSION: \`$VERSION\`"
-            echo "- GITHUB_TAG_NAME: \`${GITHUB_REF##refs/tags/}\`"
-            echo "- GITHUB_BRANCH_NAME: \`${GITHUB_REF}\`"
+            echo "- GITHUB_TAG_NAME: \`$GITHUB_TAG_NAME\`"
+            echo "- GITHUB_BRANCH_NAME: \`$GITHUB_BRANCH_NAME\`"
           } >> $GITHUB_STEP_SUMMARY
         
 

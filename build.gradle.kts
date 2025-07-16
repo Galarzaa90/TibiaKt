@@ -31,7 +31,7 @@ plugins {
 
 allprojects {
     group = "com.galarzaa"
-    version = "0.12.1"
+    version = Library.version
 
     repositories {
         mavenCentral()
