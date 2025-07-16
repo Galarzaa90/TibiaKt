@@ -21,6 +21,31 @@ jobs:
       - name: Setup Gradle 🐘
         uses: gradle/actions/setup-gradle@v4
 
+      - name: Set version 🏷️
+        run: |
+          if [[ "${{ github.event_name }}" == "release" ]]; then
+            VERSION="${{ github.event.release.tag_name }}"
+            GITHUB_TAG_NAME="${{ github.event.release.tag_name }}"
+          else
+            BASE_TAG=$(git describe --tags --abbrev=0)
+            VERSION="${BASE_TAG}-SNAPSHOT"
+            GITHUB_TAG_NAME=""
+          fi
+
+          GITHUB_BRANCH_NAME="${{ github.ref }}"
+
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          echo "GITHUB_TAG_NAME=$GITHUB_TAG_NAME" >> $GITHUB_ENV
+          echo "GITHUB_BRANCH_NAME=$GITHUB_BRANCH_NAME" >> $GITHUB_ENV
+
+          {
+            echo "### 🔖 Version Info"
+            echo "- VERSION: \`$VERSION\`"
+            echo "- GITHUB_TAG_NAME: \`$GITHUB_TAG_NAME\`"
+            echo "- GITHUB_BRANCH_NAME: \`$GITHUB_BRANCH_NAME\`"
+          } >> $GITHUB_STEP_SUMMARY
+
+
       - name: Generate Coverage Report 📊
         if: ${{github.event_name == 'push'}}
         run: ./gradlew tibiakt-core:koverHtmlReport
