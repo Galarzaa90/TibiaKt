@@ -62,7 +62,6 @@ jreleaser {
                     applyMavenCentralRules = true
                     url = "https://central.sonatype.com/api/v1/publisher"
                     stagingRepository(stagingDir.get().asFile.absolutePath)
-
                     retryDelay = 60
                     maxRetries = 120
                 }
