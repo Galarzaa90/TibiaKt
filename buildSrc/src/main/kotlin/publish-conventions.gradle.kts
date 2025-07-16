@@ -19,6 +19,14 @@ publishing {
                 description = Library.description
                 url = "https://github.com/Galarzaa90/TibiaKt"
 
+                licenses {
+                    license {
+                        name.set("Apache License 2.0")
+                        url.set("https://www.apache.org/licenses/LICENSE-2.0")
+                        distribution.set("repo")
+                    }
+                }
+
                 developers {
                     developer {
                         id = "Galarzaa"
