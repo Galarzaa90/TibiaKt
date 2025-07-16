@@ -1,4 +1,5 @@
 name: 🚀 Publish to Maven Central
+
 on:
   push:
     branches:
@@ -8,18 +9,30 @@ on:
       - '**'
   release:
     types: [ published ]
+
 jobs:
   publish:
     name: 🚀 Publish to Maven Central
     runs-on: ubuntu-latest
-    env:
-      GITHUB_BRANCH_NAME: ${{ github.ref }}
-      GITHUB_TAG_NAME: ${{ github.event.release.tag_name }}
+
     steps:
       - name: Checkout 📦
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Needed to get full tag history
 
-      - name: Set up JDK ️☕
+      - name: Set version 🏷️
+        run: |
+          if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
+            VERSION="${GITHUB_REF##refs/tags/}"
+          else
+            VERSION=$(git describe --tags --abbrev=0)-SNAPSHOT
+          fi
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          echo "GITHUB_TAG_NAME=${GITHUB_REF##refs/tags/}" >> $GITHUB_ENV
+          echo "GITHUB_BRANCH_NAME=${GITHUB_REF}" >> $GITHUB_ENV
+
+      - name: Set up JDK ☕
         uses: actions/setup-java@v4
         with:
           java-version: '19'
@@ -34,8 +47,8 @@ jobs:
       - name: Publish 🚀
         run: ./gradlew -x test jreleaserDeploy
         env:
-          JRELEASER_DEPLOY_MAVEN_MAVENCENTRAL_USERNAME: ${{secrets.SONATYPE_USER}}
-          JRELEASER_DEPLOY_MAVEN_MAVENCENTRAL_PASSWORD: ${{secrets.SONATYPE_PASSWORD}}
+          JRELEASER_DEPLOY_MAVEN_MAVENCENTRAL_USERNAME: ${{ secrets.SONATYPE_USER }}
+          JRELEASER_DEPLOY_MAVEN_MAVENCENTRAL_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
           JRELEASER_GPG_KEYNAME: ${{ vars.GPG_KEY_ID }}
           JRELEASER_GPG_PUBLIC_KEY: ${{ vars.GPG_PUBLIC_KEY }}
           JRELEASER_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}

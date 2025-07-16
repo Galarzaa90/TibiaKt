@@ -18,16 +18,18 @@ object Library {
     const val group = "com.galarzaa"
     val version: String
         get() {
-            val tag = System.getenv("GITHUB_TAG_NAME")
-            val branch = System.getenv("GITHUB_BRANCH_NAME")
-            val out = when {
-                !tag.isNullOrBlank() -> tag.replace("v", "")
-                !branch.isNullOrBlank() && branch.startsWith("refs/heads/") ->
-                    branch.substringAfter("refs/heads/").replace("/", "-") + "-SNAPSHOT"
-                else -> "undefined"
-            }
-            return out
+        val envVersion = System.getenv("VERSION")
+        if (!envVersion.isNullOrBlank()) return envVersion
+
+        val tag = System.getenv("GITHUB_TAG_NAME")
+        val branch = System.getenv("GITHUB_BRANCH_NAME")
+        return when {
+            !tag.isNullOrBlank() -> tag.removePrefix("v")
+            !branch.isNullOrBlank() && branch.startsWith("refs/heads/") ->
+                branch.removePrefix("refs/heads/").replace("/", "-") + "-SNAPSHOT"
+            else -> "undefined"
         }
+    }
     val isSnapshot: Boolean get() = version.endsWith("-SNAPSHOT")
     val isRelease: Boolean get() = !isSnapshot && !isUndefined
     val isUndefined get() = version == "undefined"
