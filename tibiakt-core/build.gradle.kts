@@ -16,11 +16,10 @@
 
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
-
-apply("../publish.gradle.kts")
-
 plugins {
     kotlin("jvm")
+    `java-library`
+    `publish-conventions`
     kotlin("plugin.serialization")
     alias(libs.plugins.dokka)
     id("io.gitlab.arturbosch.detekt")

@@ -15,11 +15,18 @@
  */
 
 plugins {
-    groovy
     `kotlin-dsl`
+    `kotlin-dsl-precompiled-script-plugins`
 }
 
 repositories {
     mavenCentral()
     gradlePluginPortal()
+}
+
+fun DependencyHandlerScope.plugin(plugin: Provider<PluginDependency>) =
+    plugin.map { "${it.pluginId}:${it.pluginId}.gradle.plugin:${it.version}" }
+
+dependencies {
+    implementation(plugin(libs.plugins.jreleaser))
 }

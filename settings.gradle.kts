@@ -21,7 +21,6 @@ include("tibiakt-client")
 include("tibiakt-server")
 
 
-
 dependencyResolutionManagement {
     versionCatalogs {
         create("libs") {

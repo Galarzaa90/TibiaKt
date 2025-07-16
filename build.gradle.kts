@@ -20,11 +20,8 @@ val sonatypePassword: String? by project
 plugins {
     java
     `java-library`
-    `maven-publish`
-    signing
     kotlin("jvm") version libs.versions.kotlin.get()
     kotlin("plugin.serialization") version libs.versions.kotlin.get()
-    id("io.github.gradle-nexus.publish-plugin") version "1.3.0"
     alias(libs.plugins.gradle.versions)
     alias(libs.plugins.detekt)
     alias(libs.plugins.dokka)
@@ -32,11 +29,10 @@ plugins {
     alias(libs.plugins.kover)
 }
 
-group = "com.galarzaa"
-version = "0.9.0"
-
-
 allprojects {
+    group = "com.galarzaa"
+    version = "0.12.1"
+
     repositories {
         mavenCentral()
     }

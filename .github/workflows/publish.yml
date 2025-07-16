@@ -10,7 +10,7 @@ on:
     types: [ published ]
 jobs:
   publish:
-    name: 🚀 Publish to Sonatype Nexus
+    name: 🚀 Publish to Maven Central
     runs-on: ubuntu-latest
     env:
       GITHUB_BRANCH_NAME: ${{ github.ref }}
@@ -18,20 +18,23 @@ jobs:
     steps:
       - name: Checkout 📦
         uses: actions/checkout@v4
+
       - name: Set up JDK ️☕
         uses: actions/setup-java@v4
         with:
           java-version: '13'
-          distribution: 'adopt'
+          distribution: 'temurin'
+
       - name: Setup Gradle 🐘
-        uses: gradle/actions/setup-gradle@v3
+        uses: gradle/actions/setup-gradle@v4
+
       - name: Build ⚙️
-        run: ./gradlew build -x test
+        run: ./gradlew build
+
       - name: Publish 🚀
-        run: ./gradlew -x test publishReleasePublicationToMavenRepository closeAndReleaseStagingRepository
+        run: ./gradlew -x test jreleaserDeploy
         env:
-          SONATYPE_USER: ${{secrets.SONATYPE_USER}}
-          SONATYPE_PASSWORD: ${{secrets.SONATYPE_PASSWORD}}
-          GPG_ID: ${{secrets.GPG_ID}}
-          GPG_KEY: ${{secrets.GPG_KEY}}
-          GPG_PASS: ${{secrets.GPG_PASS}}
+          JRELEASER_DEPLOY_MAVEN_MAVENCENTRAL_USERNAME: ${{secrets.SONATYPE_USER}}
+          JRELEASER_DEPLOY_MAVEN_MAVENCENTRAL_PASSWORD: ${{secrets.SONATYPE_PASSWORD}}
+          SIGNING_KEY: ${{secrets.GPG_KEY}}
+          SIGNING_PASSWORD: ${{secrets.GPG_PASS}}

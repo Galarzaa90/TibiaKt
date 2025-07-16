@@ -31,6 +31,8 @@ object Library {
     val isSnapshot: Boolean get() = version.endsWith("-SNAPSHOT")
     val isRelease: Boolean get() = !isSnapshot && !isUndefined
     val isUndefined get() = version == "undefined"
+
+    const val description = "Tibia.com parser and client."
 }
 
 object Repo {

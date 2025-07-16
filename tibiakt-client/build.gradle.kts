@@ -16,17 +16,17 @@
 
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
-
-apply("../publish.gradle.kts")
-
-
 plugins {
     kotlin("jvm")
+    `java-library`
+    `publish-conventions`
     kotlin("plugin.serialization")
     alias(libs.plugins.dokka)
     id("io.gitlab.arturbosch.detekt")
     id("org.jetbrains.kotlinx.kover")
 }
+
+version = Library.version
 
 tasks.test {
     useJUnitPlatform()
@@ -42,7 +42,6 @@ dependencies {
     testImplementation(libs.bundles.kotest)
     testImplementation(libs.ktor.client.mock)
 }
-
 
 
 dokka {
