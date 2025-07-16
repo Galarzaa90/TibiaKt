@@ -4,7 +4,6 @@ Kotlin library to fetch and parse Tibia.com pages.
 
 ![GitHub release](https://img.shields.io/github/v/release/Galarzaa90/TibiaKt?sort=semver)
 ![GitHub commits since latest release](https://img.shields.io/github/commits-since/Galarzaa90/TibiaKt/latest?sort=semver)
-![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/com.galarzaa/tibiakt-core?server=https%3A%2F%2Fs01.oss.sonatype.org)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=Galarzaa90_TibiaKt&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=Galarzaa90_TibiaKt)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=Galarzaa90_TibiaKt&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=Galarzaa90_TibiaKt)
 
@@ -14,36 +13,23 @@ Kotlin library to fetch and parse Tibia.com pages.
 ## Installation
 
 The latest version available on maven central is:  
-![Maven Central](https://img.shields.io/maven-central/v/com.galarzaa/tibiakt-core?label=maven)
+[![Maven Central](https://img.shields.io/maven-central/v/com.galarzaa/tibiakt-core)](https://central.sonatype.com/search?q=tibiakt)
 
-For snapshots, use `{branch}-SNAPSHOT` (e.g. `main-SNAPSHOT`).
+The latest snapshot available is:
 
-### Groovy
+![Maven metadata URL](https://img.shields.io/maven-metadata/v?metadataUrl=https%3A%2F%2Fcentral.sonatype.com%2Frepository%2Fmaven-snapshots%2Fcom%2Fgalarzaa%2Ftibiakt-core%2Fmaven-metadata.xml)
 
-```groovy
-repositories {
-    mavenCentral()
-    // Only if you want to use snapshots
-    maven {
-        url "https://s01.oss.sonatype.org/content/repositories/snapshots"
-    }
-}
 
-dependencies {
-    implementation "com.galarzaa:tibiakt-core:{version}"
-    // OR
-    implementation "com.galarzaa:tibiakt-client:{version}"
-}
 
-```
-
-### Kotlin DSL
 
 ```kotlin
 repositories {
     mavenCentral()
     // Only if you want to use snapshots
-    maven("https://s01.oss.sonatype.org/content/repositories/snapshots")
+    maven {
+        name = "Maven Central Snapshots"
+        url = uri("https://central.sonatype.com/repository/maven-snapshots/")
+    }
 }
 
 dependencies {
