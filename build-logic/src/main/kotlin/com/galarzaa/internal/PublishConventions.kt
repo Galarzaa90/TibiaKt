@@ -33,6 +33,8 @@ class PublishPlugin : Plugin<Project> {
         pluginManager.apply("maven-publish")
         pluginManager.apply("org.jreleaser")
 
+        val rootStaging = rootProject.layout.buildDirectory.dir("staging-deploy")
+
         // Publishing configuration
         extensions.configure<PublishingExtension> {
             publications {
@@ -40,11 +42,9 @@ class PublishPlugin : Plugin<Project> {
                 create<MavenPublication>("maven") {
                     // Expect Java component present (library/app with Java/Kotlin)
                     from(components.getByName("java"))
-
-                    // Use standard Gradle properties instead of a custom Library object
-                    // Set group/version at project level (root or subproject) and optional description
                     groupId = Library.group
                     version = Library.version
+                    description = Library.description
 
                     pom {
                         name.set("TibiaKt")
@@ -76,7 +76,7 @@ class PublishPlugin : Plugin<Project> {
 
             repositories {
                 maven {
-                    url = uri(layout.buildDirectory.dir("staging-deploy"))
+                    url = uri(rootStaging)
                 }
             }
         }
@@ -96,7 +96,7 @@ class PublishPlugin : Plugin<Project> {
                         create("release") {
                             active.set(Active.ALWAYS)
                             url.set("https://central.sonatype.com/api/v1/publisher")
-                            stagingRepository(stagingDir.get().asFile.absolutePath)
+                            stagingRepository(rootStaging.get().asFile.absolutePath)
                         }
                     }
                     nexus2 {
@@ -107,7 +107,7 @@ class PublishPlugin : Plugin<Project> {
                             snapshotSupported.set(true)
                             closeRepository.set(true)
                             releaseRepository.set(true)
-                            stagingRepository(stagingDir.get().asFile.absolutePath)
+                            stagingRepository(rootStaging.get().asFile.absolutePath)
                         }
                     }
                 }
