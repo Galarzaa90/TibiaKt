@@ -1,8 +1,18 @@
 FROM eclipse-temurin:19-alpine AS builder
-COPY *.gradle.kts gradle.* gradlew /app/
-COPY gradle/ /app/gradle/
-COPY build-logic/ /app/build-logic/
 WORKDIR /app
+
+# Keep Gradle caches out of the layer stack
+ENV GRADLE_USER_HOME=/gradle
+# Stop Gradle from trying to download extra JDKs in CI
+ENV ORG_GRADLE_JAVA_INSTALLATIONS_AUTO_DOWNLOAD=false
+
+COPY gradlew ./
+COPY gradle/ ./gradle/
+COPY settings.gradle.kts ./
+COPY build.gradle.kts ./
+COPY gradle.properties ./
+COPY gradle/libs.versions.toml ./gradle/libs.versions.toml
+COPY build-logic/ ./build-logic/
 
 # This step will fail because source is still not there, but at least dependencies will be downloaded
 RUN ./gradlew build -x check -x detekt --parallel --continue > /dev/null 2>&1 || true

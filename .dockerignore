@@ -8,4 +8,4 @@
 !gradlew.bat
 !settings.gradle.kts
 !gradle/
-!buildSrc
+!build-logic
