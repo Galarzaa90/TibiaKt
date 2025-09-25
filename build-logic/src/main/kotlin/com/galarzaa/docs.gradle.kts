@@ -14,29 +14,23 @@
  * limitations under the License.
  */
 
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+package com.galarzaa
+
 
 plugins {
-    id("com.galarzaa.library")
-    kotlin("plugin.serialization") version libs.versions.kotlin
-    id("com.galarzaa.docs")
-    id("com.galarzaa.linting")
-    id("org.jetbrains.kotlinx.kover")
-    id("com.galarzaa.publish")
+    id("org.jetbrains.dokka")
 }
 
-
-tasks.test {
-    useJUnitPlatform()
-}
-
-dependencies {
-    api(project(":tibiakt-core"))
-    implementation(libs.bundles.ktor.client)
-    implementation(libs.kotlinx.serialization.json)
-
-    implementation(libs.kotlinLogging)
-
-    testImplementation(libs.bundles.kotest)
-    testImplementation(libs.ktor.client.mock)
+dokka {
+    dokkaSourceSets.configureEach {
+        includes.from("Module.md")
+        sourceLink {
+            localDirectory.set(file("src/main/kotlin"))
+            remoteUrl("https://github.com/Galarzaa90/TibiaKt/blob/main/tibiakt-core/src/main/kotlin")
+            remoteLineSuffix.set("#L")
+        }
+        externalDocumentationLinks {
+            uri("https://api.ktor.io/")
+        }
+    }
 }

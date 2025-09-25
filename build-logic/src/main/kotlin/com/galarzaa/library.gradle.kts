@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2025 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,19 +14,12 @@
  * limitations under the License.
  */
 
+package com.galarzaa
+
 plugins {
-    `kotlin-dsl`
-    `kotlin-dsl-precompiled-script-plugins`
+    id("com.galarzaa.base")
 }
 
-repositories {
-    mavenCentral()
-    gradlePluginPortal()
-}
-
-fun DependencyHandlerScope.plugin(plugin: Provider<PluginDependency>) =
-    plugin.map { "${it.pluginId}:${it.pluginId}.gradle.plugin:${it.version}" }
-
-dependencies {
-    implementation(plugin(libs.plugins.jreleaser))
+kotlin {
+    explicitApi()
 }

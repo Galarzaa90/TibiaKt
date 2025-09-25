@@ -14,29 +14,17 @@
  * limitations under the License.
  */
 
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-
 plugins {
-    id("com.galarzaa.library")
-    kotlin("plugin.serialization") version libs.versions.kotlin
-    id("com.galarzaa.docs")
-    id("com.galarzaa.linting")
-    id("org.jetbrains.kotlinx.kover")
-    id("com.galarzaa.publish")
+    `kotlin-dsl`
 }
 
+fun plugin(plugin: Provider<PluginDependency>) =
+    plugin.map { "${it.pluginId}:${it.pluginId}.gradle.plugin:${it.version}" }
 
-tasks.test {
-    useJUnitPlatform()
-}
 
 dependencies {
-    api(project(":tibiakt-core"))
-    implementation(libs.bundles.ktor.client)
-    implementation(libs.kotlinx.serialization.json)
-
-    implementation(libs.kotlinLogging)
-
-    testImplementation(libs.bundles.kotest)
-    testImplementation(libs.ktor.client.mock)
+    implementation(libs.plugin.kotlin)
+    implementation(plugin(libs.plugins.jreleaser))
+    implementation(plugin(libs.plugins.dokka))
+    implementation(plugin(libs.plugins.detekt))
 }

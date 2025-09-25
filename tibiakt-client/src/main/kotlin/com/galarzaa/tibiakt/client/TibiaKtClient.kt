@@ -217,9 +217,9 @@ public open class TibiaKtClient constructor(
                 )
             )
                 throw SiteMaintenanceException("Tibia.com is under maintenance.", re)
-            if (re.response.status == HttpStatusCode.Forbidden)
+            if (re.response.status == HttpStatusCode.Forbidden) {
                 throw ForbiddenException("403 Forbidden: Might be getting rate-limited", re)
-
+            }
             throw NetworkException("${re.response.status.value} ${re.response.status.description}", re)
         }
         logger.info {

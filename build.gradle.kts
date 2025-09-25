@@ -14,48 +14,9 @@
  * limitations under the License.
  */
 plugins {
-    java
-    `java-library`
-    kotlin("jvm") version libs.versions.kotlin.get()
-    kotlin("plugin.serialization") version libs.versions.kotlin.get()
     alias(libs.plugins.gradle.versions)
-    alias(libs.plugins.detekt)
-    alias(libs.plugins.dokka)
     alias(libs.plugins.sonarqube)
     alias(libs.plugins.kover)
-}
-
-allprojects {
-    group = "com.galarzaa"
-    version = Library.version
-
-    repositories {
-        mavenCentral()
-    }
-}
-
-subprojects {
-    plugins.withId("java") {
-        extensions.configure<JavaPluginExtension>("java") {
-            sourceCompatibility = JavaVersion.VERSION_17
-            targetCompatibility = JavaVersion.VERSION_17
-            withJavadocJar()
-            withSourcesJar()
-        }
-    }
-
-    plugins.withId("org.jetbrains.kotlin.jvm") {
-        extensions.configure<org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension>("kotlin") {
-            compilerOptions {
-                jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
-            }
-        }
-    }
-}
-
-dependencies {
-    dokka(project(":tibiakt-core:"))
-    dokka(project(":tibiakt-client:"))
 }
 
 sonarqube {

@@ -14,29 +14,19 @@
  * limitations under the License.
  */
 
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+package com.galarzaa
 
 plugins {
-    id("com.galarzaa.library")
-    kotlin("plugin.serialization") version libs.versions.kotlin
-    id("com.galarzaa.docs")
-    id("com.galarzaa.linting")
-    id("org.jetbrains.kotlinx.kover")
-    id("com.galarzaa.publish")
+    id("io.gitlab.arturbosch.detekt")
 }
 
 
-tasks.test {
-    useJUnitPlatform()
-}
+detekt {
+    val configs = listOf(
+        rootProject.file("detekt.yml"), project.file("detekt.yml")
+    ).filter { it.exists() }
 
-dependencies {
-    api(project(":tibiakt-core"))
-    implementation(libs.bundles.ktor.client)
-    implementation(libs.kotlinx.serialization.json)
-
-    implementation(libs.kotlinLogging)
-
-    testImplementation(libs.bundles.kotest)
-    testImplementation(libs.ktor.client.mock)
+    if (configs.isNotEmpty()) {
+        config.setFrom(files(configs))
+    }
 }

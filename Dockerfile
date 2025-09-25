@@ -1,7 +1,7 @@
 FROM eclipse-temurin:19-alpine AS builder
 COPY *.gradle.kts gradle.* gradlew /app/
 COPY gradle/ /app/gradle/
-COPY buildSrc/ /app/buildSrc/
+COPY build-logic/ /app/build-logic/
 WORKDIR /app
 
 # This step will fail because source is still not there, but at least dependencies will be downloaded
