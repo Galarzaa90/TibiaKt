@@ -93,7 +93,8 @@ public object EventsScheduleParser : Parser<EventsSchedule> {
             for (pendingEvent in onGoingEvents.toList()) {
                 if (!todayEvents.contains(pendingEvent)) {
                     // If it didn't show up today, it means it ended yesterday.
-                    pendingEvent.endDate = LocalDate(currentMonth.year, currentMonth.month, day).minus(DatePeriod(days = 1))
+                    pendingEvent.endDate =
+                        LocalDate(currentMonth.year, currentMonth.month, day).minus(DatePeriod(days = 1))
                     addEntry(pendingEvent.build())
                     onGoingEvents.remove(pendingEvent)
                 }

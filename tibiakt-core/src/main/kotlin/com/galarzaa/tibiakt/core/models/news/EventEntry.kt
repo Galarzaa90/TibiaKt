@@ -14,16 +14,12 @@
  * limitations under the License.
  */
 
-
-
 package com.galarzaa.tibiakt.core.models.news
 
-
 import kotlinx.datetime.DatePeriod
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.UseSerializers
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.minus
+import kotlinx.serialization.Serializable
 
 /**
  * An event in the [EventsSchedule].

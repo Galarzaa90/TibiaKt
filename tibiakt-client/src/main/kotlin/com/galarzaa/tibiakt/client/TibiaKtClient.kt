@@ -262,7 +262,12 @@ public open class TibiaKtClient constructor(
         categories: Set<NewsCategory>? = null,
         types: Set<NewsType>? = null,
     ): TibiaResponse<NewsArchive> =
-        fetchRecentNews((Clock.System.now() - days.days).toLocalDateTime(TIBIA_TIMEZONE).date, Clock.System.now().toLocalDateTime(TIBIA_TIMEZONE).date, categories, types)
+        fetchRecentNews(
+            (Clock.System.now() - days.days).toLocalDateTime(TIBIA_TIMEZONE).date,
+            Clock.System.now().toLocalDateTime(TIBIA_TIMEZONE).date,
+            categories,
+            types
+        )
 
     /**
      * Fetch a specific news article by its [newsId].
@@ -289,8 +294,11 @@ public open class TibiaKtClient constructor(
     /**
      * Fetch the events schedule for the current month.
      */
-    public open suspend fun fetchEventsSchedule(): TibiaResponse<EventsSchedule> = fetchEventsSchedule(Clock.System.now().toLocalDateTime(
-        TimeZone.currentSystemDefault()).date.yearMonth)
+    public open suspend fun fetchEventsSchedule(): TibiaResponse<EventsSchedule> = fetchEventsSchedule(
+        Clock.System.now().toLocalDateTime(
+            TimeZone.currentSystemDefault()
+        ).date.yearMonth
+    )
 
     // endregion
 
@@ -534,7 +542,11 @@ public open class TibiaKtClient constructor(
 
     /** Fetch CM posts from today to the last specified [days]. */
     public open suspend fun fetchCMPostArchive(days: Int, page: Int = 0): TibiaResponse<CMPostArchive> =
-        fetchCMPostArchive((Clock.System.now() - days.days).toLocalDateTime(TIBIA_TIMEZONE).date, Clock.System.now().toLocalDateTime(TIBIA_TIMEZONE).date, page)
+        fetchCMPostArchive(
+            (Clock.System.now() - days.days).toLocalDateTime(TIBIA_TIMEZONE).date,
+            Clock.System.now().toLocalDateTime(TIBIA_TIMEZONE).date,
+            page
+        )
 
     // endregion
 

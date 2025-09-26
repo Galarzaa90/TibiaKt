@@ -35,7 +35,7 @@ import kotlin.time.Duration.Companion.days
 import kotlin.time.Duration.Companion.hours
 import kotlin.time.Instant
 
-public val yearMonthFormat: DateTimeFormat<YearMonth> = YearMonth.Format {
+internal val yearMonthFormat: DateTimeFormat<YearMonth> = YearMonth.Format {
     monthName(MonthNames.ENGLISH_FULL)
     char(' ')
     year()
@@ -101,16 +101,20 @@ public fun getTibiaDateTime(clock: Clock = Clock.System): LocalDateTime = clock.
  *
  * A new day starts every server save, at 10:00 CET/CEST.
  */
-public fun getTibiaWeekDay(clock: Clock = Clock.System): DayOfWeek = (clock.now() - 10.hours).toLocalDateTime(TIBIA_TIMEZONE).dayOfWeek
+public fun getTibiaWeekDay(clock: Clock = Clock.System): DayOfWeek =
+    (clock.now() - 10.hours).toLocalDateTime(TIBIA_TIMEZONE).dayOfWeek
 
-
+/**
+ * Get the time of the last server in Tibia.
+ */
 public fun Instant.getLastServerSaveTime(): Instant =
     LocalDateTime(toLocalDateTime(TIBIA_TIMEZONE).date, SERVER_SAVE_TIME).toInstant(TIBIA_TIMEZONE)
         .let { if (this < it) it - 1.days else it }
 
-
+/**
+ * Get the time of the next server in Tibia.
+ */
 public fun Instant.getNextServerSaveTime(): Instant = getLastServerSaveTime() + 1.days
-
 
 /**
  * Parses a string containing date and time from Tibia.com into an [Instant] instance.
@@ -133,4 +137,5 @@ public fun parseTibiaFullDate(input: String): LocalDate =
 /**
  * Parses a string containing a date time from Tibia.com forums into an [Instant] instance.
  */
-public fun parseTibiaForumDateTime(input: String): Instant = tibiaForumDateTimeFormat.parse(input).toInstant(TIBIA_TIMEZONE)
+public fun parseTibiaForumDateTime(input: String): Instant =
+    tibiaForumDateTimeFormat.parse(input).toInstant(TIBIA_TIMEZONE)
