@@ -24,15 +24,17 @@ plugins {
 }
 
 
-val suppliedVersion = providers
-    .gradleProperty("VERSION")
-    .orElse(providers.gradleProperty("version")) // allow -Pversion=...
-    .orElse(providers.environmentVariable("VERSION"))
+fun Provider<String>.orNullTrimmed() = orNull?.trim()?.takeUnless { it.isEmpty() }
 
-val needGitVersion = suppliedVersion.orNull == null && file(".git").isDirectory
-if (needGitVersion) {
-    apply(plugin = libs.plugins.git.version.get().pluginId)
-}
+val suppliedVersion = sequenceOf(
+    providers.gradleProperty("VERSION"),
+    providers.gradleProperty("version"),
+    providers.environmentVariable("VERSION")
+).mapNotNull { it.orNullTrimmed() }
+ .firstOrNull()
+
+val needGitVersion = (suppliedVersion == null) && file(".git").isDirectory
+if (needGitVersion) apply(plugin = libs.plugins.git.version.get().pluginId)
 
 fun normalizedTag(d: VersionDetails) = d.lastTag.removePrefix("v")
 
@@ -43,9 +45,7 @@ fun gitDetailsOrNull(): VersionDetails? =
     }.getOrNull()
 
 val computedVersion: String = when {
-    suppliedVersion.orNull != null -> suppliedVersion.get()
-
-
+    suppliedVersion != null -> suppliedVersion
     needGitVersion -> {
         val versionDetails: Closure<VersionDetails> by extra
         val details = versionDetails()
@@ -60,6 +60,7 @@ val computedVersion: String = when {
 
 group = "com.galarzaa"
 version = computedVersion
+
 
 tasks.register("ciPrintVersion") {
     // Don’t resolve Git lazily at execution time if it’s not there.
