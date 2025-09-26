@@ -75,10 +75,12 @@ logger.lifecycle("version-computed source={} value={}", versionSource, computedV
 
 group = "com.galarzaa"
 version = computedVersion
+description =  "Tibia.com parser and client."
 
 allprojects {
     group = rootProject.group
     version = rootProject.version
+    description = rootProject.description
 }
 
 sonarqube {

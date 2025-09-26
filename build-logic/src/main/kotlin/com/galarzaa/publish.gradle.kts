@@ -37,7 +37,7 @@ publishing {
 
             pom {
                 name = "TibiaKt"
-                description = project.description
+                description = rootProject.description
 
                 licenses {
                     license {
