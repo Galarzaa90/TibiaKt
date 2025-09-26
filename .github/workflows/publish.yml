@@ -31,7 +31,7 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
 
       - name: Deploy 🚀
-        run: ./gradlew --no-daemon -x test publish jreleaserDeploy --scan"
+        run: ./gradlew --no-daemon -x test publish jreleaserDeploy --scan
         env:
           JRELEASER_DEPLOY_MAVEN_MAVENCENTRAL_USERNAME: ${{ secrets.SONATYPE_USER }}
           JRELEASER_DEPLOY_MAVEN_MAVENCENTRAL_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
