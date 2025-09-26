@@ -23,6 +23,8 @@ plugins {
     id("org.jreleaser")
 }
 
+val rootStaging = rootProject.layout.buildDirectory.dir("staging-deploy")
+
 publishing {
     publications {
         create<MavenPublication>("maven") {
@@ -64,9 +66,8 @@ publishing {
     }
 
     repositories {
-        // Local repository
         maven {
-            url = uri(layout.buildDirectory.dir("staging-deploy"))
+             url = uri(rootStaging)
         }
     }
 }
@@ -77,14 +78,16 @@ jreleaser {
         active = Active.ALWAYS
         armored = true
     }
-    val stagingDir = layout.buildDirectory.dir("staging-deploy")
+
+    val stagingPath = rootStaging.get().asFile.absolutePath
+
     deploy {
         maven {
             mavenCentral {
                 create("release") {
                     active = Active.RELEASE
                     url = "https://central.sonatype.com/api/v1/publisher"
-                    stagingRepository(stagingDir.get().asFile.absolutePath)
+                    stagingRepository(stagingPath)
                 }
             }
             nexus2 {
@@ -95,7 +98,7 @@ jreleaser {
                     snapshotSupported = true
                     closeRepository = true
                     releaseRepository = true
-                    stagingRepository(stagingDir.get().asFile.absolutePath)
+                    stagingRepository(stagingPath)
                 }
             }
         }
