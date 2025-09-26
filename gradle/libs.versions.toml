@@ -1,21 +1,19 @@
 [versions]
 kotlin = "2.2.10"
+detekt = "1.23.8"
+dokka = "2.0.0"
+gitVersion= "4.0.0"
+gradle-versions = "0.53.0"
+jreleaser = "1.20.0"
 jsoup = "1.18.3"
 kotest = "6.0.3"
 kotlinLogging = "3.0.5"
 kotlinxDatetime = "0.7.1"
 kotlinxSerialization = "1.9.0"
-ktor = "3.1.1"
-logback = "1.5.16"
-gitVersion= "4.0.0"
-
-# Plugin versions
-gradle-versions = "0.52.0"
-detekt = "1.23.8"
-dokka = "2.0.0"
-sonarqube = "6.0.1.5171"
-kover = "0.9.1"
-jreleaser = "1.20.0"
+kover = "0.9.2"
+ktor = "3.3.0"
+logback = "1.5.18"
+sonarqube = "6.3.1.5724"
 
 [plugins]
 gradle-versions = { id = "com.github.ben-manes.versions", version.ref = "gradle-versions" }
@@ -24,41 +22,29 @@ dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 sonarqube = { id = "org.sonarqube", version.ref = "sonarqube" }
 kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
 jreleaser = { id = "org.jreleaser", version.ref = "jreleaser"}
-kotlin = { id = "org.jetbrains.kotlin", version.ref = "kotlin"}
 git-version = { id = "com.palantir.git-version", version.ref = "gitVersion"}
 
 [libraries]
-# Used for build logic
 plugin-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 
-kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDatetime" }
-kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
-
 jsoup = { module = "org.jsoup:jsoup", version.ref = "jsoup" }
-
-kotlinLogging = { module = "io.github.microutils:kotlin-logging", version.ref = "kotlinLogging" }
-
-kotest-runner-junit5 = { module = "io.kotest:kotest-runner-junit5", version.ref = "kotest" }
 kotest-assertions-core = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
 kotest-property = { module = "io.kotest:kotest-property", version.ref = "kotest" }
-
-ktor-client-encoding = { module = "io.ktor:ktor-client-encoding", version.ref = "ktor" }
+kotest-runner-junit5 = { module = "io.kotest:kotest-runner-junit5", version.ref = "kotest" }
+kotlinLogging = { module = "io.github.microutils:kotlin-logging", version.ref = "kotlinLogging" }
+kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDatetime" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
 ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
-ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
-
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-client-encoding = { module = "io.ktor:ktor-client-encoding", version.ref = "ktor" }
 ktor-client-mock = { module = "io.ktor:ktor-client-mock", version.ref = "ktor" }
-
+ktor-serialization-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 ktor-server-cio = { module = "io.ktor:ktor-server-cio", version.ref = "ktor" }
 ktor-server-content-negotiation = { module = "io.ktor:ktor-server-content-negotiation", version.ref = "ktor" }
 ktor-server-data-conversion = { module = "io.ktor:ktor-server-data-conversion", version.ref = "ktor" }
-ktor-server-status-pages = { module = "io.ktor:ktor-server-status-pages", version.ref = "ktor" }
-ktor-server-locations = { module = "io.ktor:ktor-server-locations", version.ref = "ktor" }
 ktor-server-resources = { module = "io.ktor:ktor-server-resources", version.ref = "ktor" }
-
-ktor-serialization = { module = "io.ktor:ktor-serialization", version.ref = "ktor" }
-ktor-serialization-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
-
+ktor-server-status-pages = { module = "io.ktor:ktor-server-status-pages", version.ref = "ktor" }
 logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 
 [bundles]
@@ -68,7 +54,6 @@ ktor-client = [
   "ktor-client-core",
   "ktor-client-content-negotiation",
 ]
-
 ktor-server = [
   "ktor-server-cio",
   "ktor-server-content-negotiation",
@@ -76,7 +61,6 @@ ktor-server = [
   "ktor-server-status-pages",
   "ktor-server-resources",
 ]
-
 kotest = [
   "kotest-runner-junit5",
   "kotest-assertions-core",
