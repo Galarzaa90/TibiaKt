@@ -20,7 +20,9 @@ RUN ./gradlew build -x check -x detekt --parallel --continue > /dev/null 2>&1 ||
 COPY tibiakt-core/ /app/tibiakt-core
 COPY tibiakt-client/ /app/tibiakt-client
 COPY tibiakt-server/ /app/tibiakt-server
-RUN ./gradlew build -x test -x detekt tibiakt-server:shadowJar --parallel
+
+ARG VERSION=0.0.0-SNAPSHOT
+RUN ./gradlew -PVERSION=${VERSION} build -x test -x detekt tibiakt-server:shadowJar --parallel
 
 FROM eclipse-temurin:19-jre-alpine
 COPY --from=builder ./app/tibiakt-server/build/libs/tibiatk-server-shadow.jar .

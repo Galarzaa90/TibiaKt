@@ -1,3 +1,6 @@
+import com.palantir.gradle.gitversion.VersionDetails
+import groovy.lang.Closure
+
 /*
  * Copyright © 2025 Allan Galarza
  *
@@ -17,30 +20,56 @@ plugins {
     alias(libs.plugins.gradle.versions)
     alias(libs.plugins.sonarqube)
     alias(libs.plugins.kover)
-    alias(libs.plugins.git.version)
+    alias(libs.plugins.git.version) apply false
 }
 
 
-fun normalizedTag(): String = details.lastTag.removePrefix("v")
+val suppliedVersion = providers
+    .gradleProperty("VERSION")
+    .orElse(providers.gradleProperty("version")) // allow -Pversion=...
+    .orElse(providers.environmentVariable("VERSION"))
 
-val versionDetails: groovy.lang.Closure<com.palantir.gradle.gitversion.VersionDetails> by extra
-val details = versionDetails()
-version = if (details.commitDistance == 0 && details.isCleanTag) {
-    // Exactly on a tag and the tree is clean
-    normalizedTag()                      // e.g. 0.12.1
-} else {
-    // Anything else: ahead of tag, on a branch, or dirty working tree
-    "${normalizedTag()}-SNAPSHOT"        // e.g. 0.12.1-SNAPSHOT
+val needGitVersion = suppliedVersion.orNull == null && file(".git").isDirectory
+if (needGitVersion) {
+    apply(plugin = libs.plugins.git.version.get().pluginId)
 }
+
+fun normalizedTag(d: VersionDetails) = d.lastTag.removePrefix("v")
+
+fun gitDetailsOrNull(): VersionDetails? =
+    runCatching {
+        @Suppress("UNCHECKED_CAST")
+        (extensions.extraProperties["versionDetails"] as? Closure<VersionDetails>)?.call()
+    }.getOrNull()
+
+val computedVersion: String = when {
+    suppliedVersion.orNull != null -> suppliedVersion.get()
+
+
+    needGitVersion -> {
+        val versionDetails: Closure<VersionDetails> by extra
+        val details = versionDetails()
+        if (details.commitDistance == 0 && details.isCleanTag) {
+            normalizedTag(details)
+        } else {
+            "${normalizedTag(details)}-SNAPSHOT"
+        }
+    }
+    else -> "0.0.0-SNAPSHOT"
+}
+
 group = "com.galarzaa"
+version = computedVersion
 
 tasks.register("ciPrintVersion") {
+    // Don’t resolve Git lazily at execution time if it’s not there.
+    val d = gitDetailsOrNull()
     doLast {
-        println("VERSION=${project.version}")
-        println("LAST_TAG=${details.lastTag}")
-        println("COMMIT_DISTANCE=${details.commitDistance}")
-        println("BRANCH=${details.branchName}")
-        println("CLEAN_TAG=${details.isCleanTag}")
+        println("VERSION=$version")
+        println("LAST_TAG=${d?.lastTag ?: "N/A"}")
+        println("COMMIT_DISTANCE=${d?.commitDistance ?: "N/A"}")
+        println("BRANCH=${d?.branchName ?: "N/A"}")
+        println("CLEAN_TAG=${d?.isCleanTag ?: "N/A"}")
     }
 }
 
