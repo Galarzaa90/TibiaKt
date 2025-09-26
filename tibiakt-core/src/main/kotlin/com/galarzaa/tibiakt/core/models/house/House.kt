@@ -20,7 +20,7 @@ package com.galarzaa.tibiakt.core.models.house
 import com.galarzaa.tibiakt.core.enums.HouseStatus
 import com.galarzaa.tibiakt.core.enums.HouseType
 import com.galarzaa.tibiakt.core.utils.getCharacterUrl
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

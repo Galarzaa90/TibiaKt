@@ -14,16 +14,13 @@
  * limitations under the License.
  */
 
-@file:UseSerializers(LocalDateSerializer::class)
 
 package com.galarzaa.tibiakt.core.models.forums
 
 import com.galarzaa.tibiakt.core.models.PaginatedWithUrl
-import com.galarzaa.tibiakt.core.serializers.LocalDateSerializer
 import com.galarzaa.tibiakt.core.utils.getCMPostArchiveUrl
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.UseSerializers
-import java.time.LocalDate
+import kotlinx.datetime.LocalDate
 
 /**
  * The CM Post Archive, displaying recent posts by Community Managers.

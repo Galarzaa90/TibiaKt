@@ -14,20 +14,17 @@
  * limitations under the License.
  */
 
-@file:UseSerializers(LocalDateSerializer::class, YearMonthSerializer::class)
 
 package com.galarzaa.tibiakt.core.models.world
 
 import com.galarzaa.tibiakt.core.enums.BattlEyeType
 import com.galarzaa.tibiakt.core.enums.PvpType
 import com.galarzaa.tibiakt.core.enums.TransferType
-import com.galarzaa.tibiakt.core.serializers.LocalDateSerializer
-import com.galarzaa.tibiakt.core.serializers.YearMonthSerializer
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
-import java.time.LocalDate
-import java.time.YearMonth
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.YearMonth
 
 /**
  * A game world.

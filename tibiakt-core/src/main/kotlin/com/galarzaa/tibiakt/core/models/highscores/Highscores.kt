@@ -23,7 +23,7 @@ import com.galarzaa.tibiakt.core.enums.HighscoresProfession
 import com.galarzaa.tibiakt.core.enums.PvpType
 import com.galarzaa.tibiakt.core.models.PaginatedWithUrl
 import com.galarzaa.tibiakt.core.utils.getHighscoresUrl
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 import kotlinx.serialization.Serializable
 
 /**

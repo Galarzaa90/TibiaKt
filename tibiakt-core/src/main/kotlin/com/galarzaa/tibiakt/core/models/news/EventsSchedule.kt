@@ -14,16 +14,13 @@
  * limitations under the License.
  */
 
-@file:UseSerializers(YearMonthSerializer::class)
-
 package com.galarzaa.tibiakt.core.models.news
 
-import com.galarzaa.tibiakt.core.serializers.YearMonthSerializer
 import com.galarzaa.tibiakt.core.utils.getEventsScheduleUrl
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
-import java.time.LocalDate
-import java.time.YearMonth
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.YearMonth
 
 /**
  * The event schedule, containing the events of a given month.
@@ -45,9 +42,11 @@ public data class EventsSchedule(
      * Get all the events that are active in a specific day of the month.
      */
     public fun getEventsOn(date: LocalDate): List<EventEntry> {
-        return entries.filter {
-            (it.startDate ?: LocalDate.MIN) <= date &&
-                    date <= (it.endDate ?: LocalDate.MAX)
-        }
+    return entries.filter { entry ->
+        val startOk = entry.startDate?.let { it <= date } ?: true
+        val endOk = entry.endDate?.let { date <= it } ?: true
+        startOk && endOk
     }
+}
+
 }

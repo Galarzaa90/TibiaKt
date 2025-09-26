@@ -2,25 +2,26 @@ package com.galarzaa
 
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
-group = "com.galarzaa"
-version = Library.version
 
 plugins {
     id("org.jetbrains.kotlin.jvm")
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+    withJavadocJar()
+    withSourcesJar()
 }
 
 kotlin {
     compilerOptions {
-        freeCompilerArgs.add("-opt-in=kotlin.RequiresOptIn")
-        freeCompilerArgs.add("-Xcontext-receivers")
-        jvmTarget = JvmTarget.JVM_1_8
+        optIn.add("kotlin.RequiresOptIn")
+        optIn.add("kotlin.time.ExperimentalTime")
+        jvmTarget.set(JvmTarget.JVM_11)
     }
 }
+
 
 tasks.withType<Test>().configureEach {
     useJUnitPlatform()

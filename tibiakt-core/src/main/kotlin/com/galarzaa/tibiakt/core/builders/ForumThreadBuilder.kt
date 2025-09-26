@@ -21,8 +21,8 @@ import com.galarzaa.tibiakt.core.models.forums.ForumEmoticon
 import com.galarzaa.tibiakt.core.models.forums.ForumPost
 import com.galarzaa.tibiakt.core.models.forums.ForumThread
 import com.galarzaa.tibiakt.core.utils.BuilderDsl
-import kotlinx.datetime.Clock
-import kotlinx.datetime.Instant
+import kotlin.time.Clock
+import kotlin.time.Instant
 
 @BuilderDsl
 public inline fun forumThreadBuilder(block: ForumThreadBuilder.() -> Unit): ForumThreadBuilder =

@@ -28,8 +28,8 @@ import com.galarzaa.tibiakt.core.models.character.DisplayedAchievement
 import com.galarzaa.tibiakt.core.models.character.GuildMembership
 import com.galarzaa.tibiakt.core.models.character.OtherCharacter
 import com.galarzaa.tibiakt.core.utils.BuilderDsl
-import kotlinx.datetime.Instant
-import java.time.LocalDate
+import kotlin.time.Instant
+import kotlinx.datetime.LocalDate
 
 @BuilderDsl
 public inline fun character(block: CharacterBuilder.() -> Unit): Character = CharacterBuilder().apply(block).build()

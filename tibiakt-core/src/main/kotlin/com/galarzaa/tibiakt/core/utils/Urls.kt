@@ -35,8 +35,9 @@ import com.galarzaa.tibiakt.core.enums.NewsType
 import com.galarzaa.tibiakt.core.enums.PvpType
 import com.galarzaa.tibiakt.core.models.bazaar.BazaarFilters
 import java.net.URLEncoder
-import java.time.LocalDate
-import java.time.YearMonth
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.YearMonth
+import kotlinx.datetime.number
 
 /**
  * Build a URL to Tibia.com.
@@ -144,19 +145,19 @@ public fun getNewArchiveFormData(
     types: Set<NewsType>? = null,
 ): List<Pair<String, String>> = buildList {
     startDate.apply {
-        add("filter_begin_day" to dayOfMonth.toString())
-        add("filter_begin_month" to monthValue.toString())
+        add("filter_begin_day" to day.toString())
+        add("filter_begin_month" to month.number.toString())
         add("filter_begin_year" to year.toString())
     }
     endDate.apply {
-        add("filter_end_day" to dayOfMonth.toString())
-        add("filter_end_month" to monthValue.toString())
+        add("filter_end_day" to day.toString())
+        add("filter_end_month" to month.number.toString())
         add("filter_end_year" to year.toString())
     }
-    for (category: NewsCategory in categories ?: NewsCategory.values().toSet()) {
+    for (category: NewsCategory in categories ?: NewsCategory.entries.toSet()) {
         add(category.filterName to category.value)
     }
-    for (type: NewsType in types ?: NewsType.values().toSet()) {
+    for (type: NewsType in types ?: NewsType.entries.toSet()) {
         add(type.filterName to type.filterValue)
     }
 }
@@ -240,7 +241,7 @@ public fun getEventsScheduleUrl(yearMonth: YearMonth? = null): String {
     return buildTibiaUrl(
         "news",
         "eventcalendar",
-        *yearMonth?.let { arrayOf("calendarmonth" to it.month.value, "calendaryear" to it.year) }.orEmpty()
+        *yearMonth?.let { arrayOf("calendarmonth" to it.month.number, "calendaryear" to it.year) }.orEmpty()
     )
 }
 
@@ -306,11 +307,11 @@ public fun getCMPostArchiveUrl(startDate: LocalDate, endDate: LocalDate, page: I
         "forum",
         "action" to "cm_post_archive",
         "startyear" to startDate.year,
-        "startmonth" to startDate.monthValue,
-        "startday" to startDate.dayOfMonth,
+        "startmonth" to startDate.month.number,
+        "startday" to startDate.day,
         "endyear" to endDate.year,
-        "endmonth" to endDate.monthValue,
-        "endday" to endDate.dayOfMonth,
+        "endmonth" to endDate.month.number,
+        "endday" to endDate.day,
         "currentpage" to page
     )
 }

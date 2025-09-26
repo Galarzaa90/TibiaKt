@@ -32,12 +32,11 @@ import com.galarzaa.tibiakt.core.utils.parseTibiaDateTime
 import com.galarzaa.tibiakt.core.utils.parseTibiaFullDate
 import com.galarzaa.tibiakt.core.utils.remove
 import com.galarzaa.tibiakt.core.utils.rows
+import com.galarzaa.tibiakt.core.utils.yearMonthFormat
+import kotlinx.datetime.YearMonth
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
-import java.time.YearMonth
-import java.time.format.DateTimeFormatter
-import java.util.Locale
 
 /** Parser for world pages. */
 public object WorldParser : Parser<World?> {
@@ -115,7 +114,7 @@ public object WorldParser : Parser<World?> {
                 battlEyeStartDate = null
             } else {
                 battlEyeType = BattlEyeType.YELLOW
-                battlEyeStartDate = parseTibiaFullDate(since)
+                battlEyeStartDate = parseTibiaFullDate(since.clean())
             }
             return
         }
@@ -133,7 +132,7 @@ public object WorldParser : Parser<World?> {
     }
 
     private fun WorldBuilder.parseCreationDate(value: String) {
-        creationDate = YearMonth.parse(value, DateTimeFormatter.ofPattern("MMMM yyyy", Locale.ENGLISH))
+        creationDate = YearMonth.parse(value, yearMonthFormat)
 
     }
 }

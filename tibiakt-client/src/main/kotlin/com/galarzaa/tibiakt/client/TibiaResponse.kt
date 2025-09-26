@@ -18,7 +18,7 @@
 
 package com.galarzaa.tibiakt.client
 
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 import kotlinx.serialization.Serializable
 
 /**

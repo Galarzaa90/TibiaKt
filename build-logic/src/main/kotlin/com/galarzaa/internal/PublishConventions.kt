@@ -16,7 +16,7 @@
 
 package com.galarzaa.internal
 
-import com.galarzaa.Library
+
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.publish.PublishingExtension
@@ -42,9 +42,10 @@ class PublishPlugin : Plugin<Project> {
                 create<MavenPublication>("maven") {
                     // Expect Java component present (library/app with Java/Kotlin)
                     from(components.getByName("java"))
-                    groupId = Library.group
-                    version = Library.version
-                    description = Library.description
+
+                    group = rootProject.group
+                    version = rootProject.version as String
+                    description = rootProject.description
 
                     pom {
                         name.set("TibiaKt")
@@ -87,8 +88,6 @@ class PublishPlugin : Plugin<Project> {
                 active.set(Active.ALWAYS)
                 armored.set(true)
             }
-
-            val stagingDir = layout.buildDirectory.dir("staging-deploy")
 
             deploy {
                 maven {

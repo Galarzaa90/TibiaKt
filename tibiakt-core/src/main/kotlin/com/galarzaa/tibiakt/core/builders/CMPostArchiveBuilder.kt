@@ -19,7 +19,7 @@ package com.galarzaa.tibiakt.core.builders
 import com.galarzaa.tibiakt.core.models.forums.CMPost
 import com.galarzaa.tibiakt.core.models.forums.CMPostArchive
 import com.galarzaa.tibiakt.core.utils.BuilderDsl
-import java.time.LocalDate
+import kotlinx.datetime.LocalDate
 
 @BuilderDsl
 public inline fun cmPostArchive(block: CMPostArchiveBuilder.() -> Unit): CMPostArchive =

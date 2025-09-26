@@ -21,31 +21,6 @@ jobs:
         with:
           fetch-depth: 0  # Needed to get full tag history
 
-      - name: Set version 🏷️
-        run: |
-          if [[ "${{ github.event_name }}" == "release" ]]; then
-            VERSION="${{ github.event.release.tag_name }}"
-            GITHUB_TAG_NAME="${{ github.event.release.tag_name }}"
-          else
-            BASE_TAG=$(git describe --tags --abbrev=0)
-            VERSION="${BASE_TAG}-SNAPSHOT"
-            GITHUB_TAG_NAME=""
-          fi
-
-          GITHUB_BRANCH_NAME="${{ github.ref }}"
-
-          echo "VERSION=$VERSION" >> $GITHUB_ENV
-          echo "GITHUB_TAG_NAME=$GITHUB_TAG_NAME" >> $GITHUB_ENV
-          echo "GITHUB_BRANCH_NAME=$GITHUB_BRANCH_NAME" >> $GITHUB_ENV
-
-          {
-            echo "### 🔖 Version Info"
-            echo "- VERSION: \`$VERSION\`"
-            echo "- GITHUB_TAG_NAME: \`$GITHUB_TAG_NAME\`"
-            echo "- GITHUB_BRANCH_NAME: \`$GITHUB_BRANCH_NAME\`"
-          } >> $GITHUB_STEP_SUMMARY
-        
-
       - name: Set up JDK ☕
         uses: actions/setup-java@v4
         with:
@@ -55,8 +30,28 @@ jobs:
       - name: Setup Gradle 🐘
         uses: gradle/actions/setup-gradle@v4
 
-      - name: Build ⚙️
-        run: ./gradlew build
+      - name: Resolve version via Gradle 🏷️
+        shell: bash
+        run: |
+          OUT=$(./gradlew -q ciPrintVersion | tr -d '\r')
+          echo "$OUT"
+          VERSION=$(printf "%s\n" "$OUT" | sed -n 's/^VERSION=//p' | tail -n1)
+          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
+
+          # Pretty summary
+          {
+            echo "### 🔖 Version Info"
+            echo "- VERSION: \`$VERSION\`"
+            echo "- $(printf "%s\n" "$OUT" | sed -n 's/^LAST_TAG=/Last tag: `/p' | sed 's/$/`/')"
+            echo "- $(printf "%s\n" "$OUT" | sed -n 's/^COMMIT_DISTANCE=/Commits since tag: `/p' | sed 's/$/`/')"
+            echo "- $(printf "%s\n" "$OUT" | sed -n 's/^BRANCH=/Branch: `/p' | sed 's/$/`/')"
+            echo "- $(printf "%s\n" "$OUT" | sed -n 's/^CLEAN_TAG=/Clean tag: `/p' | sed 's/$/`/')"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+
+      - name: Clean staging 🧹
+        run: rm -rf build/staging-deploy || true
+
       - name: Deploy 🚀
         run: ./gradlew -x test publish jreleaserDeploy --scan
         env:

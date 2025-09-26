@@ -32,7 +32,6 @@ import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 import org.jsoup.select.Elements
-import java.time.format.DateTimeParseException
 
 /** Parses content from the world overview section. */
 public object WorldOverviewParser : Parser<WorldOverview> {
@@ -92,7 +91,7 @@ public object WorldOverviewParser : Parser<WorldOverview> {
             battlEyeRegex.find(popUp.text())?.apply {
                 try {
                     battlEyeStartDate = parseTibiaFullDate(groups[1]!!.value)
-                } catch (e: DateTimeParseException) {
+                } catch (e: IllegalArgumentException) {
                     // Leave value as none
                 }
             }

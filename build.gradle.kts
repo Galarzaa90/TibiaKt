@@ -17,6 +17,31 @@ plugins {
     alias(libs.plugins.gradle.versions)
     alias(libs.plugins.sonarqube)
     alias(libs.plugins.kover)
+    alias(libs.plugins.git.version)
+}
+
+
+fun normalizedTag(): String = details.lastTag.removePrefix("v")
+
+val versionDetails: groovy.lang.Closure<com.palantir.gradle.gitversion.VersionDetails> by extra
+val details = versionDetails()
+version = if (details.commitDistance == 0 && details.isCleanTag) {
+    // Exactly on a tag and the tree is clean
+    normalizedTag()                      // e.g. 0.12.1
+} else {
+    // Anything else: ahead of tag, on a branch, or dirty working tree
+    "${normalizedTag()}-SNAPSHOT"        // e.g. 0.12.1-SNAPSHOT
+}
+group = "com.galarzaa"
+
+tasks.register("ciPrintVersion") {
+    doLast {
+        println("VERSION=${project.version}")
+        println("LAST_TAG=${details.lastTag}")
+        println("COMMIT_DISTANCE=${details.commitDistance}")
+        println("BRANCH=${details.branchName}")
+        println("CLEAN_TAG=${details.isCleanTag}")
+    }
 }
 
 sonarqube {

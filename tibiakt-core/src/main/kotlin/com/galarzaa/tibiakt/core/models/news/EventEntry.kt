@@ -14,15 +14,16 @@
  * limitations under the License.
  */
 
-@file:UseSerializers(LocalDateSerializer::class)
+
 
 package com.galarzaa.tibiakt.core.models.news
 
-import com.galarzaa.tibiakt.core.serializers.LocalDateSerializer
+
+import kotlinx.datetime.DatePeriod
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
-import java.time.LocalDate
-import java.time.Period
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.minus
 
 /**
  * An event in the [EventsSchedule].
@@ -42,6 +43,6 @@ public data class EventEntry(
     /**
      * The duration of the event, if both [startDate] and [endDate] are known.
      */
-    val duration: Period?
-        get() = if (startDate != null && endDate != null) Period.between(startDate, endDate) else null
+    val duration: DatePeriod?
+        get() = if (startDate != null && endDate != null) (endDate - startDate) else null
 }

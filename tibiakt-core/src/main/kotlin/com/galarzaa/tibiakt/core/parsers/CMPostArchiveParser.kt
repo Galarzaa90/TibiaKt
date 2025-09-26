@@ -33,7 +33,7 @@ import com.galarzaa.tibiakt.core.utils.replaceBrs
 import com.galarzaa.tibiakt.core.utils.rows
 import com.galarzaa.tibiakt.core.utils.wholeCleanText
 import org.jsoup.nodes.Element
-import java.time.LocalDate
+import kotlinx.datetime.LocalDate
 
 /** Parser for the CM posts archive. */
 public object CMPostArchiveParser : Parser<CMPostArchive> {
@@ -55,12 +55,12 @@ public object CMPostArchiveParser : Parser<CMPostArchive> {
 
     private fun CMPostArchiveBuilder.parseSearchTable(form: Element) {
         val formData = form.formData()
-        startDate = LocalDate.of(formData.values["startyear"]?.toInt()
+        startDate = LocalDate(formData.values["startyear"]?.toInt()
             ?: throw ParsingException("could not find startyear param"),
             formData.values["startmonth"]?.toInt() ?: throw ParsingException("could not find startmonth param"),
             formData.values["startday"]?.toInt() ?: throw ParsingException("could not find startday param"))
         endDate =
-            LocalDate.of(formData.values["endyear"]?.toInt() ?: throw ParsingException("could not find endyear param"),
+            LocalDate(formData.values["endyear"]?.toInt() ?: throw ParsingException("could not find endyear param"),
                 formData.values["endmonth"]?.toInt() ?: throw ParsingException("could not find endmonth param"),
                 formData.values["endday"]?.toInt() ?: throw ParsingException("could not find endday param"))
     }

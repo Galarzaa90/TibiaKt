@@ -81,6 +81,7 @@ import com.galarzaa.tibiakt.core.parsers.NewsArchiveParser
 import com.galarzaa.tibiakt.core.parsers.NewsParser
 import com.galarzaa.tibiakt.core.parsers.WorldOverviewParser
 import com.galarzaa.tibiakt.core.parsers.WorldParser
+import com.galarzaa.tibiakt.core.utils.TIBIA_TIMEZONE
 import com.galarzaa.tibiakt.core.utils.getAuctionUrl
 import com.galarzaa.tibiakt.core.utils.getBazaarUrl
 import com.galarzaa.tibiakt.core.utils.getBoostableBossesUrl
@@ -125,13 +126,17 @@ import io.ktor.client.statement.request
 import io.ktor.http.HttpMethod
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.Parameters
-import kotlinx.datetime.Clock
-import kotlinx.datetime.Instant
+import kotlin.time.Clock
+import kotlin.time.Instant
 import kotlinx.serialization.json.Json
 import mu.KotlinLogging
-import java.time.LocalDate
-import java.time.YearMonth
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.YearMonth
+import kotlinx.datetime.toLocalDateTime
+import kotlinx.datetime.yearMonth
 import kotlin.system.measureTimeMillis
+import kotlin.time.Duration.Companion.days
 import kotlin.time.Duration.Companion.seconds
 
 @Suppress("TooManyFunctions")
@@ -257,7 +262,7 @@ public open class TibiaKtClient constructor(
         categories: Set<NewsCategory>? = null,
         types: Set<NewsType>? = null,
     ): TibiaResponse<NewsArchive> =
-        fetchRecentNews(LocalDate.now().minusDays(days.toLong()), LocalDate.now(), categories, types)
+        fetchRecentNews((Clock.System.now() - days.days).toLocalDateTime(TIBIA_TIMEZONE).date, Clock.System.now().toLocalDateTime(TIBIA_TIMEZONE).date, categories, types)
 
     /**
      * Fetch a specific news article by its [newsId].
@@ -279,12 +284,13 @@ public open class TibiaKtClient constructor(
      * Fetch the events schedule for a specific year and month.
      */
     public open suspend fun fetchEventsSchedule(year: Int, month: Int): TibiaResponse<EventsSchedule> =
-        fetchEventsSchedule(YearMonth.of(year, month))
+        fetchEventsSchedule(YearMonth(year, month))
 
     /**
      * Fetch the events schedule for the current month.
      */
-    public open suspend fun fetchEventsSchedule(): TibiaResponse<EventsSchedule> = fetchEventsSchedule(YearMonth.now())
+    public open suspend fun fetchEventsSchedule(): TibiaResponse<EventsSchedule> = fetchEventsSchedule(Clock.System.now().toLocalDateTime(
+        TimeZone.currentSystemDefault()).date.yearMonth)
 
     // endregion
 
@@ -528,7 +534,7 @@ public open class TibiaKtClient constructor(
 
     /** Fetch CM posts from today to the last specified [days]. */
     public open suspend fun fetchCMPostArchive(days: Int, page: Int = 0): TibiaResponse<CMPostArchive> =
-        fetchCMPostArchive(LocalDate.now().minusDays(days.toLong()), LocalDate.now(), page)
+        fetchCMPostArchive((Clock.System.now() - days.days).toLocalDateTime(TIBIA_TIMEZONE).date, Clock.System.now().toLocalDateTime(TIBIA_TIMEZONE).date, page)
 
     // endregion
 

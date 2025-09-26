@@ -16,87 +16,121 @@
 
 package com.galarzaa.tibiakt.core.utils
 
-import kotlinx.datetime.Instant
-import kotlinx.datetime.toJavaInstant
-import kotlinx.datetime.toKotlinInstant
-import java.time.DayOfWeek
-import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.LocalTime
-import java.time.ZoneId
-import java.time.ZonedDateTime
-import java.time.format.DateTimeFormatter
-import java.time.format.DateTimeParseException
-import java.util.Locale
+
+import kotlinx.datetime.DayOfWeek
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.LocalTime
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.YearMonth
+import kotlinx.datetime.format.DateTimeFormat
+import kotlinx.datetime.format.MonthNames
+import kotlinx.datetime.format.Padding
+import kotlinx.datetime.format.char
+import kotlinx.datetime.format.optional
+import kotlinx.datetime.toInstant
+import kotlinx.datetime.toLocalDateTime
+import kotlin.time.Clock
+import kotlin.time.Duration.Companion.days
 import kotlin.time.Duration.Companion.hours
-import kotlin.time.toJavaDuration
+import kotlin.time.Instant
+
+public val yearMonthFormat: DateTimeFormat<YearMonth> = YearMonth.Format {
+    monthName(MonthNames.ENGLISH_FULL)
+    char(' ')
+    year()
+}
+
+private val tibiaDateTimeFormat = LocalDateTime.Format {
+    monthName(MonthNames.ENGLISH_ABBREVIATED)
+    char(' ')
+    day()
+    char(' ')
+    year()
+    chars(", ")
+    hour()
+    char(':')
+    minute()
+    optional {
+        char(':')
+        second()
+    }
+}
+
+private val tibiaDateFormat = LocalDate.Format {
+    monthName(MonthNames.ENGLISH_ABBREVIATED)
+    char(' ')
+    day()
+    char(' ')
+    year()
+}
+
+private val tibiaFullDateFormat = LocalDate.Format {
+    monthName(MonthNames.ENGLISH_FULL) // "MMMM"
+    char(' ')
+    day(Padding.NONE)
+    chars(", ")
+    year()
+}
+
+private val tibiaForumDateTimeFormat = LocalDateTime.Format {
+    day()
+    char('.')
+    monthNumber()
+    char('.')
+    year()
+    char(' ')
+    hour()
+    char(':')
+    minute()
+    char(':')
+    second()
+}
 
 /** The timezone Tibia time is based on. */
-public val TIBIA_TIMEZONE: ZoneId = ZoneId.of("Europe/Berlin")
+public val TIBIA_TIMEZONE: TimeZone = TimeZone.of("Europe/Berlin")
 
 /** The local time when server save happens. */
-public val SERVER_SAVE_TIME: LocalTime = LocalTime.of(10, 0)
+public val SERVER_SAVE_TIME: LocalTime = LocalTime(10, 0)
+
+
+/** Get the local datetime in Tibia's servers. */
+public fun getTibiaDateTime(clock: Clock = Clock.System): LocalDateTime = clock.now().toLocalDateTime(TIBIA_TIMEZONE)
 
 /** Get the current day of the week in Tibia
  *
  * A new day starts every server save, at 10:00 CET/CEST.
  */
-public fun getTibiaWeekDay(): DayOfWeek = (getTibiaDateTime() - 10.hours.toJavaDuration()).dayOfWeek
+public fun getTibiaWeekDay(clock: Clock = Clock.System): DayOfWeek = (clock.now() - 10.hours).toLocalDateTime(TIBIA_TIMEZONE).dayOfWeek
 
-/** Get the local datetime in Tibia's servers. */
-public fun getTibiaDateTime(): LocalDateTime = LocalDateTime.now(TIBIA_TIMEZONE)
 
-/** Get the time of the last server save from a [currentTime]. */
-public fun getLastServerSaveTime(currentTime: ZonedDateTime = ZonedDateTime.now(TIBIA_TIMEZONE)): ZonedDateTime {
-    val serverSaveTime = ZonedDateTime.of(
-        currentTime.toLocalDate(), SERVER_SAVE_TIME, TIBIA_TIMEZONE
-    )
-    return if (currentTime < serverSaveTime) serverSaveTime.minusDays(1) else serverSaveTime
-}
+public fun Instant.getLastServerSaveTime(): Instant =
+    LocalDateTime(toLocalDateTime(TIBIA_TIMEZONE).date, SERVER_SAVE_TIME).toInstant(TIBIA_TIMEZONE)
+        .let { if (this < it) it - 1.days else it }
 
-/** Get the time of the last server save from a [currentTime]. */
-public fun getLastServerSaveTime(currentTime: Instant): Instant =
-    getLastServerSaveTime(ZonedDateTime.ofInstant(currentTime.toJavaInstant(), TIBIA_TIMEZONE)).toInstant()
-        .toKotlinInstant()
 
-/** Get the time of the next server save from a [currentTime]. */
-public fun getNextServerSaveTime(currentTime: ZonedDateTime = ZonedDateTime.now(TIBIA_TIMEZONE)): ZonedDateTime =
-    getLastServerSaveTime(currentTime).plusDays(1)
-
-/** Get the time of the next server save from a [currentTime]. */
-public fun getNextServerSaveTime(currentTime: Instant): Instant =
-    getNextServerSaveTime(ZonedDateTime.ofInstant(currentTime.toJavaInstant(), TIBIA_TIMEZONE)).toInstant()
-        .toKotlinInstant()
+public fun Instant.getNextServerSaveTime(): Instant = getLastServerSaveTime() + 1.days
 
 
 /**
  * Parses a string containing date and time from Tibia.com into an [Instant] instance.
  */
-public fun parseTibiaDateTime(input: String): Instant {
-    val timeString = input.clean().let { it.substring(0, it.length - 4).trim() }
-    return try {
-        LocalDateTime.parse(timeString, DateTimeFormatter.ofPattern("MMM dd yyyy, HH:mm:ss", Locale.US))
-    } catch (dfe: DateTimeParseException) {
-        LocalDateTime.parse(timeString, DateTimeFormatter.ofPattern("MMM dd yyyy, HH:mm", Locale.US))
-    }.atZone(TIBIA_TIMEZONE).toInstant().toKotlinInstant()
-}
+public fun parseTibiaDateTime(input: String): Instant =
+    tibiaDateTimeFormat.parse(input.clean().removeSuffix(" CET").removeSuffix(" CEST")).toInstant(TIBIA_TIMEZONE)
 
 /**
  * Parses a string containing date from Tibia.com into an [LocalDate] instance.
  */
 public fun parseTibiaDate(input: String): LocalDate =
-    LocalDate.parse(input.clean(), DateTimeFormatter.ofPattern("MMM dd yyyy", Locale.US))
+    tibiaDateFormat.parse(input.clean())
 
 /**
  * Parses a string containing date from Tibia.com into an [LocalDate] instance.
  */
 public fun parseTibiaFullDate(input: String): LocalDate =
-    LocalDate.parse(input.clean(), DateTimeFormatter.ofPattern("MMMM d, yyyy", Locale.US))
+    tibiaFullDateFormat.parse(input.clean())
 
 /**
  * Parses a string containing a date time from Tibia.com forums into an [Instant] instance.
  */
-public fun parseTibiaForumDateTime(input: String): Instant {
-    return LocalDateTime.parse(input, DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss", Locale.US))
-        .atZone(TIBIA_TIMEZONE).toInstant().toKotlinInstant()
-}
+public fun parseTibiaForumDateTime(input: String): Instant = tibiaForumDateTimeFormat.parse(input).toInstant(TIBIA_TIMEZONE)

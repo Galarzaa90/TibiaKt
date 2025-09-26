@@ -19,7 +19,7 @@ package com.galarzaa.tibiakt.core.models.leaderboards
 
 import com.galarzaa.tibiakt.core.models.PaginatedWithUrl
 import com.galarzaa.tibiakt.core.utils.getLeaderboardUrl
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 import kotlinx.serialization.Serializable
 
 /**

@@ -22,7 +22,7 @@ import io.kotest.matchers.collections.shouldBeEmpty
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.collections.shouldNotBeEmpty
 import io.kotest.matchers.shouldBe
-import java.time.LocalDate
+import kotlinx.datetime.LocalDate
 
 class NewsArchiveParserTests : FunSpec({
     test("Initial news archive") {
@@ -37,8 +37,8 @@ class NewsArchiveParserTests : FunSpec({
         val newsArchive = NewsArchiveParser.fromContent(getResource("newsArchive/newsArchiveWithFilters.txt"))
 
         with(newsArchive) {
-            startDate shouldBe LocalDate.of(2019, 3, 25)
-            endDate shouldBe LocalDate.of(2019, 5, 25)
+            startDate shouldBe LocalDate(2019, 3, 25)
+            endDate shouldBe LocalDate(2019, 5, 25)
             newsArchive.categories shouldHaveSize 5
             newsArchive.types shouldHaveSize 3
             entries.shouldNotBeEmpty()
@@ -49,8 +49,8 @@ class NewsArchiveParserTests : FunSpec({
         val newsArchive = NewsArchiveParser.fromContent(getResource("newsArchive/newsArchiveEmpty.txt"))
 
         with(newsArchive) {
-            startDate shouldBe LocalDate.of(2023, 4, 13)
-            endDate shouldBe LocalDate.of(2023, 4, 15)
+            startDate shouldBe LocalDate(2023, 4, 13)
+            endDate shouldBe LocalDate(2023, 4, 15)
             newsArchive.categories shouldHaveSize 5
             newsArchive.types shouldHaveSize 1
             entries.shouldBeEmpty()

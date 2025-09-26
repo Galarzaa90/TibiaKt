@@ -22,8 +22,8 @@ import com.galarzaa.tibiakt.core.enums.TransferType
 import com.galarzaa.tibiakt.core.models.world.WorldEntry
 import com.galarzaa.tibiakt.core.models.world.WorldOverview
 import com.galarzaa.tibiakt.core.utils.BuilderDsl
-import kotlinx.datetime.Instant
-import java.time.LocalDate
+import kotlin.time.Instant
+import kotlinx.datetime.LocalDate
 
 @BuilderDsl
 public inline fun worldOverviewBuilder(block: WorldOverviewBuilder.() -> Unit): WorldOverviewBuilder =

@@ -24,7 +24,7 @@ import com.galarzaa.tibiakt.core.enums.Vocation
 import com.galarzaa.tibiakt.core.models.highscores.Highscores
 import com.galarzaa.tibiakt.core.models.highscores.HighscoresEntry
 import com.galarzaa.tibiakt.core.utils.BuilderDsl
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 
 @BuilderDsl
 public inline fun highscores(block: HighscoresBuilder.() -> Unit): Highscores = HighscoresBuilder().apply(block).build()

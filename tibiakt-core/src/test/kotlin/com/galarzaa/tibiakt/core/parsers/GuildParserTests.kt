@@ -24,7 +24,7 @@ import io.kotest.matchers.collections.shouldHaveAtLeastSize
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
 import io.kotest.matchers.types.shouldBeInstanceOf
-import java.time.LocalDate
+import kotlinx.datetime.LocalDate
 
 class GuildParserTests : FunSpec({
     test("Active guild") {
@@ -34,7 +34,7 @@ class GuildParserTests : FunSpec({
         guild.name shouldBe "Bald Dwarfs"
         guild.world shouldBe "Gladera"
         guild.description shouldNotBe null
-        guild.foundingDate shouldBe LocalDate.of(2010, 9, 21)
+        guild.foundingDate shouldBe LocalDate(2010, 9, 21)
         guild.isActive shouldBe true
         guild.applicationsOpen shouldBe true
         guild.guildHall.shouldBeInstanceOf<GuildHall>()

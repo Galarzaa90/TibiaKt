@@ -35,7 +35,7 @@ import com.galarzaa.tibiakt.core.utils.parsePagination
 import com.galarzaa.tibiakt.core.utils.parseTibiaDateTime
 import com.galarzaa.tibiakt.core.utils.remove
 import com.galarzaa.tibiakt.core.utils.rows
-import kotlinx.datetime.Clock
+import kotlin.time.Clock
 import org.jsoup.nodes.Element
 import kotlin.time.Duration.Companion.minutes
 

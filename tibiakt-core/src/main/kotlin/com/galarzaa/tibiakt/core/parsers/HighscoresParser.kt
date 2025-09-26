@@ -35,7 +35,7 @@ import com.galarzaa.tibiakt.core.utils.parseLong
 import com.galarzaa.tibiakt.core.utils.parsePagination
 import com.galarzaa.tibiakt.core.utils.parseTablesMap
 import com.galarzaa.tibiakt.core.utils.rows
-import kotlinx.datetime.Clock
+import kotlin.time.Clock
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element

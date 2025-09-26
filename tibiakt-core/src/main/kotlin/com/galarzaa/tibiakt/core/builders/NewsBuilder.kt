@@ -19,7 +19,7 @@ package com.galarzaa.tibiakt.core.builders
 import com.galarzaa.tibiakt.core.enums.NewsCategory
 import com.galarzaa.tibiakt.core.models.news.News
 import com.galarzaa.tibiakt.core.utils.BuilderDsl
-import java.time.LocalDate
+import kotlinx.datetime.LocalDate
 
 @BuilderDsl
 public inline fun newsBuilder(block: NewsBuilder.() -> Unit): NewsBuilder = NewsBuilder().apply(block)

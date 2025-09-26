@@ -14,15 +14,12 @@
  * limitations under the License.
  */
 
-@file:UseSerializers(LocalDateSerializer::class)
-
 package com.galarzaa.tibiakt.core.models.guild
 
-import com.galarzaa.tibiakt.core.serializers.LocalDateSerializer
 import com.galarzaa.tibiakt.core.utils.offsetStart
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
-import java.time.LocalDate
+import kotlinx.datetime.LocalDate
 
 /**
  * A Tibia guild.

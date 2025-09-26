@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
- @file:UseSerializers(LocalDateSerializer::class)
-
 package com.galarzaa.tibiakt.server.plugins
 
 import com.galarzaa.tibiakt.core.enums.AuctionBattlEyeFilter
@@ -33,13 +31,12 @@ import com.galarzaa.tibiakt.core.enums.HouseType
 import com.galarzaa.tibiakt.core.enums.NewsCategory
 import com.galarzaa.tibiakt.core.enums.NewsType
 import com.galarzaa.tibiakt.core.enums.PvpType
-import com.galarzaa.tibiakt.core.serializers.LocalDateSerializer
 import io.ktor.resources.Resource
 import io.ktor.server.application.Application
 import io.ktor.server.application.install
 import io.ktor.server.resources.Resources
 import kotlinx.serialization.UseSerializers
-import java.time.LocalDate
+import kotlinx.datetime.LocalDate
 
 internal fun Application.configureLocations() {
     install(Resources)

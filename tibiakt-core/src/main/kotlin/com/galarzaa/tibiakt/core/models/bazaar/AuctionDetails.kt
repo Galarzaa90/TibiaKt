@@ -17,7 +17,7 @@
 
 package com.galarzaa.tibiakt.core.models.bazaar
 
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 import kotlinx.serialization.Serializable
 
 /**

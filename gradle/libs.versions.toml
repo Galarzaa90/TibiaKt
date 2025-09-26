@@ -1,12 +1,13 @@
 [versions]
-kotlin = "2.1.10"
+kotlin = "2.2.10"
 jsoup = "1.18.3"
-kotest = "5.9.1"
+kotest = "6.0.3"
 kotlinLogging = "3.0.5"
-kotlinxDatetime = "0.6.2"
-kotlinxSerialization = "1.8.0"
+kotlinxDatetime = "0.7.1"
+kotlinxSerialization = "1.9.0"
 ktor = "3.1.1"
 logback = "1.5.16"
+gitVersion= "4.0.0"
 
 # Plugin versions
 gradle-versions = "0.52.0"
@@ -24,6 +25,7 @@ sonarqube = { id = "org.sonarqube", version.ref = "sonarqube" }
 kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
 jreleaser = { id = "org.jreleaser", version.ref = "jreleaser"}
 kotlin = { id = "org.jetbrains.kotlin", version.ref = "kotlin"}
+git-version = { id = "com.palantir.git-version", version.ref = "gitVersion"}
 
 [libraries]
 # Used for build logic
@@ -39,7 +41,6 @@ kotlinLogging = { module = "io.github.microutils:kotlin-logging", version.ref = 
 kotest-runner-junit5 = { module = "io.kotest:kotest-runner-junit5", version.ref = "kotest" }
 kotest-assertions-core = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
 kotest-property = { module = "io.kotest:kotest-property", version.ref = "kotest" }
-kotest-framework-datatest = { module = "io.kotest:kotest-framework-datatest", version.ref = "kotest" }
 
 ktor-client-encoding = { module = "io.ktor:ktor-client-encoding", version.ref = "ktor" }
 ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
@@ -80,5 +81,4 @@ kotest = [
   "kotest-runner-junit5",
   "kotest-assertions-core",
   "kotest-property",
-  "kotest-framework-datatest",
 ]

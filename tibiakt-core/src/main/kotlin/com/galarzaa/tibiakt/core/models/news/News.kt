@@ -14,16 +14,14 @@
  * limitations under the License.
  */
 
-@file:UseSerializers(LocalDateSerializer::class)
 
 package com.galarzaa.tibiakt.core.models.news
 
 import com.galarzaa.tibiakt.core.enums.NewsCategory
-import com.galarzaa.tibiakt.core.serializers.LocalDateSerializer
 import com.galarzaa.tibiakt.core.utils.getForumThreadUrl
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
-import java.time.LocalDate
+import kotlinx.datetime.LocalDate
 
 /**
  * A news article, featured article or news ticker.

@@ -18,7 +18,7 @@
 package com.galarzaa.tibiakt.core.models.world
 
 import com.galarzaa.tibiakt.core.utils.getWorldOverviewUrl
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 import kotlinx.serialization.Serializable
 
 /**

@@ -22,7 +22,7 @@ import com.galarzaa.tibiakt.core.models.guild.GuildHall
 import com.galarzaa.tibiakt.core.models.guild.GuildInvite
 import com.galarzaa.tibiakt.core.models.guild.GuildMember
 import com.galarzaa.tibiakt.core.utils.BuilderDsl
-import java.time.LocalDate
+import kotlinx.datetime.LocalDate
 
 @BuilderDsl
 public inline fun guildBuilder(block: GuildBuilder.() -> Unit): GuildBuilder = GuildBuilder().apply(block)

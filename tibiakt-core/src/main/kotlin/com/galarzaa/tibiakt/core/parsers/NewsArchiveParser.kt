@@ -33,7 +33,7 @@ import com.galarzaa.tibiakt.core.utils.rows
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
-import java.time.LocalDate
+import kotlinx.datetime.LocalDate
 
 /** Parses content from the news archive. */
 public object NewsArchiveParser : Parser<NewsArchive> {
@@ -77,7 +77,7 @@ public object NewsArchiveParser : Parser<NewsArchive> {
 
     private fun NewsArchiveBuilder.parseFilterTable(element: Element) {
         val formData = element.formData()
-        startDate = LocalDate.of(
+        startDate = LocalDate(
             formData.values["filter_begin_year"]?.toInt()
                 ?: throw ParsingException("could not find filter_begin_year in form"),
             formData.values["filter_begin_month"]?.toInt()
@@ -85,7 +85,7 @@ public object NewsArchiveParser : Parser<NewsArchive> {
             formData.values["filter_begin_day"]?.toInt()
                 ?: throw ParsingException("could not find filter_begin_day in form"),
         )
-        endDate = LocalDate.of(
+        endDate = LocalDate(
             formData.values["filter_end_year"]?.toInt()
                 ?: throw ParsingException("could not find filter_end_year in form"),
             formData.values["filter_end_month"]?.toInt()

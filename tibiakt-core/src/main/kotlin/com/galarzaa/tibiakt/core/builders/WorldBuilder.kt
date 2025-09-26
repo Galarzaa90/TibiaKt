@@ -23,9 +23,9 @@ import com.galarzaa.tibiakt.core.enums.Vocation
 import com.galarzaa.tibiakt.core.models.world.OnlineCharacter
 import com.galarzaa.tibiakt.core.models.world.World
 import com.galarzaa.tibiakt.core.utils.BuilderDsl
-import kotlinx.datetime.Instant
-import java.time.LocalDate
-import java.time.YearMonth
+import kotlin.time.Instant
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.YearMonth
 
 @BuilderDsl
 public inline fun worldBuilder(block: WorldBuilder.() -> Unit): WorldBuilder = WorldBuilder().apply(block)

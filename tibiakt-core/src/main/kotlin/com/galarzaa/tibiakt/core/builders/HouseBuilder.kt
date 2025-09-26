@@ -20,7 +20,7 @@ import com.galarzaa.tibiakt.core.enums.HouseStatus
 import com.galarzaa.tibiakt.core.enums.HouseType
 import com.galarzaa.tibiakt.core.models.house.House
 import com.galarzaa.tibiakt.core.utils.BuilderDsl
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 
 @BuilderDsl
 public inline fun house(block: HouseBuilder.() -> Unit): House = HouseBuilder().apply(block).build()

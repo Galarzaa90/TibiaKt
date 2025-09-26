@@ -25,10 +25,14 @@ import com.galarzaa.tibiakt.core.utils.cells
 import com.galarzaa.tibiakt.core.utils.cleanText
 import com.galarzaa.tibiakt.core.utils.parsePopup
 import com.galarzaa.tibiakt.core.utils.remove
+import com.galarzaa.tibiakt.core.utils.yearMonthFormat
+import kotlinx.datetime.DatePeriod
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.YearMonth
+import kotlinx.datetime.minus
+import kotlinx.datetime.minusMonth
+import kotlinx.datetime.plusMonth
 import org.jsoup.nodes.Element
-import java.time.LocalDate
-import java.time.YearMonth
-import java.time.format.DateTimeFormatter
 
 /** Parser for the events schedule. */
 public object EventsScheduleParser : Parser<EventsSchedule> {
@@ -38,7 +42,7 @@ public object EventsScheduleParser : Parser<EventsSchedule> {
             val dateBlock = boxContent.selectFirst("div.eventscheduleheaderdateblock")
                 ?: throw ParsingException("date block not found")
             yearMonth =
-                YearMonth.parse(dateBlock.cleanText().remove("»").remove("«"), DateTimeFormatter.ofPattern("MMMM yyyy"))
+                YearMonth.parse(dateBlock.cleanText().remove("»").remove("«"), yearMonthFormat)
             parseCalendar(boxContent, yearMonth)
         }
 
@@ -58,9 +62,9 @@ public object EventsScheduleParser : Parser<EventsSchedule> {
             val day = dayDiv.cleanText().toInt()
             val spans = cell.select("span.HelperDivIndicator")
             // The calendar might start with a day from the previous month
-            if (onGoingDay < day) currentMonth = currentMonth.minusMonths(1)
+            if (onGoingDay < day) currentMonth = currentMonth.minusMonth()
             if (day < onGoingDay) {
-                currentMonth = currentMonth.plusMonths(1)
+                currentMonth = currentMonth.plusMonth()
             }
             onGoingDay = day + 1
             val todayEvents: MutableList<EventsScheduleBuilder.EventEntryBuilder> = mutableListOf()
@@ -79,7 +83,7 @@ public object EventsScheduleParser : Parser<EventsSchedule> {
                         // Only add start date if this is not the first day of the calendar.
                         // If it's the first day, we have no way to know if the event started that day or before
                         if (!isFirstDay) {
-                            event.startDate = LocalDate.of(currentMonth.year, currentMonth.month, day)
+                            event.startDate = LocalDate(currentMonth.year, currentMonth.month, day)
                         }
                         onGoingEvents.add(event)
                     }
@@ -89,7 +93,7 @@ public object EventsScheduleParser : Parser<EventsSchedule> {
             for (pendingEvent in onGoingEvents.toList()) {
                 if (!todayEvents.contains(pendingEvent)) {
                     // If it didn't show up today, it means it ended yesterday.
-                    pendingEvent.endDate = LocalDate.of(currentMonth.year, currentMonth.month, day).minusDays(1)
+                    pendingEvent.endDate = LocalDate(currentMonth.year, currentMonth.month, day).minus(DatePeriod(days = 1))
                     addEntry(pendingEvent.build())
                     onGoingEvents.remove(pendingEvent)
                 }

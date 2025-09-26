@@ -16,7 +16,7 @@
 
 package com.galarzaa.tibiakt.core.models.leaderboards
 
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 import kotlinx.serialization.Serializable
 
 /**

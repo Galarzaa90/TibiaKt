@@ -20,7 +20,7 @@ package com.galarzaa.tibiakt.core.models.character
 import com.galarzaa.tibiakt.core.enums.Sex
 import com.galarzaa.tibiakt.core.enums.Vocation
 import com.galarzaa.tibiakt.core.utils.getCharacterUrl
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 import kotlinx.serialization.Serializable
 
 /**

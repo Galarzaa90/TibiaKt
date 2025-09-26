@@ -18,7 +18,7 @@ package com.galarzaa.tibiakt.core.builders
 
 import com.galarzaa.tibiakt.core.models.forums.LastPost
 import com.galarzaa.tibiakt.core.utils.BuilderDsl
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 
 @BuilderDsl
 public inline fun lastPostBuilder(block: LastPostBuilder.() -> Unit): LastPostBuilder = LastPostBuilder().apply(block)
