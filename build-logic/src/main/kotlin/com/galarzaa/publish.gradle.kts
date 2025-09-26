@@ -38,6 +38,7 @@ publishing {
             pom {
                 name = "TibiaKt"
                 description = rootProject.description
+                url = "https://github.com/Galarzaa90/TibiaKt"
 
                 licenses {
                     license {
