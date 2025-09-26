@@ -24,14 +24,21 @@ plugins {
 }
 
 
-fun Provider<String>.orNullTrimmed() = orNull?.trim()?.takeUnless { it.isEmpty() }
+val sources = listOf(
+    "gradleProp:VERSION" to providers.gradleProperty("VERSION"),
+    "gradleProp:version" to providers.gradleProperty("version"),
+    "env:VERSION" to providers.environmentVariable("VERSION")
+)
 
-val suppliedVersion = sequenceOf(
-    providers.gradleProperty("VERSION"),
-    providers.gradleProperty("version"),
-    providers.environmentVariable("VERSION")
-).mapNotNull { it.orNullTrimmed() }
- .firstOrNull()
+val supplied = sources.asSequence()
+    .mapNotNull { (label, p) -> p.orNull?.trim()?.takeIf { it.isNotEmpty() }?.let { label to it } }
+    .firstOrNull()
+
+val suppliedVersion = supplied?.second
+
+if (supplied != null) {
+    logger.lifecycle("version-supplied source={} value={}", supplied.first, supplied.second)
+}
 
 val needGitVersion = (suppliedVersion == null) && file(".git").isDirectory
 if (needGitVersion) apply(plugin = libs.plugins.git.version.get().pluginId)
@@ -44,11 +51,17 @@ fun gitDetailsOrNull(): VersionDetails? =
         (extensions.extraProperties["versionDetails"] as? Closure<VersionDetails>)?.call()
     }.getOrNull()
 
+var versionSource = "fallback"
+
 val computedVersion: String = when {
-    suppliedVersion != null -> suppliedVersion
+    suppliedVersion != null -> {
+        versionSource = "supplied"
+        suppliedVersion
+    }
     needGitVersion -> {
         val versionDetails: Closure<VersionDetails> by extra
         val details = versionDetails()
+        versionSource = "git(tag=${details.lastTag}, distance=${details.commitDistance}, clean=${details.isCleanTag})"
         if (details.commitDistance == 0 && details.isCleanTag) {
             normalizedTag(details)
         } else {
@@ -58,21 +71,12 @@ val computedVersion: String = when {
     else -> "0.0.0-SNAPSHOT"
 }
 
+logger.lifecycle("version-computed source={} value={}", versionSource, computedVersion)
+
 group = "com.galarzaa"
 version = computedVersion
 
 
-tasks.register("ciPrintVersion") {
-    // Don’t resolve Git lazily at execution time if it’s not there.
-    val d = gitDetailsOrNull()
-    doLast {
-        println("VERSION=$version")
-        println("LAST_TAG=${d?.lastTag ?: "N/A"}")
-        println("COMMIT_DISTANCE=${d?.commitDistance ?: "N/A"}")
-        println("BRANCH=${d?.branchName ?: "N/A"}")
-        println("CLEAN_TAG=${d?.isCleanTag ?: "N/A"}")
-    }
-}
 
 sonarqube {
     properties {
