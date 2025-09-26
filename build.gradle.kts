@@ -76,7 +76,10 @@ logger.lifecycle("version-computed source={} value={}", versionSource, computedV
 group = "com.galarzaa"
 version = computedVersion
 
-
+allprojects {
+    group = rootProject.group
+    version = rootProject.version
+}
 
 sonarqube {
     properties {
