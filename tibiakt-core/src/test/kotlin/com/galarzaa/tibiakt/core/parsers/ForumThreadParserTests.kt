@@ -34,7 +34,7 @@ class ForumThreadParserTests : FunSpec({
         thread.shouldBeInstanceOf<ForumThread>()
         thread.entries.forAtLeastOne {
             it.editedBy shouldNotBe null
-            it.editedDate shouldNotBe null
+            it.editedAt shouldNotBe null
         }
     }
 

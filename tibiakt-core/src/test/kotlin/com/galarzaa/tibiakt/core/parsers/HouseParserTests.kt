@@ -33,7 +33,7 @@ class HouseParserTests : FunSpec({
             status shouldBe HouseStatus.RENTED
             rent shouldNotBe null
             paidUntil shouldNotBe null
-            transferDate shouldBe null
+            transferScheduledAt shouldBe null
             transferPrice shouldBe null
             transferAccepted shouldBe null
             transferRecipient shouldBe null
@@ -47,7 +47,7 @@ class HouseParserTests : FunSpec({
             status shouldBe HouseStatus.RENTED
             rent shouldNotBe null
             paidUntil shouldNotBe null
-            transferDate shouldNotBe null
+            transferScheduledAt shouldNotBe null
             transferPrice shouldNotBe null
             transferAccepted shouldBe true
             transferRecipient shouldNotBe null
@@ -63,7 +63,7 @@ class HouseParserTests : FunSpec({
             highestBidder shouldNotBe null
             highestBid shouldNotBe null
             highestBidderUrl shouldNotBe null
-            auctionEnd shouldNotBe null
+            auctionEndsAt shouldNotBe null
         }
     }
     test("House auctioned without bids") {
@@ -76,7 +76,7 @@ class HouseParserTests : FunSpec({
             highestBidder shouldBe null
             highestBid shouldBe null
             highestBidderUrl shouldBe null
-            auctionEnd shouldBe null
+            auctionEndsAt shouldBe null
         }
     }
     test("House not found"){

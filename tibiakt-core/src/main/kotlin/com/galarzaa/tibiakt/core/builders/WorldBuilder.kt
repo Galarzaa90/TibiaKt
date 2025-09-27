@@ -22,7 +22,6 @@ import com.galarzaa.tibiakt.core.enums.TransferType
 import com.galarzaa.tibiakt.core.enums.Vocation
 import com.galarzaa.tibiakt.core.models.world.OnlineCharacter
 import com.galarzaa.tibiakt.core.models.world.World
-import com.galarzaa.tibiakt.core.builders.BuilderDsl
 import kotlin.time.Instant
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.YearMonth
@@ -65,14 +64,14 @@ public class WorldBuilder : TibiaKtBuilder<World> {
             location = location ?: error("location is required"),
             pvpType = pvpType ?: error("pvpType is required"),
             battlEyeType = battlEyeType,
-            battlEyeStartDate = battlEyeStartDate,
+            battlEyeStartedOn = battlEyeStartDate,
             transferType = transferType,
             isPremiumRestricted = isPremiumRestricted,
             onlineRecordCount = onlineRecordCount,
-            onlineRecordDateTime = onlineRecordDateTime
+            onlineRecordAt = onlineRecordDateTime
                 ?: error("onlineRecordDateTime is required"),
             isExperimental = isExperimental,
-            creationDate = creationDate ?: error("creationDate is required"),
+            createdOn = creationDate ?: error("creationDate is required"),
             playersOnline = playersOnline,
             worldQuests = worldQuests,
         )

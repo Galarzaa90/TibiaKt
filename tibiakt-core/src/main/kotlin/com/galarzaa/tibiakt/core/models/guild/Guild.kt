@@ -26,12 +26,12 @@ import kotlinx.datetime.LocalDate
  * @property world The world where the guild is in.
  * @property logoUrl The URL to the guild's logo, or the default logo.
  * @property description The description of the guild.
- * @property foundingDate The date when the guild was founded.
+ * @property foundedOn The date when the guild was founded.
  * @property isActive Whether the guild is active or still in formation.
  * @property applicationsOpen Whether applications are open or not.
  * @property homepage The URL to the guild's homepage, if set.
  * @property guildHall The guildhall rented by the guild.
- * @property disbandingDate The date when the guild is set to be disbanded.
+ * @property disbandsOn The date when the guild is set to be disbanded.
  * @property disbandingReason The reason why it will be disbanded.
  * @property members The list of members in the guild.
  * @property invited The list of characters currently invited to the guild.
@@ -42,12 +42,12 @@ public data class Guild(
     val world: String,
     val logoUrl: String,
     val description: String?,
-    val foundingDate: LocalDate,
+    val foundedOn: LocalDate,
     val isActive: Boolean,
     val applicationsOpen: Boolean,
     val homepage: String?,
     val guildHall: GuildHall?,
-    val disbandingDate: LocalDate?,
+    val disbandsOn: LocalDate?,
     val disbandingReason: String?,
     val members: List<GuildMember>,
     val invited: List<GuildInvite>,

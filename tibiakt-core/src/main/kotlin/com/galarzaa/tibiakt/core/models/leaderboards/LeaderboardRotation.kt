@@ -24,11 +24,11 @@ import kotlinx.serialization.Serializable
  *
  * @property rotationId The internal ID of the rotation.
  * @property isCurrent Whether this is the current rotation or not.
- * @property endDate The date when the rotation ends.
+ * @property endsAt The date when the rotation ends.
  */
 @Serializable
 public data class LeaderboardRotation(
     val rotationId: Int,
     val isCurrent: Boolean,
-    val endDate: Instant,
+    val endsAt: Instant,
 )

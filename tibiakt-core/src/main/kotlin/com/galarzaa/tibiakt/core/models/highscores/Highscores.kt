@@ -34,7 +34,7 @@ import kotlinx.serialization.Serializable
  * @property vocation The selected vocation filter for the entries.
  * @property worldTypes The selected world types to show for global highscores.
  * @property battlEyeType The BattlEye type of worlds to show for global highscores.
- * @property lastUpdated The time when the currently displayed results were last updated.
+ * @property lastUpdatedAt The time when the currently displayed results were last updated.
  */
 @Serializable
 public data class Highscores(
@@ -43,7 +43,7 @@ public data class Highscores(
     val vocation: HighscoresProfession,
     val worldTypes: Set<PvpType>,
     val battlEyeType: HighscoresBattlEyeType,
-    val lastUpdated: Instant,
+    val lastUpdatedAt: Instant,
     override val currentPage: Int,
     override val totalPages: Int,
     override val resultsCount: Int,

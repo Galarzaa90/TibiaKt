@@ -24,27 +24,27 @@ import kotlinx.datetime.YearMonth
 /**
  * The event schedule, containing the events of a given month.
  *
- * @property yearMonth The month and year the schedule is for.
+ * @property month The month and year the schedule is for.
  * @property entries The list of events in this month.
  */
 @Serializable
 public data class EventsSchedule(
-    val yearMonth: YearMonth,
+    val month: YearMonth,
     val entries: List<EventEntry>,
 ) {
     /**
      * The URL of the events schedule of the month.
      */
-    val url: String get() = eventScheduleUrl(yearMonth)
+    val url: String get() = eventScheduleUrl(month)
 
     /**
      * Get all the events that are active in a specific day of the month.
      */
     public fun getEventsOn(date: LocalDate): List<EventEntry> {
     return entries.filter { entry ->
-        val startOk = entry.startDate?.let { it <= date } ?: true
-        val endOk = entry.endDate?.let { date <= it } ?: true
-        startOk && endOk
+        val startOk = entry.startsOn?.let { it <= date } ?: true
+        val endOn = entry.endsOn?.let { date <= it } ?: true
+        startOk && endOn
     }
 }
 

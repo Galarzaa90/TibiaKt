@@ -32,11 +32,11 @@ import kotlinx.serialization.Serializable
  * @property outfitsCount the total number of outfits the character has.
  * @property titlesCount The total number of unlocked titles.
  * @property skills The current skill levels of the character.
- * @property creationDate The date and time when the character was created.
+ * @property characterCreatedAt The date and time when the character was created.
  * @property experience The total experience of the character.
  * @property gold The total gold the character has.
  * @property achievementPoints The achievement points of the character.
- * @property regularWorldTransfersAvailable The date when regular world transfers will be available again for this user.
+ * @property regularWorldTransfersUnlockAt The date when regular world transfers will be available again for this user.
  * @property charmExpansion Whether this character has a charm expansion or not.
  * @property availableCharmPoints The total charm points the character has for spending.
  * @property spentCharmPoints The total charm points that have been spent.
@@ -82,11 +82,11 @@ public data class AuctionDetails(
     val outfitsCount: Int,
     val titlesCount: Int,
     val skills: AuctionSkills,
-    val creationDate: Instant,
+    val characterCreatedAt: Instant,
     val experience: Long,
     val gold: Long,
     val achievementPoints: Int,
-    val regularWorldTransfersAvailable: Instant?,
+    val regularWorldTransfersUnlockAt: Instant?,
     val charmExpansion: Boolean,
     val availableCharmPoints: Int,
     val spentCharmPoints: Int,

@@ -26,18 +26,18 @@ import kotlinx.serialization.Serializable
  *
  * @property author The name of the character that made the last post.
  * @property postId The internal ID of the last post.
- * @property date The date and time when the post was published.
- * @property deleted Whether the author of the post is currently deleted.
- * @property traded Whether the post was made by a character that was traded afterwards.
+ * @property postedAt The date and time when the post was published.
+ * @property isDeleted Whether the author of the post is currently deleted.
+ * @property isTraded Whether the post was made by a character traded after this post was made.
  */
 @Serializable
 public data class LastPost(
     val author: String,
     override val postId: Int,
-    val date: Instant,
-    val deleted: Boolean,
-    val traded: Boolean,
+    val postedAt: Instant,
+    val isDeleted: Boolean,
+    val isTraded: Boolean,
 ) : BaseForumPost {
     /** The URL to the author's character page. If the author is deleted, there is no URL. */
-    val authorUrl: String? get() = if (!deleted) characterUrl(author) else null
+    val authorUrl: String? get() = if (!isDeleted) characterUrl(author) else null
 }

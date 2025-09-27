@@ -28,14 +28,14 @@ import kotlinx.serialization.Serializable
  * @property world The name of the world.
  * @property rotation The rotation of these leaderboards.
  * @property availableRotations The rotations that are available to view.
- * @property lastUpdated The time when the leaderboard was last updated. Only available for the current rotation.
+ * @property lastUpdatedAt The time when the leaderboard was last updated. Only available for the current rotation.
  */
 @Serializable
 public data class Leaderboard(
     val world: String,
     val rotation: LeaderboardRotation,
     val availableRotations: List<LeaderboardRotation>,
-    val lastUpdated: Instant?,
+    val lastUpdatedAt: Instant?,
     override val currentPage: Int,
     override val totalPages: Int,
     override val resultsCount: Int,

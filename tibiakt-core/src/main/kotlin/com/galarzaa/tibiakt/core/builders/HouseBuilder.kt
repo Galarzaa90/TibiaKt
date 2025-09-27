@@ -19,7 +19,6 @@ package com.galarzaa.tibiakt.core.builders
 import com.galarzaa.tibiakt.core.enums.HouseStatus
 import com.galarzaa.tibiakt.core.enums.HouseType
 import com.galarzaa.tibiakt.core.models.house.House
-import com.galarzaa.tibiakt.core.builders.BuilderDsl
 import kotlin.time.Instant
 
 @BuilderDsl
@@ -62,7 +61,7 @@ public class HouseBuilder : TibiaKtBuilder<House> {
             world = world ?: error("world is required"),
             paidUntil = paidUntil ?: error("paidUntil is required"),
             owner = owner ?: error("Owner is required"),
-            transferDate = movingDate,
+            transferScheduledAt = movingDate,
             transferPrice = transferPrice,
             transferAccepted = isTransferAccepted,
             transferRecipient = transferRecipient
@@ -78,7 +77,7 @@ public class HouseBuilder : TibiaKtBuilder<House> {
             world = world ?: error("world is required"),
             highestBid = highestBid,
             highestBidder = highestBidder,
-            auctionEnd = auctionEnd,
+            auctionEndsAt = auctionEnd,
         )
 
         else -> error("status is required")

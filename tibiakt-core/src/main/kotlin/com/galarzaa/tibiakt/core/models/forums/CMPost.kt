@@ -25,14 +25,14 @@ import kotlinx.serialization.Serializable
  * A post made by a Community Manager in the [CMPostArchive].
  *
  * @property postId The ID of the post.
- * @property date The date and time when the post was created.
+ * @property postedAt The date and time when the post was created.
  * @property board The name of the board where the post is.
  * @property threadTitle The title of the thread where the post is.
  */
 @Serializable
 public data class CMPost(
     override val postId: Int,
-    val date: Instant,
+    val postedAt: Instant,
     val board: String,
     val threadTitle: String,
 ) : BaseForumPost

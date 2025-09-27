@@ -24,7 +24,7 @@ import io.kotest.matchers.shouldBe
 class EventsScheduleParserTests : FunSpec({
     test("Parse event schedule"){
         val eventSchedule = EventsScheduleParser.fromContent(getResource("eventSchedule/eventSchedule.txt"))
-        eventSchedule.yearMonth.year shouldBe 2020
+        eventSchedule.month.year shouldBe 2020
         eventSchedule.entries shouldHaveAtLeastSize 0
     }
 })

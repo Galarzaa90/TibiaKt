@@ -20,7 +20,6 @@ import com.galarzaa.tibiakt.core.enums.NewsCategory
 import com.galarzaa.tibiakt.core.enums.NewsType
 import com.galarzaa.tibiakt.core.models.news.NewsArchive
 import com.galarzaa.tibiakt.core.models.news.NewsEntry
-import com.galarzaa.tibiakt.core.builders.BuilderDsl
 import kotlinx.datetime.LocalDate
 
 @BuilderDsl
@@ -58,8 +57,8 @@ public class NewsArchiveBuilder : TibiaKtBuilder<NewsArchive> {
 
 
     override fun build(): NewsArchive = NewsArchive(
-        startDate = startDate ?: error("startDate is required"),
-        endDate = endDate ?: error("endDate is required"),
+        startOn = startDate ?: error("startDate is required"),
+        endOn = endDate ?: error("endDate is required"),
         types = types,
         categories = categories,
         entries = entries,
@@ -76,7 +75,7 @@ public class NewsArchiveBuilder : TibiaKtBuilder<NewsArchive> {
             id = id,
             title = title ?: error("title is required"),
             category = category ?: error("category is required"),
-            date = date ?: error("date is required"),
+            publishedOn = date ?: error("date is required"),
             type = type ?: error("type is required"),
         )
     }

@@ -35,7 +35,6 @@ import com.galarzaa.tibiakt.core.models.bazaar.OutfitImage
 import com.galarzaa.tibiakt.core.models.bazaar.Outfits
 import com.galarzaa.tibiakt.core.models.bazaar.RevealedGem
 import com.galarzaa.tibiakt.core.models.bazaar.SalesArgument
-import com.galarzaa.tibiakt.core.builders.BuilderDsl
 import kotlin.time.Instant
 
 @BuilderDsl
@@ -90,8 +89,8 @@ public class AuctionBuilder : TibiaKtBuilder<Auction> {
         outfit = if (::outfit.isInitialized) outfit else error("outfit is required"),
         displayedItems = displayedItems,
         salesArguments = salesArguments,
-        auctionStart = if (::auctionStart.isInitialized) auctionStart else error("auctionStart is required"),
-        auctionEnd = if (::auctionEnd.isInitialized) auctionEnd else error("auctionEnd is required"),
+        startsAt = if (::auctionStart.isInitialized) auctionStart else error("auctionStart is required"),
+        endsAt = if (::auctionEnd.isInitialized) auctionEnd else error("auctionEnd is required"),
         bid = bid,
         bidType = if (::bidType.isInitialized) bidType else error("bidType is required"),
         status = if (::status.isInitialized) status else error("status is required"),
@@ -213,11 +212,11 @@ public class AuctionBuilder : TibiaKtBuilder<Auction> {
                 outfitsCount = outfitsCount ?: error("outfitsCount is required"),
                 titlesCount = titlesCount ?: error("titlesCount is required"),
                 skills = skills ?: error("skills is required"),
-                creationDate = creationDate ?: error("creationDate is required"),
+                characterCreatedAt = creationDate ?: error("creationDate is required"),
                 experience = experience ?: error("experience is required"),
                 gold = gold ?: error("gold is required"),
                 achievementPoints = achievementPoints ?: error("achievementPoints is required"),
-                regularWorldTransfersAvailable = regularWorldTransfersAvailable,
+                regularWorldTransfersUnlockAt = regularWorldTransfersAvailable,
                 charmExpansion = hasCharmExpansion ?: error("charmExpansion is required"),
                 availableCharmPoints = availableCharmPoints
                     ?: error("availableCharmPoints is required"),

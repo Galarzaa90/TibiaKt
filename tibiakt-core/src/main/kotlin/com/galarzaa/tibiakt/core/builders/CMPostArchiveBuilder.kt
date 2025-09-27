@@ -18,7 +18,6 @@ package com.galarzaa.tibiakt.core.builders
 
 import com.galarzaa.tibiakt.core.models.forums.CMPost
 import com.galarzaa.tibiakt.core.models.forums.CMPostArchive
-import com.galarzaa.tibiakt.core.builders.BuilderDsl
 import kotlinx.datetime.LocalDate
 
 @BuilderDsl
@@ -42,8 +41,8 @@ public class CMPostArchiveBuilder : TibiaKtBuilder<CMPostArchive> {
     public fun addEntry(post: CMPost): CMPostArchiveBuilder = apply { entries.add(post) }
 
     override fun build(): CMPostArchive = CMPostArchive(
-        startDate = startDate ?: error("startDate is required"),
-        endDate = endDate ?: error("endDate is required"),
+        startOn = startDate ?: error("startDate is required"),
+        endOn = endDate ?: error("endDate is required"),
         currentPage = currentPage,
         totalPages = totalPages,
         resultsCount = resultsCount,

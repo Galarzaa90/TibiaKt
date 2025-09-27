@@ -26,19 +26,19 @@ import kotlinx.serialization.Serializable
  *
  * @property title The title or name of the event.
  * @property description A brief description of the event.
- * @property startDate The date when the event starts. If null, it means the event started in the previous month and the date is unavailable.
- * @property endDate The date when the event ends. If null, it means the event ends in the following month and the date is unavailable.
+ * @property startsOn The date when the event starts. If null, it means the event started in the previous month and the date is unavailable.
+ * @property endsOn The date when the event ends. If null, it means the event ends in the following month and the date is unavailable.
  */
 @Serializable
 public data class EventEntry(
     val title: String,
     val description: String,
-    val startDate: LocalDate?,
-    val endDate: LocalDate?,
+    val startsOn: LocalDate?,
+    val endsOn: LocalDate?,
 ) {
     /**
-     * The duration of the event, if both [startDate] and [endDate] are known.
+     * The duration of the event, if both [startsOn] and [endsOn] are known.
      */
     val duration: DatePeriod?
-        get() = if (startDate != null && endDate != null) (endDate - startDate) else null
+        get() = if (startsOn != null && endsOn != null) (endsOn - startsOn) else null
 }

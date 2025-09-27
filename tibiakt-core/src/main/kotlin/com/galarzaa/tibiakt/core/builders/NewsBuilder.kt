@@ -18,7 +18,6 @@ package com.galarzaa.tibiakt.core.builders
 
 import com.galarzaa.tibiakt.core.enums.NewsCategory
 import com.galarzaa.tibiakt.core.models.news.News
-import com.galarzaa.tibiakt.core.builders.BuilderDsl
 import kotlinx.datetime.LocalDate
 
 @BuilderDsl
@@ -41,7 +40,7 @@ public class NewsBuilder : TibiaKtBuilder<News> {
             id = id ?: error("id is required"),
             title = if (::title.isInitialized) title else error("title is required"),
             category = if (::category.isInitialized) category else error("category is required"),
-            date = if (::date.isInitialized) date else error("date is required"),
+            publishedOn = if (::date.isInitialized) date else error("date is required"),
             content = if (::content.isInitialized) content else error("content is required"),
             threadId = threadId,
         )

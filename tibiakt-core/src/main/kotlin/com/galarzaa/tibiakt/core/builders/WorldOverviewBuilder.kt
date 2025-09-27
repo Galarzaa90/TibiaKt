@@ -21,7 +21,6 @@ import com.galarzaa.tibiakt.core.enums.PvpType
 import com.galarzaa.tibiakt.core.enums.TransferType
 import com.galarzaa.tibiakt.core.models.world.WorldEntry
 import com.galarzaa.tibiakt.core.models.world.WorldOverview
-import com.galarzaa.tibiakt.core.builders.BuilderDsl
 import kotlin.time.Instant
 import kotlinx.datetime.LocalDate
 
@@ -51,7 +50,7 @@ public class WorldOverviewBuilder : TibiaKtBuilder<WorldOverview> {
         return WorldOverview(
             overallMaximumCount = overallMaximumCount
                 ?: error("overallMaximumCount is required"),
-            overallMaximumCountDateTime = overallMaximumCountDateTime
+            overallMaximumCountAt = overallMaximumCountDateTime
                 ?: error("overallMaximumCountDateTime is required"),
             worlds = worlds,
         )
@@ -81,7 +80,7 @@ public class WorldOverviewBuilder : TibiaKtBuilder<WorldOverview> {
                 location = location ?: error("location is required"),
                 pvpType = pvpType ?: error("pvpType is required"),
                 battlEyeType = battlEyeType,
-                battlEyeStartDate = battlEyeStartDate,
+                battlEyeStartedOn = battlEyeStartDate,
                 transferType = transferType,
                 isPremiumRestricted = isPremiumRestricted,
                 isExperimental = isExperimental,

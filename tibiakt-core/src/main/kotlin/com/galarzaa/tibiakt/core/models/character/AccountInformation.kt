@@ -23,13 +23,13 @@ import kotlinx.serialization.Serializable
 /**
  * Information about an account.
  *
- * @property creation The date and time when the account was created.
+ * @property createdAt The date and time when the account was created.
  * @property loyaltyTitle The loyalty title of the account, if any.
  * @property position If the account holds a special position.
  */
 @Serializable
 public data class AccountInformation(
-    val creation: Instant,
+    val createdAt: Instant,
     val loyaltyTitle: String?,
     val position: String?,
 )

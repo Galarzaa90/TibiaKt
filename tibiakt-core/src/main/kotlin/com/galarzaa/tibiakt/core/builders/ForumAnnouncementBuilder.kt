@@ -18,7 +18,6 @@ package com.galarzaa.tibiakt.core.builders
 
 import com.galarzaa.tibiakt.core.models.forums.BaseForumAuthor
 import com.galarzaa.tibiakt.core.models.forums.ForumAnnouncement
-import com.galarzaa.tibiakt.core.builders.BuilderDsl
 import kotlin.time.Instant
 
 @BuilderDsl
@@ -52,7 +51,7 @@ public class ForumAnnouncementBuilder : TibiaKtBuilder<ForumAnnouncement> {
         sectionId = sectionId ?: error("sectionId is required"),
         author = author ?: error("author is required"),
         content = content ?: error("content is required"),
-        startDate = startDate ?: error("startDate is required"),
-        endDate = endDate ?: error("endDate is required")
+        startsAt = startDate ?: error("startDate is required"),
+        endsAt = endDate ?: error("endDate is required")
     )
 }

@@ -29,8 +29,8 @@ import kotlinx.serialization.Serializable
  * @property sectionId The internal ID of the section the announcement is in.
  * @property author The author that created the announcement.
  * @property content The content of the announcement.
- * @property startDate The start date of the announcement.
- * @property endDate The end date of the announcement.
+ * @property startsAt The start date of the announcement.
+ * @property endsAt The end date of the announcement.
  */
 @Serializable
 public data class ForumAnnouncement(
@@ -42,6 +42,6 @@ public data class ForumAnnouncement(
     val sectionId: Int,
     val author: BaseForumAuthor,
     val content: String,
-    val startDate: Instant,
-    val endDate: Instant,
+    val startsAt: Instant,
+    val endsAt: Instant,
 ) : BaseForumAnnouncement

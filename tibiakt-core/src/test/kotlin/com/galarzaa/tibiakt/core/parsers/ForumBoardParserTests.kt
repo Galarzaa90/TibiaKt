@@ -93,7 +93,7 @@ class ForumBoardParserTests : FunSpec({
 
         forumBoard.shouldBeInstanceOf<ForumBoard>()
         forumBoard.entries.forAtLeastOne {
-            it.lastPost.deleted shouldBe true
+            it.lastPost.isDeleted shouldBe true
         }
     }
     test("Forum board with thread with last post by traded char") {
@@ -102,7 +102,7 @@ class ForumBoardParserTests : FunSpec({
 
         forumBoard.shouldBeInstanceOf<ForumBoard>()
         forumBoard.entries.forAtLeastOne {
-            it.lastPost.traded shouldBe true
+            it.lastPost.isTraded shouldBe true
         }
     }
 })

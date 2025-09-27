@@ -19,7 +19,6 @@ package com.galarzaa.tibiakt.core.builders
 import com.galarzaa.tibiakt.core.models.leaderboards.BaseLeaderboardEntry
 import com.galarzaa.tibiakt.core.models.leaderboards.Leaderboard
 import com.galarzaa.tibiakt.core.models.leaderboards.LeaderboardRotation
-import com.galarzaa.tibiakt.core.builders.BuilderDsl
 import kotlin.time.Instant
 
 @BuilderDsl
@@ -57,7 +56,7 @@ public class LeaderboardBuilder : TibiaKtBuilder<Leaderboard> {
         world = world ?: error("world is required"),
         rotation = rotation ?: error("rotation is required"),
         availableRotations = availableRotations,
-        lastUpdated = lastUpdated,
+        lastUpdatedAt = lastUpdated,
         currentPage = currentPage ?: error("currentPage is required"),
         totalPages = totalPages ?: error("totalPages is required"),
         resultsCount = resultsCount ?: error("resultsCount is required"),
@@ -71,7 +70,7 @@ public class LeaderboardBuilder : TibiaKtBuilder<Leaderboard> {
         override fun build(): LeaderboardRotation = LeaderboardRotation(
             rotationId = rotationId ?: error("rotationId is required"),
             isCurrent = isCurrent,
-            endDate = endDate ?: error("endDate is required"),
+            endsAt = endDate ?: error("endDate is required"),
         )
 
     }

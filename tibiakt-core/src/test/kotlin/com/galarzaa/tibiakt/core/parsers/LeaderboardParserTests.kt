@@ -35,7 +35,7 @@ class LeaderboardParserTests : FunSpec({
         leaderboard.shouldBeInstanceOf<Leaderboard>()
         with(leaderboard) {
             rotation.isCurrent shouldBe true
-            lastUpdated shouldNotBe null
+            lastUpdatedAt shouldNotBe null
             entries.shouldNotBeEmpty()
         }
     }

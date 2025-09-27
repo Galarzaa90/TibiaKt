@@ -38,8 +38,8 @@ import kotlinx.serialization.Serializable
  * @property outfit The current outfit the character is wearing.
  * @property displayedItems A list of items selected for display.
  * @property salesArguments Arguments selected by the auction author.
- * @property auctionStart The date when the auction started.
- * @property auctionEnd The date when the auction ends.
+ * @property startsAt The date when the auction started.
+ * @property endsAt The date when the auction ends.
  * @property bid The current bid on the auction.
  * @property bidType The type of bid.
  * @property status The current status of the auction.
@@ -56,8 +56,8 @@ public data class Auction(
     val outfit: OutfitImage,
     val displayedItems: List<ItemEntry>,
     val salesArguments: List<SalesArgument>,
-    val auctionStart: Instant,
-    val auctionEnd: Instant,
+    val startsAt: Instant,
+    val endsAt: Instant,
     val bid: Int,
     val bidType: BidType,
     val status: AuctionStatus,

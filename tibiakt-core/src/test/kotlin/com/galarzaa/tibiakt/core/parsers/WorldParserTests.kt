@@ -61,7 +61,7 @@ class WorldParserTests : FunSpec({
         world.shouldBeInstanceOf<World>()
         with(world) {
             battlEyeType shouldBe BattlEyeType.UNPROTECTED
-            battlEyeStartDate shouldBe null
+            battlEyeStartedOn shouldBe null
         }
     }
 
@@ -70,7 +70,7 @@ class WorldParserTests : FunSpec({
         world.shouldBeInstanceOf<World>()
         with(world) {
             battlEyeType shouldBe BattlEyeType.YELLOW
-            battlEyeStartDate shouldNotBe null
+            battlEyeStartedOn shouldNotBe null
         }
     }
     test("World with green BattlEye") {
@@ -79,7 +79,7 @@ class WorldParserTests : FunSpec({
         world.shouldBeInstanceOf<World>()
         with(world) {
             battlEyeType shouldBe BattlEyeType.GREEN
-            battlEyeStartDate shouldBe null
+            battlEyeStartedOn shouldBe null
         }
     }
     test("Experimental world") {

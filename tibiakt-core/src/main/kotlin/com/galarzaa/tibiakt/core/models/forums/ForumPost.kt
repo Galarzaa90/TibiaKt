@@ -27,8 +27,8 @@ import kotlinx.serialization.Serializable
  * @property content The HTML content of the post.
  * @property signature The signature of the post's author.
  * @property postId The ID of the post.
- * @property postedDate The date when the post was created.
- * @property editedDate The date when the post was last edited. Null if it hasn't been edited.
+ * @property postedAt The date when the post was created.
+ * @property editedAt The date when the post was last edited. Null if it hasn't been edited.
  * @property editedBy The name of the character that last edited the post. CipSoft members might edit posts.
  */
 @Serializable
@@ -39,7 +39,7 @@ public data class ForumPost(
     val content: String,
     val signature: String?,
     override val postId: Int,
-    val postedDate: Instant,
-    val editedDate: Instant?,
+    val postedAt: Instant,
+    val editedAt: Instant?,
     val editedBy: String?,
 ) : BaseForumPost

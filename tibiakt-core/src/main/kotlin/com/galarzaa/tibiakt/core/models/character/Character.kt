@@ -39,12 +39,12 @@ import kotlinx.serialization.Serializable
  * @property marriedTo The name of the character this character is married to, if any.
  * @property houses The list of houses currently owned by the character.
  * @property guildMembership The guild the character belongs to.
- * @property lastLogin The date when the character logged in the last time. If null, the character has never logged in.
+ * @property lastLoginAt The date when the character logged in the last time. If null, the character has never logged in.
  * @property position The special position the character holds.
  * @property comment The character's comment.
  * @property isPremium Whether the character has a premium account.
  * @property isRecentlyTraded Whether the character was recently traded. If its name was changed afterward, this flag is removed.
- * @property deletionDate The date when this character is scheduled to be deleted.
+ * @property deletionScheduledAt The date when this character is scheduled to be deleted.
  * @property badges The visible badges of the character.
  * @property achievements The visible achievements for the character.
  * @property deaths The recent deaths of the character.
@@ -67,12 +67,12 @@ public data class Character(
     val marriedTo: String?,
     val houses: List<CharacterHouse>,
     val guildMembership: GuildMembership?,
-    val lastLogin: Instant?,
+    val lastLoginAt: Instant?,
     val position: String?,
     val comment: String?,
     val isPremium: Boolean,
     val isRecentlyTraded: Boolean,
-    val deletionDate: Instant?,
+    val deletionScheduledAt: Instant?,
     val badges: List<AccountBadge>,
     val achievements: List<DisplayedAchievement>,
     val deaths: List<Death>,
@@ -83,12 +83,12 @@ public data class Character(
     /**
      * Whether this character is scheduled for deletion or nto.
      */
-    val isScheduledForDeletion: Boolean get() = deletionDate != null
+    val isScheduledForDeletion: Boolean get() = deletionScheduledAt != null
 
     /**
      * Whether this character is hidden or not.
      */
-    val isHidden: Boolean get() = otherCharacters.isEmpty()
+    val isHidden: Boolean get() = accountInformation == null || otherCharacters.isEmpty()
 
     /**
      * URL to the character this character is married to, if any.

@@ -26,7 +26,7 @@ import kotlinx.serialization.Serializable
  * @property timestamp The date and time when the death happened.
  * @property level The level of the character when they died.
  * @property killers The list of killers.
- * @property assists The list of characters that assisted in the death without dealing damage.
+ * @property assists The list of characters that helped in the death without dealing damage.
  */
 @Serializable
 public data class Death(

@@ -18,7 +18,6 @@ package com.galarzaa.tibiakt.core.builders
 
 import com.galarzaa.tibiakt.core.models.news.EventEntry
 import com.galarzaa.tibiakt.core.models.news.EventsSchedule
-import com.galarzaa.tibiakt.core.builders.BuilderDsl
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.YearMonth
 
@@ -58,7 +57,7 @@ public class EventsScheduleBuilder : TibiaKtBuilder<EventsSchedule> {
 
     override fun build(): EventsSchedule =
         EventsSchedule(
-            yearMonth = if (::yearMonth.isInitialized) yearMonth else error("yearMonth is required"),
+            month = if (::yearMonth.isInitialized) yearMonth else error("yearMonth is required"),
             entries = entries
         )
 

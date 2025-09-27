@@ -34,7 +34,7 @@ class GuildParserTests : FunSpec({
         guild.name shouldBe "Bald Dwarfs"
         guild.world shouldBe "Gladera"
         guild.description shouldNotBe null
-        guild.foundingDate shouldBe LocalDate(2010, 9, 21)
+        guild.foundedOn shouldBe LocalDate(2010, 9, 21)
         guild.isActive shouldBe true
         guild.applicationsOpen shouldBe true
         guild.guildHall.shouldBeInstanceOf<GuildHall>()
@@ -49,7 +49,7 @@ class GuildParserTests : FunSpec({
         guild.shouldBeInstanceOf<Guild>()
         guild.isActive shouldBe true
         guild.disbandingReason shouldNotBe null
-        guild.disbandingDate shouldNotBe null
+        guild.disbandsOn shouldNotBe null
     }
 
 
@@ -57,7 +57,7 @@ class GuildParserTests : FunSpec({
         val guild = GuildParser.fromContent(getResource("guild/guildFormation.txt"))
 
         guild.shouldBeInstanceOf<Guild>()
-        guild.disbandingDate shouldNotBe null
+        guild.disbandsOn shouldNotBe null
         guild.disbandingReason shouldNotBe null
         guild.isActive shouldBe false
     }
@@ -67,7 +67,7 @@ class GuildParserTests : FunSpec({
 
         guild.shouldBeInstanceOf<Guild>()
         with(guild){
-            disbandingDate shouldBe null
+            disbandsOn shouldBe null
             guildHall shouldBe null
             homepage shouldBe null
             description shouldBe null

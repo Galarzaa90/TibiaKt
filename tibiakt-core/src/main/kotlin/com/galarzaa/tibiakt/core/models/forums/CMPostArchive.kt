@@ -25,13 +25,13 @@ import kotlinx.datetime.LocalDate
 /**
  * The CM Post Archive, displaying recent posts by Community Managers.
  *
- * @property startDate The start date for the results.
- * @property endDate The end date for the results.
+ * @property startOn The start date for the results.
+ * @property endOn The end date for the results.
  */
 @Serializable
 public data class CMPostArchive(
-    val startDate: LocalDate,
-    val endDate: LocalDate,
+    val startOn: LocalDate,
+    val endOn: LocalDate,
     override val currentPage: Int,
     override val totalPages: Int,
     override val resultsCount: Int,
@@ -41,7 +41,7 @@ public data class CMPostArchive(
     /**
      * The URL to the CM Post archive with the current filters.
      */
-    val url: String get() = cmPostArchiveUrl(startDate, endDate, currentPage)
+    val url: String get() = cmPostArchiveUrl(startOn, endOn, currentPage)
 
-    override fun getPageUrl(page: Int): String = cmPostArchiveUrl(startDate, endDate, page)
+    override fun getPageUrl(page: Int): String = cmPostArchiveUrl(startOn, endOn, page)
 }

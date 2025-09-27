@@ -22,7 +22,6 @@ import com.galarzaa.tibiakt.core.enums.PvpType
 import com.galarzaa.tibiakt.core.enums.TransferType
 import kotlin.time.Instant
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.UseSerializers
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.YearMonth
 
@@ -34,13 +33,13 @@ import kotlinx.datetime.YearMonth
  * @property location The geographical location of the server.
  * @property pvpType The type of PvP in this world.
  * @property battlEyeType The type of BattlEye protection present in this world.
- * @property battlEyeStartDate The date when BattlEye was implemented in this world.
+ * @property battlEyeStartedOn The date when BattlEye was implemented in this world.
  * @property transferType The type of transfer restrictions this world has.
  * @property isPremiumRestricted Whether the world can only be played by premium account characters or not.
  * @property isExperimental Whether the world is experimental or not.
  * @property onlineRecordCount The maximum online players recorded on this world.
- * @property onlineRecordDateTime The date and time when the maximum online players record was set.
- * @property creationDate The year and month when this world was created.
+ * @property onlineRecordAt The date and time when the maximum online players record was set.
+ * @property createdOn The year and month when this world was created.
  * @property worldQuests The list of world quests completed.
  * @property playersOnline The list of online players in this world.
  */
@@ -52,14 +51,14 @@ public data class World(
     val location: String,
     val pvpType: PvpType,
     val battlEyeType: BattlEyeType,
-    val battlEyeStartDate: LocalDate?,
+    val battlEyeStartedOn: LocalDate?,
     val transferType: TransferType,
     val isPremiumRestricted: Boolean,
     val isExperimental: Boolean,
     val onlineRecordCount: Int,
-    val onlineRecordDateTime: Instant,
-    val creationDate: YearMonth,
-    val worldQuests: List<String> ,
+    val onlineRecordAt: Instant,
+    val createdOn: YearMonth,
+    val worldQuests: List<String>,
     val playersOnline: List<OnlineCharacter>,
 ) : BaseWorld {
 

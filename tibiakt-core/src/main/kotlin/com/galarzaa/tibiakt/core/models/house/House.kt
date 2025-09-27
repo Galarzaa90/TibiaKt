@@ -50,7 +50,7 @@ public sealed class House : BaseHouse {
      *
      * @property paidUntil The date when the last paid rent is due.
      * @property owner The character that currently owns the house.
-     * @property transferDate The date when the current owner will move out of the house.
+     * @property transferScheduledAt The date when the current owner will move out of the house.
      * @property transferPrice The amount of gold coins to be paid for transferring the house.
      * @property transferAccepted Whether the transfer has been accepted by the recipient or not.
      * @property transferRecipient The character that will receive the house.
@@ -67,7 +67,7 @@ public sealed class House : BaseHouse {
         override val world: String,
         val paidUntil: Instant,
         val owner: String,
-        val transferDate: Instant?,
+        val transferScheduledAt: Instant?,
         val transferPrice: Int?,
         val transferAccepted: Boolean?,
         val transferRecipient: String?,
@@ -88,7 +88,7 @@ public sealed class House : BaseHouse {
      *
      * @property highestBid If the house is on auction, the highest bid received, if any.
      * @property highestBidder The character that placed the highest bid.
-     * @property auctionEnd The date and time when the auction will end.
+     * @property auctionEndsAt The date and time when the auction will end.
      */
     @Serializable
     @SerialName("AUCTIONED")
@@ -102,7 +102,7 @@ public sealed class House : BaseHouse {
         override val world: String,
         val highestBid: Int?,
         val highestBidder: String?,
-        val auctionEnd: Instant?,
+        val auctionEndsAt: Instant?,
     ) : House() {
         override val status: HouseStatus = HouseStatus.AUCTIONED
 

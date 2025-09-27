@@ -23,7 +23,6 @@ import com.galarzaa.tibiakt.core.enums.PvpType
 import com.galarzaa.tibiakt.core.enums.Vocation
 import com.galarzaa.tibiakt.core.models.highscores.Highscores
 import com.galarzaa.tibiakt.core.models.highscores.HighscoresEntry
-import com.galarzaa.tibiakt.core.builders.BuilderDsl
 import kotlin.time.Instant
 
 @BuilderDsl
@@ -69,7 +68,7 @@ public class HighscoresBuilder : TibiaKtBuilder<Highscores> {
         vocation = vocation ?: HighscoresProfession.ALL,
         worldTypes = worldTypes,
         battlEyeType = battlEyeType ?: HighscoresBattlEyeType.ANY_WORLD,
-        lastUpdated = lastUpdated ?: error("lastUpdated is required"),
+        lastUpdatedAt = lastUpdated ?: error("lastUpdated is required"),
         currentPage = currentPage,
         totalPages = totalPages,
         resultsCount = resultsCount,

@@ -61,7 +61,7 @@ public object LeaderboardParser : Parser<Leaderboard?> {
                 }
                 val rotationEnd = parseTibiaDateTime(cleanLabel)
                 val rotation = LeaderboardRotation(
-                    rotationId = rotationId, isCurrent = isCurrent, endDate = rotationEnd
+                    rotationId = rotationId, isCurrent = isCurrent, endsAt = rotationEnd
                 )
                 if (isCurrent) {
                     this.rotation = rotation

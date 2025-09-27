@@ -17,7 +17,6 @@
 package com.galarzaa.tibiakt.core.builders
 
 import com.galarzaa.tibiakt.core.models.forums.LastPost
-import com.galarzaa.tibiakt.core.builders.BuilderDsl
 import kotlin.time.Instant
 
 @BuilderDsl
@@ -38,8 +37,8 @@ public class LastPostBuilder : TibiaKtBuilder<LastPost> {
     override fun build(): LastPost = LastPost(
         author = author ?: error("author is required"),
         postId = postId ?: error("postId is required"),
-        date = date ?: error("date is required"),
-        deleted = isDeleted,
-        traded = isTraded
+        postedAt = date ?: error("date is required"),
+        isDeleted = isDeleted,
+        isTraded = isTraded
     )
 }

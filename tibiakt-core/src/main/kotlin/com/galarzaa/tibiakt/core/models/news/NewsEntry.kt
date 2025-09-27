@@ -20,14 +20,13 @@ package com.galarzaa.tibiakt.core.models.news
 import com.galarzaa.tibiakt.core.enums.NewsCategory
 import com.galarzaa.tibiakt.core.enums.NewsType
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.UseSerializers
 import kotlinx.datetime.LocalDate
 
 /**
  * A news entry listed in the [NewsArchive].
  *
  * @property title The title of the entry
- * @property date The date when the entry was published.
+ * @property publishedOn The date when the entry was published.
  * @property type The type of the entry.
  */
 @Serializable
@@ -35,6 +34,6 @@ public data class NewsEntry(
     override val id: Int,
     val title: String,
     override val category: NewsCategory,
-    val date: LocalDate,
+    val publishedOn: LocalDate,
     val type: NewsType,
 ) : BaseNews

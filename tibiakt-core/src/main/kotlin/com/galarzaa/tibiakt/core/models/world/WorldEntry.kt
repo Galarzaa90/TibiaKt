@@ -21,7 +21,6 @@ import com.galarzaa.tibiakt.core.enums.BattlEyeType
 import com.galarzaa.tibiakt.core.enums.PvpType
 import com.galarzaa.tibiakt.core.enums.TransferType
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.UseSerializers
 import kotlinx.datetime.LocalDate
 
 /**
@@ -32,7 +31,7 @@ import kotlinx.datetime.LocalDate
  * @property location The geographical location of the server.
  * @property pvpType The type of PvP in this world.
  * @property battlEyeType The type of BattlEye protection present in this world.
- * @property battlEyeStartDate The date when BattlEye was implemented in this world.
+ * @property battlEyeStartedOn The date when BattlEye was implemented in this world.
  * @property transferType The type of transfer restrictions this world has.
  * @property isPremiumRestricted Whether the world can only be played by premium account characters or not.
  * @property isExperimental Whether the world is experimental or not.
@@ -45,7 +44,7 @@ public data class WorldEntry(
     val location: String,
     val pvpType: PvpType,
     val battlEyeType: BattlEyeType,
-    val battlEyeStartDate: LocalDate?,
+    val battlEyeStartedOn: LocalDate?,
     val transferType: TransferType,
     val isPremiumRestricted: Boolean,
     val isExperimental: Boolean,

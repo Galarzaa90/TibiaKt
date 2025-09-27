@@ -53,7 +53,7 @@ class CharacterParserTests : FunSpec({
                 town shouldBe "Carlin"
                 world shouldBe character.world
             }
-            lastLogin shouldNotBe null
+            lastLoginAt shouldNotBe null
             position shouldBe null
             isPremium shouldBe true
             isRecentlyTraded shouldBe false
@@ -76,7 +76,7 @@ class CharacterParserTests : FunSpec({
         val character = CharacterParser.fromContent(getResource("character/characterScheduledForDeletion.txt"))
 
         character.shouldBeInstanceOf<Character>()
-        character.deletionDate shouldNotBe null
+        character.deletionScheduledAt shouldNotBe null
         character.isScheduledForDeletion shouldBe true
     }
     test("Character with complex deaths"){

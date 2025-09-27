@@ -20,7 +20,6 @@ import com.galarzaa.tibiakt.core.models.forums.BaseForumAuthor
 import com.galarzaa.tibiakt.core.models.forums.ForumEmoticon
 import com.galarzaa.tibiakt.core.models.forums.ForumPost
 import com.galarzaa.tibiakt.core.models.forums.ForumThread
-import com.galarzaa.tibiakt.core.builders.BuilderDsl
 import kotlin.time.Clock
 import kotlin.time.Instant
 
@@ -91,8 +90,8 @@ public class ForumThreadBuilder : TibiaKtBuilder<ForumThread> {
             content = content ?: error("content is required"),
             signature = signature,
             postId = postId ?: error("postId is required"),
-            postedDate = postedDate ?: Clock.System.now(),
-            editedDate = editedDate,
+            postedAt = postedDate ?: Clock.System.now(),
+            editedAt = editedDate,
             editedBy = editedBy
         )
     }

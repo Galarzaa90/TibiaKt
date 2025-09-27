@@ -25,13 +25,13 @@ import kotlinx.serialization.Serializable
  * The world overview section in Tibia.com.
  *
  * @property overallMaximumCount The record for simultaneous online players.
- * @property overallMaximumCountDateTime The date and time when the record for online players was set.
+ * @property overallMaximumCountAt The date and time when the record for online players was set.
  * @property worlds The list of available worlds.
  */
 @Serializable
 public data class WorldOverview(
     val overallMaximumCount: Int,
-    val overallMaximumCountDateTime: Instant,
+    val overallMaximumCountAt: Instant,
     val worlds: List<WorldEntry>,
 ) {
     /**
