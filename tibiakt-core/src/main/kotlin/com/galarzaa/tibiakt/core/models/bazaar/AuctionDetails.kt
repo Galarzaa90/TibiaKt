@@ -37,7 +37,7 @@ import kotlinx.serialization.Serializable
  * @property gold The total gold the character has.
  * @property achievementPoints The achievement points of the character.
  * @property regularWorldTransfersUnlockAt The date when regular world transfers will be available again for this user.
- * @property charmExpansion Whether this character has a charm expansion or not.
+ * @property hasCharmExpansion Whether this character has a charm expansion or not.
  * @property availableCharmPoints The total charm points the character has for spending.
  * @property spentCharmPoints The total charm points that have been spent.
  * @property dailyRewardStreak The current daily rewards streak.
@@ -87,7 +87,7 @@ public data class AuctionDetails(
     val gold: Long,
     val achievementPoints: Int,
     val regularWorldTransfersUnlockAt: Instant?,
-    val charmExpansion: Boolean,
+    val hasCharmExpansion: Boolean,
     val availableCharmPoints: Int,
     val spentCharmPoints: Int,
     val dailyRewardStreak: Int,

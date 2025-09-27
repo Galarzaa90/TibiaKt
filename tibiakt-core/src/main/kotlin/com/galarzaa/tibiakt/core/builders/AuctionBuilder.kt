@@ -217,7 +217,7 @@ public class AuctionBuilder : TibiaKtBuilder<Auction> {
                 gold = gold ?: error("gold is required"),
                 achievementPoints = achievementPoints ?: error("achievementPoints is required"),
                 regularWorldTransfersUnlockAt = regularWorldTransfersAvailable,
-                charmExpansion = hasCharmExpansion ?: error("charmExpansion is required"),
+                hasCharmExpansion = hasCharmExpansion ?: error("charmExpansion is required"),
                 availableCharmPoints = availableCharmPoints
                     ?: error("availableCharmPoints is required"),
                 spentCharmPoints = spentCharmPoints ?: error("spentCharmPoints is required"),

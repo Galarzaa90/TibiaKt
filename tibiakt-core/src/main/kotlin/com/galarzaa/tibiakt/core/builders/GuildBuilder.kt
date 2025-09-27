@@ -77,7 +77,7 @@ public class GuildBuilder : TibiaKtBuilder<Guild> {
         description = description,
         foundedOn = foundingDate ?: error("foundingDate is required"),
         isActive = isActive,
-        applicationsOpen = hasOpenApplications,
+        areApplicationsOpen = hasOpenApplications,
         homepage = homepage,
         guildHall = guildHall,
         members = members,

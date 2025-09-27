@@ -36,7 +36,7 @@ class GuildParserTests : FunSpec({
         guild.description shouldNotBe null
         guild.foundedOn shouldBe LocalDate(2010, 9, 21)
         guild.isActive shouldBe true
-        guild.applicationsOpen shouldBe true
+        guild.areApplicationsOpen shouldBe true
         guild.guildHall.shouldBeInstanceOf<GuildHall>()
         guild.guildHall?.run {
             name shouldBe "Warriors' Guildhall"

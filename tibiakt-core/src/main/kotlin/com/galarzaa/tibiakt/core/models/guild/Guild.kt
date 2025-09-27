@@ -28,7 +28,7 @@ import kotlinx.datetime.LocalDate
  * @property description The description of the guild.
  * @property foundedOn The date when the guild was founded.
  * @property isActive Whether the guild is active or still in formation.
- * @property applicationsOpen Whether applications are open or not.
+ * @property areApplicationsOpen Whether applications are open or not.
  * @property homepage The URL to the guild's homepage, if set.
  * @property guildHall The guildhall rented by the guild.
  * @property disbandsOn The date when the guild is set to be disbanded.
@@ -44,7 +44,7 @@ public data class Guild(
     val description: String?,
     val foundedOn: LocalDate,
     val isActive: Boolean,
-    val applicationsOpen: Boolean,
+    val areApplicationsOpen: Boolean,
     val homepage: String?,
     val guildHall: GuildHall?,
     val disbandsOn: LocalDate?,
