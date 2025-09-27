@@ -17,7 +17,7 @@
 package com.galarzaa.tibiakt.core.builders
 
 import com.galarzaa.tibiakt.core.models.forums.LastPost
-import com.galarzaa.tibiakt.core.utils.BuilderDsl
+import com.galarzaa.tibiakt.core.builders.BuilderDsl
 import kotlin.time.Instant
 
 @BuilderDsl

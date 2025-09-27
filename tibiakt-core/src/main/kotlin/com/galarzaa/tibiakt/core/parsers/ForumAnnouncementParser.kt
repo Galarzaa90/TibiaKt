@@ -19,11 +19,11 @@ package com.galarzaa.tibiakt.core.parsers
 import com.galarzaa.tibiakt.core.builders.forumAnnouncement
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
 import com.galarzaa.tibiakt.core.models.forums.ForumAnnouncement
-import com.galarzaa.tibiakt.core.utils.cleanText
-import com.galarzaa.tibiakt.core.utils.getLinkInformation
-import com.galarzaa.tibiakt.core.utils.parseAuthorTable
+import com.galarzaa.tibiakt.core.html.cleanText
+import com.galarzaa.tibiakt.core.html.getLinkInformation
+import com.galarzaa.tibiakt.core.html.parseAuthorTable
 import com.galarzaa.tibiakt.core.time.parseTibiaForumDateTime
-import com.galarzaa.tibiakt.core.utils.remove
+import com.galarzaa.tibiakt.core.text.remove
 
 /** Parser for forum announcements. */
 public object ForumAnnouncementParser : Parser<ForumAnnouncement?> {

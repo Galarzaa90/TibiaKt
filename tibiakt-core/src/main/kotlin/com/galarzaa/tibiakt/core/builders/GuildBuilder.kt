@@ -21,7 +21,7 @@ import com.galarzaa.tibiakt.core.models.guild.Guild
 import com.galarzaa.tibiakt.core.models.guild.GuildHall
 import com.galarzaa.tibiakt.core.models.guild.GuildInvite
 import com.galarzaa.tibiakt.core.models.guild.GuildMember
-import com.galarzaa.tibiakt.core.utils.BuilderDsl
+import com.galarzaa.tibiakt.core.builders.BuilderDsl
 import kotlinx.datetime.LocalDate
 
 @BuilderDsl

@@ -20,7 +20,7 @@ import com.galarzaa.tibiakt.core.enums.NewsCategory
 import com.galarzaa.tibiakt.core.enums.NewsType
 import com.galarzaa.tibiakt.core.models.news.NewsArchive
 import com.galarzaa.tibiakt.core.models.news.NewsEntry
-import com.galarzaa.tibiakt.core.utils.BuilderDsl
+import com.galarzaa.tibiakt.core.builders.BuilderDsl
 import kotlinx.datetime.LocalDate
 
 @BuilderDsl

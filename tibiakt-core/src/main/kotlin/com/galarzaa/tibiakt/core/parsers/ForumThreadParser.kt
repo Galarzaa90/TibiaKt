@@ -21,11 +21,11 @@ import com.galarzaa.tibiakt.core.builders.forumThread
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
 import com.galarzaa.tibiakt.core.models.forums.ForumEmoticon
 import com.galarzaa.tibiakt.core.models.forums.ForumThread
-import com.galarzaa.tibiakt.core.utils.TABLE_SELECTOR
-import com.galarzaa.tibiakt.core.utils.cleanText
-import com.galarzaa.tibiakt.core.utils.getLinkInformation
-import com.galarzaa.tibiakt.core.utils.parseAuthorTable
-import com.galarzaa.tibiakt.core.utils.parsePagination
+import com.galarzaa.tibiakt.core.html.TABLE_SELECTOR
+import com.galarzaa.tibiakt.core.html.cleanText
+import com.galarzaa.tibiakt.core.html.getLinkInformation
+import com.galarzaa.tibiakt.core.html.parseAuthorTable
+import com.galarzaa.tibiakt.core.html.parsePagination
 import com.galarzaa.tibiakt.core.time.parseTibiaForumDateTime
 import org.jsoup.nodes.Element
 import org.jsoup.nodes.TextNode

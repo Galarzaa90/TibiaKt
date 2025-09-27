@@ -21,10 +21,10 @@ import com.galarzaa.tibiakt.core.builders.eventEntryBuilder
 import com.galarzaa.tibiakt.core.builders.eventsSchedule
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
 import com.galarzaa.tibiakt.core.models.news.EventsSchedule
-import com.galarzaa.tibiakt.core.utils.cells
-import com.galarzaa.tibiakt.core.utils.cleanText
-import com.galarzaa.tibiakt.core.utils.parsePopup
-import com.galarzaa.tibiakt.core.utils.remove
+import com.galarzaa.tibiakt.core.html.cells
+import com.galarzaa.tibiakt.core.html.cleanText
+import com.galarzaa.tibiakt.core.html.parsePopup
+import com.galarzaa.tibiakt.core.text.remove
 import com.galarzaa.tibiakt.core.time.FORMAT_YEAR_MONTH
 import kotlinx.datetime.DatePeriod
 import kotlinx.datetime.LocalDate

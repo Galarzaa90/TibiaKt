@@ -22,15 +22,15 @@ import com.galarzaa.tibiakt.core.enums.HouseStatus
 import com.galarzaa.tibiakt.core.enums.StringEnum
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
 import com.galarzaa.tibiakt.core.models.house.House
-import com.galarzaa.tibiakt.core.utils.cells
-import com.galarzaa.tibiakt.core.utils.clean
-import com.galarzaa.tibiakt.core.utils.cleanText
-import com.galarzaa.tibiakt.core.utils.findInteger
-import com.galarzaa.tibiakt.core.utils.parseInteger
-import com.galarzaa.tibiakt.core.utils.parseThousandSuffix
+import com.galarzaa.tibiakt.core.html.cells
+import com.galarzaa.tibiakt.core.text.clean
+import com.galarzaa.tibiakt.core.html.cleanText
+import com.galarzaa.tibiakt.core.text.findInteger
+import com.galarzaa.tibiakt.core.text.parseInteger
+import com.galarzaa.tibiakt.core.text.parseThousandSuffix
 import com.galarzaa.tibiakt.core.time.parseTibiaDateTime
-import com.galarzaa.tibiakt.core.utils.remove
-import com.galarzaa.tibiakt.core.utils.replaceBrs
+import com.galarzaa.tibiakt.core.text.remove
+import com.galarzaa.tibiakt.core.html.replaceBrs
 
 /** Parser for House information pages. */
 public object HouseParser : Parser<House?> {

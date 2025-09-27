@@ -19,9 +19,9 @@ package com.galarzaa.tibiakt.core.parsers
 import com.galarzaa.tibiakt.core.builders.creaturesSection
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
 import com.galarzaa.tibiakt.core.models.creatures.CreaturesSection
-import com.galarzaa.tibiakt.core.utils.cleanText
-import com.galarzaa.tibiakt.core.utils.getLinkInformation
-import com.galarzaa.tibiakt.core.utils.parseTablesMap
+import com.galarzaa.tibiakt.core.html.cleanText
+import com.galarzaa.tibiakt.core.html.getLinkInformation
+import com.galarzaa.tibiakt.core.html.parseTablesMap
 
 /** Parser for the creatures section. */
 public object CreaturesSectionParser : Parser<CreaturesSection> {

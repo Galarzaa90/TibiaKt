@@ -27,7 +27,7 @@ import com.galarzaa.tibiakt.core.models.character.DeathParticipant
 import com.galarzaa.tibiakt.core.models.character.DisplayedAchievement
 import com.galarzaa.tibiakt.core.models.character.GuildMembership
 import com.galarzaa.tibiakt.core.models.character.OtherCharacter
-import com.galarzaa.tibiakt.core.utils.BuilderDsl
+import com.galarzaa.tibiakt.core.builders.BuilderDsl
 import kotlin.time.Instant
 import kotlinx.datetime.LocalDate
 

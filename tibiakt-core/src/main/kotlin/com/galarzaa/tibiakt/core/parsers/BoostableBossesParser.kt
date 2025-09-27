@@ -19,9 +19,9 @@ package com.galarzaa.tibiakt.core.parsers
 import com.galarzaa.tibiakt.core.builders.boostableBosses
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
 import com.galarzaa.tibiakt.core.models.creatures.BoostableBosses
-import com.galarzaa.tibiakt.core.utils.cleanText
-import com.galarzaa.tibiakt.core.utils.parseTablesMap
-import com.galarzaa.tibiakt.core.utils.remove
+import com.galarzaa.tibiakt.core.html.cleanText
+import com.galarzaa.tibiakt.core.html.parseTablesMap
+import com.galarzaa.tibiakt.core.text.remove
 import java.io.File
 import java.net.URL
 

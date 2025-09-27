@@ -20,7 +20,7 @@ import com.galarzaa.tibiakt.core.models.forums.BaseForumAuthor
 import com.galarzaa.tibiakt.core.models.forums.ForumEmoticon
 import com.galarzaa.tibiakt.core.models.forums.ForumPost
 import com.galarzaa.tibiakt.core.models.forums.ForumThread
-import com.galarzaa.tibiakt.core.utils.BuilderDsl
+import com.galarzaa.tibiakt.core.builders.BuilderDsl
 import kotlin.time.Clock
 import kotlin.time.Instant
 

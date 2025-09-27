@@ -1,5 +1,5 @@
 /*
- * Copyright © 2024 Allan Galarza
+ * Copyright © 2025 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,11 @@
  * limitations under the License.
  */
 
-package com.galarzaa.tibiakt.core.utils
+package com.galarzaa.tibiakt.core.html
 
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
+import com.galarzaa.tibiakt.core.text.clean
+import com.galarzaa.tibiakt.core.text.parseInteger
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
@@ -121,22 +123,6 @@ internal fun Element.formData(): FormData {
     return FormData(data, dataMultiple, availableOptions, action = attr("action"), method = attr("method"))
 }
 
-/**
- * Contains the data extracted from a form.
- * @property values Mapping of form fields to their selected value.
- * @property valuesMultiple Mapping of form fields that might have multiple values.
- * @property availableOptions Mapping of the available options for selection in the form.
- * @property action Where the form would be submitted to.
- * @property method The HTTP method used
- */
-internal data class FormData(
-    val values: Map<String, String> = emptyMap(),
-    val valuesMultiple: Map<String, List<String>> = emptyMap(),
-    val availableOptions: Map<String, List<String>> = emptyMap(),
-    val action: String? = null,
-    val method: String? = null,
-)
-
 private val pageRegex = Regex("""(?:page|pagenumber)=(\d+)""")
 private val resultsRegex = Regex("""Results: ([\d,]+)""")
 
@@ -170,15 +156,6 @@ internal fun Element.parsePagination(): PaginationData {
     return PaginationData(page, totalPages, resultsCount)
 }
 
-/**
- * Container for pagination information.
- */
-internal data class PaginationData(val currentPage: Int, val totalPages: Int, val resultsCount: Int) {
-    companion object {
-        fun default() = PaginationData(1, 1, 0)
-    }
-}
-
 internal fun parsePopup(content: String): Pair<String, Document> {
     val parts = content.split(",", limit = 3)
     val title = parts[1].replace("'", "").trim()
@@ -191,14 +168,6 @@ private val queryStringRegex = Regex("([^&=]+)=([^&]*)")
 internal fun Element.getLinkInformation(): LinkInformation? {
     if (this.tagName() != "a") return null
     return LinkInformation(this.text(), this.attr("href"))
-}
-
-internal data class LinkInformation(val title: String, val targetUrl: URL) {
-    val queryParams
-        get() = targetUrl.queryParams()
-
-    constructor(title: String, targetUrl: String) : this(title, URL(targetUrl))
-
 }
 
 internal fun URL.queryParams(): HashMap<String, MutableList<String>> {

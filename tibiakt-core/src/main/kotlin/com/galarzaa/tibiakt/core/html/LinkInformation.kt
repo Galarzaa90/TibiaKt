@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2025 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,14 @@
  * limitations under the License.
  */
 
-package com.galarzaa.tibiakt.core.utils
+package com.galarzaa.tibiakt.core.html
 
-import kotlin.math.min
+import java.net.URL
 
-/**
- * Get a sublist from the receiver, starting at a certain [offset].
- *
- * If the offset is bigger than the list's size, the same list is returned.
- */
-public fun <T> List<T>.offsetStart(offset: Int): List<T> = subList(min(offset, size), size)
+internal data class LinkInformation(val title: String, val targetUrl: URL) {
+    val queryParams
+        get() = targetUrl.queryParams()
+
+    constructor(title: String, targetUrl: String) : this(title, URL(targetUrl))
+
+}

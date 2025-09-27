@@ -16,9 +16,8 @@
 
 package com.galarzaa.tibiakt.core.models.guild
 
-import com.galarzaa.tibiakt.core.utils.offsetStart
+import com.galarzaa.tibiakt.core.collections.offsetStart
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.UseSerializers
 import kotlinx.datetime.LocalDate
 
 /**

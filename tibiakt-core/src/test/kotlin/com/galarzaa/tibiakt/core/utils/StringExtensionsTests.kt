@@ -18,6 +18,10 @@ package com.galarzaa.tibiakt.core.utils
 
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
+import com.galarzaa.tibiakt.core.text.clean
+import com.galarzaa.tibiakt.core.text.parseThousandSuffix
+import com.galarzaa.tibiakt.core.text.remove
+import com.galarzaa.tibiakt.core.text.splitList
 
 class StringExtensionsTests : FunSpec({
 

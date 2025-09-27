@@ -23,7 +23,7 @@ import com.galarzaa.tibiakt.core.models.forums.ForumBoard
 import com.galarzaa.tibiakt.core.models.forums.ForumEmoticon
 import com.galarzaa.tibiakt.core.models.forums.LastPost
 import com.galarzaa.tibiakt.core.models.forums.ThreadEntry
-import com.galarzaa.tibiakt.core.utils.BuilderDsl
+import com.galarzaa.tibiakt.core.builders.BuilderDsl
 
 public inline fun forumBoardBuilder(block: ForumBoardBuilder.() -> Unit): ForumBoardBuilder =
     ForumBoardBuilder().apply(block)

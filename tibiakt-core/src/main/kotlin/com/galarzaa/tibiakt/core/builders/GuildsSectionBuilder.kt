@@ -18,7 +18,7 @@ package com.galarzaa.tibiakt.core.builders
 
 import com.galarzaa.tibiakt.core.models.guild.GuildEntry
 import com.galarzaa.tibiakt.core.models.guild.GuildsSection
-import com.galarzaa.tibiakt.core.utils.BuilderDsl
+import com.galarzaa.tibiakt.core.builders.BuilderDsl
 
 @BuilderDsl
 public inline fun guildsSectionBuilder(block: GuildsSectionBuilder.() -> Unit): GuildsSectionBuilder =

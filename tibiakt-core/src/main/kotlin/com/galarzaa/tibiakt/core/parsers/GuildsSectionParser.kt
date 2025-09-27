@@ -19,10 +19,10 @@ package com.galarzaa.tibiakt.core.parsers
 import com.galarzaa.tibiakt.core.builders.guildsSection
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
 import com.galarzaa.tibiakt.core.models.guild.GuildsSection
-import com.galarzaa.tibiakt.core.utils.TABLE_SELECTOR
-import com.galarzaa.tibiakt.core.utils.boxContent
-import com.galarzaa.tibiakt.core.utils.cleanText
-import com.galarzaa.tibiakt.core.utils.offsetStart
+import com.galarzaa.tibiakt.core.html.TABLE_SELECTOR
+import com.galarzaa.tibiakt.core.html.boxContent
+import com.galarzaa.tibiakt.core.html.cleanText
+import com.galarzaa.tibiakt.core.collections.offsetStart
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 

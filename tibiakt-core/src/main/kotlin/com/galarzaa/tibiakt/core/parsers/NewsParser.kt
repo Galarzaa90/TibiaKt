@@ -20,10 +20,10 @@ import com.galarzaa.tibiakt.core.builders.news
 import com.galarzaa.tibiakt.core.enums.NewsCategory
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
 import com.galarzaa.tibiakt.core.models.news.News
-import com.galarzaa.tibiakt.core.utils.cleanText
-import com.galarzaa.tibiakt.core.utils.getLinkInformation
+import com.galarzaa.tibiakt.core.html.cleanText
+import com.galarzaa.tibiakt.core.html.getLinkInformation
 import com.galarzaa.tibiakt.core.time.parseTibiaDate
-import com.galarzaa.tibiakt.core.utils.remove
+import com.galarzaa.tibiakt.core.text.remove
 
 /** Parser for news articles. */
 public object NewsParser : Parser<News?> {

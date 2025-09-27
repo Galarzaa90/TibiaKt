@@ -18,7 +18,7 @@ package com.galarzaa.tibiakt.core.builders
 
 import com.galarzaa.tibiakt.core.models.news.EventEntry
 import com.galarzaa.tibiakt.core.models.news.EventsSchedule
-import com.galarzaa.tibiakt.core.utils.BuilderDsl
+import com.galarzaa.tibiakt.core.builders.BuilderDsl
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.YearMonth
 

@@ -20,7 +20,7 @@ import com.galarzaa.tibiakt.core.enums.BazaarType
 import com.galarzaa.tibiakt.core.models.bazaar.Auction
 import com.galarzaa.tibiakt.core.models.bazaar.BazaarFilters
 import com.galarzaa.tibiakt.core.models.bazaar.CharacterBazaar
-import com.galarzaa.tibiakt.core.utils.BuilderDsl
+import com.galarzaa.tibiakt.core.builders.BuilderDsl
 
 @BuilderDsl
 public inline fun characterBazaar(block: CharacterBazaarBuilder.() -> Unit): CharacterBazaar =

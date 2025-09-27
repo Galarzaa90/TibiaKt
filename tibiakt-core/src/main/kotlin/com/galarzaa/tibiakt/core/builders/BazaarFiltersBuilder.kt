@@ -24,7 +24,7 @@ import com.galarzaa.tibiakt.core.enums.AuctionSkillFilter
 import com.galarzaa.tibiakt.core.enums.AuctionVocationFilter
 import com.galarzaa.tibiakt.core.enums.PvpType
 import com.galarzaa.tibiakt.core.models.bazaar.BazaarFilters
-import com.galarzaa.tibiakt.core.utils.BuilderDsl
+import com.galarzaa.tibiakt.core.builders.BuilderDsl
 
 @BuilderDsl
 public inline fun bazaarFilters(block: BazaarFiltersBuilder.() -> Unit): BazaarFilters =

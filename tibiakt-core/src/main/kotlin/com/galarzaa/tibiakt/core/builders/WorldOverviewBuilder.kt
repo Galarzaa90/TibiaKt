@@ -21,7 +21,7 @@ import com.galarzaa.tibiakt.core.enums.PvpType
 import com.galarzaa.tibiakt.core.enums.TransferType
 import com.galarzaa.tibiakt.core.models.world.WorldEntry
 import com.galarzaa.tibiakt.core.models.world.WorldOverview
-import com.galarzaa.tibiakt.core.utils.BuilderDsl
+import com.galarzaa.tibiakt.core.builders.BuilderDsl
 import kotlin.time.Instant
 import kotlinx.datetime.LocalDate
 

@@ -19,7 +19,7 @@ package com.galarzaa.tibiakt.core.builders
 import com.galarzaa.tibiakt.core.models.leaderboards.BaseLeaderboardEntry
 import com.galarzaa.tibiakt.core.models.leaderboards.Leaderboard
 import com.galarzaa.tibiakt.core.models.leaderboards.LeaderboardRotation
-import com.galarzaa.tibiakt.core.utils.BuilderDsl
+import com.galarzaa.tibiakt.core.builders.BuilderDsl
 import kotlin.time.Instant
 
 @BuilderDsl

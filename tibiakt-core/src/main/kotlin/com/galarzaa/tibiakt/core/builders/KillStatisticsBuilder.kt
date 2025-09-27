@@ -18,7 +18,7 @@ package com.galarzaa.tibiakt.core.builders
 
 import com.galarzaa.tibiakt.core.models.KillStatistics
 import com.galarzaa.tibiakt.core.models.KillsStatisticEntry
-import com.galarzaa.tibiakt.core.utils.BuilderDsl
+import com.galarzaa.tibiakt.core.builders.BuilderDsl
 
 @BuilderDsl
 public inline fun killStatistics(block: KillStatisticsBuilder.() -> Unit): KillStatistics =

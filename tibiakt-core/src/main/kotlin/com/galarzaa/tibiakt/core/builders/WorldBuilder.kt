@@ -22,7 +22,7 @@ import com.galarzaa.tibiakt.core.enums.TransferType
 import com.galarzaa.tibiakt.core.enums.Vocation
 import com.galarzaa.tibiakt.core.models.world.OnlineCharacter
 import com.galarzaa.tibiakt.core.models.world.World
-import com.galarzaa.tibiakt.core.utils.BuilderDsl
+import com.galarzaa.tibiakt.core.builders.BuilderDsl
 import kotlin.time.Instant
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.YearMonth

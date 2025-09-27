@@ -23,9 +23,9 @@ import com.galarzaa.tibiakt.core.enums.StringEnum
 import com.galarzaa.tibiakt.core.enums.TransferType
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
 import com.galarzaa.tibiakt.core.models.world.WorldOverview
-import com.galarzaa.tibiakt.core.utils.TABLE_SELECTOR
-import com.galarzaa.tibiakt.core.utils.parseInteger
-import com.galarzaa.tibiakt.core.utils.parsePopup
+import com.galarzaa.tibiakt.core.html.TABLE_SELECTOR
+import com.galarzaa.tibiakt.core.text.parseInteger
+import com.galarzaa.tibiakt.core.html.parsePopup
 import com.galarzaa.tibiakt.core.time.parseTibiaDateTime
 import com.galarzaa.tibiakt.core.time.parseTibiaFullDate
 import org.jsoup.Jsoup

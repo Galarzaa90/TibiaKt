@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2025 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,17 +14,9 @@
  * limitations under the License.
  */
 
-package com.galarzaa.tibiakt.core.utils
+package com.galarzaa.tibiakt.core.builders
 
-/**
- * Get a mapping's key containing the string.
- *
- * @param key The key to search for.
- * @param default The value to return if the key is not found.
- */
-public fun <V> Map<String, V>.getContaining(key: String, default: V? = null): V? {
-    for ((k, v) in this)
-        if (k.contains(key))
-            return v
-    return default
-}
+/** A builder DSL. */
+@DslMarker
+@Target(AnnotationTarget.CLASS, AnnotationTarget.TYPE, AnnotationTarget.FUNCTION)
+public annotation class BuilderDsl

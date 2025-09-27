@@ -18,7 +18,7 @@ package com.galarzaa.tibiakt.core.builders
 
 import com.galarzaa.tibiakt.core.models.creatures.BoostableBosses
 import com.galarzaa.tibiakt.core.models.creatures.BossEntry
-import com.galarzaa.tibiakt.core.utils.BuilderDsl
+import com.galarzaa.tibiakt.core.builders.BuilderDsl
 
 @BuilderDsl
 public inline fun boostableBosses(block: BoostableBossesBuilder.() -> Unit): BoostableBosses =

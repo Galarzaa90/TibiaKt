@@ -22,16 +22,16 @@ import com.galarzaa.tibiakt.core.exceptions.ParsingException
 import com.galarzaa.tibiakt.core.models.forums.CMPost
 import com.galarzaa.tibiakt.core.models.forums.CMPostArchive
 import com.galarzaa.tibiakt.core.time.parseTibiaDateTime
-import com.galarzaa.tibiakt.core.utils.PaginationData
-import com.galarzaa.tibiakt.core.utils.cells
-import com.galarzaa.tibiakt.core.utils.formData
-import com.galarzaa.tibiakt.core.utils.getLinkInformation
-import com.galarzaa.tibiakt.core.utils.offsetStart
-import com.galarzaa.tibiakt.core.utils.parsePagination
-import com.galarzaa.tibiakt.core.utils.parseTablesMap
-import com.galarzaa.tibiakt.core.utils.replaceBrs
-import com.galarzaa.tibiakt.core.utils.rows
-import com.galarzaa.tibiakt.core.utils.wholeCleanText
+import com.galarzaa.tibiakt.core.html.PaginationData
+import com.galarzaa.tibiakt.core.html.cells
+import com.galarzaa.tibiakt.core.html.formData
+import com.galarzaa.tibiakt.core.html.getLinkInformation
+import com.galarzaa.tibiakt.core.collections.offsetStart
+import com.galarzaa.tibiakt.core.html.parsePagination
+import com.galarzaa.tibiakt.core.html.parseTablesMap
+import com.galarzaa.tibiakt.core.html.replaceBrs
+import com.galarzaa.tibiakt.core.html.rows
+import com.galarzaa.tibiakt.core.html.wholeCleanText
 import org.jsoup.nodes.Element
 import kotlinx.datetime.LocalDate
 

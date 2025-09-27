@@ -16,7 +16,7 @@
 
 package com.galarzaa.tibiakt.core.time
 
-import com.galarzaa.tibiakt.core.utils.clean
+import com.galarzaa.tibiakt.core.text.clean
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.YearMonth

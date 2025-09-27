@@ -35,7 +35,7 @@ import com.galarzaa.tibiakt.core.models.bazaar.OutfitImage
 import com.galarzaa.tibiakt.core.models.bazaar.Outfits
 import com.galarzaa.tibiakt.core.models.bazaar.RevealedGem
 import com.galarzaa.tibiakt.core.models.bazaar.SalesArgument
-import com.galarzaa.tibiakt.core.utils.BuilderDsl
+import com.galarzaa.tibiakt.core.builders.BuilderDsl
 import kotlin.time.Instant
 
 @BuilderDsl

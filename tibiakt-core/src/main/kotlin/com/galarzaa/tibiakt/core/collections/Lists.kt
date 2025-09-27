@@ -14,9 +14,13 @@
  * limitations under the License.
  */
 
-package com.galarzaa.tibiakt.core.utils
+package com.galarzaa.tibiakt.core.collections
 
-/** A builder DSL. */
-@DslMarker
-@Target(AnnotationTarget.CLASS, AnnotationTarget.TYPE, AnnotationTarget.FUNCTION)
-public annotation class BuilderDsl
+import kotlin.math.min
+
+/**
+ * Get a sublist from the receiver, starting at a certain [offset].
+ *
+ * If the offset is bigger than the list's size, the same list is returned.
+ */
+public fun <T> List<T>.offsetStart(offset: Int): List<T> = subList(min(offset, size), size)

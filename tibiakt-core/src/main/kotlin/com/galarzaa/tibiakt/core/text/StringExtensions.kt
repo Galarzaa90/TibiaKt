@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.galarzaa.tibiakt.core.utils
+package com.galarzaa.tibiakt.core.text
 
 import kotlin.math.pow
 

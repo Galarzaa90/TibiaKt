@@ -1,5 +1,5 @@
 /*
- * Copyright © 2024 Allan Galarza
+ * Copyright © 2025 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.galarzaa.tibiakt.core.utils
+package com.galarzaa.tibiakt.core.html
 
 import com.galarzaa.tibiakt.core.builders.lastPost
 import com.galarzaa.tibiakt.core.enums.StringEnum
@@ -26,6 +26,9 @@ import com.galarzaa.tibiakt.core.models.forums.LastPost
 import com.galarzaa.tibiakt.core.models.forums.TournamentForumAuthor
 import com.galarzaa.tibiakt.core.models.forums.UnavailableForumAuthor
 import com.galarzaa.tibiakt.core.time.parseTibiaForumDateTime
+import com.galarzaa.tibiakt.core.text.findInteger
+import com.galarzaa.tibiakt.core.text.parseInteger
+import com.galarzaa.tibiakt.core.text.remove
 import org.jsoup.nodes.Element
 
 

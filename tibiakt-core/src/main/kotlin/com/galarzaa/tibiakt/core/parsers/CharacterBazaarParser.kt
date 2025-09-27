@@ -31,11 +31,11 @@ import com.galarzaa.tibiakt.core.enums.PvpType
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
 import com.galarzaa.tibiakt.core.models.bazaar.CharacterBazaar
 import com.galarzaa.tibiakt.core.parsers.AuctionParser.parseAuctionContainer
-import com.galarzaa.tibiakt.core.utils.formData
-import com.galarzaa.tibiakt.core.utils.nullIfBlank
-import com.galarzaa.tibiakt.core.utils.parseInteger
-import com.galarzaa.tibiakt.core.utils.parsePagination
-import com.galarzaa.tibiakt.core.utils.parseTablesMap
+import com.galarzaa.tibiakt.core.html.formData
+import com.galarzaa.tibiakt.core.text.nullIfBlank
+import com.galarzaa.tibiakt.core.text.parseInteger
+import com.galarzaa.tibiakt.core.html.parsePagination
+import com.galarzaa.tibiakt.core.html.parseTablesMap
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 

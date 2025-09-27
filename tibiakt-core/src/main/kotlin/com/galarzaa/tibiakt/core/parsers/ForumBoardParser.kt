@@ -22,16 +22,16 @@ import com.galarzaa.tibiakt.core.enums.ThreadStatus
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
 import com.galarzaa.tibiakt.core.models.forums.ForumBoard
 import com.galarzaa.tibiakt.core.models.forums.ForumEmoticon
-import com.galarzaa.tibiakt.core.utils.TABLE_SELECTOR
-import com.galarzaa.tibiakt.core.utils.cells
-import com.galarzaa.tibiakt.core.utils.cleanText
-import com.galarzaa.tibiakt.core.utils.formData
-import com.galarzaa.tibiakt.core.utils.getLinkInformation
-import com.galarzaa.tibiakt.core.utils.offsetStart
-import com.galarzaa.tibiakt.core.utils.parseLastPostFromCell
-import com.galarzaa.tibiakt.core.utils.parsePagination
-import com.galarzaa.tibiakt.core.utils.remove
-import com.galarzaa.tibiakt.core.utils.rows
+import com.galarzaa.tibiakt.core.html.TABLE_SELECTOR
+import com.galarzaa.tibiakt.core.html.cells
+import com.galarzaa.tibiakt.core.html.cleanText
+import com.galarzaa.tibiakt.core.html.formData
+import com.galarzaa.tibiakt.core.html.getLinkInformation
+import com.galarzaa.tibiakt.core.collections.offsetStart
+import com.galarzaa.tibiakt.core.html.parseLastPostFromCell
+import com.galarzaa.tibiakt.core.html.parsePagination
+import com.galarzaa.tibiakt.core.text.remove
+import com.galarzaa.tibiakt.core.html.rows
 import org.jsoup.nodes.Element
 
 /** Parser for forum boards. */

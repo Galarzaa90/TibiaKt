@@ -18,7 +18,7 @@ package com.galarzaa.tibiakt.core.builders
 
 import com.galarzaa.tibiakt.core.models.creatures.CreatureEntry
 import com.galarzaa.tibiakt.core.models.creatures.CreaturesSection
-import com.galarzaa.tibiakt.core.utils.BuilderDsl
+import com.galarzaa.tibiakt.core.builders.BuilderDsl
 
 @BuilderDsl
 public inline fun creaturesSection(block: CreaturesSectionBuilder.() -> Unit): CreaturesSection =
