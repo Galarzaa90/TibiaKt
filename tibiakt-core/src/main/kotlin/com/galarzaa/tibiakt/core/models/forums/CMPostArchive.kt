@@ -18,7 +18,7 @@
 package com.galarzaa.tibiakt.core.models.forums
 
 import com.galarzaa.tibiakt.core.models.PaginatedWithUrl
-import com.galarzaa.tibiakt.core.utils.getCMPostArchiveUrl
+import com.galarzaa.tibiakt.core.net.cmPostArchiveUrl
 import kotlinx.serialization.Serializable
 import kotlinx.datetime.LocalDate
 
@@ -41,7 +41,7 @@ public data class CMPostArchive(
     /**
      * The URL to the CM Post archive with the current filters.
      */
-    val url: String get() = getCMPostArchiveUrl(startDate, endDate, currentPage)
+    val url: String get() = cmPostArchiveUrl(startDate, endDate, currentPage)
 
-    override fun getPageUrl(page: Int): String = getCMPostArchiveUrl(startDate, endDate, page)
+    override fun getPageUrl(page: Int): String = cmPostArchiveUrl(startDate, endDate, page)
 }

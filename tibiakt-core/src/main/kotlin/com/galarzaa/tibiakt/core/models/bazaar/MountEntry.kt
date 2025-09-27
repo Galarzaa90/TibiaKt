@@ -16,7 +16,7 @@
 
 package com.galarzaa.tibiakt.core.models.bazaar
 
-import com.galarzaa.tibiakt.core.utils.getStaticFileUrl
+import com.galarzaa.tibiakt.core.net.staticFileUrl
 import kotlinx.serialization.Serializable
 
 /**
@@ -33,5 +33,5 @@ public data class MountEntry(
     /**
      * The URL to the mount's image.
      */
-    val imageUrl: String get() = getStaticFileUrl("images", "charactertrade", "mounts", "$mountId.gif")
+    val imageUrl: String get() = staticFileUrl("images", "charactertrade", "mounts", "$mountId.gif")
 }

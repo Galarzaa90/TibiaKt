@@ -16,9 +16,8 @@
 
 package com.galarzaa.tibiakt.core.models.news
 
-import com.galarzaa.tibiakt.core.utils.getEventsScheduleUrl
+import com.galarzaa.tibiakt.core.net.eventScheduleUrl
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.UseSerializers
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.YearMonth
 
@@ -36,7 +35,7 @@ public data class EventsSchedule(
     /**
      * The URL of the events schedule of the month.
      */
-    val url: String get() = getEventsScheduleUrl(yearMonth)
+    val url: String get() = eventScheduleUrl(yearMonth)
 
     /**
      * Get all the events that are active in a specific day of the month.

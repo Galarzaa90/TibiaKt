@@ -17,7 +17,7 @@
 package com.galarzaa.tibiakt.core.models.news
 
 import com.galarzaa.tibiakt.core.enums.NewsCategory
-import com.galarzaa.tibiakt.core.utils.getNewsUrl
+import com.galarzaa.tibiakt.core.net.newsUrl
 
 /**
  * Base interface for news related objects.
@@ -32,5 +32,5 @@ public interface BaseNews {
     /**
      * The URL to this article.
      */
-    public val url: String get() = getNewsUrl(id)
+    public val url: String get() = newsUrl(id)
 }

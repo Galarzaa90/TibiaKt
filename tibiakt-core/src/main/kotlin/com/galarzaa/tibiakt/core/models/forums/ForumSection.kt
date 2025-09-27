@@ -16,7 +16,7 @@
 
 package com.galarzaa.tibiakt.core.models.forums
 
-import com.galarzaa.tibiakt.core.utils.getForumSectionUrl
+import com.galarzaa.tibiakt.core.net.forumSectionUrl
 import kotlinx.serialization.Serializable
 
 /**
@@ -31,5 +31,5 @@ public data class ForumSection(
     val entries: List<BoardEntry>,
 ) {
     /** The URL to this section. */
-    val url: String get() = getForumSectionUrl(sectionId)
+    val url: String get() = forumSectionUrl(sectionId)
 }

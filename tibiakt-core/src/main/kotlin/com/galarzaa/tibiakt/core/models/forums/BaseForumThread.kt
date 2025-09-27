@@ -16,7 +16,7 @@
 
 package com.galarzaa.tibiakt.core.models.forums
 
-import com.galarzaa.tibiakt.core.utils.getForumThreadUrl
+import com.galarzaa.tibiakt.core.net.forumThreadUrl
 
 /**
  * Base interface for forum related classes.
@@ -35,7 +35,7 @@ public interface BaseForumThread {
     /**
      * The URL to the forum thread.
      */
-    public val url: String get() = getForumThreadUrl(threadId)
+    public val url: String get() = forumThreadUrl(threadId)
 
 
 }

@@ -16,7 +16,7 @@
 
 package com.galarzaa.tibiakt.core.models.guild
 
-import com.galarzaa.tibiakt.core.utils.getWorldGuildsUrl
+import com.galarzaa.tibiakt.core.net.worldGuildsUrl
 import kotlinx.serialization.Serializable
 
 /**
@@ -34,7 +34,7 @@ public data class GuildsSection(
      * The URL to this guilds section.
      */
     val url: String
-        get() = getWorldGuildsUrl(world)
+        get() = worldGuildsUrl(world)
 
     /**
      * A filtered version of [guilds] containing only active guilds.

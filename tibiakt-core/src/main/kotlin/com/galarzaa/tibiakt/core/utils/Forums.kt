@@ -25,6 +25,7 @@ import com.galarzaa.tibiakt.core.models.forums.ForumAuthor
 import com.galarzaa.tibiakt.core.models.forums.LastPost
 import com.galarzaa.tibiakt.core.models.forums.TournamentForumAuthor
 import com.galarzaa.tibiakt.core.models.forums.UnavailableForumAuthor
+import com.galarzaa.tibiakt.core.time.parseTibiaForumDateTime
 import org.jsoup.nodes.Element
 
 

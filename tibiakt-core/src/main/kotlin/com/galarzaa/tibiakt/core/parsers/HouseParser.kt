@@ -28,7 +28,7 @@ import com.galarzaa.tibiakt.core.utils.cleanText
 import com.galarzaa.tibiakt.core.utils.findInteger
 import com.galarzaa.tibiakt.core.utils.parseInteger
 import com.galarzaa.tibiakt.core.utils.parseThousandSuffix
-import com.galarzaa.tibiakt.core.utils.parseTibiaDateTime
+import com.galarzaa.tibiakt.core.time.parseTibiaDateTime
 import com.galarzaa.tibiakt.core.utils.remove
 import com.galarzaa.tibiakt.core.utils.replaceBrs
 

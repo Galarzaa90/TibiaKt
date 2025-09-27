@@ -16,7 +16,7 @@
 
 package com.galarzaa.tibiakt.core.enums
 
-import com.galarzaa.tibiakt.core.utils.getStaticFileUrl
+import com.galarzaa.tibiakt.core.net.staticFileUrl
 
 /**
  * The available news categories.
@@ -37,13 +37,13 @@ public enum class NewsCategory(override val value: String) : StringEnum {
     /**
      * A URL to the big icon version of this category.
      */
-    public val bigIconUrl: String get() = getStaticFileUrl("images", "global", "content", "newsicon_${value}_big.png")
+    public val bigIconUrl: String get() = staticFileUrl("images", "global", "content", "newsicon_${value}_big.png")
 
     /**
      * An URL to the small icon version of this category.
      */
     public val smallIconUrl: String
-        get() = getStaticFileUrl(
+        get() = staticFileUrl(
             "images",
             "global",
             "content",

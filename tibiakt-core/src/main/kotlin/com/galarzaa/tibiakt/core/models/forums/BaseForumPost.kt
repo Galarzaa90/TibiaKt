@@ -16,7 +16,7 @@
 
 package com.galarzaa.tibiakt.core.models.forums
 
-import com.galarzaa.tibiakt.core.utils.getForumPostUrl
+import com.galarzaa.tibiakt.core.net.forumPostUrl
 
 /**
  * Base interface for forum post related classes.
@@ -27,5 +27,5 @@ public interface BaseForumPost {
     public val postId: Int
 
     /** The URL to this post. */
-    public val url: String get() = getForumPostUrl(postId)
+    public val url: String get() = forumPostUrl(postId)
 }

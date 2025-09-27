@@ -26,8 +26,8 @@ import com.galarzaa.tibiakt.core.utils.clean
 import com.galarzaa.tibiakt.core.utils.getLinkInformation
 import com.galarzaa.tibiakt.core.utils.parsePopup
 import com.galarzaa.tibiakt.core.utils.parseTables
-import com.galarzaa.tibiakt.core.utils.parseTibiaDate
-import com.galarzaa.tibiakt.core.utils.parseTibiaDateTime
+import com.galarzaa.tibiakt.core.time.parseTibiaDate
+import com.galarzaa.tibiakt.core.time.parseTibiaDateTime
 import com.galarzaa.tibiakt.core.utils.remove
 import com.galarzaa.tibiakt.core.utils.splitList
 import kotlin.time.Instant

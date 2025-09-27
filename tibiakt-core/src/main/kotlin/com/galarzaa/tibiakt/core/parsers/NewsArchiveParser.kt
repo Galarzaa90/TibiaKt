@@ -28,7 +28,7 @@ import com.galarzaa.tibiakt.core.utils.cleanText
 import com.galarzaa.tibiakt.core.utils.formData
 import com.galarzaa.tibiakt.core.utils.getLinkInformation
 import com.galarzaa.tibiakt.core.utils.parseTablesMap
-import com.galarzaa.tibiakt.core.utils.parseTibiaDate
+import com.galarzaa.tibiakt.core.time.parseTibiaDate
 import com.galarzaa.tibiakt.core.utils.rows
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document

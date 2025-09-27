@@ -16,7 +16,7 @@
 
 package com.galarzaa.tibiakt.core.models.forums
 
-import com.galarzaa.tibiakt.core.utils.getCharacterUrl
+import com.galarzaa.tibiakt.core.net.characterUrl
 import kotlinx.serialization.Serializable
 
 /**
@@ -34,5 +34,5 @@ public data class AnnouncementEntry(
 ) : BaseForumAnnouncement {
 
     /** The URL to the author's character page. */
-    val authorUrl: String get() = getCharacterUrl(author)
+    val authorUrl: String get() = characterUrl(author)
 }

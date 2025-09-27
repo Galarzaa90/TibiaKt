@@ -18,9 +18,8 @@
 package com.galarzaa.tibiakt.core.models.news
 
 import com.galarzaa.tibiakt.core.enums.NewsCategory
-import com.galarzaa.tibiakt.core.utils.getForumThreadUrl
+import com.galarzaa.tibiakt.core.net.forumThreadUrl
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.UseSerializers
 import kotlinx.datetime.LocalDate
 
 /**
@@ -46,5 +45,5 @@ public data class News(
     /**
      * The URL to the discussion thread of this article, if any.
      */
-    val threadUrl: String? get() = threadId?.let { getForumThreadUrl(threadId) }
+    val threadUrl: String? get() = threadId?.let { forumThreadUrl(threadId) }
 }

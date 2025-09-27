@@ -19,7 +19,7 @@ package com.galarzaa.tibiakt.core.models.character
 
 import com.galarzaa.tibiakt.core.enums.Sex
 import com.galarzaa.tibiakt.core.enums.Vocation
-import com.galarzaa.tibiakt.core.utils.getCharacterUrl
+import com.galarzaa.tibiakt.core.net.characterUrl
 import kotlin.time.Instant
 import kotlinx.serialization.Serializable
 
@@ -93,5 +93,5 @@ public data class Character(
     /**
      * URL to the character this character is married to, if any.
      */
-    val marriedToUrl: String? get() = marriedTo?.let { getCharacterUrl(it) }
+    val marriedToUrl: String? get() = marriedTo?.let { characterUrl(it) }
 }

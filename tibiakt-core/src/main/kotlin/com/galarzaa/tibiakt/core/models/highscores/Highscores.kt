@@ -22,7 +22,7 @@ import com.galarzaa.tibiakt.core.enums.HighscoresCategory
 import com.galarzaa.tibiakt.core.enums.HighscoresProfession
 import com.galarzaa.tibiakt.core.enums.PvpType
 import com.galarzaa.tibiakt.core.models.PaginatedWithUrl
-import com.galarzaa.tibiakt.core.utils.getHighscoresUrl
+import com.galarzaa.tibiakt.core.net.highscoresUrl
 import kotlin.time.Instant
 import kotlinx.serialization.Serializable
 
@@ -53,9 +53,9 @@ public data class Highscores(
     /**
      * The URL to these highscores.
      */
-    val url: String get() = getHighscoresUrl(world, category, vocation, currentPage, battlEyeType, worldTypes)
+    val url: String get() = highscoresUrl(world, category, vocation, currentPage, battlEyeType, worldTypes)
 
     override fun getPageUrl(page: Int): String =
-        getHighscoresUrl(world, category, vocation, page, battlEyeType, worldTypes)
+        highscoresUrl(world, category, vocation, page, battlEyeType, worldTypes)
 
 }

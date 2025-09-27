@@ -28,11 +28,11 @@ import com.galarzaa.tibiakt.core.utils.getContaining
 import com.galarzaa.tibiakt.core.utils.offsetStart
 import com.galarzaa.tibiakt.core.utils.parseInteger
 import com.galarzaa.tibiakt.core.utils.parseTablesMap
-import com.galarzaa.tibiakt.core.utils.parseTibiaDateTime
-import com.galarzaa.tibiakt.core.utils.parseTibiaFullDate
+import com.galarzaa.tibiakt.core.time.parseTibiaDateTime
+import com.galarzaa.tibiakt.core.time.parseTibiaFullDate
 import com.galarzaa.tibiakt.core.utils.remove
 import com.galarzaa.tibiakt.core.utils.rows
-import com.galarzaa.tibiakt.core.utils.yearMonthFormat
+import com.galarzaa.tibiakt.core.time.FORMAT_YEAR_MONTH
 import kotlinx.datetime.YearMonth
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
@@ -132,7 +132,7 @@ public object WorldParser : Parser<World?> {
     }
 
     private fun WorldBuilder.parseCreationDate(value: String) {
-        creationDate = YearMonth.parse(value, yearMonthFormat)
+        creationDate = YearMonth.parse(value, FORMAT_YEAR_MONTH)
 
     }
 }

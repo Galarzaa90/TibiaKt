@@ -26,8 +26,8 @@ import com.galarzaa.tibiakt.core.models.world.WorldOverview
 import com.galarzaa.tibiakt.core.utils.TABLE_SELECTOR
 import com.galarzaa.tibiakt.core.utils.parseInteger
 import com.galarzaa.tibiakt.core.utils.parsePopup
-import com.galarzaa.tibiakt.core.utils.parseTibiaDateTime
-import com.galarzaa.tibiakt.core.utils.parseTibiaFullDate
+import com.galarzaa.tibiakt.core.time.parseTibiaDateTime
+import com.galarzaa.tibiakt.core.time.parseTibiaFullDate
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element

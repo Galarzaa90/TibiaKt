@@ -32,7 +32,7 @@ import com.galarzaa.tibiakt.core.utils.formData
 import com.galarzaa.tibiakt.core.utils.getLinkInformation
 import com.galarzaa.tibiakt.core.utils.offsetStart
 import com.galarzaa.tibiakt.core.utils.parsePagination
-import com.galarzaa.tibiakt.core.utils.parseTibiaDateTime
+import com.galarzaa.tibiakt.core.time.parseTibiaDateTime
 import com.galarzaa.tibiakt.core.utils.remove
 import com.galarzaa.tibiakt.core.utils.rows
 import kotlin.time.Clock

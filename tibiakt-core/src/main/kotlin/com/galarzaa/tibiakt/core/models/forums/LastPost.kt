@@ -17,7 +17,7 @@
 
 package com.galarzaa.tibiakt.core.models.forums
 
-import com.galarzaa.tibiakt.core.utils.getCharacterUrl
+import com.galarzaa.tibiakt.core.net.characterUrl
 import kotlin.time.Instant
 import kotlinx.serialization.Serializable
 
@@ -39,5 +39,5 @@ public data class LastPost(
     val traded: Boolean,
 ) : BaseForumPost {
     /** The URL to the author's character page. If the author is deleted, there is no URL. */
-    val authorUrl: String? get() = if (!deleted) getCharacterUrl(author) else null
+    val authorUrl: String? get() = if (!deleted) characterUrl(author) else null
 }

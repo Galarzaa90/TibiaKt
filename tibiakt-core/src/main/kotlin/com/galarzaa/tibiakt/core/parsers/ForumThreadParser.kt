@@ -26,7 +26,7 @@ import com.galarzaa.tibiakt.core.utils.cleanText
 import com.galarzaa.tibiakt.core.utils.getLinkInformation
 import com.galarzaa.tibiakt.core.utils.parseAuthorTable
 import com.galarzaa.tibiakt.core.utils.parsePagination
-import com.galarzaa.tibiakt.core.utils.parseTibiaForumDateTime
+import com.galarzaa.tibiakt.core.time.parseTibiaForumDateTime
 import org.jsoup.nodes.Element
 import org.jsoup.nodes.TextNode
 

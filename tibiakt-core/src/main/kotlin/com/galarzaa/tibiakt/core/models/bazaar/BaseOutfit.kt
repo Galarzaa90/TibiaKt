@@ -16,7 +16,7 @@
 
 package com.galarzaa.tibiakt.core.models.bazaar
 
-import com.galarzaa.tibiakt.core.utils.getStaticFileUrl
+import com.galarzaa.tibiakt.core.net.staticFileUrl
 
 /**
  * A base outfit displayed in auctions.
@@ -32,7 +32,7 @@ public interface BaseOutfit {
      * The URL to the outfit's image.
      */
     public val imageUrl: String
-        get() = getStaticFileUrl(
+        get() = staticFileUrl(
             "images",
             "charactertrade",
             "outfits",

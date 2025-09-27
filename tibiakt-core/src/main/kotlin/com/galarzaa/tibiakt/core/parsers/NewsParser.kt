@@ -22,7 +22,7 @@ import com.galarzaa.tibiakt.core.exceptions.ParsingException
 import com.galarzaa.tibiakt.core.models.news.News
 import com.galarzaa.tibiakt.core.utils.cleanText
 import com.galarzaa.tibiakt.core.utils.getLinkInformation
-import com.galarzaa.tibiakt.core.utils.parseTibiaDate
+import com.galarzaa.tibiakt.core.time.parseTibiaDate
 import com.galarzaa.tibiakt.core.utils.remove
 
 /** Parser for news articles. */

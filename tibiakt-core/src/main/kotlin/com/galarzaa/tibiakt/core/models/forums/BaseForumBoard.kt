@@ -16,7 +16,7 @@
 
 package com.galarzaa.tibiakt.core.models.forums
 
-import com.galarzaa.tibiakt.core.utils.getForumBoardUrl
+import com.galarzaa.tibiakt.core.net.forumBoardUrl
 
 /**
  * Base interface for forum boards.
@@ -27,5 +27,5 @@ public interface BaseForumBoard {
     public val boardId: Int
 
     /** The URL to this board. */
-    public val url: String get() = getForumBoardUrl(boardId)
+    public val url: String get() = forumBoardUrl(boardId)
 }

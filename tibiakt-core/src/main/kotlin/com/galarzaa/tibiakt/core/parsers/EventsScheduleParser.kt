@@ -25,7 +25,7 @@ import com.galarzaa.tibiakt.core.utils.cells
 import com.galarzaa.tibiakt.core.utils.cleanText
 import com.galarzaa.tibiakt.core.utils.parsePopup
 import com.galarzaa.tibiakt.core.utils.remove
-import com.galarzaa.tibiakt.core.utils.yearMonthFormat
+import com.galarzaa.tibiakt.core.time.FORMAT_YEAR_MONTH
 import kotlinx.datetime.DatePeriod
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.YearMonth
@@ -42,7 +42,7 @@ public object EventsScheduleParser : Parser<EventsSchedule> {
             val dateBlock = boxContent.selectFirst("div.eventscheduleheaderdateblock")
                 ?: throw ParsingException("date block not found")
             yearMonth =
-                YearMonth.parse(dateBlock.cleanText().remove("»").remove("«"), yearMonthFormat)
+                YearMonth.parse(dateBlock.cleanText().remove("»").remove("«"), FORMAT_YEAR_MONTH)
             parseCalendar(boxContent, yearMonth)
         }
 

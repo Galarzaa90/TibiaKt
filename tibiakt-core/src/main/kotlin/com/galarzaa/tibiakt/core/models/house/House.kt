@@ -19,7 +19,7 @@ package com.galarzaa.tibiakt.core.models.house
 
 import com.galarzaa.tibiakt.core.enums.HouseStatus
 import com.galarzaa.tibiakt.core.enums.HouseType
-import com.galarzaa.tibiakt.core.utils.getCharacterUrl
+import com.galarzaa.tibiakt.core.net.characterUrl
 import kotlin.time.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -77,10 +77,10 @@ public sealed class House : BaseHouse {
         /**
          * URL to the owner's information page.
          */
-        val ownerUrl: String get() = getCharacterUrl(owner)
+        val ownerUrl: String get() = characterUrl(owner)
 
         /** URL to the transfer recipient's information page, if any. */
-        val transferRecipientUrl: String? get() = transferRecipient?.let { getCharacterUrl(it) }
+        val transferRecipientUrl: String? get() = transferRecipient?.let { characterUrl(it) }
     }
 
     /**
@@ -109,6 +109,6 @@ public sealed class House : BaseHouse {
         /**
          * The URL to the information page of the highest bidder, if any.
          */
-        val highestBidderUrl: String? get() = highestBidder?.let { getCharacterUrl(it) }
+        val highestBidderUrl: String? get() = highestBidder?.let { characterUrl(it) }
     }
 }

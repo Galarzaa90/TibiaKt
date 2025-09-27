@@ -16,7 +16,7 @@
 
 package com.galarzaa.tibiakt.core.models.forums
 
-import com.galarzaa.tibiakt.core.utils.getForumAnnouncementUrl
+import com.galarzaa.tibiakt.core.net.forumAnnouncementUrl
 
 /** Base interface for forum announcements.
  *
@@ -30,5 +30,5 @@ public interface BaseForumAnnouncement {
     /**
      * The URL to go to the specific announcement.
      */
-    public val url: String get() = getForumAnnouncementUrl(announcementId)
+    public val url: String get() = forumAnnouncementUrl(announcementId)
 }

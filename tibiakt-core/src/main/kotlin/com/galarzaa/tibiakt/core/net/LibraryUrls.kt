@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2025 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,17 +14,20 @@
  * limitations under the License.
  */
 
-package com.galarzaa.tibiakt.core.models.character
-
-import com.galarzaa.tibiakt.core.net.characterUrl
+package com.galarzaa.tibiakt.core.net
 
 /**
- * Base interface for characters.
- *
- * @property name The name of the character.
- * @property url The URL to the character's information page.
+ * Get the URL to the Creatures section in Tibia.com.
  */
-public interface BaseCharacter {
-    public val name: String
-    public val url: String get() = characterUrl(name)
-}
+public fun creaturesUrl(): String = tibiaUrl("library", "creatures")
+
+
+/**
+ * Get the URL to the Creatures section in Tibia.com.
+ */
+public fun boostableBossesUrl(): String = tibiaUrl("library", "boostablebosses")
+
+/**
+ * Get the URL to a specific creature in Tibia.com.
+ */
+public fun creatureUrl(identifier: String): String = tibiaUrl("library", "creatures", "race" to identifier)

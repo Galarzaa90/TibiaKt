@@ -25,7 +25,7 @@ import com.galarzaa.tibiakt.core.utils.boxContent
 import com.galarzaa.tibiakt.core.utils.clean
 import com.galarzaa.tibiakt.core.utils.nullIfBlank
 import com.galarzaa.tibiakt.core.utils.parseTablesMap
-import com.galarzaa.tibiakt.core.utils.parseTibiaDate
+import com.galarzaa.tibiakt.core.time.parseTibiaDate
 import com.galarzaa.tibiakt.core.utils.remove
 import com.galarzaa.tibiakt.core.utils.wholeCleanText
 import org.jsoup.Jsoup

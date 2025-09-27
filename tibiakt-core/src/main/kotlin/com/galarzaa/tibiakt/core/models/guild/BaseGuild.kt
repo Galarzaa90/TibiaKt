@@ -16,7 +16,7 @@
 
 package com.galarzaa.tibiakt.core.models.guild
 
-import com.galarzaa.tibiakt.core.utils.getGuildUrl
+import com.galarzaa.tibiakt.core.net.guildUrl
 
 /**
  * Base interface for guild related classes.
@@ -27,5 +27,5 @@ import com.galarzaa.tibiakt.core.utils.getGuildUrl
 public interface BaseGuild {
     public val name: String
 
-    public val url: String get() = getGuildUrl(name)
+    public val url: String get() = guildUrl(name)
 }

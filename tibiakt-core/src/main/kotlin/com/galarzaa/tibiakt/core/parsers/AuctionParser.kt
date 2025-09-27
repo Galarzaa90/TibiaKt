@@ -48,7 +48,7 @@ import com.galarzaa.tibiakt.core.utils.parseInteger
 import com.galarzaa.tibiakt.core.utils.parseLong
 import com.galarzaa.tibiakt.core.utils.parsePagination
 import com.galarzaa.tibiakt.core.utils.parseTablesMap
-import com.galarzaa.tibiakt.core.utils.parseTibiaDateTime
+import com.galarzaa.tibiakt.core.time.parseTibiaDateTime
 import com.galarzaa.tibiakt.core.utils.remove
 import com.galarzaa.tibiakt.core.utils.replaceBrs
 import com.galarzaa.tibiakt.core.utils.rows

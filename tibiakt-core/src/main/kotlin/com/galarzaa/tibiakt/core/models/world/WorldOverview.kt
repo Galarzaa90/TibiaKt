@@ -17,7 +17,7 @@
 
 package com.galarzaa.tibiakt.core.models.world
 
-import com.galarzaa.tibiakt.core.utils.getWorldOverviewUrl
+import com.galarzaa.tibiakt.core.net.worldOverviewUrl
 import kotlin.time.Instant
 import kotlinx.serialization.Serializable
 
@@ -44,5 +44,5 @@ public data class WorldOverview(
      * The URL to the world overview section.
      */
     val url: String
-        get() = getWorldOverviewUrl()
+        get() = worldOverviewUrl()
 }

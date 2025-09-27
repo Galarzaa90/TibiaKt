@@ -16,7 +16,7 @@
 
 package com.galarzaa.tibiakt.core.models.creatures
 
-import com.galarzaa.tibiakt.core.utils.getStaticFileUrl
+import com.galarzaa.tibiakt.core.net.staticFileUrl
 
 /**
  * Base interface for creatures in the library.
@@ -31,5 +31,5 @@ public interface BaseCreatureEntry {
     /**
      * The URL to the creature's image.
      */
-    public val imageUrl: String get() = getStaticFileUrl("images", "library", "$identifier.gif")
+    public val imageUrl: String get() = staticFileUrl("images", "library", "$identifier.gif")
 }

@@ -16,7 +16,7 @@
 
 package com.galarzaa.tibiakt.core.models.creatures
 
-import com.galarzaa.tibiakt.core.utils.getCreaturesSectionUrl
+import com.galarzaa.tibiakt.core.net.creaturesUrl
 import kotlinx.serialization.Serializable
 
 /**
@@ -33,5 +33,5 @@ public data class CreaturesSection(
     /**
      * The URL to the creatures section.
      */
-    val url: String get() = getCreaturesSectionUrl()
+    val url: String get() = creaturesUrl()
 }

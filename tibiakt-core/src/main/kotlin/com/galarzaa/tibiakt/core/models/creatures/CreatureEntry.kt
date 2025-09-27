@@ -16,7 +16,7 @@
 
 package com.galarzaa.tibiakt.core.models.creatures
 
-import com.galarzaa.tibiakt.core.utils.getCreatureUrl
+import com.galarzaa.tibiakt.core.net.creatureUrl
 import kotlinx.serialization.Serializable
 
 /**
@@ -33,5 +33,5 @@ public data class CreatureEntry(
     /**
      * The URL to the creature's page.
      */
-    val url: String get() = getCreatureUrl(identifier)
+    val url: String get() = creatureUrl(identifier)
 }

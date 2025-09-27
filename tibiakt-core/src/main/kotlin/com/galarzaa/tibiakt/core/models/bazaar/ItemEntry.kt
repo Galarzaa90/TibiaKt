@@ -16,7 +16,7 @@
 
 package com.galarzaa.tibiakt.core.models.bazaar
 
-import com.galarzaa.tibiakt.core.utils.getStaticFileUrl
+import com.galarzaa.tibiakt.core.net.staticFileUrl
 import kotlinx.serialization.Serializable
 
 /**
@@ -39,5 +39,5 @@ public data class ItemEntry(
     /**
      * The URL to the item's image.
      */
-    val imageUrl: String get() = getStaticFileUrl("images", "charactertrade", "objects", "$itemId.gif")
+    val imageUrl: String get() = staticFileUrl("images", "charactertrade", "objects", "$itemId.gif")
 }

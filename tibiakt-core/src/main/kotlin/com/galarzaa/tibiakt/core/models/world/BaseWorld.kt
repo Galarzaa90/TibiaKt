@@ -16,7 +16,7 @@
 
 package com.galarzaa.tibiakt.core.models.world
 
-import com.galarzaa.tibiakt.core.utils.getWorldUrl
+import com.galarzaa.tibiakt.core.net.worldUrl
 
 /**
  * Base interface for worlds.
@@ -30,5 +30,5 @@ public interface BaseWorld {
      * The URL to the world's page in Tibia.com.
      */
     public val url: String
-        get() = getWorldUrl(name)
+        get() = worldUrl(name)
 }

@@ -18,7 +18,7 @@
 package com.galarzaa.tibiakt.core.models.leaderboards
 
 import com.galarzaa.tibiakt.core.models.PaginatedWithUrl
-import com.galarzaa.tibiakt.core.utils.getLeaderboardUrl
+import com.galarzaa.tibiakt.core.net.leaderboardsUrl
 import kotlin.time.Instant
 import kotlinx.serialization.Serializable
 
@@ -45,7 +45,7 @@ public data class Leaderboard(
     /**
      * The URL to these leaderboards.
      */
-    val url: String get() = getLeaderboardUrl(world, rotation.rotationId, currentPage)
+    val url: String get() = leaderboardsUrl(world, rotation.rotationId, currentPage)
 
-    override fun getPageUrl(page: Int): String = getLeaderboardUrl(world, rotation.rotationId, page)
+    override fun getPageUrl(page: Int): String = leaderboardsUrl(world, rotation.rotationId, page)
 }

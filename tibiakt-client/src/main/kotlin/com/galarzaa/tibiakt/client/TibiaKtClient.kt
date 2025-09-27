@@ -81,31 +81,31 @@ import com.galarzaa.tibiakt.core.parsers.NewsArchiveParser
 import com.galarzaa.tibiakt.core.parsers.NewsParser
 import com.galarzaa.tibiakt.core.parsers.WorldOverviewParser
 import com.galarzaa.tibiakt.core.parsers.WorldParser
-import com.galarzaa.tibiakt.core.utils.TIBIA_TIMEZONE
-import com.galarzaa.tibiakt.core.utils.getAuctionUrl
-import com.galarzaa.tibiakt.core.utils.getBazaarUrl
-import com.galarzaa.tibiakt.core.utils.getBoostableBossesUrl
-import com.galarzaa.tibiakt.core.utils.getCMPostArchiveUrl
-import com.galarzaa.tibiakt.core.utils.getCharacterUrl
-import com.galarzaa.tibiakt.core.utils.getCreaturesSectionUrl
-import com.galarzaa.tibiakt.core.utils.getEventsScheduleUrl
-import com.galarzaa.tibiakt.core.utils.getForumAnnouncementUrl
-import com.galarzaa.tibiakt.core.utils.getForumBoardUrl
-import com.galarzaa.tibiakt.core.utils.getForumPostUrl
-import com.galarzaa.tibiakt.core.utils.getForumSectionUrl
-import com.galarzaa.tibiakt.core.utils.getForumThreadUrl
-import com.galarzaa.tibiakt.core.utils.getGuildUrl
-import com.galarzaa.tibiakt.core.utils.getHighscoresUrl
-import com.galarzaa.tibiakt.core.utils.getHouseUrl
-import com.galarzaa.tibiakt.core.utils.getHousesSectionUrl
-import com.galarzaa.tibiakt.core.utils.getKillStatisticsUrl
-import com.galarzaa.tibiakt.core.utils.getLeaderboardUrl
-import com.galarzaa.tibiakt.core.utils.getNewArchiveFormData
-import com.galarzaa.tibiakt.core.utils.getNewsArchiveUrl
-import com.galarzaa.tibiakt.core.utils.getNewsUrl
-import com.galarzaa.tibiakt.core.utils.getWorldGuildsUrl
-import com.galarzaa.tibiakt.core.utils.getWorldOverviewUrl
-import com.galarzaa.tibiakt.core.utils.getWorldUrl
+import com.galarzaa.tibiakt.core.time.TIBIA_TIMEZONE
+import com.galarzaa.tibiakt.core.net.auctionUrl
+import com.galarzaa.tibiakt.core.net.bazaarUrl
+import com.galarzaa.tibiakt.core.net.boostableBossesUrl
+import com.galarzaa.tibiakt.core.net.cmPostArchiveUrl
+import com.galarzaa.tibiakt.core.net.characterUrl
+import com.galarzaa.tibiakt.core.net.creaturesUrl
+import com.galarzaa.tibiakt.core.net.eventScheduleUrl
+import com.galarzaa.tibiakt.core.net.forumAnnouncementUrl
+import com.galarzaa.tibiakt.core.net.forumBoardUrl
+import com.galarzaa.tibiakt.core.net.forumPostUrl
+import com.galarzaa.tibiakt.core.net.forumSectionUrl
+import com.galarzaa.tibiakt.core.net.forumThreadUrl
+import com.galarzaa.tibiakt.core.net.guildUrl
+import com.galarzaa.tibiakt.core.net.highscoresUrl
+import com.galarzaa.tibiakt.core.net.houseUrl
+import com.galarzaa.tibiakt.core.net.housesSectionUrl
+import com.galarzaa.tibiakt.core.net.killStatisticsUrl
+import com.galarzaa.tibiakt.core.net.leaderboardsUrl
+import com.galarzaa.tibiakt.core.net.newArchiveFormData
+import com.galarzaa.tibiakt.core.net.newsArchiveUrl
+import com.galarzaa.tibiakt.core.net.newsUrl
+import com.galarzaa.tibiakt.core.net.worldGuildsUrl
+import com.galarzaa.tibiakt.core.net.worldOverviewUrl
+import com.galarzaa.tibiakt.core.net.worldUrl
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.call.body
@@ -249,8 +249,8 @@ public open class TibiaKtClient constructor(
         categories: Set<NewsCategory>? = null,
         types: Set<NewsType>? = null,
     ): TibiaResponse<NewsArchive> {
-        val data = getNewArchiveFormData(startDate, endDate, categories, types)
-        val response = this.request(HttpMethod.Post, getNewsArchiveUrl(), data)
+        val data = newArchiveFormData(startDate, endDate, categories, types)
+        val response = this.request(HttpMethod.Post, newsArchiveUrl(), data)
         return response.parse { NewsArchiveParser.fromContent(it) }
     }
 
@@ -273,7 +273,7 @@ public open class TibiaKtClient constructor(
      * Fetch a specific news article by its [newsId].
      */
     public open suspend fun fetchNews(newsId: Int): TibiaResponse<News?> {
-        val response = this.request(HttpMethod.Get, getNewsUrl(newsId))
+        val response = this.request(HttpMethod.Get, newsUrl(newsId))
         return response.parse { NewsParser.fromContent(it, newsId) }
     }
 
@@ -281,7 +281,7 @@ public open class TibiaKtClient constructor(
      * Fetch the events schedule for a specific year and month.
      */
     public open suspend fun fetchEventsSchedule(yearMonth: YearMonth): TibiaResponse<EventsSchedule> {
-        val response = this.request(HttpMethod.Get, getEventsScheduleUrl(yearMonth))
+        val response = this.request(HttpMethod.Get, eventScheduleUrl(yearMonth))
         return response.parse { EventsScheduleParser.fromContent(it) }
     }
 
@@ -305,13 +305,13 @@ public open class TibiaKtClient constructor(
     // region Library Section
     /** Fetch the boosted boss of the day as well as the list of bosstable bosses from Tibia.com. */
     public open suspend fun fetchBoostableBosses(): TibiaResponse<BoostableBosses> {
-        val response = this.request(HttpMethod.Get, getBoostableBossesUrl())
+        val response = this.request(HttpMethod.Get, boostableBossesUrl())
         return response.parse { BoostableBossesParser.fromContent(it) }
     }
 
     /** Fetch the creatures section, containing the boosted creature. */
     public open suspend fun fetchCreaturesSection(): TibiaResponse<CreaturesSection> {
-        val response = this.request(HttpMethod.Get, getCreaturesSectionUrl())
+        val response = this.request(HttpMethod.Get, creaturesUrl())
         return response.parse { CreaturesSectionParser.fromContent(it) }
     }
 
@@ -325,7 +325,7 @@ public open class TibiaKtClient constructor(
      * @param name The name of the character.
      */
     public open suspend fun fetchCharacter(name: String): TibiaResponse<Character?> {
-        val response = this.request(HttpMethod.Get, getCharacterUrl(name))
+        val response = this.request(HttpMethod.Get, characterUrl(name))
         return response.parse { CharacterParser.fromContent(it) }
     }
 
@@ -333,19 +333,19 @@ public open class TibiaKtClient constructor(
      * Fetch the world overview, containing the list of worlds.
      */
     public open suspend fun fetchWorldOverview(): TibiaResponse<WorldOverview> {
-        val response = this.request(HttpMethod.Get, getWorldOverviewUrl())
+        val response = this.request(HttpMethod.Get, worldOverviewUrl())
         return response.parse { WorldOverviewParser.fromContent(it) }
     }
 
     /** Fetch a world's information. */
     public open suspend fun fetchWorld(name: String): TibiaResponse<World?> {
-        val response = this.request(HttpMethod.Get, getWorldUrl(name))
+        val response = this.request(HttpMethod.Get, worldUrl(name))
         return response.parse { WorldParser.fromContent(it) }
     }
 
     /** Fetch a guild by its [name]. */
     public open suspend fun fetchGuild(name: String): TibiaResponse<Guild?> {
-        val response = this.request(HttpMethod.Get, getGuildUrl(name))
+        val response = this.request(HttpMethod.Get, guildUrl(name))
         return response.parse { GuildParser.fromContent(it) }
     }
 
@@ -354,7 +354,7 @@ public open class TibiaKtClient constructor(
      * If the world does not exist, it will return null.
      */
     public open suspend fun fetchWorldGuilds(world: String): TibiaResponse<GuildsSection?> {
-        val response = this.request(HttpMethod.Get, getWorldGuildsUrl(world))
+        val response = this.request(HttpMethod.Get, worldGuildsUrl(world))
         return response.parse { GuildsSectionParser.fromContent(it) }
     }
 
@@ -362,7 +362,7 @@ public open class TibiaKtClient constructor(
      * Fetch the kill statistics for a [world].
      */
     public open suspend fun fetchKillStatistics(world: String): TibiaResponse<KillStatistics?> {
-        val response = this.request(HttpMethod.Get, getKillStatisticsUrl(world))
+        val response = this.request(HttpMethod.Get, killStatisticsUrl(world))
         return response.parse { KillStatisticsParser.fromContent(it) }
     }
 
@@ -385,7 +385,7 @@ public open class TibiaKtClient constructor(
         pvpTypes: Set<PvpType>? = null,
     ): TibiaResponse<Highscores?> {
         val response =
-            this.request(HttpMethod.Get, getHighscoresUrl(world, category, vocation, page, battlEyeType, pvpTypes))
+            this.request(HttpMethod.Get, highscoresUrl(world, category, vocation, page, battlEyeType, pvpTypes))
         return response.parse { HighscoresParser.fromContent(it) }
     }
 
@@ -445,7 +445,7 @@ public open class TibiaKtClient constructor(
         status: HouseStatus? = null,
         order: HouseOrder? = null,
     ): TibiaResponse<HousesSection?> {
-        val response = this.request(HttpMethod.Get, getHousesSectionUrl(world, town, type, status, order))
+        val response = this.request(HttpMethod.Get, housesSectionUrl(world, town, type, status, order))
         return response.parse { HousesSectionParser.fromContent(it) }
     }
 
@@ -454,7 +454,7 @@ public open class TibiaKtClient constructor(
         houseId: Int,
         world: String,
     ): TibiaResponse<House?> {
-        val response = this.request(HttpMethod.Get, getHouseUrl(world, houseId))
+        val response = this.request(HttpMethod.Get, houseUrl(world, houseId))
         return response.parse { HouseParser.fromContent(it) }
     }
 
@@ -469,7 +469,7 @@ public open class TibiaKtClient constructor(
         rotation: Int? = null,
         page: Int = 1,
     ): TibiaResponse<Leaderboard?> {
-        val response = this.request(HttpMethod.Get, getLeaderboardUrl(world, rotation, page))
+        val response = this.request(HttpMethod.Get, leaderboardsUrl(world, rotation, page))
         return response.parse { LeaderboardParser.fromContent(it) }
     }
 
@@ -481,13 +481,13 @@ public open class TibiaKtClient constructor(
      * Fetches a forum section by its internal [sectionId].
      */
     public open suspend fun fetchForumSection(sectionId: Int): TibiaResponse<ForumSection?> {
-        val response = this.request(HttpMethod.Get, getForumSectionUrl(sectionId))
+        val response = this.request(HttpMethod.Get, forumSectionUrl(sectionId))
         return response.parse { ForumSectionParser.fromContent(it) }
     }
 
     /** Fetches a specific forum section. */
     public open suspend fun fetchForumSection(section: AvailableForumSection): TibiaResponse<ForumSection?> {
-        val response = this.request(HttpMethod.Get, getForumSectionUrl(section))
+        val response = this.request(HttpMethod.Get, forumSectionUrl(section))
         return response.parse { ForumSectionParser.fromContent(it) }
     }
 
@@ -500,19 +500,19 @@ public open class TibiaKtClient constructor(
         page: Int = 1,
         threadAge: Int? = null,
     ): TibiaResponse<ForumBoard?> {
-        val response = this.request(HttpMethod.Get, getForumBoardUrl(boardId, page, threadAge))
+        val response = this.request(HttpMethod.Get, forumBoardUrl(boardId, page, threadAge))
         return response.parse { ForumBoardParser.fromContent(it) }
     }
 
     /** Fetches a thread from the Tibia.com forum. */
     public open suspend fun fetchForumAnnouncement(announcementId: Int): TibiaResponse<ForumAnnouncement?> {
-        val response = this.request(HttpMethod.Get, getForumAnnouncementUrl(announcementId))
+        val response = this.request(HttpMethod.Get, forumAnnouncementUrl(announcementId))
         return response.parse { ForumAnnouncementParser.fromContent(it, announcementId) }
     }
 
     /** Fetches a forum thread from Tibia.com. */
     public open suspend fun fetchForumThread(threadId: Int, page: Int = 1): TibiaResponse<ForumThread?> {
-        val response = this.request(HttpMethod.Get, getForumThreadUrl(threadId, page))
+        val response = this.request(HttpMethod.Get, forumThreadUrl(threadId, page))
         return response.parse { ForumThreadParser.fromContent(it) }
     }
 
@@ -521,7 +521,7 @@ public open class TibiaKtClient constructor(
      * The thread will be fetched on the page containing the [ForumThread.anchoredPost]
      */
     public open suspend fun fetchForumPost(postId: Int): TibiaResponse<ForumThread?> {
-        val response = this.request(HttpMethod.Get, getForumPostUrl(postId))
+        val response = this.request(HttpMethod.Get, forumPostUrl(postId))
         return response.parse {
             ForumThreadParser.fromContent(it)?.let { thread ->
                 thread.copy(anchoredPost = thread.entries.first { post -> post.postId == postId })
@@ -536,7 +536,7 @@ public open class TibiaKtClient constructor(
         endDate: LocalDate,
         page: Int = 0,
     ): TibiaResponse<CMPostArchive> {
-        val response = this.request(HttpMethod.Get, getCMPostArchiveUrl(startDate, endDate, page))
+        val response = this.request(HttpMethod.Get, cmPostArchiveUrl(startDate, endDate, page))
         return response.parse { CMPostArchiveParser.fromContent(it) }
     }
 
@@ -563,7 +563,7 @@ public open class TibiaKtClient constructor(
         filters: BazaarFilters? = null,
         page: Int = 1,
     ): TibiaResponse<CharacterBazaar> {
-        val response = this.request(HttpMethod.Get, getBazaarUrl(type, filters, page))
+        val response = this.request(HttpMethod.Get, bazaarUrl(type, filters, page))
         return response.parse { CharacterBazaarParser.fromContent(it) }
     }
 
@@ -593,7 +593,7 @@ public open class TibiaKtClient constructor(
         fetchOutfits: Boolean = false,
         fetchMounts: Boolean = false,
     ): TibiaResponse<Auction?> {
-        val response = this.request(HttpMethod.Get, getAuctionUrl(auctionId))
+        val response = this.request(HttpMethod.Get, auctionUrl(auctionId))
         val tibiaResponse = response.parse { AuctionParser.fromContent(it, auctionId, !skipDetails) }
         return if (tibiaResponse.data?.details != null && (fetchItems || fetchMounts || fetchOutfits))
             fetchAuctionAdditionalPages(tibiaResponse, fetchItems, fetchMounts, fetchOutfits)

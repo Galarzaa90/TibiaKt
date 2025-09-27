@@ -21,6 +21,7 @@ import com.galarzaa.tibiakt.core.builders.cmPostArchive
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
 import com.galarzaa.tibiakt.core.models.forums.CMPost
 import com.galarzaa.tibiakt.core.models.forums.CMPostArchive
+import com.galarzaa.tibiakt.core.time.parseTibiaDateTime
 import com.galarzaa.tibiakt.core.utils.PaginationData
 import com.galarzaa.tibiakt.core.utils.cells
 import com.galarzaa.tibiakt.core.utils.formData
@@ -28,7 +29,6 @@ import com.galarzaa.tibiakt.core.utils.getLinkInformation
 import com.galarzaa.tibiakt.core.utils.offsetStart
 import com.galarzaa.tibiakt.core.utils.parsePagination
 import com.galarzaa.tibiakt.core.utils.parseTablesMap
-import com.galarzaa.tibiakt.core.utils.parseTibiaDateTime
 import com.galarzaa.tibiakt.core.utils.replaceBrs
 import com.galarzaa.tibiakt.core.utils.rows
 import com.galarzaa.tibiakt.core.utils.wholeCleanText

@@ -22,7 +22,7 @@ import com.galarzaa.tibiakt.core.models.forums.ForumAnnouncement
 import com.galarzaa.tibiakt.core.utils.cleanText
 import com.galarzaa.tibiakt.core.utils.getLinkInformation
 import com.galarzaa.tibiakt.core.utils.parseAuthorTable
-import com.galarzaa.tibiakt.core.utils.parseTibiaForumDateTime
+import com.galarzaa.tibiakt.core.time.parseTibiaForumDateTime
 import com.galarzaa.tibiakt.core.utils.remove
 
 /** Parser for forum announcements. */

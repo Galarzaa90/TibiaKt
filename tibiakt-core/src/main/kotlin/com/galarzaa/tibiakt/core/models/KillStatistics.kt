@@ -16,7 +16,7 @@
 
 package com.galarzaa.tibiakt.core.models
 
-import com.galarzaa.tibiakt.core.utils.getKillStatisticsUrl
+import com.galarzaa.tibiakt.core.net.killStatisticsUrl
 import kotlinx.serialization.Serializable
 
 /**
@@ -35,7 +35,7 @@ public data class KillStatistics(
      * The URL to these kill statistics.
      */
     val url: String
-        get() = getKillStatisticsUrl(world)
+        get() = killStatisticsUrl(world)
 
     /**
      * The kill statistics for players.

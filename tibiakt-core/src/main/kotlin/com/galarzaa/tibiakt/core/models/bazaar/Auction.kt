@@ -21,8 +21,8 @@ import com.galarzaa.tibiakt.core.enums.AuctionStatus
 import com.galarzaa.tibiakt.core.enums.BidType
 import com.galarzaa.tibiakt.core.enums.Sex
 import com.galarzaa.tibiakt.core.enums.Vocation
-import com.galarzaa.tibiakt.core.utils.getAuctionUrl
-import com.galarzaa.tibiakt.core.utils.getCharacterUrl
+import com.galarzaa.tibiakt.core.net.auctionUrl
+import com.galarzaa.tibiakt.core.net.characterUrl
 import kotlin.time.Instant
 import kotlinx.serialization.Serializable
 
@@ -64,8 +64,8 @@ public data class Auction(
     val details: AuctionDetails?,
 ) {
     /** URL to the auction. */
-    val url: String get() = getAuctionUrl(auctionId)
+    val url: String get() = auctionUrl(auctionId)
 
     /** URL to the character being sold. */
-    val characterUrl: String get() = getCharacterUrl(name)
+    val characterUrl: String get() = characterUrl(name)
 }

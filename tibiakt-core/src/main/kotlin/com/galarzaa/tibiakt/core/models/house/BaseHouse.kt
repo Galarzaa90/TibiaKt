@@ -16,8 +16,8 @@
 
 package com.galarzaa.tibiakt.core.models.house
 
-import com.galarzaa.tibiakt.core.utils.getHouseUrl
-import com.galarzaa.tibiakt.core.utils.getStaticFileUrl
+import com.galarzaa.tibiakt.core.net.houseUrl
+import com.galarzaa.tibiakt.core.net.staticFileUrl
 
 /**
  * Base interface for house related classes.
@@ -32,10 +32,10 @@ public interface BaseHouse {
     /**
      * The URL to the house's information page.
      */
-    public val url: String get() = getHouseUrl(world, houseId)
+    public val url: String get() = houseUrl(world, houseId)
 
     /**
      * URL to the house's image.
      */
-    public val imageUrl: String get() = getStaticFileUrl("images", "houses", "house_$houseId.png")
+    public val imageUrl: String get() = staticFileUrl("images", "houses", "house_$houseId.png")
 }
