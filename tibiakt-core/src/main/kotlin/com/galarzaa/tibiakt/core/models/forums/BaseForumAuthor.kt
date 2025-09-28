@@ -60,7 +60,7 @@ public data class UnavailableForumAuthor(
  * @property title The selected title of the character, if any.
  * @property vocation The vocation of the character.
  * @property guild The guild of the character, if any.
- * @property posts The total number of posts by this author.
+ * @property postsCount The total number of posts by this author.
  * @property isRecentlyTraded The character was traded in the last 30 days.
  */
 @SerialName("forumAuthor")
@@ -73,18 +73,18 @@ public data class ForumAuthor(
     val title: String?,
     val vocation: Vocation,
     val guild: GuildMembershipWithTitle?,
-    val posts: Int,
+    val postsCount: Int,
     val isRecentlyTraded: Boolean,
 ) : BaseForumAuthor(), BaseCharacter, CharacterLevel
 
 /**
  * An author from a tournament world.
  *
- * @property posts The total number of posts by this author.
+ * @property postCount The total number of posts by this author.
  */
 @SerialName("tournamentForumAuthor")
 @Serializable
 public data class TournamentForumAuthor(
     override val name: String,
-    val posts: Int,
+    val postCount: Int,
 ) : BaseForumAuthor(), BaseCharacter

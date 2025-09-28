@@ -58,9 +58,9 @@ public class ForumThreadBuilder : TibiaKtBuilder<ForumThread> {
     override fun build(): ForumThread = ForumThread(
         title = title ?: error("title is required"),
         threadId = threadId ?: error("threadId is required"),
-        board = board ?: error("board is required"),
+        boardName = board ?: error("board is required"),
         boardId = boardId ?: error("boardId is required"),
-        section = section ?: error("section is required"),
+        sectionName = section ?: error("section is required"),
         sectionId = sectionId ?: error("sectionId is required"),
         previousTopicNumber = previousTopicNumber,
         nextTopicNumber = nextTopicNumber,

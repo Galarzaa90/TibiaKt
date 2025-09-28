@@ -60,7 +60,7 @@ public class WorldBuilder : TibiaKtBuilder<World> {
         return World(
             name = name ?: error("name is required"),
             isOnline = isOnline,
-            onlineCount = onlineCount,
+            onlinePlayersCount = onlineCount,
             location = location ?: error("location is required"),
             pvpType = pvpType ?: error("pvpType is required"),
             battlEyeType = battlEyeType,
@@ -72,7 +72,7 @@ public class WorldBuilder : TibiaKtBuilder<World> {
                 ?: error("onlineRecordDateTime is required"),
             isExperimental = isExperimental,
             createdOn = creationDate ?: error("creationDate is required"),
-            playersOnline = playersOnline,
+            onlinePlayers = playersOnline,
             worldQuests = worldQuests,
         )
     }

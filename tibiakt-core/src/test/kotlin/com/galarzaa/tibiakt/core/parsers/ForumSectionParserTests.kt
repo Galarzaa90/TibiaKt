@@ -42,8 +42,8 @@ class ForumSectionParserTests : StringSpec({
         boards.entries shouldHaveAtLeastSize 1
         boards.entries.forAtLeastOne {
             it.lastPost shouldBe null
-            it.posts shouldBe 0
-            it.threads shouldBe 0
+            it.postsCount shouldBe 0
+            it.threadsCount shouldBe 0
         }
     }
 })

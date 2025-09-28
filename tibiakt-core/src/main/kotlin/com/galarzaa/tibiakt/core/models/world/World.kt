@@ -29,7 +29,7 @@ import kotlinx.datetime.YearMonth
  * A game world.
  *
  * @property isOnline Whether this world is currently online or not.
- * @property onlineCount The total of online players in this world.
+ * @property onlinePlayersCount The total of online players in this world.
  * @property location The geographical location of the server.
  * @property pvpType The type of PvP in this world.
  * @property battlEyeType The type of BattlEye protection present in this world.
@@ -41,14 +41,14 @@ import kotlinx.datetime.YearMonth
  * @property onlineRecordAt The date and time when the maximum online players record was set.
  * @property createdOn The year and month when this world was created.
  * @property worldQuests The list of world quests completed.
- * @property playersOnline The list of online players in this world.
+ * @property onlinePlayers The list of online players in this world.
  */
 @Serializable
 public data class World(
     override val name: String,
     val isOnline: Boolean,
-    val onlineCount: Int,
-    val location: String,
+    val onlinePlayersCount: Int,
+    val location: String,7
     val pvpType: PvpType,
     val battlEyeType: BattlEyeType,
     val battlEyeStartedOn: LocalDate?,
@@ -59,7 +59,7 @@ public data class World(
     val onlineRecordAt: Instant,
     val createdOn: YearMonth,
     val worldQuests: List<String>,
-    val playersOnline: List<OnlineCharacter>,
+    val onlinePlayers: List<OnlineCharacter>,
 ) : BaseWorld {
 
     /** Check if a character from this world can be transferred to [target] world. */

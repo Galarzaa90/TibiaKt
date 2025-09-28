@@ -49,10 +49,10 @@ public sealed class House : BaseHouse {
      * A rented house or guildhall.
      *
      * @property paidUntil The date when the last paid rent is due.
-     * @property owner The character that currently owns the house.
+     * @property ownerName The character that currently owns the house.
      * @property transferScheduledAt The date when the current owner will move out of the house.
      * @property transferPrice The amount of gold coins to be paid for transferring the house.
-     * @property transferAccepted Whether the transfer has been accepted by the recipient or not.
+     * @property isTransferAccepted Whether the transfer has been accepted by the recipient or not.
      * @property transferRecipient The character that will receive the house.
      */
     @Serializable
@@ -66,10 +66,10 @@ public sealed class House : BaseHouse {
         override val rent: Int,
         override val world: String,
         val paidUntil: Instant,
-        val owner: String,
+        val ownerName: String,
         val transferScheduledAt: Instant?,
         val transferPrice: Int?,
-        val transferAccepted: Boolean?,
+        val isTransferAccepted: Boolean?,
         val transferRecipient: String?,
     ) : House() {
         override val status: HouseStatus = HouseStatus.RENTED
@@ -77,7 +77,7 @@ public sealed class House : BaseHouse {
         /**
          * URL to the owner's information page.
          */
-        val ownerUrl: String get() = characterUrl(owner)
+        val ownerUrl: String get() = characterUrl(ownerName)
 
         /** URL to the transfer recipient's information page, if any. */
         val transferRecipientUrl: String? get() = transferRecipient?.let { characterUrl(it) }

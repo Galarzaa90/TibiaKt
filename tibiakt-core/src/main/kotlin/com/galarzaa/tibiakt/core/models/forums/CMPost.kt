@@ -26,13 +26,13 @@ import kotlinx.serialization.Serializable
  *
  * @property postId The ID of the post.
  * @property postedAt The date and time when the post was created.
- * @property board The name of the board where the post is.
+ * @property boardName The name of the board where the post is.
  * @property threadTitle The title of the thread where the post is.
  */
 @Serializable
 public data class CMPost(
     override val postId: Int,
     val postedAt: Instant,
-    val board: String,
+    val boardName: String,
     val threadTitle: String,
 ) : BaseForumPost

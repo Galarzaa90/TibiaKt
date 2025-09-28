@@ -23,9 +23,9 @@ import kotlinx.serialization.Serializable
 /**
  * A thread in the Tibia forums.
  *
- * @property board The name of the board the thread is in.
+ * @property boardName The name of the board the thread is in.
  * @property boardId The internal ID of the board the thread is in.
- * @property section The name of the section the board is in.
+ * @property sectionName The name of the section the board is in.
  * @property sectionId The internal ID of the section the board is in.
  * @property previousTopicNumber The ID of the thread before this one.
  * @property nextTopicNumber The ID of the thread after this one.
@@ -36,9 +36,9 @@ import kotlinx.serialization.Serializable
 public data class ForumThread(
     override val title: String,
     override val threadId: Int,
-    val board: String,
+    val boardName: String,
     val boardId: Int,
-    val section: String,
+    val sectionName: String,
     val sectionId: Int,
     val previousTopicNumber: Int?,
     val nextTopicNumber: Int?,

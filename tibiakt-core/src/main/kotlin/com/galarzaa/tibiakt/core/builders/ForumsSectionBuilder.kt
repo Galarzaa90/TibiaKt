@@ -52,8 +52,8 @@ public class ForumsSectionBuilder : TibiaKtBuilder<ForumSection> {
             name = name ?: throw IllegalArgumentException("name is required"),
             boardId = boardId,
             description = description ?: throw IllegalArgumentException("description is required"),
-            posts = posts,
-            threads = threads,
+            postsCount = posts,
+            threadsCount = threads,
             lastPost = lastPost
         )
     }

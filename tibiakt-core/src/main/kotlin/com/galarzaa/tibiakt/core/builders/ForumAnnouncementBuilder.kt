@@ -45,9 +45,9 @@ public class ForumAnnouncementBuilder : TibiaKtBuilder<ForumAnnouncement> {
     override fun build(): ForumAnnouncement = ForumAnnouncement(
         announcementId = announcementId ?: error("announcementId is required"),
         title = title ?: error("title is required"),
-        board = board ?: error("board is required"),
+        boardName = board ?: error("board is required"),
         boardId = boardId ?: error("boardId is required"),
-        section = section ?: error("section is required"),
+        sectionName = section ?: error("section is required"),
         sectionId = sectionId ?: error("sectionId is required"),
         author = author ?: error("author is required"),
         content = content ?: error("content is required"),

@@ -23,7 +23,6 @@ import com.galarzaa.tibiakt.core.models.forums.ForumBoard
 import com.galarzaa.tibiakt.core.models.forums.ForumEmoticon
 import com.galarzaa.tibiakt.core.models.forums.LastPost
 import com.galarzaa.tibiakt.core.models.forums.ThreadEntry
-import com.galarzaa.tibiakt.core.builders.BuilderDsl
 
 public inline fun forumBoardBuilder(block: ForumBoardBuilder.() -> Unit): ForumBoardBuilder =
     ForumBoardBuilder().apply(block)
@@ -96,16 +95,16 @@ public class ForumBoardBuilder : TibiaKtBuilder<ForumBoard> {
         override fun build(): ThreadEntry = ThreadEntry(
             title = title ?: error("title is required"),
             threadId = threadId ?: error("threadId is required"),
-            author = author ?: error("author is required"),
+            authorName = author ?: error("author is required"),
             isAuthorTraded = isAuthorTraded,
             isAuthorDeleted = isAuthorDeleted,
             emoticon = emoticon,
-            replies = replies,
-            views = views,
+            repliesCount = replies,
+            viewsCount = views,
             status = status,
             lastPost = lastPost ?: error("lastPost is required"),
             pages = pages,
-            goldenFrame = hasGoldenFrame
+            hasGoldenFrame = hasGoldenFrame
         )
     }
 }

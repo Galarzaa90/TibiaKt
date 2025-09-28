@@ -69,7 +69,7 @@ class GuildParserTests : FunSpec({
         with(guild){
             disbandsOn shouldBe null
             guildHall shouldBe null
-            homepage shouldBe null
+            homepageUrl shouldBe null
             description shouldBe null
         }
     }

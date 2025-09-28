@@ -68,7 +68,7 @@ class ForumBoardParserTests : FunSpec({
 
         forumBoard.shouldBeInstanceOf<ForumBoard>()
         forumBoard.entries.forAtLeastOne {
-            it.goldenFrame shouldBe true
+            it.hasGoldenFrame shouldBe true
         }
     }
     test("Forum board with thread by deleted char") {

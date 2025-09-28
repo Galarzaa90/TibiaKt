@@ -60,10 +60,10 @@ public class HouseBuilder : TibiaKtBuilder<House> {
             rent = rent ?: error("rent is required"),
             world = world ?: error("world is required"),
             paidUntil = paidUntil ?: error("paidUntil is required"),
-            owner = owner ?: error("Owner is required"),
+            ownerName = owner ?: error("Owner is required"),
             transferScheduledAt = movingDate,
             transferPrice = transferPrice,
-            transferAccepted = isTransferAccepted,
+            isTransferAccepted = isTransferAccepted,
             transferRecipient = transferRecipient
         )
 

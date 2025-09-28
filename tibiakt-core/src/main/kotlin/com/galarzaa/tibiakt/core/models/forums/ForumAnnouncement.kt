@@ -23,9 +23,9 @@ import kotlinx.serialization.Serializable
 /**
  * An announcement in the Tibia forums.
  *
- * @property board The name of the board the announcement is posted in.
+ * @property boardName The name of the board the announcement is posted in.
  * @property boardId The internal ID of the board the announcement is in.
- * @property section The name of the section the announcement is posted in.
+ * @property sectionName The name of the section the announcement is posted in.
  * @property sectionId The internal ID of the section the announcement is in.
  * @property author The author that created the announcement.
  * @property content The content of the announcement.
@@ -36,9 +36,9 @@ import kotlinx.serialization.Serializable
 public data class ForumAnnouncement(
     override val announcementId: Int,
     override val title: String,
-    val board: String,
+    val boardName: String,
     val boardId: Int,
-    val section: String,
+    val sectionName: String,
     val sectionId: Int,
     val author: BaseForumAuthor,
     val content: String,

@@ -34,7 +34,7 @@ class WorldParserTests : FunSpec({
             isOnline shouldBe true
             location shouldBe "Europe"
             worldQuests shouldHaveAtLeastSize 1
-            playersOnline shouldHaveSize onlineCount
+            onlinePlayers shouldHaveSize onlinePlayersCount
         }
     }
 
@@ -43,8 +43,8 @@ class WorldParserTests : FunSpec({
         world.shouldBeInstanceOf<World>()
         with(world) {
             isOnline shouldBe false
-            playersOnline shouldHaveSize 0
-            onlineCount shouldBe 0
+            onlinePlayers shouldHaveSize 0
+            onlinePlayersCount shouldBe 0
         }
     }
 

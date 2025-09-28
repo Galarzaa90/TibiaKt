@@ -37,6 +37,6 @@ class WorldBuilderTests : StringSpec({
             addOnlinePlayer("Galarzaa Fidera", 285, Vocation.ROYAL_PALADIN)
         }
 
-        world.playersOnline shouldHaveSize 2
+        world.onlinePlayers shouldHaveSize 2
     }
 })
