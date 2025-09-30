@@ -117,7 +117,7 @@ public data class AuctionDetails(
     val completedQuestLines: List<String>,
     val titles: List<String>,
     val achievements: List<AchievementEntry>,
-    val bestiaryProgress: List<CreatureEntry>,
-    val bosstiaryProgress: List<CreatureEntry>,
+    val bestiaryProgress: List<AuctionCreatureEntry>,
+    val bosstiaryProgress: List<AuctionCreatureEntry>,
     val revealedGems: List<RevealedGem>,
 )

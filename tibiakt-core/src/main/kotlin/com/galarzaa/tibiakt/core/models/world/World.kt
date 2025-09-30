@@ -48,7 +48,7 @@ public data class World(
     override val name: String,
     val isOnline: Boolean,
     val onlinePlayersCount: Int,
-    val location: String,7
+    val location: String,
     val pvpType: PvpType,
     val battlEyeType: BattlEyeType,
     val battlEyeStartedOn: LocalDate?,

@@ -28,4 +28,7 @@ import kotlinx.serialization.Serializable
 public data class CharmEntry(
     val name: String,
     val cost: Int,
+    val currency: String,
+    val type: String,
+    val grade: Int,
 )

@@ -26,7 +26,7 @@ import com.galarzaa.tibiakt.core.models.bazaar.Auction
 import com.galarzaa.tibiakt.core.models.bazaar.AuctionSkills
 import com.galarzaa.tibiakt.core.models.bazaar.BlessingEntry
 import com.galarzaa.tibiakt.core.models.bazaar.CharmEntry
-import com.galarzaa.tibiakt.core.models.bazaar.CreatureEntry
+import com.galarzaa.tibiakt.core.models.bazaar.AuctionCreatureEntry
 import com.galarzaa.tibiakt.core.models.bazaar.FamiliarEntry
 import com.galarzaa.tibiakt.core.models.bazaar.Familiars
 import com.galarzaa.tibiakt.core.models.bazaar.ItemEntry
@@ -53,6 +53,8 @@ import com.galarzaa.tibiakt.core.text.remove
 import com.galarzaa.tibiakt.core.html.replaceBrs
 import com.galarzaa.tibiakt.core.html.rows
 import com.galarzaa.tibiakt.core.html.wholeCleanText
+import com.galarzaa.tibiakt.core.models.bazaar.BestiaryEntry
+import com.galarzaa.tibiakt.core.models.bazaar.BosstiaryEntry
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 import java.io.File
@@ -109,8 +111,8 @@ public object AuctionParser : Parser<Auction?> {
                 }
                 detailsTables["Titles"]?.run { parseSingleColumnTable(this).forEach { addTitle(it) } }
                 detailsTables["Achievements"]?.run { parseAchievementsTable(this) }
-                detailsTables["Bestiary Progress"]?.run { parseBestiaryTable(this, false) }
-                detailsTables["Bosstiary Progress"]?.run { parseBestiaryTable(this, true) }
+                detailsTables["Bestiary Progress"]?.run { parseBestiaryTable(this) }
+                detailsTables["Bosstiary Progress"]?.run { parseBestiaryTable(this) }
                 detailsTables["Revealed Gems"]?.run { parseRevealedGemsTable(this) }
             }
         }
@@ -119,9 +121,10 @@ public object AuctionParser : Parser<Auction?> {
     private fun AuctionBuilder.AuctionDetailsBuilder.parseCharmsTable(table: Element) {
         for (row in table.selectFirst(TABLE_SELECTOR).rows().offsetStart(1)) {
             val colsText = row.cellsText()
-            if (colsText.size != 2) continue
-            val (cost, name) = colsText
-            addCharm(CharmEntry(name, cost.parseInteger()))
+            if (colsText.size != 4) continue
+            val (cost, type, name, grade) = colsText
+            val icon = row.selectFirst("img") ?: continue
+            addCharm(CharmEntry(name, cost.parseInteger(), icon.attr("alt"), type, grade.parseInteger()))
         }
     }
 
@@ -134,13 +137,25 @@ public object AuctionParser : Parser<Auction?> {
         }
     }
 
-    private fun AuctionBuilder.AuctionDetailsBuilder.parseBestiaryTable(table: Element, bosstiary: Boolean = false) {
+    private fun AuctionBuilder.AuctionDetailsBuilder.parseBosstiaryTablee(table: Element) {
         for (row in table.selectFirst(TABLE_SELECTOR).rows().offsetStart(1)) {
             val columnsText = row.cellsText()
             if (columnsText.size != 3) continue
             val (step, kills, name) = columnsText
-            val entry = CreatureEntry(name, kills.remove("x").parseLong(), step.toInt())
-            if (bosstiary) addBosstiaryEntry(entry) else addBestiaryEntry(entry)
+            val entry = BosstiaryEntry(name, kills.remove("x").parseLong(), step.toInt())
+            addBosstiaryEntry(entry)
+        }
+    }
+
+    private fun AuctionBuilder.AuctionDetailsBuilder.parseBestiaryTable(table: Element) {
+        for (row in table.selectFirst(TABLE_SELECTOR).rows().offsetStart(1)) {
+            val columnsText = row.cellsText()
+            if (columnsText.size != 4) continue
+            val (step, kills, name, _) = columnsText
+            val masteryIcon = row.selectFirst("img") ?: continue
+            val masteryUnlocked = masteryIcon.attr("alt").contains("unlocked")
+            val entry = BestiaryEntry(name, kills.remove("x").parseLong(), step.toInt(), masteryUnlocked)
+            addBestiaryEntry(entry)
         }
     }
 

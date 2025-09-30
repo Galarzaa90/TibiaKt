@@ -26,13 +26,34 @@ import kotlinx.serialization.Serializable
  * @property step The current unlock step of the character.
  */
 @Serializable
-public data class CreatureEntry(
-    val name: String,
-    val kills: Long,
-    val step: Int,
-) {
+public sealed interface AuctionCreatureEntry {
+    public val name: String
+    public val kills: Long
+    public val step: Int
+
     /**
      * Whether the entry is complete or not.
      */
-    val isComplete: Boolean get() = step == 4
+    public val isComplete: Boolean get() = step == 4
 }
+
+/**
+ * A bosstiary entry of an [Auction] character.
+ */
+@Serializable
+public data class BosstiaryEntry(
+    override val name: String,
+    override val kills: Long,
+    override val step: Int,
+) : AuctionCreatureEntry
+
+/**
+ * A bestiary entry of an [Auction] character.
+ */
+@Serializable
+public data class BestiaryEntry(
+    override val name: String,
+    override val kills: Long,
+    override val step: Int,
+    val isMasteryUnlocked: Boolean,
+) : AuctionCreatureEntry

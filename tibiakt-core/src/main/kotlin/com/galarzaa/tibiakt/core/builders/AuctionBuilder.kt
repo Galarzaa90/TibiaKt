@@ -26,7 +26,9 @@ import com.galarzaa.tibiakt.core.models.bazaar.AuctionDetails
 import com.galarzaa.tibiakt.core.models.bazaar.AuctionSkills
 import com.galarzaa.tibiakt.core.models.bazaar.BlessingEntry
 import com.galarzaa.tibiakt.core.models.bazaar.CharmEntry
-import com.galarzaa.tibiakt.core.models.bazaar.CreatureEntry
+import com.galarzaa.tibiakt.core.models.bazaar.AuctionCreatureEntry
+import com.galarzaa.tibiakt.core.models.bazaar.BestiaryEntry
+import com.galarzaa.tibiakt.core.models.bazaar.BosstiaryEntry
 import com.galarzaa.tibiakt.core.models.bazaar.Familiars
 import com.galarzaa.tibiakt.core.models.bazaar.ItemEntry
 import com.galarzaa.tibiakt.core.models.bazaar.ItemSummary
@@ -171,8 +173,8 @@ public class AuctionBuilder : TibiaKtBuilder<Auction> {
         public val completedQuestLines: MutableList<String> = mutableListOf()
         public val titles: MutableList<String> = mutableListOf()
         public val achievements: MutableList<AchievementEntry> = mutableListOf()
-        public val bestiaryProgress: MutableList<CreatureEntry> = mutableListOf()
-        public val bosstiaryProgress: MutableList<CreatureEntry> = mutableListOf()
+        public val bestiaryProgress: MutableList<BestiaryEntry> = mutableListOf()
+        public val bosstiaryProgress: MutableList<BosstiaryEntry> = mutableListOf()
         public val revealedGems: MutableList<RevealedGem> = mutableListOf()
 
 
@@ -192,10 +194,10 @@ public class AuctionBuilder : TibiaKtBuilder<Auction> {
         public fun addAchievement(achievement: AchievementEntry): AuctionDetailsBuilder =
             apply { achievements.add(achievement) }
 
-        public fun addBestiaryEntry(bestiaryEntry: CreatureEntry): AuctionDetailsBuilder =
+        public fun addBestiaryEntry(bestiaryEntry: BestiaryEntry): AuctionDetailsBuilder =
             apply { bestiaryProgress.add(bestiaryEntry) }
 
-        public fun addBosstiaryEntry(bosstiaryEntry: CreatureEntry): AuctionDetailsBuilder =
+        public fun addBosstiaryEntry(bosstiaryEntry: BosstiaryEntry): AuctionDetailsBuilder =
             apply { bosstiaryProgress.add(bosstiaryEntry) }
 
         public fun addRevealedGem(revealedGem: RevealedGem): AuctionDetailsBuilder =
