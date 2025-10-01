@@ -68,3 +68,29 @@ public fun String?.nullIfBlank(): String? = takeIf { !it.isNullOrBlank() }
  */
 public fun String.parseThousandSuffix(): Int =
     remove("k", true).parseInteger() * (1000.0.pow(count { it == 'k' || it == 'K' }).toInt())
+
+
+internal fun parseRomanNumerals(s: String): Int {
+    val values = mapOf(
+        'I' to 1,
+        'V' to 5,
+        'X' to 10,
+        'L' to 50,
+        'C' to 100,
+        'D' to 500,
+        'M' to 1000
+    )
+
+    var result = 0
+    var prev = 0
+    for (ch in s.reversed()) {
+        val value = values[ch] ?: 0
+        if (value < prev) {
+            result -= value
+        } else {
+            result += value
+        }
+        prev = value
+    }
+    return result
+}

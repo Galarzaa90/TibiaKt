@@ -26,10 +26,10 @@ import com.galarzaa.tibiakt.core.models.bazaar.AuctionDetails
 import com.galarzaa.tibiakt.core.models.bazaar.AuctionSkills
 import com.galarzaa.tibiakt.core.models.bazaar.BlessingEntry
 import com.galarzaa.tibiakt.core.models.bazaar.CharmEntry
-import com.galarzaa.tibiakt.core.models.bazaar.AuctionCreatureEntry
 import com.galarzaa.tibiakt.core.models.bazaar.BestiaryEntry
 import com.galarzaa.tibiakt.core.models.bazaar.BosstiaryEntry
 import com.galarzaa.tibiakt.core.models.bazaar.Familiars
+import com.galarzaa.tibiakt.core.models.bazaar.FragmentProgressEntry
 import com.galarzaa.tibiakt.core.models.bazaar.ItemEntry
 import com.galarzaa.tibiakt.core.models.bazaar.ItemSummary
 import com.galarzaa.tibiakt.core.models.bazaar.Mounts
@@ -37,6 +37,7 @@ import com.galarzaa.tibiakt.core.models.bazaar.OutfitImage
 import com.galarzaa.tibiakt.core.models.bazaar.Outfits
 import com.galarzaa.tibiakt.core.models.bazaar.RevealedGem
 import com.galarzaa.tibiakt.core.models.bazaar.SalesArgument
+import com.galarzaa.tibiakt.core.models.bazaar.WeaponProficiency
 import kotlin.time.Instant
 
 @BuilderDsl
@@ -176,6 +177,8 @@ public class AuctionBuilder : TibiaKtBuilder<Auction> {
         public val bestiaryProgress: MutableList<BestiaryEntry> = mutableListOf()
         public val bosstiaryProgress: MutableList<BosstiaryEntry> = mutableListOf()
         public val revealedGems: MutableList<RevealedGem> = mutableListOf()
+        public val fragmentProgress: MutableList<FragmentProgressEntry> = mutableListOf()
+        public val proficiencies: MutableList<WeaponProficiency> = mutableListOf()
 
 
         public fun addBlessing(blessingEntry: BlessingEntry): AuctionDetailsBuilder =
@@ -202,6 +205,12 @@ public class AuctionBuilder : TibiaKtBuilder<Auction> {
 
         public fun addRevealedGem(revealedGem: RevealedGem): AuctionDetailsBuilder =
             apply { revealedGems.add(revealedGem) }
+
+        public fun addFragmentProgress(revealedGem: FragmentProgressEntry): AuctionDetailsBuilder =
+            apply { fragmentProgress.add(revealedGem) }
+
+        public fun addProficiency(weaponProficiency: WeaponProficiency): AuctionDetailsBuilder =
+            apply { proficiencies.add(weaponProficiency) }
 
         public override fun build(): AuctionDetails =
             AuctionDetails(
@@ -255,6 +264,8 @@ public class AuctionBuilder : TibiaKtBuilder<Auction> {
                 bestiaryProgress = bestiaryProgress,
                 bosstiaryProgress = bosstiaryProgress,
                 revealedGems = revealedGems,
+                fragmentProgress = fragmentProgress,
+                proficiencies = proficiencies,
             )
     }
 }

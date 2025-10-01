@@ -30,3 +30,12 @@ public data class RevealedGem(
     val mods: List<RevealedGemMod>,
 )
 
+/**
+ * A mod for a revealed gem.
+ *
+ * @property effects The effects the mod has.
+ */
+@Serializable
+public data class RevealedGemMod(
+    val effects: List<String>,
+)

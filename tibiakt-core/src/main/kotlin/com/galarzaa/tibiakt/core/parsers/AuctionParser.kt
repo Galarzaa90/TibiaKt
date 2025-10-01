@@ -26,7 +26,6 @@ import com.galarzaa.tibiakt.core.models.bazaar.Auction
 import com.galarzaa.tibiakt.core.models.bazaar.AuctionSkills
 import com.galarzaa.tibiakt.core.models.bazaar.BlessingEntry
 import com.galarzaa.tibiakt.core.models.bazaar.CharmEntry
-import com.galarzaa.tibiakt.core.models.bazaar.AuctionCreatureEntry
 import com.galarzaa.tibiakt.core.models.bazaar.FamiliarEntry
 import com.galarzaa.tibiakt.core.models.bazaar.Familiars
 import com.galarzaa.tibiakt.core.models.bazaar.ItemEntry
@@ -44,6 +43,7 @@ import com.galarzaa.tibiakt.core.text.clean
 import com.galarzaa.tibiakt.core.html.cleanText
 import com.galarzaa.tibiakt.core.html.getLinkInformation
 import com.galarzaa.tibiakt.core.collections.offsetStart
+import com.galarzaa.tibiakt.core.html.cells
 import com.galarzaa.tibiakt.core.text.parseInteger
 import com.galarzaa.tibiakt.core.text.parseLong
 import com.galarzaa.tibiakt.core.html.parsePagination
@@ -55,6 +55,9 @@ import com.galarzaa.tibiakt.core.html.rows
 import com.galarzaa.tibiakt.core.html.wholeCleanText
 import com.galarzaa.tibiakt.core.models.bazaar.BestiaryEntry
 import com.galarzaa.tibiakt.core.models.bazaar.BosstiaryEntry
+import com.galarzaa.tibiakt.core.models.bazaar.FragmentProgressEntry
+import com.galarzaa.tibiakt.core.models.bazaar.WeaponProficiency
+import com.galarzaa.tibiakt.core.text.parseRomanNumerals
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 import java.io.File
@@ -114,6 +117,8 @@ public object AuctionParser : Parser<Auction?> {
                 detailsTables["Bestiary Progress"]?.run { parseBestiaryTable(this) }
                 detailsTables["Bosstiary Progress"]?.run { parseBestiaryTable(this) }
                 detailsTables["Revealed Gems"]?.run { parseRevealedGemsTable(this) }
+                detailsTables["Fragment Progress"]?.run { parseFragmentProgressTable(this) }
+                detailsTables["Proficiencies"]?.run { parseProficienciesTable(this) }
             }
         }
     }
@@ -168,6 +173,39 @@ public object AuctionParser : Parser<Auction?> {
                 RevealedGemMod(it.replaceBrs().wholeCleanText().split("\n"))
             }
             addRevealedGem(RevealedGem(gemType, mods))
+        }
+    }
+    private fun AuctionBuilder.AuctionDetailsBuilder.parseFragmentProgressTable(table: Element) {
+        var modType: String? = null
+        for (row in table.select(TABLE_SELECTOR).flatMap { it.rows() }) {
+            val columns = row.cells()
+            if (columns.size != 2) continue
+            val (gradeCol, typeCol) = columns
+            if(gradeCol.text().contains("Grade")) {
+                modType = typeCol.text().remove(" Mod")
+                continue
+            }
+            if(modType == null) continue
+            val grade = parseRomanNumerals(gradeCol.text())
+            addFragmentProgress(FragmentProgressEntry(grade, typeCol.cleanText(), modType))
+        }
+    }
+
+    private fun AuctionBuilder.AuctionDetailsBuilder.parseProficienciesTable(table: Element){
+        for (row in table.selectFirst(TABLE_SELECTOR).rows().offsetStart(1)) {
+            val columns = row.cells()
+            if (columns.size != 4) continue
+            val (weaponCell, levelCell, progressCell, masteryCell) = columns
+            val (level, maxLevel) = levelCell.cleanText().split("/").map { it.toInt() }
+            val masteryIcon = masteryCell.selectFirst("img") ?: continue
+            val masteryUnlocked = masteryIcon.attr("alt").contains("unlocked")
+            addProficiency(WeaponProficiency(
+                name = weaponCell.cleanText(),
+                level = level,
+                maxLevel = maxLevel,
+                totalProgress = progressCell.cleanText().parseInteger(),
+                hasMastery = masteryUnlocked
+            ))
         }
     }
 

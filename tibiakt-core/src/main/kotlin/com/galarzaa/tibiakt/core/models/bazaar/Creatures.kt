@@ -25,7 +25,6 @@ import kotlinx.serialization.Serializable
  * @property kills The number of kills done by the character.
  * @property step The current unlock step of the character.
  */
-@Serializable
 public sealed interface AuctionCreatureEntry {
     public val name: String
     public val kills: Long

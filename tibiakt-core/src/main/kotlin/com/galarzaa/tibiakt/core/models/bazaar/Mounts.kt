@@ -16,6 +16,7 @@
 
 package com.galarzaa.tibiakt.core.models.bazaar
 
+import com.galarzaa.tibiakt.core.net.staticFileUrl
 import kotlinx.serialization.Serializable
 
 /**
@@ -29,3 +30,20 @@ public data class Mounts(
     override val entries: List<MountEntry>,
     override val isFullyFetched: Boolean,
 ) : AjaxPaginator<MountEntry>
+
+/**
+ * A mount in an [Auction] character.
+ *
+ * @property name The name of the mount.
+ * @property mountId The internal ID of the mount.
+ */
+@Serializable
+public data class MountEntry(
+    val name: String,
+    val mountId: Int,
+) {
+    /**
+     * The URL to the mount's image.
+     */
+    val imageUrl: String get() = staticFileUrl("images", "charactertrade", "mounts", "$mountId.gif")
+}

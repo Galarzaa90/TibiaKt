@@ -1,5 +1,5 @@
 /*
- * Copyright © 2024 Allan Galarza
+ * Copyright © 2022 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,18 @@ package com.galarzaa.tibiakt.core.models.bazaar
 
 import com.galarzaa.tibiakt.core.net.staticFileUrl
 import kotlinx.serialization.Serializable
+
+/**
+ * A collection of items of an auctioned character.
+ */
+@Serializable
+public data class ItemSummary(
+    override val currentPage: Int,
+    override val totalPages: Int,
+    override val resultsCount: Int,
+    override val entries: List<ItemEntry>,
+    override val isFullyFetched: Boolean,
+) : AjaxPaginator<ItemEntry>
 
 /**
  * An in-game item in an [Auction].

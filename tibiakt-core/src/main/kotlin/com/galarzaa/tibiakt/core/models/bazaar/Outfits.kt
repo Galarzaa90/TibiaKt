@@ -16,6 +16,7 @@
 
 package com.galarzaa.tibiakt.core.models.bazaar
 
+import com.galarzaa.tibiakt.core.net.staticFileUrl
 import kotlinx.serialization.Serializable
 
 /**
@@ -29,3 +30,44 @@ public data class Outfits(
     override val entries: List<OutfitEntry>,
     override val isFullyFetched: Boolean,
 ) : AjaxPaginator<OutfitEntry>
+
+
+/**
+ * A base outfit displayed in auctions.
+ *
+ * @property outfitId The internal ID of the outfit.
+ * @property addons The selected or unlocked addons.
+ */
+public interface BaseOutfit {
+    public val outfitId: Int
+    public val addons: Int
+
+    /**
+     * The URL to the outfit's image.
+     */
+    public val imageUrl: String
+        get() = staticFileUrl(
+            "images", "charactertrade", "outfits", "${outfitId}_$addons.gif"
+        )
+}
+
+/**
+ * The currently selected outfit of a character in an [Auction].
+ */
+@Serializable
+public data class OutfitImage(
+    override val outfitId: Int,
+    override val addons: Int,
+) : BaseOutfit
+
+/**
+ * An outfit owned or unlocked by a character in an [Auction].
+ *
+ * @property name The name of the outfit.
+ */
+@Serializable
+public data class OutfitEntry(
+    val name: String,
+    override val outfitId: Int,
+    override val addons: Int,
+) : BaseOutfit
