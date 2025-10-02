@@ -49,10 +49,10 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
   <td class="name">BosstiaryEntry</td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    50%
   </span>
   <span class="absValue">
-    (0/2)
+    (1/2)
   </span>
 </td>
 <td class="coverageStat">
@@ -65,18 +65,18 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    80%
   </span>
   <span class="absValue">
-    (0/5)
+    (4/5)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    29.3%
   </span>
   <span class="absValue">
-    (0/58)
+    (17/58)
   </span>
 </td>
 </tr>
@@ -112,10 +112,10 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    33.3%
   </span>
   <span class="absValue">
-    (0/3)
+    (1/3)
   </span>
 </td>
 <td class="coverageStat">
@@ -128,18 +128,18 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    66.7%
   </span>
   <span class="absValue">
-    (0/6)
+    (4/6)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    28.3%
   </span>
   <span class="absValue">
-    (0/60)
+    (17/60)
   </span>
 </td>
 </tr>
@@ -192,14 +192,16 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp; * A bosstiary entry of an [Auction] character.
 &nbsp; */
 <b class="nc">&nbsp;@Serializable</b>
-<b class="nc">&nbsp;public data class BosstiaryEntry(</b>
-<b class="nc">&nbsp;    override val name: String,</b>
-<b class="nc">&nbsp;    override val kills: Long,</b>
-<b class="nc">&nbsp;    override val step: Int,</b>
+<b class="fc">&nbsp;public data class BosstiaryEntry(</b>
+<b class="fc">&nbsp;    override val name: String,</b>
+<b class="fc">&nbsp;    override val kills: Long,</b>
+<b class="fc">&nbsp;    override val step: Int,</b>
 &nbsp;) : AuctionCreatureEntry
 &nbsp;
 &nbsp;/**
 &nbsp; * A bestiary entry of an [Auction] character.
+&nbsp; *
+&nbsp; * @property isMasteryUnlocked Whether the character has unlocked the mastery of this creature or not.
 &nbsp; */
 &nbsp;@Serializable
 &nbsp;public data class BestiaryEntry(
@@ -231,7 +233,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-02 05:00</div>
+    <div style="float:right;">generated on 2025-10-02 05:06</div>
 </div>
 </body>
 </html>

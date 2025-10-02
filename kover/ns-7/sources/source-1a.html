@@ -170,6 +170,15 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;
 &nbsp;import kotlinx.serialization.Serializable
 &nbsp;
+&nbsp;/**
+&nbsp; * Represents a character&#39;s proficiency with a weapon in the game.
+&nbsp; *
+&nbsp; * @property name The name of the weapon.
+&nbsp; * @property level The current proficiency level.
+&nbsp; * @property maxLevel The maximum attainable level for this weapon.
+&nbsp; * @property totalProgress The total amount of progress made towards leveling up this weapon.
+&nbsp; * @property hasMastery Whether the character has mastered this weapon.
+&nbsp; */
 <b class="nc">&nbsp;@Serializable</b>
 <b class="nc">&nbsp;public data class WeaponProficiency(</b>
 <b class="nc">&nbsp;    val name: String,</b>
@@ -201,7 +210,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-02 05:00</div>
+    <div style="float:right;">generated on 2025-10-02 05:06</div>
 </div>
 </body>
 </html>

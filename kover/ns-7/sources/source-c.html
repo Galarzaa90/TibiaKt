@@ -171,10 +171,13 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;import kotlinx.serialization.Serializable
 &nbsp;
 &nbsp;/**
-&nbsp; * A charm of an [Auction]ed character.
+&nbsp; * A charm of an [auctioned][Auction] character.
 &nbsp; *
 &nbsp; * @property name The name of the charm
-&nbsp; * @property cost The cost of the charm in charm points.
+&nbsp; * @property cost The cost of the charm.
+&nbsp; * @property currency The type of points needed to unlock this charm.
+&nbsp; * @property type The type of charm.
+&nbsp; * @property grade The grade of the charm.
 &nbsp; */
 <b class="nc">&nbsp;@Serializable</b>
 <b class="nc">&nbsp;public data class CharmEntry(</b>
@@ -207,7 +210,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-02 05:00</div>
+    <div style="float:right;">generated on 2025-10-02 05:06</div>
 </div>
 </body>
 </html>
