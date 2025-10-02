@@ -24,12 +24,6 @@ private const val TEST_HOST = "www.test.tibia.com"
 private const val STATIC_HOST = "static.tibia.com"
 private val LATIN1 = StandardCharsets.ISO_8859_1
 
-private fun joinPath(vararg parts: String): String =
-    parts.asSequence()
-        .filter { it.isNotEmpty() }
-        .map { it.trim('/') }
-        .filter { it.isNotEmpty() }
-        .joinToString("/")
 
 /**
  * Build a URL to Tibia.com.
@@ -87,7 +81,7 @@ public fun tibiaUrl(
  * @param test Whether to use the testing version of Tibia.com or not.
  */
 public fun staticFileUrl(path: String, test: Boolean = false): String =
-    "https://${if (test) "test." else ""}static.tibia.com/${path.replace("//", "/")}"
+    "https://${if (test) "test." else ""}$STATIC_HOST/${path.replace("//", "/")}"
 
 /**
  * Get the URL of a static asset in Tibia.com.

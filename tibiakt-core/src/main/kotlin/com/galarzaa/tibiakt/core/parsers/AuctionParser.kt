@@ -115,7 +115,7 @@ public object AuctionParser : Parser<Auction?> {
                 detailsTables["Titles"]?.run { parseSingleColumnTable(this).forEach { addTitle(it) } }
                 detailsTables["Achievements"]?.run { parseAchievementsTable(this) }
                 detailsTables["Bestiary Progress"]?.run { parseBestiaryTable(this) }
-                detailsTables["Bosstiary Progress"]?.run { parseBestiaryTable(this) }
+                detailsTables["Bosstiary Progress"]?.run { parseBosstiaryTablee(this) }
                 detailsTables["Revealed Gems"]?.run { parseRevealedGemsTable(this) }
                 detailsTables["Fragment Progress"]?.run { parseFragmentProgressTable(this) }
                 detailsTables["Proficiencies"]?.run { parseProficienciesTable(this) }

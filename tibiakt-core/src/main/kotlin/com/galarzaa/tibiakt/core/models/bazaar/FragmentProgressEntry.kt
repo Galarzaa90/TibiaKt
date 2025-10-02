@@ -18,7 +18,13 @@ package com.galarzaa.tibiakt.core.models.bazaar
 
 import kotlinx.serialization.Serializable
 
-
+/**
+ * Represents the progress of a fragment in an auctioned character's details.
+ *
+ * @property grade The grade of the fragment.
+ * @property effect The effect associated with the fragment.
+ * @property modType The type of mod of the fragment.
+ */
 @Serializable
 public data class FragmentProgressEntry(
     val grade: Int,

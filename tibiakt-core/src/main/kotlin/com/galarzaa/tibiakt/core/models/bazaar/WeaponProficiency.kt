@@ -18,6 +18,15 @@ package com.galarzaa.tibiakt.core.models.bazaar
 
 import kotlinx.serialization.Serializable
 
+/**
+ * Represents a character's proficiency with a weapon in the game.
+ *
+ * @property name The name of the weapon.
+ * @property level The current proficiency level.
+ * @property maxLevel The maximum attainable level for this weapon.
+ * @property totalProgress The total amount of progress made towards leveling up this weapon.
+ * @property hasMastery Whether the character has mastered this weapon.
+ */
 @Serializable
 public data class WeaponProficiency(
     val name: String,

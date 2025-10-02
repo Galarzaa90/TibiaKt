@@ -48,6 +48,8 @@ public data class BosstiaryEntry(
 
 /**
  * A bestiary entry of an [Auction] character.
+ *
+ * @property isMasteryUnlocked Whether the character has unlocked the mastery of this creature or not.
  */
 @Serializable
 public data class BestiaryEntry(

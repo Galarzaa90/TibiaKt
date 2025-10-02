@@ -70,6 +70,8 @@ import kotlinx.serialization.Serializable
  * @property bestiaryProgress The list of bestiary creatures and their progress.
  * @property bosstiaryProgress The list of bosstiary bosses and their progress.
  * @property revealedGems The gems revealed by the character, with their effects.
+ * @property fragmentProgress The list of fragments and their progress.
+ * @property proficiencies The weapon proficiencies progress of the character.
  */
 @Serializable
 public data class AuctionDetails(

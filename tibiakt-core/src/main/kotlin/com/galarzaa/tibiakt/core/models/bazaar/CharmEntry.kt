@@ -19,10 +19,13 @@ package com.galarzaa.tibiakt.core.models.bazaar
 import kotlinx.serialization.Serializable
 
 /**
- * A charm of an [Auction]ed character.
+ * A charm of an [auctioned][Auction] character.
  *
  * @property name The name of the charm
- * @property cost The cost of the charm in charm points.
+ * @property cost The cost of the charm.
+ * @property currency The type of points needed to unlock this charm.
+ * @property type The type of charm.
+ * @property grade The grade of the charm.
  */
 @Serializable
 public data class CharmEntry(
