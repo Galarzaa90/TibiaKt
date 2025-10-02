@@ -63,7 +63,7 @@ jobs:
         run: |
           rm -rf public
           mv site public
-          mv dokka/build/dokka public/api
+          mv dokka/build/dokka/html public/api
           mv tibiakt-core/build/reports/kover/html public/kover
 
       - name: Deploy to GitHub Pages🚀
