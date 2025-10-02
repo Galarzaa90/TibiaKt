@@ -1,6 +1,11 @@
 site_name: TibiaKt
+site_author: Allan Galarza
+site_description: Kotlin library to fetch and parse Tibia.com pages.
 repo_url: https://github.com/Galarzaa90/TibiaKt
 repo_name: Galarzaa90/TibiaKt
+copyright: >
+  &copy; 2025 Allan Galarza<br>
+  <a href="https://www.tibia.com">Tibia</a> is made by <a href="https://www.cipsoft.com/">CipSoft</a>, all Tibia content is copyrighted by <a href="https://www.cipsoft.com/">CipSoft GmbH</a>.
 
 theme:
   name: material
@@ -31,6 +36,7 @@ theme:
     repo: fontawesome/brands/github
   features:
     - content.code.copy
+    - content.code.select
     - navigation.footer
     - navigation.instant
     - navigation.instant.progress
@@ -60,10 +66,21 @@ watch:
 
 markdown_extensions:
   - admonition
+  - def_list
   - pymdownx.details
   - pymdownx.superfences
   - pymdownx.highlight:
       anchor_linenums: true
   - pymdownx.snippets
+  - pymdownx.tasklist:
+      custom_checkbox: true
   - toc:
       permalink: true
+
+nav:
+  - TibiaKt:
+     Home: index.md
+     Supported Sections: sections.md
+     Usage: usage.md
+     Changelog: changelog.md
+  - API Reference ↗: api/

@@ -1,29 +1,25 @@
 # TibiaKt
 
-Kotlin library to fetch and parse Tibia.com pages into data objects to use in your projects.
+![GitHub Release](https://img.shields.io/github/v/release/Galarzaa90/TibiaKt)![GitHub Release Date](https://img.shields.io/github/release-date/Galarzaa90/TibiaKt)  
+[![Maven Central](https://img.shields.io/maven-central/v/com.galarzaa/tibiakt-core)](https://central.sonatype.com/search?q=tibiakt)  
+[![Docker Image Version](https://img.shields.io/docker/v/galarzaa90/tibiakt?sort=semver&logo=docker&logoColor=white)
+![Docker Pulls](https://img.shields.io/docker/pulls/galarzaa90/tibiakt)
+![Docker Image Size](https://img.shields.io/docker/image-size/galarzaa90/tibiakt?sort=semver)
+](https://hub.docker.com/r/galarzaa90/tibiakt)
 
-## Installation
+Kotlin library to fetch and parse Tibia.com pages.
 
-The latest version available on maven central is:  
-[![Maven Central](https://img.shields.io/maven-central/v/com.galarzaa/tibiakt-core)](https://central.sonatype.com/search?q=tibiakt)
+## Features
 
-The latest snapshot available is:
+- Support for most of Tibia.com pages, with complete data for characters, highscores, guilds, etc.
+- Utility methods to build URLs, handle server save times, etctera.
+- Complete data models for characters, guilds, etc.
+- Easily extendable, use any HTTP client of your choice or use the included one.
 
-![Maven metadata URL](https://img.shields.io/maven-metadata/v?metadataUrl=https%3A%2F%2Fcentral.sonatype.com%2Frepository%2Fmaven-snapshots%2Fcom%2Fgalarzaa%2Ftibiakt-core%2Fmaven-metadata.xml)
 
+## Usage example
+Getting a character's data can be as simple as:
 ```kotlin
-repositories {
-    mavenCentral()
-    // Only if you want to use snapshots
-    maven {
-        name = "Maven Central Snapshots"
-        url = uri("https://central.sonatype.com/repository/maven-snapshots/")
-    }
-}
-
-dependencies {
-    implementation("com.galarzaa:tibiakt-core:{version}")
-    // OR
-    implementation("com.galarzaa:tibiakt-client:{version}")
-}
+val client = TibiaKtClient()
+val character: TibiaResponse<Character> = client.fetchCharacter("Galarzaa Fidera")
 ```

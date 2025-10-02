@@ -50,7 +50,7 @@ This is the heart of TibiaKt, it contains all the model definitions and parsing 
 You can use this to parse the HTML content of Tibia pages obtained with any library.
 
 ```kotlin
-val characterUrl: String = getCharacterUrl("Galarzaa Fidera")
+val characterUrl: String = characterUrl("Galarzaa Fidera")
 val content: String = client.get(characterUrl) // Replace with any HTTP library you want
 val character: Character = CharacterParser.fromContent(content)
 ```
@@ -65,7 +65,7 @@ All you need is to create an instance of `TibiaKtClient` and you're ready to go!
 val client = TibiaKtClient()
 
 val character: TibiaResponse<Character> = client.fetchCharacter("Galarzaa Fidera")
-val world: TibiaResponse<Wolrd> = client.fetchWorld("Gladera")
+val world: TibiaResponse<World> = client.fetchWorld("Gladera")
 ```
 
 The `TibiaResponse` object contains information such as the time it took to fetch the data, the time it took to parse it
