@@ -6,12 +6,12 @@ on:
       - main
 
 jobs:
-  build:
-    name: Build Docs and Coverage 📃
+  dokka:
+    name: Build Dokka & Kover 📚
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🚚
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
@@ -19,55 +19,83 @@ jobs:
         uses: actions/setup-java@v5
         with:
           java-version: 19
-          distribution: 'temurin'
+          distribution: temurin
+
       - name: Setup Gradle 🐘
         uses: gradle/actions/setup-gradle@v5
 
-      - name: Set up Python
+      - name: Generate Coverage Report 📊
+        run: ./gradlew tibiakt-core:koverHtmlReport
+
+      - name: Generate API documentation 📃
+        run: ./gradlew dokkaGenerate
+
+      - name: Upload Dokka artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dokka-html
+          path: dokka/build/dokka/html
+          if-no-files-found: error
+
+      - name: Upload Coverage artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: kover-html
+          path: tibiakt-core/build/reports/kover/html
+          if-no-files-found: warn
+
+
+  mkdocs:
+    name: Build MkDocs Site 📖
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🚚
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python 🐍
         uses: actions/setup-python@v6
         with:
           python-version: "3.11"
 
-      - name: Install MkDocs dependencies
+      - name: Install MkDocs dependencies 📃
         run: pip install -r requirements.txt
 
-      - name: Set version 🏷️
-        run: |
-          if [[ "${{ github.event_name }}" == "release" ]]; then
-            VERSION="${{ github.event.release.tag_name }}"
-            GITHUB_TAG_NAME="${{ github.event.release.tag_name }}"
-          else
-            BASE_TAG=$(git describe --tags --abbrev=0)
-            VERSION="${BASE_TAG}-SNAPSHOT"
-          fi
-          echo "VERSION=$VERSION" >> $GITHUB_ENV
-          {
-            echo "### 🔖 Version Info"
-            echo "- VERSION: \`$VERSION\`"
-          } >> $GITHUB_STEP_SUMMARY
-
-
-      - name: Generate Coverage Report 📊
-        if: ${{github.event_name == 'push'}}
-        run: ./gradlew tibiakt-core:koverHtmlReport
-
-      - name: Generate API documentation 📃
-        if: ${{github.event_name == 'push'}}
-        run: ./gradlew dokkaGenerate
-
-      - name: Build MkDocs site
-        if: ${{github.event_name == 'push'}}
+      - name: Build MkDocs site 📃
         run: mkdocs build
 
-      - name: Organize files 📁
-        run: |
-          rm -rf public
-          mv site public
-          mv dokka/build/dokka/html public/api
-          mv tibiakt-core/build/reports/kover/html public/kover
+      - name: Upload MkDocs artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: mkdocs-site
+          path: site
+          if-no-files-found: error
 
-      - name: Deploy to GitHub Pages🚀
-        if: ${{github.event_name == 'push'}}
+  publish:
+    name: Merge outputs & Deploy 🚀
+    runs-on: ubuntu-latest
+    needs: [dokka, mkdocs]
+    steps:
+      - name: Download MkDocs
+        uses: actions/download-artifact@v5
+        with:
+          name: mkdocs-site
+          path: public
+
+      - name: Download Dokka
+        uses: actions/download-artifact@v5
+        with:
+          name: dokka-html
+          path: public/api
+
+      - name: Download Coverage
+        uses: actions/download-artifact@v5
+        with:
+          name: kover-html
+          path: public/kover
+
+      - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
