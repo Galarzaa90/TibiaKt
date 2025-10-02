@@ -119,8 +119,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;
 &nbsp;import com.galarzaa.tibiakt.core.models.forums.BaseForumAuthor
 &nbsp;import com.galarzaa.tibiakt.core.models.forums.ForumAnnouncement
-&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
-&nbsp;import kotlinx.datetime.Instant
+&nbsp;import kotlin.time.Instant
 &nbsp;
 &nbsp;@BuilderDsl
 &nbsp;public inline fun forumAnnouncementBuilder(block: ForumAnnouncementBuilder.() -&gt; Unit): ForumAnnouncementBuilder =
@@ -147,14 +146,14 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;    override fun build(): ForumAnnouncement = ForumAnnouncement(</b>
 <b class="pc">&nbsp;        announcementId = announcementId ?: error(&quot;announcementId is required&quot;),</b>
 <b class="pc">&nbsp;        title = title ?: error(&quot;title is required&quot;),</b>
-<b class="pc">&nbsp;        board = board ?: error(&quot;board is required&quot;),</b>
+<b class="pc">&nbsp;        boardName = board ?: error(&quot;board is required&quot;),</b>
 <b class="pc">&nbsp;        boardId = boardId ?: error(&quot;boardId is required&quot;),</b>
-<b class="pc">&nbsp;        section = section ?: error(&quot;section is required&quot;),</b>
+<b class="pc">&nbsp;        sectionName = section ?: error(&quot;section is required&quot;),</b>
 <b class="pc">&nbsp;        sectionId = sectionId ?: error(&quot;sectionId is required&quot;),</b>
 <b class="pc">&nbsp;        author = author ?: error(&quot;author is required&quot;),</b>
 <b class="pc">&nbsp;        content = content ?: error(&quot;content is required&quot;),</b>
-<b class="pc">&nbsp;        startDate = startDate ?: error(&quot;startDate is required&quot;),</b>
-<b class="pc">&nbsp;        endDate = endDate ?: error(&quot;endDate is required&quot;)</b>
+<b class="pc">&nbsp;        startsAt = startDate ?: error(&quot;startDate is required&quot;),</b>
+<b class="pc">&nbsp;        endsAt = endDate ?: error(&quot;endDate is required&quot;)</b>
 &nbsp;    )
 &nbsp;}
 </code>
@@ -180,7 +179,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-07-16 21:19</div>
+    <div style="float:right;">generated on 2025-10-02 02:54</div>
 </div>
 </body>
 </html>

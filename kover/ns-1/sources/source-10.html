@@ -112,9 +112,8 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;
 &nbsp;import com.galarzaa.tibiakt.core.models.news.EventEntry
 &nbsp;import com.galarzaa.tibiakt.core.models.news.EventsSchedule
-&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
-&nbsp;import java.time.LocalDate
-&nbsp;import java.time.YearMonth
+&nbsp;import kotlinx.datetime.LocalDate
+&nbsp;import kotlinx.datetime.YearMonth
 &nbsp;
 &nbsp;@BuilderDsl
 &nbsp;public inline fun eventsSchedule(block: EventsScheduleBuilder.() -&gt; Unit): EventsSchedule =
@@ -152,7 +151,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;
 &nbsp;    override fun build(): EventsSchedule =
 &nbsp;        EventsSchedule(
-&nbsp;            yearMonth = if (::yearMonth.isInitialized) yearMonth else error(&quot;yearMonth is required&quot;),
+&nbsp;            month = if (::yearMonth.isInitialized) yearMonth else error(&quot;yearMonth is required&quot;),
 &nbsp;            entries = entries
 &nbsp;        )
 &nbsp;
@@ -202,7 +201,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-07-16 21:19</div>
+    <div style="float:right;">generated on 2025-10-02 02:54</div>
 </div>
 </body>
 </html>

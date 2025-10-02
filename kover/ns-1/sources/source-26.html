@@ -111,8 +111,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;package com.galarzaa.tibiakt.core.builders
 &nbsp;
 &nbsp;import com.galarzaa.tibiakt.core.models.forums.LastPost
-&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
-&nbsp;import kotlinx.datetime.Instant
+&nbsp;import kotlin.time.Instant
 &nbsp;
 &nbsp;@BuilderDsl
 <b class="fc">&nbsp;public inline fun lastPostBuilder(block: LastPostBuilder.() -&gt; Unit): LastPostBuilder = LastPostBuilder().apply(block)</b>
@@ -132,9 +131,9 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;    override fun build(): LastPost = LastPost(
 &nbsp;        author = author ?: error(&quot;author is required&quot;),
 &nbsp;        postId = postId ?: error(&quot;postId is required&quot;),
-&nbsp;        date = date ?: error(&quot;date is required&quot;),
-&nbsp;        deleted = isDeleted,
-&nbsp;        traded = isTraded
+&nbsp;        postedAt = date ?: error(&quot;date is required&quot;),
+&nbsp;        isDeleted = isDeleted,
+&nbsp;        isTraded = isTraded
 &nbsp;    )
 &nbsp;}
 </code>
@@ -160,7 +159,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-07-16 21:19</div>
+    <div style="float:right;">generated on 2025-10-02 02:54</div>
 </div>
 </body>
 </html>

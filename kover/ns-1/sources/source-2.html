@@ -120,8 +120,10 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;import com.galarzaa.tibiakt.core.models.bazaar.AuctionSkills
 &nbsp;import com.galarzaa.tibiakt.core.models.bazaar.BlessingEntry
 &nbsp;import com.galarzaa.tibiakt.core.models.bazaar.CharmEntry
-&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.CreatureEntry
+&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.BestiaryEntry
+&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.BosstiaryEntry
 &nbsp;import com.galarzaa.tibiakt.core.models.bazaar.Familiars
+&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.FragmentProgressEntry
 &nbsp;import com.galarzaa.tibiakt.core.models.bazaar.ItemEntry
 &nbsp;import com.galarzaa.tibiakt.core.models.bazaar.ItemSummary
 &nbsp;import com.galarzaa.tibiakt.core.models.bazaar.Mounts
@@ -129,8 +131,8 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;import com.galarzaa.tibiakt.core.models.bazaar.Outfits
 &nbsp;import com.galarzaa.tibiakt.core.models.bazaar.RevealedGem
 &nbsp;import com.galarzaa.tibiakt.core.models.bazaar.SalesArgument
-&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
-&nbsp;import kotlinx.datetime.Instant
+&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.WeaponProficiency
+&nbsp;import kotlin.time.Instant
 &nbsp;
 &nbsp;@BuilderDsl
 <b class="fc">&nbsp;public inline fun auction(block: AuctionBuilder.() -&gt; Unit): Auction = AuctionBuilder().apply(block).build()</b>
@@ -184,8 +186,8 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;        outfit = if (::outfit.isInitialized) outfit else error(&quot;outfit is required&quot;),
 &nbsp;        displayedItems = displayedItems,
 &nbsp;        salesArguments = salesArguments,
-&nbsp;        auctionStart = if (::auctionStart.isInitialized) auctionStart else error(&quot;auctionStart is required&quot;),
-&nbsp;        auctionEnd = if (::auctionEnd.isInitialized) auctionEnd else error(&quot;auctionEnd is required&quot;),
+&nbsp;        startsAt = if (::auctionStart.isInitialized) auctionStart else error(&quot;auctionStart is required&quot;),
+&nbsp;        endsAt = if (::auctionEnd.isInitialized) auctionEnd else error(&quot;auctionEnd is required&quot;),
 &nbsp;        bid = bid,
 &nbsp;        bidType = if (::bidType.isInitialized) bidType else error(&quot;bidType is required&quot;),
 &nbsp;        status = if (::status.isInitialized) status else error(&quot;status is required&quot;),
@@ -266,9 +268,11 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;        public val completedQuestLines: MutableList&lt;String&gt; = mutableListOf()
 &nbsp;        public val titles: MutableList&lt;String&gt; = mutableListOf()
 &nbsp;        public val achievements: MutableList&lt;AchievementEntry&gt; = mutableListOf()
-&nbsp;        public val bestiaryProgress: MutableList&lt;CreatureEntry&gt; = mutableListOf()
-&nbsp;        public val bosstiaryProgress: MutableList&lt;CreatureEntry&gt; = mutableListOf()
+&nbsp;        public val bestiaryProgress: MutableList&lt;BestiaryEntry&gt; = mutableListOf()
+&nbsp;        public val bosstiaryProgress: MutableList&lt;BosstiaryEntry&gt; = mutableListOf()
 &nbsp;        public val revealedGems: MutableList&lt;RevealedGem&gt; = mutableListOf()
+&nbsp;        public val fragmentProgress: MutableList&lt;FragmentProgressEntry&gt; = mutableListOf()
+&nbsp;        public val proficiencies: MutableList&lt;WeaponProficiency&gt; = mutableListOf()
 &nbsp;
 &nbsp;
 &nbsp;        public fun addBlessing(blessingEntry: BlessingEntry): AuctionDetailsBuilder =
@@ -287,14 +291,20 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;        public fun addAchievement(achievement: AchievementEntry): AuctionDetailsBuilder =
 &nbsp;            apply { achievements.add(achievement) }
 &nbsp;
-&nbsp;        public fun addBestiaryEntry(bestiaryEntry: CreatureEntry): AuctionDetailsBuilder =
+&nbsp;        public fun addBestiaryEntry(bestiaryEntry: BestiaryEntry): AuctionDetailsBuilder =
 &nbsp;            apply { bestiaryProgress.add(bestiaryEntry) }
 &nbsp;
-&nbsp;        public fun addBosstiaryEntry(bosstiaryEntry: CreatureEntry): AuctionDetailsBuilder =
+&nbsp;        public fun addBosstiaryEntry(bosstiaryEntry: BosstiaryEntry): AuctionDetailsBuilder =
 &nbsp;            apply { bosstiaryProgress.add(bosstiaryEntry) }
 &nbsp;
 &nbsp;        public fun addRevealedGem(revealedGem: RevealedGem): AuctionDetailsBuilder =
 &nbsp;            apply { revealedGems.add(revealedGem) }
+&nbsp;
+&nbsp;        public fun addFragmentProgress(revealedGem: FragmentProgressEntry): AuctionDetailsBuilder =
+&nbsp;            apply { fragmentProgress.add(revealedGem) }
+&nbsp;
+&nbsp;        public fun addProficiency(weaponProficiency: WeaponProficiency): AuctionDetailsBuilder =
+&nbsp;            apply { proficiencies.add(weaponProficiency) }
 &nbsp;
 &nbsp;        public override fun build(): AuctionDetails =
 &nbsp;            AuctionDetails(
@@ -307,12 +317,12 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;                outfitsCount = outfitsCount ?: error(&quot;outfitsCount is required&quot;),
 &nbsp;                titlesCount = titlesCount ?: error(&quot;titlesCount is required&quot;),
 &nbsp;                skills = skills ?: error(&quot;skills is required&quot;),
-&nbsp;                creationDate = creationDate ?: error(&quot;creationDate is required&quot;),
+&nbsp;                characterCreatedAt = creationDate ?: error(&quot;creationDate is required&quot;),
 &nbsp;                experience = experience ?: error(&quot;experience is required&quot;),
 &nbsp;                gold = gold ?: error(&quot;gold is required&quot;),
 &nbsp;                achievementPoints = achievementPoints ?: error(&quot;achievementPoints is required&quot;),
-&nbsp;                regularWorldTransfersAvailable = regularWorldTransfersAvailable,
-&nbsp;                charmExpansion = hasCharmExpansion ?: error(&quot;charmExpansion is required&quot;),
+&nbsp;                regularWorldTransfersUnlockAt = regularWorldTransfersAvailable,
+&nbsp;                hasCharmExpansion = hasCharmExpansion ?: error(&quot;charmExpansion is required&quot;),
 &nbsp;                availableCharmPoints = availableCharmPoints
 &nbsp;                    ?: error(&quot;availableCharmPoints is required&quot;),
 &nbsp;                spentCharmPoints = spentCharmPoints ?: error(&quot;spentCharmPoints is required&quot;),
@@ -348,6 +358,8 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;                bestiaryProgress = bestiaryProgress,
 &nbsp;                bosstiaryProgress = bosstiaryProgress,
 &nbsp;                revealedGems = revealedGems,
+&nbsp;                fragmentProgress = fragmentProgress,
+&nbsp;                proficiencies = proficiencies,
 &nbsp;            )
 &nbsp;    }
 &nbsp;}
@@ -374,7 +386,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-07-16 21:19</div>
+    <div style="float:right;">generated on 2025-10-02 02:54</div>
 </div>
 </body>
 </html>

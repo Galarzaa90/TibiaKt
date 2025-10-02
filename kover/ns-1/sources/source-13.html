@@ -217,7 +217,6 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;import com.galarzaa.tibiakt.core.models.forums.ForumEmoticon
 &nbsp;import com.galarzaa.tibiakt.core.models.forums.LastPost
 &nbsp;import com.galarzaa.tibiakt.core.models.forums.ThreadEntry
-&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
 &nbsp;
 &nbsp;public inline fun forumBoardBuilder(block: ForumBoardBuilder.() -&gt; Unit): ForumBoardBuilder =
 &nbsp;    ForumBoardBuilder().apply(block)
@@ -290,16 +289,16 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;        override fun build(): ThreadEntry = ThreadEntry(</b>
 <b class="fc">&nbsp;            title = title ?: error(&quot;title is required&quot;),</b>
 <b class="pc">&nbsp;            threadId = threadId ?: error(&quot;threadId is required&quot;),</b>
-<b class="pc">&nbsp;            author = author ?: error(&quot;author is required&quot;),</b>
+<b class="pc">&nbsp;            authorName = author ?: error(&quot;author is required&quot;),</b>
 <b class="fc">&nbsp;            isAuthorTraded = isAuthorTraded,</b>
 <b class="fc">&nbsp;            isAuthorDeleted = isAuthorDeleted,</b>
 <b class="fc">&nbsp;            emoticon = emoticon,</b>
-<b class="fc">&nbsp;            replies = replies,</b>
-<b class="fc">&nbsp;            views = views,</b>
+<b class="fc">&nbsp;            repliesCount = replies,</b>
+<b class="fc">&nbsp;            viewsCount = views,</b>
 <b class="fc">&nbsp;            status = status,</b>
 <b class="pc">&nbsp;            lastPost = lastPost ?: error(&quot;lastPost is required&quot;),</b>
 <b class="fc">&nbsp;            pages = pages,</b>
-<b class="fc">&nbsp;            goldenFrame = hasGoldenFrame</b>
+<b class="fc">&nbsp;            hasGoldenFrame = hasGoldenFrame</b>
 &nbsp;        )
 &nbsp;    }
 &nbsp;}
@@ -326,7 +325,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-07-16 21:19</div>
+    <div style="float:right;">generated on 2025-10-02 02:54</div>
 </div>
 </body>
 </html>

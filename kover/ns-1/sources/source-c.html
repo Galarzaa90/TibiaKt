@@ -121,9 +121,8 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;import com.galarzaa.tibiakt.core.models.character.DisplayedAchievement
 &nbsp;import com.galarzaa.tibiakt.core.models.character.GuildMembership
 &nbsp;import com.galarzaa.tibiakt.core.models.character.OtherCharacter
-&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
-&nbsp;import kotlinx.datetime.Instant
-&nbsp;import java.time.LocalDate
+&nbsp;import kotlin.time.Instant
+&nbsp;import kotlinx.datetime.LocalDate
 &nbsp;
 &nbsp;@BuilderDsl
 <b class="fc">&nbsp;public inline fun character(block: CharacterBuilder.() -&gt; Unit): Character = CharacterBuilder().apply(block).build()</b>
@@ -241,12 +240,12 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;        marriedTo = marriedTo,
 &nbsp;        houses = houses,
 &nbsp;        guildMembership = guildMembership,
-&nbsp;        lastLogin = lastLogin,
+&nbsp;        lastLoginAt = lastLogin,
 &nbsp;        position = position,
 &nbsp;        comment = comment,
 &nbsp;        isPremium = isPremium,
 &nbsp;        isRecentlyTraded = isRecentlyTraded,
-&nbsp;        deletionDate = deletionDate,
+&nbsp;        deletionScheduledAt = deletionDate,
 &nbsp;        badges = accountBadges,
 &nbsp;        achievements = achievements,
 &nbsp;        deaths = deaths,
@@ -292,7 +291,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-07-16 21:19</div>
+    <div style="float:right;">generated on 2025-10-02 02:54</div>
 </div>
 </body>
 </html>

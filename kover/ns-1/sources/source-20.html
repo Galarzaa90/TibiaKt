@@ -113,8 +113,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;import com.galarzaa.tibiakt.core.enums.HouseStatus
 &nbsp;import com.galarzaa.tibiakt.core.enums.HouseType
 &nbsp;import com.galarzaa.tibiakt.core.models.house.House
-&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
-&nbsp;import kotlinx.datetime.Instant
+&nbsp;import kotlin.time.Instant
 &nbsp;
 &nbsp;@BuilderDsl
 <b class="fc">&nbsp;public inline fun house(block: HouseBuilder.() -&gt; Unit): House = HouseBuilder().apply(block).build()</b>
@@ -155,10 +154,10 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;            rent = rent ?: error(&quot;rent is required&quot;),
 &nbsp;            world = world ?: error(&quot;world is required&quot;),
 &nbsp;            paidUntil = paidUntil ?: error(&quot;paidUntil is required&quot;),
-&nbsp;            owner = owner ?: error(&quot;Owner is required&quot;),
-&nbsp;            transferDate = movingDate,
+&nbsp;            ownerName = owner ?: error(&quot;Owner is required&quot;),
+&nbsp;            transferScheduledAt = movingDate,
 &nbsp;            transferPrice = transferPrice,
-&nbsp;            transferAccepted = isTransferAccepted,
+&nbsp;            isTransferAccepted = isTransferAccepted,
 &nbsp;            transferRecipient = transferRecipient
 &nbsp;        )
 &nbsp;
@@ -172,7 +171,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;            world = world ?: error(&quot;world is required&quot;),
 &nbsp;            highestBid = highestBid,
 &nbsp;            highestBidder = highestBidder,
-&nbsp;            auctionEnd = auctionEnd,
+&nbsp;            auctionEndsAt = auctionEnd,
 &nbsp;        )
 &nbsp;
 &nbsp;        else -&gt; error(&quot;status is required&quot;)
@@ -201,7 +200,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-07-16 21:19</div>
+    <div style="float:right;">generated on 2025-10-02 02:54</div>
 </div>
 </body>
 </html>

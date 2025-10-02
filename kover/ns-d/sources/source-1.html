@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>tibiakt-core Coverage Report > BaseNews</title>
+  <title>tibiakt-core Coverage Report > BaseHouse</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -19,10 +19,10 @@
 <div class="breadCrumbs">
 Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">com.galarzaa.tibiakt.core.models.news</a>
+    <a href="../index.html">com.galarzaa.tibiakt.core.models.house</a>
 </div>
 
-<h1>Coverage Summary for Class: BaseNews (com.galarzaa.tibiakt.core.models.news)</h1>
+<h1>Coverage Summary for Class: BaseHouse (com.galarzaa.tibiakt.core.models.house)</h1>
 
 <table class="coverageStats">
 
@@ -45,14 +45,14 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
   Instruction, %
 </th>
 </tr>
-  <tr>
-    <td class="name">BaseNews$DefaultImpls</td>
+<tr>
+  <td class="name">BaseHouse</td>
 <td class="coverageStat">
   <span class="percent">
     0%
   </span>
   <span class="absValue">
-    (0/1)
+    (0/2)
   </span>
 </td>
     <td class="coverageStat"/>
@@ -61,7 +61,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     0%
   </span>
   <span class="absValue">
-    (0/1)
+    (0/2)
   </span>
 </td>
 <td class="coverageStat">
@@ -69,7 +69,35 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     0%
   </span>
   <span class="absValue">
-    (0/3)
+    (0/27)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">BaseHouse$DefaultImpls</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
   </span>
 </td>
   </tr>
@@ -80,7 +108,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     0%
   </span>
   <span class="absValue">
-    (0/1)
+    (0/4)
   </span>
 </td>
     <td class="coverageStat"/>
@@ -89,7 +117,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     0%
   </span>
   <span class="absValue">
-    (0/1)
+    (0/4)
   </span>
 </td>
 <td class="coverageStat">
@@ -97,7 +125,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     0%
   </span>
   <span class="absValue">
-    (0/3)
+    (0/31)
   </span>
 </td>
 </tr>
@@ -124,25 +152,30 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp; * limitations under the License.
 &nbsp; */
 &nbsp;
-&nbsp;package com.galarzaa.tibiakt.core.models.news
+&nbsp;package com.galarzaa.tibiakt.core.models.house
 &nbsp;
-&nbsp;import com.galarzaa.tibiakt.core.enums.NewsCategory
-&nbsp;import com.galarzaa.tibiakt.core.utils.getNewsUrl
+&nbsp;import com.galarzaa.tibiakt.core.net.houseUrl
+&nbsp;import com.galarzaa.tibiakt.core.net.staticFileUrl
 &nbsp;
 &nbsp;/**
-&nbsp; * Base interface for news related objects.
+&nbsp; * Base interface for house related classes.
 &nbsp; *
-&nbsp; * @property id The internal ID of the news entry.
-&nbsp; * @property category The category of the entry.
+&nbsp; * @property houseId The internal ID of the house.
+&nbsp; * @property world The world where this house is located.
 &nbsp; */
-&nbsp;public interface BaseNews {
-&nbsp;    public val id: Int
-&nbsp;    public val category: NewsCategory
+&nbsp;public interface BaseHouse {
+&nbsp;    public val houseId: Int
+&nbsp;    public val world: String
 &nbsp;
 &nbsp;    /**
-&nbsp;     * The URL to this article.
+&nbsp;     * The URL to the house&#39;s information page.
 &nbsp;     */
-<b class="nc">&nbsp;    public val url: String get() = getNewsUrl(id)</b>
+<b class="nc">&nbsp;    public val url: String get() = houseUrl(world, houseId)</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * URL to the house&#39;s image.
+&nbsp;     */
+<b class="nc">&nbsp;    public val imageUrl: String get() = staticFileUrl(&quot;images&quot;, &quot;houses&quot;, &quot;house_$houseId.png&quot;)</b>
 &nbsp;}
 </code>
 </pre>
@@ -167,7 +200,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-07-16 21:19</div>
+    <div style="float:right;">generated on 2025-10-02 02:54</div>
 </div>
 </body>
 </html>

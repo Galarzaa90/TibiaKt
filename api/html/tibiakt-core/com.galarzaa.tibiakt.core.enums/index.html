@@ -1,0 +1,512 @@
+<!doctype html>
+<html class="no-js">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>com.galarzaa.tibiakt.core.enums</title>
+<link href="../../images/logo-icon.svg" rel="icon" type="image/svg">    <script>var pathToRoot = "../../";</script>
+    <script>document.documentElement.classList.replace("no-js","js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async></script>
+<script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../styles/style.css" rel="Stylesheet">
+<link href="../../styles/main.css" rel="Stylesheet">
+<link href="../../styles/prism.css" rel="Stylesheet">
+<link href="../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../styles/font-jb-sans-auto.css" rel="Stylesheet">
+<link href="../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../scripts/clipboard.js" async></script>
+<script type="text/javascript" src="../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../ui-kit/ui-kit.min.js" defer></script>
+<script type="text/javascript" src="../../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
+<body>
+    <div class="root">
+    <nav class="navigation theme-dark" id="navigation-wrapper">
+<a class="library-name--link" href="../../index.html">
+                    TibiaKt
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">v0.12.1-SNAPSHOT
+        </div>
+        <div class="navigation-controls">
+        <div class="filter-section filter-section_loading" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":tibiakt-core/main">jvm</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox">
+                    <div class="dropdown--header"><span>Platform filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close platform filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":tibiakt-core/main" data-filter=":tibiakt-core/main">
+                                <span class="checkbox--icon"></span>
+                                jvm
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </div>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </nav>
+        <div id="container">
+            <div class="sidebar" id="leftColumn">
+                <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                    <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox">
+                        <div class="dropdown--header">
+                            <span>
+                                    TibiaKt
+                            </span>
+                            <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                                <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                            </button>
+                        </div>
+                        <div class="sidebar--inner" id="sideMenu"></div>
+                    </ul>
+                    <div class="dropdown--overlay"></div>
+                </div>
+            </div>
+            <div id="main">
+<div class="main-content" data-page-type="package" id="content" pageids="tibiakt-core::com.galarzaa.tibiakt.core.enums////PointingToDeclaration//-1623570306">
+  <div class="breadcrumbs"><a href="../index.html">tibiakt-core</a><span class="delimiter">/</span><span class="current">com.galarzaa.tibiakt.core.enums</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>Package-level</span></span> <span><span>declarations</span></span></h1>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="TYPE">Types</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="TYPE">
+        <h2 class="">Types</h2>
+        <div class="table"><a data-name="-1360597356%2FClasslikes%2F-1623570306" anchor-label="AuctionBattlEyeFilter" id="-1360597356%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-auction-battl-eye-filter/index.html"><span>Auction</span><wbr><span>Battl</span><wbr><span>Eye</span><wbr><span><span>Filter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1360597356%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-auction-battl-eye-filter/index.html">AuctionBattlEyeFilter</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-auction-battl-eye-filter/index.html">AuctionBattlEyeFilter</a><span class="token operator">&gt; </span>, <a href="-int-enum/index.html">IntEnum</a></div><div class="brief "><p class="paragraph">The possible BattlEye protection type filters for auctions.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1371216717%2FClasslikes%2F-1623570306" anchor-label="AuctionOrderBy" id="1371216717%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-auction-order-by/index.html"><span>Auction</span><wbr><span>Order</span><wbr><span><span>By</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1371216717%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-auction-order-by/index.html">AuctionOrderBy</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-auction-order-by/index.html">AuctionOrderBy</a><span class="token operator">&gt; </span>, <a href="-int-enum/index.html">IntEnum</a></div><div class="brief "><p class="paragraph">The possible fields you can order auctions by.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="882376351%2FClasslikes%2F-1623570306" anchor-label="AuctionOrderDirection" id="882376351%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-auction-order-direction/index.html"><span>Auction</span><wbr><span>Order</span><wbr><span><span>Direction</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="882376351%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-auction-order-direction/index.html">AuctionOrderDirection</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-auction-order-direction/index.html">AuctionOrderDirection</a><span class="token operator">&gt; </span>, <a href="-int-enum/index.html">IntEnum</a></div><div class="brief "><p class="paragraph">The possible ordering directions for auctions.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="333025806%2FClasslikes%2F-1623570306" anchor-label="AuctionSearchType" id="333025806%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-auction-search-type/index.html"><span>Auction</span><wbr><span>Search</span><wbr><span><span>Type</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="333025806%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-auction-search-type/index.html">AuctionSearchType</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-auction-search-type/index.html">AuctionSearchType</a><span class="token operator">&gt; </span>, <a href="-int-enum/index.html">IntEnum</a></div><div class="brief "><p class="paragraph">The types of search for the input field in the character bazaar.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2060783209%2FClasslikes%2F-1623570306" anchor-label="AuctionSkillFilter" id="2060783209%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-auction-skill-filter/index.html"><span>Auction</span><wbr><span>Skill</span><wbr><span><span>Filter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2060783209%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-auction-skill-filter/index.html">AuctionSkillFilter</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-auction-skill-filter/index.html">AuctionSkillFilter</a><span class="token operator">&gt; </span>, <a href="-int-enum/index.html">IntEnum</a></div><div class="brief "><p class="paragraph">The possible skills to filter auctions by.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1772252318%2FClasslikes%2F-1623570306" anchor-label="AuctionStatus" id="1772252318%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-auction-status/index.html"><span>Auction</span><wbr><span><span>Status</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1772252318%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-auction-status/index.html">AuctionStatus</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-auction-status/index.html">AuctionStatus</a><span class="token operator">&gt; </span>, <a href="-string-enum/index.html">StringEnum</a></div><div class="brief "><p class="paragraph">The possible values an auction might have.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1965756141%2FClasslikes%2F-1623570306" anchor-label="AuctionVocationFilter" id="1965756141%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-auction-vocation-filter/index.html"><span>Auction</span><wbr><span>Vocation</span><wbr><span><span>Filter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1965756141%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-auction-vocation-filter/index.html">AuctionVocationFilter</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-auction-vocation-filter/index.html">AuctionVocationFilter</a><span class="token operator">&gt; </span>, <a href="-int-enum/index.html">IntEnum</a></div><div class="brief "><p class="paragraph">The possible vocations to filter auction results.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-51814970%2FClasslikes%2F-1623570306" anchor-label="AvailableForumSection" id="-51814970%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-available-forum-section/index.html"><span>Available</span><wbr><span>Forum</span><wbr><span><span>Section</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-51814970%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-available-forum-section/index.html">AvailableForumSection</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-available-forum-section/index.html">AvailableForumSection</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">The available forum sections.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2101551151%2FClasslikes%2F-1623570306" anchor-label="BattlEyeType" id="-2101551151%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-battl-eye-type/index.html"><span>Battl</span><wbr><span>Eye</span><wbr><span><span>Type</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2101551151%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-battl-eye-type/index.html">BattlEyeType</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-battl-eye-type/index.html">BattlEyeType</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">The type of BattlEye protection a game world might have.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-254617730%2FClasslikes%2F-1623570306" anchor-label="BazaarType" id="-254617730%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-bazaar-type/index.html"><span>Bazaar</span><wbr><span><span>Type</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-254617730%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-bazaar-type/index.html">BazaarType</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-bazaar-type/index.html">BazaarType</a><span class="token operator">&gt; </span>, <a href="-string-enum/index.html">StringEnum</a></div><div class="brief "><p class="paragraph">The types of bazaar views.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1840430748%2FClasslikes%2F-1623570306" anchor-label="BidType" id="1840430748%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-bid-type/index.html"><span>Bid</span><wbr><span><span>Type</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1840430748%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-bid-type/index.html">BidType</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-bid-type/index.html">BidType</a><span class="token operator">&gt; </span>, <a href="-string-enum/index.html">StringEnum</a></div><div class="brief "><p class="paragraph">The possible bid types an auction might have.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1561640910%2FClasslikes%2F-1623570306" anchor-label="HighscoresBattlEyeType" id="1561640910%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-highscores-battl-eye-type/index.html"><span>Highscores</span><wbr><span>Battl</span><wbr><span>Eye</span><wbr><span><span>Type</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1561640910%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-highscores-battl-eye-type/index.html">HighscoresBattlEyeType</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-highscores-battl-eye-type/index.html">HighscoresBattlEyeType</a><span class="token operator">&gt; </span>, <a href="-int-enum/index.html">IntEnum</a></div><div class="brief "><p class="paragraph">Available BattlEye type filters for Highscores.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="545854286%2FClasslikes%2F-1623570306" anchor-label="HighscoresCategory" id="545854286%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-highscores-category/index.html"><span>Highscores</span><wbr><span><span>Category</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="545854286%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-highscores-category/index.html">HighscoresCategory</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-highscores-category/index.html">HighscoresCategory</a><span class="token operator">&gt; </span>, <a href="-int-enum/index.html">IntEnum</a></div><div class="brief "><p class="paragraph">Available highscores categories.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-376562096%2FClasslikes%2F-1623570306" anchor-label="HighscoresProfession" id="-376562096%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-highscores-profession/index.html"><span>Highscores</span><wbr><span><span>Profession</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-376562096%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-highscores-profession/index.html">HighscoresProfession</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-highscores-profession/index.html">HighscoresProfession</a><span class="token operator">&gt; </span>, <a href="-int-enum/index.html">IntEnum</a></div><div class="brief "><p class="paragraph">The available vocation filters in Highscores.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1013041087%2FClasslikes%2F-1623570306" anchor-label="HouseOrder" id="-1013041087%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-house-order/index.html"><span>House</span><wbr><span><span>Order</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1013041087%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-house-order/index.html">HouseOrder</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-house-order/index.html">HouseOrder</a><span class="token operator">&gt; </span>, <a href="-string-enum/index.html">StringEnum</a></div><div class="brief "><p class="paragraph">Possible fields to order houses or guildhalls by.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1284667553%2FClasslikes%2F-1623570306" anchor-label="HouseStatus" id="1284667553%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-house-status/index.html"><span>House</span><wbr><span><span>Status</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1284667553%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-house-status/index.html">HouseStatus</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-house-status/index.html">HouseStatus</a><span class="token operator">&gt; </span>, <a href="-string-enum/index.html">StringEnum</a></div><div class="brief "><p class="paragraph">Available house status.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1631905063%2FClasslikes%2F-1623570306" anchor-label="HouseType" id="-1631905063%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-house-type/index.html"><span>House</span><wbr><span><span>Type</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1631905063%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-house-type/index.html">HouseType</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-house-type/index.html">HouseType</a><span class="token operator">&gt; </span>, <a href="-string-enum/index.html">StringEnum</a></div><div class="brief "><p class="paragraph">The types of houses.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="51468547%2FClasslikes%2F-1623570306" anchor-label="IntEnum" id="51468547%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-int-enum/index.html"><span>Int</span><wbr><span><span>Enum</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="51468547%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-int-enum/index.html">IntEnum</a></div><div class="brief "><p class="paragraph">An enum with a numeric value.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-862951106%2FClasslikes%2F-1623570306" anchor-label="NewsCategory" id="-862951106%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-news-category/index.html"><span>News</span><wbr><span><span>Category</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-862951106%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-news-category/index.html">NewsCategory</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-news-category/index.html">NewsCategory</a><span class="token operator">&gt; </span>, <a href="-string-enum/index.html">StringEnum</a></div><div class="brief "><p class="paragraph">The available news categories.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2034159614%2FClasslikes%2F-1623570306" anchor-label="NewsType" id="-2034159614%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-news-type/index.html"><span>News</span><wbr><span><span>Type</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2034159614%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-news-type/index.html">NewsType</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-news-type/index.html">NewsType</a><span class="token operator">&gt; </span>, <a href="-string-enum/index.html">StringEnum</a></div><div class="brief "><p class="paragraph">The available types of news.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-129993841%2FClasslikes%2F-1623570306" anchor-label="PvpType" id="-129993841%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-pvp-type/index.html"><span>Pvp</span><wbr><span><span>Type</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-129993841%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-pvp-type/index.html">PvpType</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-pvp-type/index.html">PvpType</a><span class="token operator">&gt; </span>, <a href="-string-enum/index.html">StringEnum</a></div><div class="brief "><p class="paragraph">A world PvP type.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="687991789%2FClasslikes%2F-1623570306" anchor-label="Sex" id="687991789%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-sex/index.html"><span><span>Sex</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="687991789%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-sex/index.html">Sex</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-sex/index.html">Sex</a><span class="token operator">&gt; </span>, <a href="-string-enum/index.html">StringEnum</a></div><div class="brief "><p class="paragraph">Character sexes.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="309609501%2FClasslikes%2F-1623570306" anchor-label="StringEnum" id="309609501%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-string-enum/index.html"><span>String</span><wbr><span><span>Enum</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="309609501%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-string-enum/index.html">StringEnum</a></div><div class="brief "><p class="paragraph">An enum with a string value.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1380621811%2FClasslikes%2F-1623570306" anchor-label="ThreadStatus" id="1380621811%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-thread-status/index.html"><span>Thread</span><wbr><span><span>Status</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1380621811%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-thread-status/index.html">ThreadStatus</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-thread-status/index.html">ThreadStatus</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">The possible status a thread can have.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-241493270%2FClasslikes%2F-1623570306" anchor-label="TransferType" id="-241493270%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-transfer-type/index.html"><span>Transfer</span><wbr><span><span>Type</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-241493270%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-transfer-type/index.html">TransferType</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-transfer-type/index.html">TransferType</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">The type of transfer rules applied to this server.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="223137284%2FClasslikes%2F-1623570306" anchor-label="Vocation" id="223137284%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-vocation/index.html"><span><span>Vocation</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="223137284%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-vocation/index.html">Vocation</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-vocation/index.html">Vocation</a><span class="token operator">&gt; </span>, <a href="-string-enum/index.html">StringEnum</a></div><div class="brief "><p class="paragraph">Enumeration of Tibia vocations.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+        <span>© 2025 Copyright</span>
+        <span class="pull-right">
+            <span>Generated by </span>
+            <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                <span>dokka</span>
+            </a>
+        </span>
+    </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

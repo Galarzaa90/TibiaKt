@@ -117,7 +117,6 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;import com.galarzaa.tibiakt.core.models.forums.ForumEmoticon
 &nbsp;import com.galarzaa.tibiakt.core.models.forums.LastPost
 &nbsp;import com.galarzaa.tibiakt.core.models.forums.ThreadEntry
-&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
 &nbsp;
 &nbsp;public inline fun forumBoardBuilder(block: ForumBoardBuilder.() -&gt; Unit): ForumBoardBuilder =
 <b class="fc">&nbsp;    ForumBoardBuilder().apply(block)</b>
@@ -190,16 +189,16 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;        override fun build(): ThreadEntry = ThreadEntry(
 &nbsp;            title = title ?: error(&quot;title is required&quot;),
 &nbsp;            threadId = threadId ?: error(&quot;threadId is required&quot;),
-&nbsp;            author = author ?: error(&quot;author is required&quot;),
+&nbsp;            authorName = author ?: error(&quot;author is required&quot;),
 &nbsp;            isAuthorTraded = isAuthorTraded,
 &nbsp;            isAuthorDeleted = isAuthorDeleted,
 &nbsp;            emoticon = emoticon,
-&nbsp;            replies = replies,
-&nbsp;            views = views,
+&nbsp;            repliesCount = replies,
+&nbsp;            viewsCount = views,
 &nbsp;            status = status,
 &nbsp;            lastPost = lastPost ?: error(&quot;lastPost is required&quot;),
 &nbsp;            pages = pages,
-&nbsp;            goldenFrame = hasGoldenFrame
+&nbsp;            hasGoldenFrame = hasGoldenFrame
 &nbsp;        )
 &nbsp;    }
 &nbsp;}
@@ -226,7 +225,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-07-16 21:19</div>
+    <div style="float:right;">generated on 2025-10-02 02:54</div>
 </div>
 </body>
 </html>

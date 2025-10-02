@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>tibiakt-core Coverage Report > BaseWorld</title>
+  <title>tibiakt-core Coverage Report > BaseLeaderboardEntry</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -19,10 +19,10 @@
 <div class="breadCrumbs">
 Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">com.galarzaa.tibiakt.core.models.world</a>
+    <a href="../index.html">com.galarzaa.tibiakt.core.models.leaderboards</a>
 </div>
 
-<h1>Coverage Summary for Class: BaseWorld (com.galarzaa.tibiakt.core.models.world)</h1>
+<h1>Coverage Summary for Class: BaseLeaderboardEntry (com.galarzaa.tibiakt.core.models.leaderboards)</h1>
 
 <table class="coverageStats">
 
@@ -45,8 +45,36 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
   Instruction, %
 </th>
 </tr>
+<tr>
+  <td class="name">BaseLeaderboardEntry</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (43/43)
+  </span>
+</td>
+</tr>
   <tr>
-    <td class="name">BaseWorld$DefaultImpls</td>
+    <td class="name">BaseLeaderboardEntry$Companion</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -69,7 +97,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     0%
   </span>
   <span class="absValue">
-    (0/3)
+    (0/5)
   </span>
 </td>
   </tr>
@@ -77,27 +105,27 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    50%
   </span>
   <span class="absValue">
-    (0/1)
+    (1/2)
   </span>
 </td>
     <td class="coverageStat"/>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    50%
   </span>
   <span class="absValue">
-    (0/1)
+    (1/2)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    89.6%
   </span>
   <span class="absValue">
-    (0/3)
+    (43/48)
   </span>
 </td>
 </tr>
@@ -109,7 +137,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;/*
-&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; * Copyright © 2024 Allan Galarza
 &nbsp; *
 &nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 &nbsp; * you may not use this file except in compliance with the License.
@@ -124,24 +152,43 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp; * limitations under the License.
 &nbsp; */
 &nbsp;
-&nbsp;package com.galarzaa.tibiakt.core.models.world
+&nbsp;package com.galarzaa.tibiakt.core.models.leaderboards
 &nbsp;
-&nbsp;import com.galarzaa.tibiakt.core.utils.getWorldUrl
+&nbsp;import com.galarzaa.tibiakt.core.models.character.BaseCharacter
+&nbsp;import kotlinx.serialization.SerialName
+&nbsp;import kotlinx.serialization.Serializable
 &nbsp;
 &nbsp;/**
-&nbsp; * Base interface for worlds.
+&nbsp; * Base class for Leaderboards entries.
 &nbsp; *
-&nbsp; * @property name The name of the world.
+&nbsp; * @property rank The rank of the character.
+&nbsp; * @property dromeLevel The drome level of the character.
 &nbsp; */
-&nbsp;public interface BaseWorld {
-&nbsp;    public val name: String
-&nbsp;
-&nbsp;    /**
-&nbsp;     * The URL to the world&#39;s page in Tibia.com.
-&nbsp;     */
-&nbsp;    public val url: String
-<b class="nc">&nbsp;        get() = getWorldUrl(name)</b>
+<b class="pc">&nbsp;@Serializable</b>
+&nbsp;public sealed class BaseLeaderboardEntry {
+&nbsp;    public abstract val rank: Int
+&nbsp;    public abstract val dromeLevel: Int
 &nbsp;}
+&nbsp;
+&nbsp;
+&nbsp;/**
+&nbsp; * An entry in the [LeaderboardEntry].
+&nbsp; */
+&nbsp;@Serializable
+&nbsp;@SerialName(&quot;leaderboardsEntry&quot;)
+&nbsp;public data class LeaderboardEntry(
+&nbsp;    override val rank: Int,
+&nbsp;    override val name: String,
+&nbsp;    override val dromeLevel: Int,
+&nbsp;) : BaseLeaderboardEntry(), BaseCharacter
+&nbsp;
+&nbsp;/** A leaderboard entry belonging to a deleted character. */
+&nbsp;@Serializable
+&nbsp;@SerialName(&quot;deletedLeaderboardsEntry&quot;)
+&nbsp;public data class DeletedLeaderboardEntry(
+&nbsp;    override val rank: Int,
+&nbsp;    override val dromeLevel: Int,
+&nbsp;) : BaseLeaderboardEntry()
 </code>
 </pre>
 </div>
@@ -165,7 +212,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-07-16 21:19</div>
+    <div style="float:right;">generated on 2025-10-02 02:54</div>
 </div>
 </body>
 </html>

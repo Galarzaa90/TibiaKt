@@ -114,8 +114,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;import com.galarzaa.tibiakt.core.enums.NewsType
 &nbsp;import com.galarzaa.tibiakt.core.models.news.NewsArchive
 &nbsp;import com.galarzaa.tibiakt.core.models.news.NewsEntry
-&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
-&nbsp;import java.time.LocalDate
+&nbsp;import kotlinx.datetime.LocalDate
 &nbsp;
 &nbsp;@BuilderDsl
 <b class="fc">&nbsp;public fun newsArchive(block: NewsArchiveBuilder.() -&gt; Unit): NewsArchive = newsArchiveBuilder(block).build()</b>
@@ -152,8 +151,8 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;
 &nbsp;
 &nbsp;    override fun build(): NewsArchive = NewsArchive(
-&nbsp;        startDate = startDate ?: error(&quot;startDate is required&quot;),
-&nbsp;        endDate = endDate ?: error(&quot;endDate is required&quot;),
+&nbsp;        startOn = startDate ?: error(&quot;startDate is required&quot;),
+&nbsp;        endOn = endDate ?: error(&quot;endDate is required&quot;),
 &nbsp;        types = types,
 &nbsp;        categories = categories,
 &nbsp;        entries = entries,
@@ -170,7 +169,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;            id = id,
 &nbsp;            title = title ?: error(&quot;title is required&quot;),
 &nbsp;            category = category ?: error(&quot;category is required&quot;),
-&nbsp;            date = date ?: error(&quot;date is required&quot;),
+&nbsp;            publishedOn = date ?: error(&quot;date is required&quot;),
 &nbsp;            type = type ?: error(&quot;type is required&quot;),
 &nbsp;        )
 &nbsp;    }
@@ -198,7 +197,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-07-16 21:19</div>
+    <div style="float:right;">generated on 2025-10-02 02:54</div>
 </div>
 </body>
 </html>

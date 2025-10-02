@@ -113,8 +113,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;import com.galarzaa.tibiakt.core.models.leaderboards.BaseLeaderboardEntry
 &nbsp;import com.galarzaa.tibiakt.core.models.leaderboards.Leaderboard
 &nbsp;import com.galarzaa.tibiakt.core.models.leaderboards.LeaderboardRotation
-&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
-&nbsp;import kotlinx.datetime.Instant
+&nbsp;import kotlin.time.Instant
 &nbsp;
 &nbsp;@BuilderDsl
 &nbsp;public inline fun leaderboard(block: LeaderboardBuilder.() -&gt; Unit): Leaderboard =
@@ -151,7 +150,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;        world = world ?: error(&quot;world is required&quot;),
 &nbsp;        rotation = rotation ?: error(&quot;rotation is required&quot;),
 &nbsp;        availableRotations = availableRotations,
-&nbsp;        lastUpdated = lastUpdated,
+&nbsp;        lastUpdatedAt = lastUpdated,
 &nbsp;        currentPage = currentPage ?: error(&quot;currentPage is required&quot;),
 &nbsp;        totalPages = totalPages ?: error(&quot;totalPages is required&quot;),
 &nbsp;        resultsCount = resultsCount ?: error(&quot;resultsCount is required&quot;),
@@ -165,7 +164,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;        override fun build(): LeaderboardRotation = LeaderboardRotation(
 &nbsp;            rotationId = rotationId ?: error(&quot;rotationId is required&quot;),
 &nbsp;            isCurrent = isCurrent,
-&nbsp;            endDate = endDate ?: error(&quot;endDate is required&quot;),
+&nbsp;            endsAt = endDate ?: error(&quot;endDate is required&quot;),
 &nbsp;        )
 &nbsp;
 &nbsp;    }
@@ -194,7 +193,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-07-16 21:19</div>
+    <div style="float:right;">generated on 2025-10-02 02:54</div>
 </div>
 </body>
 </html>

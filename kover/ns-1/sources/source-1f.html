@@ -147,8 +147,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;import com.galarzaa.tibiakt.core.enums.HouseStatus
 &nbsp;import com.galarzaa.tibiakt.core.enums.HouseType
 &nbsp;import com.galarzaa.tibiakt.core.models.house.House
-&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
-&nbsp;import kotlinx.datetime.Instant
+&nbsp;import kotlin.time.Instant
 &nbsp;
 &nbsp;@BuilderDsl
 &nbsp;public inline fun house(block: HouseBuilder.() -&gt; Unit): House = HouseBuilder().apply(block).build()
@@ -189,10 +188,10 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="pc">&nbsp;            rent = rent ?: error(&quot;rent is required&quot;),</b>
 <b class="pc">&nbsp;            world = world ?: error(&quot;world is required&quot;),</b>
 <b class="pc">&nbsp;            paidUntil = paidUntil ?: error(&quot;paidUntil is required&quot;),</b>
-<b class="pc">&nbsp;            owner = owner ?: error(&quot;Owner is required&quot;),</b>
-<b class="fc">&nbsp;            transferDate = movingDate,</b>
+<b class="pc">&nbsp;            ownerName = owner ?: error(&quot;Owner is required&quot;),</b>
+<b class="fc">&nbsp;            transferScheduledAt = movingDate,</b>
 <b class="fc">&nbsp;            transferPrice = transferPrice,</b>
-<b class="fc">&nbsp;            transferAccepted = isTransferAccepted,</b>
+<b class="fc">&nbsp;            isTransferAccepted = isTransferAccepted,</b>
 <b class="fc">&nbsp;            transferRecipient = transferRecipient</b>
 &nbsp;        )
 &nbsp;
@@ -206,7 +205,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="pc">&nbsp;            world = world ?: error(&quot;world is required&quot;),</b>
 <b class="fc">&nbsp;            highestBid = highestBid,</b>
 <b class="fc">&nbsp;            highestBidder = highestBidder,</b>
-<b class="fc">&nbsp;            auctionEnd = auctionEnd,</b>
+<b class="fc">&nbsp;            auctionEndsAt = auctionEnd,</b>
 &nbsp;        )
 &nbsp;
 <b class="nc">&nbsp;        else -&gt; error(&quot;status is required&quot;)</b>
@@ -235,7 +234,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-07-16 21:19</div>
+    <div style="float:right;">generated on 2025-10-02 02:54</div>
 </div>
 </body>
 </html>

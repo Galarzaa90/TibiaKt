@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>tibiakt-core Coverage Report > BaseOutfit</title>
+  <title>tibiakt-core Coverage Report > PaginationData</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -19,10 +19,10 @@
 <div class="breadCrumbs">
 Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">com.galarzaa.tibiakt.core.models.bazaar</a>
+    <a href="../index.html">com.galarzaa.tibiakt.core.html</a>
 </div>
 
-<h1>Coverage Summary for Class: BaseOutfit (com.galarzaa.tibiakt.core.models.bazaar)</h1>
+<h1>Coverage Summary for Class: PaginationData (com.galarzaa.tibiakt.core.html)</h1>
 
 <table class="coverageStats">
 
@@ -45,31 +45,59 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
   Instruction, %
 </th>
 </tr>
-  <tr>
-    <td class="name">BaseOutfit$DefaultImpls</td>
+<tr>
+  <td class="name">PaginationData</td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/1)
+    (1/1)
   </span>
 </td>
     <td class="coverageStat"/>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/5)
+    (1/1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/37)
+    (17/17)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">PaginationData$Companion</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
   </span>
 </td>
   </tr>
@@ -77,27 +105,27 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/1)
+    (2/2)
   </span>
 </td>
     <td class="coverageStat"/>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/5)
+    (2/2)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/37)
+    (23/23)
   </span>
 </td>
 </tr>
@@ -109,7 +137,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;/*
-&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; * Copyright © 2025 Allan Galarza
 &nbsp; *
 &nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 &nbsp; * you may not use this file except in compliance with the License.
@@ -124,30 +152,15 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp; * limitations under the License.
 &nbsp; */
 &nbsp;
-&nbsp;package com.galarzaa.tibiakt.core.models.bazaar
-&nbsp;
-&nbsp;import com.galarzaa.tibiakt.core.utils.getStaticFileUrl
+&nbsp;package com.galarzaa.tibiakt.core.html
 &nbsp;
 &nbsp;/**
-&nbsp; * A base outfit displayed in auctions.
-&nbsp; *
-&nbsp; * @property outfitId The internal ID of the outfit.
-&nbsp; * @property addons The selected or unlocked addons.
+&nbsp; * Container for pagination information.
 &nbsp; */
-&nbsp;public interface BaseOutfit {
-&nbsp;    public val outfitId: Int
-&nbsp;    public val addons: Int
-&nbsp;
-&nbsp;    /**
-&nbsp;     * The URL to the outfit&#39;s image.
-&nbsp;     */
-&nbsp;    public val imageUrl: String
-<b class="nc">&nbsp;        get() = getStaticFileUrl(</b>
-<b class="nc">&nbsp;            &quot;images&quot;,</b>
-<b class="nc">&nbsp;            &quot;charactertrade&quot;,</b>
-<b class="nc">&nbsp;            &quot;outfits&quot;,</b>
-<b class="nc">&nbsp;            &quot;${outfitId}_$addons.gif&quot;</b>
-&nbsp;        )
+<b class="fc">&nbsp;internal data class PaginationData(val currentPage: Int, val totalPages: Int, val resultsCount: Int) {</b>
+&nbsp;    companion object {
+<b class="fc">&nbsp;        fun default() = PaginationData(1, 1, 0)</b>
+&nbsp;    }
 &nbsp;}
 </code>
 </pre>
@@ -172,7 +185,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-07-16 21:19</div>
+    <div style="float:right;">generated on 2025-10-02 02:54</div>
 </div>
 </body>
 </html>

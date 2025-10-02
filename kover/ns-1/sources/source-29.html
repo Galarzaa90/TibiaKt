@@ -179,8 +179,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;import com.galarzaa.tibiakt.core.enums.NewsType
 &nbsp;import com.galarzaa.tibiakt.core.models.news.NewsArchive
 &nbsp;import com.galarzaa.tibiakt.core.models.news.NewsEntry
-&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
-&nbsp;import java.time.LocalDate
+&nbsp;import kotlinx.datetime.LocalDate
 &nbsp;
 &nbsp;@BuilderDsl
 &nbsp;public fun newsArchive(block: NewsArchiveBuilder.() -&gt; Unit): NewsArchive = newsArchiveBuilder(block).build()
@@ -217,8 +216,8 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;
 &nbsp;
 <b class="fc">&nbsp;    override fun build(): NewsArchive = NewsArchive(</b>
-<b class="pc">&nbsp;        startDate = startDate ?: error(&quot;startDate is required&quot;),</b>
-<b class="pc">&nbsp;        endDate = endDate ?: error(&quot;endDate is required&quot;),</b>
+<b class="pc">&nbsp;        startOn = startDate ?: error(&quot;startDate is required&quot;),</b>
+<b class="pc">&nbsp;        endOn = endDate ?: error(&quot;endDate is required&quot;),</b>
 <b class="fc">&nbsp;        types = types,</b>
 <b class="fc">&nbsp;        categories = categories,</b>
 <b class="fc">&nbsp;        entries = entries,</b>
@@ -235,7 +234,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="nc">&nbsp;            id = id,</b>
 <b class="nc">&nbsp;            title = title ?: error(&quot;title is required&quot;),</b>
 <b class="nc">&nbsp;            category = category ?: error(&quot;category is required&quot;),</b>
-<b class="nc">&nbsp;            date = date ?: error(&quot;date is required&quot;),</b>
+<b class="nc">&nbsp;            publishedOn = date ?: error(&quot;date is required&quot;),</b>
 <b class="nc">&nbsp;            type = type ?: error(&quot;type is required&quot;),</b>
 &nbsp;        )
 &nbsp;    }
@@ -263,7 +262,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-07-16 21:19</div>
+    <div style="float:right;">generated on 2025-10-02 02:54</div>
 </div>
 </body>
 </html>

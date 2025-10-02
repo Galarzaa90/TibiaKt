@@ -114,9 +114,8 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;import com.galarzaa.tibiakt.core.models.forums.ForumEmoticon
 &nbsp;import com.galarzaa.tibiakt.core.models.forums.ForumPost
 &nbsp;import com.galarzaa.tibiakt.core.models.forums.ForumThread
-&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
-&nbsp;import kotlinx.datetime.Clock
-&nbsp;import kotlinx.datetime.Instant
+&nbsp;import kotlin.time.Clock
+&nbsp;import kotlin.time.Instant
 &nbsp;
 &nbsp;@BuilderDsl
 &nbsp;public inline fun forumThreadBuilder(block: ForumThreadBuilder.() -&gt; Unit): ForumThreadBuilder =
@@ -153,9 +152,9 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;    override fun build(): ForumThread = ForumThread(
 &nbsp;        title = title ?: error(&quot;title is required&quot;),
 &nbsp;        threadId = threadId ?: error(&quot;threadId is required&quot;),
-&nbsp;        board = board ?: error(&quot;board is required&quot;),
+&nbsp;        boardName = board ?: error(&quot;board is required&quot;),
 &nbsp;        boardId = boardId ?: error(&quot;boardId is required&quot;),
-&nbsp;        section = section ?: error(&quot;section is required&quot;),
+&nbsp;        sectionName = section ?: error(&quot;section is required&quot;),
 &nbsp;        sectionId = sectionId ?: error(&quot;sectionId is required&quot;),
 &nbsp;        previousTopicNumber = previousTopicNumber,
 &nbsp;        nextTopicNumber = nextTopicNumber,
@@ -185,8 +184,8 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;            content = content ?: error(&quot;content is required&quot;),
 &nbsp;            signature = signature,
 &nbsp;            postId = postId ?: error(&quot;postId is required&quot;),
-&nbsp;            postedDate = postedDate ?: Clock.System.now(),
-&nbsp;            editedDate = editedDate,
+&nbsp;            postedAt = postedDate ?: Clock.System.now(),
+&nbsp;            editedAt = editedDate,
 &nbsp;            editedBy = editedBy
 &nbsp;        )
 &nbsp;    }
@@ -214,7 +213,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-07-16 21:19</div>
+    <div style="float:right;">generated on 2025-10-02 02:54</div>
 </div>
 </body>
 </html>

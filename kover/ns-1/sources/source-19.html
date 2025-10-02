@@ -180,8 +180,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;import com.galarzaa.tibiakt.core.models.guild.GuildHall
 &nbsp;import com.galarzaa.tibiakt.core.models.guild.GuildInvite
 &nbsp;import com.galarzaa.tibiakt.core.models.guild.GuildMember
-&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
-&nbsp;import java.time.LocalDate
+&nbsp;import kotlinx.datetime.LocalDate
 &nbsp;
 &nbsp;@BuilderDsl
 &nbsp;public inline fun guildBuilder(block: GuildBuilder.() -&gt; Unit): GuildBuilder = GuildBuilder().apply(block)
@@ -235,14 +234,14 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="pc">&nbsp;        name = name ?: error(&quot;name is required&quot;),</b>
 <b class="pc">&nbsp;        logoUrl = logoUrl ?: error(&quot;logoUrl is required&quot;),</b>
 <b class="fc">&nbsp;        description = description,</b>
-<b class="pc">&nbsp;        foundingDate = foundingDate ?: error(&quot;foundingDate is required&quot;),</b>
+<b class="pc">&nbsp;        foundedOn = foundingDate ?: error(&quot;foundingDate is required&quot;),</b>
 <b class="fc">&nbsp;        isActive = isActive,</b>
-<b class="fc">&nbsp;        applicationsOpen = hasOpenApplications,</b>
-<b class="fc">&nbsp;        homepage = homepage,</b>
+<b class="fc">&nbsp;        areApplicationsOpen = hasOpenApplications,</b>
+<b class="fc">&nbsp;        homepageUrl = homepage,</b>
 <b class="fc">&nbsp;        guildHall = guildHall,</b>
 <b class="fc">&nbsp;        members = members,</b>
 <b class="fc">&nbsp;        invited = invited,</b>
-<b class="fc">&nbsp;        disbandingDate = disbandingDate,</b>
+<b class="fc">&nbsp;        disbandsOn = disbandingDate,</b>
 <b class="fc">&nbsp;        disbandingReason = disbandingReason,</b>
 &nbsp;    )
 &nbsp;
@@ -289,7 +288,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-07-16 21:19</div>
+    <div style="float:right;">generated on 2025-10-02 02:54</div>
 </div>
 </body>
 </html>

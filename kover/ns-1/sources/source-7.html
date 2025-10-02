@@ -119,8 +119,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;
 &nbsp;import com.galarzaa.tibiakt.core.models.forums.CMPost
 &nbsp;import com.galarzaa.tibiakt.core.models.forums.CMPostArchive
-&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
-&nbsp;import java.time.LocalDate
+&nbsp;import kotlinx.datetime.LocalDate
 &nbsp;
 &nbsp;@BuilderDsl
 &nbsp;public inline fun cmPostArchive(block: CMPostArchiveBuilder.() -&gt; Unit): CMPostArchive =
@@ -143,8 +142,8 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;    public fun addEntry(post: CMPost): CMPostArchiveBuilder = apply { entries.add(post) }</b>
 &nbsp;
 <b class="fc">&nbsp;    override fun build(): CMPostArchive = CMPostArchive(</b>
-<b class="pc">&nbsp;        startDate = startDate ?: error(&quot;startDate is required&quot;),</b>
-<b class="pc">&nbsp;        endDate = endDate ?: error(&quot;endDate is required&quot;),</b>
+<b class="pc">&nbsp;        startOn = startDate ?: error(&quot;startDate is required&quot;),</b>
+<b class="pc">&nbsp;        endOn = endDate ?: error(&quot;endDate is required&quot;),</b>
 <b class="fc">&nbsp;        currentPage = currentPage,</b>
 <b class="fc">&nbsp;        totalPages = totalPages,</b>
 <b class="fc">&nbsp;        resultsCount = resultsCount,</b>
@@ -174,7 +173,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-07-16 21:19</div>
+    <div style="float:right;">generated on 2025-10-02 02:54</div>
 </div>
 </body>
 </html>

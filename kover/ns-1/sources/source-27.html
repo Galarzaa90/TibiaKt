@@ -178,8 +178,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;import com.galarzaa.tibiakt.core.models.leaderboards.BaseLeaderboardEntry
 &nbsp;import com.galarzaa.tibiakt.core.models.leaderboards.Leaderboard
 &nbsp;import com.galarzaa.tibiakt.core.models.leaderboards.LeaderboardRotation
-&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
-&nbsp;import kotlinx.datetime.Instant
+&nbsp;import kotlin.time.Instant
 &nbsp;
 &nbsp;@BuilderDsl
 &nbsp;public inline fun leaderboard(block: LeaderboardBuilder.() -&gt; Unit): Leaderboard =
@@ -216,7 +215,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="pc">&nbsp;        world = world ?: error(&quot;world is required&quot;),</b>
 <b class="pc">&nbsp;        rotation = rotation ?: error(&quot;rotation is required&quot;),</b>
 <b class="fc">&nbsp;        availableRotations = availableRotations,</b>
-<b class="fc">&nbsp;        lastUpdated = lastUpdated,</b>
+<b class="fc">&nbsp;        lastUpdatedAt = lastUpdated,</b>
 <b class="pc">&nbsp;        currentPage = currentPage ?: error(&quot;currentPage is required&quot;),</b>
 <b class="pc">&nbsp;        totalPages = totalPages ?: error(&quot;totalPages is required&quot;),</b>
 <b class="pc">&nbsp;        resultsCount = resultsCount ?: error(&quot;resultsCount is required&quot;),</b>
@@ -230,7 +229,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="nc">&nbsp;        override fun build(): LeaderboardRotation = LeaderboardRotation(</b>
 <b class="nc">&nbsp;            rotationId = rotationId ?: error(&quot;rotationId is required&quot;),</b>
 <b class="nc">&nbsp;            isCurrent = isCurrent,</b>
-<b class="nc">&nbsp;            endDate = endDate ?: error(&quot;endDate is required&quot;),</b>
+<b class="nc">&nbsp;            endsAt = endDate ?: error(&quot;endDate is required&quot;),</b>
 &nbsp;        )
 &nbsp;
 &nbsp;    }
@@ -259,7 +258,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-07-16 21:19</div>
+    <div style="float:right;">generated on 2025-10-02 02:54</div>
 </div>
 </body>
 </html>

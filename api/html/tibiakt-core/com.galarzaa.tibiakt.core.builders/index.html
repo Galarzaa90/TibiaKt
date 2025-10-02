@@ -1,0 +1,1221 @@
+<!doctype html>
+<html class="no-js">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>com.galarzaa.tibiakt.core.builders</title>
+<link href="../../images/logo-icon.svg" rel="icon" type="image/svg">    <script>var pathToRoot = "../../";</script>
+    <script>document.documentElement.classList.replace("no-js","js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async></script>
+<script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../styles/style.css" rel="Stylesheet">
+<link href="../../styles/main.css" rel="Stylesheet">
+<link href="../../styles/prism.css" rel="Stylesheet">
+<link href="../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../styles/font-jb-sans-auto.css" rel="Stylesheet">
+<link href="../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../scripts/clipboard.js" async></script>
+<script type="text/javascript" src="../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../ui-kit/ui-kit.min.js" defer></script>
+<script type="text/javascript" src="../../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
+<body>
+    <div class="root">
+    <nav class="navigation theme-dark" id="navigation-wrapper">
+<a class="library-name--link" href="../../index.html">
+                    TibiaKt
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">v0.12.1-SNAPSHOT
+        </div>
+        <div class="navigation-controls">
+        <div class="filter-section filter-section_loading" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":tibiakt-core/main">jvm</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox">
+                    <div class="dropdown--header"><span>Platform filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close platform filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":tibiakt-core/main" data-filter=":tibiakt-core/main">
+                                <span class="checkbox--icon"></span>
+                                jvm
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </div>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </nav>
+        <div id="container">
+            <div class="sidebar" id="leftColumn">
+                <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                    <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox">
+                        <div class="dropdown--header">
+                            <span>
+                                    TibiaKt
+                            </span>
+                            <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                                <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                            </button>
+                        </div>
+                        <div class="sidebar--inner" id="sideMenu"></div>
+                    </ul>
+                    <div class="dropdown--overlay"></div>
+                </div>
+            </div>
+            <div id="main">
+<div class="main-content" data-page-type="package" id="content" pageids="tibiakt-core::com.galarzaa.tibiakt.core.builders////PointingToDeclaration//-1623570306">
+  <div class="breadcrumbs"><a href="../index.html">tibiakt-core</a><span class="delimiter">/</span><span class="current">com.galarzaa.tibiakt.core.builders</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>Package-level</span></span> <span><span>declarations</span></span></h1>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="TYPE">Types</button><button class="section-tab" data-togglable="FUNCTION,EXTENSION_FUNCTION">Functions</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="TYPE">
+        <h2 class="">Types</h2>
+        <div class="table"><a data-name="2140450695%2FClasslikes%2F-1623570306" anchor-label="AuctionBuilder" id="2140450695%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-auction-builder/index.html"><span>Auction</span><wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2140450695%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-auction-builder/index.html">AuctionBuilder</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.builders/-tibia-kt-builder/index.html">TibiaKtBuilder</a><span class="token operator">&lt;</span><a href="../com.galarzaa.tibiakt.core.models.bazaar/-auction/index.html">Auction</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Builder for <a href="-auction-builder/index.html">AuctionBuilder</a> instances.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1393077352%2FClasslikes%2F-1623570306" anchor-label="BazaarFiltersBuilder" id="1393077352%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-bazaar-filters-builder/index.html"><span>Bazaar</span><wbr><span>Filters</span><wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1393077352%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-bazaar-filters-builder/index.html">BazaarFiltersBuilder</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.builders/-tibia-kt-builder/index.html">TibiaKtBuilder</a><span class="token operator">&lt;</span><a href="../com.galarzaa.tibiakt.core.models.bazaar/-bazaar-filters/index.html">BazaarFilters</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Builder for <a href="../com.galarzaa.tibiakt.core.models.bazaar/-bazaar-filters/index.html">BazaarFilters</a> instances.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="588421628%2FClasslikes%2F-1623570306" anchor-label="BoostableBossesBuilder" id="588421628%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-boostable-bosses-builder/index.html"><span>Boostable</span><wbr><span>Bosses</span><wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="588421628%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-boostable-bosses-builder/index.html">BoostableBossesBuilder</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.builders/-tibia-kt-builder/index.html">TibiaKtBuilder</a><span class="token operator">&lt;</span><a href="../com.galarzaa.tibiakt.core.models.creatures/-boostable-bosses/index.html">BoostableBosses</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Builder for <a href="../com.galarzaa.tibiakt.core.models.creatures/-boostable-bosses/index.html">BoostableBosses</a> instances.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-587337347%2FClasslikes%2F-1623570306" anchor-label="BuilderDsl" id="-587337347%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-builder-dsl/index.html"><span>Builder</span><wbr><span><span>Dsl</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-587337347%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-dsl-marker/index.html"><span class="token annotation builtin">DslMarker</span></a></div><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.annotation/-target/index.html"><span class="token annotation builtin">Target</span></a><span class="token punctuation">(</span><span>allowedTargets<span class="token operator"> = </span><span class="token punctuation">[</span><span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.annotation/-annotation-target/-c-l-a-s-s/index.html">AnnotationTarget.CLASS</a><span class="token punctuation">, </span></span><wbr><span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.annotation/-annotation-target/-t-y-p-e/index.html">AnnotationTarget.TYPE</a><span class="token punctuation">, </span></span><wbr><span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.annotation/-annotation-target/-f-u-n-c-t-i-o-n/index.html">AnnotationTarget.FUNCTION</a></span><wbr><span class="token punctuation">]</span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">annotation class </span><a href="-builder-dsl/index.html">BuilderDsl</a></div><div class="brief "><p class="paragraph">A builder DSL.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2096543268%2FClasslikes%2F-1623570306" anchor-label="CharacterBazaarBuilder" id="2096543268%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-character-bazaar-builder/index.html"><span>Character</span><wbr><span>Bazaar</span><wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2096543268%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-character-bazaar-builder/index.html">CharacterBazaarBuilder</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.builders/-tibia-kt-builder/index.html">TibiaKtBuilder</a><span class="token operator">&lt;</span><a href="../com.galarzaa.tibiakt.core.models.bazaar/-character-bazaar/index.html">CharacterBazaar</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Builder for <a href="../com.galarzaa.tibiakt.core.models.bazaar/-character-bazaar/index.html">CharacterBazaar</a> instances.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1226858259%2FClasslikes%2F-1623570306" anchor-label="CharacterBuilder" id="-1226858259%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-character-builder/index.html"><span>Character</span><wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1226858259%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-character-builder/index.html">CharacterBuilder</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.builders/-tibia-kt-builder/index.html">TibiaKtBuilder</a><span class="token operator">&lt;</span><a href="../com.galarzaa.tibiakt.core.models.character/-character/index.html">Character</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Builder for <a href="../com.galarzaa.tibiakt.core.models.character/-character/index.html">Character</a> instances.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="412629020%2FClasslikes%2F-1623570306" anchor-label="CMPostArchiveBuilder" id="412629020%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-c-m-post-archive-builder/index.html"><span>CMPost</span><wbr><span>Archive</span><wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="412629020%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-c-m-post-archive-builder/index.html">CMPostArchiveBuilder</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.builders/-tibia-kt-builder/index.html">TibiaKtBuilder</a><span class="token operator">&lt;</span><a href="../com.galarzaa.tibiakt.core.models.forums/-c-m-post-archive/index.html">CMPostArchive</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Builder for <a href="../com.galarzaa.tibiakt.core.models.forums/-c-m-post-archive/index.html">CMPostArchive</a> instances.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1424678105%2FClasslikes%2F-1623570306" anchor-label="CreaturesSectionBuilder" id="1424678105%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-creatures-section-builder/index.html"><span>Creatures</span><wbr><span>Section</span><wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1424678105%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-creatures-section-builder/index.html">CreaturesSectionBuilder</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.builders/-tibia-kt-builder/index.html">TibiaKtBuilder</a><span class="token operator">&lt;</span><a href="../com.galarzaa.tibiakt.core.models.creatures/-creatures-section/index.html">CreaturesSection</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Builder for <a href="../com.galarzaa.tibiakt.core.models.creatures/-creatures-section/index.html">CreaturesSection</a> instances.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1042767864%2FClasslikes%2F-1623570306" anchor-label="EventsScheduleBuilder" id="1042767864%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-events-schedule-builder/index.html"><span>Events</span><wbr><span>Schedule</span><wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1042767864%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-events-schedule-builder/index.html">EventsScheduleBuilder</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.builders/-tibia-kt-builder/index.html">TibiaKtBuilder</a><span class="token operator">&lt;</span><a href="../com.galarzaa.tibiakt.core.models.news/-events-schedule/index.html">EventsSchedule</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Builder for <a href="../com.galarzaa.tibiakt.core.models.news/-events-schedule/index.html">EventsSchedule</a> instances.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-724328244%2FClasslikes%2F-1623570306" anchor-label="ForumAnnouncementBuilder" id="-724328244%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-forum-announcement-builder/index.html"><span>Forum</span><wbr><span>Announcement</span><wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-724328244%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-forum-announcement-builder/index.html">ForumAnnouncementBuilder</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.builders/-tibia-kt-builder/index.html">TibiaKtBuilder</a><span class="token operator">&lt;</span><a href="../com.galarzaa.tibiakt.core.models.forums/-forum-announcement/index.html">ForumAnnouncement</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Builder for <a href="../com.galarzaa.tibiakt.core.models.forums/-forum-announcement/index.html">ForumAnnouncement</a> instances.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1444017261%2FClasslikes%2F-1623570306" anchor-label="ForumBoardBuilder" id="1444017261%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-forum-board-builder/index.html"><span>Forum</span><wbr><span>Board</span><wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1444017261%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-forum-board-builder/index.html">ForumBoardBuilder</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.builders/-tibia-kt-builder/index.html">TibiaKtBuilder</a><span class="token operator">&lt;</span><a href="../com.galarzaa.tibiakt.core.models.forums/-forum-board/index.html">ForumBoard</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Builder for <a href="../com.galarzaa.tibiakt.core.models.forums/-forum-board/index.html">ForumBoard</a> instances.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="748605911%2FClasslikes%2F-1623570306" anchor-label="ForumsSectionBuilder" id="748605911%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-forums-section-builder/index.html"><span>Forums</span><wbr><span>Section</span><wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="748605911%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-forums-section-builder/index.html">ForumsSectionBuilder</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.builders/-tibia-kt-builder/index.html">TibiaKtBuilder</a><span class="token operator">&lt;</span><a href="../com.galarzaa.tibiakt.core.models.forums/-forum-section/index.html">ForumSection</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Builder for <a href="../com.galarzaa.tibiakt.core.models.forums/-forum-section/index.html">ForumSection</a> instances.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2047169743%2FClasslikes%2F-1623570306" anchor-label="ForumThreadBuilder" id="2047169743%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-forum-thread-builder/index.html"><span>Forum</span><wbr><span>Thread</span><wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2047169743%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-forum-thread-builder/index.html">ForumThreadBuilder</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.builders/-tibia-kt-builder/index.html">TibiaKtBuilder</a><span class="token operator">&lt;</span><a href="../com.galarzaa.tibiakt.core.models.forums/-forum-thread/index.html">ForumThread</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Builder for <a href="../com.galarzaa.tibiakt.core.models.forums/-forum-thread/index.html">ForumThread</a> instances.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1240268983%2FClasslikes%2F-1623570306" anchor-label="GuildBuilder" id="1240268983%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-guild-builder/index.html"><span>Guild</span><wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1240268983%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-guild-builder/index.html">GuildBuilder</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.builders/-tibia-kt-builder/index.html">TibiaKtBuilder</a><span class="token operator">&lt;</span><a href="../com.galarzaa.tibiakt.core.models.guild/-guild/index.html">Guild</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Builder for <a href="../com.galarzaa.tibiakt.core.models.guild/-guild/index.html">Guild</a> instances.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="357353129%2FClasslikes%2F-1623570306" anchor-label="GuildsSectionBuilder" id="357353129%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-guilds-section-builder/index.html"><span>Guilds</span><wbr><span>Section</span><wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="357353129%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-guilds-section-builder/index.html">GuildsSectionBuilder</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.builders/-tibia-kt-builder/index.html">TibiaKtBuilder</a><span class="token operator">&lt;</span><a href="../com.galarzaa.tibiakt.core.models.guild/-guilds-section/index.html">GuildsSection</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Builder for <a href="../com.galarzaa.tibiakt.core.models.guild/-guilds-section/index.html">GuildsSection</a> instances.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="264449643%2FClasslikes%2F-1623570306" anchor-label="HighscoresBuilder" id="264449643%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-highscores-builder/index.html"><span>Highscores</span><wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="264449643%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-highscores-builder/index.html">HighscoresBuilder</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.builders/-tibia-kt-builder/index.html">TibiaKtBuilder</a><span class="token operator">&lt;</span><a href="../com.galarzaa.tibiakt.core.models.highscores/-highscores/index.html">Highscores</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Builder for <a href="../com.galarzaa.tibiakt.core.models.highscores/-highscores/index.html">Highscores</a> instances.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1611098140%2FClasslikes%2F-1623570306" anchor-label="HouseBuilder" id="-1611098140%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-house-builder/index.html"><span>House</span><wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1611098140%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-house-builder/index.html">HouseBuilder</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.builders/-tibia-kt-builder/index.html">TibiaKtBuilder</a><span class="token operator">&lt;</span><a href="../com.galarzaa.tibiakt.core.models.house/-house/index.html">House</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Builder for <a href="../com.galarzaa.tibiakt.core.models.house/-house/index.html">House</a> instances.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1646731050%2FClasslikes%2F-1623570306" anchor-label="HousesSectionBuilder" id="-1646731050%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-houses-section-builder/index.html"><span>Houses</span><wbr><span>Section</span><wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1646731050%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-houses-section-builder/index.html">HousesSectionBuilder</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.builders/-tibia-kt-builder/index.html">TibiaKtBuilder</a><span class="token operator">&lt;</span><a href="../com.galarzaa.tibiakt.core.models.house/-houses-section/index.html">HousesSection</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Builder for <a href="../com.galarzaa.tibiakt.core.models.house/-houses-section/index.html">HousesSection</a> instances.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1644177335%2FClasslikes%2F-1623570306" anchor-label="KillStatisticsBuilder" id="-1644177335%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-kill-statistics-builder/index.html"><span>Kill</span><wbr><span>Statistics</span><wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1644177335%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-kill-statistics-builder/index.html">KillStatisticsBuilder</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.builders/-tibia-kt-builder/index.html">TibiaKtBuilder</a><span class="token operator">&lt;</span><a href="../com.galarzaa.tibiakt.core.models/-kill-statistics/index.html">KillStatistics</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Builder for <a href="../com.galarzaa.tibiakt.core.models/-kill-statistics/index.html">KillStatistics</a> instances.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1058927358%2FClasslikes%2F-1623570306" anchor-label="LastPostBuilder" id="1058927358%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-last-post-builder/index.html"><span>Last</span><wbr><span>Post</span><wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1058927358%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-last-post-builder/index.html">LastPostBuilder</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.builders/-tibia-kt-builder/index.html">TibiaKtBuilder</a><span class="token operator">&lt;</span><a href="../com.galarzaa.tibiakt.core.models.forums/-last-post/index.html">LastPost</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Builder for <a href="../com.galarzaa.tibiakt.core.models.forums/-last-post/index.html">LastPost</a> instances.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="816646593%2FClasslikes%2F-1623570306" anchor-label="LeaderboardBuilder" id="816646593%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-leaderboard-builder/index.html"><span>Leaderboard</span><wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="816646593%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-leaderboard-builder/index.html">LeaderboardBuilder</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.builders/-tibia-kt-builder/index.html">TibiaKtBuilder</a><span class="token operator">&lt;</span><a href="../com.galarzaa.tibiakt.core.models.leaderboards/-leaderboard/index.html">Leaderboard</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Builder for <a href="../com.galarzaa.tibiakt.core.models.leaderboards/-leaderboard/index.html">Leaderboard</a> instances.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1989936307%2FClasslikes%2F-1623570306" anchor-label="NewsArchiveBuilder" id="1989936307%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-news-archive-builder/index.html"><span>News</span><wbr><span>Archive</span><wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1989936307%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-news-archive-builder/index.html">NewsArchiveBuilder</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.builders/-tibia-kt-builder/index.html">TibiaKtBuilder</a><span class="token operator">&lt;</span><a href="../com.galarzaa.tibiakt.core.models.news/-news-archive/index.html">NewsArchive</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Builder for <a href="../com.galarzaa.tibiakt.core.models.news/-news-archive/index.html">NewsArchive</a> instances.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2093646213%2FClasslikes%2F-1623570306" anchor-label="NewsBuilder" id="-2093646213%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-news-builder/index.html"><span>News</span><wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2093646213%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-news-builder/index.html">NewsBuilder</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.builders/-tibia-kt-builder/index.html">TibiaKtBuilder</a><span class="token operator">&lt;</span><a href="../com.galarzaa.tibiakt.core.models.news/-news/index.html">News</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Builder for <a href="../com.galarzaa.tibiakt.core.models.news/-news/index.html">News</a> instances.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1754113110%2FClasslikes%2F-1623570306" anchor-label="WorldBuilder" id="1754113110%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-world-builder/index.html"><span>World</span><wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1754113110%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-world-builder/index.html">WorldBuilder</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.builders/-tibia-kt-builder/index.html">TibiaKtBuilder</a><span class="token operator">&lt;</span><a href="../com.galarzaa.tibiakt.core.models.world/-world/index.html">World</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Builder for <a href="../com.galarzaa.tibiakt.core.models.world/-world/index.html">World</a> instances.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1867312657%2FClasslikes%2F-1623570306" anchor-label="WorldOverviewBuilder" id="-1867312657%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-world-overview-builder/index.html"><span>World</span><wbr><span>Overview</span><wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1867312657%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-world-overview-builder/index.html">WorldOverviewBuilder</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.builders/-tibia-kt-builder/index.html">TibiaKtBuilder</a><span class="token operator">&lt;</span><a href="../com.galarzaa.tibiakt.core.models.world/-world-overview/index.html">WorldOverview</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Builder for world overview.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="">Functions</h2>
+        <div class="table"><a data-name="-1257181811%2FFunctions%2F-1623570306" anchor-label="auction" id="-1257181811%2FFunctions%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="auction.html"><span><span>auction</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1257181811%2FFunctions%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="auction.html"><span class="token function">auction</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><a href="-auction-builder/index.html">AuctionBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../com.galarzaa.tibiakt.core.models.bazaar/-auction/index.html">Auction</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="165408252%2FFunctions%2F-1623570306" anchor-label="auctionBuilder" id="165408252%2FFunctions%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="auction-builder.html"><span>auction</span><wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="165408252%2FFunctions%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="auction-builder.html"><span class="token function">auctionBuilder</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><a href="-auction-builder/index.html">AuctionBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-auction-builder/index.html">AuctionBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="16512493%2FFunctions%2F-1623570306" anchor-label="bazaarFilters" id="16512493%2FFunctions%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="bazaar-filters.html"><span>bazaar</span><wbr><span><span>Filters</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="16512493%2FFunctions%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="bazaar-filters.html"><span class="token function">bazaarFilters</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><a href="-bazaar-filters-builder/index.html">BazaarFiltersBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../com.galarzaa.tibiakt.core.models.bazaar/-bazaar-filters/index.html">BazaarFilters</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="193458490%2FFunctions%2F-1623570306" anchor-label="bazaarFiltersBuilder" id="193458490%2FFunctions%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="bazaar-filters-builder.html"><span>bazaar</span><wbr><span>Filters</span><wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="193458490%2FFunctions%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="bazaar-filters-builder.html"><span class="token function">bazaarFiltersBuilder</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><a href="-bazaar-filters-builder/index.html">BazaarFiltersBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-bazaar-filters-builder/index.html">BazaarFiltersBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-467328659%2FFunctions%2F-1623570306" anchor-label="boostableBosses" id="-467328659%2FFunctions%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="boostable-bosses.html"><span>boostable</span><wbr><span><span>Bosses</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-467328659%2FFunctions%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="boostable-bosses.html"><span class="token function">boostableBosses</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><a href="-boostable-bosses-builder/index.html">BoostableBossesBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../com.galarzaa.tibiakt.core.models.creatures/-boostable-bosses/index.html">BoostableBosses</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2101608878%2FFunctions%2F-1623570306" anchor-label="boostableBossesBuilder" id="-2101608878%2FFunctions%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="boostable-bosses-builder.html"><span>boostable</span><wbr><span>Bosses</span><wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2101608878%2FFunctions%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="boostable-bosses-builder.html"><span class="token function">boostableBossesBuilder</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><a href="-boostable-bosses-builder/index.html">BoostableBossesBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-boostable-bosses-builder/index.html">BoostableBossesBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1582007949%2FFunctions%2F-1623570306" anchor-label="character" id="1582007949%2FFunctions%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="character.html"><span><span>character</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1582007949%2FFunctions%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="character.html"><span class="token function">character</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><a href="-character-builder/index.html">CharacterBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../com.galarzaa.tibiakt.core.models.character/-character/index.html">Character</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="534440045%2FFunctions%2F-1623570306" anchor-label="characterBazaar" id="534440045%2FFunctions%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="character-bazaar.html"><span>character</span><wbr><span><span>Bazaar</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="534440045%2FFunctions%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="character-bazaar.html"><span class="token function">characterBazaar</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><a href="-character-bazaar-builder/index.html">CharacterBazaarBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../com.galarzaa.tibiakt.core.models.bazaar/-character-bazaar/index.html">CharacterBazaar</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1366806526%2FFunctions%2F-1623570306" anchor-label="characterBazaarBuilder" id="-1366806526%2FFunctions%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="character-bazaar-builder.html"><span>character</span><wbr><span>Bazaar</span><wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1366806526%2FFunctions%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="character-bazaar-builder.html"><span class="token function">characterBazaarBuilder</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><a href="-character-bazaar-builder/index.html">CharacterBazaarBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-character-bazaar-builder/index.html">CharacterBazaarBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1288167632%2FFunctions%2F-1623570306" anchor-label="characterBuilder" id="-1288167632%2FFunctions%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="character-builder.html"><span>character</span><wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1288167632%2FFunctions%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="character-builder.html"><span class="token function">characterBuilder</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><a href="-character-builder/index.html">CharacterBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-character-builder/index.html">CharacterBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1497044557%2FFunctions%2F-1623570306" anchor-label="cmPostArchive" id="1497044557%2FFunctions%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="cm-post-archive.html"><span>cm</span><wbr><span>Post</span><wbr><span><span>Archive</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1497044557%2FFunctions%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="cm-post-archive.html"><span class="token function">cmPostArchive</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><a href="-c-m-post-archive-builder/index.html">CMPostArchiveBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../com.galarzaa.tibiakt.core.models.forums/-c-m-post-archive/index.html">CMPostArchive</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-225838606%2FFunctions%2F-1623570306" anchor-label="cmPostArchiveBuilder" id="-225838606%2FFunctions%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="cm-post-archive-builder.html"><span>cm</span><wbr><span>Post</span><wbr><span>Archive</span><wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-225838606%2FFunctions%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="cm-post-archive-builder.html"><span class="token function">cmPostArchiveBuilder</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><a href="-c-m-post-archive-builder/index.html">CMPostArchiveBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-c-m-post-archive-builder/index.html">CMPostArchiveBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1732408607%2FFunctions%2F-1623570306" anchor-label="creaturesSection" id="1732408607%2FFunctions%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="creatures-section.html"><span>creatures</span><wbr><span><span>Section</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1732408607%2FFunctions%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="creatures-section.html"><span class="token function">creaturesSection</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><a href="-creatures-section-builder/index.html">CreaturesSectionBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../com.galarzaa.tibiakt.core.models.creatures/-creatures-section/index.html">CreaturesSection</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="142377376%2FFunctions%2F-1623570306" anchor-label="creaturesSectionBuilder" id="142377376%2FFunctions%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="creatures-section-builder.html"><span>creatures</span><wbr><span>Section</span><wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="142377376%2FFunctions%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="creatures-section-builder.html"><span class="token function">creaturesSectionBuilder</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><a href="-creatures-section-builder/index.html">CreaturesSectionBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-creatures-section-builder/index.html">CreaturesSectionBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1360361569%2FFunctions%2F-1623570306" anchor-label="eventsSchedule" id="1360361569%2FFunctions%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="events-schedule.html"><span>events</span><wbr><span><span>Schedule</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1360361569%2FFunctions%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="events-schedule.html"><span class="token function">eventsSchedule</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><a href="-events-schedule-builder/index.html">EventsScheduleBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../com.galarzaa.tibiakt.core.models.news/-events-schedule/index.html">EventsSchedule</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1829379456%2FFunctions%2F-1623570306" anchor-label="eventsScheduleBuilder" id="1829379456%2FFunctions%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="events-schedule-builder.html"><span>events</span><wbr><span>Schedule</span><wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1829379456%2FFunctions%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="events-schedule-builder.html"><span class="token function">eventsScheduleBuilder</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><a href="-events-schedule-builder/index.html">EventsScheduleBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-events-schedule-builder/index.html">EventsScheduleBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-331043219%2FFunctions%2F-1623570306" anchor-label="forumAnnouncement" id="-331043219%2FFunctions%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="forum-announcement.html"><span>forum</span><wbr><span><span>Announcement</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-331043219%2FFunctions%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="forum-announcement.html"><span class="token function">forumAnnouncement</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><a href="-forum-announcement-builder/index.html">ForumAnnouncementBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../com.galarzaa.tibiakt.core.models.forums/-forum-announcement/index.html">ForumAnnouncement</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="76247282%2FFunctions%2F-1623570306" anchor-label="forumAnnouncementBuilder" id="76247282%2FFunctions%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="forum-announcement-builder.html"><span>forum</span><wbr><span>Announcement</span><wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="76247282%2FFunctions%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="forum-announcement-builder.html"><span class="token function">forumAnnouncementBuilder</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><a href="-forum-announcement-builder/index.html">ForumAnnouncementBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-forum-announcement-builder/index.html">ForumAnnouncementBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1070886089%2FFunctions%2F-1623570306" anchor-label="forumBoard" id="-1070886089%2FFunctions%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="forum-board.html"><span>forum</span><wbr><span><span>Board</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1070886089%2FFunctions%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="forum-board.html"><span class="token function">forumBoard</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><a href="-forum-board-builder/index.html">ForumBoardBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../com.galarzaa.tibiakt.core.models.forums/-forum-board/index.html">ForumBoard</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1448721312%2FFunctions%2F-1623570306" anchor-label="forumBoardBuilder" id="1448721312%2FFunctions%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="forum-board-builder.html"><span>forum</span><wbr><span>Board</span><wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1448721312%2FFunctions%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="forum-board-builder.html"><span class="token function">forumBoardBuilder</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><a href="-forum-board-builder/index.html">ForumBoardBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-forum-board-builder/index.html">ForumBoardBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="521593933%2FFunctions%2F-1623570306" anchor-label="forumsSection" id="521593933%2FFunctions%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="forums-section.html"><span>forums</span><wbr><span><span>Section</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="521593933%2FFunctions%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="forums-section.html"><span class="token function">forumsSection</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><a href="-forums-section-builder/index.html">ForumsSectionBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../com.galarzaa.tibiakt.core.models.forums/-forum-section/index.html">ForumSection</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-891928996%2FFunctions%2F-1623570306" anchor-label="forumsSectionBuilder" id="-891928996%2FFunctions%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="forums-section-builder.html"><span>forums</span><wbr><span>Section</span><wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-891928996%2FFunctions%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="forums-section-builder.html"><span class="token function">forumsSectionBuilder</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><a href="-forums-section-builder/index.html">ForumsSectionBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-forums-section-builder/index.html">ForumsSectionBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-67236595%2FFunctions%2F-1623570306" anchor-label="forumThread" id="-67236595%2FFunctions%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="forum-thread.html"><span>forum</span><wbr><span><span>Thread</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-67236595%2FFunctions%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="forum-thread.html"><span class="token function">forumThread</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><a href="-forum-thread-builder/index.html">ForumThreadBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../com.galarzaa.tibiakt.core.models.forums/-forum-thread/index.html">ForumThread</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="613080940%2FFunctions%2F-1623570306" anchor-label="forumThreadBuilder" id="613080940%2FFunctions%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="forum-thread-builder.html"><span>forum</span><wbr><span>Thread</span><wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="613080940%2FFunctions%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="forum-thread-builder.html"><span class="token function">forumThreadBuilder</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><a href="-forum-thread-builder/index.html">ForumThreadBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-forum-thread-builder/index.html">ForumThreadBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-638242995%2FFunctions%2F-1623570306" anchor-label="guild" id="-638242995%2FFunctions%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="guild.html"><span><span>guild</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-638242995%2FFunctions%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="guild.html"><span class="token function">guild</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><a href="-guild-builder/index.html">GuildBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../com.galarzaa.tibiakt.core.models.guild/-guild/index.html">Guild</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2001873764%2FFunctions%2F-1623570306" anchor-label="guildBuilder" id="-2001873764%2FFunctions%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="guild-builder.html"><span>guild</span><wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2001873764%2FFunctions%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="guild-builder.html"><span class="token function">guildBuilder</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><a href="-guild-builder/index.html">GuildBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-guild-builder/index.html">GuildBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1052681613%2FFunctions%2F-1623570306" anchor-label="guildsSection" id="1052681613%2FFunctions%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="guilds-section.html"><span>guilds</span><wbr><span><span>Section</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1052681613%2FFunctions%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="guilds-section.html"><span class="token function">guildsSection</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><a href="-guilds-section-builder/index.html">GuildsSectionBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../com.galarzaa.tibiakt.core.models.guild/-guilds-section/index.html">GuildsSection</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="882681016%2FFunctions%2F-1623570306" anchor-label="guildsSectionBuilder" id="882681016%2FFunctions%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="guilds-section-builder.html"><span>guilds</span><wbr><span>Section</span><wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="882681016%2FFunctions%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="guilds-section-builder.html"><span class="token function">guildsSectionBuilder</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><a href="-guilds-section-builder/index.html">GuildsSectionBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-guilds-section-builder/index.html">GuildsSectionBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1346963013%2FFunctions%2F-1623570306" anchor-label="highscores" id="-1346963013%2FFunctions%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="highscores.html"><span><span>highscores</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1346963013%2FFunctions%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="highscores.html"><span class="token function">highscores</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><a href="-highscores-builder/index.html">HighscoresBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../com.galarzaa.tibiakt.core.models.highscores/-highscores/index.html">Highscores</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1273757024%2FFunctions%2F-1623570306" anchor-label="highscoresBuilder" id="1273757024%2FFunctions%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="highscores-builder.html"><span>highscores</span><wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1273757024%2FFunctions%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="highscores-builder.html"><span class="token function">highscoresBuilder</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><a href="-highscores-builder/index.html">HighscoresBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-highscores-builder/index.html">HighscoresBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1090790253%2FFunctions%2F-1623570306" anchor-label="house" id="1090790253%2FFunctions%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="house.html"><span><span>house</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1090790253%2FFunctions%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="house.html"><span class="token function">house</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><a href="-house-builder/index.html">HouseBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../com.galarzaa.tibiakt.core.models.house/-house/index.html">House</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-927133374%2FFunctions%2F-1623570306" anchor-label="houseBuilder" id="-927133374%2FFunctions%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="house-builder.html"><span>house</span><wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-927133374%2FFunctions%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="house-builder.html"><span class="token function">houseBuilder</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><a href="-house-builder/index.html">HouseBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-house-builder/index.html">HouseBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="946781357%2FFunctions%2F-1623570306" anchor-label="housesSection" id="946781357%2FFunctions%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="houses-section.html"><span>houses</span><wbr><span><span>Section</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="946781357%2FFunctions%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="houses-section.html"><span class="token function">housesSection</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><a href="-houses-section-builder/index.html">HousesSectionBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../com.galarzaa.tibiakt.core.models.house/-houses-section/index.html">HousesSection</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="111622238%2FFunctions%2F-1623570306" anchor-label="housesSectionBuilder" id="111622238%2FFunctions%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="houses-section-builder.html"><span>houses</span><wbr><span>Section</span><wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="111622238%2FFunctions%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="houses-section-builder.html"><span class="token function">housesSectionBuilder</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><a href="-houses-section-builder/index.html">HousesSectionBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-houses-section-builder/index.html">HousesSectionBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-706537729%2FFunctions%2F-1623570306" anchor-label="killStatistics" id="-706537729%2FFunctions%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="kill-statistics.html"><span>kill</span><wbr><span><span>Statistics</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-706537729%2FFunctions%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="kill-statistics.html"><span class="token function">killStatistics</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><a href="-kill-statistics-builder/index.html">KillStatisticsBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../com.galarzaa.tibiakt.core.models/-kill-statistics/index.html">KillStatistics</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-510204384%2FFunctions%2F-1623570306" anchor-label="killStatisticsBuilder" id="-510204384%2FFunctions%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="kill-statistics-builder.html"><span>kill</span><wbr><span>Statistics</span><wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-510204384%2FFunctions%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="kill-statistics-builder.html"><span class="token function">killStatisticsBuilder</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><a href="-kill-statistics-builder/index.html">KillStatisticsBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-kill-statistics-builder/index.html">KillStatisticsBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="138724437%2FFunctions%2F-1623570306" anchor-label="lastPost" id="138724437%2FFunctions%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="last-post.html"><span>last</span><wbr><span><span>Post</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="138724437%2FFunctions%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="last-post.html"><span class="token function">lastPost</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><a href="-last-post-builder/index.html">LastPostBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../com.galarzaa.tibiakt.core.models.forums/-last-post/index.html">LastPost</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1503817600%2FFunctions%2F-1623570306" anchor-label="lastPostBuilder" id="-1503817600%2FFunctions%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="last-post-builder.html"><span>last</span><wbr><span>Post</span><wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1503817600%2FFunctions%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="last-post-builder.html"><span class="token function">lastPostBuilder</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><a href="-last-post-builder/index.html">LastPostBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-last-post-builder/index.html">LastPostBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-981895475%2FFunctions%2F-1623570306" anchor-label="leaderboard" id="-981895475%2FFunctions%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="leaderboard.html"><span><span>leaderboard</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-981895475%2FFunctions%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="leaderboard.html"><span class="token function">leaderboard</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><a href="-leaderboard-builder/index.html">LeaderboardBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../com.galarzaa.tibiakt.core.models.leaderboards/-leaderboard/index.html">Leaderboard</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1970536712%2FFunctions%2F-1623570306" anchor-label="leaderboardBuilder" id="1970536712%2FFunctions%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="leaderboard-builder.html"><span>leaderboard</span><wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1970536712%2FFunctions%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="leaderboard-builder.html"><span class="token function">leaderboardBuilder</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><a href="-leaderboard-builder/index.html">LeaderboardBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-leaderboard-builder/index.html">LeaderboardBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="167819867%2FFunctions%2F-1623570306" anchor-label="news" id="167819867%2FFunctions%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="news.html"><span><span>news</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="167819867%2FFunctions%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="news.html"><span class="token function">news</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><a href="-news-builder/index.html">NewsBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../com.galarzaa.tibiakt.core.models.news/-news/index.html">News</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1411112819%2FFunctions%2F-1623570306" anchor-label="newsArchive" id="-1411112819%2FFunctions%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="news-archive.html"><span>news</span><wbr><span><span>Archive</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1411112819%2FFunctions%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="news-archive.html"><span class="token function">newsArchive</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><a href="-news-archive-builder/index.html">NewsArchiveBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../com.galarzaa.tibiakt.core.models.news/-news-archive/index.html">NewsArchive</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1494554276%2FFunctions%2F-1623570306" anchor-label="newsArchiveBuilder" id="1494554276%2FFunctions%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="news-archive-builder.html"><span>news</span><wbr><span>Archive</span><wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1494554276%2FFunctions%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="news-archive-builder.html"><span class="token function">newsArchiveBuilder</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><a href="-news-archive-builder/index.html">NewsArchiveBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-news-archive-builder/index.html">NewsArchiveBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="858639456%2FFunctions%2F-1623570306" anchor-label="newsBuilder" id="858639456%2FFunctions%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="news-builder.html"><span>news</span><wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="858639456%2FFunctions%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="news-builder.html"><span class="token function">newsBuilder</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><a href="-news-builder/index.html">NewsBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-news-builder/index.html">NewsBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-857924947%2FFunctions%2F-1623570306" anchor-label="world" id="-857924947%2FFunctions%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="world.html"><span><span>world</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-857924947%2FFunctions%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="world.html"><span class="token function">world</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><a href="-world-builder/index.html">WorldBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../com.galarzaa.tibiakt.core.models.world/-world/index.html">World</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-304548258%2FFunctions%2F-1623570306" anchor-label="worldBuilder" id="-304548258%2FFunctions%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="world-builder.html"><span>world</span><wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-304548258%2FFunctions%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="world-builder.html"><span class="token function">worldBuilder</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><a href="-world-builder/index.html">WorldBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-world-builder/index.html">WorldBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1039899469%2FFunctions%2F-1623570306" anchor-label="worldOverview" id="1039899469%2FFunctions%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="world-overview.html"><span>world</span><wbr><span><span>Overview</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1039899469%2FFunctions%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="world-overview.html"><span class="token function">worldOverview</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><a href="-world-overview-builder/index.html">WorldOverviewBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../com.galarzaa.tibiakt.core.models.world/-world-overview/index.html">WorldOverview</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="477330988%2FFunctions%2F-1623570306" anchor-label="worldOverviewBuilder" id="477330988%2FFunctions%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="world-overview-builder.html"><span>world</span><wbr><span>Overview</span><wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="477330988%2FFunctions%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="world-overview-builder.html"><span class="token function">worldOverviewBuilder</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><a href="-world-overview-builder/index.html">WorldOverviewBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-world-overview-builder/index.html">WorldOverviewBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+        <span>© 2025 Copyright</span>
+        <span class="pull-right">
+            <span>Generated by </span>
+            <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                <span>dokka</span>
+            </a>
+        </span>
+    </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

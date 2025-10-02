@@ -182,8 +182,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;import com.galarzaa.tibiakt.core.enums.Vocation
 &nbsp;import com.galarzaa.tibiakt.core.models.highscores.Highscores
 &nbsp;import com.galarzaa.tibiakt.core.models.highscores.HighscoresEntry
-&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
-&nbsp;import kotlinx.datetime.Instant
+&nbsp;import kotlin.time.Instant
 &nbsp;
 &nbsp;@BuilderDsl
 &nbsp;public inline fun highscores(block: HighscoresBuilder.() -&gt; Unit): Highscores = HighscoresBuilder().apply(block).build()
@@ -228,7 +227,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;        vocation = vocation ?: HighscoresProfession.ALL,</b>
 <b class="fc">&nbsp;        worldTypes = worldTypes,</b>
 <b class="pc">&nbsp;        battlEyeType = battlEyeType ?: HighscoresBattlEyeType.ANY_WORLD,</b>
-<b class="pc">&nbsp;        lastUpdated = lastUpdated ?: error(&quot;lastUpdated is required&quot;),</b>
+<b class="pc">&nbsp;        lastUpdatedAt = lastUpdated ?: error(&quot;lastUpdated is required&quot;),</b>
 <b class="fc">&nbsp;        currentPage = currentPage,</b>
 <b class="fc">&nbsp;        totalPages = totalPages,</b>
 <b class="fc">&nbsp;        resultsCount = resultsCount,</b>
@@ -279,7 +278,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-07-16 21:19</div>
+    <div style="float:right;">generated on 2025-10-02 02:54</div>
 </div>
 </body>
 </html>

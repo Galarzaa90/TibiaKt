@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>tibiakt-core Coverage Report > HighscoresEntry</title>
+  <title>tibiakt-core Coverage Report > BaseForumAnnouncement</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -19,10 +19,10 @@
 <div class="breadCrumbs">
 Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">com.galarzaa.tibiakt.core.models.highscores</a>
+    <a href="../index.html">com.galarzaa.tibiakt.core.models.forums</a>
 </div>
 
-<h1>Coverage Summary for Class: HighscoresEntry (com.galarzaa.tibiakt.core.models.highscores)</h1>
+<h1>Coverage Summary for Class: BaseForumAnnouncement (com.galarzaa.tibiakt.core.models.forums)</h1>
 
 <table class="coverageStats">
 
@@ -46,13 +46,22 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </th>
 </tr>
 <tr>
-  <td class="name">HighscoresEntry</td>
+  <td class="name">BaseForumAnnouncement</td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    0%
   </span>
   <span class="absValue">
-    (2/2)
+    (0/1)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
   </span>
 </td>
 <td class="coverageStat">
@@ -60,28 +69,12 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     0%
   </span>
   <span class="absValue">
-    (0/2)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    100%
-  </span>
-  <span class="absValue">
-    (9/9)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    82.5%
-  </span>
-  <span class="absValue">
-    (132/160)
+    (0/3)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">HighscoresEntry$Companion</td>
+    <td class="name">BaseForumAnnouncement$DefaultImpls</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -112,12 +105,13 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    66.7%
+    0%
   </span>
   <span class="absValue">
-    (2/3)
+    (0/2)
   </span>
 </td>
+    <td class="coverageStat"/>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -128,18 +122,10 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </td>
 <td class="coverageStat">
   <span class="percent">
-    90%
+    0%
   </span>
   <span class="absValue">
-    (9/10)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    81.5%
-  </span>
-  <span class="absValue">
-    (132/162)
+    (0/5)
   </span>
 </td>
 </tr>
@@ -151,7 +137,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;/*
-&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; * Copyright © 2024 Allan Galarza
 &nbsp; *
 &nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 &nbsp; * you may not use this file except in compliance with the License.
@@ -166,33 +152,24 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp; * limitations under the License.
 &nbsp; */
 &nbsp;
-&nbsp;package com.galarzaa.tibiakt.core.models.highscores
+&nbsp;package com.galarzaa.tibiakt.core.models.forums
 &nbsp;
-&nbsp;import com.galarzaa.tibiakt.core.enums.Vocation
-&nbsp;import com.galarzaa.tibiakt.core.models.character.BaseCharacter
-&nbsp;import com.galarzaa.tibiakt.core.models.character.CharacterLevel
-&nbsp;import kotlinx.serialization.Serializable
+&nbsp;import com.galarzaa.tibiakt.core.net.forumAnnouncementUrl
 &nbsp;
-&nbsp;/**
-&nbsp; * An entry in the [Highscores].
+&nbsp;/** Base interface for forum announcements.
 &nbsp; *
-&nbsp; * @property rank The rank of the character. Multiple entries might have the same rank if they are tied.
-&nbsp; * @property level The level of the character.
-&nbsp; * @property world The world of the character.
-&nbsp; * @property vocation The vocation of the character.
-&nbsp; * @property value The value of the entry (e.g. distance level, magic level, experience)
-&nbsp; * @property additionalValue Additional information displayed in some categories, such as Loyalty Title.
+&nbsp; * @property title The title of the announcement.
+&nbsp; * @property announcementId The internal ID of the announcement, used for linking.
 &nbsp; */
-<b class="pc">&nbsp;@Serializable</b>
-<b class="fc">&nbsp;public data class HighscoresEntry(</b>
-<b class="fc">&nbsp;    val rank: Int,</b>
-<b class="fc">&nbsp;    override val name: String,</b>
-<b class="fc">&nbsp;    override val level: Int,</b>
-<b class="fc">&nbsp;    val world: String,</b>
-<b class="fc">&nbsp;    val vocation: Vocation,</b>
-<b class="fc">&nbsp;    val value: Long,</b>
-<b class="fc">&nbsp;    val additionalValue: String?,</b>
-&nbsp;) : BaseCharacter, CharacterLevel
+&nbsp;public interface BaseForumAnnouncement {
+&nbsp;    public val title: String
+&nbsp;    public val announcementId: Int
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The URL to go to the specific announcement.
+&nbsp;     */
+<b class="nc">&nbsp;    public val url: String get() = forumAnnouncementUrl(announcementId)</b>
+&nbsp;}
 </code>
 </pre>
 </div>
@@ -216,7 +193,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-07-16 21:19</div>
+    <div style="float:right;">generated on 2025-10-02 02:54</div>
 </div>
 </body>
 </html>

@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>tibiakt-core Coverage Report > ListExtensionsKt</title>
+  <title>tibiakt-core Coverage Report > UrlsKt</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -19,10 +19,10 @@
 <div class="breadCrumbs">
 Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">com.galarzaa.tibiakt.core.utils</a>
+    <a href="../index.html">com.galarzaa.tibiakt.core.net</a>
 </div>
 
-<h1>Coverage Summary for Class: ListExtensionsKt (com.galarzaa.tibiakt.core.utils)</h1>
+<h1>Coverage Summary for Class: UrlsKt (com.galarzaa.tibiakt.core.net)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -49,7 +49,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </th>
 </tr>
 <tr>
-  <td class="name">ListExtensionsKt</td>
+  <td class="name">UrlsKt</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -60,27 +60,34 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    50%
   </span>
   <span class="absValue">
-    (1/1)
-  </span>
-</td>
-    <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    100%
-  </span>
-  <span class="absValue">
-    (1/1)
+    (3/6)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    33.3%
   </span>
   <span class="absValue">
-    (8/8)
+    (6/18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (18/27)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    54%
+  </span>
+  <span class="absValue">
+    (116/215)
   </span>
 </td>
 </tr>
@@ -93,7 +100,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;/*
-&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; * Copyright © 2025 Allan Galarza
 &nbsp; *
 &nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 &nbsp; * you may not use this file except in compliance with the License.
@@ -108,16 +115,91 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp; * limitations under the License.
 &nbsp; */
 &nbsp;
-&nbsp;package com.galarzaa.tibiakt.core.utils
+&nbsp;package com.galarzaa.tibiakt.core.net
 &nbsp;
-&nbsp;import kotlin.math.min
+&nbsp;import java.net.URLEncoder
+&nbsp;import java.nio.charset.StandardCharsets
+&nbsp;
+&nbsp;private const val BASE_HOST = &quot;www.tibia.com&quot;
+&nbsp;private const val TEST_HOST = &quot;www.test.tibia.com&quot;
+&nbsp;private const val STATIC_HOST = &quot;static.tibia.com&quot;
+<b class="fc">&nbsp;private val LATIN1 = StandardCharsets.ISO_8859_1</b>
+&nbsp;
+&nbsp;private fun joinPath(vararg parts: String): String =
+<b class="nc">&nbsp;    parts.asSequence()</b>
+<b class="nc">&nbsp;        .filter { it.isNotEmpty() }</b>
+<b class="nc">&nbsp;        .map { it.trim(&#39;/&#39;) }</b>
+<b class="nc">&nbsp;        .filter { it.isNotEmpty() }</b>
+<b class="nc">&nbsp;        .joinToString(&quot;/&quot;)</b>
 &nbsp;
 &nbsp;/**
-&nbsp; * Get a sublist from the receiver, starting at a certain [offset].
+&nbsp; * Build a URL to Tibia.com.
 &nbsp; *
-&nbsp; * If the offset is bigger than the list&#39;s size, the same list is returned.
+&nbsp; * @param section The desired section.
+&nbsp; * @param params The query arguments to pass.
+&nbsp; * @param test Whether to get a URL to the testing version of Tibia.com.
+&nbsp; * @param anchor The anchor to append to the URL.
 &nbsp; */
-<b class="fc">&nbsp;public fun &lt;T&gt; List&lt;T&gt;.offsetStart(offset: Int): List&lt;T&gt; = subList(min(offset, size), size)</b>
+&nbsp;public fun tibiaUrl(
+&nbsp;    section: String,
+&nbsp;    vararg params: Pair&lt;String, Any?&gt;,
+<b class="fc">&nbsp;    test: Boolean = false,</b>
+<b class="fc">&nbsp;    anchor: String? = null,</b>
+&nbsp;): String {
+<b class="pc">&nbsp;     val host = if (test) TEST_HOST else BASE_HOST</b>
+&nbsp;
+<b class="fc">&nbsp;    val query = params.asSequence()</b>
+<b class="pc">&nbsp;        .filter { ( _, v ) -&gt; v != null }</b>
+<b class="fc">&nbsp;        .map { (k, v) -&gt; &quot;$k=${URLEncoder.encode(v.toString(), LATIN1)}&quot; }</b>
+<b class="fc">&nbsp;        .joinToString(&quot;&amp;&quot;)</b>
+&nbsp;
+<b class="fc">&nbsp;    return buildString {</b>
+<b class="fc">&nbsp;        append(&quot;https://$host/${section.trimEnd(&#39;/&#39;)}/&quot;)</b>
+<b class="pc">&nbsp;        if (query.isNotEmpty()) append(&#39;?&#39;).append(query)</b>
+<b class="pc">&nbsp;        if (!anchor.isNullOrEmpty()) append(&#39;#&#39;).append(anchor)</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;}
+&nbsp;
+&nbsp;/**
+&nbsp; * Build a URL to Tibia.com.
+&nbsp; *
+&nbsp; * @param section The desired section.
+&nbsp; * @param subtopic The desired subtopic.
+&nbsp; * @param params The query arguments to pass.
+&nbsp; * @param test Whether to get a URL to the testing version of Tibia.com.
+&nbsp; * @param anchor The anchor to append to the URL.
+&nbsp; */
+&nbsp;public fun tibiaUrl(
+&nbsp;    section: String,
+&nbsp;    subtopic: String,
+&nbsp;    vararg params: Pair&lt;String, Any?&gt;,
+<b class="fc">&nbsp;    test: Boolean = false,</b>
+<b class="fc">&nbsp;    anchor: String? = null,</b>
+&nbsp;): String {
+<b class="fc">&nbsp;    val newParams = mutableListOf(*params)</b>
+<b class="fc">&nbsp;    newParams.add(0, &quot;subtopic&quot; to subtopic)</b>
+<b class="fc">&nbsp;    return tibiaUrl(section, params = newParams.toTypedArray(), test = test, anchor = anchor)</b>
+&nbsp;}
+&nbsp;
+&nbsp;/**
+&nbsp; * Get the URL of a static asset in Tibia.com.
+&nbsp; *
+&nbsp; * @param path The path to the asset.
+&nbsp; * @param test Whether to use the testing version of Tibia.com or not.
+&nbsp; */
+<b class="nc">&nbsp;public fun staticFileUrl(path: String, test: Boolean = false): String =</b>
+<b class="nc">&nbsp;    &quot;https://${if (test) &quot;test.&quot; else &quot;&quot;}static.tibia.com/${path.replace(&quot;//&quot;, &quot;/&quot;)}&quot;</b>
+&nbsp;
+&nbsp;/**
+&nbsp; * Get the URL of a static asset in Tibia.com.
+&nbsp; *
+&nbsp; * @param path The path to the asset, represented as an array of directories with the filename at the end.
+&nbsp; * @param test Whether to use the testing version of Tibia.com or not.
+&nbsp; */
+<b class="nc">&nbsp;public fun staticFileUrl(vararg path: String, test: Boolean = false): String =</b>
+<b class="nc">&nbsp;    staticFileUrl(path.joinToString(&quot;/&quot;), test)</b>
+&nbsp;
+&nbsp;
 </code>
 </pre>
 </div>
@@ -141,7 +223,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-07-16 21:19</div>
+    <div style="float:right;">generated on 2025-10-02 02:54</div>
 </div>
 </body>
 </html>

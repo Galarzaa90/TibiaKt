@@ -115,9 +115,8 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;import com.galarzaa.tibiakt.core.enums.TransferType
 &nbsp;import com.galarzaa.tibiakt.core.models.world.WorldEntry
 &nbsp;import com.galarzaa.tibiakt.core.models.world.WorldOverview
-&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
-&nbsp;import kotlinx.datetime.Instant
-&nbsp;import java.time.LocalDate
+&nbsp;import kotlin.time.Instant
+&nbsp;import kotlinx.datetime.LocalDate
 &nbsp;
 &nbsp;@BuilderDsl
 &nbsp;public inline fun worldOverviewBuilder(block: WorldOverviewBuilder.() -&gt; Unit): WorldOverviewBuilder =
@@ -145,7 +144,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;        return WorldOverview(
 &nbsp;            overallMaximumCount = overallMaximumCount
 &nbsp;                ?: error(&quot;overallMaximumCount is required&quot;),
-&nbsp;            overallMaximumCountDateTime = overallMaximumCountDateTime
+&nbsp;            overallMaximumCountAt = overallMaximumCountDateTime
 &nbsp;                ?: error(&quot;overallMaximumCountDateTime is required&quot;),
 &nbsp;            worlds = worlds,
 &nbsp;        )
@@ -175,7 +174,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;                location = location ?: error(&quot;location is required&quot;),
 &nbsp;                pvpType = pvpType ?: error(&quot;pvpType is required&quot;),
 &nbsp;                battlEyeType = battlEyeType,
-&nbsp;                battlEyeStartDate = battlEyeStartDate,
+&nbsp;                battlEyeStartedOn = battlEyeStartDate,
 &nbsp;                transferType = transferType,
 &nbsp;                isPremiumRestricted = isPremiumRestricted,
 &nbsp;                isExperimental = isExperimental,
@@ -206,7 +205,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-07-16 21:19</div>
+    <div style="float:right;">generated on 2025-10-02 02:54</div>
 </div>
 </body>
 </html>

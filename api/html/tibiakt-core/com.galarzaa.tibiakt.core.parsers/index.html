@@ -1,0 +1,452 @@
+<!doctype html>
+<html class="no-js">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>com.galarzaa.tibiakt.core.parsers</title>
+<link href="../../images/logo-icon.svg" rel="icon" type="image/svg">    <script>var pathToRoot = "../../";</script>
+    <script>document.documentElement.classList.replace("no-js","js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async></script>
+<script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../styles/style.css" rel="Stylesheet">
+<link href="../../styles/main.css" rel="Stylesheet">
+<link href="../../styles/prism.css" rel="Stylesheet">
+<link href="../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../styles/font-jb-sans-auto.css" rel="Stylesheet">
+<link href="../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../scripts/clipboard.js" async></script>
+<script type="text/javascript" src="../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../ui-kit/ui-kit.min.js" defer></script>
+<script type="text/javascript" src="../../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
+<body>
+    <div class="root">
+    <nav class="navigation theme-dark" id="navigation-wrapper">
+<a class="library-name--link" href="../../index.html">
+                    TibiaKt
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">v0.12.1-SNAPSHOT
+        </div>
+        <div class="navigation-controls">
+        <div class="filter-section filter-section_loading" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":tibiakt-core/main">jvm</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox">
+                    <div class="dropdown--header"><span>Platform filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close platform filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":tibiakt-core/main" data-filter=":tibiakt-core/main">
+                                <span class="checkbox--icon"></span>
+                                jvm
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </div>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </nav>
+        <div id="container">
+            <div class="sidebar" id="leftColumn">
+                <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                    <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox">
+                        <div class="dropdown--header">
+                            <span>
+                                    TibiaKt
+                            </span>
+                            <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                                <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                            </button>
+                        </div>
+                        <div class="sidebar--inner" id="sideMenu"></div>
+                    </ul>
+                    <div class="dropdown--overlay"></div>
+                </div>
+            </div>
+            <div id="main">
+<div class="main-content" data-page-type="package" id="content" pageids="tibiakt-core::com.galarzaa.tibiakt.core.parsers////PointingToDeclaration//-1623570306">
+  <div class="breadcrumbs"><a href="../index.html">tibiakt-core</a><span class="delimiter">/</span><span class="current">com.galarzaa.tibiakt.core.parsers</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>Package-level</span></span> <span><span>declarations</span></span></h1>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="TYPE">Types</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="TYPE">
+        <h2 class="">Types</h2>
+        <div class="table"><a data-name="1484749039%2FClasslikes%2F-1623570306" anchor-label="AuctionParser" id="1484749039%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-auction-parser/index.html"><span>Auction</span><wbr><span><span>Parser</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1484749039%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-auction-parser/index.html">AuctionParser</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.parsers/-parser/index.html">Parser</a><span class="token operator">&lt;</span><a href="../com.galarzaa.tibiakt.core.models.bazaar/-auction/index.html">Auction</a><span class="token operator">?</span><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Parser for auction pages.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1994087898%2FClasslikes%2F-1623570306" anchor-label="BoostableBossesParser" id="1994087898%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-boostable-bosses-parser/index.html"><span>Boostable</span><wbr><span>Bosses</span><wbr><span><span>Parser</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1994087898%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-boostable-bosses-parser/index.html">BoostableBossesParser</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.parsers/-parser/index.html">Parser</a><span class="token operator">&lt;</span><a href="../com.galarzaa.tibiakt.core.models.creatures/-boostable-bosses/index.html">BoostableBosses</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Parser for the boostable bosses section.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="795810994%2FClasslikes%2F-1623570306" anchor-label="CharacterBazaarParser" id="795810994%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-character-bazaar-parser/index.html"><span>Character</span><wbr><span>Bazaar</span><wbr><span><span>Parser</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="795810994%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-character-bazaar-parser/index.html">CharacterBazaarParser</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.parsers/-parser/index.html">Parser</a><span class="token operator">&lt;</span><a href="../com.galarzaa.tibiakt.core.models.bazaar/-character-bazaar/index.html">CharacterBazaar</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Parser for the character bazaar.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1777184951%2FClasslikes%2F-1623570306" anchor-label="CharacterParser" id="-1777184951%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-character-parser/index.html"><span>Character</span><wbr><span><span>Parser</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1777184951%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-character-parser/index.html">CharacterParser</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.parsers/-parser/index.html">Parser</a><span class="token operator">&lt;</span><a href="../com.galarzaa.tibiakt.core.models.character/-character/index.html">Character</a><span class="token operator">?</span><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Parser for character information pages.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="662720314%2FClasslikes%2F-1623570306" anchor-label="CMPostArchiveParser" id="662720314%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-c-m-post-archive-parser/index.html"><span>CMPost</span><wbr><span>Archive</span><wbr><span><span>Parser</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="662720314%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-c-m-post-archive-parser/index.html">CMPostArchiveParser</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.parsers/-parser/index.html">Parser</a><span class="token operator">&lt;</span><a href="../com.galarzaa.tibiakt.core.models.forums/-c-m-post-archive/index.html">CMPostArchive</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Parser for the CM posts archive.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1397699647%2FClasslikes%2F-1623570306" anchor-label="CreaturesSectionParser" id="-1397699647%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-creatures-section-parser/index.html"><span>Creatures</span><wbr><span>Section</span><wbr><span><span>Parser</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1397699647%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-creatures-section-parser/index.html">CreaturesSectionParser</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.parsers/-parser/index.html">Parser</a><span class="token operator">&lt;</span><a href="../com.galarzaa.tibiakt.core.models.creatures/-creatures-section/index.html">CreaturesSection</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Parser for the creatures section.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1496611518%2FClasslikes%2F-1623570306" anchor-label="EventsScheduleParser" id="-1496611518%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-events-schedule-parser/index.html"><span>Events</span><wbr><span>Schedule</span><wbr><span><span>Parser</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1496611518%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-events-schedule-parser/index.html">EventsScheduleParser</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.parsers/-parser/index.html">Parser</a><span class="token operator">&lt;</span><a href="../com.galarzaa.tibiakt.core.models.news/-events-schedule/index.html">EventsSchedule</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Parser for the events schedule.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1737078390%2FClasslikes%2F-1623570306" anchor-label="ForumAnnouncementParser" id="-1737078390%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-forum-announcement-parser/index.html"><span>Forum</span><wbr><span>Announcement</span><wbr><span><span>Parser</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1737078390%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-forum-announcement-parser/index.html">ForumAnnouncementParser</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.parsers/-parser/index.html">Parser</a><span class="token operator">&lt;</span><a href="../com.galarzaa.tibiakt.core.models.forums/-forum-announcement/index.html">ForumAnnouncement</a><span class="token operator">?</span><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Parser for forum announcements.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-250042579%2FClasslikes%2F-1623570306" anchor-label="ForumBoardParser" id="-250042579%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-forum-board-parser/index.html"><span>Forum</span><wbr><span>Board</span><wbr><span><span>Parser</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-250042579%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-forum-board-parser/index.html">ForumBoardParser</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.parsers/-parser/index.html">Parser</a><span class="token operator">&lt;</span><a href="../com.galarzaa.tibiakt.core.models.forums/-forum-board/index.html">ForumBoard</a><span class="token operator">?</span><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Parser for forum boards.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1185667854%2FClasslikes%2F-1623570306" anchor-label="ForumSectionParser" id="1185667854%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-forum-section-parser/index.html"><span>Forum</span><wbr><span>Section</span><wbr><span><span>Parser</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1185667854%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-forum-section-parser/index.html">ForumSectionParser</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.parsers/-parser/index.html">Parser</a><span class="token operator">&lt;</span><a href="../com.galarzaa.tibiakt.core.models.forums/-forum-section/index.html">ForumSection</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Parser for a forum section.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-310836313%2FClasslikes%2F-1623570306" anchor-label="ForumThreadParser" id="-310836313%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-forum-thread-parser/index.html"><span>Forum</span><wbr><span>Thread</span><wbr><span><span>Parser</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-310836313%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-forum-thread-parser/index.html">ForumThreadParser</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.parsers/-parser/index.html">Parser</a><span class="token operator">&lt;</span><a href="../com.galarzaa.tibiakt.core.models.forums/-forum-thread/index.html">ForumThread</a><span class="token operator">?</span><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Parser for forum threads.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1535994561%2FClasslikes%2F-1623570306" anchor-label="GuildParser" id="-1535994561%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-guild-parser/index.html"><span>Guild</span><wbr><span><span>Parser</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1535994561%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-guild-parser/index.html">GuildParser</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.parsers/-parser/index.html">Parser</a><span class="token operator">&lt;</span><a href="../com.galarzaa.tibiakt.core.models.guild/-guild/index.html">Guild</a><span class="token operator">?</span><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Parser for the guild information page.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="938031885%2FClasslikes%2F-1623570306" anchor-label="GuildsSectionParser" id="938031885%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-guilds-section-parser/index.html"><span>Guilds</span><wbr><span>Section</span><wbr><span><span>Parser</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="938031885%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-guilds-section-parser/index.html">GuildsSectionParser</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.parsers/-parser/index.html">Parser</a><span class="token operator">&lt;</span><a href="../com.galarzaa.tibiakt.core.models.guild/-guilds-section/index.html">GuildsSection</a><span class="token operator">?</span><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Parser for the guild section.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2089208465%2FClasslikes%2F-1623570306" anchor-label="HighscoresParser" id="-2089208465%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-highscores-parser/index.html"><span>Highscores</span><wbr><span><span>Parser</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2089208465%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-highscores-parser/index.html">HighscoresParser</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.parsers/-parser/index.html">Parser</a><span class="token operator">&lt;</span><a href="../com.galarzaa.tibiakt.core.models.highscores/-highscores/index.html">Highscores</a><span class="token operator">?</span><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Parser for highscores.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2043616142%2FClasslikes%2F-1623570306" anchor-label="HouseParser" id="-2043616142%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-house-parser/index.html"><span>House</span><wbr><span><span>Parser</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2043616142%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-house-parser/index.html">HouseParser</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.parsers/-parser/index.html">Parser</a><span class="token operator">&lt;</span><a href="../com.galarzaa.tibiakt.core.models.house/-house/index.html">House</a><span class="token operator">?</span><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Parser for House information pages.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="596289344%2FClasslikes%2F-1623570306" anchor-label="HousesSectionParser" id="596289344%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-houses-section-parser/index.html"><span>Houses</span><wbr><span>Section</span><wbr><span><span>Parser</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="596289344%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-houses-section-parser/index.html">HousesSectionParser</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.parsers/-parser/index.html">Parser</a><span class="token operator">&lt;</span><a href="../com.galarzaa.tibiakt.core.models.house/-houses-section/index.html">HousesSection</a><span class="token operator">?</span><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Parses content from the houses section.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1187659473%2FClasslikes%2F-1623570306" anchor-label="KillStatisticsParser" id="1187659473%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-kill-statistics-parser/index.html"><span>Kill</span><wbr><span>Statistics</span><wbr><span><span>Parser</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1187659473%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-kill-statistics-parser/index.html">KillStatisticsParser</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.parsers/-parser/index.html">Parser</a><span class="token operator">&lt;</span><a href="../com.galarzaa.tibiakt.core.models/-kill-statistics/index.html">KillStatistics</a><span class="token operator">?</span><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Parses content from the Kill Statistics section.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="896395381%2FClasslikes%2F-1623570306" anchor-label="LeaderboardParser" id="896395381%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-leaderboard-parser/index.html"><span>Leaderboard</span><wbr><span><span>Parser</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="896395381%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-leaderboard-parser/index.html">LeaderboardParser</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.parsers/-parser/index.html">Parser</a><span class="token operator">&lt;</span><a href="../com.galarzaa.tibiakt.core.models.leaderboards/-leaderboard/index.html">Leaderboard</a><span class="token operator">?</span><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Parses content from the leaderboards.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-451229885%2FClasslikes%2F-1623570306" anchor-label="NewsArchiveParser" id="-451229885%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-news-archive-parser/index.html"><span>News</span><wbr><span>Archive</span><wbr><span><span>Parser</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-451229885%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-news-archive-parser/index.html">NewsArchiveParser</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.parsers/-parser/index.html">Parser</a><span class="token operator">&lt;</span><a href="../com.galarzaa.tibiakt.core.models.news/-news-archive/index.html">NewsArchive</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Parses content from the news archive.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1787099359%2FClasslikes%2F-1623570306" anchor-label="NewsParser" id="1787099359%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-news-parser/index.html"><span>News</span><wbr><span><span>Parser</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1787099359%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-news-parser/index.html">NewsParser</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.parsers/-parser/index.html">Parser</a><span class="token operator">&lt;</span><a href="../com.galarzaa.tibiakt.core.models.news/-news/index.html">News</a><span class="token operator">?</span><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Parser for news articles.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-796299513%2FClasslikes%2F-1623570306" anchor-label="WorldOverviewParser" id="-796299513%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-world-overview-parser/index.html"><span>World</span><wbr><span>Overview</span><wbr><span><span>Parser</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-796299513%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-world-overview-parser/index.html">WorldOverviewParser</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.parsers/-parser/index.html">Parser</a><span class="token operator">&lt;</span><a href="../com.galarzaa.tibiakt.core.models.world/-world-overview/index.html">WorldOverview</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Parses content from the world overview section.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1519418944%2FClasslikes%2F-1623570306" anchor-label="WorldParser" id="-1519418944%2FClasslikes%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-world-parser/index.html"><span>World</span><wbr><span><span>Parser</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1519418944%2FClasslikes%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-world-parser/index.html">WorldParser</a> : <a href="../../tibiakt-core/com.galarzaa.tibiakt.core.parsers/-parser/index.html">Parser</a><span class="token operator">&lt;</span><a href="../com.galarzaa.tibiakt.core.models.world/-world/index.html">World</a><span class="token operator">?</span><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Parser for world pages.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+        <span>© 2025 Copyright</span>
+        <span class="pull-right">
+            <span>Generated by </span>
+            <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                <span>dokka</span>
+            </a>
+        </span>
+    </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

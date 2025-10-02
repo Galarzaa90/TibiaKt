@@ -179,9 +179,8 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;import com.galarzaa.tibiakt.core.models.forums.ForumEmoticon
 &nbsp;import com.galarzaa.tibiakt.core.models.forums.ForumPost
 &nbsp;import com.galarzaa.tibiakt.core.models.forums.ForumThread
-&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
-&nbsp;import kotlinx.datetime.Clock
-&nbsp;import kotlinx.datetime.Instant
+&nbsp;import kotlin.time.Clock
+&nbsp;import kotlin.time.Instant
 &nbsp;
 &nbsp;@BuilderDsl
 &nbsp;public inline fun forumThreadBuilder(block: ForumThreadBuilder.() -&gt; Unit): ForumThreadBuilder =
@@ -218,9 +217,9 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;    override fun build(): ForumThread = ForumThread(</b>
 <b class="pc">&nbsp;        title = title ?: error(&quot;title is required&quot;),</b>
 <b class="pc">&nbsp;        threadId = threadId ?: error(&quot;threadId is required&quot;),</b>
-<b class="pc">&nbsp;        board = board ?: error(&quot;board is required&quot;),</b>
+<b class="pc">&nbsp;        boardName = board ?: error(&quot;board is required&quot;),</b>
 <b class="pc">&nbsp;        boardId = boardId ?: error(&quot;boardId is required&quot;),</b>
-<b class="pc">&nbsp;        section = section ?: error(&quot;section is required&quot;),</b>
+<b class="pc">&nbsp;        sectionName = section ?: error(&quot;section is required&quot;),</b>
 <b class="pc">&nbsp;        sectionId = sectionId ?: error(&quot;sectionId is required&quot;),</b>
 <b class="fc">&nbsp;        previousTopicNumber = previousTopicNumber,</b>
 <b class="fc">&nbsp;        nextTopicNumber = nextTopicNumber,</b>
@@ -250,8 +249,8 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="pc">&nbsp;            content = content ?: error(&quot;content is required&quot;),</b>
 <b class="fc">&nbsp;            signature = signature,</b>
 <b class="pc">&nbsp;            postId = postId ?: error(&quot;postId is required&quot;),</b>
-<b class="pc">&nbsp;            postedDate = postedDate ?: Clock.System.now(),</b>
-<b class="fc">&nbsp;            editedDate = editedDate,</b>
+<b class="pc">&nbsp;            postedAt = postedDate ?: Clock.System.now(),</b>
+<b class="fc">&nbsp;            editedAt = editedDate,</b>
 <b class="fc">&nbsp;            editedBy = editedBy</b>
 &nbsp;        )
 &nbsp;    }
@@ -279,7 +278,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-07-16 21:19</div>
+    <div style="float:right;">generated on 2025-10-02 02:54</div>
 </div>
 </body>
 </html>

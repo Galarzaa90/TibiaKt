@@ -119,8 +119,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;
 &nbsp;import com.galarzaa.tibiakt.core.enums.NewsCategory
 &nbsp;import com.galarzaa.tibiakt.core.models.news.News
-&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
-&nbsp;import java.time.LocalDate
+&nbsp;import kotlinx.datetime.LocalDate
 &nbsp;
 &nbsp;@BuilderDsl
 &nbsp;public inline fun newsBuilder(block: NewsBuilder.() -&gt; Unit): NewsBuilder = NewsBuilder().apply(block)
@@ -142,7 +141,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="pc">&nbsp;            id = id ?: error(&quot;id is required&quot;),</b>
 <b class="pc">&nbsp;            title = if (::title.isInitialized) title else error(&quot;title is required&quot;),</b>
 <b class="pc">&nbsp;            category = if (::category.isInitialized) category else error(&quot;category is required&quot;),</b>
-<b class="pc">&nbsp;            date = if (::date.isInitialized) date else error(&quot;date is required&quot;),</b>
+<b class="pc">&nbsp;            publishedOn = if (::date.isInitialized) date else error(&quot;date is required&quot;),</b>
 <b class="pc">&nbsp;            content = if (::content.isInitialized) content else error(&quot;content is required&quot;),</b>
 <b class="fc">&nbsp;            threadId = threadId,</b>
 &nbsp;        )
@@ -171,7 +170,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-07-16 21:19</div>
+    <div style="float:right;">generated on 2025-10-02 02:54</div>
 </div>
 </body>
 </html>

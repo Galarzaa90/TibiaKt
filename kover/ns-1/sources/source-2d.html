@@ -123,10 +123,9 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;import com.galarzaa.tibiakt.core.enums.Vocation
 &nbsp;import com.galarzaa.tibiakt.core.models.world.OnlineCharacter
 &nbsp;import com.galarzaa.tibiakt.core.models.world.World
-&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
-&nbsp;import kotlinx.datetime.Instant
-&nbsp;import java.time.LocalDate
-&nbsp;import java.time.YearMonth
+&nbsp;import kotlin.time.Instant
+&nbsp;import kotlinx.datetime.LocalDate
+&nbsp;import kotlinx.datetime.YearMonth
 &nbsp;
 &nbsp;@BuilderDsl
 &nbsp;public inline fun worldBuilder(block: WorldBuilder.() -&gt; Unit): WorldBuilder = WorldBuilder().apply(block)
@@ -162,19 +161,19 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;        return World(</b>
 <b class="fc">&nbsp;            name = name ?: error(&quot;name is required&quot;),</b>
 <b class="fc">&nbsp;            isOnline = isOnline,</b>
-<b class="fc">&nbsp;            onlineCount = onlineCount,</b>
+<b class="fc">&nbsp;            onlinePlayersCount = onlineCount,</b>
 <b class="pc">&nbsp;            location = location ?: error(&quot;location is required&quot;),</b>
 <b class="pc">&nbsp;            pvpType = pvpType ?: error(&quot;pvpType is required&quot;),</b>
 <b class="fc">&nbsp;            battlEyeType = battlEyeType,</b>
-<b class="fc">&nbsp;            battlEyeStartDate = battlEyeStartDate,</b>
+<b class="fc">&nbsp;            battlEyeStartedOn = battlEyeStartDate,</b>
 <b class="fc">&nbsp;            transferType = transferType,</b>
 <b class="fc">&nbsp;            isPremiumRestricted = isPremiumRestricted,</b>
 <b class="fc">&nbsp;            onlineRecordCount = onlineRecordCount,</b>
-<b class="pc">&nbsp;            onlineRecordDateTime = onlineRecordDateTime</b>
+<b class="pc">&nbsp;            onlineRecordAt = onlineRecordDateTime</b>
 <b class="nc">&nbsp;                ?: error(&quot;onlineRecordDateTime is required&quot;),</b>
 <b class="fc">&nbsp;            isExperimental = isExperimental,</b>
-<b class="pc">&nbsp;            creationDate = creationDate ?: error(&quot;creationDate is required&quot;),</b>
-<b class="fc">&nbsp;            playersOnline = playersOnline,</b>
+<b class="pc">&nbsp;            createdOn = creationDate ?: error(&quot;creationDate is required&quot;),</b>
+<b class="fc">&nbsp;            onlinePlayers = playersOnline,</b>
 <b class="fc">&nbsp;            worldQuests = worldQuests,</b>
 &nbsp;        )
 &nbsp;    }
@@ -202,7 +201,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-07-16 21:19</div>
+    <div style="float:right;">generated on 2025-10-02 02:54</div>
 </div>
 </body>
 </html>

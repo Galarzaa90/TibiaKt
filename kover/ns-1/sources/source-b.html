@@ -186,9 +186,8 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;import com.galarzaa.tibiakt.core.models.character.DisplayedAchievement
 &nbsp;import com.galarzaa.tibiakt.core.models.character.GuildMembership
 &nbsp;import com.galarzaa.tibiakt.core.models.character.OtherCharacter
-&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
-&nbsp;import kotlinx.datetime.Instant
-&nbsp;import java.time.LocalDate
+&nbsp;import kotlin.time.Instant
+&nbsp;import kotlinx.datetime.LocalDate
 &nbsp;
 &nbsp;@BuilderDsl
 &nbsp;public inline fun character(block: CharacterBuilder.() -&gt; Unit): Character = CharacterBuilder().apply(block).build()
@@ -306,12 +305,12 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;        marriedTo = marriedTo,</b>
 <b class="fc">&nbsp;        houses = houses,</b>
 <b class="fc">&nbsp;        guildMembership = guildMembership,</b>
-<b class="fc">&nbsp;        lastLogin = lastLogin,</b>
+<b class="fc">&nbsp;        lastLoginAt = lastLogin,</b>
 <b class="fc">&nbsp;        position = position,</b>
 <b class="fc">&nbsp;        comment = comment,</b>
 <b class="fc">&nbsp;        isPremium = isPremium,</b>
 <b class="fc">&nbsp;        isRecentlyTraded = isRecentlyTraded,</b>
-<b class="fc">&nbsp;        deletionDate = deletionDate,</b>
+<b class="fc">&nbsp;        deletionScheduledAt = deletionDate,</b>
 <b class="fc">&nbsp;        badges = accountBadges,</b>
 <b class="fc">&nbsp;        achievements = achievements,</b>
 <b class="fc">&nbsp;        deaths = deaths,</b>
@@ -357,7 +356,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-07-16 21:19</div>
+    <div style="float:right;">generated on 2025-10-02 02:54</div>
 </div>
 </body>
 </html>

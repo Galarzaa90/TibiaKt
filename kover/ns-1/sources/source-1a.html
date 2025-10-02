@@ -115,8 +115,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;import com.galarzaa.tibiakt.core.models.guild.GuildHall
 &nbsp;import com.galarzaa.tibiakt.core.models.guild.GuildInvite
 &nbsp;import com.galarzaa.tibiakt.core.models.guild.GuildMember
-&nbsp;import com.galarzaa.tibiakt.core.utils.BuilderDsl
-&nbsp;import java.time.LocalDate
+&nbsp;import kotlinx.datetime.LocalDate
 &nbsp;
 &nbsp;@BuilderDsl
 <b class="fc">&nbsp;public inline fun guildBuilder(block: GuildBuilder.() -&gt; Unit): GuildBuilder = GuildBuilder().apply(block)</b>
@@ -170,14 +169,14 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;        name = name ?: error(&quot;name is required&quot;),
 &nbsp;        logoUrl = logoUrl ?: error(&quot;logoUrl is required&quot;),
 &nbsp;        description = description,
-&nbsp;        foundingDate = foundingDate ?: error(&quot;foundingDate is required&quot;),
+&nbsp;        foundedOn = foundingDate ?: error(&quot;foundingDate is required&quot;),
 &nbsp;        isActive = isActive,
-&nbsp;        applicationsOpen = hasOpenApplications,
-&nbsp;        homepage = homepage,
+&nbsp;        areApplicationsOpen = hasOpenApplications,
+&nbsp;        homepageUrl = homepage,
 &nbsp;        guildHall = guildHall,
 &nbsp;        members = members,
 &nbsp;        invited = invited,
-&nbsp;        disbandingDate = disbandingDate,
+&nbsp;        disbandsOn = disbandingDate,
 &nbsp;        disbandingReason = disbandingReason,
 &nbsp;    )
 &nbsp;
@@ -224,7 +223,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-07-16 21:19</div>
+    <div style="float:right;">generated on 2025-10-02 02:54</div>
 </div>
 </body>
 </html>
