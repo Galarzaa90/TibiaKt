@@ -18,8 +18,16 @@ package com.galarzaa.tibiakt.core.html
 
 /**
  * Container for pagination information.
+ *
+ * @property currentPage The current page number.
+ * @property totalPages The total number of pages.
+ * @property resultsCount The total number of results available to paginate.
  */
-internal data class PaginationData(val currentPage: Int, val totalPages: Int, val resultsCount: Int) {
+internal data class PaginationData(
+    val currentPage: Int,
+    val totalPages: Int,
+    val resultsCount: Int
+) {
     companion object {
         fun default() = PaginationData(1, 1, 0)
     }

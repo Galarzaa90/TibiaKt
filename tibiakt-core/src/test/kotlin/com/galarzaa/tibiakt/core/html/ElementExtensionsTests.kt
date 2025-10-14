@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.galarzaa.tibiakt.core.utils
+package com.galarzaa.tibiakt.core.html
 
 import com.galarzaa.tibiakt.core.html.formData
 import io.kotest.core.spec.style.StringSpec
@@ -32,3 +32,4 @@ class ElementExtensionsTests : StringSpec({
         formData.values["filter_begin_day"] shouldBe "25"
     }
 })
+

@@ -21,7 +21,7 @@ import kotlin.math.pow
 /**
  * Split a string enumerating elements, using a different separator for the last item.
  */
-public fun String?.splitList(separator: String = ",", lastSeparator: String = " and "): List<String> {
+internal fun String?.splitList(separator: String = ",", lastSeparator: String = " and "): List<String> {
     val items = this?.nullIfBlank()?.split(separator)?.toMutableList() ?: return emptyList()
     val lastSplit: List<String> = items.last().split(lastSeparator)
     if (lastSplit.size > 1) {
@@ -34,34 +34,34 @@ public fun String?.splitList(separator: String = ",", lastSeparator: String = " 
 /**
  * Remove an arbitrary string from a string, as many times as it is found.
  */
-public fun String.remove(value: String, ignoreCase: Boolean = false): String = replace(value, "", ignoreCase)
+internal fun String.remove(value: String, ignoreCase: Boolean = false): String = replace(value, "", ignoreCase)
 
 /**
  * Clean the string of non-breaking spaces and trims whitespace.
  */
-public fun String.clean(): String = replace("\u00A0", " ").replace("&#xa0;", " ").trim()
+internal fun String.clean(): String = replace("\u00A0", " ").replace("&#xa0;", " ").trim()
 
 /**
  * Parse a string into an integer, removing any thousand separators.
  */
-public fun String.parseInteger(): Int = remove(",").trim().toInt()
+internal fun String.parseInteger(): Int = remove(",").trim().toInt()
 
 /**
  * Parse a string into a long integer, removing any thousand separators.
  */
-public fun String.parseLong(): Long = remove(",").trim().toLong()
+internal fun String.parseLong(): Long = remove(",").trim().toLong()
 
 /**
  * Find and parse an integer from a string, ignoring everything that is not a digit.
  *
  * Note that this may cause unexpected results such as "I have 2 apples and 3 oranges" being converted into 23.
  */
-public fun String.findInteger(): Int = filter { it.isDigit() }.toInt()
+internal fun String.findInteger(): Int = filter { it.isDigit() }.toInt()
 
 /**
  * Return null if the string is blank.
  */
-public fun String?.nullIfBlank(): String? = takeIf { !it.isNullOrBlank() }
+internal fun String?.nullIfBlank(): String? = takeIf { !it.isNullOrBlank() }
 
 /**
  *  Parses strings with numbers using "k" as suffix to represent thousands.

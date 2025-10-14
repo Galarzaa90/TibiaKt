@@ -37,7 +37,7 @@ internal val FORMAT_YEAR_MONTH: DateTimeFormat<YearMonth> = YearMonth.Format {
 private val FORMAT_TIBIA_DATE_TIME = LocalDateTime.Format {
     monthName(MonthNames.ENGLISH_ABBREVIATED)
     char(' ')
-    day()
+    day(Padding.NONE)
     char(' ')
     year()
     chars(", ")
@@ -53,7 +53,7 @@ private val FORMAT_TIBIA_DATE_TIME = LocalDateTime.Format {
 private val FORMAT_TIBIA_DATE = LocalDate.Format {
     monthName(MonthNames.ENGLISH_ABBREVIATED)
     char(' ')
-    day()
+    day(Padding.NONE)
     char(' ')
     year()
 }
@@ -83,24 +83,32 @@ private val FORMAT_TIBIA_FORUM_DATE = LocalDateTime.Format {
 
 /**
  * Parses a string containing date and time from Tibia.com into an [Instant] instance.
+ *
+ * The expected format is: `Jul 18 2023, 23:35:02 CEST`
  */
 public fun parseTibiaDateTime(input: String): Instant =
     FORMAT_TIBIA_DATE_TIME.parse(input.clean().removeSuffix(" CET").removeSuffix(" CEST")).toInstant(TIBIA_TIMEZONE)
 
 /**
  * Parses a string containing date from Tibia.com into an [LocalDate] instance.
+ *
+ * The expected format is: `Sep 12 2017`
  */
 public fun parseTibiaDate(input: String): LocalDate =
     FORMAT_TIBIA_DATE.parse(input.clean())
 
 /**
- * Parses a string containing date from Tibia.com into an [LocalDate] instance.
+ * Parses a string containing full date from Tibia.com into an [LocalDate] instance.
+ *
+ * The expected format is: `September 12, 2017`
  */
 public fun parseTibiaFullDate(input: String): LocalDate =
     FORMAT_TIBIA_FULL_DATE.parse(input.clean())
 
 /**
  * Parses a string containing a date time from Tibia.com forums into an [Instant] instance.
+ *
+ * The expected format is: `12.10.2025 15:20:35`
  */
 public fun parseTibiaForumDateTime(input: String): Instant =
     FORMAT_TIBIA_FORUM_DATE.parse(input).toInstant(TIBIA_TIMEZONE)

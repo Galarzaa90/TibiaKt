@@ -49,7 +49,7 @@ data class Characters(val name: String)
 class Worlds {
 
     @Resource("/{name}")
-    data class ByName(val parent: Worlds, val name: String) {
+    data class ByName(val parent: Worlds = Worlds(), val name: String) {
         @Resource("/guilds")
         data class Guilds(val parent: ByName)
     }
@@ -71,7 +71,7 @@ data class NewsArchive(
 @Resource("/news/{newsId}")
 data class News(val newsId: Int) {
     @Resource("/html")
-    data class Html(val parent: News)
+    data class Html(val parent: News){}
 }
 
 @Resource("/killStatistics/{world}")

@@ -17,11 +17,17 @@
 package com.galarzaa.tibiakt
 
 import java.io.IOException
+import kotlin.time.Clock
+import kotlin.time.Instant
 
 object TestResources {
 
     fun getResource(path: String): String {
         return this::class.java.getResource("/$path")?.readText()
             ?: throw IOException("Test resource $path not found")
+    }
+
+    class FakeClock(private val fixedTime: Instant) : Clock {
+        override fun now() = fixedTime
     }
 }

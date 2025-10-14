@@ -23,4 +23,4 @@ import kotlin.math.min
  *
  * If the offset is bigger than the list's size, the same list is returned.
  */
-public fun <T> List<T>.offsetStart(offset: Int): List<T> = subList(min(offset, size), size)
+internal fun <T> List<T>.offsetStart(offset: Int): List<T> = subList(min(offset, size), size)

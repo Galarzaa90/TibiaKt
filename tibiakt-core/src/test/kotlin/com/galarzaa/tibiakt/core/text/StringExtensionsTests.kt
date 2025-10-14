@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.galarzaa.tibiakt.core.utils
+package com.galarzaa.tibiakt.core.text
 
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
