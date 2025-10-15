@@ -16,6 +16,7 @@
 
 package com.galarzaa.tibiakt.client
 
+import com.galarzaa.tibiakt.client.TibiaKtClient.Companion.defaultConfig
 import com.galarzaa.tibiakt.client.exceptions.ForbiddenException
 import com.galarzaa.tibiakt.client.exceptions.NetworkException
 import com.galarzaa.tibiakt.client.exceptions.SiteMaintenanceException
@@ -59,6 +60,30 @@ import com.galarzaa.tibiakt.core.models.news.News
 import com.galarzaa.tibiakt.core.models.news.NewsArchive
 import com.galarzaa.tibiakt.core.models.world.World
 import com.galarzaa.tibiakt.core.models.world.WorldOverview
+import com.galarzaa.tibiakt.core.net.auctionUrl
+import com.galarzaa.tibiakt.core.net.bazaarUrl
+import com.galarzaa.tibiakt.core.net.boostableBossesUrl
+import com.galarzaa.tibiakt.core.net.characterUrl
+import com.galarzaa.tibiakt.core.net.cmPostArchiveUrl
+import com.galarzaa.tibiakt.core.net.creaturesUrl
+import com.galarzaa.tibiakt.core.net.eventScheduleUrl
+import com.galarzaa.tibiakt.core.net.forumAnnouncementUrl
+import com.galarzaa.tibiakt.core.net.forumBoardUrl
+import com.galarzaa.tibiakt.core.net.forumPostUrl
+import com.galarzaa.tibiakt.core.net.forumSectionUrl
+import com.galarzaa.tibiakt.core.net.forumThreadUrl
+import com.galarzaa.tibiakt.core.net.guildUrl
+import com.galarzaa.tibiakt.core.net.highscoresUrl
+import com.galarzaa.tibiakt.core.net.houseUrl
+import com.galarzaa.tibiakt.core.net.housesSectionUrl
+import com.galarzaa.tibiakt.core.net.killStatisticsUrl
+import com.galarzaa.tibiakt.core.net.leaderboardsUrl
+import com.galarzaa.tibiakt.core.net.newArchiveFormData
+import com.galarzaa.tibiakt.core.net.newsArchiveUrl
+import com.galarzaa.tibiakt.core.net.newsUrl
+import com.galarzaa.tibiakt.core.net.worldGuildsUrl
+import com.galarzaa.tibiakt.core.net.worldOverviewUrl
+import com.galarzaa.tibiakt.core.net.worldUrl
 import com.galarzaa.tibiakt.core.parsers.AuctionParser
 import com.galarzaa.tibiakt.core.parsers.BoostableBossesParser
 import com.galarzaa.tibiakt.core.parsers.CMPostArchiveParser
@@ -82,35 +107,11 @@ import com.galarzaa.tibiakt.core.parsers.NewsParser
 import com.galarzaa.tibiakt.core.parsers.WorldOverviewParser
 import com.galarzaa.tibiakt.core.parsers.WorldParser
 import com.galarzaa.tibiakt.core.time.TIBIA_TIMEZONE
-import com.galarzaa.tibiakt.core.net.auctionUrl
-import com.galarzaa.tibiakt.core.net.bazaarUrl
-import com.galarzaa.tibiakt.core.net.boostableBossesUrl
-import com.galarzaa.tibiakt.core.net.cmPostArchiveUrl
-import com.galarzaa.tibiakt.core.net.characterUrl
-import com.galarzaa.tibiakt.core.net.creaturesUrl
-import com.galarzaa.tibiakt.core.net.eventScheduleUrl
-import com.galarzaa.tibiakt.core.net.forumAnnouncementUrl
-import com.galarzaa.tibiakt.core.net.forumBoardUrl
-import com.galarzaa.tibiakt.core.net.forumPostUrl
-import com.galarzaa.tibiakt.core.net.forumSectionUrl
-import com.galarzaa.tibiakt.core.net.forumThreadUrl
-import com.galarzaa.tibiakt.core.net.guildUrl
-import com.galarzaa.tibiakt.core.net.highscoresUrl
-import com.galarzaa.tibiakt.core.net.houseUrl
-import com.galarzaa.tibiakt.core.net.housesSectionUrl
-import com.galarzaa.tibiakt.core.net.killStatisticsUrl
-import com.galarzaa.tibiakt.core.net.leaderboardsUrl
-import com.galarzaa.tibiakt.core.net.newArchiveFormData
-import com.galarzaa.tibiakt.core.net.newsArchiveUrl
-import com.galarzaa.tibiakt.core.net.newsUrl
-import com.galarzaa.tibiakt.core.net.worldGuildsUrl
-import com.galarzaa.tibiakt.core.net.worldOverviewUrl
-import com.galarzaa.tibiakt.core.net.worldUrl
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.call.body
 import io.ktor.client.engine.HttpClientEngine
-import io.ktor.client.engine.cio.CIO
+import io.ktor.client.engine.HttpClientEngineFactory
 import io.ktor.client.plugins.Charsets
 import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.ResponseException
@@ -126,61 +127,105 @@ import io.ktor.client.statement.request
 import io.ktor.http.HttpMethod
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.Parameters
-import kotlin.time.Clock
-import kotlin.time.Instant
-import kotlinx.serialization.json.Json
-import mu.KotlinLogging
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.YearMonth
 import kotlinx.datetime.toLocalDateTime
 import kotlinx.datetime.yearMonth
+import kotlinx.serialization.json.Json
+import mu.KotlinLogging
 import kotlin.system.measureTimeMillis
+import kotlin.time.Clock
 import kotlin.time.Duration.Companion.days
 import kotlin.time.Duration.Companion.seconds
+import kotlin.time.Instant
 
 @Suppress("TooManyFunctions")
 /**
- * A coroutine based client to fetch from Tibia.com.
+ * Tibia.com client with engine-agnostic construction.
  *
- * @param engine The ktor client engine to use, by default CIO is used.
- * @param additionalConfig Additional configuration for the Ktor Client.
+ * This class accepts a prebuilt [HttpClient], an engine factory, or a concrete engine.
+ * Defaults (timeouts, compression, user-agent, no redirects) are applied via [defaultConfig]
+ * unless explicitly disabled where supported.
  */
-public open class TibiaKtClient constructor(
-    engine: HttpClientEngine?,
-    private val userAgent: String? = null,
-    private val additionalConfig: (HttpClientConfig<*>.() -> Unit) = {},
+public open class TibiaKtClient protected constructor(
+    protected val client: HttpClient,
+    private val ownsClient: Boolean,
 ) {
 
-    private val client = HttpClient(engine ?: CIO.create()) {
-        install(HttpTimeout) {
-            requestTimeoutMillis = 30.seconds.inWholeMilliseconds
-            connectTimeoutMillis = 30.seconds.inWholeMilliseconds
-        }
-        Charsets {
-            register(Charsets.UTF_8)
-            register(Charsets.ISO_8859_1)
-        }
-        followRedirects = false
-        install(ContentEncoding) {
-            gzip()
-            deflate()
-        }
-        install(UserAgent) {
-            agent = userAgent ?: "TibiaKtClient/? ktor/? Kotlin/${KotlinVersion.CURRENT}"
-        }
+    /**
+     * Create a client from a caller-provided [HttpClient].
+     *
+     * @param baseClient An existing Ktor client, possibly shared across your app.
+     * @param applyDefaults When true, applies this library’s defaults to a derived client
+     * @param userAgent Optional User-Agent string. If null, a sensible default is used.
+     * @param additionalConfig Extra client configuration applied **after** the library defaults.
+     *
+     * Ownership: this constructor sets [ownsClient] to false; the caller manages [baseClient] lifecycle.
+     */
+    public constructor(
+        baseClient: HttpClient,
+        applyDefaults: Boolean = true,
+        userAgent: String? = null,
+        additionalConfig: HttpClientConfig<*>.() -> Unit = {},
+    ) : this(if (applyDefaults) baseClient.config {
+        defaultConfig(userAgent)
         additionalConfig(this)
-    }
+    } else baseClient, ownsClient = false)
+
 
     /**
-     * Creates an instance of the client, using the default engine (CIO).
+     * Create a client using a specific engine **factory** (e.g., OkHttp, CIO, Apache, Darwin).
      *
-     * @param userAgent The value that will be sent in the User-Agent header of every request.
-     * @param additionalConfig Additional configuratin for the HTTP client.
+     * @param engineFactory The engine factory to use for building the underlying [HttpClient].
+     * @param userAgent Optional User-Agent string. If null, a sensible default is used.
+     * @param additionalConfig Extra client configuration applied **after** the library defaults.
+     *
+     * Ownership: this constructor builds and owns the underlying client; [close] will close it.
      */
-    public constructor(userAgent: String? = null, additionalConfig: (HttpClientConfig<*>.() -> Unit) = {}) : this(
-        null, userAgent, additionalConfig
+    public constructor(
+        engineFactory: HttpClientEngineFactory<*>,
+        userAgent: String? = null,
+        additionalConfig: HttpClientConfig<*>.() -> Unit = {},
+    ) : this(
+        HttpClient(engineFactory) {
+            defaultConfig(userAgent)
+            additionalConfig(this)
+        }, ownsClient = true
     )
+
+    /**
+     * Create a client using a specific **engine instance**.
+     *
+     * Use this when you need to share or preconfigure the engine (connection pool, proxy, DNS, etc.)
+     * outside of this library.
+     *
+     * @param engine A concrete engine instance to back the [HttpClient].
+     * @param userAgent Optional User-Agent string. If null, a sensible default is used.
+     * @param additionalConfig Extra client configuration applied **after** the library defaults.
+     *
+     * Ownership: this constructor builds and owns the [HttpClient], but **you** still own the [engine]
+     * if it’s reused elsewhere. Closing this client will not automatically close other clients that share the engine.
+     */
+    public constructor(
+        engine: HttpClientEngine,
+        userAgent: String? = null,
+        additionalConfig: HttpClientConfig<*>.() -> Unit = {},
+    ) : this(
+        HttpClient(engine) {
+            defaultConfig(userAgent)
+            additionalConfig(this)
+        }, ownsClient = true
+    )
+
+    /**
+     * Close the underlying [HttpClient] if this instance owns it.
+     *
+     * If the caller provided the client, this is a no-op and the caller remains responsible for closing that client.
+     */
+    public open fun close() {
+        if (ownsClient) client.close()
+    }
 
     /**
      * Perform a request using the required headers.
@@ -199,8 +244,7 @@ public open class TibiaKtClient constructor(
             when (method) {
                 HttpMethod.Get -> client.get(url) {
                     expectSuccess = true
-                    if (headers.isNotEmpty())
-                        headers { headers.forEach { header(it.first, it.second) } }
+                    if (headers.isNotEmpty()) headers { headers.forEach { header(it.first, it.second) } }
 
                 }
 
@@ -213,6 +257,14 @@ public open class TibiaKtClient constructor(
                 else -> throw IllegalArgumentException("Unsupported method $method")
             }
         } catch (re: ResponseException) {
+            logger.info {
+                listOf(
+                    url,
+                    method.value.uppercase(),
+                    "${re.response.status.value} ${re.response.status.description}",
+                    "${re.response.fetchingTimeMillis}ms"
+                ).joinToString(" | ")
+            }
             if (re.response.status in listOf(
                     HttpStatusCode.MovedPermanently,
                     HttpStatusCode.Found,
@@ -220,8 +272,7 @@ public open class TibiaKtClient constructor(
                     HttpStatusCode.PermanentRedirect,
                     HttpStatusCode.SeeOther
                 )
-            )
-                throw SiteMaintenanceException("Tibia.com is under maintenance.", re)
+            ) throw SiteMaintenanceException("Tibia.com is under maintenance.", re)
             if (re.response.status == HttpStatusCode.Forbidden) {
                 throw ForbiddenException("403 Forbidden: Might be getting rate-limited", re)
             }
@@ -261,13 +312,12 @@ public open class TibiaKtClient constructor(
         days: Int = 30,
         categories: Set<NewsCategory>? = null,
         types: Set<NewsType>? = null,
-    ): TibiaResponse<NewsArchive> =
-        fetchRecentNews(
-            (Clock.System.now() - days.days).toLocalDateTime(TIBIA_TIMEZONE).date,
-            Clock.System.now().toLocalDateTime(TIBIA_TIMEZONE).date,
-            categories,
-            types
-        )
+    ): TibiaResponse<NewsArchive> = fetchRecentNews(
+        (Clock.System.now() - days.days).toLocalDateTime(TIBIA_TIMEZONE).date,
+        Clock.System.now().toLocalDateTime(TIBIA_TIMEZONE).date,
+        categories,
+        types
+    )
 
     /**
      * Fetch a specific news article by its [newsId].
@@ -419,8 +469,7 @@ public open class TibiaKtClient constructor(
             totalPages = response.data.totalPages
             fetchingTime += response.fetchingTime
             parsingTime += response.parsingTime
-            if (currentPage == 1)
-                baseHighscores = response.data
+            if (currentPage == 1) baseHighscores = response.data
 
             currentPage++
         }
@@ -595,8 +644,9 @@ public open class TibiaKtClient constructor(
     ): TibiaResponse<Auction?> {
         val response = this.request(HttpMethod.Get, auctionUrl(auctionId))
         val tibiaResponse = response.parse { AuctionParser.fromContent(it, auctionId, !skipDetails) }
-        return if (tibiaResponse.data?.details != null && (fetchItems || fetchMounts || fetchOutfits))
-            fetchAuctionAdditionalPages(tibiaResponse, fetchItems, fetchMounts, fetchOutfits)
+        return if (tibiaResponse.data?.details != null && (fetchItems || fetchMounts || fetchOutfits)) fetchAuctionAdditionalPages(
+            tibiaResponse, fetchItems, fetchMounts, fetchOutfits
+        )
         else tibiaResponse
     }
 
@@ -716,7 +766,7 @@ public open class TibiaKtClient constructor(
     }
 
     /**
-     * Fetch all the pages, parse and collect the entries.
+     * Fetch all the pages, parse, and collect the entries.
      * @param auctionId The id of the auction.
      * @param type The type of items.
      * @param paginator The paginator class that holds the collection
@@ -767,5 +817,24 @@ public open class TibiaKtClient constructor(
 
         private val HttpResponse.fetchingTime get() = (responseTime.timestamp - requestTime.timestamp) / 1000.0
         private val HttpResponse.fetchingTimeMillis get() = (fetchingTime * 1000).toInt()
+
+        private fun HttpClientConfig<*>.defaultConfig(userAgent: String?) {
+            install(HttpTimeout) {
+                requestTimeoutMillis = 30.seconds.inWholeMilliseconds
+                connectTimeoutMillis = 30.seconds.inWholeMilliseconds
+            }
+            Charsets {
+                register(Charsets.UTF_8)
+                register(Charsets.ISO_8859_1)
+            }
+            followRedirects = false
+            install(ContentEncoding) {
+                gzip()
+                deflate()
+            }
+            install(UserAgent) {
+                agent = userAgent ?: "TibiaKtClient/? ktor/? Kotlin/${KotlinVersion.CURRENT}"
+            }
+        }
     }
 }

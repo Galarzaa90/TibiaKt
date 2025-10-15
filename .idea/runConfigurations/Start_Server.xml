@@ -1,11 +1,9 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Start Server" type="JetRunConfigurationType">
-    <envs>
-      <env name="TIBIAKT_PORT" value="8090" />
-    </envs>
     <option name="MAIN_CLASS_NAME" value="com.galarzaa.tibiakt.server.ApplicationKt" />
     <module name="TibiaKt.tibiakt-server.main" />
     <shortenClasspath name="NONE" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
     <method v="2">
       <option name="Make" enabled="true" />
     </method>

@@ -16,12 +16,22 @@ val character: Character = CharacterParser.fromContent(content)
 
 ## tibiakt-client
 
-A ready to use client based on [ktor](https://ktor.io/).
+A Ktor-based HTTP client for Tibia.com.
 
-All you need is to create an instance of `TibiaKtClient` and you're ready to go!
+!!! note
+    This client is **engine-agnostic**. You must provide an HTTP client engine at runtime (CIO, OkHttp, Apache, Darwin, etc.), or hand in your own `HttpClient`.
+
+
+Add a [Ktor client engine](https://ktor.io/docs/client-engines.html) to your dependencies:
 
 ```kotlin
-val client = TibiaKtClient()
+dependencies {
+    implementation("io.ktor:ktor-client-cio")
+}
+```
+
+```kotlin
+val client = TibiaKtClient(CIO)
 
 val character: TibiaResponse<Character> = client.fetchCharacter("Galarzaa Fidera")
 val world: TibiaResponse<World> = client.fetchWorld("Gladera")

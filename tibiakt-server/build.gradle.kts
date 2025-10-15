@@ -29,10 +29,12 @@ application {
 dependencies {
     implementation(project(":tibiakt-client"))
 
+    implementation(libs.ktor.client.cio)
+    implementation(libs.ktor.client.okhttp)
+
     implementation(libs.bundles.ktor.server)
     implementation(libs.ktor.serialization.json)
     implementation(libs.kotlinx.serialization.json)
-
 
     implementation(libs.logback)
 }

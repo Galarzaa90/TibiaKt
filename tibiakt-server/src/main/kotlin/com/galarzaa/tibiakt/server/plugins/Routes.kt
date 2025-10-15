@@ -23,7 +23,6 @@ import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.Application
 import io.ktor.server.application.ApplicationCall
-import io.ktor.server.application.call
 import io.ktor.server.resources.get
 import io.ktor.server.response.respond
 import io.ktor.server.response.respondText
@@ -59,8 +58,14 @@ internal fun Application.configureRouting(client: TibiaKtClient) {
             } ?: call.respond(HttpStatusCode.NotFound, "")
         }
         get<KillStatistics> { (world) -> call.respondOrNotFound(client.fetchKillStatistics(world)) }
-        get<EventsSchedule> { (year, month) -> call.respondOrNotFound(client.fetchEventsSchedule(year, month)) }
-        get("/eventsSchedule") { call.respondOrNotFound(client.fetchEventsSchedule()) }
+        get<EventsSchedule> { call.respondOrNotFound(client.fetchEventsSchedule()) }
+        get<EventsSchedule.ByMonth> { (_, year, month) ->
+            call.respondOrNotFound(
+                client.fetchEventsSchedule(
+                    year, month
+                )
+            )
+        }
         get<WorldHouses> {
             call.respondOrNotFound(client.fetchHousesSection(it.world, it.town, it.type, it.status, it.order))
         }

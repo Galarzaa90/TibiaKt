@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-
 plugins {
     id("com.galarzaa.library")
     kotlin("plugin.serialization") version libs.versions.kotlin
@@ -32,7 +30,9 @@ tasks.test {
 
 dependencies {
     api(project(":tibiakt-core"))
-    implementation(libs.bundles.ktor.client)
+    api(platform(libs.ktor.bom))
+    implementation(libs.ktor.client.core)
+    implementation(libs.bundles.ktor.client.extras)
     implementation(libs.kotlinx.serialization.json)
 
     implementation(libs.kotlinLogging)

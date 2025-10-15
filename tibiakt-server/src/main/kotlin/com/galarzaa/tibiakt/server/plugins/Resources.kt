@@ -35,7 +35,6 @@ import io.ktor.resources.Resource
 import io.ktor.server.application.Application
 import io.ktor.server.application.install
 import io.ktor.server.resources.Resources
-import kotlinx.serialization.UseSerializers
 import kotlinx.datetime.LocalDate
 
 internal fun Application.configureLocations() {
@@ -77,8 +76,15 @@ data class News(val newsId: Int) {
 @Resource("/killStatistics/{world}")
 data class KillStatistics(val world: String)
 
-@Resource("/eventsSchedule/{year}/{month}")
-data class EventsSchedule(val year: Int, val month: Int)
+@Resource("/eventsSchedule")
+class EventsSchedule {
+    @Resource("/{year}/{month}")
+    data class ByMonth(
+        val parent: EventsSchedule,
+        val year: Int,
+        val month: Int
+    )
+}
 
 @Resource("/houses/{world}/town/{town}")
 data class WorldHouses(
