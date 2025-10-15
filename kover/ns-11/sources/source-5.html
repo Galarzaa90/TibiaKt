@@ -52,42 +52,42 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
   <td class="name">NewsUrlsKt</td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/1)
+    (1/1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/4)
+    (4/4)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/10)
+    (10/10)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/25)
+    (25/25)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/212)
+    (212/212)
   </span>
 </td>
 </tr>
@@ -126,7 +126,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;/**
 &nbsp; * Get the URL to the News Archive.
 &nbsp; */
-<b class="nc">&nbsp;public fun newsArchiveUrl(): String = tibiaUrl(&quot;news&quot;, &quot;newsarchive&quot;)</b>
+<b class="fc">&nbsp;public fun newsArchiveUrl(): String = tibiaUrl(&quot;news&quot;, &quot;newsarchive&quot;)</b>
 &nbsp;
 &nbsp;/**
 &nbsp; * Get the post parameters to filter news in the News Archive.
@@ -134,31 +134,31 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;public fun newArchiveFormData(
 &nbsp;    startDate: LocalDate,
 &nbsp;    endDate: LocalDate,
-<b class="nc">&nbsp;    categories: Set&lt;NewsCategory&gt;? = null,</b>
-<b class="nc">&nbsp;    types: Set&lt;NewsType&gt;? = null,</b>
-<b class="nc">&nbsp;): List&lt;Pair&lt;String, String&gt;&gt; = buildList {</b>
-<b class="nc">&nbsp;    startDate.apply {</b>
-<b class="nc">&nbsp;        add(&quot;filter_begin_day&quot; to day.toString())</b>
-<b class="nc">&nbsp;        add(&quot;filter_begin_month&quot; to month.number.toString())</b>
-<b class="nc">&nbsp;        add(&quot;filter_begin_year&quot; to year.toString())</b>
-<b class="nc">&nbsp;    }</b>
-<b class="nc">&nbsp;    endDate.apply {</b>
-<b class="nc">&nbsp;        add(&quot;filter_end_day&quot; to day.toString())</b>
-<b class="nc">&nbsp;        add(&quot;filter_end_month&quot; to month.number.toString())</b>
-<b class="nc">&nbsp;        add(&quot;filter_end_year&quot; to year.toString())</b>
-<b class="nc">&nbsp;    }</b>
-<b class="nc">&nbsp;    for (category: NewsCategory in categories ?: NewsCategory.entries.toSet()) {</b>
-<b class="nc">&nbsp;        add(category.filterName to category.value)</b>
+<b class="fc">&nbsp;    categories: Set&lt;NewsCategory&gt;? = null,</b>
+<b class="fc">&nbsp;    types: Set&lt;NewsType&gt;? = null,</b>
+<b class="fc">&nbsp;): List&lt;Pair&lt;String, String&gt;&gt; = buildList {</b>
+<b class="fc">&nbsp;    startDate.apply {</b>
+<b class="fc">&nbsp;        add(&quot;filter_begin_day&quot; to day.toString())</b>
+<b class="fc">&nbsp;        add(&quot;filter_begin_month&quot; to month.number.toString())</b>
+<b class="fc">&nbsp;        add(&quot;filter_begin_year&quot; to year.toString())</b>
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;    endDate.apply {</b>
+<b class="fc">&nbsp;        add(&quot;filter_end_day&quot; to day.toString())</b>
+<b class="fc">&nbsp;        add(&quot;filter_end_month&quot; to month.number.toString())</b>
+<b class="fc">&nbsp;        add(&quot;filter_end_year&quot; to year.toString())</b>
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;    for (category: NewsCategory in categories ?: NewsCategory.entries.toSet()) {</b>
+<b class="fc">&nbsp;        add(category.filterName to category.value)</b>
 &nbsp;    }
-<b class="nc">&nbsp;    for (type: NewsType in types ?: NewsType.entries.toSet()) {</b>
-<b class="nc">&nbsp;        add(type.filterName to type.filterValue)</b>
+<b class="fc">&nbsp;    for (type: NewsType in types ?: NewsType.entries.toSet()) {</b>
+<b class="fc">&nbsp;        add(type.filterName to type.filterValue)</b>
 &nbsp;    }
-<b class="nc">&nbsp;}</b>
+<b class="fc">&nbsp;}</b>
 &nbsp;
 &nbsp;/**
 &nbsp; * Get the URL to a specific news article.
 &nbsp; */
-<b class="nc">&nbsp;public fun newsUrl(newsId: Int): String = tibiaUrl(&quot;news&quot;, &quot;newsarchive&quot;, &quot;id&quot; to newsId)</b>
+<b class="fc">&nbsp;public fun newsUrl(newsId: Int): String = tibiaUrl(&quot;news&quot;, &quot;newsarchive&quot;, &quot;id&quot; to newsId)</b>
 &nbsp;
 &nbsp;/**
 &nbsp; * Get the URL to the events schedule.
@@ -167,11 +167,11 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp; *
 &nbsp; * Note that going past the allowed limits, will take you the current month and year.
 &nbsp; */
-<b class="nc">&nbsp;public fun eventScheduleUrl(yearMonth: YearMonth? = null): String {</b>
-<b class="nc">&nbsp;    return tibiaUrl(</b>
-<b class="nc">&nbsp;        &quot;news&quot;,</b>
-<b class="nc">&nbsp;        &quot;eventcalendar&quot;,</b>
-<b class="nc">&nbsp;        *yearMonth?.let { arrayOf(&quot;calendarmonth&quot; to it.month.number, &quot;calendaryear&quot; to it.year) }.orEmpty()</b>
+<b class="fc">&nbsp;public fun eventScheduleUrl(yearMonth: YearMonth? = null): String {</b>
+<b class="fc">&nbsp;    return tibiaUrl(</b>
+<b class="fc">&nbsp;        &quot;news&quot;,</b>
+<b class="fc">&nbsp;        &quot;eventcalendar&quot;,</b>
+<b class="fc">&nbsp;        *yearMonth?.let { arrayOf(&quot;calendarmonth&quot; to it.month.number, &quot;calendaryear&quot; to it.year) }.orEmpty()</b>
 &nbsp;    )
 &nbsp;}
 </code>
@@ -197,7 +197,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-15 00:20</div>
+    <div style="float:right;">generated on 2025-10-15 04:33</div>
 </div>
 </body>
 </html>

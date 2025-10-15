@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>tibiakt-core Coverage Report > ForumsUrlKt</title>
+  <title>tibiakt-core Coverage Report > ForumsUrlsKt</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     <a href="../index.html">com.galarzaa.tibiakt.core.net</a>
 </div>
 
-<h1>Coverage Summary for Class: ForumsUrlKt (com.galarzaa.tibiakt.core.net)</h1>
+<h1>Coverage Summary for Class: ForumsUrlsKt (com.galarzaa.tibiakt.core.net)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -49,7 +49,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </th>
 </tr>
 <tr>
-  <td class="name">ForumsUrlKt</td>
+  <td class="name">ForumsUrlsKt</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -60,27 +60,27 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </td>
 <td class="coverageStat">
   <span class="percent">
-    12.5%
+    100%
   </span>
   <span class="absValue">
-    (1/8)
+    (8/8)
   </span>
 </td>
     <td class="coverageStat"/>
 <td class="coverageStat">
   <span class="percent">
-    9.5%
+    100%
   </span>
   <span class="absValue">
-    (2/21)
+    (21/21)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    14.8%
+    100%
   </span>
   <span class="absValue">
-    (39/264)
+    (264/264)
   </span>
 </td>
 </tr>
@@ -118,28 +118,28 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp; * Get the URL to a specific forum section.
 &nbsp; */
 &nbsp;public fun forumSectionUrl(sectionId: Int): String =
-<b class="nc">&nbsp;    tibiaUrl(&quot;forum&quot;, &quot;action&quot; to &quot;main&quot;, &quot;sectionid&quot; to sectionId)</b>
+<b class="fc">&nbsp;    tibiaUrl(&quot;forum&quot;, &quot;action&quot; to &quot;main&quot;, &quot;sectionid&quot; to sectionId)</b>
 &nbsp;
 &nbsp;
 &nbsp;/**
 &nbsp; * Get the URL to a specific forum section.
 &nbsp; */
 &nbsp;public fun forumSectionUrl(section: AvailableForumSection): String =
-<b class="nc">&nbsp;    tibiaUrl(&quot;forum&quot;, section.subtopic)</b>
+<b class="fc">&nbsp;    tibiaUrl(&quot;forum&quot;, section.subtopic)</b>
 &nbsp;
 &nbsp;/**
 &nbsp; * Get the URL to a specific forum section by its name.
 &nbsp; */
-<b class="nc">&nbsp;public fun forumSectionUrl(sectionName: String): String = tibiaUrl(&quot;forum&quot;, sectionName)</b>
+<b class="fc">&nbsp;public fun forumSectionUrl(sectionName: String): String = tibiaUrl(&quot;forum&quot;, sectionName)</b>
 &nbsp;
 &nbsp;/** Get the URL to a forum board. */
-<b class="nc">&nbsp;public fun forumBoardUrl(boardId: Int, page: Int = 1, threadAge: Int? = null): String = tibiaUrl(</b>
-<b class="nc">&nbsp;    &quot;forum&quot;, &quot;action&quot; to &quot;board&quot;, &quot;boardid&quot; to boardId, &quot;pagenumber&quot; to page, &quot;threadage&quot; to threadAge</b>
+<b class="fc">&nbsp;public fun forumBoardUrl(boardId: Int, page: Int = 1, threadAge: Int? = null): String = tibiaUrl(</b>
+<b class="fc">&nbsp;    &quot;forum&quot;, &quot;action&quot; to &quot;board&quot;, &quot;boardid&quot; to boardId, &quot;pagenumber&quot; to page, &quot;threadage&quot; to threadAge</b>
 &nbsp;)
 &nbsp;
 &nbsp;/** Get the URL to a forum announcement. */
 &nbsp;public fun forumAnnouncementUrl(announcementId: Int): String =
-<b class="nc">&nbsp;    tibiaUrl(&quot;forum&quot;, &quot;action&quot; to &quot;announcement&quot;, &quot;announcementid&quot; to announcementId)</b>
+<b class="fc">&nbsp;    tibiaUrl(&quot;forum&quot;, &quot;action&quot; to &quot;announcement&quot;, &quot;announcementid&quot; to announcementId)</b>
 &nbsp;
 &nbsp;/**
 &nbsp; * Get the URL to a specific thread in the forums.
@@ -151,24 +151,24 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp; * Get the URL of a forum post with a specific [postId] in Tibia.com.
 &nbsp; */
 &nbsp;public fun forumPostUrl(postId: Int): String =
-<b class="nc">&nbsp;    tibiaUrl(&quot;forum&quot;, &quot;action&quot; to &quot;thread&quot;, &quot;postid&quot; to postId, anchor = &quot;post$postId&quot;)</b>
+<b class="fc">&nbsp;    tibiaUrl(&quot;forum&quot;, &quot;action&quot; to &quot;thread&quot;, &quot;postid&quot; to postId, anchor = &quot;post$postId&quot;)</b>
 &nbsp;
 &nbsp;
 &nbsp;/**
 &nbsp; * Get the URL to the CM Post Archive in Tibia.com.
 &nbsp; */
-<b class="nc">&nbsp;public fun cmPostArchiveUrl(startDate: LocalDate, endDate: LocalDate, page: Int = 1): String {</b>
-<b class="nc">&nbsp;    return tibiaUrl(</b>
-<b class="nc">&nbsp;        &quot;forum&quot;,</b>
-<b class="nc">&nbsp;        &quot;forum&quot;,</b>
-<b class="nc">&nbsp;        &quot;action&quot; to &quot;cm_post_archive&quot;,</b>
-<b class="nc">&nbsp;        &quot;startyear&quot; to startDate.year,</b>
-<b class="nc">&nbsp;        &quot;startmonth&quot; to startDate.month.number,</b>
-<b class="nc">&nbsp;        &quot;startday&quot; to startDate.day,</b>
-<b class="nc">&nbsp;        &quot;endyear&quot; to endDate.year,</b>
-<b class="nc">&nbsp;        &quot;endmonth&quot; to endDate.month.number,</b>
-<b class="nc">&nbsp;        &quot;endday&quot; to endDate.day,</b>
-<b class="nc">&nbsp;        &quot;currentpage&quot; to page</b>
+<b class="fc">&nbsp;public fun cmPostArchiveUrl(startDate: LocalDate, endDate: LocalDate, page: Int = 1): String {</b>
+<b class="fc">&nbsp;    return tibiaUrl(</b>
+<b class="fc">&nbsp;        &quot;forum&quot;,</b>
+<b class="fc">&nbsp;        &quot;forum&quot;,</b>
+<b class="fc">&nbsp;        &quot;action&quot; to &quot;cm_post_archive&quot;,</b>
+<b class="fc">&nbsp;        &quot;startyear&quot; to startDate.year,</b>
+<b class="fc">&nbsp;        &quot;startmonth&quot; to startDate.month.number,</b>
+<b class="fc">&nbsp;        &quot;startday&quot; to startDate.day,</b>
+<b class="fc">&nbsp;        &quot;endyear&quot; to endDate.year,</b>
+<b class="fc">&nbsp;        &quot;endmonth&quot; to endDate.month.number,</b>
+<b class="fc">&nbsp;        &quot;endday&quot; to endDate.day,</b>
+<b class="fc">&nbsp;        &quot;currentpage&quot; to page</b>
 &nbsp;    )
 &nbsp;}
 </code>
@@ -194,7 +194,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-15 00:20</div>
+    <div style="float:right;">generated on 2025-10-15 04:33</div>
 </div>
 </body>
 </html>
