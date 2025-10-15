@@ -61,7 +61,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     100%
   </span>
   <span class="absValue">
-    (1/1)
+    (4/4)
   </span>
 </td>
 <td class="coverageStat">
@@ -117,7 +117,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     100%
   </span>
   <span class="absValue">
-    (2/2)
+    (5/5)
   </span>
 </td>
 <td class="coverageStat">
@@ -156,8 +156,16 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;
 &nbsp;/**
 &nbsp; * Container for pagination information.
+&nbsp; *
+&nbsp; * @property currentPage The current page number.
+&nbsp; * @property totalPages The total number of pages.
+&nbsp; * @property resultsCount The total number of results available to paginate.
 &nbsp; */
-<b class="fc">&nbsp;internal data class PaginationData(val currentPage: Int, val totalPages: Int, val resultsCount: Int) {</b>
+<b class="fc">&nbsp;internal data class PaginationData(</b>
+<b class="fc">&nbsp;    val currentPage: Int,</b>
+<b class="fc">&nbsp;    val totalPages: Int,</b>
+<b class="fc">&nbsp;    val resultsCount: Int</b>
+&nbsp;) {
 &nbsp;    companion object {
 <b class="fc">&nbsp;        fun default() = PaginationData(1, 1, 0)</b>
 &nbsp;    }
@@ -185,7 +193,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-02 05:45</div>
+    <div style="float:right;">generated on 2025-10-15 00:20</div>
 </div>
 </body>
 </html>

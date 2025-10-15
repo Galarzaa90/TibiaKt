@@ -125,7 +125,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp; * @param key The key to search for.
 &nbsp; * @param default The value to return if the key is not found.
 &nbsp; */
-<b class="fc">&nbsp;public fun &lt;V&gt; Map&lt;String, V&gt;.getContaining(key: String, default: V? = null): V? {</b>
+<b class="fc">&nbsp;internal fun &lt;V&gt; Map&lt;String, V&gt;.getContaining(key: String, default: V? = null): V? {</b>
 <b class="fc">&nbsp;    for ((k, v) in this)</b>
 <b class="fc">&nbsp;        if (k.contains(key))</b>
 <b class="fc">&nbsp;            return v</b>
@@ -154,7 +154,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-02 05:45</div>
+    <div style="float:right;">generated on 2025-10-15 00:20</div>
 </div>
 </body>
 </html>

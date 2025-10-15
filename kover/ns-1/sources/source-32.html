@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>tibiakt-core Coverage Report > BuilderDsl</title>
+  <title>tibiakt-core Coverage Report > TibiaKtBuilder</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     <a href="../index.html">com.galarzaa.tibiakt.core.builders</a>
 </div>
 
-<h1>Coverage Summary for Class: BuilderDsl (com.galarzaa.tibiakt.core.builders)</h1>
+<h1>Coverage Summary for Class: TibiaKtBuilder (com.galarzaa.tibiakt.core.builders)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -33,7 +33,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </th>
 </tr>
 <tr>
-  <td class="name">BuilderDsl</td>
+  <td class="name">TibiaKtBuilder</td>
     <td class="coverageStat"/>
 </tr>
 
@@ -45,7 +45,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;/*
-&nbsp; * Copyright © 2025 Allan Galarza
+&nbsp; * Copyright © 2024 Allan Galarza
 &nbsp; *
 &nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 &nbsp; * you may not use this file except in compliance with the License.
@@ -62,10 +62,14 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;
 &nbsp;package com.galarzaa.tibiakt.core.builders
 &nbsp;
-&nbsp;/** A builder DSL. */
-&nbsp;@DslMarker
-&nbsp;@Target(AnnotationTarget.CLASS, AnnotationTarget.TYPE, AnnotationTarget.FUNCTION)
-&nbsp;public annotation class BuilderDsl
+&nbsp;/** Interface for builders of TibiaKt models. */
+&nbsp;internal fun interface TibiaKtBuilder&lt;T&gt; {
+&nbsp;    /** Builds an instance with the current data in the builder.
+&nbsp;     *
+&nbsp;     * @throws IllegalStateException if the builder is missing required properties
+&nbsp;     */
+&nbsp;    fun build(): T
+&nbsp;}
 </code>
 </pre>
 </div>
@@ -89,7 +93,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-02 05:45</div>
+    <div style="float:right;">generated on 2025-10-15 00:20</div>
 </div>
 </body>
 </html>

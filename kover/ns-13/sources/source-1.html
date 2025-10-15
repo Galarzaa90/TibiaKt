@@ -122,7 +122,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;/**
 &nbsp; * Split a string enumerating elements, using a different separator for the last item.
 &nbsp; */
-<b class="fc">&nbsp;public fun String?.splitList(separator: String = &quot;,&quot;, lastSeparator: String = &quot; and &quot;): List&lt;String&gt; {</b>
+<b class="fc">&nbsp;internal fun String?.splitList(separator: String = &quot;,&quot;, lastSeparator: String = &quot; and &quot;): List&lt;String&gt; {</b>
 <b class="pc">&nbsp;    val items = this?.nullIfBlank()?.split(separator)?.toMutableList() ?: return emptyList()</b>
 <b class="fc">&nbsp;    val lastSplit: List&lt;String&gt; = items.last().split(lastSeparator)</b>
 <b class="fc">&nbsp;    if (lastSplit.size &gt; 1) {</b>
@@ -135,34 +135,34 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;/**
 &nbsp; * Remove an arbitrary string from a string, as many times as it is found.
 &nbsp; */
-<b class="fc">&nbsp;public fun String.remove(value: String, ignoreCase: Boolean = false): String = replace(value, &quot;&quot;, ignoreCase)</b>
+<b class="fc">&nbsp;internal fun String.remove(value: String, ignoreCase: Boolean = false): String = replace(value, &quot;&quot;, ignoreCase)</b>
 &nbsp;
 &nbsp;/**
 &nbsp; * Clean the string of non-breaking spaces and trims whitespace.
 &nbsp; */
-<b class="fc">&nbsp;public fun String.clean(): String = replace(&quot;\u00A0&quot;, &quot; &quot;).replace(&quot;&amp;#xa0;&quot;, &quot; &quot;).trim()</b>
+<b class="fc">&nbsp;internal fun String.clean(): String = replace(&quot;\u00A0&quot;, &quot; &quot;).replace(&quot;&amp;#xa0;&quot;, &quot; &quot;).trim()</b>
 &nbsp;
 &nbsp;/**
 &nbsp; * Parse a string into an integer, removing any thousand separators.
 &nbsp; */
-<b class="fc">&nbsp;public fun String.parseInteger(): Int = remove(&quot;,&quot;).trim().toInt()</b>
+<b class="fc">&nbsp;internal fun String.parseInteger(): Int = remove(&quot;,&quot;).trim().toInt()</b>
 &nbsp;
 &nbsp;/**
 &nbsp; * Parse a string into a long integer, removing any thousand separators.
 &nbsp; */
-<b class="fc">&nbsp;public fun String.parseLong(): Long = remove(&quot;,&quot;).trim().toLong()</b>
+<b class="fc">&nbsp;internal fun String.parseLong(): Long = remove(&quot;,&quot;).trim().toLong()</b>
 &nbsp;
 &nbsp;/**
 &nbsp; * Find and parse an integer from a string, ignoring everything that is not a digit.
 &nbsp; *
 &nbsp; * Note that this may cause unexpected results such as &quot;I have 2 apples and 3 oranges&quot; being converted into 23.
 &nbsp; */
-<b class="fc">&nbsp;public fun String.findInteger(): Int = filter { it.isDigit() }.toInt()</b>
+<b class="fc">&nbsp;internal fun String.findInteger(): Int = filter { it.isDigit() }.toInt()</b>
 &nbsp;
 &nbsp;/**
 &nbsp; * Return null if the string is blank.
 &nbsp; */
-<b class="pc">&nbsp;public fun String?.nullIfBlank(): String? = takeIf { !it.isNullOrBlank() }</b>
+<b class="pc">&nbsp;internal fun String?.nullIfBlank(): String? = takeIf { !it.isNullOrBlank() }</b>
 &nbsp;
 &nbsp;/**
 &nbsp; *  Parses strings with numbers using &quot;k&quot; as suffix to represent thousands.
@@ -218,7 +218,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-02 05:45</div>
+    <div style="float:right;">generated on 2025-10-15 00:20</div>
 </div>
 </body>
 </html>

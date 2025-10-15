@@ -80,7 +80,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     100%
   </span>
   <span class="absValue">
-    (232/232)
+    (227/227)
   </span>
 </td>
 </tr>
@@ -131,7 +131,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;private val FORMAT_TIBIA_DATE_TIME = LocalDateTime.Format {</b>
 <b class="fc">&nbsp;    monthName(MonthNames.ENGLISH_ABBREVIATED)</b>
 <b class="fc">&nbsp;    char(&#39; &#39;)</b>
-<b class="fc">&nbsp;    day()</b>
+<b class="fc">&nbsp;    day(Padding.NONE)</b>
 <b class="fc">&nbsp;    char(&#39; &#39;)</b>
 <b class="fc">&nbsp;    year()</b>
 <b class="fc">&nbsp;    chars(&quot;, &quot;)</b>
@@ -147,7 +147,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;private val FORMAT_TIBIA_DATE = LocalDate.Format {</b>
 <b class="fc">&nbsp;    monthName(MonthNames.ENGLISH_ABBREVIATED)</b>
 <b class="fc">&nbsp;    char(&#39; &#39;)</b>
-<b class="fc">&nbsp;    day()</b>
+<b class="fc">&nbsp;    day(Padding.NONE)</b>
 <b class="fc">&nbsp;    char(&#39; &#39;)</b>
 <b class="fc">&nbsp;    year()</b>
 &nbsp;}
@@ -177,24 +177,32 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;
 &nbsp;/**
 &nbsp; * Parses a string containing date and time from Tibia.com into an [Instant] instance.
+&nbsp; *
+&nbsp; * The expected format is: `Jul 18 2023, 23:35:02 CEST`
 &nbsp; */
 &nbsp;public fun parseTibiaDateTime(input: String): Instant =
 <b class="fc">&nbsp;    FORMAT_TIBIA_DATE_TIME.parse(input.clean().removeSuffix(&quot; CET&quot;).removeSuffix(&quot; CEST&quot;)).toInstant(TIBIA_TIMEZONE)</b>
 &nbsp;
 &nbsp;/**
 &nbsp; * Parses a string containing date from Tibia.com into an [LocalDate] instance.
+&nbsp; *
+&nbsp; * The expected format is: `Sep 12 2017`
 &nbsp; */
 &nbsp;public fun parseTibiaDate(input: String): LocalDate =
 <b class="fc">&nbsp;    FORMAT_TIBIA_DATE.parse(input.clean())</b>
 &nbsp;
 &nbsp;/**
-&nbsp; * Parses a string containing date from Tibia.com into an [LocalDate] instance.
+&nbsp; * Parses a string containing full date from Tibia.com into an [LocalDate] instance.
+&nbsp; *
+&nbsp; * The expected format is: `September 12, 2017`
 &nbsp; */
 &nbsp;public fun parseTibiaFullDate(input: String): LocalDate =
 <b class="fc">&nbsp;    FORMAT_TIBIA_FULL_DATE.parse(input.clean())</b>
 &nbsp;
 &nbsp;/**
 &nbsp; * Parses a string containing a date time from Tibia.com forums into an [Instant] instance.
+&nbsp; *
+&nbsp; * The expected format is: `12.10.2025 15:20:35`
 &nbsp; */
 &nbsp;public fun parseTibiaForumDateTime(input: String): Instant =
 <b class="fc">&nbsp;    FORMAT_TIBIA_FORUM_DATE.parse(input).toInstant(TIBIA_TIMEZONE)</b>
@@ -221,7 +229,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-02 05:45</div>
+    <div style="float:right;">generated on 2025-10-15 00:20</div>
 </div>
 </body>
 </html>

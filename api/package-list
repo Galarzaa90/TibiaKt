@@ -6,7 +6,6 @@ com.galarzaa.tibiakt.client
 com.galarzaa.tibiakt.client.exceptions
 module:tibiakt-core
 com.galarzaa.tibiakt.core.builders
-com.galarzaa.tibiakt.core.collections
 com.galarzaa.tibiakt.core.enums
 com.galarzaa.tibiakt.core.exceptions
 com.galarzaa.tibiakt.core.models
