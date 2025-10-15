@@ -17,9 +17,8 @@
 package com.galarzaa.tibiakt.core.models.news
 
 import com.galarzaa.tibiakt.core.net.eventScheduleUrl
-import kotlinx.serialization.Serializable
-import kotlinx.datetime.LocalDate
 import kotlinx.datetime.YearMonth
+import kotlinx.serialization.Serializable
 
 /**
  * The event schedule, containing the events of a given month.
@@ -30,22 +29,10 @@ import kotlinx.datetime.YearMonth
 @Serializable
 public data class EventsSchedule(
     val month: YearMonth,
-    val entries: List<EventEntry>,
+    val entries: List<BaseEventEntry>,
 ) {
     /**
-     * The URL of the events schedule of the month.
+     * URL for this schedule.
      */
     val url: String get() = eventScheduleUrl(month)
-
-    /**
-     * Get all the events that are active in a specific day of the month.
-     */
-    public fun getEventsOn(date: LocalDate): List<EventEntry> {
-    return entries.filter { entry ->
-        val startOk = entry.startsOn?.let { it <= date } ?: true
-        val endOn = entry.endsOn?.let { date <= it } ?: true
-        startOk && endOn
-    }
-}
-
 }

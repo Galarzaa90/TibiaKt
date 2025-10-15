@@ -20,10 +20,10 @@ import com.galarzaa.tibiakt.core.builders.EventsScheduleBuilder
 import com.galarzaa.tibiakt.core.builders.eventEntryBuilder
 import com.galarzaa.tibiakt.core.builders.eventsSchedule
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
-import com.galarzaa.tibiakt.core.models.news.EventsSchedule
 import com.galarzaa.tibiakt.core.html.cells
 import com.galarzaa.tibiakt.core.html.cleanText
 import com.galarzaa.tibiakt.core.html.parsePopup
+import com.galarzaa.tibiakt.core.models.news.EventsSchedule
 import com.galarzaa.tibiakt.core.text.remove
 import com.galarzaa.tibiakt.core.time.FORMAT_YEAR_MONTH
 import kotlinx.datetime.DatePeriod
@@ -83,7 +83,7 @@ public object EventsScheduleParser : Parser<EventsSchedule> {
                         // Only add start date if this is not the first day of the calendar.
                         // If it's the first day, we have no way to know if the event started that day or before
                         if (!isFirstDay) {
-                            event.startDate = LocalDate(currentMonth.year, currentMonth.month, day)
+                            event.startsOn = LocalDate(currentMonth.year, currentMonth.month, day)
                         }
                         onGoingEvents.add(event)
                     }
@@ -93,7 +93,7 @@ public object EventsScheduleParser : Parser<EventsSchedule> {
             for (pendingEvent in onGoingEvents.toList()) {
                 if (!todayEvents.contains(pendingEvent)) {
                     // If it didn't show up today, it means it ended yesterday.
-                    pendingEvent.endDate =
+                    pendingEvent.endsOn =
                         LocalDate(currentMonth.year, currentMonth.month, day).minus(DatePeriod(days = 1))
                     addEntry(pendingEvent.build())
                     onGoingEvents.remove(pendingEvent)

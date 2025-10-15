@@ -16,7 +16,7 @@
 
 package com.galarzaa.tibiakt.core.builders
 
-import com.galarzaa.tibiakt.core.models.news.EventEntry
+import com.galarzaa.tibiakt.core.models.news.BaseEventEntry
 import com.galarzaa.tibiakt.core.models.news.EventsSchedule
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.YearMonth
@@ -30,9 +30,8 @@ public inline fun eventsScheduleBuilder(block: EventsScheduleBuilder.() -> Unit)
     EventsScheduleBuilder().apply(block)
 
 @BuilderDsl
-internal inline fun eventEntry(block: EventsScheduleBuilder.EventEntryBuilder.() -> Unit): EventEntry =
-    EventsScheduleBuilder.EventEntryBuilder()
-        .apply(block).build()
+internal inline fun eventEntry(block: EventsScheduleBuilder.EventEntryBuilder.() -> Unit): BaseEventEntry =
+    EventsScheduleBuilder.EventEntryBuilder().apply(block).build()
 
 @BuilderDsl
 internal inline fun eventEntryBuilder(block: EventsScheduleBuilder.EventEntryBuilder.() -> Unit) =
@@ -42,36 +41,34 @@ internal inline fun eventEntryBuilder(block: EventsScheduleBuilder.EventEntryBui
 @BuilderDsl
 public class EventsScheduleBuilder : TibiaKtBuilder<EventsSchedule> {
     public lateinit var yearMonth: YearMonth
-    public val entries: MutableList<EventEntry> = mutableListOf()
+    public val entries: MutableList<BaseEventEntry> = mutableListOf()
 
 
     public fun addEntry(
         title: String,
         description: String,
-        startDate: LocalDate?,
-        endDate: LocalDate?,
-    ): EventsScheduleBuilder =
-        apply { entries.add(EventEntry(title, description, startDate, endDate)) }
-
-    public fun addEntry(entry: EventEntry): EventsScheduleBuilder = apply { entries.add(entry) }
-
-    override fun build(): EventsSchedule =
-        EventsSchedule(
-            month = if (::yearMonth.isInitialized) yearMonth else error("yearMonth is required"),
-            entries = entries
+        startsOn: LocalDate?,
+        endsOn: LocalDate?,
+    ): EventsScheduleBuilder = apply {
+        entries.add(
+            BaseEventEntry.of(title, description, startsOn, endsOn)
         )
+    }
+
+    public fun addEntry(entry: BaseEventEntry): EventsScheduleBuilder = apply { entries.add(entry) }
+
+    override fun build(): EventsSchedule = EventsSchedule(
+        month = if (::yearMonth.isInitialized) yearMonth else error("yearMonth is required"), entries = entries
+    )
 
     public class EventEntryBuilder {
         public var title: String? = null
         public var description: String? = null
-        public var startDate: LocalDate? = null
-        public var endDate: LocalDate? = null
+        public var startsOn: LocalDate? = null
+        public var endsOn: LocalDate? = null
 
-        public fun build(): EventEntry = EventEntry(
-            title ?: error("title is required"),
-            description ?: error("description is required"),
-            startDate,
-            endDate
+        public fun build(): BaseEventEntry = BaseEventEntry.of(
+            title ?: error("title is required"), description ?: error("description is required"), startsOn, endsOn
         )
 
         override fun equals(other: Any?): Boolean =
