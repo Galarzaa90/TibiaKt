@@ -16,7 +16,7 @@
 
 package com.galarzaa.tibiakt.core.parsers
 
-import com.galarzaa.tibiakt.TestResources.getResource
+import com.galarzaa.tibiakt.TestUtilities.getResource
 import com.galarzaa.tibiakt.core.enums.AuctionStatus
 import com.galarzaa.tibiakt.core.models.bazaar.Auction
 import com.galarzaa.tibiakt.core.models.bazaar.AuctionDetails

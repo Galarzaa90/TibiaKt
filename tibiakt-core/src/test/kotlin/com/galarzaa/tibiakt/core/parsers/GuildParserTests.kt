@@ -16,7 +16,7 @@
 
 package com.galarzaa.tibiakt.core.parsers
 
-import com.galarzaa.tibiakt.TestResources.getResource
+import com.galarzaa.tibiakt.TestUtilities.getResource
 import com.galarzaa.tibiakt.core.models.guild.Guild
 import com.galarzaa.tibiakt.core.models.guild.GuildHall
 import io.kotest.core.spec.style.FunSpec

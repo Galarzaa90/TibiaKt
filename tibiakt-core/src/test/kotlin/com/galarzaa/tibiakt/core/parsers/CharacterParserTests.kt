@@ -16,7 +16,7 @@
 
 package com.galarzaa.tibiakt.core.parsers
 
-import com.galarzaa.tibiakt.TestResources.getResource
+import com.galarzaa.tibiakt.TestUtilities.getResource
 import com.galarzaa.tibiakt.core.enums.Sex
 import com.galarzaa.tibiakt.core.enums.Vocation
 import com.galarzaa.tibiakt.core.models.character.Character

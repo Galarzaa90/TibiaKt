@@ -16,7 +16,7 @@
 
 package com.galarzaa.tibiakt.core.parsers
 
-import com.galarzaa.tibiakt.TestResources.getResource
+import com.galarzaa.tibiakt.TestUtilities.getResource
 import com.galarzaa.tibiakt.core.models.leaderboards.DeletedLeaderboardEntry
 import com.galarzaa.tibiakt.core.models.leaderboards.Leaderboard
 import io.kotest.core.spec.style.FunSpec

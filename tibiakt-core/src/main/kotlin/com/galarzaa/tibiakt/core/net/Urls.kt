@@ -19,9 +19,9 @@ package com.galarzaa.tibiakt.core.net
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
 
-private const val BASE_HOST = "www.tibia.com"
-private const val TEST_HOST = "www.test.tibia.com"
-private const val STATIC_HOST = "static.tibia.com"
+internal const val BASE_HOST = "www.tibia.com"
+internal const val TEST_HOST = "www.test.tibia.com"
+internal const val STATIC_HOST = "static.tibia.com"
 private val LATIN1 = StandardCharsets.ISO_8859_1
 
 

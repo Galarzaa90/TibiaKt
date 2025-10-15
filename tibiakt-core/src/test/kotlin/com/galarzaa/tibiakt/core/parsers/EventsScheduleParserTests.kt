@@ -16,15 +16,17 @@
 
 package com.galarzaa.tibiakt.core.parsers
 
-import com.galarzaa.tibiakt.TestResources.getResource
+import com.galarzaa.tibiakt.TestUtilities.getResource
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.collections.shouldHaveAtLeastSize
 import io.kotest.matchers.shouldBe
+import kotlinx.datetime.Month
 
 class EventsScheduleParserTests : FunSpec({
     test("Parse event schedule"){
         val eventSchedule = EventsScheduleParser.fromContent(getResource("eventSchedule/eventSchedule.txt"))
-        eventSchedule.month.year shouldBe 2020
+        eventSchedule.month.year shouldBe 2025
+        eventSchedule.month.month shouldBe Month.OCTOBER
         eventSchedule.entries shouldHaveAtLeastSize 0
     }
 })

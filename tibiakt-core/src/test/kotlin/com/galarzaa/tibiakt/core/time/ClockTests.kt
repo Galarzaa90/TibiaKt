@@ -16,7 +16,7 @@
 
 package com.galarzaa.tibiakt.core.time
 
-import com.galarzaa.tibiakt.TestResources.FakeClock
+import com.galarzaa.tibiakt.TestUtilities.FakeClock
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 import kotlinx.datetime.DayOfWeek
