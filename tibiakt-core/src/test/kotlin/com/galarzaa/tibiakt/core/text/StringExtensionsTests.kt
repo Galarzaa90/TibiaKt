@@ -18,10 +18,6 @@ package com.galarzaa.tibiakt.core.text
 
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
-import com.galarzaa.tibiakt.core.text.clean
-import com.galarzaa.tibiakt.core.text.parseThousandSuffix
-import com.galarzaa.tibiakt.core.text.remove
-import com.galarzaa.tibiakt.core.text.splitList
 
 class StringExtensionsTests : FunSpec({
 
@@ -49,5 +45,15 @@ class StringExtensionsTests : FunSpec({
         "500k".parseThousandSuffix() shouldBe 500_000
         "5kk".parseThousandSuffix() shouldBe 5_000_000
         "10".parseThousandSuffix() shouldBe 10
+    }
+
+    test("parseRomanNumerals"){
+        parseRomanNumerals("I") shouldBe 1
+        parseRomanNumerals("II") shouldBe 2
+        parseRomanNumerals("III") shouldBe 3
+        parseRomanNumerals("IV") shouldBe 4
+        parseRomanNumerals("V") shouldBe 5
+        parseRomanNumerals("X") shouldBe 10
+        parseRomanNumerals("XIX") shouldBe 19
     }
 })
