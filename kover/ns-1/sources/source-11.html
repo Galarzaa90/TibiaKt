@@ -134,26 +134,26 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;public class ForumAnnouncementBuilder : TibiaKtBuilder&lt;ForumAnnouncement&gt; {
 <b class="fc">&nbsp;    public var announcementId: Int? = null</b>
 <b class="fc">&nbsp;    public var title: String? = null</b>
-<b class="fc">&nbsp;    public var board: String? = null</b>
+<b class="fc">&nbsp;    public var boardName: String? = null</b>
 <b class="fc">&nbsp;    public var boardId: Int? = null</b>
-<b class="fc">&nbsp;    public var section: String? = null</b>
+<b class="fc">&nbsp;    public var sectionName: String? = null</b>
 <b class="fc">&nbsp;    public var sectionId: Int? = null</b>
 <b class="fc">&nbsp;    public var author: BaseForumAuthor? = null</b>
 <b class="fc">&nbsp;    public var content: String? = null</b>
-<b class="fc">&nbsp;    public var startDate: Instant? = null</b>
-<b class="fc">&nbsp;    public var endDate: Instant? = null</b>
+<b class="fc">&nbsp;    public var startsAt: Instant? = null</b>
+<b class="fc">&nbsp;    public var endsAt: Instant? = null</b>
 &nbsp;
 <b class="fc">&nbsp;    override fun build(): ForumAnnouncement = ForumAnnouncement(</b>
 <b class="pc">&nbsp;        announcementId = announcementId ?: error(&quot;announcementId is required&quot;),</b>
 <b class="pc">&nbsp;        title = title ?: error(&quot;title is required&quot;),</b>
-<b class="pc">&nbsp;        boardName = board ?: error(&quot;board is required&quot;),</b>
+<b class="pc">&nbsp;        boardName = boardName ?: error(&quot;boardName is required&quot;),</b>
 <b class="pc">&nbsp;        boardId = boardId ?: error(&quot;boardId is required&quot;),</b>
-<b class="pc">&nbsp;        sectionName = section ?: error(&quot;section is required&quot;),</b>
+<b class="pc">&nbsp;        sectionName = sectionName ?: error(&quot;sectionName is required&quot;),</b>
 <b class="pc">&nbsp;        sectionId = sectionId ?: error(&quot;sectionId is required&quot;),</b>
 <b class="pc">&nbsp;        author = author ?: error(&quot;author is required&quot;),</b>
 <b class="pc">&nbsp;        content = content ?: error(&quot;content is required&quot;),</b>
-<b class="pc">&nbsp;        startsAt = startDate ?: error(&quot;startDate is required&quot;),</b>
-<b class="pc">&nbsp;        endsAt = endDate ?: error(&quot;endDate is required&quot;)</b>
+<b class="pc">&nbsp;        startsAt = startsAt ?: error(&quot;startsAt is required&quot;),</b>
+<b class="pc">&nbsp;        endsAt = endsAt ?: error(&quot;endsAt is required&quot;)</b>
 &nbsp;    )
 &nbsp;}
 </code>
@@ -179,7 +179,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-15 14:13</div>
+    <div style="float:right;">generated on 2025-10-17 18:02</div>
 </div>
 </body>
 </html>

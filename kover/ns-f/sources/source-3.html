@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>tibiakt-core Coverage Report > EventEntry</title>
+  <title>tibiakt-core Coverage Report > Leaderboard</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -19,10 +19,10 @@
 <div class="breadCrumbs">
 Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">com.galarzaa.tibiakt.core.models.news</a>
+    <a href="../index.html">com.galarzaa.tibiakt.core.models.leaderboards</a>
 </div>
 
-<h1>Coverage Summary for Class: EventEntry (com.galarzaa.tibiakt.core.models.news)</h1>
+<h1>Coverage Summary for Class: Leaderboard (com.galarzaa.tibiakt.core.models.leaderboards)</h1>
 
 <table class="coverageStats">
 
@@ -46,13 +46,13 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </th>
 </tr>
 <tr>
-  <td class="name">EventEntry</td>
+  <td class="name">Leaderboard</td>
 <td class="coverageStat">
   <span class="percent">
-    20%
+    50%
   </span>
   <span class="absValue">
-    (1/5)
+    (2/4)
   </span>
 </td>
 <td class="coverageStat">
@@ -65,23 +65,23 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </td>
 <td class="coverageStat">
   <span class="percent">
-    55.6%
+    83.3%
   </span>
   <span class="absValue">
-    (5/9)
+    (10/12)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    21.9%
+    76.5%
   </span>
   <span class="absValue">
-    (23/105)
+    (156/204)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">EventEntry$Companion</td>
+    <td class="name">Leaderboard$Companion</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -112,10 +112,10 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    16.7%
+    40%
   </span>
   <span class="absValue">
-    (1/6)
+    (2/5)
   </span>
 </td>
 <td class="coverageStat">
@@ -128,18 +128,18 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </td>
 <td class="coverageStat">
   <span class="percent">
-    50%
+    76.9%
   </span>
   <span class="absValue">
-    (5/10)
+    (10/13)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    21.5%
+    75.7%
   </span>
   <span class="absValue">
-    (23/107)
+    (156/206)
   </span>
 </td>
 </tr>
@@ -166,122 +166,40 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp; * limitations under the License.
 &nbsp; */
 &nbsp;
-&nbsp;package com.galarzaa.tibiakt.core.models.news
 &nbsp;
-&nbsp;import com.galarzaa.tibiakt.core.time.SERVER_SAVE_TIME
-&nbsp;import com.galarzaa.tibiakt.core.time.TIBIA_TIMEZONE
-&nbsp;import kotlinx.datetime.DatePeriod
-&nbsp;import kotlinx.datetime.LocalDate
-&nbsp;import kotlinx.datetime.atTime
-&nbsp;import kotlinx.datetime.minus
-&nbsp;import kotlinx.datetime.toInstant
-&nbsp;import kotlinx.serialization.SerialName
-&nbsp;import kotlinx.serialization.Serializable
+&nbsp;package com.galarzaa.tibiakt.core.models.leaderboards
+&nbsp;
+&nbsp;import com.galarzaa.tibiakt.core.models.PaginatedWithUrl
+&nbsp;import com.galarzaa.tibiakt.core.net.leaderboardsUrl
 &nbsp;import kotlin.time.Instant
+&nbsp;import kotlinx.serialization.Serializable
 &nbsp;
 &nbsp;/**
-&nbsp; * Base type for all entries that can appear in an [EventsSchedule].
+&nbsp; * The Tibia Drome leaderboards of a world.
 &nbsp; *
-&nbsp; * @property title The title or name of the event.
-&nbsp; * @property description Brief description of the event.
-&nbsp; * @property startsOn Start date of the event, or null if the start is open/unknown.
-&nbsp; * @property endsOn End date of the event, or null if the end is open/unknown.
+&nbsp; * @property world The name of the world.
+&nbsp; * @property rotation The rotation of these leaderboards.
+&nbsp; * @property availableRotations The rotations that are available to view.
+&nbsp; * @property lastUpdatedAt The time when the leaderboard was last updated. Only available for the current rotation.
 &nbsp; */
-&nbsp;@Serializable
-&nbsp;public sealed class BaseEventEntry {
-&nbsp;    public abstract val title: String
-&nbsp;    public abstract val description: String
-&nbsp;    public abstract val startsOn: LocalDate?
-&nbsp;    public abstract val endsOn: LocalDate?
-&nbsp;
-&nbsp;    /** The exact moment when the event starts. Based on the event&#39;s start date and server save time. */
-&nbsp;    public abstract val startsAt: Instant?
-&nbsp;
-&nbsp;    /** The exact moment when the event starts. Based on the event&#39;s start date and server save time. */
-&nbsp;    public abstract val endsAt: Instant?
-&nbsp;
-&nbsp;    public companion object {
-&nbsp;        /**
-&nbsp;         * Create an instance of one of the subclasses of [BaseEventEntry] depending on the provided values.
-&nbsp;         */
-&nbsp;        public fun of(
-&nbsp;            title: String,
-&nbsp;            description: String,
-&nbsp;            startsOn: LocalDate?,
-&nbsp;            endsOn: LocalDate?,
-&nbsp;        ): BaseEventEntry {
-&nbsp;            require(startsOn != null || endsOn != null) {
-&nbsp;                &quot;At least one of startsOn or endsOn must be non-null.&quot;
-&nbsp;            }
-&nbsp;            if (startsOn != null &amp;&amp; endsOn != null) {
-&nbsp;                require(startsOn &lt;= endsOn) { &quot;startsOn must be ≤ endsOn.&quot; }
-&nbsp;                return EventEntry(title, description, startsOn, endsOn)
-&nbsp;            }
-&nbsp;            return when {
-&nbsp;                startsOn != null -&gt; EventEntryOpenEnd(title, description, startsOn)
-&nbsp;                else -&gt; EventEntryOpenStart(title, description, endsOn!!)
-&nbsp;            }
-&nbsp;        }
-&nbsp;    }
-&nbsp;}
-&nbsp;
-&nbsp;/**
-&nbsp; * Event with both start and end moments known.
-&nbsp; *
-&nbsp; * @property startsOn The date when the event starts.
-&nbsp; * @property endsOn The date when the event ends.
-&nbsp; */
-<b class="nc">&nbsp;@Serializable</b>
-&nbsp;@SerialName(&quot;eventEntry&quot;)
-&nbsp;public data class EventEntry(
-<b class="fc">&nbsp;    override val title: String,</b>
-<b class="fc">&nbsp;    override val description: String,</b>
-<b class="fc">&nbsp;    override val startsOn: LocalDate,</b>
-<b class="fc">&nbsp;    override val endsOn: LocalDate,</b>
-<b class="fc">&nbsp;) : BaseEventEntry() {</b>
-&nbsp;
-<b class="nc">&nbsp;    public override val startsAt: Instant get() = startsOn.atTime(SERVER_SAVE_TIME).toInstant(TIBIA_TIMEZONE)</b>
-<b class="nc">&nbsp;    public override val endsAt: Instant get() = endsOn.atTime(SERVER_SAVE_TIME).toInstant(TIBIA_TIMEZONE)</b>
+<b class="pc">&nbsp;@Serializable</b>
+<b class="fc">&nbsp;public data class Leaderboard(</b>
+<b class="fc">&nbsp;    val world: String,</b>
+<b class="fc">&nbsp;    val rotation: LeaderboardRotation,</b>
+<b class="fc">&nbsp;    val availableRotations: List&lt;LeaderboardRotation&gt;,</b>
+<b class="fc">&nbsp;    val lastUpdatedAt: Instant?,</b>
+<b class="fc">&nbsp;    override val currentPage: Int,</b>
+<b class="fc">&nbsp;    override val totalPages: Int,</b>
+<b class="fc">&nbsp;    override val resultsCount: Int,</b>
+<b class="fc">&nbsp;    override val entries: List&lt;BaseLeaderboardEntry&gt;,</b>
+&nbsp;) : PaginatedWithUrl&lt;BaseLeaderboardEntry&gt; {
 &nbsp;
 &nbsp;    /**
-&nbsp;     * The duration of the event, calculated from [startsOn] to [endsOn].
+&nbsp;     * The URL to these leaderboards.
 &nbsp;     */
-&nbsp;    val duration: DatePeriod
-<b class="nc">&nbsp;        get() = (endsOn - startsOn)</b>
-&nbsp;}
+<b class="nc">&nbsp;    val url: String get() = leaderboardsUrl(world, rotation.rotationId, currentPage)</b>
 &nbsp;
-&nbsp;/**
-&nbsp; * Event with an unknown/open start (typically began earlier and continues until [endsOn]).
-&nbsp; *
-&nbsp; * @property endsOn The date when the event ends.
-&nbsp; */
-&nbsp;@Serializable
-&nbsp;@SerialName(&quot;eventEntryOpenStart&quot;)
-&nbsp;public data class EventEntryOpenStart(
-&nbsp;    override val title: String,
-&nbsp;    override val description: String,
-&nbsp;    override val endsOn: LocalDate,
-&nbsp;) : BaseEventEntry() {
-&nbsp;    override val startsOn: LocalDate? get()  = null
-&nbsp;    public override val startsAt: Instant? get() = null
-&nbsp;    public override val endsAt: Instant get() = endsOn.atTime(SERVER_SAVE_TIME).toInstant(TIBIA_TIMEZONE)
-&nbsp;}
-&nbsp;
-&nbsp;/**
-&nbsp; * Event with an unknown/open end (starts at [startsOn] and continues afterward).
-&nbsp; *
-&nbsp; * @property startsOn The date when the event starts.
-&nbsp; */
-&nbsp;@Serializable
-&nbsp;@SerialName(&quot;eventEntryOpenEnd&quot;)
-&nbsp;public data class EventEntryOpenEnd(
-&nbsp;    override val title: String,
-&nbsp;    override val description: String,
-&nbsp;    override val startsOn: LocalDate,
-&nbsp;) : BaseEventEntry() {
-&nbsp;    override val endsOn: LocalDate?  get()  = null
-&nbsp;    public override val startsAt: Instant get() = startsOn.atTime(SERVER_SAVE_TIME).toInstant(TIBIA_TIMEZONE)
-&nbsp;    public override val endsAt: Instant? get() = null
+<b class="nc">&nbsp;    override fun getPageUrl(page: Int): String = leaderboardsUrl(world, rotation.rotationId, page)</b>
 &nbsp;}
 </code>
 </pre>
@@ -306,7 +224,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-15 14:13</div>
+    <div style="float:right;">generated on 2025-10-17 18:02</div>
 </div>
 </body>
 </html>

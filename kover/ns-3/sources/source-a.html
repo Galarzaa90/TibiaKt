@@ -116,7 +116,9 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp; * @property subtopic The value for the &quot;subtopic&quot; query parameter used to access it.
 &nbsp; */
 <b class="fc">&nbsp;public enum class BazaarType(override val value: String, public val subtopic: String) : StringEnum {</b>
+&nbsp;    /** Auctions that are currently active. */
 <b class="fc">&nbsp;    CURRENT(&quot;current&quot;, &quot;currentcharactertrades&quot;),</b>
+&nbsp;    /** Auctions that have ended. */
 <b class="fc">&nbsp;    HISTORY(&quot;history&quot;, &quot;pastcharactertrades&quot;),</b>
 &nbsp;}
 </code>
@@ -142,7 +144,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-15 14:13</div>
+    <div style="float:right;">generated on 2025-10-17 18:02</div>
 </div>
 </body>
 </html>

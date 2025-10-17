@@ -116,10 +116,15 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp; * @property subtopic The query parameter value for &quot;subtopic&quot; used to access this board.
 &nbsp; */
 <b class="fc">&nbsp;public enum class AvailableForumSection(public val subtopic: String) {</b>
+&nbsp;    /** The World boards section, containing a dedicated board for every world. */
 <b class="fc">&nbsp;    WORLD_BOARDS(&quot;worldboards&quot;),</b>
+&nbsp;    /** The trade boards section, containing a dedicated trading board for every world. */
 <b class="fc">&nbsp;    TRADE_BOARDS(&quot;tradeboards&quot;),</b>
+&nbsp;    /** Community boards. */
 <b class="fc">&nbsp;    COMMUNITY_BOARDS(&quot;communityboards&quot;),</b>
+&nbsp;    /** Support boards. */
 <b class="fc">&nbsp;    SUPPORT_BOARDS(&quot;supportboards&quot;),</b>
+&nbsp;    /** Guild boards. */
 <b class="fc">&nbsp;    GUILD_BOARDS(&quot;guildboards&quot;),</b>
 &nbsp;}
 </code>
@@ -145,7 +150,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-15 14:13</div>
+    <div style="float:right;">generated on 2025-10-17 18:02</div>
 </div>
 </body>
 </html>

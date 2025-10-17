@@ -134,17 +134,41 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp; * The possible fields you can order auctions by.
 &nbsp; */
 <b class="fc">&nbsp;public enum class AuctionOrderBy(override val value: Int) : IntEnum {</b>
+&nbsp;
+&nbsp;    /** Order by the highest current bid amount. */
 <b class="fc">&nbsp;    BID(100),</b>
+&nbsp;
+&nbsp;    /** Order by the auction&#39;s end date. */
 <b class="fc">&nbsp;    END_DATE(101),</b>
+&nbsp;
+&nbsp;    /** Order by the character&#39;s level. */
 <b class="fc">&nbsp;    LEVEL(102),</b>
+&nbsp;
+&nbsp;    /** Order by the auction&#39;s start date. */
 <b class="fc">&nbsp;    START_DATE(103),</b>
+&nbsp;
+&nbsp;    /** Order by the character&#39;s axe fighting skill. */
 <b class="fc">&nbsp;    AXE_FIGHTING(10),</b>
+&nbsp;
+&nbsp;    /** Order by the character&#39;s club fighting skill. */
 <b class="fc">&nbsp;    CLUB_FIGHTING(9),</b>
+&nbsp;
+&nbsp;    /** Order by the character&#39;s distance fighting skill. */
 <b class="fc">&nbsp;    DISTANCE_FIGHTING(7),</b>
+&nbsp;
+&nbsp;    /** Order by the character&#39;s fishing skill. */
 <b class="fc">&nbsp;    FISHING(13),</b>
+&nbsp;
+&nbsp;    /** Order by the character&#39;s fist fighting skill. */
 <b class="fc">&nbsp;    FIST_FIGHTING(11),</b>
+&nbsp;
+&nbsp;    /** Order by the character&#39;s magic level. */
 <b class="fc">&nbsp;    MAGIC_LEVEL(1),</b>
+&nbsp;
+&nbsp;    /** Order by the character&#39;s shielding skill. */
 <b class="fc">&nbsp;    SHIELDING(6),</b>
+&nbsp;
+&nbsp;    /** Order by the character&#39;s sword fighting skill. */
 <b class="fc">&nbsp;    SWORD_FIGHTING(8);</b>
 &nbsp;
 &nbsp;    public companion object {
@@ -177,7 +201,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-15 14:13</div>
+    <div style="float:right;">generated on 2025-10-17 18:02</div>
 </div>
 </body>
 </html>

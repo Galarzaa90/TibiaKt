@@ -133,7 +133,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;    public var id: Int? = null</b>
 <b class="fc">&nbsp;    public lateinit var title: String</b>
 <b class="fc">&nbsp;    public lateinit var category: NewsCategory</b>
-<b class="fc">&nbsp;    public lateinit var date: LocalDate</b>
+<b class="fc">&nbsp;    public lateinit var publishedOn: LocalDate</b>
 <b class="fc">&nbsp;    public lateinit var content: String</b>
 <b class="fc">&nbsp;    public var threadId: Int? = null</b>
 &nbsp;    override fun build(): News {
@@ -141,7 +141,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="pc">&nbsp;            id = id ?: error(&quot;id is required&quot;),</b>
 <b class="pc">&nbsp;            title = if (::title.isInitialized) title else error(&quot;title is required&quot;),</b>
 <b class="pc">&nbsp;            category = if (::category.isInitialized) category else error(&quot;category is required&quot;),</b>
-<b class="pc">&nbsp;            publishedOn = if (::date.isInitialized) date else error(&quot;date is required&quot;),</b>
+<b class="pc">&nbsp;            publishedOn = if (::publishedOn.isInitialized) publishedOn else error(&quot;publishedOn is required&quot;),</b>
 <b class="pc">&nbsp;            content = if (::content.isInitialized) content else error(&quot;content is required&quot;),</b>
 <b class="fc">&nbsp;            threadId = threadId,</b>
 &nbsp;        )
@@ -170,7 +170,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-15 14:13</div>
+    <div style="float:right;">generated on 2025-10-17 18:02</div>
 </div>
 </body>
 </html>

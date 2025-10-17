@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>tibiakt-core Coverage Report > BoostableBossesParser</title>
+  <title>tibiakt-core Coverage Report > CommunityUrlsKt</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -19,10 +19,10 @@
 <div class="breadCrumbs">
 Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">com.galarzaa.tibiakt.core.parsers</a>
+    <a href="../index.html">com.galarzaa.tibiakt.core.net</a>
 </div>
 
-<h1>Coverage Summary for Class: BoostableBossesParser (com.galarzaa.tibiakt.core.parsers)</h1>
+<h1>Coverage Summary for Class: CommunityUrlsKt (com.galarzaa.tibiakt.core.net)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -49,7 +49,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </th>
 </tr>
 <tr>
-  <td class="name">BoostableBossesParser</td>
+  <td class="name">CommunityUrlsKt</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -63,31 +63,31 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     100%
   </span>
   <span class="absValue">
-    (3/3)
+    (10/10)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    54.5%
+    100%
   </span>
   <span class="absValue">
-    (12/22)
+    (8/8)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    83.3%
+    100%
   </span>
   <span class="absValue">
-    (20/24)
+    (35/35)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    81.4%
+    100%
   </span>
   <span class="absValue">
-    (162/199)
+    (328/328)
   </span>
 </td>
 </tr>
@@ -100,7 +100,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;/*
-&nbsp; * Copyright © 2023 Allan Galarza
+&nbsp; * Copyright © 2025 Allan Galarza
 &nbsp; *
 &nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 &nbsp; * you may not use this file except in compliance with the License.
@@ -115,50 +115,102 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp; * limitations under the License.
 &nbsp; */
 &nbsp;
-&nbsp;package com.galarzaa.tibiakt.core.parsers
+&nbsp;package com.galarzaa.tibiakt.core.net
 &nbsp;
-&nbsp;import com.galarzaa.tibiakt.core.builders.boostableBosses
-&nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
-&nbsp;import com.galarzaa.tibiakt.core.models.creatures.BoostableBosses
-&nbsp;import com.galarzaa.tibiakt.core.html.cleanText
-&nbsp;import com.galarzaa.tibiakt.core.html.parseTablesMap
-&nbsp;import com.galarzaa.tibiakt.core.text.remove
-&nbsp;import java.io.File
-&nbsp;import java.net.URL
+&nbsp;import com.galarzaa.tibiakt.core.enums.HighscoresBattlEyeType
+&nbsp;import com.galarzaa.tibiakt.core.enums.HighscoresCategory
+&nbsp;import com.galarzaa.tibiakt.core.enums.HighscoresProfession
+&nbsp;import com.galarzaa.tibiakt.core.enums.HouseOrder
+&nbsp;import com.galarzaa.tibiakt.core.enums.HouseStatus
+&nbsp;import com.galarzaa.tibiakt.core.enums.HouseType
+&nbsp;import com.galarzaa.tibiakt.core.enums.PvpType
 &nbsp;
-&nbsp;/** Parser for the boostable bosses section. */
-&nbsp;public object BoostableBossesParser : Parser&lt;BoostableBosses&gt; {
-&nbsp;    override fun fromContent(content: String): BoostableBosses {
-<b class="fc">&nbsp;        val boxContent = boxContent(content)</b>
-<b class="fc">&nbsp;        val tables = boxContent.parseTablesMap(&quot;table.Table1&quot;)</b>
-<b class="fc">&nbsp;        return boostableBosses {</b>
-<b class="pc">&nbsp;            tables[&quot;Boosted Boss&quot;]?.let {</b>
-<b class="pc">&nbsp;                val boostedCreatureImageUrl = it.selectFirst(&quot;img&quot;)?.attr(&quot;src&quot;)</b>
-<b class="nc">&nbsp;                    ?: throw ParsingException(&quot;boosted boss image not found&quot;)</b>
-<b class="fc">&nbsp;                val fileName = File(URL(boostedCreatureImageUrl).path).name.remove(&quot;.gif&quot;)</b>
-<b class="fc">&nbsp;                boostedBoss {</b>
-<b class="pc">&nbsp;                    name = it.selectFirst(&quot;p&quot;)?.cleanText()?.substringAfter(&quot;Today&#39;s boosted boss: &quot;)</b>
-<b class="nc">&nbsp;                        ?: throw ParsingException(&quot;Boss title not found&quot;)</b>
-<b class="fc">&nbsp;                    identifier = fileName</b>
-<b class="fc">&nbsp;                }</b>
-<b class="fc">&nbsp;            } ?: throw ParsingException(&quot;Boosted boss table not found.&quot;)</b>
+&nbsp;/**
+&nbsp; * URL for a specific character.
+&nbsp; */
+<b class="fc">&nbsp;public fun characterUrl(name: String): String = tibiaUrl(&quot;community&quot;, &quot;characters&quot;, &quot;name&quot; to name)</b>
 &nbsp;
-<b class="pc">&nbsp;            val entriesTable = boxContent.selectFirst(&quot;div[style*=display: table]&quot;)</b>
-<b class="nc">&nbsp;                ?: throw ParsingException(&quot;could not find creatures list container&quot;)</b>
-<b class="fc">&nbsp;            val entryContainers = entriesTable.select(&quot;div[style*=float: left]&quot;)</b>
-<b class="fc">&nbsp;            for (entryContainer in entryContainers) {</b>
-<b class="pc">&nbsp;                val imageUrl = entryContainer.selectFirst(&quot;img&quot;)?.attr(&quot;src&quot;)</b>
-<b class="nc">&nbsp;                    ?: throw ParsingException(&quot;boss image not found&quot;)</b>
-<b class="fc">&nbsp;                val fileName = File(URL(imageUrl).path).name.remove(&quot;.gif&quot;)</b>
-<b class="fc">&nbsp;                addCreature {</b>
-<b class="fc">&nbsp;                    name = entryContainer.cleanText()</b>
-<b class="fc">&nbsp;                    identifier = fileName</b>
-&nbsp;                }
-&nbsp;            }
+&nbsp;/**
+&nbsp; * URL for the World Overview section.
+&nbsp; */
+<b class="fc">&nbsp;public fun worldOverviewUrl(): String = tibiaUrl(&quot;community&quot;, &quot;worlds&quot;)</b>
 &nbsp;
-<b class="fc">&nbsp;        }</b>
-&nbsp;    }
-&nbsp;}
+&nbsp;/**
+&nbsp; * URL for a specific world.
+&nbsp; */
+<b class="fc">&nbsp;public fun worldUrl(name: String): String = tibiaUrl(&quot;community&quot;, &quot;worlds&quot;, &quot;world&quot; to name)</b>
+&nbsp;
+&nbsp;/**
+&nbsp; * URL for highscores with filters.
+&nbsp; *
+&nbsp; * @param world World name; if null, shows highscores for all worlds.
+&nbsp; */
+&nbsp;public fun highscoresUrl(
+&nbsp;    world: String?,
+<b class="fc">&nbsp;    category: HighscoresCategory = HighscoresCategory.EXPERIENCE_POINTS,</b>
+<b class="fc">&nbsp;    vocations: HighscoresProfession = HighscoresProfession.ALL,</b>
+<b class="fc">&nbsp;    page: Int = 1,</b>
+<b class="fc">&nbsp;    battleEye: HighscoresBattlEyeType = HighscoresBattlEyeType.ANY_WORLD,</b>
+<b class="fc">&nbsp;    worldTypes: Set&lt;PvpType&gt;? = null,</b>
+<b class="fc">&nbsp;): String = tibiaUrl(</b>
+<b class="fc">&nbsp;    &quot;community&quot;,</b>
+<b class="fc">&nbsp;    &quot;subtopic&quot; to &quot;highscores&quot;,</b>
+<b class="fc">&nbsp;    &quot;world&quot; to world,</b>
+<b class="fc">&nbsp;    &quot;profession&quot; to vocations.value,</b>
+<b class="fc">&nbsp;    &quot;currentpage&quot; to page,</b>
+<b class="fc">&nbsp;    &quot;category&quot; to category.value,</b>
+<b class="fc">&nbsp;    &quot;beprotection&quot; to battleEye.value,</b>
+<b class="fc">&nbsp;    *worldTypes.orEmpty().map { &quot;${PvpType.Companion.QUERY_PARAM_HIGHSCORES}[]&quot; to it.highscoresFilterValue }</b>
+<b class="fc">&nbsp;        .toTypedArray())</b>
+&nbsp;
+&nbsp;/**
+&nbsp; * URL for a world&#39;s Leaderboards.
+&nbsp; */
+<b class="fc">&nbsp;public fun leaderboardsUrl(world: String, rotation: Int? = null, page: Int = 1): String = tibiaUrl(</b>
+<b class="fc">&nbsp;    &quot;community&quot;, &quot;leaderboards&quot;, &quot;world&quot; to world, &quot;rotation&quot; to rotation, &quot;currentpage&quot; to page</b>
+&nbsp;)
+&nbsp;
+&nbsp;/**
+&nbsp; * URL for a world&#39;s kill statistics.
+&nbsp; */
+<b class="fc">&nbsp;public fun killStatisticsUrl(world: String): String = tibiaUrl(&quot;community&quot;, &quot;killstatistics&quot;, &quot;world&quot; to world)</b>
+&nbsp;
+&nbsp;/**
+&nbsp; * URL for the Houses section with filters.
+&nbsp; */
+&nbsp;public fun housesSectionUrl(
+&nbsp;    world: String,
+&nbsp;    town: String,
+<b class="fc">&nbsp;    type: HouseType? = null,</b>
+<b class="fc">&nbsp;    status: HouseStatus? = null,</b>
+<b class="fc">&nbsp;    order: HouseOrder? = null,</b>
+<b class="fc">&nbsp;): String = tibiaUrl(</b>
+<b class="fc">&nbsp;    &quot;community&quot;,</b>
+<b class="fc">&nbsp;    &quot;houses&quot;,</b>
+<b class="fc">&nbsp;    &quot;world&quot; to world,</b>
+<b class="fc">&nbsp;    &quot;town&quot; to town,</b>
+<b class="fc">&nbsp;    &quot;state&quot; to status?.value,</b>
+<b class="fc">&nbsp;    &quot;type&quot; to type?.value,</b>
+<b class="fc">&nbsp;    &quot;order&quot; to order?.value,</b>
+&nbsp;)
+&nbsp;
+&nbsp;/**
+&nbsp; * URL for a specific house.
+&nbsp; */
+&nbsp;public fun houseUrl(world: String, houseId: Int): String =
+<b class="fc">&nbsp;    tibiaUrl(&quot;community&quot;, &quot;houses&quot;, &quot;page&quot; to &quot;view&quot;, &quot;world&quot; to world, &quot;houseid&quot; to houseId)</b>
+&nbsp;
+&nbsp;/**
+&nbsp; * URL for a world&#39;s guild list.
+&nbsp; */
+<b class="fc">&nbsp;public fun worldGuildsUrl(world: String): String = tibiaUrl(&quot;community&quot;, &quot;guilds&quot;, &quot;world&quot; to world)</b>
+&nbsp;
+&nbsp;/**
+&nbsp; * URL for a specific guild.
+&nbsp; */
+<b class="fc">&nbsp;public fun guildUrl(name: String): String = tibiaUrl(&quot;community&quot;, &quot;guilds&quot;, &quot;GuildName&quot; to name, &quot;page&quot; to &quot;view&quot;)</b>
+&nbsp;
+&nbsp;
 </code>
 </pre>
 </div>
@@ -182,7 +234,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-15 14:13</div>
+    <div style="float:right;">generated on 2025-10-17 18:02</div>
 </div>
 </body>
 </html>

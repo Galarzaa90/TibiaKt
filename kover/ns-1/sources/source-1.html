@@ -253,10 +253,10 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;import com.galarzaa.tibiakt.core.models.bazaar.Auction
 &nbsp;import com.galarzaa.tibiakt.core.models.bazaar.AuctionDetails
 &nbsp;import com.galarzaa.tibiakt.core.models.bazaar.AuctionSkills
-&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.BlessingEntry
-&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.CharmEntry
 &nbsp;import com.galarzaa.tibiakt.core.models.bazaar.BestiaryEntry
+&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.BlessingEntry
 &nbsp;import com.galarzaa.tibiakt.core.models.bazaar.BosstiaryEntry
+&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.CharmEntry
 &nbsp;import com.galarzaa.tibiakt.core.models.bazaar.Familiars
 &nbsp;import com.galarzaa.tibiakt.core.models.bazaar.FragmentProgressEntry
 &nbsp;import com.galarzaa.tibiakt.core.models.bazaar.ItemEntry
@@ -287,8 +287,8 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;    public lateinit var outfit: OutfitImage</b>
 <b class="fc">&nbsp;    private val displayedItems: MutableList&lt;ItemEntry&gt; = mutableListOf()</b>
 <b class="fc">&nbsp;    private val salesArguments: MutableList&lt;SalesArgument&gt; = mutableListOf()</b>
-<b class="fc">&nbsp;    public lateinit var auctionStart: Instant</b>
-<b class="fc">&nbsp;    public lateinit var auctionEnd: Instant</b>
+<b class="fc">&nbsp;    public lateinit var startsAt: Instant</b>
+<b class="fc">&nbsp;    public lateinit var endsAt: Instant</b>
 <b class="fc">&nbsp;    public var bid: Int = 0</b>
 <b class="fc">&nbsp;    public lateinit var bidType: BidType</b>
 <b class="fc">&nbsp;    public lateinit var status: AuctionStatus</b>
@@ -321,8 +321,8 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="pc">&nbsp;        outfit = if (::outfit.isInitialized) outfit else error(&quot;outfit is required&quot;),</b>
 <b class="fc">&nbsp;        displayedItems = displayedItems,</b>
 <b class="fc">&nbsp;        salesArguments = salesArguments,</b>
-<b class="pc">&nbsp;        startsAt = if (::auctionStart.isInitialized) auctionStart else error(&quot;auctionStart is required&quot;),</b>
-<b class="pc">&nbsp;        endsAt = if (::auctionEnd.isInitialized) auctionEnd else error(&quot;auctionEnd is required&quot;),</b>
+<b class="pc">&nbsp;        startsAt = if (::startsAt.isInitialized) startsAt else error(&quot;auctionStart is required&quot;),</b>
+<b class="pc">&nbsp;        endsAt = if (::endsAt.isInitialized) endsAt else error(&quot;auctionEnd is required&quot;),</b>
 <b class="fc">&nbsp;        bid = bid,</b>
 <b class="pc">&nbsp;        bidType = if (::bidType.isInitialized) bidType else error(&quot;bidType is required&quot;),</b>
 <b class="pc">&nbsp;        status = if (::status.isInitialized) status else error(&quot;status is required&quot;),</b>
@@ -521,7 +521,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-15 14:13</div>
+    <div style="float:right;">generated on 2025-10-17 18:02</div>
 </div>
 </body>
 </html>

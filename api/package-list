@@ -16,6 +16,7 @@ com.galarzaa.tibiakt.core.models.forums
 com.galarzaa.tibiakt.core.models.guild
 com.galarzaa.tibiakt.core.models.highscores
 com.galarzaa.tibiakt.core.models.house
+com.galarzaa.tibiakt.core.models.killstatistics
 com.galarzaa.tibiakt.core.models.leaderboards
 com.galarzaa.tibiakt.core.models.news
 com.galarzaa.tibiakt.core.models.world

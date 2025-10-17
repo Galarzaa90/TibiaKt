@@ -191,8 +191,8 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;/** Builder for [NewsArchive] instances. */
 <b class="fc">&nbsp;@BuilderDsl</b>
 &nbsp;public class NewsArchiveBuilder : TibiaKtBuilder&lt;NewsArchive&gt; {
-<b class="fc">&nbsp;    public var startDate: LocalDate? = null</b>
-<b class="fc">&nbsp;    public var endDate: LocalDate? = null</b>
+<b class="fc">&nbsp;    public var startOn: LocalDate? = null</b>
+<b class="fc">&nbsp;    public var endOn: LocalDate? = null</b>
 <b class="fc">&nbsp;    public val types: MutableSet&lt;NewsType&gt; = mutableSetOf()</b>
 <b class="fc">&nbsp;    public val categories: MutableSet&lt;NewsCategory&gt; = mutableSetOf()</b>
 <b class="fc">&nbsp;    public val entries: MutableList&lt;NewsEntry&gt; = mutableListOf()</b>
@@ -216,8 +216,8 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;
 &nbsp;
 <b class="fc">&nbsp;    override fun build(): NewsArchive = NewsArchive(</b>
-<b class="pc">&nbsp;        startOn = startDate ?: error(&quot;startDate is required&quot;),</b>
-<b class="pc">&nbsp;        endOn = endDate ?: error(&quot;endDate is required&quot;),</b>
+<b class="pc">&nbsp;        startOn = startOn ?: error(&quot;startOn is required&quot;),</b>
+<b class="pc">&nbsp;        endOn = endOn ?: error(&quot;endOn is required&quot;),</b>
 <b class="fc">&nbsp;        types = types,</b>
 <b class="fc">&nbsp;        categories = categories,</b>
 <b class="fc">&nbsp;        entries = entries,</b>
@@ -227,14 +227,14 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="nc">&nbsp;        public var id: Int = 0</b>
 <b class="nc">&nbsp;        public var title: String? = null</b>
 <b class="nc">&nbsp;        public var category: NewsCategory? = null</b>
-<b class="nc">&nbsp;        public var date: LocalDate? = null</b>
+<b class="nc">&nbsp;        public var publishedOn: LocalDate? = null</b>
 <b class="nc">&nbsp;        public var type: NewsType? = null</b>
 &nbsp;
 <b class="nc">&nbsp;        override fun build(): NewsEntry = NewsEntry(</b>
 <b class="nc">&nbsp;            id = id,</b>
 <b class="nc">&nbsp;            title = title ?: error(&quot;title is required&quot;),</b>
 <b class="nc">&nbsp;            category = category ?: error(&quot;category is required&quot;),</b>
-<b class="nc">&nbsp;            publishedOn = date ?: error(&quot;date is required&quot;),</b>
+<b class="nc">&nbsp;            publishedOn = publishedOn ?: error(&quot;date is required&quot;),</b>
 <b class="nc">&nbsp;            type = type ?: error(&quot;type is required&quot;),</b>
 &nbsp;        )
 &nbsp;    }
@@ -262,7 +262,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-15 14:13</div>
+    <div style="float:right;">generated on 2025-10-17 18:02</div>
 </div>
 </body>
 </html>

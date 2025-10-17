@@ -122,16 +122,16 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;/** Builder for [LastPost] instances. */
 &nbsp;@BuilderDsl
 &nbsp;public class LastPostBuilder : TibiaKtBuilder&lt;LastPost&gt; {
-&nbsp;    public var author: String? = null
+&nbsp;    public var authorName: String? = null
 &nbsp;    public var postId: Int? = null
-&nbsp;    public var date: Instant? = null
+&nbsp;    public var postedAt: Instant? = null
 &nbsp;    public var isDeleted: Boolean = false
 &nbsp;    public var isTraded: Boolean = false
 &nbsp;
 &nbsp;    override fun build(): LastPost = LastPost(
-&nbsp;        author = author ?: error(&quot;author is required&quot;),
+&nbsp;        authorName = authorName ?: error(&quot;authorName is required&quot;),
 &nbsp;        postId = postId ?: error(&quot;postId is required&quot;),
-&nbsp;        postedAt = date ?: error(&quot;date is required&quot;),
+&nbsp;        postedAt = postedAt ?: error(&quot;postedAt is required&quot;),
 &nbsp;        isDeleted = isDeleted,
 &nbsp;        isTraded = isTraded
 &nbsp;    )
@@ -159,7 +159,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-15 14:13</div>
+    <div style="float:right;">generated on 2025-10-17 18:02</div>
 </div>
 </body>
 </html>

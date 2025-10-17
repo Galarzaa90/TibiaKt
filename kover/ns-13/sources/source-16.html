@@ -1,0 +1,239 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>tibiakt-core Coverage Report > WorldOverviewParser</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.galarzaa.tibiakt.core.parsers</a>
+</div>
+
+<h1>Coverage Summary for Class: WorldOverviewParser (com.galarzaa.tibiakt.core.parsers)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+<th class="coverageStat 
+">
+  Instruction, %
+</th>
+</tr>
+<tr>
+  <td class="name">WorldOverviewParser</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    71.9%
+  </span>
+  <span class="absValue">
+    (23/32)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    97.9%
+  </span>
+  <span class="absValue">
+    (47/48)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    88.8%
+  </span>
+  <span class="absValue">
+    (356/401)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright © 2024 Allan Galarza
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.galarzaa.tibiakt.core.parsers
+&nbsp;
+&nbsp;import com.galarzaa.tibiakt.core.builders.WorldOverviewBuilder
+&nbsp;import com.galarzaa.tibiakt.core.builders.worldOverviewBuilder
+&nbsp;import com.galarzaa.tibiakt.core.enums.BattlEyeType
+&nbsp;import com.galarzaa.tibiakt.core.enums.StringEnum
+&nbsp;import com.galarzaa.tibiakt.core.enums.TransferType
+&nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
+&nbsp;import com.galarzaa.tibiakt.core.html.TABLE_SELECTOR
+&nbsp;import com.galarzaa.tibiakt.core.html.parsePopup
+&nbsp;import com.galarzaa.tibiakt.core.models.world.WorldOverview
+&nbsp;import com.galarzaa.tibiakt.core.text.parseInteger
+&nbsp;import com.galarzaa.tibiakt.core.time.parseTibiaDateTime
+&nbsp;import com.galarzaa.tibiakt.core.time.parseTibiaFullDate
+&nbsp;import org.jsoup.Jsoup
+&nbsp;import org.jsoup.nodes.Document
+&nbsp;import org.jsoup.nodes.Element
+&nbsp;import org.jsoup.select.Elements
+&nbsp;
+&nbsp;/** Parses content from the world overview section. */
+&nbsp;public object WorldOverviewParser : Parser&lt;WorldOverview&gt; {
+<b class="fc">&nbsp;    private val recordRegex = Regex(&quot;&quot;&quot;(?&lt;count&gt;[\d.,]+) players \(on (?&lt;date&gt;[^)]+)\)&quot;&quot;&quot;)</b>
+<b class="fc">&nbsp;    private val battlEyeRegex = Regex(&quot;&quot;&quot;since ([^.]+).&quot;&quot;&quot;)</b>
+&nbsp;
+&nbsp;    override fun fromContent(content: String): WorldOverview {
+<b class="fc">&nbsp;        val document: Document = Jsoup.parse(content, &quot;&quot;, org.jsoup.parser.Parser.xmlParser())</b>
+<b class="fc">&nbsp;        val boxContent =</b>
+<b class="pc">&nbsp;            document.selectFirst(&quot;div.BoxContent&quot;) ?: throw ParsingException(&quot;BoxContent container not found&quot;)</b>
+<b class="fc">&nbsp;        val tables = boxContent.select(TABLE_SELECTOR)</b>
+<b class="fc">&nbsp;        val builder = worldOverviewBuilder {</b>
+<b class="pc">&nbsp;            recordRegex.find(tables.first()?.text() ?: throw ParsingException(&quot;No content tables found.&quot;))?.apply {</b>
+<b class="fc">&nbsp;                val (_, recordCount, recordDate) = groupValues</b>
+<b class="fc">&nbsp;                overallMaximumCount = recordCount.parseInteger()</b>
+<b class="fc">&nbsp;                overallMaximumCountDateTime = parseTibiaDateTime(recordDate)</b>
+<b class="fc">&nbsp;            }</b>
+<b class="pc">&nbsp;            for (i in 1..tables.lastIndex step 2) {</b>
+<b class="fc">&nbsp;                val headerTable = tables[i]</b>
+<b class="fc">&nbsp;                val worldsTable = tables[i + 1]</b>
+<b class="fc">&nbsp;                if (headerTable.text().contains(&quot;Regular&quot;)) parseWorldsTable(worldsTable)</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return builder.build()</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private fun WorldOverviewBuilder.parseWorldsTable(table: Element) {
+<b class="fc">&nbsp;        val rows = table.select(&quot;tr&quot;)</b>
+<b class="fc">&nbsp;        for (row in rows.subList(1, rows.size)) {</b>
+<b class="fc">&nbsp;            addWorld {</b>
+<b class="fc">&nbsp;                val columns = row.select(&quot;td&quot;)</b>
+<b class="pc">&nbsp;                name = columns.first()?.text() ?: throw ParsingException(&quot;No columns in world row.&quot;)</b>
+<b class="fc">&nbsp;                parseOnlineStatus(columns)</b>
+<b class="fc">&nbsp;                location = columns[2].text()</b>
+<b class="pc">&nbsp;                pvpType = StringEnum.fromValue(columns[3].text())</b>
+<b class="nc">&nbsp;                    ?: throw ParsingException(&quot;Unknown PvP type found: ${columns[3].text()}&quot;)</b>
+&nbsp;
+<b class="fc">&nbsp;                parseBattlEyeStatus(columns)</b>
+<b class="fc">&nbsp;                val additionalProperties = columns[5].text()</b>
+<b class="fc">&nbsp;                transferType = if (additionalProperties.contains(&quot;blocked&quot;)) {</b>
+<b class="fc">&nbsp;                    TransferType.BLOCKED</b>
+<b class="fc">&nbsp;                } else if (additionalProperties.contains(&quot;locked&quot;)) {</b>
+<b class="fc">&nbsp;                    TransferType.LOCKED</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    TransferType.REGULAR</b>
+&nbsp;                }
+<b class="fc">&nbsp;                isPremiumRestricted = additionalProperties.contains(&quot;premium&quot;)</b>
+<b class="fc">&nbsp;                isExperimental = additionalProperties.contains(&quot;experimental&quot;)</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private fun WorldOverviewBuilder.WorldEntryBuilder.parseBattlEyeStatus(columns: Elements) {
+<b class="fc">&nbsp;        battlEyeType = BattlEyeType.UNPROTECTED</b>
+<b class="fc">&nbsp;        columns[4].selectFirst(&quot;span.HelperDivIndicator&quot;)?.apply {</b>
+<b class="fc">&nbsp;            val (_, popUp) = parsePopup(attr(&quot;onmouseover&quot;))</b>
+<b class="pc">&nbsp;            battlEyeRegex.find(popUp.text())?.apply {</b>
+&nbsp;                try {
+<b class="fc">&nbsp;                    battlEyeStartedOn = parseTibiaFullDate(groups[1]!!.value)</b>
+&nbsp;                } catch (e: IllegalArgumentException) {
+&nbsp;                    // Leave value as none
+&nbsp;                }
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;            battlEyeType = if (battlEyeStartedOn == null) BattlEyeType.GREEN else BattlEyeType.YELLOW</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private fun WorldOverviewBuilder.WorldEntryBuilder.parseOnlineStatus(columns: Elements) {
+&nbsp;        try {
+<b class="fc">&nbsp;            onlinePlayersCount = columns[1].text().parseInteger()</b>
+<b class="fc">&nbsp;            isOnline = true</b>
+&nbsp;        } catch (nfe: NumberFormatException) {
+<b class="fc">&nbsp;            onlinePlayersCount = 0</b>
+<b class="fc">&nbsp;            isOnline = false</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-10-17 18:02</div>
+</div>
+</body>
+</html>

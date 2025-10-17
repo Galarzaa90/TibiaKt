@@ -116,9 +116,9 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;import com.galarzaa.tibiakt.core.enums.Vocation
 &nbsp;import com.galarzaa.tibiakt.core.models.world.OnlineCharacter
 &nbsp;import com.galarzaa.tibiakt.core.models.world.World
-&nbsp;import kotlin.time.Instant
 &nbsp;import kotlinx.datetime.LocalDate
 &nbsp;import kotlinx.datetime.YearMonth
+&nbsp;import kotlin.time.Instant
 &nbsp;
 &nbsp;@BuilderDsl
 <b class="fc">&nbsp;public inline fun worldBuilder(block: WorldBuilder.() -&gt; Unit): WorldBuilder = WorldBuilder().apply(block)</b>
@@ -131,42 +131,42 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;public class WorldBuilder : TibiaKtBuilder&lt;World&gt; {
 &nbsp;    public var name: String? = null
 &nbsp;    public var isOnline: Boolean = false
-&nbsp;    public var onlineCount: Int = 0
+&nbsp;    public var onlinePlayersCount: Int = 0
 &nbsp;    public var location: String? = null
 &nbsp;    public var pvpType: PvpType? = null
 &nbsp;    public var battlEyeType: BattlEyeType = BattlEyeType.UNPROTECTED
-&nbsp;    public var battlEyeStartDate: LocalDate? = null
+&nbsp;    public var battlEyeStartedOn: LocalDate? = null
 &nbsp;    public var transferType: TransferType = TransferType.REGULAR
 &nbsp;    public var isPremiumRestricted: Boolean = false
 &nbsp;    public var isExperimental: Boolean = false
 &nbsp;    public var onlineRecordCount: Int = 0
-&nbsp;    public var onlineRecordDateTime: Instant? = null
-&nbsp;    public var creationDate: YearMonth? = null
+&nbsp;    public var onlineRecordAt: Instant? = null
+&nbsp;    public var createdOn: YearMonth? = null
 &nbsp;    public val worldQuests: MutableList&lt;String&gt; = mutableListOf()
-&nbsp;    public val playersOnline: MutableList&lt;OnlineCharacter&gt; = mutableListOf()
+&nbsp;    public val onlinePlayers: MutableList&lt;OnlineCharacter&gt; = mutableListOf()
 &nbsp;
 &nbsp;    public fun worldQuest(quest: String): Boolean = worldQuests.add(quest)
 &nbsp;    public fun addOnlinePlayer(name: String, level: Int, vocation: Vocation): Boolean =
-&nbsp;        playersOnline.add(OnlineCharacter(name, level, vocation))
+&nbsp;        onlinePlayers.add(OnlineCharacter(name, level, vocation))
 &nbsp;
 &nbsp;
 &nbsp;    override fun build(): World {
 &nbsp;        return World(
 &nbsp;            name = name ?: error(&quot;name is required&quot;),
 &nbsp;            isOnline = isOnline,
-&nbsp;            onlinePlayersCount = onlineCount,
+&nbsp;            onlinePlayersCount = onlinePlayersCount,
 &nbsp;            location = location ?: error(&quot;location is required&quot;),
 &nbsp;            pvpType = pvpType ?: error(&quot;pvpType is required&quot;),
 &nbsp;            battlEyeType = battlEyeType,
-&nbsp;            battlEyeStartedOn = battlEyeStartDate,
+&nbsp;            battlEyeStartedOn = battlEyeStartedOn,
 &nbsp;            transferType = transferType,
 &nbsp;            isPremiumRestricted = isPremiumRestricted,
 &nbsp;            onlineRecordCount = onlineRecordCount,
-&nbsp;            onlineRecordAt = onlineRecordDateTime
-&nbsp;                ?: error(&quot;onlineRecordDateTime is required&quot;),
+&nbsp;            onlineRecordAt = onlineRecordAt
+&nbsp;                ?: error(&quot;onlineRecordAt is required&quot;),
 &nbsp;            isExperimental = isExperimental,
-&nbsp;            createdOn = creationDate ?: error(&quot;creationDate is required&quot;),
-&nbsp;            onlinePlayers = playersOnline,
+&nbsp;            createdOn = createdOn ?: error(&quot;createdOn is required&quot;),
+&nbsp;            onlinePlayers = onlinePlayers,
 &nbsp;            worldQuests = worldQuests,
 &nbsp;        )
 &nbsp;    }
@@ -194,7 +194,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-15 14:13</div>
+    <div style="float:right;">generated on 2025-10-17 18:02</div>
 </div>
 </body>
 </html>

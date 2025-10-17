@@ -130,12 +130,12 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;    public var name: String? = null
 &nbsp;    public var logoUrl: String? = null
 &nbsp;    public var description: String? = null
-&nbsp;    public var foundingDate: LocalDate? = null
+&nbsp;    public var foundedOn: LocalDate? = null
 &nbsp;    public var isActive: Boolean = false
-&nbsp;    public var hasOpenApplications: Boolean = false
+&nbsp;    public var areApplicationsOpen: Boolean = false
 &nbsp;    public var homepage: String? = null
 &nbsp;    public var guildHall: GuildHall? = null
-&nbsp;    public var disbandingDate: LocalDate? = null
+&nbsp;    public var disbandsOn: LocalDate? = null
 &nbsp;    public var disbandingReason: String? = null
 &nbsp;    public val members: MutableList&lt;GuildMember&gt; = mutableListOf()
 &nbsp;    public val invited: MutableList&lt;GuildInvite&gt; = mutableListOf()
@@ -169,14 +169,14 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;        name = name ?: error(&quot;name is required&quot;),
 &nbsp;        logoUrl = logoUrl ?: error(&quot;logoUrl is required&quot;),
 &nbsp;        description = description,
-&nbsp;        foundedOn = foundingDate ?: error(&quot;foundingDate is required&quot;),
+&nbsp;        foundedOn = foundedOn ?: error(&quot;foundedOn is required&quot;),
 &nbsp;        isActive = isActive,
-&nbsp;        areApplicationsOpen = hasOpenApplications,
+&nbsp;        areApplicationsOpen = areApplicationsOpen,
 &nbsp;        homepageUrl = homepage,
 &nbsp;        guildHall = guildHall,
 &nbsp;        members = members,
 &nbsp;        invited = invited,
-&nbsp;        disbandsOn = disbandingDate,
+&nbsp;        disbandsOn = disbandsOn,
 &nbsp;        disbandingReason = disbandingReason,
 &nbsp;    )
 &nbsp;
@@ -223,7 +223,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-15 14:13</div>
+    <div style="float:right;">generated on 2025-10-17 18:02</div>
 </div>
 </body>
 </html>

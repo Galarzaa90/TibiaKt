@@ -176,17 +176,17 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp; *
 &nbsp; * The detailed view is represented by [ForumAnnouncement].
 &nbsp; *
-&nbsp; * @property author The name of the author of the announcement.
+&nbsp; * @property authorName The name of the character posting the announcement.
 &nbsp; */
 <b class="nc">&nbsp;@Serializable</b>
 <b class="fc">&nbsp;public data class AnnouncementEntry(</b>
 <b class="fc">&nbsp;    override val title: String,</b>
 <b class="fc">&nbsp;    override val announcementId: Int,</b>
-<b class="fc">&nbsp;    val author: String,</b>
+<b class="fc">&nbsp;    val authorName: String,</b>
 &nbsp;) : BaseForumAnnouncement {
 &nbsp;
 &nbsp;    /** The URL to the author&#39;s character page. */
-<b class="nc">&nbsp;    val authorUrl: String get() = characterUrl(author)</b>
+<b class="nc">&nbsp;    val authorUrl: String get() = characterUrl(authorName)</b>
 &nbsp;}
 </code>
 </pre>
@@ -211,7 +211,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-15 14:13</div>
+    <div style="float:right;">generated on 2025-10-17 18:02</div>
 </div>
 </body>
 </html>

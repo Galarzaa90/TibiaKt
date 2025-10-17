@@ -1,0 +1,222 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>tibiakt-core Coverage Report > HousesSectionParser</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.galarzaa.tibiakt.core.parsers</a>
+</div>
+
+<h1>Coverage Summary for Class: HousesSectionParser (com.galarzaa.tibiakt.core.parsers)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+<th class="coverageStat 
+">
+  Instruction, %
+</th>
+</tr>
+<tr>
+  <td class="name">HousesSectionParser</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (24/36)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    91.5%
+  </span>
+  <span class="absValue">
+    (43/47)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    85.7%
+  </span>
+  <span class="absValue">
+    (367/428)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.galarzaa.tibiakt.core.parsers
+&nbsp;
+&nbsp;import com.galarzaa.tibiakt.core.builders.housesSection
+&nbsp;import com.galarzaa.tibiakt.core.enums.HouseOrder
+&nbsp;import com.galarzaa.tibiakt.core.enums.HouseStatus
+&nbsp;import com.galarzaa.tibiakt.core.enums.StringEnum
+&nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
+&nbsp;import com.galarzaa.tibiakt.core.models.house.HousesSection
+&nbsp;import com.galarzaa.tibiakt.core.html.cells
+&nbsp;import com.galarzaa.tibiakt.core.html.cleanText
+&nbsp;import com.galarzaa.tibiakt.core.html.formData
+&nbsp;import com.galarzaa.tibiakt.core.collections.getContaining
+&nbsp;import com.galarzaa.tibiakt.core.collections.offsetStart
+&nbsp;import com.galarzaa.tibiakt.core.text.parseInteger
+&nbsp;import com.galarzaa.tibiakt.core.html.parseTablesMap
+&nbsp;import com.galarzaa.tibiakt.core.text.parseThousandSuffix
+&nbsp;import com.galarzaa.tibiakt.core.text.remove
+&nbsp;import com.galarzaa.tibiakt.core.html.rows
+&nbsp;import kotlin.time.Duration
+&nbsp;import kotlin.time.Duration.Companion.days
+&nbsp;import kotlin.time.Duration.Companion.hours
+&nbsp;
+&nbsp;/** Parses content from the houses section. */
+&nbsp;public object HousesSectionParser : Parser&lt;HousesSection?&gt; {
+<b class="fc">&nbsp;    private val auctionInfoRegex = Regex(&quot;&quot;&quot;\((?&lt;bid&gt;\d+) gold; (?&lt;timeLeft&gt;\w)+ (?&lt;timeUnit&gt;day|hour)s? left\)&quot;&quot;&quot;)</b>
+&nbsp;
+&nbsp;    override fun fromContent(content: String): HousesSection? {
+<b class="fc">&nbsp;        val boxContent = boxContent(content)</b>
+<b class="fc">&nbsp;        return housesSection {</b>
+<b class="fc">&nbsp;            val tables = boxContent.parseTablesMap()</b>
+<b class="pc">&nbsp;            tables[&quot;House Search&quot;]?.apply {</b>
+<b class="pc">&nbsp;                val form = boxContent.selectFirst(&quot;div.BoxContent &gt; form&quot;)?.formData()</b>
+<b class="nc">&nbsp;                    ?: throw ParsingException(&quot;could not find house form&quot;)</b>
+<b class="pc">&nbsp;                world = form.values[&quot;world&quot;] ?: throw ParsingException(&quot;could not find world value in form&quot;)</b>
+<b class="pc">&nbsp;                town = form.values[&quot;town&quot;] ?: throw ParsingException(&quot;could not find town value in form&quot;)</b>
+<b class="fc">&nbsp;                status = StringEnum.fromValue(form.values[&quot;state&quot;])</b>
+<b class="pc">&nbsp;                type = StringEnum.fromValue(form.values[&quot;type&quot;])</b>
+<b class="nc">&nbsp;                    ?: throw ParsingException(&quot;could not find type value in form&quot;)</b>
+<b class="fc">&nbsp;                StringEnum.fromValue&lt;HouseOrder&gt;(form.values[&quot;order&quot;])?.also {</b>
+<b class="fc">&nbsp;                    order = it</b>
+<b class="fc">&nbsp;                }</b>
+<b class="fc">&nbsp;            } ?: throw ParsingException(&quot;House Search table not found&quot;)</b>
+<b class="pc">&nbsp;            tables.getContaining(&quot;Available&quot;)?.apply {</b>
+<b class="fc">&nbsp;                for (row in rows().offsetStart(1)) {</b>
+<b class="fc">&nbsp;                    val columns = row.cells()</b>
+<b class="fc">&nbsp;                    if (columns.size != 5) break</b>
+<b class="fc">&nbsp;                    val statusText = columns[3].cleanText()</b>
+<b class="fc">&nbsp;                    var timeLeft: Duration? = null</b>
+<b class="fc">&nbsp;                    var highestBid: Int? = null</b>
+<b class="fc">&nbsp;                    auctionInfoRegex.find(statusText)?.apply {</b>
+<b class="fc">&nbsp;                        highestBid = groups[&quot;bid&quot;]!!.value.toInt()</b>
+<b class="fc">&nbsp;                        val timeUnit = groups[&quot;timeUnit&quot;]!!.value</b>
+<b class="fc">&nbsp;                        timeLeft = groups[&quot;timeLeft&quot;]!!.value.toLong().let {</b>
+<b class="fc">&nbsp;                            when (timeUnit) {</b>
+<b class="pc">&nbsp;                                &quot;hour&quot; -&gt; it.hours</b>
+<b class="pc">&nbsp;                                &quot;day&quot; -&gt; it.days</b>
+<b class="nc">&nbsp;                                else -&gt; throw ParsingException(&quot;unknown time unit $timeUnit&quot;)</b>
+<b class="fc">&nbsp;                            }</b>
+&nbsp;                        }
+<b class="fc">&nbsp;                    }</b>
+<b class="fc">&nbsp;                    addEntry {</b>
+<b class="fc">&nbsp;                        name = columns[0].cleanText()</b>
+<b class="fc">&nbsp;                        size = columns[1].cleanText().remove(&quot;sqm&quot;).parseInteger()</b>
+<b class="fc">&nbsp;                        rent = columns[2].cleanText().remove(&quot;gold&quot;).parseThousandSuffix()</b>
+<b class="fc">&nbsp;                        status = if (statusText.contains(&quot;auctioned&quot;)) HouseStatus.AUCTIONED else HouseStatus.RENTED</b>
+<b class="pc">&nbsp;                        houseId = columns[4].selectFirst(&quot;input[name=houseid]&quot;)?.`val`()?.toInt()</b>
+<b class="nc">&nbsp;                            ?: throw ParsingException(&quot;could not find view button for house&quot;)</b>
+<b class="fc">&nbsp;                        this.timeLeft = timeLeft</b>
+<b class="fc">&nbsp;                        this.highestBid = highestBid</b>
+<b class="fc">&nbsp;                        town = this@housesSection.town</b>
+<b class="fc">&nbsp;                        world = this@housesSection.world</b>
+<b class="fc">&nbsp;                        type = this@housesSection.type</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="fc">&nbsp;            } ?: return null</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-10-17 18:02</div>
+</div>
+</body>
+</html>

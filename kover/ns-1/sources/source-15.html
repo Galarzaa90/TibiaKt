@@ -194,9 +194,9 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;public class ForumThreadBuilder : TibiaKtBuilder&lt;ForumThread&gt; {
 <b class="fc">&nbsp;    public var title: String? = null</b>
 <b class="fc">&nbsp;    public var threadId: Int? = null</b>
-<b class="fc">&nbsp;    public var board: String? = null</b>
+<b class="fc">&nbsp;    public var boardName: String? = null</b>
 <b class="fc">&nbsp;    public var boardId: Int? = null</b>
-<b class="fc">&nbsp;    public var section: String? = null</b>
+<b class="fc">&nbsp;    public var sectionName: String? = null</b>
 <b class="fc">&nbsp;    public var sectionId: Int? = null</b>
 <b class="fc">&nbsp;    public var previousTopicNumber: Int? = null</b>
 <b class="fc">&nbsp;    public var nextTopicNumber: Int? = null</b>
@@ -217,13 +217,13 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;    override fun build(): ForumThread = ForumThread(</b>
 <b class="pc">&nbsp;        title = title ?: error(&quot;title is required&quot;),</b>
 <b class="pc">&nbsp;        threadId = threadId ?: error(&quot;threadId is required&quot;),</b>
-<b class="pc">&nbsp;        boardName = board ?: error(&quot;board is required&quot;),</b>
+<b class="pc">&nbsp;        boardName = boardName ?: error(&quot;boardName is required&quot;),</b>
 <b class="pc">&nbsp;        boardId = boardId ?: error(&quot;boardId is required&quot;),</b>
-<b class="pc">&nbsp;        sectionName = section ?: error(&quot;section is required&quot;),</b>
+<b class="pc">&nbsp;        sectionName = sectionName ?: error(&quot;sectionName is required&quot;),</b>
 <b class="pc">&nbsp;        sectionId = sectionId ?: error(&quot;sectionId is required&quot;),</b>
 <b class="fc">&nbsp;        previousTopicNumber = previousTopicNumber,</b>
 <b class="fc">&nbsp;        nextTopicNumber = nextTopicNumber,</b>
-<b class="fc">&nbsp;        goldenFrame = hasGoldenFrame,</b>
+<b class="fc">&nbsp;        hasGoldenFrame = hasGoldenFrame,</b>
 <b class="fc">&nbsp;        anchoredPost = anchoredPost,</b>
 <b class="fc">&nbsp;        currentPage = currentPage,</b>
 <b class="fc">&nbsp;        totalPages = totalPages,</b>
@@ -278,7 +278,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-15 14:13</div>
+    <div style="float:right;">generated on 2025-10-17 18:02</div>
 </div>
 </body>
 </html>

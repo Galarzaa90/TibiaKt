@@ -126,10 +126,10 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;import com.galarzaa.tibiakt.core.models.forums.LastPost
 &nbsp;import com.galarzaa.tibiakt.core.models.forums.TournamentForumAuthor
 &nbsp;import com.galarzaa.tibiakt.core.models.forums.UnavailableForumAuthor
-&nbsp;import com.galarzaa.tibiakt.core.time.parseTibiaForumDateTime
 &nbsp;import com.galarzaa.tibiakt.core.text.findInteger
 &nbsp;import com.galarzaa.tibiakt.core.text.parseInteger
 &nbsp;import com.galarzaa.tibiakt.core.text.remove
+&nbsp;import com.galarzaa.tibiakt.core.time.parseTibiaForumDateTime
 &nbsp;import org.jsoup.nodes.Element
 &nbsp;
 &nbsp;
@@ -148,8 +148,8 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;    }
 <b class="fc">&nbsp;    return lastPost {</b>
 <b class="fc">&nbsp;        postId = permalink.queryParams[&quot;postid&quot;]!!.first().toInt()</b>
-<b class="fc">&nbsp;        date = parseTibiaForumDateTime(postDate.cleanText())</b>
-<b class="fc">&nbsp;        author = authorName</b>
+<b class="fc">&nbsp;        postedAt = parseTibiaForumDateTime(postDate.cleanText())</b>
+<b class="fc">&nbsp;        this.authorName = authorName</b>
 <b class="fc">&nbsp;        isDeleted = authorLink == null &amp;&amp; !isTraded</b>
 <b class="fc">&nbsp;        this.isTraded = isTraded</b>
 <b class="fc">&nbsp;    }</b>
@@ -237,7 +237,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-15 14:13</div>
+    <div style="float:right;">generated on 2025-10-17 18:02</div>
 </div>
 </body>
 </html>

@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>tibiakt-core Coverage Report > ClockKt</title>
+  <title>tibiakt-core Coverage Report > StringExtensionsKt</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -19,10 +19,10 @@
 <div class="breadCrumbs">
 Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">com.galarzaa.tibiakt.core.time</a>
+    <a href="../index.html">com.galarzaa.tibiakt.core.text</a>
 </div>
 
-<h1>Coverage Summary for Class: ClockKt (com.galarzaa.tibiakt.core.time)</h1>
+<h1>Coverage Summary for Class: StringExtensionsKt (com.galarzaa.tibiakt.core.text)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -49,7 +49,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </th>
 </tr>
 <tr>
-  <td class="name">ClockKt</td>
+  <td class="name">StringExtensionsKt</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -63,24 +63,31 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     100%
   </span>
   <span class="absValue">
-    (3/3)
-  </span>
-</td>
-    <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    75%
-  </span>
-  <span class="absValue">
-    (3/4)
+    (9/9)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    76.9%
+    79.2%
   </span>
   <span class="absValue">
-    (30/39)
+    (19/24)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (31/31)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    98.1%
+  </span>
+  <span class="absValue">
+    (318/324)
   </span>
 </td>
 </tr>
@@ -93,7 +100,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;/*
-&nbsp; * Copyright © 2025 Allan Galarza
+&nbsp; * Copyright © 2024 Allan Galarza
 &nbsp; *
 &nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 &nbsp; * you may not use this file except in compliance with the License.
@@ -108,34 +115,86 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp; * limitations under the License.
 &nbsp; */
 &nbsp;
-&nbsp;package com.galarzaa.tibiakt.core.time
+&nbsp;package com.galarzaa.tibiakt.core.text
 &nbsp;
-&nbsp;import kotlinx.datetime.DayOfWeek
-&nbsp;import kotlinx.datetime.LocalDateTime
-&nbsp;import kotlinx.datetime.TimeZone
-&nbsp;import kotlinx.datetime.toLocalDateTime
-&nbsp;import kotlin.time.Clock
-&nbsp;import kotlin.time.Duration.Companion.hours
+&nbsp;import kotlin.math.pow
 &nbsp;
 &nbsp;/**
-&nbsp; * The timezone Tibia&#39;s servers are based on.
+&nbsp; * Split a string enumerating elements, using a different separator for the last item.
+&nbsp; */
+<b class="fc">&nbsp;internal fun String?.splitList(separator: String = &quot;,&quot;, lastSeparator: String = &quot; and &quot;): List&lt;String&gt; {</b>
+<b class="pc">&nbsp;    val items = this?.nullIfBlank()?.split(separator)?.toMutableList() ?: return emptyList()</b>
+<b class="fc">&nbsp;    val lastSplit: List&lt;String&gt; = items.last().split(lastSeparator)</b>
+<b class="fc">&nbsp;    if (lastSplit.size &gt; 1) {</b>
+<b class="fc">&nbsp;        items[items.lastIndex] = lastSplit.subList(0, lastSplit.lastIndex).joinToString(lastSeparator)</b>
+<b class="fc">&nbsp;        items.add(lastSplit.last())</b>
+&nbsp;    }
+<b class="fc">&nbsp;    return items.map { it.trim() }</b>
+&nbsp;}
+&nbsp;
+&nbsp;/**
+&nbsp; * Remove an arbitrary string from a string, as many times as it is found.
+&nbsp; */
+<b class="fc">&nbsp;internal fun String.remove(value: String, ignoreCase: Boolean = false): String = replace(value, &quot;&quot;, ignoreCase)</b>
+&nbsp;
+&nbsp;/**
+&nbsp; * Clean the string of non-breaking spaces and trims whitespace.
+&nbsp; */
+<b class="fc">&nbsp;internal fun String.clean(): String = replace(&quot;\u00A0&quot;, &quot; &quot;).replace(&quot;&amp;#xa0;&quot;, &quot; &quot;).trim()</b>
+&nbsp;
+&nbsp;/**
+&nbsp; * Parse a string into an integer, removing any thousand separators.
+&nbsp; */
+<b class="fc">&nbsp;internal fun String.parseInteger(): Int = remove(&quot;,&quot;).trim().toInt()</b>
+&nbsp;
+&nbsp;/**
+&nbsp; * Parse a string into a long integer, removing any thousand separators.
+&nbsp; */
+<b class="fc">&nbsp;internal fun String.parseLong(): Long = remove(&quot;,&quot;).trim().toLong()</b>
+&nbsp;
+&nbsp;/**
+&nbsp; * Find and parse an integer from a string, ignoring everything that is not a digit.
 &nbsp; *
-&nbsp; * Corresponds to CET (+1) and CEST (+2) during daylight saving times.
+&nbsp; * Note that this may cause unexpected results such as &quot;I have 2 apples and 3 oranges&quot; being converted into 23.
 &nbsp; */
-<b class="fc">&nbsp;public val TIBIA_TIMEZONE: TimeZone = TimeZone.of(&quot;Europe/Berlin&quot;)</b>
+<b class="fc">&nbsp;internal fun String.findInteger(): Int = filter { it.isDigit() }.toInt()</b>
 &nbsp;
 &nbsp;/**
-&nbsp; * Current local date and time on Tibia.com.
+&nbsp; * Return null if the string is blank.
 &nbsp; */
-<b class="fc">&nbsp;public fun tibiaNow(clock: Clock = Clock.System): LocalDateTime = clock.now().toLocalDateTime(TIBIA_TIMEZONE)</b>
+<b class="pc">&nbsp;internal fun String?.nullIfBlank(): String? = takeIf { !it.isNullOrBlank() }</b>
 &nbsp;
 &nbsp;/**
-&nbsp; * Current in-game day of the week.
-&nbsp; *
-&nbsp; * A new game day starts at [server save][SERVER_SAVE_TIME], not at midnight.
+&nbsp; *  Parses strings with numbers using &quot;k&quot; as suffix to represent thousands.
 &nbsp; */
-<b class="nc">&nbsp;public fun tibiaGameWeekDay(clock: Clock = Clock.System): DayOfWeek =</b>
-<b class="fc">&nbsp;    (clock.now() - SERVER_SAVE_TIME.hour.hours).toLocalDateTime(TIBIA_TIMEZONE).dayOfWeek</b>
+&nbsp;public fun String.parseThousandSuffix(): Int =
+<b class="pc">&nbsp;    remove(&quot;k&quot;, true).parseInteger() * (1000.0.pow(count { it == &#39;k&#39; || it == &#39;K&#39; }).toInt())</b>
+&nbsp;
+&nbsp;
+&nbsp;internal fun parseRomanNumerals(s: String): Int {
+<b class="fc">&nbsp;    val values = mapOf(</b>
+<b class="fc">&nbsp;        &#39;I&#39; to 1,</b>
+<b class="fc">&nbsp;        &#39;V&#39; to 5,</b>
+<b class="fc">&nbsp;        &#39;X&#39; to 10,</b>
+<b class="fc">&nbsp;        &#39;L&#39; to 50,</b>
+<b class="fc">&nbsp;        &#39;C&#39; to 100,</b>
+<b class="fc">&nbsp;        &#39;D&#39; to 500,</b>
+<b class="fc">&nbsp;        &#39;M&#39; to 1000</b>
+&nbsp;    )
+&nbsp;
+<b class="fc">&nbsp;    var result = 0</b>
+<b class="fc">&nbsp;    var prev = 0</b>
+<b class="fc">&nbsp;    for (ch in s.reversed()) {</b>
+<b class="pc">&nbsp;        val value = values[ch] ?: 0</b>
+<b class="fc">&nbsp;        if (value &lt; prev) {</b>
+<b class="fc">&nbsp;            result -= value</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            result += value</b>
+&nbsp;        }
+<b class="fc">&nbsp;        prev = value</b>
+&nbsp;    }
+<b class="fc">&nbsp;    return result</b>
+&nbsp;}
 </code>
 </pre>
 </div>
@@ -159,7 +218,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-15 14:13</div>
+    <div style="float:right;">generated on 2025-10-17 18:02</div>
 </div>
 </body>
 </html>

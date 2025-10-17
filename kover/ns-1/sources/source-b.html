@@ -186,8 +186,8 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;import com.galarzaa.tibiakt.core.models.character.DisplayedAchievement
 &nbsp;import com.galarzaa.tibiakt.core.models.character.GuildMembership
 &nbsp;import com.galarzaa.tibiakt.core.models.character.OtherCharacter
-&nbsp;import kotlin.time.Instant
 &nbsp;import kotlinx.datetime.LocalDate
+&nbsp;import kotlin.time.Instant
 &nbsp;
 &nbsp;@BuilderDsl
 &nbsp;public inline fun character(block: CharacterBuilder.() -&gt; Unit): Character = CharacterBuilder().apply(block).build()
@@ -206,10 +206,10 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;    public var sex: Sex? = null</b>
 <b class="fc">&nbsp;    public var world: String? = null</b>
 <b class="fc">&nbsp;    public var achievementPoints: Int = 0</b>
-<b class="fc">&nbsp;    public var lastLogin: Instant? = null</b>
+<b class="fc">&nbsp;    public var lastLoginAt: Instant? = null</b>
 <b class="fc">&nbsp;    public var isRecentlyTraded: Boolean = false</b>
 <b class="fc">&nbsp;    public var formerNames: List&lt;String&gt; = emptyList()</b>
-<b class="fc">&nbsp;    public var deletionDate: Instant? = null</b>
+<b class="fc">&nbsp;    public var deletionScheduledAt: Instant? = null</b>
 <b class="fc">&nbsp;    public var formerWorld: String? = null</b>
 <b class="fc">&nbsp;    public var isPremium: Boolean = false</b>
 <b class="fc">&nbsp;    public var comment: String? = null</b>
@@ -305,12 +305,12 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;        marriedTo = marriedTo,</b>
 <b class="fc">&nbsp;        houses = houses,</b>
 <b class="fc">&nbsp;        guildMembership = guildMembership,</b>
-<b class="fc">&nbsp;        lastLoginAt = lastLogin,</b>
+<b class="fc">&nbsp;        lastLoginAt = lastLoginAt,</b>
 <b class="fc">&nbsp;        position = position,</b>
 <b class="fc">&nbsp;        comment = comment,</b>
 <b class="fc">&nbsp;        isPremium = isPremium,</b>
 <b class="fc">&nbsp;        isRecentlyTraded = isRecentlyTraded,</b>
-<b class="fc">&nbsp;        deletionScheduledAt = deletionDate,</b>
+<b class="fc">&nbsp;        deletionScheduledAt = deletionScheduledAt,</b>
 <b class="fc">&nbsp;        badges = accountBadges,</b>
 <b class="fc">&nbsp;        achievements = achievements,</b>
 <b class="fc">&nbsp;        deaths = deaths,</b>
@@ -356,7 +356,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-15 14:13</div>
+    <div style="float:right;">generated on 2025-10-17 18:02</div>
 </div>
 </body>
 </html>

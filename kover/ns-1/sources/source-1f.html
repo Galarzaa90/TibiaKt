@@ -169,13 +169,13 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;    public var status: HouseStatus? = null</b>
 <b class="fc">&nbsp;    public var paidUntil: Instant? = null</b>
 <b class="fc">&nbsp;    public var owner: String? = null</b>
-<b class="fc">&nbsp;    public var movingDate: Instant? = null</b>
+<b class="fc">&nbsp;    public var transferScheduledAt: Instant? = null</b>
 <b class="fc">&nbsp;    public var transferPrice: Int? = null</b>
 <b class="fc">&nbsp;    public var isTransferAccepted: Boolean? = null</b>
 <b class="fc">&nbsp;    public var transferRecipient: String? = null</b>
 <b class="fc">&nbsp;    public var highestBid: Int? = null</b>
 <b class="fc">&nbsp;    public var highestBidder: String? = null</b>
-<b class="fc">&nbsp;    public var auctionEnd: Instant? = null</b>
+<b class="fc">&nbsp;    public var auctionEndsAt: Instant? = null</b>
 &nbsp;
 &nbsp;    @Suppress(&quot;ComplexMethod&quot;)
 <b class="pc">&nbsp;    override fun build(): House = when (status) {</b>
@@ -189,7 +189,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="pc">&nbsp;            world = world ?: error(&quot;world is required&quot;),</b>
 <b class="pc">&nbsp;            paidUntil = paidUntil ?: error(&quot;paidUntil is required&quot;),</b>
 <b class="pc">&nbsp;            ownerName = owner ?: error(&quot;Owner is required&quot;),</b>
-<b class="fc">&nbsp;            transferScheduledAt = movingDate,</b>
+<b class="fc">&nbsp;            transferScheduledAt = transferScheduledAt,</b>
 <b class="fc">&nbsp;            transferPrice = transferPrice,</b>
 <b class="fc">&nbsp;            isTransferAccepted = isTransferAccepted,</b>
 <b class="fc">&nbsp;            transferRecipient = transferRecipient</b>
@@ -205,7 +205,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="pc">&nbsp;            world = world ?: error(&quot;world is required&quot;),</b>
 <b class="fc">&nbsp;            highestBid = highestBid,</b>
 <b class="fc">&nbsp;            highestBidder = highestBidder,</b>
-<b class="fc">&nbsp;            auctionEndsAt = auctionEnd,</b>
+<b class="fc">&nbsp;            auctionEndsAt = auctionEndsAt,</b>
 &nbsp;        )
 &nbsp;
 <b class="nc">&nbsp;        else -&gt; error(&quot;status is required&quot;)</b>
@@ -234,7 +234,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-15 14:13</div>
+    <div style="float:right;">generated on 2025-10-17 18:02</div>
 </div>
 </body>
 </html>

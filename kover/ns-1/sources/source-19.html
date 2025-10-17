@@ -195,12 +195,12 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;    public var name: String? = null</b>
 <b class="fc">&nbsp;    public var logoUrl: String? = null</b>
 <b class="fc">&nbsp;    public var description: String? = null</b>
-<b class="fc">&nbsp;    public var foundingDate: LocalDate? = null</b>
+<b class="fc">&nbsp;    public var foundedOn: LocalDate? = null</b>
 <b class="fc">&nbsp;    public var isActive: Boolean = false</b>
-<b class="fc">&nbsp;    public var hasOpenApplications: Boolean = false</b>
+<b class="fc">&nbsp;    public var areApplicationsOpen: Boolean = false</b>
 <b class="fc">&nbsp;    public var homepage: String? = null</b>
 <b class="nc">&nbsp;    public var guildHall: GuildHall? = null</b>
-<b class="fc">&nbsp;    public var disbandingDate: LocalDate? = null</b>
+<b class="fc">&nbsp;    public var disbandsOn: LocalDate? = null</b>
 <b class="fc">&nbsp;    public var disbandingReason: String? = null</b>
 <b class="fc">&nbsp;    public val members: MutableList&lt;GuildMember&gt; = mutableListOf()</b>
 <b class="fc">&nbsp;    public val invited: MutableList&lt;GuildInvite&gt; = mutableListOf()</b>
@@ -234,14 +234,14 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="pc">&nbsp;        name = name ?: error(&quot;name is required&quot;),</b>
 <b class="pc">&nbsp;        logoUrl = logoUrl ?: error(&quot;logoUrl is required&quot;),</b>
 <b class="fc">&nbsp;        description = description,</b>
-<b class="pc">&nbsp;        foundedOn = foundingDate ?: error(&quot;foundingDate is required&quot;),</b>
+<b class="pc">&nbsp;        foundedOn = foundedOn ?: error(&quot;foundedOn is required&quot;),</b>
 <b class="fc">&nbsp;        isActive = isActive,</b>
-<b class="fc">&nbsp;        areApplicationsOpen = hasOpenApplications,</b>
+<b class="fc">&nbsp;        areApplicationsOpen = areApplicationsOpen,</b>
 <b class="fc">&nbsp;        homepageUrl = homepage,</b>
 <b class="fc">&nbsp;        guildHall = guildHall,</b>
 <b class="fc">&nbsp;        members = members,</b>
 <b class="fc">&nbsp;        invited = invited,</b>
-<b class="fc">&nbsp;        disbandsOn = disbandingDate,</b>
+<b class="fc">&nbsp;        disbandsOn = disbandsOn,</b>
 <b class="fc">&nbsp;        disbandingReason = disbandingReason,</b>
 &nbsp;    )
 &nbsp;
@@ -288,7 +288,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-15 14:13</div>
+    <div style="float:right;">generated on 2025-10-17 18:02</div>
 </div>
 </body>
 </html>

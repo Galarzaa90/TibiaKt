@@ -170,13 +170,13 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;package com.galarzaa.tibiakt.core.models.forums
 &nbsp;
 &nbsp;import com.galarzaa.tibiakt.core.net.characterUrl
-&nbsp;import kotlin.time.Instant
 &nbsp;import kotlinx.serialization.Serializable
+&nbsp;import kotlin.time.Instant
 &nbsp;
 &nbsp;/**
 &nbsp; * Information about the last post in a board or thread.
 &nbsp; *
-&nbsp; * @property author The name of the character that made the last post.
+&nbsp; * @property authorName The name of the character that made the last post.
 &nbsp; * @property postId The internal ID of the last post.
 &nbsp; * @property postedAt The date and time when the post was published.
 &nbsp; * @property isDeleted Whether the author of the post is currently deleted.
@@ -184,14 +184,14 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp; */
 <b class="nc">&nbsp;@Serializable</b>
 <b class="fc">&nbsp;public data class LastPost(</b>
-<b class="fc">&nbsp;    val author: String,</b>
+<b class="fc">&nbsp;    val authorName: String,</b>
 <b class="fc">&nbsp;    override val postId: Int,</b>
 <b class="fc">&nbsp;    val postedAt: Instant,</b>
 <b class="fc">&nbsp;    val isDeleted: Boolean,</b>
 <b class="fc">&nbsp;    val isTraded: Boolean,</b>
 &nbsp;) : BaseForumPost {
 &nbsp;    /** The URL to the author&#39;s character page. If the author is deleted, there is no URL. */
-<b class="nc">&nbsp;    val authorUrl: String? get() = if (!isDeleted) characterUrl(author) else null</b>
+<b class="nc">&nbsp;    val authorUrl: String? get() = if (!isDeleted) characterUrl(authorName) else null</b>
 &nbsp;}
 </code>
 </pre>
@@ -216,7 +216,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-15 14:13</div>
+    <div style="float:right;">generated on 2025-10-17 18:02</div>
 </div>
 </body>
 </html>

@@ -135,13 +135,13 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;    public var status: HouseStatus? = null
 &nbsp;    public var paidUntil: Instant? = null
 &nbsp;    public var owner: String? = null
-&nbsp;    public var movingDate: Instant? = null
+&nbsp;    public var transferScheduledAt: Instant? = null
 &nbsp;    public var transferPrice: Int? = null
 &nbsp;    public var isTransferAccepted: Boolean? = null
 &nbsp;    public var transferRecipient: String? = null
 &nbsp;    public var highestBid: Int? = null
 &nbsp;    public var highestBidder: String? = null
-&nbsp;    public var auctionEnd: Instant? = null
+&nbsp;    public var auctionEndsAt: Instant? = null
 &nbsp;
 &nbsp;    @Suppress(&quot;ComplexMethod&quot;)
 &nbsp;    override fun build(): House = when (status) {
@@ -155,7 +155,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;            world = world ?: error(&quot;world is required&quot;),
 &nbsp;            paidUntil = paidUntil ?: error(&quot;paidUntil is required&quot;),
 &nbsp;            ownerName = owner ?: error(&quot;Owner is required&quot;),
-&nbsp;            transferScheduledAt = movingDate,
+&nbsp;            transferScheduledAt = transferScheduledAt,
 &nbsp;            transferPrice = transferPrice,
 &nbsp;            isTransferAccepted = isTransferAccepted,
 &nbsp;            transferRecipient = transferRecipient
@@ -171,7 +171,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;            world = world ?: error(&quot;world is required&quot;),
 &nbsp;            highestBid = highestBid,
 &nbsp;            highestBidder = highestBidder,
-&nbsp;            auctionEndsAt = auctionEnd,
+&nbsp;            auctionEndsAt = auctionEndsAt,
 &nbsp;        )
 &nbsp;
 &nbsp;        else -&gt; error(&quot;status is required&quot;)
@@ -200,7 +200,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-15 14:13</div>
+    <div style="float:right;">generated on 2025-10-17 18:02</div>
 </div>
 </body>
 </html>

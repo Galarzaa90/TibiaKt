@@ -180,8 +180,8 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;import com.galarzaa.tibiakt.core.enums.TransferType
 &nbsp;import com.galarzaa.tibiakt.core.models.world.WorldEntry
 &nbsp;import com.galarzaa.tibiakt.core.models.world.WorldOverview
-&nbsp;import kotlin.time.Instant
 &nbsp;import kotlinx.datetime.LocalDate
+&nbsp;import kotlin.time.Instant
 &nbsp;
 &nbsp;@BuilderDsl
 &nbsp;public inline fun worldOverviewBuilder(block: WorldOverviewBuilder.() -&gt; Unit): WorldOverviewBuilder =
@@ -220,11 +220,11 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;    public class WorldEntryBuilder : TibiaKtBuilder&lt;WorldEntry&gt; {
 <b class="fc">&nbsp;        public var name: String? = null</b>
 <b class="fc">&nbsp;        public var isOnline: Boolean = false</b>
-<b class="fc">&nbsp;        public var onlineCount: Int = 0</b>
+<b class="fc">&nbsp;        public var onlinePlayersCount: Int = 0</b>
 <b class="fc">&nbsp;        public var location: String? = null</b>
 <b class="fc">&nbsp;        public var pvpType: PvpType? = null</b>
 <b class="fc">&nbsp;        public var battlEyeType: BattlEyeType = BattlEyeType.UNPROTECTED</b>
-<b class="fc">&nbsp;        public var battlEyeStartDate: LocalDate? = null</b>
+<b class="fc">&nbsp;        public var battlEyeStartedOn: LocalDate? = null</b>
 <b class="fc">&nbsp;        public var transferType: TransferType = TransferType.REGULAR</b>
 <b class="fc">&nbsp;        public var isPremiumRestricted: Boolean = false</b>
 <b class="fc">&nbsp;        public var isExperimental: Boolean = false</b>
@@ -235,11 +235,11 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;            return WorldEntry(</b>
 <b class="pc">&nbsp;                name = name ?: error(&quot;name is required&quot;),</b>
 <b class="fc">&nbsp;                isOnline = isOnline,</b>
-<b class="fc">&nbsp;                onlineCount = onlineCount,</b>
+<b class="fc">&nbsp;                onlinePlayersCount = onlinePlayersCount,</b>
 <b class="pc">&nbsp;                location = location ?: error(&quot;location is required&quot;),</b>
 <b class="pc">&nbsp;                pvpType = pvpType ?: error(&quot;pvpType is required&quot;),</b>
 <b class="fc">&nbsp;                battlEyeType = battlEyeType,</b>
-<b class="fc">&nbsp;                battlEyeStartedOn = battlEyeStartDate,</b>
+<b class="fc">&nbsp;                battlEyeStartedOn = battlEyeStartedOn,</b>
 <b class="fc">&nbsp;                transferType = transferType,</b>
 <b class="fc">&nbsp;                isPremiumRestricted = isPremiumRestricted,</b>
 <b class="fc">&nbsp;                isExperimental = isExperimental,</b>
@@ -270,7 +270,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-15 14:13</div>
+    <div style="float:right;">generated on 2025-10-17 18:02</div>
 </div>
 </body>
 </html>

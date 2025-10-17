@@ -129,9 +129,9 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;public class ForumThreadBuilder : TibiaKtBuilder&lt;ForumThread&gt; {
 &nbsp;    public var title: String? = null
 &nbsp;    public var threadId: Int? = null
-&nbsp;    public var board: String? = null
+&nbsp;    public var boardName: String? = null
 &nbsp;    public var boardId: Int? = null
-&nbsp;    public var section: String? = null
+&nbsp;    public var sectionName: String? = null
 &nbsp;    public var sectionId: Int? = null
 &nbsp;    public var previousTopicNumber: Int? = null
 &nbsp;    public var nextTopicNumber: Int? = null
@@ -152,13 +152,13 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;    override fun build(): ForumThread = ForumThread(
 &nbsp;        title = title ?: error(&quot;title is required&quot;),
 &nbsp;        threadId = threadId ?: error(&quot;threadId is required&quot;),
-&nbsp;        boardName = board ?: error(&quot;board is required&quot;),
+&nbsp;        boardName = boardName ?: error(&quot;boardName is required&quot;),
 &nbsp;        boardId = boardId ?: error(&quot;boardId is required&quot;),
-&nbsp;        sectionName = section ?: error(&quot;section is required&quot;),
+&nbsp;        sectionName = sectionName ?: error(&quot;sectionName is required&quot;),
 &nbsp;        sectionId = sectionId ?: error(&quot;sectionId is required&quot;),
 &nbsp;        previousTopicNumber = previousTopicNumber,
 &nbsp;        nextTopicNumber = nextTopicNumber,
-&nbsp;        goldenFrame = hasGoldenFrame,
+&nbsp;        hasGoldenFrame = hasGoldenFrame,
 &nbsp;        anchoredPost = anchoredPost,
 &nbsp;        currentPage = currentPage,
 &nbsp;        totalPages = totalPages,
@@ -213,7 +213,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-15 14:13</div>
+    <div style="float:right;">generated on 2025-10-17 18:02</div>
 </div>
 </body>
 </html>

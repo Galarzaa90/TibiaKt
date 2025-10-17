@@ -115,8 +115,8 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;import com.galarzaa.tibiakt.core.enums.TransferType
 &nbsp;import com.galarzaa.tibiakt.core.models.world.WorldEntry
 &nbsp;import com.galarzaa.tibiakt.core.models.world.WorldOverview
-&nbsp;import kotlin.time.Instant
 &nbsp;import kotlinx.datetime.LocalDate
+&nbsp;import kotlin.time.Instant
 &nbsp;
 &nbsp;@BuilderDsl
 &nbsp;public inline fun worldOverviewBuilder(block: WorldOverviewBuilder.() -&gt; Unit): WorldOverviewBuilder =
@@ -155,11 +155,11 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;    public class WorldEntryBuilder : TibiaKtBuilder&lt;WorldEntry&gt; {
 &nbsp;        public var name: String? = null
 &nbsp;        public var isOnline: Boolean = false
-&nbsp;        public var onlineCount: Int = 0
+&nbsp;        public var onlinePlayersCount: Int = 0
 &nbsp;        public var location: String? = null
 &nbsp;        public var pvpType: PvpType? = null
 &nbsp;        public var battlEyeType: BattlEyeType = BattlEyeType.UNPROTECTED
-&nbsp;        public var battlEyeStartDate: LocalDate? = null
+&nbsp;        public var battlEyeStartedOn: LocalDate? = null
 &nbsp;        public var transferType: TransferType = TransferType.REGULAR
 &nbsp;        public var isPremiumRestricted: Boolean = false
 &nbsp;        public var isExperimental: Boolean = false
@@ -170,11 +170,11 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;            return WorldEntry(
 &nbsp;                name = name ?: error(&quot;name is required&quot;),
 &nbsp;                isOnline = isOnline,
-&nbsp;                onlineCount = onlineCount,
+&nbsp;                onlinePlayersCount = onlinePlayersCount,
 &nbsp;                location = location ?: error(&quot;location is required&quot;),
 &nbsp;                pvpType = pvpType ?: error(&quot;pvpType is required&quot;),
 &nbsp;                battlEyeType = battlEyeType,
-&nbsp;                battlEyeStartedOn = battlEyeStartDate,
+&nbsp;                battlEyeStartedOn = battlEyeStartedOn,
 &nbsp;                transferType = transferType,
 &nbsp;                isPremiumRestricted = isPremiumRestricted,
 &nbsp;                isExperimental = isExperimental,
@@ -205,7 +205,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-15 14:13</div>
+    <div style="float:right;">generated on 2025-10-17 18:02</div>
 </div>
 </body>
 </html>

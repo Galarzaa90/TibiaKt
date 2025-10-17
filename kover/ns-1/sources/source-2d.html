@@ -123,9 +123,9 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;import com.galarzaa.tibiakt.core.enums.Vocation
 &nbsp;import com.galarzaa.tibiakt.core.models.world.OnlineCharacter
 &nbsp;import com.galarzaa.tibiakt.core.models.world.World
-&nbsp;import kotlin.time.Instant
 &nbsp;import kotlinx.datetime.LocalDate
 &nbsp;import kotlinx.datetime.YearMonth
+&nbsp;import kotlin.time.Instant
 &nbsp;
 &nbsp;@BuilderDsl
 &nbsp;public inline fun worldBuilder(block: WorldBuilder.() -&gt; Unit): WorldBuilder = WorldBuilder().apply(block)
@@ -138,42 +138,42 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;public class WorldBuilder : TibiaKtBuilder&lt;World&gt; {
 <b class="fc">&nbsp;    public var name: String? = null</b>
 <b class="fc">&nbsp;    public var isOnline: Boolean = false</b>
-<b class="fc">&nbsp;    public var onlineCount: Int = 0</b>
+<b class="fc">&nbsp;    public var onlinePlayersCount: Int = 0</b>
 <b class="fc">&nbsp;    public var location: String? = null</b>
 <b class="fc">&nbsp;    public var pvpType: PvpType? = null</b>
 <b class="fc">&nbsp;    public var battlEyeType: BattlEyeType = BattlEyeType.UNPROTECTED</b>
-<b class="fc">&nbsp;    public var battlEyeStartDate: LocalDate? = null</b>
+<b class="fc">&nbsp;    public var battlEyeStartedOn: LocalDate? = null</b>
 <b class="fc">&nbsp;    public var transferType: TransferType = TransferType.REGULAR</b>
 <b class="fc">&nbsp;    public var isPremiumRestricted: Boolean = false</b>
 <b class="fc">&nbsp;    public var isExperimental: Boolean = false</b>
 <b class="fc">&nbsp;    public var onlineRecordCount: Int = 0</b>
-<b class="fc">&nbsp;    public var onlineRecordDateTime: Instant? = null</b>
-<b class="fc">&nbsp;    public var creationDate: YearMonth? = null</b>
+<b class="fc">&nbsp;    public var onlineRecordAt: Instant? = null</b>
+<b class="fc">&nbsp;    public var createdOn: YearMonth? = null</b>
 <b class="fc">&nbsp;    public val worldQuests: MutableList&lt;String&gt; = mutableListOf()</b>
-<b class="fc">&nbsp;    public val playersOnline: MutableList&lt;OnlineCharacter&gt; = mutableListOf()</b>
+<b class="fc">&nbsp;    public val onlinePlayers: MutableList&lt;OnlineCharacter&gt; = mutableListOf()</b>
 &nbsp;
 <b class="fc">&nbsp;    public fun worldQuest(quest: String): Boolean = worldQuests.add(quest)</b>
 &nbsp;    public fun addOnlinePlayer(name: String, level: Int, vocation: Vocation): Boolean =
-<b class="fc">&nbsp;        playersOnline.add(OnlineCharacter(name, level, vocation))</b>
+<b class="fc">&nbsp;        onlinePlayers.add(OnlineCharacter(name, level, vocation))</b>
 &nbsp;
 &nbsp;
 &nbsp;    override fun build(): World {
 <b class="fc">&nbsp;        return World(</b>
 <b class="fc">&nbsp;            name = name ?: error(&quot;name is required&quot;),</b>
 <b class="fc">&nbsp;            isOnline = isOnline,</b>
-<b class="fc">&nbsp;            onlinePlayersCount = onlineCount,</b>
+<b class="fc">&nbsp;            onlinePlayersCount = onlinePlayersCount,</b>
 <b class="pc">&nbsp;            location = location ?: error(&quot;location is required&quot;),</b>
 <b class="pc">&nbsp;            pvpType = pvpType ?: error(&quot;pvpType is required&quot;),</b>
 <b class="fc">&nbsp;            battlEyeType = battlEyeType,</b>
-<b class="fc">&nbsp;            battlEyeStartedOn = battlEyeStartDate,</b>
+<b class="fc">&nbsp;            battlEyeStartedOn = battlEyeStartedOn,</b>
 <b class="fc">&nbsp;            transferType = transferType,</b>
 <b class="fc">&nbsp;            isPremiumRestricted = isPremiumRestricted,</b>
 <b class="fc">&nbsp;            onlineRecordCount = onlineRecordCount,</b>
-<b class="pc">&nbsp;            onlineRecordAt = onlineRecordDateTime</b>
-<b class="nc">&nbsp;                ?: error(&quot;onlineRecordDateTime is required&quot;),</b>
+<b class="pc">&nbsp;            onlineRecordAt = onlineRecordAt</b>
+<b class="nc">&nbsp;                ?: error(&quot;onlineRecordAt is required&quot;),</b>
 <b class="fc">&nbsp;            isExperimental = isExperimental,</b>
-<b class="pc">&nbsp;            createdOn = creationDate ?: error(&quot;creationDate is required&quot;),</b>
-<b class="fc">&nbsp;            onlinePlayers = playersOnline,</b>
+<b class="pc">&nbsp;            createdOn = createdOn ?: error(&quot;createdOn is required&quot;),</b>
+<b class="fc">&nbsp;            onlinePlayers = onlinePlayers,</b>
 <b class="fc">&nbsp;            worldQuests = worldQuests,</b>
 &nbsp;        )
 &nbsp;    }
@@ -201,7 +201,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-15 14:13</div>
+    <div style="float:right;">generated on 2025-10-17 18:02</div>
 </div>
 </body>
 </html>

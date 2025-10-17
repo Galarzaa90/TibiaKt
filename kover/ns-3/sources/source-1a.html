@@ -49,10 +49,10 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
   <td class="name">Vocation</td>
 <td class="coverageStat">
   <span class="percent">
-    66.7%
+    50%
   </span>
   <span class="absValue">
-    (2/3)
+    (2/4)
   </span>
 </td>
 <td class="coverageStat">
@@ -60,23 +60,23 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     0%
   </span>
   <span class="absValue">
-    (0/5)
+    (0/9)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    63.2%
+    60%
   </span>
   <span class="absValue">
-    (12/19)
+    (12/20)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    84.4%
+    77.3%
   </span>
   <span class="absValue">
-    (92/109)
+    (92/119)
   </span>
 </td>
 </tr>
@@ -88,10 +88,10 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    66.7%
+    50%
   </span>
   <span class="absValue">
-    (2/3)
+    (2/4)
   </span>
 </td>
 <td class="coverageStat">
@@ -99,23 +99,23 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     0%
   </span>
   <span class="absValue">
-    (0/5)
+    (0/9)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    63.2%
+    60%
   </span>
   <span class="absValue">
-    (12/19)
+    (12/20)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    84.4%
+    77.3%
   </span>
   <span class="absValue">
-    (92/109)
+    (92/119)
   </span>
 </td>
 </tr>
@@ -172,6 +172,10 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="nc">&nbsp;            EXALTED_MONK -&gt; MONK</b>
 <b class="nc">&nbsp;            else -&gt; this</b>
 &nbsp;        }
+&nbsp;
+&nbsp;    /** Whether this is a promoted vocation or not. */
+&nbsp;    public val isPromoted: Boolean
+<b class="nc">&nbsp;        get() = this != NONE &amp;&amp; this != base</b>
 &nbsp;}
 </code>
 </pre>
@@ -196,7 +200,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-15 14:13</div>
+    <div style="float:right;">generated on 2025-10-17 18:02</div>
 </div>
 </body>
 </html>

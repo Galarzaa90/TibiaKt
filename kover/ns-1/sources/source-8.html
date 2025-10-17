@@ -125,8 +125,8 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;/** Builder for [CMPostArchive] instances. */
 &nbsp;@BuilderDsl
 &nbsp;public class CMPostArchiveBuilder : TibiaKtBuilder&lt;CMPostArchive&gt; {
-&nbsp;    public var startDate: LocalDate? = null
-&nbsp;    public var endDate: LocalDate? = null
+&nbsp;    public var startOn: LocalDate? = null
+&nbsp;    public var endOn: LocalDate? = null
 &nbsp;    public var currentPage: Int = 1
 &nbsp;    public var totalPages: Int = 1
 &nbsp;    public var resultsCount: Int = 0
@@ -135,8 +135,8 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;    public fun addEntry(post: CMPost): CMPostArchiveBuilder = apply { entries.add(post) }
 &nbsp;
 &nbsp;    override fun build(): CMPostArchive = CMPostArchive(
-&nbsp;        startOn = startDate ?: error(&quot;startDate is required&quot;),
-&nbsp;        endOn = endDate ?: error(&quot;endDate is required&quot;),
+&nbsp;        startOn = startOn ?: error(&quot;startOn is required&quot;),
+&nbsp;        endOn = endOn ?: error(&quot;endOn is required&quot;),
 &nbsp;        currentPage = currentPage,
 &nbsp;        totalPages = totalPages,
 &nbsp;        resultsCount = resultsCount,
@@ -166,7 +166,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-15 14:13</div>
+    <div style="float:right;">generated on 2025-10-17 18:02</div>
 </div>
 </body>
 </html>

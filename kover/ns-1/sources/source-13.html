@@ -229,7 +229,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;    public var name: String? = null</b>
 <b class="fc">&nbsp;    public var boardId: Int? = null</b>
 <b class="fc">&nbsp;    public var sectionId: Int? = null</b>
-<b class="fc">&nbsp;    public var section: String? = null</b>
+<b class="fc">&nbsp;    public var sectionName: String? = null</b>
 <b class="fc">&nbsp;    public var threadAge: Int = DEFAULT_THREAD_AGE</b>
 <b class="fc">&nbsp;    public var currentPage: Int = 1</b>
 <b class="fc">&nbsp;    public var totalPages: Int = 1</b>
@@ -249,7 +249,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;        name = name ?: error(&quot;name is required&quot;),</b>
 <b class="pc">&nbsp;        boardId = boardId ?: error(&quot;boardId is required&quot;),</b>
 <b class="pc">&nbsp;        sectionId = sectionId ?: error(&quot;sectionId is required&quot;),</b>
-<b class="pc">&nbsp;        section = section ?: error(&quot;section is required&quot;),</b>
+<b class="pc">&nbsp;        sectionName = sectionName ?: error(&quot;sectionName is required&quot;),</b>
 <b class="fc">&nbsp;        threadAge = threadAge,</b>
 <b class="fc">&nbsp;        currentPage = currentPage,</b>
 <b class="fc">&nbsp;        totalPages = totalPages,</b>
@@ -267,7 +267,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;        override fun build(): AnnouncementEntry = AnnouncementEntry(</b>
 <b class="pc">&nbsp;            title = title ?: error(&quot;title is required&quot;),</b>
 <b class="pc">&nbsp;            announcementId = announcementId ?: error(&quot;announcementId is required&quot;),</b>
-<b class="pc">&nbsp;            author = author ?: error(&quot;author is required&quot;)</b>
+<b class="pc">&nbsp;            authorName = author ?: error(&quot;author is required&quot;)</b>
 &nbsp;        )
 &nbsp;    }
 &nbsp;
@@ -275,12 +275,12 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;    public class ThreadEntryBuilder : TibiaKtBuilder&lt;ThreadEntry&gt; {
 <b class="fc">&nbsp;        public var title: String? = null</b>
 <b class="fc">&nbsp;        public var threadId: Int? = null</b>
-<b class="fc">&nbsp;        public var author: String? = null</b>
+<b class="fc">&nbsp;        public var authorName: String? = null</b>
 <b class="fc">&nbsp;        public var isAuthorTraded: Boolean = false</b>
 <b class="fc">&nbsp;        public var isAuthorDeleted: Boolean = false</b>
-<b class="fc">&nbsp;        public var replies: Int = 0</b>
+<b class="fc">&nbsp;        public var repliesCount: Int = 0</b>
 <b class="fc">&nbsp;        public var emoticon: ForumEmoticon? = null</b>
-<b class="fc">&nbsp;        public var views: Int = 0</b>
+<b class="fc">&nbsp;        public var viewsCount: Int = 0</b>
 <b class="fc">&nbsp;        public var lastPost: LastPost? = null</b>
 <b class="fc">&nbsp;        public val status: MutableSet&lt;ThreadStatus&gt; = mutableSetOf()</b>
 <b class="fc">&nbsp;        public var pages: Int = 1</b>
@@ -289,12 +289,12 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;        override fun build(): ThreadEntry = ThreadEntry(</b>
 <b class="fc">&nbsp;            title = title ?: error(&quot;title is required&quot;),</b>
 <b class="pc">&nbsp;            threadId = threadId ?: error(&quot;threadId is required&quot;),</b>
-<b class="pc">&nbsp;            authorName = author ?: error(&quot;author is required&quot;),</b>
+<b class="pc">&nbsp;            authorName = authorName ?: error(&quot;authorName is required&quot;),</b>
 <b class="fc">&nbsp;            isAuthorTraded = isAuthorTraded,</b>
 <b class="fc">&nbsp;            isAuthorDeleted = isAuthorDeleted,</b>
 <b class="fc">&nbsp;            emoticon = emoticon,</b>
-<b class="fc">&nbsp;            repliesCount = replies,</b>
-<b class="fc">&nbsp;            viewsCount = views,</b>
+<b class="fc">&nbsp;            repliesCount = repliesCount,</b>
+<b class="fc">&nbsp;            viewsCount = viewsCount,</b>
 <b class="fc">&nbsp;            status = status,</b>
 <b class="pc">&nbsp;            lastPost = lastPost ?: error(&quot;lastPost is required&quot;),</b>
 <b class="fc">&nbsp;            pages = pages,</b>
@@ -325,7 +325,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-15 14:13</div>
+    <div style="float:right;">generated on 2025-10-17 18:02</div>
 </div>
 </body>
 </html>

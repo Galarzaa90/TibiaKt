@@ -126,8 +126,8 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;/** Builder for [NewsArchive] instances. */
 &nbsp;@BuilderDsl
 &nbsp;public class NewsArchiveBuilder : TibiaKtBuilder&lt;NewsArchive&gt; {
-&nbsp;    public var startDate: LocalDate? = null
-&nbsp;    public var endDate: LocalDate? = null
+&nbsp;    public var startOn: LocalDate? = null
+&nbsp;    public var endOn: LocalDate? = null
 &nbsp;    public val types: MutableSet&lt;NewsType&gt; = mutableSetOf()
 &nbsp;    public val categories: MutableSet&lt;NewsCategory&gt; = mutableSetOf()
 &nbsp;    public val entries: MutableList&lt;NewsEntry&gt; = mutableListOf()
@@ -151,8 +151,8 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;
 &nbsp;
 &nbsp;    override fun build(): NewsArchive = NewsArchive(
-&nbsp;        startOn = startDate ?: error(&quot;startDate is required&quot;),
-&nbsp;        endOn = endDate ?: error(&quot;endDate is required&quot;),
+&nbsp;        startOn = startOn ?: error(&quot;startOn is required&quot;),
+&nbsp;        endOn = endOn ?: error(&quot;endOn is required&quot;),
 &nbsp;        types = types,
 &nbsp;        categories = categories,
 &nbsp;        entries = entries,
@@ -162,14 +162,14 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;        public var id: Int = 0
 &nbsp;        public var title: String? = null
 &nbsp;        public var category: NewsCategory? = null
-&nbsp;        public var date: LocalDate? = null
+&nbsp;        public var publishedOn: LocalDate? = null
 &nbsp;        public var type: NewsType? = null
 &nbsp;
 &nbsp;        override fun build(): NewsEntry = NewsEntry(
 &nbsp;            id = id,
 &nbsp;            title = title ?: error(&quot;title is required&quot;),
 &nbsp;            category = category ?: error(&quot;category is required&quot;),
-&nbsp;            publishedOn = date ?: error(&quot;date is required&quot;),
+&nbsp;            publishedOn = publishedOn ?: error(&quot;date is required&quot;),
 &nbsp;            type = type ?: error(&quot;type is required&quot;),
 &nbsp;        )
 &nbsp;    }
@@ -197,7 +197,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-15 14:13</div>
+    <div style="float:right;">generated on 2025-10-17 18:02</div>
 </div>
 </body>
 </html>

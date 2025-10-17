@@ -127,26 +127,26 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;public class ForumAnnouncementBuilder : TibiaKtBuilder&lt;ForumAnnouncement&gt; {
 &nbsp;    public var announcementId: Int? = null
 &nbsp;    public var title: String? = null
-&nbsp;    public var board: String? = null
+&nbsp;    public var boardName: String? = null
 &nbsp;    public var boardId: Int? = null
-&nbsp;    public var section: String? = null
+&nbsp;    public var sectionName: String? = null
 &nbsp;    public var sectionId: Int? = null
 &nbsp;    public var author: BaseForumAuthor? = null
 &nbsp;    public var content: String? = null
-&nbsp;    public var startDate: Instant? = null
-&nbsp;    public var endDate: Instant? = null
+&nbsp;    public var startsAt: Instant? = null
+&nbsp;    public var endsAt: Instant? = null
 &nbsp;
 &nbsp;    override fun build(): ForumAnnouncement = ForumAnnouncement(
 &nbsp;        announcementId = announcementId ?: error(&quot;announcementId is required&quot;),
 &nbsp;        title = title ?: error(&quot;title is required&quot;),
-&nbsp;        boardName = board ?: error(&quot;board is required&quot;),
+&nbsp;        boardName = boardName ?: error(&quot;boardName is required&quot;),
 &nbsp;        boardId = boardId ?: error(&quot;boardId is required&quot;),
-&nbsp;        sectionName = section ?: error(&quot;section is required&quot;),
+&nbsp;        sectionName = sectionName ?: error(&quot;sectionName is required&quot;),
 &nbsp;        sectionId = sectionId ?: error(&quot;sectionId is required&quot;),
 &nbsp;        author = author ?: error(&quot;author is required&quot;),
 &nbsp;        content = content ?: error(&quot;content is required&quot;),
-&nbsp;        startsAt = startDate ?: error(&quot;startDate is required&quot;),
-&nbsp;        endsAt = endDate ?: error(&quot;endDate is required&quot;)
+&nbsp;        startsAt = startsAt ?: error(&quot;startsAt is required&quot;),
+&nbsp;        endsAt = endsAt ?: error(&quot;endsAt is required&quot;)
 &nbsp;    )
 &nbsp;}
 </code>
@@ -172,7 +172,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-15 14:13</div>
+    <div style="float:right;">generated on 2025-10-17 18:02</div>
 </div>
 </body>
 </html>
