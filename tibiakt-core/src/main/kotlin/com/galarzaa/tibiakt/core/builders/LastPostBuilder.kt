@@ -28,16 +28,16 @@ public inline fun lastPost(block: LastPostBuilder.() -> Unit): LastPost = lastPo
 /** Builder for [LastPost] instances. */
 @BuilderDsl
 public class LastPostBuilder : TibiaKtBuilder<LastPost> {
-    public var author: String? = null
+    public var authorName: String? = null
     public var postId: Int? = null
-    public var date: Instant? = null
+    public var postedAt: Instant? = null
     public var isDeleted: Boolean = false
     public var isTraded: Boolean = false
 
     override fun build(): LastPost = LastPost(
-        author = author ?: error("author is required"),
+        authorName = authorName ?: error("authorName is required"),
         postId = postId ?: error("postId is required"),
-        postedAt = date ?: error("date is required"),
+        postedAt = postedAt ?: error("postedAt is required"),
         isDeleted = isDeleted,
         isTraded = isTraded
     )

@@ -19,11 +19,11 @@ package com.galarzaa.tibiakt.core.parsers
 import com.galarzaa.tibiakt.core.builders.news
 import com.galarzaa.tibiakt.core.enums.NewsCategory
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
-import com.galarzaa.tibiakt.core.models.news.News
 import com.galarzaa.tibiakt.core.html.cleanText
 import com.galarzaa.tibiakt.core.html.getLinkInformation
-import com.galarzaa.tibiakt.core.time.parseTibiaDate
+import com.galarzaa.tibiakt.core.models.news.News
 import com.galarzaa.tibiakt.core.text.remove
+import com.galarzaa.tibiakt.core.time.parseTibiaDate
 
 /** Parser for news articles. */
 public object NewsParser : Parser<News?> {
@@ -48,7 +48,7 @@ public object NewsParser : Parser<News?> {
                 ?: throw ParsingException("Unexpected news icon found: ${icon.attr("src")}")
 
             val newsDate = boxContent.selectFirst("div.NewsHeadlineDate")?.cleanText()?.remove("-")?.trim()
-            date = parseTibiaDate(newsDate ?: throw ParsingException("News date not found."))
+            publishedOn = parseTibiaDate(newsDate ?: throw ParsingException("News date not found."))
 
             this.content = boxContent.selectFirst("td.NewsTableContainer")?.html()
                 ?: throw ParsingException("News content not found.")

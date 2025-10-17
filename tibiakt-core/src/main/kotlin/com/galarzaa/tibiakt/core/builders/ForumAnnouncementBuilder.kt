@@ -33,25 +33,25 @@ public inline fun forumAnnouncement(block: ForumAnnouncementBuilder.() -> Unit):
 public class ForumAnnouncementBuilder : TibiaKtBuilder<ForumAnnouncement> {
     public var announcementId: Int? = null
     public var title: String? = null
-    public var board: String? = null
+    public var boardName: String? = null
     public var boardId: Int? = null
-    public var section: String? = null
+    public var sectionName: String? = null
     public var sectionId: Int? = null
     public var author: BaseForumAuthor? = null
     public var content: String? = null
-    public var startDate: Instant? = null
-    public var endDate: Instant? = null
+    public var startsAt: Instant? = null
+    public var endsAt: Instant? = null
 
     override fun build(): ForumAnnouncement = ForumAnnouncement(
         announcementId = announcementId ?: error("announcementId is required"),
         title = title ?: error("title is required"),
-        boardName = board ?: error("board is required"),
+        boardName = boardName ?: error("boardName is required"),
         boardId = boardId ?: error("boardId is required"),
-        sectionName = section ?: error("section is required"),
+        sectionName = sectionName ?: error("sectionName is required"),
         sectionId = sectionId ?: error("sectionId is required"),
         author = author ?: error("author is required"),
         content = content ?: error("content is required"),
-        startsAt = startDate ?: error("startDate is required"),
-        endsAt = endDate ?: error("endDate is required")
+        startsAt = startsAt ?: error("startsAt is required"),
+        endsAt = endsAt ?: error("endsAt is required")
     )
 }

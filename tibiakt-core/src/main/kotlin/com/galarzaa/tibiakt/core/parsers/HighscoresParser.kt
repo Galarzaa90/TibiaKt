@@ -18,27 +18,27 @@ package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.core.builders.HighscoresBuilder
 import com.galarzaa.tibiakt.core.builders.highscores
+import com.galarzaa.tibiakt.core.collections.getContaining
+import com.galarzaa.tibiakt.core.collections.offsetStart
 import com.galarzaa.tibiakt.core.enums.IntEnum
 import com.galarzaa.tibiakt.core.enums.PvpType
 import com.galarzaa.tibiakt.core.enums.StringEnum
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
-import com.galarzaa.tibiakt.core.models.highscores.Highscores
 import com.galarzaa.tibiakt.core.html.FormData
 import com.galarzaa.tibiakt.core.html.TABLE_SELECTOR
 import com.galarzaa.tibiakt.core.html.cellsText
 import com.galarzaa.tibiakt.core.html.cleanText
 import com.galarzaa.tibiakt.core.html.formData
-import com.galarzaa.tibiakt.core.collections.getContaining
-import com.galarzaa.tibiakt.core.text.nullIfBlank
-import com.galarzaa.tibiakt.core.collections.offsetStart
-import com.galarzaa.tibiakt.core.text.parseLong
 import com.galarzaa.tibiakt.core.html.parsePagination
 import com.galarzaa.tibiakt.core.html.parseTablesMap
 import com.galarzaa.tibiakt.core.html.rows
-import kotlin.time.Clock
+import com.galarzaa.tibiakt.core.models.highscores.Highscores
+import com.galarzaa.tibiakt.core.text.nullIfBlank
+import com.galarzaa.tibiakt.core.text.parseLong
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
+import kotlin.time.Clock
 import kotlin.time.Duration.Companion.minutes
 
 /** Parser for highscores. */
@@ -65,7 +65,7 @@ public object HighscoresParser : Parser<Highscores?> {
                 ?: throw ParsingException("Could not find last update label")
             numericMatch.find(lastUpdateText)?.also {
                 val minutes = it.groups[0]!!.value.toInt()
-                lastUpdated = Clock.System.now().minus(minutes.minutes)
+                lastUpdatedAt = Clock.System.now().minus(minutes.minutes)
             }
             val paginationData = boxContent.selectFirst("small")?.parsePagination()
                 ?: throw ParsingException("could not find pagination block")

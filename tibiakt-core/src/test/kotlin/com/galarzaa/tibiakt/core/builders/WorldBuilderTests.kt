@@ -20,8 +20,8 @@ import com.galarzaa.tibiakt.core.enums.PvpType
 import com.galarzaa.tibiakt.core.enums.Vocation
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.collections.shouldHaveSize
-import kotlin.time.Clock
 import kotlinx.datetime.YearMonth
+import kotlin.time.Clock
 
 class WorldBuilderTests : StringSpec({
     "Build with all required parameters"{
@@ -30,9 +30,9 @@ class WorldBuilderTests : StringSpec({
             isOnline = true
             location = "North America"
             pvpType = PvpType.OPTIONAL_PVP
-            onlineRecordDateTime = Clock.System.now()
+            onlineRecordAt = Clock.System.now()
             onlineRecordCount = 425
-            creationDate = YearMonth(2018, 4)
+            createdOn = YearMonth(2018, 4)
             addOnlinePlayer("Someone", 123, Vocation.DRUID)
             addOnlinePlayer("Galarzaa Fidera", 285, Vocation.ROYAL_PALADIN)
         }

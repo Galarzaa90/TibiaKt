@@ -31,8 +31,8 @@ public inline fun cmPostArchiveBuilder(block: CMPostArchiveBuilder.() -> Unit): 
 /** Builder for [CMPostArchive] instances. */
 @BuilderDsl
 public class CMPostArchiveBuilder : TibiaKtBuilder<CMPostArchive> {
-    public var startDate: LocalDate? = null
-    public var endDate: LocalDate? = null
+    public var startOn: LocalDate? = null
+    public var endOn: LocalDate? = null
     public var currentPage: Int = 1
     public var totalPages: Int = 1
     public var resultsCount: Int = 0
@@ -41,8 +41,8 @@ public class CMPostArchiveBuilder : TibiaKtBuilder<CMPostArchive> {
     public fun addEntry(post: CMPost): CMPostArchiveBuilder = apply { entries.add(post) }
 
     override fun build(): CMPostArchive = CMPostArchive(
-        startOn = startDate ?: error("startDate is required"),
-        endOn = endDate ?: error("endDate is required"),
+        startOn = startOn ?: error("startOn is required"),
+        endOn = endOn ?: error("endOn is required"),
         currentPage = currentPage,
         totalPages = totalPages,
         resultsCount = resultsCount,

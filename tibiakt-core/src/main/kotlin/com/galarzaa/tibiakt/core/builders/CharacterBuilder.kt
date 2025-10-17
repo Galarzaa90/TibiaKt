@@ -27,8 +27,8 @@ import com.galarzaa.tibiakt.core.models.character.DeathParticipant
 import com.galarzaa.tibiakt.core.models.character.DisplayedAchievement
 import com.galarzaa.tibiakt.core.models.character.GuildMembership
 import com.galarzaa.tibiakt.core.models.character.OtherCharacter
-import kotlin.time.Instant
 import kotlinx.datetime.LocalDate
+import kotlin.time.Instant
 
 @BuilderDsl
 public inline fun character(block: CharacterBuilder.() -> Unit): Character = CharacterBuilder().apply(block).build()
@@ -47,10 +47,10 @@ public class CharacterBuilder : TibiaKtBuilder<Character> {
     public var sex: Sex? = null
     public var world: String? = null
     public var achievementPoints: Int = 0
-    public var lastLogin: Instant? = null
+    public var lastLoginAt: Instant? = null
     public var isRecentlyTraded: Boolean = false
     public var formerNames: List<String> = emptyList()
-    public var deletionDate: Instant? = null
+    public var deletionScheduledAt: Instant? = null
     public var formerWorld: String? = null
     public var isPremium: Boolean = false
     public var comment: String? = null
@@ -146,12 +146,12 @@ public class CharacterBuilder : TibiaKtBuilder<Character> {
         marriedTo = marriedTo,
         houses = houses,
         guildMembership = guildMembership,
-        lastLoginAt = lastLogin,
+        lastLoginAt = lastLoginAt,
         position = position,
         comment = comment,
         isPremium = isPremium,
         isRecentlyTraded = isRecentlyTraded,
-        deletionScheduledAt = deletionDate,
+        deletionScheduledAt = deletionScheduledAt,
         badges = accountBadges,
         achievements = achievements,
         deaths = deaths,

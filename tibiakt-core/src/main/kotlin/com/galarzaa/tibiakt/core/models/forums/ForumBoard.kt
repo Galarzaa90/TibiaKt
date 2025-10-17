@@ -31,7 +31,7 @@ public const val DEFAULT_THREAD_AGE: Int = 30
  *
  * @property name The name of the board.
  * @property sectionId The internal ID of the section the board is in.
- * @property section The name of the section the board is in.
+ * @property sectionName The name of the section the board is in.
  * @property threadAge The age in days of the displayed posts.
  * @property announcements The announcements in the board.
  */
@@ -40,7 +40,7 @@ public data class ForumBoard(
     val name: String,
     override val boardId: Int,
     val sectionId: Int,
-    val section: String,
+    val sectionName: String,
     val threadAge: Int,
     val announcements: List<AnnouncementEntry>,
     override val currentPage: Int,

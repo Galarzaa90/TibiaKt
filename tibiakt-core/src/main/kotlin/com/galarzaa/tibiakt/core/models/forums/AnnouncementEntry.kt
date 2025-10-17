@@ -24,15 +24,15 @@ import kotlinx.serialization.Serializable
  *
  * The detailed view is represented by [ForumAnnouncement].
  *
- * @property author The name of the author of the announcement.
+ * @property authorName The name of the character posting the announcement.
  */
 @Serializable
 public data class AnnouncementEntry(
     override val title: String,
     override val announcementId: Int,
-    val author: String,
+    val authorName: String,
 ) : BaseForumAnnouncement {
 
     /** The URL to the author's character page. */
-    val authorUrl: String get() = characterUrl(author)
+    val authorUrl: String get() = characterUrl(authorName)
 }

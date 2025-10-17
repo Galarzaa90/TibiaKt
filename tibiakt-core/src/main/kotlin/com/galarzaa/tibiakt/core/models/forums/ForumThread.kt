@@ -29,7 +29,7 @@ import kotlinx.serialization.Serializable
  * @property sectionId The internal ID of the section the board is in.
  * @property previousTopicNumber The ID of the thread before this one.
  * @property nextTopicNumber The ID of the thread after this one.
- * @property goldenFrame Whether the post has a golden frame or not.
+ * @property hasGoldenFrame Whether the post has a golden frame or not.
  * @property anchoredPost The post that corresponds to the anchor in the URL if any.
  */
 @Serializable
@@ -42,7 +42,7 @@ public data class ForumThread(
     val sectionId: Int,
     val previousTopicNumber: Int?,
     val nextTopicNumber: Int?,
-    val goldenFrame: Boolean,
+    val hasGoldenFrame: Boolean,
     val anchoredPost: ForumPost? = null,
     override val currentPage: Int,
     override val totalPages: Int,

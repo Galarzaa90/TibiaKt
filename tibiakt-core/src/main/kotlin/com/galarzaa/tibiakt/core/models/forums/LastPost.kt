@@ -18,13 +18,13 @@
 package com.galarzaa.tibiakt.core.models.forums
 
 import com.galarzaa.tibiakt.core.net.characterUrl
-import kotlin.time.Instant
 import kotlinx.serialization.Serializable
+import kotlin.time.Instant
 
 /**
  * Information about the last post in a board or thread.
  *
- * @property author The name of the character that made the last post.
+ * @property authorName The name of the character that made the last post.
  * @property postId The internal ID of the last post.
  * @property postedAt The date and time when the post was published.
  * @property isDeleted Whether the author of the post is currently deleted.
@@ -32,12 +32,12 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 public data class LastPost(
-    val author: String,
+    val authorName: String,
     override val postId: Int,
     val postedAt: Instant,
     val isDeleted: Boolean,
     val isTraded: Boolean,
 ) : BaseForumPost {
     /** The URL to the author's character page. If the author is deleted, there is no URL. */
-    val authorUrl: String? get() = if (!isDeleted) characterUrl(author) else null
+    val authorUrl: String? get() = if (!isDeleted) characterUrl(authorName) else null
 }

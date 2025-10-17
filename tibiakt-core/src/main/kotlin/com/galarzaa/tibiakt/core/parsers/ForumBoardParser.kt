@@ -18,20 +18,20 @@ package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.core.builders.ForumBoardBuilder
 import com.galarzaa.tibiakt.core.builders.forumBoard
+import com.galarzaa.tibiakt.core.collections.offsetStart
 import com.galarzaa.tibiakt.core.enums.ThreadStatus
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
-import com.galarzaa.tibiakt.core.models.forums.ForumBoard
-import com.galarzaa.tibiakt.core.models.forums.ForumEmoticon
 import com.galarzaa.tibiakt.core.html.TABLE_SELECTOR
 import com.galarzaa.tibiakt.core.html.cells
 import com.galarzaa.tibiakt.core.html.cleanText
 import com.galarzaa.tibiakt.core.html.formData
 import com.galarzaa.tibiakt.core.html.getLinkInformation
-import com.galarzaa.tibiakt.core.collections.offsetStart
 import com.galarzaa.tibiakt.core.html.parseLastPostFromCell
 import com.galarzaa.tibiakt.core.html.parsePagination
-import com.galarzaa.tibiakt.core.text.remove
 import com.galarzaa.tibiakt.core.html.rows
+import com.galarzaa.tibiakt.core.models.forums.ForumBoard
+import com.galarzaa.tibiakt.core.models.forums.ForumEmoticon
+import com.galarzaa.tibiakt.core.text.remove
 import org.jsoup.nodes.Element
 
 /** Parser for forum boards. */
@@ -49,7 +49,7 @@ public object ForumBoardParser : Parser<ForumBoard?> {
             val headerText = forumBreadcrumbs.cleanText()
             val headerParts = headerText.split("|").map { it.trim() }
             name = headerParts.last()
-            section = headerParts.first()
+            sectionName = headerParts.first()
             sectionId =
                 forumBreadcrumbs.selectFirst("a")?.getLinkInformation()?.queryParams?.get("sectionid")?.first()?.toInt()
                     ?: throw ParsingException("sectionId not found")
@@ -96,13 +96,13 @@ public object ForumBoardParser : Parser<ForumBoard?> {
                 threadId = threadLink.queryParams["threadid"]?.get(0)?.toInt()
                 pages =
                     pageLinks.takeIf { it.isNotEmpty() }?.last()?.queryParams?.get("pagenumber")?.get(0)?.toInt() ?: 1
-                author = authorName
+                this.authorName = authorName
                 isAuthorTraded = isTraded
                 isAuthorDeleted = authorLink == null && !isTraded
                 ThreadStatus.values().filter { it.name.lowercase() in statusImageFileName }.forEach { status.add(it) }
                 lastPost = parseLastPostFromCell(columns[6]) ?: throw ParsingException("last post not found")
-                replies = columns[4].text().remove(",").toInt()
-                views = columns[5].text().remove(",").toInt()
+                repliesCount = columns[4].text().remove(",").toInt()
+                viewsCount = columns[5].text().remove(",").toInt()
                 hasGoldenFrame = "ClassifiedProposal" in row.attr("class")
             }
         }

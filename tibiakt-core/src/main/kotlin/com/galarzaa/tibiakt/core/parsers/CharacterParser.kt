@@ -20,21 +20,21 @@ import com.galarzaa.tibiakt.core.builders.CharacterBuilder
 import com.galarzaa.tibiakt.core.builders.character
 import com.galarzaa.tibiakt.core.enums.StringEnum
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
-import com.galarzaa.tibiakt.core.models.character.Character
-import com.galarzaa.tibiakt.core.models.character.DeathParticipant
-import com.galarzaa.tibiakt.core.text.clean
 import com.galarzaa.tibiakt.core.html.getLinkInformation
 import com.galarzaa.tibiakt.core.html.parsePopup
 import com.galarzaa.tibiakt.core.html.parseTables
-import com.galarzaa.tibiakt.core.time.parseTibiaDate
-import com.galarzaa.tibiakt.core.time.parseTibiaDateTime
+import com.galarzaa.tibiakt.core.models.character.Character
+import com.galarzaa.tibiakt.core.models.character.DeathParticipant
+import com.galarzaa.tibiakt.core.text.clean
 import com.galarzaa.tibiakt.core.text.remove
 import com.galarzaa.tibiakt.core.text.splitList
-import kotlin.time.Instant
+import com.galarzaa.tibiakt.core.time.parseTibiaDate
+import com.galarzaa.tibiakt.core.time.parseTibiaDateTime
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 import org.jsoup.select.Elements
+import kotlin.time.Instant
 
 /** Parser for character information pages. */
 public object CharacterParser : Parser<Character?> {
@@ -84,7 +84,7 @@ public object CharacterParser : Parser<Character?> {
                 "world" -> world = value
                 "residence" -> residence = value
                 "last_login" -> if (!value.contains("never logged", true)) {
-                    lastLogin = parseTibiaDateTime(value)
+                    lastLoginAt = parseTibiaDateTime(value)
                 }
 
                 "position" -> position = value
@@ -125,7 +125,7 @@ public object CharacterParser : Parser<Character?> {
         val match = deletedRegexp.matchEntire(value)
         name = if (match != null) {
             val (_, cleanName, deletionDateStr) = match.groupValues
-            deletionDate = parseTibiaDateTime(deletionDateStr)
+            deletionScheduledAt = parseTibiaDateTime(deletionDateStr)
             cleanName
         } else {
             value

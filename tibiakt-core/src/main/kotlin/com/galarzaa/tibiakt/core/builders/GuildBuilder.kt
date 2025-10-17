@@ -36,12 +36,12 @@ public class GuildBuilder : TibiaKtBuilder<Guild> {
     public var name: String? = null
     public var logoUrl: String? = null
     public var description: String? = null
-    public var foundingDate: LocalDate? = null
+    public var foundedOn: LocalDate? = null
     public var isActive: Boolean = false
-    public var hasOpenApplications: Boolean = false
+    public var areApplicationsOpen: Boolean = false
     public var homepage: String? = null
     public var guildHall: GuildHall? = null
-    public var disbandingDate: LocalDate? = null
+    public var disbandsOn: LocalDate? = null
     public var disbandingReason: String? = null
     public val members: MutableList<GuildMember> = mutableListOf()
     public val invited: MutableList<GuildInvite> = mutableListOf()
@@ -75,14 +75,14 @@ public class GuildBuilder : TibiaKtBuilder<Guild> {
         name = name ?: error("name is required"),
         logoUrl = logoUrl ?: error("logoUrl is required"),
         description = description,
-        foundedOn = foundingDate ?: error("foundingDate is required"),
+        foundedOn = foundedOn ?: error("foundedOn is required"),
         isActive = isActive,
-        areApplicationsOpen = hasOpenApplications,
+        areApplicationsOpen = areApplicationsOpen,
         homepageUrl = homepage,
         guildHall = guildHall,
         members = members,
         invited = invited,
-        disbandsOn = disbandingDate,
+        disbandsOn = disbandsOn,
         disbandingReason = disbandingReason,
     )
 

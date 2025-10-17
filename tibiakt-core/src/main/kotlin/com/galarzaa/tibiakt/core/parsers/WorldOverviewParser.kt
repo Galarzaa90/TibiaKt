@@ -22,10 +22,10 @@ import com.galarzaa.tibiakt.core.enums.BattlEyeType
 import com.galarzaa.tibiakt.core.enums.StringEnum
 import com.galarzaa.tibiakt.core.enums.TransferType
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
-import com.galarzaa.tibiakt.core.models.world.WorldOverview
 import com.galarzaa.tibiakt.core.html.TABLE_SELECTOR
-import com.galarzaa.tibiakt.core.text.parseInteger
 import com.galarzaa.tibiakt.core.html.parsePopup
+import com.galarzaa.tibiakt.core.models.world.WorldOverview
+import com.galarzaa.tibiakt.core.text.parseInteger
 import com.galarzaa.tibiakt.core.time.parseTibiaDateTime
 import com.galarzaa.tibiakt.core.time.parseTibiaFullDate
 import org.jsoup.Jsoup
@@ -90,21 +90,21 @@ public object WorldOverviewParser : Parser<WorldOverview> {
             val (_, popUp) = parsePopup(attr("onmouseover"))
             battlEyeRegex.find(popUp.text())?.apply {
                 try {
-                    battlEyeStartDate = parseTibiaFullDate(groups[1]!!.value)
+                    battlEyeStartedOn = parseTibiaFullDate(groups[1]!!.value)
                 } catch (e: IllegalArgumentException) {
                     // Leave value as none
                 }
             }
-            battlEyeType = if (battlEyeStartDate == null) BattlEyeType.GREEN else BattlEyeType.YELLOW
+            battlEyeType = if (battlEyeStartedOn == null) BattlEyeType.GREEN else BattlEyeType.YELLOW
         }
     }
 
     private fun WorldOverviewBuilder.WorldEntryBuilder.parseOnlineStatus(columns: Elements) {
         try {
-            onlineCount = columns[1].text().parseInteger()
+            onlinePlayersCount = columns[1].text().parseInteger()
             isOnline = true
         } catch (nfe: NumberFormatException) {
-            onlineCount = 0
+            onlinePlayersCount = 0
             isOnline = false
         }
     }

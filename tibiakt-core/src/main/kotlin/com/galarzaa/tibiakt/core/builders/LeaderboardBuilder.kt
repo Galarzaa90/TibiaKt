@@ -35,7 +35,7 @@ public class LeaderboardBuilder : TibiaKtBuilder<Leaderboard> {
     public var world: String? = null
     public var rotation: LeaderboardRotation? = null
     public val availableRotations: MutableList<LeaderboardRotation> = mutableListOf()
-    public var lastUpdated: Instant? = null
+    public var lastUpdatedAt: Instant? = null
     public var currentPage: Int? = null
     public var totalPages: Int? = null
     public var resultsCount: Int? = null
@@ -56,7 +56,7 @@ public class LeaderboardBuilder : TibiaKtBuilder<Leaderboard> {
         world = world ?: error("world is required"),
         rotation = rotation ?: error("rotation is required"),
         availableRotations = availableRotations,
-        lastUpdatedAt = lastUpdated,
+        lastUpdatedAt = lastUpdatedAt,
         currentPage = currentPage ?: error("currentPage is required"),
         totalPages = totalPages ?: error("totalPages is required"),
         resultsCount = resultsCount ?: error("resultsCount is required"),

@@ -18,22 +18,22 @@ package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.core.builders.CMPostArchiveBuilder
 import com.galarzaa.tibiakt.core.builders.cmPostArchive
+import com.galarzaa.tibiakt.core.collections.offsetStart
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
-import com.galarzaa.tibiakt.core.models.forums.CMPost
-import com.galarzaa.tibiakt.core.models.forums.CMPostArchive
-import com.galarzaa.tibiakt.core.time.parseTibiaDateTime
 import com.galarzaa.tibiakt.core.html.PaginationData
 import com.galarzaa.tibiakt.core.html.cells
 import com.galarzaa.tibiakt.core.html.formData
 import com.galarzaa.tibiakt.core.html.getLinkInformation
-import com.galarzaa.tibiakt.core.collections.offsetStart
 import com.galarzaa.tibiakt.core.html.parsePagination
 import com.galarzaa.tibiakt.core.html.parseTablesMap
 import com.galarzaa.tibiakt.core.html.replaceBrs
 import com.galarzaa.tibiakt.core.html.rows
 import com.galarzaa.tibiakt.core.html.wholeCleanText
-import org.jsoup.nodes.Element
+import com.galarzaa.tibiakt.core.models.forums.CMPost
+import com.galarzaa.tibiakt.core.models.forums.CMPostArchive
+import com.galarzaa.tibiakt.core.time.parseTibiaDateTime
 import kotlinx.datetime.LocalDate
+import org.jsoup.nodes.Element
 
 /** Parser for the CM posts archive. */
 public object CMPostArchiveParser : Parser<CMPostArchive> {
@@ -55,11 +55,11 @@ public object CMPostArchiveParser : Parser<CMPostArchive> {
 
     private fun CMPostArchiveBuilder.parseSearchTable(form: Element) {
         val formData = form.formData()
-        startDate = LocalDate(formData.values["startyear"]?.toInt()
+        startOn = LocalDate(formData.values["startyear"]?.toInt()
             ?: throw ParsingException("could not find startyear param"),
             formData.values["startmonth"]?.toInt() ?: throw ParsingException("could not find startmonth param"),
             formData.values["startday"]?.toInt() ?: throw ParsingException("could not find startday param"))
-        endDate =
+        endOn =
             LocalDate(formData.values["endyear"]?.toInt() ?: throw ParsingException("could not find endyear param"),
                 formData.values["endmonth"]?.toInt() ?: throw ParsingException("could not find endmonth param"),
                 formData.values["endday"]?.toInt() ?: throw ParsingException("could not find endday param"))

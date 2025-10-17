@@ -22,18 +22,18 @@ import com.galarzaa.tibiakt.core.enums.NewsCategory
 import com.galarzaa.tibiakt.core.enums.NewsType
 import com.galarzaa.tibiakt.core.enums.StringEnum
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
-import com.galarzaa.tibiakt.core.models.news.NewsArchive
 import com.galarzaa.tibiakt.core.html.cells
 import com.galarzaa.tibiakt.core.html.cleanText
 import com.galarzaa.tibiakt.core.html.formData
 import com.galarzaa.tibiakt.core.html.getLinkInformation
 import com.galarzaa.tibiakt.core.html.parseTablesMap
-import com.galarzaa.tibiakt.core.time.parseTibiaDate
 import com.galarzaa.tibiakt.core.html.rows
+import com.galarzaa.tibiakt.core.models.news.NewsArchive
+import com.galarzaa.tibiakt.core.time.parseTibiaDate
+import kotlinx.datetime.LocalDate
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
-import kotlinx.datetime.LocalDate
 
 /** Parses content from the news archive. */
 public object NewsArchiveParser : Parser<NewsArchive> {
@@ -77,7 +77,7 @@ public object NewsArchiveParser : Parser<NewsArchive> {
 
     private fun NewsArchiveBuilder.parseFilterTable(element: Element) {
         val formData = element.formData()
-        startDate = LocalDate(
+        startOn = LocalDate(
             formData.values["filter_begin_year"]?.toInt()
                 ?: throw ParsingException("could not find filter_begin_year in form"),
             formData.values["filter_begin_month"]?.toInt()
@@ -85,7 +85,7 @@ public object NewsArchiveParser : Parser<NewsArchive> {
             formData.values["filter_begin_day"]?.toInt()
                 ?: throw ParsingException("could not find filter_begin_day in form"),
         )
-        endDate = LocalDate(
+        endOn = LocalDate(
             formData.values["filter_end_year"]?.toInt()
                 ?: throw ParsingException("could not find filter_end_year in form"),
             formData.values["filter_end_month"]?.toInt()

@@ -20,11 +20,26 @@ package com.galarzaa.tibiakt.core.enums
  * The possible vocations to filter auction results.
  */
 public enum class AuctionVocationFilter(override val value: Int) : IntEnum {
+
+    /** No vocation. */
     NONE(1),
+
+    /** Any vocation. */
+    ANY(0),
+
+    /** Druids and Elder Druids. */
     DRUID(2),
+
+    /** Knights and Elite Knights. */
     KNIGHT(3),
+
+    /** Paladins and Royal Paladins. */
     PALADIN(4),
+
+    /** Sorcerer and Master Sorcerers. */
     SORCERER(5),
+
+    /** Monks and Exalted Monks. */
     MONK(6);
 
     public companion object {

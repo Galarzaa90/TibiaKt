@@ -22,9 +22,9 @@ import com.galarzaa.tibiakt.core.enums.TransferType
 import com.galarzaa.tibiakt.core.enums.Vocation
 import com.galarzaa.tibiakt.core.models.world.OnlineCharacter
 import com.galarzaa.tibiakt.core.models.world.World
-import kotlin.time.Instant
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.YearMonth
+import kotlin.time.Instant
 
 @BuilderDsl
 public inline fun worldBuilder(block: WorldBuilder.() -> Unit): WorldBuilder = WorldBuilder().apply(block)
@@ -37,42 +37,42 @@ public inline fun world(block: WorldBuilder.() -> Unit): World = worldBuilder(bl
 public class WorldBuilder : TibiaKtBuilder<World> {
     public var name: String? = null
     public var isOnline: Boolean = false
-    public var onlineCount: Int = 0
+    public var onlinePlayersCount: Int = 0
     public var location: String? = null
     public var pvpType: PvpType? = null
     public var battlEyeType: BattlEyeType = BattlEyeType.UNPROTECTED
-    public var battlEyeStartDate: LocalDate? = null
+    public var battlEyeStartedOn: LocalDate? = null
     public var transferType: TransferType = TransferType.REGULAR
     public var isPremiumRestricted: Boolean = false
     public var isExperimental: Boolean = false
     public var onlineRecordCount: Int = 0
-    public var onlineRecordDateTime: Instant? = null
-    public var creationDate: YearMonth? = null
+    public var onlineRecordAt: Instant? = null
+    public var createdOn: YearMonth? = null
     public val worldQuests: MutableList<String> = mutableListOf()
-    public val playersOnline: MutableList<OnlineCharacter> = mutableListOf()
+    public val onlinePlayers: MutableList<OnlineCharacter> = mutableListOf()
 
     public fun worldQuest(quest: String): Boolean = worldQuests.add(quest)
     public fun addOnlinePlayer(name: String, level: Int, vocation: Vocation): Boolean =
-        playersOnline.add(OnlineCharacter(name, level, vocation))
+        onlinePlayers.add(OnlineCharacter(name, level, vocation))
 
 
     override fun build(): World {
         return World(
             name = name ?: error("name is required"),
             isOnline = isOnline,
-            onlinePlayersCount = onlineCount,
+            onlinePlayersCount = onlinePlayersCount,
             location = location ?: error("location is required"),
             pvpType = pvpType ?: error("pvpType is required"),
             battlEyeType = battlEyeType,
-            battlEyeStartedOn = battlEyeStartDate,
+            battlEyeStartedOn = battlEyeStartedOn,
             transferType = transferType,
             isPremiumRestricted = isPremiumRestricted,
             onlineRecordCount = onlineRecordCount,
-            onlineRecordAt = onlineRecordDateTime
-                ?: error("onlineRecordDateTime is required"),
+            onlineRecordAt = onlineRecordAt
+                ?: error("onlineRecordAt is required"),
             isExperimental = isExperimental,
-            createdOn = creationDate ?: error("creationDate is required"),
-            onlinePlayers = playersOnline,
+            createdOn = createdOn ?: error("createdOn is required"),
+            onlinePlayers = onlinePlayers,
             worldQuests = worldQuests,
         )
     }

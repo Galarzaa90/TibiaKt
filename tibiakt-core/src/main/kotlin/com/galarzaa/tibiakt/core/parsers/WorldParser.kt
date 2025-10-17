@@ -18,21 +18,21 @@ package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.core.builders.WorldBuilder
 import com.galarzaa.tibiakt.core.builders.worldBuilder
+import com.galarzaa.tibiakt.core.collections.getContaining
+import com.galarzaa.tibiakt.core.collections.offsetStart
 import com.galarzaa.tibiakt.core.enums.BattlEyeType
 import com.galarzaa.tibiakt.core.enums.StringEnum
 import com.galarzaa.tibiakt.core.enums.TransferType
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
+import com.galarzaa.tibiakt.core.html.parseTablesMap
+import com.galarzaa.tibiakt.core.html.rows
 import com.galarzaa.tibiakt.core.models.world.World
 import com.galarzaa.tibiakt.core.text.clean
-import com.galarzaa.tibiakt.core.collections.getContaining
-import com.galarzaa.tibiakt.core.collections.offsetStart
 import com.galarzaa.tibiakt.core.text.parseInteger
-import com.galarzaa.tibiakt.core.html.parseTablesMap
+import com.galarzaa.tibiakt.core.text.remove
+import com.galarzaa.tibiakt.core.time.FORMAT_YEAR_MONTH
 import com.galarzaa.tibiakt.core.time.parseTibiaDateTime
 import com.galarzaa.tibiakt.core.time.parseTibiaFullDate
-import com.galarzaa.tibiakt.core.text.remove
-import com.galarzaa.tibiakt.core.html.rows
-import com.galarzaa.tibiakt.core.time.FORMAT_YEAR_MONTH
 import kotlinx.datetime.YearMonth
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
@@ -76,7 +76,7 @@ public object WorldParser : Parser<World?> {
             field = field.remove(":")
             when (field) {
                 "Status" -> isOnline = value.contains("online", true)
-                "Players Online" -> onlineCount = value.parseInteger()
+                "Players Online" -> onlinePlayersCount = value.parseInteger()
                 "Online Record" -> parseOnlineRecord(value)
                 "Creation Date" -> parseCreationDate(value)
                 "Location" -> location = value
@@ -111,28 +111,28 @@ public object WorldParser : Parser<World?> {
             val (_, since) = this.groupValues
             if (since.contains("release")) {
                 battlEyeType = BattlEyeType.GREEN
-                battlEyeStartDate = null
+                battlEyeStartedOn = null
             } else {
                 battlEyeType = BattlEyeType.YELLOW
-                battlEyeStartDate = parseTibiaFullDate(since.clean())
+                battlEyeStartedOn = parseTibiaFullDate(since.clean())
             }
             return
         }
         battlEyeType = BattlEyeType.UNPROTECTED
-        battlEyeStartDate = null
+        battlEyeStartedOn = null
     }
 
     private fun WorldBuilder.parseOnlineRecord(value: String) {
         recordRegex.find(value)?.apply {
             val (_, count, date) = this.groupValues
             onlineRecordCount = count.parseInteger()
-            onlineRecordDateTime = parseTibiaDateTime(date)
+            onlineRecordAt = parseTibiaDateTime(date)
 
         }
     }
 
     private fun WorldBuilder.parseCreationDate(value: String) {
-        creationDate = YearMonth.parse(value, FORMAT_YEAR_MONTH)
+        createdOn = YearMonth.parse(value, FORMAT_YEAR_MONTH)
 
     }
 }

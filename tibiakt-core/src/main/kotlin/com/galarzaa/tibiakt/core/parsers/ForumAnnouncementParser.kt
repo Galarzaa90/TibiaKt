@@ -18,12 +18,12 @@ package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.core.builders.forumAnnouncement
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
-import com.galarzaa.tibiakt.core.models.forums.ForumAnnouncement
 import com.galarzaa.tibiakt.core.html.cleanText
 import com.galarzaa.tibiakt.core.html.getLinkInformation
 import com.galarzaa.tibiakt.core.html.parseAuthorTable
-import com.galarzaa.tibiakt.core.time.parseTibiaForumDateTime
+import com.galarzaa.tibiakt.core.models.forums.ForumAnnouncement
 import com.galarzaa.tibiakt.core.text.remove
+import com.galarzaa.tibiakt.core.time.parseTibiaForumDateTime
 
 /** Parser for forum announcements. */
 public object ForumAnnouncementParser : Parser<ForumAnnouncement?> {
@@ -49,10 +49,10 @@ public object ForumAnnouncementParser : Parser<ForumAnnouncement?> {
 
             sectionId = sectionLink.queryParams["sectionid"]?.first()?.toInt()
                 ?: throw ParsingException("Could not find section ID in link.")
-            section = sectionLink.title
+            sectionName = sectionLink.title
             boardId = boardLink.queryParams["boardid"]?.first()?.toInt()
                 ?: throw ParsingException("Could not find board ID in link.")
-            board = boardLink.title
+            boardName = boardLink.title
             this.announcementId = announcementId
             author = parseAuthorTable(boxContent.selectFirst("div.PostCharacterText")!!)
 
@@ -68,8 +68,8 @@ public object ForumAnnouncementParser : Parser<ForumAnnouncement?> {
             datesContainer.remove()
 
             this.content = postTextContainer.html().split("<hr>", limit = 2).last()
-            startDate = parseTibiaForumDateTime(startDateText)
-            endDate = parseTibiaForumDateTime(endDateText)
+            startsAt = parseTibiaForumDateTime(startDateText)
+            endsAt = parseTibiaForumDateTime(endDateText)
 
         }
     }

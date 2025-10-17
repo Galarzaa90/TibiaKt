@@ -18,14 +18,14 @@ package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.core.builders.KillStatisticsBuilder
 import com.galarzaa.tibiakt.core.builders.killStatistics
+import com.galarzaa.tibiakt.core.collections.offsetStart
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
-import com.galarzaa.tibiakt.core.models.KillStatistics
 import com.galarzaa.tibiakt.core.html.TABLE_SELECTOR
 import com.galarzaa.tibiakt.core.html.cellsText
 import com.galarzaa.tibiakt.core.html.formData
-import com.galarzaa.tibiakt.core.collections.offsetStart
 import com.galarzaa.tibiakt.core.html.parseTablesMap
 import com.galarzaa.tibiakt.core.html.rows
+import com.galarzaa.tibiakt.core.models.killstatistics.KillStatistics
 import org.jsoup.nodes.Element
 
 /** Parses content from the Kill Statistics section. */

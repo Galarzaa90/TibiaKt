@@ -22,9 +22,14 @@ package com.galarzaa.tibiakt.core.enums
  * @property subtopic The query parameter value for "subtopic" used to access this board.
  */
 public enum class AvailableForumSection(public val subtopic: String) {
+    /** The World boards section, containing a dedicated board for every world. */
     WORLD_BOARDS("worldboards"),
+    /** The trade boards section, containing a dedicated trading board for every world. */
     TRADE_BOARDS("tradeboards"),
+    /** Community boards. */
     COMMUNITY_BOARDS("communityboards"),
+    /** Support boards. */
     SUPPORT_BOARDS("supportboards"),
+    /** Guild boards. */
     GUILD_BOARDS("guildboards"),
 }

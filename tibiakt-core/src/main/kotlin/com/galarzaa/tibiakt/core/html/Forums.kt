@@ -25,10 +25,10 @@ import com.galarzaa.tibiakt.core.models.forums.ForumAuthor
 import com.galarzaa.tibiakt.core.models.forums.LastPost
 import com.galarzaa.tibiakt.core.models.forums.TournamentForumAuthor
 import com.galarzaa.tibiakt.core.models.forums.UnavailableForumAuthor
-import com.galarzaa.tibiakt.core.time.parseTibiaForumDateTime
 import com.galarzaa.tibiakt.core.text.findInteger
 import com.galarzaa.tibiakt.core.text.parseInteger
 import com.galarzaa.tibiakt.core.text.remove
+import com.galarzaa.tibiakt.core.time.parseTibiaForumDateTime
 import org.jsoup.nodes.Element
 
 
@@ -47,8 +47,8 @@ internal fun parseLastPostFromCell(cell: Element): LastPost? {
     }
     return lastPost {
         postId = permalink.queryParams["postid"]!!.first().toInt()
-        date = parseTibiaForumDateTime(postDate.cleanText())
-        author = authorName
+        postedAt = parseTibiaForumDateTime(postDate.cleanText())
+        this.authorName = authorName
         isDeleted = authorLink == null && !isTraded
         this.isTraded = isTraded
     }

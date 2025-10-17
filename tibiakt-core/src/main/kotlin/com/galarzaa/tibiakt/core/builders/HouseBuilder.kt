@@ -41,13 +41,13 @@ public class HouseBuilder : TibiaKtBuilder<House> {
     public var status: HouseStatus? = null
     public var paidUntil: Instant? = null
     public var owner: String? = null
-    public var movingDate: Instant? = null
+    public var transferScheduledAt: Instant? = null
     public var transferPrice: Int? = null
     public var isTransferAccepted: Boolean? = null
     public var transferRecipient: String? = null
     public var highestBid: Int? = null
     public var highestBidder: String? = null
-    public var auctionEnd: Instant? = null
+    public var auctionEndsAt: Instant? = null
 
     @Suppress("ComplexMethod")
     override fun build(): House = when (status) {
@@ -61,7 +61,7 @@ public class HouseBuilder : TibiaKtBuilder<House> {
             world = world ?: error("world is required"),
             paidUntil = paidUntil ?: error("paidUntil is required"),
             ownerName = owner ?: error("Owner is required"),
-            transferScheduledAt = movingDate,
+            transferScheduledAt = transferScheduledAt,
             transferPrice = transferPrice,
             isTransferAccepted = isTransferAccepted,
             transferRecipient = transferRecipient
@@ -77,7 +77,7 @@ public class HouseBuilder : TibiaKtBuilder<House> {
             world = world ?: error("world is required"),
             highestBid = highestBid,
             highestBidder = highestBidder,
-            auctionEndsAt = auctionEnd,
+            auctionEndsAt = auctionEndsAt,
         )
 
         else -> error("status is required")

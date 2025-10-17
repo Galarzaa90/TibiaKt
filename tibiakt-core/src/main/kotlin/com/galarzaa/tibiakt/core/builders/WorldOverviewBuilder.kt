@@ -21,8 +21,8 @@ import com.galarzaa.tibiakt.core.enums.PvpType
 import com.galarzaa.tibiakt.core.enums.TransferType
 import com.galarzaa.tibiakt.core.models.world.WorldEntry
 import com.galarzaa.tibiakt.core.models.world.WorldOverview
-import kotlin.time.Instant
 import kotlinx.datetime.LocalDate
+import kotlin.time.Instant
 
 @BuilderDsl
 public inline fun worldOverviewBuilder(block: WorldOverviewBuilder.() -> Unit): WorldOverviewBuilder =
@@ -61,11 +61,11 @@ public class WorldOverviewBuilder : TibiaKtBuilder<WorldOverview> {
     public class WorldEntryBuilder : TibiaKtBuilder<WorldEntry> {
         public var name: String? = null
         public var isOnline: Boolean = false
-        public var onlineCount: Int = 0
+        public var onlinePlayersCount: Int = 0
         public var location: String? = null
         public var pvpType: PvpType? = null
         public var battlEyeType: BattlEyeType = BattlEyeType.UNPROTECTED
-        public var battlEyeStartDate: LocalDate? = null
+        public var battlEyeStartedOn: LocalDate? = null
         public var transferType: TransferType = TransferType.REGULAR
         public var isPremiumRestricted: Boolean = false
         public var isExperimental: Boolean = false
@@ -76,11 +76,11 @@ public class WorldOverviewBuilder : TibiaKtBuilder<WorldOverview> {
             return WorldEntry(
                 name = name ?: error("name is required"),
                 isOnline = isOnline,
-                onlineCount = onlineCount,
+                onlinePlayersCount = onlinePlayersCount,
                 location = location ?: error("location is required"),
                 pvpType = pvpType ?: error("pvpType is required"),
                 battlEyeType = battlEyeType,
-                battlEyeStartedOn = battlEyeStartDate,
+                battlEyeStartedOn = battlEyeStartedOn,
                 transferType = transferType,
                 isPremiumRestricted = isPremiumRestricted,
                 isExperimental = isExperimental,

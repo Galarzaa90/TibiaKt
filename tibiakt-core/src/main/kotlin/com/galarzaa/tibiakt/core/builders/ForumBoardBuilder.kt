@@ -35,7 +35,7 @@ public class ForumBoardBuilder : TibiaKtBuilder<ForumBoard> {
     public var name: String? = null
     public var boardId: Int? = null
     public var sectionId: Int? = null
-    public var section: String? = null
+    public var sectionName: String? = null
     public var threadAge: Int = DEFAULT_THREAD_AGE
     public var currentPage: Int = 1
     public var totalPages: Int = 1
@@ -55,7 +55,7 @@ public class ForumBoardBuilder : TibiaKtBuilder<ForumBoard> {
         name = name ?: error("name is required"),
         boardId = boardId ?: error("boardId is required"),
         sectionId = sectionId ?: error("sectionId is required"),
-        section = section ?: error("section is required"),
+        sectionName = sectionName ?: error("sectionName is required"),
         threadAge = threadAge,
         currentPage = currentPage,
         totalPages = totalPages,
@@ -73,7 +73,7 @@ public class ForumBoardBuilder : TibiaKtBuilder<ForumBoard> {
         override fun build(): AnnouncementEntry = AnnouncementEntry(
             title = title ?: error("title is required"),
             announcementId = announcementId ?: error("announcementId is required"),
-            author = author ?: error("author is required")
+            authorName = author ?: error("author is required")
         )
     }
 
@@ -81,12 +81,12 @@ public class ForumBoardBuilder : TibiaKtBuilder<ForumBoard> {
     public class ThreadEntryBuilder : TibiaKtBuilder<ThreadEntry> {
         public var title: String? = null
         public var threadId: Int? = null
-        public var author: String? = null
+        public var authorName: String? = null
         public var isAuthorTraded: Boolean = false
         public var isAuthorDeleted: Boolean = false
-        public var replies: Int = 0
+        public var repliesCount: Int = 0
         public var emoticon: ForumEmoticon? = null
-        public var views: Int = 0
+        public var viewsCount: Int = 0
         public var lastPost: LastPost? = null
         public val status: MutableSet<ThreadStatus> = mutableSetOf()
         public var pages: Int = 1
@@ -95,12 +95,12 @@ public class ForumBoardBuilder : TibiaKtBuilder<ForumBoard> {
         override fun build(): ThreadEntry = ThreadEntry(
             title = title ?: error("title is required"),
             threadId = threadId ?: error("threadId is required"),
-            authorName = author ?: error("author is required"),
+            authorName = authorName ?: error("authorName is required"),
             isAuthorTraded = isAuthorTraded,
             isAuthorDeleted = isAuthorDeleted,
             emoticon = emoticon,
-            repliesCount = replies,
-            viewsCount = views,
+            repliesCount = repliesCount,
+            viewsCount = viewsCount,
             status = status,
             lastPost = lastPost ?: error("lastPost is required"),
             pages = pages,

@@ -18,16 +18,30 @@ package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.core.builders.AuctionBuilder
 import com.galarzaa.tibiakt.core.builders.auction
+import com.galarzaa.tibiakt.core.collections.offsetStart
 import com.galarzaa.tibiakt.core.enums.AuctionStatus
 import com.galarzaa.tibiakt.core.enums.StringEnum
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
+import com.galarzaa.tibiakt.core.html.TABLE_SELECTOR
+import com.galarzaa.tibiakt.core.html.cells
+import com.galarzaa.tibiakt.core.html.cellsText
+import com.galarzaa.tibiakt.core.html.cleanText
+import com.galarzaa.tibiakt.core.html.getLinkInformation
+import com.galarzaa.tibiakt.core.html.parsePagination
+import com.galarzaa.tibiakt.core.html.parseTablesMap
+import com.galarzaa.tibiakt.core.html.replaceBrs
+import com.galarzaa.tibiakt.core.html.rows
+import com.galarzaa.tibiakt.core.html.wholeCleanText
 import com.galarzaa.tibiakt.core.models.bazaar.AchievementEntry
 import com.galarzaa.tibiakt.core.models.bazaar.Auction
 import com.galarzaa.tibiakt.core.models.bazaar.AuctionSkills
+import com.galarzaa.tibiakt.core.models.bazaar.BestiaryEntry
 import com.galarzaa.tibiakt.core.models.bazaar.BlessingEntry
+import com.galarzaa.tibiakt.core.models.bazaar.BosstiaryEntry
 import com.galarzaa.tibiakt.core.models.bazaar.CharmEntry
 import com.galarzaa.tibiakt.core.models.bazaar.FamiliarEntry
 import com.galarzaa.tibiakt.core.models.bazaar.Familiars
+import com.galarzaa.tibiakt.core.models.bazaar.FragmentProgressEntry
 import com.galarzaa.tibiakt.core.models.bazaar.ItemEntry
 import com.galarzaa.tibiakt.core.models.bazaar.ItemSummary
 import com.galarzaa.tibiakt.core.models.bazaar.MountEntry
@@ -37,27 +51,13 @@ import com.galarzaa.tibiakt.core.models.bazaar.OutfitImage
 import com.galarzaa.tibiakt.core.models.bazaar.Outfits
 import com.galarzaa.tibiakt.core.models.bazaar.RevealedGem
 import com.galarzaa.tibiakt.core.models.bazaar.RevealedGemMod
-import com.galarzaa.tibiakt.core.html.TABLE_SELECTOR
-import com.galarzaa.tibiakt.core.html.cellsText
+import com.galarzaa.tibiakt.core.models.bazaar.WeaponProficiency
 import com.galarzaa.tibiakt.core.text.clean
-import com.galarzaa.tibiakt.core.html.cleanText
-import com.galarzaa.tibiakt.core.html.getLinkInformation
-import com.galarzaa.tibiakt.core.collections.offsetStart
-import com.galarzaa.tibiakt.core.html.cells
 import com.galarzaa.tibiakt.core.text.parseInteger
 import com.galarzaa.tibiakt.core.text.parseLong
-import com.galarzaa.tibiakt.core.html.parsePagination
-import com.galarzaa.tibiakt.core.html.parseTablesMap
-import com.galarzaa.tibiakt.core.time.parseTibiaDateTime
-import com.galarzaa.tibiakt.core.text.remove
-import com.galarzaa.tibiakt.core.html.replaceBrs
-import com.galarzaa.tibiakt.core.html.rows
-import com.galarzaa.tibiakt.core.html.wholeCleanText
-import com.galarzaa.tibiakt.core.models.bazaar.BestiaryEntry
-import com.galarzaa.tibiakt.core.models.bazaar.BosstiaryEntry
-import com.galarzaa.tibiakt.core.models.bazaar.FragmentProgressEntry
-import com.galarzaa.tibiakt.core.models.bazaar.WeaponProficiency
 import com.galarzaa.tibiakt.core.text.parseRomanNumerals
+import com.galarzaa.tibiakt.core.text.remove
+import com.galarzaa.tibiakt.core.time.parseTibiaDateTime
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 import java.io.File
@@ -442,8 +442,8 @@ public object AuctionParser : Parser<Auction?> {
         }
 
         val (startDate, endDate, _) = auctionContainer.select("div.ShortAuctionDataValue").map { it.cleanText() }
-        auctionStart = parseTibiaDateTime(startDate)
-        auctionEnd = parseTibiaDateTime(endDate)
+        startsAt = parseTibiaDateTime(startDate)
+        endsAt = parseTibiaDateTime(endDate)
         auctionContainer.selectFirst("div.ShortAuctionDataBidRow")?.run {
             val bidTag = selectFirst("div.ShortAuctionDataValue") ?: throw ParsingException("Could not find bid")
             val bidTypeTag =

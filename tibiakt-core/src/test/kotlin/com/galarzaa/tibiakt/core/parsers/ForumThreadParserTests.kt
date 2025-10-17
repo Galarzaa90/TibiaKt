@@ -42,7 +42,7 @@ class ForumThreadParserTests : FunSpec({
         val thread = ForumThreadParser.fromContent(getResource("forumThread/forumThreadWithGoldenFrame.txt"))
 
         thread.shouldBeInstanceOf<ForumThread>()
-        thread.goldenFrame shouldBe true
+        thread.hasGoldenFrame shouldBe true
     }
 
     test("Forum thread with post by deleted char") {

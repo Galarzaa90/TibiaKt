@@ -32,7 +32,7 @@ public class NewsBuilder : TibiaKtBuilder<News> {
     public var id: Int? = null
     public lateinit var title: String
     public lateinit var category: NewsCategory
-    public lateinit var date: LocalDate
+    public lateinit var publishedOn: LocalDate
     public lateinit var content: String
     public var threadId: Int? = null
     override fun build(): News {
@@ -40,7 +40,7 @@ public class NewsBuilder : TibiaKtBuilder<News> {
             id = id ?: error("id is required"),
             title = if (::title.isInitialized) title else error("title is required"),
             category = if (::category.isInitialized) category else error("category is required"),
-            publishedOn = if (::date.isInitialized) date else error("date is required"),
+            publishedOn = if (::publishedOn.isInitialized) publishedOn else error("publishedOn is required"),
             content = if (::content.isInitialized) content else error("content is required"),
             threadId = threadId,
         )

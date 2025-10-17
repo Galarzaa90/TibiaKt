@@ -24,10 +24,10 @@ import com.galarzaa.tibiakt.core.models.bazaar.AchievementEntry
 import com.galarzaa.tibiakt.core.models.bazaar.Auction
 import com.galarzaa.tibiakt.core.models.bazaar.AuctionDetails
 import com.galarzaa.tibiakt.core.models.bazaar.AuctionSkills
-import com.galarzaa.tibiakt.core.models.bazaar.BlessingEntry
-import com.galarzaa.tibiakt.core.models.bazaar.CharmEntry
 import com.galarzaa.tibiakt.core.models.bazaar.BestiaryEntry
+import com.galarzaa.tibiakt.core.models.bazaar.BlessingEntry
 import com.galarzaa.tibiakt.core.models.bazaar.BosstiaryEntry
+import com.galarzaa.tibiakt.core.models.bazaar.CharmEntry
 import com.galarzaa.tibiakt.core.models.bazaar.Familiars
 import com.galarzaa.tibiakt.core.models.bazaar.FragmentProgressEntry
 import com.galarzaa.tibiakt.core.models.bazaar.ItemEntry
@@ -58,8 +58,8 @@ public class AuctionBuilder : TibiaKtBuilder<Auction> {
     public lateinit var outfit: OutfitImage
     private val displayedItems: MutableList<ItemEntry> = mutableListOf()
     private val salesArguments: MutableList<SalesArgument> = mutableListOf()
-    public lateinit var auctionStart: Instant
-    public lateinit var auctionEnd: Instant
+    public lateinit var startsAt: Instant
+    public lateinit var endsAt: Instant
     public var bid: Int = 0
     public lateinit var bidType: BidType
     public lateinit var status: AuctionStatus
@@ -92,8 +92,8 @@ public class AuctionBuilder : TibiaKtBuilder<Auction> {
         outfit = if (::outfit.isInitialized) outfit else error("outfit is required"),
         displayedItems = displayedItems,
         salesArguments = salesArguments,
-        startsAt = if (::auctionStart.isInitialized) auctionStart else error("auctionStart is required"),
-        endsAt = if (::auctionEnd.isInitialized) auctionEnd else error("auctionEnd is required"),
+        startsAt = if (::startsAt.isInitialized) startsAt else error("auctionStart is required"),
+        endsAt = if (::endsAt.isInitialized) endsAt else error("auctionEnd is required"),
         bid = bid,
         bidType = if (::bidType.isInitialized) bidType else error("bidType is required"),
         status = if (::status.isInitialized) status else error("status is required"),

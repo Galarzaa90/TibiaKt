@@ -20,14 +20,14 @@ package com.galarzaa.tibiakt.core.models.world
 import com.galarzaa.tibiakt.core.enums.BattlEyeType
 import com.galarzaa.tibiakt.core.enums.PvpType
 import com.galarzaa.tibiakt.core.enums.TransferType
-import kotlinx.serialization.Serializable
 import kotlinx.datetime.LocalDate
+import kotlinx.serialization.Serializable
 
 /**
  * A listed world in the [WorldOverview] section.
  *
  * @property isOnline Whether this world is currently online or not.
- * @property onlineCount The total of online players in this world.
+ * @property onlinePlayersCount The total of online players in this world.
  * @property location The geographical location of the server.
  * @property pvpType The type of PvP in this world.
  * @property battlEyeType The type of BattlEye protection present in this world.
@@ -40,7 +40,7 @@ import kotlinx.datetime.LocalDate
 public data class WorldEntry(
     override val name: String,
     val isOnline: Boolean,
-    val onlineCount: Int,
+    val onlinePlayersCount: Int,
     val location: String,
     val pvpType: PvpType,
     val battlEyeType: BattlEyeType,

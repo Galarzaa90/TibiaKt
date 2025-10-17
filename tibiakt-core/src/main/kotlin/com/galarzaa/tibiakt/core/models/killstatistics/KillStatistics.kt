@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.galarzaa.tibiakt.core.models
+package com.galarzaa.tibiakt.core.models.killstatistics
 
 import com.galarzaa.tibiakt.core.net.killStatisticsUrl
 import kotlinx.serialization.Serializable

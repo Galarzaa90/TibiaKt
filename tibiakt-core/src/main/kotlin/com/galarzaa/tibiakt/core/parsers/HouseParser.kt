@@ -21,16 +21,16 @@ import com.galarzaa.tibiakt.core.builders.house
 import com.galarzaa.tibiakt.core.enums.HouseStatus
 import com.galarzaa.tibiakt.core.enums.StringEnum
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
-import com.galarzaa.tibiakt.core.models.house.House
 import com.galarzaa.tibiakt.core.html.cells
-import com.galarzaa.tibiakt.core.text.clean
 import com.galarzaa.tibiakt.core.html.cleanText
+import com.galarzaa.tibiakt.core.html.replaceBrs
+import com.galarzaa.tibiakt.core.models.house.House
+import com.galarzaa.tibiakt.core.text.clean
 import com.galarzaa.tibiakt.core.text.findInteger
 import com.galarzaa.tibiakt.core.text.parseInteger
 import com.galarzaa.tibiakt.core.text.parseThousandSuffix
-import com.galarzaa.tibiakt.core.time.parseTibiaDateTime
 import com.galarzaa.tibiakt.core.text.remove
-import com.galarzaa.tibiakt.core.html.replaceBrs
+import com.galarzaa.tibiakt.core.time.parseTibiaDateTime
 
 /** Parser for House information pages. */
 public object HouseParser : Parser<House?> {
@@ -83,12 +83,12 @@ public object HouseParser : Parser<House?> {
         }
         bidPattern.find(stateLine)?.apply {
             status = HouseStatus.AUCTIONED
-            auctionEnd = parseTibiaDateTime(groups["auctionEnd"]!!.value)
+            auctionEndsAt = parseTibiaDateTime(groups["auctionEnd"]!!.value)
             highestBid = groups["highestBid"]!!.value.parseInteger()
             highestBidder = groups["bidder"]!!.value.clean()
         }
         moveOutPattern.find(stateLine)?.apply {
-            movingDate = parseTibiaDateTime(groups["moveDate"]!!.value)
+            transferScheduledAt = parseTibiaDateTime(groups["moveDate"]!!.value)
         }
         transferPattern.find(stateLine)?.apply {
             isTransferAccepted = groups["action"]!!.value == "will"

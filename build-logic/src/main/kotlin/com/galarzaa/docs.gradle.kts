@@ -32,5 +32,9 @@ dokka {
         externalDocumentationLinks {
             uri("https://api.ktor.io/")
         }
+        externalDocumentationLinks.register("datetime") {
+            url.set(uri("https://kotlinlang.org/api/kotlinx-datetime/"))
+            packageListUrl.set(uri("https://kotlinlang.org/api/kotlinx-datetime/kotlinx-datetime/package-list"))
+        }
     }
 }

@@ -18,8 +18,8 @@
 package com.galarzaa.tibiakt.core.models.world
 
 import com.galarzaa.tibiakt.core.net.worldOverviewUrl
-import kotlin.time.Instant
 import kotlinx.serialization.Serializable
+import kotlin.time.Instant
 
 /**
  * The world overview section in Tibia.com.
@@ -38,7 +38,7 @@ public data class WorldOverview(
      * The total of currently online players across worlds.
      */
     val totalOnline: Int
-        get() = worlds.sumOf { it.onlineCount }
+        get() = worlds.sumOf { it.onlinePlayersCount }
 
     /**
      * The URL to the world overview section.

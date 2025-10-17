@@ -18,25 +18,25 @@ package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.core.builders.LeaderboardBuilder
 import com.galarzaa.tibiakt.core.builders.leaderboard
+import com.galarzaa.tibiakt.core.collections.offsetStart
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
+import com.galarzaa.tibiakt.core.html.PaginationData
+import com.galarzaa.tibiakt.core.html.TABLE_SELECTOR
+import com.galarzaa.tibiakt.core.html.cells
+import com.galarzaa.tibiakt.core.html.cleanText
+import com.galarzaa.tibiakt.core.html.formData
+import com.galarzaa.tibiakt.core.html.getLinkInformation
+import com.galarzaa.tibiakt.core.html.parsePagination
+import com.galarzaa.tibiakt.core.html.rows
 import com.galarzaa.tibiakt.core.models.leaderboards.DeletedLeaderboardEntry
 import com.galarzaa.tibiakt.core.models.leaderboards.Leaderboard
 import com.galarzaa.tibiakt.core.models.leaderboards.LeaderboardEntry
 import com.galarzaa.tibiakt.core.models.leaderboards.LeaderboardRotation
-import com.galarzaa.tibiakt.core.html.PaginationData
-import com.galarzaa.tibiakt.core.html.TABLE_SELECTOR
-import com.galarzaa.tibiakt.core.html.cells
 import com.galarzaa.tibiakt.core.text.clean
-import com.galarzaa.tibiakt.core.html.cleanText
-import com.galarzaa.tibiakt.core.html.formData
-import com.galarzaa.tibiakt.core.html.getLinkInformation
-import com.galarzaa.tibiakt.core.collections.offsetStart
-import com.galarzaa.tibiakt.core.html.parsePagination
-import com.galarzaa.tibiakt.core.time.parseTibiaDateTime
 import com.galarzaa.tibiakt.core.text.remove
-import com.galarzaa.tibiakt.core.html.rows
-import kotlin.time.Clock
+import com.galarzaa.tibiakt.core.time.parseTibiaDateTime
 import org.jsoup.nodes.Element
+import kotlin.time.Clock
 import kotlin.time.Duration.Companion.minutes
 
 /** Parses content from the leaderboards. */
@@ -77,7 +77,7 @@ public object LeaderboardParser : Parser<Leaderboard?> {
                     Regex("""(\d+)""").find(lastUpdateString)?.groups?.get(0)?.value?.toInt() ?: throw ParsingException(
                         "unexpected last update text: $lastUpdateString"
                     )
-                lastUpdated = Clock.System.now().minus(minutes.minutes)
+                lastUpdatedAt = Clock.System.now().minus(minutes.minutes)
             }
 
             val entriesTable = tables.last()

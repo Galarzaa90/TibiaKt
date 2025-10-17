@@ -19,13 +19,13 @@ package com.galarzaa.tibiakt.core.parsers
 import com.galarzaa.tibiakt.core.builders.ForumThreadBuilder
 import com.galarzaa.tibiakt.core.builders.forumThread
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
-import com.galarzaa.tibiakt.core.models.forums.ForumEmoticon
-import com.galarzaa.tibiakt.core.models.forums.ForumThread
 import com.galarzaa.tibiakt.core.html.TABLE_SELECTOR
 import com.galarzaa.tibiakt.core.html.cleanText
 import com.galarzaa.tibiakt.core.html.getLinkInformation
 import com.galarzaa.tibiakt.core.html.parseAuthorTable
 import com.galarzaa.tibiakt.core.html.parsePagination
+import com.galarzaa.tibiakt.core.models.forums.ForumEmoticon
+import com.galarzaa.tibiakt.core.models.forums.ForumThread
 import com.galarzaa.tibiakt.core.time.parseTibiaForumDateTime
 import org.jsoup.nodes.Element
 import org.jsoup.nodes.TextNode
@@ -51,10 +51,10 @@ public object ForumThreadParser : Parser<ForumThread?> {
 
             sectionId = sectionLink.queryParams["sectionid"]?.first()?.toInt()
                 ?: throw ParsingException("Could not find section ID in link.")
-            section = sectionLink.title
+            sectionName = sectionLink.title
             boardId = boardLink.queryParams["boardid"]?.first()?.toInt()
                 ?: throw ParsingException("Could not find board ID in link.")
-            board = boardLink.title
+            boardName = boardLink.title
 
             val forumTitleContainer = boxContent.selectFirst("div.ForumTitleText")
             if (forumTitleContainer == null) {

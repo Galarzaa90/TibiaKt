@@ -44,4 +44,8 @@ public enum class Vocation(override val value: String) : StringEnum {
             EXALTED_MONK -> MONK
             else -> this
         }
+
+    /** Whether this is a promoted vocation or not. */
+    public val isPromoted: Boolean
+        get() = this != NONE && this != base
 }

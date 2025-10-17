@@ -22,6 +22,8 @@ package com.galarzaa.tibiakt.core.enums
  * @property subtopic The value for the "subtopic" query parameter used to access it.
  */
 public enum class BazaarType(override val value: String, public val subtopic: String) : StringEnum {
+    /** Auctions that are currently active. */
     CURRENT("current", "currentcharactertrades"),
+    /** Auctions that have ended. */
     HISTORY("history", "pastcharactertrades"),
 }

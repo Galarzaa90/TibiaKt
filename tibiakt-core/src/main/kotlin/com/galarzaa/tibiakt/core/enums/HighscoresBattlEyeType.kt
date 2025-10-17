@@ -18,6 +18,7 @@ package com.galarzaa.tibiakt.core.enums
 
 /** Available BattlEye type filters for Highscores. */
 public enum class HighscoresBattlEyeType(override val value: Int) : IntEnum {
+
     /** Show entries from any world. */
     ANY_WORLD(-1),
 

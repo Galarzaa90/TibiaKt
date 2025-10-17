@@ -20,14 +20,14 @@ import com.galarzaa.tibiakt.core.builders.GuildBuilder
 import com.galarzaa.tibiakt.core.builders.guild
 import com.galarzaa.tibiakt.core.enums.StringEnum
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
-import com.galarzaa.tibiakt.core.models.guild.Guild
 import com.galarzaa.tibiakt.core.html.boxContent
+import com.galarzaa.tibiakt.core.html.parseTablesMap
+import com.galarzaa.tibiakt.core.html.wholeCleanText
+import com.galarzaa.tibiakt.core.models.guild.Guild
 import com.galarzaa.tibiakt.core.text.clean
 import com.galarzaa.tibiakt.core.text.nullIfBlank
-import com.galarzaa.tibiakt.core.html.parseTablesMap
-import com.galarzaa.tibiakt.core.time.parseTibiaDate
 import com.galarzaa.tibiakt.core.text.remove
-import com.galarzaa.tibiakt.core.html.wholeCleanText
+import com.galarzaa.tibiakt.core.time.parseTibiaDate
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
@@ -106,10 +106,10 @@ public object GuildParser : Parser<Guild?> {
         val containerText = container.wholeCleanText()
         descriptionRegex.find(containerText)?.apply {
             description = groups["description"]?.value?.trim().nullIfBlank()
-            foundingDate = parseTibiaDate(groups["date"]!!.value)
+            foundedOn = parseTibiaDate(groups["date"]!!.value)
             world = groups["world"]!!.value
         }
-        hasOpenApplications = containerText.contains("opened for applications")
+        areApplicationsOpen = containerText.contains("opened for applications")
         isActive = containerText.contains("it is currently active", true)
         container.selectFirst("a")?.apply { homepage = text() }
         guildHallRegex.find(containerText)?.apply {
@@ -117,7 +117,7 @@ public object GuildParser : Parser<Guild?> {
         }
         disbandingRegex.find(containerText)?.apply {
             val (_, date, reason) = groupValues
-            disbandingDate = parseTibiaDate(date)
+            disbandsOn = parseTibiaDate(date)
             disbandingReason = reason
         }
     }

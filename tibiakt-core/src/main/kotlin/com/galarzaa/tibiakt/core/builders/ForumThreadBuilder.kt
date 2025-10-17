@@ -35,9 +35,9 @@ public inline fun forumThread(block: ForumThreadBuilder.() -> Unit): ForumThread
 public class ForumThreadBuilder : TibiaKtBuilder<ForumThread> {
     public var title: String? = null
     public var threadId: Int? = null
-    public var board: String? = null
+    public var boardName: String? = null
     public var boardId: Int? = null
-    public var section: String? = null
+    public var sectionName: String? = null
     public var sectionId: Int? = null
     public var previousTopicNumber: Int? = null
     public var nextTopicNumber: Int? = null
@@ -58,13 +58,13 @@ public class ForumThreadBuilder : TibiaKtBuilder<ForumThread> {
     override fun build(): ForumThread = ForumThread(
         title = title ?: error("title is required"),
         threadId = threadId ?: error("threadId is required"),
-        boardName = board ?: error("board is required"),
+        boardName = boardName ?: error("boardName is required"),
         boardId = boardId ?: error("boardId is required"),
-        sectionName = section ?: error("section is required"),
+        sectionName = sectionName ?: error("sectionName is required"),
         sectionId = sectionId ?: error("sectionId is required"),
         previousTopicNumber = previousTopicNumber,
         nextTopicNumber = nextTopicNumber,
-        goldenFrame = hasGoldenFrame,
+        hasGoldenFrame = hasGoldenFrame,
         anchoredPost = anchoredPost,
         currentPage = currentPage,
         totalPages = totalPages,

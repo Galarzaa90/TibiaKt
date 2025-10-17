@@ -32,8 +32,8 @@ public fun newsArchiveBuilder(block: NewsArchiveBuilder.() -> Unit): NewsArchive
 /** Builder for [NewsArchive] instances. */
 @BuilderDsl
 public class NewsArchiveBuilder : TibiaKtBuilder<NewsArchive> {
-    public var startDate: LocalDate? = null
-    public var endDate: LocalDate? = null
+    public var startOn: LocalDate? = null
+    public var endOn: LocalDate? = null
     public val types: MutableSet<NewsType> = mutableSetOf()
     public val categories: MutableSet<NewsCategory> = mutableSetOf()
     public val entries: MutableList<NewsEntry> = mutableListOf()
@@ -57,8 +57,8 @@ public class NewsArchiveBuilder : TibiaKtBuilder<NewsArchive> {
 
 
     override fun build(): NewsArchive = NewsArchive(
-        startOn = startDate ?: error("startDate is required"),
-        endOn = endDate ?: error("endDate is required"),
+        startOn = startOn ?: error("startOn is required"),
+        endOn = endOn ?: error("endOn is required"),
         types = types,
         categories = categories,
         entries = entries,
@@ -68,14 +68,14 @@ public class NewsArchiveBuilder : TibiaKtBuilder<NewsArchive> {
         public var id: Int = 0
         public var title: String? = null
         public var category: NewsCategory? = null
-        public var date: LocalDate? = null
+        public var publishedOn: LocalDate? = null
         public var type: NewsType? = null
 
         override fun build(): NewsEntry = NewsEntry(
             id = id,
             title = title ?: error("title is required"),
             category = category ?: error("category is required"),
-            publishedOn = date ?: error("date is required"),
+            publishedOn = publishedOn ?: error("date is required"),
             type = type ?: error("type is required"),
         )
     }

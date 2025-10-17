@@ -40,7 +40,7 @@ public class HighscoresBuilder : TibiaKtBuilder<Highscores> {
     public var vocation: HighscoresProfession? = null
     public val worldTypes: MutableSet<PvpType> = mutableSetOf()
     public var battlEyeType: HighscoresBattlEyeType? = null
-    public var lastUpdated: Instant? = null
+    public var lastUpdatedAt: Instant? = null
     public var currentPage: Int = 1
     public var totalPages: Int = 1
     public var resultsCount: Int = 0
@@ -68,7 +68,7 @@ public class HighscoresBuilder : TibiaKtBuilder<Highscores> {
         vocation = vocation ?: HighscoresProfession.ALL,
         worldTypes = worldTypes,
         battlEyeType = battlEyeType ?: HighscoresBattlEyeType.ANY_WORLD,
-        lastUpdatedAt = lastUpdated ?: error("lastUpdated is required"),
+        lastUpdatedAt = lastUpdatedAt ?: error("lastUpdatedAt is required"),
         currentPage = currentPage,
         totalPages = totalPages,
         resultsCount = resultsCount,

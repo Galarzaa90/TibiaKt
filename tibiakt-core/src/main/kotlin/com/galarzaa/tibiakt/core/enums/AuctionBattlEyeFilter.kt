@@ -21,7 +21,7 @@ package com.galarzaa.tibiakt.core.enums
  */
 public enum class AuctionBattlEyeFilter(override val value: Int) : IntEnum {
     /**
-     * Worlds that have been protected from the beginning, these have a green icon.
+     * Worlds that have been protected from the beginning. These have a green icon.
      */
     INITIALLY_PROTECTED(1),
 
