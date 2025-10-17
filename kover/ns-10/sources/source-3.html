@@ -217,10 +217,8 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;                require(startsOn &lt;= endsOn) { &quot;startsOn must be ≤ endsOn.&quot; }
 &nbsp;                return EventEntry(title, description, startsOn, endsOn)
 &nbsp;            }
-&nbsp;            return when {
-&nbsp;                startsOn != null -&gt; EventEntryOpenEnd(title, description, startsOn)
-&nbsp;                else -&gt; EventEntryOpenStart(title, description, endsOn!!)
-&nbsp;            }
+&nbsp;            return if (startsOn != null) EventEntryOpenEnd(title, description, startsOn)
+&nbsp;            else EventEntryOpenStart(title, description, endsOn!!)
 &nbsp;        }
 &nbsp;    }
 &nbsp;}
@@ -306,7 +304,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-17 18:02</div>
+    <div style="float:right;">generated on 2025-10-17 18:56</div>
 </div>
 </body>
 </html>
