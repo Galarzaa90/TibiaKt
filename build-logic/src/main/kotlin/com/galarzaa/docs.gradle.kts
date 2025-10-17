@@ -30,11 +30,13 @@ dokka {
             remoteLineSuffix.set("#L")
         }
         externalDocumentationLinks {
-            uri("https://api.ktor.io/")
-        }
-        externalDocumentationLinks.register("datetime") {
-            url.set(uri("https://kotlinlang.org/api/kotlinx-datetime/"))
-            packageListUrl.set(uri("https://kotlinlang.org/api/kotlinx-datetime/kotlinx-datetime/package-list"))
+            register("Ktor") {
+                url.set(uri("https://api.ktor.io/"))
+            }
+            register("kotlinx-datetime") {
+                url.set(uri("https://kotlinlang.org/api/kotlinx-datetime/"))
+                packageListUrl.set(uri("https://kotlinlang.org/api/kotlinx-datetime/kotlinx-datetime/package-list"))
+            }
         }
     }
 }

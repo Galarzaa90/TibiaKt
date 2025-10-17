@@ -17,7 +17,7 @@
 package com.galarzaa.tibiakt.core.parsers
 
 import com.galarzaa.tibiakt.TestUtilities.getResource
-import com.galarzaa.tibiakt.core.models.KillStatistics
+import com.galarzaa.tibiakt.core.models.killstatistics.KillStatistics
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
