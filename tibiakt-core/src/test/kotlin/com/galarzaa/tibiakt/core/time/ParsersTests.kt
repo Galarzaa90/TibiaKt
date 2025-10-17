@@ -23,8 +23,7 @@ import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.toInstant
 import kotlin.time.Instant
 
-
-class ParserTests : FunSpec({
+class ParsersTests : FunSpec({
 
     fun asInstant(local: LocalDateTime): Instant = local.toInstant(TIBIA_TIMEZONE)
 

@@ -22,23 +22,8 @@ import kotlin.time.Instant
 
 object TestUtilities {
 
-    fun getResource(path: String): String {
-        return this::class.java.getResource("/$path")?.readText() ?: throw IOException("Test resource $path not found")
-    }
-
-    fun parseQueryParams(url: String): Map<String, String> {
-        val query = url.substringAfter('?', "").substringBefore('#')
-        if (query.isBlank()) return emptyMap()
-
-        return query.split('&').mapNotNull {
-                if (it.isBlank()) return@mapNotNull null
-                val (key, value) = it.split('=', limit = 2).let { parts ->
-                    parts[0] to (parts.getOrNull(1) ?: "")
-                }
-                key to java.net.URLDecoder.decode(value, Charsets.UTF_8)
-            }.toMap()
-    }
-
+    fun getResource(path: String): String =
+        this::class.java.getResource("/$path")?.readText() ?: throw IOException("Test resource $path not found")
 
     class FakeClock(private val fixedTime: Instant) : Clock {
         override fun now() = fixedTime

@@ -26,7 +26,6 @@ import com.galarzaa.tibiakt.core.enums.PvpType
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.string.shouldContain
 
-
 class CommunityUrlsTests : FunSpec({
 
     test("characterUrl") {
@@ -61,15 +60,13 @@ class CommunityUrlsTests : FunSpec({
 
         test("with world and PvP types") {
             val url = highscoresUrl(
-                world = "Antica",
-                worldTypes = setOf(PvpType.OPEN_PVP, PvpType.HARDCORE_PVP),
-                page = 3
+                world = "Antica", worldTypes = setOf(PvpType.OPEN_PVP, PvpType.HARDCORE_PVP), page = 3
             )
             url shouldContain "/community"
             url shouldContain "subtopic=highscores"
             url shouldContain "world=Antica"
             url shouldContain "currentpage=3"
-            url shouldContain PvpType.Companion.QUERY_PARAM_HIGHSCORES
+            url shouldContain PvpType.QUERY_PARAM_HIGHSCORES
         }
     }
 
@@ -99,11 +96,7 @@ class CommunityUrlsTests : FunSpec({
 
         test("housesSectionUrl with filters") {
             val url = housesSectionUrl(
-                "Antica",
-                "Thais",
-                type = HouseType.HOUSE,
-                status = HouseStatus.AUCTIONED,
-                order = HouseOrder.RENT
+                "Antica", "Thais", type = HouseType.HOUSE, status = HouseStatus.AUCTIONED, order = HouseOrder.RENT
             )
             url shouldContain "state=${HouseStatus.AUCTIONED.value}"
             url shouldContain "type=${HouseType.HOUSE.value}"

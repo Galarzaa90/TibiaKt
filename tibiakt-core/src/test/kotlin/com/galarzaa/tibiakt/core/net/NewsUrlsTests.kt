@@ -87,7 +87,7 @@ class NewsUrlsTests : FunSpec({
     }
 
     test("newsUrl") {
-        val url = newsUrl(123456)
+        val url = newsUrl(123_456)
 
         url shouldContain "/news"
         url shouldContain "subtopic=newsarchive"

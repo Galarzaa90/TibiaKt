@@ -48,7 +48,7 @@ class BazaarUrlsTests : FunSpec({
     }
 
     test("auctionUrl") {
-        val url = auctionUrl(12345)
+        val url = auctionUrl(12_345)
 
         url shouldContain "/charactertrade"
         url shouldContain "subtopic=currentcharactertrades"

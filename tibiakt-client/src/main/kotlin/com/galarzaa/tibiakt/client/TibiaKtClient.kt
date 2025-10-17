@@ -642,12 +642,19 @@ public open class TibiaKtClient protected constructor(
         fetchOutfits: Boolean = false,
         fetchMounts: Boolean = false,
     ): TibiaResponse<Auction?> {
-        val response = this.request(HttpMethod.Get, auctionUrl(auctionId))
-        val tibiaResponse = response.parse { AuctionParser.fromContent(it, auctionId, !skipDetails) }
-        return if (tibiaResponse.data?.details != null && (fetchItems || fetchMounts || fetchOutfits)) fetchAuctionAdditionalPages(
-            tibiaResponse, fetchItems, fetchMounts, fetchOutfits
-        )
-        else tibiaResponse
+        val response = request(HttpMethod.Get, auctionUrl(auctionId))
+        val tibiaResponse = response.parse {
+            AuctionParser.fromContent(it, auctionId, !skipDetails)
+        }
+
+        val hasDetails = tibiaResponse.data?.details != null
+        val wantsExtras = fetchItems || fetchMounts || fetchOutfits
+
+        return if (hasDetails && wantsExtras) {
+            fetchAuctionAdditionalPages(tibiaResponse, fetchItems, fetchMounts, fetchOutfits)
+        } else {
+            tibiaResponse
+        }
     }
 
     private suspend fun fetchAuctionAdditionalPages(

@@ -22,7 +22,6 @@ import io.kotest.matchers.string.shouldContain
 import io.kotest.matchers.string.shouldNotContain
 import kotlinx.datetime.LocalDate
 
-
 class ForumsUrlsTests : FunSpec({
     context("forumSectionUrl") {
         test("by id") {

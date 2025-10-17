@@ -65,10 +65,8 @@ public sealed class BaseEventEntry {
                 require(startsOn <= endsOn) { "startsOn must be ≤ endsOn." }
                 return EventEntry(title, description, startsOn, endsOn)
             }
-            return when {
-                startsOn != null -> EventEntryOpenEnd(title, description, startsOn)
-                else -> EventEntryOpenStart(title, description, endsOn!!)
-            }
+            return if (startsOn != null) EventEntryOpenEnd(title, description, startsOn)
+            else EventEntryOpenStart(title, description, endsOn!!)
         }
     }
 }
