@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.0 (2025/10/17)
+
+- Initial release
+- Added support for weapon proficiency, bestiary mastery, fragment progression and charm changes.
+- Re-organized many of the package names.
+
 ## 0.12.1 (2025-07-08)
 
 - Fix parsing loyalty points highscores not parsing character names correctly.
