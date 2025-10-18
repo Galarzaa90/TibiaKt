@@ -17,17 +17,17 @@
 package com.galarzaa.tibiakt.core.net
 
 /**
- * Get the URL to the Creatures section in Tibia.com.
+ * URL to the Creatures section in Tibia.com.
  */
 public fun creaturesUrl(): String = tibiaUrl("library", "creatures")
 
 
 /**
- * Get the URL to the Creatures section in Tibia.com.
+ * URL to the Creatures section in Tibia.com.
  */
 public fun boostableBossesUrl(): String = tibiaUrl("library", "boostablebosses")
 
 /**
- * Get the URL to a specific creature in Tibia.com.
+ * URL to a specific creature in Tibia.com.
  */
 public fun creatureUrl(identifier: String): String = tibiaUrl("library", "creatures", "race" to identifier)

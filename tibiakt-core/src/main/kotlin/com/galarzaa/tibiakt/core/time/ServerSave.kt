@@ -26,7 +26,7 @@ import kotlin.time.Instant
 /** The local time when server save happens (10:00 CET/CEST). */
 public val SERVER_SAVE_TIME: LocalTime = LocalTime(10, 0)
 
-/** Last server save instant relative to this instant. */
+/** Last server save relative to this moment. */
 public fun Instant.lastServerSave(): Instant =
     LocalDateTime(toLocalDateTime(TIBIA_TIMEZONE).date, SERVER_SAVE_TIME).toInstant(TIBIA_TIMEZONE)
         .let { if (this < it) it - 1.days else it }

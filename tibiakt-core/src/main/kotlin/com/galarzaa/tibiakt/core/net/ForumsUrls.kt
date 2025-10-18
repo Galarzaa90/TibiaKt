@@ -21,47 +21,47 @@ import kotlinx.datetime.LocalDate
 import kotlinx.datetime.number
 
 /**
- * Get the URL to a specific forum section.
+ * URL to a specific forum section by its [ID][sectionId].
  */
 public fun forumSectionUrl(sectionId: Int): String =
     tibiaUrl("forum", "action" to "main", "sectionid" to sectionId)
 
 
 /**
- * Get the URL to a specific forum section.
+ * URL to a specific forum section.
  */
 public fun forumSectionUrl(section: AvailableForumSection): String =
     tibiaUrl("forum", section.subtopic)
 
 /**
- * Get the URL to a specific forum section by its name.
+ * URL to a specific forum section by its name.
  */
 public fun forumSectionUrl(sectionName: String): String = tibiaUrl("forum", sectionName)
 
-/** Get the URL to a forum board. */
+/** URL to a forum board. */
 public fun forumBoardUrl(boardId: Int, page: Int = 1, threadAge: Int? = null): String = tibiaUrl(
     "forum", "action" to "board", "boardid" to boardId, "pagenumber" to page, "threadage" to threadAge
 )
 
-/** Get the URL to a forum announcement. */
+/** URL to a forum announcement. */
 public fun forumAnnouncementUrl(announcementId: Int): String =
     tibiaUrl("forum", "action" to "announcement", "announcementid" to announcementId)
 
 /**
- * Get the URL to a specific thread in the forums.
+ * URL to a specific thread in the forums.
  */
 public fun forumThreadUrl(threadId: Int, page: Int = 1): String =
     tibiaUrl("forum", "action" to "thread", "threadid" to threadId, "pagenumber" to page)
 
 /**
- * Get the URL of a forum post with a specific [postId] in Tibia.com.
+ * URL of a forum post with a specific [postId] in Tibia.com.
  */
 public fun forumPostUrl(postId: Int): String =
     tibiaUrl("forum", "action" to "thread", "postid" to postId, anchor = "post$postId")
 
 
 /**
- * Get the URL to the CM Post Archive in Tibia.com.
+ * URL to the CM Post Archive in Tibia.com.
  */
 public fun cmPostArchiveUrl(startDate: LocalDate, endDate: LocalDate, page: Int = 1): String {
     return tibiaUrl(

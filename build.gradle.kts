@@ -87,6 +87,7 @@ sonarqube {
     properties {
         property("sonar.projectKey", "Galarzaa90_TibiaKt")
         property("sonar.organization", "galarzaa90")
+        property("sonar.projectVersion", rootProject.version.toString())
         property("sonar.host.url", "https://sonarcloud.io")
         property("sonar.coverage.jacoco.xmlReportPaths", "build/reports/kover/report.xml")
     }

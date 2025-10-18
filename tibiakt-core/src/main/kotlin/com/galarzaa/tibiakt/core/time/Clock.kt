@@ -38,7 +38,7 @@ public fun tibiaNow(clock: Clock = Clock.System): LocalDateTime = clock.now().to
 /**
  * Current in-game day of the week.
  *
- * A new game day starts at [server save][SERVER_SAVE_TIME], not at midnight.
+ * A new in-game day starts at [server save][SERVER_SAVE_TIME], not at midnight.
  */
 public fun tibiaGameWeekDay(clock: Clock = Clock.System): DayOfWeek =
     (clock.now() - SERVER_SAVE_TIME.hour.hours).toLocalDateTime(TIBIA_TIMEZONE).dayOfWeek

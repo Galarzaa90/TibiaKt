@@ -27,7 +27,7 @@ import com.galarzaa.tibiakt.core.enums.PvpType
 import com.galarzaa.tibiakt.core.models.bazaar.BazaarFilters
 
 /**
- * Get the URL to the character bazaar.
+ * URL to the character bazaar.
  *
  * @param type Whether to show current auctions or the auction history.
  */
@@ -54,7 +54,7 @@ private fun BazaarFilters?.queryParams(): Array<Pair<String, Any?>> {
 }
 
 /**
- * Get the URL to a specific auction.
+ * URL to a specific auction.
  */
 public fun auctionUrl(auctionId: Int): String =
     tibiaUrl("charactertrade", "currentcharactertrades", "page" to "details", "auctionid" to auctionId)

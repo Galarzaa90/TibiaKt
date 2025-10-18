@@ -23,12 +23,12 @@ import kotlinx.datetime.YearMonth
 import kotlinx.datetime.number
 
 /**
- * Get the URL to the News Archive.
+ * URL to the News Archive.
  */
 public fun newsArchiveUrl(): String = tibiaUrl("news", "newsarchive")
 
 /**
- * Get the post parameters to filter news in the News Archive.
+ * POST parameters to filter news in the News Archive.
  */
 public fun newArchiveFormData(
     startDate: LocalDate,
@@ -55,12 +55,12 @@ public fun newArchiveFormData(
 }
 
 /**
- * Get the URL to a specific news article.
+ * URL to a specific news article.
  */
 public fun newsUrl(newsId: Int): String = tibiaUrl("news", "newsarchive", "id" to newsId)
 
 /**
- * Get the URL to the events schedule.
+ * URL to the events schedule.
  *
  * @param yearMonth The specific year and month to show the schedule for.
  *

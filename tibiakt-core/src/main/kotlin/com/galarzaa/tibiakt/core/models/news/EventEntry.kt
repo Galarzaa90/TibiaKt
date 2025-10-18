@@ -97,7 +97,9 @@ public data class EventEntry(
 }
 
 /**
- * Event with an unknown/open start (typically began earlier and continues until [endsOn]).
+ * Event with an unknown start date.
+ *
+ * Typically, an event that started in the previous month.
  *
  * @property endsOn The date when the event ends.
  */
@@ -114,7 +116,9 @@ public data class EventEntryOpenStart(
 }
 
 /**
- * Event with an unknown/open end (starts at [startsOn] and continues afterward).
+ * Event with an unknown end date.
+ *
+ * Typically, an event that ends in the next month.
  *
  * @property startsOn The date when the event starts.
  */

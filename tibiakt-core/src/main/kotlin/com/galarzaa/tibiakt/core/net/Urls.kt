@@ -75,7 +75,7 @@ public fun tibiaUrl(
 }
 
 /**
- * Get the URL of a static asset in Tibia.com.
+ * Url for a static asset in Tibia.com.
  *
  * @param path The path to the asset.
  * @param test Whether to use the testing version of Tibia.com or not.
@@ -84,7 +84,7 @@ public fun staticFileUrl(path: String, test: Boolean = false): String =
     "https://${if (test) "test." else ""}$STATIC_HOST/${path.replace("//", "/")}"
 
 /**
- * Get the URL of a static asset in Tibia.com.
+ * URL for a static asset in Tibia.com.
  *
  * @param path The path to the asset, represented as an array of directories with the filename at the end.
  * @param test Whether to use the testing version of Tibia.com or not.
