@@ -127,7 +127,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;/** The local time when server save happens (10:00 CET/CEST). */
 <b class="fc">&nbsp;public val SERVER_SAVE_TIME: LocalTime = LocalTime(10, 0)</b>
 &nbsp;
-&nbsp;/** Last server save instant relative to this instant. */
+&nbsp;/** Last server save relative to this moment. */
 &nbsp;public fun Instant.lastServerSave(): Instant =
 <b class="fc">&nbsp;    LocalDateTime(toLocalDateTime(TIBIA_TIMEZONE).date, SERVER_SAVE_TIME).toInstant(TIBIA_TIMEZONE)</b>
 <b class="fc">&nbsp;        .let { if (this &lt; it) it - 1.days else it }</b>
@@ -158,7 +158,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-17 18:56</div>
+    <div style="float:right;">generated on 2025-10-18 03:37</div>
 </div>
 </body>
 </html>

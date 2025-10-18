@@ -115,47 +115,47 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;import kotlinx.datetime.number
 &nbsp;
 &nbsp;/**
-&nbsp; * Get the URL to a specific forum section.
+&nbsp; * URL to a specific forum section by its [ID][sectionId].
 &nbsp; */
 &nbsp;public fun forumSectionUrl(sectionId: Int): String =
 <b class="fc">&nbsp;    tibiaUrl(&quot;forum&quot;, &quot;action&quot; to &quot;main&quot;, &quot;sectionid&quot; to sectionId)</b>
 &nbsp;
 &nbsp;
 &nbsp;/**
-&nbsp; * Get the URL to a specific forum section.
+&nbsp; * URL to a specific forum section.
 &nbsp; */
 &nbsp;public fun forumSectionUrl(section: AvailableForumSection): String =
 <b class="fc">&nbsp;    tibiaUrl(&quot;forum&quot;, section.subtopic)</b>
 &nbsp;
 &nbsp;/**
-&nbsp; * Get the URL to a specific forum section by its name.
+&nbsp; * URL to a specific forum section by its name.
 &nbsp; */
 <b class="fc">&nbsp;public fun forumSectionUrl(sectionName: String): String = tibiaUrl(&quot;forum&quot;, sectionName)</b>
 &nbsp;
-&nbsp;/** Get the URL to a forum board. */
+&nbsp;/** URL to a forum board. */
 <b class="fc">&nbsp;public fun forumBoardUrl(boardId: Int, page: Int = 1, threadAge: Int? = null): String = tibiaUrl(</b>
 <b class="fc">&nbsp;    &quot;forum&quot;, &quot;action&quot; to &quot;board&quot;, &quot;boardid&quot; to boardId, &quot;pagenumber&quot; to page, &quot;threadage&quot; to threadAge</b>
 &nbsp;)
 &nbsp;
-&nbsp;/** Get the URL to a forum announcement. */
+&nbsp;/** URL to a forum announcement. */
 &nbsp;public fun forumAnnouncementUrl(announcementId: Int): String =
 <b class="fc">&nbsp;    tibiaUrl(&quot;forum&quot;, &quot;action&quot; to &quot;announcement&quot;, &quot;announcementid&quot; to announcementId)</b>
 &nbsp;
 &nbsp;/**
-&nbsp; * Get the URL to a specific thread in the forums.
+&nbsp; * URL to a specific thread in the forums.
 &nbsp; */
 <b class="fc">&nbsp;public fun forumThreadUrl(threadId: Int, page: Int = 1): String =</b>
 <b class="fc">&nbsp;    tibiaUrl(&quot;forum&quot;, &quot;action&quot; to &quot;thread&quot;, &quot;threadid&quot; to threadId, &quot;pagenumber&quot; to page)</b>
 &nbsp;
 &nbsp;/**
-&nbsp; * Get the URL of a forum post with a specific [postId] in Tibia.com.
+&nbsp; * URL of a forum post with a specific [postId] in Tibia.com.
 &nbsp; */
 &nbsp;public fun forumPostUrl(postId: Int): String =
 <b class="fc">&nbsp;    tibiaUrl(&quot;forum&quot;, &quot;action&quot; to &quot;thread&quot;, &quot;postid&quot; to postId, anchor = &quot;post$postId&quot;)</b>
 &nbsp;
 &nbsp;
 &nbsp;/**
-&nbsp; * Get the URL to the CM Post Archive in Tibia.com.
+&nbsp; * URL to the CM Post Archive in Tibia.com.
 &nbsp; */
 <b class="fc">&nbsp;public fun cmPostArchiveUrl(startDate: LocalDate, endDate: LocalDate, page: Int = 1): String {</b>
 <b class="fc">&nbsp;    return tibiaUrl(</b>
@@ -194,7 +194,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-17 18:56</div>
+    <div style="float:right;">generated on 2025-10-18 03:37</div>
 </div>
 </body>
 </html>

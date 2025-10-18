@@ -132,7 +132,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;/**
 &nbsp; * Current in-game day of the week.
 &nbsp; *
-&nbsp; * A new game day starts at [server save][SERVER_SAVE_TIME], not at midnight.
+&nbsp; * A new in-game day starts at [server save][SERVER_SAVE_TIME], not at midnight.
 &nbsp; */
 <b class="nc">&nbsp;public fun tibiaGameWeekDay(clock: Clock = Clock.System): DayOfWeek =</b>
 <b class="fc">&nbsp;    (clock.now() - SERVER_SAVE_TIME.hour.hours).toLocalDateTime(TIBIA_TIMEZONE).dayOfWeek</b>
@@ -159,7 +159,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-17 18:56</div>
+    <div style="float:right;">generated on 2025-10-18 03:37</div>
 </div>
 </body>
 </html>
