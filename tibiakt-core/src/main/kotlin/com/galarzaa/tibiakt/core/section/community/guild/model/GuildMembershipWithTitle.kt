@@ -20,7 +20,7 @@ import com.galarzaa.tibiakt.core.domain.guild.BaseGuild
 import kotlinx.serialization.Serializable
 
 /**
- * The guild a [com.galarzaa.tibiakt.core.section.community.character.model.Character] belongs to.
+ * The guild a [com.galarzaa.tibiakt.core.section.community.character.model.CharacterInfo] belongs to.
  *
  * @property rank The name of the guild rank.
  * @property title A customizable title the character might have received in the guild.

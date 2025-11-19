@@ -21,7 +21,7 @@ import kotlinx.datetime.LocalDate
 import kotlinx.serialization.Serializable
 
 /**
- * A house owned by a [Character].
+ * A house owned by a [CharacterInfo].
  *
  * @property name The name of the house.
  * @property town The town where the city is or is closest to.

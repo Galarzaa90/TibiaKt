@@ -20,7 +20,7 @@ import com.galarzaa.tibiakt.core.domain.guild.BaseGuild
 import kotlinx.serialization.Serializable
 
 /**
- * The guild a [Character] belongs to.
+ * The guild a [CharacterInfo] belongs to.
  *
  * @property rank The name of the rank the character holds in the guild.
  */

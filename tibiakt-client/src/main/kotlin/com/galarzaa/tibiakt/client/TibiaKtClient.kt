@@ -25,7 +25,7 @@ import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.BazaarType
 import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.parser.AuctionParser
 import com.galarzaa.tibiakt.core.section.charactertrade.urls.auctionUrl
 import com.galarzaa.tibiakt.core.section.charactertrade.urls.bazaarUrl
-import com.galarzaa.tibiakt.core.section.community.character.model.Character
+import com.galarzaa.tibiakt.core.section.community.character.model.CharacterInfo
 import com.galarzaa.tibiakt.core.section.community.character.parser.CharacterParser
 import com.galarzaa.tibiakt.core.section.community.guild.model.Guild
 import com.galarzaa.tibiakt.core.section.community.guild.model.GuildsSection
@@ -365,7 +365,7 @@ public open class TibiaKtClient protected constructor(
      *
      * @param name The name of the character.
      */
-    public open suspend fun fetchCharacter(name: String): TibiaResponse<Character?> {
+    public open suspend fun fetchCharacter(name: String): TibiaResponse<CharacterInfo?> {
         val response = this.request(HttpMethod.Get, characterUrl(name))
         return response.parse { CharacterParser.fromContent(it) }
     }

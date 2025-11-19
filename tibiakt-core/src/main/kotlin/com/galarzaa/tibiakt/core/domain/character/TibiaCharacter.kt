@@ -19,12 +19,12 @@ package com.galarzaa.tibiakt.core.domain.character
 import com.galarzaa.tibiakt.core.section.community.urls.characterUrl
 
 /**
- * Base interface for characters.
+ * Defines a Tibia character.
  *
  * @property name The name of the character.
  * @property url The URL to the character's information page.
  */
-public interface BaseCharacter {
+public interface TibiaCharacter {
     public val name: String
     public val url: String get() = characterUrl(name)
 }

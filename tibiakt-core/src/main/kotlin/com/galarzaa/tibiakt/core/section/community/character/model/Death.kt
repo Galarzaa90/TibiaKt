@@ -21,7 +21,7 @@ import kotlinx.serialization.Serializable
 import kotlin.time.Instant
 
 /**
- * A death by a [Character].
+ * A death by a [CharacterInfo].
  *
  * @property timestamp The date and time when the death happened.
  * @property level The level of the character when they died.

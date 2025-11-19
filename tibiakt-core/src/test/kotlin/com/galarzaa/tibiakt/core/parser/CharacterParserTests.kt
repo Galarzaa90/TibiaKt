@@ -19,7 +19,7 @@ package com.galarzaa.tibiakt.core.parser
 import com.galarzaa.tibiakt.TestUtilities.getResource
 import com.galarzaa.tibiakt.core.domain.character.Sex
 import com.galarzaa.tibiakt.core.domain.character.Vocation
-import com.galarzaa.tibiakt.core.section.community.character.model.Character
+import com.galarzaa.tibiakt.core.section.community.character.model.CharacterInfo
 import com.galarzaa.tibiakt.core.section.community.character.parser.CharacterParser
 import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.FunSpec
@@ -39,7 +39,7 @@ class CharacterParserTests : FunSpec({
 
         val character = CharacterParser.fromContent(content)
 
-        character.shouldBeInstanceOf<Character>()
+        character.shouldBeInstanceOf<CharacterInfo>()
         with(character) {
             name shouldBe "Tschas"
             title shouldBe null
@@ -70,13 +70,13 @@ class CharacterParserTests : FunSpec({
     test("Character recently traded") {
         val character = CharacterParser.fromContent(getResource("character/characterRecentlyTraded.txt"))
 
-        character.shouldBeInstanceOf<Character>()
+        character.shouldBeInstanceOf<CharacterInfo>()
         character.isRecentlyTraded shouldBe true
     }
     test("Character scheduled for deletion") {
         val character = CharacterParser.fromContent(getResource("character/characterScheduledForDeletion.txt"))
 
-        character.shouldBeInstanceOf<Character>()
+        character.shouldBeInstanceOf<CharacterInfo>()
         character.deletionScheduledAt shouldNotBe null
         character.isScheduledForDeletion shouldBe true
     }
@@ -86,31 +86,31 @@ class CharacterParserTests : FunSpec({
     test("Character with former names") {
         val character = CharacterParser.fromContent(getResource("character/characterWithFormerNames.txt"))
 
-        character.shouldBeInstanceOf<Character>()
+        character.shouldBeInstanceOf<CharacterInfo>()
         character.formerNames shouldHaveAtLeastSize 1
     }
     test("Character with former world") {
         val character = CharacterParser.fromContent(getResource("character/characterWithFormerWorld.txt"))
 
-        character.shouldBeInstanceOf<Character>()
+        character.shouldBeInstanceOf<CharacterInfo>()
         character.formerWorld shouldNotBe null
     }
     test("Character with multiple houses") {
         val character = CharacterParser.fromContent(getResource("character/characterWithMultipleHouses.txt"))
 
-        character.shouldBeInstanceOf<Character>()
+        character.shouldBeInstanceOf<CharacterInfo>()
         character.houses shouldHaveAtLeastSize 2
     }
     test("Character with no badges selected") {
         val character = CharacterParser.fromContent(getResource("character/characterWithNoBadgesSelected.txt"))
 
-        character.shouldBeInstanceOf<Character>()
+        character.shouldBeInstanceOf<CharacterInfo>()
         character.badges shouldHaveSize 0
     }
     test("Character with special position") {
         val character = CharacterParser.fromContent(getResource("character/characterWithSpecialPosition.txt"))
 
-        character.shouldBeInstanceOf<Character>()
+        character.shouldBeInstanceOf<CharacterInfo>()
         character.position shouldNotBe null
         character.otherCharacters.forAtLeastOne {
             it.position shouldNotBe null
@@ -119,7 +119,7 @@ class CharacterParserTests : FunSpec({
     test("Character with title and badges") {
         val character = CharacterParser.fromContent(getResource("character/characterWithTitleAndBadges.txt"))
 
-        character.shouldBeInstanceOf<Character>()
+        character.shouldBeInstanceOf<CharacterInfo>()
         character.title shouldNotBe null
         character.unlockedTitles shouldNotBe 0
         character.badges shouldHaveAtLeastSize 0
@@ -128,7 +128,7 @@ class CharacterParserTests : FunSpec({
     xtest("Character with truncated deaths") {
         val character = CharacterParser.fromContent("character/characterWithTruncatedDeaths.txt")
 
-        character.shouldBeInstanceOf<Character>()
+        character.shouldBeInstanceOf<CharacterInfo>()
         character.deaths shouldHaveAtLeastSize 1
     }
 })

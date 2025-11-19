@@ -22,8 +22,8 @@ import com.galarzaa.tibiakt.core.domain.character.Sex
 import com.galarzaa.tibiakt.core.domain.character.Vocation
 import com.galarzaa.tibiakt.core.section.community.character.model.AccountBadge
 import com.galarzaa.tibiakt.core.section.community.character.model.AccountInformation
-import com.galarzaa.tibiakt.core.section.community.character.model.Character
 import com.galarzaa.tibiakt.core.section.community.character.model.CharacterHouse
+import com.galarzaa.tibiakt.core.section.community.character.model.CharacterInfo
 import com.galarzaa.tibiakt.core.section.community.character.model.Death
 import com.galarzaa.tibiakt.core.section.community.character.model.DeathParticipant
 import com.galarzaa.tibiakt.core.section.community.character.model.DisplayedAchievement
@@ -33,15 +33,15 @@ import kotlinx.datetime.LocalDate
 import kotlin.time.Instant
 
 @BuilderDsl
-public inline fun character(block: CharacterBuilder.() -> Unit): Character = CharacterBuilder().apply(block).build()
+public inline fun character(block: CharacterBuilder.() -> Unit): CharacterInfo = CharacterBuilder().apply(block).build()
 
 @BuilderDsl
 public inline fun characterBuilder(block: CharacterBuilder.() -> Unit): CharacterBuilder =
     CharacterBuilder().apply(block)
 
-/** Builder for [Character] instances. */
+/** Builder for [CharacterInfo] instances. */
 @BuilderDsl
-public class CharacterBuilder : TibiaKtBuilder<Character> {
+public class CharacterBuilder : TibiaKtBuilder<CharacterInfo> {
     public lateinit var name: String
     public var level: Int = 2
     public var residence: String? = null
@@ -133,7 +133,7 @@ public class CharacterBuilder : TibiaKtBuilder<Character> {
             )
         }
 
-    override fun build(): Character = Character(
+    override fun build(): CharacterInfo = CharacterInfo(
         name = if (::name.isInitialized) name else error("name is required"),
         title = title,
         formerNames = formerNames,

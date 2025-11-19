@@ -20,7 +20,7 @@ import kotlin.math.ceil
 import kotlin.math.floor
 
 /** A character with a level attribute. */
-public interface CharacterLevel {
+public interface LevelAware {
     /**
      * The character's level up.
      */

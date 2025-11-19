@@ -16,8 +16,8 @@
 
 package com.galarzaa.tibiakt.core.section.community.world.model
 
-import com.galarzaa.tibiakt.core.domain.character.BaseCharacter
-import com.galarzaa.tibiakt.core.domain.character.CharacterLevel
+import com.galarzaa.tibiakt.core.domain.character.LevelAware
+import com.galarzaa.tibiakt.core.domain.character.TibiaCharacter
 import com.galarzaa.tibiakt.core.domain.character.Vocation
 import kotlinx.serialization.Serializable
 
@@ -32,4 +32,4 @@ public data class OnlineCharacter(
     override val name: String,
     override val level: Int,
     val vocation: Vocation,
-) : BaseCharacter, CharacterLevel
+) : TibiaCharacter, LevelAware

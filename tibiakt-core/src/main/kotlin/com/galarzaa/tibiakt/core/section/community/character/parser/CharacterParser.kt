@@ -24,7 +24,7 @@ import com.galarzaa.tibiakt.core.html.parseTables
 import com.galarzaa.tibiakt.core.parser.Parser
 import com.galarzaa.tibiakt.core.section.community.character.builder.CharacterBuilder
 import com.galarzaa.tibiakt.core.section.community.character.builder.character
-import com.galarzaa.tibiakt.core.section.community.character.model.Character
+import com.galarzaa.tibiakt.core.section.community.character.model.CharacterInfo
 import com.galarzaa.tibiakt.core.section.community.character.model.DeathParticipant
 import com.galarzaa.tibiakt.core.text.clean
 import com.galarzaa.tibiakt.core.text.remove
@@ -38,7 +38,7 @@ import org.jsoup.select.Elements
 import kotlin.time.Instant
 
 /** Parser for character information pages. */
-public object CharacterParser : Parser<Character?> {
+public object CharacterParser : Parser<CharacterInfo?> {
     private val deletedRegexp = Regex("""([^,]+), will be deleted at (.*)""")
     private val titlesRegexp = Regex("""(.*)\((\d+) titles? unlocked\)""")
     private val houseRegexp = Regex("""\(([^)]+)\) is paid until (.*)""")
@@ -49,7 +49,7 @@ public object CharacterParser : Parser<Character?> {
     private val deathSummon = Regex("""(?<summon>an? .+) of (?<name>.*)""")
     private const val tradedLabel = "(traded)"
 
-    override fun fromContent(content: String): Character? {
+    override fun fromContent(content: String): CharacterInfo? {
         val document: Document = Jsoup.parse(content, "", org.jsoup.parser.Parser.xmlParser())
         val boxContent =
             document.selectFirst("div.BoxContent") ?: throw ParsingException("BoxContent container not found")

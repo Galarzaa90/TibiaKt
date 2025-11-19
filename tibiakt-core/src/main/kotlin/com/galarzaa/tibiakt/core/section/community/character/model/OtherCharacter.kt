@@ -16,11 +16,11 @@
 
 package com.galarzaa.tibiakt.core.section.community.character.model
 
-import com.galarzaa.tibiakt.core.domain.character.BaseCharacter
+import com.galarzaa.tibiakt.core.domain.character.TibiaCharacter
 import kotlinx.serialization.Serializable
 
 /**
- * Additional character listed in a [Character]'s information.
+ * Additional character listed in a [CharacterInfo]'s information.
  *
  * @property world The world of the character.
  * @property isMain Whether this is the main character of the account or not.
@@ -38,4 +38,4 @@ public data class OtherCharacter(
     val isDeleted: Boolean,
     val isRecentlyTraded: Boolean,
     val position: String?,
-) : BaseCharacter
+) : TibiaCharacter

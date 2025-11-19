@@ -19,7 +19,7 @@ package com.galarzaa.tibiakt.core.section.community.character.model
 import kotlinx.serialization.Serializable
 
 /**
- * The achievements chosen to be displayed for a [Character].
+ * The achievements chosen to be displayed for a [CharacterInfo].
  *
  * @property name The name of the achievement.
  * @property grade The grade of the achievement, also known as the number of stars.

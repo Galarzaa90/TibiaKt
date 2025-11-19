@@ -16,8 +16,8 @@
 
 package com.galarzaa.tibiakt.core.section.community.guild.model
 
-import com.galarzaa.tibiakt.core.domain.character.BaseCharacter
-import com.galarzaa.tibiakt.core.domain.character.CharacterLevel
+import com.galarzaa.tibiakt.core.domain.character.LevelAware
+import com.galarzaa.tibiakt.core.domain.character.TibiaCharacter
 import com.galarzaa.tibiakt.core.domain.character.Vocation
 import kotlinx.datetime.LocalDate
 import kotlinx.serialization.Serializable
@@ -41,4 +41,4 @@ public data class GuildMember(
     val vocation: Vocation,
     val joinedOn: LocalDate,
     val isOnline: Boolean,
-) : BaseCharacter, CharacterLevel
+) : TibiaCharacter, LevelAware

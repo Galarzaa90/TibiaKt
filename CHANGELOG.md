@@ -4,6 +4,9 @@
 
 - Reorganized package names.
     - Classes are organized similar to sections on Tibia.com
+- Renamed `BaseCharacter` to `TibiaCharacter`.
+- Renamed `Character` to `CharacterInfo` to avoid conflicts with `java.lang.Character`
+- Renamed `CharacterLevel` to `LevelAware`.
 
 ## 1.0.0 (2025/10/17)
 

@@ -16,8 +16,8 @@
 
 package com.galarzaa.tibiakt.core.section.community.highscores.model
 
-import com.galarzaa.tibiakt.core.domain.character.BaseCharacter
-import com.galarzaa.tibiakt.core.domain.character.CharacterLevel
+import com.galarzaa.tibiakt.core.domain.character.LevelAware
+import com.galarzaa.tibiakt.core.domain.character.TibiaCharacter
 import com.galarzaa.tibiakt.core.domain.character.Vocation
 import kotlinx.serialization.Serializable
 
@@ -40,4 +40,4 @@ public data class HighscoresEntry(
     val vocation: Vocation,
     val value: Long,
     val additionalValue: String?,
-) : BaseCharacter, CharacterLevel
+) : TibiaCharacter, LevelAware
