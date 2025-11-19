@@ -1,0 +1,58 @@
+/*
+ * Copyright © 2025 Allan Galarza
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+
+package com.galarzaa.tibiakt.core.section.community.highscores.model
+
+import com.galarzaa.tibiakt.core.domain.world.PvpType
+import com.galarzaa.tibiakt.core.pagination.PaginatedWithUrl
+import com.galarzaa.tibiakt.core.section.community.urls.highscoresUrl
+import kotlinx.serialization.Serializable
+import kotlin.time.Instant
+
+/**
+ * The Tibia highscores, containing the highest levels of a given [category].
+ *
+ * @property world The world the highscores belong to, or null if these are global highscores.
+ * @property category The displayed highscores category.
+ * @property vocation The selected vocation filter for the entries.
+ * @property worldTypes The selected world types to show for global highscores.
+ * @property battlEyeType The BattlEye type of worlds to show for global highscores.
+ * @property lastUpdatedAt The time when the currently displayed results were last updated.
+ */
+@Serializable
+public data class Highscores(
+    val world: String?,
+    val category: HighscoresCategory,
+    val vocation: HighscoresProfession,
+    val worldTypes: Set<PvpType>,
+    val battlEyeType: HighscoresBattlEyeType,
+    val lastUpdatedAt: Instant,
+    override val currentPage: Int,
+    override val totalPages: Int,
+    override val resultsCount: Int,
+    override val entries: List<HighscoresEntry>,
+) : PaginatedWithUrl<HighscoresEntry> {
+
+    /**
+     * The URL to these highscores.
+     */
+    val url: String get() = highscoresUrl(world, category, vocation, currentPage, battlEyeType, worldTypes)
+
+    override fun getPageUrl(page: Int): String =
+        highscoresUrl(world, category, vocation, page, battlEyeType, worldTypes)
+
+}

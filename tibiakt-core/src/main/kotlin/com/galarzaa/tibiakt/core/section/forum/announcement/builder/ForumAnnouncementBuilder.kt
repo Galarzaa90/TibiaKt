@@ -1,0 +1,59 @@
+/*
+ * Copyright © 2025 Allan Galarza
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.galarzaa.tibiakt.core.section.forum.announcement.builder
+
+import com.galarzaa.tibiakt.core.builder.BuilderDsl
+import com.galarzaa.tibiakt.core.builder.TibiaKtBuilder
+import com.galarzaa.tibiakt.core.section.forum.announcement.model.ForumAnnouncement
+import com.galarzaa.tibiakt.core.section.forum.shared.model.BaseForumAuthor
+import kotlin.time.Instant
+
+@BuilderDsl
+public inline fun forumAnnouncementBuilder(block: ForumAnnouncementBuilder.() -> Unit): ForumAnnouncementBuilder =
+    ForumAnnouncementBuilder().apply(block)
+
+@BuilderDsl
+public inline fun forumAnnouncement(block: ForumAnnouncementBuilder.() -> Unit): ForumAnnouncement =
+    forumAnnouncementBuilder(block).build()
+
+/** Builder for [ForumAnnouncement] instances. */
+@BuilderDsl
+public class ForumAnnouncementBuilder : TibiaKtBuilder<ForumAnnouncement> {
+    public var announcementId: Int? = null
+    public var title: String? = null
+    public var boardName: String? = null
+    public var boardId: Int? = null
+    public var sectionName: String? = null
+    public var sectionId: Int? = null
+    public var author: BaseForumAuthor? = null
+    public var content: String? = null
+    public var startsAt: Instant? = null
+    public var endsAt: Instant? = null
+
+    override fun build(): ForumAnnouncement = ForumAnnouncement(
+        announcementId = announcementId ?: error("announcementId is required"),
+        title = title ?: error("title is required"),
+        boardName = boardName ?: error("boardName is required"),
+        boardId = boardId ?: error("boardId is required"),
+        sectionName = sectionName ?: error("sectionName is required"),
+        sectionId = sectionId ?: error("sectionId is required"),
+        author = author ?: error("author is required"),
+        content = content ?: error("content is required"),
+        startsAt = startsAt ?: error("startsAt is required"),
+        endsAt = endsAt ?: error("endsAt is required")
+    )
+}

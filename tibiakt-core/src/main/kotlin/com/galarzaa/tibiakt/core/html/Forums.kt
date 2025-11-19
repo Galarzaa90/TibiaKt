@@ -16,15 +16,15 @@
 
 package com.galarzaa.tibiakt.core.html
 
-import com.galarzaa.tibiakt.core.builders.lastPost
 import com.galarzaa.tibiakt.core.enums.StringEnum
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
-import com.galarzaa.tibiakt.core.models.character.GuildMembershipWithTitle
-import com.galarzaa.tibiakt.core.models.forums.BaseForumAuthor
-import com.galarzaa.tibiakt.core.models.forums.ForumAuthor
-import com.galarzaa.tibiakt.core.models.forums.LastPost
-import com.galarzaa.tibiakt.core.models.forums.TournamentForumAuthor
-import com.galarzaa.tibiakt.core.models.forums.UnavailableForumAuthor
+import com.galarzaa.tibiakt.core.section.community.guild.model.GuildMembershipWithTitle
+import com.galarzaa.tibiakt.core.section.forum.shared.builder.lastPost
+import com.galarzaa.tibiakt.core.section.forum.shared.model.BaseForumAuthor
+import com.galarzaa.tibiakt.core.section.forum.shared.model.ForumAuthor
+import com.galarzaa.tibiakt.core.section.forum.shared.model.LastPost
+import com.galarzaa.tibiakt.core.section.forum.shared.model.TournamentForumAuthor
+import com.galarzaa.tibiakt.core.section.forum.shared.model.UnavailableForumAuthor
 import com.galarzaa.tibiakt.core.text.findInteger
 import com.galarzaa.tibiakt.core.text.parseInteger
 import com.galarzaa.tibiakt.core.text.remove

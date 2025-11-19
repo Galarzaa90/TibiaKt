@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.0 (Unreleased)
+
+- Reorganized package names.
+    - Classes are organized similar to sections on Tibia.com
+
 ## 1.0.0 (2025/10/17)
 
 - Initial release

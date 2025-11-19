@@ -16,13 +16,23 @@
 
 package com.galarzaa.tibiakt.core.net
 
-import com.galarzaa.tibiakt.core.enums.HighscoresBattlEyeType
-import com.galarzaa.tibiakt.core.enums.HighscoresCategory
-import com.galarzaa.tibiakt.core.enums.HighscoresProfession
-import com.galarzaa.tibiakt.core.enums.HouseOrder
-import com.galarzaa.tibiakt.core.enums.HouseStatus
-import com.galarzaa.tibiakt.core.enums.HouseType
-import com.galarzaa.tibiakt.core.enums.PvpType
+import com.galarzaa.tibiakt.core.domain.world.PvpType
+import com.galarzaa.tibiakt.core.section.community.highscores.model.HighscoresBattlEyeType
+import com.galarzaa.tibiakt.core.section.community.highscores.model.HighscoresCategory
+import com.galarzaa.tibiakt.core.section.community.highscores.model.HighscoresProfession
+import com.galarzaa.tibiakt.core.section.community.house.model.HouseOrder
+import com.galarzaa.tibiakt.core.section.community.house.model.HouseStatus
+import com.galarzaa.tibiakt.core.section.community.house.model.HouseType
+import com.galarzaa.tibiakt.core.section.community.urls.characterUrl
+import com.galarzaa.tibiakt.core.section.community.urls.guildUrl
+import com.galarzaa.tibiakt.core.section.community.urls.highscoresUrl
+import com.galarzaa.tibiakt.core.section.community.urls.houseUrl
+import com.galarzaa.tibiakt.core.section.community.urls.housesSectionUrl
+import com.galarzaa.tibiakt.core.section.community.urls.killStatisticsUrl
+import com.galarzaa.tibiakt.core.section.community.urls.leaderboardsUrl
+import com.galarzaa.tibiakt.core.section.community.urls.worldGuildsUrl
+import com.galarzaa.tibiakt.core.section.community.urls.worldOverviewUrl
+import com.galarzaa.tibiakt.core.section.community.urls.worldUrl
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.string.shouldContain
 

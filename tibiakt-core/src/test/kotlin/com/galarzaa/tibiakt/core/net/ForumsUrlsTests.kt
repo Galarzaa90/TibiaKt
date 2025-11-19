@@ -16,7 +16,13 @@
 
 package com.galarzaa.tibiakt.core.net
 
-import com.galarzaa.tibiakt.core.enums.AvailableForumSection
+import com.galarzaa.tibiakt.core.section.forum.urls.cmPostArchiveUrl
+import com.galarzaa.tibiakt.core.section.forum.urls.forumAnnouncementUrl
+import com.galarzaa.tibiakt.core.section.forum.urls.forumBoardUrl
+import com.galarzaa.tibiakt.core.section.forum.urls.forumPostUrl
+import com.galarzaa.tibiakt.core.section.forum.urls.forumSectionUrl
+import com.galarzaa.tibiakt.core.section.forum.urls.forumThreadUrl
+import com.galarzaa.tibiakt.core.section.news.shared.model.AvailableForumSection
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.string.shouldContain
 import io.kotest.matchers.string.shouldNotContain

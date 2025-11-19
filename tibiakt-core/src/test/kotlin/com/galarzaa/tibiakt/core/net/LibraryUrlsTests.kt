@@ -16,6 +16,9 @@
 
 package com.galarzaa.tibiakt.core.net
 
+import com.galarzaa.tibiakt.core.section.library.urls.boostableBossesUrl
+import com.galarzaa.tibiakt.core.section.library.urls.creatureUrl
+import com.galarzaa.tibiakt.core.section.library.urls.creaturesUrl
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.string.shouldContain
 

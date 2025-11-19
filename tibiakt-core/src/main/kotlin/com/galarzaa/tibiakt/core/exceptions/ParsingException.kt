@@ -19,7 +19,7 @@ package com.galarzaa.tibiakt.core.exceptions
 /**
  * Exception thrown when parsing failed.
  *
- * Parsing might fail when the wrong [com.galarzaa.tibiakt.core.parsers.Parser] was used for a specific HTML content.
+ * Parsing might fail when the wrong [com.galarzaa.tibiakt.core.parser.Parser] was used for a specific HTML content.
  * Alternatively, it might fail when Tibia.com changes its HTML structure.
  */
 public open class ParsingException(message: String? = null, cause: Throwable? = null) : TibiaKtException(message, cause)

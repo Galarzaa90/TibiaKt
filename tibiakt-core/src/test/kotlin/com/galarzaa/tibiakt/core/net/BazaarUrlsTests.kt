@@ -16,8 +16,8 @@
 
 package com.galarzaa.tibiakt.core.net
 
-import com.galarzaa.tibiakt.core.enums.BazaarType
-import com.galarzaa.tibiakt.core.models.bazaar.BazaarFilters
+import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.BazaarType
+import com.galarzaa.tibiakt.core.section.charactertrade.model.BazaarFilters
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.string.shouldContain
 
@@ -25,7 +25,8 @@ class BazaarUrlsTests : FunSpec({
 
     context("bazaarUrl") {
         test("Current auctions, no filters") {
-            val url = bazaarUrl(BazaarType.CURRENT)
+            val url =
+                _root_ide_package_.com.galarzaa.tibiakt.core.section.charactertrade.urls.bazaarUrl(BazaarType.CURRENT)
 
             url shouldContain "/charactertrade"
             url shouldContain "subtopic=${BazaarType.CURRENT.subtopic}"
@@ -33,7 +34,7 @@ class BazaarUrlsTests : FunSpec({
         }
 
         test("Auction history, level range filter") {
-            val url = bazaarUrl(
+            val url = _root_ide_package_.com.galarzaa.tibiakt.core.section.charactertrade.urls.bazaarUrl(
                 BazaarType.HISTORY, BazaarFilters(
                     minimumLevel = 100,
                     maximumLevel = 200,
@@ -48,7 +49,7 @@ class BazaarUrlsTests : FunSpec({
     }
 
     test("auctionUrl") {
-        val url = auctionUrl(12_345)
+        val url = _root_ide_package_.com.galarzaa.tibiakt.core.section.charactertrade.urls.auctionUrl(12_345)
 
         url shouldContain "/charactertrade"
         url shouldContain "subtopic=currentcharactertrades"

@@ -20,92 +20,83 @@ import com.galarzaa.tibiakt.client.TibiaKtClient.Companion.defaultConfig
 import com.galarzaa.tibiakt.client.exceptions.ForbiddenException
 import com.galarzaa.tibiakt.client.exceptions.NetworkException
 import com.galarzaa.tibiakt.client.exceptions.SiteMaintenanceException
-import com.galarzaa.tibiakt.core.builders.BazaarFiltersBuilder
-import com.galarzaa.tibiakt.core.enums.AvailableForumSection
-import com.galarzaa.tibiakt.core.enums.BazaarType
-import com.galarzaa.tibiakt.core.enums.HighscoresBattlEyeType
-import com.galarzaa.tibiakt.core.enums.HighscoresCategory
-import com.galarzaa.tibiakt.core.enums.HighscoresProfession
-import com.galarzaa.tibiakt.core.enums.HouseOrder
-import com.galarzaa.tibiakt.core.enums.HouseStatus
-import com.galarzaa.tibiakt.core.enums.HouseType
-import com.galarzaa.tibiakt.core.enums.NewsCategory
-import com.galarzaa.tibiakt.core.enums.NewsType
-import com.galarzaa.tibiakt.core.enums.PvpType
-import com.galarzaa.tibiakt.core.models.bazaar.AjaxPaginator
-import com.galarzaa.tibiakt.core.models.bazaar.Auction
-import com.galarzaa.tibiakt.core.models.bazaar.BazaarFilters
-import com.galarzaa.tibiakt.core.models.bazaar.CharacterBazaar
-import com.galarzaa.tibiakt.core.models.bazaar.ItemEntry
-import com.galarzaa.tibiakt.core.models.bazaar.MountEntry
-import com.galarzaa.tibiakt.core.models.bazaar.OutfitEntry
-import com.galarzaa.tibiakt.core.models.character.Character
-import com.galarzaa.tibiakt.core.models.creatures.BoostableBosses
-import com.galarzaa.tibiakt.core.models.creatures.CreaturesSection
-import com.galarzaa.tibiakt.core.models.forums.CMPostArchive
-import com.galarzaa.tibiakt.core.models.forums.ForumAnnouncement
-import com.galarzaa.tibiakt.core.models.forums.ForumBoard
-import com.galarzaa.tibiakt.core.models.forums.ForumSection
-import com.galarzaa.tibiakt.core.models.forums.ForumThread
-import com.galarzaa.tibiakt.core.models.guild.Guild
-import com.galarzaa.tibiakt.core.models.guild.GuildsSection
-import com.galarzaa.tibiakt.core.models.highscores.Highscores
-import com.galarzaa.tibiakt.core.models.highscores.HighscoresEntry
-import com.galarzaa.tibiakt.core.models.house.House
-import com.galarzaa.tibiakt.core.models.house.HousesSection
-import com.galarzaa.tibiakt.core.models.killstatistics.KillStatistics
-import com.galarzaa.tibiakt.core.models.leaderboards.Leaderboard
-import com.galarzaa.tibiakt.core.models.news.EventsSchedule
-import com.galarzaa.tibiakt.core.models.news.News
-import com.galarzaa.tibiakt.core.models.news.NewsArchive
-import com.galarzaa.tibiakt.core.models.world.World
-import com.galarzaa.tibiakt.core.models.world.WorldOverview
-import com.galarzaa.tibiakt.core.net.auctionUrl
-import com.galarzaa.tibiakt.core.net.bazaarUrl
-import com.galarzaa.tibiakt.core.net.boostableBossesUrl
-import com.galarzaa.tibiakt.core.net.characterUrl
-import com.galarzaa.tibiakt.core.net.cmPostArchiveUrl
-import com.galarzaa.tibiakt.core.net.creaturesUrl
-import com.galarzaa.tibiakt.core.net.eventScheduleUrl
-import com.galarzaa.tibiakt.core.net.forumAnnouncementUrl
-import com.galarzaa.tibiakt.core.net.forumBoardUrl
-import com.galarzaa.tibiakt.core.net.forumPostUrl
-import com.galarzaa.tibiakt.core.net.forumSectionUrl
-import com.galarzaa.tibiakt.core.net.forumThreadUrl
-import com.galarzaa.tibiakt.core.net.guildUrl
-import com.galarzaa.tibiakt.core.net.highscoresUrl
-import com.galarzaa.tibiakt.core.net.houseUrl
-import com.galarzaa.tibiakt.core.net.housesSectionUrl
-import com.galarzaa.tibiakt.core.net.killStatisticsUrl
-import com.galarzaa.tibiakt.core.net.leaderboardsUrl
-import com.galarzaa.tibiakt.core.net.newArchiveFormData
-import com.galarzaa.tibiakt.core.net.newsArchiveUrl
-import com.galarzaa.tibiakt.core.net.newsUrl
-import com.galarzaa.tibiakt.core.net.worldGuildsUrl
-import com.galarzaa.tibiakt.core.net.worldOverviewUrl
-import com.galarzaa.tibiakt.core.net.worldUrl
-import com.galarzaa.tibiakt.core.parsers.AuctionParser
-import com.galarzaa.tibiakt.core.parsers.BoostableBossesParser
-import com.galarzaa.tibiakt.core.parsers.CMPostArchiveParser
-import com.galarzaa.tibiakt.core.parsers.CharacterBazaarParser
-import com.galarzaa.tibiakt.core.parsers.CharacterParser
-import com.galarzaa.tibiakt.core.parsers.CreaturesSectionParser
-import com.galarzaa.tibiakt.core.parsers.EventsScheduleParser
-import com.galarzaa.tibiakt.core.parsers.ForumAnnouncementParser
-import com.galarzaa.tibiakt.core.parsers.ForumBoardParser
-import com.galarzaa.tibiakt.core.parsers.ForumSectionParser
-import com.galarzaa.tibiakt.core.parsers.ForumThreadParser
-import com.galarzaa.tibiakt.core.parsers.GuildParser
-import com.galarzaa.tibiakt.core.parsers.GuildsSectionParser
-import com.galarzaa.tibiakt.core.parsers.HighscoresParser
-import com.galarzaa.tibiakt.core.parsers.HouseParser
-import com.galarzaa.tibiakt.core.parsers.HousesSectionParser
-import com.galarzaa.tibiakt.core.parsers.KillStatisticsParser
-import com.galarzaa.tibiakt.core.parsers.LeaderboardParser
-import com.galarzaa.tibiakt.core.parsers.NewsArchiveParser
-import com.galarzaa.tibiakt.core.parsers.NewsParser
-import com.galarzaa.tibiakt.core.parsers.WorldOverviewParser
-import com.galarzaa.tibiakt.core.parsers.WorldParser
+import com.galarzaa.tibiakt.core.domain.world.PvpType
+import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.BazaarType
+import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.parser.AuctionParser
+import com.galarzaa.tibiakt.core.section.charactertrade.urls.auctionUrl
+import com.galarzaa.tibiakt.core.section.charactertrade.urls.bazaarUrl
+import com.galarzaa.tibiakt.core.section.community.character.model.Character
+import com.galarzaa.tibiakt.core.section.community.character.parser.CharacterParser
+import com.galarzaa.tibiakt.core.section.community.guild.model.Guild
+import com.galarzaa.tibiakt.core.section.community.guild.model.GuildsSection
+import com.galarzaa.tibiakt.core.section.community.guild.parser.GuildParser
+import com.galarzaa.tibiakt.core.section.community.guild.parser.GuildsSectionParser
+import com.galarzaa.tibiakt.core.section.community.highscores.model.Highscores
+import com.galarzaa.tibiakt.core.section.community.highscores.model.HighscoresBattlEyeType
+import com.galarzaa.tibiakt.core.section.community.highscores.model.HighscoresCategory
+import com.galarzaa.tibiakt.core.section.community.highscores.model.HighscoresEntry
+import com.galarzaa.tibiakt.core.section.community.highscores.model.HighscoresProfession
+import com.galarzaa.tibiakt.core.section.community.highscores.parser.HighscoresParser
+import com.galarzaa.tibiakt.core.section.community.house.model.House
+import com.galarzaa.tibiakt.core.section.community.house.model.HouseOrder
+import com.galarzaa.tibiakt.core.section.community.house.model.HouseStatus
+import com.galarzaa.tibiakt.core.section.community.house.model.HouseType
+import com.galarzaa.tibiakt.core.section.community.house.model.HousesSection
+import com.galarzaa.tibiakt.core.section.community.house.parser.HouseParser
+import com.galarzaa.tibiakt.core.section.community.house.parser.HousesSectionParser
+import com.galarzaa.tibiakt.core.section.community.killstatistics.model.KillStatistics
+import com.galarzaa.tibiakt.core.section.community.killstatistics.parser.KillStatisticsParser
+import com.galarzaa.tibiakt.core.section.community.leaderboard.model.Leaderboard
+import com.galarzaa.tibiakt.core.section.community.leaderboard.parser.LeaderboardParser
+import com.galarzaa.tibiakt.core.section.community.urls.characterUrl
+import com.galarzaa.tibiakt.core.section.community.urls.guildUrl
+import com.galarzaa.tibiakt.core.section.community.urls.highscoresUrl
+import com.galarzaa.tibiakt.core.section.community.urls.houseUrl
+import com.galarzaa.tibiakt.core.section.community.urls.housesSectionUrl
+import com.galarzaa.tibiakt.core.section.community.urls.killStatisticsUrl
+import com.galarzaa.tibiakt.core.section.community.urls.leaderboardsUrl
+import com.galarzaa.tibiakt.core.section.community.urls.worldGuildsUrl
+import com.galarzaa.tibiakt.core.section.community.urls.worldOverviewUrl
+import com.galarzaa.tibiakt.core.section.community.urls.worldUrl
+import com.galarzaa.tibiakt.core.section.community.world.model.World
+import com.galarzaa.tibiakt.core.section.community.world.model.WorldOverview
+import com.galarzaa.tibiakt.core.section.community.world.parser.WorldOverviewParser
+import com.galarzaa.tibiakt.core.section.community.world.parser.WorldParser
+import com.galarzaa.tibiakt.core.section.forum.announcement.model.ForumAnnouncement
+import com.galarzaa.tibiakt.core.section.forum.announcement.parser.ForumAnnouncementParser
+import com.galarzaa.tibiakt.core.section.forum.board.model.ForumBoard
+import com.galarzaa.tibiakt.core.section.forum.board.parser.ForumBoardParser
+import com.galarzaa.tibiakt.core.section.forum.cmpost.model.CMPostArchive
+import com.galarzaa.tibiakt.core.section.forum.cmpost.parser.CMPostArchiveParser
+import com.galarzaa.tibiakt.core.section.forum.section.model.ForumSection
+import com.galarzaa.tibiakt.core.section.forum.section.parser.ForumSectionParser
+import com.galarzaa.tibiakt.core.section.forum.thread.model.ForumThread
+import com.galarzaa.tibiakt.core.section.forum.thread.parser.ForumThreadParser
+import com.galarzaa.tibiakt.core.section.forum.urls.cmPostArchiveUrl
+import com.galarzaa.tibiakt.core.section.forum.urls.forumAnnouncementUrl
+import com.galarzaa.tibiakt.core.section.forum.urls.forumBoardUrl
+import com.galarzaa.tibiakt.core.section.forum.urls.forumPostUrl
+import com.galarzaa.tibiakt.core.section.forum.urls.forumSectionUrl
+import com.galarzaa.tibiakt.core.section.forum.urls.forumThreadUrl
+import com.galarzaa.tibiakt.core.section.library.creature.model.BoostableBosses
+import com.galarzaa.tibiakt.core.section.library.creature.model.CreaturesSection
+import com.galarzaa.tibiakt.core.section.library.creature.parser.BoostableBossesParser
+import com.galarzaa.tibiakt.core.section.library.creature.parser.CreaturesSectionParser
+import com.galarzaa.tibiakt.core.section.library.urls.boostableBossesUrl
+import com.galarzaa.tibiakt.core.section.library.urls.creaturesUrl
+import com.galarzaa.tibiakt.core.section.news.archive.model.NewsArchive
+import com.galarzaa.tibiakt.core.section.news.archive.parser.NewsArchiveParser
+import com.galarzaa.tibiakt.core.section.news.article.model.News
+import com.galarzaa.tibiakt.core.section.news.article.parser.NewsParser
+import com.galarzaa.tibiakt.core.section.news.event.model.EventsSchedule
+import com.galarzaa.tibiakt.core.section.news.event.parser.EventsScheduleParser
+import com.galarzaa.tibiakt.core.section.news.shared.model.AvailableForumSection
+import com.galarzaa.tibiakt.core.section.news.shared.model.NewsCategory
+import com.galarzaa.tibiakt.core.section.news.shared.model.NewsType
+import com.galarzaa.tibiakt.core.section.news.urls.eventScheduleUrl
+import com.galarzaa.tibiakt.core.section.news.urls.newArchiveFormData
+import com.galarzaa.tibiakt.core.section.news.urls.newsArchiveUrl
+import com.galarzaa.tibiakt.core.section.news.urls.newsUrl
 import com.galarzaa.tibiakt.core.time.TIBIA_TIMEZONE
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
@@ -609,11 +600,15 @@ public open class TibiaKtClient protected constructor(
      */
     public open suspend fun fetchBazaar(
         type: BazaarType = BazaarType.CURRENT,
-        filters: BazaarFilters? = null,
+        filters: com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.BazaarFilters? = null,
         page: Int = 1,
-    ): TibiaResponse<CharacterBazaar> {
+    ): TibiaResponse<com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.CharacterBazaar> {
         val response = this.request(HttpMethod.Get, bazaarUrl(type, filters, page))
-        return response.parse { CharacterBazaarParser.fromContent(it) }
+        return response.parse {
+            _root_ide_package_.com.galarzaa.tibiakt.core.section.charactertrade.bazaar.parser.CharacterBazaarParser.fromContent(
+                it
+            )
+        }
     }
 
     /**
@@ -622,9 +617,12 @@ public open class TibiaKtClient protected constructor(
     public open suspend fun fetchBazaar(
         type: BazaarType = BazaarType.CURRENT,
         page: Int = 1,
-        filterBuilder: (BazaarFiltersBuilder.() -> Unit)? = null,
-    ): TibiaResponse<CharacterBazaar> =
-        fetchBazaar(type, filterBuilder?.let { BazaarFiltersBuilder().apply(it).build() }, page)
+        filterBuilder: (com.galarzaa.tibiakt.core.section.charactertrade.bazaar.builder.BazaarFiltersBuilder.() -> Unit)? = null,
+    ): TibiaResponse<com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.CharacterBazaar> =
+        fetchBazaar(type, filterBuilder?.let {
+            _root_ide_package_.com.galarzaa.tibiakt.core.section.charactertrade.bazaar.builder.BazaarFiltersBuilder()
+                .apply(it).build()
+        }, page)
 
     /**
      * Fetch an auction from Tibia.com.
@@ -641,10 +639,14 @@ public open class TibiaKtClient protected constructor(
         fetchItems: Boolean = false,
         fetchOutfits: Boolean = false,
         fetchMounts: Boolean = false,
-    ): TibiaResponse<Auction?> {
+    ): TibiaResponse<com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.Auction?> {
         val response = request(HttpMethod.Get, auctionUrl(auctionId))
         val tibiaResponse = response.parse {
-            AuctionParser.fromContent(it, auctionId, !skipDetails)
+            _root_ide_package_.com.galarzaa.tibiakt.core.section.charactertrade.bazaar.parser.AuctionParser.fromContent(
+                it,
+                auctionId,
+                !skipDetails
+            )
         }
 
         val hasDetails = tibiaResponse.data?.details != null
@@ -658,19 +660,19 @@ public open class TibiaKtClient protected constructor(
     }
 
     private suspend fun fetchAuctionAdditionalPages(
-        tibiaResponse: TibiaResponse<Auction?>,
+        tibiaResponse: TibiaResponse<com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.Auction?>,
         fetchItems: Boolean = false,
         fetchOutfits: Boolean = false,
         fetchMounts: Boolean = false,
-    ): TibiaResponse<Auction?> {
+    ): TibiaResponse<com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.Auction?> {
         if (tibiaResponse.data?.details == null) return tibiaResponse
         val accumulator = Timing(tibiaResponse.fetchingTime, tibiaResponse.parsingTime)
-        var itemEntries: List<ItemEntry>? = null
-        var storeItemEntries: List<ItemEntry>? = null
-        var outfitEntries: List<OutfitEntry>? = null
-        var storeOutfitEntries: List<OutfitEntry>? = null
-        var mountEntries: List<MountEntry>? = null
-        var storeMountEntries: List<MountEntry>? = null
+        var itemEntries: List<com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.ItemEntry>? = null
+        var storeItemEntries: List<com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.ItemEntry>? = null
+        var outfitEntries: List<com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.OutfitEntry>? = null
+        var storeOutfitEntries: List<com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.OutfitEntry>? = null
+        var mountEntries: List<com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.MountEntry>? = null
+        var storeMountEntries: List<com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.MountEntry>? = null
         if (fetchItems) {
             itemEntries = fetchAllPages(
                 tibiaResponse.data.auctionId, AuctionPagesType.ITEMS, tibiaResponse.data.details!!.items
@@ -778,7 +780,7 @@ public open class TibiaKtClient protected constructor(
      * @param type The type of items.
      * @param paginator The paginator class that holds the collection
      */
-    private suspend inline fun <reified E, T : AjaxPaginator<E>> fetchAllPages(
+    private suspend inline fun <reified E, T : com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.AjaxPaginator<E>> fetchAllPages(
         auctionId: Int,
         type: AuctionPagesType,
         paginator: T,

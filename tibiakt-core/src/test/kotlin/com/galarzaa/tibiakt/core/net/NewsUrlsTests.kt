@@ -16,8 +16,12 @@
 
 package com.galarzaa.tibiakt.core.net
 
-import com.galarzaa.tibiakt.core.enums.NewsCategory
-import com.galarzaa.tibiakt.core.enums.NewsType
+import com.galarzaa.tibiakt.core.section.news.shared.model.NewsCategory
+import com.galarzaa.tibiakt.core.section.news.shared.model.NewsType
+import com.galarzaa.tibiakt.core.section.news.urls.eventScheduleUrl
+import com.galarzaa.tibiakt.core.section.news.urls.newArchiveFormData
+import com.galarzaa.tibiakt.core.section.news.urls.newsArchiveUrl
+import com.galarzaa.tibiakt.core.section.news.urls.newsUrl
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.collections.shouldContainAll
 import io.kotest.matchers.collections.shouldNotContainAll

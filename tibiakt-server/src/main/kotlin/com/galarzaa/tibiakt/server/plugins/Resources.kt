@@ -16,21 +16,21 @@
 
 package com.galarzaa.tibiakt.server.plugins
 
-import com.galarzaa.tibiakt.core.enums.AuctionBattlEyeFilter
-import com.galarzaa.tibiakt.core.enums.AuctionOrderBy
-import com.galarzaa.tibiakt.core.enums.AuctionOrderDirection
-import com.galarzaa.tibiakt.core.enums.AuctionSearchType
-import com.galarzaa.tibiakt.core.enums.AuctionSkillFilter
-import com.galarzaa.tibiakt.core.enums.AuctionVocationFilter
-import com.galarzaa.tibiakt.core.enums.BazaarType
-import com.galarzaa.tibiakt.core.enums.HighscoresCategory
-import com.galarzaa.tibiakt.core.enums.HighscoresProfession
-import com.galarzaa.tibiakt.core.enums.HouseOrder
-import com.galarzaa.tibiakt.core.enums.HouseStatus
-import com.galarzaa.tibiakt.core.enums.HouseType
-import com.galarzaa.tibiakt.core.enums.NewsCategory
-import com.galarzaa.tibiakt.core.enums.NewsType
-import com.galarzaa.tibiakt.core.enums.PvpType
+import com.galarzaa.tibiakt.core.domain.world.PvpType
+import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.AuctionBattlEyeFilter
+import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.AuctionOrderBy
+import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.AuctionOrderDirection
+import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.AuctionSearchType
+import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.AuctionSkillFilter
+import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.AuctionVocationFilter
+import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.BazaarType
+import com.galarzaa.tibiakt.core.section.community.highscores.model.HighscoresCategory
+import com.galarzaa.tibiakt.core.section.community.highscores.model.HighscoresProfession
+import com.galarzaa.tibiakt.core.section.community.house.model.HouseOrder
+import com.galarzaa.tibiakt.core.section.community.house.model.HouseStatus
+import com.galarzaa.tibiakt.core.section.community.house.model.HouseType
+import com.galarzaa.tibiakt.core.section.news.shared.model.NewsCategory
+import com.galarzaa.tibiakt.core.section.news.shared.model.NewsType
 import io.ktor.resources.Resource
 import io.ktor.server.application.Application
 import io.ktor.server.application.install

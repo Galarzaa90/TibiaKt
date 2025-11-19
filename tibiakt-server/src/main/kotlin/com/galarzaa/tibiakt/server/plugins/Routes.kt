@@ -18,7 +18,7 @@ package com.galarzaa.tibiakt.server.plugins
 
 import com.galarzaa.tibiakt.client.TibiaKtClient
 import com.galarzaa.tibiakt.client.TibiaResponse
-import com.galarzaa.tibiakt.core.models.bazaar.BazaarFilters
+import com.galarzaa.tibiakt.core.section.charactertrade.model.BazaarFilters
 import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.Application
