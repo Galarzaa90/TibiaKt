@@ -82,7 +82,8 @@ public object NewsArchiveParser : Parser<NewsArchive> {
 
     private fun NewsArchiveBuilder.parseFilterTable(element: Element) {
         val formData = element.formData()
-        startOn = LocalDate(
+        val builder = NewsArchiveBuilder.NewsArchiveFiltersBuilder()
+        builder.startOn = LocalDate(
             formData.values["filter_begin_year"]?.toInt()
                 ?: throw ParsingException("could not find filter_begin_year in form"),
             formData.values["filter_begin_month"]?.toInt()
@@ -90,7 +91,7 @@ public object NewsArchiveParser : Parser<NewsArchive> {
             formData.values["filter_begin_day"]?.toInt()
                 ?: throw ParsingException("could not find filter_begin_day in form"),
         )
-        endOn = LocalDate(
+        builder.endOn = LocalDate(
             formData.values["filter_end_year"]?.toInt()
                 ?: throw ParsingException("could not find filter_end_year in form"),
             formData.values["filter_end_month"]?.toInt()
@@ -99,11 +100,12 @@ public object NewsArchiveParser : Parser<NewsArchive> {
                 ?: throw ParsingException("could not find filter_end_day in form"),
         )
 
-        for (value in NewsCategory.values()) {
-            if (!formData.valuesMultiple[value.filterName].isNullOrEmpty()) addCategory(value)
+        for (value in NewsCategory.entries) {
+            if (!formData.valuesMultiple[value.filterName].isNullOrEmpty()) builder.addCategory(value)
         }
-        for (value in NewsType.values()) {
-            if (!formData.valuesMultiple[value.filterName].isNullOrEmpty()) addType(value)
+        for (value in NewsType.entries) {
+            if (!formData.valuesMultiple[value.filterName].isNullOrEmpty()) builder.addType(value)
         }
+        filters = builder.build()
     }
 }

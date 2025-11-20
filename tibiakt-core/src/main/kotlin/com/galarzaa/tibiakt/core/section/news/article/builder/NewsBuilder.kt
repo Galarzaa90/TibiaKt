@@ -18,33 +18,33 @@ package com.galarzaa.tibiakt.core.section.news.article.builder
 
 import com.galarzaa.tibiakt.core.builder.BuilderDsl
 import com.galarzaa.tibiakt.core.builder.TibiaKtBuilder
-import com.galarzaa.tibiakt.core.section.news.article.model.News
+import com.galarzaa.tibiakt.core.builder.requireField
+import com.galarzaa.tibiakt.core.section.news.article.model.NewsArticle
 import com.galarzaa.tibiakt.core.section.news.shared.model.NewsCategory
 import kotlinx.datetime.LocalDate
 
 @BuilderDsl
-public inline fun newsBuilder(block: NewsBuilder.() -> Unit): NewsBuilder = NewsBuilder().apply(block)
+internal inline fun newsBuilder(block: NewsBuilder.() -> Unit): NewsBuilder = NewsBuilder().apply(block)
 
 @BuilderDsl
-public inline fun news(block: NewsBuilder.() -> Unit): News = newsBuilder(block).build()
+internal inline fun news(block: NewsBuilder.() -> Unit): NewsArticle = newsBuilder(block).build()
 
-/** Builder for [News] instances. */
+/** Builder for [NewsArticle] instances. */
 @BuilderDsl
-public class NewsBuilder : TibiaKtBuilder<News> {
-    public var id: Int? = null
-    public lateinit var title: String
-    public lateinit var category: NewsCategory
-    public lateinit var publishedOn: LocalDate
-    public lateinit var content: String
-    public var threadId: Int? = null
-    override fun build(): News {
-        return News(
-            id = id ?: error("id is required"),
-            title = if (::title.isInitialized) title else error("title is required"),
-            category = if (::category.isInitialized) category else error("category is required"),
-            publishedOn = if (::publishedOn.isInitialized) publishedOn else error("publishedOn is required"),
-            content = if (::content.isInitialized) content else error("content is required"),
-            threadId = threadId,
-        )
-    }
+internal class NewsBuilder : TibiaKtBuilder<NewsArticle> {
+    var id: Int? = null
+    lateinit var title: String
+    lateinit var category: NewsCategory
+    lateinit var publishedOn: LocalDate
+    lateinit var content: String
+    var threadId: Int? = null
+
+    override fun build() = NewsArticle(
+        id = requireField(id, "id"),
+        title = requireField(::title.isInitialized, "title") { title },
+        category = requireField(::category.isInitialized, "category") { category },
+        publishedOn = requireField(::publishedOn.isInitialized, "publishedOn") { publishedOn },
+        content = requireField(::content.isInitialized, "content") { content },
+        threadId = threadId,
+    )
 }

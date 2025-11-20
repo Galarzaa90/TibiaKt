@@ -21,13 +21,16 @@ import com.galarzaa.tibiakt.core.net.staticFileUrl
 
 /**
  * The available news categories.
+ *
+ * @property value The internal value, used in parameters for filtering, and image paths.
+ * @property displayName The display name used on Tibia.com.
  */
-public enum class NewsCategory(override val value: String) : StringEnum {
-    CIPSOFT("cipsoft"),
-    COMMUNITY("community"),
-    DEVELOPMENT("development"),
-    SUPPORT("support"),
-    TECHNICAL_ISSUES("technical");
+public enum class NewsCategory(override val value: String, public val displayName: String) : StringEnum {
+    CIPSOFT("cipsoft", "CipSoft"),
+    COMMUNITY("community", "Community"),
+    DEVELOPMENT("development", "Development"),
+    SUPPORT("support", "Support"),
+    TECHNICAL_ISSUES("technical", "Technical Issues");
 
     /**
      * The name of query parameter used to set this filter.
@@ -41,7 +44,7 @@ public enum class NewsCategory(override val value: String) : StringEnum {
     public val bigIconUrl: String get() = staticFileUrl("images", "global", "content", "newsicon_${value}_big.png")
 
     /**
-     * An URL to the small icon version of this category.
+     * A URL to the small icon version of this category.
      */
     public val smallIconUrl: String
         get() = staticFileUrl(

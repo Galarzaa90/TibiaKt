@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.galarzaa.tibiakt.core.section.news.shared.model
+package com.galarzaa.tibiakt.core.section.forum.shared.model
 
 /**
  * The possible status a thread can have.

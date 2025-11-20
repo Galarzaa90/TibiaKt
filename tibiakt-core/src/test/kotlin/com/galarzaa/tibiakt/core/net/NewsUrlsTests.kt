@@ -21,7 +21,7 @@ import com.galarzaa.tibiakt.core.section.news.shared.model.NewsType
 import com.galarzaa.tibiakt.core.section.news.urls.eventScheduleUrl
 import com.galarzaa.tibiakt.core.section.news.urls.newArchiveFormData
 import com.galarzaa.tibiakt.core.section.news.urls.newsArchiveUrl
-import com.galarzaa.tibiakt.core.section.news.urls.newsUrl
+import com.galarzaa.tibiakt.core.section.news.urls.newsArticleUrl
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.collections.shouldContainAll
 import io.kotest.matchers.collections.shouldNotContainAll
@@ -64,12 +64,12 @@ class NewsUrlsTests : FunSpec({
             form shouldContainAll expectedSelectedCategories
 
             // Must include selected types
-            val expectedSelectedTypes = pickedTypes.map { it.filterName to it.filterValue }
+            val expectedSelectedTypes = pickedTypes.map { it.filterName to it.value }
             form shouldContainAll expectedSelectedTypes
 
             // Must not include the rest
             val excludedCategories = (NewsCategory.entries.toSet() - pickedCategories).map { it.filterName to it.value }
-            val excludedTypes = (NewsType.entries.toSet() - pickedTypes).map { it.filterName to it.filterValue }
+            val excludedTypes = (NewsType.entries.toSet() - pickedTypes).map { it.filterName to it.value }
             form shouldNotContainAll excludedCategories
             form shouldNotContainAll excludedTypes
         }
@@ -85,13 +85,13 @@ class NewsUrlsTests : FunSpec({
             form shouldContainAll allCategories
 
             // All types present
-            val allTypes = NewsType.entries.map { it.filterName to it.filterValue }
+            val allTypes = NewsType.entries.map { it.filterName to it.value }
             form shouldContainAll allTypes
         }
     }
 
     test("newsUrl") {
-        val url = newsUrl(123_456)
+        val url = newsArticleUrl(123_456)
 
         url shouldContain "/news"
         url shouldContain "subtopic=newsarchive"

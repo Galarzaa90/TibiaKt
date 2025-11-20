@@ -18,7 +18,7 @@ package com.galarzaa.tibiakt.server.plugins
 
 import com.galarzaa.tibiakt.client.TibiaKtClient
 import com.galarzaa.tibiakt.client.TibiaResponse
-import com.galarzaa.tibiakt.core.section.charactertrade.model.BazaarFilters
+import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.BazaarFilters
 import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.Application
@@ -42,13 +42,8 @@ internal fun Application.configureRouting(client: TibiaKtClient) {
         get<Guilds> { (name) -> call.respondOrNotFound(client.fetchGuild(name)) }
         get<Worlds.ByName.Guilds> { (it) -> call.respondOrNotFound(client.fetchWorldGuilds(it.name)) }
         get<NewsArchive> {
-            if (it.start != null && it.end != null) {
-                call.respond(client.fetchRecentNews(it.start, it.end, it.category?.toSet(), it.type?.toSet()))
-            } else if (it.days != null) {
-                call.respond(client.fetchRecentNews(it.days, it.category?.toSet(), it.type?.toSet()))
-            } else {
-                call.respond(HttpStatusCode.BadRequest, "Query parameters 'start' and 'end', or 'days' are required")
-            }
+            check(it.startAt >= it.endAt) { "endAt must be after startAt" }
+            call.respond(client.fetchNewsArchive(it.startAt, it.endAt, it.category?.toSet(), it.type?.toSet()))
         }
         get<News> { (newsId) -> call.respondOrNotFound(client.fetchNews(newsId)) }
         get<News.Html> { (it) ->

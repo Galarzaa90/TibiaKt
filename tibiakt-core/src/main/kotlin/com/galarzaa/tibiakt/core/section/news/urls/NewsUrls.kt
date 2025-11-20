@@ -17,6 +17,7 @@
 package com.galarzaa.tibiakt.core.section.news.urls
 
 import com.galarzaa.tibiakt.core.net.tibiaUrl
+import com.galarzaa.tibiakt.core.section.news.archive.model.NewsArchiveFilters
 import com.galarzaa.tibiakt.core.section.news.shared.model.NewsCategory
 import com.galarzaa.tibiakt.core.section.news.shared.model.NewsType
 import kotlinx.datetime.LocalDate
@@ -32,17 +33,17 @@ public fun newsArchiveUrl(): String = tibiaUrl("news", "newsarchive")
  * POST parameters to filter news in the News Archive.
  */
 public fun newArchiveFormData(
-    startDate: LocalDate,
-    endDate: LocalDate,
+    startAt: LocalDate,
+    endAt: LocalDate,
     categories: Set<NewsCategory>? = null,
     types: Set<NewsType>? = null,
 ): List<Pair<String, String>> = buildList {
-    startDate.apply {
+    startAt.apply {
         add("filter_begin_day" to day.toString())
         add("filter_begin_month" to month.number.toString())
         add("filter_begin_year" to year.toString())
     }
-    endDate.apply {
+    endAt.apply {
         add("filter_end_day" to day.toString())
         add("filter_end_month" to month.number.toString())
         add("filter_end_year" to year.toString())
@@ -51,14 +52,20 @@ public fun newArchiveFormData(
         add(category.filterName to category.value)
     }
     for (type: NewsType in types ?: NewsType.entries.toSet()) {
-        add(type.filterName to type.filterValue)
+        add(type.filterName to type.value)
     }
 }
 
 /**
+ * POST parameters to filter news in the News Archive.
+ */
+public fun newsArchiveFormData(filters: NewsArchiveFilters): List<Pair<String, String>> =
+    newArchiveFormData(filters.startOn, filters.endOn, filters.categories, filters.types)
+
+/**
  * URL to a specific news article.
  */
-public fun newsUrl(newsId: Int): String = tibiaUrl("news", "newsarchive", "id" to newsId)
+public fun newsArticleUrl(newsId: Int): String = tibiaUrl("news", "newsarchive", "id" to newsId)
 
 /**
  * URL to the events schedule.

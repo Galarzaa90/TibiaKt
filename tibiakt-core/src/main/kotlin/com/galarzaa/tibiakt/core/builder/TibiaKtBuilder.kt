@@ -16,6 +16,12 @@
 
 package com.galarzaa.tibiakt.core.builder
 
+/** A builder DSL. */
+@DslMarker
+@Target(AnnotationTarget.CLASS, AnnotationTarget.TYPE, AnnotationTarget.FUNCTION)
+public annotation class BuilderDsl
+
+
 /** Interface for builders of TibiaKt models. */
 internal fun interface TibiaKtBuilder<T> {
     /** Builds an instance with the current data in the builder.
@@ -24,3 +30,9 @@ internal fun interface TibiaKtBuilder<T> {
      */
     fun build(): T
 }
+
+
+internal fun <T : Any> requireField(value: T?, name: String): T = requireNotNull(value) { "$name is required" }
+
+internal inline fun <T> requireField(initialized: Boolean, name: String, value: () -> T): T =
+    if (initialized) value() else error("$name is required")

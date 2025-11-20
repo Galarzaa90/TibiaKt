@@ -14,20 +14,25 @@
  * limitations under the License.
  */
 
-
 package com.galarzaa.tibiakt.core.section.news.archive.model
 
+import com.galarzaa.tibiakt.core.section.news.shared.model.NewsCategory
+import com.galarzaa.tibiakt.core.section.news.shared.model.NewsType
+import kotlinx.datetime.LocalDate
 import kotlinx.serialization.Serializable
 
 /**
- * The News Archive section in Tibia.com.
+ * Filtering options for search in the News Archive.
  *
- * @property filters The selected filtering options
- * @property entries The entries matching the filters.
+ * @property startOn The start date of the articles displayed.
+ * @property endOn The end date of the articles displayed.
+ * @property types The types of articles to show.
+ * @property categories The categories of articles to show.
  */
 @Serializable
-public data class NewsArchive(
-    val filters: NewsArchiveFilters,
-    val entries: List<NewsEntry>,
+public data class NewsArchiveFilters(
+    val startOn: LocalDate,
+    val endOn: LocalDate,
+    val types: Set<NewsType>,
+    val categories: Set<NewsCategory>,
 )
-

@@ -21,21 +21,21 @@ import com.galarzaa.tibiakt.core.html.cleanText
 import com.galarzaa.tibiakt.core.html.getLinkInformation
 import com.galarzaa.tibiakt.core.parser.Parser
 import com.galarzaa.tibiakt.core.section.news.article.builder.news
-import com.galarzaa.tibiakt.core.section.news.article.model.News
+import com.galarzaa.tibiakt.core.section.news.article.model.NewsArticle
 import com.galarzaa.tibiakt.core.section.news.shared.model.NewsCategory
 import com.galarzaa.tibiakt.core.text.remove
 import com.galarzaa.tibiakt.core.time.parseTibiaDate
 
 /** Parser for news articles. */
-public object NewsParser : Parser<News?> {
-    override fun fromContent(content: String): News? = fromContent(content, 0)
+public object NewsParser : Parser<NewsArticle?> {
+    override fun fromContent(content: String): NewsArticle? = fromContent(content, 0)
 
     /**
      * Parse the content from Tibia.com into a news article.
      *
      * @param newsId The news ID to assign to the article, since it is not possible to know this only from the HTML content.
      */
-    public fun fromContent(content: String, newsId: Int = 0): News? {
+    public fun fromContent(content: String, newsId: Int = 0): NewsArticle? {
         val boxContent = boxContent(content)
 
         val titleContainer = boxContent.selectFirst("div.NewsHeadlineText")
@@ -45,7 +45,7 @@ public object NewsParser : Parser<News?> {
         return news {
             id = newsId
             title = titleContainer.cleanText()
-            category = NewsCategory.Companion.fromIcon(icon.attr("src"))
+            category = NewsCategory.fromIcon(icon.attr("src"))
                 ?: throw ParsingException("Unexpected news icon found: ${icon.attr("src")}")
 
             val newsDate = boxContent.selectFirst("div.NewsHeadlineDate")?.cleanText()?.remove("-")?.trim()

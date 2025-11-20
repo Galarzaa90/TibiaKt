@@ -41,6 +41,7 @@ internal fun Application.configureLocations() {
     install(Resources)
 }
 
+
 @Resource("/characters/{name}")
 data class Characters(val name: String)
 
@@ -60,11 +61,10 @@ data class Guilds(val name: String)
 
 @Resource("/news")
 data class NewsArchive(
-    val start: LocalDate? = null,
-    val end: LocalDate? = null,
-    val days: Int? = null,
-    val type: List<NewsType>? = null,
-    val category: List<NewsCategory>? = null,
+    val startAt: LocalDate,
+    val endAt: LocalDate,
+    val type: Set<NewsType>? = null,
+    val category: Set<NewsCategory>? = null,
 )
 
 @Resource("/news/{newsId}")

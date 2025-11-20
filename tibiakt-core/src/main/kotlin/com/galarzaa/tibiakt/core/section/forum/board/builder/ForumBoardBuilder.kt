@@ -24,7 +24,7 @@ import com.galarzaa.tibiakt.core.section.forum.board.model.ForumBoard
 import com.galarzaa.tibiakt.core.section.forum.board.model.ThreadEntry
 import com.galarzaa.tibiakt.core.section.forum.shared.model.ForumEmoticon
 import com.galarzaa.tibiakt.core.section.forum.shared.model.LastPost
-import com.galarzaa.tibiakt.core.section.news.shared.model.ThreadStatus
+import com.galarzaa.tibiakt.core.section.forum.shared.model.ThreadStatus
 
 public inline fun forumBoardBuilder(block: ForumBoardBuilder.() -> Unit): ForumBoardBuilder =
     ForumBoardBuilder().apply(block)

@@ -17,7 +17,7 @@
 package com.galarzaa.tibiakt.core.parser
 
 import com.galarzaa.tibiakt.TestUtilities.getResource
-import com.galarzaa.tibiakt.core.section.news.article.model.News
+import com.galarzaa.tibiakt.core.section.news.article.model.NewsArticle
 import com.galarzaa.tibiakt.core.section.news.article.parser.NewsParser
 import com.galarzaa.tibiakt.core.section.news.shared.model.NewsCategory
 import io.kotest.core.spec.IsolationMode
@@ -32,20 +32,20 @@ class NewsParserTests : FunSpec({
     test("News post with discussion thread") {
         val news = NewsParser.fromContent(getResource("news/newsPostWithDiscussionThread.txt"))
 
-        news.shouldBeInstanceOf<News>()
+        news.shouldBeInstanceOf<NewsArticle>()
         news.threadId shouldNotBe null
         news.threadUrl shouldNotBe null
     }
     test("News ticker") {
         val news = NewsParser.fromContent(getResource("news/newsTicker.txt"))
 
-        news.shouldBeInstanceOf<News>()
+        news.shouldBeInstanceOf<NewsArticle>()
         news.title shouldBe "News Ticker"
     }
     test("Featured article") {
         val news = NewsParser.fromContent(getResource("news/newsFeaturedArticle.txt"))
 
-        news.shouldBeInstanceOf<News>()
+        news.shouldBeInstanceOf<NewsArticle>()
         news.category shouldBe NewsCategory.COMMUNITY
     }
     test("News not found") {

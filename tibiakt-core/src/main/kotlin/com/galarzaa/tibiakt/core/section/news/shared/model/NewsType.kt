@@ -19,20 +19,14 @@ package com.galarzaa.tibiakt.core.section.news.shared.model
 import com.galarzaa.tibiakt.core.enums.StringEnum
 
 /** The available types of news. */
-public enum class NewsType(override val value: String) : StringEnum {
-    NEWS("News"),
-    NEWS_TICKER("News Ticker"),
-    FEATURED_ARTICLE("Featured Article");
+public enum class NewsType(override val value: String, public val displayName: String) : StringEnum {
+    NEWS("news", "News"),
+    NEWS_TICKER("ticker", "News Ticker"),
+    FEATURED_ARTICLE("article", "Featured Article");
 
     /**
      * The name of query parameter used to set this filter.
      */
     public val filterName: String
-        get() = "filter_$filterValue"
-
-    /**
-     * The value of query parameter used to set this filter.
-     */
-    public val filterValue: String
-        get() = value.split(" ").last().lowercase()
+        get() = "filter_$value"
 }

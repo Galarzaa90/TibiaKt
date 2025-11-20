@@ -18,67 +18,80 @@ package com.galarzaa.tibiakt.core.section.news.archive.builder
 
 import com.galarzaa.tibiakt.core.builder.BuilderDsl
 import com.galarzaa.tibiakt.core.builder.TibiaKtBuilder
+import com.galarzaa.tibiakt.core.builder.requireField
 import com.galarzaa.tibiakt.core.section.news.archive.model.NewsArchive
+import com.galarzaa.tibiakt.core.section.news.archive.model.NewsArchiveFilters
 import com.galarzaa.tibiakt.core.section.news.archive.model.NewsEntry
 import com.galarzaa.tibiakt.core.section.news.shared.model.NewsCategory
 import com.galarzaa.tibiakt.core.section.news.shared.model.NewsType
 import kotlinx.datetime.LocalDate
 
 @BuilderDsl
-public fun newsArchive(block: NewsArchiveBuilder.() -> Unit): NewsArchive = newsArchiveBuilder(block).build()
+internal fun newsArchive(block: NewsArchiveBuilder.() -> Unit) = newsArchiveBuilder(block).build()
 
 @BuilderDsl
-public fun newsArchiveBuilder(block: NewsArchiveBuilder.() -> Unit): NewsArchiveBuilder =
+internal fun newsArchiveBuilder(block: NewsArchiveBuilder.() -> Unit) =
     NewsArchiveBuilder().apply(block)
 
 /** Builder for [NewsArchive] instances. */
 @BuilderDsl
-public class NewsArchiveBuilder : TibiaKtBuilder<NewsArchive> {
-    public var startOn: LocalDate? = null
-    public var endOn: LocalDate? = null
-    public val types: MutableSet<NewsType> = mutableSetOf()
-    public val categories: MutableSet<NewsCategory> = mutableSetOf()
-    public val entries: MutableList<NewsEntry> = mutableListOf()
-    public fun addCategory(category: NewsCategory): NewsArchiveBuilder = apply { categories.add(category) }
+internal class NewsArchiveBuilder : TibiaKtBuilder<NewsArchive> {
+    var filters: NewsArchiveFilters? = null
+    val entries: MutableList<NewsEntry> = mutableListOf()
 
-    public fun addType(type: NewsType): NewsArchiveBuilder = apply { types.add(type) }
 
-    public fun addEntry(
+    fun addEntry(
         id: Int,
         title: String,
         category: NewsCategory,
         date: LocalDate,
         type: NewsType,
-    ): NewsArchiveBuilder = apply {
+    ) = apply {
         entries.add(NewsEntry(id, title, category, date, type))
     }
 
-    public fun addEntry(builder: NewsEntryBuilder.() -> Unit): NewsArchiveBuilder = apply {
+    fun addEntry(builder: NewsEntryBuilder.() -> Unit) = apply {
         entries.add(NewsEntryBuilder().apply(builder).build())
     }
 
 
     override fun build(): NewsArchive = NewsArchive(
-        startOn = startOn ?: error("startOn is required"),
-        endOn = endOn ?: error("endOn is required"),
-        types = types,
-        categories = categories,
+        filters = requireField(filters, "filters"),
         entries = entries,
     )
 
-    public class NewsEntryBuilder : TibiaKtBuilder<NewsEntry> {
-        public var id: Int = 0
-        public var title: String? = null
-        public var category: NewsCategory? = null
-        public var publishedOn: LocalDate? = null
-        public var type: NewsType? = null
+    class NewsEntryBuilder : TibiaKtBuilder<NewsEntry> {
+        var id: Int = 0
+        var title: String? = null
+        var category: NewsCategory? = null
+        var publishedOn: LocalDate? = null
+        var type: NewsType? = null
 
-        override fun build(): NewsEntry = NewsEntry(
+
+        override fun build() = NewsEntry(
             id = id,
-            title = title ?: error("title is required"),
-            category = category ?: error("category is required"),
-            publishedOn = publishedOn ?: error("date is required"),
-            type = type ?: error("type is required"),
+            title = requireField(title, "title"),
+            category = requireField(category, "category"),
+            publishedOn = requireField(publishedOn, "publishedOn"),
+            type = requireField(type, "type"),
+        )
+    }
+
+    class NewsArchiveFiltersBuilder : TibiaKtBuilder<NewsArchiveFilters> {
+        var startOn: LocalDate? = null
+        var endOn: LocalDate? = null
+        val types: MutableSet<NewsType> = mutableSetOf()
+        val categories: MutableSet<NewsCategory> = mutableSetOf()
+
+        fun addCategory(category: NewsCategory) = apply { categories.add(category) }
+
+        fun addType(type: NewsType) = apply { types.add(type) }
+
+        override fun build() = NewsArchiveFilters(
+            startOn = requireField(startOn, "startOn"),
+            endOn = requireField(endOn, "endOn"),
+            types = types,
+            categories = categories,
         )
     }
 }

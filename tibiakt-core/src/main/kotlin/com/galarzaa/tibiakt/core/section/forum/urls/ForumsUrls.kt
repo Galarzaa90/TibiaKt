@@ -17,7 +17,7 @@
 package com.galarzaa.tibiakt.core.section.forum.urls
 
 import com.galarzaa.tibiakt.core.net.tibiaUrl
-import com.galarzaa.tibiakt.core.section.news.shared.model.AvailableForumSection
+import com.galarzaa.tibiakt.core.section.forum.shared.model.AvailableForumSection
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.number
 

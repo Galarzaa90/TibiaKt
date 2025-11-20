@@ -23,7 +23,7 @@ import kotlinx.datetime.LocalDate
 import kotlinx.serialization.Serializable
 
 /**
- * A news article, featured article or news ticker.
+ * A news article. Can be a regular news article, a featured article or a news ticker.
  *
  * @property id The internal ID of the entry.
  * @property title The title of the news.
@@ -33,7 +33,7 @@ import kotlinx.serialization.Serializable
  * @property threadId The discussion thread specific for this entry, if any.
  */
 @Serializable
-public data class News(
+public data class NewsArticle(
     override val id: Int,
     val title: String,
     override val category: NewsCategory,

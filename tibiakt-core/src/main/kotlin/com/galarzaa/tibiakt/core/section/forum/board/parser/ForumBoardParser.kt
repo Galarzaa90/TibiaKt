@@ -31,7 +31,7 @@ import com.galarzaa.tibiakt.core.section.forum.board.builder.ForumBoardBuilder
 import com.galarzaa.tibiakt.core.section.forum.board.builder.forumBoard
 import com.galarzaa.tibiakt.core.section.forum.board.model.ForumBoard
 import com.galarzaa.tibiakt.core.section.forum.shared.model.ForumEmoticon
-import com.galarzaa.tibiakt.core.section.news.shared.model.ThreadStatus
+import com.galarzaa.tibiakt.core.section.forum.shared.model.ThreadStatus
 import com.galarzaa.tibiakt.core.text.remove
 import org.jsoup.nodes.Element
 

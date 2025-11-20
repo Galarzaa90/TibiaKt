@@ -16,7 +16,7 @@
 
 package com.galarzaa.tibiakt.core.section.news.shared.model
 
-import com.galarzaa.tibiakt.core.section.news.urls.newsUrl
+import com.galarzaa.tibiakt.core.section.news.urls.newsArticleUrl
 
 /**
  * Base interface for news related objects.
@@ -31,5 +31,5 @@ public interface BaseNews {
     /**
      * The URL to this article.
      */
-    public val url: String get() = newsUrl(id)
+    public val url: String get() = newsArticleUrl(id)
 }

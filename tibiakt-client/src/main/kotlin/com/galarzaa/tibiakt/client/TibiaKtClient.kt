@@ -70,6 +70,7 @@ import com.galarzaa.tibiakt.core.section.forum.cmpost.model.CMPostArchive
 import com.galarzaa.tibiakt.core.section.forum.cmpost.parser.CMPostArchiveParser
 import com.galarzaa.tibiakt.core.section.forum.section.model.ForumSection
 import com.galarzaa.tibiakt.core.section.forum.section.parser.ForumSectionParser
+import com.galarzaa.tibiakt.core.section.forum.shared.model.AvailableForumSection
 import com.galarzaa.tibiakt.core.section.forum.thread.model.ForumThread
 import com.galarzaa.tibiakt.core.section.forum.thread.parser.ForumThreadParser
 import com.galarzaa.tibiakt.core.section.forum.urls.cmPostArchiveUrl
@@ -86,17 +87,16 @@ import com.galarzaa.tibiakt.core.section.library.urls.boostableBossesUrl
 import com.galarzaa.tibiakt.core.section.library.urls.creaturesUrl
 import com.galarzaa.tibiakt.core.section.news.archive.model.NewsArchive
 import com.galarzaa.tibiakt.core.section.news.archive.parser.NewsArchiveParser
-import com.galarzaa.tibiakt.core.section.news.article.model.News
+import com.galarzaa.tibiakt.core.section.news.article.model.NewsArticle
 import com.galarzaa.tibiakt.core.section.news.article.parser.NewsParser
 import com.galarzaa.tibiakt.core.section.news.event.model.EventsSchedule
 import com.galarzaa.tibiakt.core.section.news.event.parser.EventsScheduleParser
-import com.galarzaa.tibiakt.core.section.news.shared.model.AvailableForumSection
 import com.galarzaa.tibiakt.core.section.news.shared.model.NewsCategory
 import com.galarzaa.tibiakt.core.section.news.shared.model.NewsType
 import com.galarzaa.tibiakt.core.section.news.urls.eventScheduleUrl
 import com.galarzaa.tibiakt.core.section.news.urls.newArchiveFormData
 import com.galarzaa.tibiakt.core.section.news.urls.newsArchiveUrl
-import com.galarzaa.tibiakt.core.section.news.urls.newsUrl
+import com.galarzaa.tibiakt.core.section.news.urls.newsArticleUrl
 import com.galarzaa.tibiakt.core.time.TIBIA_TIMEZONE
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
@@ -285,13 +285,13 @@ public open class TibiaKtClient protected constructor(
     /**
      * Fetch the news for a given interval.
      */
-    public open suspend fun fetchRecentNews(
-        startDate: LocalDate,
-        endDate: LocalDate,
+    public open suspend fun fetchNewsArchive(
+        startAt: LocalDate,
+        endAt: LocalDate,
         categories: Set<NewsCategory>? = null,
         types: Set<NewsType>? = null,
     ): TibiaResponse<NewsArchive> {
-        val data = newArchiveFormData(startDate, endDate, categories, types)
+        val data = newArchiveFormData(startAt, endAt, categories, types)
         val response = this.request(HttpMethod.Post, newsArchiveUrl(), data)
         return response.parse { NewsArchiveParser.fromContent(it) }
     }
@@ -299,11 +299,11 @@ public open class TibiaKtClient protected constructor(
     /**
      * Fetch the news from today to the last provided days.
      */
-    public open suspend fun fetchRecentNews(
+    public open suspend fun fetchNewsArchive(
         days: Int = 30,
         categories: Set<NewsCategory>? = null,
         types: Set<NewsType>? = null,
-    ): TibiaResponse<NewsArchive> = fetchRecentNews(
+    ): TibiaResponse<NewsArchive> = fetchNewsArchive(
         (Clock.System.now() - days.days).toLocalDateTime(TIBIA_TIMEZONE).date,
         Clock.System.now().toLocalDateTime(TIBIA_TIMEZONE).date,
         categories,
@@ -313,8 +313,8 @@ public open class TibiaKtClient protected constructor(
     /**
      * Fetch a specific news article by its [newsId].
      */
-    public open suspend fun fetchNews(newsId: Int): TibiaResponse<News?> {
-        val response = this.request(HttpMethod.Get, newsUrl(newsId))
+    public open suspend fun fetchNews(newsId: Int): TibiaResponse<NewsArticle?> {
+        val response = this.request(HttpMethod.Get, newsArticleUrl(newsId))
         return response.parse { NewsParser.fromContent(it, newsId) }
     }
 

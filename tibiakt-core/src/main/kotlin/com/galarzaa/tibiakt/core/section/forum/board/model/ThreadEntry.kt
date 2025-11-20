@@ -19,7 +19,7 @@ package com.galarzaa.tibiakt.core.section.forum.board.model
 import com.galarzaa.tibiakt.core.section.forum.shared.model.BaseForumThread
 import com.galarzaa.tibiakt.core.section.forum.shared.model.ForumEmoticon
 import com.galarzaa.tibiakt.core.section.forum.shared.model.LastPost
-import com.galarzaa.tibiakt.core.section.news.shared.model.ThreadStatus
+import com.galarzaa.tibiakt.core.section.forum.shared.model.ThreadStatus
 import kotlinx.serialization.Serializable
 
 /**
