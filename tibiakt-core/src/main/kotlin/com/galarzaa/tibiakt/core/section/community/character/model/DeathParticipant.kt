@@ -16,20 +16,53 @@
 
 package com.galarzaa.tibiakt.core.section.community.character.model
 
+import com.galarzaa.tibiakt.core.domain.character.TibiaCharacter
+import com.galarzaa.tibiakt.core.section.community.urls.characterUrl
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-/**
- * Represents a participant listed in a death.
- *
- * @property name The name of the participant. If the participant is a summoned creature, this is the summoner's name.
- * @property isPlayer Whether the participant is a player.
- * @property isTraded Whether the character was traded after this death occurred.
- * @property summon The summoned creature that caused this death, if applicable.
- */
+/** An entity that participated in a [character][CharacterInfo]'s death. */
 @Serializable
-public data class DeathParticipant(
-    val name: String,
-    val isPlayer: Boolean,
-    val summon: String?,
-    val isTraded: Boolean,
-)
+public sealed interface DeathParticipant {
+    /** The name of the participant. */
+    public val name: String
+
+    /**
+     * A creature that participated in a death.
+     *
+     * @property name The name of the creature.
+     */
+    @Serializable
+    @SerialName("creature")
+    public data class Creature(override val name: String) : DeathParticipant
+
+    /**
+     * A player who participated in a death.
+     *
+     * @property name The name of the player.
+     */
+    @Serializable
+    @SerialName("player")
+    public data class Player(
+        override val name: String,
+        val isTraded: Boolean,
+    ) : DeathParticipant, TibiaCharacter
+
+    /**
+     * A creature that was summoned by a player and participated in a death.
+     *
+     * @property name The creature that dealt the killing blow.
+     * @property summonerName The name of the player that summoned the creature.
+     * @property isSummonerTraded Whether the summoner was traded after the death occurred.
+     */
+    @Serializable
+    @SerialName("summon")
+    public data class Summon(
+        override val name: String,
+        val summonerName: String,
+        val isSummonerTraded: Boolean,
+    ) : DeathParticipant {
+        /** URL to the summoner's information page. */
+        public val summonerUrl: String get() = characterUrl(summonerName)
+    }
+}

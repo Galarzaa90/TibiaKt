@@ -24,7 +24,7 @@ import com.galarzaa.tibiakt.core.net.staticFileUrl
  * @property name The name of the creature.
  * @property identifier The internal name of the creature, used for images and links (where applicable).
  */
-public interface BaseCreatureEntry {
+public interface BaseCreature {
     public val name: String
     public val identifier: String
 

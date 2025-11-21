@@ -18,48 +18,49 @@ package com.galarzaa.tibiakt.core.section.library.creature.builder
 
 import com.galarzaa.tibiakt.core.builder.BuilderDsl
 import com.galarzaa.tibiakt.core.builder.TibiaKtBuilder
+import com.galarzaa.tibiakt.core.builder.requireField
 import com.galarzaa.tibiakt.core.section.library.creature.model.CreatureEntry
 import com.galarzaa.tibiakt.core.section.library.creature.model.CreaturesSection
 
 @BuilderDsl
-public inline fun creaturesSection(block: CreaturesSectionBuilder.() -> Unit): CreaturesSection =
+internal inline fun creaturesSection(block: CreaturesSectionBuilder.() -> Unit): CreaturesSection =
     CreaturesSectionBuilder().apply(block).build()
 
 @BuilderDsl
-public inline fun creaturesSectionBuilder(block: CreaturesSectionBuilder.() -> Unit): CreaturesSectionBuilder =
+internal inline fun creaturesSectionBuilder(block: CreaturesSectionBuilder.() -> Unit): CreaturesSectionBuilder =
     CreaturesSectionBuilder().apply(block)
 
 /** Builder for [CreaturesSection] instances. */
 @BuilderDsl
-public class CreaturesSectionBuilder : TibiaKtBuilder<CreaturesSection> {
-    public var boostedCreature: CreatureEntry? = null
-    public val creatures: MutableList<CreatureEntry> = mutableListOf()
+internal class CreaturesSectionBuilder : TibiaKtBuilder<CreaturesSection> {
+    var boostedCreature: CreatureEntry? = null
+    val creatures: MutableList<CreatureEntry> = mutableListOf()
 
-    public fun boostedCreature(boostedCreature: CreatureEntry): CreaturesSectionBuilder =
+    fun boostedCreature(boostedCreature: CreatureEntry): CreaturesSectionBuilder =
         apply { this.boostedCreature = boostedCreature }
 
-    public fun boostedCreature(block: CreatureEntryBuilder.() -> Unit): CreaturesSectionBuilder =
+    fun boostedCreature(block: CreatureEntryBuilder.() -> Unit): CreaturesSectionBuilder =
         apply { this.boostedCreature = CreatureEntryBuilder().apply(block).build() }
 
-    public fun addCreature(creature: CreatureEntry): CreaturesSectionBuilder = apply { creatures.add(creature) }
+    fun addCreature(creature: CreatureEntry): CreaturesSectionBuilder = apply { creatures.add(creature) }
 
     @BuilderDsl
-    public fun addCreature(block: CreatureEntryBuilder.() -> Unit): CreaturesSectionBuilder =
+    fun addCreature(block: CreatureEntryBuilder.() -> Unit): CreaturesSectionBuilder =
         apply { creatures.add(CreatureEntryBuilder().apply(block).build()) }
 
-    public override fun build(): CreaturesSection = CreaturesSection(
-        boostedCreature = boostedCreature
-            ?: throw IllegalArgumentException("boostedCreature is required"), creatures = creatures
+    override fun build(): CreaturesSection = CreaturesSection(
+        boostedCreature = requireField(boostedCreature, "boostedCreature"),
+        creatures = creatures,
     )
 
     @BuilderDsl
-    public class CreatureEntryBuilder : TibiaKtBuilder<CreatureEntry> {
-        public lateinit var name: String
-        public lateinit var identifier: String
+    class CreatureEntryBuilder : TibiaKtBuilder<CreatureEntry> {
+        lateinit var name: String
+        lateinit var identifier: String
 
-        public override fun build(): CreatureEntry = CreatureEntry(
-            name = if (::name.isInitialized) name else error("name is required"),
-            identifier = if (::identifier.isInitialized) identifier else error("identifier is required"),
+        override fun build(): CreatureEntry = CreatureEntry(
+            name = requireField(::name.isInitialized, "name") { name },
+            identifier = requireField(::identifier.isInitialized, "identifier") { identifier },
         )
     }
 }

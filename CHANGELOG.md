@@ -2,11 +2,23 @@
 
 ## 2.0.0 (Unreleased)
 
-- Reorganized package names.
-    - Classes are organized similar to sections on Tibia.com
+- Reorganized package names. Classes are organized similar to sections on Tibia.com
 - Renamed `BaseCharacter` to `TibiaCharacter`.
 - Renamed `Character` to `CharacterInfo` to avoid conflicts with `java.lang.Character`
 - Renamed `CharacterLevel` to `LevelAware`.
+- `TibiaKtClient` now implements `TibiaKtApi` interface.
+  - Remove `fetchNewsArchive` using days.
+  - `fetchNews` renamed to `fetchNewsArticleById`.
+  - Removed `fetchEventsSchedule` overloads with separate `year`  and `month` parameters.
+- Added `displayName` property to `NewsCategory` enum.
+- `NewsType.value` renamed to `displayName`, added `value` property to represent internal value.
+- Renamed `News` to `NewsArticle`.
+- Renamed `BaseCreatureEntry` to `BaseCreature`.
+- Renamed `OtherCharacter` to `AccountCharacter`.
+- Renamed `OtherCharacter.isDeleted` to `isScheduledForDeletion`.
+- Renamed `Death.timestamp` to `occurredAt`.
+- `DeathParticipant` is now a sealed interface with subtypes `Creature`, `Player` and `Summon`.
+- All builder classes are now internal.
 
 ## 1.0.0 (2025/10/17)
 

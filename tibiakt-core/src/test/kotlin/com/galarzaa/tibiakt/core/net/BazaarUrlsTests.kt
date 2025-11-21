@@ -16,8 +16,8 @@
 
 package com.galarzaa.tibiakt.core.net
 
+import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.BazaarFilters
 import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.BazaarType
-import com.galarzaa.tibiakt.core.section.charactertrade.model.BazaarFilters
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.string.shouldContain
 

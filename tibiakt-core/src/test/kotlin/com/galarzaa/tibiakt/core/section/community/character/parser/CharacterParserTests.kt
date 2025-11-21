@@ -1,5 +1,5 @@
 /*
- * Copyright © 2024 Allan Galarza
+ * Copyright © 2025 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,19 +14,21 @@
  * limitations under the License.
  */
 
-package com.galarzaa.tibiakt.core.parser
+package com.galarzaa.tibiakt.core.section.community.character.parser
 
 import com.galarzaa.tibiakt.TestUtilities.getResource
 import com.galarzaa.tibiakt.core.domain.character.Sex
 import com.galarzaa.tibiakt.core.domain.character.Vocation
 import com.galarzaa.tibiakt.core.section.community.character.model.CharacterInfo
-import com.galarzaa.tibiakt.core.section.community.character.parser.CharacterParser
+import com.galarzaa.tibiakt.core.section.community.character.model.DeathParticipant
 import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.inspectors.forAtLeastOne
+import io.kotest.inspectors.shouldForAny
 import io.kotest.matchers.collections.shouldBeEmpty
 import io.kotest.matchers.collections.shouldHaveAtLeastSize
 import io.kotest.matchers.collections.shouldHaveSize
+import io.kotest.matchers.nulls.shouldNotBeNull
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
 import io.kotest.matchers.types.shouldBeInstanceOf
@@ -81,7 +83,11 @@ class CharacterParserTests : FunSpec({
         character.isScheduledForDeletion shouldBe true
     }
     test("Character with complex deaths"){
+        val character = CharacterParser.fromContent(getResource("character/characterWithComplexDeaths.txt"))
 
+        character.shouldNotBeNull()
+        val killers = character.deaths.flatMap { it.killers }
+        killers.shouldForAny { it is DeathParticipant.Summon }
     }
     test("Character with former names") {
         val character = CharacterParser.fromContent(getResource("character/characterWithFormerNames.txt"))
@@ -130,5 +136,42 @@ class CharacterParserTests : FunSpec({
 
         character.shouldBeInstanceOf<CharacterInfo>()
         character.deaths shouldHaveAtLeastSize 1
+    }
+
+    context("parseKiller") {
+        test("Killer with ' of ' in name") {
+            // language=html
+            val html =
+                """<a href="https://www.tibia.com/community/?subtopic=characters&name=Hand+of+Nightshadow" >Hand&#160;of&#160;Nightshadow</a>"""
+            val killer = CharacterParser.parseKiller(html)
+            killer.shouldNotBeNull()
+            killer.shouldBeInstanceOf<DeathParticipant.Player>()
+            killer.name shouldBe "Hand of Nightshadow"
+        }
+        test("Traded killer") {
+            // language=html
+            val html = """Nice&#160;bomba (traded)"""
+            val killer = CharacterParser.parseKiller(html)
+            killer.shouldBeInstanceOf<DeathParticipant.Player>()
+            killer.name shouldBe "Nice bomba"
+            killer.isTraded shouldBe true
+        }
+        test("Player summon") {
+            // language=html
+            val html =
+                """sorcerer familiar of <a href="https://www.tibia.com/community/?subtopic=characters&name=Deatth" >Deatth</a>"""
+            val killer = CharacterParser.parseKiller(html)
+            killer.shouldBeInstanceOf<DeathParticipant.Summon>()
+            killer.name shouldBe "sorcerer familiar"
+            killer.summonerName shouldBe "Deatth"
+            killer.isSummonerTraded shouldBe false
+        }
+        test("Creature") {
+            // language=html
+            val html = """cloak of terror"""
+            val killer = CharacterParser.parseKiller(html)
+            killer.shouldBeInstanceOf<DeathParticipant.Creature>()
+            killer.name shouldBe "cloak of terror"
+        }
     }
 })

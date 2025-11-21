@@ -17,10 +17,10 @@
 package com.galarzaa.tibiakt.core.parser
 
 import com.galarzaa.tibiakt.TestUtilities.getResource
+import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.Auction
+import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.AuctionDetails
 import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.AuctionStatus
-import com.galarzaa.tibiakt.core.section.charactertrade.model.Auction
-import com.galarzaa.tibiakt.core.section.charactertrade.model.AuctionDetails
-import com.galarzaa.tibiakt.core.section.charactertrade.parser.AuctionParser
+import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.parser.AuctionParser
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.inspectors.forAtLeastOne
 import io.kotest.matchers.ints.shouldBeGreaterThan

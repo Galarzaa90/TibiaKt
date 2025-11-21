@@ -21,16 +21,16 @@ import kotlinx.serialization.Serializable
 import kotlin.time.Instant
 
 /**
- * A death by a [CharacterInfo].
+ * A death by a [character][CharacterInfo].
  *
- * @property timestamp The date and time when the death happened.
+ * @property occurredAt The date and time when the death happened.
  * @property level The level of the character when they died.
  * @property killers The list of killers.
  * @property assists The list of characters that helped in the death without dealing damage.
  */
 @Serializable
 public data class Death(
-    val timestamp: Instant,
+    val occurredAt: Instant,
     val level: Int,
     val killers: List<DeathParticipant>,
     val assists: List<DeathParticipant>,
@@ -38,5 +38,7 @@ public data class Death(
     /**
      * Whether this death was caused by players.
      */
-    val isByPlayers: Boolean get() = killers.any { it.isPlayer } || assists.any()
+    val isByPlayers: Boolean
+        get() = killers.any { it is DeathParticipant.Player || it is DeathParticipant.Summon } ||
+                assists.any { it is DeathParticipant.Player || it is DeathParticipant.Summon }
 }

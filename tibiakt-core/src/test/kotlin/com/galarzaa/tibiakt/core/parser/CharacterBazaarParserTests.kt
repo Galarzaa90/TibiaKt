@@ -18,7 +18,7 @@ package com.galarzaa.tibiakt.core.parser
 
 import com.galarzaa.tibiakt.TestUtilities.getResource
 import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.BazaarType
-import com.galarzaa.tibiakt.core.section.charactertrade.parser.CharacterBazaarParser
+import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.parser.CharacterBazaarParser
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.collections.shouldHaveAtLeastSize
 import io.kotest.matchers.collections.shouldHaveSize

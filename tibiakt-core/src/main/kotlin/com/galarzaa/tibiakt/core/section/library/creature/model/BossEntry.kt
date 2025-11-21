@@ -28,4 +28,4 @@ import kotlinx.serialization.Serializable
 public data class BossEntry(
     override val name: String,
     override val identifier: String,
-) : BaseCreatureEntry
+) : BaseCreature

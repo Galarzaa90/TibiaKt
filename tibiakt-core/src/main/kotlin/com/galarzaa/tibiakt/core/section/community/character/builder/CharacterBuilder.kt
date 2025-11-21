@@ -18,9 +18,11 @@ package com.galarzaa.tibiakt.core.section.community.character.builder
 
 import com.galarzaa.tibiakt.core.builder.BuilderDsl
 import com.galarzaa.tibiakt.core.builder.TibiaKtBuilder
+import com.galarzaa.tibiakt.core.builder.requireField
 import com.galarzaa.tibiakt.core.domain.character.Sex
 import com.galarzaa.tibiakt.core.domain.character.Vocation
 import com.galarzaa.tibiakt.core.section.community.character.model.AccountBadge
+import com.galarzaa.tibiakt.core.section.community.character.model.AccountCharacter
 import com.galarzaa.tibiakt.core.section.community.character.model.AccountInformation
 import com.galarzaa.tibiakt.core.section.community.character.model.CharacterHouse
 import com.galarzaa.tibiakt.core.section.community.character.model.CharacterInfo
@@ -28,7 +30,6 @@ import com.galarzaa.tibiakt.core.section.community.character.model.Death
 import com.galarzaa.tibiakt.core.section.community.character.model.DeathParticipant
 import com.galarzaa.tibiakt.core.section.community.character.model.DisplayedAchievement
 import com.galarzaa.tibiakt.core.section.community.character.model.GuildMembership
-import com.galarzaa.tibiakt.core.section.community.character.model.OtherCharacter
 import kotlinx.datetime.LocalDate
 import kotlin.time.Instant
 
@@ -66,7 +67,7 @@ public class CharacterBuilder : TibiaKtBuilder<CharacterInfo> {
     public val achievements: MutableList<DisplayedAchievement> = mutableListOf()
     public var accountInformation: AccountInformation? = null
     public val deaths: MutableList<Death> = mutableListOf()
-    public val otherCharacters: MutableList<OtherCharacter> = mutableListOf()
+    public val otherCharacters: MutableList<AccountCharacter> = mutableListOf()
 
     public fun addHouse(
         name: String,
@@ -102,12 +103,12 @@ public class CharacterBuilder : TibiaKtBuilder<CharacterInfo> {
         apply { guildMembership = GuildMembership(guild, rank) }
 
     public fun addDeath(
-        timestamp: Instant,
+        occurredAt: Instant,
         level: Int,
         killers: List<DeathParticipant>,
         assists: List<DeathParticipant>,
     ): CharacterBuilder = apply {
-        deaths.add(Death(timestamp, level, killers, assists))
+        deaths.add(Death(occurredAt, level, killers, assists))
     }
 
     public fun addOtherCharacter(
@@ -118,33 +119,26 @@ public class CharacterBuilder : TibiaKtBuilder<CharacterInfo> {
         isDeleted: Boolean = false,
         isRecentlyTraded: Boolean = false,
         position: String?,
-    ): CharacterBuilder =
-        apply {
-            otherCharacters.add(
-                OtherCharacter(
-                    name,
-                    world,
-                    isMain,
-                    isOnline,
-                    isDeleted,
-                    isRecentlyTraded,
-                    position
-                )
+    ): CharacterBuilder = apply {
+        otherCharacters.add(
+            AccountCharacter(
+                name, world, isMain, isOnline, isDeleted, isRecentlyTraded, position
             )
-        }
+        )
+    }
 
     override fun build(): CharacterInfo = CharacterInfo(
-        name = if (::name.isInitialized) name else error("name is required"),
+        name = requireField(::name.isInitialized, "name") { name },
         title = title,
         formerNames = formerNames,
         unlockedTitles = unlockedTitles,
-        sex = sex ?: error("sex is required"),
-        vocation = vocation ?: error("vocation is required"),
+        sex = requireField(sex, "sex"),
+        vocation = requireField(vocation, "vocation"),
         level = level,
         achievementPoints = achievementPoints,
-        world = world ?: error("world is required"),
+        world = requireField(world, "world"),
         formerWorld = formerWorld,
-        residence = residence ?: error("residence is required"),
+        residence = requireField(residence, "residence"),
         marriedTo = marriedTo,
         houses = houses,
         guildMembership = guildMembership,
@@ -168,11 +162,11 @@ public class CharacterBuilder : TibiaKtBuilder<CharacterInfo> {
         public lateinit var paidUntil: LocalDate
         public lateinit var world: String
         public override fun build(): CharacterHouse = CharacterHouse(
-            name = if (::name.isInitialized) name else error("name is required"),
+            name = requireField(::name.isInitialized, "name") { name },
             houseId = houseId,
-            town = if (::town.isInitialized) town else error("town is required"),
-            paidUntil = if (::paidUntil.isInitialized) paidUntil else error("paidUntil is required"),
-            world = if (::world.isInitialized) world else error("world is required"),
+            town = requireField(::town.isInitialized, "town") { town },
+            paidUntil = requireField(::paidUntil.isInitialized, "paidUntil") { paidUntil },
+            world = requireField(::world.isInitialized, "world") { world },
         )
     }
 }

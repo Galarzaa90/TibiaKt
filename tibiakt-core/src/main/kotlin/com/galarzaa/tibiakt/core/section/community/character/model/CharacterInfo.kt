@@ -30,7 +30,7 @@ import kotlin.time.Instant
  *
  * @property title The title selected to be displayed.
  * @property formerNames A list of former names the player had in the last 6 months.
- * @property unlockedTitles The amount of titles the player has unlocked in total.
+ * @property unlockedTitles The number of titles the player has unlocked in total.
  * @property sex The sex of the character.
  * @property vocation The vocation of the character.
  * @property level The level of the character.
@@ -79,7 +79,7 @@ public data class CharacterInfo(
     val achievements: List<DisplayedAchievement>,
     val deaths: List<Death>,
     val accountInformation: AccountInformation?,
-    val otherCharacters: List<OtherCharacter>,
+    val otherCharacters: List<AccountCharacter>,
 ) : TibiaCharacter, LevelAware {
 
     /**

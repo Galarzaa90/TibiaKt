@@ -18,47 +18,49 @@ package com.galarzaa.tibiakt.core.section.library.creature.builder
 
 import com.galarzaa.tibiakt.core.builder.BuilderDsl
 import com.galarzaa.tibiakt.core.builder.TibiaKtBuilder
+import com.galarzaa.tibiakt.core.builder.requireField
 import com.galarzaa.tibiakt.core.section.library.creature.model.BoostableBosses
 import com.galarzaa.tibiakt.core.section.library.creature.model.BossEntry
 
 @BuilderDsl
-public inline fun boostableBosses(block: BoostableBossesBuilder.() -> Unit): BoostableBosses =
+internal inline fun boostableBosses(block: BoostableBossesBuilder.() -> Unit): BoostableBosses =
     BoostableBossesBuilder().apply(block).build()
 
 @BuilderDsl
-public inline fun boostableBossesBuilder(block: BoostableBossesBuilder.() -> Unit): BoostableBossesBuilder =
+internal inline fun boostableBossesBuilder(block: BoostableBossesBuilder.() -> Unit): BoostableBossesBuilder =
     BoostableBossesBuilder().apply(block)
 
 /** Builder for [BoostableBosses] instances. */
 @BuilderDsl
-public class BoostableBossesBuilder : TibiaKtBuilder<BoostableBosses> {
-    public var boostedBoss: BossEntry? = null
-    public val bosses: MutableList<BossEntry> = mutableListOf()
+internal class BoostableBossesBuilder : TibiaKtBuilder<BoostableBosses> {
+    var boostedBoss: BossEntry? = null
+    val bosses: MutableList<BossEntry> = mutableListOf()
 
-    public fun boostedBoss(boostedBoss: BossEntry): BoostableBossesBuilder = apply { this.boostedBoss = boostedBoss }
+    fun boostedBoss(boostedBoss: BossEntry): BoostableBossesBuilder = apply { this.boostedBoss = boostedBoss }
 
     @BuilderDsl
-    public fun boostedBoss(block: BossEntryBuilder.() -> Unit): BoostableBossesBuilder =
+    fun boostedBoss(block: BossEntryBuilder.() -> Unit): BoostableBossesBuilder =
         apply { this.boostedBoss = BossEntryBuilder().apply(block).build() }
 
-    public fun addCreature(creature: BossEntry): BoostableBossesBuilder = apply { bosses.add(creature) }
+    fun addCreature(creature: BossEntry): BoostableBossesBuilder = apply { bosses.add(creature) }
 
     @BuilderDsl
-    public fun addCreature(block: BossEntryBuilder.() -> Unit): BoostableBossesBuilder =
+    fun addCreature(block: BossEntryBuilder.() -> Unit): BoostableBossesBuilder =
         apply { bosses.add(BossEntryBuilder().apply(block).build()) }
 
     override fun build(): BoostableBosses = BoostableBosses(
-        boostedBoss = boostedBoss ?: throw IllegalArgumentException("boostedBoss is required"), bosses = bosses
+        boostedBoss = requireField(boostedBoss, "boostedBoss"),
+        bosses = bosses
     )
 
     @BuilderDsl
-    public class BossEntryBuilder : TibiaKtBuilder<BossEntry> {
-        public lateinit var name: String
-        public lateinit var identifier: String
+    class BossEntryBuilder : TibiaKtBuilder<BossEntry> {
+        lateinit var name: String
+        lateinit var identifier: String
 
         override fun build(): BossEntry = BossEntry(
-            name = if (::name.isInitialized) name else error("name is required"),
-            identifier = if (::identifier.isInitialized) identifier else error("identifier is required"),
+            name = requireField(::name.isInitialized, "name") { name },
+            identifier = requireField(::identifier.isInitialized, "identifier") { identifier },
         )
     }
 }

@@ -29,7 +29,7 @@ import kotlinx.serialization.Serializable
 public data class CreatureEntry(
     override val name: String,
     override val identifier: String,
-) : BaseCreatureEntry {
+) : BaseCreature {
     /**
      * The URL to the creature's page.
      */

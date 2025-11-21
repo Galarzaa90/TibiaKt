@@ -29,8 +29,8 @@ class NewsArchiveParserTests : FunSpec({
     test("Initial news archive") {
         val newsArchive = NewsArchiveParser.fromContent(getResource("newsArchive/newsArchiveInitial.txt"))
 
-        newsArchive.categories shouldHaveSize 5
-        newsArchive.types shouldHaveSize 3
+        newsArchive.filters.categories shouldHaveSize 5
+        newsArchive.filters.types shouldHaveSize 3
         newsArchive.entries.shouldBeEmpty()
     }
 
@@ -38,10 +38,10 @@ class NewsArchiveParserTests : FunSpec({
         val newsArchive = NewsArchiveParser.fromContent(getResource("newsArchive/newsArchiveWithFilters.txt"))
 
         with(newsArchive) {
-            startOn shouldBe LocalDate(2019, 3, 25)
-            endOn shouldBe LocalDate(2019, 5, 25)
-            newsArchive.categories shouldHaveSize 5
-            newsArchive.types shouldHaveSize 3
+            filters.startOn shouldBe LocalDate(2019, 3, 25)
+            filters.endOn shouldBe LocalDate(2019, 5, 25)
+            filters.categories shouldHaveSize 5
+            filters.types shouldHaveSize 3
             entries.shouldNotBeEmpty()
         }
     }
@@ -50,10 +50,10 @@ class NewsArchiveParserTests : FunSpec({
         val newsArchive = NewsArchiveParser.fromContent(getResource("newsArchive/newsArchiveEmpty.txt"))
 
         with(newsArchive) {
-            startOn shouldBe LocalDate(2023, 4, 13)
-            endOn shouldBe LocalDate(2023, 4, 15)
-            newsArchive.categories shouldHaveSize 5
-            newsArchive.types shouldHaveSize 1
+            filters.startOn shouldBe LocalDate(2023, 4, 13)
+            filters.endOn shouldBe LocalDate(2023, 4, 15)
+            filters.categories shouldHaveSize 5
+            filters.types shouldHaveSize 1
             entries.shouldBeEmpty()
         }
     }

@@ -20,22 +20,22 @@ import com.galarzaa.tibiakt.core.domain.character.TibiaCharacter
 import kotlinx.serialization.Serializable
 
 /**
- * Additional character listed in a [CharacterInfo]'s information.
+ * Additional character listed in a [character][CharacterInfo]'s information.
  *
  * @property world The world of the character.
  * @property isMain Whether this is the main character of the account or not.
  * @property isOnline Whether this character is currently online or not.
- * @property isDeleted Whether this character is scheduled for deletion or not.
+ * @property isScheduledForDeletion Whether this character is scheduled for deletion or not.
  * @property isRecentlyTraded Whether this character was recently traded.
  * @property position Any special position the character holds.
  */
 @Serializable
-public data class OtherCharacter(
+public data class AccountCharacter(
     override val name: String,
     val world: String,
     val isMain: Boolean,
     val isOnline: Boolean,
-    val isDeleted: Boolean,
+    val isScheduledForDeletion: Boolean,
     val isRecentlyTraded: Boolean,
     val position: String?,
 ) : TibiaCharacter

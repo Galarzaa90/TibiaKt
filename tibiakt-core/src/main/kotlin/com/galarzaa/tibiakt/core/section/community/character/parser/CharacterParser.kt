@@ -46,7 +46,11 @@ public object CharacterParser : Parser<CharacterInfo?> {
     private val deathAssistsRegex = Regex("""(?:(?<killers>.+)\.<br\s?/>)?Assisted by (?<assists>.+)""")
     private val linkSearch = Regex("""<a[^>]+>[^<]+</a>""")
     private val linkContent = Regex(""">([^<]+)<""")
-    private val deathSummon = Regex("""(?<summon>an? .+) of (?<name>.*)""")
+
+    // A summon typically starts with a lower-case creature name (optionally preceded by "a"/"an"), contains at least two words,
+    // and is followed by "of <player>". This prevents false positives for player names that include "of", e.g., "Hand of Nightshadow".
+    private val deathSummon =
+        Regex("""(?<![A-Za-z])(?<summon>(?:an?\s+)?[a-z][^.]*\s+[a-z][^.]*?)\s+of\s+(?<name>[^.]+)\.?""")
     private const val tradedLabel = "(traded)"
 
     override fun fromContent(content: String): CharacterInfo? {
@@ -202,26 +206,33 @@ public object CharacterParser : Parser<CharacterInfo?> {
         }
     }
 
-    private fun parseKiller(killerHtml: String): DeathParticipant? {
-        var name: String = killerHtml
-        var isPlayer = false
-        var isTraded = false
-        var summon: String? = null
-        if (killerHtml.contains(tradedLabel)) {
-            name = killerHtml.clean().remove(tradedLabel).trim()
-            isTraded = true
-            isPlayer = true
-        }
-        if (killerHtml.contains("href")) {
-            name = linkContent.find(killerHtml)?.groups?.get(1)?.value ?: return null
-            isPlayer = true
-        }
-        deathSummon.find(name)?.apply {
-            summon = groups["summon"]!!.value.clean()
-            name = groups["name"]!!.value.clean()
+    internal fun parseKiller(killerHtml: String): DeathParticipant? {
+        val doc = Jsoup.parse(killerHtml)
+        val anchor = doc.selectFirst("a")
+        val text = doc.text().clean()
+        val cleanedText = text.remove(tradedLabel).trim()
+        val tradedInText = text.contains(tradedLabel, ignoreCase = true)
+
+        deathSummon.find(cleanedText)?.apply {
+            val summonedCreature = groups["summon"]!!.value.clean()
+            val summonerNameRaw = groups["name"]!!.value.clean()
+            val summonerName = summonerNameRaw.remove(tradedLabel).trim()
+            val summonerTraded = tradedInText || summonerNameRaw.contains(tradedLabel, ignoreCase = true)
+            return DeathParticipant.Summon(
+                summonerName = summonerName,
+                name = summonedCreature,
+                isSummonerTraded = summonerTraded,
+            )
         }
 
-        return DeathParticipant(name.clean(), isPlayer, summon, isTraded)
+        val name = (anchor?.text() ?: cleanedText).clean()
+        val isTraded = tradedInText || name.contains(tradedLabel, ignoreCase = true)
+
+        return if (anchor != null || isTraded) {
+            DeathParticipant.Player(name = name.remove(tradedLabel).trim(), isTraded = isTraded)
+        } else {
+            DeathParticipant.Creature(name)
+        }
     }
 
     private fun CharacterBuilder.parseCharacters(rows: Elements) {
