@@ -18,17 +18,18 @@ package com.galarzaa.tibiakt.core.section.news.event.builder
 
 import com.galarzaa.tibiakt.core.builder.BuilderDsl
 import com.galarzaa.tibiakt.core.builder.TibiaKtBuilder
+import com.galarzaa.tibiakt.core.builder.requireField
 import com.galarzaa.tibiakt.core.section.news.event.model.BaseEventEntry
 import com.galarzaa.tibiakt.core.section.news.event.model.EventsSchedule
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.YearMonth
 
 @BuilderDsl
-public inline fun eventsSchedule(block: EventsScheduleBuilder.() -> Unit): EventsSchedule =
+internal inline fun eventsSchedule(block: EventsScheduleBuilder.() -> Unit): EventsSchedule =
     EventsScheduleBuilder().apply(block).build()
 
 @BuilderDsl
-public inline fun eventsScheduleBuilder(block: EventsScheduleBuilder.() -> Unit): EventsScheduleBuilder =
+internal inline fun eventsScheduleBuilder(block: EventsScheduleBuilder.() -> Unit): EventsScheduleBuilder =
     EventsScheduleBuilder().apply(block)
 
 @BuilderDsl
@@ -41,12 +42,12 @@ internal inline fun eventEntryBuilder(block: EventsScheduleBuilder.EventEntryBui
 
 /** Builder for [EventsSchedule] instances. */
 @BuilderDsl
-public class EventsScheduleBuilder : TibiaKtBuilder<EventsSchedule> {
-    public lateinit var yearMonth: YearMonth
-    public val entries: MutableList<BaseEventEntry> = mutableListOf()
+internal class EventsScheduleBuilder : TibiaKtBuilder<EventsSchedule> {
+    lateinit var yearMonth: YearMonth
+    val entries: MutableList<BaseEventEntry> = mutableListOf()
 
 
-    public fun addEntry(
+    fun addEntry(
         title: String,
         description: String,
         startsOn: LocalDate?,
@@ -57,20 +58,24 @@ public class EventsScheduleBuilder : TibiaKtBuilder<EventsSchedule> {
         )
     }
 
-    public fun addEntry(entry: BaseEventEntry): EventsScheduleBuilder = apply { entries.add(entry) }
+    fun addEntry(entry: BaseEventEntry): EventsScheduleBuilder = apply { entries.add(entry) }
 
     override fun build(): EventsSchedule = EventsSchedule(
-        month = if (::yearMonth.isInitialized) yearMonth else error("yearMonth is required"), entries = entries
+        month = requireField(::yearMonth.isInitialized, "yearMonth") { yearMonth },
+        entries = entries
     )
 
-    public class EventEntryBuilder {
-        public var title: String? = null
-        public var description: String? = null
-        public var startsOn: LocalDate? = null
-        public var endsOn: LocalDate? = null
+    internal class EventEntryBuilder {
+        var title: String? = null
+        var description: String? = null
+        var startsOn: LocalDate? = null
+        var endsOn: LocalDate? = null
 
-        public fun build(): BaseEventEntry = BaseEventEntry.of(
-            title ?: error("title is required"), description ?: error("description is required"), startsOn, endsOn
+        fun build(): BaseEventEntry = BaseEventEntry.of(
+            requireField(title, "title"),
+            requireField(description, "description"),
+            startsOn,
+            endsOn
         )
 
         override fun equals(other: Any?): Boolean =

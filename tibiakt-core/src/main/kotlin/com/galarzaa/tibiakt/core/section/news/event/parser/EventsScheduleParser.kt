@@ -43,7 +43,7 @@ public object EventsScheduleParser : Parser<EventsSchedule> {
             val dateBlock = boxContent.selectFirst("div.eventscheduleheaderdateblock")
                 ?: throw ParsingException("date block not found")
             yearMonth =
-                YearMonth.Companion.parse(dateBlock.cleanText().remove("»").remove("«"), FORMAT_YEAR_MONTH)
+                YearMonth.parse(dateBlock.cleanText().remove("»").remove("«"), FORMAT_YEAR_MONTH)
             parseCalendar(boxContent, yearMonth)
         }
 
