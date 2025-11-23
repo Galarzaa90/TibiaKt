@@ -97,7 +97,7 @@ public object GuildParser : Parser<Guild?> {
             vocation = StringEnum.Companion.fromValue(columns[2].text().clean())
                 ?: throw ParsingException("unknown vocation in member: ${columns[2].text().clean()}")
             level = columns[3].text().toInt()
-            joiningDate = parseTibiaDate(columns[4].text().clean())
+            joinedOn = parseTibiaDate(columns[4].text().clean())
             isOnline = columns[5].text().contains("online")
         }
         return rank

@@ -18,6 +18,7 @@ package com.galarzaa.tibiakt.core.section.community.guild.builder
 
 import com.galarzaa.tibiakt.core.builder.BuilderDsl
 import com.galarzaa.tibiakt.core.builder.TibiaKtBuilder
+import com.galarzaa.tibiakt.core.builder.requireField
 import com.galarzaa.tibiakt.core.domain.character.Vocation
 import com.galarzaa.tibiakt.core.section.community.guild.model.Guild
 import com.galarzaa.tibiakt.core.section.community.guild.model.GuildHall
@@ -73,11 +74,11 @@ internal class GuildBuilder : TibiaKtBuilder<Guild> {
         apply { invited.add(GuildInvite(name, inviteDate)) }
 
     override fun build(): Guild = Guild(
-        world = world ?: error("world is required"),
-        name = name ?: error("name is required"),
-        logoUrl = logoUrl ?: error("logoUrl is required"),
+        world = requireField(world, "world"),
+        name = requireField(name, "name"),
+        logoUrl = requireField(logoUrl, "logoUrl"),
         description = description,
-        foundedOn = foundedOn ?: error("foundedOn is required"),
+        foundedOn = requireField(foundedOn, "foundedOn"),
         isActive = isActive,
         areApplicationsOpen = areApplicationsOpen,
         homepageUrl = homepage,
@@ -94,16 +95,16 @@ internal class GuildBuilder : TibiaKtBuilder<Guild> {
         var title: String? = null
         lateinit var vocation: Vocation
         var level: Int = 0
-        lateinit var joiningDate: LocalDate
+        lateinit var joinedOn: LocalDate
         var isOnline: Boolean = false
 
         override fun build(): GuildMember = GuildMember(
-            rank = if (::rank.isInitialized) rank else error("rank is required"),
-            name = if (::name.isInitialized) name else error("name is required"),
+            rank = requireField(::rank.isInitialized, "rank") { rank },
+            name = requireField(::name.isInitialized, "name") { name },
             title = title,
-            vocation = if (::vocation.isInitialized) vocation else error("vocation is required"),
+            vocation = requireField(::vocation.isInitialized, "vocation") { vocation },
             level = level,
-            joinedOn = if (::joiningDate.isInitialized) joiningDate else error("joiningDate is required"),
+            joinedOn = requireField(::joinedOn.isInitialized, "joinedOn") { joinedOn },
             isOnline = isOnline,
         )
     }

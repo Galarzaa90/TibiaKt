@@ -18,6 +18,7 @@ package com.galarzaa.tibiakt.core.section.community.guild.builder
 
 import com.galarzaa.tibiakt.core.builder.BuilderDsl
 import com.galarzaa.tibiakt.core.builder.TibiaKtBuilder
+import com.galarzaa.tibiakt.core.builder.requireField
 import com.galarzaa.tibiakt.core.section.community.guild.model.GuildEntry
 import com.galarzaa.tibiakt.core.section.community.guild.model.GuildsSection
 
@@ -46,7 +47,7 @@ internal class GuildsSectionBuilder : TibiaKtBuilder<GuildsSection> {
 
     override fun build(): GuildsSection {
         return GuildsSection(
-            world = world ?: error("name is required"),
+            world = requireField(world, "world"),
             guilds = guilds
         )
     }
