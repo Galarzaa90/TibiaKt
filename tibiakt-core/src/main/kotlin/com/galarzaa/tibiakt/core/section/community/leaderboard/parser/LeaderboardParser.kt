@@ -29,7 +29,6 @@ import com.galarzaa.tibiakt.core.html.rows
 import com.galarzaa.tibiakt.core.parser.Parser
 import com.galarzaa.tibiakt.core.section.community.leaderboard.builder.LeaderboardBuilder
 import com.galarzaa.tibiakt.core.section.community.leaderboard.builder.leaderboard
-import com.galarzaa.tibiakt.core.section.community.leaderboard.model.DeletedLeaderboardEntry
 import com.galarzaa.tibiakt.core.section.community.leaderboard.model.Leaderboard
 import com.galarzaa.tibiakt.core.section.community.leaderboard.model.LeaderboardEntry
 import com.galarzaa.tibiakt.core.section.community.leaderboard.model.LeaderboardRotation
@@ -101,7 +100,7 @@ public object LeaderboardParser : Parser<Leaderboard?> {
             val rank = cells[0].text().remove(".").toInt()
             val dromeLevel = cells[2].text().toInt()
             addEntry(
-                if (name != null) LeaderboardEntry(rank, name, dromeLevel) else DeletedLeaderboardEntry(
+                if (name != null) LeaderboardEntry.Character(rank, dromeLevel, name) else LeaderboardEntry.Deleted(
                     rank, dromeLevel
                 )
             )

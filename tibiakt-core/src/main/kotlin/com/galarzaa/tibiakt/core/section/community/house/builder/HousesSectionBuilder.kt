@@ -18,6 +18,7 @@ package com.galarzaa.tibiakt.core.section.community.house.builder
 
 import com.galarzaa.tibiakt.core.builder.BuilderDsl
 import com.galarzaa.tibiakt.core.builder.TibiaKtBuilder
+import com.galarzaa.tibiakt.core.builder.requireField
 import com.galarzaa.tibiakt.core.section.community.house.model.HouseEntry
 import com.galarzaa.tibiakt.core.section.community.house.model.HouseOrder
 import com.galarzaa.tibiakt.core.section.community.house.model.HouseStatus
@@ -26,25 +27,25 @@ import com.galarzaa.tibiakt.core.section.community.house.model.HousesSection
 import kotlin.time.Duration
 
 @BuilderDsl
-public inline fun housesSection(block: HousesSectionBuilder.() -> Unit): HousesSection =
+internal inline fun housesSection(block: HousesSectionBuilder.() -> Unit): HousesSection =
     HousesSectionBuilder().apply(block).build()
 
 @BuilderDsl
-public inline fun housesSectionBuilder(block: HousesSectionBuilder.() -> Unit): HousesSectionBuilder =
+internal inline fun housesSectionBuilder(block: HousesSectionBuilder.() -> Unit): HousesSectionBuilder =
     HousesSectionBuilder().apply(block)
 
 /** Builder for [HousesSection] instances. */
 @BuilderDsl
-public class HousesSectionBuilder : TibiaKtBuilder<HousesSection> {
-    public var world: String? = null
-    public var town: String? = null
-    public var status: HouseStatus? = null
-    public var type: HouseType = HouseType.HOUSE
-    public var order: HouseOrder = HouseOrder.NAME
-    public val entries: MutableList<HouseEntry> = mutableListOf()
+internal class HousesSectionBuilder : TibiaKtBuilder<HousesSection> {
+    var world: String? = null
+    var town: String? = null
+    var status: HouseStatus? = null
+    var type: HouseType = HouseType.HOUSE
+    var order: HouseOrder = HouseOrder.NAME
+    val entries: MutableList<HouseEntry> = mutableListOf()
 
 
-    public fun addEntry(
+    fun addEntry(
         name: String,
         size: Int,
         rent: Int,
@@ -66,42 +67,42 @@ public class HousesSectionBuilder : TibiaKtBuilder<HousesSection> {
         )
     }
 
-    public fun addEntry(houseEntry: HouseEntry): HousesSectionBuilder = apply { entries.add(houseEntry) }
+    fun addEntry(houseEntry: HouseEntry): HousesSectionBuilder = apply { entries.add(houseEntry) }
 
     @BuilderDsl
-    public fun addEntry(block: HouseEntryBuilder.() -> Unit): Boolean =
+    fun addEntry(block: HouseEntryBuilder.() -> Unit): Boolean =
         entries.add(HouseEntryBuilder().apply(block).build())
 
     override fun build(): HousesSection = HousesSection(
-        world = world ?: error("world is required"),
-        town = town ?: error("town is required"),
+        world = requireField(world, "world"),
+        town = requireField(town, "town"),
         type = type,
         status = status,
         order = order,
         entries = entries
     )
 
-    public class HouseEntryBuilder : TibiaKtBuilder<HouseEntry> {
-        public var houseId: Int? = null
-        public var name: String? = null
-        public var size: Int? = null
-        public var rent: Int? = null
-        public var town: String? = null
-        public var world: String? = null
-        public var type: HouseType? = null
-        public var status: HouseStatus? = null
-        public var highestBid: Int? = null
-        public var timeLeft: Duration? = null
+    class HouseEntryBuilder : TibiaKtBuilder<HouseEntry> {
+        var houseId: Int? = null
+        var name: String? = null
+        var size: Int? = null
+        var rent: Int? = null
+        var town: String? = null
+        var world: String? = null
+        var type: HouseType? = null
+        var status: HouseStatus? = null
+        var highestBid: Int? = null
+        var timeLeft: Duration? = null
 
         override fun build(): HouseEntry = HouseEntry(
-            houseId = houseId ?: error("houseId is required"),
-            name = name ?: error("name is required"),
-            size = size ?: error("size is required"),
-            rent = rent ?: error("rent is required"),
-            town = town ?: error("town is required"),
-            world = world ?: error("world is required"),
-            type = type ?: error("type is required"),
-            status = status ?: error("status is required"),
+            houseId = requireField(houseId, "houseId"),
+            name = requireField(name, "name"),
+            size = requireField(size, "size"),
+            rent = requireField(rent, "rent"),
+            town = requireField(town, "town"),
+            world = requireField(world, "world"),
+            type = requireField(type, "type"),
+            status = requireField(status, "status"),
             highestBid = highestBid,
             timeLeft = timeLeft,
         )

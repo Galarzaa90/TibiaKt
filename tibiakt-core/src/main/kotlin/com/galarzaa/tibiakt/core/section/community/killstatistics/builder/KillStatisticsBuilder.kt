@@ -18,26 +18,27 @@ package com.galarzaa.tibiakt.core.section.community.killstatistics.builder
 
 import com.galarzaa.tibiakt.core.builder.BuilderDsl
 import com.galarzaa.tibiakt.core.builder.TibiaKtBuilder
+import com.galarzaa.tibiakt.core.builder.requireField
 import com.galarzaa.tibiakt.core.section.community.killstatistics.model.KillStatistics
 import com.galarzaa.tibiakt.core.section.community.killstatistics.model.KillsStatisticEntry
 
 @BuilderDsl
-public inline fun killStatistics(block: KillStatisticsBuilder.() -> Unit): KillStatistics =
+internal inline fun killStatistics(block: KillStatisticsBuilder.() -> Unit): KillStatistics =
     KillStatisticsBuilder().apply(block).build()
 
 @BuilderDsl
-public inline fun killStatisticsBuilder(block: KillStatisticsBuilder.() -> Unit): KillStatisticsBuilder =
+internal inline fun killStatisticsBuilder(block: KillStatisticsBuilder.() -> Unit): KillStatisticsBuilder =
     KillStatisticsBuilder().apply(block)
 
 
 /** Builder for [KillStatistics] instances. */
 @BuilderDsl
-public class KillStatisticsBuilder : TibiaKtBuilder<KillStatistics> {
-    public var world: String? = null
-    public val entries: MutableMap<String, KillsStatisticEntry> = mutableMapOf()
+internal class KillStatisticsBuilder : TibiaKtBuilder<KillStatistics> {
+    var world: String? = null
+    val entries: MutableMap<String, KillsStatisticEntry> = mutableMapOf()
     private var total: KillsStatisticEntry = KillsStatisticEntry(0, 0, 0, 0)
 
-    public fun total(
+    fun total(
         lastDayKilledPlayers: Int,
         lastDayKilled: Int,
         lastWeekKilledPlayers: Int,
@@ -46,7 +47,7 @@ public class KillStatisticsBuilder : TibiaKtBuilder<KillStatistics> {
         total = KillsStatisticEntry(lastDayKilledPlayers, lastDayKilled, lastWeekKilledPlayers, lastWeekKilled)
     }
 
-    public fun addEntry(
+    fun addEntry(
         race: String,
         lastDayKilledPlayers: Int,
         lastDayKilled: Int,
@@ -57,7 +58,7 @@ public class KillStatisticsBuilder : TibiaKtBuilder<KillStatistics> {
     }
 
     override fun build(): KillStatistics = KillStatistics(
-        world = world ?: error("world is required"),
+        world = requireField(world, "world"),
         entries = entries,
         total = total
     )

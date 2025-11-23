@@ -17,7 +17,7 @@
 package com.galarzaa.tibiakt.core.section.forum.announcement.model
 
 import com.galarzaa.tibiakt.core.section.forum.shared.model.BaseForumAnnouncement
-import com.galarzaa.tibiakt.core.section.forum.shared.model.BaseForumAuthor
+import com.galarzaa.tibiakt.core.section.forum.shared.model.ForumAuthor
 import kotlinx.serialization.Serializable
 import kotlin.time.Instant
 
@@ -41,7 +41,7 @@ public data class ForumAnnouncement(
     val boardId: Int,
     val sectionName: String,
     val sectionId: Int,
-    val author: BaseForumAuthor,
+    val author: ForumAuthor,
     val content: String,
     val startsAt: Instant,
     val endsAt: Instant,

@@ -21,7 +21,7 @@ import kotlinx.serialization.Serializable
 
 /**
  * The Kill Statistics section for a specific world.
- * @property world The game world this statistics are for.
+ * @property world The game world these statistics are for.
  * @property entries A mapping of races to their kills' information.
  * @property total The kill statistics totals.
  */

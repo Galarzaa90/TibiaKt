@@ -39,8 +39,8 @@ public data class Leaderboard(
     override val currentPage: Int,
     override val totalPages: Int,
     override val resultsCount: Int,
-    override val entries: List<BaseLeaderboardEntry>,
-) : PaginatedWithUrl<BaseLeaderboardEntry> {
+    override val entries: List<LeaderboardEntry>,
+) : PaginatedWithUrl<LeaderboardEntry> {
 
     /**
      * The URL to these leaderboards.

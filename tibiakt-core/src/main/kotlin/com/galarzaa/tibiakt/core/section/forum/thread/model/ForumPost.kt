@@ -16,8 +16,8 @@
 
 package com.galarzaa.tibiakt.core.section.forum.thread.model
 
-import com.galarzaa.tibiakt.core.section.forum.shared.model.BaseForumAuthor
 import com.galarzaa.tibiakt.core.section.forum.shared.model.BaseForumPost
+import com.galarzaa.tibiakt.core.section.forum.shared.model.ForumAuthor
 import com.galarzaa.tibiakt.core.section.forum.shared.model.ForumEmoticon
 import kotlinx.serialization.Serializable
 import kotlin.time.Instant
@@ -36,7 +36,7 @@ import kotlin.time.Instant
  */
 @Serializable
 public data class ForumPost(
-    val author: BaseForumAuthor,
+    val author: ForumAuthor,
     val emoticon: ForumEmoticon?,
     val title: String?,
     val content: String,

@@ -21,33 +21,34 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
- * Base class for Leaderboards entries.
+ * Entry type for Leaderboards.
  *
  * @property rank The rank of the character.
  * @property dromeLevel The drome level of the character.
  */
 @Serializable
-public sealed class BaseLeaderboardEntry {
-    public abstract val rank: Int
-    public abstract val dromeLevel: Int
+public sealed interface LeaderboardEntry {
+    public val rank: Int
+    public val dromeLevel: Int
+
+    /**
+     * A leaderboard entry belonging to a normal (non-deleted) character.
+     */
+    @Serializable
+    @SerialName("character")
+    public data class Character(
+        override val rank: Int,
+        override val dromeLevel: Int,
+        override val name: String,
+    ) : LeaderboardEntry, BaseCharacter
+
+    /**
+     * A leaderboard entry belonging to a deleted character.
+     */
+    @Serializable
+    @SerialName("deleted")
+    public data class Deleted(
+        override val rank: Int,
+        override val dromeLevel: Int,
+    ) : LeaderboardEntry
 }
-
-
-/**
- * An entry in the [LeaderboardEntry].
- */
-@Serializable
-@SerialName("leaderboardsEntry")
-public data class LeaderboardEntry(
-    override val rank: Int,
-    override val name: String,
-    override val dromeLevel: Int,
-) : BaseLeaderboardEntry(), BaseCharacter
-
-/** A leaderboard entry belonging to a deleted character. */
-@Serializable
-@SerialName("deletedLeaderboardsEntry")
-public data class DeletedLeaderboardEntry(
-    override val rank: Int,
-    override val dromeLevel: Int,
-) : BaseLeaderboardEntry()

@@ -28,7 +28,7 @@ import kotlinx.serialization.Serializable
  * @property level The level of the character.
  * @property world The world of the character.
  * @property vocation The vocation of the character.
- * @property value The value of the entry (e.g. distance level, magic level, experience)
+ * @property value The value of the entry (e.g., distance level, magic level, experience)
  * @property additionalValue Additional information displayed in some categories, such as Loyalty Title.
  */
 @Serializable

@@ -36,17 +36,17 @@ import kotlin.time.Instant
  * @property endsOn End date of the event, or null if the end is open/unknown.
  */
 @Serializable
-public sealed class EventEntry {
-    public abstract val title: String
-    public abstract val description: String
-    public abstract val startsOn: LocalDate?
-    public abstract val endsOn: LocalDate?
+public sealed interface EventEntry {
+    public val title: String
+    public val description: String
+    public val startsOn: LocalDate?
+    public val endsOn: LocalDate?
 
     /** The exact moment when the event starts. Based on the event's start date and server save time. */
-    public abstract val startsAt: Instant?
+    public val startsAt: Instant?
 
-    /** The exact moment when the event starts. Based on the event's start date and server save time. */
-    public abstract val endsAt: Instant?
+    /** The exact moment when the event ends. Based on the event's end date and server save time. */
+    public val endsAt: Instant?
 
     /**
      * Event with both start and end moments known.
@@ -61,14 +61,13 @@ public sealed class EventEntry {
         override val description: String,
         override val startsOn: LocalDate,
         override val endsOn: LocalDate,
-    ) : EventEntry() {
+    ) : EventEntry {
+        override val startsAt: Instant
+            get() = startsOn.atTime(SERVER_SAVE_TIME).toInstant(TIBIA_TIMEZONE)
 
-        public override val startsAt: Instant get() = startsOn.atTime(SERVER_SAVE_TIME).toInstant(TIBIA_TIMEZONE)
-        public override val endsAt: Instant get() = endsOn.atTime(SERVER_SAVE_TIME).toInstant(TIBIA_TIMEZONE)
+        override val endsAt: Instant
+            get() = endsOn.atTime(SERVER_SAVE_TIME).toInstant(TIBIA_TIMEZONE)
 
-        /**
-         * The duration of the event, calculated from [startsOn] to [endsOn].
-         */
         val duration: DatePeriod
             get() = (endsOn - startsOn)
     }
@@ -77,8 +76,6 @@ public sealed class EventEntry {
      * Event with an unknown start date.
      *
      * Typically, an event that started in the previous month.
-     *
-     * @property endsOn The date when the event ends.
      */
     @Serializable
     @SerialName("openStart")
@@ -86,18 +83,17 @@ public sealed class EventEntry {
         override val title: String,
         override val description: String,
         override val endsOn: LocalDate,
-    ) : EventEntry() {
+    ) : EventEntry {
         override val startsOn: LocalDate? get() = null
-        public override val startsAt: Instant? get() = null
-        public override val endsAt: Instant get() = endsOn.atTime(SERVER_SAVE_TIME).toInstant(TIBIA_TIMEZONE)
+        override val startsAt: Instant? get() = null
+        override val endsAt: Instant
+            get() = endsOn.atTime(SERVER_SAVE_TIME).toInstant(TIBIA_TIMEZONE)
     }
 
     /**
      * Event with an unknown end date.
      *
      * Typically, an event that ends in the next month.
-     *
-     * @property startsOn The date when the event starts.
      */
     @Serializable
     @SerialName("openEnd")
@@ -105,16 +101,14 @@ public sealed class EventEntry {
         override val title: String,
         override val description: String,
         override val startsOn: LocalDate,
-    ) : EventEntry() {
+    ) : EventEntry {
         override val endsOn: LocalDate? get() = null
-        public override val startsAt: Instant get() = startsOn.atTime(SERVER_SAVE_TIME).toInstant(TIBIA_TIMEZONE)
-        public override val endsAt: Instant? get() = null
+        override val startsAt: Instant
+            get() = startsOn.atTime(SERVER_SAVE_TIME).toInstant(TIBIA_TIMEZONE)
+        override val endsAt: Instant? get() = null
     }
 
     public companion object {
-        /**
-         * Create an instance of one of the subclasses of [EventEntry] depending on the provided values.
-         */
         public fun of(
             title: String,
             description: String,
@@ -128,8 +122,11 @@ public sealed class EventEntry {
                 require(startsOn <= endsOn) { "startsOn must be <= endsOn." }
                 return Bounded(title, description, startsOn, endsOn)
             }
-            return if (startsOn != null) OpenEnd(title, description, startsOn)
-            else OpenStart(title, description, endsOn!!)
+            return if (startsOn != null) {
+                OpenEnd(title, description, startsOn)
+            } else {
+                OpenStart(title, description, endsOn!!)
+            }
         }
     }
 }

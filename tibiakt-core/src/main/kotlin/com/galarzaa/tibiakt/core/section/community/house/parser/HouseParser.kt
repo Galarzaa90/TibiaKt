@@ -72,7 +72,7 @@ public object HouseParser : Parser<House?> {
     private fun HouseBuilder.parseStatusDescription(stateLine: String) {
         rentedPattern.find(stateLine)?.apply {
             status = HouseStatus.RENTED
-            owner = groups["owner"]!!.value.clean()
+            ownerName = groups["owner"]!!.value.clean()
             paidUntil = parseTibiaDateTime(groups["paidUntil"]!!.value)
             houseType = StringEnum.fromValue("${groups["type"]!!.value}s")
                 ?: throw ParsingException("Unknown house type found: ${groups["type"]!!.value}")

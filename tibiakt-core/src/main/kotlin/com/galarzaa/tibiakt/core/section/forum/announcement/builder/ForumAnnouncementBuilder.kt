@@ -18,42 +18,43 @@ package com.galarzaa.tibiakt.core.section.forum.announcement.builder
 
 import com.galarzaa.tibiakt.core.builder.BuilderDsl
 import com.galarzaa.tibiakt.core.builder.TibiaKtBuilder
+import com.galarzaa.tibiakt.core.builder.requireField
 import com.galarzaa.tibiakt.core.section.forum.announcement.model.ForumAnnouncement
-import com.galarzaa.tibiakt.core.section.forum.shared.model.BaseForumAuthor
+import com.galarzaa.tibiakt.core.section.forum.shared.model.ForumAuthor
 import kotlin.time.Instant
 
 @BuilderDsl
-public inline fun forumAnnouncementBuilder(block: ForumAnnouncementBuilder.() -> Unit): ForumAnnouncementBuilder =
+internal inline fun forumAnnouncementBuilder(block: ForumAnnouncementBuilder.() -> Unit): ForumAnnouncementBuilder =
     ForumAnnouncementBuilder().apply(block)
 
 @BuilderDsl
-public inline fun forumAnnouncement(block: ForumAnnouncementBuilder.() -> Unit): ForumAnnouncement =
+internal inline fun forumAnnouncement(block: ForumAnnouncementBuilder.() -> Unit): ForumAnnouncement =
     forumAnnouncementBuilder(block).build()
 
 /** Builder for [ForumAnnouncement] instances. */
 @BuilderDsl
-public class ForumAnnouncementBuilder : TibiaKtBuilder<ForumAnnouncement> {
-    public var announcementId: Int? = null
-    public var title: String? = null
-    public var boardName: String? = null
-    public var boardId: Int? = null
-    public var sectionName: String? = null
-    public var sectionId: Int? = null
-    public var author: BaseForumAuthor? = null
-    public var content: String? = null
-    public var startsAt: Instant? = null
-    public var endsAt: Instant? = null
+internal class ForumAnnouncementBuilder : TibiaKtBuilder<ForumAnnouncement> {
+    var announcementId: Int? = null
+    var title: String? = null
+    var boardName: String? = null
+    var boardId: Int? = null
+    var sectionName: String? = null
+    var sectionId: Int? = null
+    var author: ForumAuthor? = null
+    var content: String? = null
+    var startsAt: Instant? = null
+    var endsAt: Instant? = null
 
     override fun build(): ForumAnnouncement = ForumAnnouncement(
-        announcementId = announcementId ?: error("announcementId is required"),
-        title = title ?: error("title is required"),
-        boardName = boardName ?: error("boardName is required"),
-        boardId = boardId ?: error("boardId is required"),
-        sectionName = sectionName ?: error("sectionName is required"),
-        sectionId = sectionId ?: error("sectionId is required"),
-        author = author ?: error("author is required"),
-        content = content ?: error("content is required"),
-        startsAt = startsAt ?: error("startsAt is required"),
-        endsAt = endsAt ?: error("endsAt is required")
+        announcementId = requireField(announcementId, "announcementId"),
+        title = requireField(title, "title"),
+        boardName = requireField(boardName, "boardName"),
+        boardId = requireField(boardId, "boardId"),
+        sectionName = requireField(sectionName, "sectionName"),
+        sectionId = requireField(sectionId, "sectionId"),
+        author = requireField(author, "author"),
+        content = requireField(content, "content"),
+        startsAt = requireField(startsAt, "startsAt"),
+        endsAt = requireField(endsAt, "endsAt"),
     )
 }

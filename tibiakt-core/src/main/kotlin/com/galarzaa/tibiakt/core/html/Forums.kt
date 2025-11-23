@@ -20,11 +20,8 @@ import com.galarzaa.tibiakt.core.enums.StringEnum
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
 import com.galarzaa.tibiakt.core.section.community.guild.model.GuildMembershipWithTitle
 import com.galarzaa.tibiakt.core.section.forum.shared.builder.lastPost
-import com.galarzaa.tibiakt.core.section.forum.shared.model.BaseForumAuthor
 import com.galarzaa.tibiakt.core.section.forum.shared.model.ForumAuthor
 import com.galarzaa.tibiakt.core.section.forum.shared.model.LastPost
-import com.galarzaa.tibiakt.core.section.forum.shared.model.TournamentForumAuthor
-import com.galarzaa.tibiakt.core.section.forum.shared.model.UnavailableForumAuthor
 import com.galarzaa.tibiakt.core.text.findInteger
 import com.galarzaa.tibiakt.core.text.parseInteger
 import com.galarzaa.tibiakt.core.text.remove
@@ -61,12 +58,12 @@ private val authorPostsRegex = Regex("""Posts: (\d+)""")
 
 private val titleRegex = Regex("""\(([\w\s]+)\)""")
 
-internal fun parseAuthorTable(table: Element): BaseForumAuthor {
+internal fun parseAuthorTable(table: Element): ForumAuthor {
     val charLink = table.selectFirst("a")?.getLinkInformation()
     if (charLink == null) {
         val name = table.cleanText()
         val isTraded: Boolean = name.contains(TRADED_TAG)
-        return UnavailableForumAuthor(name.remove(TRADED_TAG).trim(), !isTraded, isTraded)
+        return ForumAuthor.Unavailable(name.remove(TRADED_TAG).trim(), !isTraded, isTraded)
     }
     val charInfo = table.selectFirst("font.ff_infotext")
     val positionInfo = table.selectFirst("font.ff_smallinfo")
@@ -93,7 +90,7 @@ internal fun parseAuthorTable(table: Element): BaseForumAuthor {
     }
     charInfo?.replaceBrs()
     if (charInfo?.cleanText()?.contains("Tournament - ") == true) {
-        return TournamentForumAuthor(charLink.title, charInfo.cleanText().findInteger())
+        return ForumAuthor.Tournament(charLink.title, charInfo.cleanText().findInteger())
     }
 
     val (_, world, vocation, level) = charInfoRegex.find(charInfo!!.wholeCleanText())?.groupValues
@@ -101,7 +98,7 @@ internal fun parseAuthorTable(table: Element): BaseForumAuthor {
 
     val (_, postsText) = authorPostsRegex.find(charInfo.wholeCleanText())!!.groupValues
 
-    return ForumAuthor(
+    return ForumAuthor.Character(
         name = charLink.title,
         level = level.toInt(),
         world = world,

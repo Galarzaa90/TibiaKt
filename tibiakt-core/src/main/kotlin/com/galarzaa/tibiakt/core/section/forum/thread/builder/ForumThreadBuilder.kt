@@ -18,7 +18,7 @@ package com.galarzaa.tibiakt.core.section.forum.thread.builder
 
 import com.galarzaa.tibiakt.core.builder.BuilderDsl
 import com.galarzaa.tibiakt.core.builder.TibiaKtBuilder
-import com.galarzaa.tibiakt.core.section.forum.shared.model.BaseForumAuthor
+import com.galarzaa.tibiakt.core.section.forum.shared.model.ForumAuthor
 import com.galarzaa.tibiakt.core.section.forum.shared.model.ForumEmoticon
 import com.galarzaa.tibiakt.core.section.forum.thread.model.ForumPost
 import com.galarzaa.tibiakt.core.section.forum.thread.model.ForumThread
@@ -75,7 +75,7 @@ public class ForumThreadBuilder : TibiaKtBuilder<ForumThread> {
     )
 
     public class ForumPostBuilder : TibiaKtBuilder<ForumPost> {
-        public var author: BaseForumAuthor? = null
+        public var author: ForumAuthor? = null
         public var emoticon: ForumEmoticon? = null
         public var title: String? = null
         public var content: String? = null

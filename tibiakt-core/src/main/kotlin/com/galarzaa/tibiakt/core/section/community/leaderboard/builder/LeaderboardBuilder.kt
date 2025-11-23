@@ -18,8 +18,9 @@ package com.galarzaa.tibiakt.core.section.community.leaderboard.builder
 
 import com.galarzaa.tibiakt.core.builder.BuilderDsl
 import com.galarzaa.tibiakt.core.builder.TibiaKtBuilder
-import com.galarzaa.tibiakt.core.section.community.leaderboard.model.BaseLeaderboardEntry
+import com.galarzaa.tibiakt.core.builder.requireField
 import com.galarzaa.tibiakt.core.section.community.leaderboard.model.Leaderboard
+import com.galarzaa.tibiakt.core.section.community.leaderboard.model.LeaderboardEntry
 import com.galarzaa.tibiakt.core.section.community.leaderboard.model.LeaderboardRotation
 import kotlin.time.Instant
 
@@ -41,7 +42,7 @@ public class LeaderboardBuilder : TibiaKtBuilder<Leaderboard> {
     public var currentPage: Int? = null
     public var totalPages: Int? = null
     public var resultsCount: Int? = null
-    public val entries: MutableList<BaseLeaderboardEntry> = mutableListOf()
+    public val entries: MutableList<LeaderboardEntry> = mutableListOf()
 
     @BuilderDsl
     public fun rotation(body: LeaderboardRotationBuilder.() -> Unit): LeaderboardBuilder =
@@ -51,28 +52,28 @@ public class LeaderboardBuilder : TibiaKtBuilder<Leaderboard> {
     public fun addAvailableRotation(rotation: LeaderboardRotation): LeaderboardBuilder =
         apply { availableRotations.add(rotation) }
 
-    public fun addEntry(entry: BaseLeaderboardEntry): LeaderboardBuilder = apply { entries.add(entry) }
+    public fun addEntry(entry: LeaderboardEntry): LeaderboardBuilder = apply { entries.add(entry) }
 
 
     override fun build(): Leaderboard = Leaderboard(
-        world = world ?: error("world is required"),
-        rotation = rotation ?: error("rotation is required"),
+        world = requireField(world, "world"),
+        rotation = requireField(rotation, "rotation"),
         availableRotations = availableRotations,
         lastUpdatedAt = lastUpdatedAt,
-        currentPage = currentPage ?: error("currentPage is required"),
-        totalPages = totalPages ?: error("totalPages is required"),
-        resultsCount = resultsCount ?: error("resultsCount is required"),
+        currentPage = requireField(currentPage, "currentPage"),
+        totalPages = requireField(totalPages, "totalPages"),
+        resultsCount = requireField(resultsCount, "resultsCount"),
         entries = entries
     )
 
     public class LeaderboardRotationBuilder : TibiaKtBuilder<LeaderboardRotation> {
         public var rotationId: Int? = null
         public var isCurrent: Boolean = false
-        public var endDate: Instant? = null
+        public var endsAt: Instant? = null
         override fun build(): LeaderboardRotation = LeaderboardRotation(
-            rotationId = rotationId ?: error("rotationId is required"),
+            rotationId = requireField(rotationId, "rotationId"),
             isCurrent = isCurrent,
-            endsAt = endDate ?: error("endDate is required"),
+            endsAt = requireField(endsAt, "endsAt"),
         )
 
     }

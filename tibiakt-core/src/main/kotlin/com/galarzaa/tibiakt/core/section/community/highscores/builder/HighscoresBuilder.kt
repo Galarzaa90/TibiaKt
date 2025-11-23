@@ -18,6 +18,7 @@ package com.galarzaa.tibiakt.core.section.community.highscores.builder
 
 import com.galarzaa.tibiakt.core.builder.BuilderDsl
 import com.galarzaa.tibiakt.core.builder.TibiaKtBuilder
+import com.galarzaa.tibiakt.core.builder.requireField
 import com.galarzaa.tibiakt.core.domain.character.Vocation
 import com.galarzaa.tibiakt.core.domain.world.PvpType
 import com.galarzaa.tibiakt.core.section.community.highscores.model.Highscores
@@ -28,27 +29,28 @@ import com.galarzaa.tibiakt.core.section.community.highscores.model.HighscoresPr
 import kotlin.time.Instant
 
 @BuilderDsl
-public inline fun highscores(block: HighscoresBuilder.() -> Unit): Highscores = HighscoresBuilder().apply(block).build()
+internal inline fun highscores(block: HighscoresBuilder.() -> Unit): Highscores =
+    HighscoresBuilder().apply(block).build()
 
 @BuilderDsl
-public inline fun highscoresBuilder(block: HighscoresBuilder.() -> Unit): HighscoresBuilder =
+internal inline fun highscoresBuilder(block: HighscoresBuilder.() -> Unit): HighscoresBuilder =
     HighscoresBuilder().apply(block)
 
 /** Builder for [Highscores] instances. */
 @BuilderDsl
-public class HighscoresBuilder : TibiaKtBuilder<Highscores> {
-    public var world: String? = null
-    public var category: HighscoresCategory? = null
-    public var vocation: HighscoresProfession? = null
-    public val worldTypes: MutableSet<PvpType> = mutableSetOf()
-    public var battlEyeType: HighscoresBattlEyeType? = null
-    public var lastUpdatedAt: Instant? = null
-    public var currentPage: Int = 1
-    public var totalPages: Int = 1
-    public var resultsCount: Int = 0
-    public val entries: MutableList<HighscoresEntry> = mutableListOf()
+internal class HighscoresBuilder : TibiaKtBuilder<Highscores> {
+    var world: String? = null
+    var category: HighscoresCategory? = null
+    var vocation: HighscoresProfession? = null
+    val worldTypes: MutableSet<PvpType> = mutableSetOf()
+    var battlEyeType: HighscoresBattlEyeType? = null
+    var lastUpdatedAt: Instant? = null
+    var currentPage: Int = 1
+    var totalPages: Int = 1
+    var resultsCount: Int = 0
+    val entries: MutableList<HighscoresEntry> = mutableListOf()
 
-    public fun addEntry(
+    fun addEntry(
         rank: Int,
         name: String,
         vocation: Vocation,
@@ -61,7 +63,7 @@ public class HighscoresBuilder : TibiaKtBuilder<Highscores> {
     }
 
     @BuilderDsl
-    public fun addEntry(block: HighscoresEntryBuilder.() -> Unit): Boolean =
+    fun addEntry(block: HighscoresEntryBuilder.() -> Unit): Boolean =
         entries.add(HighscoresEntryBuilder().apply(block).build())
 
     override fun build(): Highscores = Highscores(
@@ -70,7 +72,7 @@ public class HighscoresBuilder : TibiaKtBuilder<Highscores> {
         vocation = vocation ?: HighscoresProfession.ALL,
         worldTypes = worldTypes,
         battlEyeType = battlEyeType ?: HighscoresBattlEyeType.ANY_WORLD,
-        lastUpdatedAt = lastUpdatedAt ?: error("lastUpdatedAt is required"),
+        lastUpdatedAt = requireField(lastUpdatedAt, "lastUpdatedAt"),
         currentPage = currentPage,
         totalPages = totalPages,
         resultsCount = resultsCount,
@@ -78,20 +80,20 @@ public class HighscoresBuilder : TibiaKtBuilder<Highscores> {
     )
 
     @BuilderDsl
-    public class HighscoresEntryBuilder : TibiaKtBuilder<HighscoresEntry> {
-        public var rank: Int = 0
-        public lateinit var name: String
-        public lateinit var vocation: Vocation
-        public lateinit var world: String
-        public var level: Int = 0
-        public var value: Long = 0
-        public var additionalValue: String? = null
+    class HighscoresEntryBuilder : TibiaKtBuilder<HighscoresEntry> {
+        var rank: Int = 0
+        lateinit var name: String
+        lateinit var vocation: Vocation
+        lateinit var world: String
+        var level: Int = 0
+        var value: Long = 0
+        var additionalValue: String? = null
 
         override fun build(): HighscoresEntry = HighscoresEntry(
             rank = rank,
-            name = if (::name.isInitialized) name else error("name is required"),
-            vocation = if (::vocation.isInitialized) vocation else error("vocation is required"),
-            world = if (::world.isInitialized) world else error("world is required"),
+            name = requireField(::name.isInitialized, "name") { name },
+            vocation = requireField(::vocation.isInitialized, "vocation") { vocation },
+            world = requireField(::world.isInitialized, "world") { world },
             level = level,
             value = value,
             additionalValue = additionalValue,

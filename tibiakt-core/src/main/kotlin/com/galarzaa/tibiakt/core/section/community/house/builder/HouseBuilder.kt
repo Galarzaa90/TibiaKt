@@ -18,51 +18,52 @@ package com.galarzaa.tibiakt.core.section.community.house.builder
 
 import com.galarzaa.tibiakt.core.builder.BuilderDsl
 import com.galarzaa.tibiakt.core.builder.TibiaKtBuilder
+import com.galarzaa.tibiakt.core.builder.requireField
 import com.galarzaa.tibiakt.core.section.community.house.model.House
 import com.galarzaa.tibiakt.core.section.community.house.model.HouseStatus
 import com.galarzaa.tibiakt.core.section.community.house.model.HouseType
 import kotlin.time.Instant
 
 @BuilderDsl
-public inline fun house(block: HouseBuilder.() -> Unit): House = HouseBuilder().apply(block).build()
+internal inline fun house(block: HouseBuilder.() -> Unit): House = HouseBuilder().apply(block).build()
 
 @BuilderDsl
-public inline fun houseBuilder(block: HouseBuilder.() -> Unit): HouseBuilder = HouseBuilder().apply(block)
+internal inline fun houseBuilder(block: HouseBuilder.() -> Unit): HouseBuilder = HouseBuilder().apply(block)
 
 
 /** Builder for [House] instances. */
 @BuilderDsl
-public class HouseBuilder : TibiaKtBuilder<House> {
-    public var houseId: Int? = null
-    public var name: String? = null
-    public var size: Int? = null
-    public var houseType: HouseType? = null
-    public var beds: Int? = null
-    public var rent: Int? = null
-    public var world: String? = null
-    public var status: HouseStatus? = null
-    public var paidUntil: Instant? = null
-    public var owner: String? = null
-    public var transferScheduledAt: Instant? = null
-    public var transferPrice: Int? = null
-    public var isTransferAccepted: Boolean? = null
-    public var transferRecipient: String? = null
-    public var highestBid: Int? = null
-    public var highestBidder: String? = null
-    public var auctionEndsAt: Instant? = null
+internal class HouseBuilder : TibiaKtBuilder<House> {
+    var houseId: Int? = null
+    var name: String? = null
+    var size: Int? = null
+    var houseType: HouseType? = null
+    var beds: Int? = null
+    var rent: Int? = null
+    var world: String? = null
+    var status: HouseStatus? = null
+    var paidUntil: Instant? = null
+    var ownerName: String? = null
+    var transferScheduledAt: Instant? = null
+    var transferPrice: Int? = null
+    var isTransferAccepted: Boolean? = null
+    var transferRecipient: String? = null
+    var highestBid: Int? = null
+    var highestBidder: String? = null
+    var auctionEndsAt: Instant? = null
 
     @Suppress("ComplexMethod")
     override fun build(): House = when (status) {
         HouseStatus.RENTED -> House.Rented(
-            houseId = houseId ?: error("houseId is required"),
-            name = name ?: error("name is required"),
-            size = size ?: error("size is required"),
-            houseType = houseType ?: error("type is required"),
-            beds = beds ?: error("beds is required"),
-            rent = rent ?: error("rent is required"),
-            world = world ?: error("world is required"),
-            paidUntil = paidUntil ?: error("paidUntil is required"),
-            ownerName = owner ?: error("Owner is required"),
+            houseId = requireField(houseId, "houseId"),
+            name = requireField(name, "name"),
+            size = requireField(size, "size"),
+            houseType = requireField(houseType, "houseType"),
+            beds = requireField(beds, "beds"),
+            rent = requireField(rent, "rent"),
+            world = requireField(world, "world"),
+            paidUntil = requireField(paidUntil, "paidUntil"),
+            ownerName = requireField(ownerName, "ownerName"),
             transferScheduledAt = transferScheduledAt,
             transferPrice = transferPrice,
             isTransferAccepted = isTransferAccepted,
@@ -70,13 +71,13 @@ public class HouseBuilder : TibiaKtBuilder<House> {
         )
 
         HouseStatus.AUCTIONED -> House.Auctioned(
-            houseId = houseId ?: error("houseId is required"),
-            name = name ?: error("name is required"),
-            size = size ?: error("size is required"),
-            houseType = houseType ?: error("type is required"),
-            beds = beds ?: error("beds is required"),
-            rent = rent ?: error("rent is required"),
-            world = world ?: error("world is required"),
+            houseId = requireField(houseId, "houseId"),
+            name = requireField(name, "name"),
+            size = requireField(size, "size"),
+            houseType = requireField(houseType, "houseType"),
+            beds = requireField(beds, "beds"),
+            rent = requireField(rent, "rent"),
+            world = requireField(world, "world"),
             highestBid = highestBid,
             highestBidder = highestBidder,
             auctionEndsAt = auctionEndsAt,

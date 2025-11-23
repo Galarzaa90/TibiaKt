@@ -3,9 +3,13 @@
 ## 2.0.0 (Unreleased)
 
 - Reorganized package names. Classes are organized similar to sections on Tibia.com
-- Renamed `BaseCharacter` to `TibiaCharacter`.
 - Renamed `Character` to `CharacterInfo` to avoid conflicts with `java.lang.Character`
 - Renamed `CharacterLevel` to `LevelAware`.
+- Renamed `BaseEventEntry` to `EventEntry`.
+  - Implementations are now inner, and have been renamed:
+    - `EventEntryOpenStart` to `EventEntry.OpenStart`
+    - `EventEntryOpenEnd` to `EventEntry.OpenEnd`
+    - `EventEntry` to `EventEntry.Bounded`
 - `TibiaKtClient` now implements `TibiaKtApi` interface.
   - Remove `fetchNewsArchive` using days.
   - `fetchNews` renamed to `fetchNewsArticleById`.

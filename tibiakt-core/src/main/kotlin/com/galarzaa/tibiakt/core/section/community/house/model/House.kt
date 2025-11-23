@@ -21,27 +21,26 @@ import com.galarzaa.tibiakt.core.section.community.urls.characterUrl
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlin.time.Instant
-
 /**
  * A house or guildhall.
  *
  * @property name The name of the house.
  * @property size The size of the house in square meters (tiles).
  * @property houseType The type of the house.
- * @property beds The maximum amount of beds that can be placed in there.
+ * @property beds The maximum number of beds that can be placed in there.
  * @property rent The monthly rent paid for this house in gold coins.
  * @property status The current status of the house.
  */
 @Serializable
-public sealed class House : BaseHouse {
-    abstract override val houseId: Int
-    public abstract val name: String
-    public abstract val size: Int
-    public abstract val houseType: HouseType
-    public abstract val beds: Int
-    public abstract val rent: Int
-    abstract override val world: String
-    public abstract val status: HouseStatus
+public sealed interface House : BaseHouse {
+    override val houseId: Int
+    public val name: String
+    public val size: Int
+    public val houseType: HouseType
+    public val beds: Int
+    public val rent: Int
+    override val world: String
+    public val status: HouseStatus
 
     /**
      * A rented house or guildhall.
@@ -49,12 +48,12 @@ public sealed class House : BaseHouse {
      * @property paidUntil The date when the last paid rent is due.
      * @property ownerName The character that currently owns the house.
      * @property transferScheduledAt The date when the current owner will move out of the house.
-     * @property transferPrice The amount of gold coins to be paid for transferring the house.
+     * @property transferPrice The number of gold coins to be paid for transferring the house.
      * @property isTransferAccepted Whether the transfer has been accepted by the recipient or not.
      * @property transferRecipient The character that will receive the house.
      */
     @Serializable
-    @SerialName("RENTED")
+    @SerialName("rented")
     public data class Rented(
         override val houseId: Int,
         override val name: String,
@@ -69,16 +68,16 @@ public sealed class House : BaseHouse {
         val transferPrice: Int?,
         val isTransferAccepted: Boolean?,
         val transferRecipient: String?,
-    ) : House() {
+    ) : House {
         override val status: HouseStatus = HouseStatus.RENTED
 
-        /**
-         * URL to the owner's information page.
-         */
-        val ownerUrl: String get() = characterUrl(ownerName)
+        /** URL to the owner's information page. */
+        val ownerUrl: String
+            get() = characterUrl(ownerName)
 
         /** URL to the transfer recipient's information page, if any. */
-        val transferRecipientUrl: String? get() = transferRecipient?.let { characterUrl(it) }
+        val transferRecipientUrl: String?
+            get() = transferRecipient?.let(::characterUrl)
     }
 
     /**
@@ -89,7 +88,7 @@ public sealed class House : BaseHouse {
      * @property auctionEndsAt The date and time when the auction will end.
      */
     @Serializable
-    @SerialName("AUCTIONED")
+    @SerialName("auctioned")
     public data class Auctioned(
         override val houseId: Int,
         override val name: String,
@@ -101,12 +100,11 @@ public sealed class House : BaseHouse {
         val highestBid: Int?,
         val highestBidder: String?,
         val auctionEndsAt: Instant?,
-    ) : House() {
+    ) : House {
         override val status: HouseStatus = HouseStatus.AUCTIONED
 
-        /**
-         * The URL to the information page of the highest bidder, if any.
-         */
-        val highestBidderUrl: String? get() = highestBidder?.let { characterUrl(it) }
+        /** The URL to the information page of the highest bidder, if any. */
+        val highestBidderUrl: String?
+            get() = highestBidder?.let(::characterUrl)
     }
 }
