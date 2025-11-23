@@ -16,7 +16,7 @@
 
 package com.galarzaa.tibiakt.core.section.community.guild.model
 
-import com.galarzaa.tibiakt.core.domain.character.TibiaCharacter
+import com.galarzaa.tibiakt.core.domain.character.BaseCharacter
 import kotlinx.datetime.LocalDate
 import kotlinx.serialization.Serializable
 
@@ -29,4 +29,4 @@ import kotlinx.serialization.Serializable
 public data class GuildInvite(
     override val name: String,
     val invitedOn: LocalDate,
-) : TibiaCharacter
+) : BaseCharacter

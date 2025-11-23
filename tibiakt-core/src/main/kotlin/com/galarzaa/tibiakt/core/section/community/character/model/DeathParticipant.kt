@@ -16,7 +16,7 @@
 
 package com.galarzaa.tibiakt.core.section.community.character.model
 
-import com.galarzaa.tibiakt.core.domain.character.TibiaCharacter
+import com.galarzaa.tibiakt.core.domain.character.BaseCharacter
 import com.galarzaa.tibiakt.core.section.community.urls.characterUrl
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -46,7 +46,7 @@ public sealed interface DeathParticipant {
     public data class Player(
         override val name: String,
         val isTraded: Boolean,
-    ) : DeathParticipant, TibiaCharacter
+    ) : DeathParticipant, BaseCharacter
 
     /**
      * A creature that was summoned by a player and participated in a death.

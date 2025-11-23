@@ -16,7 +16,7 @@
 
 package com.galarzaa.tibiakt.core.section.community.leaderboard.model
 
-import com.galarzaa.tibiakt.core.domain.character.TibiaCharacter
+import com.galarzaa.tibiakt.core.domain.character.BaseCharacter
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -42,7 +42,7 @@ public data class LeaderboardEntry(
     override val rank: Int,
     override val name: String,
     override val dromeLevel: Int,
-) : BaseLeaderboardEntry(), TibiaCharacter
+) : BaseLeaderboardEntry(), BaseCharacter
 
 /** A leaderboard entry belonging to a deleted character. */
 @Serializable

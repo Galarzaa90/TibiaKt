@@ -16,7 +16,7 @@
 
 package com.galarzaa.tibiakt.core.section.community.character.model
 
-import com.galarzaa.tibiakt.core.domain.character.TibiaCharacter
+import com.galarzaa.tibiakt.core.domain.character.BaseCharacter
 import kotlinx.serialization.Serializable
 
 /**
@@ -38,4 +38,4 @@ public data class AccountCharacter(
     val isScheduledForDeletion: Boolean,
     val isRecentlyTraded: Boolean,
     val position: String?,
-) : TibiaCharacter
+) : BaseCharacter

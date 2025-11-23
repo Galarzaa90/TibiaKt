@@ -17,9 +17,9 @@
 
 package com.galarzaa.tibiakt.core.section.community.character.model
 
+import com.galarzaa.tibiakt.core.domain.character.BaseCharacter
 import com.galarzaa.tibiakt.core.domain.character.LevelAware
 import com.galarzaa.tibiakt.core.domain.character.Sex
-import com.galarzaa.tibiakt.core.domain.character.TibiaCharacter
 import com.galarzaa.tibiakt.core.domain.character.Vocation
 import com.galarzaa.tibiakt.core.section.community.urls.characterUrl
 import kotlinx.serialization.Serializable
@@ -80,7 +80,7 @@ public data class CharacterInfo(
     val deaths: List<Death>,
     val accountInformation: AccountInformation?,
     val otherCharacters: List<AccountCharacter>,
-) : TibiaCharacter, LevelAware {
+) : BaseCharacter, LevelAware {
 
     /**
      * Whether this character is scheduled for deletion or nto.

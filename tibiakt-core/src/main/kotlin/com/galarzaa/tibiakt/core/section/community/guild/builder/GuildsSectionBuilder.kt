@@ -22,20 +22,20 @@ import com.galarzaa.tibiakt.core.section.community.guild.model.GuildEntry
 import com.galarzaa.tibiakt.core.section.community.guild.model.GuildsSection
 
 @BuilderDsl
-public inline fun guildsSectionBuilder(block: GuildsSectionBuilder.() -> Unit): GuildsSectionBuilder =
+internal inline fun guildsSectionBuilder(block: GuildsSectionBuilder.() -> Unit): GuildsSectionBuilder =
     GuildsSectionBuilder().apply(block)
 
 @BuilderDsl
-public inline fun guildsSection(block: GuildsSectionBuilder.() -> Unit): GuildsSection =
+internal inline fun guildsSection(block: GuildsSectionBuilder.() -> Unit): GuildsSection =
     guildsSectionBuilder(block).build()
 
 /** Builder for [GuildsSection] instances. */
 @BuilderDsl
-public class GuildsSectionBuilder : TibiaKtBuilder<GuildsSection> {
-    public var world: String? = null
-    public val guilds: MutableList<GuildEntry> = mutableListOf()
+internal class GuildsSectionBuilder : TibiaKtBuilder<GuildsSection> {
+    var world: String? = null
+    val guilds: MutableList<GuildEntry> = mutableListOf()
 
-    public fun addGuild(
+    fun addGuild(
         name: String,
         logoUrl: String,
         description: String? = null,

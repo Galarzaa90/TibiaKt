@@ -24,7 +24,7 @@ import com.galarzaa.tibiakt.core.section.community.urls.characterUrl
  * @property name The name of the character.
  * @property url The URL to the character's information page.
  */
-public interface TibiaCharacter {
+public interface BaseCharacter {
     public val name: String
     public val url: String get() = characterUrl(name)
 }

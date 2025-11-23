@@ -16,8 +16,8 @@
 
 package com.galarzaa.tibiakt.core.section.forum.shared.model
 
+import com.galarzaa.tibiakt.core.domain.character.BaseCharacter
 import com.galarzaa.tibiakt.core.domain.character.LevelAware
-import com.galarzaa.tibiakt.core.domain.character.TibiaCharacter
 import com.galarzaa.tibiakt.core.domain.character.Vocation
 import com.galarzaa.tibiakt.core.section.community.guild.model.GuildMembershipWithTitle
 import kotlinx.serialization.SerialName
@@ -75,7 +75,7 @@ public data class ForumAuthor(
     val guild: GuildMembershipWithTitle?,
     val postsCount: Int,
     val isRecentlyTraded: Boolean,
-) : BaseForumAuthor(), TibiaCharacter, LevelAware
+) : BaseForumAuthor(), BaseCharacter, LevelAware
 
 /**
  * An author from a tournament world.
@@ -87,4 +87,4 @@ public data class ForumAuthor(
 public data class TournamentForumAuthor(
     override val name: String,
     val postCount: Int,
-) : BaseForumAuthor(), TibiaCharacter
+) : BaseForumAuthor(), BaseCharacter

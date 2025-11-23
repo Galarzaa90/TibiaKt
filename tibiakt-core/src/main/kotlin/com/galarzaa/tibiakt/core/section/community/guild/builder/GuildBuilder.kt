@@ -26,34 +26,34 @@ import com.galarzaa.tibiakt.core.section.community.guild.model.GuildMember
 import kotlinx.datetime.LocalDate
 
 @BuilderDsl
-public inline fun guildBuilder(block: GuildBuilder.() -> Unit): GuildBuilder = GuildBuilder().apply(block)
+internal inline fun guildBuilder(block: GuildBuilder.() -> Unit): GuildBuilder = GuildBuilder().apply(block)
 
 @BuilderDsl
-public inline fun guild(block: GuildBuilder.() -> Unit): Guild = guildBuilder(block).build()
+internal inline fun guild(block: GuildBuilder.() -> Unit): Guild = guildBuilder(block).build()
 
 /** Builder for [Guild] instances. */
 @BuilderDsl
-public class GuildBuilder : TibiaKtBuilder<Guild> {
-    public var world: String? = null
-    public var name: String? = null
-    public var logoUrl: String? = null
-    public var description: String? = null
-    public var foundedOn: LocalDate? = null
-    public var isActive: Boolean = false
-    public var areApplicationsOpen: Boolean = false
-    public var homepage: String? = null
-    public var guildHall: GuildHall? = null
-    public var disbandsOn: LocalDate? = null
-    public var disbandingReason: String? = null
-    public val members: MutableList<GuildMember> = mutableListOf()
-    public val invited: MutableList<GuildInvite> = mutableListOf()
+internal class GuildBuilder : TibiaKtBuilder<Guild> {
+    var world: String? = null
+    var name: String? = null
+    var logoUrl: String? = null
+    var description: String? = null
+    var foundedOn: LocalDate? = null
+    var isActive: Boolean = false
+    var areApplicationsOpen: Boolean = false
+    var homepage: String? = null
+    var guildHall: GuildHall? = null
+    var disbandsOn: LocalDate? = null
+    var disbandingReason: String? = null
+    val members: MutableList<GuildMember> = mutableListOf()
+    val invited: MutableList<GuildInvite> = mutableListOf()
 
-    public fun guildHall(name: String, paidUntil: LocalDate): GuildBuilder =
+    fun guildHall(name: String, paidUntil: LocalDate): GuildBuilder =
         apply { guildHall = GuildHall(name, paidUntil) }
 
-    public fun guildHall(guildHall: GuildHall): GuildBuilder = apply { this.guildHall = guildHall }
+    fun guildHall(guildHall: GuildHall): GuildBuilder = apply { this.guildHall = guildHall }
 
-    public fun addMember(
+    fun addMember(
         rank: String,
         name: String,
         title: String?,
@@ -66,10 +66,10 @@ public class GuildBuilder : TibiaKtBuilder<Guild> {
     }
 
     @BuilderDsl
-    public fun addMember(block: GuildMemberBuilder.() -> Unit): Boolean =
+    fun addMember(block: GuildMemberBuilder.() -> Unit): Boolean =
         members.add(GuildMemberBuilder().apply(block).build())
 
-    public fun addInvite(name: String, inviteDate: LocalDate): GuildBuilder =
+    fun addInvite(name: String, inviteDate: LocalDate): GuildBuilder =
         apply { invited.add(GuildInvite(name, inviteDate)) }
 
     override fun build(): Guild = Guild(
@@ -88,14 +88,14 @@ public class GuildBuilder : TibiaKtBuilder<Guild> {
         disbandingReason = disbandingReason,
     )
 
-    public class GuildMemberBuilder : TibiaKtBuilder<GuildMember> {
-        public lateinit var rank: String
-        public lateinit var name: String
-        public var title: String? = null
-        public lateinit var vocation: Vocation
-        public var level: Int = 0
-        public lateinit var joiningDate: LocalDate
-        public var isOnline: Boolean = false
+    class GuildMemberBuilder : TibiaKtBuilder<GuildMember> {
+        lateinit var rank: String
+        lateinit var name: String
+        var title: String? = null
+        lateinit var vocation: Vocation
+        var level: Int = 0
+        lateinit var joiningDate: LocalDate
+        var isOnline: Boolean = false
 
         override fun build(): GuildMember = GuildMember(
             rank = if (::rank.isInitialized) rank else error("rank is required"),
