@@ -19,7 +19,7 @@ package com.galarzaa.tibiakt.core.section.news.event.builder
 import com.galarzaa.tibiakt.core.builder.BuilderDsl
 import com.galarzaa.tibiakt.core.builder.TibiaKtBuilder
 import com.galarzaa.tibiakt.core.builder.requireField
-import com.galarzaa.tibiakt.core.section.news.event.model.BaseEventEntry
+import com.galarzaa.tibiakt.core.section.news.event.model.EventEntry
 import com.galarzaa.tibiakt.core.section.news.event.model.EventsSchedule
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.YearMonth
@@ -33,7 +33,7 @@ internal inline fun eventsScheduleBuilder(block: EventsScheduleBuilder.() -> Uni
     EventsScheduleBuilder().apply(block)
 
 @BuilderDsl
-internal inline fun eventEntry(block: EventsScheduleBuilder.EventEntryBuilder.() -> Unit): BaseEventEntry =
+internal inline fun eventEntry(block: EventsScheduleBuilder.EventEntryBuilder.() -> Unit): EventEntry =
     EventsScheduleBuilder.EventEntryBuilder().apply(block).build()
 
 @BuilderDsl
@@ -44,7 +44,7 @@ internal inline fun eventEntryBuilder(block: EventsScheduleBuilder.EventEntryBui
 @BuilderDsl
 internal class EventsScheduleBuilder : TibiaKtBuilder<EventsSchedule> {
     lateinit var yearMonth: YearMonth
-    val entries: MutableList<BaseEventEntry> = mutableListOf()
+    val entries: MutableList<EventEntry> = mutableListOf()
 
 
     fun addEntry(
@@ -54,11 +54,11 @@ internal class EventsScheduleBuilder : TibiaKtBuilder<EventsSchedule> {
         endsOn: LocalDate?,
     ): EventsScheduleBuilder = apply {
         entries.add(
-            BaseEventEntry.of(title, description, startsOn, endsOn)
+            EventEntry.of(title, description, startsOn, endsOn)
         )
     }
 
-    fun addEntry(entry: BaseEventEntry): EventsScheduleBuilder = apply { entries.add(entry) }
+    fun addEntry(entry: EventEntry): EventsScheduleBuilder = apply { entries.add(entry) }
 
     override fun build(): EventsSchedule = EventsSchedule(
         month = requireField(::yearMonth.isInitialized, "yearMonth") { yearMonth },
@@ -71,7 +71,7 @@ internal class EventsScheduleBuilder : TibiaKtBuilder<EventsSchedule> {
         var startsOn: LocalDate? = null
         var endsOn: LocalDate? = null
 
-        fun build(): BaseEventEntry = BaseEventEntry.of(
+        fun build(): EventEntry = EventEntry.of(
             requireField(title, "title"),
             requireField(description, "description"),
             startsOn,

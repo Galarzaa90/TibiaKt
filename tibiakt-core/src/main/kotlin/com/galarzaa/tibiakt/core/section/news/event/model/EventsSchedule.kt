@@ -29,7 +29,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 public data class EventsSchedule(
     val month: YearMonth,
-    val entries: List<BaseEventEntry>,
+    val entries: List<EventEntry>,
 ) {
     /**
      * URL for this schedule.
