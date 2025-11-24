@@ -17,7 +17,7 @@
 package com.galarzaa.tibiakt.server.plugins
 
 import com.galarzaa.tibiakt.client.TibiaKtClient
-import com.galarzaa.tibiakt.client.TibiaResponse
+import com.galarzaa.tibiakt.client.model.TibiaResponse
 import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.BazaarFilters
 import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
@@ -28,6 +28,7 @@ import io.ktor.server.response.respond
 import io.ktor.server.response.respondText
 import io.ktor.server.routing.get
 import io.ktor.server.routing.routing
+import kotlinx.datetime.YearMonth
 
 internal fun Application.configureRouting(client: TibiaKtClient) {
     routing {
@@ -45,9 +46,9 @@ internal fun Application.configureRouting(client: TibiaKtClient) {
             check(it.startAt >= it.endAt) { "endAt must be after startAt" }
             call.respond(client.fetchNewsArchive(it.startAt, it.endAt, it.category?.toSet(), it.type?.toSet()))
         }
-        get<News> { (newsId) -> call.respondOrNotFound(client.fetchNews(newsId)) }
+        get<News> { (newsId) -> call.respondOrNotFound(client.fetchNewsArticleById(newsId)) }
         get<News.Html> { (it) ->
-            val response = client.fetchNews(it.newsId)
+            val response = client.fetchNewsArticleById(it.newsId)
             response.data?.content?.let {
                 call.respondText(it, ContentType.Text.Html)
             } ?: call.respond(HttpStatusCode.NotFound, "")
@@ -56,9 +57,7 @@ internal fun Application.configureRouting(client: TibiaKtClient) {
         get<EventsSchedule> { call.respondOrNotFound(client.fetchEventsSchedule()) }
         get<EventsSchedule.ByMonth> { (_, year, month) ->
             call.respondOrNotFound(
-                client.fetchEventsSchedule(
-                    year, month
-                )
+                client.fetchEventsSchedule(YearMonth(year, month))
             )
         }
         get<WorldHouses> {

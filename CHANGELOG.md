@@ -3,26 +3,67 @@
 ## 2.0.0 (Unreleased)
 
 - Reorganized package names. Classes are organized similar to sections on Tibia.com
+    - `com.galarzaa.tibiakt.core.*.bazaar` to `com.galarzaa.tibiakt.core.section.charactertrade.bazaar.*`
+    - `com.galarzaa.tibiakt.core.*.character.*` to `com.galarzaa.tibiakt.core.section.community.character.*`
+    - `com.galarzaa.tibiakt.core.*.creatures.*` to `com.galarzaa.tibiakt.core.section.library.creature.*`
+    - `com.galarzaa.tibiakt.core.*.forums.*` to `com.galarzaa.tibiakt.core.section.forums.*`
+    - `com.galarzaa.tibiakt.core.*.guild.*` to `com.galarzaa.tibiakt.core.section.community.guild.*`
+    - `com.galarzaa.tibiakt.core.*.highscores.*` to `com.galarzaa.tibiakt.core.section.community.highscores.*`
+    - `com.galarzaa.tibiakt.core.*.house.*` to `com.galarzaa.tibiakt.core.section.community.house.*`
+    - `com.galarzaa.tibiakt.core.*.killstatistics.*` to `com.galarzaa.tibiakt.core.section.community.killstatistics.*`
+    - `com.galarzaa.tibiakt.core.*.leaderboards.*` to `com.galarzaa.tibiakt.core.section.community.leaderboard.*`
+    - `com.galarzaa.tibiakt.core.*.world.*` to `com.galarzaa.tibiakt.core.section.community.world.*`
+    - `com.galarzaa.tibiakt.core.*.news.*` to `com.galarzaa.tibiakt.core.section.news.*`
+    - `com.galarzaa.tibiakt.core.*.world.*` to `com.galarzaa.tibiakt.core.section.world.*`
+    - Moved `com.galarzaa.tibiakt.core.enums.*` into section packages.
+    - Moved `BaseCharacter` to `com.galarzaa.tibiakt.core.domain.character`
+    - Moved `CharacterLevel` to `com.galarzaa.tibiakt.core.domain.character`
+    - Moved `Sex` enum to `com.galarzaa.tibiakt.core.domain.character`
+    - Moved `Vocation` enum to `com.galarzaa.tibiakt.core.domain.character`
+    - Moved `BaseGuild` to `com.galarzaa.tibiakt.core.domain.guild`
+    - Moved `BaseHouse` to `com.galarzaa.tibiakt.core.domain.house`
+    - Moved `BattlEyeType` enum to `com.galarzaa.tibiakt.core.domain.world`
+    - Moved `PvpType` enum to `com.galarzaa.tibiakt.core.domain.world`
+    - Moved `TransferType` enum to `com.galarzaa.tibiakt.core.domain.world`
 - Renamed `Character` to `CharacterInfo` to avoid conflicts with `java.lang.Character`
 - Renamed `CharacterLevel` to `LevelAware`.
-- Renamed `BaseEventEntry` to `EventEntry`.
-  - Implementations are now inner, and have been renamed:
+- Renamed `BaseEventEntry` to `EventEntry`, and it is now a sealed interface.
+    - Implementations are now inner and have been renamed:
     - `EventEntryOpenStart` to `EventEntry.OpenStart`
     - `EventEntryOpenEnd` to `EventEntry.OpenEnd`
     - `EventEntry` to `EventEntry.Bounded`
-- `TibiaKtClient` now implements `TibiaKtApi` interface.
-  - Remove `fetchNewsArchive` using days.
-  - `fetchNews` renamed to `fetchNewsArticleById`.
-  - Removed `fetchEventsSchedule` overloads with separate `year`  and `month` parameters.
+- `NewsArchive`'s filtering properties have been moved to new data class `NewsArchiveFilters`.
 - Added `displayName` property to `NewsCategory` enum.
 - `NewsType.value` renamed to `displayName`, added `value` property to represent internal value.
 - Renamed `News` to `NewsArticle`.
 - Renamed `BaseCreatureEntry` to `BaseCreature`.
 - Renamed `OtherCharacter` to `AccountCharacter`.
 - Renamed `OtherCharacter.isDeleted` to `isScheduledForDeletion`.
-- Renamed `Death.timestamp` to `occurredAt`.
+- Renamed `Death.timestamp` to `occurredAt`.`
+- Renamed `House.Rented.isTranscerAccepted` to `transferIsAccepted`
 - `DeathParticipant` is now a sealed interface with subtypes `Creature`, `Player` and `Summon`.
+- Renamed `KillStatisticsEntry.lastDayKilled` to `lastDayKilledByPlayers` and `KillStatisticsEntry.lastWeekKilled` to
+  `lastWeekKilledByPlayers` to reflect the website.
+- Renamed `BaseLeaderboardEntry to `LeaderboardEntry` and it is now a sealed interface instead of sealed class.
+    - Implementations are now inner classes and have been renamed:
+        - `LeaderboardEntry` to `LeaderboardEntry.Character`
+        - `DeletedLeaderboardEntry` to `LeaderboardEntry.Deleted`
+- Renamed `BaseForumAuthor` to `ForumAuthor` and it is now a sealed interface instead of sealed class.
+    - Implementations are now inner classes and have been renamed:
+        - `UnavailableForumAuthor` to `ForumAuthor.Unavailable`
+        - `ForumAuthor` to `ForumAuthor.Character`
+        - `TournamentForumAuthor` to `ForumAuthor.Tournament`
+- `LastPost` properties renamed:
+    - `isDeleted` to `authorIsDeleted`
+    - `isTraded` to `authorIsTraded`
+- `ThreadEntry` properties renamed:
+    - `isAuthorDeleted` to `authorIsDeleted`
+    - `isAuthorTraded` to `authorIsTraded`
 - All builder classes are now internal.
+- `TibiaKtClient` now implements `TibiaKtApi` interface.
+    - Remove `fetchNewsArchive` using days.
+    - `fetchNews` renamed to `fetchNewsArticleById`.
+    - Removed `fetchEventsSchedule` overloads with separate `year`  and `month` parameters.
 
 ## 1.0.0 (2025/10/17)
 

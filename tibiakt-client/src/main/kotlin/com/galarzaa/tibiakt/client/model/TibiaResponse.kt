@@ -1,5 +1,5 @@
 /*
- * Copyright © 2024 Allan Galarza
+ * Copyright © 2025 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,12 +14,10 @@
  * limitations under the License.
  */
 
+package com.galarzaa.tibiakt.client.model
 
-
-package com.galarzaa.tibiakt.client
-
-import kotlin.time.Instant
 import kotlinx.serialization.Serializable
+import kotlin.time.Instant
 
 /**
  * A response from Tibia.com.

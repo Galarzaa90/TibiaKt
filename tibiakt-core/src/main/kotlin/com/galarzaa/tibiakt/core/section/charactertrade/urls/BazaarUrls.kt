@@ -20,6 +20,7 @@ import com.galarzaa.tibiakt.core.domain.world.PvpType
 import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.AuctionBattlEyeFilter
 import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.AuctionOrderBy
 import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.AuctionOrderDirection
+import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.AuctionPagesType
 import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.AuctionSearchType
 import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.AuctionSkillFilter
 import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.AuctionVocationFilter
@@ -68,3 +69,8 @@ public fun auctionUrl(auctionId: Int): String =
         "page" to "details",
         "auctionid" to auctionId
     )
+
+
+/** URL to the endpoint to get additional elements for an auction. */
+public fun auctionCharacterDetailsUrl(auctionId: Int, type: AuctionPagesType, page: Int): String =
+    "https://www.tibia.com/websiteservices/handle_charactertrades.php?auctionid=$auctionId&type=${type.typeId}&currentpage=$page"

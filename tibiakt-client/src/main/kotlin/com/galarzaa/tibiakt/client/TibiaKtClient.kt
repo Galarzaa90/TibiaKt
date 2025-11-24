@@ -20,9 +20,22 @@ import com.galarzaa.tibiakt.client.TibiaKtClient.Companion.defaultConfig
 import com.galarzaa.tibiakt.client.exceptions.ForbiddenException
 import com.galarzaa.tibiakt.client.exceptions.NetworkException
 import com.galarzaa.tibiakt.client.exceptions.SiteMaintenanceException
+import com.galarzaa.tibiakt.client.model.AjaxResponse
+import com.galarzaa.tibiakt.client.model.TibiaResponse
+import com.galarzaa.tibiakt.client.model.TimedResult
 import com.galarzaa.tibiakt.core.domain.world.PvpType
+import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.AjaxPaginator
+import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.Auction
+import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.AuctionPagesType
+import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.BazaarFilters
 import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.BazaarType
+import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.CharacterBazaar
+import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.ItemEntry
+import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.MountEntry
+import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.OutfitEntry
 import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.parser.AuctionParser
+import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.parser.CharacterBazaarParser
+import com.galarzaa.tibiakt.core.section.charactertrade.urls.auctionCharacterDetailsUrl
 import com.galarzaa.tibiakt.core.section.charactertrade.urls.auctionUrl
 import com.galarzaa.tibiakt.core.section.charactertrade.urls.bazaarUrl
 import com.galarzaa.tibiakt.core.section.community.character.model.CharacterInfo
@@ -97,7 +110,6 @@ import com.galarzaa.tibiakt.core.section.news.urls.eventScheduleUrl
 import com.galarzaa.tibiakt.core.section.news.urls.newArchiveFormData
 import com.galarzaa.tibiakt.core.section.news.urls.newsArchiveUrl
 import com.galarzaa.tibiakt.core.section.news.urls.newsArticleUrl
-import com.galarzaa.tibiakt.core.time.TIBIA_TIMEZONE
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.call.body
@@ -127,7 +139,6 @@ import kotlinx.serialization.json.Json
 import mu.KotlinLogging
 import kotlin.system.measureTimeMillis
 import kotlin.time.Clock
-import kotlin.time.Duration.Companion.days
 import kotlin.time.Duration.Companion.seconds
 import kotlin.time.Instant
 
@@ -139,10 +150,10 @@ import kotlin.time.Instant
  * Defaults (timeouts, compression, user-agent, no redirects) are applied via [defaultConfig]
  * unless explicitly disabled where supported.
  */
-public open class TibiaKtClient protected constructor(
-    protected val client: HttpClient,
+public class TibiaKtClient constructor(
+    private val client: HttpClient,
     private val ownsClient: Boolean,
-) {
+) : TibiaKtApi, AutoCloseable {
 
     /**
      * Create a client from a caller-provided [HttpClient].
@@ -214,7 +225,7 @@ public open class TibiaKtClient protected constructor(
      *
      * If the caller provided the client, this is a no-op and the caller remains responsible for closing that client.
      */
-    public open fun close() {
+    public override fun close() {
         if (ownsClient) client.close()
     }
 
@@ -225,7 +236,7 @@ public open class TibiaKtClient protected constructor(
      * @param data The form parameters to add.
      * @param headers Additional headers to add.
      */
-    public open suspend fun request(
+    public suspend fun request(
         method: HttpMethod,
         url: String,
         data: List<Pair<String, Any>> = emptyList(),
@@ -282,60 +293,29 @@ public open class TibiaKtClient protected constructor(
 
     // region News Section
 
-    /**
-     * Fetch the news for a given interval.
-     */
-    public open suspend fun fetchNewsArchive(
+
+    public override suspend fun fetchNewsArchive(
         startAt: LocalDate,
         endAt: LocalDate,
-        categories: Set<NewsCategory>? = null,
-        types: Set<NewsType>? = null,
+        categories: Set<NewsCategory>?,
+        types: Set<NewsType>?,
     ): TibiaResponse<NewsArchive> {
         val data = newArchiveFormData(startAt, endAt, categories, types)
         val response = this.request(HttpMethod.Post, newsArchiveUrl(), data)
         return response.parse { NewsArchiveParser.fromContent(it) }
     }
 
-    /**
-     * Fetch the news from today to the last provided days.
-     */
-    public open suspend fun fetchNewsArchive(
-        days: Int = 30,
-        categories: Set<NewsCategory>? = null,
-        types: Set<NewsType>? = null,
-    ): TibiaResponse<NewsArchive> = fetchNewsArchive(
-        (Clock.System.now() - days.days).toLocalDateTime(TIBIA_TIMEZONE).date,
-        Clock.System.now().toLocalDateTime(TIBIA_TIMEZONE).date,
-        categories,
-        types
-    )
-
-    /**
-     * Fetch a specific news article by its [newsId].
-     */
-    public open suspend fun fetchNews(newsId: Int): TibiaResponse<NewsArticle?> {
+    public override suspend fun fetchNewsArticleById(newsId: Int): TibiaResponse<NewsArticle?> {
         val response = this.request(HttpMethod.Get, newsArticleUrl(newsId))
         return response.parse { NewsParser.fromContent(it, newsId) }
     }
 
-    /**
-     * Fetch the events schedule for a specific year and month.
-     */
-    public open suspend fun fetchEventsSchedule(yearMonth: YearMonth): TibiaResponse<EventsSchedule> {
+    public override suspend fun fetchEventsSchedule(yearMonth: YearMonth): TibiaResponse<EventsSchedule> {
         val response = this.request(HttpMethod.Get, eventScheduleUrl(yearMonth))
         return response.parse { EventsScheduleParser.fromContent(it) }
     }
 
-    /**
-     * Fetch the events schedule for a specific year and month.
-     */
-    public open suspend fun fetchEventsSchedule(year: Int, month: Int): TibiaResponse<EventsSchedule> =
-        fetchEventsSchedule(YearMonth(year, month))
-
-    /**
-     * Fetch the events schedule for the current month.
-     */
-    public open suspend fun fetchEventsSchedule(): TibiaResponse<EventsSchedule> = fetchEventsSchedule(
+    public override suspend fun fetchEventsSchedule(): TibiaResponse<EventsSchedule> = fetchEventsSchedule(
         Clock.System.now().toLocalDateTime(
             TimeZone.currentSystemDefault()
         ).date.yearMonth
@@ -344,14 +324,12 @@ public open class TibiaKtClient protected constructor(
     // endregion
 
     // region Library Section
-    /** Fetch the boosted boss of the day as well as the list of bosstable bosses from Tibia.com. */
-    public open suspend fun fetchBoostableBosses(): TibiaResponse<BoostableBosses> {
+    public override suspend fun fetchBoostableBosses(): TibiaResponse<BoostableBosses> {
         val response = this.request(HttpMethod.Get, boostableBossesUrl())
         return response.parse { BoostableBossesParser.fromContent(it) }
     }
 
-    /** Fetch the creatures section, containing the boosted creature. */
-    public open suspend fun fetchCreaturesSection(): TibiaResponse<CreaturesSection> {
+    public override suspend fun fetchCreaturesSection(): TibiaResponse<CreaturesSection> {
         val response = this.request(HttpMethod.Get, creaturesUrl())
         return response.parse { CreaturesSectionParser.fromContent(it) }
     }
@@ -360,91 +338,56 @@ public open class TibiaKtClient protected constructor(
 
     // region Community Section
 
-    /**
-     * Fetch a character.
-     *
-     * @param name The name of the character.
-     */
-    public open suspend fun fetchCharacter(name: String): TibiaResponse<CharacterInfo?> {
+    public override suspend fun fetchCharacter(name: String): TibiaResponse<CharacterInfo?> {
         val response = this.request(HttpMethod.Get, characterUrl(name))
         return response.parse { CharacterParser.fromContent(it) }
     }
 
-    /**
-     * Fetch the world overview, containing the list of worlds.
-     */
-    public open suspend fun fetchWorldOverview(): TibiaResponse<WorldOverview> {
+    public override suspend fun fetchWorldOverview(): TibiaResponse<WorldOverview> {
         val response = this.request(HttpMethod.Get, worldOverviewUrl())
         return response.parse { WorldOverviewParser.fromContent(it) }
     }
 
-    /** Fetch a world's information. */
-    public open suspend fun fetchWorld(name: String): TibiaResponse<World?> {
+    public override suspend fun fetchWorld(name: String): TibiaResponse<World?> {
         val response = this.request(HttpMethod.Get, worldUrl(name))
         return response.parse { WorldParser.fromContent(it) }
     }
 
-    /** Fetch a guild by its [name]. */
-    public open suspend fun fetchGuild(name: String): TibiaResponse<Guild?> {
+    public override suspend fun fetchGuild(name: String): TibiaResponse<Guild?> {
         val response = this.request(HttpMethod.Get, guildUrl(name))
         return response.parse { GuildParser.fromContent(it) }
     }
 
-    /** Fetch active and in formation guilds in a [world].
-     *
-     * If the world does not exist, it will return null.
-     */
-    public open suspend fun fetchWorldGuilds(world: String): TibiaResponse<GuildsSection?> {
+    public override suspend fun fetchWorldGuilds(world: String): TibiaResponse<GuildsSection?> {
         val response = this.request(HttpMethod.Get, worldGuildsUrl(world))
         return response.parse { GuildsSectionParser.fromContent(it) }
     }
 
-    /**
-     * Fetch the kill statistics for a [world].
-     */
-    public open suspend fun fetchKillStatistics(world: String): TibiaResponse<KillStatistics?> {
+
+    public override suspend fun fetchKillStatistics(world: String): TibiaResponse<KillStatistics?> {
         val response = this.request(HttpMethod.Get, killStatisticsUrl(world))
         return response.parse { KillStatisticsParser.fromContent(it) }
     }
 
-    /**
-     * Fetch a page of the highscores.
-     *
-     * @param world The world to get highscores from. If null, the highscores of all worlds are returned.
-     * @param category The category to fetch.
-     * @param vocation The vocation to filter by. By default, all vocations will be returned
-     * @param page The page number to fetch
-     * @param battlEyeType The BattlEye type of the worlds to fetch. Only applies when [world] is null.
-     * @param pvpTypes The PvP type of the worlds to fetch. Only applies when [world] is null.
-     */
-    public open suspend fun fetchHighscoresPage(
+    public override suspend fun fetchHighscoresPage(
         world: String?,
         category: HighscoresCategory,
-        vocation: HighscoresProfession = HighscoresProfession.ALL,
-        page: Int = 1,
-        battlEyeType: HighscoresBattlEyeType = HighscoresBattlEyeType.ANY_WORLD,
-        pvpTypes: Set<PvpType>? = null,
+        vocation: HighscoresProfession,
+        page: Int,
+        battlEyeType: HighscoresBattlEyeType,
+        pvpTypes: Set<PvpType>?,
     ): TibiaResponse<Highscores?> {
         val response =
             this.request(HttpMethod.Get, highscoresUrl(world, category, vocation, page, battlEyeType, pvpTypes))
         return response.parse { HighscoresParser.fromContent(it) }
     }
 
-    /**
-     * Fetch the entire highscores.
-     *
-     * @param world The world to get highscores from. If null, the highscores of all worlds are returned.
-     * @param category The category to fetch.
-     * @param vocation The vocation to filter by. By default, all vocations will be returned
-     * @param battlEyeType The BattlEye type of the worlds to fetch. Only applies when [world] is null.
-     * @param pvpTypes The PvP type of the worlds to fetch. Only applies when [world] is null.
-     */
-    public open suspend fun fetchHigscores(
+    public suspend fun fetchHigscores(
         world: String?,
         category: HighscoresCategory,
-        vocation: HighscoresProfession = HighscoresProfession.ALL,
-        battlEyeType: HighscoresBattlEyeType = HighscoresBattlEyeType.ANY_WORLD,
-        pvpTypes: Set<PvpType>? = null,
+        vocation: HighscoresProfession,
+        battlEyeType: HighscoresBattlEyeType,
+        pvpTypes: Set<PvpType>?,
     ): TibiaResponse<Highscores?> {
         val now = Clock.System.now()
         var totalPages = 0
@@ -461,7 +404,6 @@ public open class TibiaKtClient protected constructor(
             fetchingTime += response.fetchingTime
             parsingTime += response.parsingTime
             if (currentPage == 1) baseHighscores = response.data
-
             currentPage++
         }
         return TibiaResponse(
@@ -475,22 +417,20 @@ public open class TibiaKtClient protected constructor(
         )
     }
 
-    /**
-     * Fetch the houses section for a [world] and [town].
-     */
-    public open suspend fun fetchHousesSection(
+
+    public override suspend fun fetchHousesSection(
         world: String,
         town: String,
-        type: HouseType? = null,
-        status: HouseStatus? = null,
-        order: HouseOrder? = null,
+        type: HouseType?,
+        status: HouseStatus?,
+        order: HouseOrder?,
     ): TibiaResponse<HousesSection?> {
         val response = this.request(HttpMethod.Get, housesSectionUrl(world, town, type, status, order))
         return response.parse { HousesSectionParser.fromContent(it) }
     }
 
     /** Fetch a house by its [houseId] in a specific world. */
-    public open suspend fun fetchHouse(
+    public override suspend fun fetchHouse(
         houseId: Int,
         world: String,
     ): TibiaResponse<House?> {
@@ -498,16 +438,10 @@ public open class TibiaKtClient protected constructor(
         return response.parse { HouseParser.fromContent(it) }
     }
 
-    /**
-     * Fetches the Tibia Drome leaderboards for a [world].
-     *
-     * If the world does not exist, the leaderboards will be null.
-     * @param rotation The rotation number to see. Tibia.com only allows viewing the current and last rotations. Any other value takes you to the current leaderboard.
-     */
-    public open suspend fun fetchLeaderboard(
+    public override suspend fun fetchLeaderboard(
         world: String,
-        rotation: Int? = null,
-        page: Int = 1,
+        rotation: Int?,
+        page: Int,
     ): TibiaResponse<Leaderboard?> {
         val response = this.request(HttpMethod.Get, leaderboardsUrl(world, rotation, page))
         return response.parse { LeaderboardParser.fromContent(it) }
@@ -520,13 +454,13 @@ public open class TibiaKtClient protected constructor(
     /**
      * Fetches a forum section by its internal [sectionId].
      */
-    public open suspend fun fetchForumSection(sectionId: Int): TibiaResponse<ForumSection?> {
+    public override suspend fun fetchForumSection(sectionId: Int): TibiaResponse<ForumSection?> {
         val response = this.request(HttpMethod.Get, forumSectionUrl(sectionId))
         return response.parse { ForumSectionParser.fromContent(it) }
     }
 
     /** Fetches a specific forum section. */
-    public open suspend fun fetchForumSection(section: AvailableForumSection): TibiaResponse<ForumSection?> {
+    public override suspend fun fetchForumSection(section: AvailableForumSection): TibiaResponse<ForumSection?> {
         val response = this.request(HttpMethod.Get, forumSectionUrl(section))
         return response.parse { ForumSectionParser.fromContent(it) }
     }
@@ -535,23 +469,23 @@ public open class TibiaKtClient protected constructor(
      *
      * @param threadAge The maximum age of displayed threads. A value of -1 means no limit. Null means the server limit will be used.
      */
-    public open suspend fun fetchForumBoard(
+    public override suspend fun fetchForumBoard(
         boardId: Int,
-        page: Int = 1,
-        threadAge: Int? = null,
+        page: Int,
+        threadAge: Int?,
     ): TibiaResponse<ForumBoard?> {
         val response = this.request(HttpMethod.Get, forumBoardUrl(boardId, page, threadAge))
         return response.parse { ForumBoardParser.fromContent(it) }
     }
 
     /** Fetches a thread from the Tibia.com forum. */
-    public open suspend fun fetchForumAnnouncement(announcementId: Int): TibiaResponse<ForumAnnouncement?> {
+    public override suspend fun fetchForumAnnouncement(announcementId: Int): TibiaResponse<ForumAnnouncement?> {
         val response = this.request(HttpMethod.Get, forumAnnouncementUrl(announcementId))
         return response.parse { ForumAnnouncementParser.fromContent(it, announcementId) }
     }
 
     /** Fetches a forum thread from Tibia.com. */
-    public open suspend fun fetchForumThread(threadId: Int, page: Int = 1): TibiaResponse<ForumThread?> {
+    public override suspend fun fetchForumThread(threadId: Int, page: Int): TibiaResponse<ForumThread?> {
         val response = this.request(HttpMethod.Get, forumThreadUrl(threadId, page))
         return response.parse { ForumThreadParser.fromContent(it) }
     }
@@ -560,7 +494,7 @@ public open class TibiaKtClient protected constructor(
      *
      * The thread will be fetched on the page containing the [ForumThread.anchoredPost]
      */
-    public open suspend fun fetchForumPost(postId: Int): TibiaResponse<ForumThread?> {
+    public override suspend fun fetchForumPost(postId: Int): TibiaResponse<ForumThread?> {
         val response = this.request(HttpMethod.Get, forumPostUrl(postId))
         return response.parse {
             ForumThreadParser.fromContent(it)?.let { thread ->
@@ -569,24 +503,15 @@ public open class TibiaKtClient protected constructor(
         }
     }
 
-
     /** Fetch CM posts between two dates. */
-    public open suspend fun fetchCMPostArchive(
-        startDate: LocalDate,
-        endDate: LocalDate,
-        page: Int = 0,
+    public override suspend fun fetchCMPostArchive(
+        startOn: LocalDate,
+        endOn: LocalDate,
+        page: Int,
     ): TibiaResponse<CMPostArchive> {
-        val response = this.request(HttpMethod.Get, cmPostArchiveUrl(startDate, endDate, page))
+        val response = this.request(HttpMethod.Get, cmPostArchiveUrl(startOn, endOn, page))
         return response.parse { CMPostArchiveParser.fromContent(it) }
     }
-
-    /** Fetch CM posts from today to the last specified [days]. */
-    public open suspend fun fetchCMPostArchive(days: Int, page: Int = 0): TibiaResponse<CMPostArchive> =
-        fetchCMPostArchive(
-            (Clock.System.now() - days.days).toLocalDateTime(TIBIA_TIMEZONE).date,
-            Clock.System.now().toLocalDateTime(TIBIA_TIMEZONE).date,
-            page
-        )
 
     // endregion
 
@@ -598,31 +523,18 @@ public open class TibiaKtClient protected constructor(
      * @param filters The filtering parameters to use.
      * @param page The page to display.
      */
-    public open suspend fun fetchBazaar(
-        type: BazaarType = BazaarType.CURRENT,
-        filters: com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.BazaarFilters? = null,
-        page: Int = 1,
-    ): TibiaResponse<com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.CharacterBazaar> {
+    public override suspend fun fetchBazaar(
+        type: BazaarType,
+        filters: BazaarFilters?,
+        page: Int,
+    ): TibiaResponse<CharacterBazaar> {
         val response = this.request(HttpMethod.Get, bazaarUrl(type, filters, page))
         return response.parse {
-            _root_ide_package_.com.galarzaa.tibiakt.core.section.charactertrade.bazaar.parser.CharacterBazaarParser.fromContent(
+            CharacterBazaarParser.fromContent(
                 it
             )
         }
     }
-
-    /**
-     * Fetch the character bazaar from Tibia.com.
-     */
-    public open suspend fun fetchBazaar(
-        type: BazaarType = BazaarType.CURRENT,
-        page: Int = 1,
-        filterBuilder: (com.galarzaa.tibiakt.core.section.charactertrade.bazaar.builder.BazaarFiltersBuilder.() -> Unit)? = null,
-    ): TibiaResponse<com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.CharacterBazaar> =
-        fetchBazaar(type, filterBuilder?.let {
-            _root_ide_package_.com.galarzaa.tibiakt.core.section.charactertrade.bazaar.builder.BazaarFiltersBuilder()
-                .apply(it).build()
-        }, page)
 
     /**
      * Fetch an auction from Tibia.com.
@@ -633,13 +545,13 @@ public open class TibiaKtClient protected constructor(
      * @param fetchOutfits Whether to fetch outfits from further pages if necessary. Cannot be done if [skipDetails] is true.
      * @param fetchMounts Whether to fetch mounts from further pages if necessary. Cannot be done if [skipDetails] is true.
      */
-    public open suspend fun fetchAuction(
+    public override suspend fun fetchAuction(
         auctionId: Int,
-        skipDetails: Boolean = false,
-        fetchItems: Boolean = false,
-        fetchOutfits: Boolean = false,
-        fetchMounts: Boolean = false,
-    ): TibiaResponse<com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.Auction?> {
+        skipDetails: Boolean,
+        fetchItems: Boolean,
+        fetchOutfits: Boolean,
+        fetchMounts: Boolean,
+    ): TibiaResponse<Auction?> {
         val response = request(HttpMethod.Get, auctionUrl(auctionId))
         val tibiaResponse = response.parse {
             _root_ide_package_.com.galarzaa.tibiakt.core.section.charactertrade.bazaar.parser.AuctionParser.fromContent(
@@ -660,19 +572,19 @@ public open class TibiaKtClient protected constructor(
     }
 
     private suspend fun fetchAuctionAdditionalPages(
-        tibiaResponse: TibiaResponse<com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.Auction?>,
+        tibiaResponse: TibiaResponse<Auction?>,
         fetchItems: Boolean = false,
         fetchOutfits: Boolean = false,
         fetchMounts: Boolean = false,
-    ): TibiaResponse<com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.Auction?> {
+    ): TibiaResponse<Auction?> {
         if (tibiaResponse.data?.details == null) return tibiaResponse
         val accumulator = Timing(tibiaResponse.fetchingTime, tibiaResponse.parsingTime)
-        var itemEntries: List<com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.ItemEntry>? = null
-        var storeItemEntries: List<com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.ItemEntry>? = null
-        var outfitEntries: List<com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.OutfitEntry>? = null
-        var storeOutfitEntries: List<com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.OutfitEntry>? = null
-        var mountEntries: List<com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.MountEntry>? = null
-        var storeMountEntries: List<com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.MountEntry>? = null
+        var itemEntries: List<ItemEntry>? = null
+        var storeItemEntries: List<ItemEntry>? = null
+        var outfitEntries: List<OutfitEntry>? = null
+        var storeOutfitEntries: List<OutfitEntry>? = null
+        var mountEntries: List<MountEntry>? = null
+        var storeMountEntries: List<MountEntry>? = null
         if (fetchItems) {
             itemEntries = fetchAllPages(
                 tibiaResponse.data.auctionId, AuctionPagesType.ITEMS, tibiaResponse.data.details!!.items
@@ -731,7 +643,6 @@ public open class TibiaKtClient protected constructor(
 
     // endregion
 
-
     /** Convert to a [TibiaResponse]. */
     private fun <T> HttpResponse.toTibiaResponse(parsingTime: Double, data: T): TibiaResponse<T> = TibiaResponse(
         timestamp = Instant.fromEpochMilliseconds(responseTime.timestamp),
@@ -756,19 +667,14 @@ public open class TibiaKtClient protected constructor(
         return toTibiaResponse(parsingTime, data)
     }
 
-    @Suppress("MaxLineLength")
-    /**
-     * Get the URL to the endpoint to get page items for auctions.
-     */
-    private fun getAuctionAjaxPaginationUrl(auctionId: Int, type: AuctionPagesType, page: Int): String =
-        "https://www.tibia.com/websiteservices/handle_charactertrades.php?auctionid=$auctionId&type=${type.typeId}&currentpage=$page"
 
-    /**
-     * Fetch a single page from the auction pagination endpoint.
-     */
-    private suspend fun fetchAjaxPage(auctionId: Int, type: AuctionPagesType, page: Int): TimedResult<AjaxResponse> {
+    override suspend fun fetchAuctionDetailsPage(
+        auctionId: Int,
+        type: AuctionPagesType,
+        page: Int,
+    ): TimedResult<AjaxResponse> {
         val response = this.request(
-            HttpMethod.Get, getAuctionAjaxPaginationUrl(auctionId, type, page),
+            HttpMethod.Get, auctionCharacterDetailsUrl(auctionId, type, page),
             headers = listOf("x-requested-with" to "XMLHttpRequest"),
         )
         return TimedResult(response.fetchingTime, Json.decodeFromString(AjaxResponse.serializer(), response.body()))
@@ -776,11 +682,12 @@ public open class TibiaKtClient protected constructor(
 
     /**
      * Fetch all the pages, parse, and collect the entries.
+     *
      * @param auctionId The id of the auction.
      * @param type The type of items.
      * @param paginator The paginator class that holds the collection
      */
-    private suspend inline fun <reified E, T : com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.AjaxPaginator<E>> fetchAllPages(
+    private suspend inline fun <reified E, T : AjaxPaginator<E>> fetchAllPages(
         auctionId: Int,
         type: AuctionPagesType,
         paginator: T,
@@ -789,7 +696,7 @@ public open class TibiaKtClient protected constructor(
         val entries: MutableList<E> = paginator.entries.toMutableList()
         val timing = Timing()
         while (currentPage <= paginator.totalPages) {
-            val (fetchingTime, ajaxResponse) = fetchAjaxPage(auctionId, type, currentPage)
+            val (fetchingTime, ajaxResponse) = fetchAuctionDetailsPage(auctionId, type, currentPage)
             timing.fetching += fetchingTime
             val parsingTime = measureTimeMillis {
                 entries.addAll(AuctionParser.parsePageItems(ajaxResponse.ajaxObjects.first().data))
@@ -797,7 +704,7 @@ public open class TibiaKtClient protected constructor(
             timing.parsing += parsingTime
             logger.info {
                 "${
-                    getAuctionAjaxPaginationUrl(auctionId, type, currentPage)
+                    auctionCharacterDetailsUrl(auctionId, type, currentPage)
                 } | PARSE | ${(parsingTime * 1000).toInt()}ms"
             }
             currentPage++
@@ -818,8 +725,6 @@ public open class TibiaKtClient protected constructor(
         accumulator.parsing += first.parsing
         return second
     }
-
-    private data class TimedResult<T>(val time: Double, val result: T)
 
     internal companion object {
         internal val logger = KotlinLogging.logger { }
@@ -847,3 +752,4 @@ public open class TibiaKtClient protected constructor(
         }
     }
 }
+

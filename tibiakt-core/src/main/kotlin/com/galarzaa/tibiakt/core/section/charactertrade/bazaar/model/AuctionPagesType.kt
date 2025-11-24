@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Allan Galarza
+ * Copyright © 2025 Allan Galarza
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.galarzaa.tibiakt.client
+package com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model
 
-internal enum class AuctionPagesType(val typeId: Int) {
+enum class AuctionPagesType(val typeId: Int) {
     ITEMS(0),
     ITEMS_STORE(1),
     MOUNTS(2),

@@ -64,17 +64,17 @@ public fun forumPostUrl(postId: Int): String =
 /**
  * URL to the CM Post Archive in Tibia.com.
  */
-public fun cmPostArchiveUrl(startDate: LocalDate, endDate: LocalDate, page: Int = 1): String {
+public fun cmPostArchiveUrl(startOn: LocalDate, endOn: LocalDate, page: Int = 1): String {
     return tibiaUrl(
         "forum",
         "forum",
         "action" to "cm_post_archive",
-        "startyear" to startDate.year,
-        "startmonth" to startDate.month.number,
-        "startday" to startDate.day,
-        "endyear" to endDate.year,
-        "endmonth" to endDate.month.number,
-        "endday" to endDate.day,
+        "startyear" to startOn.year,
+        "startmonth" to startOn.month.number,
+        "startday" to startOn.day,
+        "endyear" to endOn.year,
+        "endmonth" to endOn.month.number,
+        "endday" to endOn.day,
         "currentpage" to page
     )
 }
