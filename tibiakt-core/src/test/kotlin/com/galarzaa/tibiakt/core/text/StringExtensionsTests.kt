@@ -34,6 +34,10 @@ class StringExtensionsTests : FunSpec({
         "Hello".remove("L", true) shouldBe "Heo"
     }
 
+    test("removeLast") {
+        "spark of destruction of".removeLast(" of") shouldBe "spark of destruction"
+    }
+
     test("clean") {
         " Hello ".clean() shouldBe "Hello"
         "Lorem\u00A0Ipsum".clean() shouldBe "Lorem Ipsum"

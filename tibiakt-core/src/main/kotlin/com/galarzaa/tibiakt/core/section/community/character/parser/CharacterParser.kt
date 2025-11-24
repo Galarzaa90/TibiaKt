@@ -18,6 +18,7 @@ package com.galarzaa.tibiakt.core.section.community.character.parser
 
 import com.galarzaa.tibiakt.core.enums.StringEnum
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
+import com.galarzaa.tibiakt.core.html.cleanText
 import com.galarzaa.tibiakt.core.html.getLinkInformation
 import com.galarzaa.tibiakt.core.html.parsePopup
 import com.galarzaa.tibiakt.core.html.parseTables
@@ -28,6 +29,7 @@ import com.galarzaa.tibiakt.core.section.community.character.model.CharacterInfo
 import com.galarzaa.tibiakt.core.section.community.character.model.DeathParticipant
 import com.galarzaa.tibiakt.core.text.clean
 import com.galarzaa.tibiakt.core.text.remove
+import com.galarzaa.tibiakt.core.text.removeLast
 import com.galarzaa.tibiakt.core.text.splitList
 import com.galarzaa.tibiakt.core.time.parseTibiaDate
 import com.galarzaa.tibiakt.core.time.parseTibiaDateTime
@@ -47,10 +49,8 @@ public object CharacterParser : Parser<CharacterInfo?> {
     private val linkSearch = Regex("""<a[^>]+>[^<]+</a>""")
     private val linkContent = Regex(""">([^<]+)<""")
 
-    // A summon typically starts with a lower-case creature name (optionally preceded by "a"/"an"), contains at least two words,
-    // and is followed by "of <player>". This prevents false positives for player names that include "of", e.g., "Hand of Nightshadow".
-    private val deathSummon =
-        Regex("""(?<![A-Za-z])(?<summon>(?:an?\s+)?[a-z][^.]*\s+[a-z][^.]*?)\s+of\s+(?<name>[^.]+)\.?""")
+    private val deathSummon = Regex("""^(?<summon>.+) of (?<name>[^.]+?)\.?$""")
+
     private const val tradedLabel = "(traded)"
 
     override fun fromContent(content: String): CharacterInfo? {
@@ -189,9 +189,7 @@ public object CharacterParser : Parser<CharacterInfo?> {
             val deathDateTime: Instant = parseTibiaDateTime(dateColumn.text())
             val deathMatch = deathsRegex.find(descriptionColumn.toString())
             var (_, levelStr, killersDesc) = deathMatch?.groupValues ?: Triple(
-                "",
-                "0",
-                descriptionColumn.toString()
+                "", "0", descriptionColumn.toString()
             ).toList()
             var assistNameList: List<String> = mutableListOf()
             deathAssistsRegex.find(killersDesc)?.apply {
@@ -208,32 +206,60 @@ public object CharacterParser : Parser<CharacterInfo?> {
 
     internal fun parseKiller(killerHtml: String): DeathParticipant? {
         val doc = Jsoup.parse(killerHtml)
-        val anchor = doc.selectFirst("a")
-        val text = doc.text().clean()
-        val cleanedText = text.remove(tradedLabel).trim()
+        val characterLink = doc.selectFirst("a")
+        characterLink?.remove()
+        val text = doc.wholeText().trim()
         val tradedInText = text.contains(tradedLabel, ignoreCase = true)
 
-        deathSummon.find(cleanedText)?.apply {
+        // There is a character link -> it's definitely a player, possibly a summoner.
+        if (characterLink != null) {
+            val summonerName = characterLink.cleanText()
+
+            // Remove "(traded)" from the remaining text, so we can reliably detect " of".
+            val remainingText = text.remove(tradedLabel).trim()
+
+            // No remaining text (or only "(traded)") => plain player
+            if (remainingText.isBlank()) {
+                return DeathParticipant.Player(
+                    name = summonerName,
+                    isTraded = tradedInText,
+                )
+            }
+
+            // Remaining text => "<summon> of" (the "of" separator is here)
+            val summonName = remainingText.removeLast(" of").clean()
+            return DeathParticipant.Summon(
+                name = summonName,
+                summonerName = summonerName,
+                summonerIsTraded = tradedInText,
+            )
+        }
+        // No link, no traded label => plain creature (even if it has "of" in the name).
+        if (!tradedInText) {
+            return DeathParticipant.Creature(text.clean())
+        }
+
+        // No link, but has "(traded)".
+        // Try to parse as "summon of NAME (traded)" using your regex.
+        deathSummon.find(text)?.apply {
             val summonedCreature = groups["summon"]!!.value.clean()
             val summonerNameRaw = groups["name"]!!.value.clean()
-            val summonerName = summonerNameRaw.remove(tradedLabel).trim()
-            val summonerTraded = tradedInText || summonerNameRaw.contains(tradedLabel, ignoreCase = true)
+
             return DeathParticipant.Summon(
-                summonerName = summonerName,
+                summonerName = summonerNameRaw.remove(tradedLabel).trim(),
                 name = summonedCreature,
-                summonerIsTraded = summonerTraded,
+                summonerIsTraded = true,
             )
         }
 
-        val name = (anchor?.text() ?: cleanedText).clean()
-        val isTraded = tradedInText || name.contains(tradedLabel, ignoreCase = true)
-
-        return if (anchor != null || isTraded) {
-            DeathParticipant.Player(name = name.remove(tradedLabel).trim(), isTraded = isTraded)
-        } else {
-            DeathParticipant.Creature(name)
-        }
+        // If regex doesn’t match, then it’s just a traded player without a link.
+        val playerName = text.remove(tradedLabel).trim().clean()
+        return DeathParticipant.Player(
+            name = playerName,
+            isTraded = true,
+        )
     }
+
 
     private fun CharacterBuilder.parseCharacters(rows: Elements) {
         for (row: Element in rows.subList(1, rows.size)) {

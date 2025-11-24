@@ -36,6 +36,12 @@ internal fun String?.splitList(separator: String = ",", lastSeparator: String = 
  */
 internal fun String.remove(value: String, ignoreCase: Boolean = false): String = replace(value, "", ignoreCase)
 
+/** Remove the last occurrence of a string from a string. */
+internal fun String.removeLast(value: String, ignoreCase: Boolean = false): String {
+    val index = lastIndexOf(value, ignoreCase = ignoreCase)
+    return if (index == -1) this else removeRange(index, index + value.length)
+}
+
 /**
  * Clean the string of non-breaking spaces and trims whitespace.
  */

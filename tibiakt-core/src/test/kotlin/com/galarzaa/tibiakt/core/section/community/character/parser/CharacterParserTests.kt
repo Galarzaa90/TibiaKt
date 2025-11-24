@@ -82,7 +82,7 @@ class CharacterParserTests : FunSpec({
         character.deletionScheduledAt shouldNotBe null
         character.isScheduledForDeletion shouldBe true
     }
-    test("Character with complex deaths"){
+    test("Character with complex deaths") {
         val character = CharacterParser.fromContent(getResource("character/characterWithComplexDeaths.txt"))
 
         character.shouldNotBeNull()
@@ -143,35 +143,47 @@ class CharacterParserTests : FunSpec({
             // language=html
             val html =
                 """<a href="https://www.tibia.com/community/?subtopic=characters&name=Hand+of+Nightshadow" >Hand&#160;of&#160;Nightshadow</a>"""
-            val killer = CharacterParser.parseKiller(html)
-            killer.shouldNotBeNull()
-            killer.shouldBeInstanceOf<DeathParticipant.Player>()
-            killer.name shouldBe "Hand of Nightshadow"
+            CharacterParser.parseKiller(html) shouldBe DeathParticipant.Player("Hand of Nightshadow", false)
         }
         test("Traded killer") {
             // language=html
             val html = """Nice&#160;bomba (traded)"""
-            val killer = CharacterParser.parseKiller(html)
-            killer.shouldBeInstanceOf<DeathParticipant.Player>()
-            killer.name shouldBe "Nice bomba"
-            killer.isTraded shouldBe true
+            CharacterParser.parseKiller(html) shouldBe DeathParticipant.Player("Nice bomba", true)
         }
         test("Player summon") {
             // language=html
             val html =
                 """sorcerer familiar of <a href="https://www.tibia.com/community/?subtopic=characters&name=Deatth" >Deatth</a>"""
-            val killer = CharacterParser.parseKiller(html)
-            killer.shouldBeInstanceOf<DeathParticipant.Summon>()
-            killer.name shouldBe "sorcerer familiar"
-            killer.summonerName shouldBe "Deatth"
-            killer.summonerIsTraded shouldBe false
+            CharacterParser.parseKiller(html) shouldBe DeathParticipant.Summon("sorcerer familiar", "Deatth", false)
+        }
+        test("Player summon, multiple words name") {
+            // language=html
+            val html =
+                """rat of <a href="https://www.tibia.com/community/?subtopic=characters&name=Summoner+of+Death" >Summoner&#160;of&#160;Death</a>"""
+            CharacterParser.parseKiller(html) shouldBe DeathParticipant.Summon("rat", "Summoner of Death", false)
         }
         test("Creature") {
             // language=html
             val html = """cloak of terror"""
-            val killer = CharacterParser.parseKiller(html)
-            killer.shouldBeInstanceOf<DeathParticipant.Creature>()
-            killer.name shouldBe "cloak of terror"
+            CharacterParser.parseKiller(html) shouldBe DeathParticipant.Creature("cloak of terror")
+        }
+        test("Summoner and summoner with 'of' in name.") {
+            // There are no summonable or convinceable creatures with 'of' in their name, so this should never happen, but just in case.
+            // language=html
+            val html =
+                """spark of destruction of <a href="https://www.tibia.com/community/?subtopic=characters&name=Hand+of+Nightshadow" >Hand&#160;of&#160;Nightshadow</a>"""
+            CharacterParser.parseKiller(html) shouldBe DeathParticipant.Summon(
+                "spark of destruction", "Hand of Nightshadow", false
+            )
+        }
+        test("Traded player summon without link") {
+            // language=html
+            val html = """spark of destruction of Hand&#160;of&#160;Nightshadow (traded)"""
+            CharacterParser.parseKiller(html) shouldBe DeathParticipant.Summon(
+                name = "spark of destruction",
+                summonerName = "Hand of Nightshadow",
+                summonerIsTraded = true,
+            )
         }
     }
 })
