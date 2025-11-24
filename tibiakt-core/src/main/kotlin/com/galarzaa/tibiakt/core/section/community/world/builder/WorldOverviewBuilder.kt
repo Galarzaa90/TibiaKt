@@ -18,6 +18,7 @@ package com.galarzaa.tibiakt.core.section.community.world.builder
 
 import com.galarzaa.tibiakt.core.builder.BuilderDsl
 import com.galarzaa.tibiakt.core.builder.TibiaKtBuilder
+import com.galarzaa.tibiakt.core.builder.requireField
 import com.galarzaa.tibiakt.core.domain.world.BattlEyeType
 import com.galarzaa.tibiakt.core.domain.world.PvpType
 import com.galarzaa.tibiakt.core.domain.world.TransferType
@@ -27,25 +28,25 @@ import kotlinx.datetime.LocalDate
 import kotlin.time.Instant
 
 @BuilderDsl
-public inline fun worldOverviewBuilder(block: WorldOverviewBuilder.() -> Unit): WorldOverviewBuilder =
+internal inline fun worldOverviewBuilder(block: WorldOverviewBuilder.() -> Unit): WorldOverviewBuilder =
     WorldOverviewBuilder().apply(block)
 
 @BuilderDsl
-public inline fun worldOverview(block: WorldOverviewBuilder.() -> Unit): WorldOverview =
+internal inline fun worldOverview(block: WorldOverviewBuilder.() -> Unit): WorldOverview =
     worldOverviewBuilder(block).build()
 
 
 /** Builder for world overview. */
 @BuilderDsl
-public class WorldOverviewBuilder : TibiaKtBuilder<WorldOverview> {
-    public var overallMaximumCount: Int? = null
-    public var overallMaximumCountDateTime: Instant? = null
-    public val worlds: MutableList<WorldEntry> = mutableListOf()
+internal class WorldOverviewBuilder : TibiaKtBuilder<WorldOverview> {
+    var overallMaximumCount: Int? = null
+    var overallMaximumCountDateTime: Instant? = null
+    val worlds: MutableList<WorldEntry> = mutableListOf()
 
-    public fun addWorld(world: WorldEntry): Boolean = worlds.add(world)
+    fun addWorld(world: WorldEntry): Boolean = worlds.add(world)
 
     @BuilderDsl
-    public fun addWorld(block: WorldEntryBuilder.() -> Unit): Boolean =
+    fun addWorld(block: WorldEntryBuilder.() -> Unit): Boolean =
         worlds.add(WorldEntryBuilder().apply(block).build())
 
     override fun build(): WorldOverview {
@@ -60,27 +61,27 @@ public class WorldOverviewBuilder : TibiaKtBuilder<WorldOverview> {
 
     /** A builder for world entries. */
     @BuilderDsl
-    public class WorldEntryBuilder : TibiaKtBuilder<WorldEntry> {
-        public var name: String? = null
-        public var isOnline: Boolean = false
-        public var onlinePlayersCount: Int = 0
-        public var location: String? = null
-        public var pvpType: PvpType? = null
-        public var battlEyeType: BattlEyeType = BattlEyeType.UNPROTECTED
-        public var battlEyeStartedOn: LocalDate? = null
-        public var transferType: TransferType = TransferType.REGULAR
-        public var isPremiumRestricted: Boolean = false
-        public var isExperimental: Boolean = false
-        public var onlineRecordDateTime: Instant? = null
+    class WorldEntryBuilder : TibiaKtBuilder<WorldEntry> {
+        var name: String? = null
+        var isOnline: Boolean = false
+        var onlinePlayersCount: Int = 0
+        var location: String? = null
+        var pvpType: PvpType? = null
+        var battlEyeType: BattlEyeType = BattlEyeType.UNPROTECTED
+        var battlEyeStartedOn: LocalDate? = null
+        var transferType: TransferType = TransferType.REGULAR
+        var isPremiumRestricted: Boolean = false
+        var isExperimental: Boolean = false
+        var onlineRecordDateTime: Instant? = null
 
 
         override fun build(): WorldEntry {
             return WorldEntry(
-                name = name ?: error("name is required"),
+                name = requireField(name, "name"),
                 isOnline = isOnline,
                 onlinePlayersCount = onlinePlayersCount,
-                location = location ?: error("location is required"),
-                pvpType = pvpType ?: error("pvpType is required"),
+                location = requireField(location, "location"),
+                pvpType = requireField(pvpType, "pvpType"),
                 battlEyeType = battlEyeType,
                 battlEyeStartedOn = battlEyeStartedOn,
                 transferType = transferType,

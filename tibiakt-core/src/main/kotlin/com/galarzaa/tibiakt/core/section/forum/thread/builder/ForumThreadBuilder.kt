@@ -18,6 +18,7 @@ package com.galarzaa.tibiakt.core.section.forum.thread.builder
 
 import com.galarzaa.tibiakt.core.builder.BuilderDsl
 import com.galarzaa.tibiakt.core.builder.TibiaKtBuilder
+import com.galarzaa.tibiakt.core.builder.requireField
 import com.galarzaa.tibiakt.core.section.forum.shared.model.ForumAuthor
 import com.galarzaa.tibiakt.core.section.forum.shared.model.ForumEmoticon
 import com.galarzaa.tibiakt.core.section.forum.thread.model.ForumPost
@@ -26,44 +27,44 @@ import kotlin.time.Clock
 import kotlin.time.Instant
 
 @BuilderDsl
-public inline fun forumThreadBuilder(block: ForumThreadBuilder.() -> Unit): ForumThreadBuilder =
+internal inline fun forumThreadBuilder(block: ForumThreadBuilder.() -> Unit): ForumThreadBuilder =
     ForumThreadBuilder().apply(block)
 
 @BuilderDsl
-public inline fun forumThread(block: ForumThreadBuilder.() -> Unit): ForumThread = forumThreadBuilder(block).build()
+internal inline fun forumThread(block: ForumThreadBuilder.() -> Unit): ForumThread = forumThreadBuilder(block).build()
 
 /** Builder for [ForumThread] instances. */
 @BuilderDsl
-public class ForumThreadBuilder : TibiaKtBuilder<ForumThread> {
-    public var title: String? = null
-    public var threadId: Int? = null
-    public var boardName: String? = null
-    public var boardId: Int? = null
-    public var sectionName: String? = null
-    public var sectionId: Int? = null
-    public var previousTopicNumber: Int? = null
-    public var nextTopicNumber: Int? = null
-    public var hasGoldenFrame: Boolean = false
-    public var anchoredPost: ForumPost? = null
-    public var currentPage: Int = 1
-    public var totalPages: Int = 1
-    public var resultsCount: Int = 1
-    public val entries: MutableList<ForumPost> = mutableListOf()
+internal class ForumThreadBuilder : TibiaKtBuilder<ForumThread> {
+    var title: String? = null
+    var threadId: Int? = null
+    var boardName: String? = null
+    var boardId: Int? = null
+    var sectionName: String? = null
+    var sectionId: Int? = null
+    var previousTopicNumber: Int? = null
+    var nextTopicNumber: Int? = null
+    var hasGoldenFrame: Boolean = false
+    var anchoredPost: ForumPost? = null
+    var currentPage: Int = 1
+    var totalPages: Int = 1
+    var resultsCount: Int = 1
+    val entries: MutableList<ForumPost> = mutableListOf()
 
-    public fun addPost(post: ForumPost): ForumThreadBuilder = apply { entries.add(post) }
+    fun addPost(post: ForumPost): ForumThreadBuilder = apply { entries.add(post) }
 
     @BuilderDsl
-    public fun addPost(block: ForumPostBuilder.() -> Unit): ForumThreadBuilder =
+    fun addPost(block: ForumPostBuilder.() -> Unit): ForumThreadBuilder =
         apply { entries.add(ForumPostBuilder().apply(block).build()) }
 
 
     override fun build(): ForumThread = ForumThread(
-        title = title ?: error("title is required"),
-        threadId = threadId ?: error("threadId is required"),
-        boardName = boardName ?: error("boardName is required"),
-        boardId = boardId ?: error("boardId is required"),
-        sectionName = sectionName ?: error("sectionName is required"),
-        sectionId = sectionId ?: error("sectionId is required"),
+        title = requireField(title, "title"),
+        threadId = requireField(threadId, "threadId"),
+        boardName = requireField(boardName, "boardName"),
+        boardId = requireField(boardId, "boardId"),
+        sectionName = requireField(sectionName, "sectionName"),
+        sectionId = requireField(sectionId, "sectionId"),
         previousTopicNumber = previousTopicNumber,
         nextTopicNumber = nextTopicNumber,
         hasGoldenFrame = hasGoldenFrame,
@@ -74,24 +75,24 @@ public class ForumThreadBuilder : TibiaKtBuilder<ForumThread> {
         entries = entries
     )
 
-    public class ForumPostBuilder : TibiaKtBuilder<ForumPost> {
-        public var author: ForumAuthor? = null
-        public var emoticon: ForumEmoticon? = null
-        public var title: String? = null
-        public var content: String? = null
-        public var signature: String? = null
-        public var postId: Int? = null
-        public var postedDate: Instant? = null
-        public var editedDate: Instant? = null
-        public var editedBy: String? = null
+    class ForumPostBuilder : TibiaKtBuilder<ForumPost> {
+        var author: ForumAuthor? = null
+        var emoticon: ForumEmoticon? = null
+        var title: String? = null
+        var content: String? = null
+        var signature: String? = null
+        var postId: Int? = null
+        var postedDate: Instant? = null
+        var editedDate: Instant? = null
+        var editedBy: String? = null
 
         override fun build(): ForumPost = ForumPost(
-            author = author ?: error("author is required"),
+            author = requireField(author, "author"),
             emoticon = emoticon,
             title = title,
-            content = content ?: error("content is required"),
+            content = requireField(content, "content"),
             signature = signature,
-            postId = postId ?: error("postId is required"),
+            postId = requireField(postId, "postId"),
             postedAt = postedDate ?: Clock.System.now(),
             editedAt = editedDate,
             editedBy = editedBy

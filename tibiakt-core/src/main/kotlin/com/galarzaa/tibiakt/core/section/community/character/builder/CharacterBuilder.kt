@@ -34,42 +34,43 @@ import kotlinx.datetime.LocalDate
 import kotlin.time.Instant
 
 @BuilderDsl
-public inline fun character(block: CharacterBuilder.() -> Unit): CharacterInfo = CharacterBuilder().apply(block).build()
+internal inline fun character(block: CharacterBuilder.() -> Unit): CharacterInfo =
+    CharacterBuilder().apply(block).build()
 
 @BuilderDsl
-public inline fun characterBuilder(block: CharacterBuilder.() -> Unit): CharacterBuilder =
+internal inline fun characterBuilder(block: CharacterBuilder.() -> Unit): CharacterBuilder =
     CharacterBuilder().apply(block)
 
 /** Builder for [CharacterInfo] instances. */
 @BuilderDsl
-public class CharacterBuilder : TibiaKtBuilder<CharacterInfo> {
-    public lateinit var name: String
-    public var level: Int = 2
-    public var residence: String? = null
-    public var vocation: Vocation? = null
-    public var sex: Sex? = null
-    public var world: String? = null
-    public var achievementPoints: Int = 0
-    public var lastLoginAt: Instant? = null
-    public var isRecentlyTraded: Boolean = false
-    public var formerNames: List<String> = emptyList()
-    public var deletionScheduledAt: Instant? = null
-    public var formerWorld: String? = null
-    public var isPremium: Boolean = false
-    public var comment: String? = null
-    public var title: String? = null
-    public var position: String? = null
-    public var unlockedTitles: Int = 0
-    public var marriedTo: String? = null
-    public val houses: MutableList<CharacterHouse> = mutableListOf()
-    public var guildMembership: GuildMembership? = null
-    public val accountBadges: MutableList<AccountBadge> = mutableListOf()
-    public val achievements: MutableList<DisplayedAchievement> = mutableListOf()
-    public var accountInformation: AccountInformation? = null
-    public val deaths: MutableList<Death> = mutableListOf()
-    public val otherCharacters: MutableList<AccountCharacter> = mutableListOf()
+internal class CharacterBuilder : TibiaKtBuilder<CharacterInfo> {
+    lateinit var name: String
+    var level: Int = 2
+    var residence: String? = null
+    var vocation: Vocation? = null
+    var sex: Sex? = null
+    var world: String? = null
+    var achievementPoints: Int = 0
+    var lastLoginAt: Instant? = null
+    var isRecentlyTraded: Boolean = false
+    var formerNames: List<String> = emptyList()
+    var deletionScheduledAt: Instant? = null
+    var formerWorld: String? = null
+    var isPremium: Boolean = false
+    var comment: String? = null
+    var title: String? = null
+    var position: String? = null
+    var unlockedTitles: Int = 0
+    var marriedTo: String? = null
+    val houses: MutableList<CharacterHouse> = mutableListOf()
+    var guildMembership: GuildMembership? = null
+    val accountBadges: MutableList<AccountBadge> = mutableListOf()
+    val achievements: MutableList<DisplayedAchievement> = mutableListOf()
+    var accountInformation: AccountInformation? = null
+    val deaths: MutableList<Death> = mutableListOf()
+    val otherCharacters: MutableList<AccountCharacter> = mutableListOf()
 
-    public fun addHouse(
+    fun addHouse(
         name: String,
         houseId: Int,
         town: String,
@@ -80,18 +81,18 @@ public class CharacterBuilder : TibiaKtBuilder<CharacterInfo> {
     }
 
     @BuilderDsl
-    public fun house(block: CharacterHouseBuilder.() -> Unit): CharacterBuilder =
+    fun house(block: CharacterHouseBuilder.() -> Unit): CharacterBuilder =
         apply { houses.add(CharacterHouseBuilder().apply(block).build()) }
 
-    public fun addBadge(name: String, descroption: String, iconUrl: String): CharacterBuilder = apply {
+    fun addBadge(name: String, descroption: String, iconUrl: String): CharacterBuilder = apply {
         accountBadges.add(AccountBadge(name, descroption, iconUrl))
     }
 
-    public fun addAchievement(name: String, grade: Int, isSecret: Boolean): CharacterBuilder = apply {
+    fun addAchievement(name: String, grade: Int, isSecret: Boolean): CharacterBuilder = apply {
         achievements.add(DisplayedAchievement(name, grade, isSecret))
     }
 
-    public fun accountInformation(
+    fun accountInformation(
         created: Instant,
         loyaltyTitle: String?,
         position: String?,
@@ -99,10 +100,10 @@ public class CharacterBuilder : TibiaKtBuilder<CharacterInfo> {
         accountInformation = AccountInformation(created, loyaltyTitle, position)
     }
 
-    public fun guild(rank: String, guild: String): CharacterBuilder =
+    fun guild(rank: String, guild: String): CharacterBuilder =
         apply { guildMembership = GuildMembership(guild, rank) }
 
-    public fun addDeath(
+    fun addDeath(
         occurredAt: Instant,
         level: Int,
         killers: List<DeathParticipant>,
@@ -111,7 +112,7 @@ public class CharacterBuilder : TibiaKtBuilder<CharacterInfo> {
         deaths.add(Death(occurredAt, level, killers, assists))
     }
 
-    public fun addOtherCharacter(
+    fun addOtherCharacter(
         name: String,
         world: String,
         isMain: Boolean = false,
@@ -155,13 +156,13 @@ public class CharacterBuilder : TibiaKtBuilder<CharacterInfo> {
         otherCharacters = otherCharacters
     )
 
-    public class CharacterHouseBuilder : TibiaKtBuilder<CharacterHouse> {
-        public lateinit var name: String
-        public var houseId: Int = 0
-        public lateinit var town: String
-        public lateinit var paidUntil: LocalDate
-        public lateinit var world: String
-        public override fun build(): CharacterHouse = CharacterHouse(
+    class CharacterHouseBuilder : TibiaKtBuilder<CharacterHouse> {
+        lateinit var name: String
+        var houseId: Int = 0
+        lateinit var town: String
+        lateinit var paidUntil: LocalDate
+        lateinit var world: String
+        override fun build(): CharacterHouse = CharacterHouse(
             name = requireField(::name.isInitialized, "name") { name },
             houseId = houseId,
             town = requireField(::town.isInitialized, "town") { town },

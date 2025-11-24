@@ -66,7 +66,7 @@ internal class HouseBuilder : TibiaKtBuilder<House> {
             ownerName = requireField(ownerName, "ownerName"),
             transferScheduledAt = transferScheduledAt,
             transferPrice = transferPrice,
-            isTransferAccepted = isTransferAccepted,
+            transferIsAccepted = isTransferAccepted,
             transferRecipient = transferRecipient
         )
 

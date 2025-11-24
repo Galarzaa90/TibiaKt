@@ -36,7 +36,7 @@ class HouseParserTests : FunSpec({
             paidUntil shouldNotBe null
             transferScheduledAt shouldBe null
             transferPrice shouldBe null
-            isTransferAccepted shouldBe null
+            transferIsAccepted shouldBe null
             transferRecipient shouldBe null
         }
     }
@@ -50,7 +50,7 @@ class HouseParserTests : FunSpec({
             paidUntil shouldNotBe null
             transferScheduledAt shouldNotBe null
             transferPrice shouldNotBe null
-            isTransferAccepted shouldBe true
+            transferIsAccepted shouldBe true
             transferRecipient shouldNotBe null
         }
     }

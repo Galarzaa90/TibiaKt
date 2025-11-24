@@ -32,9 +32,9 @@ class KillStatisticsParserTests : FunSpec({
         killStatistics!!.world shouldBe "Gladera"
         killStatistics.entries["(elemental forces)"]?.apply {
             lastDayKilledPlayers shouldBe 3
-            lastDayKilled shouldBe 0
+            lastDayKilledByPlayers shouldBe 0
             lastWeekKilledPlayers shouldBe 19
-            lastWeekKilled shouldBe 0
+            lastWeekKilledByPlayers shouldBe 0
         } shouldNotBe null
     }
     test("Kill statistics empty") {

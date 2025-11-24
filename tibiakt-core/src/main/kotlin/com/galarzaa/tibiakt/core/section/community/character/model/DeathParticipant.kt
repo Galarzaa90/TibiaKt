@@ -53,14 +53,14 @@ public sealed interface DeathParticipant {
      *
      * @property name The creature that dealt the killing blow.
      * @property summonerName The name of the player that summoned the creature.
-     * @property isSummonerTraded Whether the summoner was traded after the death occurred.
+     * @property summonerIsTraded Whether the summoner was traded after the death occurred.
      */
     @Serializable
     @SerialName("summon")
     public data class Summon(
         override val name: String,
         val summonerName: String,
-        val isSummonerTraded: Boolean,
+        val summonerIsTraded: Boolean,
     ) : DeathParticipant {
         /** URL to the summoner's information page. */
         public val summonerUrl: String get() = characterUrl(summonerName)

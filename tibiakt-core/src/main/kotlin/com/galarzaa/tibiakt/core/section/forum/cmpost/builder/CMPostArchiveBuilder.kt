@@ -18,33 +18,34 @@ package com.galarzaa.tibiakt.core.section.forum.cmpost.builder
 
 import com.galarzaa.tibiakt.core.builder.BuilderDsl
 import com.galarzaa.tibiakt.core.builder.TibiaKtBuilder
+import com.galarzaa.tibiakt.core.builder.requireField
 import com.galarzaa.tibiakt.core.section.forum.cmpost.model.CMPost
 import com.galarzaa.tibiakt.core.section.forum.cmpost.model.CMPostArchive
 import kotlinx.datetime.LocalDate
 
 @BuilderDsl
-public inline fun cmPostArchive(block: CMPostArchiveBuilder.() -> Unit): CMPostArchive =
+internal inline fun cmPostArchive(block: CMPostArchiveBuilder.() -> Unit): CMPostArchive =
     CMPostArchiveBuilder().apply(block).build()
 
 @BuilderDsl
-public inline fun cmPostArchiveBuilder(block: CMPostArchiveBuilder.() -> Unit): CMPostArchiveBuilder =
+internal inline fun cmPostArchiveBuilder(block: CMPostArchiveBuilder.() -> Unit): CMPostArchiveBuilder =
     CMPostArchiveBuilder().apply(block)
 
 /** Builder for [CMPostArchive] instances. */
 @BuilderDsl
-public class CMPostArchiveBuilder : TibiaKtBuilder<CMPostArchive> {
-    public var startOn: LocalDate? = null
-    public var endOn: LocalDate? = null
-    public var currentPage: Int = 1
-    public var totalPages: Int = 1
-    public var resultsCount: Int = 0
-    public val entries: MutableList<CMPost> = mutableListOf()
+internal class CMPostArchiveBuilder : TibiaKtBuilder<CMPostArchive> {
+    var startOn: LocalDate? = null
+    var endOn: LocalDate? = null
+    var currentPage: Int = 1
+    var totalPages: Int = 1
+    var resultsCount: Int = 0
+    val entries: MutableList<CMPost> = mutableListOf()
 
-    public fun addEntry(post: CMPost): CMPostArchiveBuilder = apply { entries.add(post) }
+    fun addEntry(post: CMPost): CMPostArchiveBuilder = apply { entries.add(post) }
 
     override fun build(): CMPostArchive = CMPostArchive(
-        startOn = startOn ?: error("startOn is required"),
-        endOn = endOn ?: error("endOn is required"),
+        startOn = requireField(startOn, "startOn"),
+        endOn = requireField(endOn, "endOn"),
         currentPage = currentPage,
         totalPages = totalPages,
         resultsCount = resultsCount,

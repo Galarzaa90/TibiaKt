@@ -26,8 +26,8 @@ import kotlinx.serialization.Serializable
  * A thread entry in the forums.
  *
  * @property authorName The name of the author that created the thread.
- * @property isAuthorTraded Whether the author's character was traded after the thread was created.
- * @property isAuthorDeleted Whether the thread author is now deleted.
+ * @property authorIsTraded Whether the author's character was traded after the thread was created.
+ * @property authorIsDeleted Whether the thread author is now deleted.
  * @property emoticon The selected emoticon for the thread.
  * @property repliesCount The total number of replies the thread has.
  * @property viewsCount The total number of views the thread has.
@@ -41,8 +41,8 @@ public data class ThreadEntry(
     override val title: String,
     override val threadId: Int,
     val authorName: String,
-    val isAuthorTraded: Boolean,
-    val isAuthorDeleted: Boolean,
+    val authorIsTraded: Boolean,
+    val authorIsDeleted: Boolean,
     val emoticon: ForumEmoticon?,
     val repliesCount: Int,
     val viewsCount: Int,

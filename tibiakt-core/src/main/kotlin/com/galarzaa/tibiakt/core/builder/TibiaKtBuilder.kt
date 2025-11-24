@@ -19,7 +19,7 @@ package com.galarzaa.tibiakt.core.builder
 /** A builder DSL. */
 @DslMarker
 @Target(AnnotationTarget.CLASS, AnnotationTarget.TYPE, AnnotationTarget.FUNCTION)
-public annotation class BuilderDsl
+internal annotation class BuilderDsl
 
 
 /** Interface for builders of TibiaKt models. */

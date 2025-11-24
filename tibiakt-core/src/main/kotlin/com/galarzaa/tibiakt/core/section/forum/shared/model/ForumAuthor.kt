@@ -40,7 +40,7 @@ public sealed interface ForumAuthor {
      * @property isTraded The author character was traded after this post was made.
      */
     @Serializable
-    @SerialName("unavailableForumAuthor")
+    @SerialName("unavailable")
     public data class Unavailable(
         override val name: String,
         val isDeleted: Boolean,
@@ -64,7 +64,7 @@ public sealed interface ForumAuthor {
      * @property isRecentlyTraded The character was traded in the last 30 days.
      */
     @Serializable
-    @SerialName("forumAuthor")
+    @SerialName("character")
     public data class Character(
         override val name: String,
         override val level: Int,
@@ -83,7 +83,7 @@ public sealed interface ForumAuthor {
      * @property postCount The total number of posts by this author.
      */
     @Serializable
-    @SerialName("tournamentForumAuthor")
+    @SerialName("tournament")
     public data class Tournament(
         override val name: String,
         val postCount: Int,

@@ -164,7 +164,7 @@ class CharacterParserTests : FunSpec({
             killer.shouldBeInstanceOf<DeathParticipant.Summon>()
             killer.name shouldBe "sorcerer familiar"
             killer.summonerName shouldBe "Deatth"
-            killer.isSummonerTraded shouldBe false
+            killer.summonerIsTraded shouldBe false
         }
         test("Creature") {
             // language=html

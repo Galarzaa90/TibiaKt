@@ -18,29 +18,30 @@ package com.galarzaa.tibiakt.core.section.forum.shared.builder
 
 import com.galarzaa.tibiakt.core.builder.BuilderDsl
 import com.galarzaa.tibiakt.core.builder.TibiaKtBuilder
+import com.galarzaa.tibiakt.core.builder.requireField
 import com.galarzaa.tibiakt.core.section.forum.shared.model.LastPost
 import kotlin.time.Instant
 
 @BuilderDsl
-public inline fun lastPostBuilder(block: LastPostBuilder.() -> Unit): LastPostBuilder = LastPostBuilder().apply(block)
+internal inline fun lastPostBuilder(block: LastPostBuilder.() -> Unit): LastPostBuilder = LastPostBuilder().apply(block)
 
 @BuilderDsl
-public inline fun lastPost(block: LastPostBuilder.() -> Unit): LastPost = lastPostBuilder(block).build()
+internal inline fun lastPost(block: LastPostBuilder.() -> Unit): LastPost = lastPostBuilder(block).build()
 
 /** Builder for [LastPost] instances. */
 @BuilderDsl
-public class LastPostBuilder : TibiaKtBuilder<LastPost> {
-    public var authorName: String? = null
-    public var postId: Int? = null
-    public var postedAt: Instant? = null
-    public var isDeleted: Boolean = false
-    public var isTraded: Boolean = false
+internal class LastPostBuilder : TibiaKtBuilder<LastPost> {
+    var authorName: String? = null
+    var postId: Int? = null
+    var postedAt: Instant? = null
+    var isDeleted: Boolean = false
+    var isTraded: Boolean = false
 
     override fun build(): LastPost = LastPost(
-        authorName = authorName ?: error("authorName is required"),
-        postId = postId ?: error("postId is required"),
-        postedAt = postedAt ?: error("postedAt is required"),
-        isDeleted = isDeleted,
-        isTraded = isTraded
+        authorName = requireField(authorName, "authorName"),
+        postId = requireField(postId, "postId"),
+        postedAt = requireField(postedAt, "postedAt"),
+        authorIsDeleted = isDeleted,
+        authorIsTraded = isTraded
     )
 }

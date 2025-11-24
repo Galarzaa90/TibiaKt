@@ -350,13 +350,13 @@ public object AuctionParser : Parser<Auction?> {
                 "Fist Fighting" -> skillsMap[field] = parseSkillValue(row)
                 "Shielding" -> skillsMap[field] = parseSkillValue(row)
 
-                "Creation Date" -> creationDate = parseTibiaDateTime(value)
+                "Creation Date" -> characterCreatedAt = parseTibiaDateTime(value)
                 "Experience" -> experience = value.parseLong()
                 "Gold" -> gold = value.parseLong()
                 "Achievement Points" -> achievementPoints = value.parseInteger()
 
                 "Regular World Transfer" -> if (value.contains("after")) {
-                    regularWorldTransfersAvailable = parseTibiaDateTime(value.split("after")[1])
+                    regularWorldTransfersUnlockAt = parseTibiaDateTime(value.split("after")[1])
                 }
 
                 "Charm Expansion" -> hasCharmExpansion = value.contains("yes")

@@ -18,6 +18,7 @@ package com.galarzaa.tibiakt.core.section.charactertrade.bazaar.builder
 
 import com.galarzaa.tibiakt.core.builder.BuilderDsl
 import com.galarzaa.tibiakt.core.builder.TibiaKtBuilder
+import com.galarzaa.tibiakt.core.builder.requireField
 import com.galarzaa.tibiakt.core.domain.character.Sex
 import com.galarzaa.tibiakt.core.domain.character.Vocation
 import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.AchievementEntry
@@ -43,48 +44,48 @@ import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.WeaponProfi
 import kotlin.time.Instant
 
 @BuilderDsl
-public inline fun auction(block: AuctionBuilder.() -> Unit): Auction = AuctionBuilder().apply(block).build()
+internal inline fun auction(block: AuctionBuilder.() -> Unit): Auction = AuctionBuilder().apply(block).build()
 
 @BuilderDsl
-public inline fun auctionBuilder(block: AuctionBuilder.() -> Unit): AuctionBuilder = AuctionBuilder().apply(block)
+internal inline fun auctionBuilder(block: AuctionBuilder.() -> Unit): AuctionBuilder = AuctionBuilder().apply(block)
 
 /** Builder for [AuctionBuilder] instances. */
 @BuilderDsl
-public class AuctionBuilder : TibiaKtBuilder<Auction> {
-    public lateinit var name: String
-    public var auctionId: Int? = null
-    public var level: Int? = null
-    public lateinit var world: String
-    public lateinit var vocation: Vocation
-    public lateinit var sex: Sex
-    public lateinit var outfit: OutfitImage
+internal class AuctionBuilder : TibiaKtBuilder<Auction> {
+    lateinit var name: String
+    var auctionId: Int? = null
+    var level: Int? = null
+    lateinit var world: String
+    lateinit var vocation: Vocation
+    lateinit var sex: Sex
+    lateinit var outfit: OutfitImage
     private val displayedItems: MutableList<ItemEntry> = mutableListOf()
     private val salesArguments: MutableList<SalesArgument> = mutableListOf()
-    public lateinit var startsAt: Instant
-    public lateinit var endsAt: Instant
-    public var bid: Int = 0
-    public lateinit var bidType: BidType
-    public lateinit var status: AuctionStatus
-    public var details: AuctionDetails? = null
+    lateinit var startsAt: Instant
+    lateinit var endsAt: Instant
+    var bid: Int = 0
+    lateinit var bidType: BidType
+    lateinit var status: AuctionStatus
+    var details: AuctionDetails? = null
 
-    public fun addDisplayedItem(displayedItem: ItemEntry): AuctionBuilder = apply { displayedItems.add(displayedItem) }
+    fun addDisplayedItem(displayedItem: ItemEntry): AuctionBuilder = apply { displayedItems.add(displayedItem) }
 
     @BuilderDsl
-    public fun displayedItem(block: ItemEntryBuilder.() -> Unit): AuctionBuilder =
+    fun displayedItem(block: ItemEntryBuilder.() -> Unit): AuctionBuilder =
         apply { displayedItems.add(ItemEntryBuilder().apply(block).build()) }
 
-    public fun addSalesArgument(salesArgument: SalesArgument): AuctionBuilder =
+    fun addSalesArgument(salesArgument: SalesArgument): AuctionBuilder =
         apply { salesArguments.add(salesArgument) }
 
     @BuilderDsl
-    public fun salesArgument(block: SalesArgumentBuilder.() -> Unit): AuctionBuilder =
+    fun salesArgument(block: SalesArgumentBuilder.() -> Unit): AuctionBuilder =
         apply { salesArguments.add(SalesArgumentBuilder().apply(block).build()) }
 
     @BuilderDsl
-    public fun details(block: AuctionDetailsBuilder.() -> Unit): AuctionBuilder =
+    fun details(block: AuctionDetailsBuilder.() -> Unit): AuctionBuilder =
         apply { details = AuctionDetailsBuilder().apply(block).build() }
 
-    public override fun build(): Auction = Auction(
+    override fun build(): Auction = Auction(
         name = if (::name.isInitialized) name else error("name is required"),
         auctionId = auctionId ?: error("auctionId is required"),
         level = level ?: error("level is required"),
@@ -103,12 +104,12 @@ public class AuctionBuilder : TibiaKtBuilder<Auction> {
     )
 
     @BuilderDsl
-    public class ItemEntryBuilder : TibiaKtBuilder<ItemEntry> {
-        public var itemId: Int? = null
-        public lateinit var name: String
-        public lateinit var description: String
-        public var count: Int = 1
-        public var tier: Int = 0
+    class ItemEntryBuilder : TibiaKtBuilder<ItemEntry> {
+        var itemId: Int? = null
+        lateinit var name: String
+        lateinit var description: String
+        var count: Int = 1
+        var tier: Int = 0
 
         override fun build(): ItemEntry = ItemEntry(
             itemId = itemId ?: error("itemId is required"),
@@ -120,9 +121,9 @@ public class AuctionBuilder : TibiaKtBuilder<Auction> {
     }
 
     @BuilderDsl
-    public class SalesArgumentBuilder : TibiaKtBuilder<SalesArgument> {
-        public var categoryId: Int? = null
-        public lateinit var content: String
+    class SalesArgumentBuilder : TibiaKtBuilder<SalesArgument> {
+        var categoryId: Int? = null
+        lateinit var content: String
 
         override fun build(): SalesArgument = SalesArgument(
             categoryId = categoryId ?: error("categoryId is required"),
@@ -131,131 +132,131 @@ public class AuctionBuilder : TibiaKtBuilder<Auction> {
     }
 
     @BuilderDsl
-    public class AuctionDetailsBuilder : TibiaKtBuilder<AuctionDetails> {
-        public var hitPoints: Int? = null
-        public var mana: Int? = null
-        public var capacity: Int? = null
-        public var speed: Int? = null
-        public var blessingsCount: Int? = null
-        public var mountsCount: Int? = null
-        public var outfitsCount: Int? = null
-        public var titlesCount: Int? = null
-        public var skills: AuctionSkills? = null
-        public var creationDate: Instant? = null
-        public var experience: Long? = null
-        public var gold: Long? = null
-        public var achievementPoints: Int? = null
-        public var regularWorldTransfersAvailable: Instant? = null
-        public var hasCharmExpansion: Boolean? = null
-        public var availableCharmPoints: Int? = null
-        public var spentCharmPoints: Int? = null
-        public var dailyRewardStreak: Int? = null
-        public var huntingTaskPoints: Int? = null
-        public var permanentHuntingTaskSlots: Int? = null
-        public var permanentPreySlots: Int? = null
-        public var preyWildcards: Int? = null
-        public var hirelings: Int? = null
-        public var hirelingJobs: Int? = null
-        public var hirelingOutfits: Int? = null
-        public var exaltedDust: Int? = null
-        public var exaltedDustLimit: Int? = null
-        public var bossPoints: Int? = null
-        public var bonusPromotionPoints: Int? = null
-        public var items: ItemSummary? = null
-        public var storeItems: ItemSummary? = null
-        public var mounts: Mounts? = null
-        public var storeMounts: Mounts? = null
-        public var outfits: Outfits? = null
-        public var storeOutfits: Outfits? = null
-        public var familiars: Familiars? = null
-        public var animusMasteriesUnlocked: Int = 0
-        public val blessings: MutableList<BlessingEntry> = mutableListOf()
-        public val imbuements: MutableList<String> = mutableListOf()
-        public val charms: MutableList<CharmEntry> = mutableListOf()
-        public val completedCyclopediaMapAreas: MutableList<String> = mutableListOf()
-        public val completedQuestLines: MutableList<String> = mutableListOf()
-        public val titles: MutableList<String> = mutableListOf()
-        public val achievements: MutableList<AchievementEntry> = mutableListOf()
-        public val bestiaryProgress: MutableList<BestiaryEntry> = mutableListOf()
-        public val bosstiaryProgress: MutableList<BosstiaryEntry> = mutableListOf()
-        public val revealedGems: MutableList<RevealedGem> = mutableListOf()
-        public val fragmentProgress: MutableList<FragmentProgressEntry> = mutableListOf()
-        public val proficiencies: MutableList<WeaponProficiency> = mutableListOf()
+    class AuctionDetailsBuilder : TibiaKtBuilder<AuctionDetails> {
+        var hitPoints: Int? = null
+        var mana: Int? = null
+        var capacity: Int? = null
+        var speed: Int? = null
+        var blessingsCount: Int? = null
+        var mountsCount: Int? = null
+        var outfitsCount: Int? = null
+        var titlesCount: Int? = null
+        var skills: AuctionSkills? = null
+        var characterCreatedAt: Instant? = null
+        var experience: Long? = null
+        var gold: Long? = null
+        var achievementPoints: Int? = null
+        var regularWorldTransfersUnlockAt: Instant? = null
+        var hasCharmExpansion: Boolean? = null
+        var availableCharmPoints: Int? = null
+        var spentCharmPoints: Int? = null
+        var dailyRewardStreak: Int? = null
+        var huntingTaskPoints: Int? = null
+        var permanentHuntingTaskSlots: Int? = null
+        var permanentPreySlots: Int? = null
+        var preyWildcards: Int? = null
+        var hirelings: Int? = null
+        var hirelingJobs: Int? = null
+        var hirelingOutfits: Int? = null
+        var exaltedDust: Int? = null
+        var exaltedDustLimit: Int? = null
+        var bossPoints: Int? = null
+        var bonusPromotionPoints: Int? = null
+        var items: ItemSummary? = null
+        var storeItems: ItemSummary? = null
+        var mounts: Mounts? = null
+        var storeMounts: Mounts? = null
+        var outfits: Outfits? = null
+        var storeOutfits: Outfits? = null
+        var familiars: Familiars? = null
+        var animusMasteriesUnlocked: Int = 0
+        val blessings: MutableList<BlessingEntry> = mutableListOf()
+        val imbuements: MutableList<String> = mutableListOf()
+        val charms: MutableList<CharmEntry> = mutableListOf()
+        val completedCyclopediaMapAreas: MutableList<String> = mutableListOf()
+        val completedQuestLines: MutableList<String> = mutableListOf()
+        val titles: MutableList<String> = mutableListOf()
+        val achievements: MutableList<AchievementEntry> = mutableListOf()
+        val bestiaryProgress: MutableList<BestiaryEntry> = mutableListOf()
+        val bosstiaryProgress: MutableList<BosstiaryEntry> = mutableListOf()
+        val revealedGems: MutableList<RevealedGem> = mutableListOf()
+        val fragmentProgress: MutableList<FragmentProgressEntry> = mutableListOf()
+        val proficiencies: MutableList<WeaponProficiency> = mutableListOf()
 
 
-        public fun addBlessing(blessingEntry: BlessingEntry): AuctionDetailsBuilder =
+        fun addBlessing(blessingEntry: BlessingEntry): AuctionDetailsBuilder =
             apply { blessings.add(blessingEntry) }
 
-        public fun addImbuement(imbuement: String): AuctionDetailsBuilder = apply { imbuements.add(imbuement) }
-        public fun addCharm(charm: CharmEntry): AuctionDetailsBuilder = apply { charms.add(charm) }
+        fun addImbuement(imbuement: String): AuctionDetailsBuilder = apply { imbuements.add(imbuement) }
+        fun addCharm(charm: CharmEntry): AuctionDetailsBuilder = apply { charms.add(charm) }
 
-        public fun addCompletedQuestLine(completedQuestLine: String): AuctionDetailsBuilder =
+        fun addCompletedQuestLine(completedQuestLine: String): AuctionDetailsBuilder =
             apply { completedQuestLines.add(completedQuestLine) }
 
-        public fun addCompletedCyclopediaMapArea(completedCyclopediaMapArea: String): AuctionDetailsBuilder =
+        fun addCompletedCyclopediaMapArea(completedCyclopediaMapArea: String): AuctionDetailsBuilder =
             apply { completedCyclopediaMapAreas.add(completedCyclopediaMapArea) }
 
-        public fun addTitle(title: String): AuctionDetailsBuilder = apply { titles.add(title) }
-        public fun addAchievement(achievement: AchievementEntry): AuctionDetailsBuilder =
+        fun addTitle(title: String): AuctionDetailsBuilder = apply { titles.add(title) }
+        fun addAchievement(achievement: AchievementEntry): AuctionDetailsBuilder =
             apply { achievements.add(achievement) }
 
-        public fun addBestiaryEntry(bestiaryEntry: BestiaryEntry): AuctionDetailsBuilder =
+        fun addBestiaryEntry(bestiaryEntry: BestiaryEntry): AuctionDetailsBuilder =
             apply { bestiaryProgress.add(bestiaryEntry) }
 
-        public fun addBosstiaryEntry(bosstiaryEntry: BosstiaryEntry): AuctionDetailsBuilder =
+        fun addBosstiaryEntry(bosstiaryEntry: BosstiaryEntry): AuctionDetailsBuilder =
             apply { bosstiaryProgress.add(bosstiaryEntry) }
 
-        public fun addRevealedGem(revealedGem: RevealedGem): AuctionDetailsBuilder =
+        fun addRevealedGem(revealedGem: RevealedGem): AuctionDetailsBuilder =
             apply { revealedGems.add(revealedGem) }
 
-        public fun addFragmentProgress(revealedGem: FragmentProgressEntry): AuctionDetailsBuilder =
+        fun addFragmentProgress(revealedGem: FragmentProgressEntry): AuctionDetailsBuilder =
             apply { fragmentProgress.add(revealedGem) }
 
-        public fun addProficiency(weaponProficiency: WeaponProficiency): AuctionDetailsBuilder =
+        fun addProficiency(weaponProficiency: WeaponProficiency): AuctionDetailsBuilder =
             apply { proficiencies.add(weaponProficiency) }
 
-        public override fun build(): AuctionDetails =
+        override fun build(): AuctionDetails =
             AuctionDetails(
-                hitPoints = hitPoints ?: error("hitPoints is required"),
-                mana = mana ?: error("mana is required"),
-                capacity = capacity ?: error("capacity is required"),
-                speed = speed ?: error("speed is required"),
-                blessingsCount = blessingsCount ?: error("blessingsCount is required"),
-                mountsCount = mountsCount ?: error("mountsCount is required"),
-                outfitsCount = outfitsCount ?: error("outfitsCount is required"),
-                titlesCount = titlesCount ?: error("titlesCount is required"),
-                skills = skills ?: error("skills is required"),
-                characterCreatedAt = creationDate ?: error("creationDate is required"),
-                experience = experience ?: error("experience is required"),
-                gold = gold ?: error("gold is required"),
-                achievementPoints = achievementPoints ?: error("achievementPoints is required"),
-                regularWorldTransfersUnlockAt = regularWorldTransfersAvailable,
-                hasCharmExpansion = hasCharmExpansion ?: error("charmExpansion is required"),
-                availableCharmPoints = availableCharmPoints
-                    ?: error("availableCharmPoints is required"),
-                spentCharmPoints = spentCharmPoints ?: error("spentCharmPoints is required"),
-                dailyRewardStreak = dailyRewardStreak ?: error("dailyRewardStreak is required"),
-                permanentHuntingTaskSlots = permanentHuntingTaskSlots
-                    ?: error("permanentHuntingTaskSlots is required"),
-                permanentPreySlots = permanentPreySlots
-                    ?: error("permanentPreySlots is required"),
-                huntingTaskPoints = huntingTaskPoints ?: error("huntingTaskPoints is required"),
-                preyWildcards = preyWildcards ?: error("preyWildcards is required"),
-                hirelings = hirelings ?: error("hirelings is required"),
-                hirelingJobs = hirelingJobs ?: error("hirelingJobs is required"),
-                hirelingOutfits = hirelingOutfits ?: error("hirelingOutfits is required"),
-                exaltedDust = exaltedDust ?: error("exaltedDust is required"),
-                exaltedDustLimit = exaltedDustLimit ?: error("exaltedDustLimit is required"),
-                bossPoints = bossPoints ?: error("bossPoints is required"),
-                bonusPromotionPoints = bonusPromotionPoints ?: error("bonusPromotionPoints is required"),
-                animusMasteriesUnlocked = animusMasteriesUnlocked ?: error("animusMasteriesUnlocked is required"),
-                items = items ?: error("items is required"),
-                storeItems = storeItems ?: error("storeItems is required"),
-                mounts = mounts ?: error("mounts is required"),
-                storeMounts = storeMounts ?: error("storeMounts is required"),
-                outfits = outfits ?: error("outfits is required"),
-                storeOutfits = storeOutfits ?: error("storeOutfits is required"),
-                familiars = familiars ?: error("familiars is required"),
+                hitPoints = requireField(hitPoints, "hitPoints"),
+                mana = requireField(mana, "mana"),
+                capacity = requireField(capacity, "capacity"),
+                speed = requireField(speed, "speed"),
+                blessingsCount = requireField(blessingsCount, "blessingsCount"),
+                mountsCount = requireField(mountsCount, "mountsCount"),
+                outfitsCount = requireField(outfitsCount, "outfitsCount"),
+                titlesCount = requireField(titlesCount, "titlesCount"),
+                skills = requireField(skills, "skills"),
+                characterCreatedAt = requireField(characterCreatedAt, "characterCreatedAt"),
+                experience = requireField(experience, "experience"),
+                gold = requireField(gold, "gold"),
+                achievementPoints = requireField(achievementPoints, "achievementPoints"),
+                regularWorldTransfersUnlockAt = requireField(
+                    regularWorldTransfersUnlockAt,
+                    "regularWorldTransfersUnlockAt"
+                ),
+                hasCharmExpansion = requireField(hasCharmExpansion, "hasCharmExpansion"),
+                availableCharmPoints = requireField(availableCharmPoints, "availableCharmPoints"),
+                spentCharmPoints = requireField(spentCharmPoints, "spentCharmPoints"),
+                dailyRewardStreak = requireField(dailyRewardStreak, "dailyRewardStreak"),
+                permanentHuntingTaskSlots = requireField(permanentHuntingTaskSlots, "permanentHuntingTaskSlots"),
+                permanentPreySlots = requireField(permanentPreySlots, "permanentPreySlots"),
+                huntingTaskPoints = requireField(huntingTaskPoints, "huntingTaskPoints"),
+                preyWildcards = requireField(preyWildcards, "preyWildcards"),
+                hirelings = requireField(hirelings, "hirelings"),
+                hirelingJobs = requireField(hirelingJobs, "hirelingJobs"),
+                hirelingOutfits = requireField(hirelingOutfits, "hirelingOutfits"),
+                exaltedDust = requireField(exaltedDust, "exaltedDust"),
+                exaltedDustLimit = requireField(exaltedDustLimit, "exaltedDustLimit"),
+                bossPoints = requireField(bossPoints, "bossPoints"),
+                bonusPromotionPoints = requireField(bonusPromotionPoints, "bonusPromotionPoints"),
+                animusMasteriesUnlocked = animusMasteriesUnlocked,
+                items = requireField(items, "items"),
+                storeItems = requireField(storeItems, "storeItems"),
+                mounts = requireField(mounts, "mounts"),
+                storeMounts = requireField(storeMounts, "storeMounts"),
+                outfits = requireField(outfits, "outfits"),
+                storeOutfits = requireField(storeOutfits, "storeOutfits"),
+                familiars = requireField(familiars, "familiars"),
                 blessings = blessings,
                 imbuements = imbuements,
                 charms = charms,

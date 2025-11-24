@@ -25,34 +25,34 @@ import com.galarzaa.tibiakt.core.section.community.leaderboard.model.Leaderboard
 import kotlin.time.Instant
 
 @BuilderDsl
-public inline fun leaderboard(block: LeaderboardBuilder.() -> Unit): Leaderboard =
+internal inline fun leaderboard(block: LeaderboardBuilder.() -> Unit): Leaderboard =
     LeaderboardBuilder().apply(block).build()
 
 @BuilderDsl
-public inline fun leaderboardBuilder(block: LeaderboardBuilder.() -> Unit): LeaderboardBuilder =
+internal inline fun leaderboardBuilder(block: LeaderboardBuilder.() -> Unit): LeaderboardBuilder =
     LeaderboardBuilder().apply(block)
 
 /** Builder for [Leaderboard] instances. */
 @BuilderDsl
-public class LeaderboardBuilder : TibiaKtBuilder<Leaderboard> {
-    public var world: String? = null
-    public var rotation: LeaderboardRotation? = null
-    public val availableRotations: MutableList<LeaderboardRotation> = mutableListOf()
-    public var lastUpdatedAt: Instant? = null
-    public var currentPage: Int? = null
-    public var totalPages: Int? = null
-    public var resultsCount: Int? = null
-    public val entries: MutableList<LeaderboardEntry> = mutableListOf()
+internal class LeaderboardBuilder : TibiaKtBuilder<Leaderboard> {
+    var world: String? = null
+    var rotation: LeaderboardRotation? = null
+    val availableRotations: MutableList<LeaderboardRotation> = mutableListOf()
+    var lastUpdatedAt: Instant? = null
+    var currentPage: Int? = null
+    var totalPages: Int? = null
+    var resultsCount: Int? = null
+    val entries: MutableList<LeaderboardEntry> = mutableListOf()
 
     @BuilderDsl
-    public fun rotation(body: LeaderboardRotationBuilder.() -> Unit): LeaderboardBuilder =
+    fun rotation(body: LeaderboardRotationBuilder.() -> Unit): LeaderboardBuilder =
         apply { rotation = LeaderboardRotationBuilder().apply(body).build() }
 
     @BuilderDsl
-    public fun addAvailableRotation(rotation: LeaderboardRotation): LeaderboardBuilder =
+    fun addAvailableRotation(rotation: LeaderboardRotation): LeaderboardBuilder =
         apply { availableRotations.add(rotation) }
 
-    public fun addEntry(entry: LeaderboardEntry): LeaderboardBuilder = apply { entries.add(entry) }
+    fun addEntry(entry: LeaderboardEntry): LeaderboardBuilder = apply { entries.add(entry) }
 
 
     override fun build(): Leaderboard = Leaderboard(
@@ -66,10 +66,10 @@ public class LeaderboardBuilder : TibiaKtBuilder<Leaderboard> {
         entries = entries
     )
 
-    public class LeaderboardRotationBuilder : TibiaKtBuilder<LeaderboardRotation> {
-        public var rotationId: Int? = null
-        public var isCurrent: Boolean = false
-        public var endsAt: Instant? = null
+    class LeaderboardRotationBuilder : TibiaKtBuilder<LeaderboardRotation> {
+        var rotationId: Int? = null
+        var isCurrent: Boolean = false
+        var endsAt: Instant? = null
         override fun build(): LeaderboardRotation = LeaderboardRotation(
             rotationId = requireField(rotationId, "rotationId"),
             isCurrent = isCurrent,

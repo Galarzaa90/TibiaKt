@@ -77,7 +77,7 @@ class ForumBoardParserTests : FunSpec({
 
         forumBoard.shouldBeInstanceOf<ForumBoard>()
         forumBoard.entries.forAtLeastOne {
-            it.isAuthorDeleted shouldBe true
+            it.authorIsDeleted shouldBe true
         }
     }
     test("Forum board with thread by traded char") {
@@ -85,7 +85,7 @@ class ForumBoardParserTests : FunSpec({
 
         forumBoard.shouldBeInstanceOf<ForumBoard>()
         forumBoard.entries.forAtLeastOne {
-            it.isAuthorTraded shouldBe true
+            it.authorIsTraded shouldBe true
         }
     }
     test("Forum board with thread with last post by deleted char") {
@@ -94,7 +94,7 @@ class ForumBoardParserTests : FunSpec({
 
         forumBoard.shouldBeInstanceOf<ForumBoard>()
         forumBoard.entries.forAtLeastOne {
-            it.lastPost.isDeleted shouldBe true
+            it.lastPost.authorIsDeleted shouldBe true
         }
     }
     test("Forum board with thread with last post by traded char") {
@@ -103,7 +103,7 @@ class ForumBoardParserTests : FunSpec({
 
         forumBoard.shouldBeInstanceOf<ForumBoard>()
         forumBoard.entries.forAtLeastOne {
-            it.lastPost.isTraded shouldBe true
+            it.lastPost.authorIsTraded shouldBe true
         }
     }
 })

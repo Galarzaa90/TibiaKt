@@ -49,7 +49,7 @@ public sealed interface House : BaseHouse {
      * @property ownerName The character that currently owns the house.
      * @property transferScheduledAt The date when the current owner will move out of the house.
      * @property transferPrice The number of gold coins to be paid for transferring the house.
-     * @property isTransferAccepted Whether the transfer has been accepted by the recipient or not.
+     * @property transferIsAccepted Whether the transfer has been accepted by the recipient or not.
      * @property transferRecipient The character that will receive the house.
      */
     @Serializable
@@ -66,7 +66,7 @@ public sealed interface House : BaseHouse {
         val ownerName: String,
         val transferScheduledAt: Instant?,
         val transferPrice: Int?,
-        val isTransferAccepted: Boolean?,
+        val transferIsAccepted: Boolean?,
         val transferRecipient: String?,
     ) : House {
         override val status: HouseStatus = HouseStatus.RENTED

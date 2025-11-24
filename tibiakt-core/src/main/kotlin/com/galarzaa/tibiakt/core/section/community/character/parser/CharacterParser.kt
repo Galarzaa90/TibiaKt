@@ -221,7 +221,7 @@ public object CharacterParser : Parser<CharacterInfo?> {
             return DeathParticipant.Summon(
                 summonerName = summonerName,
                 name = summonedCreature,
-                isSummonerTraded = summonerTraded,
+                summonerIsTraded = summonerTraded,
             )
         }
 

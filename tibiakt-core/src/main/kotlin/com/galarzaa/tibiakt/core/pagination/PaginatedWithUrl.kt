@@ -24,7 +24,7 @@ public interface PaginatedWithUrl<T> : Paginated<T> {
 
     /** Get the URL to the previous page if there is any. */
     public val previousPageUrl: String?
-        get() = if (currentPage == 0) null else getPageUrl(currentPage - 1)
+        get() = if (currentPage == 1) null else getPageUrl(currentPage - 1)
 
     /** Get the URL to a specific page. */
     public fun getPageUrl(page: Int): String
