@@ -29,4 +29,8 @@ public enum class NewsType(override val value: String, public val displayName: S
      */
     public val filterName: String
         get() = "filter_$value"
+
+    public companion object {
+        public fun fromDisplayName(displayName: String?): NewsType? = entries.find { it.displayName == displayName }
+    }
 }

@@ -16,7 +16,6 @@
 
 package com.galarzaa.tibiakt.core.section.news.archive.parser
 
-import com.galarzaa.tibiakt.core.enums.StringEnum
 import com.galarzaa.tibiakt.core.exceptions.ParsingException
 import com.galarzaa.tibiakt.core.html.cells
 import com.galarzaa.tibiakt.core.html.cleanText
@@ -74,7 +73,7 @@ public object NewsArchiveParser : Parser<NewsArchive> {
                 titleColumn.cleanText(),
                 category,
                 parseTibiaDate(dateColumn.cleanText()),
-                StringEnum.Companion.fromValue(newsType)
+                NewsType.fromDisplayName(newsType)
                     ?: throw ParsingException("unexpected news type found: $newsType")
             )
         }

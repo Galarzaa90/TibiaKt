@@ -554,7 +554,7 @@ public class TibiaKtClient constructor(
     ): TibiaResponse<Auction?> {
         val response = request(HttpMethod.Get, auctionUrl(auctionId))
         val tibiaResponse = response.parse {
-            _root_ide_package_.com.galarzaa.tibiakt.core.section.charactertrade.bazaar.parser.AuctionParser.fromContent(
+            AuctionParser.fromContent(
                 it,
                 auctionId,
                 !skipDetails

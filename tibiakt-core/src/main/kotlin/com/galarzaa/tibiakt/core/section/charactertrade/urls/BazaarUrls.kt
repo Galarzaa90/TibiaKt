@@ -17,6 +17,7 @@
 package com.galarzaa.tibiakt.core.section.charactertrade.urls
 
 import com.galarzaa.tibiakt.core.domain.world.PvpType
+import com.galarzaa.tibiakt.core.net.tibiaUrl
 import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.AuctionBattlEyeFilter
 import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.AuctionOrderBy
 import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.AuctionOrderDirection
@@ -33,7 +34,7 @@ import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.BazaarType
  * @param type Whether to show current auctions or the auction history.
  */
 public fun bazaarUrl(type: BazaarType = BazaarType.CURRENT, filters: BazaarFilters? = null, page: Int = 1): String =
-    _root_ide_package_.com.galarzaa.tibiakt.core.net.tibiaUrl(
+    tibiaUrl(
         "charactertrade",
         type.subtopic,
         "currentpage" to page,
@@ -63,7 +64,7 @@ private fun BazaarFilters?.queryParams(): Array<Pair<String, Any?>> {
  * URL to a specific auction.
  */
 public fun auctionUrl(auctionId: Int): String =
-    _root_ide_package_.com.galarzaa.tibiakt.core.net.tibiaUrl(
+    tibiaUrl(
         "charactertrade",
         "currentcharactertrades",
         "page" to "details",
