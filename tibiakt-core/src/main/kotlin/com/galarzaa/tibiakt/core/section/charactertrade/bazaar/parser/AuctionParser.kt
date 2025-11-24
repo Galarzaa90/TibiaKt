@@ -362,11 +362,13 @@ public object AuctionParser : Parser<Auction?> {
                 "Charm Expansion" -> hasCharmExpansion = value.contains("yes")
                 "Available Charm Points" -> availableCharmPoints = value.parseInteger()
                 "Spent Charm Points" -> spentCharmPoints = value.parseInteger()
+                "Available Minor Charm Echoes" -> availableMinorCharmEchoes = value.parseInteger()
+                "Spent Minor Charm Echoes" -> spentMinorCharmEchoes = value.parseInteger()
 
                 "Daily Reward Streak" -> dailyRewardStreak = value.parseInteger()
 
                 "Hunting Task Points" -> huntingTaskPoints = value.parseInteger()
-                "Permanent Hunting Task Slots" -> permanentHuntingTaskSlots = value.parseInteger()
+                "Permanent Weekly Task Expansion" -> permanentWeeklyTaskExpansion = value.contains("yes")
                 "Permanent Prey Slots" -> permanentPreySlots = value.parseInteger()
                 "Prey Wildcards" -> preyWildcards = value.parseInteger()
 

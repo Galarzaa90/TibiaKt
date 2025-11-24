@@ -141,9 +141,9 @@ data class Auctions(val auctionId: Int, val detailsOnly: Int = 0, val fetchAll: 
 
 @Resource("/cmPosts")
 data class CMPosts(
-    val start: LocalDate? = null,
-    val end: LocalDate? = null,
-    val days: Int? = null, val page: Int = 1,
+    val startOn: LocalDate,
+    val endOn: LocalDate,
+    val page: Int = 1,
 )
 
 @Resource("/forums")

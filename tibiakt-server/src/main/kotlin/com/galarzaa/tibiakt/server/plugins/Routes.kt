@@ -104,13 +104,7 @@ internal fun Application.configureRouting(client: TibiaKtClient) {
         }
 
         get<CMPosts> {
-            if (it.start != null && it.end != null) {
-                call.respond(client.fetchCMPostArchive(it.start, it.end, it.page))
-            } else if (it.days != null) {
-                call.respond(client.fetchCMPostArchive(it.days, it.page))
-            } else {
-                call.respond(HttpStatusCode.BadRequest, "Query parameters 'start' and 'end', or 'days' are required")
-            }
+            call.respond(client.fetchCMPostArchive(it.startOn, it.endOn, it.page))
         }
 
         get<Forums.Section> { call.respondOrNotFound(client.fetchForumSection(it.sectionId)) }

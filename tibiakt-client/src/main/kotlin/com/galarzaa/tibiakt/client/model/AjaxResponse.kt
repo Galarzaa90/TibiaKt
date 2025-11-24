@@ -19,18 +19,52 @@ package com.galarzaa.tibiakt.client.model
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+/**
+ * Container for responses returned by Tibia’s AJAX endpoints.
+ *
+ * The `AjaxObjects` field contains one or more elements wrapping HTML fragments
+ * or auxiliary metadata used by website features such as character trades,
+ * auctions, pagination, or filtering panels.
+ *
+ * Each entry is represented as an [AjaxObject].
+ */
 @Serializable
 public data class AjaxResponse(
+    /**
+     * List of AJAX objects returned by the endpoint.
+     *
+     * Each object contains:
+     * - a raw HTML fragment,
+     * - a type identifier describing how the client should interpret the data,
+     * - and the CSS selector or DOM target the Tibia website uses to inject it.
+     */
     @SerialName("AjaxObjects")
     val ajaxObjects: List<AjaxObject>,
 )
 
+/**
+ * Represents a single AJAX payload item returned by Tibia’s internal web services.
+ *
+ * @property data Raw HTML content provided by the endpoint.
+ * This string typically contains `<div>`, `<img>`, and other markup used to
+ * dynamically populate sections of the Tibia.com page (for example: lists of items,
+ * pagination rows, character trade objects, or dialog content).
+ *
+ * @property dataType String indicating the kind of data contained in [data].
+ * Common values include `"HTML"` or `"Container"`, informing the client-side
+ * scripts how the content should be interpreted.
+ *
+ * @property target CSS selector or DOM target ID used by Tibia.com to insert the
+ * provided HTML fragment into the page.
+ */
 @Serializable
 public data class AjaxObject(
     @SerialName("Data")
     val data: String,
+
     @SerialName("DataType")
     val dataType: String,
+
     @SerialName("Target")
     val target: String,
 )

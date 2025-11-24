@@ -59,6 +59,11 @@
 - `ThreadEntry` properties renamed:
     - `isAuthorDeleted` to `authorIsDeleted`
     - `isAuthorTraded` to `authorIsTraded`
+- `AuctuionDetails` changes:
+    - Added `availableMinorCharmEchoes`
+    - Added `spentMinorCharmEchoes`
+    - Removed `permanentHuntingTaskSlots`
+    - Added `permanentWeeklyTaskExpansion`
 - All builder classes are now internal.
 - `TibiaKtClient` now implements `TibiaKtApi` interface.
     - Remove `fetchNewsArchive` using days.

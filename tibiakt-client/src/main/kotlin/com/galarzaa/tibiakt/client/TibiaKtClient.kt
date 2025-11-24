@@ -385,9 +385,9 @@ public class TibiaKtClient constructor(
     public suspend fun fetchHigscores(
         world: String?,
         category: HighscoresCategory,
-        vocation: HighscoresProfession,
-        battlEyeType: HighscoresBattlEyeType,
-        pvpTypes: Set<PvpType>?,
+        vocation: HighscoresProfession = HighscoresProfession.ALL,
+        battlEyeType: HighscoresBattlEyeType = HighscoresBattlEyeType.ANY_WORLD,
+        pvpTypes: Set<PvpType>? = null,
     ): TibiaResponse<Highscores?> {
         val now = Clock.System.now()
         var totalPages = 0

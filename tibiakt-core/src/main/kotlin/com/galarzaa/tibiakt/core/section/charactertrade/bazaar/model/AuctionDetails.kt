@@ -42,7 +42,7 @@ import kotlin.time.Instant
  * @property spentCharmPoints The total charm points that have been spent.
  * @property dailyRewardStreak The current daily rewards streak.
  * @property huntingTaskPoints The total hunting task points.
- * @property permanentHuntingTaskSlots The total number of permanent hunting task slots the character has.
+ * @property permanentWeeklyTaskExpansion The total number of permanent hunting task slots the character has.
  * @property permanentPreySlots The total number of permanent prey slots.
  * @property preyWildcards The number of prey wildcards.
  * @property hirelings The total hirelings this character has.
@@ -92,9 +92,11 @@ public data class AuctionDetails(
     val hasCharmExpansion: Boolean,
     val availableCharmPoints: Int,
     val spentCharmPoints: Int,
+    val availableMinorCharmEchoes: Int,
+    val spentMinorCharmEchoes: Int,
     val dailyRewardStreak: Int,
     val huntingTaskPoints: Int,
-    val permanentHuntingTaskSlots: Int,
+    val permanentWeeklyTaskExpansion: Boolean,
     val permanentPreySlots: Int,
     val preyWildcards: Int,
     val hirelings: Int,

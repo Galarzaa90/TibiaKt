@@ -150,9 +150,11 @@ internal class AuctionBuilder : TibiaKtBuilder<Auction> {
         var hasCharmExpansion: Boolean? = null
         var availableCharmPoints: Int? = null
         var spentCharmPoints: Int? = null
+        var availableMinorCharmEchoes: Int? = null
+        var spentMinorCharmEchoes: Int? = null
         var dailyRewardStreak: Int? = null
         var huntingTaskPoints: Int? = null
-        var permanentHuntingTaskSlots: Int? = null
+        var permanentWeeklyTaskExpansion: Boolean? = null
         var permanentPreySlots: Int? = null
         var preyWildcards: Int? = null
         var hirelings: Int? = null
@@ -230,15 +232,17 @@ internal class AuctionBuilder : TibiaKtBuilder<Auction> {
                 experience = requireField(experience, "experience"),
                 gold = requireField(gold, "gold"),
                 achievementPoints = requireField(achievementPoints, "achievementPoints"),
-                regularWorldTransfersUnlockAt = requireField(
-                    regularWorldTransfersUnlockAt,
-                    "regularWorldTransfersUnlockAt"
-                ),
+                regularWorldTransfersUnlockAt = regularWorldTransfersUnlockAt,
                 hasCharmExpansion = requireField(hasCharmExpansion, "hasCharmExpansion"),
                 availableCharmPoints = requireField(availableCharmPoints, "availableCharmPoints"),
                 spentCharmPoints = requireField(spentCharmPoints, "spentCharmPoints"),
+                availableMinorCharmEchoes = requireField(availableMinorCharmEchoes, "availableMinorCharmEchoes"),
+                spentMinorCharmEchoes = requireField(spentMinorCharmEchoes, "spentMinorCharmEchoes"),
                 dailyRewardStreak = requireField(dailyRewardStreak, "dailyRewardStreak"),
-                permanentHuntingTaskSlots = requireField(permanentHuntingTaskSlots, "permanentHuntingTaskSlots"),
+                permanentWeeklyTaskExpansion = requireField(
+                    permanentWeeklyTaskExpansion,
+                    "permanentWeeklyTaskExpansion"
+                ),
                 permanentPreySlots = requireField(permanentPreySlots, "permanentPreySlots"),
                 huntingTaskPoints = requireField(huntingTaskPoints, "huntingTaskPoints"),
                 preyWildcards = requireField(preyWildcards, "preyWildcards"),

@@ -16,7 +16,7 @@
 
 package com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model
 
-enum class AuctionPagesType(val typeId: Int) {
+public enum class AuctionPagesType(public val typeId: Int) {
     ITEMS(0),
     ITEMS_STORE(1),
     MOUNTS(2),
