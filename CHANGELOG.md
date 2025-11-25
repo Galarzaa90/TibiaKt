@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.0.0 (Unreleased)
+## 2.0.0 (2025-11-24)
 
 - Added `BOUNTY_POINTS_EARNED` and `WEEKLY_TASKS_COMPLETED` highscores categories.
 - Reorganized package names. Classes are organized similar to sections on Tibia.com
