@@ -71,7 +71,7 @@ internal fun Application.configureRouting(client: TibiaKtClient) {
 
         get<HighscoresComplete> {
             val world = if (it.world.lowercase() == "all") null else it.world
-            call.respondOrNotFound(client.fetchHigscores(world, it.category, it.profession))
+            call.respondOrNotFound(client.fetchHighscores(world, it.category, it.profession))
         }
         get<Bazaar> {
             val filters = BazaarFilters(

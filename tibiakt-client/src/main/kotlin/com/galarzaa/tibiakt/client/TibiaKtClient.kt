@@ -382,7 +382,7 @@ public class TibiaKtClient constructor(
         return response.parse { HighscoresParser.fromContent(it) }
     }
 
-    public suspend fun fetchHigscores(
+    public suspend fun fetchHighscores(
         world: String?,
         category: HighscoresCategory,
         vocation: HighscoresProfession = HighscoresProfession.ALL,
@@ -616,7 +616,7 @@ public class TibiaKtClient constructor(
                         entries = itemEntries ?: tibiaResponse.data.details!!.items.entries,
                         isFullyFetched = fetchItems,
                     ),
-                    storeItems = tibiaResponse.data.details!!.items.copy(
+                    storeItems = tibiaResponse.data.details!!.storeItems.copy(
                         entries = storeItemEntries ?: tibiaResponse.data.details!!.items.entries,
                         isFullyFetched = fetchItems,
                     ),

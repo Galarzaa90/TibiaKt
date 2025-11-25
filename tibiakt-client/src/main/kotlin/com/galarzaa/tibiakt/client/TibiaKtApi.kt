@@ -216,7 +216,7 @@ public interface TibiaKtApi {
     public suspend fun fetchCMPostArchive(
         startOn: LocalDate,
         endOn: LocalDate,
-        page: Int = 0,
+        page: Int = 1,
     ): TibiaResponse<CMPostArchive>
 
     // endregion
