@@ -2,6 +2,7 @@
 
 ## 2.0.0 (Unreleased)
 
+- Added `BOUNTY_POINTS_EARNED` and `WEEKLY_TASKS_COMPLETED` highscores categories.
 - Reorganized package names. Classes are organized similar to sections on Tibia.com
     - `com.galarzaa.tibiakt.core.*.bazaar` to `com.galarzaa.tibiakt.core.section.charactertrade.bazaar.*`
     - `com.galarzaa.tibiakt.core.*.character.*` to `com.galarzaa.tibiakt.core.section.community.character.*`

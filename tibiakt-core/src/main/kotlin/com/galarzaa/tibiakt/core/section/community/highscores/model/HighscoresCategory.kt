@@ -23,6 +23,7 @@ public enum class HighscoresCategory(override val value: Int) : IntEnum {
     ACHIEVEMENTS(1),
     AXE_FIGHTING(2),
     BOSS_POINTS(15),
+    BOUNTY_POINTS_EARNED(16),
     CHARM_POINTS(3),
     CLUB_FIGHTING(4),
     DISTANCE_FIGHTING(5),
@@ -35,4 +36,5 @@ public enum class HighscoresCategory(override val value: Int) : IntEnum {
     MAGIC_LEVEL(11),
     SHIELDING(12),
     SWORD_FIGHTING(13),
+    WEEKLY_TASKS_COMPLETED(17);
 }
