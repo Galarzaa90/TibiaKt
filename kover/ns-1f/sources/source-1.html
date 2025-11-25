@@ -1,0 +1,200 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>tibiakt-core Coverage Report > KillStatisticsParser</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.galarzaa.tibiakt.core.section.community.killstatistics.parser</a>
+</div>
+
+<h1>Coverage Summary for Class: KillStatisticsParser (com.galarzaa.tibiakt.core.section.community.killstatistics.parser)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+<th class="coverageStat 
+">
+  Instruction, %
+</th>
+</tr>
+<tr>
+  <td class="name">KillStatisticsParser</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    65%
+  </span>
+  <span class="absValue">
+    (13/20)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (28/28)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    84.3%
+  </span>
+  <span class="absValue">
+    (161/191)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright © 2025 Allan Galarza
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.galarzaa.tibiakt.core.section.community.killstatistics.parser
+&nbsp;
+&nbsp;import com.galarzaa.tibiakt.core.collections.offsetStart
+&nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
+&nbsp;import com.galarzaa.tibiakt.core.html.TABLE_SELECTOR
+&nbsp;import com.galarzaa.tibiakt.core.html.cellsText
+&nbsp;import com.galarzaa.tibiakt.core.html.formData
+&nbsp;import com.galarzaa.tibiakt.core.html.parseTablesMap
+&nbsp;import com.galarzaa.tibiakt.core.html.rows
+&nbsp;import com.galarzaa.tibiakt.core.parser.Parser
+&nbsp;import com.galarzaa.tibiakt.core.section.community.killstatistics.builder.KillStatisticsBuilder
+&nbsp;import com.galarzaa.tibiakt.core.section.community.killstatistics.builder.killStatistics
+&nbsp;import com.galarzaa.tibiakt.core.section.community.killstatistics.model.KillStatistics
+&nbsp;import org.jsoup.nodes.Element
+&nbsp;
+&nbsp;/** Parses content from the Kill Statistics section. */
+&nbsp;public object KillStatisticsParser : Parser&lt;KillStatistics?&gt; {
+&nbsp;    override fun fromContent(content: String): KillStatistics? {
+<b class="fc">&nbsp;        val boxContent = boxContent(content)</b>
+<b class="fc">&nbsp;        val formData =</b>
+<b class="pc">&nbsp;            boxContent.selectFirst(&quot;form&quot;)?.formData() ?: throw ParsingException(&quot;Could not find world selection form&quot;)</b>
+<b class="pc">&nbsp;        if (formData.values[&quot;world&quot;].isNullOrBlank())</b>
+<b class="fc">&nbsp;            return null</b>
+<b class="fc">&nbsp;        val tables = boxContent.parseTablesMap(&quot;table.Table1, table.Table3&quot;)</b>
+<b class="fc">&nbsp;        return killStatistics {</b>
+<b class="pc">&nbsp;            tables[&quot;Kill Statistics&quot;]?.apply {</b>
+<b class="fc">&nbsp;                parseKillStatisticsTable(this)</b>
+<b class="fc">&nbsp;            } ?: throw ParsingException(&quot;kill statistics table not found&quot;)</b>
+<b class="pc">&nbsp;            boxContent.selectFirst(&quot;form&quot;) ?: throw ParsingException(&quot;could not find form in value&quot;)</b>
+<b class="pc">&nbsp;            world = formData.values[&quot;world&quot;] ?: throw ParsingException(&quot;could not find world value in form&quot;)</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private fun KillStatisticsBuilder.parseKillStatisticsTable(table: Element) {
+<b class="fc">&nbsp;        val innerTable = table.selectFirst(TABLE_SELECTOR)</b>
+<b class="fc">&nbsp;        for (row in innerTable.rows().offsetStart(2)) {</b>
+<b class="fc">&nbsp;            val columnns = row.cellsText()</b>
+<b class="fc">&nbsp;            if (columnns[0] == &quot;Total&quot;) {</b>
+<b class="fc">&nbsp;                total(</b>
+<b class="fc">&nbsp;                    lastDayKilledPlayers = columnns[1].toInt(),</b>
+<b class="fc">&nbsp;                    lastDayKilled = columnns[2].toInt(),</b>
+<b class="fc">&nbsp;                    lastWeekKilledPlayers = columnns[3].toInt(),</b>
+<b class="fc">&nbsp;                    lastWeekKilled = columnns[4].toInt(),</b>
+&nbsp;                )
+&nbsp;            } else {
+<b class="fc">&nbsp;                addEntry(</b>
+<b class="fc">&nbsp;                    race = columnns[0],</b>
+<b class="fc">&nbsp;                    lastDayKilledPlayers = columnns[1].toInt(),</b>
+<b class="fc">&nbsp;                    lastDayKilled = columnns[2].toInt(),</b>
+<b class="fc">&nbsp;                    lastWeekKilledPlayers = columnns[3].toInt(),</b>
+<b class="fc">&nbsp;                    lastWeekKilled = columnns[4].toInt(),</b>
+&nbsp;                )
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-11-25 04:03</div>
+</div>
+</body>
+</html>

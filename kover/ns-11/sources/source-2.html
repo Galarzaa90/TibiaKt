@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>tibiakt-core Coverage Report > OnlineCharacter</title>
+  <title>tibiakt-core Coverage Report > CharacterBuilderKt</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -19,15 +19,18 @@
 <div class="breadCrumbs">
 Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">com.galarzaa.tibiakt.core.models.world</a>
+    <a href="../index.html">com.galarzaa.tibiakt.core.section.community.character.builder</a>
 </div>
 
-<h1>Coverage Summary for Class: OnlineCharacter (com.galarzaa.tibiakt.core.models.world)</h1>
+<h1>Coverage Summary for Class: CharacterBuilderKt (com.galarzaa.tibiakt.core.section.community.character.builder)</h1>
 
 <table class="coverageStats">
-
 <tr>
   <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -46,103 +49,42 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </th>
 </tr>
 <tr>
-  <td class="name">OnlineCharacter</td>
+  <td class="name">CharacterBuilderKt</td>
 <td class="coverageStat">
   <span class="percent">
     100%
   </span>
   <span class="absValue">
-    (2/2)
+    (1/1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    50%
   </span>
   <span class="absValue">
-    (0/2)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    100%
-  </span>
-  <span class="absValue">
-    (5/5)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    81.4%
-  </span>
-  <span class="absValue">
-    (70/86)
-  </span>
-</td>
-</tr>
-  <tr>
-    <td class="name">OnlineCharacter$Companion</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/1)
+    (1/2)
   </span>
 </td>
     <td class="coverageStat"/>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    50%
   </span>
   <span class="absValue">
-    (0/1)
+    (1/2)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    52.6%
   </span>
   <span class="absValue">
-    (0/2)
-  </span>
-</td>
-  </tr>
-<tr>
-  <td class="name"><strong>Total</strong></td>
-<td class="coverageStat">
-  <span class="percent">
-    66.7%
-  </span>
-  <span class="absValue">
-    (2/3)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/2)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    83.3%
-  </span>
-  <span class="absValue">
-    (5/6)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    79.5%
-  </span>
-  <span class="absValue">
-    (70/88)
+    (10/19)
   </span>
 </td>
 </tr>
+
 </table>
 
 <br/>
@@ -151,7 +93,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;/*
-&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; * Copyright © 2025 Allan Galarza
 &nbsp; *
 &nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 &nbsp; * you may not use this file except in compliance with the License.
@@ -166,25 +108,163 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp; * limitations under the License.
 &nbsp; */
 &nbsp;
-&nbsp;package com.galarzaa.tibiakt.core.models.world
+&nbsp;package com.galarzaa.tibiakt.core.section.community.character.builder
 &nbsp;
-&nbsp;import com.galarzaa.tibiakt.core.enums.Vocation
-&nbsp;import com.galarzaa.tibiakt.core.models.character.BaseCharacter
-&nbsp;import com.galarzaa.tibiakt.core.models.character.CharacterLevel
-&nbsp;import kotlinx.serialization.Serializable
+&nbsp;import com.galarzaa.tibiakt.core.builder.BuilderDsl
+&nbsp;import com.galarzaa.tibiakt.core.builder.TibiaKtBuilder
+&nbsp;import com.galarzaa.tibiakt.core.builder.requireField
+&nbsp;import com.galarzaa.tibiakt.core.domain.character.Sex
+&nbsp;import com.galarzaa.tibiakt.core.domain.character.Vocation
+&nbsp;import com.galarzaa.tibiakt.core.section.community.character.model.AccountBadge
+&nbsp;import com.galarzaa.tibiakt.core.section.community.character.model.AccountCharacter
+&nbsp;import com.galarzaa.tibiakt.core.section.community.character.model.AccountInformation
+&nbsp;import com.galarzaa.tibiakt.core.section.community.character.model.CharacterHouse
+&nbsp;import com.galarzaa.tibiakt.core.section.community.character.model.CharacterInfo
+&nbsp;import com.galarzaa.tibiakt.core.section.community.character.model.Death
+&nbsp;import com.galarzaa.tibiakt.core.section.community.character.model.DeathParticipant
+&nbsp;import com.galarzaa.tibiakt.core.section.community.character.model.DisplayedAchievement
+&nbsp;import com.galarzaa.tibiakt.core.section.community.character.model.GuildMembership
+&nbsp;import kotlinx.datetime.LocalDate
+&nbsp;import kotlin.time.Instant
 &nbsp;
-&nbsp;/**
-&nbsp; * An online character.
-&nbsp; *
-&nbsp; * @property level The level of the character
-&nbsp; * @property vocation The vocation of the character
-&nbsp; */
-<b class="pc">&nbsp;@Serializable</b>
-<b class="fc">&nbsp;public data class OnlineCharacter(</b>
-<b class="fc">&nbsp;    override val name: String,</b>
-<b class="fc">&nbsp;    override val level: Int,</b>
-<b class="fc">&nbsp;    val vocation: Vocation,</b>
-&nbsp;) : BaseCharacter, CharacterLevel
+&nbsp;@BuilderDsl
+&nbsp;internal inline fun character(block: CharacterBuilder.() -&gt; Unit): CharacterInfo =
+<b class="fc">&nbsp;    CharacterBuilder().apply(block).build()</b>
+&nbsp;
+&nbsp;@BuilderDsl
+&nbsp;internal inline fun characterBuilder(block: CharacterBuilder.() -&gt; Unit): CharacterBuilder =
+<b class="nc">&nbsp;    CharacterBuilder().apply(block)</b>
+&nbsp;
+&nbsp;/** Builder for [CharacterInfo] instances. */
+&nbsp;@BuilderDsl
+&nbsp;internal class CharacterBuilder : TibiaKtBuilder&lt;CharacterInfo&gt; {
+&nbsp;    lateinit var name: String
+&nbsp;    var level: Int = 2
+&nbsp;    var residence: String? = null
+&nbsp;    var vocation: Vocation? = null
+&nbsp;    var sex: Sex? = null
+&nbsp;    var world: String? = null
+&nbsp;    var achievementPoints: Int = 0
+&nbsp;    var lastLoginAt: Instant? = null
+&nbsp;    var isRecentlyTraded: Boolean = false
+&nbsp;    var formerNames: List&lt;String&gt; = emptyList()
+&nbsp;    var deletionScheduledAt: Instant? = null
+&nbsp;    var formerWorld: String? = null
+&nbsp;    var isPremium: Boolean = false
+&nbsp;    var comment: String? = null
+&nbsp;    var title: String? = null
+&nbsp;    var position: String? = null
+&nbsp;    var unlockedTitles: Int = 0
+&nbsp;    var marriedTo: String? = null
+&nbsp;    val houses: MutableList&lt;CharacterHouse&gt; = mutableListOf()
+&nbsp;    var guildMembership: GuildMembership? = null
+&nbsp;    val accountBadges: MutableList&lt;AccountBadge&gt; = mutableListOf()
+&nbsp;    val achievements: MutableList&lt;DisplayedAchievement&gt; = mutableListOf()
+&nbsp;    var accountInformation: AccountInformation? = null
+&nbsp;    val deaths: MutableList&lt;Death&gt; = mutableListOf()
+&nbsp;    val otherCharacters: MutableList&lt;AccountCharacter&gt; = mutableListOf()
+&nbsp;
+&nbsp;    fun addHouse(
+&nbsp;        name: String,
+&nbsp;        houseId: Int,
+&nbsp;        town: String,
+&nbsp;        paidUntil: LocalDate,
+&nbsp;        world: String,
+&nbsp;    ): CharacterBuilder = apply {
+&nbsp;        houses.add(CharacterHouse(name, houseId, town, paidUntil, world))
+&nbsp;    }
+&nbsp;
+&nbsp;    @BuilderDsl
+&nbsp;    fun house(block: CharacterHouseBuilder.() -&gt; Unit): CharacterBuilder =
+&nbsp;        apply { houses.add(CharacterHouseBuilder().apply(block).build()) }
+&nbsp;
+&nbsp;    fun addBadge(name: String, descroption: String, iconUrl: String): CharacterBuilder = apply {
+&nbsp;        accountBadges.add(AccountBadge(name, descroption, iconUrl))
+&nbsp;    }
+&nbsp;
+&nbsp;    fun addAchievement(name: String, grade: Int, isSecret: Boolean): CharacterBuilder = apply {
+&nbsp;        achievements.add(DisplayedAchievement(name, grade, isSecret))
+&nbsp;    }
+&nbsp;
+&nbsp;    fun accountInformation(
+&nbsp;        created: Instant,
+&nbsp;        loyaltyTitle: String?,
+&nbsp;        position: String?,
+&nbsp;    ): CharacterBuilder = apply {
+&nbsp;        accountInformation = AccountInformation(created, loyaltyTitle, position)
+&nbsp;    }
+&nbsp;
+&nbsp;    fun guild(rank: String, guild: String): CharacterBuilder =
+&nbsp;        apply { guildMembership = GuildMembership(guild, rank) }
+&nbsp;
+&nbsp;    fun addDeath(
+&nbsp;        occurredAt: Instant,
+&nbsp;        level: Int,
+&nbsp;        killers: List&lt;DeathParticipant&gt;,
+&nbsp;        assists: List&lt;DeathParticipant&gt;,
+&nbsp;    ): CharacterBuilder = apply {
+&nbsp;        deaths.add(Death(occurredAt, level, killers, assists))
+&nbsp;    }
+&nbsp;
+&nbsp;    fun addOtherCharacter(
+&nbsp;        name: String,
+&nbsp;        world: String,
+&nbsp;        isMain: Boolean = false,
+&nbsp;        isOnline: Boolean = false,
+&nbsp;        isDeleted: Boolean = false,
+&nbsp;        isRecentlyTraded: Boolean = false,
+&nbsp;        position: String?,
+&nbsp;    ): CharacterBuilder = apply {
+&nbsp;        otherCharacters.add(
+&nbsp;            AccountCharacter(
+&nbsp;                name, world, isMain, isOnline, isDeleted, isRecentlyTraded, position
+&nbsp;            )
+&nbsp;        )
+&nbsp;    }
+&nbsp;
+&nbsp;    override fun build(): CharacterInfo = CharacterInfo(
+&nbsp;        name = requireField(::name.isInitialized, &quot;name&quot;) { name },
+&nbsp;        title = title,
+&nbsp;        formerNames = formerNames,
+&nbsp;        unlockedTitles = unlockedTitles,
+&nbsp;        sex = requireField(sex, &quot;sex&quot;),
+&nbsp;        vocation = requireField(vocation, &quot;vocation&quot;),
+&nbsp;        level = level,
+&nbsp;        achievementPoints = achievementPoints,
+&nbsp;        world = requireField(world, &quot;world&quot;),
+&nbsp;        formerWorld = formerWorld,
+&nbsp;        residence = requireField(residence, &quot;residence&quot;),
+&nbsp;        marriedTo = marriedTo,
+&nbsp;        houses = houses,
+&nbsp;        guildMembership = guildMembership,
+&nbsp;        lastLoginAt = lastLoginAt,
+&nbsp;        position = position,
+&nbsp;        comment = comment,
+&nbsp;        isPremium = isPremium,
+&nbsp;        isRecentlyTraded = isRecentlyTraded,
+&nbsp;        deletionScheduledAt = deletionScheduledAt,
+&nbsp;        badges = accountBadges,
+&nbsp;        achievements = achievements,
+&nbsp;        deaths = deaths,
+&nbsp;        accountInformation = accountInformation,
+&nbsp;        otherCharacters = otherCharacters
+&nbsp;    )
+&nbsp;
+&nbsp;    class CharacterHouseBuilder : TibiaKtBuilder&lt;CharacterHouse&gt; {
+&nbsp;        lateinit var name: String
+&nbsp;        var houseId: Int = 0
+&nbsp;        lateinit var town: String
+&nbsp;        lateinit var paidUntil: LocalDate
+&nbsp;        lateinit var world: String
+&nbsp;        override fun build(): CharacterHouse = CharacterHouse(
+&nbsp;            name = requireField(::name.isInitialized, &quot;name&quot;) { name },
+&nbsp;            houseId = houseId,
+&nbsp;            town = requireField(::town.isInitialized, &quot;town&quot;) { town },
+&nbsp;            paidUntil = requireField(::paidUntil.isInitialized, &quot;paidUntil&quot;) { paidUntil },
+&nbsp;            world = requireField(::world.isInitialized, &quot;world&quot;) { world },
+&nbsp;        )
+&nbsp;    }
+&nbsp;}
 </code>
 </pre>
 </div>
@@ -208,7 +288,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-18 03:38</div>
+    <div style="float:right;">generated on 2025-11-25 04:03</div>
 </div>
 </body>
 </html>

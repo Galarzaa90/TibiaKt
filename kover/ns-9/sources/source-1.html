@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>tibiakt-core Coverage Report > BaseCreatureEntry</title>
+  <title>tibiakt-core Coverage Report > ElementsKt</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -19,15 +19,18 @@
 <div class="breadCrumbs">
 Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">com.galarzaa.tibiakt.core.models.creatures</a>
+    <a href="../index.html">com.galarzaa.tibiakt.core.html</a>
 </div>
 
-<h1>Coverage Summary for Class: BaseCreatureEntry (com.galarzaa.tibiakt.core.models.creatures)</h1>
+<h1>Coverage Summary for Class: ElementsKt (com.galarzaa.tibiakt.core.html)</h1>
 
 <table class="coverageStats">
-
 <tr>
   <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -46,89 +49,49 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </th>
 </tr>
 <tr>
-  <td class="name">BaseCreatureEntry</td>
+  <td class="name">ElementsKt</td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/1)
-  </span>
-</td>
-    <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/1)
+    (1/1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    89.5%
   </span>
   <span class="absValue">
-    (0/22)
-  </span>
-</td>
-</tr>
-  <tr>
-    <td class="name">BaseCreatureEntry$DefaultImpls</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/1)
-  </span>
-</td>
-    <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/1)
+    (17/19)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    63.2%
   </span>
   <span class="absValue">
-    (0/2)
-  </span>
-</td>
-  </tr>
-<tr>
-  <td class="name"><strong>Total</strong></td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/2)
-  </span>
-</td>
-    <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/2)
+    (43/68)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    93.8%
   </span>
   <span class="absValue">
-    (0/24)
+    (90/96)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    88.6%
+  </span>
+  <span class="absValue">
+    (774/874)
   </span>
 </td>
 </tr>
+
 </table>
 
 <br/>
@@ -137,7 +100,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;/*
-&nbsp; * Copyright © 2022 Allan Galarza
+&nbsp; * Copyright © 2025 Allan Galarza
 &nbsp; *
 &nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 &nbsp; * you may not use this file except in compliance with the License.
@@ -152,24 +115,170 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp; * limitations under the License.
 &nbsp; */
 &nbsp;
-&nbsp;package com.galarzaa.tibiakt.core.models.creatures
+&nbsp;package com.galarzaa.tibiakt.core.html
 &nbsp;
-&nbsp;import com.galarzaa.tibiakt.core.net.staticFileUrl
+&nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
+&nbsp;import com.galarzaa.tibiakt.core.text.clean
+&nbsp;import com.galarzaa.tibiakt.core.text.parseInteger
+&nbsp;import org.jsoup.Jsoup
+&nbsp;import org.jsoup.nodes.Document
+&nbsp;import org.jsoup.nodes.Element
+&nbsp;import org.jsoup.nodes.TextNode
+&nbsp;import org.jsoup.parser.Parser
+&nbsp;import org.jsoup.select.Elements
+&nbsp;import java.net.URL
 &nbsp;
-&nbsp;/**
-&nbsp; * Base interface for creatures in the library.
+&nbsp;internal const val TABLE_SELECTOR = &quot;table.TableContent&quot;
+&nbsp;
+&nbsp;internal fun Element.boxContent(): Element =
+<b class="pc">&nbsp;    selectFirst(&quot;div.BoxContent&quot;) ?: throw ParsingException(&quot;BoxContent container not found&quot;)</b>
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;internal fun Element.parseTables(contentTableSelector: String = TABLE_SELECTOR): Map&lt;String, Elements&gt; {</b>
+<b class="fc">&nbsp;    val tables = select(&quot;div.TableContainer&quot;)</b>
+<b class="fc">&nbsp;    val output = mutableMapOf&lt;String, Elements&gt;()</b>
+<b class="fc">&nbsp;    for (table: Element in tables) {</b>
+<b class="fc">&nbsp;        val captionContainer = table.selectFirst(&quot;div.CaptionContainer&quot;)</b>
+<b class="fc">&nbsp;        val contentTable = table.selectFirst(contentTableSelector)</b>
+<b class="pc">&nbsp;        val caption = captionContainer?.text() ?: throw ParsingException(&quot;table has no caption container&quot;)</b>
+<b class="fc">&nbsp;        if (contentTable == null) continue</b>
+<b class="fc">&nbsp;        val rows = contentTable.select(&quot;tr&quot;)</b>
+<b class="fc">&nbsp;        output[caption] = rows</b>
+&nbsp;    }
+<b class="fc">&nbsp;    return output</b>
+&nbsp;}
+&nbsp;
+<b class="fc">&nbsp;internal fun Element.parseTablesMap(contentSelector: String = &quot;div.TableContentContainer&quot;): Map&lt;String, Element&gt; {</b>
+<b class="fc">&nbsp;    val tables = select(&quot;div.TableContainer&quot;)</b>
+<b class="fc">&nbsp;    val output = mutableMapOf&lt;String, Element&gt;()</b>
+<b class="fc">&nbsp;    for (table: Element in tables) {</b>
+<b class="fc">&nbsp;        val caption: String =</b>
+<b class="pc">&nbsp;            table.selectFirst(&quot;div.Text&quot;)?.cleanText() ?: throw ParsingException(&quot;table has no caption&quot;)</b>
+<b class="fc">&nbsp;        val contentTable = table.selectFirst(contentSelector)</b>
+<b class="fc">&nbsp;        output[caption] = contentTable ?: continue</b>
+&nbsp;    }
+<b class="fc">&nbsp;    return output</b>
+&nbsp;}
+&nbsp;
+&nbsp;/** Get a list of rows in the element. */
+<b class="pc">&nbsp;internal fun Element?.rows(): Elements = this?.select(&quot;tr&quot;) ?: Elements()</b>
+<b class="pc">&nbsp;internal fun Elements?.rows(): Elements = this?.select(&quot;tr&quot;) ?: Elements()</b>
+&nbsp;
+&nbsp;/** Get a list of cells found in the elmenet. */
+<b class="pc">&nbsp;internal fun Element?.cells(): Elements = this?.select(&quot;td&quot;) ?: Elements()</b>
+&nbsp;
+&nbsp;/** Get a list of the text contained in all cells in the element.*/
+<b class="fc">&nbsp;internal fun Element.cellsText(): List&lt;String&gt; = cells().map { it.cleanText() }</b>
+&nbsp;
+&nbsp;/** Get the text contained in an element, cleaned out of extraneous characters. */
+<b class="fc">&nbsp;internal fun Element.cleanText() = text().clean()</b>
+<b class="fc">&nbsp;internal fun TextNode.cleanText() = text().clean()</b>
+&nbsp;
+&nbsp;/** Get the text contained in a list of element, cleaned out of extraneous characters. */
+<b class="nc">&nbsp;internal fun Elements.cleanText() = text().clean()</b>
+&nbsp;
+&nbsp;/** Get the text contained in an element, cleaned out of extraneous characters. */
+<b class="fc">&nbsp;internal fun Element.wholeCleanText() = wholeText().clean()</b>
+&nbsp;
+&nbsp;
+&nbsp;/** Replace all br tags in an element with line jumps. */
+<b class="fc">&nbsp;internal fun Element.replaceBrs() = apply {</b>
+<b class="fc">&nbsp;    select(&quot;br&quot;).forEach { it.replaceWith(TextNode(&quot;\n&quot;)) }</b>
+<b class="fc">&nbsp;}</b>
+&nbsp;
+&nbsp;/** Replace all br tags in an array of elements with line jumps. */
+<b class="nc">&nbsp;internal fun ArrayList&lt;Element&gt;.replaceBr() = forEach { it.replaceBrs() }</b>
+&nbsp;
+&nbsp;/** Get all the field&#39;s values and available options of a form element.
 &nbsp; *
-&nbsp; * @property name The name of the creature.
-&nbsp; * @property identifier The internal name of the creature, used for images and links (where applicable).
+&nbsp; * @receiver An element with the form tag.
 &nbsp; */
-&nbsp;public interface BaseCreatureEntry {
-&nbsp;    public val name: String
-&nbsp;    public val identifier: String
+&nbsp;internal fun Element.formData(): FormData {
+<b class="pc">&nbsp;    require(this.tagName().lowercase() == &quot;form&quot;) {</b>
+<b class="nc">&nbsp;        &quot;expected element with &#39;form&#39; tag, got element with &#39;${this.tagName()}&#39; tag&quot;</b>
+&nbsp;    }
+<b class="fc">&nbsp;    val data = mutableMapOf&lt;String, String&gt;()</b>
+<b class="fc">&nbsp;    val dataMultiple = mutableMapOf&lt;String, MutableList&lt;String&gt;&gt;()</b>
+<b class="fc">&nbsp;    val availableOptions = mutableMapOf&lt;String, MutableList&lt;String&gt;&gt;()</b>
+<b class="fc">&nbsp;    select(&quot;input[type=text], input[type=hidden]&quot;).forEach { data[it.attr(&quot;name&quot;)] = it.attr(&quot;value&quot;) }</b>
+<b class="fc">&nbsp;    select(&quot;select&quot;).forEach {</b>
+<b class="fc">&nbsp;        it.select(&quot;option&quot;).forEach { opt -&gt;</b>
+<b class="fc">&nbsp;            val value = opt.attr(&quot;value&quot;)</b>
+<b class="fc">&nbsp;            val name = it.attr(&quot;name&quot;)</b>
+<b class="fc">&nbsp;            availableOptions.getOrPut(name) { mutableListOf() }.add(value)</b>
+<b class="fc">&nbsp;            if (opt.hasAttr(&quot;selected&quot;)) data[name] = value</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;    select(&quot;input[type=checkbox]&quot;).forEach {</b>
+<b class="fc">&nbsp;        val name = it.attr(&quot;name&quot;)</b>
+<b class="fc">&nbsp;        val value = it.attr(&quot;value&quot;)</b>
+<b class="fc">&nbsp;        availableOptions.getOrPut(name) { mutableListOf() }.add(value)</b>
+<b class="fc">&nbsp;        if (it.hasAttr(&quot;checked&quot;)) dataMultiple.getOrPut(name) { mutableListOf() }.add(value)</b>
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;    select(&quot;input[type=radio]&quot;).forEach {</b>
+<b class="fc">&nbsp;        val name = it.attr(&quot;name&quot;)</b>
+<b class="fc">&nbsp;        val value = it.attr(&quot;value&quot;)</b>
+<b class="fc">&nbsp;        availableOptions.getOrPut(name) { mutableListOf() }.add(value)</b>
+<b class="fc">&nbsp;        if (it.hasAttr(&quot;checked&quot;)) data[name] = value</b>
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;    return FormData(data, dataMultiple, availableOptions, action = attr(&quot;action&quot;), method = attr(&quot;method&quot;))</b>
+&nbsp;}
 &nbsp;
-&nbsp;    /**
-&nbsp;     * The URL to the creature&#39;s image.
-&nbsp;     */
-<b class="nc">&nbsp;    public val imageUrl: String get() = staticFileUrl(&quot;images&quot;, &quot;library&quot;, &quot;$identifier.gif&quot;)</b>
+<b class="fc">&nbsp;private val pageRegex = Regex(&quot;&quot;&quot;(?:page|pagenumber)=(\d+)&quot;&quot;&quot;)</b>
+<b class="fc">&nbsp;private val resultsRegex = Regex(&quot;&quot;&quot;Results: ([\d,]+)&quot;&quot;&quot;)</b>
+&nbsp;
+&nbsp;/** Parse the pagination block present in many Tibia.com sections. */
+&nbsp;internal fun Element.parsePagination(): PaginationData {
+<b class="fc">&nbsp;    val (pagesDiv, resultsDiv) = select(&quot;small &gt; div&quot;)</b>
+<b class="fc">&nbsp;    val currentPageLink = pagesDiv.selectFirst(&quot;.CurrentPageLink&quot;)</b>
+<b class="fc">&nbsp;    val pageLinks = pagesDiv.select(&quot;.PageLink&quot;)</b>
+<b class="fc">&nbsp;    val firstOrLastPages = pagesDiv.select(&quot;.FirstOrLastElement&quot;)</b>
+<b class="fc">&nbsp;    val totalPages = if (firstOrLastPages.isNotEmpty()) {</b>
+<b class="pc">&nbsp;        val lastPageLink = firstOrLastPages.last()?.selectFirst(&quot;a&quot;)</b>
+<b class="pc">&nbsp;        if (lastPageLink != null) {</b>
+<b class="pc">&nbsp;            pageRegex.find(lastPageLink.attr(&quot;href&quot;))?.let {</b>
+<b class="fc">&nbsp;                it.groups[1]!!.value.toInt()</b>
+<b class="nc">&nbsp;            } ?: throw ParsingException(&quot;Could not parse pagination info&quot;)</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            pageLinks[pageLinks.size - 2].text().toInt()</b>
+&nbsp;        }
+&nbsp;    } else {
+<b class="pc">&nbsp;        pageLinks.last()?.text()?.toInt() ?: throw ParsingException(&quot;could not find last page link&quot;)</b>
+&nbsp;    }
+<b class="fc">&nbsp;    val page = try {</b>
+<b class="pc">&nbsp;        currentPageLink?.text()?.toInt() ?: totalPages</b>
+&nbsp;    } catch (nfe: NumberFormatException) {
+<b class="pc">&nbsp;        if (currentPageLink?.text()?.contains(&quot;First&quot;) == true) 1</b>
+<b class="fc">&nbsp;        else totalPages</b>
+&nbsp;    }
+<b class="pc">&nbsp;    val resultsCount: Int = resultsRegex.find(resultsDiv.text())?.let {</b>
+<b class="fc">&nbsp;        it.groups[1]!!.value.parseInteger()</b>
+<b class="nc">&nbsp;    } ?: 0</b>
+<b class="fc">&nbsp;    return PaginationData(page, totalPages, resultsCount)</b>
+&nbsp;}
+&nbsp;
+&nbsp;internal fun parsePopup(content: String): Pair&lt;String, Document&gt; {
+<b class="fc">&nbsp;    val parts = content.split(&quot;,&quot;, limit = 3)</b>
+<b class="fc">&nbsp;    val title = parts[1].replace(&quot;&#39;&quot;, &quot;&quot;).trim()</b>
+<b class="fc">&nbsp;    val html = parts[parts.size - 1].replace(&quot;\\&#39;&quot;, &quot;\&quot;&quot;).replace(&quot;&#39;&quot;, &quot;&quot;).replace(&quot;,);&quot;, &quot;&quot;).replace(&quot;, );&quot;, &quot;&quot;).trim()</b>
+<b class="fc">&nbsp;    val parsedHtml = Jsoup.parse(html, &quot;&quot;, Parser.xmlParser())</b>
+<b class="fc">&nbsp;    return title to parsedHtml</b>
+&nbsp;}
+&nbsp;
+<b class="fc">&nbsp;private val queryStringRegex = Regex(&quot;([^&amp;=]+)=([^&amp;]*)&quot;)</b>
+&nbsp;internal fun Element.getLinkInformation(): LinkInformation? {
+<b class="pc">&nbsp;    if (this.tagName() != &quot;a&quot;) return null</b>
+<b class="fc">&nbsp;    return LinkInformation(this.text(), this.attr(&quot;href&quot;))</b>
+&nbsp;}
+&nbsp;
+&nbsp;internal fun URL.queryParams(): HashMap&lt;String, MutableList&lt;String&gt;&gt; {
+<b class="fc">&nbsp;    val matches = queryStringRegex.findAll(this.query)</b>
+<b class="fc">&nbsp;    val map: HashMap&lt;String, MutableList&lt;String&gt;&gt; = hashMapOf()</b>
+<b class="fc">&nbsp;    for (match: MatchResult in matches) {</b>
+<b class="fc">&nbsp;        val (_, name, value) = match.groupValues</b>
+<b class="fc">&nbsp;        map.getOrPut(name) { mutableListOf() }.add(value)</b>
+&nbsp;    }
+<b class="fc">&nbsp;    return map</b>
 &nbsp;}
 </code>
 </pre>
@@ -194,7 +303,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-18 03:38</div>
+    <div style="float:right;">generated on 2025-11-25 04:03</div>
 </div>
 </body>
 </html>

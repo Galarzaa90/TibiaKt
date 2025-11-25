@@ -1,0 +1,276 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>tibiakt-core Coverage Report > ForumThreadParser</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.galarzaa.tibiakt.core.section.forum.thread.parser</a>
+</div>
+
+<h1>Coverage Summary for Class: ForumThreadParser (com.galarzaa.tibiakt.core.section.forum.thread.parser)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+<th class="coverageStat 
+">
+  Instruction, %
+</th>
+</tr>
+<tr>
+  <td class="name">ForumThreadParser</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    57.1%
+  </span>
+  <span class="absValue">
+    (36/63)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    86.9%
+  </span>
+  <span class="absValue">
+    (73/84)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    82.6%
+  </span>
+  <span class="absValue">
+    (587/711)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright © 2025 Allan Galarza
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.galarzaa.tibiakt.core.section.forum.thread.parser
+&nbsp;
+&nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
+&nbsp;import com.galarzaa.tibiakt.core.html.TABLE_SELECTOR
+&nbsp;import com.galarzaa.tibiakt.core.html.cleanText
+&nbsp;import com.galarzaa.tibiakt.core.html.getLinkInformation
+&nbsp;import com.galarzaa.tibiakt.core.html.parseAuthorTable
+&nbsp;import com.galarzaa.tibiakt.core.html.parsePagination
+&nbsp;import com.galarzaa.tibiakt.core.parser.Parser
+&nbsp;import com.galarzaa.tibiakt.core.section.forum.shared.model.ForumEmoticon
+&nbsp;import com.galarzaa.tibiakt.core.section.forum.thread.builder.ForumThreadBuilder
+&nbsp;import com.galarzaa.tibiakt.core.section.forum.thread.builder.forumThread
+&nbsp;import com.galarzaa.tibiakt.core.section.forum.thread.model.ForumThread
+&nbsp;import com.galarzaa.tibiakt.core.time.parseTibiaForumDateTime
+&nbsp;import org.jsoup.nodes.Element
+&nbsp;import org.jsoup.nodes.TextNode
+&nbsp;
+&nbsp;/** Parser for forum threads. */
+&nbsp;public object ForumThreadParser : Parser&lt;ForumThread?&gt; {
+&nbsp;    private const val SIGNATURE_SEPARATOR = &quot;________________&quot;
+<b class="fc">&nbsp;    private val datesRegex = Regex(&quot;&quot;&quot;(\d{2}\.\d{2}\.\d{4}\s\d{2}:\d{2}:\d{2})&quot;&quot;&quot;)</b>
+<b class="fc">&nbsp;    private val editedByRegex = Regex(&quot;&quot;&quot;Edited by (.*) on \d{2}&quot;&quot;&quot;)</b>
+&nbsp;
+&nbsp;    override fun fromContent(content: String): ForumThread? {
+<b class="fc">&nbsp;        val boxContent = boxContent(content)</b>
+<b class="fc">&nbsp;        return forumThread {</b>
+<b class="fc">&nbsp;            val breadCrumbs = boxContent.select(&quot;div.ForumBreadCrumbs &gt; a&quot;)</b>
+<b class="fc">&nbsp;            if (breadCrumbs.isEmpty()) {</b>
+<b class="fc">&nbsp;                val messageBox = boxContent.selectFirst(&quot;div.InnerTableContainer&quot;)</b>
+<b class="pc">&nbsp;                if (messageBox == null || &quot;not found&quot; !in messageBox.text()) {</b>
+<b class="nc">&nbsp;                    throw ParsingException(&quot;Could not find Forum Breadcrumbs&quot;)</b>
+&nbsp;                }
+<b class="fc">&nbsp;                return null</b>
+&nbsp;            }
+<b class="fc">&nbsp;            val (sectionLink, boardLink) = breadCrumbs.mapNotNull { it.getLinkInformation() }</b>
+&nbsp;
+<b class="pc">&nbsp;            sectionId = sectionLink.queryParams[&quot;sectionid&quot;]?.first()?.toInt()</b>
+<b class="nc">&nbsp;                ?: throw ParsingException(&quot;Could not find section ID in link.&quot;)</b>
+<b class="fc">&nbsp;            sectionName = sectionLink.title</b>
+<b class="pc">&nbsp;            boardId = boardLink.queryParams[&quot;boardid&quot;]?.first()?.toInt()</b>
+<b class="nc">&nbsp;                ?: throw ParsingException(&quot;Could not find board ID in link.&quot;)</b>
+<b class="fc">&nbsp;            boardName = boardLink.title</b>
+&nbsp;
+<b class="fc">&nbsp;            val forumTitleContainer = boxContent.selectFirst(&quot;div.ForumTitleText&quot;)</b>
+<b class="fc">&nbsp;            if (forumTitleContainer == null) {</b>
+<b class="pc">&nbsp;                title = boxContent.selectFirst(&quot;div.ForumBreadCrumbs &gt; b&quot;)?.text()</b>
+<b class="nc">&nbsp;                    ?: throw ParsingException(&quot;Could not find partial title&quot;)</b>
+<b class="fc">&nbsp;                threadId = 0</b>
+<b class="fc">&nbsp;                currentPage = -1</b>
+&nbsp;                return@forumThread
+&nbsp;            }
+<b class="fc">&nbsp;            val border = forumTitleContainer.parent()!!.previousSibling()!!.previousSibling()!!</b>
+<b class="fc">&nbsp;            hasGoldenFrame = &quot;gold&quot; in border.attr(&quot;style&quot;)</b>
+<b class="fc">&nbsp;            title = forumTitleContainer.cleanText()</b>
+&nbsp;
+<b class="fc">&nbsp;            val postTable = boxContent.selectFirst(TABLE_SELECTOR)!!</b>
+<b class="fc">&nbsp;            val threadInfoContainer = postTable.selectFirst(&quot;div.ForumPostHeaderText&quot;)!!</b>
+<b class="fc">&nbsp;            val (threadNumber, navigationContainer) = threadInfoContainer.childNodes()</b>
+&nbsp;
+<b class="fc">&nbsp;            threadId = (threadNumber as TextNode).cleanText().split(&quot;#&quot;).last().toInt()</b>
+&nbsp;
+<b class="fc">&nbsp;            val navigationLinks = (navigationContainer as Element).select(&quot;a&quot;).mapNotNull { it.getLinkInformation() }</b>
+<b class="pc">&nbsp;            if (navigationLinks.size == 2) {</b>
+<b class="fc">&nbsp;                val (prevLink, nextLink) = navigationLinks</b>
+<b class="pc">&nbsp;                previousTopicNumber = prevLink.queryParams[&quot;threadid&quot;]?.first()?.toInt()</b>
+<b class="nc">&nbsp;                    ?: throw ParsingException(&quot;Could not find previous topic number in link.&quot;)</b>
+<b class="pc">&nbsp;                nextTopicNumber = nextLink.queryParams[&quot;threadid&quot;]?.first()?.toInt()</b>
+<b class="nc">&nbsp;                    ?: throw ParsingException(&quot;Could not find next topic number in link.&quot;)</b>
+<b class="nc">&nbsp;            } else if (&quot;Previous&quot; in navigationLinks.first().title) {</b>
+<b class="nc">&nbsp;                previousTopicNumber = navigationLinks.first().queryParams[&quot;threadid&quot;]?.first()?.toInt()</b>
+<b class="nc">&nbsp;                    ?: throw ParsingException(&quot;Could not find previous topic number in link.&quot;)</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                nextTopicNumber = navigationLinks.first().queryParams[&quot;threadid&quot;]?.first()?.toInt()</b>
+<b class="nc">&nbsp;                    ?: throw ParsingException(&quot;Could not find next topic number in link.&quot;)</b>
+&nbsp;            }
+<b class="fc">&nbsp;            val paginationData = boxContent.selectFirst(&quot;td.PageNavigation&quot;)!!.parsePagination()</b>
+<b class="fc">&nbsp;            totalPages = paginationData.totalPages</b>
+<b class="fc">&nbsp;            currentPage = paginationData.currentPage</b>
+<b class="fc">&nbsp;            resultsCount = paginationData.resultsCount</b>
+&nbsp;
+<b class="fc">&nbsp;            val postContainers = postTable.select(&quot;div.PostBody&quot;)</b>
+<b class="fc">&nbsp;            for (postContainer in postContainers) {</b>
+<b class="fc">&nbsp;                parsePostContainer(postContainer)</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private fun ForumThreadBuilder.parsePostContainer(container: Element) {
+<b class="fc">&nbsp;        addPost {</b>
+<b class="fc">&nbsp;            author = parseAuthorTable(container.selectFirst(&quot;div.PostCharacterText&quot;)!!)</b>
+<b class="fc">&nbsp;            val contentContainer = container.selectFirst(&quot;div.PostText&quot;)!!</b>
+<b class="fc">&nbsp;            var emoticonTag: Element? = null</b>
+<b class="fc">&nbsp;            var titleTag: Element? = null</b>
+<b class="fc">&nbsp;            while (true) {</b>
+<b class="fc">&nbsp;                val child = contentContainer.child(0)</b>
+<b class="fc">&nbsp;                child.remove()</b>
+<b class="pc">&nbsp;                when (child.tagName()) {</b>
+<b class="fc">&nbsp;                    &quot;img&quot; -&gt; emoticonTag = child</b>
+<b class="fc">&nbsp;                    &quot;b&quot; -&gt; titleTag = child</b>
+&nbsp;                    &quot;div&quot; -&gt; break
+&nbsp;                }
+&nbsp;            }
+<b class="pc">&nbsp;            contentContainer.selectFirst(&quot;br&quot;)?.remove()</b>
+&nbsp;
+<b class="fc">&nbsp;            val signatureContainer = container.selectFirst(&quot;td.ff_pagetext&quot;)</b>
+<b class="fc">&nbsp;            if (signatureContainer != null) {</b>
+<b class="fc">&nbsp;                signature = signatureContainer.html()</b>
+<b class="fc">&nbsp;                signatureContainer.remove()</b>
+&nbsp;            }
+<b class="fc">&nbsp;            content = contentContainer.html()</b>
+<b class="fc">&nbsp;            if (signatureContainer != null) {</b>
+<b class="fc">&nbsp;                val parts = content!!.split(SIGNATURE_SEPARATOR)</b>
+<b class="fc">&nbsp;                content = parts.subList(0, parts.size - 1).joinToString(SIGNATURE_SEPARATOR)</b>
+&nbsp;            }
+<b class="fc">&nbsp;            emoticonTag?.let {</b>
+<b class="fc">&nbsp;                emoticon = ForumEmoticon(it.attr(&quot;alt&quot;), it.attr(&quot;src&quot;))</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;            titleTag?.let {</b>
+<b class="fc">&nbsp;                title = it.cleanText()</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;            val postDetails = container.selectFirst(&quot;div.PostDetails&quot;)!!</b>
+<b class="fc">&nbsp;            val dates = datesRegex.findAll(postDetails.text()).map { it.value }.toList()</b>
+<b class="fc">&nbsp;            postedDate = parseTibiaForumDateTime(dates.first())</b>
+<b class="fc">&nbsp;            if (dates.size &gt; 1) {</b>
+<b class="fc">&nbsp;                editedDate = parseTibiaForumDateTime(dates[1])</b>
+<b class="fc">&nbsp;                editedBy = editedByRegex.find(postDetails.text())!!.groupValues[1]</b>
+&nbsp;            }
+<b class="fc">&nbsp;            val additionalBox = container.selectFirst(&quot;div.AdditionalBox&quot;)!!</b>
+<b class="fc">&nbsp;            postId = additionalBox.cleanText().split(&quot;#&quot;, limit = 2)[1].toInt()</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-11-25 04:03</div>
+</div>
+</body>
+</html>

@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>tibiakt-core Coverage Report > UrlsKt</title>
+  <title>tibiakt-core Coverage Report > Death</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -19,18 +19,15 @@
 <div class="breadCrumbs">
 Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">com.galarzaa.tibiakt.core.net</a>
+    <a href="../index.html">com.galarzaa.tibiakt.core.section.community.character.model</a>
 </div>
 
-<h1>Coverage Summary for Class: UrlsKt (com.galarzaa.tibiakt.core.net)</h1>
+<h1>Coverage Summary for Class: Death (com.galarzaa.tibiakt.core.section.community.character.model)</h1>
 
 <table class="coverageStats">
+
 <tr>
   <th class="name">Class</th>
-<th class="coverageStat 
-">
-  Class, %
-</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -49,49 +46,103 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </th>
 </tr>
 <tr>
-  <td class="name">UrlsKt</td>
+  <td class="name">Death</td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    66.7%
   </span>
   <span class="absValue">
-    (1/1)
+    (2/3)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    0%
   </span>
   <span class="absValue">
-    (5/5)
+    (0/8)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    85.7%
+    75%
   </span>
   <span class="absValue">
-    (12/14)
+    (6/8)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    63.8%
   </span>
   <span class="absValue">
-    (22/22)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    99.4%
-  </span>
-  <span class="absValue">
-    (172/173)
+    (90/141)
   </span>
 </td>
 </tr>
-
+  <tr>
+    <td class="name">Death$Companion</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (2/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (6/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    62.9%
+  </span>
+  <span class="absValue">
+    (90/143)
+  </span>
+</td>
+</tr>
 </table>
 
 <br/>
@@ -115,85 +166,34 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp; * limitations under the License.
 &nbsp; */
 &nbsp;
-&nbsp;package com.galarzaa.tibiakt.core.net
 &nbsp;
-&nbsp;import java.net.URLEncoder
-&nbsp;import java.nio.charset.StandardCharsets
+&nbsp;package com.galarzaa.tibiakt.core.section.community.character.model
 &nbsp;
-&nbsp;internal const val BASE_HOST = &quot;www.tibia.com&quot;
-&nbsp;internal const val TEST_HOST = &quot;www.test.tibia.com&quot;
-&nbsp;internal const val STATIC_HOST = &quot;static.tibia.com&quot;
-<b class="fc">&nbsp;private val LATIN1 = StandardCharsets.ISO_8859_1</b>
-&nbsp;
+&nbsp;import kotlinx.serialization.Serializable
+&nbsp;import kotlin.time.Instant
 &nbsp;
 &nbsp;/**
-&nbsp; * Build a URL to Tibia.com.
+&nbsp; * A death by a [character][CharacterInfo].
 &nbsp; *
-&nbsp; * @param section The desired section.
-&nbsp; * @param params The query arguments to pass.
-&nbsp; * @param test Whether to get a URL to the testing version of Tibia.com.
-&nbsp; * @param anchor The anchor to append to the URL.
+&nbsp; * @property occurredAt The date and time when the death happened.
+&nbsp; * @property level The level of the character when they died.
+&nbsp; * @property killers The list of killers.
+&nbsp; * @property assists The list of characters that helped in the death without dealing damage.
 &nbsp; */
-&nbsp;public fun tibiaUrl(
-&nbsp;    section: String,
-&nbsp;    vararg params: Pair&lt;String, Any?&gt;,
-<b class="fc">&nbsp;    test: Boolean = false,</b>
-<b class="fc">&nbsp;    anchor: String? = null,</b>
-&nbsp;): String {
-<b class="fc">&nbsp;     val host = if (test) TEST_HOST else BASE_HOST</b>
-&nbsp;
-<b class="fc">&nbsp;    val query = params.asSequence()</b>
-<b class="fc">&nbsp;        .filter { ( _, v ) -&gt; v != null }</b>
-<b class="fc">&nbsp;        .map { (k, v) -&gt; &quot;$k=${URLEncoder.encode(v.toString(), LATIN1)}&quot; }</b>
-<b class="fc">&nbsp;        .joinToString(&quot;&amp;&quot;)</b>
-&nbsp;
-<b class="fc">&nbsp;    return buildString {</b>
-<b class="fc">&nbsp;        append(&quot;https://$host/${section.trimEnd(&#39;/&#39;)}/&quot;)</b>
-<b class="pc">&nbsp;        if (query.isNotEmpty()) append(&#39;?&#39;).append(query)</b>
-<b class="fc">&nbsp;        if (!anchor.isNullOrEmpty()) append(&#39;#&#39;).append(anchor)</b>
-<b class="fc">&nbsp;    }</b>
+<b class="pc">&nbsp;@Serializable</b>
+<b class="fc">&nbsp;public data class Death(</b>
+<b class="fc">&nbsp;    val occurredAt: Instant,</b>
+<b class="fc">&nbsp;    val level: Int,</b>
+<b class="fc">&nbsp;    val killers: List&lt;DeathParticipant&gt;,</b>
+<b class="fc">&nbsp;    val assists: List&lt;DeathParticipant&gt;,</b>
+&nbsp;) {
+&nbsp;    /**
+&nbsp;     * Whether this death was caused by players.
+&nbsp;     */
+&nbsp;    val isByPlayers: Boolean
+<b class="nc">&nbsp;        get() = killers.any { it is DeathParticipant.Player || it is DeathParticipant.Summon } ||</b>
+<b class="nc">&nbsp;                assists.any { it is DeathParticipant.Player || it is DeathParticipant.Summon }</b>
 &nbsp;}
-&nbsp;
-&nbsp;/**
-&nbsp; * Build a URL to Tibia.com.
-&nbsp; *
-&nbsp; * @param section The desired section.
-&nbsp; * @param subtopic The desired subtopic.
-&nbsp; * @param params The query arguments to pass.
-&nbsp; * @param test Whether to get a URL to the testing version of Tibia.com.
-&nbsp; * @param anchor The anchor to append to the URL.
-&nbsp; */
-&nbsp;public fun tibiaUrl(
-&nbsp;    section: String,
-&nbsp;    subtopic: String,
-&nbsp;    vararg params: Pair&lt;String, Any?&gt;,
-<b class="fc">&nbsp;    test: Boolean = false,</b>
-<b class="fc">&nbsp;    anchor: String? = null,</b>
-&nbsp;): String {
-<b class="fc">&nbsp;    val newParams = mutableListOf(*params)</b>
-<b class="fc">&nbsp;    newParams.add(0, &quot;subtopic&quot; to subtopic)</b>
-<b class="fc">&nbsp;    return tibiaUrl(section, params = newParams.toTypedArray(), test = test, anchor = anchor)</b>
-&nbsp;}
-&nbsp;
-&nbsp;/**
-&nbsp; * Url for a static asset in Tibia.com.
-&nbsp; *
-&nbsp; * @param path The path to the asset.
-&nbsp; * @param test Whether to use the testing version of Tibia.com or not.
-&nbsp; */
-<b class="fc">&nbsp;public fun staticFileUrl(path: String, test: Boolean = false): String =</b>
-<b class="fc">&nbsp;    &quot;https://${if (test) &quot;test.&quot; else &quot;&quot;}$STATIC_HOST/${path.replace(&quot;//&quot;, &quot;/&quot;)}&quot;</b>
-&nbsp;
-&nbsp;/**
-&nbsp; * URL for a static asset in Tibia.com.
-&nbsp; *
-&nbsp; * @param path The path to the asset, represented as an array of directories with the filename at the end.
-&nbsp; * @param test Whether to use the testing version of Tibia.com or not.
-&nbsp; */
-<b class="fc">&nbsp;public fun staticFileUrl(vararg path: String, test: Boolean = false): String =</b>
-<b class="fc">&nbsp;    staticFileUrl(path.joinToString(&quot;/&quot;), test)</b>
-&nbsp;
-&nbsp;
 </code>
 </pre>
 </div>
@@ -217,7 +217,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-18 03:38</div>
+    <div style="float:right;">generated on 2025-11-25 04:03</div>
 </div>
 </body>
 </html>

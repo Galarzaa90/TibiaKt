@@ -1,0 +1,276 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>tibiakt-core Coverage Report > EventsScheduleBuilder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.galarzaa.tibiakt.core.section.news.event.builder</a>
+</div>
+
+<h1>Coverage Summary for Class: EventsScheduleBuilder (com.galarzaa.tibiakt.core.section.news.event.builder)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+<th class="coverageStat 
+">
+  Instruction, %
+</th>
+</tr>
+<tr>
+  <td class="name">EventsScheduleBuilder</td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (4/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    63.6%
+  </span>
+  <span class="absValue">
+    (7/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    72%
+  </span>
+  <span class="absValue">
+    (54/75)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">EventsScheduleBuilder$EventEntryBuilder</td>
+<td class="coverageStat">
+  <span class="percent">
+    77.8%
+  </span>
+  <span class="absValue">
+    (7/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    30%
+  </span>
+  <span class="absValue">
+    (3/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    84.6%
+  </span>
+  <span class="absValue">
+    (11/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    68.8%
+  </span>
+  <span class="absValue">
+    (55/80)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    78.6%
+  </span>
+  <span class="absValue">
+    (11/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (4/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (18/24)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    70.3%
+  </span>
+  <span class="absValue">
+    (109/155)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright © 2025 Allan Galarza
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package com.galarzaa.tibiakt.core.section.news.event.builder
+&nbsp;
+&nbsp;import com.galarzaa.tibiakt.core.builder.BuilderDsl
+&nbsp;import com.galarzaa.tibiakt.core.builder.TibiaKtBuilder
+&nbsp;import com.galarzaa.tibiakt.core.builder.requireField
+&nbsp;import com.galarzaa.tibiakt.core.section.news.event.model.EventEntry
+&nbsp;import com.galarzaa.tibiakt.core.section.news.event.model.EventsSchedule
+&nbsp;import kotlinx.datetime.LocalDate
+&nbsp;import kotlinx.datetime.YearMonth
+&nbsp;
+&nbsp;@BuilderDsl
+&nbsp;internal inline fun eventsSchedule(block: EventsScheduleBuilder.() -&gt; Unit): EventsSchedule =
+&nbsp;    EventsScheduleBuilder().apply(block).build()
+&nbsp;
+&nbsp;@BuilderDsl
+&nbsp;internal inline fun eventsScheduleBuilder(block: EventsScheduleBuilder.() -&gt; Unit): EventsScheduleBuilder =
+&nbsp;    EventsScheduleBuilder().apply(block)
+&nbsp;
+&nbsp;@BuilderDsl
+&nbsp;internal inline fun eventEntry(block: EventsScheduleBuilder.EventEntryBuilder.() -&gt; Unit): EventEntry =
+&nbsp;    EventsScheduleBuilder.EventEntryBuilder().apply(block).build()
+&nbsp;
+&nbsp;@BuilderDsl
+&nbsp;internal inline fun eventEntryBuilder(block: EventsScheduleBuilder.EventEntryBuilder.() -&gt; Unit) =
+&nbsp;    EventsScheduleBuilder.EventEntryBuilder().apply(block)
+&nbsp;
+&nbsp;/** Builder for [EventsSchedule] instances. */
+<b class="fc">&nbsp;@BuilderDsl</b>
+&nbsp;internal class EventsScheduleBuilder : TibiaKtBuilder&lt;EventsSchedule&gt; {
+<b class="fc">&nbsp;    lateinit var yearMonth: YearMonth</b>
+<b class="fc">&nbsp;    val entries: MutableList&lt;EventEntry&gt; = mutableListOf()</b>
+&nbsp;
+&nbsp;
+&nbsp;    fun addEntry(
+&nbsp;        title: String,
+&nbsp;        description: String,
+&nbsp;        startsOn: LocalDate?,
+&nbsp;        endsOn: LocalDate?,
+<b class="nc">&nbsp;    ): EventsScheduleBuilder = apply {</b>
+<b class="nc">&nbsp;        entries.add(</b>
+<b class="nc">&nbsp;            EventEntry.of(title, description, startsOn, endsOn)</b>
+&nbsp;        )
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+<b class="fc">&nbsp;    fun addEntry(entry: EventEntry): EventsScheduleBuilder = apply { entries.add(entry) }</b>
+&nbsp;
+<b class="fc">&nbsp;    override fun build(): EventsSchedule = EventsSchedule(</b>
+<b class="pc">&nbsp;        month = requireField(::yearMonth.isInitialized, &quot;yearMonth&quot;) { yearMonth },</b>
+<b class="fc">&nbsp;        entries = entries</b>
+&nbsp;    )
+&nbsp;
+<b class="fc">&nbsp;    internal class EventEntryBuilder {</b>
+<b class="fc">&nbsp;        var title: String? = null</b>
+<b class="fc">&nbsp;        var description: String? = null</b>
+<b class="fc">&nbsp;        var startsOn: LocalDate? = null</b>
+<b class="fc">&nbsp;        var endsOn: LocalDate? = null</b>
+&nbsp;
+<b class="fc">&nbsp;        fun build(): EventEntry = EventEntry.of(</b>
+<b class="fc">&nbsp;            requireField(title, &quot;title&quot;),</b>
+<b class="fc">&nbsp;            requireField(description, &quot;description&quot;),</b>
+<b class="fc">&nbsp;            startsOn,</b>
+<b class="fc">&nbsp;            endsOn</b>
+&nbsp;        )
+&nbsp;
+&nbsp;        override fun equals(other: Any?): Boolean =
+<b class="pc">&nbsp;            other is EventEntryBuilder &amp;&amp; other.title == title &amp;&amp; other.description == description</b>
+&nbsp;
+<b class="nc">&nbsp;        override fun hashCode(): Int = 31 * (title?.hashCode() ?: 0) + (description?.hashCode() ?: 0)</b>
+&nbsp;
+<b class="nc">&nbsp;        override fun toString(): String = title ?: &quot;&lt;undefined title&gt;&quot;</b>
+&nbsp;
+&nbsp;
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-11-25 04:03</div>
+</div>
+</body>
+</html>

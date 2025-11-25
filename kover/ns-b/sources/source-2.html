@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>tibiakt-core Coverage Report > Guild</title>
+  <title>tibiakt-core Coverage Report > Paginated</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -19,130 +19,24 @@
 <div class="breadCrumbs">
 Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">com.galarzaa.tibiakt.core.models.guild</a>
+    <a href="../index.html">com.galarzaa.tibiakt.core.pagination</a>
 </div>
 
-<h1>Coverage Summary for Class: Guild (com.galarzaa.tibiakt.core.models.guild)</h1>
+<h1>Coverage Summary for Class: Paginated (com.galarzaa.tibiakt.core.pagination)</h1>
 
 <table class="coverageStats">
-
 <tr>
   <th class="name">Class</th>
 <th class="coverageStat 
 ">
-  Method, %
-</th>
-<th class="coverageStat 
-">
   Branch, %
 </th>
-<th class="coverageStat 
-">
-  Line, %
-</th>
-<th class="coverageStat 
-">
-  Instruction, %
-</th>
 </tr>
 <tr>
-  <td class="name">Guild</td>
-<td class="coverageStat">
-  <span class="percent">
-    22.2%
-  </span>
-  <span class="absValue">
-    (2/9)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/2)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    68.2%
-  </span>
-  <span class="absValue">
-    (15/22)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    70.1%
-  </span>
-  <span class="absValue">
-    (237/338)
-  </span>
-</td>
-</tr>
-  <tr>
-    <td class="name">Guild$Companion</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/1)
-  </span>
-</td>
+  <td class="name">Paginated</td>
     <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/1)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/2)
-  </span>
-</td>
-  </tr>
-<tr>
-  <td class="name"><strong>Total</strong></td>
-<td class="coverageStat">
-  <span class="percent">
-    20%
-  </span>
-  <span class="absValue">
-    (2/10)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/2)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    65.2%
-  </span>
-  <span class="absValue">
-    (15/23)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    69.7%
-  </span>
-  <span class="absValue">
-    (237/340)
-  </span>
-</td>
 </tr>
+
 </table>
 
 <br/>
@@ -166,77 +60,21 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp; * limitations under the License.
 &nbsp; */
 &nbsp;
-&nbsp;package com.galarzaa.tibiakt.core.models.guild
-&nbsp;
-&nbsp;import com.galarzaa.tibiakt.core.collections.offsetStart
-&nbsp;import kotlinx.serialization.Serializable
-&nbsp;import kotlinx.datetime.LocalDate
+&nbsp;package com.galarzaa.tibiakt.core.pagination
 &nbsp;
 &nbsp;/**
-&nbsp; * A Tibia guild.
+&nbsp; * An object made of multiple pages.
 &nbsp; *
-&nbsp; * @property world The world where the guild is in.
-&nbsp; * @property logoUrl The URL to the guild&#39;s logo, or the default logo.
-&nbsp; * @property description The description of the guild.
-&nbsp; * @property foundedOn The date when the guild was founded.
-&nbsp; * @property isActive Whether the guild is active or still in formation.
-&nbsp; * @property areApplicationsOpen Whether applications are open or not.
-&nbsp; * @property homepageUrl The URL to the guild&#39;s homepage, if set.
-&nbsp; * @property guildHall The guildhall rented by the guild.
-&nbsp; * @property disbandsOn The date when the guild is set to be disbanded.
-&nbsp; * @property disbandingReason The reason why it will be disbanded.
-&nbsp; * @property members The list of members in the guild.
-&nbsp; * @property invited The list of characters currently invited to the guild.
+&nbsp; * @property currentPage The currently viewed page.
+&nbsp; * @property totalPages The total number of pages.
+&nbsp; * @property resultsCount The total number of [entries] across all pages.
+&nbsp; * @property entries The entries in this page.
 &nbsp; */
-<b class="pc">&nbsp;@Serializable</b>
-<b class="fc">&nbsp;public data class Guild(</b>
-<b class="fc">&nbsp;    override val name: String,</b>
-<b class="fc">&nbsp;    val world: String,</b>
-<b class="fc">&nbsp;    val logoUrl: String,</b>
-<b class="fc">&nbsp;    val description: String?,</b>
-<b class="fc">&nbsp;    val foundedOn: LocalDate,</b>
-<b class="fc">&nbsp;    val isActive: Boolean,</b>
-<b class="fc">&nbsp;    val areApplicationsOpen: Boolean,</b>
-<b class="fc">&nbsp;    val homepageUrl: String?,</b>
-<b class="fc">&nbsp;    val guildHall: GuildHall?,</b>
-<b class="fc">&nbsp;    val disbandsOn: LocalDate?,</b>
-<b class="fc">&nbsp;    val disbandingReason: String?,</b>
-<b class="fc">&nbsp;    val members: List&lt;GuildMember&gt;,</b>
-<b class="fc">&nbsp;    val invited: List&lt;GuildInvite&gt;,</b>
-&nbsp;) : BaseGuild {
-&nbsp;    /**
-&nbsp;     * A list of the guild ranks.
-&nbsp;     */
-&nbsp;    val ranks: List&lt;String&gt;
-<b class="nc">&nbsp;        get() = members.map { it.rank }.distinct()</b>
-&nbsp;
-&nbsp;    /** The leader of the guild. */
-&nbsp;    val leader: GuildMember
-<b class="nc">&nbsp;        get() = members.first()</b>
-&nbsp;
-&nbsp;    /** The vice leaders of the guild. */
-&nbsp;    val viceLeaders: List&lt;GuildMember&gt;
-<b class="nc">&nbsp;        get() = members.offsetStart(1).takeWhile { it.rank == members[1].rank }</b>
-&nbsp;
-&nbsp;    /** A mapping of the members by their rank. */
-&nbsp;    val membersByRank: Map&lt;String, List&lt;GuildMember&gt;&gt;
-<b class="nc">&nbsp;        get() = members.groupBy { it.rank }</b>
-&nbsp;
-&nbsp;    /** The number of members in the guild. */
-&nbsp;    val memberCount: Int
-<b class="nc">&nbsp;        get() = members.size</b>
-&nbsp;
-&nbsp;    /**
-&nbsp;     * The list of members currently online.
-&nbsp;     */
-&nbsp;    val onlineMembers: List&lt;GuildMember&gt;
-<b class="nc">&nbsp;        get() = members.filter { it.isOnline }</b>
-&nbsp;
-&nbsp;    /**
-&nbsp;     * The number of online members in the guild.
-&nbsp;     */
-&nbsp;    val onlineCount: Int
-<b class="nc">&nbsp;        get() = onlineMembers.count()</b>
+&nbsp;public interface Paginated&lt;T&gt; {
+&nbsp;    public val currentPage: Int
+&nbsp;    public val totalPages: Int
+&nbsp;    public val resultsCount: Int
+&nbsp;    public val entries: List&lt;T&gt;
 &nbsp;}
 </code>
 </pre>
@@ -261,7 +99,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-18 03:38</div>
+    <div style="float:right;">generated on 2025-11-25 04:03</div>
 </div>
 </body>
 </html>

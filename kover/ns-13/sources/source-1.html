@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>tibiakt-core Coverage Report > AuctionParser</title>
+  <title>tibiakt-core Coverage Report > CharacterParser</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -19,10 +19,10 @@
 <div class="breadCrumbs">
 Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">com.galarzaa.tibiakt.core.parsers</a>
+    <a href="../index.html">com.galarzaa.tibiakt.core.section.community.character.parser</a>
 </div>
 
-<h1>Coverage Summary for Class: AuctionParser (com.galarzaa.tibiakt.core.parsers)</h1>
+<h1>Coverage Summary for Class: CharacterParser (com.galarzaa.tibiakt.core.section.community.character.parser)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -49,7 +49,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </th>
 </tr>
 <tr>
-  <td class="name">AuctionParser</td>
+  <td class="name">CharacterParser</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -60,34 +60,34 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </td>
 <td class="coverageStat">
   <span class="percent">
-    81.5%
+    100%
   </span>
   <span class="absValue">
-    (22/27)
+    (13/13)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    59.9%
+    71.9%
   </span>
   <span class="absValue">
-    (151/252)
+    (110/153)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    78.7%
+    98.7%
   </span>
   <span class="absValue">
-    (247/314)
+    (157/159)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    74.6%
+    95.3%
   </span>
   <span class="absValue">
-    (2170/2910)
+    (1361/1428)
   </span>
 </td>
 </tr>
@@ -100,7 +100,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;/*
-&nbsp; * Copyright © 2024 Allan Galarza
+&nbsp; * Copyright © 2025 Allan Galarza
 &nbsp; *
 &nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 &nbsp; * you may not use this file except in compliance with the License.
@@ -115,502 +115,270 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp; * limitations under the License.
 &nbsp; */
 &nbsp;
-&nbsp;package com.galarzaa.tibiakt.core.parsers
+&nbsp;package com.galarzaa.tibiakt.core.section.community.character.parser
 &nbsp;
-&nbsp;import com.galarzaa.tibiakt.core.builders.AuctionBuilder
-&nbsp;import com.galarzaa.tibiakt.core.builders.auction
-&nbsp;import com.galarzaa.tibiakt.core.collections.offsetStart
-&nbsp;import com.galarzaa.tibiakt.core.enums.AuctionStatus
 &nbsp;import com.galarzaa.tibiakt.core.enums.StringEnum
 &nbsp;import com.galarzaa.tibiakt.core.exceptions.ParsingException
-&nbsp;import com.galarzaa.tibiakt.core.html.TABLE_SELECTOR
-&nbsp;import com.galarzaa.tibiakt.core.html.cells
-&nbsp;import com.galarzaa.tibiakt.core.html.cellsText
 &nbsp;import com.galarzaa.tibiakt.core.html.cleanText
 &nbsp;import com.galarzaa.tibiakt.core.html.getLinkInformation
-&nbsp;import com.galarzaa.tibiakt.core.html.parsePagination
-&nbsp;import com.galarzaa.tibiakt.core.html.parseTablesMap
-&nbsp;import com.galarzaa.tibiakt.core.html.replaceBrs
-&nbsp;import com.galarzaa.tibiakt.core.html.rows
-&nbsp;import com.galarzaa.tibiakt.core.html.wholeCleanText
-&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.AchievementEntry
-&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.Auction
-&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.AuctionSkills
-&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.BestiaryEntry
-&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.BlessingEntry
-&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.BosstiaryEntry
-&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.CharmEntry
-&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.FamiliarEntry
-&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.Familiars
-&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.FragmentProgressEntry
-&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.ItemEntry
-&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.ItemSummary
-&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.MountEntry
-&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.Mounts
-&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.OutfitEntry
-&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.OutfitImage
-&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.Outfits
-&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.RevealedGem
-&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.RevealedGemMod
-&nbsp;import com.galarzaa.tibiakt.core.models.bazaar.WeaponProficiency
+&nbsp;import com.galarzaa.tibiakt.core.html.parsePopup
+&nbsp;import com.galarzaa.tibiakt.core.html.parseTables
+&nbsp;import com.galarzaa.tibiakt.core.parser.Parser
+&nbsp;import com.galarzaa.tibiakt.core.section.community.character.builder.CharacterBuilder
+&nbsp;import com.galarzaa.tibiakt.core.section.community.character.builder.character
+&nbsp;import com.galarzaa.tibiakt.core.section.community.character.model.CharacterInfo
+&nbsp;import com.galarzaa.tibiakt.core.section.community.character.model.DeathParticipant
 &nbsp;import com.galarzaa.tibiakt.core.text.clean
-&nbsp;import com.galarzaa.tibiakt.core.text.parseInteger
-&nbsp;import com.galarzaa.tibiakt.core.text.parseLong
-&nbsp;import com.galarzaa.tibiakt.core.text.parseRomanNumerals
 &nbsp;import com.galarzaa.tibiakt.core.text.remove
+&nbsp;import com.galarzaa.tibiakt.core.text.removeLast
+&nbsp;import com.galarzaa.tibiakt.core.text.splitList
+&nbsp;import com.galarzaa.tibiakt.core.time.parseTibiaDate
 &nbsp;import com.galarzaa.tibiakt.core.time.parseTibiaDateTime
 &nbsp;import org.jsoup.Jsoup
+&nbsp;import org.jsoup.nodes.Document
 &nbsp;import org.jsoup.nodes.Element
-&nbsp;import java.io.File
-&nbsp;import java.net.URL
+&nbsp;import org.jsoup.select.Elements
+&nbsp;import kotlin.time.Instant
 &nbsp;
-&nbsp;/** Parser for auction pages. */
-&nbsp;public object AuctionParser : Parser&lt;Auction?&gt; {
-&nbsp;    private const val PERCENTAGE = 100f
+&nbsp;/** Parser for character information pages. */
+&nbsp;public object CharacterParser : Parser&lt;CharacterInfo?&gt; {
+<b class="fc">&nbsp;    private val deletedRegexp = Regex(&quot;&quot;&quot;([^,]+), will be deleted at (.*)&quot;&quot;&quot;)</b>
+<b class="fc">&nbsp;    private val titlesRegexp = Regex(&quot;&quot;&quot;(.*)\((\d+) titles? unlocked\)&quot;&quot;&quot;)</b>
+<b class="fc">&nbsp;    private val houseRegexp = Regex(&quot;&quot;&quot;\(([^)]+)\) is paid until (.*)&quot;&quot;&quot;)</b>
+<b class="fc">&nbsp;    private val deathsRegex = Regex(&quot;&quot;&quot;Level (\d+) by (.*)\.&lt;/td&gt;&quot;&quot;&quot;)</b>
+<b class="fc">&nbsp;    private val deathAssistsRegex = Regex(&quot;&quot;&quot;(?:(?&lt;killers&gt;.+)\.&lt;br\s?/&gt;)?Assisted by (?&lt;assists&gt;.+)&quot;&quot;&quot;)</b>
+<b class="fc">&nbsp;    private val linkSearch = Regex(&quot;&quot;&quot;&lt;a[^&gt;]+&gt;[^&lt;]+&lt;/a&gt;&quot;&quot;&quot;)</b>
+<b class="fc">&nbsp;    private val linkContent = Regex(&quot;&quot;&quot;&gt;([^&lt;]+)&lt;&quot;&quot;&quot;)</b>
 &nbsp;
-&nbsp;    @PublishedApi
-&nbsp;    internal const val ICON_CSS_SELECTOR: String = &quot;div.CVIcon&quot;
-&nbsp;    internal const val PAGINATOR_SELECTOR: String = &quot;div.BlockPageNavigationRow&quot;
+<b class="fc">&nbsp;    private val deathSummon = Regex(&quot;&quot;&quot;^(?&lt;summon&gt;.+) of (?&lt;name&gt;[^.]+?)\.?$&quot;&quot;&quot;)</b>
 &nbsp;
-<b class="fc">&nbsp;    private val charInfoRegex = Regex(&quot;&quot;&quot;Level: (\d+) \| Vocation: ([\w\s]+)\| (\w+) \| World: (\w+)&quot;&quot;&quot;)</b>
-<b class="fc">&nbsp;    private val idAddonsRegex = Regex(&quot;&quot;&quot;/(\d+)_(\d+)&quot;&quot;&quot;)</b>
-<b class="fc">&nbsp;    private val amountRegex = Regex(&quot;&quot;&quot;([\d,]+)x &quot;&quot;&quot;)</b>
-<b class="fc">&nbsp;    private val tierRegex = Regex(&quot;&quot;&quot;(.*)\s\(tier (\d)\)&quot;&quot;&quot;)</b>
-<b class="fc">&nbsp;    private val idRegex = Regex(&quot;&quot;&quot;(\d+).(?:gif|png)&quot;&quot;&quot;)</b>
+&nbsp;    private const val tradedLabel = &quot;(traded)&quot;
 &nbsp;
-<b class="fc">&nbsp;    override fun fromContent(content: String): Auction? = fromContent(content, 0, true)</b>
-&nbsp;
-&nbsp;    /**
-&nbsp;     * Parse the content of an auction.
-&nbsp;     *
-&nbsp;     * @param content The HTML content of the auction&#39;s page.
-&nbsp;     * @param auctionId The auction ID to set to the results, since it is not possible to know from the content only.
-&nbsp;     * @param parseDetails Whether to parse the auction&#39;s detail or just the general information.
-&nbsp;     */
-<b class="nc">&nbsp;    public fun fromContent(content: String, auctionId: Int, parseDetails: Boolean = true): Auction? {</b>
-<b class="fc">&nbsp;        val document = Jsoup.parse(content)</b>
-<b class="fc">&nbsp;        return auction {</b>
-<b class="fc">&nbsp;            this.auctionId = auctionId</b>
-<b class="fc">&nbsp;            document.selectFirst(&quot;div.Auction&quot;)?.let { parseAuctionContainer(it) } ?: return null</b>
-<b class="fc">&nbsp;            val detailsTables = document.parseTablesMap(&quot;table.Table3, table.Table5&quot;)</b>
-<b class="pc">&nbsp;            if (!parseDetails) return@auction</b>
-&nbsp;
-<b class="fc">&nbsp;            details {</b>
-<b class="pc">&nbsp;                detailsTables[&quot;General&quot;]?.apply { parseGeneralTable(this) }</b>
-<b class="pc">&nbsp;                detailsTables[&quot;Item Summary&quot;]?.apply { items = parseItemsTable(this) }</b>
-<b class="pc">&nbsp;                detailsTables[&quot;Store Item Summary&quot;]?.apply { storeItems = parseItemsTable(this) }</b>
-<b class="pc">&nbsp;                detailsTables[&quot;Mounts&quot;]?.apply { mounts = parseMountsTable(this) }</b>
-<b class="pc">&nbsp;                detailsTables[&quot;Store Mounts&quot;]?.apply { storeMounts = parseMountsTable(this) }</b>
-<b class="pc">&nbsp;                detailsTables[&quot;Outfits&quot;]?.apply { outfits = parseOutfitsTable(this) }</b>
-<b class="pc">&nbsp;                detailsTables[&quot;Store Outfits&quot;]?.apply { storeOutfits = parseOutfitsTable(this) }</b>
-<b class="pc">&nbsp;                detailsTables[&quot;Familiars&quot;]?.apply { familiars = parseFamiliarsTable(this) }</b>
-<b class="pc">&nbsp;                detailsTables[&quot;Blessings&quot;]?.apply { parseBlessingsTable(this) }</b>
-<b class="pc">&nbsp;                detailsTables[&quot;Imbuements&quot;]?.apply { parseSingleColumnTable(this).forEach { addImbuement(it) } }</b>
-<b class="pc">&nbsp;                detailsTables[&quot;Charms&quot;]?.apply { parseCharmsTable(this) }</b>
-<b class="pc">&nbsp;                detailsTables[&quot;Completed Cyclopedia Map Areas&quot;]?.apply {</b>
-<b class="fc">&nbsp;                    parseSingleColumnTable(this).forEach { addCompletedCyclopediaMapArea(it) }</b>
-<b class="fc">&nbsp;                }</b>
-<b class="pc">&nbsp;                detailsTables[&quot;Completed Quest Lines&quot;]?.apply {</b>
-<b class="fc">&nbsp;                    parseSingleColumnTable(this).forEach { addCompletedQuestLine(it) }</b>
-<b class="fc">&nbsp;                }</b>
-<b class="pc">&nbsp;                detailsTables[&quot;Titles&quot;]?.run { parseSingleColumnTable(this).forEach { addTitle(it) } }</b>
-<b class="pc">&nbsp;                detailsTables[&quot;Achievements&quot;]?.run { parseAchievementsTable(this) }</b>
-<b class="pc">&nbsp;                detailsTables[&quot;Bestiary Progress&quot;]?.run { parseBestiaryTable(this) }</b>
-<b class="pc">&nbsp;                detailsTables[&quot;Bosstiary Progress&quot;]?.run { parseBosstiaryTablee(this) }</b>
-<b class="pc">&nbsp;                detailsTables[&quot;Revealed Gems&quot;]?.run { parseRevealedGemsTable(this) }</b>
-<b class="pc">&nbsp;                detailsTables[&quot;Fragment Progress&quot;]?.run { parseFragmentProgressTable(this) }</b>
-<b class="pc">&nbsp;                detailsTables[&quot;Proficiencies&quot;]?.run { parseProficienciesTable(this) }</b>
-&nbsp;            }
+&nbsp;    override fun fromContent(content: String): CharacterInfo? {
+<b class="fc">&nbsp;        val document: Document = Jsoup.parse(content, &quot;&quot;, org.jsoup.parser.Parser.xmlParser())</b>
+<b class="fc">&nbsp;        val boxContent =</b>
+<b class="pc">&nbsp;            document.selectFirst(&quot;div.BoxContent&quot;) ?: throw ParsingException(&quot;BoxContent container not found&quot;)</b>
+<b class="fc">&nbsp;        val tables = boxContent.parseTables()</b>
+<b class="pc">&nbsp;        if (tables.keys.any { it.startsWith(&quot;Could not find character&quot;) }) return null</b>
+<b class="fc">&nbsp;        return character {</b>
+<b class="fc">&nbsp;            parseCharacterInformation(tables[&quot;Character Information&quot;] ?: return null)</b>
+<b class="fc">&nbsp;            tables[&quot;Account Badges&quot;]?.apply { parseAccountBadges(this) }</b>
+<b class="pc">&nbsp;            tables[&quot;Account Achievements&quot;]?.apply { parseAccountAchievements(this) }</b>
+<b class="fc">&nbsp;            tables[&quot;Account Information&quot;]?.apply { parseAccountInformation(this) }</b>
+<b class="fc">&nbsp;            tables[&quot;Character Deaths (Last 30 Days)&quot;]?.apply { parseCharacterDeaths(this) }</b>
+<b class="fc">&nbsp;            tables[&quot;Characters&quot;]?.apply { parseCharacters(this) }</b>
 <b class="fc">&nbsp;        }</b>
+&nbsp;
 &nbsp;    }
 &nbsp;
-&nbsp;    private fun AuctionBuilder.AuctionDetailsBuilder.parseCharmsTable(table: Element) {
-<b class="fc">&nbsp;        for (row in table.selectFirst(TABLE_SELECTOR).rows().offsetStart(1)) {</b>
-<b class="fc">&nbsp;            val colsText = row.cellsText()</b>
-<b class="pc">&nbsp;            if (colsText.size != 4) continue</b>
-<b class="nc">&nbsp;            val (cost, type, name, grade) = colsText</b>
-<b class="nc">&nbsp;            val icon = row.selectFirst(&quot;img&quot;) ?: continue</b>
-<b class="nc">&nbsp;            addCharm(CharmEntry(name, cost.parseInteger(), icon.attr(&quot;alt&quot;), type, grade.parseInteger()))</b>
-&nbsp;        }
-&nbsp;    }
-&nbsp;
-&nbsp;    private fun AuctionBuilder.AuctionDetailsBuilder.parseAchievementsTable(table: Element) {
-<b class="fc">&nbsp;        for (row in table.selectFirst(TABLE_SELECTOR).rows().offsetStart(1)) {</b>
-<b class="fc">&nbsp;            val text = row.cleanText()</b>
-<b class="fc">&nbsp;            if (text.contains(&quot;more entries&quot;)) continue</b>
-<b class="fc">&nbsp;            val isSecret = row.selectFirst(&quot;img&quot;) != null</b>
-<b class="fc">&nbsp;            addAchievement(AchievementEntry(text, isSecret))</b>
-&nbsp;        }
-&nbsp;    }
-&nbsp;
-&nbsp;    private fun AuctionBuilder.AuctionDetailsBuilder.parseBosstiaryTablee(table: Element) {
-<b class="fc">&nbsp;        for (row in table.selectFirst(TABLE_SELECTOR).rows().offsetStart(1)) {</b>
-<b class="fc">&nbsp;            val columnsText = row.cellsText()</b>
-<b class="fc">&nbsp;            if (columnsText.size != 3) continue</b>
-<b class="fc">&nbsp;            val (step, kills, name) = columnsText</b>
-<b class="fc">&nbsp;            val entry = BosstiaryEntry(name, kills.remove(&quot;x&quot;).parseLong(), step.toInt())</b>
-<b class="fc">&nbsp;            addBosstiaryEntry(entry)</b>
-&nbsp;        }
-&nbsp;    }
-&nbsp;
-&nbsp;    private fun AuctionBuilder.AuctionDetailsBuilder.parseBestiaryTable(table: Element) {
-<b class="fc">&nbsp;        for (row in table.selectFirst(TABLE_SELECTOR).rows().offsetStart(1)) {</b>
-<b class="fc">&nbsp;            val columnsText = row.cellsText()</b>
-<b class="pc">&nbsp;            if (columnsText.size != 4) continue</b>
-<b class="nc">&nbsp;            val (step, kills, name, _) = columnsText</b>
-<b class="nc">&nbsp;            val masteryIcon = row.selectFirst(&quot;img&quot;) ?: continue</b>
-<b class="nc">&nbsp;            val masteryUnlocked = masteryIcon.attr(&quot;alt&quot;).contains(&quot;unlocked&quot;)</b>
-<b class="nc">&nbsp;            val entry = BestiaryEntry(name, kills.remove(&quot;x&quot;).parseLong(), step.toInt(), masteryUnlocked)</b>
-<b class="nc">&nbsp;            addBestiaryEntry(entry)</b>
-&nbsp;        }
-&nbsp;    }
-&nbsp;
-&nbsp;    private fun AuctionBuilder.AuctionDetailsBuilder.parseRevealedGemsTable(table: Element) {
-<b class="nc">&nbsp;        for (row in table.selectFirst(TABLE_SELECTOR).rows().offsetStart(1)) {</b>
-<b class="nc">&nbsp;            val gemTag = row.selectFirst(&quot;div.Gem&quot;) ?: continue</b>
-<b class="nc">&nbsp;            val gemType = gemTag.attr(&quot;title&quot;)</b>
-<b class="nc">&nbsp;            val modSpans = row.select(&quot;span&quot;)</b>
-<b class="nc">&nbsp;            val mods = modSpans.map {</b>
-<b class="nc">&nbsp;                RevealedGemMod(it.replaceBrs().wholeCleanText().split(&quot;\n&quot;))</b>
-&nbsp;            }
-<b class="nc">&nbsp;            addRevealedGem(RevealedGem(gemType, mods))</b>
-&nbsp;        }
-&nbsp;    }
-&nbsp;    private fun AuctionBuilder.AuctionDetailsBuilder.parseFragmentProgressTable(table: Element) {
-<b class="nc">&nbsp;        var modType: String? = null</b>
-<b class="nc">&nbsp;        for (row in table.select(TABLE_SELECTOR).flatMap { it.rows() }) {</b>
-<b class="nc">&nbsp;            val columns = row.cells()</b>
-<b class="nc">&nbsp;            if (columns.size != 2) continue</b>
-<b class="nc">&nbsp;            val (gradeCol, typeCol) = columns</b>
-<b class="nc">&nbsp;            if(gradeCol.text().contains(&quot;Grade&quot;)) {</b>
-<b class="nc">&nbsp;                modType = typeCol.text().remove(&quot; Mod&quot;)</b>
-&nbsp;                continue
-&nbsp;            }
-<b class="nc">&nbsp;            if(modType == null) continue</b>
-<b class="nc">&nbsp;            val grade = parseRomanNumerals(gradeCol.text())</b>
-<b class="nc">&nbsp;            addFragmentProgress(FragmentProgressEntry(grade, typeCol.cleanText(), modType))</b>
-&nbsp;        }
-&nbsp;    }
-&nbsp;
-&nbsp;    private fun AuctionBuilder.AuctionDetailsBuilder.parseProficienciesTable(table: Element){
-<b class="nc">&nbsp;        for (row in table.selectFirst(TABLE_SELECTOR).rows().offsetStart(1)) {</b>
-<b class="nc">&nbsp;            val columns = row.cells()</b>
-<b class="nc">&nbsp;            if (columns.size != 4) continue</b>
-<b class="nc">&nbsp;            val (weaponCell, levelCell, progressCell, masteryCell) = columns</b>
-<b class="nc">&nbsp;            val (level, maxLevel) = levelCell.cleanText().split(&quot;/&quot;).map { it.toInt() }</b>
-<b class="nc">&nbsp;            val masteryIcon = masteryCell.selectFirst(&quot;img&quot;) ?: continue</b>
-<b class="nc">&nbsp;            val masteryUnlocked = masteryIcon.attr(&quot;alt&quot;).contains(&quot;unlocked&quot;)</b>
-<b class="nc">&nbsp;            addProficiency(WeaponProficiency(</b>
-<b class="nc">&nbsp;                name = weaponCell.cleanText(),</b>
-<b class="nc">&nbsp;                level = level,</b>
-<b class="nc">&nbsp;                maxLevel = maxLevel,</b>
-<b class="nc">&nbsp;                totalProgress = progressCell.cleanText().parseInteger(),</b>
-<b class="nc">&nbsp;                hasMastery = masteryUnlocked</b>
-&nbsp;            ))
-&nbsp;        }
-&nbsp;    }
-&nbsp;
-&nbsp;    private fun AuctionBuilder.AuctionDetailsBuilder.parseBlessingsTable(table: Element) {
-<b class="fc">&nbsp;        for (row in table.selectFirst(TABLE_SELECTOR).rows().offsetStart(1)) {</b>
-<b class="fc">&nbsp;            val colsText = row.cellsText()</b>
-<b class="pc">&nbsp;            if (colsText.size != 2) continue</b>
-<b class="fc">&nbsp;            val (amount, name) = colsText</b>
-<b class="fc">&nbsp;            addBlessing(BlessingEntry(name, amount.remove(&quot;x&quot;).parseInteger()))</b>
-&nbsp;        }
-&nbsp;    }
-&nbsp;
-&nbsp;    private fun parseSingleColumnTable(table: Element): List&lt;String&gt; {
-<b class="fc">&nbsp;        val innerTable = table.select(TABLE_SELECTOR).last()</b>
-<b class="fc">&nbsp;        val values = mutableListOf&lt;String&gt;()</b>
-<b class="fc">&nbsp;        for (row in innerTable.rows().offsetStart(1)) {</b>
-<b class="pc">&nbsp;            val text = row.selectFirst(&quot;td&quot;)?.cleanText().orEmpty()</b>
-<b class="fc">&nbsp;            if (text.contains(&quot;more entries&quot;)) continue</b>
-<b class="fc">&nbsp;            values.add(text)</b>
-&nbsp;        }
-<b class="fc">&nbsp;        return values</b>
-&nbsp;    }
-&nbsp;
-&nbsp;    private fun parseFamiliarsTable(table: Element): Familiars {
-<b class="pc">&nbsp;        val paginationData = table.selectFirst(PAGINATOR_SELECTOR)?.parsePagination() ?: return Familiars(</b>
-<b class="nc">&nbsp;            1,</b>
-<b class="nc">&nbsp;            0,</b>
-<b class="nc">&nbsp;            0,</b>
-<b class="nc">&nbsp;            emptyList(),</b>
-<b class="nc">&nbsp;            false</b>
-&nbsp;        )
-<b class="fc">&nbsp;        val familiarBoxes = table.select(ICON_CSS_SELECTOR)</b>
-<b class="fc">&nbsp;        val familiars = mutableListOf&lt;FamiliarEntry&gt;()</b>
-<b class="fc">&nbsp;        for (mountBox in familiarBoxes) {</b>
-<b class="fc">&nbsp;            val name = mountBox.attr(&quot;title&quot;).split(&quot;(&quot;).first().clean()</b>
-<b class="pc">&nbsp;            val (_, id) = idRegex.find(mountBox.selectFirst(&quot;img&quot;)?.attr(&quot;src&quot;).orEmpty())?.groupValues</b>
-<b class="nc">&nbsp;                ?: throw ParsingException(&quot;familiar image did not match expected pattern&quot;)</b>
-<b class="fc">&nbsp;            familiars.add(FamiliarEntry(name, id.toInt()))</b>
-&nbsp;        }
-<b class="fc">&nbsp;        return Familiars(</b>
-<b class="fc">&nbsp;            paginationData.currentPage,</b>
-<b class="fc">&nbsp;            paginationData.totalPages,</b>
-<b class="fc">&nbsp;            paginationData.resultsCount,</b>
-<b class="fc">&nbsp;            familiars,</b>
-<b class="fc">&nbsp;            false</b>
-&nbsp;        )
-&nbsp;    }
-&nbsp;
-&nbsp;    private fun parseOutfitsTable(table: Element): Outfits {
-<b class="pc">&nbsp;        val paginationData = table.selectFirst(PAGINATOR_SELECTOR)?.parsePagination() ?: return Outfits(</b>
-<b class="fc">&nbsp;            1,</b>
-<b class="fc">&nbsp;            0,</b>
-<b class="fc">&nbsp;            0,</b>
-<b class="fc">&nbsp;            emptyList(),</b>
-<b class="fc">&nbsp;            false</b>
-&nbsp;        )
-<b class="fc">&nbsp;        val outfitBoxes = table.select(ICON_CSS_SELECTOR)</b>
-<b class="fc">&nbsp;        val outfits = outfitBoxes.map { parseDisplayedOutfit(it) }</b>
-<b class="fc">&nbsp;        return Outfits(</b>
-<b class="fc">&nbsp;            paginationData.currentPage,</b>
-<b class="fc">&nbsp;            paginationData.totalPages,</b>
-<b class="fc">&nbsp;            paginationData.resultsCount,</b>
-<b class="fc">&nbsp;            outfits,</b>
-<b class="fc">&nbsp;            false</b>
-&nbsp;        )
-&nbsp;    }
-&nbsp;
-&nbsp;    private fun parseMountsTable(mountsTable: Element): Mounts {
-<b class="fc">&nbsp;        val paginationData =</b>
-<b class="pc">&nbsp;            mountsTable.selectFirst(PAGINATOR_SELECTOR)?.parsePagination() ?: return Mounts(</b>
-<b class="fc">&nbsp;                1,</b>
-<b class="fc">&nbsp;                0,</b>
-<b class="fc">&nbsp;                0,</b>
-<b class="fc">&nbsp;                emptyList(),</b>
-<b class="fc">&nbsp;                false</b>
-&nbsp;            )
-<b class="fc">&nbsp;        val mountsBoxes = mountsTable.select(ICON_CSS_SELECTOR)</b>
-<b class="fc">&nbsp;        val mounts = mountsBoxes.map { parseDisplayedMount(it) }</b>
-<b class="fc">&nbsp;        return Mounts(paginationData.currentPage, paginationData.totalPages, paginationData.resultsCount, mounts, false)</b>
-&nbsp;    }
-&nbsp;
-&nbsp;    private fun parseItemsTable(itemsTable: Element): ItemSummary {
-<b class="fc">&nbsp;        val paginationData =</b>
-<b class="pc">&nbsp;            itemsTable.selectFirst(PAGINATOR_SELECTOR)?.parsePagination() ?: return ItemSummary(</b>
-<b class="nc">&nbsp;                1,</b>
-<b class="nc">&nbsp;                0,</b>
-<b class="nc">&nbsp;                0,</b>
-<b class="nc">&nbsp;                emptyList(),</b>
-<b class="nc">&nbsp;                false</b>
-&nbsp;            )
-<b class="fc">&nbsp;        val itemBoxes = itemsTable.select(ICON_CSS_SELECTOR)</b>
-<b class="fc">&nbsp;        val items = mutableListOf&lt;ItemEntry&gt;()</b>
-<b class="fc">&nbsp;        for (itemBox in itemBoxes) {</b>
-<b class="pc">&nbsp;            parseDisplayedItem(itemBox)?.run { items.add(this) }</b>
-&nbsp;        }
-<b class="fc">&nbsp;        return ItemSummary(</b>
-<b class="fc">&nbsp;            paginationData.currentPage,</b>
-<b class="fc">&nbsp;            paginationData.totalPages,</b>
-<b class="fc">&nbsp;            paginationData.resultsCount,</b>
-<b class="fc">&nbsp;            items,</b>
-<b class="fc">&nbsp;            false</b>
-&nbsp;        )
-&nbsp;    }
-&nbsp;
-&nbsp;    private fun getAuctionTableFieldValue(row: Element): Pair&lt;String, String&gt; {
-<b class="fc">&nbsp;        val field =</b>
-<b class="pc">&nbsp;            row.selectFirst(&quot;.LabelV, .LabelColumn&quot;)?.cleanText()?.remove(&quot;:&quot;)</b>
-<b class="nc">&nbsp;                ?: throw ParsingException(&quot;could not find field&#39;s label&quot;)</b>
-<b class="pc">&nbsp;        val value = row.selectFirst(&quot;div&quot;)?.cleanText() ?: throw ParsingException(&quot;could not find value&#39;s div&quot;)</b>
-<b class="fc">&nbsp;        return field to value</b>
-&nbsp;    }
-&nbsp;
-&nbsp;    private fun parseSkillValue(row: Element): Double {
-<b class="fc">&nbsp;        val (_, level, progress) = row.cellsText()</b>
-<b class="fc">&nbsp;        return level.parseInteger() + (progress.remove(&quot;%&quot;).toDouble() / PERCENTAGE)</b>
-&nbsp;    }
-&nbsp;
-&nbsp;    private fun AuctionBuilder.AuctionDetailsBuilder.parseGeneralTable(table: Element) {
-<b class="fc">&nbsp;        val skillsMap = mutableMapOf&lt;String, Double&gt;().withDefault { 0.0 }</b>
-<b class="fc">&nbsp;        val contentContainers = table.select(TABLE_SELECTOR)</b>
-<b class="fc">&nbsp;        contentContainers.rows().forEach { row -&gt;</b>
-<b class="fc">&nbsp;            val (field, value) = getAuctionTableFieldValue(row)</b>
+&nbsp;    private fun CharacterBuilder.parseCharacterInformation(rows: Elements) {
+<b class="fc">&nbsp;        for (row: Element in rows) {</b>
+<b class="fc">&nbsp;            val columns = row.select(&quot;td&quot;)</b>
+<b class="fc">&nbsp;            var (field, value) = columns.map { it.wholeText().clean() }</b>
+<b class="fc">&nbsp;            field = field.replace(&quot; &quot;, &quot;_&quot;).remove(&quot;:&quot;).lowercase()</b>
 <b class="pc">&nbsp;            when (field) {</b>
-<b class="fc">&nbsp;                &quot;Hit Points&quot; -&gt; hitPoints = value.parseInteger()</b>
-<b class="fc">&nbsp;                &quot;Mana&quot; -&gt; mana = value.parseInteger()</b>
-<b class="fc">&nbsp;                &quot;Capacity&quot; -&gt; capacity = value.parseInteger()</b>
-<b class="fc">&nbsp;                &quot;Speed&quot; -&gt; speed = value.parseInteger()</b>
-<b class="fc">&nbsp;                &quot;Blessings&quot; -&gt; blessingsCount = value.split(&quot;/&quot;).first().parseInteger()</b>
-<b class="fc">&nbsp;                &quot;Mounts&quot; -&gt; mountsCount = value.parseInteger()</b>
-<b class="fc">&nbsp;                &quot;Outfits&quot; -&gt; outfitsCount = value.parseInteger()</b>
-<b class="fc">&nbsp;                &quot;Titles&quot; -&gt; titlesCount = value.parseInteger()</b>
+<b class="fc">&nbsp;                &quot;name&quot; -&gt; parseNameField(value)</b>
+<b class="fc">&nbsp;                &quot;title&quot; -&gt; parseTitles(value)</b>
+<b class="fc">&nbsp;                &quot;former_names&quot; -&gt; formerNames = value.split(&quot;,&quot;).map { it.trim() }</b>
+<b class="fc">&nbsp;                &quot;former_world&quot; -&gt; formerWorld = value</b>
+<b class="fc">&nbsp;                &quot;sex&quot; -&gt; sex = StringEnum.Companion.fromValue(value)!!</b>
+<b class="fc">&nbsp;                &quot;vocation&quot; -&gt; vocation =</b>
+<b class="pc">&nbsp;                    StringEnum.Companion.fromValue(value) ?: throw ParsingException(&quot;Unknown vocation: $value&quot;)</b>
 &nbsp;
-<b class="fc">&nbsp;                &quot;Axe Fighting&quot; -&gt; skillsMap[field] = parseSkillValue(row)</b>
-<b class="fc">&nbsp;                &quot;Club Fighting&quot; -&gt; skillsMap[field] = parseSkillValue(row)</b>
-<b class="fc">&nbsp;                &quot;Sword Fighting&quot; -&gt; skillsMap[field] = parseSkillValue(row)</b>
-<b class="fc">&nbsp;                &quot;Distance Fighting&quot; -&gt; skillsMap[field] = parseSkillValue(row)</b>
-<b class="fc">&nbsp;                &quot;Fishing&quot; -&gt; skillsMap[field] = parseSkillValue(row)</b>
-<b class="fc">&nbsp;                &quot;Magic Level&quot; -&gt; skillsMap[field] = parseSkillValue(row)</b>
-<b class="fc">&nbsp;                &quot;Fist Fighting&quot; -&gt; skillsMap[field] = parseSkillValue(row)</b>
-<b class="fc">&nbsp;                &quot;Shielding&quot; -&gt; skillsMap[field] = parseSkillValue(row)</b>
-&nbsp;
-<b class="fc">&nbsp;                &quot;Creation Date&quot; -&gt; creationDate = parseTibiaDateTime(value)</b>
-<b class="fc">&nbsp;                &quot;Experience&quot; -&gt; experience = value.parseLong()</b>
-<b class="fc">&nbsp;                &quot;Gold&quot; -&gt; gold = value.parseLong()</b>
-<b class="fc">&nbsp;                &quot;Achievement Points&quot; -&gt; achievementPoints = value.parseInteger()</b>
-&nbsp;
-<b class="pc">&nbsp;                &quot;Regular World Transfer&quot; -&gt; if (value.contains(&quot;after&quot;)) {</b>
-<b class="fc">&nbsp;                    regularWorldTransfersAvailable = parseTibiaDateTime(value.split(&quot;after&quot;)[1])</b>
+<b class="fc">&nbsp;                &quot;level&quot; -&gt; level = value.toInt()</b>
+<b class="fc">&nbsp;                &quot;achievement_points&quot; -&gt; achievementPoints = value.toInt()</b>
+<b class="fc">&nbsp;                &quot;world&quot; -&gt; world = value</b>
+<b class="fc">&nbsp;                &quot;residence&quot; -&gt; residence = value</b>
+<b class="pc">&nbsp;                &quot;last_login&quot; -&gt; if (!value.contains(&quot;never logged&quot;, true)) {</b>
+<b class="fc">&nbsp;                    lastLoginAt = parseTibiaDateTime(value)</b>
 &nbsp;                }
 &nbsp;
-<b class="fc">&nbsp;                &quot;Charm Expansion&quot; -&gt; hasCharmExpansion = value.contains(&quot;yes&quot;)</b>
-<b class="fc">&nbsp;                &quot;Available Charm Points&quot; -&gt; availableCharmPoints = value.parseInteger()</b>
-<b class="fc">&nbsp;                &quot;Spent Charm Points&quot; -&gt; spentCharmPoints = value.parseInteger()</b>
-&nbsp;
-<b class="fc">&nbsp;                &quot;Daily Reward Streak&quot; -&gt; dailyRewardStreak = value.parseInteger()</b>
-&nbsp;
-<b class="fc">&nbsp;                &quot;Hunting Task Points&quot; -&gt; huntingTaskPoints = value.parseInteger()</b>
-<b class="fc">&nbsp;                &quot;Permanent Hunting Task Slots&quot; -&gt; permanentHuntingTaskSlots = value.parseInteger()</b>
-<b class="fc">&nbsp;                &quot;Permanent Prey Slots&quot; -&gt; permanentPreySlots = value.parseInteger()</b>
-<b class="fc">&nbsp;                &quot;Prey Wildcards&quot; -&gt; preyWildcards = value.parseInteger()</b>
-&nbsp;
-<b class="fc">&nbsp;                &quot;Hirelings&quot; -&gt; hirelings = value.parseInteger()</b>
-<b class="fc">&nbsp;                &quot;Hireling Jobs&quot; -&gt; hirelingJobs = value.parseInteger()</b>
-<b class="fc">&nbsp;                &quot;Hireling Outfits&quot; -&gt; hirelingOutfits = value.parseInteger()</b>
-&nbsp;
-<b class="fc">&nbsp;                &quot;Exalted Dust&quot; -&gt; run {</b>
-<b class="fc">&nbsp;                    val (current, limit) = value.split(&quot;/&quot;).map { it.parseInteger() }</b>
-<b class="fc">&nbsp;                    exaltedDust = current</b>
-<b class="fc">&nbsp;                    exaltedDustLimit = limit</b>
-<b class="fc">&nbsp;                }</b>
-&nbsp;
-<b class="nc">&nbsp;                &quot;Animus Masteries unlocked&quot; -&gt; animusMasteriesUnlocked = value.parseInteger()</b>
-&nbsp;
-<b class="fc">&nbsp;                &quot;Boss Points&quot; -&gt; bossPoints = value.parseInteger()</b>
-&nbsp;
-<b class="fc">&nbsp;                &quot;Bonus Promotion Points&quot; -&gt; bonusPromotionPoints = value.parseInteger()</b>
+<b class="fc">&nbsp;                &quot;position&quot; -&gt; position = value</b>
+<b class="fc">&nbsp;                &quot;comment&quot; -&gt; comment = value</b>
+<b class="fc">&nbsp;                &quot;account_status&quot; -&gt; isPremium = &quot;premium&quot; in value.lowercase()</b>
+<b class="fc">&nbsp;                &quot;married_to&quot; -&gt; marriedTo = value</b>
+<b class="fc">&nbsp;                &quot;house&quot; -&gt; parseHouseColumn(columns[1])</b>
+<b class="fc">&nbsp;                &quot;guild_membership&quot; -&gt; parseGuildColumn(columns[1])</b>
 &nbsp;            }
-<b class="fc">&nbsp;        }</b>
+&nbsp;        }
+&nbsp;    }
 &nbsp;
-<b class="fc">&nbsp;        skills = AuctionSkills(</b>
-<b class="fc">&nbsp;            axeFighting = skillsMap.getValue(&quot;Axe Fighting&quot;),</b>
-<b class="fc">&nbsp;            clubFighting = skillsMap.getValue(&quot;Club Fighting&quot;),</b>
-<b class="fc">&nbsp;            swordFighting = skillsMap.getValue(&quot;Sword Fighting&quot;),</b>
-<b class="fc">&nbsp;            distanceFighting = skillsMap.getValue(&quot;Distance Fighting&quot;),</b>
-<b class="fc">&nbsp;            fishing = skillsMap.getValue(&quot;Fishing&quot;),</b>
-<b class="fc">&nbsp;            magicLevel = skillsMap.getValue(&quot;Magic Level&quot;),</b>
-<b class="fc">&nbsp;            fistFighting = skillsMap.getValue(&quot;Fist Fighting&quot;),</b>
-<b class="fc">&nbsp;            shielding = skillsMap.getValue(&quot;Shielding&quot;),</b>
+&nbsp;    private fun CharacterBuilder.parseGuildColumn(valueColumn: Element) {
+<b class="pc">&nbsp;        val guildName = valueColumn.selectFirst(&quot;a&quot;)?.text() ?: return</b>
+<b class="fc">&nbsp;        val rankName = valueColumn.text().split(&quot;of the&quot;).first().trim()</b>
+<b class="fc">&nbsp;        guild(rankName, guildName)</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private fun CharacterBuilder.parseHouseColumn(valueColumn: Element) {
+<b class="pc">&nbsp;        val match = houseRegexp.find(valueColumn.ownText()) ?: return</b>
+<b class="pc">&nbsp;        val link = valueColumn.selectFirst(&quot;a&quot;)?.getLinkInformation() ?: return</b>
+<b class="fc">&nbsp;        val (_, town, paidUntilStr) = match.groupValues</b>
+<b class="fc">&nbsp;        addHouse(</b>
+<b class="fc">&nbsp;            name = link.title,</b>
+<b class="pc">&nbsp;            houseId = link.queryParams[&quot;houseid&quot;]?.first()?.toInt() ?: return,</b>
+<b class="fc">&nbsp;            town = town,</b>
+<b class="fc">&nbsp;            paidUntil = parseTibiaDate(paidUntilStr),</b>
+<b class="pc">&nbsp;            world = link.queryParams[&quot;world&quot;]?.first() ?: return</b>
 &nbsp;        )
 &nbsp;    }
 &nbsp;
-&nbsp;    internal fun AuctionBuilder.parseAuctionContainer(auctionContainer: Element) {
-<b class="fc">&nbsp;        val headerContainer =</b>
-<b class="pc">&nbsp;            auctionContainer.selectFirst(&quot;div.AuctionHeader&quot;) ?: throw ParsingException(&quot;auction header not found&quot;)</b>
-<b class="pc">&nbsp;        name = headerContainer.selectFirst(&quot;div.AuctionCharacterName&quot;)?.cleanText()</b>
-<b class="nc">&nbsp;            ?: throw ParsingException(&quot;character name not found&quot;)</b>
-<b class="fc">&nbsp;        headerContainer.selectFirst(&quot;div.AuctionCharacterName &gt; a&quot;)?.apply {</b>
-<b class="fc">&nbsp;            val auctionLinkInfo = getLinkInformation()!!</b>
-<b class="pc">&nbsp;            auctionId = auctionLinkInfo.queryParams[&quot;auctionid&quot;]?.first()?.toInt()</b>
-<b class="nc">&nbsp;                ?: throw ParsingException(&quot;auctionId not found in link&quot;)</b>
-<b class="fc">&nbsp;            remove()</b>
-<b class="fc">&nbsp;        }</b>
-&nbsp;
-<b class="pc">&nbsp;        charInfoRegex.find(headerContainer.cleanText())?.run {</b>
-<b class="fc">&nbsp;            val (_, levelStr, vocationStr, sexStr, worldStr) = groupValues</b>
-<b class="fc">&nbsp;            level = levelStr.toInt()</b>
-<b class="fc">&nbsp;            vocation =</b>
-<b class="pc">&nbsp;                StringEnum.fromValue(vocationStr.trim())</b>
-<b class="nc">&nbsp;                    ?: throw ParsingException(&quot;Unknown vocation found: $vocationStr&quot;)</b>
-<b class="fc">&nbsp;            sex =</b>
-<b class="pc">&nbsp;                StringEnum.fromValue(sexStr.lowercase().trim()) ?: throw ParsingException(&quot;Unknown sex found: $sexStr&quot;)</b>
-<b class="fc">&nbsp;            world = worldStr.trim()</b>
-<b class="fc">&nbsp;        }</b>
-<b class="pc">&nbsp;        val outfitImageUrl = auctionContainer.selectFirst(&quot;img.AuctionOutfitImage&quot;)?.attr(&quot;src&quot;)</b>
-<b class="nc">&nbsp;            ?: throw ParsingException(&quot;outfit image not found&quot;)</b>
-<b class="pc">&nbsp;        val (_, outfitId, addons) = idAddonsRegex.find(outfitImageUrl)?.groupValues</b>
-<b class="nc">&nbsp;            ?: throw ParsingException(&quot;image URL does not match expected pattern&quot;)</b>
-&nbsp;
-<b class="fc">&nbsp;        auctionContainer.select(&quot;.CVIcon&quot;).forEach {</b>
-<b class="fc">&nbsp;            parseDisplayedItem(it)?.run { addDisplayedItem(this) }</b>
-<b class="fc">&nbsp;        }</b>
-&nbsp;
-<b class="fc">&nbsp;        outfit = OutfitImage(outfitId = outfitId.toInt(), addons = addons.toInt())</b>
-&nbsp;
-<b class="fc">&nbsp;        auctionContainer.select(&quot;div.Entry&quot;).forEach {</b>
-<b class="fc">&nbsp;            val img = it.select(&quot;img&quot;)</b>
-<b class="fc">&nbsp;            val imgUrl = img.attr(&quot;src&quot;)</b>
-<b class="pc">&nbsp;            val (_, id) = idRegex.find(imgUrl)?.groupValues</b>
-<b class="nc">&nbsp;                ?: throw ParsingException(&quot;sales argument image does not match pattern.&quot;)</b>
-<b class="fc">&nbsp;            salesArgument {</b>
-<b class="fc">&nbsp;                categoryId = id.toInt()</b>
-<b class="fc">&nbsp;                content = it.cleanText()</b>
-&nbsp;            }
-<b class="fc">&nbsp;        }</b>
-&nbsp;
-<b class="fc">&nbsp;        val (startDate, endDate, _) = auctionContainer.select(&quot;div.ShortAuctionDataValue&quot;).map { it.cleanText() }</b>
-<b class="fc">&nbsp;        startsAt = parseTibiaDateTime(startDate)</b>
-<b class="fc">&nbsp;        endsAt = parseTibiaDateTime(endDate)</b>
-<b class="pc">&nbsp;        auctionContainer.selectFirst(&quot;div.ShortAuctionDataBidRow&quot;)?.run {</b>
-<b class="pc">&nbsp;            val bidTag = selectFirst(&quot;div.ShortAuctionDataValue&quot;) ?: throw ParsingException(&quot;Could not find bid&quot;)</b>
-<b class="fc">&nbsp;            val bidTypeTag =</b>
-<b class="pc">&nbsp;                selectFirst(&quot;div.ShortAuctionDataLabel&quot;) ?: throw ParsingException(&quot;could not find bid type&quot;)</b>
-<b class="fc">&nbsp;            val bidTypeStr = bidTypeTag.cleanText().remove(&quot;:&quot;)</b>
-<b class="fc">&nbsp;            bid = bidTag.text().parseInteger()</b>
-<b class="pc">&nbsp;            bidType = StringEnum.fromValue(bidTypeStr) ?: throw ParsingException(&quot;unknown bid type: $bidTypeStr&quot;)</b>
-<b class="fc">&nbsp;        }</b>
-&nbsp;
-<b class="pc">&nbsp;        status = auctionContainer.selectFirst(&quot;div.AuctionInfo&quot;)?.cleanText()?.let { StringEnum.fromValue(it) }</b>
-<b class="fc">&nbsp;            ?: AuctionStatus.IN_PROGRESS</b>
+&nbsp;    private fun CharacterBuilder.parseTitles(value: String) {
+<b class="pc">&nbsp;        val match = titlesRegexp.find(value) ?: return</b>
+<b class="fc">&nbsp;        val (_, currentTitle, unlockedTitlesStr) = match.groupValues</b>
+<b class="fc">&nbsp;        title = if (currentTitle.contains(&quot;none&quot;, true)) null else currentTitle.trim()</b>
+<b class="fc">&nbsp;        unlockedTitles = unlockedTitlesStr.toInt()</b>
 &nbsp;    }
 &nbsp;
-&nbsp;    @PublishedApi
-&nbsp;    internal fun parseDisplayedItem(displayItemContainer: Element): ItemEntry? {
-<b class="fc">&nbsp;        val title = displayItemContainer.attr(&quot;title&quot;)</b>
-<b class="pc">&nbsp;        val fileUrl = displayItemContainer.selectFirst(&quot;img&quot;)?.attr(&quot;src&quot;) ?: return null</b>
-<b class="fc">&nbsp;        val fileName = File(URL(fileUrl).path).name</b>
-<b class="fc">&nbsp;        val itemId = fileName.remove(&quot;.gif&quot;).toInt()</b>
-<b class="fc">&nbsp;        val titleLines = title.split(&quot;\n&quot;)</b>
-<b class="fc">&nbsp;        var name = titleLines.first()</b>
-<b class="fc">&nbsp;        val description = if (titleLines.size &gt; 1) {</b>
-<b class="fc">&nbsp;            titleLines.offsetStart(1).joinToString(&quot;\n&quot;)</b>
+&nbsp;    private fun CharacterBuilder.parseNameField(value: String) {
+<b class="fc">&nbsp;        val match = deletedRegexp.matchEntire(value)</b>
+<b class="fc">&nbsp;        name = if (match != null) {</b>
+<b class="fc">&nbsp;            val (_, cleanName, deletionDateStr) = match.groupValues</b>
+<b class="fc">&nbsp;            deletionScheduledAt = parseTibiaDateTime(deletionDateStr)</b>
+<b class="fc">&nbsp;            cleanName</b>
 &nbsp;        } else {
-<b class="fc">&nbsp;            null</b>
+<b class="fc">&nbsp;            value</b>
 &nbsp;        }
-<b class="fc">&nbsp;        var amount = 1</b>
-<b class="fc">&nbsp;        amountRegex.find(name)?.apply {</b>
-<b class="fc">&nbsp;            amount = groups[1]!!.value.parseInteger()</b>
-<b class="fc">&nbsp;            name = amountRegex.replace(name, &quot;&quot;)</b>
-<b class="fc">&nbsp;        }</b>
-<b class="fc">&nbsp;        var tier = 0</b>
-<b class="fc">&nbsp;        tierRegex.find(name)?.apply {</b>
-<b class="fc">&nbsp;            tier = groups[2]!!.value.parseInteger()</b>
-<b class="fc">&nbsp;            name = groups[1]!!.value</b>
-<b class="fc">&nbsp;        }</b>
-<b class="fc">&nbsp;        return ItemEntry(itemId, name, description, amount, tier)</b>
+<b class="fc">&nbsp;        if (name.contains(tradedLabel)) {</b>
+<b class="fc">&nbsp;            isRecentlyTraded = true</b>
+<b class="fc">&nbsp;            name = name.remove(tradedLabel).trim()</b>
+&nbsp;        }
 &nbsp;    }
 &nbsp;
-&nbsp;    @PublishedApi
-&nbsp;    internal fun parseDisplayedOutfit(container: Element): OutfitEntry {
-<b class="fc">&nbsp;        val name = container.attr(&quot;title&quot;).split(&quot;(&quot;).first().clean()</b>
-<b class="pc">&nbsp;        val (_, id, addons) = idAddonsRegex.find(container.selectFirst(&quot;img&quot;)?.attr(&quot;src&quot;).orEmpty())?.groupValues</b>
-<b class="nc">&nbsp;            ?: throw ParsingException(&quot;outfit image did not match expected pattern&quot;)</b>
-<b class="fc">&nbsp;        return OutfitEntry(name, id.toInt(), addons.toInt())</b>
+&nbsp;    private fun CharacterBuilder.parseAccountBadges(rows: Elements) {
+<b class="fc">&nbsp;        val row = rows[0]</b>
+<b class="fc">&nbsp;        for (column: Element in row.select(&quot;td &gt; span&quot;)) {</b>
+<b class="pc">&nbsp;            val popupSpan = column.selectFirst(&quot;span.HelperDivIndicator&quot;) ?: return</b>
+<b class="fc">&nbsp;            val (title: String, popupContent: Document) = parsePopup(popupSpan.attr(&quot;onmouseover&quot;))</b>
+<b class="fc">&nbsp;            val description = popupContent.text()</b>
+<b class="pc">&nbsp;            val imageUrl = column.selectFirst(&quot;img&quot;)?.attr(&quot;src&quot;)</b>
+<b class="pc">&nbsp;            addBadge(title, description, imageUrl ?: continue)</b>
+&nbsp;        }
 &nbsp;    }
 &nbsp;
-&nbsp;    @PublishedApi
-&nbsp;    internal fun parseDisplayedMount(container: Element): MountEntry {
-<b class="fc">&nbsp;        val name = container.attr(&quot;title&quot;)</b>
-<b class="pc">&nbsp;        val (_, id) = idRegex.find(container.selectFirst(&quot;img&quot;)?.attr(&quot;src&quot;).orEmpty())?.groupValues</b>
-<b class="nc">&nbsp;            ?: throw ParsingException(&quot;mount image did not match expected pattern&quot;)</b>
-<b class="fc">&nbsp;        return MountEntry(name, id.toInt())</b>
+&nbsp;    private fun CharacterBuilder.parseAccountAchievements(rows: Elements) {
+<b class="fc">&nbsp;        for (row: Element in rows) {</b>
+<b class="fc">&nbsp;            val columns = row.select(&quot;td&quot;)</b>
+<b class="fc">&nbsp;            if (columns.size != 2) continue</b>
+<b class="fc">&nbsp;            val (gradeColumn, nameColumn) = columns</b>
+<b class="fc">&nbsp;            val grade = gradeColumn.select(&quot;img&quot;).size</b>
+<b class="fc">&nbsp;            val name = nameColumn.text()</b>
+<b class="fc">&nbsp;            val isSecret = nameColumn.selectFirst(&quot;img&quot;) != null</b>
+<b class="fc">&nbsp;            addAchievement(name, grade, isSecret)</b>
+&nbsp;        }
 &nbsp;    }
 &nbsp;
-&nbsp;    /**
-&nbsp;     * Parses the items from the dynamic paginator in an auction&#39;s details page.
-&nbsp;     */
-&nbsp;    public inline fun &lt;reified T&gt; parsePageItems(content: String): List&lt;T&gt; {
-<b class="nc">&nbsp;        val document = Jsoup.parse(content)</b>
-<b class="nc">&nbsp;        val cvIcon = document.select(ICON_CSS_SELECTOR)</b>
-<b class="nc">&nbsp;        return when (T::class) {</b>
-<b class="nc">&nbsp;            ItemEntry::class -&gt; cvIcon.mapNotNull { parseDisplayedItem(it) as T }</b>
-<b class="nc">&nbsp;            OutfitEntry::class -&gt; cvIcon.mapNotNull { parseDisplayedOutfit(it) as T }</b>
-<b class="nc">&nbsp;            MountEntry::class -&gt; cvIcon.mapNotNull { parseDisplayedMount(it) as T }</b>
-<b class="nc">&nbsp;            else -&gt; emptyList()</b>
+&nbsp;    private fun CharacterBuilder.parseAccountInformation(rows: Elements) {
+<b class="fc">&nbsp;        val valueMap = mutableMapOf&lt;String, String&gt;()</b>
+<b class="fc">&nbsp;        for (row: Element in rows) {</b>
+<b class="fc">&nbsp;            val columns = row.select(&quot;td&quot;)</b>
+<b class="fc">&nbsp;            var (field, value) = columns.map { it.wholeText().clean() }</b>
+<b class="fc">&nbsp;            field = field.replace(&quot; &quot;, &quot;_&quot;).remove(&quot;:&quot;).lowercase()</b>
+<b class="fc">&nbsp;            valueMap[field] = value</b>
+&nbsp;        }
+<b class="fc">&nbsp;        accountInformation(</b>
+<b class="pc">&nbsp;            created = parseTibiaDateTime(valueMap[&quot;created&quot;] ?: return),</b>
+<b class="fc">&nbsp;            loyaltyTitle = valueMap[&quot;loyalty_title&quot;],</b>
+<b class="fc">&nbsp;            position = valueMap[&quot;position&quot;],</b>
+&nbsp;        )
+&nbsp;    }
+&nbsp;
+&nbsp;    private fun CharacterBuilder.parseCharacterDeaths(rows: Elements) {
+<b class="fc">&nbsp;        for (row: Element in rows) {</b>
+<b class="fc">&nbsp;            val columns = row.select(&quot;td&quot;)</b>
+<b class="pc">&nbsp;            if (columns.size != 2) continue</b>
+<b class="fc">&nbsp;            val (dateColumn, descriptionColumn) = columns</b>
+<b class="fc">&nbsp;            val deathDateTime: Instant = parseTibiaDateTime(dateColumn.text())</b>
+<b class="fc">&nbsp;            val deathMatch = deathsRegex.find(descriptionColumn.toString())</b>
+<b class="pc">&nbsp;            var (_, levelStr, killersDesc) = deathMatch?.groupValues ?: Triple(</b>
+<b class="nc">&nbsp;                &quot;&quot;, &quot;0&quot;, descriptionColumn.toString()</b>
+<b class="nc">&nbsp;            ).toList()</b>
+<b class="fc">&nbsp;            var assistNameList: List&lt;String&gt; = mutableListOf()</b>
+<b class="fc">&nbsp;            deathAssistsRegex.find(killersDesc)?.apply {</b>
+<b class="pc">&nbsp;                killersDesc = this.groups[&quot;killers&quot;]?.value.orEmpty()</b>
+<b class="pc">&nbsp;                val assistsDec = this.groups[&quot;assists&quot;]?.value ?: return</b>
+<b class="fc">&nbsp;                assistNameList = linkSearch.findAll(assistsDec).map { it.value }.toList()</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;            val killerNameList = killersDesc.splitList()</b>
+<b class="fc">&nbsp;            val killerList = killerNameList.mapNotNull { parseKiller(it) }</b>
+<b class="fc">&nbsp;            val assistsList = assistNameList.mapNotNull { parseKiller(it) }</b>
+<b class="fc">&nbsp;            addDeath(deathDateTime, levelStr.toInt(), killerList, assistsList)</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    internal fun parseKiller(killerHtml: String): DeathParticipant? {
+<b class="fc">&nbsp;        val doc = Jsoup.parse(killerHtml)</b>
+<b class="fc">&nbsp;        val characterLink = doc.selectFirst(&quot;a&quot;)</b>
+<b class="fc">&nbsp;        characterLink?.remove()</b>
+<b class="fc">&nbsp;        val text = doc.wholeText().trim()</b>
+<b class="fc">&nbsp;        val tradedInText = text.contains(tradedLabel, ignoreCase = true)</b>
+&nbsp;
+&nbsp;        // There is a character link -&gt; it&#39;s definitely a player, possibly a summoner.
+<b class="fc">&nbsp;        if (characterLink != null) {</b>
+<b class="fc">&nbsp;            val summonerName = characterLink.cleanText()</b>
+&nbsp;
+&nbsp;            // Remove &quot;(traded)&quot; from the remaining text, so we can reliably detect &quot; of&quot;.
+<b class="fc">&nbsp;            val remainingText = text.remove(tradedLabel).trim()</b>
+&nbsp;
+&nbsp;            // No remaining text (or only &quot;(traded)&quot;) =&gt; plain player
+<b class="fc">&nbsp;            if (remainingText.isBlank()) {</b>
+<b class="fc">&nbsp;                return DeathParticipant.Player(</b>
+<b class="fc">&nbsp;                    name = summonerName,</b>
+<b class="fc">&nbsp;                    isTraded = tradedInText,</b>
+&nbsp;                )
+&nbsp;            }
+&nbsp;
+&nbsp;            // Remaining text =&gt; &quot;&lt;summon&gt; of&quot; (the &quot;of&quot; separator is here)
+<b class="fc">&nbsp;            val summonName = remainingText.removeLast(&quot; of&quot;).clean()</b>
+<b class="fc">&nbsp;            return DeathParticipant.Summon(</b>
+<b class="fc">&nbsp;                name = summonName,</b>
+<b class="fc">&nbsp;                summonerName = summonerName,</b>
+<b class="fc">&nbsp;                summonerIsTraded = tradedInText,</b>
+&nbsp;            )
+&nbsp;        }
+&nbsp;        // No link, no traded label =&gt; plain creature (even if it has &quot;of&quot; in the name).
+<b class="fc">&nbsp;        if (!tradedInText) {</b>
+<b class="fc">&nbsp;            return DeathParticipant.Creature(text.clean())</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // No link, but has &quot;(traded)&quot;.
+&nbsp;        // Try to parse as &quot;summon of NAME (traded)&quot; using your regex.
+<b class="fc">&nbsp;        deathSummon.find(text)?.apply {</b>
+<b class="fc">&nbsp;            val summonedCreature = groups[&quot;summon&quot;]!!.value.clean()</b>
+<b class="fc">&nbsp;            val summonerNameRaw = groups[&quot;name&quot;]!!.value.clean()</b>
+&nbsp;
+<b class="fc">&nbsp;            return DeathParticipant.Summon(</b>
+<b class="fc">&nbsp;                summonerName = summonerNameRaw.remove(tradedLabel).trim(),</b>
+<b class="fc">&nbsp;                name = summonedCreature,</b>
+<b class="fc">&nbsp;                summonerIsTraded = true,</b>
+&nbsp;            )
+&nbsp;        }
+&nbsp;
+&nbsp;        // If regex doesn’t match, then it’s just a traded player without a link.
+<b class="fc">&nbsp;        val playerName = text.remove(tradedLabel).trim().clean()</b>
+<b class="fc">&nbsp;        return DeathParticipant.Player(</b>
+<b class="fc">&nbsp;            name = playerName,</b>
+<b class="fc">&nbsp;            isTraded = true,</b>
+&nbsp;        )
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    private fun CharacterBuilder.parseCharacters(rows: Elements) {
+<b class="fc">&nbsp;        for (row: Element in rows.subList(1, rows.size)) {</b>
+<b class="fc">&nbsp;            val columns = row.select(&quot;td&quot;)</b>
+<b class="fc">&nbsp;            val (nameColumn, worldColumn, statusColumn, _) = columns</b>
+<b class="fc">&nbsp;            var isTraded = false</b>
+<b class="fc">&nbsp;            var name = nameColumn.text().splitList(&quot;.&quot;).last().clean()</b>
+<b class="fc">&nbsp;            if (name.contains(tradedLabel, true)) {</b>
+<b class="fc">&nbsp;                name = name.remove(tradedLabel).trim()</b>
+<b class="fc">&nbsp;                isTraded = true</b>
+&nbsp;            }
+<b class="fc">&nbsp;            val isMain = nameColumn.selectFirst(&quot;img&quot;) != null</b>
+<b class="fc">&nbsp;            val world = worldColumn.text().clean()</b>
+<b class="fc">&nbsp;            val status = statusColumn.text().clean()</b>
+<b class="fc">&nbsp;            val isOnline = status.contains(&quot;online&quot;)</b>
+<b class="fc">&nbsp;            val isDeleted = status.contains(&quot;deleted&quot;)</b>
+<b class="fc">&nbsp;            val position = if (status.contains(&quot;CipSoft Member&quot;)) &quot;CipSoft Member&quot; else null</b>
+<b class="fc">&nbsp;            addOtherCharacter(name, world, isMain, isOnline, isDeleted, isTraded, position)</b>
 &nbsp;        }
 &nbsp;    }
 &nbsp;}
@@ -637,7 +405,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-18 03:38</div>
+    <div style="float:right;">generated on 2025-11-25 04:03</div>
 </div>
 </body>
 </html>

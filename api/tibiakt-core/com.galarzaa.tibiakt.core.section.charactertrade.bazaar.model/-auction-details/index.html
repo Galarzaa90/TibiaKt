@@ -1,0 +1,907 @@
+<!doctype html>
+<html class="no-js">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>AuctionDetails</title>
+<link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">    <script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js","js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async></script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
+<link href="../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/clipboard.js" async></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer></script>
+<script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
+<body>
+    <div class="root">
+    <nav class="navigation theme-dark" id="navigation-wrapper">
+<a class="library-name--link" href="../../../index.html">
+                    TibiaKt
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">1.0.0-SNAPSHOT
+        </div>
+        <div class="navigation-controls">
+        <div class="filter-section filter-section_loading" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":tibiakt-core/main">jvm</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox">
+                    <div class="dropdown--header"><span>Platform filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close platform filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":tibiakt-core/main" data-filter=":tibiakt-core/main">
+                                <span class="checkbox--icon"></span>
+                                jvm
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </div>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </nav>
+        <div id="container">
+            <div class="sidebar" id="leftColumn">
+                <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                    <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox">
+                        <div class="dropdown--header">
+                            <span>
+                                    TibiaKt
+                            </span>
+                            <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                                <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                            </button>
+                        </div>
+                        <div class="sidebar--inner" id="sideMenu"></div>
+                    </ul>
+                    <div class="dropdown--overlay"></div>
+                </div>
+            </div>
+            <div id="main">
+<div class="main-content" data-page-type="classlike" id="content" pageids="tibiakt-core::com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model/AuctionDetails///PointingToDeclaration//-1623570306">
+  <div class="breadcrumbs"><a href="../../index.html">tibiakt-core</a><span class="delimiter">/</span><a href="../index.html">com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model</a><span class="delimiter">/</span><span class="current">AuctionDetails</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Auction</span><wbr><span><span>Details</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="kotlinx.serialization/Serializable///PointingToDeclaration/"><span class="token annotation builtin">Serializable</span></span></div></div><span class="token keyword">data </span><span class="token keyword">class </span><a href="index.html">AuctionDetails</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>hitPoints<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>mana<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>capacity<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>speed<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>blessingsCount<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>mountsCount<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>outfitsCount<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>titlesCount<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>skills<span class="token operator">: </span><a href="../-auction-skills/index.html">AuctionSkills</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>characterCreatedAt<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.time/-instant/index.html">Instant</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>experience<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>gold<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>achievementPoints<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>regularWorldTransfersUnlockAt<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.time/-instant/index.html">Instant</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>hasCharmExpansion<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>availableCharmPoints<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>spentCharmPoints<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>availableMinorCharmEchoes<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>spentMinorCharmEchoes<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>dailyRewardStreak<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>huntingTaskPoints<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>permanentWeeklyTaskExpansion<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>permanentPreySlots<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>preyWildcards<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>hirelings<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>hirelingJobs<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>hirelingOutfits<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>exaltedDust<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>exaltedDustLimit<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>bossPoints<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>bonusPromotionPoints<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>animusMasteriesUnlocked<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>items<span class="token operator">: </span><a href="../-item-summary/index.html">ItemSummary</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>storeItems<span class="token operator">: </span><a href="../-item-summary/index.html">ItemSummary</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>mounts<span class="token operator">: </span><a href="../-mounts/index.html">Mounts</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>storeMounts<span class="token operator">: </span><a href="../-mounts/index.html">Mounts</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>outfits<span class="token operator">: </span><a href="../-outfits/index.html">Outfits</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>storeOutfits<span class="token operator">: </span><a href="../-outfits/index.html">Outfits</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>familiars<span class="token operator">: </span><a href="../-familiars/index.html">Familiars</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>blessings<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../-blessing-entry/index.html">BlessingEntry</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>imbuements<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>charms<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../-charm-entry/index.html">CharmEntry</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>completedCyclopediaMapAreas<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>completedQuestLines<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>titles<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>achievements<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../-achievement-entry/index.html">AchievementEntry</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>bestiaryProgress<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../-bestiary-entry/index.html">BestiaryEntry</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>bosstiaryProgress<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../-bosstiary-entry/index.html">BosstiaryEntry</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>revealedGems<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../-revealed-gem/index.html">RevealedGem</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>fragmentProgress<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../-fragment-progress-entry/index.html">FragmentProgressEntry</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>proficiencies<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../-weapon-proficiency/index.html">WeaponProficiency</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="clearfix"><span class="floating-right">(<a href="https://github.com/Galarzaa90/TibiaKt/blob/main/tibiakt-core/src/main/kotlin/com/galarzaa/tibiakt/core/section/charactertrade/bazaar/model/AuctionDetails.kt#L77">source</a>)</span></span></div><p class="paragraph">An auction's details.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="CONSTRUCTOR">
+        <h2 class="">Constructors</h2>
+        <div class="table"><a data-name="2071886857%2FConstructors%2F-1623570306" anchor-label="AuctionDetails" id="2071886857%2FConstructors%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-togglable="CONSTRUCTOR" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-auction-details.html"><span>Auction</span><wbr><span><span>Details</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2071886857%2FConstructors%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">hitPoints<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">mana<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">capacity<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">speed<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">blessingsCount<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">mountsCount<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">outfitsCount<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">titlesCount<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">skills<span class="token operator">: </span><a href="../-auction-skills/index.html">AuctionSkills</a><span class="token punctuation">, </span></span><span class="parameter ">characterCreatedAt<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.time/-instant/index.html">Instant</a><span class="token punctuation">, </span></span><span class="parameter ">experience<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter ">gold<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter ">achievementPoints<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">regularWorldTransfersUnlockAt<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.time/-instant/index.html">Instant</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">hasCharmExpansion<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter ">availableCharmPoints<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">spentCharmPoints<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">availableMinorCharmEchoes<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">spentMinorCharmEchoes<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">dailyRewardStreak<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">huntingTaskPoints<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">permanentWeeklyTaskExpansion<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter ">permanentPreySlots<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">preyWildcards<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">hirelings<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">hirelingJobs<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">hirelingOutfits<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">exaltedDust<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">exaltedDustLimit<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">bossPoints<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">bonusPromotionPoints<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">animusMasteriesUnlocked<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">items<span class="token operator">: </span><a href="../-item-summary/index.html">ItemSummary</a><span class="token punctuation">, </span></span><span class="parameter ">storeItems<span class="token operator">: </span><a href="../-item-summary/index.html">ItemSummary</a><span class="token punctuation">, </span></span><span class="parameter ">mounts<span class="token operator">: </span><a href="../-mounts/index.html">Mounts</a><span class="token punctuation">, </span></span><span class="parameter ">storeMounts<span class="token operator">: </span><a href="../-mounts/index.html">Mounts</a><span class="token punctuation">, </span></span><span class="parameter ">outfits<span class="token operator">: </span><a href="../-outfits/index.html">Outfits</a><span class="token punctuation">, </span></span><span class="parameter ">storeOutfits<span class="token operator">: </span><a href="../-outfits/index.html">Outfits</a><span class="token punctuation">, </span></span><span class="parameter ">familiars<span class="token operator">: </span><a href="../-familiars/index.html">Familiars</a><span class="token punctuation">, </span></span><span class="parameter ">blessings<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../-blessing-entry/index.html">BlessingEntry</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter ">imbuements<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter ">charms<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../-charm-entry/index.html">CharmEntry</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter ">completedCyclopediaMapAreas<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter ">completedQuestLines<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter ">titles<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter ">achievements<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../-achievement-entry/index.html">AchievementEntry</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter ">bestiaryProgress<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../-bestiary-entry/index.html">BestiaryEntry</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter ">bosstiaryProgress<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../-bosstiary-entry/index.html">BosstiaryEntry</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter ">revealedGems<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../-revealed-gem/index.html">RevealedGem</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter ">fragmentProgress<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../-fragment-progress-entry/index.html">FragmentProgressEntry</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter ">proficiencies<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../-weapon-proficiency/index.html">WeaponProficiency</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="">Properties</h2>
+        <div class="table"><a data-name="939087779%2FProperties%2F-1623570306" anchor-label="achievementPoints" id="939087779%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="achievement-points.html"><span>achievement</span><wbr><span><span>Points</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="939087779%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="achievement-points.html">achievementPoints</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">The achievement points of the character.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1568324223%2FProperties%2F-1623570306" anchor-label="achievements" id="-1568324223%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="achievements.html"><span><span>achievements</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1568324223%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="achievements.html">achievements</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../-achievement-entry/index.html">AchievementEntry</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">The list of achievements the character has unlocked.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1329616916%2FProperties%2F-1623570306" anchor-label="animusMasteriesUnlocked" id="-1329616916%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="animus-masteries-unlocked.html"><span>animus</span><wbr><span>Masteries</span><wbr><span><span>Unlocked</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1329616916%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="animus-masteries-unlocked.html">animusMasteriesUnlocked</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">The number of animus masteries the character has unlocked.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-885362636%2FProperties%2F-1623570306" anchor-label="availableCharmPoints" id="-885362636%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="available-charm-points.html"><span>available</span><wbr><span>Charm</span><wbr><span><span>Points</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-885362636%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="available-charm-points.html">availableCharmPoints</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">The total charm points the character has for spending.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2041697239%2FProperties%2F-1623570306" anchor-label="availableMinorCharmEchoes" id="2041697239%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="available-minor-charm-echoes.html"><span>available</span><wbr><span>Minor</span><wbr><span>Charm</span><wbr><span><span>Echoes</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2041697239%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="available-minor-charm-echoes.html">availableMinorCharmEchoes</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1384518251%2FProperties%2F-1623570306" anchor-label="bestiaryProgress" id="-1384518251%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="bestiary-progress.html"><span>bestiary</span><wbr><span><span>Progress</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1384518251%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="bestiary-progress.html">bestiaryProgress</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../-bestiary-entry/index.html">BestiaryEntry</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">The list of bestiary creatures and their progress.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1518727561%2FProperties%2F-1623570306" anchor-label="blessings" id="1518727561%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="blessings.html"><span><span>blessings</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1518727561%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="blessings.html">blessings</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../-blessing-entry/index.html">BlessingEntry</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">The blessings the character has.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="81416034%2FProperties%2F-1623570306" anchor-label="blessingsCount" id="81416034%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="blessings-count.html"><span>blessings</span><wbr><span><span>Count</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="81416034%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="blessings-count.html">blessingsCount</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">The number of blessings the character has.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="869096638%2FProperties%2F-1623570306" anchor-label="bonusPromotionPoints" id="869096638%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="bonus-promotion-points.html"><span>bonus</span><wbr><span>Promotion</span><wbr><span><span>Points</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="869096638%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="bonus-promotion-points.html">bonusPromotionPoints</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">The bonus promotion points of the character.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="359689589%2FProperties%2F-1623570306" anchor-label="bossPoints" id="359689589%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="boss-points.html"><span>boss</span><wbr><span><span>Points</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="359689589%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="boss-points.html">bossPoints</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">The boss points of the character.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1853472030%2FProperties%2F-1623570306" anchor-label="bosstiaryProgress" id="-1853472030%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="bosstiary-progress.html"><span>bosstiary</span><wbr><span><span>Progress</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1853472030%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="bosstiary-progress.html">bosstiaryProgress</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../-bosstiary-entry/index.html">BosstiaryEntry</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">The list of bosstiary bosses and their progress.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-22982485%2FProperties%2F-1623570306" anchor-label="capacity" id="-22982485%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="capacity.html"><span><span>capacity</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-22982485%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="capacity.html">capacity</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">The maximum capacity of the character.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-902650285%2FProperties%2F-1623570306" anchor-label="characterCreatedAt" id="-902650285%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="character-created-at.html"><span>character</span><wbr><span>Created</span><wbr><span><span>At</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-902650285%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="character-created-at.html">characterCreatedAt</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.time/-instant/index.html">Instant</a></div><div class="brief "><p class="paragraph">The date and time when the character was created.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1789396439%2FProperties%2F-1623570306" anchor-label="charms" id="-1789396439%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="charms.html"><span><span>charms</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1789396439%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="charms.html">charms</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../-charm-entry/index.html">CharmEntry</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">The list of charms the character has unlocked.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1539985417%2FProperties%2F-1623570306" anchor-label="completedCyclopediaMapAreas" id="1539985417%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="completed-cyclopedia-map-areas.html"><span>completed</span><wbr><span>Cyclopedia</span><wbr><span>Map</span><wbr><span><span>Areas</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1539985417%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="completed-cyclopedia-map-areas.html">completedCyclopediaMapAreas</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">The map areas the character has fully discovered.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-202705043%2FProperties%2F-1623570306" anchor-label="completedQuestLines" id="-202705043%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="completed-quest-lines.html"><span>completed</span><wbr><span>Quest</span><wbr><span><span>Lines</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-202705043%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="completed-quest-lines.html">completedQuestLines</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">The quest lines the character has unlocked.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="821556943%2FProperties%2F-1623570306" anchor-label="dailyRewardStreak" id="821556943%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="daily-reward-streak.html"><span>daily</span><wbr><span>Reward</span><wbr><span><span>Streak</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="821556943%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="daily-reward-streak.html">dailyRewardStreak</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">The current daily rewards streak.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1324118866%2FProperties%2F-1623570306" anchor-label="exaltedDust" id="-1324118866%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="exalted-dust.html"><span>exalted</span><wbr><span><span>Dust</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1324118866%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="exalted-dust.html">exaltedDust</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">The amount of exalted dust the character has.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-439483855%2FProperties%2F-1623570306" anchor-label="exaltedDustLimit" id="-439483855%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="exalted-dust-limit.html"><span>exalted</span><wbr><span>Dust</span><wbr><span><span>Limit</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-439483855%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="exalted-dust-limit.html">exaltedDustLimit</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">The exalted dust limit of the character.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1186449413%2FProperties%2F-1623570306" anchor-label="experience" id="-1186449413%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="experience.html"><span><span>experience</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1186449413%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="experience.html">experience</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></div><div class="brief "><p class="paragraph">The total experience of the character.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1907375737%2FProperties%2F-1623570306" anchor-label="familiars" id="-1907375737%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="familiars.html"><span><span>familiars</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1907375737%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="familiars.html">familiars</a><span class="token operator">: </span><a href="../-familiars/index.html">Familiars</a></div><div class="brief "><p class="paragraph">The familiars the character has unlocked.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1948853720%2FProperties%2F-1623570306" anchor-label="fragmentProgress" id="-1948853720%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="fragment-progress.html"><span>fragment</span><wbr><span><span>Progress</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1948853720%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="fragment-progress.html">fragmentProgress</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../-fragment-progress-entry/index.html">FragmentProgressEntry</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">The list of fragments and their progress.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1381932997%2FProperties%2F-1623570306" anchor-label="gold" id="1381932997%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="gold.html"><span><span>gold</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1381932997%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="gold.html">gold</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></div><div class="brief "><p class="paragraph">The total gold the character has.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-222445901%2FProperties%2F-1623570306" anchor-label="hasCharmExpansion" id="-222445901%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="has-charm-expansion.html"><span>has</span><wbr><span>Charm</span><wbr><span><span>Expansion</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-222445901%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="has-charm-expansion.html">hasCharmExpansion</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Whether this character has a charm expansion or not.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1042909243%2FProperties%2F-1623570306" anchor-label="hirelingJobs" id="-1042909243%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="hireling-jobs.html"><span>hireling</span><wbr><span><span>Jobs</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1042909243%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="hireling-jobs.html">hirelingJobs</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">The total hireling jobs the character has available.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="638537359%2FProperties%2F-1623570306" anchor-label="hirelingOutfits" id="638537359%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="hireling-outfits.html"><span>hireling</span><wbr><span><span>Outfits</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="638537359%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="hireling-outfits.html">hirelingOutfits</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">The total hireling outfits the character has available.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="280817580%2FProperties%2F-1623570306" anchor-label="hirelings" id="280817580%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="hirelings.html"><span><span>hirelings</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="280817580%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="hirelings.html">hirelings</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">The total hirelings this character has.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1428741823%2FProperties%2F-1623570306" anchor-label="hitPoints" id="1428741823%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="hit-points.html"><span>hit</span><wbr><span><span>Points</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1428741823%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="hit-points.html">hitPoints</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">The maximum hitpoint of the character.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2032402590%2FProperties%2F-1623570306" anchor-label="huntingTaskPoints" id="2032402590%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="hunting-task-points.html"><span>hunting</span><wbr><span>Task</span><wbr><span><span>Points</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2032402590%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="hunting-task-points.html">huntingTaskPoints</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">The total hunting task points.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="816491326%2FProperties%2F-1623570306" anchor-label="imbuements" id="816491326%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="imbuements.html"><span><span>imbuements</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="816491326%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="imbuements.html">imbuements</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">The list of imbuements the character has unlocked.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1797541739%2FProperties%2F-1623570306" anchor-label="items" id="-1797541739%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="items.html"><span><span>items</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1797541739%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="items.html">items</a><span class="token operator">: </span><a href="../-item-summary/index.html">ItemSummary</a></div><div class="brief "><p class="paragraph">The summary of items of the character.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1947878466%2FProperties%2F-1623570306" anchor-label="mana" id="-1947878466%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="mana.html"><span><span>mana</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1947878466%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="mana.html">mana</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">The maximum mana of the character.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1935257579%2FProperties%2F-1623570306" anchor-label="mounts" id="1935257579%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="mounts.html"><span><span>mounts</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1935257579%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="mounts.html">mounts</a><span class="token operator">: </span><a href="../-mounts/index.html">Mounts</a></div><div class="brief "><p class="paragraph">The mounts the character has unlocked.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1474838080%2FProperties%2F-1623570306" anchor-label="mountsCount" id="1474838080%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="mounts-count.html"><span>mounts</span><wbr><span><span>Count</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1474838080%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="mounts-count.html">mountsCount</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">The number of mounts the character has.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2016843141%2FProperties%2F-1623570306" anchor-label="outfits" id="2016843141%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="outfits.html"><span><span>outfits</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2016843141%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="outfits.html">outfits</a><span class="token operator">: </span><a href="../-outfits/index.html">Outfits</a></div><div class="brief "><p class="paragraph">The outfits the character has unlocked.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-920860442%2FProperties%2F-1623570306" anchor-label="outfitsCount" id="-920860442%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="outfits-count.html"><span>outfits</span><wbr><span><span>Count</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-920860442%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="outfits-count.html">outfitsCount</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">the total number of outfits the character has.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-995504460%2FProperties%2F-1623570306" anchor-label="permanentPreySlots" id="-995504460%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="permanent-prey-slots.html"><span>permanent</span><wbr><span>Prey</span><wbr><span><span>Slots</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-995504460%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="permanent-prey-slots.html">permanentPreySlots</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">The total number of permanent prey slots.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1246159962%2FProperties%2F-1623570306" anchor-label="permanentWeeklyTaskExpansion" id="1246159962%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="permanent-weekly-task-expansion.html"><span>permanent</span><wbr><span>Weekly</span><wbr><span>Task</span><wbr><span><span>Expansion</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1246159962%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="permanent-weekly-task-expansion.html">permanentWeeklyTaskExpansion</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">The total number of permanent hunting task slots the character has.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-526325390%2FProperties%2F-1623570306" anchor-label="preyWildcards" id="-526325390%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="prey-wildcards.html"><span>prey</span><wbr><span><span>Wildcards</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-526325390%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="prey-wildcards.html">preyWildcards</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">The number of prey wildcards.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1165278238%2FProperties%2F-1623570306" anchor-label="proficiencies" id="-1165278238%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="proficiencies.html"><span><span>proficiencies</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1165278238%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="proficiencies.html">proficiencies</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../-weapon-proficiency/index.html">WeaponProficiency</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">The weapon proficiencies progress of the character.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="713363084%2FProperties%2F-1623570306" anchor-label="regularWorldTransfersUnlockAt" id="713363084%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="regular-world-transfers-unlock-at.html"><span>regular</span><wbr><span>World</span><wbr><span>Transfers</span><wbr><span>Unlock</span><wbr><span><span>At</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="713363084%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="regular-world-transfers-unlock-at.html">regularWorldTransfersUnlockAt</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.time/-instant/index.html">Instant</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">The date when regular world transfers will be available again for this user.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1430468565%2FProperties%2F-1623570306" anchor-label="revealedGems" id="1430468565%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="revealed-gems.html"><span>revealed</span><wbr><span><span>Gems</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1430468565%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="revealed-gems.html">revealedGems</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../-revealed-gem/index.html">RevealedGem</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">The gems revealed by the character, with their effects.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1379035171%2FProperties%2F-1623570306" anchor-label="skills" id="1379035171%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="skills.html"><span><span>skills</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1379035171%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="skills.html">skills</a><span class="token operator">: </span><a href="../-auction-skills/index.html">AuctionSkills</a></div><div class="brief "><p class="paragraph">The current skill levels of the character.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="269905390%2FProperties%2F-1623570306" anchor-label="speed" id="269905390%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="speed.html"><span><span>speed</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="269905390%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="speed.html">speed</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">The speed of the character.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1114985383%2FProperties%2F-1623570306" anchor-label="spentCharmPoints" id="-1114985383%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="spent-charm-points.html"><span>spent</span><wbr><span>Charm</span><wbr><span><span>Points</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1114985383%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="spent-charm-points.html">spentCharmPoints</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">The total charm points that have been spent.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="457860818%2FProperties%2F-1623570306" anchor-label="spentMinorCharmEchoes" id="457860818%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="spent-minor-charm-echoes.html"><span>spent</span><wbr><span>Minor</span><wbr><span>Charm</span><wbr><span><span>Echoes</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="457860818%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="spent-minor-charm-echoes.html">spentMinorCharmEchoes</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-147203162%2FProperties%2F-1623570306" anchor-label="storeItems" id="-147203162%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="store-items.html"><span>store</span><wbr><span><span>Items</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-147203162%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="store-items.html">storeItems</a><span class="token operator">: </span><a href="../-item-summary/index.html">ItemSummary</a></div><div class="brief "><p class="paragraph">The summary of store items of the character.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1556145914%2FProperties%2F-1623570306" anchor-label="storeMounts" id="1556145914%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="store-mounts.html"><span>store</span><wbr><span><span>Mounts</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1556145914%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="store-mounts.html">storeMounts</a><span class="token operator">: </span><a href="../-mounts/index.html">Mounts</a></div><div class="brief "><p class="paragraph">The store mounts the character has purchased.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1145683882%2FProperties%2F-1623570306" anchor-label="storeOutfits" id="-1145683882%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="store-outfits.html"><span>store</span><wbr><span><span>Outfits</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1145683882%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="store-outfits.html">storeOutfits</a><span class="token operator">: </span><a href="../-outfits/index.html">Outfits</a></div><div class="brief "><p class="paragraph">The store outfits the character has purchased.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1694943894%2FProperties%2F-1623570306" anchor-label="titles" id="-1694943894%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="titles.html"><span><span>titles</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1694943894%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="titles.html">titles</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">The list of titles the character has unlocked.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-387231711%2FProperties%2F-1623570306" anchor-label="titlesCount" id="-387231711%2FProperties%2F-1623570306" data-filterable-set=":tibiakt-core/main"></a>
+          <div class="table-row" data-filterable-current=":tibiakt-core/main" data-filterable-set=":tibiakt-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="titles-count.html"><span>titles</span><wbr><span><span>Count</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-387231711%2FProperties%2F-1623570306"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="titles-count.html">titlesCount</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">The total number of unlocked titles.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+        <span>© 2025 Copyright</span>
+        <span class="pull-right">
+            <span>Generated by </span>
+            <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                <span>dokka</span>
+            </a>
+        </span>
+    </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
