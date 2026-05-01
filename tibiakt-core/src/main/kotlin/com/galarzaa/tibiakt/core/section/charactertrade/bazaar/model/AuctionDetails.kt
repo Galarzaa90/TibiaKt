@@ -71,6 +71,7 @@ import kotlin.time.Instant
  * @property bosstiaryProgress The list of bosstiary bosses and their progress.
  * @property revealedGems The gems revealed by the character, with their effects.
  * @property fragmentProgress The list of fragments and their progress.
+ * @property bountyTalisman The bounty talisman progress of the character, if available.
  * @property proficiencies The weapon proficiencies progress of the character.
  */
 @Serializable
@@ -125,5 +126,6 @@ public data class AuctionDetails(
     val bosstiaryProgress: List<BosstiaryEntry>,
     val revealedGems: List<RevealedGem>,
     val fragmentProgress: List<FragmentProgressEntry>,
+    val bountyTalisman: BountyTalisman?,
     val proficiencies: List<WeaponProficiency>,
 )
