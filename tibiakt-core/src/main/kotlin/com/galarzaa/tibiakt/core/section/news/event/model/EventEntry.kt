@@ -68,6 +68,7 @@ public sealed interface EventEntry {
         override val endsAt: Instant
             get() = endsOn.atTime(SERVER_SAVE_TIME).toInstant(TIBIA_TIMEZONE)
 
+        /** The duration of the event. */
         val duration: DatePeriod
             get() = (endsOn - startsOn)
     }
@@ -109,6 +110,7 @@ public sealed interface EventEntry {
     }
 
     public companion object {
+        /** Create an instance of [EventEntry] based on the provided parameters. */
         public fun of(
             title: String,
             description: String,

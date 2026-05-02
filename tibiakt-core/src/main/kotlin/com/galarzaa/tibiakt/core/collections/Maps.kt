@@ -16,8 +16,6 @@
 
 package com.galarzaa.tibiakt.core.collections
 
-import kotlin.collections.iterator
-
 /**
  * Get a mapping's key containing the string.
  *
@@ -25,8 +23,9 @@ import kotlin.collections.iterator
  * @param default The value to return if the key is not found.
  */
 internal fun <V> Map<String, V>.getContaining(key: String, default: V? = null): V? {
-    for ((k, v) in this)
+    for ((k, v) in this) {
         if (k.contains(key))
             return v
+    }
     return default
 }

@@ -142,7 +142,6 @@ import kotlin.time.Clock
 import kotlin.time.Duration.Companion.seconds
 import kotlin.time.Instant
 
-@Suppress("TooManyFunctions")
 /**
  * Tibia.com client with engine-agnostic construction.
  *
@@ -150,7 +149,7 @@ import kotlin.time.Instant
  * Defaults (timeouts, compression, user-agent, no redirects) are applied via [defaultConfig]
  * unless explicitly disabled where supported.
  */
-public class TibiaKtClient constructor(
+public class TibiaKtClient(
     private val client: HttpClient,
     private val ownsClient: Boolean,
 ) : TibiaKtApi, AutoCloseable {
@@ -382,6 +381,16 @@ public class TibiaKtClient constructor(
         return response.parse { HighscoresParser.fromContent(it) }
     }
 
+    /**
+     * Fetches highscores based on the specified filters and returns them in a structured format.
+     *
+     * @param world The name of the world to fetch highscores for. If null, high scores across all worlds are fetched.
+     * @param category The category of highscores to fetch (e.g., experience, magic level).
+     * @param vocation The profession filter for highscores. Defaults to HighscoresProfession.ALL.
+     * @param battlEyeType The BattlEye filter for the worlds to include.
+     * @param pvpTypes Optional set of PvP types to filter the worlds. If null, no PvP filtering is applied.
+     * @return A TibiaResponse object containing the highscores data, or null if the fetch fails.
+     */
     public suspend fun fetchHighscores(
         world: String?,
         category: HighscoresCategory,

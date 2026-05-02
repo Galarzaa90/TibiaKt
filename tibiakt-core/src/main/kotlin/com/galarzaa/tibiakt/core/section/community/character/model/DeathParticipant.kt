@@ -40,6 +40,7 @@ public sealed interface DeathParticipant {
      * A player who participated in a death.
      *
      * @property name The name of the player.
+     * @property isTraded Whether the player was traded after the death occurred.
      */
     @Serializable
     @SerialName("player")

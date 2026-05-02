@@ -21,6 +21,7 @@ import com.galarzaa.tibiakt.core.section.community.urls.characterUrl
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlin.time.Instant
+
 /**
  * A house or guildhall.
  *

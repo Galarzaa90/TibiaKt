@@ -28,7 +28,6 @@ import com.galarzaa.tibiakt.core.text.remove
 import com.galarzaa.tibiakt.core.time.parseTibiaForumDateTime
 import org.jsoup.nodes.Element
 
-
 internal const val TRADED_TAG = "(traded)"
 
 internal fun parseLastPostFromCell(cell: Element): LastPost? {

@@ -16,4 +16,10 @@
 
 package com.galarzaa.tibiakt.client.model
 
+/**
+ * A result with a duration timestamp.
+ *
+ * @property time The duration of the request in seconds.
+ * @property result The result of the request.
+ */
 public data class TimedResult<T>(val time: Double, val result: T)
