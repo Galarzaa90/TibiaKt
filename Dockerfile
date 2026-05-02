@@ -20,6 +20,7 @@ RUN ./gradlew build -x check -x detekt --parallel --continue > /dev/null 2>&1 ||
 COPY tibiakt-core/ /app/tibiakt-core
 COPY tibiakt-client/ /app/tibiakt-client
 COPY tibiakt-server/ /app/tibiakt-server
+COPY dokka/ /app/dokka
 
 ARG VERSION=0.0.0-SNAPSHOT
 RUN ./gradlew -PVERSION=${VERSION} build -x test -x detekt tibiakt-server:shadowJar --parallel

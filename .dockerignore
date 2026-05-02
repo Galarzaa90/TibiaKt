@@ -2,6 +2,7 @@
 !tibiakt-core/
 !tibiakt-client/
 !tibiakt-server/
+!dokka/
 !build.gradle.kts
 !gradle.properties
 !gradlew
