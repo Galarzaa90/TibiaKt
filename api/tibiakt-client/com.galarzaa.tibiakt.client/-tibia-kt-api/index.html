@@ -1,56 +1,53 @@
 <!doctype html>
-<html class="no-js">
+<html class="no-js" lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <title>TibiaKtApi</title>
-<link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">    <script>var pathToRoot = "../../../";</script>
-    <script>document.documentElement.classList.replace("no-js","js");</script>
+<link href="../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
     <script>const storage = localStorage.getItem("dokka-dark-mode")
-    if (storage == null) {
+      if (storage == null) {
         const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
         if (osDarkSchemePreferred === true) {
-            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
         }
-    } else {
+      } else {
         const savedDarkMode = JSON.parse(storage)
-        if(savedDarkMode === true) {
-            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
         }
-    }
+      }
     </script>
-<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async></script>
 <script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script>
 <link href="../../../styles/style.css" rel="Stylesheet">
 <link href="../../../styles/main.css" rel="Stylesheet">
 <link href="../../../styles/prism.css" rel="Stylesheet">
 <link href="../../../styles/logo-styles.css" rel="Stylesheet">
-<link href="../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
 <link href="../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
-<script type="text/javascript" src="../../../scripts/clipboard.js" async></script>
+<script type="text/javascript" src="../../../scripts/safe-local-storage_blocking.js"></script>
 <script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script>
 <script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script>
 <script type="text/javascript" src="../../../scripts/main.js" defer></script>
 <script type="text/javascript" src="../../../scripts/prism.js" async></script>
-<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer></script>
-<script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
+<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer></script></head>
 <body>
-    <div class="root">
-    <nav class="navigation theme-dark" id="navigation-wrapper">
-<a class="library-name--link" href="../../../index.html">
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+<a class="library-name--link" href="../../../index.html" tabindex="1">
                     TibiaKt
             </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
-        <div class="library-version" id="library-version">1.0.0-SNAPSHOT
+        <div class="library-version" id="library-version">2.0.0-SNAPSHOT
         </div>
         <div class="navigation-controls">
-        <div class="filter-section filter-section_loading" id="filter-section">
-                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":tibiakt-client/main">jvm</button>
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true" data-filter=":tibiakt-client/main">jvm</button>
             <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
                 <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
-                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox">
-                    <div class="dropdown--header"><span>Platform filter</span>
-                        <button class="button" data-role="dropdown-toggle" aria-label="Close platform filter">
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
                             <i class="ui-kit-icon ui-kit-icon_cross"></i>
                         </button>
                     </div>
@@ -64,45 +61,47 @@
                 </ul>
                 <div class="dropdown--overlay"></div>
             </div>
-        </div>
+        </ul>
             <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
             </button>
             <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
                 API
             </div>
         </div>
-    </nav>
-        <div id="container">
-            <div class="sidebar" id="leftColumn">
-                <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
-                    <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox">
-                        <div class="dropdown--header">
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config="{&quot;defaultSize&quot;: 280, &quot;minSize&quot;: 200, &quot;maxSize&quot;: 400}">
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
                             <span>
                                     TibiaKt
                             </span>
-                            <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
-                                <i class="ui-kit-icon ui-kit-icon_cross"></i>
-                            </button>
-                        </div>
-                        <div class="sidebar--inner" id="sideMenu"></div>
-                    </ul>
-                    <div class="dropdown--overlay"></div>
-                </div>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
             </div>
-            <div id="main">
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
 <div class="main-content" data-page-type="classlike" id="content" pageids="tibiakt-client::com.galarzaa.tibiakt.client/TibiaKtApi///PointingToDeclaration//-45736278">
   <div class="breadcrumbs"><a href="../../index.html">tibiakt-client</a><span class="delimiter">/</span><a href="../index.html">com.galarzaa.tibiakt.client</a><span class="delimiter">/</span><span class="current">TibiaKtApi</span></div>
   <div class="cover ">
     <h1 class="cover"><span>Tibia</span><wbr><span>Kt</span><wbr><span><span>Api</span></span></h1>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-client/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="index.html">TibiaKtApi</a><span class="clearfix"><span class="floating-right">(<a href="https://github.com/Galarzaa90/TibiaKt/blob/main/tibiakt-core/src/main/kotlin/com/galarzaa/tibiakt/client/TibiaKtApi.kt#L60">source</a>)</span></span></div><h4 class="">Inheritors</h4><div class="table"><div class="table-row" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="../-tibia-kt-client/index.html">TibiaKtClient</a></div></span></div><div></div></div></div></div></div></div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-client/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="index.html">TibiaKtApi</a><span class="source-link-wrapper"><span class="source-link" data-element-type="source-link">(<a href="https://github.com/Galarzaa90/TibiaKt/blob/main/tibiakt-core/src/main/kotlin/com/galarzaa/tibiakt/client/TibiaKtApi.kt#L63">source</a>)</span></span></div><p class="paragraph">An HTTP API client for Tibia.com.</p><h4 class="tableheader">Inheritors</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="../-tibia-kt-client/index.html">TibiaKtClient</a></div></span></div><div></div></div></div></div></div></div>
   </div>
   <div class="tabbedcontent">
     <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
     <div class="tabs-section-body">
       <div data-togglable="FUNCTION">
-        <h2 class="">Functions</h2>
+        <h2 class="tableheader">Functions</h2>
         <div class="table"><a data-name="1378908393%2FFunctions%2F-45736278" anchor-label="fetchAuction" id="1378908393%2FFunctions%2F-45736278" data-filterable-set=":tibiakt-client/main"></a>
-          <div class="table-row" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
+          <div class="table-row table-row_content" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="fetch-auction.html"><span>fetch</span><wbr><span><span>Auction</span></span></a></div>
@@ -117,7 +116,7 @@
             </div>
           </div>
 <a data-name="417200428%2FFunctions%2F-45736278" anchor-label="fetchAuctionDetailsPage" id="417200428%2FFunctions%2F-45736278" data-filterable-set=":tibiakt-client/main"></a>
-          <div class="table-row" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
+          <div class="table-row table-row_content" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="fetch-auction-details-page.html"><span>fetch</span><wbr><span>Auction</span><wbr><span>Details</span><wbr><span><span>Page</span></span></a></div>
@@ -132,7 +131,7 @@
             </div>
           </div>
 <a data-name="2060767197%2FFunctions%2F-45736278" anchor-label="fetchBazaar" id="2060767197%2FFunctions%2F-45736278" data-filterable-set=":tibiakt-client/main"></a>
-          <div class="table-row" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
+          <div class="table-row table-row_content" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="fetch-bazaar.html"><span>fetch</span><wbr><span><span>Bazaar</span></span></a></div>
@@ -147,7 +146,7 @@
             </div>
           </div>
 <a data-name="-706044490%2FFunctions%2F-45736278" anchor-label="fetchBoostableBosses" id="-706044490%2FFunctions%2F-45736278" data-filterable-set=":tibiakt-client/main"></a>
-          <div class="table-row" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
+          <div class="table-row table-row_content" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="fetch-boostable-bosses.html"><span>fetch</span><wbr><span>Boostable</span><wbr><span><span>Bosses</span></span></a></div>
@@ -162,7 +161,7 @@
             </div>
           </div>
 <a data-name="-1547780609%2FFunctions%2F-45736278" anchor-label="fetchCharacter" id="-1547780609%2FFunctions%2F-45736278" data-filterable-set=":tibiakt-client/main"></a>
-          <div class="table-row" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
+          <div class="table-row table-row_content" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="fetch-character.html"><span>fetch</span><wbr><span><span>Character</span></span></a></div>
@@ -177,7 +176,7 @@
             </div>
           </div>
 <a data-name="310534004%2FFunctions%2F-45736278" anchor-label="fetchCMPostArchive" id="310534004%2FFunctions%2F-45736278" data-filterable-set=":tibiakt-client/main"></a>
-          <div class="table-row" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
+          <div class="table-row table-row_content" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="fetch-c-m-post-archive.html"><span>fetch</span><wbr><span>CMPost</span><wbr><span><span>Archive</span></span></a></div>
@@ -186,13 +185,13 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-client/main"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="fetch-c-m-post-archive.html"><span class="token function">fetchCMPostArchive</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">startOn<span class="token operator">: </span><a href="https://kotlinlang.org/api/kotlinx-datetime/kotlinx-datetime/kotlinx.datetime/-local-date/index.html">LocalDate</a><span class="token punctuation">, </span></span><span class="parameter ">endOn<span class="token operator">: </span><a href="https://kotlinlang.org/api/kotlinx-datetime/kotlinx-datetime/kotlinx.datetime/-local-date/index.html">LocalDate</a><span class="token punctuation">, </span></span><span class="parameter ">page<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator"> = </span><span class="token constant">1</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../com.galarzaa.tibiakt.client.model/-tibia-response/index.html">TibiaResponse</a><span class="token operator">&lt;</span><a href="../../../tibiakt-core/com.galarzaa.tibiakt.core.section.forum.cmpost.model/-c-m-post-archive/index.html">CMPostArchive</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Fetch CM posts between two dates.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-client/main"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="fetch-c-m-post-archive.html"><span class="token function">fetchCMPostArchive</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">startOn<span class="token operator">: </span><span data-unresolved-link="kotlinx.datetime/LocalDate///PointingToDeclaration/">LocalDate</span><span class="token punctuation">, </span></span><span class="parameter ">endOn<span class="token operator">: </span><span data-unresolved-link="kotlinx.datetime/LocalDate///PointingToDeclaration/">LocalDate</span><span class="token punctuation">, </span></span><span class="parameter ">page<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator"> = </span><span class="token constant">1</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../com.galarzaa.tibiakt.client.model/-tibia-response/index.html">TibiaResponse</a><span class="token operator">&lt;</span><a href="../../../tibiakt-core/com.galarzaa.tibiakt.core.section.forum.cmpost.model/-c-m-post-archive/index.html">CMPostArchive</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Fetch CM posts between two dates.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
 <a data-name="179482907%2FFunctions%2F-45736278" anchor-label="fetchCreaturesSection" id="179482907%2FFunctions%2F-45736278" data-filterable-set=":tibiakt-client/main"></a>
-          <div class="table-row" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
+          <div class="table-row table-row_content" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="fetch-creatures-section.html"><span>fetch</span><wbr><span>Creatures</span><wbr><span><span>Section</span></span></a></div>
@@ -207,7 +206,7 @@
             </div>
           </div>
 <a data-name="-476216635%2FFunctions%2F-45736278" anchor-label="fetchEventsSchedule" id="-476216635%2FFunctions%2F-45736278" data-filterable-set=":tibiakt-client/main"></a>
-          <div class="table-row" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
+          <div class="table-row table-row_content" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="fetch-events-schedule.html"><span>fetch</span><wbr><span>Events</span><wbr><span><span>Schedule</span></span></a></div>
@@ -216,13 +215,13 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-client/main"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="fetch-events-schedule.html"><span class="token function">fetchEventsSchedule</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../com.galarzaa.tibiakt.client.model/-tibia-response/index.html">TibiaResponse</a><span class="token operator">&lt;</span><a href="../../../tibiakt-core/com.galarzaa.tibiakt.core.section.news.event.model/-events-schedule/index.html">EventsSchedule</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Fetch the events schedule for the current month.</p></div><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="fetch-events-schedule.html"><span class="token function">fetchEventsSchedule</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">yearMonth<span class="token operator">: </span><a href="https://kotlinlang.org/api/kotlinx-datetime/kotlinx-datetime/kotlinx.datetime/-year-month/index.html">YearMonth</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../com.galarzaa.tibiakt.client.model/-tibia-response/index.html">TibiaResponse</a><span class="token operator">&lt;</span><a href="../../../tibiakt-core/com.galarzaa.tibiakt.core.section.news.event.model/-events-schedule/index.html">EventsSchedule</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Fetch the events schedule for a specific year and month.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-client/main"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="fetch-events-schedule.html"><span class="token function">fetchEventsSchedule</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../com.galarzaa.tibiakt.client.model/-tibia-response/index.html">TibiaResponse</a><span class="token operator">&lt;</span><a href="../../../tibiakt-core/com.galarzaa.tibiakt.core.section.news.event.model/-events-schedule/index.html">EventsSchedule</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Fetch the events schedule for the current month.</p></div><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="fetch-events-schedule.html"><span class="token function">fetchEventsSchedule</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">yearMonth<span class="token operator">: </span><span data-unresolved-link="kotlinx.datetime/YearMonth///PointingToDeclaration/">YearMonth</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../com.galarzaa.tibiakt.client.model/-tibia-response/index.html">TibiaResponse</a><span class="token operator">&lt;</span><a href="../../../tibiakt-core/com.galarzaa.tibiakt.core.section.news.event.model/-events-schedule/index.html">EventsSchedule</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Fetch the events schedule for a specific year and month.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
 <a data-name="-642001084%2FFunctions%2F-45736278" anchor-label="fetchForumAnnouncement" id="-642001084%2FFunctions%2F-45736278" data-filterable-set=":tibiakt-client/main"></a>
-          <div class="table-row" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
+          <div class="table-row table-row_content" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="fetch-forum-announcement.html"><span>fetch</span><wbr><span>Forum</span><wbr><span><span>Announcement</span></span></a></div>
@@ -237,7 +236,7 @@
             </div>
           </div>
 <a data-name="-1759654978%2FFunctions%2F-45736278" anchor-label="fetchForumBoard" id="-1759654978%2FFunctions%2F-45736278" data-filterable-set=":tibiakt-client/main"></a>
-          <div class="table-row" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
+          <div class="table-row table-row_content" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="fetch-forum-board.html"><span>fetch</span><wbr><span>Forum</span><wbr><span><span>Board</span></span></a></div>
@@ -252,7 +251,7 @@
             </div>
           </div>
 <a data-name="-341830325%2FFunctions%2F-45736278" anchor-label="fetchForumPost" id="-341830325%2FFunctions%2F-45736278" data-filterable-set=":tibiakt-client/main"></a>
-          <div class="table-row" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
+          <div class="table-row table-row_content" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="fetch-forum-post.html"><span>fetch</span><wbr><span>Forum</span><wbr><span><span>Post</span></span></a></div>
@@ -267,7 +266,7 @@
             </div>
           </div>
 <a data-name="520098084%2FFunctions%2F-45736278" anchor-label="fetchForumSection" id="520098084%2FFunctions%2F-45736278" data-filterable-set=":tibiakt-client/main"></a>
-          <div class="table-row" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
+          <div class="table-row table-row_content" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="fetch-forum-section.html"><span>fetch</span><wbr><span>Forum</span><wbr><span><span>Section</span></span></a></div>
@@ -282,7 +281,7 @@
             </div>
           </div>
 <a data-name="-850863332%2FFunctions%2F-45736278" anchor-label="fetchForumThread" id="-850863332%2FFunctions%2F-45736278" data-filterable-set=":tibiakt-client/main"></a>
-          <div class="table-row" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
+          <div class="table-row table-row_content" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="fetch-forum-thread.html"><span>fetch</span><wbr><span>Forum</span><wbr><span><span>Thread</span></span></a></div>
@@ -297,7 +296,7 @@
             </div>
           </div>
 <a data-name="2069776073%2FFunctions%2F-45736278" anchor-label="fetchGuild" id="2069776073%2FFunctions%2F-45736278" data-filterable-set=":tibiakt-client/main"></a>
-          <div class="table-row" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
+          <div class="table-row table-row_content" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="fetch-guild.html"><span>fetch</span><wbr><span><span>Guild</span></span></a></div>
@@ -312,7 +311,7 @@
             </div>
           </div>
 <a data-name="-1333815716%2FFunctions%2F-45736278" anchor-label="fetchHighscoresPage" id="-1333815716%2FFunctions%2F-45736278" data-filterable-set=":tibiakt-client/main"></a>
-          <div class="table-row" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
+          <div class="table-row table-row_content" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="fetch-highscores-page.html"><span>fetch</span><wbr><span>Highscores</span><wbr><span><span>Page</span></span></a></div>
@@ -327,7 +326,7 @@
             </div>
           </div>
 <a data-name="-137878639%2FFunctions%2F-45736278" anchor-label="fetchHouse" id="-137878639%2FFunctions%2F-45736278" data-filterable-set=":tibiakt-client/main"></a>
-          <div class="table-row" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
+          <div class="table-row table-row_content" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="fetch-house.html"><span>fetch</span><wbr><span><span>House</span></span></a></div>
@@ -342,7 +341,7 @@
             </div>
           </div>
 <a data-name="487529949%2FFunctions%2F-45736278" anchor-label="fetchHousesSection" id="487529949%2FFunctions%2F-45736278" data-filterable-set=":tibiakt-client/main"></a>
-          <div class="table-row" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
+          <div class="table-row table-row_content" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="fetch-houses-section.html"><span>fetch</span><wbr><span>Houses</span><wbr><span><span>Section</span></span></a></div>
@@ -357,7 +356,7 @@
             </div>
           </div>
 <a data-name="2025281273%2FFunctions%2F-45736278" anchor-label="fetchKillStatistics" id="2025281273%2FFunctions%2F-45736278" data-filterable-set=":tibiakt-client/main"></a>
-          <div class="table-row" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
+          <div class="table-row table-row_content" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="fetch-kill-statistics.html"><span>fetch</span><wbr><span>Kill</span><wbr><span><span>Statistics</span></span></a></div>
@@ -372,7 +371,7 @@
             </div>
           </div>
 <a data-name="-105540732%2FFunctions%2F-45736278" anchor-label="fetchLeaderboard" id="-105540732%2FFunctions%2F-45736278" data-filterable-set=":tibiakt-client/main"></a>
-          <div class="table-row" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
+          <div class="table-row table-row_content" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="fetch-leaderboard.html"><span>fetch</span><wbr><span><span>Leaderboard</span></span></a></div>
@@ -387,7 +386,7 @@
             </div>
           </div>
 <a data-name="1223962692%2FFunctions%2F-45736278" anchor-label="fetchNewsArchive" id="1223962692%2FFunctions%2F-45736278" data-filterable-set=":tibiakt-client/main"></a>
-          <div class="table-row" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
+          <div class="table-row table-row_content" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="fetch-news-archive.html"><span>fetch</span><wbr><span>News</span><wbr><span><span>Archive</span></span></a></div>
@@ -396,13 +395,13 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-client/main"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="fetch-news-archive.html"><span class="token function">fetchNewsArchive</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">startAt<span class="token operator">: </span><a href="https://kotlinlang.org/api/kotlinx-datetime/kotlinx-datetime/kotlinx.datetime/-local-date/index.html">LocalDate</a><span class="token punctuation">, </span></span><span class="parameter ">endAt<span class="token operator">: </span><a href="https://kotlinlang.org/api/kotlinx-datetime/kotlinx-datetime/kotlinx.datetime/-local-date/index.html">LocalDate</a><span class="token punctuation">, </span></span><span class="parameter ">categories<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-set/index.html">Set</a><span class="token operator">&lt;</span><a href="../../../tibiakt-core/com.galarzaa.tibiakt.core.section.news.shared.model/-news-category/index.html">NewsCategory</a><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">types<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-set/index.html">Set</a><span class="token operator">&lt;</span><a href="../../../tibiakt-core/com.galarzaa.tibiakt.core.section.news.shared.model/-news-type/index.html">NewsType</a><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../com.galarzaa.tibiakt.client.model/-tibia-response/index.html">TibiaResponse</a><span class="token operator">&lt;</span><a href="../../../tibiakt-core/com.galarzaa.tibiakt.core.section.news.archive.model/-news-archive/index.html">NewsArchive</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Fetch the news for a given interval.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":tibiakt-client/main"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="fetch-news-archive.html"><span class="token function">fetchNewsArchive</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">startAt<span class="token operator">: </span><span data-unresolved-link="kotlinx.datetime/LocalDate///PointingToDeclaration/">LocalDate</span><span class="token punctuation">, </span></span><span class="parameter ">endAt<span class="token operator">: </span><span data-unresolved-link="kotlinx.datetime/LocalDate///PointingToDeclaration/">LocalDate</span><span class="token punctuation">, </span></span><span class="parameter ">categories<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-set/index.html">Set</a><span class="token operator">&lt;</span><a href="../../../tibiakt-core/com.galarzaa.tibiakt.core.section.news.shared.model/-news-category/index.html">NewsCategory</a><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">types<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-set/index.html">Set</a><span class="token operator">&lt;</span><a href="../../../tibiakt-core/com.galarzaa.tibiakt.core.section.news.shared.model/-news-type/index.html">NewsType</a><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../com.galarzaa.tibiakt.client.model/-tibia-response/index.html">TibiaResponse</a><span class="token operator">&lt;</span><a href="../../../tibiakt-core/com.galarzaa.tibiakt.core.section.news.archive.model/-news-archive/index.html">NewsArchive</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Fetch the news for a given interval.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
 <a data-name="-949406633%2FFunctions%2F-45736278" anchor-label="fetchNewsArticleById" id="-949406633%2FFunctions%2F-45736278" data-filterable-set=":tibiakt-client/main"></a>
-          <div class="table-row" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
+          <div class="table-row table-row_content" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="fetch-news-article-by-id.html"><span>fetch</span><wbr><span>News</span><wbr><span>Article</span><wbr><span>By</span><wbr><span><span>Id</span></span></a></div>
@@ -417,7 +416,7 @@
             </div>
           </div>
 <a data-name="-1799915736%2FFunctions%2F-45736278" anchor-label="fetchWorld" id="-1799915736%2FFunctions%2F-45736278" data-filterable-set=":tibiakt-client/main"></a>
-          <div class="table-row" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
+          <div class="table-row table-row_content" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="fetch-world.html"><span>fetch</span><wbr><span><span>World</span></span></a></div>
@@ -432,7 +431,7 @@
             </div>
           </div>
 <a data-name="-620326552%2FFunctions%2F-45736278" anchor-label="fetchWorldGuilds" id="-620326552%2FFunctions%2F-45736278" data-filterable-set=":tibiakt-client/main"></a>
-          <div class="table-row" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
+          <div class="table-row table-row_content" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="fetch-world-guilds.html"><span>fetch</span><wbr><span>World</span><wbr><span><span>Guilds</span></span></a></div>
@@ -447,7 +446,7 @@
             </div>
           </div>
 <a data-name="2085084387%2FFunctions%2F-45736278" anchor-label="fetchWorldOverview" id="2085084387%2FFunctions%2F-45736278" data-filterable-set=":tibiakt-client/main"></a>
-          <div class="table-row" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
+          <div class="table-row table-row_content" data-filterable-current=":tibiakt-client/main" data-filterable-set=":tibiakt-client/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="fetch-world-overview.html"><span>fetch</span><wbr><span>World</span><wbr><span><span>Overview</span></span></a></div>
@@ -467,17 +466,21 @@
   </div>
 </div>
     <div class="footer">
-        <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
-        <span>© 2025 Copyright</span>
-        <span class="pull-right">
-            <span>Generated by </span>
-            <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
-                <span>dokka</span>
-            </a>
-        </span>
-    </div>
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2026 Copyright</div>
+                </div>
             </div>
         </div>
     </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

@@ -170,7 +170,12 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;
 &nbsp;import com.galarzaa.tibiakt.core.enums.StringEnum
 &nbsp;
-&nbsp;/** The available types of news. */
+&nbsp;/**
+&nbsp; * The available types of news.
+&nbsp; *
+&nbsp; * @property value The internal value, used in parameters for filtering, and image paths.
+&nbsp; * @property displayName The display name used on Tibia.com.
+&nbsp; * */
 <b class="fc">&nbsp;public enum class NewsType(override val value: String, public val displayName: String) : StringEnum {</b>
 <b class="fc">&nbsp;    NEWS(&quot;news&quot;, &quot;News&quot;),</b>
 <b class="fc">&nbsp;    NEWS_TICKER(&quot;ticker&quot;, &quot;News Ticker&quot;),</b>
@@ -183,6 +188,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;        get() = &quot;filter_$value&quot;</b>
 &nbsp;
 &nbsp;    public companion object {
+&nbsp;        /** Get the [NewsType] corresponding to the given [displayName]. */
 <b class="pc">&nbsp;        public fun fromDisplayName(displayName: String?): NewsType? = entries.find { it.displayName == displayName }</b>
 &nbsp;    }
 &nbsp;}
@@ -209,7 +215,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-11-25 04:03</div>
+    <div style="float:right;">generated on 2026-05-02 00:37</div>
 </div>
 </body>
 </html>

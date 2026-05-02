@@ -178,12 +178,12 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;        filters = bazaarFilters {</b>
 <b class="fc">&nbsp;            world = searchData.values[&quot;filter_world&quot;]</b>
 <b class="fc">&nbsp;            pvpType =</b>
-<b class="fc">&nbsp;                PvpType.Companion.fromHighscoresFilterValue(searchData.values[PvpType.Companion.QUERY_PARAM_BAZAAR]?.toInt())</b>
-<b class="fc">&nbsp;            battlEyeType = IntEnum.Companion.fromValue(searchData.values[AuctionBattlEyeFilter.Companion.QUERY_PARAM])</b>
-<b class="fc">&nbsp;            vocation = IntEnum.Companion.fromValue(searchData.values[AuctionVocationFilter.Companion.QUERY_PARAM])</b>
-<b class="fc">&nbsp;            skill = IntEnum.Companion.fromValue(searchData.values[AuctionSkillFilter.Companion.QUERY_PARAM])</b>
-<b class="fc">&nbsp;            orderBy = IntEnum.Companion.fromValue(searchData.values[AuctionOrderBy.Companion.QUERY_PARAM])</b>
-<b class="fc">&nbsp;            orderDirection = IntEnum.Companion.fromValue(searchData.values[AuctionOrderDirection.Companion.QUERY_PARAM])</b>
+<b class="fc">&nbsp;                PvpType.fromHighscoresFilterValue(searchData.values[PvpType.QUERY_PARAM_BAZAAR]?.toInt())</b>
+<b class="fc">&nbsp;            battlEyeType = IntEnum.fromValue(searchData.values[AuctionBattlEyeFilter.QUERY_PARAM])</b>
+<b class="fc">&nbsp;            vocation = IntEnum.fromValue(searchData.values[AuctionVocationFilter.QUERY_PARAM])</b>
+<b class="fc">&nbsp;            skill = IntEnum.fromValue(searchData.values[AuctionSkillFilter.QUERY_PARAM])</b>
+<b class="fc">&nbsp;            orderBy = IntEnum.fromValue(searchData.values[AuctionOrderBy.QUERY_PARAM])</b>
+<b class="fc">&nbsp;            orderDirection = IntEnum.fromValue(searchData.values[AuctionOrderDirection.QUERY_PARAM])</b>
 <b class="pc">&nbsp;            minimumLevel = searchData.values[&quot;filter_levelrangefrom&quot;]?.nullIfBlank()?.parseInteger()</b>
 <b class="pc">&nbsp;            maximumLevel = searchData.values[&quot;filter_levelrangeto&quot;]?.nullIfBlank()?.parseInteger()</b>
 <b class="pc">&nbsp;            minimumSkillLevel = searchData.values[&quot;filter_skillrangefrom&quot;]?.nullIfBlank()?.parseInteger()</b>
@@ -192,7 +192,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;            if (forms.size &gt; 1) {</b>
 <b class="fc">&nbsp;                val additionalData = forms[1].formData()</b>
 <b class="pc">&nbsp;                searchString = additionalData.values[&quot;searchstring&quot;]?.nullIfBlank()</b>
-<b class="fc">&nbsp;                searchType = IntEnum.Companion.fromValue(additionalData.values[AuctionSearchType.Companion.queryParam])</b>
+<b class="fc">&nbsp;                searchType = IntEnum.fromValue(additionalData.values[AuctionSearchType.queryParam])</b>
 &nbsp;            }
 <b class="fc">&nbsp;        }</b>
 &nbsp;    }
@@ -220,7 +220,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-11-25 04:03</div>
+    <div style="float:right;">generated on 2026-05-02 00:37</div>
 </div>
 </body>
 </html>

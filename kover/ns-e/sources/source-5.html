@@ -52,6 +52,69 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     100%
   </span>
   <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (52/52)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    82.6%
+  </span>
+  <span class="absValue">
+    (890/1078)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">AuctionDetails$Companion</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
     (2/2)
   </span>
 </td>
@@ -76,70 +139,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     82.6%
   </span>
   <span class="absValue">
-    (890/1078)
-  </span>
-</td>
-</tr>
-  <tr>
-    <td class="name">AuctionDetails$Companion</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/1)
-  </span>
-</td>
-    <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/1)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/2)
-  </span>
-</td>
-  </tr>
-<tr>
-  <td class="name"><strong>Total</strong></td>
-<td class="coverageStat">
-  <span class="percent">
-    66.7%
-  </span>
-  <span class="absValue">
-    (2/3)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/6)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    98.1%
-  </span>
-  <span class="absValue">
-    (53/54)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    82.4%
-  </span>
-  <span class="absValue">
-    (890/1080)
+    (894/1082)
   </span>
 </td>
 </tr>
@@ -192,6 +192,8 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp; * @property hasCharmExpansion Whether this character has a charm expansion or not.
 &nbsp; * @property availableCharmPoints The total charm points the character has for spending.
 &nbsp; * @property spentCharmPoints The total charm points that have been spent.
+&nbsp; * @property availableMinorCharmEchoes The total minor charm echoes the character has for spending.
+&nbsp; * @property spentMinorCharmEchoes The total minor charm echoes that have been spent.
 &nbsp; * @property dailyRewardStreak The current daily rewards streak.
 &nbsp; * @property huntingTaskPoints The total hunting task points.
 &nbsp; * @property permanentWeeklyTaskExpansion The total number of permanent hunting task slots the character has.
@@ -226,7 +228,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp; * @property proficiencies The weapon proficiencies progress of the character.
 &nbsp; */
 <b class="pc">&nbsp;@Serializable</b>
-<b class="fc">&nbsp;public data class AuctionDetails(</b>
+&nbsp;public data class AuctionDetails(
 <b class="fc">&nbsp;    val hitPoints: Int,</b>
 <b class="fc">&nbsp;    val mana: Int,</b>
 <b class="fc">&nbsp;    val capacity: Int,</b>
@@ -302,7 +304,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-11-25 04:03</div>
+    <div style="float:right;">generated on 2026-05-02 00:37</div>
 </div>
 </body>
 </html>
