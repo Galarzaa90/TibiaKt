@@ -7,27 +7,30 @@ ENV GRADLE_USER_HOME=/gradle
 # Stop Gradle from trying to download extra JDKs in CI
 ENV ORG_GRADLE_JAVA_INSTALLATIONS_AUTO_DOWNLOAD=false
 
-COPY gradlew ./
-COPY gradle/ ./gradle/
-COPY settings.gradle.kts ./
-COPY build.gradle.kts ./
-COPY gradle.properties ./
-COPY gradle/libs.versions.toml ./gradle/libs.versions.toml
-COPY build-logic/ ./build-logic/
+COPY --link gradlew ./
+COPY --link gradle/ ./gradle/
+COPY --link settings.gradle.kts ./
+COPY --link build.gradle.kts ./
+COPY --link gradle.properties ./
+COPY --link gradle/libs.versions.toml ./gradle/libs.versions.toml
+COPY --link build-logic/ ./build-logic/
 RUN mkdir -p dokka tibiakt-core tibiakt-client tibiakt-server
 # Warm Gradle/plugin caches deterministically before copying full sources.
 RUN --mount=type=cache,target=/gradle ./gradlew help --no-daemon
 
-COPY tibiakt-core/ /app/tibiakt-core
-COPY tibiakt-client/ /app/tibiakt-client
-COPY tibiakt-server/ /app/tibiakt-server
-COPY dokka/ /app/dokka
+COPY --link tibiakt-core/ /app/tibiakt-core
+COPY --link tibiakt-client/ /app/tibiakt-client
+COPY --link tibiakt-server/ /app/tibiakt-server
+COPY --link dokka/ /app/dokka
 
 ARG VERSION=0.0.0-SNAPSHOT
-RUN --mount=type=cache,target=/gradle ./gradlew -PVERSION=${VERSION} build -x test -x detekt tibiakt-server:shadowJar --parallel --no-daemon
+RUN --mount=type=cache,target=/gradle ./gradlew -PVERSION=${VERSION} tibiakt-server:shadowJar -x test -x detekt --parallel --no-daemon
 
 FROM eclipse-temurin:21-jre-alpine
-COPY --from=builder ./app/tibiakt-server/build/libs/tibiatk-server-shadow.jar .
+WORKDIR /app
+RUN addgroup -S tibiakt && adduser -S -G tibiakt tibiakt
+COPY --from=builder /app/tibiakt-server/build/libs/tibiatk-server-shadow.jar /app/tibiatk-server-shadow.jar
+USER tibiakt
 
 EXPOSE 8080
 
@@ -44,4 +47,4 @@ LABEL org.opencontainers.image.description="HTTP API that parses content from Ti
 HEALTHCHECK --interval=30s --timeout=60s --start-period=5s --retries=5 \
   CMD wget http://localhost:8080/healthcheck -q -O - > /dev/null 2>&1
 
-ENTRYPOINT [ "java", "-jar",  "./tibiatk-server-shadow.jar" ]
+ENTRYPOINT [ "java", "-jar", "/app/tibiatk-server-shadow.jar" ]
