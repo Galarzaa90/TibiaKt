@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>tibiakt-core Coverage Report > Familiars</title>
+  <title>tibiakt-core Coverage Report > CharmEntry</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     <a href="../index.html">com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model</a>
 </div>
 
-<h1>Coverage Summary for Class: Familiars (com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model)</h1>
+<h1>Coverage Summary for Class: CharmEntry (com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model)</h1>
 
 <table class="coverageStats">
 
@@ -46,7 +46,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </th>
 </tr>
 <tr>
-  <td class="name">Familiars</td>
+  <td class="name">CharmEntry</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -73,15 +73,15 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </td>
 <td class="coverageStat">
   <span class="percent">
-    81.4%
+    73.8%
   </span>
   <span class="absValue">
-    (96/118)
+    (62/84)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">Familiars$Companion</td>
+    <td class="name">CharmEntry$Companion</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -136,10 +136,10 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </td>
 <td class="coverageStat">
   <span class="percent">
-    82%
+    75%
   </span>
   <span class="absValue">
-    (100/122)
+    (66/88)
   </span>
 </td>
 </tr>
@@ -168,37 +168,25 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;
 &nbsp;package com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model
 &nbsp;
-&nbsp;import com.galarzaa.tibiakt.core.net.staticFileUrl
 &nbsp;import kotlinx.serialization.Serializable
 &nbsp;
 &nbsp;/**
-&nbsp; * The familiars of a character in an [Auction].
+&nbsp; * A charm of an [auctioned][Auction] character.
+&nbsp; *
+&nbsp; * @property name The name of the charm
+&nbsp; * @property cost The cost of the charm.
+&nbsp; * @property currency The type of points needed to unlock this charm.
+&nbsp; * @property type The type of charm.
+&nbsp; * @property grade The grade of the charm.
 &nbsp; */
 <b class="pc">&nbsp;@Serializable</b>
-&nbsp;public data class Familiars(
-<b class="fc">&nbsp;    override val currentPage: Int,</b>
-<b class="fc">&nbsp;    override val totalPages: Int,</b>
-<b class="fc">&nbsp;    override val resultsCount: Int,</b>
-<b class="fc">&nbsp;    override val entries: List&lt;FamiliarEntry&gt;,</b>
-<b class="fc">&nbsp;    override val isFullyFetched: Boolean,</b>
-&nbsp;) : AjaxPaginator&lt;FamiliarEntry&gt;
-&nbsp;
-&nbsp;/**
-&nbsp; * A familiar of an [Auction] character.
-&nbsp; *
-&nbsp; * @property name The name of the familiar.
-&nbsp; * @property familiarId The internal ID of the familiar.
-&nbsp; */
-&nbsp;@Serializable
-&nbsp;public data class FamiliarEntry(
-&nbsp;    val name: String,
-&nbsp;    val familiarId: Int,
-&nbsp;) {
-&nbsp;    /**
-&nbsp;     * The URL to the familiar&#39;s image.
-&nbsp;     */
-&nbsp;    val imageUrl: String get() = staticFileUrl(&quot;images&quot;, &quot;charactertrade&quot;, &quot;summons&quot;, &quot;$familiarId.gif&quot;)
-&nbsp;}
+&nbsp;public data class CharmEntry(
+<b class="fc">&nbsp;    val name: String,</b>
+<b class="fc">&nbsp;    val cost: Int,</b>
+<b class="fc">&nbsp;    val currency: String,</b>
+<b class="fc">&nbsp;    val type: String,</b>
+<b class="fc">&nbsp;    val grade: Int,</b>
+&nbsp;)
 </code>
 </pre>
 </div>
@@ -222,7 +210,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2026-05-04 23:48</div>
+    <div style="float:right;">generated on 2026-05-05 01:02</div>
 </div>
 </body>
 </html>

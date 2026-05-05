@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>tibiakt-core Coverage Report > FragmentProgressEntry</title>
+  <title>tibiakt-core Coverage Report > FamiliarEntry</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     <a href="../index.html">com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model</a>
 </div>
 
-<h1>Coverage Summary for Class: FragmentProgressEntry (com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model)</h1>
+<h1>Coverage Summary for Class: FamiliarEntry (com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model)</h1>
 
 <table class="coverageStats">
 
@@ -46,13 +46,13 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </th>
 </tr>
 <tr>
-  <td class="name">FragmentProgressEntry</td>
+  <td class="name">FamiliarEntry</td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    50%
   </span>
   <span class="absValue">
-    (0/1)
+    (1/2)
   </span>
 </td>
 <td class="coverageStat">
@@ -65,46 +65,46 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    75%
   </span>
   <span class="absValue">
-    (0/4)
+    (3/4)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    42.6%
   </span>
   <span class="absValue">
-    (0/56)
+    (29/68)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">FragmentProgressEntry$Companion</td>
+    <td class="name">FamiliarEntry$Companion</td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/1)
+    (1/1)
   </span>
 </td>
     <td class="coverageStat"/>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/1)
+    (1/1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/4)
+    (4/4)
   </span>
 </td>
   </tr>
@@ -112,10 +112,10 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    66.7%
   </span>
   <span class="absValue">
-    (0/2)
+    (2/3)
   </span>
 </td>
 <td class="coverageStat">
@@ -128,18 +128,18 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    80%
   </span>
   <span class="absValue">
-    (0/5)
+    (4/5)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    45.8%
   </span>
   <span class="absValue">
-    (0/60)
+    (33/72)
   </span>
 </td>
 </tr>
@@ -168,21 +168,37 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;
 &nbsp;package com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model
 &nbsp;
+&nbsp;import com.galarzaa.tibiakt.core.net.staticFileUrl
 &nbsp;import kotlinx.serialization.Serializable
 &nbsp;
 &nbsp;/**
-&nbsp; * Represents the progress of a fragment in an auctioned character&#39;s details.
-&nbsp; *
-&nbsp; * @property grade The grade of the fragment.
-&nbsp; * @property effect The effect associated with the fragment.
-&nbsp; * @property modType The type of mod of the fragment.
+&nbsp; * The familiars of a character in an [Auction].
 &nbsp; */
-<b class="nc">&nbsp;@Serializable</b>
-&nbsp;public data class FragmentProgressEntry(
-<b class="nc">&nbsp;    val grade: Int,</b>
-<b class="nc">&nbsp;    val effect: String,</b>
-<b class="nc">&nbsp;    val modType: String,</b>
-&nbsp;)
+&nbsp;@Serializable
+&nbsp;public data class Familiars(
+&nbsp;    override val currentPage: Int,
+&nbsp;    override val totalPages: Int,
+&nbsp;    override val resultsCount: Int,
+&nbsp;    override val entries: List&lt;FamiliarEntry&gt;,
+&nbsp;    override val isFullyFetched: Boolean,
+&nbsp;) : AjaxPaginator&lt;FamiliarEntry&gt;
+&nbsp;
+&nbsp;/**
+&nbsp; * A familiar of an [Auction] character.
+&nbsp; *
+&nbsp; * @property name The name of the familiar.
+&nbsp; * @property familiarId The internal ID of the familiar.
+&nbsp; */
+<b class="pc">&nbsp;@Serializable</b>
+&nbsp;public data class FamiliarEntry(
+<b class="fc">&nbsp;    val name: String,</b>
+<b class="fc">&nbsp;    val familiarId: Int,</b>
+&nbsp;) {
+&nbsp;    /**
+&nbsp;     * The URL to the familiar&#39;s image.
+&nbsp;     */
+<b class="nc">&nbsp;    val imageUrl: String get() = staticFileUrl(&quot;images&quot;, &quot;charactertrade&quot;, &quot;summons&quot;, &quot;$familiarId.gif&quot;)</b>
+&nbsp;}
 </code>
 </pre>
 </div>
@@ -206,7 +222,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2026-05-04 23:48</div>
+    <div style="float:right;">generated on 2026-05-05 01:02</div>
 </div>
 </body>
 </html>

@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>tibiakt-core Coverage Report > CharacterBazaar</title>
+  <title>tibiakt-core Coverage Report > BountyTalisman</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     <a href="../index.html">com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model</a>
 </div>
 
-<h1>Coverage Summary for Class: CharacterBazaar (com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model)</h1>
+<h1>Coverage Summary for Class: BountyTalisman (com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model)</h1>
 
 <table class="coverageStats">
 
@@ -46,13 +46,13 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </th>
 </tr>
 <tr>
-  <td class="name">CharacterBazaar</td>
+  <td class="name">BountyTalisman</td>
 <td class="coverageStat">
   <span class="percent">
-    33.3%
+    100%
   </span>
   <span class="absValue">
-    (1/3)
+    (1/1)
   </span>
 </td>
 <td class="coverageStat">
@@ -60,28 +60,28 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     0%
   </span>
   <span class="absValue">
-    (0/8)
+    (0/2)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    77.8%
+    100%
   </span>
   <span class="absValue">
-    (7/9)
+    (3/3)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    69%
+    79.7%
   </span>
   <span class="absValue">
-    (160/232)
+    (51/64)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">CharacterBazaar$Companion</td>
+    <td class="name">BountyTalisman$Companion</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -112,10 +112,10 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    50%
+    100%
   </span>
   <span class="absValue">
-    (2/4)
+    (2/2)
   </span>
 </td>
 <td class="coverageStat">
@@ -123,23 +123,23 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     0%
   </span>
   <span class="absValue">
-    (0/8)
+    (0/2)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    80%
+    100%
   </span>
   <span class="absValue">
-    (8/10)
+    (4/4)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    69.5%
+    80.9%
   </span>
   <span class="absValue">
-    (164/236)
+    (55/68)
   </span>
 </td>
 </tr>
@@ -168,31 +168,33 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;
 &nbsp;package com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model
 &nbsp;
-&nbsp;import com.galarzaa.tibiakt.core.pagination.PaginatedWithUrl
-&nbsp;import com.galarzaa.tibiakt.core.section.charactertrade.urls.bazaarUrl
 &nbsp;import kotlinx.serialization.Serializable
 &nbsp;
 &nbsp;/**
-&nbsp; * The Character Bazaar.
+&nbsp; * Bounty talisman details shown in an auction.
 &nbsp; *
-&nbsp; * @property type The type of bazaar, current auctions or auction history.
-&nbsp; * @property filters The currently active filters for the bazaar.
+&nbsp; * @property points The total bounty points available.
+&nbsp; * @property effects The list of bounty talisman effects.
 &nbsp; */
 <b class="pc">&nbsp;@Serializable</b>
-&nbsp;public data class CharacterBazaar(
-<b class="fc">&nbsp;    val type: BazaarType,</b>
-<b class="fc">&nbsp;    val filters: BazaarFilters = BazaarFilters(),</b>
-<b class="fc">&nbsp;    override val currentPage: Int,</b>
-<b class="fc">&nbsp;    override val totalPages: Int,</b>
-<b class="fc">&nbsp;    override val resultsCount: Int,</b>
-<b class="fc">&nbsp;    override val entries: List&lt;Auction&gt;,</b>
-&nbsp;) : PaginatedWithUrl&lt;Auction&gt; {
-&nbsp;    /**
-&nbsp;     * The URL to the bazaar with the current filters and page.
-&nbsp;     */
-<b class="nc">&nbsp;    val url: String get() = bazaarUrl(type, filters, currentPage)</b>
-<b class="nc">&nbsp;    override fun getPageUrl(page: Int): String = bazaarUrl(type, filters, page)</b>
-&nbsp;}
+&nbsp;public data class BountyTalisman(
+<b class="fc">&nbsp;    val points: Int,</b>
+<b class="fc">&nbsp;    val effects: List&lt;BountyTalismanEffect&gt;,</b>
+&nbsp;)
+&nbsp;
+&nbsp;/**
+&nbsp; * A bounty talisman effect.
+&nbsp; *
+&nbsp; * @property effect The effect description.
+&nbsp; * @property level The level of the effect.
+&nbsp; * @property value The effect value as percentage.
+&nbsp; */
+&nbsp;@Serializable
+&nbsp;public data class BountyTalismanEffect(
+&nbsp;    val effect: String,
+&nbsp;    val level: Int,
+&nbsp;    val value: Double,
+&nbsp;)
 </code>
 </pre>
 </div>
@@ -216,7 +218,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2026-05-04 23:48</div>
+    <div style="float:right;">generated on 2026-05-05 01:02</div>
 </div>
 </body>
 </html>

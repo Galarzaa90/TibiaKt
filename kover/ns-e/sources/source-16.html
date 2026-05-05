@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>tibiakt-core Coverage Report > CharmEntry</title>
+  <title>tibiakt-core Coverage Report > BountyTalismanEffect</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     <a href="../index.html">com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model</a>
 </div>
 
-<h1>Coverage Summary for Class: CharmEntry (com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model)</h1>
+<h1>Coverage Summary for Class: BountyTalismanEffect (com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model)</h1>
 
 <table class="coverageStats">
 
@@ -46,7 +46,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 </th>
 </tr>
 <tr>
-  <td class="name">CharmEntry</td>
+  <td class="name">BountyTalismanEffect</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -68,20 +68,20 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     100%
   </span>
   <span class="absValue">
-    (6/6)
+    (4/4)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    73.8%
+    71.4%
   </span>
   <span class="absValue">
-    (62/84)
+    (40/56)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">CharmEntry$Companion</td>
+    <td class="name">BountyTalismanEffect$Companion</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -131,15 +131,15 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     100%
   </span>
   <span class="absValue">
-    (7/7)
+    (5/5)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    75%
+    73.3%
   </span>
   <span class="absValue">
-    (66/88)
+    (44/60)
   </span>
 </td>
 </tr>
@@ -171,21 +171,29 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;import kotlinx.serialization.Serializable
 &nbsp;
 &nbsp;/**
-&nbsp; * A charm of an [auctioned][Auction] character.
+&nbsp; * Bounty talisman details shown in an auction.
 &nbsp; *
-&nbsp; * @property name The name of the charm
-&nbsp; * @property cost The cost of the charm.
-&nbsp; * @property currency The type of points needed to unlock this charm.
-&nbsp; * @property type The type of charm.
-&nbsp; * @property grade The grade of the charm.
+&nbsp; * @property points The total bounty points available.
+&nbsp; * @property effects The list of bounty talisman effects.
+&nbsp; */
+&nbsp;@Serializable
+&nbsp;public data class BountyTalisman(
+&nbsp;    val points: Int,
+&nbsp;    val effects: List&lt;BountyTalismanEffect&gt;,
+&nbsp;)
+&nbsp;
+&nbsp;/**
+&nbsp; * A bounty talisman effect.
+&nbsp; *
+&nbsp; * @property effect The effect description.
+&nbsp; * @property level The level of the effect.
+&nbsp; * @property value The effect value as percentage.
 &nbsp; */
 <b class="pc">&nbsp;@Serializable</b>
-&nbsp;public data class CharmEntry(
-<b class="fc">&nbsp;    val name: String,</b>
-<b class="fc">&nbsp;    val cost: Int,</b>
-<b class="fc">&nbsp;    val currency: String,</b>
-<b class="fc">&nbsp;    val type: String,</b>
-<b class="fc">&nbsp;    val grade: Int,</b>
+&nbsp;public data class BountyTalismanEffect(
+<b class="fc">&nbsp;    val effect: String,</b>
+<b class="fc">&nbsp;    val level: Int,</b>
+<b class="fc">&nbsp;    val value: Double,</b>
 &nbsp;)
 </code>
 </pre>
@@ -210,7 +218,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2026-05-04 23:48</div>
+    <div style="float:right;">generated on 2026-05-05 01:02</div>
 </div>
 </body>
 </html>
