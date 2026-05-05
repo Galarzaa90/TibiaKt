@@ -40,6 +40,8 @@ import kotlin.time.Instant
  * @property hasCharmExpansion Whether this character has a charm expansion or not.
  * @property availableCharmPoints The total charm points the character has for spending.
  * @property spentCharmPoints The total charm points that have been spent.
+ * @property availableMinorCharmEchoes The total minor charm echoes the character has for spending.
+ * @property spentMinorCharmEchoes The total minor charm echoes that have been spent.
  * @property dailyRewardStreak The current daily rewards streak.
  * @property huntingTaskPoints The total hunting task points.
  * @property permanentWeeklyTaskExpansion The total number of permanent hunting task slots the character has.

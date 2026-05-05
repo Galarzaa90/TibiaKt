@@ -17,7 +17,7 @@
 package com.galarzaa
 
 plugins {
-    id("io.gitlab.arturbosch.detekt")
+    id("dev.detekt")
 }
 
 
@@ -25,6 +25,8 @@ detekt {
     val configs = listOf(
         rootProject.file("detekt.yml"), project.file("detekt.yml")
     ).filter { it.exists() }
+
+    buildUponDefaultConfig = true
 
     if (configs.isNotEmpty()) {
         config.setFrom(files(configs))

@@ -16,6 +16,11 @@
 
 package com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model
 
+/**
+ * The different types of pages for pagination in auction details.
+ *
+ * @property typeId The id of the page type.
+ */
 public enum class AuctionPagesType(public val typeId: Int) {
     ITEMS(0),
     ITEMS_STORE(1),

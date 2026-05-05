@@ -18,7 +18,12 @@ package com.galarzaa.tibiakt.core.section.news.shared.model
 
 import com.galarzaa.tibiakt.core.enums.StringEnum
 
-/** The available types of news. */
+/**
+ * The available types of news.
+ *
+ * @property value The internal value, used in parameters for filtering, and image paths.
+ * @property displayName The display name used on Tibia.com.
+ * */
 public enum class NewsType(override val value: String, public val displayName: String) : StringEnum {
     NEWS("news", "News"),
     NEWS_TICKER("ticker", "News Ticker"),
@@ -31,6 +36,7 @@ public enum class NewsType(override val value: String, public val displayName: S
         get() = "filter_$value"
 
     public companion object {
+        /** Get the [NewsType] corresponding to the given [displayName]. */
         public fun fromDisplayName(displayName: String?): NewsType? = entries.find { it.displayName == displayName }
     }
 }

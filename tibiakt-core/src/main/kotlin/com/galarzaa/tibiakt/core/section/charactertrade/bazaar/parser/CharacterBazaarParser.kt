@@ -77,12 +77,12 @@ public object CharacterBazaarParser : Parser<CharacterBazaar> {
         filters = bazaarFilters {
             world = searchData.values["filter_world"]
             pvpType =
-                PvpType.Companion.fromHighscoresFilterValue(searchData.values[PvpType.Companion.QUERY_PARAM_BAZAAR]?.toInt())
-            battlEyeType = IntEnum.Companion.fromValue(searchData.values[AuctionBattlEyeFilter.Companion.QUERY_PARAM])
-            vocation = IntEnum.Companion.fromValue(searchData.values[AuctionVocationFilter.Companion.QUERY_PARAM])
-            skill = IntEnum.Companion.fromValue(searchData.values[AuctionSkillFilter.Companion.QUERY_PARAM])
-            orderBy = IntEnum.Companion.fromValue(searchData.values[AuctionOrderBy.Companion.QUERY_PARAM])
-            orderDirection = IntEnum.Companion.fromValue(searchData.values[AuctionOrderDirection.Companion.QUERY_PARAM])
+                PvpType.fromHighscoresFilterValue(searchData.values[PvpType.QUERY_PARAM_BAZAAR]?.toInt())
+            battlEyeType = IntEnum.fromValue(searchData.values[AuctionBattlEyeFilter.QUERY_PARAM])
+            vocation = IntEnum.fromValue(searchData.values[AuctionVocationFilter.QUERY_PARAM])
+            skill = IntEnum.fromValue(searchData.values[AuctionSkillFilter.QUERY_PARAM])
+            orderBy = IntEnum.fromValue(searchData.values[AuctionOrderBy.QUERY_PARAM])
+            orderDirection = IntEnum.fromValue(searchData.values[AuctionOrderDirection.QUERY_PARAM])
             minimumLevel = searchData.values["filter_levelrangefrom"]?.nullIfBlank()?.parseInteger()
             maximumLevel = searchData.values["filter_levelrangeto"]?.nullIfBlank()?.parseInteger()
             minimumSkillLevel = searchData.values["filter_skillrangefrom"]?.nullIfBlank()?.parseInteger()
@@ -91,7 +91,7 @@ public object CharacterBazaarParser : Parser<CharacterBazaar> {
             if (forms.size > 1) {
                 val additionalData = forms[1].formData()
                 searchString = additionalData.values["searchstring"]?.nullIfBlank()
-                searchType = IntEnum.Companion.fromValue(additionalData.values[AuctionSearchType.Companion.queryParam])
+                searchType = IntEnum.fromValue(additionalData.values[AuctionSearchType.queryParam])
             }
         }
     }

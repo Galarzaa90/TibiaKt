@@ -57,6 +57,9 @@ import com.galarzaa.tibiakt.core.section.news.shared.model.NewsType
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.YearMonth
 
+/**
+ * An HTTP API client for Tibia.com.
+ */
 public interface TibiaKtApi {
 
     // region News Section
