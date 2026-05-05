@@ -39,6 +39,8 @@ import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.AuctionStat
 import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.BestiaryEntry
 import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.BlessingEntry
 import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.BosstiaryEntry
+import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.BountyTalisman
+import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.BountyTalismanEffect
 import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.CharmEntry
 import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.FamiliarEntry
 import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.Familiars
@@ -119,6 +121,7 @@ public object AuctionParser : Parser<Auction?> {
                 detailsTables["Bosstiary Progress"]?.run { parseBosstiaryTablee(this) }
                 detailsTables["Revealed Gems"]?.run { parseRevealedGemsTable(this) }
                 detailsTables["Fragment Progress"]?.run { parseFragmentProgressTable(this) }
+                detailsTables["Bounty Talisman"]?.run { parseBountyTalismanTable(this) }
                 detailsTables["Proficiencies"]?.run { parseProficienciesTable(this) }
             }
         }
@@ -190,6 +193,30 @@ public object AuctionParser : Parser<Auction?> {
             val grade = parseRomanNumerals(gradeCol.text())
             addFragmentProgress(FragmentProgressEntry(grade, typeCol.cleanText(), modType))
         }
+    }
+
+    private fun AuctionBuilder.AuctionDetailsBuilder.parseBountyTalismanTable(table: Element) {
+        val tables = table.select(TABLE_SELECTOR)
+        if (tables.size < 2) return
+
+        val pointsRow = tables.first().rows().firstOrNull() ?: return
+        val points = pointsRow.selectFirst("div[style*=float:right]")?.cleanText()?.parseInteger() ?: return
+
+        val effects = mutableListOf<BountyTalismanEffect>()
+        for (row in tables.last().rows().offsetStart(1)) {
+            val columns = row.cells()
+            if (columns.size != 3) continue
+            val (effectCell, levelCell, valueCell) = columns
+            effects.add(
+                BountyTalismanEffect(
+                    effect = effectCell.cleanText(),
+                    level = levelCell.cleanText().parseInteger(),
+                    value = valueCell.cleanText().remove("%").toDouble(),
+                )
+            )
+        }
+
+        bountyTalisman = BountyTalisman(points, effects)
     }
 
     private fun AuctionBuilder.AuctionDetailsBuilder.parseProficienciesTable(table: Element){

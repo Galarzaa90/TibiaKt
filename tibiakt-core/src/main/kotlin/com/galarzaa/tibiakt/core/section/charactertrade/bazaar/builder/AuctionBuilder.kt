@@ -30,6 +30,7 @@ import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.BestiaryEnt
 import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.BidType
 import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.BlessingEntry
 import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.BosstiaryEntry
+import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.BountyTalisman
 import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.CharmEntry
 import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.Familiars
 import com.galarzaa.tibiakt.core.section.charactertrade.bazaar.model.FragmentProgressEntry
@@ -183,6 +184,7 @@ internal class AuctionBuilder : TibiaKtBuilder<Auction> {
         val bosstiaryProgress: MutableList<BosstiaryEntry> = mutableListOf()
         val revealedGems: MutableList<RevealedGem> = mutableListOf()
         val fragmentProgress: MutableList<FragmentProgressEntry> = mutableListOf()
+        var bountyTalisman: BountyTalisman? = null
         val proficiencies: MutableList<WeaponProficiency> = mutableListOf()
 
 
@@ -272,6 +274,7 @@ internal class AuctionBuilder : TibiaKtBuilder<Auction> {
                 bosstiaryProgress = bosstiaryProgress,
                 revealedGems = revealedGems,
                 fragmentProgress = fragmentProgress,
+                bountyTalisman = bountyTalisman,
                 proficiencies = proficiencies,
             )
     }
