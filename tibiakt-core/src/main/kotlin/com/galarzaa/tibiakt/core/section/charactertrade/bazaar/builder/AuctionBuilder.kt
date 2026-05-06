@@ -184,7 +184,7 @@ internal class AuctionBuilder : TibiaKtBuilder<Auction> {
         val bosstiaryProgress: MutableList<BosstiaryEntry> = mutableListOf()
         val revealedGems: MutableList<RevealedGem> = mutableListOf()
         val fragmentProgress: MutableList<FragmentProgressEntry> = mutableListOf()
-        var bountyTalisman: BountyTalisman? = BountyTalisman(0, emptyList())
+        var bountyTalisman: BountyTalisman = BountyTalisman(0, emptyList())
         val proficiencies: MutableList<WeaponProficiency> = mutableListOf()
 
 
