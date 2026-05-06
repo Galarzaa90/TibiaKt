@@ -1,5 +1,16 @@
 # Changelog
 
+## 2.1.0 (2026-05-06)
+
+- Added `AuctionDetails.bountyTalisman`.
+  - Added `BountyTalisman` and `BountyTalismanEffect` models.
+  - Added parsing for the Bounty Talisman section in character auction details.
+- Migrated Detekt to the `dev.detekt` plugin and updated the Detekt configuration.
+- Migrated the server shadow plugin to `com.gradleup.shadow`.
+- Added and improved KDoc for selected public API types and model properties.
+- Updated the Docker image build to use Java 21, BuildKit cache mounts, linked copies, and a non-root runtime user.
+- Upgraded build and runtime dependencies
+
 ## 2.0.0 (2025-11-24)
 
 - Added `BOUNTY_POINTS_EARNED` and `WEEKLY_TASKS_COMPLETED` highscores categories.
