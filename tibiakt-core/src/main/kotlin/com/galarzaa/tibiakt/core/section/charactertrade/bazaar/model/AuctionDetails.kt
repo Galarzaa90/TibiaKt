@@ -128,6 +128,6 @@ public data class AuctionDetails(
     val bosstiaryProgress: List<BosstiaryEntry>,
     val revealedGems: List<RevealedGem>,
     val fragmentProgress: List<FragmentProgressEntry>,
-    val bountyTalisman: BountyTalisman?,
+    val bountyTalisman: BountyTalisman,
     val proficiencies: List<WeaponProficiency>,
 )
