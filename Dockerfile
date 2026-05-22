@@ -34,12 +34,12 @@ USER tibiakt
 
 EXPOSE 8080
 
-LABEL maintainer="Allan Galarza <allan.galarza@gmail.com>"
+LABEL maintainer="Allan Galarza <contact@galarzaa.com>"
 LABEL org.opencontainers.image.licenses="Apache 2.0"
-LABEL org.opencontainers.image.authors="Allan Galarza <allan.galarza@gmail.com>"
+LABEL org.opencontainers.image.authors="Allan Galarza <contact@galarzaa.com>"
 LABEL org.opencontainers.image.url="https://github.com/Galarzaa90/tibiakt"
 LABEL org.opencontainers.image.source="https://github.com/Galarzaa90/tibiakt"
-LABEL org.opencontainers.image.vendor="Allan Galarza <allan.galarza@gmail.com>"
+LABEL org.opencontainers.image.vendor="Allan Galarza <contact@galarzaa.com>"
 LABEL org.opencontainers.image.title="TibiaKT"
 LABEL org.opencontainers.image.description="HTTP API that parses content from Tibia.com into JSON data."
 
