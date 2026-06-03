@@ -87,7 +87,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     95.3%
   </span>
   <span class="absValue">
-    (1361/1428)
+    (1373/1440)
   </span>
 </td>
 </tr>
@@ -367,7 +367,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="fc">&nbsp;            val columns = row.select(&quot;td&quot;)</b>
 <b class="fc">&nbsp;            val (nameColumn, worldColumn, statusColumn, _) = columns</b>
 <b class="fc">&nbsp;            var isTraded = false</b>
-<b class="fc">&nbsp;            var name = nameColumn.text().splitList(&quot;.&quot;).last().clean()</b>
+<b class="fc">&nbsp;            var name = nameColumn.text().split(&quot;.&quot;).last().clean()</b>
 <b class="fc">&nbsp;            if (name.contains(tradedLabel, true)) {</b>
 <b class="fc">&nbsp;                name = name.remove(tradedLabel).trim()</b>
 <b class="fc">&nbsp;                isTraded = true</b>
@@ -405,7 +405,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2026-05-22 00:10</div>
+    <div style="float:right;">generated on 2026-06-03 04:31</div>
 </div>
 </body>
 </html>
