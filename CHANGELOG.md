@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.1 (2026-06-02)
+
+- Fixed account character parsing so names containing `and` are preserved correctly.
+
 ## 2.1.0 (2026-05-06)
 
 - Added `AuctionDetails.bountyTalisman`.

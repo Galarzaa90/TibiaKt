@@ -266,7 +266,7 @@ public object CharacterParser : Parser<CharacterInfo?> {
             val columns = row.select("td")
             val (nameColumn, worldColumn, statusColumn, _) = columns
             var isTraded = false
-            var name = nameColumn.text().splitList(".").last().clean()
+            var name = nameColumn.text().split(".").last().clean()
             if (name.contains(tradedLabel, true)) {
                 name = name.remove(tradedLabel).trim()
                 isTraded = true
