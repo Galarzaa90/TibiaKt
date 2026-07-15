@@ -159,11 +159,19 @@ public object AuctionParser : Parser<Auction?> {
     private fun AuctionBuilder.AuctionDetailsBuilder.parseBestiaryTable(table: Element) {
         for (row in table.selectFirst(TABLE_SELECTOR).rows().offsetStart(1)) {
             val columnsText = row.cellsText()
-            if (columnsText.size != 4) continue
-            val (step, kills, name, _) = columnsText
-            val masteryIcon = row.selectFirst("img") ?: continue
+            if (columnsText.size !in 4..5) continue
+            val (step, kills, name) = columnsText
+            val icons = row.select("img")
+            val masteryIcon = icons.getOrNull(0) ?: continue
             val masteryUnlocked = masteryIcon.attr("alt").contains("unlocked")
-            val entry = BestiaryEntry(name, kills.remove("x").parseLong(), step.toInt(), masteryUnlocked)
+            val echoWardenKilled = icons.getOrNull(1)?.attr("alt") == "Echo Warden killed"
+            val entry = BestiaryEntry(
+                name = name,
+                kills = kills.remove("x").parseLong(),
+                step = step.toInt(),
+                isMasteryUnlocked = masteryUnlocked,
+                hasKilledEchoWarden = echoWardenKilled,
+            )
             addBestiaryEntry(entry)
         }
     }

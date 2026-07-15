@@ -50,6 +50,7 @@ public data class BosstiaryEntry(
  * A bestiary entry of an [Auction] character.
  *
  * @property isMasteryUnlocked Whether the character has unlocked the mastery of this creature or not.
+ * @property hasKilledEchoWarden Whether the character has killed the Echo Warden for this creature.
  */
 @Serializable
 public data class BestiaryEntry(
@@ -57,4 +58,5 @@ public data class BestiaryEntry(
     override val kills: Long,
     override val step: Int,
     val isMasteryUnlocked: Boolean,
+    val hasKilledEchoWarden: Boolean = false,
 ) : AuctionCreatureEntry

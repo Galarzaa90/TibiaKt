@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.2.0 (2026-07-15)
+
+- Add `PHOSPHORUS_RECORD` entry to the `HighscoresCategory` enum.
+- Add `hasKilledEchoWarden` property to `BestiaryEntry` and added parser support for it.
+
 ## 2.1.1 (2026-06-02)
 
 - Fixed account character parsing so names containing `and` are preserved correctly.

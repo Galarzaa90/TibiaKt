@@ -34,6 +34,7 @@ public enum class HighscoresCategory(override val value: Int) : IntEnum {
     GOSHNARS_TAINT(9),
     LOYALTY_POINTS(10),
     MAGIC_LEVEL(11),
+    PHOSPHORUS_RECORD(18),
     SHIELDING(12),
     SWORD_FIGHTING(13),
     WEEKLY_TASKS_COMPLETED(17);
