@@ -202,6 +202,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp; * A bestiary entry of an [Auction] character.
 &nbsp; *
 &nbsp; * @property isMasteryUnlocked Whether the character has unlocked the mastery of this creature or not.
+&nbsp; * @property hasKilledEchoWarden Whether the character has killed the Echo Warden for this creature.
 &nbsp; */
 &nbsp;@Serializable
 &nbsp;public data class BestiaryEntry(
@@ -209,6 +210,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;    override val kills: Long,
 &nbsp;    override val step: Int,
 &nbsp;    val isMasteryUnlocked: Boolean,
+&nbsp;    val hasKilledEchoWarden: Boolean = false,
 &nbsp;) : AuctionCreatureEntry
 </code>
 </pre>
@@ -233,7 +235,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2026-06-03 04:31</div>
+    <div style="float:right;">generated on 2026-07-15 22:37</div>
 </div>
 </body>
 </html>
