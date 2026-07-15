@@ -1,0 +1,88 @@
+[project]
+site_name = "TibiaKt"
+site_url = "https://galarzaa90.github.io/TibiaKt/"
+site_author = "Allan Galarza"
+site_description = "Kotlin library to fetch and parse Tibia.com pages."
+site_dir = "site"
+repo_url = "https://github.com/Galarzaa90/TibiaKt"
+repo_name = "Galarzaa90/TibiaKt"
+copyright = """
+&copy; 2025 Allan Galarza<br>
+<a href="https://www.tibia.com">Tibia</a> is made by <a href="https://www.cipsoft.com/">CipSoft</a>, all Tibia content is copyrighted by <a href="https://www.cipsoft.com/">CipSoft GmbH</a>.
+"""
+nav = [
+    { "TibiaKt" = [
+        { "Home" = "index.md" },
+        { "Supported Sections" = "sections.md" },
+        { "Usage" = "usage.md" },
+        { "Changelog" = "changelog.md" },
+    ] },
+    { "API Reference ↗" = "api/" },
+]
+
+[project.theme]
+variant = "modern"
+language = "en"
+features = [
+    "content.code.copy",
+    "content.code.select",
+    "navigation.footer",
+    "navigation.instant",
+    "navigation.instant.progress",
+    "navigation.tabs",
+    "navigation.tabs.sticky",
+    "navigation.top",
+    "navigation.tracking",
+    "search.suggest",
+    "search.highlight",
+    "search.share",
+    "toc.follow",
+]
+
+[project.theme.icon]
+repo = "fontawesome/brands/github"
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme)"
+toggle.icon = "material/brightness-auto"
+toggle.name = "Switch to light mode"
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: light)"
+scheme = "default"
+primary = "light blue"
+toggle.icon = "material/brightness-7"
+toggle.name = "Switch to dark mode"
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: dark)"
+scheme = "slate"
+primary = "light blue"
+toggle.icon = "material/brightness-4"
+toggle.name = "Switch to system preference"
+
+[[project.extra.social]]
+icon = "fontawesome/brands/github"
+link = "https://github.com/Galarzaa90/TibiaKt"
+
+[[project.extra.social]]
+icon = "fontawesome/brands/docker"
+link = "https://hub.docker.com/r/galarzaa90/tibiakt"
+
+[project.markdown_extensions.admonition]
+[project.markdown_extensions.def_list]
+[project.markdown_extensions.pymdownx.details]
+[project.markdown_extensions.pymdownx.superfences]
+
+[project.markdown_extensions.pymdownx.highlight]
+anchor_linenums = true
+
+[project.markdown_extensions.pymdownx.snippets]
+
+[project.markdown_extensions.pymdownx.tasklist]
+custom_checkbox = true
+
+[project.markdown_extensions.toc]
+permalink = true
+
+[project.plugins.search]
