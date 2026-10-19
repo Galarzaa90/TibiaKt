@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Fix `TibiaKtClient.fetchAuctionAdditionalPages` not properly passing parameters to fetch outfits and mounts.
+- Fix fetching additional auction items possibly corrupting store items.
+
 ## 2.2.0 (2026-07-15)
 
 - Add `PHOSPHORUS_RECORD` entry to the `HighscoresCategory` enum.

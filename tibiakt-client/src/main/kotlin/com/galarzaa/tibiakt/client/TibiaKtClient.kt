@@ -574,7 +574,12 @@ public class TibiaKtClient(
         val wantsExtras = fetchItems || fetchMounts || fetchOutfits
 
         return if (hasDetails && wantsExtras) {
-            fetchAuctionAdditionalPages(tibiaResponse, fetchItems, fetchMounts, fetchOutfits)
+            fetchAuctionAdditionalPages(
+                tibiaResponse,
+                fetchItems = fetchItems,
+                fetchOutfits = fetchOutfits,
+                fetchMounts = fetchMounts
+            )
         } else {
             tibiaResponse
         }
@@ -626,7 +631,7 @@ public class TibiaKtClient(
                         isFullyFetched = fetchItems,
                     ),
                     storeItems = tibiaResponse.data.details!!.storeItems.copy(
-                        entries = storeItemEntries ?: tibiaResponse.data.details!!.items.entries,
+                        entries = storeItemEntries ?: tibiaResponse.data.details!!.storeItems.entries,
                         isFullyFetched = fetchItems,
                     ),
                     mounts = tibiaResponse.data.details!!.mounts.copy(
