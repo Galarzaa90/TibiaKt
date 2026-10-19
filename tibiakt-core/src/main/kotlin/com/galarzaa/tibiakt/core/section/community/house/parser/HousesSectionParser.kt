@@ -39,7 +39,7 @@ import kotlin.time.Duration.Companion.hours
 
 /** Parses content from the houses section. */
 public object HousesSectionParser : Parser<HousesSection?> {
-    private val auctionInfoRegex = Regex("""\((?<bid>\d+) gold; (?<timeLeft>\w)+ (?<timeUnit>day|hour)s? left\)""")
+    private val auctionInfoRegex = Regex("""\((?<bid>\d+) gold; (?<timeLeft>\d+) (?<timeUnit>day|hour)s? left\)""")
 
     override fun fromContent(content: String): HousesSection? {
         val boxContent = boxContent(content)
