@@ -20,7 +20,12 @@ import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.date.shouldBeBefore
 import io.kotest.matchers.ints.shouldBeLessThan
 import io.kotest.matchers.shouldBe
-import kotlinx.datetime.*
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toInstant
+import kotlinx.datetime.toLocalDateTime
+import kotlin.time.Instant
 import kotlin.time.toJavaInstant
 
 class ServerSaveTests : FunSpec({
@@ -68,5 +73,43 @@ class ServerSaveTests : FunSpec({
 
             convertedTime.hour shouldBe 1
         }
+
+        test("Time before server save on spring DST transition day") {
+            val time = Instant.parse("2026-03-29T07:59:59Z")
+            val serverSaveTime = time.lastServerSave()
+
+            serverSaveTime shouldBe Instant.parse("2026-03-28T09:00:00Z")
+        }
+
+        test("Time before server save on autumn DST transition day") {
+            val time = Instant.parse("2026-10-25T08:59:59Z")
+            val serverSaveTime = time.lastServerSave()
+
+            serverSaveTime shouldBe Instant.parse("2026-10-24T08:00:00Z")
+        }
+    }
+
+    context("nextServerSave") {
+
+        test("Time before spring DST transition") {
+            val time = Instant.parse("2026-03-28T12:00:00Z")
+            val serverSaveTime = time.nextServerSave()
+
+            serverSaveTime shouldBe Instant.parse("2026-03-29T08:00:00Z")
+        }
+
+        test("Time before autumn DST transition") {
+            val time = Instant.parse("2026-10-24T12:00:00Z")
+            val serverSaveTime = time.nextServerSave()
+
+            serverSaveTime shouldBe Instant.parse("2026-10-25T09:00:00Z")
+        }
+    }
+
+    test("Time at server save") {
+        val time = Instant.parse("2026-03-29T08:00:00Z")
+
+        time.lastServerSave() shouldBe time
+        time.nextServerSave() shouldBe Instant.parse("2026-03-30T08:00:00Z")
     }
 })

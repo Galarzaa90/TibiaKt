@@ -4,6 +4,7 @@
 
 - Fix `TibiaKtClient.fetchAuctionAdditionalPages` not properly passing parameters to fetch outfits and mounts.
 - Fix fetching additional auction items possibly corrupting store items.
+- `Instant.lastServerSave` and `Instant.nextServerSave` now properly handle DST transition days
 
 ## 2.2.0 (2026-07-15)
 
