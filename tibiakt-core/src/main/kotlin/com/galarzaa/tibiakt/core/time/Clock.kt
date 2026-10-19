@@ -16,12 +16,13 @@
 
 package com.galarzaa.tibiakt.core.time
 
+import kotlinx.datetime.DatePeriod
 import kotlinx.datetime.DayOfWeek
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
+import kotlinx.datetime.minus
 import kotlinx.datetime.toLocalDateTime
 import kotlin.time.Clock
-import kotlin.time.Duration.Companion.hours
 
 /**
  * The timezone Tibia's servers are based on.
@@ -40,5 +41,12 @@ public fun tibiaNow(clock: Clock = Clock.System): LocalDateTime = clock.now().to
  *
  * A new in-game day starts at [server save][SERVER_SAVE_TIME], not at midnight.
  */
-public fun tibiaGameWeekDay(clock: Clock = Clock.System): DayOfWeek =
-    (clock.now() - SERVER_SAVE_TIME.hour.hours).toLocalDateTime(TIBIA_TIMEZONE).dayOfWeek
+public fun tibiaGameWeekDay(clock: Clock = Clock.System): DayOfWeek {
+    val local = tibiaNow(clock)
+    val date = if (local.time < SERVER_SAVE_TIME) {
+        local.date - DatePeriod(days = 1)
+    } else {
+        local.date
+    }
+    return date.dayOfWeek
+}

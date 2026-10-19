@@ -81,5 +81,19 @@ class ClockTests : FunSpec({
 
             tibiaGameWeekDay(clock) shouldBe DayOfWeek.WEDNESDAY
         }
+
+        test("after server save uses current calendar day on spring DST transition") {
+            val instant = Instant.parse("2026-03-29T08:30:00Z")
+            val clock = FakeClock(instant)
+
+            tibiaGameWeekDay(clock) shouldBe DayOfWeek.SUNDAY
+        }
+
+        test("before server save uses previous calendar day on autumn DST transition") {
+            val instant = Instant.parse("2026-10-25T08:30:00Z")
+            val clock = FakeClock(instant)
+
+            tibiaGameWeekDay(clock) shouldBe DayOfWeek.SATURDAY
+        }
     }
 })
