@@ -8,6 +8,7 @@
 - Fix `tibiaGameWeekDay` potentially being wrong around DST transitions.
 - Fix incorrect validation in news endpoint
 - Fix house auction time remaining losing all but the last digit.
+- Fix traded players without links being omitted from death assists.
 
 ## 2.2.0 (2026-07-15)
 

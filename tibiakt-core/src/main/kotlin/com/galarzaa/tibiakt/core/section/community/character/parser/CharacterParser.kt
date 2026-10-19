@@ -46,8 +46,7 @@ public object CharacterParser : Parser<CharacterInfo?> {
     private val houseRegexp = Regex("""\(([^)]+)\) is paid until (.*)""")
     private val deathsRegex = Regex("""Level (\d+) by (.*)\.</td>""")
     private val deathAssistsRegex = Regex("""(?:(?<killers>.+)\.<br\s?/>)?Assisted by (?<assists>.+)""")
-    private val linkSearch = Regex("""<a[^>]+>[^<]+</a>""")
-    private val linkContent = Regex(""">([^<]+)<""")
+    private val deathAssistTokens = Regex("""<a\b[^>]*>.*?</a>|(?<separator>,| and )""")
 
     private val deathSummon = Regex("""^(?<summon>.+) of (?<name>[^.]+?)\.?$""")
 
@@ -195,13 +194,23 @@ public object CharacterParser : Parser<CharacterInfo?> {
             deathAssistsRegex.find(killersDesc)?.apply {
                 killersDesc = this.groups["killers"]?.value.orEmpty()
                 val assistsDec = this.groups["assists"]?.value ?: return
-                assistNameList = linkSearch.findAll(assistsDec).map { it.value }.toList()
+                assistNameList = splitDeathAssists(assistsDec)
             }
             val killerNameList = killersDesc.splitList()
             val killerList = killerNameList.mapNotNull { parseKiller(it) }
             val assistsList = assistNameList.mapNotNull { parseKiller(it) }
             addDeath(deathDateTime, levelStr.toInt(), killerList, assistsList)
         }
+    }
+
+    private fun splitDeathAssists(assistsHtml: String): List<String> = buildList {
+        var start = 0
+        for (match in deathAssistTokens.findAll(assistsHtml)) {
+            if (match.groups["separator"] == null) continue
+            add(assistsHtml.substring(start, match.range.first).trim())
+            start = match.range.last + 1
+        }
+        add(assistsHtml.substring(start).trim())
     }
 
     internal fun parseKiller(killerHtml: String): DeathParticipant? {

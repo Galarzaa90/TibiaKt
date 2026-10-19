@@ -88,6 +88,61 @@ class CharacterParserTests : FunSpec({
         character.shouldNotBeNull()
         val killers = character.deaths.flatMap { it.killers }
         killers.shouldForAny { it is DeathParticipant.Summon }
+        character.deaths.filter { it.assists.isNotEmpty() }.map { death ->
+            death.assists.map { it.name }
+        } shouldBe listOf(
+            listOf(
+                "Ali eltaip", "Enkiie", "Exmiinderro", "Parli Nohands", "Brutal Bits",
+                "Fen Harel", "Don Nazzoplex", "Efrette Charlover", "Warszawiak Thais Patrol",
+            ),
+            listOf("Darknes Killer"),
+            listOf("Enri Crys", "Phantom Kraken", "Zeveluna", "Zevelona"),
+        )
+    }
+    test("Character with traded death assist without link") {
+        val content = getResource("character/characterWithComplexDeaths.txt")
+            .replace(
+                "Died at Level 454 by quara raider.",
+                "Died at Level 454 by quara raider.<br/>Assisted by Alice (traded)."
+            )
+        val character = CharacterParser.fromContent(content)
+
+        character.shouldBeInstanceOf<CharacterInfo>()
+        val death = character.deaths.single { it.level == 454 }
+        death.killers shouldBe listOf(DeathParticipant.Creature("quara raider"))
+        death.assists shouldBe listOf(DeathParticipant.Player("Alice", true))
+        death.isByPlayers shouldBe true
+    }
+    test("Character with linked and traded death assists") {
+        val content = getResource("character/characterWithComplexDeaths.txt")
+            .replace(
+                "Died at Level 454 by quara raider.",
+                "Died at Level 454 by quara raider.<br/>Assisted by Alice (traded), " +
+                        """<a href="https://www.tibia.com/community/?subtopic=characters&name=Bob">Bob</a>""" +
+                        " and Charlie (traded)."
+            )
+        val character = CharacterParser.fromContent(content)
+
+        character.shouldBeInstanceOf<CharacterInfo>()
+        val death = character.deaths.single { it.level == 454 }
+        death.assists shouldBe listOf(
+            DeathParticipant.Player("Alice", true),
+            DeathParticipant.Player("Bob", false),
+            DeathParticipant.Player("Charlie", true),
+        )
+    }
+    test("Character with linked death assist containing 'and' in name") {
+        val content = getResource("character/characterWithComplexDeaths.txt")
+            .replace(
+                "Died at Level 454 by quara raider.",
+                "Died at Level 454 by quara raider.<br/>Assisted by " +
+                        """<a href="https://www.tibia.com/community/?subtopic=characters&name=Rock+and+Roll">Rock and Roll</a>."""
+            )
+        val character = CharacterParser.fromContent(content)
+
+        character.shouldBeInstanceOf<CharacterInfo>()
+        character.deaths.single { it.level == 454 }.assists shouldBe
+                listOf(DeathParticipant.Player("Rock and Roll", false))
     }
     test("Character with former names") {
         val character = CharacterParser.fromContent(getResource("character/characterWithFormerNames.txt"))
