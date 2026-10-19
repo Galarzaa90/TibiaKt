@@ -43,7 +43,7 @@ internal fun Application.configureRouting(client: TibiaKtClient) {
         get<Guilds> { (name) -> call.respondOrNotFound(client.fetchGuild(name)) }
         get<Worlds.ByName.Guilds> { (it) -> call.respondOrNotFound(client.fetchWorldGuilds(it.name)) }
         get<NewsArchive> {
-            check(it.startAt >= it.endAt) { "endAt must be after startAt" }
+            check(it.endAt >= it.startAt) { "endAt must be after startAt" }
             call.respond(client.fetchNewsArchive(it.startAt, it.endAt, it.category?.toSet(), it.type?.toSet()))
         }
         get<News> { (newsId) -> call.respondOrNotFound(client.fetchNewsArticleById(newsId)) }

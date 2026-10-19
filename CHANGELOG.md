@@ -6,6 +6,7 @@
 - Fix fetching additional auction items possibly corrupting store items.
 - `Instant.lastServerSave` and `Instant.nextServerSave` now properly handle DST transition days
 - Fix `tibiaGameWeekDay` potentially being wrong around DST transitions.
+- Fix incorrect validation in news endpoint
 
 ## 2.2.0 (2026-07-15)
 
