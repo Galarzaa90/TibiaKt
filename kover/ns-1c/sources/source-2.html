@@ -140,7 +140,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;
 &nbsp;/** Parses content from the houses section. */
 &nbsp;public object HousesSectionParser : Parser&lt;HousesSection?&gt; {
-<b class="fc">&nbsp;    private val auctionInfoRegex = Regex(&quot;&quot;&quot;\((?&lt;bid&gt;\d+) gold; (?&lt;timeLeft&gt;\w)+ (?&lt;timeUnit&gt;day|hour)s? left\)&quot;&quot;&quot;)</b>
+<b class="fc">&nbsp;    private val auctionInfoRegex = Regex(&quot;&quot;&quot;\((?&lt;bid&gt;\d+) gold; (?&lt;timeLeft&gt;\d+) (?&lt;timeUnit&gt;day|hour)s? left\)&quot;&quot;&quot;)</b>
 &nbsp;
 &nbsp;    override fun fromContent(content: String): HousesSection? {
 <b class="fc">&nbsp;        val boxContent = boxContent(content)</b>
@@ -217,7 +217,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2026-10-19 03:36</div>
+    <div style="float:right;">generated on 2026-10-19 05:09</div>
 </div>
 </body>
 </html>

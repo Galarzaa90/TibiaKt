@@ -66,21 +66,28 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     (3/3)
   </span>
 </td>
-    <td class="coverageStat"/>
 <td class="coverageStat">
   <span class="percent">
-    75%
+    100%
   </span>
   <span class="absValue">
-    (3/4)
+    (2/2)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    76.9%
+    87.5%
   </span>
   <span class="absValue">
-    (30/39)
+    (7/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    82.7%
+  </span>
+  <span class="absValue">
+    (43/52)
   </span>
 </td>
 </tr>
@@ -110,12 +117,13 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp;
 &nbsp;package com.galarzaa.tibiakt.core.time
 &nbsp;
+&nbsp;import kotlinx.datetime.DatePeriod
 &nbsp;import kotlinx.datetime.DayOfWeek
 &nbsp;import kotlinx.datetime.LocalDateTime
 &nbsp;import kotlinx.datetime.TimeZone
+&nbsp;import kotlinx.datetime.minus
 &nbsp;import kotlinx.datetime.toLocalDateTime
 &nbsp;import kotlin.time.Clock
-&nbsp;import kotlin.time.Duration.Companion.hours
 &nbsp;
 &nbsp;/**
 &nbsp; * The timezone Tibia&#39;s servers are based on.
@@ -134,8 +142,15 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 &nbsp; *
 &nbsp; * A new in-game day starts at [server save][SERVER_SAVE_TIME], not at midnight.
 &nbsp; */
-<b class="nc">&nbsp;public fun tibiaGameWeekDay(clock: Clock = Clock.System): DayOfWeek =</b>
-<b class="fc">&nbsp;    (clock.now() - SERVER_SAVE_TIME.hour.hours).toLocalDateTime(TIBIA_TIMEZONE).dayOfWeek</b>
+<b class="nc">&nbsp;public fun tibiaGameWeekDay(clock: Clock = Clock.System): DayOfWeek {</b>
+<b class="fc">&nbsp;    val local = tibiaNow(clock)</b>
+<b class="fc">&nbsp;    val date = if (local.time &lt; SERVER_SAVE_TIME) {</b>
+<b class="fc">&nbsp;        local.date - DatePeriod(days = 1)</b>
+&nbsp;    } else {
+<b class="fc">&nbsp;        local.date</b>
+&nbsp;    }
+<b class="fc">&nbsp;    return date.dayOfWeek</b>
+&nbsp;}
 </code>
 </pre>
 </div>
@@ -159,7 +174,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2026-10-19 03:36</div>
+    <div style="float:right;">generated on 2026-10-19 05:09</div>
 </div>
 </body>
 </html>
