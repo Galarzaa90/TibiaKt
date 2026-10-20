@@ -87,7 +87,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
     79.4%
   </span>
   <span class="absValue">
-    (2463/3103)
+    (2463/3101)
   </span>
 </td>
 </tr>
@@ -335,7 +335,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 <b class="nc">&nbsp;            val (weaponCell, levelCell, progressCell, masteryCell) = columns</b>
 <b class="nc">&nbsp;            val (level, maxLevel) = levelCell.cleanText().split(&quot;/&quot;).map { it.toInt() }</b>
 <b class="nc">&nbsp;            val masteryIcon = masteryCell.selectFirst(&quot;img&quot;) ?: continue</b>
-<b class="nc">&nbsp;            val masteryUnlocked = masteryIcon.attr(&quot;alt&quot;).contains(&quot;unlocked&quot;)</b>
+<b class="nc">&nbsp;            val masteryUnlocked = masteryIcon.attr(&quot;src&quot;).endsWith(&quot;/icon_yes.png&quot;)</b>
 <b class="nc">&nbsp;            addProficiency(</b>
 <b class="nc">&nbsp;                WeaponProficiency(</b>
 <b class="nc">&nbsp;                    name = weaponCell.cleanText(),</b>
@@ -680,7 +680,7 @@ Current scope: tibiakt-core<span class="separator">|</span>    <a href="../../in
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2026-10-20 13:50</div>
+    <div style="float:right;">generated on 2026-10-20 19:59</div>
 </div>
 </body>
 </html>
