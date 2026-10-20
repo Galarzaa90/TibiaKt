@@ -9,6 +9,7 @@
 - Fix incorrect validation in news endpoint
 - Fix house auction time remaining losing all but the last digit.
 - Fix traded players without links being omitted from death assists.
+- Fix auction proficiency mastery not being parsed correctly.
 
 ## 2.2.0 (2026-07-15)
 

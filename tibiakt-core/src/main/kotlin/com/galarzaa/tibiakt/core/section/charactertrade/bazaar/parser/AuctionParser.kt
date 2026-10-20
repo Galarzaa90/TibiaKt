@@ -234,7 +234,7 @@ public object AuctionParser : Parser<Auction?> {
             val (weaponCell, levelCell, progressCell, masteryCell) = columns
             val (level, maxLevel) = levelCell.cleanText().split("/").map { it.toInt() }
             val masteryIcon = masteryCell.selectFirst("img") ?: continue
-            val masteryUnlocked = masteryIcon.attr("alt").contains("unlocked")
+            val masteryUnlocked = masteryIcon.attr("src").endsWith("/icon_yes.png")
             addProficiency(
                 WeaponProficiency(
                     name = weaponCell.cleanText(),
