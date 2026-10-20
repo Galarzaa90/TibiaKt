@@ -158,21 +158,25 @@ public class TibiaKtClient(
      * Create a client from a caller-provided [HttpClient].
      *
      * @param baseClient An existing Ktor client, possibly shared across your app.
-     * @param applyDefaults When true, applies this library’s defaults to a derived client
-     * @param userAgent Optional User-Agent string. If null, a sensible default is used.
-     * @param additionalConfig Extra client configuration applied **after** the library defaults.
+     * @param applyDefaults When true, applies this library’s defaults to the derived client.
+     * @param userAgent Optional User-Agent string used when [applyDefaults] is true.
+     * If null, a sensible default is used.
+     * @param additionalConfig Extra client configuration applied after any library defaults,
+     * regardless of [applyDefaults].
      *
-     * Ownership: this constructor sets [ownsClient] to false; the caller manages [baseClient] lifecycle.
+     * Ownership: the caller remains responsible for closing [baseClient]. This constructor
+     * always creates a derived client that shares [baseClient]'s engine. TibiaKtClient owns
+     * the derived client and closes it when [close] is called.
      */
     public constructor(
         baseClient: HttpClient,
         applyDefaults: Boolean = true,
         userAgent: String? = null,
         additionalConfig: HttpClientConfig<*>.() -> Unit = {},
-    ) : this(if (applyDefaults) baseClient.config {
-        defaultConfig(userAgent)
+    ) : this(baseClient.config {
+        if (applyDefaults) defaultConfig(userAgent)
         additionalConfig(this)
-    } else baseClient, ownsClient = false)
+    }, ownsClient = true)
 
 
     /**
@@ -222,7 +226,9 @@ public class TibiaKtClient(
     /**
      * Close the underlying [HttpClient] if this instance owns it.
      *
-     * If the caller provided the client, this is a no-op and the caller remains responsible for closing that client.
+     * This includes clients created from an engine or engine factory, and derived clients
+     * created from a caller-provided client. The original caller-provided client is never
+     * closed by this method.
      */
     public override fun close() {
         if (ownsClient) client.close()
