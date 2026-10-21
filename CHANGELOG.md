@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 2.2.1 (2026-10-21)
 
 - Fix `TibiaKtClient.fetchAuctionAdditionalPages` not properly passing parameters to fetch outfits and mounts.
 - Fix fetching additional auction items possibly corrupting store items.
